@@ -1,0 +1,212 @@
+Files found:
+    - [0x1000, asm]
+    - [0x91D10, hasm, setintmask]
+    - [0x91DB0, asm]
+    - [0x9A400, hasm, invaldcache]
+    - [0x9A4B0, hasm, writebackdcache]
+    - [0x9A530, hasm, writebackdcacheall]
+    - [0x9A560, asm]
+    - [0x9DCE0, hasm, bcopy]
+    - [0x9E000, hasm, bzero]
+    - [0x9E0A0, asm]
+    - [0x9EE20, hasm, getcount]
+    - [0x9EE30, asm]
+    - [0xA15F0, hasm, probetlb]
+    - [0xA16B0, asm]
+    - [0xA3090, hasm, exceptasm]
+    - [0xA3E80, hasm, interrupt]
+    - [0xA3F10, asm]
+    - [0xA47F0, hasm, invalicache]
+    - [0xA4870, asm]
+    - [0xA4C40, hasm, sqrtf]
+    - [0xA4C50, asm]
+    - [0xA6890, hasm, getcause]
+    - [0xA68A0, hasm, getsr]
+    - [0xA68B0, hasm, setcompare]
+    - [0xA68C0, hasm, setfpccsr]
+    - [0xA68D0, hasm, setsr]
+    - [0xA68E0, asm]
+    - [0xA6F40, hasm, maptlbrdb]
+    - [0xA6FA0, hasm, unmaptlball]
+    - [0xA6FF0, asm]
+    - [0xAB5B0, hasm, rmonrcp]
+
+Ambiguous chunks:
+ackramromread: [ 0x1EFC, 0x26FC, 0x4A7C, 0x2E7F0, 0x31B0C, 0x3F120, 0x44E6C, 0x47F30, 0x53310, 0x5B4BC, 0x5E21C, 0x5E4EC, 0x67360, 0x67F9C, 0x6B240, 0x707C0, 0x71B3C, 0x722BC, 0x7471C, 0x74810, 0x74900, 0x749F0, 0x74AE0, 0x74BD0, 0x74CC0, 0x74DB0, 0x74EA0, 0x74F90, 0x75080, 0x75170, 0x75260, 0x75350, 0x75440, 0x75530, 0x75620, 0x75BE0, 0x88680, 0x8A2AC, 0x8BA0C, 0x908E4, 0x9099C, 0x9A51C, 0x9A550, 0xA16A0, 0xA2BB0, 0xA485C, 0xA6F90, 0xA6FDC ]
+ackramromwrite: [ 0x1EFC, 0x26FC, 0x4A7C, 0x2E7F0, 0x31B0C, 0x3F120, 0x44E6C, 0x47F30, 0x53310, 0x5B4BC, 0x5E21C, 0x5E4EC, 0x67360, 0x67F9C, 0x6B240, 0x707C0, 0x71B3C, 0x722BC, 0x7471C, 0x74810, 0x74900, 0x749F0, 0x74AE0, 0x74BD0, 0x74CC0, 0x74DB0, 0x74EA0, 0x74F90, 0x75080, 0x75170, 0x75260, 0x75350, 0x75440, 0x75530, 0x75620, 0x75BE0, 0x88680, 0x8A2AC, 0x8BA0C, 0x908E4, 0x9099C, 0x9A51C, 0x9A550, 0xA16A0, 0xA2BB0, 0xA485C, 0xA6F90, 0xA6FDC ]
+synfreefx: [ 0x1EFC, 0x26FC, 0x4A7C, 0x2E7F0, 0x31B0C, 0x3F120, 0x44E6C, 0x47F30, 0x53310, 0x5B4BC, 0x5E21C, 0x5E4EC, 0x67360, 0x67F9C, 0x6B240, 0x707C0, 0x71B3C, 0x722BC, 0x7471C, 0x74810, 0x74900, 0x749F0, 0x74AE0, 0x74BD0, 0x74CC0, 0x74DB0, 0x74EA0, 0x74F90, 0x75080, 0x75170, 0x75260, 0x75350, 0x75440, 0x75530, 0x75620, 0x75BE0, 0x88680, 0x8A2AC, 0x8BA0C, 0x908E4, 0x9099C, 0x9A51C, 0x9A550, 0xA16A0, 0xA2BB0, 0xA485C, 0xA6F90, 0xA6FDC ]
+
+Files not found:
+afterprenmi, ai, aigetlen, aigetstat, aisetfreq, aisetnextbuf, align, assertbreak, atomic, auxbus, bcmp, bnkf, cartrominit, cents2ratio, clearattribute, color, contchannelreset, conteeplongread, conteeplongwrite, conteepprobe, conteepread, conteepwrite, contpfs, contquery, contramread, contramwrite, contreaddata, contreset, controller, contsetch, copy, cosf, coss, crc, createmesgqueue, createthread, cseq, cspdelete, cspgetchlvol, cspgetfxmix, cspgetpan, cspgetpriority, cspgetprogram, cspgetseq, cspgetstate, cspgettempo, cspgetvol, csplayer, cspplay, cspsendmidi, cspsetbank, cspsetchlvol, cspsetfxmix, cspsetpan, cspsetpriority, cspsetprogram, cspsetseq, cspsettempo, cspsetvol, cspstop, delay, destroythread, devmgr, dp, dpctr, dpgetstat, dpsetnextbuf, dpsetstat, drvrnew, dumpturbo, env, epidma, epigettype, epilinkhandle, epirawdma, epirawread, epirawwrite, epiread, epiwrite, event, exit, filter, free, frustum, gbpakcheckconnector, gbpakgetbank, gbpakgetstatus, gbpakinit, gbpakpower, gbpakreadid, gbpakreadwrite, gbpaksetbank, getactivequeue, getbufcount, getcompare, getconfig, getcurrfaultthread, getfpccsr, gethwinterrupt, getintmask, getmemsize, getnextfaultthread, getsize, getthreadid, getthreadpri, gettime, gettlbasid, gettlbhi, gettlblo0, gettlblo1, gettlbpagemask, giointerrupt, giorawinterrupt, gt, guloadtile_bug, heapalloc, heapcheck, heapinit, hide, host_ptn64, initialize, initrdb, jammesg, kdebugserver, ldiv, ll, llbit, llcvt, load, loadtextureblockmipmap, log, logfloat, lookat, lookathil, lookatref, lookatstereo, mainbus, malloc, maptlb, motor, mtxcatf, mtxcatl, mtxutil, normalize, ortho, parse_abi, parse_gbi, parse_rdp, parse_string, perspective, pfsallocatefile, pfschecker, pfsdeletefile, pfsfilestate, pfsfreeblocks, pfsgetlabel, pfsgetstatus, pfsinit, pfsinitpak, pfsisplug, pfsnumfiles, pfsreadwritefile, pfsreformat, pfsrepairid, pfssearchfile, pfsselectbank, pfssetlabel, physicaltovirtual, pi, piacs, pidma, pigetcmdq, pigetstat, pigettype, pimgr, pirawdma, pirawread, pirawwrite, piread, piwrite, position, poslight, poslighthil, printregion, profile, random, rdbsend, readhost, recvmesg, region, resample, resetglobalintmask, reverb, rmonbrk, rmoncmds, rmonmain, rmonmem, rmonmisc, rmonregs, rmonsio, rmontask, rotate, rotaterpy, save, scale, sched, sendmesg, seq, seqpdelete, seqpgetchlvol, seqpgetfxmix, seqpgetpan, seqpgetpriority, seqpgetprogram, seqpgetseq, seqpgetstate, seqpgettempo, seqpgetvol, seqplayer, seqploop, seqpplay, seqpsendmidi, seqpsetbank, seqpsetchlvol, seqpsetfxmix, seqpsetpan, seqpsetpriority, seqpsetprogram, seqpsetseq, seqpsettempo, seqpsetvol, seqpstop, setattribute, setcause, setconfig, setcount, seteventmesg, setglobalintmask, sethwinterrupt, setpiinterrupt, setthreadpri, settime, settimer, settlbasid, show, si, siacs, sigetstat, sinf, sins, sirawdma, sirawread, sirawwrite, sl, sndpallocate, sndpdeallocate, sndpdelete, sndpgetsound, sndpgetstate, sndplayer, sndpplay, sndpplayat, sndpsetfxmix, sndpsetpan, sndpsetpitch, sndpsetpriority, sndpsetsound, sndpsetvol, sndpstop, sp, spgetstat, sprawdma, sprawread, sprawwrite, sprintf, sprite, spriteex, spriteex2, spscale, spsetpc, spsetstat, sptask, sptaskyield, sptaskyielded, startthread, stopthread, stoptimer, string, synaddplayer, synallocfx, synallocvoice, syncprintf, syncputchars, syndelete, synfreevoice, syngetfxref, syngetpriority, synremoveplayer, synsetfxmix, synsetfxparam, synsetpan, synsetpitch, synsetpriority, synsetvol, synstartvoice, synstartvoiceparam, synstopvoice, synthesizer, thread, timerintr, translate, unmaptlb, us2dex, us2dex2_emu, us2dex_emu, usprite, vi, viblack, viextendvstart, vifade, vigetcurrcontext, vigetcurrframebuf, vigetfield, vigetline, vigetmode, vigetnextcontext, vigetnextframebuf, vigetstat, vimgr, virepeatline, virtualtophysical, visetevent, visetmode, visetspecial, visetxscale, visetyscale, viswapbuf, viswapcontext, voicecheckresult, voicecheckword, voicecleardictionary, voicecontread2, voicecontread36, voicecontrolgain, voicecontwrite20, voicecontwrite4, voicecountsyllables, voicecrc, voicegetreaddata, voicegetstatus, voiceinit, voicemaskdictionary, voicesetadconverter, voicesetword, voicestartreaddata, voicestopreaddata, writehost, xldtob, xlitob, xprintf, yieldthread
+
+Symbols:
+osAckRamromRead, 0x800012FC, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x800012FC, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x800012FC, 0x8  (synfreefx, true)
+osAckRamromRead, 0x80001AFC, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x80001AFC, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x80001AFC, 0x8  (synfreefx, true)
+osAckRamromRead, 0x80003E7C, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x80003E7C, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x80003E7C, 0x8  (synfreefx, true)
+osAckRamromRead, 0x8002DBF0, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x8002DBF0, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x8002DBF0, 0x8  (synfreefx, true)
+osAckRamromRead, 0x80030F0C, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x80030F0C, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x80030F0C, 0x8  (synfreefx, true)
+osAckRamromRead, 0x8003E520, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x8003E520, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x8003E520, 0x8  (synfreefx, true)
+osAckRamromRead, 0x8004426C, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x8004426C, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x8004426C, 0x8  (synfreefx, true)
+osAckRamromRead, 0x80047330, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x80047330, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x80047330, 0x8  (synfreefx, true)
+osAckRamromRead, 0x80052710, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x80052710, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x80052710, 0x8  (synfreefx, true)
+osAckRamromRead, 0x8005A8BC, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x8005A8BC, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x8005A8BC, 0x8  (synfreefx, true)
+osAckRamromRead, 0x8005D61C, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x8005D61C, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x8005D61C, 0x8  (synfreefx, true)
+osAckRamromRead, 0x8005D8EC, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x8005D8EC, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x8005D8EC, 0x8  (synfreefx, true)
+osAckRamromRead, 0x80066760, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x80066760, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x80066760, 0x8  (synfreefx, true)
+osAckRamromRead, 0x8006739C, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x8006739C, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x8006739C, 0x8  (synfreefx, true)
+osAckRamromRead, 0x8006A640, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x8006A640, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x8006A640, 0x8  (synfreefx, true)
+osAckRamromRead, 0x8006FBC0, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x8006FBC0, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x8006FBC0, 0x8  (synfreefx, true)
+osAckRamromRead, 0x80070F3C, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x80070F3C, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x80070F3C, 0x8  (synfreefx, true)
+osAckRamromRead, 0x800716BC, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x800716BC, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x800716BC, 0x8  (synfreefx, true)
+osAckRamromRead, 0x80073B1C, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x80073B1C, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x80073B1C, 0x8  (synfreefx, true)
+osAckRamromRead, 0x80073C10, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x80073C10, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x80073C10, 0x8  (synfreefx, true)
+osAckRamromRead, 0x80073D00, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x80073D00, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x80073D00, 0x8  (synfreefx, true)
+osAckRamromRead, 0x80073DF0, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x80073DF0, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x80073DF0, 0x8  (synfreefx, true)
+osAckRamromRead, 0x80073EE0, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x80073EE0, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x80073EE0, 0x8  (synfreefx, true)
+osAckRamromRead, 0x80073FD0, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x80073FD0, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x80073FD0, 0x8  (synfreefx, true)
+osAckRamromRead, 0x800740C0, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x800740C0, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x800740C0, 0x8  (synfreefx, true)
+osAckRamromRead, 0x800741B0, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x800741B0, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x800741B0, 0x8  (synfreefx, true)
+osAckRamromRead, 0x800742A0, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x800742A0, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x800742A0, 0x8  (synfreefx, true)
+osAckRamromRead, 0x80074390, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x80074390, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x80074390, 0x8  (synfreefx, true)
+osAckRamromRead, 0x80074480, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x80074480, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x80074480, 0x8  (synfreefx, true)
+osAckRamromRead, 0x80074570, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x80074570, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x80074570, 0x8  (synfreefx, true)
+osAckRamromRead, 0x80074660, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x80074660, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x80074660, 0x8  (synfreefx, true)
+osAckRamromRead, 0x80074750, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x80074750, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x80074750, 0x8  (synfreefx, true)
+osAckRamromRead, 0x80074840, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x80074840, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x80074840, 0x8  (synfreefx, true)
+osAckRamromRead, 0x80074930, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x80074930, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x80074930, 0x8  (synfreefx, true)
+osAckRamromRead, 0x80074A20, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x80074A20, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x80074A20, 0x8  (synfreefx, true)
+osAckRamromRead, 0x80074FE0, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x80074FE0, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x80074FE0, 0x8  (synfreefx, true)
+osAckRamromRead, 0x80087A80, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x80087A80, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x80087A80, 0x8  (synfreefx, true)
+osAckRamromRead, 0x800896AC, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x800896AC, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x800896AC, 0x8  (synfreefx, true)
+osAckRamromRead, 0x8008AE0C, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x8008AE0C, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x8008AE0C, 0x8  (synfreefx, true)
+osAckRamromRead, 0x8008FCE4, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x8008FCE4, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x8008FCE4, 0x8  (synfreefx, true)
+osAckRamromRead, 0x8008FD9C, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x8008FD9C, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x8008FD9C, 0x8  (synfreefx, true)
+osAckRamromRead, 0x8009991C, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x8009991C, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x8009991C, 0x8  (synfreefx, true)
+osAckRamromRead, 0x80099950, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x80099950, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x80099950, 0x8  (synfreefx, true)
+osDestroyThread, 0x8009FC00, 0x0  (exceptasm, false)
+osAckRamromRead, 0x800A0AA0, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x800A0AA0, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x800A0AA0, 0x8  (synfreefx, true)
+osAckRamromRead, 0x800A1FB0, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x800A1FB0, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x800A1FB0, 0x8  (synfreefx, true)
+, 0x800A2490, 0x0  (exceptasm, false)
+, 0x800A2C1F, 0x0  (exceptasm, false)
+, 0x800A2D99, 0x0  (exceptasm, false)
+, 0x800A2DCF, 0x0  (exceptasm, false)
+osAckRamromRead, 0x800A3C5C, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x800A3C5C, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x800A3C5C, 0x8  (synfreefx, true)
+kdebugserver, 0x800A3F24, 0x0  (exceptasm, false)
+osAckRamromRead, 0x800A6390, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x800A6390, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x800A6390, 0x8  (synfreefx, true)
+osAckRamromRead, 0x800A63DC, 0x8  (ackramromread, true)
+osAckRamromWrite, 0x800A63DC, 0x8  (ackramromwrite, true)
+alSynFreeFX, 0x800A63DC, 0x8  (synfreefx, true)
+__osRdb_IP6_Empty, 0x800BE9C0, 0x0  (exceptasm, false)
+__osRunQueue, 0x800BEA18, 0x0  (exceptasm, false)
+__osRunningThread, 0x800BEA20, 0x0  (exceptasm, false)
+__osFaultedThread, 0x800BEA24, 0x0  (exceptasm, false)
+__osShutdown, 0x800C0D6C, 0x0  (exceptasm, false)
+__OSGlobalIntMask, 0x800C0D70, 0x0  (exceptasm, false)
+, 0x800C0FE0, 0x0  (exceptasm, false)
+__osRcpImTable, 0x800C78F0, 0x0  (exceptasm, false)
+, 0x800C78F0, 0x0  (setintmask, false)
+, 0x800C94B0, 0x0  (exceptasm, false)
+__osRdb_DbgRead_Buf, 0x8019D154, 0x0  (exceptasm, false)
+__kmc_pt_mode, 0x801AB62C, 0x0  (exceptasm, false)
+__osThreadSave, 0x801AB630, 0x0  (exceptasm, false)
+__osRdb_Read_Data_Ct, 0x801C6C8C, 0x0  (exceptasm, false)
+__osRdb_IP6_Size, 0x801C6E50, 0x0  (exceptasm, false)
+__osRdb_IP6_CurSend, 0x801F9CA0, 0x0  (exceptasm, false)
+__osRdb_Read_Data_Buf, 0x8021AD58, 0x0  (exceptasm, false)
+__osEventStateTab, 0x8021B970, 0x0  (exceptasm, false)
+__osRdb_IP6_Data, 0x8021BA58, 0x0  (exceptasm, false)
+__osRdb_IP6_Ct, 0x8021BEE0, 0x0  (exceptasm, false)

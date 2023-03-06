@@ -8,6 +8,9 @@ undefined_funcs_auto.ld
 undefined_syms_auto.ld
 puzzleleague.ld
 
+__pycache__/
+.make_options
+
 ctx.c
 ctx.c.m2c
 *.o

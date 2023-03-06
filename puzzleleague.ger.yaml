@@ -49,6 +49,7 @@ segments:
     vram: 0x80000400
     subsegments:
       - [0x1000, asm]
+      # Uses libgultra
   - type: bin
     start: 0xA65F0
   - [0x2000000]

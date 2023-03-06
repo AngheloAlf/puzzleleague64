@@ -1,0 +1,88 @@
+Files found:
+    - [0x1000, asm]
+    - [0x907A0, hasm, setintmask]
+    - [0x90840, asm]
+    - [0x98E90, hasm, invaldcache]
+    - [0x98F40, hasm, writebackdcache]
+    - [0x98FC0, hasm, writebackdcacheall]
+    - [0x98FF0, asm]
+    - [0x9C770, hasm, bcopy]
+    - [0x9CA90, hasm, bzero]
+    - [0x9CB30, asm]
+    - [0x9D8B0, hasm, getcount]
+    - [0x9D8C0, asm]
+    - [0xA0080, hasm, probetlb]
+    - [0xA0140, asm]
+    - [0xA2A50, hasm, interrupt]
+    - [0xA2AE0, asm]
+    - [0xA33C0, hasm, invalicache]
+    - [0xA3440, asm]
+    - [0xA3810, hasm, sqrtf]
+    - [0xA3820, asm]
+    - [0xA5460, hasm, getcause]
+    - [0xA5470, hasm, getsr]
+    - [0xA5480, hasm, setcompare]
+    - [0xA5490, hasm, setfpccsr]
+    - [0xA54A0, hasm, setsr]
+    - [0xA54B0, asm]
+    - [0xA5B10, hasm, maptlbrdb]
+    - [0xA5B70, hasm, unmaptlball]
+
+Ambiguous chunks:
+synfreefx: [ 0x27CC, 0x4B40, 0x5DE0, 0x2C27C, 0x2CF5C, 0x2E860, 0x31A9C, 0x34F20, 0x3F0C0, 0x41930, 0x450D0, 0x51D20, 0x59EBC, 0x5CEFC, 0x65D70, 0x669AC, 0x6F220, 0x7059C, 0x70D1C, 0x7317C, 0x73270, 0x73360, 0x73450, 0x73540, 0x73630, 0x73720, 0x73810, 0x73900, 0x739F0, 0x73AE0, 0x73BD0, 0x73CC0, 0x73DB0, 0x73EA0, 0x73F90, 0x74080, 0x74640, 0x82620, 0x8F364, 0x8F41C, 0x8F61C, 0x98FAC, 0x98FE0, 0xA0130, 0xA1780, 0xA342C, 0xA5B60, 0xA5BAC ]
+
+Files not found:
+afterprenmi, ai, aigetlen, aigetstat, aisetfreq, aisetnextbuf, align, atomic, auxbus, bcmp, bnkf, cartrominit, cents2ratio, clearattribute, color, contchannelreset, conteeplongread, conteeplongwrite, conteepprobe, conteepread, conteepwrite, contpfs, contquery, contramread, contramwrite, contreaddata, contreset, controller, contsetch, copy, cosf, coss, crc, createmesgqueue, createthread, cseq, cspdelete, cspgetchlvol, cspgetfxmix, cspgetpan, cspgetpriority, cspgetprogram, cspgetseq, cspgetstate, cspgettempo, cspgetvol, csplayer, cspplay, cspsendmidi, cspsetbank, cspsetchlvol, cspsetfxmix, cspsetpan, cspsetpriority, cspsetprogram, cspsetseq, cspsettempo, cspsetvol, cspstop, destroythread, devmgr, dp, dpctr, dpgetstat, dpsetnextbuf, dpsetstat, drvrnew, env, epidma, epigettype, epilinkhandle, epirawdma, epirawread, epirawwrite, epiread, epiwrite, event, exceptasm, filter, free, frustum, gbpakcheckconnector, gbpakgetbank, gbpakgetstatus, gbpakinit, gbpakpower, gbpakreadid, gbpakreadwrite, gbpaksetbank, getactivequeue, getbufcount, getcompare, getconfig, getcurrfaultthread, getfpccsr, gethwinterrupt, getintmask, getmemsize, getnextfaultthread, getsize, getthreadid, getthreadpri, gettime, gettlbasid, gettlbhi, gettlblo0, gettlblo1, gettlbpagemask, gt, guloadtile_bug, heapalloc, heapcheck, heapinit, hide, initialize, jammesg, ldiv, ll, llbit, llcvt, load, loadtextureblockmipmap, lookat, lookathil, lookatref, lookatstereo, mainbus, malloc, maptlb, motor, mtxcatf, mtxcatl, mtxutil, normalize, ortho, perspective, pfsallocatefile, pfschecker, pfsdeletefile, pfsfilestate, pfsfreeblocks, pfsgetlabel, pfsgetstatus, pfsinit, pfsinitpak, pfsisplug, pfsnumfiles, pfsreadwritefile, pfsreformat, pfsrepairid, pfssearchfile, pfsselectbank, pfssetlabel, physicaltovirtual, pi, piacs, pidma, pigetcmdq, pigetstat, pigettype, pimgr, pirawdma, pirawread, pirawwrite, piread, piwrite, position, poslight, poslighthil, random, recvmesg, region, resample, resetglobalintmask, reverb, rotate, rotaterpy, save, scale, sched, sendmesg, seq, seqpdelete, seqpgetchlvol, seqpgetfxmix, seqpgetpan, seqpgetpriority, seqpgetprogram, seqpgetseq, seqpgetstate, seqpgettempo, seqpgetvol, seqplayer, seqploop, seqpplay, seqpsendmidi, seqpsetbank, seqpsetchlvol, seqpsetfxmix, seqpsetpan, seqpsetpriority, seqpsetprogram, seqpsetseq, seqpsettempo, seqpsetvol, seqpstop, setattribute, setcause, setconfig, setcount, seteventmesg, setglobalintmask, sethwinterrupt, setpiinterrupt, setthreadpri, settime, settimer, settlbasid, show, si, siacs, sigetstat, sinf, sins, sirawdma, sirawread, sirawwrite, sl, sndpallocate, sndpdeallocate, sndpdelete, sndpgetsound, sndpgetstate, sndplayer, sndpplay, sndpplayat, sndpsetfxmix, sndpsetpan, sndpsetpitch, sndpsetpriority, sndpsetsound, sndpsetvol, sndpstop, sp, spgetstat, sprawdma, sprawread, sprawwrite, sprintf, sprite, spriteex, spriteex2, spscale, spsetpc, spsetstat, sptask, sptaskyield, sptaskyielded, startthread, stopthread, stoptimer, string, synaddplayer, synallocfx, synallocvoice, syncprintf, syncputchars, syndelete, synfreevoice, syngetfxref, syngetpriority, synremoveplayer, synsetfxmix, synsetfxparam, synsetpan, synsetpitch, synsetpriority, synsetvol, synstartvoice, synstartvoiceparam, synstopvoice, synthesizer, thread, timerintr, translate, unmaptlb, us2dex, us2dex2_emu, us2dex_emu, usprite, vi, viblack, viextendvstart, vifade, vigetcurrcontext, vigetcurrframebuf, vigetfield, vigetline, vigetmode, vigetnextcontext, vigetnextframebuf, vigetstat, vimgr, virepeatline, virtualtophysical, visetevent, visetmode, visetspecial, visetxscale, visetyscale, viswapbuf, viswapcontext, voicecheckresult, voicecheckword, voicecleardictionary, voicecontread2, voicecontread36, voicecontrolgain, voicecontwrite20, voicecontwrite4, voicecountsyllables, voicecrc, voicegetreaddata, voicegetstatus, voiceinit, voicemaskdictionary, voicesetadconverter, voicesetword, voicestartreaddata, voicestopreaddata, xldtob, xlitob, xprintf, yieldthread
+
+Symbols:
+alSynFreeFX, 0x80001BCC, 0x8  (synfreefx, true)
+alSynFreeFX, 0x80003F40, 0x8  (synfreefx, true)
+alSynFreeFX, 0x800051E0, 0x8  (synfreefx, true)
+alSynFreeFX, 0x8002B67C, 0x8  (synfreefx, true)
+alSynFreeFX, 0x8002C35C, 0x8  (synfreefx, true)
+alSynFreeFX, 0x8002DC60, 0x8  (synfreefx, true)
+alSynFreeFX, 0x80030E9C, 0x8  (synfreefx, true)
+alSynFreeFX, 0x80034320, 0x8  (synfreefx, true)
+alSynFreeFX, 0x8003E4C0, 0x8  (synfreefx, true)
+alSynFreeFX, 0x80040D30, 0x8  (synfreefx, true)
+alSynFreeFX, 0x800444D0, 0x8  (synfreefx, true)
+alSynFreeFX, 0x80051120, 0x8  (synfreefx, true)
+alSynFreeFX, 0x800592BC, 0x8  (synfreefx, true)
+alSynFreeFX, 0x8005C2FC, 0x8  (synfreefx, true)
+alSynFreeFX, 0x80065170, 0x8  (synfreefx, true)
+alSynFreeFX, 0x80065DAC, 0x8  (synfreefx, true)
+alSynFreeFX, 0x8006E620, 0x8  (synfreefx, true)
+alSynFreeFX, 0x8006F99C, 0x8  (synfreefx, true)
+alSynFreeFX, 0x8007011C, 0x8  (synfreefx, true)
+alSynFreeFX, 0x8007257C, 0x8  (synfreefx, true)
+alSynFreeFX, 0x80072670, 0x8  (synfreefx, true)
+alSynFreeFX, 0x80072760, 0x8  (synfreefx, true)
+alSynFreeFX, 0x80072850, 0x8  (synfreefx, true)
+alSynFreeFX, 0x80072940, 0x8  (synfreefx, true)
+alSynFreeFX, 0x80072A30, 0x8  (synfreefx, true)
+alSynFreeFX, 0x80072B20, 0x8  (synfreefx, true)
+alSynFreeFX, 0x80072C10, 0x8  (synfreefx, true)
+alSynFreeFX, 0x80072D00, 0x8  (synfreefx, true)
+alSynFreeFX, 0x80072DF0, 0x8  (synfreefx, true)
+alSynFreeFX, 0x80072EE0, 0x8  (synfreefx, true)
+alSynFreeFX, 0x80072FD0, 0x8  (synfreefx, true)
+alSynFreeFX, 0x800730C0, 0x8  (synfreefx, true)
+alSynFreeFX, 0x800731B0, 0x8  (synfreefx, true)
+alSynFreeFX, 0x800732A0, 0x8  (synfreefx, true)
+alSynFreeFX, 0x80073390, 0x8  (synfreefx, true)
+alSynFreeFX, 0x80073480, 0x8  (synfreefx, true)
+alSynFreeFX, 0x80073A40, 0x8  (synfreefx, true)
+alSynFreeFX, 0x80081A20, 0x8  (synfreefx, true)
+alSynFreeFX, 0x8008E764, 0x8  (synfreefx, true)
+alSynFreeFX, 0x8008E81C, 0x8  (synfreefx, true)
+alSynFreeFX, 0x8008EA1C, 0x8  (synfreefx, true)
+alSynFreeFX, 0x800983AC, 0x8  (synfreefx, true)
+alSynFreeFX, 0x800983E0, 0x8  (synfreefx, true)
+alSynFreeFX, 0x8009F530, 0x8  (synfreefx, true)
+alSynFreeFX, 0x800A0B80, 0x8  (synfreefx, true)
+alSynFreeFX, 0x800A282C, 0x8  (synfreefx, true)
+alSynFreeFX, 0x800A4F60, 0x8  (synfreefx, true)
+alSynFreeFX, 0x800A4FAC, 0x8  (synfreefx, true)
+__osRunningThread, 0x800BD780, 0x0  (interrupt, false)
+__OSGlobalIntMask, 0x800BFAD0, 0x0  (interrupt, false)
+, 0x800C6200, 0x0  (setintmask, false)
