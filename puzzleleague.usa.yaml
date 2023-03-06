@@ -1,0 +1,54 @@
+name: Puzzle League N64 (North America)
+sha1: 8173866fc8c7652abd44c48efcab85441c6806a1
+options:
+  basename: puzzleleaguen64
+  target_path: baserom.usa.z64
+  ld_script_path: linker_scripts/usa/puzzleleague.ld
+  base_path: .
+  compiler: GCC
+  find_file_boundaries: True
+  header_encoding: ASCII
+  platform: n64
+  undefined_funcs_auto_path: linker_scripts/usa/auto/undefined_funcs_auto.ld
+  undefined_syms_auto_path: linker_scripts/usa/auto/undefined_syms_auto.ld
+  # symbol_addrs_path: symbol_addrs.txt
+  asm_path: asm/usa
+  src_path: src
+  build_path: build
+  asset_path: bin/usa
+  extensions_path: tools/splat_ext
+  mips_abi_float_regs: o32
+  do_c_func_detection: True
+  o_as_suffix: True
+  # gfx_ucode: f3dex2
+  mnemonic_ljust: 12
+  rom_address_padding: True
+  dump_symbols: True
+  # generated_c_preamble: |
+  # asm_inc_header: ""
+  use_legacy_include_asm: False
+  create_asm_dependencies: True
+  # string_encoding: SHIFT-JIS
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  # include_macro_inc: False
+  libultra_symbols: True
+  hardware_regs: True
+  auto_all_sections: []
+segments:
+  - name: header
+    type: header
+    start: 0x0
+  - name: boot
+    type: bin
+    start: 0x40
+  - name: main
+    type: code
+    start: 0x1000
+    vram: 0x80000400
+    subsegments:
+      - [0x1000, asm]
+  - type: bin
+    start: 0xB07F0
+  - [0x2000000]

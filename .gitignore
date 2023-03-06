@@ -4,6 +4,10 @@ bin/
 assets/
 build/
 
+undefined_funcs_auto.ld
+undefined_syms_auto.ld
+puzzleleague.ld
+
 ctx.c
 ctx.c.m2c
 *.o
