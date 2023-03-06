@@ -1,0 +1,17 @@
+.splat/
+asm/
+bin/
+assets/
+build/
+
+ctx.c
+ctx.c.m2c
+*.o
+
+*.z64
+*.n64
+*.v64
+*.plf
+*.sym
+
+asdf.c
