@@ -63,169 +63,290 @@ segments:
     bss_size: 0x1364C0
     subsegments:
       - [0x1050, asm]
+      - [0x1FE0, asm]
+      - [0x27E0, asm]
+      - [0x4B50, asm]
+      - [0x5DF0, asm]
+      - [0x68C0, asm]
+      - [0x7F40, asm]
+      - [0x1E060, asm]
+      - [0x1FA00, asm]
+      - [0x2C290, asm]
+      - [0x2CF70, asm]
+      - [0x2E870, asm]
+      - [0x2FE70, asm]
+      - [0x31AB0, asm]
+      - [0x34F30, asm]
+      - [0x366C0, asm]
+      - [0x37E10, asm]
+      - [0x3F0D0, asm]
+      - [0x41940, asm]
+      - [0x431A0, asm]
+      - [0x43EB0, asm]
+      - [0x450E0, asm]
+      - [0x46450, asm]
+      - [0x4A920, asm]
+      - [0x4DA60, asm]
+      - [0x51D30, asm]
+      - [0x53630, asm]
+      - [0x54E30, asm]
+      - [0x55F20, asm]
+      - [0x59ED0, asm]
+      - [0x5CC40, asm]
+      - [0x5CF10, asm]
+      - [0x5DB20, asm]
+      - [0x65D80, asm]
+      - [0x669C0, asm]
+      - [0x6A540, asm]
+      - [0x6C4B0, asm]
+      - [0x6F230, asm]
+      - [0x705B0, asm]
+      - [0x70D30, asm]
+      - [0x72CE0, asm]
+      - [0x73190, asm]
+      - [0x73280, asm]
+      - [0x73370, asm]
+      - [0x73460, asm]
+      - [0x73550, asm]
+      - [0x73640, asm]
+      - [0x73730, asm]
+      - [0x73820, asm]
+      - [0x73910, asm]
+      - [0x73A00, asm]
+      - [0x73AF0, asm]
+      - [0x73BE0, asm]
+      - [0x73CD0, asm]
+      - [0x73DC0, asm]
+      - [0x73EB0, asm]
+      - [0x73FA0, asm]
+      - [0x74090, asm]
+      - [0x74650, asm]
+      - [0x82630, asm]
+      - [0x88010, asm]
+      - [0x88D10, asm]
+      - [0x8A4A0, asm]
+      - [0x8E630, asm]
+      - [0x8F430, asm]
+      - [0x8F630, asm]
+      - [0x8F920, asm]
+      - [0x8FA70, asm]
 
       # Uses libgultra_d
-      - [0x907A0, hasm, setintmask]
-      - [0x90840, c, pimgr]
-      - [0x90B80, c, epirawdma]
-      - [0x90F60, c, epiwrite]
-      - [0x90FF0, c, epiread]
-      - [0x91080, c, epidma]
-      - [0x912C0, c, epilinkhandle]
-      - [0x91320, c, cartrominit]
-      - [0x91510, c, devmgr]
+      - [0x907A0, hasm, libultra/setintmask]
+      - [0x90840, asm, libultra/pimgr] # c
+      - [0x90B80, asm, libultra/epirawdma] # c
+      - [0x90F60, asm, libultra/epiwrite] # c
+      - [0x90FF0, asm, libultra/epiread] # c
+      - [0x91080, asm, libultra/epidma] # c
+      - [0x912C0, asm, libultra/epilinkhandle] # c
+      - [0x91320, asm, libultra/cartrominit] # c
+      - [0x91510, asm, libultra/devmgr] # c
       - [0x91A50, asm]
-      - [0x91B40, c, pidma]
-      - [0x91D80, c, aigetlen]
-      - [0x91DB0, c, aigetstat]
-      - [0x91DE0, c, aisetfreq]
-      - [0x92090, c, aisetnextbuf]
-      - [0x921A0, c, drvrnew]
-      - [0x92CF0, c, load]
-      - [0x94070, c, auxbus]
-      - [0x94240, c, env]
-      - [0x956E0, c, filter]
-      - [0x95750, c, mainbus]
-      - [0x959B0, c, resample]
-      - [0x95E20, c, reverb]
-      - [0x971D0, c, save]
-      - [0x973D0, c, sl]
-      - [0x97550, c, heapinit]
-      - [0x975F0, c, heapalloc]
-      - [0x97760, c, copy] # common form
-      - [0x977F0, c, synthesizer]
-      - [0x981B0, c, syndelete]
-      - [0x981E0, c, synaddplayer]
-      - [0x98250, c, synremoveplayer]
-      - [0x98330, c, synfreevoice]
-      - [0x98430, c, synallocvoice]
-      - [0x987B0, c, synstopvoice]
-      - [0x98880, c, synstartvoice]
-      - [0x98970, c, synsetpitch]
-      - [0x98A50, c, synsetvol]
-      - [0x98B50, c, synsetfxmix]
-      - [0x98C50, c, synsetpan]
-      - [0x98D30, c, synallocfx]
-      - [0x98E90, hasm, invaldcache]
-      - [0x98F40, hasm, writebackdcache]
-      - [0x98FC0, hasm, writebackdcacheall]
-      - [0x98FF0, c, contquery]
-      - [0x990C0, c, contreaddata]
-      - [0x99390, c, contreset]
-      - [0x99520, c, controller]
-      - [0x99950, c, contsetch]
-      - [0x999D0, c, virtualtophysical]
-      - [0x99AB0, c, assert]
-      - [0x99B00, c, lookat]
-      - [0x99FA0, c, mtxutil]
-      - [0x9A3C0, c, perspective]
-      - [0x9A6F0, c, rotate]
-      - [0x9A9A0, c, sinf]
-      - [0x9AC50, c, translate]
-      - [0x9AD10, c, us2dex]
-      - [0x9AF30, c, us2dex_emu]
-      - [0x9C3D0, c, rdbsend]
-      - [0x9C6C0, c, initrdb]
-      - [0x9C770, hasm, bcopy]
-      - [0x9CA90, hasm, bzero]
-      - [0x9CB30, c, string]
-      - [0x9CCB0, c, sprintf]
-      - [0x9CD80, c, syncprintf]
-      - [0x9D1F0, c, createmesgqueue]
-      - [0x9D290, c, jammesg]
-      - [0x9D450, c, recvmesg]
-      - [0x9D600, c, sendmesg]
-      - [0x9D7B0, c, seteventmesg]
-      - [0x9D8B0, hasm, getcount]
-      - [0x9D8C0, c, sptask]
-      - [0x9DCF0, c, sched]
-      - [0x9EED0, c, sirawdma]
+      - [0x91B40, asm, libultra/pidma] # c
+      - [0x91D80, asm, libultra/aigetlen] # c
+      - [0x91DB0, asm, libultra/aigetstat] # c
+      - [0x91DE0, asm, libultra/aisetfreq] # c
+      - [0x92090, asm, libultra/aisetnextbuf] # c
+      - [0x921A0, asm, libultra/drvrnew] # c
+      - [0x92CF0, asm, libultra/load] # c
+      - [0x94070, asm, libultra/auxbus] # c
+      - [0x94240, asm, libultra/env] # c
+      - [0x956E0, asm, libultra/filter] # c
+      - [0x95750, asm, libultra/mainbus] # c
+      - [0x959B0, asm, libultra/resample] # c
+      - [0x95E20, asm, libultra/reverb] # c
+      - [0x971D0, asm, libultra/save] # c
+      - [0x973D0, asm, libultra/sl] # c
+      - [0x97550, asm, libultra/heapinit] # c
+      - [0x975F0, asm, libultra/heapalloc] # c
+      - [0x97760, asm, libultra/copy] # common form # c
+      - [0x977F0, asm, libultra/synthesizer] # c
+      - [0x981B0, asm, libultra/syndelete] # c
+      - [0x981E0, asm, libultra/synaddplayer] # c
+      - [0x98250, asm, libultra/synremoveplayer] # c
+      - [0x98330, asm, libultra/synfreevoice] # c
+      - [0x98430, asm, libultra/synallocvoice] # c
+      - [0x987B0, asm, libultra/synstopvoice] # c
+      - [0x98880, asm, libultra/synstartvoice] # c
+      - [0x98970, asm, libultra/synsetpitch] # c
+      - [0x98A50, asm, libultra/synsetvol] # c
+      - [0x98B50, asm, libultra/synsetfxmix] # c
+      - [0x98C50, asm, libultra/synsetpan] # c
+      - [0x98D30, asm, libultra/synallocfx] # c
+      - [0x98E90, hasm, libultra/invaldcache]
+      - [0x98F40, hasm, libultra/writebackdcache]
+      - [0x98FC0, hasm, libultra/writebackdcacheall]
+      - [0x98FF0, asm, libultra/contquery] # c
+      - [0x990C0, asm, libultra/contreaddata] # c
+      - [0x99390, asm, libultra/contreset] # c
+      - [0x99520, asm, libultra/controller] # c
+      - [0x99950, asm, libultra/contsetch] # c
+      - [0x999D0, asm, libultra/virtualtophysical] # c
+      - [0x99AB0, asm, libultra/assert] # c
+      - [0x99B00, asm, libultra/lookat] # c
+      - [0x99FA0, asm, libultra/mtxutil] # c
+      - [0x9A3C0, asm, libultra/perspective] # c
+      - [0x9A6F0, asm, libultra/rotate] # c
+      - [0x9A9A0, asm, libultra/sinf] # c
+      - [0x9AC50, asm, libultra/translate] # c
+      - [0x9AD10, asm, libultra/us2dex] # c
+      - [0x9AF30, asm, libultra/us2dex_emu] # c
+      - [0x9C3D0, asm, libultra/rdbsend] # c
+      - [0x9C6C0, asm, libultra/initrdb] # c
+      - [0x9C770, hasm, libultra/bcopy]
+      - [0x9CA90, hasm, libultra/bzero]
+      - [0x9CB30, asm, libultra/string] # c
+      - [0x9CCB0, asm, libultra/sprintf] # c
+      - [0x9CD80, asm, libultra/syncprintf] # c
+      - [0x9D1F0, asm, libultra/createmesgqueue] # c
+      - [0x9D290, asm, libultra/jammesg] # c
+      - [0x9D450, asm, libultra/recvmesg] # c
+      - [0x9D600, asm, libultra/sendmesg] # c
+      - [0x9D7B0, asm, libultra/seteventmesg] # c
+      - [0x9D8B0, hasm, libultra/getcount]
+      - [0x9D8C0, asm, libultra/sptask] # c
+      - [0x9DCF0, asm, libultra/sched] # c
+      - [0x9EED0, asm, libultra/sirawdma] # c
       - [0x9EFD0, asm]
-      - [0x9F0C0, c, createthread]
-      - [0x9F290, c, destroythread]
-      - [0x9F3B0, c, getthreadpri]
-      - [0x9F400, c, setthreadpri]
-      - [0x9F550, c, startthread]
-      - [0x9F6F0, c, stopthread]
-      - [0x9F7E0, c, thread]
-      - [0x9F840, c, yieldthread]
-      - [0x9F8A0, c, gettime]
-      - [0x9F980, c, settimer]
-      - [0x9FA80, c, timerintr]
-      - [0xA0080, hasm, probetlb]
-      - [0xA0140, c, vigetcurrframebuf]
-      - [0xA01C0, c, vigetnextframebuf]
-      - [0xA0240, c, vigetline]
-      - [0xA0270, c, vimgr]
-      - [0xA0690, c, visetevent]
-      - [0xA0760, c, visetmode]
-      - [0xA0830, c, visetspecial]
-      - [0xA0AC0, c, visetyscale]
-      - [0xA0C00, c, viswapbuf]
-      - [0xA0CE0, c, viswapcontext]
-      - [0xA1050, c, viblack]
+      - [0x9F0C0, asm, libultra/createthread] # c
+      - [0x9F290, asm, libultra/destroythread] # c
+      - [0x9F3B0, asm, libultra/getthreadpri] # c
+      - [0x9F400, asm, libultra/setthreadpri] # c
+      - [0x9F550, asm, libultra/startthread] # c
+      - [0x9F6F0, asm, libultra/stopthread] # c
+      - [0x9F7E0, asm, libultra/thread] # c
+      - [0x9F840, asm, libultra/yieldthread] # c
+      - [0x9F8A0, asm, libultra/gettime] # c
+      - [0x9F980, asm, libultra/settimer] # c
+      - [0x9FA80, asm, libultra/timerintr] # c
+      - [0xA0080, hasm, libultra/probetlb]
+      - [0xA0140, asm, libultra/vigetcurrframebuf] # c
+      - [0xA01C0, asm, libultra/vigetnextframebuf] # c
+      - [0xA0240, asm, libultra/vigetline] # c
+      - [0xA0270, asm, libultra/vimgr] # c
+      - [0xA0690, asm, libultra/visetevent] # c
+      - [0xA0760, asm, libultra/visetmode] # c
+      - [0xA0830, asm, libultra/visetspecial] # c
+      - [0xA0AC0, asm, libultra/visetyscale] # c
+      - [0xA0C00, asm, libultra/viswapbuf] # c
+      - [0xA0CE0, asm, libultra/viswapcontext] # c
+      - [0xA1050, asm, libultra/viblack] # c
       - [0xA10F0, asm]
-      - [0xA1150, c, afterprenmi]
-      - [0xA1190, c, initialize]
-      - [0xA1740, c, errorasm]
-      - [0xA1790, c, error]
-      - [0xA1820, c, kmcprintf]
-      - [0xA1C60, hasm, exceptasm]
-      - [0xA2A50, hasm, interrupt]
-      - [0xA2AE0, c, setglobalintmask]
-      - [0xA2B40, c, resetglobalintmask]
-      - [0xA2BB0, c, pirawdma]
-      - [0xA2D90, c, pigetcmdq]
-      - [0xA2DE0, c, epirawread]
-      - [0xA30C0, c, epirawwrite]
-      - [0xA3370, c, ai]
-      - [0xA33C0, hasm, invalicache]
-      - [0xA3440, c, kdebugserver]
-      - [0xA3810, hasm, sqrtf]
-      - [0xA3820, c, cosf]
-      - [0xA3A60, c, normalize]
-      - [0xA3B40, c, readhost]
-      - [0xA3C20, c, xprintf]
-      - [0xA4E20, c, log]
-      - [0xA5330, c, dpsetnextbuf]
-      - [0xA5460, hasm, getcause]
-      - [0xA5470, hasm, getsr]
-      - [0xA5480, hasm, setcompare]
-      - [0xA5490, hasm, setfpccsr]
-      - [0xA54A0, hasm, setsr]
-      - [0xA54B0, c, rmonsio]
-      - [0xA5700, c, sp]
-      - [0xA5750, c, spsetstat]
-      - [0xA5780, c, spsetpc]
-      - [0xA57D0, c, sprawdma]
-      - [0xA5900, c, sptaskyield]
-      - [0xA5930, c, sptaskyielded]
-      - [0xA59C0, c, sirawread]
+      - [0xA1150, asm, libultra/afterprenmi] # c
+      - [0xA1190, asm, libultra/initialize] # c
+      - [0xA1740, asm, libultra/errorasm] # c
+      - [0xA1790, asm, libultra/error] # c
+      - [0xA1820, asm, libultra/kmcprintf] # c
+      - [0xA1C60, hasm, libultra/exceptasm]
+      - [0xA2A50, hasm, libultra/interrupt]
+      - [0xA2AE0, asm, libultra/setglobalintmask] # c
+      - [0xA2B40, asm, libultra/resetglobalintmask] # c
+      - [0xA2BB0, asm, libultra/pirawdma] # c
+      - [0xA2D90, asm, libultra/pigetcmdq] # c
+      - [0xA2DE0, asm, libultra/epirawread] # c
+      - [0xA30C0, asm, libultra/epirawwrite] # c
+      - [0xA3370, asm, libultra/ai] # c
+      - [0xA33C0, hasm, libultra/invalicache]
+      - [0xA3440, asm, libultra/kdebugserver] # c
+      - [0xA3810, hasm, libultra/sqrtf]
+      - [0xA3820, asm, libultra/cosf] # c
+      - [0xA3A60, asm, libultra/normalize] # c
+      - [0xA3B40, asm, libultra/readhost] # c
+      - [0xA3C20, asm, libultra/xprintf] # c
+      - [0xA4E20, asm, libultra/log] # c
+      - [0xA5330, asm, libultra/dpsetnextbuf] # c
+      - [0xA5460, hasm, libultra/getcause]
+      - [0xA5470, hasm, libultra/getsr]
+      - [0xA5480, hasm, libultra/setcompare]
+      - [0xA5490, hasm, libultra/setfpccsr]
+      - [0xA54A0, hasm, libultra/setsr]
+      - [0xA54B0, asm, libultra/rmonsio] # c
+      - [0xA5700, asm, libultra/sp] # c
+      - [0xA5750, asm, libultra/spsetstat] # c
+      - [0xA5780, asm, libultra/spsetpc] # c
+      - [0xA57D0, asm, libultra/sprawdma] # c
+      - [0xA5900, asm, libultra/sptaskyield] # c
+      - [0xA5930, asm, libultra/sptaskyielded] # c
+      - [0xA59C0, asm, libultra/sirawread] # c
       - [0xA5A80, asm]
-      - [0xA5B10, hasm, maptlbrdb]
-      - [0xA5B70, hasm, unmaptlball]
-      - [0xA5BC0, c, vi]
+      - [0xA5B10, hasm, libultra/maptlbrdb]
+      - [0xA5B70, hasm, libultra/unmaptlball]
+      - [0xA5BC0, asm, libultra/vi] # c
       - [0xA5D20, asm]
-      - [0xA5D50, c, xlitob]
-      - [0xA6100, c, xldtob]
-      - [0xA7280, c, dp]
-      - [0xA72D0, c, rmoncmds]
-      - [0xA73B0, c, rmonmem]
-      - [0xA7E20, c, rmonmisc]
-      - [0xA7FF0, c, rmonregs]
-      - [0xA8D30, c, rmontask]
-      - [0xA98D0, c, rmonmain]
-      - [0xA9D20, c, spgetstat]
-      - [0xA9D50, c, sprawread]
+      - [0xA5D50, asm, libultra/xlitob] # c
+      - [0xA6100, asm, libultra/xldtob] # c
+      - [0xA7280, asm, libultra/dp] # c
+      - [0xA72D0, asm, libultra/rmoncmds] # c
+      - [0xA73B0, asm, libultra/rmonmem] # c
+      - [0xA7E20, asm, libultra/rmonmisc] # c
+      - [0xA7FF0, asm, libultra/rmonregs] # c
+      - [0xA8D30, asm, libultra/rmontask] # c
+      - [0xA98D0, asm, libultra/rmonmain] # c
+      - [0xA9D20, asm, libultra/spgetstat] # c
+      - [0xA9D50, asm, libultra/sprawread] # c
       - [0xA9E10, asm]
-      - [0xA9EA0, c, si]
+      - [0xA9EA0, asm, libultra/si] # c
       - [0xA9EF0, asm]
-      - [0xA9F20, c, ldiv]
-      - [0xAA180, hasm, rmonrcp]
-      - [0xAA220, c, rmonbrk]
+      - [0xA9F20, asm, libultra/ldiv] # c
+      - [0xAA180, hasm, libultra/rmonrcp]
+      - [0xAA220, asm, libultra/rmonbrk] # c
       - [0xAAF10, asm]
 
-      - [0xAF3C0, data]
+      - [0xAEC30, asm]
+      - [0xAEFC0, asm]
+      - [0xAF130, asm]
+      - [0xAF150, asm]
+
+      - [0x0AF190, data, rsp/rspboot]
+      - [0x0AF260, data]
+
+      - [0x0B3260, data]
+
+      # rodata start is a  guess
+      - [0x0C1D60, rodata]
+      - [0xC2560, rodata]
+      - [0xC2950, rodata]
+      - [0xC29F0, rodata]
+      - [0xC2B20, rodata]
+      - [0xC2BF0, rodata]
+      - [0xC2C50, rodata]
+      - [0xC3790, rodata]
+      - [0xC37D0, rodata]
+      - [0xC3800, rodata]
+      - [0xC3810, rodata]
+      - [0xC3820, rodata]
+      - [0xC39B0, rodata]
+      - [0xC3A60, rodata]
+      - [0xC3F80, rodata]
+      - [0xC4710, rodata]
+      - [0xC4720, rodata]
+      - [0xC4730, rodata]
+      - [0xC4DD0, rodata]
+      - [0xC4F40, rodata]
+      - [0xC5E80, rodata]
+      - [0xC62B0, rodata]
+      - [0xC64B0, rodata]
+      - [0xC6B40, rodata]
+      - [0xC6C10, rodata]
+      - [0xC6D10, rodata]
+      - [0xC6DF0, rodata]
+      - [0xC6EB0, rodata]
+      - [0xC6F00, rodata]
+      - [0xC7000, rodata]
+      - [0xC7030, rodata]
+      - [0xC70B0, rodata]
+      - [0xC70E0, rodata]
+      - [0xC7120, rodata]
+      - [0xC71A0, rodata]
+      - [0xC71D0, rodata]
+      - [0xC7220, rodata]
+      - [0xC7230, rodata]
+      - [0xC8A30, rodata]
+      - [0xC8A50, rodata]
+      - [0xC8AD0, rodata]
+      - [0xC8AF0, rodata]
+      - [0xC8CF0, rodata]
+
       - { start: 0xC8DB0, type: bss, vram: 0x800C81B0 }
 
   - type: bin
