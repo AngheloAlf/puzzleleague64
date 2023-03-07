@@ -43,15 +43,26 @@ segments:
   - name: header
     type: header
     start: 0x0
+
   - name: boot
     type: bin
     start: 0x40
-  - name: main
+
+  - name: entry
     type: code
     start: 0x1000
     vram: 0x80000400
     subsegments:
-      - [0x1000, asm]
+      - [0x1000, hasm]
+
+  - name: main
+    type: code
+    start: 0x1050
+    vram: 0x80000450
+    follows_vram: entry
+    bss_size: 0x136450
+    subsegments:
+      - [0x1050, asm]
 
       # Uses libgultra
       - [0x90960, hasm, setintmask]
@@ -205,6 +216,10 @@ segments:
       - [0xA17A0, c, rmonbrk]
       - [0xA2490, asm]
 
+      - [0xA65F0, data]
+      - { start: 0xBE490, type: bss, vram: 0x800BD890 }
+
   - type: bin
-    start: 0xA65F0
+    start: 0xBE490
+    follows_vram: main
   - [0x2000000]
