@@ -13,6 +13,8 @@ options:
   undefined_syms_auto_path: linker_scripts/usa/auto/undefined_syms_auto.ld
   symbol_addrs_path:
     - linker_scripts/usa/symbol_addrs_libultra.txt
+  reloc_addrs_path:
+    - relocs/reloc_addrs.usa.txt
   asm_path: asm/usa
   src_path: src
   build_path: build
