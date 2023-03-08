@@ -499,9 +499,8 @@ __osPiAccessQueueEnabled = 0x800B4620; // (pimgr, false)
 // = 0x800B4630; // (aisetnextbuf, false)
 // = 0x800B4640; // (drvrnew, false)
 // = 0x800B47D0; // (env, false)
-alGlobals = 0x800B48F0; // (env, false)
-// = 0x800B48F0; // (sl, false)
-alGlobals = 0x800B48F0; // (synthesizer, false)
+
+alGlobals = 0x800B48F0;
 // = 0x800B4900; // (controller, false)
 // = 0x800B4910; // (rotate, false)
 // = 0x800B4920; // (us2dex_emu, false)
