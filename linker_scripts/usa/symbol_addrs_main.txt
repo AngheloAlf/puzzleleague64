@@ -1,0 +1,3 @@
+bootproc = 0x80000520;
+Idle_ThreadEntry = 0x80000588;
+Main_ThreadEntry = 0x80000854;

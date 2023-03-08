@@ -12,7 +12,10 @@ options:
   undefined_funcs_auto_path: linker_scripts/fra/auto/undefined_funcs_auto.ld
   undefined_syms_auto_path: linker_scripts/fra/auto/undefined_syms_auto.ld
   symbol_addrs_path:
+    - linker_scripts/fra/symbol_addrs_main.txt
     - linker_scripts/fra/symbol_addrs_libultra.txt
+    - linker_scripts/fra/symbol_addrs_libkmc.txt
+    - linker_scripts/fra/ignored_addresses.txt
   reloc_addrs_path:
     - relocs/reloc_addrs.fra.txt
   asm_path: asm/fra
@@ -53,7 +56,7 @@ segments:
     start: 0x1000
     vram: 0x80000400
     subsegments:
-      - [0x1000, hasm]
+      - [0x1000, hasm, entry/entry]
 
   - name: main
     type: code
