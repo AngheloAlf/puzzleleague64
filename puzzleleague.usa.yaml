@@ -345,6 +345,7 @@ segments:
       - [0x0C8920, rodata]
       - [0x0CA120, rodata]
       - [0x0CA140, rodata]
+      - [0x0CA150, rodata]
       - [0x0CA1C0, rodata]
       - [0x0CA1E0, rodata]
       - [0x0CA3E0, rodata]
