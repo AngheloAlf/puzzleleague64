@@ -129,6 +129,7 @@ segments:
       - [0x88D10, asm]
       - [0x8A4A0, asm]
       - [0x8E630, asm]
+      - [0x8F370, asm]
       - [0x8F430, asm]
       - [0x8F630, asm]
       - [0x8F920, asm]
