@@ -356,4 +356,5 @@ segments:
   - type: bin
     start: 0xCA750
     follows_vram: main
-  - [0x2000000]
+
+  - [0x1FCFC00]

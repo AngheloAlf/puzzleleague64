@@ -357,4 +357,5 @@ segments:
   - type: bin
     start: 0xC8DB0
     follows_vram: main
-  - [0x2000000]
+
+  - [0x1F875D0]

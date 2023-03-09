@@ -293,6 +293,7 @@ segments:
       - [0xAC340, asm]
 
       - [0xB0060, asm]
+      - [0xB01F0, asm]
       - [0xB03F0, asm]
       - [0xB0560, asm]
       - [0xB0580, asm]
@@ -355,4 +356,5 @@ segments:
   - type: bin
     start: 0xCA4A0
     follows_vram: main
-  - [0x2000000]
+
+  - [0x1FCF900]

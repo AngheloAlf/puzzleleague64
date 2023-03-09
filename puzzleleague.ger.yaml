@@ -348,4 +348,5 @@ segments:
   - type: bin
     start: 0xBE490
     follows_vram: main
-  - [0x2000000]
+
+  - [0x1FE9E70]
