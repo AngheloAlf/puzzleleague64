@@ -1,6 +1,6 @@
 // .text
 
-func_80000400_eur = 0x80000400; // type:func
+entrypoint = 0x80000400; // type:func
 func_80000450_eur = 0x80000450; // type:func
 bootproC_eur = 0x8000053C; // type:func
 Idle_ThreadEntry = 0x800005AC; // type:func

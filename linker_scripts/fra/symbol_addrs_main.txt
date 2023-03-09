@@ -1,6 +1,6 @@
 // .text
 
-func_80000400_fra = 0x80000400; // type:func
+entrypoint = 0x80000400; // type:func
 func_80000450_fra = 0x80000450; // type:func
 bootproc = 0x8000053C; // type:func
 Idle_ThreadEntry = 0x800005AC; // type:func
@@ -1078,7 +1078,7 @@ func_800ABA28_fra = 0x800ABA28; // type:func
 func_800ADE88_fra = 0x800ADE88; // type:func
 func_800AE01C_fra = 0x800AE01C; // type:func
 func_800AE030_fra = 0x800AE030; // type:func
-func_800AE1C4_fra = 0x800AE1C4; // type:func
+func_800AE1C0_fra = 0x800AE1C0; // type:func
 func_800AE1F8_fra = 0x800AE1F8; // type:func
 func_800AE2F4_fra = 0x800AE2F4; // type:func
 

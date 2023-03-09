@@ -293,7 +293,11 @@ segments:
       - [0xA17A0, asm, libultra/rmonbrk] # c
 
       - [0xA2140, asm]
-      - [0xA2490, asm]
+      - [0xA5E60, asm]
+      - [0xA5FF0, asm]
+      - [0xA61F0, asm]
+      - [0xA6360, asm]
+      - [0xA6380, asm]
 
       - [0x0A63C0, data, rsp/rspboot]
       - [0x0A6490, data] # rsp?

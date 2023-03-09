@@ -297,6 +297,7 @@ segments:
       - [0xAAF10, asm]
 
       - [0xAEC30, asm]
+      - [0x0AEDC0, asm]
       - [0xAEFC0, asm]
       - [0xAF130, asm]
       - [0xAF150, asm]
