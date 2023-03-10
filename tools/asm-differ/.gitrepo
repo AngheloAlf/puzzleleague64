@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:simonlindholm/asm-differ.git
+	branch = main
+	commit = ae408664a89ea4dc70d005d0afc69ac26c938cbb
+	parent = 0932ffaf1da195c576f176215a7e651a234809d6
+	method = merge
+	cmdver = 0.4.3
