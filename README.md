@@ -2,10 +2,10 @@
 
 [Build Status]: <https://github.com/AngheloAlf/puzzleleague64/actions/workflows/ci.yml/badge.svg>
 [actions]: <https://github.com/AngheloAlf/puzzleleague64/actions/workflows/ci.yml>
-[Code usa Progress]: https://img.shields.io/endpoint?label=Code%20us&url=https%3A%2F%2Fprogress.deco.mp%2Fdata%2Fpuzzleleague64%2Fusa%2Fcode%2F%3Fmode%3Dshield%26measure%3Dall
-[Code eur Progress]: https://img.shields.io/endpoint?label=Code%20cn&url=https%3A%2F%2Fprogress.deco.mp%2Fdata%2Fpuzzleleague64%2Feur%2Fcode%2F%3Fmode%3Dshield%26measure%3Dall
-[Code fra Progress]: https://img.shields.io/endpoint?label=Code%20us&url=https%3A%2F%2Fprogress.deco.mp%2Fdata%2Fpuzzleleague64%2Ffra%2Fcode%2F%3Fmode%3Dshield%26measure%3Dall
-[Code ger Progress]: https://img.shields.io/endpoint?label=Code%20cn&url=https%3A%2F%2Fprogress.deco.mp%2Fdata%2Fpuzzleleague64%2Fger%2Fcode%2F%3Fmode%3Dshield%26measure%3Dall
+[Code usa Progress]: https://img.shields.io/endpoint?label=Code%20usa&url=https%3A%2F%2Fprogress.deco.mp%2Fdata%2Fpuzzleleague64%2Fusa%2Fcode%2F%3Fmode%3Dshield%26measure%3Dall
+[Code eur Progress]: https://img.shields.io/endpoint?label=Code%20eur&url=https%3A%2F%2Fprogress.deco.mp%2Fdata%2Fpuzzleleague64%2Feur%2Fcode%2F%3Fmode%3Dshield%26measure%3Dall
+[Code fra Progress]: https://img.shields.io/endpoint?label=Code%20fra&url=https%3A%2F%2Fprogress.deco.mp%2Fdata%2Fpuzzleleague64%2Ffra%2Fcode%2F%3Fmode%3Dshield%26measure%3Dall
+[Code ger Progress]: https://img.shields.io/endpoint?label=Code%20ger&url=https%3A%2F%2Fprogress.deco.mp%2Fdata%2Fpuzzleleague64%2Fger%2Fcode%2F%3Fmode%3Dshield%26measure%3Dall
 
 Matching decomp of Pokémon Puzzle League
 
