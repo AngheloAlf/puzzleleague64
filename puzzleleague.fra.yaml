@@ -64,6 +64,7 @@ segments:
     vram: 0x80000450
     follows_vram: entry
     bss_size: 0x1364C0
+    subalign: 0
     subsegments:
       - [0x1050, asm]
       - [0x1FE0, asm]
@@ -351,6 +352,7 @@ segments:
       - [0xC8AD0, rodata]
       - [0xC8AF0, rodata]
       - [0xC8CF0, rodata]
+      - [0x0C8D88, rodata, main/build]
 
       - { start: 0xC8DB0, type: bss, vram: 0x800C81B0 }
 
