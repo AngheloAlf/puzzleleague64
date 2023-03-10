@@ -1,4 +1,4 @@
-# puzzleleague
+# puzzleleague64
 
 ## License
 

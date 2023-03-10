@@ -19,7 +19,7 @@ def mapToPj64symsMain():
 
     version: str = args.version
     output: Path = args.output
-    mapPath = Path("build") / f"puzzleleague.{version}.map"
+    mapPath = Path("build") / f"puzzleleague64.{version}.map"
 
     exit(mapfile_parser.frontends.pj64_syms.doPj64Syms(mapPath, output))
 

@@ -83,7 +83,7 @@ def progressMain():
 
     args = parser.parse_args()
 
-    mapPath = Path("build") / f"puzzleleague.{args.version}.map"
+    mapPath = Path("build") / f"puzzleleague64.{args.version}.map"
 
     totalStats, progressPerFolder = getProgress(mapPath, args.version)
 

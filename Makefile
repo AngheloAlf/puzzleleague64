@@ -29,7 +29,7 @@ MIPS_BINUTILS_PREFIX ?= mips-linux-gnu-
 VERSION ?= usa
 
 BASEROM              := baserom.$(VERSION).z64
-TARGET               := puzzleleague
+TARGET               := puzzleleague64
 
 
 ### Output ###

@@ -19,7 +19,7 @@ def symInfoMain():
 
     args = parser.parse_args()
 
-    BUILTMAP = Path(f"build") / f"puzzleleague.{args.version}.map"
+    BUILTMAP = Path(f"build") / f"puzzleleague64.{args.version}.map"
 
     mapPath = BUILTMAP
     if args.use_expected:

@@ -13,7 +13,7 @@ import progress
 
 
 BASE_URL = "https://progress.deco.mp"
-PROJECT = "puzzleleague"
+PROJECT = "puzzleleague64"
 
 def uploadProgressMain():
     parser = argparse.ArgumentParser()
@@ -25,7 +25,7 @@ def uploadProgressMain():
     version: str = args.version
     category: str = "code"
     apikey: str = args.apikey
-    mapPath = Path("build") / f"puzzleleague.{args.version}.map"
+    mapPath = Path("build") / f"puzzleleague64.{args.version}.map"
 
     totalStats, progressPerFolder = progress.getProgress(mapPath, version)
 

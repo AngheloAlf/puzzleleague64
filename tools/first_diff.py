@@ -20,8 +20,8 @@ def firstDiffMain():
 
     buildFolder = Path("build")
 
-    BUILTROM = buildFolder / f"puzzleleague.{args.version}.z64"
-    BUILTMAP = buildFolder / f"puzzleleague.{args.version}.map"
+    BUILTROM = buildFolder / f"puzzleleague64.{args.version}.z64"
+    BUILTMAP = buildFolder / f"puzzleleague64.{args.version}.map"
 
     EXPECTEDROM = "expected" / BUILTROM
     EXPECTEDMAP = "expected" / BUILTMAP

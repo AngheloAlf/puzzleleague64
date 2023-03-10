@@ -1,9 +1,9 @@
 name: Puzzle League N64 (French)
 sha1: 72760a2d87ed3e70756a4aa689b9b26786669a52
 options:
-  basename: puzzleleaguen64
+  basename: puzzleleague64n64
   target_path: baserom.fra.z64
-  ld_script_path: linker_scripts/fra/puzzleleague.ld
+  ld_script_path: linker_scripts/fra/puzzleleague64.ld
   base_path: .
   compiler: GCC
   find_file_boundaries: True

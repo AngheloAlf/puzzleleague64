@@ -6,7 +6,7 @@ build/
 
 undefined_funcs_auto.ld
 undefined_syms_auto.ld
-puzzleleague.ld
+puzzleleague64.ld
 
 __pycache__/
 .make_options
