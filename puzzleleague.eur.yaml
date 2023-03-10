@@ -64,7 +64,7 @@ segments:
     vram: 0x80000450
     follows_vram: entry
     bss_size: 0x1364C0
-    subalign: 0
+    subalign: null
     subsegments:
       - [0x001050, asm, main/001050]
       - [0x001FD0, asm, main/001FD0]

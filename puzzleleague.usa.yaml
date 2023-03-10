@@ -64,7 +64,7 @@ segments:
     vram: 0x80000450
     follows_vram: entry
     bss_size: 0x1576B0
-    subalign: 0
+    subalign: null
     subsegments:
       - [0x001050, asm, main/001050]
       - [0x001F10, asm, main/001F10]
@@ -308,9 +308,11 @@ segments:
 
       # rodata start is a  guess
       - [0x0C3000, rodata, main/0C3000]
-      - [0x0C3800, rodata, main/0C3800]
+      - [0x0C3800, rodata, main/0C3800] # rsp?
+      - [0x0C3BC0, rodata, main/0C3BC0]
       - [0x0C3BF0, rodata, main/0C3BF0]
       - [0x0C3C90, rodata, main/0C3C90]
+      - [0x0C3CD0, rodata, main/0C3CD0]
       - [0x0C3DC0, rodata, main/0C3DC0]
       - [0x0C3E90, rodata, main/0C3E90]
       - [0x0C3EF0, rodata, main/0C3EF0]
