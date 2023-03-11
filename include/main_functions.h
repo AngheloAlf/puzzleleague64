@@ -8,7 +8,7 @@
 
 // void func_80000450_usa();
 // void bootproc();
-// void Idle_ThreadEntry();
+void Idle_ThreadEntry(void *);
 // void func_80000630_usa();
 // void Main_ThreadEntry();
 // void func_800009E4_usa();

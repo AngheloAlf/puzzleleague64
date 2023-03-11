@@ -30,8 +30,14 @@ options:
   mnemonic_ljust: 12
   rom_address_padding: True
   dump_symbols: True
-  # generated_c_preamble: |
-  # asm_inc_header: ""
+  generated_c_preamble: |
+    #include "libultra.h"
+    #include "include_asm.h"
+    #include "macros_defines.h"
+    #include "unknown_structs.h"
+    #include "main_functions.h"
+    #include "main_variables.h"
+  asm_inc_header: ""
   use_legacy_include_asm: False
   create_asm_dependencies: True
   # string_encoding: SHIFT-JIS
@@ -70,7 +76,7 @@ segments:
     bss_size: 0x1364C0
     subalign: null
     subsegments:
-      - [0x001050, asm, main/001050]
+      - [0x001050, c, main/boot_main]
       - [0x001FD0, asm, main/001FD0]
       - [0x0027D0, asm, main/0027D0]
       - [0x004B50, asm, main/004B50]

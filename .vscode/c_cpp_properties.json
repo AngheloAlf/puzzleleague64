@@ -9,8 +9,8 @@
                 "bin/eur",
                 "bin/fra",
                 "bin/ger",
-                "lib/ultralib/include",
-                "lib/ultralib/include/PR",
+                "lib/libultra_j/include",
+                "lib/libultra_j/include/PR",
                 "."
             ],
             "defines": [

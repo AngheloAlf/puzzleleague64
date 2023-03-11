@@ -2022,12 +2022,12 @@ RO_STR_800C9878_usa = 0x800C9878; // type:asciz
 // .bss
 
 B_800C98A0_usa = 0x800C98A0; //
-B_800CB8A0_usa = 0x800CB8A0; //
+sIdleStack = 0x800CB8A0; //
 B_800CD8A0_usa = 0x800CD8A0; //
 B_800CEA50_usa = 0x800CEA50; //
 B_800CED70_usa = 0x800CED70; //
 B_800CED88_usa = 0x800CED88; //
-B_800CEF38_usa = 0x800CEF38; //
+sIdleThread = 0x800CEF38; //
 B_FLT_800CF2A0_usa = 0x800CF2A0; // type:f32
 B_800CF2B0_usa = 0x800CF2B0; //
 B_800F0535_usa = 0x800F0535; //

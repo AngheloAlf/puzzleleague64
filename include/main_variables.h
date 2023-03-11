@@ -809,12 +809,12 @@
 // .bss
 
 // extern UNK_TYPE B_800C98A0_usa;
-// extern UNK_TYPE B_800CB8A0_usa;
+extern STACK(sIdleStack, 0x2000);
 // extern UNK_TYPE B_800CD8A0_usa;
 // extern UNK_TYPE B_800CEA50_usa;
 // extern UNK_TYPE B_800CED70_usa;
 // extern UNK_TYPE B_800CED88_usa;
-// extern UNK_TYPE B_800CEF38_usa;
+extern OSThread sIdleThread;
 // extern UNK_TYPE B_FLT_800CF2A0_usa;
 // extern UNK_TYPE B_800CF2B0_usa;
 // extern UNK_TYPE B_800F0535_usa;
@@ -1815,7 +1815,7 @@
 // extern UNK_TYPE B_801AB984_usa;
 // extern UNK_TYPE B_801AB985_usa;
 // extern UNK_TYPE B_801AB988_usa;
-// extern UNK_TYPE gBootStack;
+extern STACK(gBootStack, BOOT_STACK_SIZE);
 // extern UNK_TYPE B_801AD9A0_usa;
 // extern UNK_TYPE B_801AD9B0_usa;
 // extern UNK_TYPE B_801AD9BC_usa;
