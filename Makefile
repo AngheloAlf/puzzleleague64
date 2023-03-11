@@ -99,6 +99,7 @@ SPLAT_YAML        ?= $(TARGET).$(VERSION).yaml
 
 
 IINC       := -Iinclude -Ibin/$(VERSION) -I.
+IINC       += -Ilib/ultralib/include -Ilib/ultralib/include/PR
 
 # Check code syntax with host compiler
 CHECK_WARNINGS := -Wall -Wextra -Wimplicit-fallthrough -Wno-unknown-pragmas -Wno-missing-braces -Wno-sign-compare -Wno-uninitialized
@@ -248,9 +249,9 @@ $(BUILD_DIR)/%.o: %.s
 $(BUILD_DIR)/%.o: %.c
 	$(CC_CHECK) $(CC_CHECK_FLAGS) $(IINC) -I $(dir $*) $(CHECK_WARNINGS) $(BUILD_DEFINES) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(C_DEFINES) $(MIPS_BUILTIN_DEFS) -o $@ $<
 ifeq ($(MULTISTEP_BUILD), 0)
-	$(CC) $(C_COMPILER_FLAGS) -I $(dir $*) -E $< | $(ICONV) $(ICONV_FLAGS) | $(CC) -x c $(C_COMPILER_FLAGS) -I $(dir $*) -c -o $@ -
+	$(CC) $(C_COMPILER_FLAGS) -I $(dir $*) -E $< | $(CC) -x c $(C_COMPILER_FLAGS) -I $(dir $*) -c -o $@ -
 else
-	$(CC) $(C_COMPILER_FLAGS) -I $(dir $*) -E $< | $(ICONV) $(ICONV_FLAGS) -o $(@:.o=.i)
+	$(CC) $(C_COMPILER_FLAGS) -I $(dir $*) -E $< -o $(@:.o=.i)
 	$(CC) $(C_COMPILER_FLAGS) -I $(dir $*) -S -o $(@:.o=.s) $(@:.o=.i)
 	$(CC) $(C_COMPILER_FLAGS) -I $(dir $*) -c -o $@ $(@:.o=.s)
 endif
