@@ -2032,11 +2032,11 @@ RO_DBL_800C7B98_eur = 0x800C7B98; // type:f64
 // .bss
 
 B_800C9B50_eur = 0x800C9B50; //
-B_800CBB50_eur = 0x800CBB50; //
+sIdleStack = 0x800CBB50; // size:0x2000
 B_800CDB50_eur = 0x800CDB50; //
 B_800CDE70_eur = 0x800CDE70; //
 B_800CDE88_eur = 0x800CDE88; //
-B_800CE038_eur = 0x800CE038; //
+sIdleThread = 0x800CE038; //
 B_FLT_800CE3A0_eur = 0x800CE3A0; // type:f32
 B_800CE3B0_eur = 0x800CE3B0; //
 B_800F0535_eur = 0x800F0535; //

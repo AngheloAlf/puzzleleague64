@@ -14,7 +14,7 @@ func_8000147C_ger = 0x8000147C; // type:func
 func_800017A8_ger = 0x800017A8; // type:func
 func_8000184C_ger = 0x8000184C; // type:func
 func_800018FC_ger = 0x800018FC; // type:func
-func_80001A90_ger = 0x80001A90; // type:func
+func_80001A80_eur = 0x80001A90; // type:func
 func_80001BE0_ger = 0x80001BE0; // type:func
 func_80001D70_ger = 0x80001D70; // type:func
 func_80001E24_ger = 0x80001E24; // type:func
@@ -2057,12 +2057,12 @@ RO_DBL_800BD1B8_ger = 0x800BD1B8; // type:f64
 // .bss
 
 B_800BD890_ger = 0x800BD890; //
-B_800BF890_ger = 0x800BF890; //
+sIdleStack = 0x800BF890; // size:0x2000
 B_800C00D2_ger = 0x800C00D2; //
 B_800C1890_ger = 0x800C1890; //
 B_800C1BB0_ger = 0x800C1BB0; //
 B_800C1BC8_ger = 0x800C1BC8; //
-B_800C1D78_ger = 0x800C1D78; //
+sIdleThread = 0x800C1D78; //
 B_FLT_800C20E0_ger = 0x800C20E0; // type:f32
 B_800C20F0_ger = 0x800C20F0; //
 B_800F0535_ger = 0x800F0535; //

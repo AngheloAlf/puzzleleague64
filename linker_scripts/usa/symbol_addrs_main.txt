@@ -2022,7 +2022,7 @@ RO_STR_800C9878_usa = 0x800C9878; // type:asciz
 // .bss
 
 B_800C98A0_usa = 0x800C98A0; //
-sIdleStack = 0x800CB8A0; //
+sIdleStack = 0x800CB8A0; // size:0x2000
 B_800CD8A0_usa = 0x800CD8A0; //
 B_800CEA50_usa = 0x800CEA50; //
 B_800CED70_usa = 0x800CED70; //

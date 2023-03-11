@@ -4,6 +4,7 @@
 #include "libultra.h"
 #include "unk.h"
 #include "unknown_structs.h"
+#include "version.h"
 
 
 // void func_80000450_usa();
@@ -1086,5 +1087,11 @@ void Idle_ThreadEntry(void *);
 // void func_800AF5F0_usa();
 // void func_800AF628_usa();
 // void func_800AF724_usa();
+
+
+#if REGION_PAL
+void func_80001A80_eur(UNK_TYPE);
+#endif
+
 
 #endif
