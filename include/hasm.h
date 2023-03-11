@@ -19,6 +19,10 @@
     addu \dst, \src, $zero
 .endm
 
+#define LA(dst, address) \
+    lui         dst, %hi(address); \
+    addiu       dst, dst, %lo(address)
+
 #endif
 
 #define BOOT_STACK_SIZE 0x2000

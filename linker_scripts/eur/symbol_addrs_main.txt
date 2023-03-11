@@ -2,7 +2,7 @@
 
 entrypoint = 0x80000400; // type:func
 func_80000450_eur = 0x80000450; // type:func
-bootproC_eur = 0x8000053C; // type:func
+bootproc = 0x8000053C; // type:func
 Idle_ThreadEntry = 0x800005AC; // type:func
 func_80000654_eur = 0x80000654; // type:func
 func_800008AC_eur = 0x800008AC; // type:func
@@ -3039,7 +3039,7 @@ B_801AAA80_eur = 0x801AAA80; //
 B_801AAA84_eur = 0x801AAA84; //
 B_801AAA85_eur = 0x801AAA85; //
 B_801AAA88_eur = 0x801AAA88; //
-B_801AAAA0_eur = 0x801AAAA0; //
+gBootStack = 0x801AAAA0; // size:0x2000
 B_801ACAA0_eur = 0x801ACAA0; //
 B_801ACAB0_eur = 0x801ACAB0; //
 B_801ACABC_eur = 0x801ACABC; //

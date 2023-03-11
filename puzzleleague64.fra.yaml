@@ -60,7 +60,7 @@ segments:
     start: 0x1000
     vram: 0x80000400
     subsegments:
-      - [0x1000, hasm, entry/entry]
+      - [0x001000, .hasm, ../../src/entry/entry]
 
   - name: main
     type: code
