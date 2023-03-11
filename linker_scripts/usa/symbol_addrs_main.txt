@@ -2021,12 +2021,12 @@ RO_STR_800C9878_usa = 0x800C9878; // type:asciz
 
 // .bss
 
-B_800C98A0_usa = 0x800C98A0; //
+sMainStack = 0x800C98A0; //
 sIdleStack = 0x800CB8A0; // size:0x2000
 B_800CD8A0_usa = 0x800CD8A0; //
-B_800CEA50_usa = 0x800CEA50; //
-B_800CED70_usa = 0x800CED70; //
-B_800CED88_usa = 0x800CED88; //
+sPiMgrCmdBuff = 0x800CEA50; //
+sPiMgrCmdQueue = 0x800CED70; //
+sMainThread = 0x800CED88; //
 sIdleThread = 0x800CEF38; //
 B_FLT_800CF2A0_usa = 0x800CF2A0; // type:f32
 B_800CF2B0_usa = 0x800CF2B0; //
@@ -2945,8 +2945,7 @@ B_801A6D6E_usa = 0x801A6D6E; //
 B_801A6D70_usa = 0x801A6D70; //
 B_801A6D74_usa = 0x801A6D74; //
 B_801A6D78_usa = 0x801A6D78; //
-B_801A6D7C_usa = 0x801A6D7C; //
-B_801A6D80_usa = 0x801A6D80; //
+B_801A6D7C_usa = 0x801A6D7C; // size:0x8 // maybe larger
 B_801A6D84_usa = 0x801A6D84; //
 B_801A6D88_usa = 0x801A6D88; //
 B_801A6D8C_usa = 0x801A6D8C; //

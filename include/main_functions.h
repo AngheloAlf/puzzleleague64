@@ -9,11 +9,11 @@
 
 // void func_80000450_usa();
 // void bootproc();
-void Idle_ThreadEntry(void *);
-// void func_80000630_usa();
-// void Main_ThreadEntry();
-// void func_800009E4_usa();
-// void func_80000EF8_usa();
+void Idle_ThreadEntry(void *arg);
+void func_80000630_usa(void);
+void Main_ThreadEntry(void *arg);
+s32 func_800009E4_usa(s32 arg0);
+s32 func_80000EF8_usa(s32 arg0);
 // void func_80001310_usa();
 // void func_80001330_usa();
 // void func_800013AC_usa();

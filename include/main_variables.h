@@ -19,7 +19,7 @@
 // extern UNK_TYPE D_800B3A90_usa;
 // extern UNK_TYPE D_800B3AB0_usa;
 // extern UNK_TYPE D_800B3AC0_usa;
-// extern UNK_TYPE D_800B3AC4_usa;
+extern s32 D_800B3AC4_usa;
 // extern UNK_TYPE D_800B3AC8_usa;
 // extern UNK_TYPE D_800B3ACC_usa;
 // extern UNK_TYPE D_800B3AD0_usa;
@@ -381,8 +381,8 @@
 // extern UNK_TYPE D_800BDB68_usa;
 // extern UNK_TYPE D_800BE1E8_usa;
 // extern UNK_TYPE D_800BE340_usa;
-// extern UNK_TYPE D_800BE344_usa;
-// extern UNK_TYPE D_800BE348_usa;
+extern s32 D_800BE344_usa;
+extern s32 D_800BE348_usa;
 // extern UNK_TYPE D_800BE34C_usa;
 // extern UNK_TYPE D_800BE350_usa;
 // extern UNK_TYPE D_800BE360_usa;
@@ -808,12 +808,12 @@
 
 // .bss
 
-// extern UNK_TYPE B_800C98A0_usa;
+extern STACK(sMainStack, 0x2000);
 extern STACK(sIdleStack, 0x2000);
 // extern UNK_TYPE B_800CD8A0_usa;
-// extern UNK_TYPE B_800CEA50_usa;
-// extern UNK_TYPE B_800CED70_usa;
-// extern UNK_TYPE B_800CED88_usa;
+extern OSMesg sPiMgrCmdBuff[200];
+extern OSMesgQueue sPiMgrCmdQueue;
+extern OSThread sMainThread;
 extern OSThread sIdleThread;
 // extern UNK_TYPE B_FLT_800CF2A0_usa;
 // extern UNK_TYPE B_800CF2B0_usa;
@@ -1421,7 +1421,7 @@ extern OSThread sIdleThread;
 // extern UNK_TYPE B_8019CEAC_usa;
 // extern UNK_TYPE B_8019CEB0_usa;
 // extern UNK_TYPE B_8019CEB1_usa;
-// extern UNK_TYPE B_8019CEC0_usa;
+extern s32 B_8019CEC0_usa;
 // extern UNK_TYPE B_8019CEC8_usa;
 // extern UNK_TYPE B_8019CECC_usa;
 // extern UNK_TYPE B_8019CED0_usa;
@@ -1732,8 +1732,7 @@ extern OSThread sIdleThread;
 // extern UNK_TYPE B_801A6D70_usa;
 // extern UNK_TYPE B_801A6D74_usa;
 // extern UNK_TYPE B_801A6D78_usa;
-// extern UNK_TYPE B_801A6D7C_usa;
-// extern UNK_TYPE B_801A6D80_usa;
+extern s32 B_801A6D7C_usa[];
 // extern UNK_TYPE B_801A6D84_usa;
 // extern UNK_TYPE B_801A6D88_usa;
 // extern UNK_TYPE B_801A6D8C_usa;
@@ -1957,7 +1956,7 @@ extern STACK(gBootStack, BOOT_STACK_SIZE);
 // extern UNK_TYPE B_801F9C80_usa;
 // extern UNK_TYPE B_801F9CA4_usa;
 // extern UNK_TYPE B_801F9CA8_usa;
-// extern UNK_TYPE B_801F9CB8_usa;
+extern s32 B_801F9CB8_usa;
 
 // extern UNK_TYPE B_801F9CC0_usa;
 // extern UNK_TYPE B_801F9CC4_usa;
