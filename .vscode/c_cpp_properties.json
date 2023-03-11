@@ -1,0 +1,46 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "include",
+                "bin/usa",
+                "bin/eur",
+                "bin/fra",
+                "bin/ger",
+                "."
+            ],
+            "defines": [
+                "NON_EQUIVALENT",
+                "NON_MATCHING",
+                "AVOID_UB",
+                "_LANGUAGE_C",
+                // "F3DEX_GBI_2",
+                "_MIPS_SZLONG=32",
+                "__USE_ISOC99",
+                "NDEBUG",
+                //"_FINALROM",
+                "__USE_ISOC99",
+                "__mips__",
+                "VERSION_USA=1",
+                "VERSION_EUR=1",
+                "VERSION_FRA=1",
+                "VERSION_GER=1"
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "compilerPath": "/usr/bin/clang",
+            "intelliSenseMode": "linux-clang-x86",
+            "compilerArgs": [
+                "-m32",
+                "-nostdinc++",
+                "-Wincompatible-pointer-types",
+                "-Werror=incompatible-pointer-types"
+            ],
+            "cStandard": "gnu89"
+        }
+    ],
+    "version": 4
+}
