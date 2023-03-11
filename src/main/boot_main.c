@@ -46,8 +46,7 @@ void Idle_ThreadEntry(void *arg) {
     }
     osSetThreadPri(NULL, 0);
 
-    while (true) {
-    }
+    while (true) {}
 }
 INCLUDE_ASM("asm/usa/nonmatchings/main/boot_main", func_80000630_usa);
 
