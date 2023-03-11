@@ -1,0 +1,223 @@
+rm -f -r asm/usa bin/usa
+tools/splat/split.py puzzleleague64.usa.yaml
+splat 0.13.4 (powered by spimdisasm 1.11.5)
+
+Rodata segment 'main/0C3BC0' may belong to the text segment 'main/002710'
+    Based on the usage from the function func_80002348_usa to the symbol RO_STR_800C2FC0_usa
+
+Rodata segment 'main/0C3BF0' may belong to the text segment 'main/002710'
+    Based on the usage from the function func_80002D8C_usa to the symbol RO_DBL_800C3020_usa
+
+Rodata segment 'main/0C3C90' may belong to the text segment 'main/004A90'
+    Based on the usage from the function func_80005184_usa to the symbol RO_DBL_800C3090_usa
+
+Rodata segment 'main/0C3CD0' may belong to the text segment 'main/006800'
+    Based on the usage from the function func_80005C00_usa to the symbol RO_DBL_800C30D0_usa
+
+Rodata segment 'main/0C3DC0' may belong to the text segment 'main/007EA0'
+    Based on the usage from the function func_800150B4_usa to the symbol RO_STR_800C31C0_usa
+
+Rodata segment 'main/0C3E90' may belong to the text segment 'main/007EA0'
+    Based on the usage from the function func_80009A78_usa to the symbol jtbl_800C3290_usa
+
+Rodata segment 'main/0C3EF0' may belong to the text segment 'main/007EA0'
+    Based on the usage from the function func_8000AC80_usa to the symbol jtbl_800C3300_usa
+
+Rodata segment 'main/0C4BB0' may belong to the text segment 'main/01D4B0'
+    Based on the usage from the function func_8001D278_usa to the symbol RO_STR_800C3FB0_usa
+
+Rodata segment 'main/0C4BF0' may belong to the text segment 'main/01F8B0'
+    Based on the usage from the function func_8001EDE0_usa to the symbol RO_STR_800C3FF0_usa
+
+Rodata segment 'main/0C4C70' may belong to the text segment 'main/022EF0'
+    Based on the usage from the function func_800222F0_usa to the symbol jtbl_800C4080_usa
+
+Rodata segment 'main/0C4C70' may belong to the text segment 'main/02C1D0'
+    Based on the usage from the function func_8002B600_usa to the symbol jtbl_800C4218_usa
+
+Rodata segment 'main/0C4E90' may belong to the text segment 'main/02C1D0'
+    Based on the usage from the function func_8002CC18_usa to the symbol RO_DBL_800C4290_usa
+
+Rodata segment 'main/0C4ED0' may belong to the text segment 'main/02E800'
+    Based on the usage from the function func_8002DC00_usa to the symbol RO_STR_800C42D0_usa
+
+Rodata segment 'main/0C4ED0' may belong to the text segment 'main/031B20'
+    Based on the usage from the function func_80030F20_usa to the symbol jtbl_800C4618_usa
+
+Rodata segment 'main/0C5580' may belong to the text segment 'main/037E70'
+    Based on the usage from the function func_80037CBC_usa to the symbol jtbl_800C49A8_usa
+
+Rodata segment 'main/0C5580' may belong to the text segment 'main/03F130'
+    Based on the usage from the function func_8003F42C_usa to the symbol RO_STR_800C4D70_usa
+
+Rodata segment 'main/0C5C30' may belong to the text segment 'main/03F130'
+    Based on the usage from the function func_800410A4_usa to the symbol RO_STR_800C5030_usa
+
+Rodata segment 'main/0C5DA0' may belong to the text segment 'main/03F130'
+    Based on the usage from the function func_80042C24_usa to the symbol RO_STR_800C51BC_usa
+
+Rodata segment 'main/0C5DA0' may belong to the text segment 'main/043D10'
+    Based on the usage from the function func_8004407C_usa to the symbol RO_STR_800C5828_usa
+
+Rodata segment 'main/0C6440' may belong to the text segment 'main/044E80'
+    Based on the usage from the function func_8004441C_usa to the symbol RO_DBL_800C5840_usa
+
+Rodata segment 'main/0C6600' may belong to the text segment 'main/044E80'
+    Based on the usage from the function func_80046E64_usa to the symbol RO_STR_800C5A00_usa
+
+Rodata segment 'main/0C6600' may belong to the text segment 'main/047F40'
+    Based on the usage from the function func_80047E64_usa to the symbol jtbl_800C5A30_usa
+
+Rodata segment 'main/0C6600' may belong to the text segment 'main/04BF00'
+    Based on the usage from the function func_8004B300_usa to the symbol jtbl_800C5CE8_usa
+
+Rodata segment 'main/0C6600' may belong to the text segment 'main/053320'
+    Based on the usage from the function func_80052720_usa to the symbol jtbl_800C6178_usa
+
+Rodata segment 'main/0C6600' may belong to the text segment 'main/054C20'
+    Based on the usage from the function func_80054A2C_usa to the symbol jtbl_800C6640_usa
+
+Rodata segment 'main/0C6600' may belong to the text segment 'main/057510'
+    Based on the usage from the function func_8005731C_usa to the symbol RO_DBL_800C6920_usa
+
+Rodata segment 'main/0C7570' may belong to the text segment 'main/057510'
+    Based on the usage from the function func_80057650_usa to the symbol jtbl_800C6970_usa
+
+Rodata segment 'main/0C7570' may belong to the text segment 'main/05B4D0'
+    Based on the usage from the function func_8005A8D0_usa to the symbol jtbl_800C6BA0_usa
+
+Rodata segment 'main/0C79A0' may belong to the text segment 'main/05E500'
+    Based on the usage from the function func_8005E3F4_usa to the symbol jtbl_800C6E00_usa
+
+Rodata segment 'main/0C79A0' may belong to the text segment 'main/05F110'
+    Based on the usage from the function func_8005E9D4_usa to the symbol jtbl_800C6E50_usa
+
+Rodata segment 'main/0C7BA0' may belong to the text segment 'main/067FB0'
+    Based on the usage from the function func_800673B0_usa to the symbol RO_DBL_800C6FA0_usa
+
+Rodata segment 'main/0C7BA0' may belong to the text segment 'main/06BB30'
+    Based on the usage from the function func_8006B798_usa to the symbol jtbl_800C7078_usa
+
+Rodata segment 'main/0C7BA0' may belong to the text segment 'main/06DAA0'
+    Based on the usage from the function func_8006CEA0_usa to the symbol jtbl_800C72E0_usa
+
+Rodata segment 'main/0C7BA0' may belong to the text segment 'main/071B50'
+    Based on the usage from the function func_80071138_usa to the symbol jtbl_800C73A0_usa
+
+Rodata segment 'main/0C7BA0' may belong to the text segment 'main/0722D0'
+    Based on the usage from the function func_8007197C_usa to the symbol jtbl_800C7430_usa
+
+Rodata segment 'main/0C7BA0' may belong to the text segment 'main/074280'
+    Based on the usage from the function func_800737B8_usa to the symbol jtbl_800C7478_usa
+
+Rodata segment 'main/0C7BA0' may belong to the text segment 'main/075BF0'
+    Based on the usage from the function func_80075524_usa to the symbol jtbl_800C74D0_usa
+
+Rodata segment 'main/0C8230' may belong to the text segment 'main/075BF0'
+    Based on the usage from the function func_80083480_usa to the symbol jtbl_800C7630_usa
+
+Rodata segment 'main/0C8300' may belong to the text segment 'main/088690'
+    Based on the usage from the function func_80087B28_usa to the symbol RO_STR_800C7700_usa
+
+Rodata segment 'main/0C8300' may belong to the text segment 'main/089540'
+    Based on the usage from the function func_80088940_usa to the symbol jtbl_800C77A0_usa
+
+Rodata segment 'main/0C8300' may belong to the text segment 'main/08A2C0'
+    Based on the usage from the function func_80089BE0_usa to the symbol jtbl_800C77D0_usa
+
+Rodata segment 'main/0C8400' may belong to the text segment 'main/08BA20'
+    Based on the usage from the function func_8008AE20_usa to the symbol RO_DBL_800C7800_usa
+
+Rodata segment 'main/0C84E0' may belong to the text segment 'main/08FBB0'
+    Based on the usage from the function func_8008F4CC_usa to the symbol RO_DBL_800C78E0_usa
+
+Rodata segment 'main/0C84E0' may belong to the text segment 'libultra/devmgr'
+    Based on the usage from the function __osDevMgrMain to the symbol jtbl_800C7970_usa
+
+Rodata segment 'main/0C84E0' may belong to the text segment 'libultra/aisetfreq'
+    Based on the usage from the function osAiSetFrequency to the symbol DBL_800C7990
+
+Rodata segment 'main/0C85A0' may belong to the text segment 'libultra/drvrnew'
+    Based on the usage from the function _init_lpfilter to the symbol DBL_800C79A0
+
+Rodata segment 'main/0C85F0' may belong to the text segment 'libultra/env'
+    Based on the usage from the function alEnvmixerPull to the symbol jtbl_800C7A00_usa
+
+Rodata segment 'main/0C86F0' may belong to the text segment 'libultra/resample'
+    Based on the usage from the function alResamplePull to the symbol DBL_800C7AF0
+
+Rodata segment 'main/0C8720' may belong to the text segment 'libultra/reverb'
+    Based on the usage from the function alFxPull to the symbol STR_800C7B20
+
+Rodata segment 'main/0C8720' may belong to the text segment 'libultra/save'
+    Based on the usage from the function alSavePull to the symbol STR_800C7B80
+
+Rodata segment 'main/0C8720' may belong to the text segment 'libultra/heapalloc'
+    Based on the usage from the function alHeapDBAlloc to the symbol STR_800C7B8C
+
+Rodata segment 'main/0C87A0' may belong to the text segment 'libultra/synthesizer'
+    Based on the usage from the function _timeToSamplesNoRound to the symbol DBL_800C7BB0
+
+Rodata segment 'main/0C87D0' may belong to the text segment 'libultra/assert'
+    Based on the usage from the function __assert to the symbol STR_800C7BD0
+
+Rodata segment 'main/0C87D0' may belong to the text segment 'libultra/lookat'
+    Based on the usage from the function guLookAtF to the symbol DBL_800C7BF0
+
+Rodata segment 'main/0C8810' may belong to the text segment 'libultra/perspective'
+    Based on the usage from the function guPerspectiveF to the symbol DBL_800C7C10
+
+Rodata segment 'main/0C8810' may belong to the text segment 'libultra/sinf'
+    Based on the usage from the function __sinf to the symbol DBL_800C7C38
+
+Rodata segment 'main/0C8890' may belong to the text segment 'libultra/sched'
+    Based on the usage from the function __scSchedule to the symbol jtbl_800C7CA0_usa
+
+Rodata segment 'main/0C88C0' may belong to the text segment 'libultra/sirawdma'
+    Based on the usage from the function __osSiRawStartDma to the symbol STR_800C7CC0
+
+Rodata segment 'main/0C88C0' may belong to the text segment 'libultra/visetevent'
+    Based on the usage from the function osViSetEvent to the symbol STR_800C7CD0
+
+Rodata segment 'main/0C88C0' may belong to the text segment 'libultra/visetmode'
+    Based on the usage from the function osViSetMode to the symbol STR_800C7CE4
+
+Rodata segment 'main/0C88C0' may belong to the text segment 'libultra/viswapbuf'
+    Based on the usage from the function osViSwapBuffer to the symbol STR_800C7CF4
+
+Rodata segment 'main/0C8910' may belong to the text segment 'libultra/viswapcontext'
+    Based on the usage from the function __osViSwapContext to the symbol DBL_800C7D10
+
+Rodata segment 'main/0C8920' may belong to the text segment 'libultra/kmcprintf'
+    Based on the usage from the function kmcErrorHandler to the symbol STR_800C94AC
+
+Rodata segment 'main/0C8920' may belong to the text segment 'libultra/exceptasm'
+    Based on the usage from the function func_800A24C0_usa to the symbol jtbl_800C94D0_usa
+
+Rodata segment 'main/0CA120' may belong to the text segment 'libultra/epirawread'
+    Based on the usage from the function __osEPiRawReadIo to the symbol STR_800C9520
+
+Rodata segment 'main/0CA150' may belong to the text segment 'libultra/cosf'
+    Based on the usage from the function __cosf to the symbol DBL_800C9558
+
+Rodata segment 'main/0CA1E0' may belong to the text segment 'libultra/xprintf'
+    Based on the usage from the function _Printf to the symbol STR_800C95E0
+
+Rodata segment 'main/0CA1E0' may belong to the text segment 'libultra/0A6EB0'
+    Based on the usage from the function __osSiRawWriteIo to the symbol STR_800C9758
+
+Rodata segment 'main/0CA1E0' may belong to the text segment 'libultra/xldtob'
+    Based on the usage from the function _Ldtob to the symbol STR_800C97B8
+
+Rodata segment 'main/0CA3E0' may belong to the text segment 'libultra/rmonmem'
+    Based on the usage from the function __rmonGetExeName to the symbol STR_800C97E0
+
+Rodata segment 'main/0CA3E0' may belong to the text segment 'libultra/0AB240'
+    Based on the usage from the function __osSpRawWriteIo to the symbol STR_800C9800
+
+Rodata segment 'main/0CA3E0' may belong to the text segment 'libultra/rmonbrk'
+    Based on the usage from the function __rmonGetBranchTarget to the symbol jtbl_800C9818_usa
+Split 828 KB (2.47%) in defined segments
+                code:   824 KB (2.46%) 3 split, 0 cached
+                 bin:     4 KB (0.01%) 1 split, 0 cached
+             unknown:    32 MB (96.94%) from unknown bin files
