@@ -320,7 +320,13 @@ segments:
       - [0x0A7880, data, main/0A7880]
       - [0x0AA490, data, main/0AA490]
 
+      - [0x0B7B50, data, libhvqm/adpcmdec]
+
+      - [0x0B7D00, data, main/0B7D00]
+
       # rodata start is a  guess
+      - [0x0B7FD0, rodata, libhvqm/rsp/hvqm2sp1]
+
       - [0x0B8D20, rodata, main/0B8D20]
       - [0x0B9520, rodata, main/0B9520]
       - [0x0B9910, rodata, main/0B9910]

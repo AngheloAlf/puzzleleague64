@@ -325,7 +325,13 @@ segments:
       - [0x0B0650, data, main/0B0650]
       - [0x0B3260, data, main/0B3260]
 
+      - [0x0C0B90, data, libhvqm/adpcmdec]
+
+      - [0x0C0D40, data, main/0C0D40]
+
       # rodata start is a  guess
+      - [0x0C1010, rodata, libhvqm/rsp/hvqm2sp1]
+
       - [0x0C1D60, rodata, main/0C1D60]
       - [0x0C2560, rodata, main/0C2560]
       - [0x0C2950, rodata, main/0C2950]

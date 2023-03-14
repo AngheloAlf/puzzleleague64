@@ -304,7 +304,7 @@ segments:
       - [0x0AB5B0, hasm, libultra/rmonrcp]
       - [0x0AB650, asm, libultra/rmonbrk] # c
 
-      - [0x0AC340, asm, libhvqm/hvqm2decSP1]
+      - [0x0AC340, asm, libhvqm/hvqm2decSP1] # TODO: find the bss
       - [0x0B0060, asm, libhvqm/adpcmdec]
 
       - [0x0B01F0, asm, main/0B01F0]
@@ -320,7 +320,13 @@ segments:
 
       - [0x0B4690, data, main/0B4690]
 
+      - [0x0C1E30, data, libhvqm/adpcmdec]
+
+      - [0x0C1FE0, data, main/0C1FE0]
+
       # rodata start is a  guess
+      - [0x0C22B0, rodata, libhvqm/rsp/hvqm2sp1]
+
       - [0x0C3000, rodata, main/0C3000]
       - [0x0C3800, rodata, main/0C3800] # rsp?
       - [0x0C3BC0, rodata, main/0C3BC0]

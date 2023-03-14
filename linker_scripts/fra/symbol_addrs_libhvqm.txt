@@ -17,5 +17,11 @@ adpcmDecode = 0x800AE030; // type:func size:0x188
 
 hvqm2sp1TextStart = 0x800AF480; // size:0x5D0 name_end:hvqm2sp1TextEnd dont_allow_addend:True
 
-// , 0x800BFF90, 0x0  (adpcmdec, false)
+D_800BFF90_fra = 0x800BFF90; //
+D_800BFFD0_fra = 0x800BFFD0; //
+
 // , 0x80197C20, 0x0  (hvqm2decSP1, false)
+
+// .rodata
+
+hvqm2sp1DataStart = 0x800C0410; // size:0xD50 name_end:hvqm2sp1DataEnd dont_allow_addend:True

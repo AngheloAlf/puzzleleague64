@@ -1485,11 +1485,9 @@ D_800BEB6C_eur = 0x800BEB6C; //
 D_800BEB70_eur = 0x800BEB70; //
 
 
-D_800C1760_eur = 0x800C1760; //
-D_800C17A0_eur = 0x800C17A0; //
 D_800C1910_eur = 0x800C1910; //
 D_800C1920_eur = 0x800C1920; //
-D_800C1BE0_eur = 0x800C1BE0; //
+
 
 // .rodata
 
