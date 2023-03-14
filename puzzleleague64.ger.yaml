@@ -15,6 +15,7 @@ options:
     - linker_scripts/ger/symbol_addrs_main.txt
     - linker_scripts/ger/symbol_addrs_libultra.txt
     - linker_scripts/ger/symbol_addrs_libkmc.txt
+    - linker_scripts/ger/symbol_addrs_libhvqm.txt
     - linker_scripts/ger/ignored_addresses.txt
   reloc_addrs_path:
     - relocs/reloc_addrs.ger.txt
@@ -303,8 +304,9 @@ segments:
       - [0x0A1700, hasm, libultra/rmonrcp]
       - [0x0A17A0, asm, libultra/rmonbrk] # c
 
-      - [0x0A2140, asm, main/0A2140]
-      - [0x0A5E60, asm, main/0A5E60]
+      - [0x0A2140, asm, libhvqm/hvqm2decSP1]
+      - [0x0A5E60, asm, libhvqm/adpcmdec]
+
       - [0x0A5FF0, asm, main/0A5FF0]
 
       - [0x0A61F0, asm, libkmc/0A61F0] # __divdi3
@@ -313,7 +315,9 @@ segments:
 
       - [0x0A63C0, data, rsp/rspboot]
       - [0x0A6490, data, main/0A6490] # rsp?
+      - [0x0A72B0, data, libhvqm/rsp/hvqm2sp1]
 
+      - [0x0A7880, data, main/0A7880]
       - [0x0AA490, data, main/0AA490]
 
       # rodata start is a  guess

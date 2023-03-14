@@ -15,6 +15,7 @@ options:
     - linker_scripts/eur/symbol_addrs_main.txt
     - linker_scripts/eur/symbol_addrs_libultra.txt
     - linker_scripts/eur/symbol_addrs_libkmc.txt
+    - linker_scripts/eur/symbol_addrs_libhvqm.txt
     - linker_scripts/eur/ignored_addresses.txt
   reloc_addrs_path:
     - relocs/reloc_addrs.eur.txt
@@ -305,15 +306,21 @@ segments:
       - [0x0ABAD0, hasm, libultra/rmonrcp]
       - [0x0ABB70, asm, libultra/rmonbrk] # c
 
-      - [0x0AC860, asm, main/0AC860]
-      - [0x0B0580, asm, main/0B0580]
+      - [0x0AC860, asm, libhvqm/hvqm2decSP1]
+      - [0x0B0580, asm, libhvqm/adpcmdec]
+
+      - [0x0B0710, asm, main/0B0710]
 
       - [0x0B0910, asm, libkmc/0B0910] # __divdi3
       - [0x0B0A80, asm, libkmc/0B0A80] # __udivdi3
       - [0x0B0AA0, asm, libkmc/0B0AA0] # __umoddi3
 
-      - [0x0B0AE0, data, rsp/rspboot]
+      - [0x0B0AE0, data, libultra/rsp/rspboot]
       - [0x0B0BB0, data, main/0B0BB0] # rsp?
+
+      - [0x0B19D0, data, libhvqm/rsp/hvqm2sp1]
+
+      - [0x0B1FA0, data]
 
       - [0x0B4BB0, data, main/0B4BB0]
 

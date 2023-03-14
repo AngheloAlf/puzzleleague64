@@ -15,6 +15,7 @@ options:
     - linker_scripts/usa/symbol_addrs_main.txt
     - linker_scripts/usa/symbol_addrs_libultra.txt
     - linker_scripts/usa/symbol_addrs_libkmc.txt
+    - linker_scripts/usa/symbol_addrs_libhvqm.txt
     - linker_scripts/usa/ignored_addresses.txt
   reloc_addrs_path:
     - relocs/reloc_addrs.usa.txt
@@ -303,17 +304,19 @@ segments:
       - [0x0AB5B0, hasm, libultra/rmonrcp]
       - [0x0AB650, asm, libultra/rmonbrk] # c
 
-      - [0x0AC340, asm, main/0AC340]
-      - [0x0B0060, asm, main/0B0060]
+      - [0x0AC340, asm, libhvqm/hvqm2decSP1]
+      - [0x0B0060, asm, libhvqm/adpcmdec]
+
       - [0x0B01F0, asm, main/0B01F0]
 
       - [0x0B03F0, asm, libkmc/0B03F0] # __divdi3
       - [0x0B0560, asm, libkmc/0B0560] # __udivdi3
       - [0x0B0580, asm, libkmc/0B0580] # __umoddi3
 
-      - [0x0B05C0, data, rsp/rspboot]
+      - [0x0B05C0, data, libultra/rsp/rspboot]
       - [0x0B0690, data, main/0B0690] # rsp?
-      - [0x0B14B0, data, main/0B14B0] # rsp?
+      - [0x0B14B0, data, libhvqm/rsp/hvqm2sp1]
+      - [0x0B1A80, data, main/0B1A80] # rsp?
 
       - [0x0B4690, data, main/0B4690]
 

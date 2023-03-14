@@ -1068,16 +1068,6 @@ func_80090C6C_usa = 0x80090C6C; // type:func
 func_80090D2C_usa = 0x80090D2C; // type:func
 func_80090E9C_usa = 0x80090E9C; // type:func
 
-func_800AB740_usa = 0x800AB740; // type:func
-func_800AB9F8_usa = 0x800AB9F8; // type:func
-func_800ABBA8_usa = 0x800ABBA8; // type:func
-func_800ABD1C_usa = 0x800ABD1C; // type:func
-func_800AC0FC_usa = 0x800AC0FC; // type:func
-func_800ACA5C_usa = 0x800ACA5C; // type:func
-func_800ACE58_usa = 0x800ACE58; // type:func
-func_800AF2B8_usa = 0x800AF2B8; // type:func
-func_800AF44C_usa = 0x800AF44C; // type:func
-func_800AF460_usa = 0x800AF460; // type:func
 func_800AF5F0_usa = 0x800AF5F0; // type:func
 func_800AF628_usa = 0x800AF628; // type:func
 func_800AF724_usa = 0x800AF724; // type:func
@@ -1088,7 +1078,7 @@ func_800AF724_usa = 0x800AF724; // type:func
 
 D_800AF9C0_usa = 0x800AF9C0; //
 D_800AFA90_usa = 0x800AFA90; //
-D_800B08B0_usa = 0x800B08B0; //
+
 D_800B0E80_usa = 0x800B0E80; //
 D_800B22B0_usa = 0x800B22B0; //
 D_800B3A90_usa = 0x800B3A90; //

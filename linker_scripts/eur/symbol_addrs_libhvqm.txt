@@ -1,0 +1,21 @@
+// .text
+
+func_800ABC60_eur = 0x800ABC60; // type:func
+func_800ABF18_eur = 0x800ABF18; // type:func
+func_800AC0C8_eur = 0x800AC0C8; // type:func
+func_800AC23C_eur = 0x800AC23C; // type:func
+func_800AC61C_eur = 0x800AC61C; // type:func
+func_800ACF7C_eur = 0x800ACF7C; // type:func
+
+hvqm2DecodeSP1 = 0x800AD378; // type:func size:0x2460
+hvqm2SetupSP1 = 0x800AF7D8; // type:func size:0x194
+hvqm2InitSP1 = 0x800AF96C; // type:func size:0xC
+adpcmDecode = 0x800AF980; // type:func size:0x188
+
+
+// .data
+
+hvqm2sp1TextStart = 0x800B0DD0; // size:0x5D0 name_end:hvqm2sp1TextEnd dont_allow_addend:True
+
+// , 0x800C1760, 0x0  (adpcmdec, false)
+// , 0x801995C0, 0x0  (hvqm2decSP1, false)
