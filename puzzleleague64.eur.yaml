@@ -92,7 +92,7 @@ segments:
       - [0x034FD0, asm, main/034FD0]
       - [0x036750, asm, main/036750]
       - [0x037EA0, asm, main/037EA0]
-      - [0x03F160, asm, main/03F160]
+      - [0x03F160, asm, main/03F160_eur]
       - [0x0419D0, asm, main/0419D0]
       - [0x043230, asm, main/043230]
       - [0x043F40, asm, main/043F40]

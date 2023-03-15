@@ -1103,7 +1103,7 @@ extern OSThread sIdleThread;
 // extern UNK_TYPE B_8018EA3C_usa;
 // extern UNK_TYPE B_8018EA40_usa;
 // extern UNK_TYPE B_8018EA50_usa;
-// extern UNK_TYPE B_8018EA54_usa;
+extern s32 B_8018EA54_usa;
 // extern UNK_TYPE B_8018EA58_usa;
 // extern UNK_TYPE B_8018EA60_usa;
 // extern UNK_TYPE B_8018EA78_usa;
