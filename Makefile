@@ -99,7 +99,7 @@ SPLAT_YAML        ?= $(TARGET).$(VERSION).yaml
 
 
 IINC       := -Iinclude -Ibin/$(VERSION) -I.
-IINC       += -Ilib/libultra_j/include -Ilib/libultra_j/include/PR
+IINC       += -Ilib -Ilib/libultra_j/include -Ilib/libultra_j/include/PR -Ilib/libhvqm/include
 
 # Check code syntax with host compiler
 CHECK_WARNINGS := -Wall -Wextra -Wimplicit-fallthrough -Wno-unknown-pragmas -Wno-missing-braces -Wno-sign-compare -Wno-uninitialized

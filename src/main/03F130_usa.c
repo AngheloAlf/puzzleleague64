@@ -4,6 +4,7 @@
 #include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
+#include "libhvqm.h"
 
 
 #if VERSION_USA
@@ -68,16 +69,13 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/03F130_usa", func_8003F608_usa);
 
 #if VERSION_USA
 #if 0
-u64 __udivdi3(s32, s32, ?, s32);                    /* extern */
+u64 __udivdi3(s32, s32, UNK_TYPE, s32);                    /* extern */
 s32 func_8001CAD0_usa(s32, u32 *);                  /* extern */
-? func_8001F6B8_usa(s32 *, ? *, s32 *);             /* extern */
-? func_80021414_usa(s32, ?, ?, s32 *);              /* extern */
-? func_8002CFC8_usa();                              /* extern */
+UNK_TYPE func_8001F6B8_usa(s32 *, UNK_TYPE *, s32 *);             /* extern */
+UNK_TYPE func_80021414_usa(s32, UNK_TYPE, UNK_TYPE, s32 *);              /* extern */
+UNK_TYPE func_8002CFC8_usa();                              /* extern */
 void func_8003E854_usa(void *);                     /* extern */
-? func_8008B21C_usa();                              /* extern */
-s32 hvqm2DecodeSP1(s32, u16, void *, void *, s32, ? *, s32); /* extern */
-? hvqm2InitSP1(?);                                  /* extern */
-? hvqm2SetupSP1(s32, ?, s32);                       /* extern */
+UNK_TYPE func_8008B21C_usa();                              /* extern */
 extern s32 B_8018EA50_usa;
 extern u32 B_8018EA58_usa;
 extern OSMesgQueue B_8018EA78_usa;
@@ -99,10 +97,10 @@ extern OSMesgQueue B_80192E80_usa;
 extern void *B_80192E98_usa;
 extern OSMesgQueue B_80192EA0_usa;
 extern void *B_80192EB8_usa;
-extern ? B_80192F00_usa;
-extern ? B_80192F04_usa;
-extern ? B_80192F08_usa;
-extern ? B_80192F0C_usa;
+extern UNK_TYPE B_80192F00_usa;
+extern UNK_TYPE B_80192F04_usa;
+extern UNK_TYPE B_80192F08_usa;
+extern UNK_TYPE B_80192F0C_usa;
 extern s32 B_80192F20_usa;
 extern s32 B_80192F24_usa;
 extern s32 B_80192F64_usa;
@@ -111,40 +109,27 @@ extern s32 B_80192F70_usa;
 extern u32 B_80192F74_usa;
 extern s32 B_80192F78_usa;
 extern u32 B_80192F7C_usa;
-extern s32 B_8019CF58_usa;
-extern s32 B_8019CF5C_usa;
-extern ? *B_8019CF60_usa;
-extern s32 B_8019CF64_usa;
-extern ? *B_8019CF68_usa;
-extern s32 B_8019CF6C_usa;
-extern ? *B_8019CF70_usa;
-extern s32 B_8019CF74_usa;
-extern ? *B_8019CF88_usa;
-extern s32 B_8019CF90_usa;
-extern s32 B_8019CF94_usa;
 extern OSThread B_8019CFA0_usa;
-extern ? B_801AABA0_usa;
+extern u64 B_801AABA0_usa;
 extern s32 *B_801AB620_usa;
 extern s32 *B_801AB624_usa;
 extern s32 B_801C6E48_usa;
 extern OSContPad B_801C7228_usa;
 extern OSMesgQueue B_8021AAE0_usa;
 extern OSThread B_8021AB50_usa;
-extern ? D_800AF9C0_usa;
-extern ? D_800AFA90_usa;
-extern ? D_800B0E80_usa;
+extern u64 D_800AF9C0_usa;
+extern u64 D_800AFA90_usa;
+extern UNK_TYPE D_800B0E80_usa;
 extern s32 D_803B5000;
 extern s32 D_803DA800;
-extern ? func_80040B1C_usa;
-extern u64 hvqm2sp1DataStart[];
-extern u64 hvqm2sp1TextStart[];
+extern UNK_TYPE func_80040B1C_usa;
 
 s32 func_8003F810_usa(s32 arg0, u32 arg1, s32 arg2) {
     s32 sp40;
     u32 sp44;
-    ? *sp48;
+    UNK_TYPE *sp48;
     s32 sp4C;
-    ? sp5F;
+    UNK_TYPE sp5F;
     u32 sp6C;
     s32 sp74;
     s32 sp7C;
@@ -163,7 +148,6 @@ s32 func_8003F810_usa(s32 arg0, u32 arg1, s32 arg2) {
     s32 *temp_a0_7;
     s32 *temp_a0_8;
     s32 *temp_a0_9;
-    s32 *temp_s0_5;
     s32 *temp_s0_6;
     s32 *temp_s0_7;
     s32 *temp_s1_4;
@@ -184,12 +168,10 @@ s32 func_8003F810_usa(s32 arg0, u32 arg1, s32 arg2) {
     s32 *var_v1_4;
     s32 *var_v1_5;
     s32 *var_v1_6;
-    s32 temp_a2_2;
     s32 temp_s0_2;
-    s32 temp_s0_4;
-    s32 temp_s1;
+    HVQM2Header *temp_s1;
     s32 temp_s1_2;
-    s32 temp_s2;
+    HVQM2Record *temp_s2;
     s32 temp_t3_2;
     s32 temp_t3_3;
     s32 temp_v0;
@@ -217,6 +199,7 @@ s32 func_8003F810_usa(s32 arg0, u32 arg1, s32 arg2) {
     s32 var_s7;
     s32 var_v0;
     u16 temp_s0_3;
+    u32 *temp_s0_5;
     u32 temp_a0;
     u32 temp_a0_2;
     u32 temp_a1;
@@ -226,8 +209,9 @@ s32 func_8003F810_usa(s32 arg0, u32 arg1, s32 arg2) {
     u32 temp_a1_5;
     u32 temp_a1_6;
     u32 temp_a2;
-    u32 temp_a2_3;
+    u32 temp_a2_2;
     u32 temp_s0;
+    u32 temp_s0_4;
     u32 temp_s0_8;
     u32 temp_s2_2;
     u32 temp_s2_3;
@@ -272,6 +256,7 @@ s32 func_8003F810_usa(s32 arg0, u32 arg1, s32 arg2) {
         func_8001F6B8_usa(&sp40, "iSkip16.BIF", &arg2);
         arg2 = (arg2 + 0xF) & ~0xF;
     }
+
     var_v0 = func_8001CAD0_usa(arg0, &sp44);
     if (var_v0 != 0) {
         B_8018EA58_usa = sp44;
@@ -291,6 +276,7 @@ loop_5:
             }
             var_s0 += 1;
         } while (var_s0 < 8);
+
         var_s0_2 = 0;
         osStopThread(&B_8021AB50_usa);
         osStopThread(&B_8019CFA0_usa);
@@ -305,6 +291,7 @@ loop_9:
             }
             var_s0_2 += 1;
         } while (var_s0_2 < 8);
+
         func_8008B21C_usa();
         B_801AB624_usa = &D_803DA800;
         B_801AB620_usa = &D_803B5000;
@@ -329,7 +316,11 @@ loop_9:
         if ((B_8018EA50_usa + 0x45630) & 0xF) {
             osSyncPrintf("ERROR: 'hvq_yieldbuf' not 16-byte aligned!\n");
         }
+        #if 0
         temp_s1 = ((u32) (B_8018EA50_usa + 0x4624F) >> 4) * 0x10;
+        #endif
+        temp_s1 = OS_DCACHE_ROUNDUP_ADDR((u32) (B_8018EA50_usa + 0x46240));
+
         osCreateMesgQueue(&B_8018EAD0_usa, &B_8018EAE8_usa, 1);
         osSetEventMesg(4U, &B_8018EAD0_usa, NULL);
         osCreateMesgQueue(&B_8018EA78_usa, &B_8018EA90_usa, 1);
@@ -338,21 +329,21 @@ loop_9:
         osCreateMesgQueue(&B_80192EA0_usa, &B_80192EB8_usa, 1);
         osCreateThread(&B_8018EB20_usa, 3, func_8003E854_usa, NULL, &B_80190CD0_usa, 0xC);
         osStartThread(&B_8018EB20_usa);
-        hvqm2InitSP1(0xFF);
+        hvqm2InitSP1(0xFFU);
         var_t0 = &B_801C6E48_usa;
         var_a3 = 0;
         var_a2 = &B_801AB620_usa;
-        B_8019CF6C_usa = &D_800B0E80_usa - &hvqm2sp1TextStart;
-        B_8019CF70_usa = &hvqm2sp1DataStart;
-        B_8019CF68_usa = &hvqm2sp1TextStart;
-        B_8019CF58_usa = 7;
-        B_8019CF64_usa = &D_800AFA90_usa - &D_800AF9C0_usa;
-        B_8019CF74_usa = 0x70;
-        B_8019CF88_usa = &B_801AABA0_usa;
-        B_8019CF5C_usa = 0;
-        B_8019CF60_usa = &D_800AF9C0_usa;
-        B_8019CF94_usa = 0xC10;
-        B_8019CF90_usa = B_8018EA50_usa + 0x45630;
+        hvqtask.t.ucode_size = hvqm2sp1TextEnd - hvqm2sp1TextStart;
+        hvqtask.t.ucode_data = (u64 *) hvqm2sp1DataStart;
+        hvqtask.t.ucode = (u64 *) hvqm2sp1TextStart;
+        hvqtask.t.type = 7;
+        hvqtask.t.ucode_boot_size = &D_800AFA90_usa - &D_800AF9C0_usa;
+        hvqtask.t.ucode_data_size = 0x70;
+        hvqtask.t.data_ptr = &B_801AABA0_usa;
+        hvqtask.t.flags = 0;
+        hvqtask.t.ucode_boot = &D_800AF9C0_usa;
+        hvqtask.t.yield_data_size = 0xC10;
+        hvqtask.t.yield_data_ptr = B_8018EA50_usa + 0x45630;
         do {
             var_a0 = 0;
 loop_25:
@@ -370,18 +361,19 @@ loop_25:
         osViSwapBuffer(B_801AB624_usa);
         osViBlack(1U);
         temp_s0 = B_8018EA58_usa;
+
         osInvalDCache((void *) temp_s1, 0x3C);
         do {
 
         } while (osPiStartDma(&B_8018EA98_usa, 0, 0, temp_s0, (void *) temp_s1, 0x3CU, &B_8018EAB0_usa) == -1);
         osRecvMesg(&B_8018EAB0_usa, NULL, 1);
-        B_8018EAEC_usa = temp_s1->unk_1C;
-        sp9C = temp_s1->unk_20;
-        temp_a2 = 0x140 - temp_s1->unk_14;
-        B_8018EAF0_usa = temp_s1->unk_30;
-        temp_a2_2 = (s32) (temp_a2 + (temp_a2 >> 0x1F)) >> 1;
-        sp94 = (((s32) (0xF0 - temp_s1->unk_16) / 2) * 0x140) + temp_a2_2;
-        hvqm2SetupSP1(temp_s1, 0x140, temp_a2_2);
+
+        B_8018EAEC_usa = temp_s1->total_frames;
+        sp9C = temp_s1->usec_per_frame;
+        temp_a2 = 0x140 - temp_s1->width;
+        B_8018EAF0_usa = temp_s1->total_audio_records;
+        sp94 = (((s32) (0xF0 - temp_s1->height) / 2) * 0x140) + ((s32) (temp_a2 + (temp_a2 >> 0x1F)) >> 1);
+        hvqm2SetupSP1((HVQM2Header *) temp_s1, 0x140U);
         var_a0_2 = 0;
         var_v1 = &B_801C6E48_usa;
         do {
@@ -393,12 +385,13 @@ loop_25:
         sp84 = 0;
         sp8C = 0;
         sp48 = &func_80040B1C_usa;
-        sp4C = temp_s1->unk_34;
+        sp4C = temp_s1->samples_per_sec;
         osSendMesg(&B_80192E80_usa, &sp48, 1);
         osRecvMesg(&B_80192EA0_usa, NULL, 1);
         if ((temp_s5 != 0) && (temp_s5 < (u32) B_8018EAEC_usa)) {
             B_8018EB00_usa = temp_s5;
         }
+
         sp74 = 0;
         if (B_8018EB00_usa != 0) {
             spA4 = 0x11910;
@@ -418,9 +411,9 @@ loop_39:
 
             } while (osPiStartDma(&B_8018EA98_usa, 0, 0, var_s0_3, (void *) temp_s2, 8U, &B_8018EAB0_usa) == -1);
             osRecvMesg(&B_8018EAB0_usa, NULL, 1);
-            temp_s1_2 = temp_s2->unk_4;
+            temp_s1_2 = temp_s2->size;
             var_s0_4 = var_s0_3 + 8;
-            if (temp_s2->unk_0 != 1) {
+            if (temp_s2->type != 1) {
                 var_s0_3 = var_s0_4 + temp_s1_2;
                 goto loop_39;
             }
@@ -469,11 +462,11 @@ loop_39:
                     } while (var_a0_3 < 2);
 loop_78:
                     temp_a1_4 = B_8018EB0C_usa + sp9C;
-                    temp_a2_3 = B_8018EB00_usa - 1;
+                    temp_a2_2 = B_8018EB00_usa - 1;
                     B_8018EB08_usa += temp_a1_4 < sp9C;
                     B_8018EB0C_usa = temp_a1_4;
-                    B_8018EB00_usa = temp_a2_3;
-                    if (temp_a2_3 != 0) {
+                    B_8018EB00_usa = temp_a2_2;
+                    if (temp_a2_2 != 0) {
                         var_s1_2 = B_8018EAF4_usa;
                         temp_s3_2 = B_8018EA50_usa + spA4;
 loop_61:
@@ -482,9 +475,9 @@ loop_61:
 
                         } while (osPiStartDma(&B_8018EA98_usa, 0, 0, var_s1_2, (void *) temp_s2, 8U, &B_8018EAB0_usa) == -1);
                         osRecvMesg(&B_8018EAB0_usa, NULL, 1);
-                        temp_s0_2 = temp_s2->unk_4;
+                        temp_s0_2 = temp_s2->size;
                         var_s1_3 = var_s1_2 + 8;
-                        if (temp_s2->unk_0 != 1) {
+                        if (temp_s2->type != 1) {
                             var_s1_2 = var_s1_3 + temp_s0_2;
                             goto loop_61;
                         }
@@ -497,7 +490,7 @@ loop_61:
                             var_s1_3 += temp_s0_2;
                         }
                         B_8018EAF4_usa = var_s1_3;
-                        if (temp_s2->unk_2 == 0) {
+                        if (temp_s2->format == 0) {
                             if (B_80192F64_usa == 0) {
                                 var_a0_4 = 0;
                                 var_a1 = 0;
@@ -535,7 +528,7 @@ loop_61:
                 }
             } else {
 block_80:
-                temp_s0_3 = temp_s2->unk_2;
+                temp_s0_3 = temp_s2->format;
                 var_a0_5 = 0;
                 if ((temp_s0_3 & 0xFFFF) == 2) {
                     var_s4 = var_s7;
@@ -555,13 +548,13 @@ loop_83:
                     }
                     var_s4 = var_a0_5;
                     temp_s1_3 = &(&B_801AB620_usa)[var_a0_5];
-                    B_8019CF5C_usa = 0;
+                    hvqtask.t.flags = 0;
                     temp_v0_4 = sp94 * 2;
-                    temp_s0_4 = hvqm2DecodeSP1(B_8018EA50_usa + spA4, temp_s0_3, *temp_s1_3 + temp_v0_4, (&B_801AB620_usa)[var_s7] + temp_v0_4, B_8018EA50_usa + 0x19A10, &B_801AABA0_usa, B_8018EA50_usa + 0x1E520);
+                    temp_s0_4 = hvqm2DecodeSP1(B_8018EA50_usa + spA4, (u32) temp_s0_3, *temp_s1_3 + temp_v0_4, (&B_801AB620_usa)[var_s7] + temp_v0_4, B_8018EA50_usa + 0x19A10, (HVQM2Arg *) &B_801AABA0_usa, B_8018EA50_usa + 0x1E520);
                     osWritebackDCacheAll();
-                    if (temp_s0_4 > 0) {
+                    if ((s32) temp_s0_4 > 0) {
                         osInvalDCache(*temp_s1_3, 0x25800);
-                        temp_s0_5 = &B_8019CF5C_usa - 4;
+                        temp_s0_5 = &hvqtask.t.flags - 4;
                         osSpTaskLoad((OSTask *) temp_s0_5);
                         osSpTaskStartGo((OSTask *) temp_s0_5);
                         osRecvMesg(&B_8018EAD0_usa, NULL, 1);
