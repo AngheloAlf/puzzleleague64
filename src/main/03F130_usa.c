@@ -96,7 +96,352 @@ u64 func_8003E714_usa(void) {
 #endif
 
 #if VERSION_USA
+
+typedef u32 (*tkAudioProc)(void *pcmbuf);
+typedef tkAudioProc (*tkRewindProc)(void);
+
+typedef struct {
+    tkRewindProc rewind; /* Pointer to stream rewind function */
+    u32 samples_per_sec; /* Audio sampling rate */
+} TKCMD;
+
+
+typedef struct {
+    u64 disptime; /* Display time */
+    void *vaddr;  /* Frame buffer address */
+    u32 *statP;   /* Pointer to frame buffer state flag */
+} VideoRing;
+
+extern VideoRing B_80192F00_usa[];
+extern s32 B_80192F20_usa;
+extern s32 B_80192F24_usa;
+
+
+
+typedef struct AudioRing {
+  void *buf;			/* PCM data buffer */
+  u32 len;			/* PCM data length */
+} AudioRing;
+
+//u64 __udivdi3(s32, s32, ?, u32);                    /* extern */
+extern OSThread B_80190CD0_usa;
+extern OSMesgQueue B_80192EC0_usa;
+extern void *B_80192ED8_usa;
+extern void *B_80192EF8_usa;
+extern s32 B_80192F28_usa;
+extern AudioRing B_80192F30_usa[];
+extern s32 B_80192F48_usa;
+extern s32 B_80192F4C_usa;
+extern s32 B_80192F50_usa;
+extern u16 B_80192F60_usa;
+
+#if 0
+// timekeeperProc
+void func_8003E854_usa(void *arg) {
+    TKCMD *cmd;
+    s32 sp24;
+    s32 *sp2C;
+    s32 sp34;
+    s32 sp3C;
+    s32 sp44;
+    s32 (*sp4C)(s32);
+    s32 sp50;
+    u32 sp54;
+    enum bool var_s7;
+    s32 *var_s5;
+    s32 temp_a3;
+    s32 temp_s0_3;
+    s32 temp_s1_3;
+    s32 temp_s2;
+    s32 temp_s2_2;
+    s32 temp_s4;
+    s32 temp_v0;
+    s32 temp_v0_2;
+    s32 temp_v0_3;
+    s32 temp_v0_4;
+    s32 temp_v0_5;
+    s32 temp_v0_6;
+    s32 temp_v0_7;
+    s32 temp_v0_9;
+    s32 temp_v1_6;
+    s32 var_a0;
+    s32 var_a0_2;
+    s32 var_fp;
+    s32 var_s4;
+    s32 var_s6;
+    s32 var_v0;
+    u16 *var_a1;
+    u16 *var_a1_2;
+    u16 *var_a2;
+    u16 *var_a2_2;
+    u16 temp_v0_10;
+    u16 temp_v0_8;
+    u32 temp_a0;
+    u32 temp_a1;
+    u32 temp_a1_2;
+    u32 temp_a1_3;
+    u32 temp_a1_4;
+    u32 temp_s0;
+    u32 temp_s1;
+    u32 temp_s1_2;
+    u32 temp_s3;
+    u32 temp_t1;
+    u32 temp_v1;
+    u32 temp_v1_2;
+    u32 temp_v1_3;
+    u32 temp_v1_4;
+    u32 temp_v1_5;
+    u32 var_s1;
+    u64 temp_ret;
+    u64 temp_ret_2;
+    u64 temp_ret_3;
+    u64 temp_ret_4;
+    u64 temp_ret_5;
+    u64 temp_ret_6;
+    u64 temp_ret_7;
+    u64 temp_ret_8;
+    u64 var_s0;
+    void *temp_s0_2;
+    void *temp_s0_4;
+
+    sp24 = 0;
+    sp2C = NULL;
+    osCreateMesgQueue(&B_80192EC0_usa, &B_80192ED8_usa, 2);
+    osViSetEvent(&B_80192EC0_usa, NULL, 1U);
+
+    osCreateMesgQueue(&B_80192EE0_usa, &B_80192EF8_usa, 2);
+    osSetEventMesg(6U, &B_80192EE0_usa, (void *)1);
+
+    osCreateThread(&B_80190CD0_usa, 4, func_80040A60_usa, NULL, STACK_TOP(B_80190E80_usa), 0xD);
+    osStartThread(&B_80190CD0_usa);
+
+    osRecvMesg(&B_80192E80_usa, &cmd, 1);
+
+    while (true) {
+
+        while (cmd == NULL) {
+            osSendMesg(&B_80192EA0_usa, NULL, 1);
+            osRecvMesg(&B_80192E80_usa, &cmd, 1);
+        }
+
+        B_80192F64_usa = false;
+        temp_a0 = cmd->samples_per_sec;
+        sp4C = cmd->rewind();
+        B_80192F68_usa = temp_a0;
+        var_s7 = false;
+        if (temp_a0 != 0) {
+            osAiSetFrequency(temp_a0);
+        }
+        var_s6 = 0;
+        var_s5 = NULL;
+        var_s4 = 0;
+        var_fp = 0;
+        sp34 = 0;
+        sp3C = 0;
+        sp44 = 0;
+        B_80192F54_usa = 0;
+        B_80192F5C_usa = 0;
+        B_80192F58_usa = 0;
+        B_80192F4C_usa = 0;
+        B_80192F50_usa = 0;
+        B_80192F48_usa = 0;
+        B_80192F24_usa = 0;
+        B_80192F28_usa = 0;
+        B_80192F20_usa = 0;
+        osSendMesg(&B_80192EA0_usa, NULL, 1);
+        temp_ret = osGetTime();
+        sp50 = temp_ret;
+        sp54 = (u32) temp_ret;
+    loop_7:
+        osRecvMesg(&B_80192EC0_usa, NULL, 1);
+        temp_ret_2 = osGetTime();
+        temp_s2 = sp50;
+        temp_s3 = sp54;
+        sp50 = temp_ret_2;
+        sp54 = (u32) temp_ret_2;
+        if (B_80192F64_usa == false) {
+            var_s0 = 0;
+            var_s1 = 0;
+        } else {
+            temp_ret_3 = osGetTime();
+            temp_v1 = (u32) temp_ret_3;
+            temp_a1 = *(&B_80192F78_usa + 4);
+            temp_a1_2 = temp_v1 - temp_a1;
+            temp_ret_4 = __udivdi3((((temp_ret_3 - B_80192F78_usa) - (temp_v1 < temp_a1)) << 6) | (temp_a1_2 >> 0x1A), temp_a1_2 << 6, 0, 0xBB8U);
+            var_s0 = temp_ret_4;
+            var_s1 = (u32) temp_ret_4;
+            if (B_80192F68_usa != 0) {
+                temp_t1 = *(&B_80192F70_usa + 4);
+                temp_v1_2 = temp_t1 * 0x1F;
+                temp_v0 = (((B_80192F70_usa << 5) | (temp_t1 >> 0x1B)) - B_80192F70_usa) - ((u32) (temp_t1 << 5) < temp_t1);
+                temp_a1_3 = temp_t1 * 0x3D09;
+                temp_ret_5 = __udivdi3(((((((((temp_v0 << 6) | (temp_v1_2 >> 0x1A)) - temp_v0) - ((u32) (temp_t1 * 0x7C0) < temp_v1_2)) * 8) | ((u32) (temp_t1 * 0x7A1) >> 0x1D)) + B_80192F70_usa + (temp_a1_3 < temp_t1)) << 6) | (temp_a1_3 >> 0x1A), temp_t1 * 0xF4240, 0, B_80192F68_usa);
+                temp_v1_3 = (u32) temp_ret_5;
+                var_s1 += temp_v1_3;
+                var_s0 = var_s0 + temp_ret_5 + (var_s1 < temp_v1_3);
+            }
+        }
+        temp_a1_4 = sp54 - temp_s3;
+        temp_ret_6 = __udivdi3((((sp50 - temp_s2) - (sp54 < temp_s3)) << 6) | (temp_a1_4 >> 0x1A), temp_a1_4 << 6, 0, 0xBB8U);
+        temp_v1_4 = (u32) temp_ret_6;
+        temp_s1 = var_s1 + temp_v1_4;
+        temp_s0 = var_s0 + temp_ret_6 + (temp_s1 < temp_v1_4);
+        if (var_s6 != 0) {
+            if (sp34 == 0) {
+                sp34 = 1;
+                if ((var_s7 == false) & sp44) {
+                    B_80192F70_usa = 0;
+                    *(&B_80192F70_usa + 4) = 0;
+                    var_s7 = true;
+                    temp_ret_7 = osGetTime();
+                    B_80192F78_usa = temp_ret_7;
+                    *(&B_80192F78_usa + 4) = (u32) temp_ret_7;
+                    B_80192F64_usa = true;
+                }
+            }
+            if ((sp2C != NULL) & (sp24 != var_s6)) {
+                *sp2C = *sp2C & ~2;
+            }
+            sp24 = var_s6;
+            var_s6 = 0;
+            sp2C = var_s5;
+            var_s5 = NULL;
+        }
+        if ((sp34 != 0) || (((B_80192F48_usa > 0) | sp44) != 0)) {
+            if (B_80192F20_usa != 0) {
+    loop_21:
+                temp_v1_5 = B_80192F00_usa[B_80192F28_usa].disptime;
+                if ((temp_s0 >= temp_v1_5) /* && ((temp_v1_5 != temp_s0) || (temp_s1 >= (u32) *(B_80192F00_usa + 4 + (B_80192F28_usa * 0x10))))*/) {
+                    if (var_s5 != NULL) {
+                        *var_s5 &= ~2;
+                    }
+                    temp_v0_2 = B_80192F28_usa * 0x10;
+                    var_s5 = *(&B_80192F00_usa->statP + temp_v0_2);
+                    var_s6 = *(&B_80192F00_usa->vaddr + temp_v0_2);
+                    *var_s5 |= 2;
+                    osViSwapBuffer((void *) var_s6);
+                    temp_v0_3 = B_80192F28_usa + 1;
+                    B_80192F28_usa = temp_v0_3;
+                    if (temp_v0_3 == 2) {
+                        B_80192F28_usa = 0;
+                    }
+                    temp_v0_4 = B_80192F20_usa - 1;
+                    B_80192F20_usa = temp_v0_4;
+                    if (temp_v0_4 != 0) {
+                        goto loop_21;
+                    }
+                }
+            }
+        }
+        if (sp34 != 0) {
+            osSetThreadPri(NULL, 0xE);
+            var_v0 = B_80192F48_usa;
+    loop_39:
+            if (var_v0 > 0) {
+                if (B_80192F58_usa != 0) {
+
+                } else {
+                    temp_v0_5 = B_80192F50_usa * 8;
+                    temp_s0_2 = B_80192F30_usa[B_80192F50_usa].buf;
+                    temp_s1_2 = B_80192F30_usa[B_80192F50_usa].len;
+                    if (!(osAiGetStatus() & 0x80000000) && (osAiSetNextBuffer(temp_s0_2, temp_s1_2) != -1)) {
+                        B_80192F58_usa = temp_s1_2 >> 2;
+                        if (var_s7 == false) {
+                            B_80192F70_usa = 0;
+                            *(&B_80192F70_usa + 4) = 0;
+                            var_s7 = true;
+                            temp_ret_8 = osGetTime();
+                            B_80192F78_usa = temp_ret_8;
+                            *(&B_80192F78_usa + 4) = (u32) temp_ret_8;
+                            B_80192F64_usa = true;
+                        }
+                        temp_v0_6 = B_80192F50_usa + 1;
+                        B_80192F50_usa = temp_v0_6;
+                        if (temp_v0_6 == 3) {
+                            B_80192F50_usa = 0;
+                        }
+                        var_v0 = B_80192F48_usa - 1;
+                        B_80192F48_usa = var_v0;
+                        goto loop_39;
+                    }
+                }
+            }
+            osSetThreadPri(NULL, 0xC);
+        }
+        if ((sp44 == 0) && (B_80192F48_usa < 3) && (B_80192F54_usa < 3)) {
+            temp_s0_3 = (var_s4 * 0x5DA8) + 0x10;
+            temp_v0_7 = sp4C(B_8018EA50_usa + temp_s0_3 + (var_fp * 4));
+            if (temp_v0_7 != 0) {
+                var_a1 = &B_80192F60_usa;
+                var_a0 = (var_fp * 2) - 1;
+                B_80192F54_usa += 1;
+                var_a2 = B_8018EA50_usa + temp_s0_3;
+                if (var_a0 != -1) {
+                    do {
+                        temp_v0_8 = *var_a1;
+                        var_a1 += 2;
+                        var_a0 -= 1;
+                        *var_a2 = temp_v0_8;
+                        var_a2 += 2;
+                    } while (var_a0 != -1);
+                }
+                temp_a3 = temp_v0_7 + var_fp;
+                var_fp = temp_a3 & 1;
+                temp_s2_2 = (temp_a3 - var_fp) * 4;
+                temp_s1_3 = (var_s4 * 0x5DA8) + 0x10;
+                temp_s0_4 = B_8018EA50_usa + temp_s1_3;
+                osWritebackDCache(temp_s0_4, temp_s2_2);
+                temp_v0_9 = B_80192F4C_usa * 8;
+                temp_v1_6 = B_80192F4C_usa + 1;
+                B_80192F30_usa[B_80192F4C_usa].buf = temp_s0_4;
+                B_80192F30_usa[B_80192F4C_usa].len = temp_s2_2;
+                B_80192F4C_usa = temp_v1_6;
+                if (temp_v1_6 == 3) {
+                    B_80192F4C_usa = 0;
+                }
+                var_a2_2 = &B_80192F60_usa;
+                var_a0_2 = (var_fp * 2) - 1;
+                B_80192F48_usa += 1;
+                var_a1_2 = B_8018EA50_usa + temp_s1_3 + temp_s2_2;
+                if (var_a0_2 != -1) {
+                    do {
+                        temp_v0_10 = *var_a1_2;
+                        var_a1_2 += 2;
+                        var_a0_2 -= 1;
+                        *var_a2_2 = temp_v0_10;
+                        var_a2_2 += 2;
+                    } while (var_a0_2 != -1);
+                }
+                temp_s4 = var_s4 + 1;
+                var_s4 = temp_s4 & -(temp_s4 < 3);
+            } else {
+                sp44 = 1;
+            }
+        }
+        if (osRecvMesg(&B_80192E80_usa, &cmd, 0) == 0) {
+            sp3C = 1;
+        }
+        if (sp3C == 0) {
+            goto loop_7;
+        }
+        if (((B_80192F20_usa > 0) | (var_s6 != 0)) != 0) {
+            goto loop_7;
+        }
+        if (sp44 == 0) {
+            goto loop_7;
+        }
+        if (B_80192F48_usa > 0) {
+            goto loop_7;
+        }
+        if (B_80192F58_usa != 0) {
+            goto loop_7;
+        }
+
+    }
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/03F130_usa", func_8003E854_usa);
+#endif
 #endif
 
 #if VERSION_USA
@@ -110,14 +455,6 @@ void func_8003F0EC_usa(void) {
 #endif
 
 #if VERSION_USA
-typedef u32 (*tkAudioProc)(void *pcmbuf);
-typedef tkAudioProc (*tkRewindProc)(void);
-
-typedef struct {
-    tkRewindProc rewind; /* Pointer to stream rewind function */
-    u32 samples_per_sec; /* Audio sampling rate */
-} TKCMD;
-
 // tkStart
 void func_8003F178_usa(tkRewindProc rewind, u32 samples_per_sec) {
     TKCMD tkcmd;
@@ -139,16 +476,6 @@ void func_8003F1C0_usa(void) {
 #endif
 
 #if VERSION_USA
-typedef struct {
-    u64 disptime; /* Display time */
-    void *vaddr;  /* Frame buffer address */
-    u32 *statP;   /* Pointer to frame buffer state flag */
-} VideoRing;
-
-extern VideoRing B_80192F00_usa[];
-extern s32 B_80192F20_usa;
-extern s32 B_80192F24_usa;
-
 // tkPushVideoframe
 void func_8003F200_usa(void *arg0, u32 *arg1, u64 arg2) {
     *arg1 |= 2;
@@ -962,10 +1289,6 @@ void func_80040A4C_usa(void) {
 #endif
 
 #if VERSION_USA
-extern OSMesgQueue B_80192EE0_usa;
-extern s32 B_80192F54_usa;
-extern u32 B_80192F58_usa;
-extern u32 B_80192F5C_usa;
 
 // daCounterProc
 void func_80040A60_usa(void *arg UNUSED) {
@@ -983,13 +1306,6 @@ void func_80040A60_usa(void *arg UNUSED) {
 #endif
 
 #if VERSION_USA
-extern romoffset_t B_8018EA58_usa;
-extern s32 B_8018EAEC_usa;
-extern s32 B_8018EAF0_usa;
-extern romoffset_t B_8018EAF4_usa;
-extern s32 B_8018EB00_usa;
-extern u64 B_8018EB08_usa;
-
 // rewind
 tkAudioProc func_80040B1C_usa(void) {
     B_8018EAF4_usa = B_8018EAF8_usa = B_8018EA58_usa + sizeof(HVQM2Header);

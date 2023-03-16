@@ -473,7 +473,7 @@ void func_8003E854_usa(void *arg);
 // void func_8003F810_usa();
 // void func_800409E4_usa();
 void func_80040A4C_usa();
-// void func_80040A60_usa();
+void func_80040A60_usa(void *arg);
 // void func_80040B1C_usa();
 // void func_80040B80_usa();
 // void func_80040DE4_usa();
