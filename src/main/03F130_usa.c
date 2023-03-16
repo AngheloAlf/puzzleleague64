@@ -137,7 +137,7 @@ extern s32 B_80192F4C_usa;
 extern s32 B_80192F50_usa;
 extern u16 B_80192F60_usa;
 
-#if 0
+#ifdef NON_MATCHING
 // timekeeperProc
 void func_8003E854_usa(void *arg) {
     TKCMD *cmd;
@@ -219,13 +219,12 @@ void func_8003E854_usa(void *arg) {
         }
 
         B_80192F64_usa = false;
-        temp_a0 = cmd->samples_per_sec;
         sp4C = cmd->rewind();
-        B_80192F68_usa = temp_a0;
-        var_s7 = false;
-        if (temp_a0 != 0) {
-            osAiSetFrequency(temp_a0);
+        B_80192F68_usa = cmd->samples_per_sec;
+        if (B_80192F68_usa != 0) {
+            osAiSetFrequency(B_80192F68_usa);
         }
+        var_s7 = false;
         var_s6 = 0;
         var_s5 = NULL;
         var_s4 = 0;
@@ -327,9 +326,10 @@ void func_8003E854_usa(void *arg) {
                     B_80192F54_usa += 1;
 
                     var_a1 = &B_80192F60_usa;
-                    var_a0 = var_fp << 1;
+                    var_a0 = (var_fp << 1);
+                    var_a0--;
                     var_a2 = B_8018EA50_usa + temp_s0_3;
-                    while (var_a0 >= 0) {
+                    while (var_a0 != -1) {
                         *var_a2++ = *var_a1++;
                         var_a0 -= 1;
                     }
@@ -348,9 +348,10 @@ void func_8003E854_usa(void *arg) {
                     B_80192F48_usa += 1;
 
                     var_a2 = &B_80192F60_usa;
+                    var_a0 = (var_fp << 1);
+                    var_a0--;
                     var_a1 = B_8018EA50_usa + temp_s1_3 + temp_s2_2;
-                    var_a0 = var_fp << 1;
-                    while (var_a0 >= 0) {
+                    while (var_a0 != -1) {
                         *var_a2++ = *var_a1++;
                         var_a0 -= 1;
                     }
