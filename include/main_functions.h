@@ -454,14 +454,15 @@ void func_80033B10_usa();
 // void func_8003D21C_usa();
 void func_8003E4BC_usa();
 // void func_8003E508_usa();
-// void func_8003E530_usa();
+
+void romcpy(void *dest, u32 src, size_t len, s32 pri, OSIoMesg *mb, OSMesgQueue *mq);
 // void func_8003E5DC_usa();
 // void func_8003E638_usa();
 // void func_8003E658_usa();
 // void func_8003E684_usa();
 // void func_8003E6B8_usa();
 // void func_8003E714_usa();
-// void func_8003E854_usa();
+void func_8003E854_usa(void *arg);
 // void func_8003F0EC_usa();
 // void func_8003F178_usa();
 // void func_8003F1C0_usa();
