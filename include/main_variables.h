@@ -1138,7 +1138,6 @@ extern OSMesgQueue B_80192EE0_usa;
 // extern UNK_TYPE B_80192F24_usa;
 // extern UNK_TYPE B_80192F28_usa;
 // extern UNK_TYPE B_80192F30_usa;
-// extern UNK_TYPE B_80192F34_usa;
 // extern UNK_TYPE B_80192F48_usa;
 // extern UNK_TYPE B_80192F4C_usa;
 // extern UNK_TYPE B_80192F50_usa;
