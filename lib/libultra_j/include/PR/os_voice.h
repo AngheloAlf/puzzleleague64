@@ -33,7 +33,7 @@ typedef struct {		/* Voice Recognition System */
 
 typedef struct {		/* Voice Recognition System */
   u16	warning;
-  u16	answer_num;		/* 0Å`5 */
+  u16	answer_num;		/* 0„Äú5 */
   u16	voice_level;
   u16	voice_sn;
   u16	voice_time;

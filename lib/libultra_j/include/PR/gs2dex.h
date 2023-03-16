@@ -40,66 +40,66 @@ extern "C" {
 
 /* Non scalable background plane */
 typedef	struct	{
-  u16   imageX;		/* ƒeƒNƒXƒ`ƒƒ‚Ì¶ãˆÊ’u X À•W (u10.5)        */ 
-  u16	imageW;		/* ƒeƒNƒXƒ`ƒƒ‚Ì•              (u10.2)        */
-  s16	frameX;		/* “]‘—‚³‚ê‚éƒtƒŒ[ƒ€‚Ì¶ãˆÊ’u(s10.2)        */
-  u16	frameW;		/* “]‘—‚³‚ê‚éƒtƒŒ[ƒ€‚Ì•      (u10.2)        */
+  u16   imageX;		/* ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®å·¦ä¸Šä½ç½® X åº§æ¨™ (u10.5)        */ 
+  u16	imageW;		/* ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®å¹…              (u10.2)        */
+  s16	frameX;		/* è»¢é€ã•ã‚Œã‚‹ãƒ•ãƒ¬ãƒ¼ãƒ ã®å·¦ä¸Šä½ç½®(s10.2)        */
+  u16	frameW;		/* è»¢é€ã•ã‚Œã‚‹ãƒ•ãƒ¬ãƒ¼ãƒ ã®å¹…      (u10.2)        */
 
-  u16   imageY; 	/* ƒeƒNƒXƒ`ƒƒ‚Ì¶ãˆÊ’u Y À•W (u10.5)        */ 
-  u16	imageH;		/* ƒeƒNƒXƒ`ƒƒ‚Ì‚‚³            (u10.2)        */
-  s16	frameY;		/* “]‘—‚³‚ê‚éƒtƒŒ[ƒ€‚Ì¶ãˆÊ’u(s10.2)        */
-  u16	frameH;		/* “]‘—‚³‚ê‚éƒtƒŒ[ƒ€‚Ì‚‚³    (u10.2)        */
+  u16   imageY; 	/* ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®å·¦ä¸Šä½ç½® Y åº§æ¨™ (u10.5)        */ 
+  u16	imageH;		/* ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®é«˜ã•            (u10.2)        */
+  s16	frameY;		/* è»¢é€ã•ã‚Œã‚‹ãƒ•ãƒ¬ãƒ¼ãƒ ã®å·¦ä¸Šä½ç½®(s10.2)        */
+  u16	frameH;		/* è»¢é€ã•ã‚Œã‚‹ãƒ•ãƒ¬ãƒ¼ãƒ ã®é«˜ã•    (u10.2)        */
 
-  u64  *imagePtr;	/* DRAM ã‚ÌƒeƒNƒXƒ`ƒƒƒ\[ƒXƒAƒhƒŒƒX          */
-  u16	imageLoad;	/* LoadBlock, LoadTile ‚Ì‚Ç‚¿‚ç‚ðŽg—p‚·‚é‚©   */
-  u8	imageFmt;	/* ƒeƒNƒZƒ‹‚ÌƒtƒH[ƒ}ƒbƒg G_IM_FMT_*          */
-  u8	imageSiz;	/* ƒeƒNƒZƒ‹‚ÌƒTƒCƒY       G_IM_SIZ_*          */
-  u16   imagePal; 	/* ƒpƒŒƒbƒg”Ô†                               */
-  u16	imageFlip;	/* ƒCƒ[ƒW‚Ì¶‰E”½“]  G_BG_FLAG_FLIPS ‚Å”½“] */
+  u64  *imagePtr;	/* DRAM ä¸Šã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚½ãƒ¼ã‚¹ã‚¢ãƒ‰ãƒ¬ã‚¹          */
+  u16	imageLoad;	/* LoadBlock, LoadTile ã®ã©ã¡ã‚‰ã‚’ä½¿ç”¨ã™ã‚‹ã‹   */
+  u8	imageFmt;	/* ãƒ†ã‚¯ã‚»ãƒ«ã®ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ G_IM_FMT_*          */
+  u8	imageSiz;	/* ãƒ†ã‚¯ã‚»ãƒ«ã®ã‚µã‚¤ã‚º       G_IM_SIZ_*          */
+  u16   imagePal; 	/* ãƒ‘ãƒ¬ãƒƒãƒˆç•ªå·                               */
+  u16	imageFlip;	/* ã‚¤ãƒ¡ãƒ¼ã‚¸ã®å·¦å³åè»¢  G_BG_FLAG_FLIPS ã§åè»¢ */
 
-  /* ˆÈ‰º‚Í‰Šú‰»ƒ‹[ƒ`ƒ“ guS2DInitBg() “à‚ÅÝ’è‚³‚ê‚é‚Ì‚Åƒ†[ƒU‚ªÝ
-     ’è‚·‚é•K—v‚Í‚È‚¢ */
-  u16	tmemW;		/* frame 1 ƒ‰ƒCƒ“‚Ì TMEM • Word ƒTƒCƒY
-                           LoadBlock ‚ÌŽž GS_PIX2TMEM(imageW/4,imageSiz)
-                           LoadTile  ‚ÌŽž GS_PIX2TMEM(frameW/4,imageSiz)+1 */
-  u16	tmemH;		/* ˆê“x‚Éƒ[ƒh‚Å‚«‚é TMEM ‚‚³ (s13.2) 4”{’l
-			   ’ÊíƒeƒNƒXƒ`ƒƒ‚ÌŽž   512/tmemW*4
-			   CI  ƒeƒNƒXƒ`ƒƒ‚ÌŽž   256/tmemW*4           */
-  u16	tmemLoadSH;	/* SH ’l
-			   LoadBlock ‚ÌŽž tmemSize/2-1
-			   LoadTile  ‚ÌŽž tmemW*16-1                  */
-  u16	tmemLoadTH;	/* TH ’l or Stride ’l
-			   LoadBlock ‚ÌŽž GS_CALC_DXT(tmemW)
-			   LoadTile  ‚ÌŽž tmemH-1                     */
-  u16	tmemSizeW;	/* image 1 ƒ‰ƒCƒ“•ª‚Ì imagePtr ‚ÌƒXƒLƒbƒv’l 
-			   LoadBlock ‚ÌŽž tmemW*2
-                           LoadTile  ‚ÌŽž GS_PIX2TMEM(imageW/4,imageSiz)*2 */
-  u16	tmemSize;	/* ƒ[ƒhˆê‰ñ•ª‚Ì imagePtr ‚ÌƒXƒLƒbƒv’l 
+  /* ä»¥ä¸‹ã¯åˆæœŸåŒ–ãƒ«ãƒ¼ãƒãƒ³ guS2DInitBg() å†…ã§è¨­å®šã•ã‚Œã‚‹ã®ã§ãƒ¦ãƒ¼ã‚¶ãŒè¨­
+     å®šã™ã‚‹å¿…è¦ã¯ãªã„ */
+  u16	tmemW;		/* frame 1 ãƒ©ã‚¤ãƒ³ã® TMEM å¹… Word ã‚µã‚¤ã‚º
+                           LoadBlock ã®æ™‚ GS_PIX2TMEM(imageW/4,imageSiz)
+                           LoadTile  ã®æ™‚ GS_PIX2TMEM(frameW/4,imageSiz)+1 */
+  u16	tmemH;		/* ä¸€åº¦ã«ãƒ­ãƒ¼ãƒ‰ã§ãã‚‹ TMEM é«˜ã• (s13.2) 4å€å€¤
+			   é€šå¸¸ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®æ™‚   512/tmemW*4
+			   CI  ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®æ™‚   256/tmemW*4           */
+  u16	tmemLoadSH;	/* SH å€¤
+			   LoadBlock ã®æ™‚ tmemSize/2-1
+			   LoadTile  ã®æ™‚ tmemW*16-1                  */
+  u16	tmemLoadTH;	/* TH å€¤ or Stride å€¤
+			   LoadBlock ã®æ™‚ GS_CALC_DXT(tmemW)
+			   LoadTile  ã®æ™‚ tmemH-1                     */
+  u16	tmemSizeW;	/* image 1 ãƒ©ã‚¤ãƒ³åˆ†ã® imagePtr ã®ã‚¹ã‚­ãƒƒãƒ—å€¤ 
+			   LoadBlock ã®æ™‚ tmemW*2
+                           LoadTile  ã®æ™‚ GS_PIX2TMEM(imageW/4,imageSiz)*2 */
+  u16	tmemSize;	/* ãƒ­ãƒ¼ãƒ‰ä¸€å›žåˆ†ã® imagePtr ã®ã‚¹ã‚­ãƒƒãƒ—å€¤ 
 			   = tmemSizeW*tmemH                          */
 } uObjBg_t;		/* 40 bytes */
 
 /* Scalable background plane */
 typedef	struct	{
-  u16   imageX;		/* ƒeƒNƒXƒ`ƒƒ‚Ì¶ãˆÊ’u X À•W (u10.5)        */ 
-  u16	imageW;		/* ƒeƒNƒXƒ`ƒƒ‚Ì•              (u10.2)        */
-  s16	frameX;		/* “]‘—‚³‚ê‚éƒtƒŒ[ƒ€‚Ì¶ãˆÊ’u(s10.2)        */
-  u16	frameW;		/* “]‘—‚³‚ê‚éƒtƒŒ[ƒ€‚Ì•      (u10.2)        */
+  u16   imageX;		/* ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®å·¦ä¸Šä½ç½® X åº§æ¨™ (u10.5)        */ 
+  u16	imageW;		/* ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®å¹…              (u10.2)        */
+  s16	frameX;		/* è»¢é€ã•ã‚Œã‚‹ãƒ•ãƒ¬ãƒ¼ãƒ ã®å·¦ä¸Šä½ç½®(s10.2)        */
+  u16	frameW;		/* è»¢é€ã•ã‚Œã‚‹ãƒ•ãƒ¬ãƒ¼ãƒ ã®å¹…      (u10.2)        */
 
-  u16   imageY; 	/* ƒeƒNƒXƒ`ƒƒ‚Ì¶ãˆÊ’u Y À•W (u10.5)        */ 
-  u16	imageH;		/* ƒeƒNƒXƒ`ƒƒ‚Ì‚‚³            (u10.2)        */
-  s16	frameY;		/* “]‘—‚³‚ê‚éƒtƒŒ[ƒ€‚Ì¶ãˆÊ’u(s10.2)        */
-  u16	frameH;		/* “]‘—‚³‚ê‚éƒtƒŒ[ƒ€‚Ì‚‚³    (u10.2)        */
+  u16   imageY; 	/* ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®å·¦ä¸Šä½ç½® Y åº§æ¨™ (u10.5)        */ 
+  u16	imageH;		/* ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®é«˜ã•            (u10.2)        */
+  s16	frameY;		/* è»¢é€ã•ã‚Œã‚‹ãƒ•ãƒ¬ãƒ¼ãƒ ã®å·¦ä¸Šä½ç½®(s10.2)        */
+  u16	frameH;		/* è»¢é€ã•ã‚Œã‚‹ãƒ•ãƒ¬ãƒ¼ãƒ ã®é«˜ã•    (u10.2)        */
 
-  u64  *imagePtr;	/* DRAM ã‚ÌƒeƒNƒXƒ`ƒƒƒ\[ƒXƒAƒhƒŒƒX          */
-  u16	imageLoad;	/* LoadBlock, LoadTile ‚Ì‚Ç‚¿‚ç‚ðŽg—p‚·‚é‚©   */
-  u8	imageFmt;	/* ƒeƒNƒZƒ‹‚ÌƒtƒH[ƒ}ƒbƒg G_IM_FMT_*          */
-  u8	imageSiz;	/* ƒeƒNƒZƒ‹‚ÌƒTƒCƒY       G_IM_SIZ_*          */
-  u16   imagePal; 	/* ƒpƒŒƒbƒg”Ô†                               */
-  u16	imageFlip;	/* ƒCƒ[ƒW‚Ì¶‰E”½“]  G_BG_FLAG_FLIPS ‚Å”½“] */
+  u64  *imagePtr;	/* DRAM ä¸Šã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚½ãƒ¼ã‚¹ã‚¢ãƒ‰ãƒ¬ã‚¹          */
+  u16	imageLoad;	/* LoadBlock, LoadTile ã®ã©ã¡ã‚‰ã‚’ä½¿ç”¨ã™ã‚‹ã‹   */
+  u8	imageFmt;	/* ãƒ†ã‚¯ã‚»ãƒ«ã®ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ G_IM_FMT_*          */
+  u8	imageSiz;	/* ãƒ†ã‚¯ã‚»ãƒ«ã®ã‚µã‚¤ã‚º       G_IM_SIZ_*          */
+  u16   imagePal; 	/* ãƒ‘ãƒ¬ãƒƒãƒˆç•ªå·                               */
+  u16	imageFlip;	/* ã‚¤ãƒ¡ãƒ¼ã‚¸ã®å·¦å³åè»¢  G_BG_FLAG_FLIPS ã§åè»¢ */
 
-  u16	scaleW;		/* X •ûŒüƒXƒP[ƒ‹’l               (u5.10)     */
-  u16	scaleH;		/* Y •ûŒüƒXƒP[ƒ‹’l               (u5.10)     */
-  s32	imageYorig;	/* image ‚É‚¨‚¯‚é•`‰æŽn“_         (s20.5)     */
+  u16	scaleW;		/* X æ–¹å‘ã‚¹ã‚±ãƒ¼ãƒ«å€¤               (u5.10)     */
+  u16	scaleH;		/* Y æ–¹å‘ã‚¹ã‚±ãƒ¼ãƒ«å€¤               (u5.10)     */
+  s32	imageYorig;	/* image ã«ãŠã‘ã‚‹æç”»å§‹ç‚¹         (s20.5)     */
   
   u8	padding[4];
   
@@ -114,24 +114,24 @@ typedef union {
 /*---------------------------------------------------------------------------*
  *	2D Objects
  *---------------------------------------------------------------------------*/
-#define	G_OBJ_FLAG_FLIPS	1<<0		/* S •ûŒü”½“] */
-#define	G_OBJ_FLAG_FLIPT	1<<4		/* T •ûŒü”½“] */
+#define	G_OBJ_FLAG_FLIPS	1<<0		/* S æ–¹å‘åè»¢ */
+#define	G_OBJ_FLAG_FLIPT	1<<4		/* T æ–¹å‘åè»¢ */
 
 typedef struct {
-  s16  objX;		/* s10.2 OBJ ¶ã’[ X À•W                 */
-  u16  scaleW;		/* u5.10 ••ûŒüƒXƒP[ƒŠƒ“ƒO                */
-  u16  imageW;		/* u10.5 ƒeƒNƒXƒ`ƒƒ‚Ì•   (S •ûŒü‚Ì’·‚³)   */
-  u16  paddingX;	/* –¢Žg—p í‚É 0                           */
-  s16  objY;		/* s10.2 OBJ ¶ã’[ Y À•W                 */
-  u16  scaleH;		/* u5.10 ‚‚³•ûŒüƒXƒP[ƒŠƒ“ƒO              */
-  u16  imageH;		/* u10.5 ƒeƒNƒXƒ`ƒƒ‚Ì‚‚³ (T •ûŒü‚Ì’·‚³)   */
-  u16  paddingY;	/* –¢Žg—p í‚É 0                           */
-  u16  imageStride;	/* ƒeƒNƒZƒ‹‚ÌÜ‚è•Ô‚µ•        (64bit word ’PˆÊ) */
-  u16  imageAdrs;	/* TMEM “à‚ÌƒeƒNƒXƒ`ƒƒæ“ªˆÊ’u (64bit word ’PˆÊ) */  
-  u8   imageFmt;	/* ƒeƒNƒZƒ‹‚ÌƒtƒH[ƒ}ƒbƒg G_IM_FMT_*       */
-  u8   imageSiz;	/* ƒeƒNƒZƒ‹‚ÌƒTƒCƒY       G_IM_SIZ_*       */
-  u8   imagePal;	/* ƒpƒŒƒbƒg”Ô† 0-7                        */
-  u8   imageFlags;	/* •\Ž¦ƒtƒ‰ƒO  G_OBJ_FLAG_FLIP*            */
+  s16  objX;		/* s10.2 OBJ å·¦ä¸Šç«¯ X åº§æ¨™                 */
+  u16  scaleW;		/* u5.10 å¹…æ–¹å‘ã‚¹ã‚±ãƒ¼ãƒªãƒ³ã‚°                */
+  u16  imageW;		/* u10.5 ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®å¹…   (S æ–¹å‘ã®é•·ã•)   */
+  u16  paddingX;	/* æœªä½¿ç”¨ å¸¸ã« 0                           */
+  s16  objY;		/* s10.2 OBJ å·¦ä¸Šç«¯ Y åº§æ¨™                 */
+  u16  scaleH;		/* u5.10 é«˜ã•æ–¹å‘ã‚¹ã‚±ãƒ¼ãƒªãƒ³ã‚°              */
+  u16  imageH;		/* u10.5 ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®é«˜ã• (T æ–¹å‘ã®é•·ã•)   */
+  u16  paddingY;	/* æœªä½¿ç”¨ å¸¸ã« 0                           */
+  u16  imageStride;	/* ãƒ†ã‚¯ã‚»ãƒ«ã®æŠ˜ã‚Šè¿”ã—å¹…        (64bit word å˜ä½) */
+  u16  imageAdrs;	/* TMEM å†…ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£å…ˆé ­ä½ç½® (64bit word å˜ä½) */  
+  u8   imageFmt;	/* ãƒ†ã‚¯ã‚»ãƒ«ã®ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ G_IM_FMT_*       */
+  u8   imageSiz;	/* ãƒ†ã‚¯ã‚»ãƒ«ã®ã‚µã‚¤ã‚º       G_IM_SIZ_*       */
+  u8   imagePal;	/* ãƒ‘ãƒ¬ãƒƒãƒˆç•ªå· 0-7                        */
+  u8   imageFlags;	/* è¡¨ç¤ºãƒ•ãƒ©ã‚°  G_OBJ_FLAG_FLIP*            */
 } uObjSprite_t;		/* 24 bytes */
 
 typedef union {
@@ -176,12 +176,12 @@ typedef union {
 #define	GS_TB_TLINE(pix,siz)	(GS_CALC_DXT(GS_PIX2TMEM((pix),(siz))))
 
 typedef	struct	{
-  u32	type;		/* Type Ží•Ê G_OBJLT_TXTRBLOCK                    */
-  u64	*image;		/* DRAM ã‚ÌƒeƒNƒXƒ`ƒƒƒ\[ƒXƒAƒhƒŒƒX              */
-  u16	tmem;		/* ƒ[ƒhæ‚Ì TMEM ƒ[ƒhƒAƒhƒŒƒX (8byteWORD)     */
-  u16	tsize;		/* Texture ƒTƒCƒY     ƒ}ƒNƒ GS_TB_TSIZE() ‚ÅŽw’è */
-  u16	tline;		/* Texture 1 ƒ‰ƒCƒ“• ƒ}ƒNƒ GS_TB_TLINE() ‚ÅŽw’è */
-  u16	sid;		/* STATE ID  4 ‚Ì”{”‚Å 0,4,8,12 ‚Ì‚Ç‚ê‚©         */
+  u32	type;		/* Type ç¨®åˆ¥ G_OBJLT_TXTRBLOCK                    */
+  u64	*image;		/* DRAM ä¸Šã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚½ãƒ¼ã‚¹ã‚¢ãƒ‰ãƒ¬ã‚¹              */
+  u16	tmem;		/* ãƒ­ãƒ¼ãƒ‰å…ˆã® TMEM ãƒ¯ãƒ¼ãƒ‰ã‚¢ãƒ‰ãƒ¬ã‚¹ (8byteWORD)     */
+  u16	tsize;		/* Texture ã‚µã‚¤ã‚º     ãƒžã‚¯ãƒ­ GS_TB_TSIZE() ã§æŒ‡å®š */
+  u16	tline;		/* Texture 1 ãƒ©ã‚¤ãƒ³å¹… ãƒžã‚¯ãƒ­ GS_TB_TLINE() ã§æŒ‡å®š */
+  u16	sid;		/* STATE ID  4 ã®å€æ•°ã§ 0,4,8,12 ã®ã©ã‚Œã‹         */
   u32	flag;		/* STATE flag  */
   u32	mask;		/* STATE mask  */
 } uObjTxtrBlock_t;		/* 24 bytes */
@@ -190,12 +190,12 @@ typedef	struct	{
 #define	GS_TT_THEIGHT(pix,siz)	(((pix)<<2)-1)
 
 typedef	struct	{
-  u32	type;		/* Type Ží•Ê G_OBJLT_TXTRTILE                     */
-  u64	*image;		/* DRAM ã‚ÌƒeƒNƒXƒ`ƒƒƒ\[ƒXƒAƒhƒŒƒX              */
-  u16	tmem;		/* ƒ[ƒhæ‚Ì TMEM ƒ[ƒhƒAƒhƒŒƒX (8byteWORD)     */
-  u16	twidth;		/* Texture •      ƒ}ƒNƒ GS_TT_TWIDTH()  ‚ÅŽw’è  */
-  u16	theight;	/* Texture ‚‚³    ƒ}ƒNƒ GS_TT_THEIGHT() ‚ÅŽw’è  */
-  u16	sid;		/* STATE ID  4 ‚Ì”{”‚Å 0,4,8,12 ‚Ì‚Ç‚ê‚©         */
+  u32	type;		/* Type ç¨®åˆ¥ G_OBJLT_TXTRTILE                     */
+  u64	*image;		/* DRAM ä¸Šã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚½ãƒ¼ã‚¹ã‚¢ãƒ‰ãƒ¬ã‚¹              */
+  u16	tmem;		/* ãƒ­ãƒ¼ãƒ‰å…ˆã® TMEM ãƒ¯ãƒ¼ãƒ‰ã‚¢ãƒ‰ãƒ¬ã‚¹ (8byteWORD)     */
+  u16	twidth;		/* Texture å¹…      ãƒžã‚¯ãƒ­ GS_TT_TWIDTH()  ã§æŒ‡å®š  */
+  u16	theight;	/* Texture é«˜ã•    ãƒžã‚¯ãƒ­ GS_TT_THEIGHT() ã§æŒ‡å®š  */
+  u16	sid;		/* STATE ID  4 ã®å€æ•°ã§ 0,4,8,12 ã®ã©ã‚Œã‹         */
   u32	flag;		/* STATE flag  */
   u32	mask;		/* STATE mask  */
 } uObjTxtrTile_t;		/* 24 bytes */
@@ -204,12 +204,12 @@ typedef	struct	{
 #define	GS_PAL_NUM(num)		((num)-1)
 
 typedef	struct	{
-  u32	type;		/* Type Ží•Ê G_OBJLT_TLUT                         */
-  u64	*image;		/* DRAM ã‚ÌƒeƒNƒXƒ`ƒƒƒ\[ƒXƒAƒhƒŒƒX              */
-  u16	phead;		/* ƒ[ƒhæ“ª‚ÌƒpƒŒƒbƒg”Ô† 256 ˆÈã 511 ˆÈ‰º     */
-  u16	pnum;		/* ƒ[ƒh‚·‚éƒpƒŒƒbƒg” - 1                       */
-  u16   zero;		/* í‚É 0 ‚ð‘ã“ü‚·‚é                              */
-  u16	sid;		/* STATE ID  4 ‚Ì”{”‚Å 0,4,8,12 ‚Ì‚Ç‚ê‚©         */
+  u32	type;		/* Type ç¨®åˆ¥ G_OBJLT_TLUT                         */
+  u64	*image;		/* DRAM ä¸Šã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚½ãƒ¼ã‚¹ã‚¢ãƒ‰ãƒ¬ã‚¹              */
+  u16	phead;		/* ãƒ­ãƒ¼ãƒ‰å…ˆé ­ã®ãƒ‘ãƒ¬ãƒƒãƒˆç•ªå· 256 ä»¥ä¸Š 511 ä»¥ä¸‹     */
+  u16	pnum;		/* ãƒ­ãƒ¼ãƒ‰ã™ã‚‹ãƒ‘ãƒ¬ãƒƒãƒˆæ•° - 1                       */
+  u16   zero;		/* å¸¸ã« 0 ã‚’ä»£å…¥ã™ã‚‹                              */
+  u16	sid;		/* STATE ID  4 ã®å€æ•°ã§ 0,4,8,12 ã®ã©ã‚Œã‹         */
   u32	flag;		/* STATE flag  */
   u32	mask;		/* STATE mask  */
 } uObjTxtrTLUT_t;		/* 24 bytes */
@@ -322,7 +322,7 @@ typedef	struct	{
 /*---------------------------------------------------------------------------*
  *	Set general status
  *---------------------------------------------------------------------------*/
-#define	G_MW_GENSTAT	0x08	/* G_MW_FOG ‚Æ“¯‚¶’l‚È‚Ì‚Å’ˆÓ */
+#define	G_MW_GENSTAT	0x08	/* G_MW_FOG ã¨åŒã˜å€¤ãªã®ã§æ³¨æ„ */
 
 #define	gSPSetStatus(pkt, sid, val)	\
 	gMoveWd((pkt), G_MW_GENSTAT, (sid), (val))

@@ -7,7 +7,7 @@
 #include "libhvqm.h"
 
 #if VERSION_USA
-void romcpy(void *dest, u32 src, size_t len, s32 pri, OSIoMesg *mb, OSMesgQueue *mq) {
+INLINE void romcpy(void *dest, romoffset_t src, size_t len, s32 pri, OSIoMesg *mb, OSMesgQueue *mq) {
     osInvalDCache(dest, len);
 
     while (osPiStartDma(mb, pri, 0, src, dest, len, mq) == -1) {}
@@ -172,16 +172,108 @@ void func_8003F200_usa(void *arg0, u32 *arg1, u64 arg2) {
 
 #if VERSION_USA
 // get_record?
-INCLUDE_ASM("asm/usa/nonmatchings/main/03F130_usa", func_8003F2F0_usa);
+INLINE romoffset_t func_8003F2F0_usa(HVQM2Record *header, void *body, u16 type, romoffset_t src, OSIoMesg *mb,
+                                     OSMesgQueue *mq) {
+    s32 bodySize;
+    s32 pri = type == 0 ? 1 : 0;
+
+    while (true) {
+        romcpy(header, src, sizeof(HVQM2Record), pri, mb, mq);
+        src += sizeof(HVQM2Record);
+
+        bodySize = header->size;
+
+        if (header->type == type) {
+            break;
+        }
+        src += bodySize;
+    }
+
+    if (bodySize != 0) {
+        romcpy(body, src, bodySize, pri, mb, mq);
+        src += bodySize;
+    }
+
+    return src;
+}
 #endif
 
 #if VERSION_USA
 // print_hvqm_info
-INCLUDE_ASM("asm/usa/nonmatchings/main/03F130_usa", func_8003F42C_usa);
+void func_8003F42C_usa(HVQM2Header *header) {
+    s32 var_s0;
+
+    osSyncPrintf("\n");
+    osSyncPrintf("File version        : %s\n", header);
+    osSyncPrintf("File size           : %d\n", header->file_size);
+    osSyncPrintf("Image width         : %d\n", header->width);
+    osSyncPrintf("Image height        : %d\n", header->height);
+    osSyncPrintf("Compress type       : %s\n", header->v_sampling_rate == 1 ? "4:2:2" : "4:1:1");
+    osSyncPrintf("Total frames        : %d\n", header->total_frames);
+    osSyncPrintf("Video rate          : %f frame/sec\n", 1000000.0 / header->usec_per_frame);
+    osSyncPrintf("Total audio records : %d\n", header->total_audio_records);
+    osSyncPrintf("Audio rate          : %d Hz\n", header->samples_per_sec);
+    osSyncPrintf("\n");
+    osSyncPrintf("Display mode        : %s\n", "16-bit RGBA");
+    osSyncPrintf("\n");
+
+    var_s0 = 0;
+    if (header->max_frame_size > 0x7530) {
+        var_s0 += 1;
+        osSyncPrintf("ERROR: hvqbuf insufficient\n");
+    }
+    if (header->max_audio_record_size > 0xBB8) {
+        var_s0 += 1;
+        osSyncPrintf("ERROR: adpcmbuf insufficient\n");
+    }
+    if (header->max_sp_packets > 0x4E20) {
+        var_s0 += 1;
+        osSyncPrintf("ERROR: hvq_spfifo insufficient\n");
+    }
+
+    if (var_s0) {
+        while (true) {}
+    }
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/03F130_usa", func_8003F608_usa);
+extern ADPCMstate B_8018EB10_usa;
+
+// next_audio_record
+u32 func_8003F608_usa(void *arg0) {
+    u8 sp20[sizeof(HVQM2Record) + 0x10];
+    s16 *var_a0;
+    HVQM2Record *temp_s2;
+    HVQM2Audio *temp_a0;
+    u32 temp_s0;
+    u32 var_v1;
+    void *temp_s3;
+
+    if (B_8018EAFC_usa == 0) {
+        return 0U;
+    }
+
+    temp_s2 = OS_DCACHE_ROUNDUP_ADDR(sp20);
+    temp_s3 = (void *)(B_8018EA50_usa + 0x18E50);
+
+    B_8018EAF8_usa = func_8003F2F0_usa(temp_s2, temp_s3, 0, B_8018EAF8_usa, &B_8018EA60_usa, &B_8018EA78_usa);
+
+    B_8018EAFC_usa -= 1;
+    temp_a0 = (void *)(B_8018EA50_usa + 0x18E50);
+
+    temp_s0 = *(u32 *)(&temp_a0->samples);
+    adpcmDecode(&temp_a0[1], *(u16 *)(&temp_s2->format), temp_s0, arg0, 1U, &B_8018EB10_usa);
+    var_v1 = 0;
+
+    var_a0 = arg0;
+    while (var_v1 < 0x2ED4U) {
+        var_a0[var_v1] = (var_a0[var_v1] * B_8018EA54_usa) >> 16;
+        var_v1 += 1;
+    }
+
+    return temp_s0;
+}
 #endif
 
 #if VERSION_USA
@@ -856,7 +948,11 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/03F130_usa", func_8003F810_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/03F130_usa", func_800409E4_usa);
+s32 func_800409E4_usa(f32 arg0) {
+    B_8018EA54_usa = arg0 * 0x10000;
+
+    return -1;
+}
 #endif
 
 #if VERSION_USA
@@ -866,9 +962,40 @@ void func_80040A4C_usa(void) {
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/03F130_usa", func_80040A60_usa);
+extern OSMesgQueue B_80192EE0_usa;
+extern s32 B_80192F54_usa;
+extern u32 B_80192F58_usa;
+extern u32 B_80192F5C_usa;
+
+// daCounterProc
+void func_80040A60_usa(void *arg UNUSED) {
+    while (true) {
+        osRecvMesg(&B_80192EE0_usa, NULL, 1);
+        B_80192F78_usa = osGetTime();
+        if (B_80192F5C_usa != 0) {
+            B_80192F54_usa -= 1;
+        }
+        B_80192F70_usa += B_80192F5C_usa;
+        B_80192F5C_usa = B_80192F58_usa;
+        B_80192F58_usa = 0;
+    }
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/03F130_usa", func_80040B1C_usa);
+extern romoffset_t B_8018EA58_usa;
+extern s32 B_8018EAEC_usa;
+extern s32 B_8018EAF0_usa;
+extern romoffset_t B_8018EAF4_usa;
+extern s32 B_8018EB00_usa;
+extern u64 B_8018EB08_usa;
+
+// rewind
+tkAudioProc func_80040B1C_usa(void) {
+    B_8018EAF4_usa = B_8018EAF8_usa = B_8018EA58_usa + sizeof(HVQM2Header);
+    B_8018EAFC_usa = B_8018EAF0_usa;
+    B_8018EB00_usa = B_8018EAEC_usa;
+    B_8018EB08_usa = 0;
+    return func_8003F608_usa;
+}
 #endif

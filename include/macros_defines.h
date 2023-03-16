@@ -20,7 +20,12 @@
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
 #define ARRAY_COUNTU(arr) (u32)(sizeof(arr) / sizeof(arr[0]))
 
-
+#define STATIC_INLINE static inline
+#ifdef PERMUTER
+#define INLINE static inline
+#else
+#define INLINE inline
+#endif
 
 #define saved_reg_s0 0
 #define saved_reg_s1 0
