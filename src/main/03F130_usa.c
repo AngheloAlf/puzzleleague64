@@ -140,22 +140,27 @@ extern s32 B_80192F4C_usa;
 extern s32 B_80192F50_usa;
 extern u16 B_80192F60_usa;
 
+typedef struct struct_8018EA50_usa_unk_00010 {
+    /* 0x0000 */ s16 unk_0000[UNK_SIZE];
+    /* 0x0002 */ UNK_TYPE1 unk_0002[0x5DA6];
+} struct_8018EA50_usa_unk_00010; // size = 0x5DA8
+
 typedef struct struct_8018EA50_usa {
-    /* 0x00000 */ UNK_TYPE1 unk_00000[0x18E50];
+    ///* 0x00000 */ UNK_TYPE1 unk_00000[0x18E50];
+    /* 0x00000 */ UNK_TYPE1 unk_00000[0x10];
+    /* 0x00010 */ struct_8018EA50_usa_unk_00010 unk_00010[UNK_SIZE];
+    /* 0x05DB8 */ UNK_TYPE1 unk_05DB8[0x13098];
     /* 0x18E50 */ u8 unk_18E50[UNK_SIZE];
 } struct_8018EA50_usa; // size = ?
 
 extern struct_8018EA50_usa *B_8018EA50_usa;
 
-#if 0
 // timekeeperProc
 void func_8003E854_usa(void *arg UNUSED) {
     TKCMD *cmd;
-    void *sp24;
-    u32 *sp2C;
+    void *sp24 = NULL;
+    u32 *sp2C = NULL;
 
-    sp24 = NULL;
-    sp2C = NULL;
     osCreateMesgQueue(&B_80192EC0_usa, &B_80192ED8_usa, 2);
     osViSetEvent(&B_80192EC0_usa, NULL, 1U);
 
@@ -173,22 +178,10 @@ void func_8003E854_usa(void *arg UNUSED) {
         s32 sp44;
         tkAudioProc sp4C;
         OSTime sp50;
-
-        u32 temp_v0_7;
-
-        s32 var_a0;
-        u16 *var_a1;
-        u16 *var_a2;
-
-        void *temp_s0_4;
-        s32 temp_s0_3;
-        s32 temp_s1_3;
-        s32 temp_s2_2;
         s32 var_s4;
         u32 *var_s5;
         void *var_s6;
         bool var_s7;
-
         s32 var_fp;
 
         while (cmd == NULL) {
@@ -245,9 +238,11 @@ void func_8003E854_usa(void *arg UNUSED) {
                         tkClockStart();
                     }
                 }
+
                 if ((sp2C != NULL) && (sp24 != var_s6)) {
                     *sp2C &= ~2;
                 }
+
                 sp24 = var_s6;
                 var_s6 = 0;
                 sp2C = var_s5;
@@ -305,24 +300,31 @@ void func_8003E854_usa(void *arg UNUSED) {
             }
 
             if ((sp44 == 0) && (B_80192F48_usa < 3) && (B_80192F54_usa < 3)) {
-                temp_s0_3 = (var_s4 * 0x5DA8) + 0x10;
-                temp_v0_7 = sp4C((void *)(B_8018EA50_usa + temp_s0_3 + (var_fp * 4)));
+                u32 temp_v0_7;
+                void *temp_s0_4;
+                s32 temp_s2_2;
+                u16 *var_a2;
+                u16 *var_a1;
+                s32 var_a0;
+
+                temp_v0_7 = sp4C((void *)(&B_8018EA50_usa->unk_00010[var_s4].unk_0000[var_fp << 1]));
                 if (temp_v0_7 > 0) {
                     B_80192F54_usa += 1;
 
                     var_a1 = &B_80192F60_usa;
                     var_a0 = (var_fp << 1);
                     var_a0--;
-                    var_a2 = (void *)(B_8018EA50_usa + temp_s0_3);
+                    var_a2 = (void *)(B_8018EA50_usa->unk_00010[var_s4].unk_0000);
                     while (var_a0 != -1) {
                         *var_a2++ = *var_a1++;
                         var_a0 -= 1;
                     }
                     temp_v0_7 += var_fp;
                     var_fp = temp_v0_7 & 1;
-                    temp_s2_2 = (temp_v0_7 - var_fp) << 2;
-                    temp_s1_3 = (var_s4 * 0x5DA8) + 0x10;
-                    temp_s0_4 = (void *)(B_8018EA50_usa + temp_s1_3);
+                    temp_v0_7 -= var_fp;
+                    temp_s2_2 = temp_v0_7 << 2;
+
+                    temp_s0_4 = (void *)(B_8018EA50_usa->unk_00010[var_s4].unk_0000);
                     osWritebackDCache(temp_s0_4, temp_s2_2);
                     B_80192F30_usa[B_80192F4C_usa].buf = temp_s0_4;
                     B_80192F30_usa[B_80192F4C_usa].len = temp_s2_2;
@@ -335,7 +337,7 @@ void func_8003E854_usa(void *arg UNUSED) {
                     var_a2 = &B_80192F60_usa;
                     var_a0 = (var_fp << 1);
                     var_a0--;
-                    var_a1 = (void *)(B_8018EA50_usa + temp_s1_3 + temp_s2_2);
+                    var_a1 = (void *)((uintptr_t)B_8018EA50_usa->unk_00010[var_s4].unk_0000 + temp_s2_2);
                     while (var_a0 != -1) {
                         *var_a2++ = *var_a1++;
                         var_a0 -= 1;
@@ -356,9 +358,6 @@ void func_8003E854_usa(void *arg UNUSED) {
         }
     }
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/03F130_usa", func_8003E854_usa);
-#endif
 #endif
 
 #if VERSION_USA
