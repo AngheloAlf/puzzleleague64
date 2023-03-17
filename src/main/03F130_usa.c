@@ -95,12 +95,16 @@ INLINE u64 func_8003E714_usa(void) {
 #endif
 
 #if VERSION_USA
+
+STATIC_INLINE void tkClockDisable(void) {
+    B_80192F64_usa = false;
+}
+
 STATIC_INLINE void tkClockStart(void) {
     B_80192F70_usa = 0;
     B_80192F78_usa = osGetTime();
     B_80192F64_usa = true;
 }
-
 
 typedef u32 (*tkAudioProc)(void *pcmbuf);
 typedef tkAudioProc (*tkRewindProc)(void);
@@ -125,7 +129,6 @@ typedef struct AudioRing {
     u32 len;   /* PCM data length */
 } AudioRing;
 
-// u64 __udivdi3(s32, s32, ?, u32);                    /* extern */
 extern OSThread B_80190CD0_usa;
 extern OSMesgQueue B_80192EC0_usa;
 extern void *B_80192ED8_usa;
@@ -139,67 +142,12 @@ extern u16 B_80192F60_usa;
 
 #ifdef NON_MATCHING
 // timekeeperProc
-void func_8003E854_usa(void *arg) {
+void func_8003E854_usa(void *arg UNUSED) {
     TKCMD *cmd;
-    s32 sp24;
-    s32 *sp2C;
-    s32 sp34;
-    s32 sp3C;
-    s32 sp44;
-    s32 (*sp4C)(s32);
-    OSTime sp50;
-    enum bool var_s7;
-    s32 *var_s5;
-    s32 temp_a3;
-    s32 temp_s0_3;
-    s32 temp_s1_3;
-    OSTime temp_s2;
-    s32 temp_s2_2;
-    s32 temp_v0;
-    s32 temp_v0_3;
-    s32 temp_v0_4;
-    s32 temp_v0_6;
-    u32 temp_v0_7;
-    s32 temp_v1_6;
-    s32 var_a0;
-    s32 var_a0_2;
-    s32 var_fp;
-    s32 var_s4;
-    s32 var_s6;
-    s32 var_v0;
-    u16 *var_a1;
-    u16 *var_a2;
-    u16 *var_a2_2;
-    u16 temp_v0_10;
-    u16 temp_v0_8;
-    u32 temp_a0;
-    u32 temp_a1;
-    u32 temp_a1_2;
-    u32 temp_a1_3;
-    u32 temp_a1_4;
-    u64 temp_s0;
-    u32 temp_s1;
-    u32 temp_s1_2;
-    u32 temp_s3;
-    u32 temp_t1;
-    u32 temp_v1;
-    u32 temp_v1_2;
-    u32 temp_v1_3;
-    u32 temp_v1_4;
-    u32 temp_v1_5;
-    u32 var_s1;
-    u64 temp_ret;
-    u64 temp_ret_2;
-    u64 temp_ret_3;
-    u64 temp_ret_4;
-    u64 temp_ret_5;
-    u64 temp_ret_6;
-    u64 temp_ret_7;
-    u64 var_s0;
-    void *temp_s0_2;
-    void *temp_s0_4;
+    void *sp24;
+    u32 *sp2C;
 
-    sp24 = 0;
+    sp24 = NULL;
     sp2C = NULL;
     osCreateMesgQueue(&B_80192EC0_usa, &B_80192ED8_usa, 2);
     osViSetEvent(&B_80192EC0_usa, NULL, 1U);
@@ -210,20 +158,45 @@ void func_8003E854_usa(void *arg) {
     osCreateThread(&B_80190CD0_usa, 4, func_80040A60_usa, NULL, STACK_TOP(B_80190E80_usa), 0xD);
     osStartThread(&B_80190CD0_usa);
 
-    osRecvMesg(&B_80192E80_usa, &cmd, 1);
+    osRecvMesg(&B_80192E80_usa, (OSMesg *)&cmd, 1);
 
     while (true) {
+        s32 sp34;
+        s32 sp3C;
+        s32 sp44;
+        tkAudioProc sp4C;
+        OSTime sp50;
+
+        u32 temp_v0_7;
+
+        s32 var_a0;
+        u16 *var_a1;
+        u16 *var_a2;
+
+        void *temp_s0_4;
+        s32 temp_s0_3;
+        s32 temp_s1_3;
+        s32 temp_s2_2;
+        s32 var_s4;
+        u32 *var_s5;
+        void *var_s6;
+        bool var_s7;
+
+        s32 var_fp;
+
         while (cmd == NULL) {
             osSendMesg(&B_80192EA0_usa, NULL, 1);
-            osRecvMesg(&B_80192E80_usa, &cmd, 1);
+            osRecvMesg(&B_80192E80_usa, (OSMesg *)&cmd, 1);
         }
 
-        B_80192F64_usa = false;
+        tkClockDisable();
         sp4C = cmd->rewind();
+
         B_80192F68_usa = cmd->samples_per_sec;
         if (B_80192F68_usa != 0) {
             osAiSetFrequency(B_80192F68_usa);
         }
+
         var_s7 = false;
         var_s6 = 0;
         var_s5 = NULL;
@@ -241,16 +214,21 @@ void func_8003E854_usa(void *arg) {
         B_80192F24_usa = 0;
         B_80192F28_usa = 0;
         B_80192F20_usa = 0;
+
         osSendMesg(&B_80192EA0_usa, NULL, 1);
+
         sp50 = osGetTime();
+        while ((sp3C == 0) || ((B_80192F20_usa > 0) || (var_s6 != 0)) || (sp44 == 0) || (B_80192F48_usa > 0) ||
+               (B_80192F58_usa != 0)) {
+            u64 temp_s0;
+            OSTime temp_s2;
 
-        while ((sp3C == 0) || ((B_80192F20_usa > 0) || (var_s6 != 0)) || (sp44 == 0) || (B_80192F48_usa > 0) || (B_80192F58_usa != 0)) {
             osRecvMesg(&B_80192EC0_usa, NULL, 1);
-            temp_ret_2 = osGetTime();
-            temp_s2 = sp50;
-            sp50 = temp_ret_2;
 
+            temp_s2 = sp50;
+            sp50 = osGetTime();
             temp_s0 = func_8003E714_usa() + OS_CYCLES_TO_USEC(sp50 - temp_s2);
+
             if (var_s6 != 0) {
                 if (sp34 == 0) {
                     sp34 = 1;
@@ -260,8 +238,8 @@ void func_8003E854_usa(void *arg) {
                         tkClockStart();
                     }
                 }
-                if ((sp2C != NULL) & (sp24 != var_s6)) {
-                    *sp2C = *sp2C & ~2;
+                if ((sp2C != NULL) && (sp24 != var_s6)) {
+                    *sp2C &= ~2;
                 }
                 sp24 = var_s6;
                 var_s6 = 0;
@@ -271,7 +249,6 @@ void func_8003E854_usa(void *arg) {
 
             if (sp34 || (B_80192F48_usa > 0) || sp44) {
                 while (B_80192F20_usa != 0) {
-                    temp_v1_5 = B_80192F00_usa[B_80192F28_usa].disptime;
                     if (B_80192F00_usa[B_80192F28_usa].disptime > temp_s0) {
                         break;
                     }
@@ -281,10 +258,10 @@ void func_8003E854_usa(void *arg) {
                     var_s5 = B_80192F00_usa[B_80192F28_usa].statP;
                     var_s6 = B_80192F00_usa[B_80192F28_usa].vaddr;
                     *var_s5 |= 2;
-                    osViSwapBuffer((void *) var_s6);
-                    temp_v0_3 = B_80192F28_usa + 1;
-                    B_80192F28_usa = temp_v0_3;
-                    if (temp_v0_3 == 2) {
+                    osViSwapBuffer(var_s6);
+
+                    B_80192F28_usa++;
+                    if (B_80192F28_usa == 2) {
                         B_80192F28_usa = 0;
                     }
 
@@ -295,17 +272,17 @@ void func_8003E854_usa(void *arg) {
                 osSetThreadPri(NULL, 0xE);
 
                 while ((B_80192F48_usa > 0) && (B_80192F58_usa == 0)) {
-                    temp_s0_2 = B_80192F30_usa[B_80192F50_usa].buf;
-                    temp_s1_2 = B_80192F30_usa[B_80192F50_usa].len;
+                    void *s0 = B_80192F30_usa[B_80192F50_usa].buf;
+                    u32 s1 = B_80192F30_usa[B_80192F50_usa].len;
 
                     if (osAiGetStatus() & 0x80000000) {
                         break;
                     }
-                    if (osAiSetNextBuffer(temp_s0_2, temp_s1_2) == -1) {
+                    if (osAiSetNextBuffer(s0, s1) == -1) {
                         break;
                     }
 
-                    B_80192F58_usa = temp_s1_2 >> 2;
+                    B_80192F58_usa = s1 >> 2;
                     if (var_s7 == false) {
                         var_s7 = true;
                         tkClockStart();
@@ -319,25 +296,26 @@ void func_8003E854_usa(void *arg) {
                 }
                 osSetThreadPri(NULL, 0xC);
             }
+
             if ((sp44 == 0) && (B_80192F48_usa < 3) && (B_80192F54_usa < 3)) {
                 temp_s0_3 = (var_s4 * 0x5DA8) + 0x10;
-                temp_v0_7 = sp4C(B_8018EA50_usa + temp_s0_3 + (var_fp * 4));
+                temp_v0_7 = sp4C((void *)(B_8018EA50_usa + temp_s0_3 + (var_fp * 4)));
                 if (temp_v0_7 > 0) {
                     B_80192F54_usa += 1;
 
                     var_a1 = &B_80192F60_usa;
                     var_a0 = (var_fp << 1);
                     var_a0--;
-                    var_a2 = B_8018EA50_usa + temp_s0_3;
+                    var_a2 = (void *)(B_8018EA50_usa + temp_s0_3);
                     while (var_a0 != -1) {
                         *var_a2++ = *var_a1++;
                         var_a0 -= 1;
                     }
-                    temp_a3 = temp_v0_7 + var_fp;
-                    var_fp = temp_a3 & 1;
-                    temp_s2_2 = (temp_a3 - var_fp) << 2;
+                    temp_v0_7 += var_fp;
+                    var_fp = temp_v0_7 & 1;
+                    temp_s2_2 = (temp_v0_7 - var_fp) << 2;
                     temp_s1_3 = (var_s4 * 0x5DA8) + 0x10;
-                    temp_s0_4 = B_8018EA50_usa + temp_s1_3;
+                    temp_s0_4 = (void *)(B_8018EA50_usa + temp_s1_3);
                     osWritebackDCache(temp_s0_4, temp_s2_2);
                     B_80192F30_usa[B_80192F4C_usa].buf = temp_s0_4;
                     B_80192F30_usa[B_80192F4C_usa].len = temp_s2_2;
@@ -350,7 +328,7 @@ void func_8003E854_usa(void *arg) {
                     var_a2 = &B_80192F60_usa;
                     var_a0 = (var_fp << 1);
                     var_a0--;
-                    var_a1 = B_8018EA50_usa + temp_s1_3 + temp_s2_2;
+                    var_a1 = (void *)(B_8018EA50_usa + temp_s1_3 + temp_s2_2);
                     while (var_a0 != -1) {
                         *var_a2++ = *var_a1++;
                         var_a0 -= 1;
@@ -365,7 +343,7 @@ void func_8003E854_usa(void *arg) {
                 }
             }
 
-            if (osRecvMesg(&B_80192E80_usa, &cmd, 0) == 0) {
+            if (osRecvMesg(&B_80192E80_usa, (OSMesg *)&cmd, 0) == 0) {
                 sp3C = 1;
             }
         }
