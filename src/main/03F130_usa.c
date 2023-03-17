@@ -140,7 +140,14 @@ extern s32 B_80192F4C_usa;
 extern s32 B_80192F50_usa;
 extern u16 B_80192F60_usa;
 
-#ifdef NON_MATCHING
+typedef struct struct_8018EA50_usa {
+    /* 0x00000 */ UNK_TYPE1 unk_00000[0x18E50];
+    /* 0x18E50 */ u8 unk_18E50[UNK_SIZE];
+} struct_8018EA50_usa; // size = ?
+
+extern struct_8018EA50_usa *B_8018EA50_usa;
+
+#if 0
 // timekeeperProc
 void func_8003E854_usa(void *arg UNUSED) {
     TKCMD *cmd;
@@ -485,20 +492,19 @@ u32 func_8003F608_usa(void *arg0) {
     HVQM2Audio *temp_a0;
     u32 temp_s0;
     u32 var_v1;
-    void *temp_s3;
 
     if (B_8018EAFC_usa == 0) {
         return 0U;
     }
 
     temp_s2 = OS_DCACHE_ROUNDUP_ADDR(sp20);
-    temp_s3 = (void *)(B_8018EA50_usa + 0x18E50);
 
-    B_8018EAF8_usa = func_8003F2F0_usa(temp_s2, temp_s3, 0, B_8018EAF8_usa, &B_8018EA60_usa, &B_8018EA78_usa);
+    B_8018EAF8_usa =
+        func_8003F2F0_usa(temp_s2, B_8018EA50_usa->unk_18E50, 0, B_8018EAF8_usa, &B_8018EA60_usa, &B_8018EA78_usa);
 
     B_8018EAFC_usa -= 1;
-    temp_a0 = (void *)(B_8018EA50_usa + 0x18E50);
 
+    temp_a0 = (void *)B_8018EA50_usa->unk_18E50;
     temp_s0 = *(u32 *)(&temp_a0->samples);
     adpcmDecode(&temp_a0[1], *(u16 *)(&temp_s2->format), temp_s0, arg0, 1U, &B_8018EB10_usa);
     var_v1 = 0;
