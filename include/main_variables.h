@@ -1113,12 +1113,12 @@ extern OSMesgQueue B_8018EA78_usa;
 // extern UNK_TYPE B_8018EAC8_usa;
 // extern UNK_TYPE B_8018EAD0_usa;
 // extern UNK_TYPE B_8018EAE8_usa;
-extern s32 B_8018EAEC_usa;
-extern s32 B_8018EAF0_usa;
+extern u32 B_8018EAEC_usa;
+extern u32 B_8018EAF0_usa;
 extern romoffset_t B_8018EAF4_usa;
 extern romoffset_t B_8018EAF8_usa;
 extern s32 B_8018EAFC_usa;
-extern s32 B_8018EB00_usa;
+extern u32 B_8018EB00_usa;
 extern u64 B_8018EB08_usa;
 
 extern OSThread B_8018EB20_usa;
@@ -1761,7 +1761,7 @@ extern OSMesgQueue *B_801AAB9C_usa;
 // extern UNK_TYPE B_801AABA0_usa;
 
 // extern UNK_TYPE B_801AB61C_usa;
-extern s16 *B_801AB620_usa[];
+extern u16 *B_801AB620_usa[];
 // extern UNK_TYPE B_801AB628_usa;
 
 // extern UNK_TYPE B_801AB7E0_usa;
@@ -1830,7 +1830,7 @@ extern STACK(gBootStack, BOOT_STACK_SIZE);
 // extern UNK_TYPE B_801C6CA0_usa;
 // extern UNK_TYPE B_801C6CA4_usa;
 // extern UNK_TYPE B_801C6CA5_usa;
-extern s32 B_801C6E48_usa[];
+extern u32 B_801C6E48_usa[];
 
 // extern UNK_TYPE B_801C6E54_usa;
 // extern UNK_TYPE B_801C6E58_usa;
@@ -1968,7 +1968,6 @@ extern s32 B_801F9CB8_usa;
 // extern UNK_TYPE B_8021AA80_usa;
 // extern UNK_TYPE B_8021AAA0_usa;
 // extern UNK_TYPE B_8021AAE0_usa;
-// extern UNK_TYPE B_8021AB50_usa;
 // extern UNK_TYPE B_8021AD28_usa;
 // extern UNK_TYPE B_8021AD55_usa;
 

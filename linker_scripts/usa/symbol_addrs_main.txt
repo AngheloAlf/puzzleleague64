@@ -1075,8 +1075,6 @@ func_800AF724_usa = 0x800AF724; // type:func
 
 // .data
 
-
-D_800AF9C0_usa = 0x800AF9C0; //
 D_800AFA90_usa = 0x800AFA90; //
 
 D_800B0E80_usa = 0x800B0E80; //
@@ -3169,8 +3167,8 @@ B_80219E30_usa = 0x80219E30; //
 B_8021AA30_usa = 0x8021AA30; //
 B_8021AA80_usa = 0x8021AA80; //
 B_8021AAA0_usa = 0x8021AAA0; //
-B_8021AAE0_usa = 0x8021AAE0; //
-B_8021AB50_usa = 0x8021AB50; //
+B_8021AAE0_usa = 0x8021AAE0; // size:0x220 // maybe bigger
+
 B_8021AD28_usa = 0x8021AD28; //
 B_8021AD55_usa = 0x8021AD55; //
 
