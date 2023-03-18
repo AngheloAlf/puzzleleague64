@@ -16,6 +16,7 @@ options:
     - linker_scripts/eur/symbol_addrs_libultra.txt
     - linker_scripts/eur/symbol_addrs_libkmc.txt
     - linker_scripts/eur/symbol_addrs_libhvqm.txt
+    - linker_scripts/eur/symbol_addrs_buffers.txt
     - linker_scripts/eur/ignored_addresses.txt
   reloc_addrs_path:
     - relocs/reloc_addrs.eur.txt
@@ -378,8 +379,36 @@ segments:
 
       - { start: 0xCA750, type: bss, vram: 0x800C9B50, name: main/800C9B50 }
 
+  - name: buffer1
+    type: code
+    start: 0x0CA750
+    vram: 0x80200010
+    follows_vram: main
+    bss_size: 0x1B04F0
+    subsegments:
+      - [0x0CA750, c, buffers/buffer1]
+      - { start: 0x0CA750, type: .bss, vram: 0x80200010, name: buffers/buffer1 }
+
+  - name: buffer2
+    type: code
+    start: 0x0CA750
+    bss_size: 0x4B00
+    vram: 0x803B0500
+    subsegments:
+      - [0x0CA750, c, buffers/buffer2]
+      - { start: 0x0CA750, type: .bss, vram: 0x803B0500, name: buffers/buffer2 }
+
+  - name: framebuffer
+    type: code
+    start: 0x0CA750
+    bss_size: 0x4B000 # SCREEN_WIDTH * SCREEN_HEIGHT * 2 * sizeof(u16)
+    vram: 0x803B5000 # 0x80400000 - bss_size
+    subsegments:
+      - [0x0CA750, c, buffers/framebuffer]
+      - { start: 0x0CA750, type: .bss, vram: 0x803B5000, name: buffers/framebuffer }
+
   - type: bin
-    start: 0xCA750
+    start: 0x0CA750
     follows_vram: main
 
   - [0x1FCFC00]

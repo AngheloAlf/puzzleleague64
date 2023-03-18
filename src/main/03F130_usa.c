@@ -5,6 +5,7 @@
 #include "main_functions.h"
 #include "main_variables.h"
 #include "libhvqm.h"
+#include "buffers.h"
 
 #if VERSION_USA
 INLINE void romcpy(void *dest, romoffset_t src, size_t len, s32 pri, OSIoMesg *mb, OSMesgQueue *mq) {
@@ -532,11 +533,6 @@ u32 func_8003F608_usa(void *arg0) {
 
 #if VERSION_USA
 #ifdef NON_MATCHING
-s32 func_8001CAD0_usa(s32, u32 *);                     /* extern */
-UNK_RET func_8001F6B8_usa(s32 *, const char *, s32 *); /* extern */
-UNK_RET func_80021414_usa(s32, s32, s32, u16 *);       /* extern */
-UNK_RET func_8002CFC8_usa();                           /* extern */
-UNK_RET func_8008B21C_usa();                           /* extern */
 extern void *B_8018EA90_usa;
 extern OSIoMesg B_8018EA98_usa;
 extern OSMesgQueue B_8018EAB0_usa;
@@ -548,9 +544,6 @@ extern HVQM2Arg B_801AABA0_usa;
 extern OSContPad B_801C7228_usa;
 extern u64 D_800AF9C0_usa;
 extern u64 D_800AFA90_usa;
-// maybe [SCREEN_HEIGHT][SCREEN_WIDTH]
-extern s16 D_803B5000[SCREEN_WIDTH][SCREEN_HEIGHT];
-extern s16 D_803DA800;
 
 typedef struct struct_8021AAE0_usa {
     /* 0x00 */ OSMesgQueue unk_00;
@@ -561,22 +554,22 @@ typedef struct struct_8021AAE0_usa {
 extern struct_8021AAE0_usa B_8021AAE0_usa;
 
 // stack problems
-s32 func_8003F810_usa(s32 arg0, u32 arg1, s32 arg2) {
+s32 func_8003F810_usa(const char *arg0, u32 arg1, void *arg2) {
     u8 pad[0x20] UNUSED;
 
     s32 sp40;
     u32 sp44;
 
     s32 var_v0;
-    u32 temp_s5;
     s32 var_s7;
+    u32 temp_s5;
 
     var_s7 = -1;
     temp_s5 = arg1 >> 0x10;
     arg1 = arg1 & 0xFFFF;
     if (arg1 & 0x1000) {
         func_8001F6B8_usa(&sp40, "iSkip16.BIF", &arg2);
-        arg2 = (arg2 + 0xF) & ~0xF;
+        arg2 = ALIGN_PTR(arg2);
     }
 
     var_v0 = func_8001CAD0_usa(arg0, &sp44);
@@ -634,11 +627,11 @@ s32 func_8003F810_usa(s32 arg0, u32 arg1, s32 arg2) {
 
         func_8008B21C_usa();
 
-        B_801AB620_usa[0] = (void *)&D_803B5000;
-        B_801AB620_usa[1] = (void *)&D_803DA800;
+        B_801AB620_usa[0] = (void *)&gFramebuffers[0];
+        B_801AB620_usa[1] = (void *)&gFramebuffers[1];
 
         B_8018EA50_usa = (void *)ALIGN8((uintptr_t)arg2);
-        arg2 += 0x46290;
+        arg2 = (void *)((uintptr_t)arg2 + 0x46290);
         if (((uintptr_t)&B_8018EA50_usa->unk_00010) & 0xF) {
             osSyncPrintf("ERROR: 'pcmbuf' not 16-byte aligned!\n");
         }
@@ -822,9 +815,9 @@ s32 func_8003F810_usa(s32 arg0, u32 arg1, s32 arg2) {
 
         if (sp8C == 0) {
             var_a0_6 = osViGetNextFramebuffer();
-            v1 = (void *)&D_803B5000;
-            if ((void *)var_a0_6 == (void *)&D_803B5000) {
-                v1 = (void *)&D_803DA800;
+            v1 = (void *)&gFramebuffers[0];
+            if ((void *)var_a0_6 == (void *)&gFramebuffers[0]) {
+                v1 = (void *)&gFramebuffers[1];
             }
 
             a1 = 0x12BF;
@@ -854,7 +847,7 @@ s32 func_8003F810_usa(s32 arg0, u32 arg1, s32 arg2) {
         func_80003E90_usa();
 
         while (sp8C != 0) {
-            v1 = (void *)&D_803B5000;
+            v1 = (void *)&gFramebuffers[0];
             a1 = 0x95FF;
 
             while (a1 != -1) {
@@ -862,7 +855,7 @@ s32 func_8003F810_usa(s32 arg0, u32 arg1, s32 arg2) {
                 a1 -= 1;
             }
 
-            v1 = (void *)&D_803DA800;
+            v1 = (void *)&gFramebuffers[1];
             a1 = 0x95FF;
 
             while (a1 != -1) {

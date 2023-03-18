@@ -5,6 +5,7 @@
 #include "main_functions.h"
 #include "main_variables.h"
 #include "PR/sched.h"
+#include "buffers.h"
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/boot_main", func_80000450_usa);
@@ -53,14 +54,10 @@ void Idle_ThreadEntry(void *arg) {
 extern OSScClient B_801AB810_usa;
 extern OSSched B_8021AAA0_usa;
 
-extern s32 D_803B5000[];
-extern s32 D_803DA800[];
-
 extern STACK(B_8021DF50_usa, OS_SC_STACKSIZE);
 
 void func_80000630_usa(void) {
     s32 *var_v1;
-    s32 *var_v1_2;
     s32 var_s0;
     s32 mode;
     s32 var_v0;
@@ -77,19 +74,20 @@ void func_80000630_usa(void) {
             if (var_s0 != 0) {
                 var_s0 &= -(~osAfterPreNMI() == 0);
             }
+
             while (osViGetCurrentLine() != 0) {}
             while (osViGetCurrentLine() == 0) {}
 
-            var_v1 = D_803B5000;
+            var_v1 = (void *)gFramebuffers[0];
             for (var_v0 = 0x95FF; var_v0 != -1; var_v0--) {
                 *var_v1 = 0;
                 var_v1++;
             }
 
-            var_v1_2 = D_803DA800;
+            var_v1 = (void *)gFramebuffers[1];
             for (var_v0 = 0x95FF; var_v0 != -1; var_v0--) {
-                *var_v1_2 = 0;
-                var_v1_2++;
+                *var_v1 = 0;
+                var_v1++;
             }
         }
     }
@@ -212,7 +210,7 @@ s32 func_800009E4_usa(s32 arg0) {
                 do {
                 } while (osViGetCurrentLine() == 0);
 
-                var_v1 = D_803B5000;
+                var_v1 = (void *)gFramebuffers[0];
                 var_v0 = 0x95FF;
                 do {
                     *var_v1 = 0;
@@ -220,7 +218,7 @@ s32 func_800009E4_usa(s32 arg0) {
                     var_v1 += 4;
                 } while (var_v0 != -1);
 
-                var_v1 = D_803DA800;
+                var_v1 = (void *)gFramebuffers[1];
                 var_v0 = 0x95FF;
                 do {
                     *var_v1 = 0;
@@ -338,13 +336,13 @@ s32 func_800009E4_usa(s32 arg0) {
                     while (osViGetCurrentLine() != 0) {}
                     while (osViGetCurrentLine() == 0) {}
 
-                    var_v1 = D_803B5000;
+                    var_v1 = (void *)gFramebuffers[0];
                     for (var_v0 = 0x95FF; var_v0 != -1; var_v0--) {
                         *var_v1 = 0;
                         var_v1++;
                     }
 
-                    var_v1 = D_803DA800;
+                    var_v1 = (void *)gFramebuffers[1];
                     for (var_v0 = 0x95FF; var_v0 != -1; var_v0--) {
                         *var_v1 = 0;
                         var_v1++;

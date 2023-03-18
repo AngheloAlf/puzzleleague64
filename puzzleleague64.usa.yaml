@@ -16,6 +16,7 @@ options:
     - linker_scripts/usa/symbol_addrs_libultra.txt
     - linker_scripts/usa/symbol_addrs_libkmc.txt
     - linker_scripts/usa/symbol_addrs_libhvqm.txt
+    - linker_scripts/usa/symbol_addrs_buffers.txt
     - linker_scripts/usa/ignored_addresses.txt
   reloc_addrs_path:
     - relocs/reloc_addrs.usa.txt
@@ -378,10 +379,38 @@ segments:
       - [0x0CA3E0, rodata, main/0CA3E0]
       - [0x0CA478, rodata, main/build]
 
-      - { start: 0xCA4A0, type: bss, vram: 0x800C98A0, name: main/800C98A0 }
+      - { start: 0x0CA4A0, type: bss, vram: 0x800C98A0, name: main/800C98A0 }
+
+  - name: buffer1
+    type: code
+    start: 0x0CA4A0
+    vram: 0x80220F50
+    follows_vram: main
+    bss_size: 0x18F5B0
+    subsegments:
+      - [0x0CA4A0, c, buffers/buffer1]
+      - { start: 0x0CA4A0, type: .bss, vram: 0x80220F50, name: buffers/buffer1 }
+
+  - name: buffer2
+    type: code
+    start: 0x0CA4A0
+    bss_size: 0x4B00
+    vram: 0x803B0500
+    subsegments:
+      - [0x0CA4A0, c, buffers/buffer2]
+      - { start: 0x0CA4A0, type: .bss, vram: 0x803B0500, name: buffers/buffer2 }
+
+  - name: framebuffer
+    type: code
+    start: 0x0CA4A0
+    bss_size: 0x4B000 # SCREEN_WIDTH * SCREEN_HEIGHT * 2 * sizeof(u16)
+    vram: 0x803B5000 # 0x80400000 - bss_size
+    subsegments:
+      - [0x0CA4A0, c, buffers/framebuffer]
+      - { start: 0x0CA4A0, type: .bss, vram: 0x803B5000, name: buffers/framebuffer }
 
   - type: bin
-    start: 0xCA4A0
+    start: 0x0CA4A0
     follows_vram: main
 
   - [0x1FCF900]

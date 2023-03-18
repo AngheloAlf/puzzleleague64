@@ -1,0 +1,5 @@
+gBufferHeap = 0x801F3CE0; // size:0x1BC820
+
+D_803B0500 = 0x803B0500; // size:0x4B00
+
+gFramebuffers = 0x803B5000; // size:0x4B000
