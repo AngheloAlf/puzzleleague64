@@ -4,6 +4,7 @@
 #include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
+#include "hvqm2util.h"
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/006800", func_80005C00_usa);
@@ -72,7 +73,7 @@ void func_800284E4_usa(s32, UNK_TYPE);                        /* extern */
 void func_8002CC18_usa();                              /* extern */
 void func_8002CFE4_usa(UNK_TYPE);                             /* extern */
 s32 func_8002DA70_usa(void);
-s32 func_8003F810_usa(UNK_TYPE *, UNK_TYPE, s32);                 /* extern */
+s32 HVQM2Util_Play(UNK_TYPE *, UNK_TYPE, s32);                 /* extern */
 void func_80089BE0_usa(UNK_TYPE arg0, UNK_TYPE arg1);
 extern s32 B_8018A7F0_usa;
 extern struct_8018A7F4_usa *B_8018A7F4_usa;
@@ -212,7 +213,7 @@ block_12:
             break;
         case 0x4:                                   /* switch 1 */
             if ((func_80024C2C_usa() == 0) && (func_80024C14_usa() == 0) && (func_80024BF4_usa(&sp1C) != 0)) {
-                func_8003F810_usa(&RO_STR_800C3134_usa, 0, sp1C);
+                HVQM2Util_Play(&RO_STR_800C3134_usa, 0, sp1C);
                 B_8018A7F4_usa->unk_14 = 5;
             }
             break;
@@ -417,7 +418,7 @@ block_36:
 
                 if ((var_v0_3 != 0) && (func_80024BF4_usa(&sp1C) != 0)) {
                     func_80005184_usa(&D_800B4160_usa, 2);
-                    if ((func_80024BF4_usa(&sp1C) != 0) && (func_8003F810_usa(&RO_STR_800C3154_usa, 0x1000, sp1C) != 0)) {
+                    if ((func_80024BF4_usa(&sp1C) != 0) && (HVQM2Util_Play(&RO_STR_800C3154_usa, 0x1000, sp1C) != 0)) {
                         func_80005184_usa(&D_800B4160_usa, 2);
                     }
                     D_800BE348_usa = 0x258;

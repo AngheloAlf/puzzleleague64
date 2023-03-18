@@ -6,9 +6,12 @@
 #include "main_variables.h"
 #include "libhvqm.h"
 #include "buffers.h"
+#include "cfb_keep.h"
+#include "timekeeper.h"
+#include "hvqm2util.h"
 
 #if VERSION_USA
-INLINE void romcpy(void *dest, romoffset_t src, size_t len, s32 pri, OSIoMesg *mb, OSMesgQueue *mq) {
+INLINE void RomCopy(void *dest, romoffset_t src, size_t len, s32 pri, OSIoMesg *mb, OSMesgQueue *mq) {
     osInvalDCache(dest, len);
 
     while (osPiStartDma(mb, pri, 0, src, dest, len, mq) == -1) {}
@@ -19,58 +22,60 @@ INLINE void romcpy(void *dest, romoffset_t src, size_t len, s32 pri, OSIoMesg *m
 
 #if VERSION_USA
 // init_cfb
-INLINE void func_8003E5DC_usa(void) {
-    s32 var_a2;
+INLINE void Cfb_Init(void) {
+    s32 i;
 
-    for (var_a2 = 0; var_a2 < 2; var_a2++) {
-        s32 var_a0;
+    for (i = 0; i < CFB_NUM; i++) {
+        s32 j;
 
-        for (var_a0 = 0; var_a0 < SCREEN_WIDTH * SCREEN_HEIGHT; var_a0++) {
-            B_801AB620_usa[var_a2][var_a0] = 0;
+        for (j = 0; j < SCREEN_WIDTH * SCREEN_HEIGHT; j++) {
+            B_801AB620_usa[i][j] = 0;
         }
 
-        B_801C6E48_usa[var_a2] = 0;
+        gCfbStatus[i] = CFB_STATUS_FREE;
     }
 }
 #endif
 
 #if VERSION_USA
 // keep_cfb
-INLINE void func_8003E638_usa(s32 arg0) {
-    B_801C6E48_usa[arg0] |= 1;
+INLINE void Cfb_Keep(s32 index) {
+    gCfbStatus[index] |= CFB_STATUS_PRECIOUS;
 }
 #endif
 
 #if VERSION_USA
 // release_cfb
-INLINE void func_8003E658_usa(s32 arg0) {
-    if (arg0 >= 0) {
-        B_801C6E48_usa[arg0] &= ~1;
+INLINE void Cfb_Release(s32 index) {
+    if (index >= 0) {
+        gCfbStatus[index] &= ~CFB_STATUS_PRECIOUS;
     }
 }
 #endif
 
 #if VERSION_USA
-INLINE void func_8003E684_usa(void) {
-    s32 var_a0;
+// release_all_cfb
+INLINE void Cfb_ReleaseAll(void) {
+    s32 i;
 
-    for (var_a0 = 0; var_a0 < 2; var_a0++) {
-        B_801C6E48_usa[var_a0] &= ~1;
+    for (i = 0; i < CFB_NUM; i++) {
+        gCfbStatus[i] &= ~CFB_STATUS_PRECIOUS;
     }
 }
 #endif
 
 #if VERSION_USA
 // get_cfb
-INLINE s32 func_8003E6B8_usa(void) {
+INLINE s32 Cfb_GetCurrentIndex(void) {
     while (true) {
-        s32 var_a0;
+        s32 i;
 
-        for (var_a0 = 0; var_a0 < 2; var_a0++) {
-            if (B_801C6E48_usa[var_a0] == 0) {
-                return var_a0;
+        for (i = 0; i < CFB_NUM; i++) {
+            if (gCfbStatus[i] == CFB_STATUS_FREE) {
+                return i;
             }
         }
+
         osYieldThread();
     }
 }
@@ -78,117 +83,57 @@ INLINE s32 func_8003E6B8_usa(void) {
 
 #if VERSION_USA
 // tkGetTime
-INLINE u64 func_8003E714_usa(void) {
-    u64 temp_ret;
+INLINE u64 TimeKeeper_GetTime(void) {
+    u64 ret;
 
-    if (!B_80192F64_usa) {
+    if (!gTimerKeeperClockActive) {
         return 0;
     }
 
-    temp_ret = OS_CYCLES_TO_USEC(osGetTime() - B_80192F78_usa);
+    ret = OS_CYCLES_TO_USEC(osGetTime() - gTimerKeeperLastTime);
 
-    if (B_80192F68_usa > 0) {
-        temp_ret += B_80192F70_usa * 1000000LL / B_80192F68_usa;
+    if (gTimerKeeperSamplesPerSecond > 0) {
+        ret += gTimerKeeperSamplesPlayed * 1000000LL / gTimerKeeperSamplesPerSecond;
     }
 
-    return temp_ret;
+    return ret;
 }
 #endif
 
 #if VERSION_USA
 
 STATIC_INLINE void tkClockDisable(void) {
-    B_80192F64_usa = false;
+    gTimerKeeperClockActive = false;
 }
 
 STATIC_INLINE void tkClockStart(void) {
-    B_80192F70_usa = 0;
-    B_80192F78_usa = osGetTime();
-    B_80192F64_usa = true;
+    gTimerKeeperSamplesPlayed = 0;
+    gTimerKeeperLastTime = osGetTime();
+    gTimerKeeperClockActive = true;
 }
 
-typedef u32 (*tkAudioProc)(void *pcmbuf);
-typedef tkAudioProc (*tkRewindProc)(void);
-
-tkAudioProc func_80040B1C_usa(void);
-
-typedef struct {
-    tkRewindProc rewind; /* Pointer to stream rewind function */
-    u32 samples_per_sec; /* Audio sampling rate */
-} TKCMD;
-
-typedef struct {
-    u64 disptime; /* Display time */
-    void *vaddr;  /* Frame buffer address */
-    u32 *statP;   /* Pointer to frame buffer state flag */
-} VideoRing;
-
-extern VideoRing B_80192F00_usa[];
-extern s32 B_80192F20_usa;
-extern s32 B_80192F24_usa;
-
-typedef struct AudioRing {
-    void *buf; /* PCM data buffer */
-    u32 len;   /* PCM data length */
-} AudioRing;
-
-extern OSThread B_80190CD0_usa;
-extern OSMesgQueue B_80192EC0_usa;
-extern void *B_80192ED8_usa;
-extern void *B_80192EF8_usa;
-extern s32 B_80192F28_usa;
-extern AudioRing B_80192F30_usa[];
-extern s32 B_80192F48_usa;
-extern s32 B_80192F4C_usa;
-extern s32 B_80192F50_usa;
-extern u16 B_80192F60_usa;
-
-typedef struct struct_8018EA50_usa_unk_00010 {
-    /* 0x0000 */ s16 unk_0000[UNK_SIZE];
-    /* 0x0002 */ UNK_TYPE1 unk_0002[0x5DA6];
-} struct_8018EA50_usa_unk_00010; // size = 0x5DA8
-
-typedef struct struct_8018EA50_usa {
-    ///* 0x00000 */ UNK_TYPE1 unk_00000[0x18E50];
-    /* 0x00000 */ UNK_TYPE1 unk_00000[0x10];
-    /* 0x00010 */ struct_8018EA50_usa_unk_00010 unk_00010[UNK_SIZE]; // pcmbuf
-    /* 0x05DB8 */ UNK_TYPE1 unk_05DB8[0xBB58];
-    /* 0x11910 */ UNK_TYPE1 unk_11910[UNK_SIZE]; // hvqbuf
-    /* 0x11911 */ UNK_TYPE1 unk_11911[0x753F];   // hvqbuf
-    /* 0x18E50 */ u8 unk_18E50[UNK_SIZE];        // adpcmbuf
-    /* 0x18E51 */ UNK_TYPE1 unk_18E51[0xBBF];
-    /* 0x19A10 */ u16 unk_19A10[UNK_SIZE]; // hvqwork
-    /* 0x19A12 */ UNK_TYPE1 unk_19A11[0x4B0E];
-    /* 0x1E520 */ HVQM2Info unk_1E520[UNK_SIZE]; // hvq_spfifo
-    /* 0x1E528 */ UNK_TYPE1 unk_1E528[0x27108];
-    /* 0x45630 */ STACK(unk_45630, 0xC10); // hvq_yieldbuf
-    /* 0x46240 */ UNK_TYPE1 unk_46240[UNK_SIZE];
-    /* 0x46241 */ UNK_TYPE1 unk_46241[0x4F];
-} struct_8018EA50_usa; // size = 0x46290?
-
-extern struct_8018EA50_usa *B_8018EA50_usa;
-
 // timekeeperProc
-void func_8003E854_usa(void *arg UNUSED) {
-    TKCMD *cmd;
+void TimeKeeper_ThreadEntry(void *arg UNUSED) {
+    TimeKeeperCommand *cmd;
     void *sp24 = NULL;
     u32 *sp2C = NULL;
 
-    osCreateMesgQueue(&B_80192EC0_usa, &B_80192ED8_usa, 2);
+    osCreateMesgQueue(&B_80192EC0_usa, B_80192ED8_usa, ARRAY_COUNT(B_80192ED8_usa));
     osViSetEvent(&B_80192EC0_usa, NULL, 1U);
 
-    osCreateMesgQueue(&B_80192EE0_usa, &B_80192EF8_usa, 2);
-    osSetEventMesg(6U, &B_80192EE0_usa, (void *)1);
+    osCreateMesgQueue(&B_80192EE0_usa, B_80192EF8_usa, ARRAY_COUNT(B_80192EF8_usa));
+    osSetEventMesg(OS_EVENT_AI, &B_80192EE0_usa, (void *)1);
 
-    osCreateThread(&B_80190CD0_usa, 4, func_80040A60_usa, NULL, STACK_TOP(B_80190E80_usa), 0xD);
-    osStartThread(&B_80190CD0_usa);
+    osCreateThread(&gTimeKeeperCounterThread, 4, TimeKeeper_CounterThreadEntry, NULL,
+                   STACK_TOP(gTimeKeeperCounterStack), 0xD);
+    osStartThread(&gTimeKeeperCounterThread);
 
-    osRecvMesg(&B_80192E80_usa, (OSMesg *)&cmd, 1);
+    osRecvMesg(&B_80192E80_usa, (OSMesg *)&cmd, OS_MESG_BLOCK);
 
     while (true) {
         s32 sp34;
         s32 sp3C;
-        s32 sp44;
+        bool sp44;
         tkAudioProc sp4C;
         OSTime sp50;
         s32 var_s4;
@@ -198,16 +143,16 @@ void func_8003E854_usa(void *arg UNUSED) {
         s32 var_fp;
 
         while (cmd == NULL) {
-            osSendMesg(&B_80192EA0_usa, NULL, 1);
-            osRecvMesg(&B_80192E80_usa, (OSMesg *)&cmd, 1);
+            osSendMesg(&B_80192EA0_usa, NULL, OS_MESG_BLOCK);
+            osRecvMesg(&B_80192E80_usa, (OSMesg *)&cmd, OS_MESG_BLOCK);
         }
 
         tkClockDisable();
         sp4C = cmd->rewind();
 
-        B_80192F68_usa = cmd->samples_per_sec;
-        if (B_80192F68_usa != 0) {
-            osAiSetFrequency(B_80192F68_usa);
+        gTimerKeeperSamplesPerSecond = cmd->samples_per_sec;
+        if (gTimerKeeperSamplesPerSecond != 0) {
+            osAiSetFrequency(gTimerKeeperSamplesPerSecond);
         }
 
         var_s7 = false;
@@ -217,22 +162,22 @@ void func_8003E854_usa(void *arg UNUSED) {
         var_fp = 0;
         sp34 = 0;
         sp3C = 0;
-        sp44 = 0;
+        sp44 = false;
         B_80192F54_usa = 0;
         B_80192F5C_usa = 0;
         B_80192F58_usa = 0;
         B_80192F4C_usa = 0;
-        B_80192F50_usa = 0;
-        B_80192F48_usa = 0;
-        B_80192F24_usa = 0;
-        B_80192F28_usa = 0;
-        B_80192F20_usa = 0;
+        gTimeKeeperAudioRingRead = 0;
+        gTimeKeeperAudioRingCount = 0;
+        gTimeKeeperVideoRingIndex = 0;
+        gTimeKeeperVideoRingReadIndex = 0;
+        gTimeKeeperVideoRingCount = 0;
 
-        osSendMesg(&B_80192EA0_usa, NULL, 1);
+        osSendMesg(&B_80192EA0_usa, NULL, OS_MESG_BLOCK);
 
         sp50 = osGetTime();
-        while ((sp3C == 0) || ((B_80192F20_usa > 0) || (var_s6 != 0)) || (sp44 == 0) || (B_80192F48_usa > 0) ||
-               (B_80192F58_usa != 0)) {
+        while ((sp3C == 0) || ((gTimeKeeperVideoRingCount > 0) || (var_s6 != 0)) || !sp44 ||
+               (gTimeKeeperAudioRingCount > 0) || (B_80192F58_usa != 0)) {
             u64 temp_s0;
             OSTime temp_s2;
 
@@ -240,7 +185,7 @@ void func_8003E854_usa(void *arg UNUSED) {
 
             temp_s2 = sp50;
             sp50 = osGetTime();
-            temp_s0 = func_8003E714_usa() + OS_CYCLES_TO_USEC(sp50 - temp_s2);
+            temp_s0 = TimeKeeper_GetTime() + OS_CYCLES_TO_USEC(sp50 - temp_s2);
 
             if (var_s6 != 0) {
                 if (sp34 == 0) {
@@ -262,35 +207,37 @@ void func_8003E854_usa(void *arg UNUSED) {
                 var_s5 = NULL;
             }
 
-            if (sp34 || (B_80192F48_usa > 0) || sp44) {
-                while (B_80192F20_usa != 0) {
-                    if (B_80192F00_usa[B_80192F28_usa].disptime > temp_s0) {
+            if (sp34 || (gTimeKeeperAudioRingCount > 0) || sp44) {
+                while (gTimeKeeperVideoRingCount != 0) {
+                    if (gTimeKeeperVideoRingBuffer[gTimeKeeperVideoRingReadIndex].disptime > temp_s0) {
                         break;
                     }
+
                     if (var_s5 != NULL) {
-                        *var_s5 &= ~2;
+                        *var_s5 &= ~CFB_STATUS_SHOWING;
                     }
-                    var_s5 = B_80192F00_usa[B_80192F28_usa].statP;
-                    var_s6 = B_80192F00_usa[B_80192F28_usa].vaddr;
-                    *var_s5 |= 2;
+
+                    var_s5 = gTimeKeeperVideoRingBuffer[gTimeKeeperVideoRingReadIndex].statP;
+                    var_s6 = gTimeKeeperVideoRingBuffer[gTimeKeeperVideoRingReadIndex].vaddr;
+                    *var_s5 |= CFB_STATUS_SHOWING;
                     osViSwapBuffer(var_s6);
 
-                    B_80192F28_usa++;
-                    if (B_80192F28_usa == 2) {
-                        B_80192F28_usa = 0;
+                    gTimeKeeperVideoRingReadIndex++;
+                    if (gTimeKeeperVideoRingReadIndex == TIMEKEEPER_VIDEO_RING_SIZE) {
+                        gTimeKeeperVideoRingReadIndex = 0;
                     }
 
-                    B_80192F20_usa--;
+                    gTimeKeeperVideoRingCount--;
                 }
             }
             if (sp34 != 0) {
                 osSetThreadPri(NULL, 0xE);
 
-                while ((B_80192F48_usa > 0) && (B_80192F58_usa == 0)) {
-                    void *s0 = B_80192F30_usa[B_80192F50_usa].buf;
-                    u32 s1 = B_80192F30_usa[B_80192F50_usa].len;
+                while ((gTimeKeeperAudioRingCount > 0) && (B_80192F58_usa == 0)) {
+                    void *s0 = B_80192F30_usa[gTimeKeeperAudioRingRead].buf;
+                    u32 s1 = B_80192F30_usa[gTimeKeeperAudioRingRead].len;
 
-                    if (osAiGetStatus() & 0x80000000) {
+                    if (osAiGetStatus() & AI_STATUS_FIFO_FULL) {
                         break;
                     }
                     if (osAiSetNextBuffer(s0, s1) == -1) {
@@ -298,21 +245,21 @@ void func_8003E854_usa(void *arg UNUSED) {
                     }
 
                     B_80192F58_usa = s1 >> 2;
-                    if (var_s7 == false) {
+                    if (!var_s7) {
                         var_s7 = true;
                         tkClockStart();
                     }
 
-                    B_80192F50_usa++;
-                    if (B_80192F50_usa == 3) {
-                        B_80192F50_usa = 0;
+                    gTimeKeeperAudioRingRead++;
+                    if (gTimeKeeperAudioRingRead == TIMEKEEPER_AUDIO_RING_SIZE) {
+                        gTimeKeeperAudioRingRead = 0;
                     }
-                    B_80192F48_usa--;
+                    gTimeKeeperAudioRingCount--;
                 }
                 osSetThreadPri(NULL, 0xC);
             }
 
-            if ((sp44 == 0) && (B_80192F48_usa < 3) && (B_80192F54_usa < 3)) {
+            if (!sp44 && (gTimeKeeperAudioRingCount < TIMEKEEPER_AUDIO_RING_SIZE) && (B_80192F54_usa < 3)) {
                 u32 temp_v0_7;
                 void *temp_s0_4;
                 s32 temp_s2_2;
@@ -320,14 +267,14 @@ void func_8003E854_usa(void *arg UNUSED) {
                 u16 *var_a1;
                 s32 var_a0;
 
-                temp_v0_7 = sp4C((void *)(&B_8018EA50_usa->unk_00010[var_s4].unk_0000[var_fp << 1]));
+                temp_v0_7 = sp4C((void *)(&B_8018EA50_usa->pcmbuf[var_s4].unk_0000[var_fp << 1]));
                 if (temp_v0_7 > 0) {
-                    B_80192F54_usa += 1;
+                    B_80192F54_usa++;
 
                     var_a1 = &B_80192F60_usa;
                     var_a0 = (var_fp << 1);
                     var_a0--;
-                    var_a2 = (void *)(B_8018EA50_usa->unk_00010[var_s4].unk_0000);
+                    var_a2 = (void *)(B_8018EA50_usa->pcmbuf[var_s4].unk_0000);
                     while (var_a0 != -1) {
                         *var_a2++ = *var_a1++;
                         var_a0 -= 1;
@@ -337,7 +284,7 @@ void func_8003E854_usa(void *arg UNUSED) {
                     temp_v0_7 -= var_fp;
                     temp_s2_2 = temp_v0_7 << 2;
 
-                    temp_s0_4 = (void *)(B_8018EA50_usa->unk_00010[var_s4].unk_0000);
+                    temp_s0_4 = (void *)(B_8018EA50_usa->pcmbuf[var_s4].unk_0000);
                     osWritebackDCache(temp_s0_4, temp_s2_2);
                     B_80192F30_usa[B_80192F4C_usa].buf = temp_s0_4;
                     B_80192F30_usa[B_80192F4C_usa].len = temp_s2_2;
@@ -345,15 +292,15 @@ void func_8003E854_usa(void *arg UNUSED) {
                     if (B_80192F4C_usa == 3) {
                         B_80192F4C_usa = 0;
                     }
-                    B_80192F48_usa += 1;
+                    gTimeKeeperAudioRingCount += 1;
 
                     var_a2 = &B_80192F60_usa;
                     var_a0 = (var_fp << 1);
                     var_a0--;
-                    var_a1 = (void *)((uintptr_t)B_8018EA50_usa->unk_00010[var_s4].unk_0000 + temp_s2_2);
+                    var_a1 = (void *)((uintptr_t)B_8018EA50_usa->pcmbuf[var_s4].unk_0000 + temp_s2_2);
                     while (var_a0 != -1) {
                         *var_a2++ = *var_a1++;
-                        var_a0 -= 1;
+                        var_a0--;
                     }
 
                     var_s4++;
@@ -361,12 +308,12 @@ void func_8003E854_usa(void *arg UNUSED) {
                         var_s4 = 0;
                     }
                 } else {
-                    sp44 = 1;
+                    sp44 = true;
                 }
             }
 
-            if (osRecvMesg(&B_80192E80_usa, (OSMesg *)&cmd, 0) == 0) {
-                sp3C = 1;
+            if (osRecvMesg(&B_80192E80_usa, (OSMesg *)&cmd, OS_MESG_NOBLOCK) == 0) {
+                sp3C = true;
             }
         }
     }
@@ -375,30 +322,30 @@ void func_8003E854_usa(void *arg UNUSED) {
 
 #if VERSION_USA
 // createTimekeeper
-INLINE void func_8003F0EC_usa(void) {
+INLINE void TimeKeeper_StartThread(void) {
     osCreateMesgQueue(&B_80192E80_usa, B_80192E98_usa, ARRAY_COUNT(B_80192E98_usa));
     osCreateMesgQueue(&B_80192EA0_usa, B_80192EB8_usa, ARRAY_COUNT(B_80192EB8_usa));
-    osCreateThread(&B_8018EB20_usa, 3, func_8003E854_usa, NULL, STACK_TOP(B_8018ECD0_usa), 0xC);
-    osStartThread(&B_8018EB20_usa);
+    osCreateThread(&gTimeKeeperThread, 3, TimeKeeper_ThreadEntry, NULL, STACK_TOP(gTimeKeeperStack), 0xC);
+    osStartThread(&gTimeKeeperThread);
 }
 #endif
 
 #if VERSION_USA
 // tkStart
-INLINE void func_8003F178_usa(tkRewindProc rewind, u32 samples_per_sec) {
-    TKCMD tkcmd;
+INLINE void TimeKeeper_PlayVideo(tkRewindProc rewind, u32 samples_per_sec) {
+    TimeKeeperCommand cmd;
 
-    tkcmd.rewind = rewind;
-    tkcmd.samples_per_sec = samples_per_sec;
+    cmd.rewind = rewind;
+    cmd.samples_per_sec = samples_per_sec;
 
-    osSendMesg(&B_80192E80_usa, (OSMesg *)&tkcmd, OS_MESG_BLOCK);
+    osSendMesg(&B_80192E80_usa, (OSMesg *)&cmd, OS_MESG_BLOCK);
     osRecvMesg(&B_80192EA0_usa, (OSMesg *)NULL, OS_MESG_BLOCK);
 }
 #endif
 
 #if VERSION_USA
 // tkStop
-void func_8003F1C0_usa(void) {
+void TimeKeeper_StopVideo(void) {
     osSendMesg(&B_80192E80_usa, NULL, OS_MESG_BLOCK);
     osRecvMesg(&B_80192EA0_usa, NULL, OS_MESG_BLOCK);
 }
@@ -406,35 +353,35 @@ void func_8003F1C0_usa(void) {
 
 #if VERSION_USA
 // tkPushVideoframe
-INLINE void func_8003F200_usa(void *vaddr, u32 *statP, u64 disptime) {
-    *statP |= 2;
+INLINE void TimeKeeper_AddVideoFrame(void *vaddr, u32 *statP, u64 disptime) {
+    *statP |= CFB_STATUS_SHOWING;
 
-    while (B_80192F20_usa >= 2) {
+    while (gTimeKeeperVideoRingCount >= TIMEKEEPER_VIDEO_RING_SIZE) {
         osYieldThread();
     }
 
-    B_80192F00_usa[B_80192F24_usa].disptime = disptime;
-    B_80192F00_usa[B_80192F24_usa].vaddr = vaddr;
-    B_80192F00_usa[B_80192F24_usa].statP = statP;
+    gTimeKeeperVideoRingBuffer[gTimeKeeperVideoRingIndex].disptime = disptime;
+    gTimeKeeperVideoRingBuffer[gTimeKeeperVideoRingIndex].vaddr = vaddr;
+    gTimeKeeperVideoRingBuffer[gTimeKeeperVideoRingIndex].statP = statP;
 
-    B_80192F24_usa++;
-    if (B_80192F24_usa == 2) {
-        B_80192F24_usa = 0;
+    gTimeKeeperVideoRingIndex++;
+    if (gTimeKeeperVideoRingIndex == TIMEKEEPER_VIDEO_RING_SIZE) {
+        gTimeKeeperVideoRingIndex = 0;
     }
 
-    B_80192F20_usa++;
+    gTimeKeeperVideoRingCount++;
 }
 #endif
 
 #if VERSION_USA
-// get_record?
-INLINE romoffset_t func_8003F2F0_usa(HVQM2Record *header, void *body, u16 type, romoffset_t src, OSIoMesg *mb,
-                                     OSMesgQueue *mq) {
-    s32 bodySize;
-    s32 pri = type == 0 ? 1 : 0;
+// get_record
+INLINE romoffset_t HVQM2Util_GetRecord(HVQM2Record *header, void *body, u16 type, romoffset_t src, OSIoMesg *mb,
+                                       OSMesgQueue *mq) {
+    size_t bodySize;
+    s32 pri = type == HVQM2_AUDIO ? OS_MESG_PRI_HIGH : OS_MESG_PRI_NORMAL;
 
     while (true) {
-        romcpy(header, src, sizeof(HVQM2Record), pri, mb, mq);
+        RomCopy(header, src, sizeof(HVQM2Record), pri, mb, mq);
         src += sizeof(HVQM2Record);
 
         bodySize = header->size;
@@ -445,8 +392,8 @@ INLINE romoffset_t func_8003F2F0_usa(HVQM2Record *header, void *body, u16 type, 
         src += bodySize;
     }
 
-    if (bodySize != 0) {
-        romcpy(body, src, bodySize, pri, mb, mq);
+    if (bodySize > 0) {
+        RomCopy(body, src, bodySize, pri, mb, mq);
         src += bodySize;
     }
 
@@ -456,7 +403,7 @@ INLINE romoffset_t func_8003F2F0_usa(HVQM2Record *header, void *body, u16 type, 
 
 #if VERSION_USA
 // print_hvqm_info
-void func_8003F42C_usa(HVQM2Header *header) {
+void HVQM2Util_PrintInfo(HVQM2Header *header) {
     s32 var_s0;
 
     osSyncPrintf("\n");
@@ -497,34 +444,31 @@ void func_8003F42C_usa(HVQM2Header *header) {
 extern ADPCMstate B_8018EB10_usa;
 
 // next_audio_record
-u32 func_8003F608_usa(void *arg0) {
+u32 HVQM2Util_GetNextAudioRecord(void *arg0) {
     u8 sp20[sizeof(HVQM2Record) + 0x10];
     s16 *var_a0;
     HVQM2Record *temp_s2;
     HVQM2Audio *temp_a0;
     u32 temp_s0;
-    u32 var_v1;
+    u32 i;
 
-    if (B_8018EAFC_usa == 0) {
-        return 0U;
+    if (gHVQM2UtilRemainingAudioRecords == 0) {
+        return 0;
     }
 
     temp_s2 = OS_DCACHE_ROUNDUP_ADDR(sp20);
+    gHVQM2UtilAudioStreamP = HVQM2Util_GetRecord(temp_s2, B_8018EA50_usa->adpcmbuf, HVQM2_AUDIO, gHVQM2UtilAudioStreamP,
+                                                 &B_8018EA60_usa, &B_8018EA78_usa);
 
-    B_8018EAF8_usa =
-        func_8003F2F0_usa(temp_s2, B_8018EA50_usa->unk_18E50, 0, B_8018EAF8_usa, &B_8018EA60_usa, &B_8018EA78_usa);
+    gHVQM2UtilRemainingAudioRecords--;
 
-    B_8018EAFC_usa -= 1;
-
-    temp_a0 = (void *)B_8018EA50_usa->unk_18E50;
+    temp_a0 = (void *)B_8018EA50_usa->adpcmbuf;
     temp_s0 = *(u32 *)(&temp_a0->samples);
-    adpcmDecode(&temp_a0[1], *(u16 *)(&temp_s2->format), temp_s0, arg0, 1U, &B_8018EB10_usa);
-    var_v1 = 0;
+    adpcmDecode(&temp_a0[1], *(u16 *)(&temp_s2->format), temp_s0, arg0, 1, &B_8018EB10_usa);
 
     var_a0 = arg0;
-    while (var_v1 < 0x2ED4U) {
-        var_a0[var_v1] = (var_a0[var_v1] * B_8018EA54_usa) >> 16;
-        var_v1 += 1;
+    for (i = 0; i < 0x2ED4U; i++) {
+        var_a0[i] = (var_a0[i] * B_8018EA54_usa) >> 16;
     }
 
     return temp_s0;
@@ -533,17 +477,15 @@ u32 func_8003F608_usa(void *arg0) {
 
 #if VERSION_USA
 #ifdef NON_MATCHING
-extern void *B_8018EA90_usa;
+extern OSMesg B_8018EA90_usa[1];
 extern OSIoMesg B_8018EA98_usa;
 extern OSMesgQueue B_8018EAB0_usa;
-extern void *B_8018EAC8_usa;
+extern OSMesg B_8018EAC8_usa[1];
 extern OSMesgQueue B_8018EAD0_usa;
-extern void *B_8018EAE8_usa;
+extern OSMesg B_8018EAE8_usa[1];
 extern OSThread B_8019CFA0_usa;
 extern HVQM2Arg B_801AABA0_usa;
 extern OSContPad B_801C7228_usa;
-extern u64 D_800AF9C0_usa;
-extern u64 D_800AFA90_usa;
 
 typedef struct struct_8021AAE0_usa {
     /* 0x00 */ OSMesgQueue unk_00;
@@ -554,7 +496,7 @@ typedef struct struct_8021AAE0_usa {
 extern struct_8021AAE0_usa B_8021AAE0_usa;
 
 // stack problems
-s32 func_8003F810_usa(const char *arg0, u32 arg1, void *arg2) {
+s32 HVQM2Util_Play(const char *arg0, u32 arg1, void *arg2) {
     u8 pad[0x20] UNUSED;
 
     s32 sp40;
@@ -606,7 +548,7 @@ s32 func_8003F810_usa(const char *arg0, u32 arg1, void *arg2) {
 
         u32 sp9C;
 
-        B_8018EA58_usa = sp44;
+        gHVQM2UtilCurrentVideoRomAddress = sp44;
         osViBlack(1U);
         func_8002CFC8_usa();
         func_80002D5C_usa();
@@ -632,33 +574,33 @@ s32 func_8003F810_usa(const char *arg0, u32 arg1, void *arg2) {
 
         B_8018EA50_usa = (void *)ALIGN8((uintptr_t)arg2);
         arg2 = (void *)((uintptr_t)arg2 + 0x46290);
-        if (((uintptr_t)&B_8018EA50_usa->unk_00010) & 0xF) {
+        if (((uintptr_t)&B_8018EA50_usa->pcmbuf) & 0xF) {
             osSyncPrintf("ERROR: 'pcmbuf' not 16-byte aligned!\n");
         }
-        if ((uintptr_t)&B_8018EA50_usa->unk_11910 & 0xF) {
+        if ((uintptr_t)&B_8018EA50_usa->hvqbuf & 0xF) {
             osSyncPrintf("ERROR: 'hvqbuf' not 16-byte aligned!\n");
         }
-        if ((uintptr_t)&B_8018EA50_usa->unk_18E50 & 0xF) {
+        if ((uintptr_t)&B_8018EA50_usa->adpcmbuf & 0xF) {
             osSyncPrintf("ERROR: 'adpcmbuf' not 16-byte aligned!\n");
         }
-        if ((uintptr_t)(&B_8018EA50_usa->unk_19A10) & 0xF) {
+        if ((uintptr_t)(&B_8018EA50_usa->hvqwork) & 0xF) {
             osSyncPrintf("ERROR: 'hvqwork' not 16-byte aligned!\n");
         }
-        if ((uintptr_t)&B_8018EA50_usa->unk_1E520 & 0xF) {
+        if ((uintptr_t)&B_8018EA50_usa->hvq_spfifo & 0xF) {
             osSyncPrintf("ERROR: 'hvq_spfifo' not 16-byte aligned!\n");
         }
-        if ((uintptr_t)&B_8018EA50_usa->unk_45630 & 0xF) {
+        if ((uintptr_t)&B_8018EA50_usa->hvq_yieldbuf & 0xF) {
             osSyncPrintf("ERROR: 'hvq_yieldbuf' not 16-byte aligned!\n");
         }
 
         temp_s1 = OS_DCACHE_ROUNDUP_ADDR(&B_8018EA50_usa->unk_46240);
 
-        osCreateMesgQueue(&B_8018EAD0_usa, &B_8018EAE8_usa, 1);
+        osCreateMesgQueue(&B_8018EAD0_usa, B_8018EAE8_usa, ARRAY_COUNT(B_8018EAE8_usa));
         osSetEventMesg(4U, &B_8018EAD0_usa, NULL);
-        osCreateMesgQueue(&B_8018EA78_usa, &B_8018EA90_usa, 1);
-        osCreateMesgQueue(&B_8018EAB0_usa, &B_8018EAC8_usa, 1);
+        osCreateMesgQueue(&B_8018EA78_usa, B_8018EA90_usa, ARRAY_COUNT(B_8018EA90_usa));
+        osCreateMesgQueue(&B_8018EAB0_usa, B_8018EAC8_usa, ARRAY_COUNT(B_8018EAC8_usa));
 
-        func_8003F0EC_usa();
+        TimeKeeper_StartThread();
 
         hvqm2InitSP1(255);
 
@@ -674,41 +616,41 @@ s32 func_8003F810_usa(const char *arg0, u32 arg1, void *arg2) {
         hvqtask.t.ucode_data_size = 0x70;
 
         hvqtask.t.data_ptr = (void *)&B_801AABA0_usa;
-        hvqtask.t.yield_data_ptr = B_8018EA50_usa->unk_45630;
-        hvqtask.t.yield_data_size = sizeof(B_8018EA50_usa->unk_45630);
+        hvqtask.t.yield_data_ptr = B_8018EA50_usa->hvq_yieldbuf;
+        hvqtask.t.yield_data_size = sizeof(B_8018EA50_usa->hvq_yieldbuf);
 
-        func_8003E5DC_usa();
+        Cfb_Init();
 
         osViSwapBuffer(B_801AB620_usa[1]);
 
         osViBlack(1U);
 
-        romcpy(temp_s1, B_8018EA58_usa, 0x3C, 0, &B_8018EA98_usa, &B_8018EAB0_usa);
+        RomCopy(temp_s1, gHVQM2UtilCurrentVideoRomAddress, 0x3C, 0, &B_8018EA98_usa, &B_8018EAB0_usa);
 
-        B_8018EAEC_usa = *(u32 *)&temp_s1->total_frames;
+        gHVQM2UtilTotalVideoFrames = *(u32 *)&temp_s1->total_frames;
         sp9C = *(u32 *)&temp_s1->usec_per_frame;
-        B_8018EAF0_usa = *(u32 *)&temp_s1->total_audio_records;
+        gHVQM2UtilTotalAudioRecords = *(u32 *)&temp_s1->total_audio_records;
 
         temp_a2 = (SCREEN_WIDTH - temp_s1->width) / 2;
         temp = (SCREEN_HEIGHT - temp_s1->height) / 2;
         sp94 = (temp * SCREEN_WIDTH) + temp_a2;
         hvqm2SetupSP1(temp_s1, SCREEN_WIDTH);
 
-        func_8003E684_usa();
+        Cfb_ReleaseAll();
 
-        func_8003F178_usa(func_80040B1C_usa, *(u32 *)&temp_s1->samples_per_sec);
+        TimeKeeper_PlayVideo(HVQM2Util_Rewind, *(u32 *)&temp_s1->samples_per_sec);
 
         sp7C = -1;
         sp84 = 0;
         sp8C = 0;
 
-        if ((temp_s5 != 0) && (temp_s5 < (u32)B_8018EAEC_usa)) {
-            B_8018EB00_usa = (s32)temp_s5;
+        if ((temp_s5 != 0) && (temp_s5 < (u32)gHVQM2UtilTotalVideoFrames)) {
+            gHVQM2UtilRemainingVideoFrames = (s32)temp_s5;
         }
 
         sp74 = 0;
 
-        while (B_8018EB00_usa > 0) {
+        while (gHVQM2UtilRemainingVideoFrames > 0) {
             sp74++;
             if (sp74 >= 5) {
                 osViBlack(0U);
@@ -716,26 +658,27 @@ s32 func_8003F810_usa(const char *arg0, u32 arg1, void *arg2) {
             osContStartReadData(&B_801AB988_usa);
             temp_s2 = OS_DCACHE_ROUNDUP_ADDR(sp50);
 
-            B_8018EAF4_usa = func_8003F2F0_usa(temp_s2, B_8018EA50_usa->unk_11910, 1, B_8018EAF4_usa, &B_8018EA98_usa,
-                                               &B_8018EAB0_usa);
+            gHVQM2UtilVideoStreamP = HVQM2Util_GetRecord(temp_s2, B_8018EA50_usa->hvqbuf, 1, gHVQM2UtilVideoStreamP,
+                                                         &B_8018EA98_usa, &B_8018EAB0_usa);
 
-            if (B_8018EB08_usa > 0) {
-                if (func_8003E714_usa() > B_8018EB08_usa + sp9C * 2) {
-                    func_8003E684_usa();
+            if (gHVQM2UtilDispTime > 0) {
+                if (TimeKeeper_GetTime() > gHVQM2UtilDispTime + sp9C * 2) {
+                    Cfb_ReleaseAll();
 
                     do {
-                        B_8018EB08_usa += sp9C;
+                        gHVQM2UtilDispTime += sp9C;
 
-                        B_8018EB00_usa--;
-                        if (B_8018EB00_usa == 0) {
+                        gHVQM2UtilRemainingVideoFrames--;
+                        if (gHVQM2UtilRemainingVideoFrames == 0) {
                             break;
                         }
 
-                        B_8018EAF4_usa = func_8003F2F0_usa(temp_s2, B_8018EA50_usa->unk_11910, 1, B_8018EAF4_usa,
-                                                           &B_8018EA98_usa, &B_8018EAB0_usa);
-                    } while ((*(u16 *)&temp_s2->format != 0) || (func_8003E714_usa() > B_8018EB08_usa));
+                        gHVQM2UtilVideoStreamP =
+                            HVQM2Util_GetRecord(temp_s2, B_8018EA50_usa->hvqbuf, 1, gHVQM2UtilVideoStreamP,
+                                                &B_8018EA98_usa, &B_8018EAB0_usa);
+                    } while ((*(u16 *)&temp_s2->format != 0) || (TimeKeeper_GetTime() > gHVQM2UtilDispTime));
 
-                    if (B_8018EB00_usa == 0) {
+                    if (gHVQM2UtilRemainingVideoFrames == 0) {
                         break;
                     }
                 }
@@ -746,12 +689,12 @@ s32 func_8003F810_usa(const char *arg0, u32 arg1, void *arg2) {
             if (temp_s0_3 == 2) {
                 var_s4 = var_s7;
             } else {
-                var_s4 = func_8003E6B8_usa();
+                var_s4 = Cfb_GetCurrentIndex();
 
                 hvqtask.t.flags = 0;
-                temp_s0_4 = hvqm2DecodeSP1(&B_8018EA50_usa->unk_11910, temp_s0_3, &B_801AB620_usa[var_s4][sp94],
-                                           &B_801AB620_usa[var_s7][sp94], B_8018EA50_usa->unk_19A10, &B_801AABA0_usa,
-                                           B_8018EA50_usa->unk_1E520);
+                temp_s0_4 = hvqm2DecodeSP1(&B_8018EA50_usa->hvqbuf, temp_s0_3, &B_801AB620_usa[var_s4][sp94],
+                                           &B_801AB620_usa[var_s7][sp94], B_8018EA50_usa->hvqwork, &B_801AABA0_usa,
+                                           B_8018EA50_usa->hvq_spfifo);
 
                 osWritebackDCacheAll();
                 if (temp_s0_4 > 0) {
@@ -765,18 +708,18 @@ s32 func_8003F810_usa(const char *arg0, u32 arg1, void *arg2) {
                 func_80021414_usa(sp40, 0xF2, 0xD0, B_801AB620_usa[var_s4]);
             }
 
-            func_8003E638_usa(var_s4);
+            Cfb_Keep(var_s4);
 
             if ((var_s7 >= 0) && (var_s7 != var_s4)) {
-                func_8003E658_usa(var_s7);
+                Cfb_Release(var_s7);
             }
 
-            func_8003F200_usa(B_801AB620_usa[var_s4], &B_801C6E48_usa[var_s4], B_8018EB08_usa);
+            TimeKeeper_AddVideoFrame(B_801AB620_usa[var_s4], &gCfbStatus[var_s4], gHVQM2UtilDispTime);
 
             var_s7 = var_s4;
 
-            B_8018EB08_usa += sp9C;
-            B_8018EB00_usa--;
+            gHVQM2UtilDispTime += sp9C;
+            gHVQM2UtilRemainingVideoFrames--;
 
             if (osRecvMesg(&B_801AB7F0_usa, NULL, 0) == 0) {
                 while (osAfterPreNMI() == -1) {}
@@ -798,7 +741,7 @@ s32 func_8003F810_usa(const char *arg0, u32 arg1, void *arg2) {
         }
 
         if (var_s7 >= 0) {
-            func_8003F200_usa(B_801AB620_usa[var_s7], (void *)&B_801C6E48_usa[var_s7], B_8018EB08_usa);
+            TimeKeeper_AddVideoFrame(B_801AB620_usa[var_s7], (void *)&gCfbStatus[var_s7], gHVQM2UtilDispTime);
         }
 
         if (sp8C == 0) {
@@ -809,8 +752,8 @@ s32 func_8003F810_usa(const char *arg0, u32 arg1, void *arg2) {
         }
 
         temp_s0_8 = osSetIntMask(1U);
-        osDestroyThread(&B_80190CD0_usa);
-        osDestroyThread(&B_8018EB20_usa);
+        osDestroyThread(&gTimeKeeperCounterThread);
+        osDestroyThread(&gTimeKeeperThread);
         osSetIntMask(temp_s0_8);
 
         if (sp8C == 0) {
@@ -871,12 +814,12 @@ s32 func_8003F810_usa(const char *arg0, u32 arg1, void *arg2) {
     return var_v0;
 }
 #else
-INCLUDE_ASM("asm/usa/nonmatchings/main/03F130_usa", func_8003F810_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/hvqm2util", HVQM2Util_Play);
 #endif
 #endif
 
 #if VERSION_USA
-s32 func_800409E4_usa(f32 arg0) {
+s32 HVQM2Util_800409E4_usa(f32 arg0) {
     B_8018EA54_usa = arg0 * 0x10000;
 
     return -1;
@@ -884,22 +827,22 @@ s32 func_800409E4_usa(f32 arg0) {
 #endif
 
 #if VERSION_USA
-void func_80040A4C_usa(void) {
+void HVQM2Util_80040A4C_usa(void) {
     B_8018EA54_usa = 0xCCCC;
 }
 #endif
 
 #if VERSION_USA
-
 // daCounterProc
-void func_80040A60_usa(void *arg UNUSED) {
+void TimeKeeper_CounterThreadEntry(void *arg UNUSED) {
     while (true) {
-        osRecvMesg(&B_80192EE0_usa, NULL, 1);
-        B_80192F78_usa = osGetTime();
+        osRecvMesg(&B_80192EE0_usa, NULL, OS_MESG_BLOCK);
+        gTimerKeeperLastTime = osGetTime();
+
         if (B_80192F5C_usa != 0) {
-            B_80192F54_usa -= 1;
+            B_80192F54_usa--;
         }
-        B_80192F70_usa += B_80192F5C_usa;
+        gTimerKeeperSamplesPlayed += B_80192F5C_usa;
         B_80192F5C_usa = B_80192F58_usa;
         B_80192F58_usa = 0;
     }
@@ -908,11 +851,11 @@ void func_80040A60_usa(void *arg UNUSED) {
 
 #if VERSION_USA
 // rewind
-tkAudioProc func_80040B1C_usa(void) {
-    B_8018EAF4_usa = B_8018EAF8_usa = B_8018EA58_usa + sizeof(HVQM2Header);
-    B_8018EAFC_usa = B_8018EAF0_usa;
-    B_8018EB00_usa = B_8018EAEC_usa;
-    B_8018EB08_usa = 0;
-    return func_8003F608_usa;
+tkAudioProc HVQM2Util_Rewind(void) {
+    gHVQM2UtilVideoStreamP = gHVQM2UtilAudioStreamP = gHVQM2UtilCurrentVideoRomAddress + sizeof(HVQM2Header);
+    gHVQM2UtilRemainingAudioRecords = gHVQM2UtilTotalAudioRecords;
+    gHVQM2UtilRemainingVideoFrames = gHVQM2UtilTotalVideoFrames;
+    gHVQM2UtilDispTime = 0;
+    return HVQM2Util_GetNextAudioRecord;
 }
 #endif

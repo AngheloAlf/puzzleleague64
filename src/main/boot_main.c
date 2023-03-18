@@ -6,6 +6,7 @@
 #include "main_variables.h"
 #include "PR/sched.h"
 #include "buffers.h"
+#include "hvqm2util.h"
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/boot_main", func_80000450_usa);
@@ -127,7 +128,7 @@ void func_80000630_usa(void) {
     func_8001EC9C_usa();
     func_8002B570_usa();
     func_8002DAC8_usa();
-    func_80040A4C_usa();
+    HVQM2Util_80040A4C_usa();
 }
 
 void Main_ThreadEntry(void *arg UNUSED) {
