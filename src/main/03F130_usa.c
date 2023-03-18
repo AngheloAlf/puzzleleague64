@@ -35,14 +35,14 @@ void func_8003E5DC_usa(void) {
 
 #if VERSION_USA
 // keep_cfb
-void func_8003E638_usa(s32 arg0) {
+INLINE void func_8003E638_usa(s32 arg0) {
     B_801C6E48_usa[arg0] |= 1;
 }
 #endif
 
 #if VERSION_USA
 // release_cfb
-void func_8003E658_usa(s32 arg0) {
+INLINE void func_8003E658_usa(s32 arg0) {
     if (arg0 >= 0) {
         B_801C6E48_usa[arg0] &= ~1;
     }
@@ -50,7 +50,7 @@ void func_8003E658_usa(s32 arg0) {
 #endif
 
 #if VERSION_USA
-void func_8003E684_usa(void) {
+INLINE void func_8003E684_usa(void) {
     s32 var_a0;
 
     for (var_a0 = 0; var_a0 < 2; var_a0++) {
@@ -61,7 +61,7 @@ void func_8003E684_usa(void) {
 
 #if VERSION_USA
 // get_cfb
-s32 func_8003E6B8_usa(void) {
+INLINE s32 func_8003E6B8_usa(void) {
     while (true) {
         s32 var_a0;
 
@@ -108,6 +108,8 @@ STATIC_INLINE void tkClockStart(void) {
 
 typedef u32 (*tkAudioProc)(void *pcmbuf);
 typedef tkAudioProc (*tkRewindProc)(void);
+
+tkAudioProc func_80040B1C_usa(void);
 
 typedef struct {
     tkRewindProc rewind; /* Pointer to stream rewind function */
@@ -362,7 +364,7 @@ void func_8003E854_usa(void *arg UNUSED) {
 
 #if VERSION_USA
 // createTimekeeper
-void func_8003F0EC_usa(void) {
+INLINE void func_8003F0EC_usa(void) {
     osCreateMesgQueue(&B_80192E80_usa, B_80192E98_usa, ARRAY_COUNT(B_80192E98_usa));
     osCreateMesgQueue(&B_80192EA0_usa, B_80192EB8_usa, ARRAY_COUNT(B_80192EB8_usa));
     osCreateThread(&B_8018EB20_usa, 3, func_8003E854_usa, NULL, STACK_TOP(B_8018ECD0_usa), 0xC);
@@ -372,7 +374,7 @@ void func_8003F0EC_usa(void) {
 
 #if VERSION_USA
 // tkStart
-void func_8003F178_usa(tkRewindProc rewind, u32 samples_per_sec) {
+INLINE void func_8003F178_usa(tkRewindProc rewind, u32 samples_per_sec) {
     TKCMD tkcmd;
 
     tkcmd.rewind = rewind;
@@ -393,16 +395,16 @@ void func_8003F1C0_usa(void) {
 
 #if VERSION_USA
 // tkPushVideoframe
-void func_8003F200_usa(void *arg0, u32 *arg1, u64 arg2) {
-    *arg1 |= 2;
+INLINE void func_8003F200_usa(void *vaddr, u32 *statP, u64 disptime) {
+    *statP |= 2;
 
     while (B_80192F20_usa >= 2) {
         osYieldThread();
     }
 
-    B_80192F00_usa[B_80192F24_usa].disptime = arg2;
-    B_80192F00_usa[B_80192F24_usa].vaddr = arg0;
-    B_80192F00_usa[B_80192F24_usa].statP = arg1;
+    B_80192F00_usa[B_80192F24_usa].disptime = disptime;
+    B_80192F00_usa[B_80192F24_usa].vaddr = vaddr;
+    B_80192F00_usa[B_80192F24_usa].statP = statP;
 
     B_80192F24_usa++;
     if (B_80192F24_usa == 2) {
@@ -520,67 +522,34 @@ u32 func_8003F608_usa(void *arg0) {
 
 #if VERSION_USA
 #if 0
-u64 __udivdi3(s32, s32, UNK_TYPE, s32);                    /* extern */
 s32 func_8001CAD0_usa(s32, u32 *);                  /* extern */
-UNK_TYPE func_8001F6B8_usa(s32 *, UNK_TYPE *, s32 *);             /* extern */
-UNK_TYPE func_80021414_usa(s32, UNK_TYPE, UNK_TYPE, s32 *);              /* extern */
-UNK_TYPE func_8002CFC8_usa();                              /* extern */
-void func_8003E854_usa(void *);                     /* extern */
-UNK_TYPE func_8008B21C_usa();                              /* extern */
-extern s32 B_8018EA50_usa;
-extern u32 B_8018EA58_usa;
-extern OSMesgQueue B_8018EA78_usa;
+UNK_RET func_8001F6B8_usa(s32 *, const char *, s32 *);             /* extern */
+UNK_RET func_80021414_usa(s32, s32, s32, s16 *);              /* extern */
+UNK_RET func_8002CFC8_usa();                              /* extern */
+UNK_RET func_8008B21C_usa();                              /* extern */
 extern void *B_8018EA90_usa;
 extern OSIoMesg B_8018EA98_usa;
 extern OSMesgQueue B_8018EAB0_usa;
 extern void *B_8018EAC8_usa;
 extern OSMesgQueue B_8018EAD0_usa;
 extern void *B_8018EAE8_usa;
-extern u32 B_8018EAEC_usa;
-extern s32 B_8018EAF0_usa;
-extern u32 B_8018EAF4_usa;
-extern u32 B_8018EB00_usa;
-extern u32 B_8018EB08_usa;
-extern u32 B_8018EB0C_usa;
-extern OSThread B_8018EB20_usa;
-extern OSThread B_80190CD0_usa;
-extern OSMesgQueue B_80192E80_usa;
-extern void *B_80192E98_usa;
-extern OSMesgQueue B_80192EA0_usa;
-extern void *B_80192EB8_usa;
-extern UNK_TYPE B_80192F00_usa;
-extern UNK_TYPE B_80192F04_usa;
-extern UNK_TYPE B_80192F08_usa;
-extern UNK_TYPE B_80192F0C_usa;
-extern s32 B_80192F20_usa;
-extern s32 B_80192F24_usa;
-extern s32 B_80192F64_usa;
-extern s32 B_80192F68_usa;
-extern s32 B_80192F70_usa;
-extern u32 B_80192F74_usa;
-extern s32 B_80192F78_usa;
-extern u32 B_80192F7C_usa;
 extern OSThread B_8019CFA0_usa;
 extern u64 B_801AABA0_usa;
-extern s32 *B_801AB620_usa;
-extern s32 *B_801AB624_usa;
-extern s32 B_801C6E48_usa;
 extern OSContPad B_801C7228_usa;
 extern OSMesgQueue B_8021AAE0_usa;
 extern OSThread B_8021AB50_usa;
 extern u64 D_800AF9C0_usa;
 extern u64 D_800AFA90_usa;
-extern UNK_TYPE D_800B0E80_usa;
-extern s32 D_803B5000;
-extern s32 D_803DA800;
-extern UNK_TYPE func_80040B1C_usa;
+// maybe [SCREEN_HEIGHT][SCREEN_WIDTH]
+extern s16 D_803B5000[SCREEN_WIDTH][SCREEN_HEIGHT];
+extern s16 D_803DA800;
 
 s32 func_8003F810_usa(s32 arg0, u32 arg1, s32 arg2) {
     s32 sp40;
     u32 sp44;
-    UNK_TYPE *sp48;
+    u32 (*(*sp48)())(void *);
     s32 sp4C;
-    UNK_TYPE sp5F;
+    u8 sp50[0x10+0x10];
     u32 sp6C;
     s32 sp74;
     s32 sp7C;
@@ -589,8 +558,20 @@ s32 func_8003F810_usa(s32 arg0, u32 arg1, s32 arg2) {
     s32 sp94;
     u32 sp9C;
     s32 spA4;
-    s32 **temp_s1_3;
-    s32 **var_a2;
+    s16 **temp_s1_3;
+    s16 **var_a2;
+    s16 *temp_s1_4;
+    s16 *temp_s1_5;
+    s16 *temp_v1_10;
+    s16 *temp_v1_11;
+    s16 *temp_v1_12;
+    s16 *temp_v1_13;
+    s16 *temp_v1_14;
+    s16 *temp_v1_15;
+    s16 *temp_v1_16;
+    s16 *var_v1_4;
+    s32 *var_v1_5;
+    s32 *var_v1_6;
     s32 *temp_a0_10;
     s32 *temp_a0_3;
     s32 *temp_a0_4;
@@ -601,36 +582,26 @@ s32 func_8003F810_usa(s32 arg0, u32 arg1, s32 arg2) {
     s32 *temp_a0_9;
     s32 *temp_s0_6;
     s32 *temp_s0_7;
-    s32 *temp_s1_4;
-    s32 *temp_s1_5;
-    s32 *temp_v0_5;
-    s32 *temp_v1_10;
-    s32 *temp_v1_11;
-    s32 *temp_v1_12;
-    s32 *temp_v1_13;
-    s32 *temp_v1_14;
-    s32 *temp_v1_15;
-    s32 *temp_v1_16;
+    s32 *temp_v0_4;
     s32 *var_a0_6;
     s32 *var_t0;
     s32 *var_v1;
     s32 *var_v1_2;
     s32 *var_v1_3;
-    s32 *var_v1_4;
-    s32 *var_v1_5;
-    s32 *var_v1_6;
+    s32 temp_a2_2;
     s32 temp_s0_2;
     HVQM2Header *temp_s1;
     s32 temp_s1_2;
     HVQM2Record *temp_s2;
+    s32 temp_s3_3;
+    s32 temp_s3_4;
     s32 temp_t3_2;
     s32 temp_t3_3;
     s32 temp_v0;
     s32 temp_v0_2;
     s32 temp_v0_3;
-    s32 temp_v0_4;
+    s32 temp_v0_5;
     s32 temp_v0_6;
-    s32 temp_v0_7;
     s32 temp_v1;
     s32 temp_v1_8;
     s32 temp_v1_9;
@@ -649,6 +620,8 @@ s32 func_8003F810_usa(s32 arg0, u32 arg1, s32 arg2) {
     s32 var_s4;
     s32 var_s7;
     s32 var_v0;
+    s8 *temp_s3;
+    s8 *temp_s3_2;
     u16 temp_s0_3;
     u32 *temp_s0_5;
     u32 temp_a0;
@@ -659,17 +632,18 @@ s32 func_8003F810_usa(s32 arg0, u32 arg1, s32 arg2) {
     u32 temp_a1_4;
     u32 temp_a1_5;
     u32 temp_a1_6;
+    u32 temp_a1_7;
+    u32 temp_a1_8;
     u32 temp_a2;
-    u32 temp_a2_2;
     u32 temp_s0;
     u32 temp_s0_4;
     u32 temp_s0_8;
-    u32 temp_s2_2;
-    u32 temp_s2_3;
-    u32 temp_s3_3;
-    u32 temp_s3_4;
+    u64 temp_s2_2;
+    u64 temp_s2_3;
     u32 temp_s5;
     u32 temp_t1;
+    u32 temp_t1_2;
+    u32 temp_t1_3;
     u32 temp_t3;
     u32 temp_v1_2;
     u32 temp_v1_3;
@@ -695,8 +669,6 @@ s32 func_8003F810_usa(s32 arg0, u32 arg1, s32 arg2) {
     u64 var_s0_5;
     u64 var_s0_6;
     u64 var_t0_2;
-    void *temp_s3;
-    void *temp_s3_2;
 
     sp6C = arg1;
     var_s7 = -1;
@@ -711,79 +683,75 @@ s32 func_8003F810_usa(s32 arg0, u32 arg1, s32 arg2) {
     var_v0 = func_8001CAD0_usa(arg0, &sp44);
     if (var_v0 != 0) {
         B_8018EA58_usa = sp44;
-        var_s0 = 0;
         osViBlack(1U);
         func_8002CFC8_usa();
         func_80002D5C_usa();
         func_80002DE8_usa();
-        do {
-loop_4:
-            if (osViGetCurrentLine() != 0) {
-                goto loop_4;
-            }
-loop_5:
-            if (osViGetCurrentLine() == 0) {
-                goto loop_5;
-            }
-            var_s0 += 1;
-        } while (var_s0 < 8);
 
-        var_s0_2 = 0;
+        for (var_s0 = 0; var_s0 < 8; var_s0++) {
+            while (osViGetCurrentLine() != 0) {
+            }
+            while (osViGetCurrentLine() == 0) {
+            }
+        }
+
         osStopThread(&B_8021AB50_usa);
         osStopThread(&B_8019CFA0_usa);
-        do {
-loop_8:
-            if (osViGetCurrentLine() != 0) {
-                goto loop_8;
+
+        for (var_s0 = 0; var_s0 < 8; var_s0++) {
+            while (osViGetCurrentLine() != 0) {
             }
-loop_9:
-            if (osViGetCurrentLine() == 0) {
-                goto loop_9;
+            while (osViGetCurrentLine() == 0) {
             }
-            var_s0_2 += 1;
-        } while (var_s0_2 < 8);
+        }
 
         func_8008B21C_usa();
-        B_801AB624_usa = &D_803DA800;
-        B_801AB620_usa = &D_803B5000;
+
+        B_801AB620_usa[0] = &D_803B5000;
+        B_801AB620_usa[1] = &D_803DA800;
+
         temp_v0 = (arg2 + 7) & ~7;
-        B_8018EA50_usa = temp_v0;
+        B_8018EA50_usa = (struct_8018EA50_usa *) temp_v0;
         arg2 += 0x46290;
         if ((temp_v0 + 0x10) & 0xF) {
-            osSyncPrintf("ERROR: 'pcmbuf' not 16-byte aligned!\n", 0x46290);
+            osSyncPrintf("ERROR: 'pcmbuf' not 16-byte aligned!\n");
         }
-        if ((B_8018EA50_usa + 0x11910) & 0xF) {
+        if ((s32) &B_8018EA50_usa->unk_05DB8[0xBB58] & 0xF) {
             osSyncPrintf("ERROR: 'hvqbuf' not 16-byte aligned!\n");
         }
-        if ((B_8018EA50_usa + 0x18E50) & 0xF) {
+        if ((s32) B_8018EA50_usa->unk_18E50 & 0xF) {
             osSyncPrintf("ERROR: 'adpcmbuf' not 16-byte aligned!\n");
         }
-        if ((B_8018EA50_usa + 0x19A10) & 0xF) {
+        if ((s32) (B_8018EA50_usa + 0x19A10) & 0xF) {
             osSyncPrintf("ERROR: 'hvqwork' not 16-byte aligned!\n");
         }
-        if ((B_8018EA50_usa + 0x1E520) & 0xF) {
+        if ((s32) (B_8018EA50_usa + 0x1E520) & 0xF) {
             osSyncPrintf("ERROR: 'hvq_spfifo' not 16-byte aligned!\n");
         }
-        if ((B_8018EA50_usa + 0x45630) & 0xF) {
+        if ((s32) (B_8018EA50_usa + 0x45630) & 0xF) {
             osSyncPrintf("ERROR: 'hvq_yieldbuf' not 16-byte aligned!\n");
         }
-#if 0
+
         temp_s1 = ((u32) (B_8018EA50_usa + 0x4624F) >> 4) * 0x10;
-#endif
-        temp_s1 = OS_DCACHE_ROUNDUP_ADDR((u32) (B_8018EA50_usa + 0x46240));
 
         osCreateMesgQueue(&B_8018EAD0_usa, &B_8018EAE8_usa, 1);
         osSetEventMesg(4U, &B_8018EAD0_usa, NULL);
         osCreateMesgQueue(&B_8018EA78_usa, &B_8018EA90_usa, 1);
         osCreateMesgQueue(&B_8018EAB0_usa, &B_8018EAC8_usa, 1);
-        osCreateMesgQueue(&B_80192E80_usa, &B_80192E98_usa, 1);
-        osCreateMesgQueue(&B_80192EA0_usa, &B_80192EB8_usa, 1);
+
+        #if 0
+        osCreateMesgQueue(&B_80192E80_usa, B_80192E98_usa, 1);
+        osCreateMesgQueue(&B_80192EA0_usa, B_80192EB8_usa, 1);
         osCreateThread(&B_8018EB20_usa, 3, func_8003E854_usa, NULL, &B_80190CD0_usa, 0xC);
         osStartThread(&B_8018EB20_usa);
+        #else
+        func_8003F0EC_usa();
+        #endif
+
         hvqm2InitSP1(0xFFU);
-        var_t0 = &B_801C6E48_usa;
+        var_t0 = B_801C6E48_usa;
         var_a3 = 0;
-        var_a2 = &B_801AB620_usa;
+        var_a2 = B_801AB620_usa;
         hvqtask.t.ucode_size = hvqm2sp1TextEnd - hvqm2sp1TextStart;
         hvqtask.t.ucode_data = (u64 *) hvqm2sp1DataStart;
         hvqtask.t.ucode = (u64 *) hvqm2sp1TextStart;
@@ -795,6 +763,7 @@ loop_9:
         hvqtask.t.ucode_boot = &D_800AF9C0_usa;
         hvqtask.t.yield_data_size = 0xC10;
         hvqtask.t.yield_data_ptr = B_8018EA50_usa + 0x45630;
+
         do {
             var_a0 = 0;
 loop_25:
@@ -809,15 +778,20 @@ loop_25:
             var_a3 += 4;
             var_a2 += 4;
         } while (var_a3 < 8);
-        osViSwapBuffer(B_801AB624_usa);
+
+        osViSwapBuffer(*(B_801AB620_usa + 4));
         osViBlack(1U);
         temp_s0 = B_8018EA58_usa;
 
+        #if 0
         osInvalDCache((void *) temp_s1, 0x3C);
         do {
 
         } while (osPiStartDma(&B_8018EA98_usa, 0, 0, temp_s0, (void *) temp_s1, 0x3CU, &B_8018EAB0_usa) == -1);
         osRecvMesg(&B_8018EAB0_usa, NULL, 1);
+        #else
+        romcpy(temp_s1, temp_s0, 0x3C, 0, &B_8018EA98_usa, &B_8018EAB0_usa);
+        #endif
 
         B_8018EAEC_usa = temp_s1->total_frames;
         sp9C = temp_s1->usec_per_frame;
@@ -825,22 +799,34 @@ loop_25:
         B_8018EAF0_usa = temp_s1->total_audio_records;
         sp94 = (((s32) (0xF0 - temp_s1->height) / 2) * 0x140) + ((s32) (temp_a2 + (temp_a2 >> 0x1F)) >> 1);
         hvqm2SetupSP1((HVQM2Header *) temp_s1, 0x140U);
+
+        #if 0
         var_a0_2 = 0;
-        var_v1 = &B_801C6E48_usa;
+        var_v1 = B_801C6E48_usa;
         do {
             var_a0_2 += 1;
             *var_v1 &= ~1;
             var_v1 += 4;
         } while (var_a0_2 < 2);
+        #else
+        func_8003E684_usa();
+        #endif
+
         sp7C = -1;
         sp84 = 0;
         sp8C = 0;
-        sp48 = &func_80040B1C_usa;
+
+        #if 0
+        sp48 = func_80040B1C_usa;
         sp4C = temp_s1->samples_per_sec;
         osSendMesg(&B_80192E80_usa, &sp48, 1);
         osRecvMesg(&B_80192EA0_usa, NULL, 1);
+        #else
+        func_8003F178_usa(func_80040B1C_usa, temp_s1->samples_per_sec);
+        #endif
+
         if ((temp_s5 != 0) && (temp_s5 < (u32) B_8018EAEC_usa)) {
-            B_8018EB00_usa = temp_s5;
+            B_8018EB00_usa = (s32) temp_s5;
         }
 
         sp74 = 0;
@@ -853,15 +839,23 @@ loop_36:
                 osViBlack(0U);
             }
             osContStartReadData(&B_801AB988_usa);
-            temp_s2 = ((u32) &sp5F >> 4) * 0x10;
+            temp_s2 = ((((u32) &sp50) + 0xF) >> 4) * 0x10;
             var_s0_3 = B_8018EAF4_usa;
-            temp_s3 = B_8018EA50_usa + spA4;
+            temp_s3 = &B_8018EA50_usa->unk_00000[spA4];
+
+            #if 0
 loop_39:
+
+            #if 0
             osInvalDCache((void *) temp_s2, 8);
             do {
 
             } while (osPiStartDma(&B_8018EA98_usa, 0, 0, var_s0_3, (void *) temp_s2, 8U, &B_8018EAB0_usa) == -1);
             osRecvMesg(&B_8018EAB0_usa, NULL, 1);
+            #else
+            romcpy(temp_s2, var_s0_3, 8, 0, &B_8018EA98_usa, &B_8018EAB0_usa);
+            #endif
+
             temp_s1_2 = temp_s2->size;
             var_s0_4 = var_s0_3 + 8;
             if (temp_s2->type != 1) {
@@ -869,30 +863,42 @@ loop_39:
                 goto loop_39;
             }
             if (temp_s1_2 != 0) {
+                #if 0
                 osInvalDCache(temp_s3, temp_s1_2);
                 do {
 
                 } while (osPiStartDma(&B_8018EA98_usa, 0, 0, var_s0_4, temp_s3, (u32) temp_s1_2, &B_8018EAB0_usa) == -1);
                 osRecvMesg(&B_8018EAB0_usa, NULL, 1);
+                #else
+                romcpy(temp_s3, var_s0_4, temp_s1_2, 0, &B_8018EA98_usa, &B_8018EAB0_usa);
+                #endif
+
                 var_s0_4 += temp_s1_2;
             }
+            #else
+            var_s0_4 = func_8003F2F0_usa(temp_s2, temp_s3, 1, var_s0_3, &B_8018EA98_usa, &B_8018EAB0_usa);
+            #endif
+
             B_8018EAF4_usa = var_s0_4;
-            if ((B_8018EB08_usa != 0) || (B_8018EB0C_usa != 0)) {
-                if (B_80192F64_usa == 0) {
+            if ((B_8018EB08_usa != 0) || (*(&B_8018EB08_usa + 4) != 0)) {
+                #if 0
+                if (B_80192F64_usa == false) {
                     var_t0_2 = 0;
                     var_t1 = 0;
                 } else {
                     temp_ret = osGetTime();
                     temp_v1_2 = (u32) temp_ret;
-                    temp_a1 = temp_v1_2 - B_80192F7C_usa;
-                    temp_ret_2 = __udivdi3((((temp_ret - B_80192F78_usa) - (temp_v1_2 < (u32) B_80192F7C_usa)) << 6) | (temp_a1 >> 0x1A), temp_a1 << 6, 0, 0xBB8);
+                    temp_a1 = *(&B_80192F78_usa + 4);
+                    temp_a1_2 = temp_v1_2 - temp_a1;
+                    temp_ret_2 = __udivdi3((((temp_ret - B_80192F78_usa) - (temp_v1_2 < temp_a1)) << 6) | (temp_a1_2 >> 0x1A), temp_a1_2 << 6, 0, 0xBB8U);
                     var_s0_5 = temp_ret_2;
                     var_s1 = (u32) temp_ret_2;
                     if (B_80192F68_usa != 0) {
-                        temp_v1_3 = B_80192F74_usa * 0x1F;
-                        temp_v0_2 = (((B_80192F70_usa << 5) | ((u32) B_80192F74_usa >> 0x1B)) - B_80192F70_usa) - ((u32) (B_80192F74_usa << 5) < (u32) B_80192F74_usa);
-                        temp_a1_2 = B_80192F74_usa * 0x3D09;
-                        temp_ret_3 = __udivdi3(((((((((temp_v0_2 << 6) | (temp_v1_3 >> 0x1A)) - temp_v0_2) - ((u32) (B_80192F74_usa * 0x7C0) < temp_v1_3)) * 8) | ((u32) (B_80192F74_usa * 0x7A1) >> 0x1D)) + B_80192F70_usa + (temp_a1_2 < (u32) B_80192F74_usa)) << 6) | (temp_a1_2 >> 0x1A), B_80192F74_usa * 0xF4240, 0, B_80192F68_usa);
+                        temp_t1 = *(&B_80192F70_usa + 4);
+                        temp_v1_3 = temp_t1 * 0x1F;
+                        temp_v0_2 = (((B_80192F70_usa << 5) | (temp_t1 >> 0x1B)) - B_80192F70_usa) - ((u32) (temp_t1 << 5) < temp_t1);
+                        temp_a1_3 = temp_t1 * 0x3D09;
+                        temp_ret_3 = __udivdi3(((((((((temp_v0_2 << 6) | (temp_v1_3 >> 0x1A)) - temp_v0_2) - ((u32) (temp_t1 * 0x7C0) < temp_v1_3)) * 8) | ((u32) (temp_t1 * 0x7A1) >> 0x1D)) + B_80192F70_usa + (temp_a1_3 < temp_t1)) << 6) | (temp_a1_3 >> 0x1A), temp_t1 * 0xF4240, 0, B_80192F68_usa);
                         temp_v1_4 = (u32) temp_ret_3;
                         var_s1 += temp_v1_4;
                         var_s0_5 = var_s0_5 + temp_ret_3 + (var_s1 < temp_v1_4);
@@ -900,32 +906,52 @@ loop_39:
                     var_t0_2 = var_s0_5;
                     var_t1 = var_s1;
                 }
+                #else
+                var_t0_2 = func_8003E714_usa();
+                #endif
                 temp_a0 = sp9C * 2;
-                temp_a1_3 = B_8018EB0C_usa + temp_a0;
-                temp_a0_2 = B_8018EB08_usa + (temp_a1_3 < temp_a0);
-                if ((temp_a0_2 < var_t0_2) || ((var_t0_2 == temp_a0_2) && (temp_a1_3 < var_t1))) {
+                temp_a1_4 = *(&B_8018EB08_usa + 4) + temp_a0;
+                temp_a0_2 = B_8018EB08_usa + (temp_a1_4 < temp_a0);
+                if ((temp_a0_2 < var_t0_2) || ((var_t0_2 == temp_a0_2) && (temp_a1_4 < var_t1))) {
+                    #if 0
                     var_a0_3 = 0;
-                    var_v1_2 = &B_801C6E48_usa;
+                    var_v1_2 = B_801C6E48_usa;
                     do {
                         var_a0_3 += 1;
                         *var_v1_2 &= ~1;
                         var_v1_2 += 4;
                     } while (var_a0_3 < 2);
+                    #else
+                    func_8003E684_usa();
+                    #endif
 loop_78:
-                    temp_a1_4 = B_8018EB0C_usa + sp9C;
-                    temp_a2_2 = B_8018EB00_usa - 1;
-                    B_8018EB08_usa += temp_a1_4 < sp9C;
-                    B_8018EB0C_usa = temp_a1_4;
-                    B_8018EB00_usa = temp_a2_2;
-                    if (temp_a2_2 != 0) {
+
+                    #if 0
+                    temp_a1_5 = *(&B_8018EB08_usa + 4) + sp9C;
+                    B_8018EB08_usa += temp_a1_5 < sp9C;
+                    *(&B_8018EB08_usa + 4) = temp_a1_5;
+                    #else
+                    B_8018EB08_usa += sp9C;
+                    #endif
+
+                    B_8018EB00_usa--;
+                    if (B_8018EB00_usa != 0) {
                         var_s1_2 = B_8018EAF4_usa;
-                        temp_s3_2 = B_8018EA50_usa + spA4;
+                        temp_s3_2 = &B_8018EA50_usa->unk_00000[spA4];
+
+                        #if 0
 loop_61:
+
+                        #if 0
                         osInvalDCache((void *) temp_s2, 8);
                         do {
 
                         } while (osPiStartDma(&B_8018EA98_usa, 0, 0, var_s1_2, (void *) temp_s2, 8U, &B_8018EAB0_usa) == -1);
                         osRecvMesg(&B_8018EAB0_usa, NULL, 1);
+                        #else
+                        romcpy(temp_s2, var_s1_2, 8, 0, &B_8018EA98_usa, &B_8018EAB0_usa);
+                        #endif
+
                         temp_s0_2 = temp_s2->size;
                         var_s1_3 = var_s1_2 + 8;
                         if (temp_s2->type != 1) {
@@ -933,30 +959,41 @@ loop_61:
                             goto loop_61;
                         }
                         if (temp_s0_2 != 0) {
+                            #if 0
                             osInvalDCache(temp_s3_2, temp_s0_2);
                             do {
 
                             } while (osPiStartDma(&B_8018EA98_usa, 0, 0, var_s1_3, temp_s3_2, (u32) temp_s0_2, &B_8018EAB0_usa) == -1);
                             osRecvMesg(&B_8018EAB0_usa, NULL, 1);
+                            #else
+                            romcpy(temp_s3_2, var_s1_3, temp_s0_2, 0, &B_8018EA98_usa, &B_8018EAB0_usa);
+                            #endif
                             var_s1_3 += temp_s0_2;
                         }
+                        #else
+                        var_s1_3 = func_8003F2F0_usa(temp_s2, temp_s3_2, 1, var_s1_2, &B_8018EA98_usa, &B_8018EAB0_usa);
+                        #endif
+
                         B_8018EAF4_usa = var_s1_3;
                         if (temp_s2->format == 0) {
-                            if (B_80192F64_usa == 0) {
+                            #if 0
+                            if (B_80192F64_usa == false) {
                                 var_a0_4 = 0;
                                 var_a1 = 0;
                             } else {
                                 temp_ret_4 = osGetTime();
                                 temp_v1_5 = (u32) temp_ret_4;
-                                temp_a1_5 = temp_v1_5 - B_80192F7C_usa;
-                                temp_ret_5 = __udivdi3((((temp_ret_4 - B_80192F78_usa) - (temp_v1_5 < (u32) B_80192F7C_usa)) << 6) | (temp_a1_5 >> 0x1A), temp_a1_5 << 6, 0, 0xBB8);
+                                temp_a1_6 = *(&B_80192F78_usa + 4);
+                                temp_a1_7 = temp_v1_5 - temp_a1_6;
+                                temp_ret_5 = __udivdi3((((temp_ret_4 - B_80192F78_usa) - (temp_v1_5 < temp_a1_6)) << 6) | (temp_a1_7 >> 0x1A), temp_a1_7 << 6, 0, 0xBB8U);
                                 var_s0_6 = temp_ret_5;
                                 var_s1_4 = (u32) temp_ret_5;
                                 if (B_80192F68_usa != 0) {
-                                    temp_v1_6 = B_80192F74_usa * 0x1F;
-                                    temp_v0_3 = (((B_80192F70_usa << 5) | ((u32) B_80192F74_usa >> 0x1B)) - B_80192F70_usa) - ((u32) (B_80192F74_usa << 5) < (u32) B_80192F74_usa);
-                                    temp_a1_6 = B_80192F74_usa * 0x3D09;
-                                    temp_ret_6 = __udivdi3(((((((((temp_v0_3 << 6) | (temp_v1_6 >> 0x1A)) - temp_v0_3) - ((u32) (B_80192F74_usa * 0x7C0) < temp_v1_6)) * 8) | ((u32) (B_80192F74_usa * 0x7A1) >> 0x1D)) + B_80192F70_usa + (temp_a1_6 < (u32) B_80192F74_usa)) << 6) | (temp_a1_6 >> 0x1A), B_80192F74_usa * 0xF4240, 0, B_80192F68_usa);
+                                    temp_t1_2 = *(&B_80192F70_usa + 4);
+                                    temp_v1_6 = temp_t1_2 * 0x1F;
+                                    temp_v0_3 = (((B_80192F70_usa << 5) | (temp_t1_2 >> 0x1B)) - B_80192F70_usa) - ((u32) (temp_t1_2 << 5) < temp_t1_2);
+                                    temp_a1_8 = temp_t1_2 * 0x3D09;
+                                    temp_ret_6 = __udivdi3(((((((((temp_v0_3 << 6) | (temp_v1_6 >> 0x1A)) - temp_v0_3) - ((u32) (temp_t1_2 * 0x7C0) < temp_v1_6)) * 8) | ((u32) (temp_t1_2 * 0x7A1) >> 0x1D)) + B_80192F70_usa + (temp_a1_8 < temp_t1_2)) << 6) | (temp_a1_8 >> 0x1A), temp_t1_2 * 0xF4240, 0, B_80192F68_usa);
                                     temp_v1_7 = (u32) temp_ret_6;
                                     var_s1_4 += temp_v1_7;
                                     var_s0_6 = var_s0_6 + temp_ret_6 + (var_s1_4 < temp_v1_7);
@@ -964,7 +1001,11 @@ loop_61:
                                 var_a0_4 = var_s0_6;
                                 var_a1 = var_s1_4;
                             }
-                            if (((u32) B_8018EB08_usa < var_a0_4) || ((var_a0_4 == B_8018EB08_usa) && ((u32) B_8018EB0C_usa < var_a1))) {
+                            #else
+                            var_a0_4 = func_8003E714_usa();
+                            #endif
+
+                            if (((u32) B_8018EB08_usa < var_a0_4) || ((var_a0_4 == B_8018EB08_usa) && ((u32) *(&B_8018EB08_usa + 4) < var_a1))) {
                                 goto loop_78;
                             }
                         } else {
@@ -984,8 +1025,9 @@ block_80:
                 if ((temp_s0_3 & 0xFFFF) == 2) {
                     var_s4 = var_s7;
                 } else {
+                    #if 0
 loop_82:
-                    var_v1_3 = &B_801C6E48_usa;
+                    var_v1_3 = B_801C6E48_usa;
 loop_83:
                     if (*var_v1_3 != 0) {
                         var_a0_5 += 1;
@@ -997,11 +1039,14 @@ loop_83:
                         }
                         goto loop_83;
                     }
+                    #else
+                    var_a0_5 = func_8003E6B8_usa();
+                    #endif
                     var_s4 = var_a0_5;
-                    temp_s1_3 = &(&B_801AB620_usa)[var_a0_5];
+                    temp_s1_3 = &B_801AB620_usa[var_a0_5];
                     hvqtask.t.flags = 0;
-                    temp_v0_4 = sp94 * 2;
-                    temp_s0_4 = hvqm2DecodeSP1(B_8018EA50_usa + spA4, (u32) temp_s0_3, *temp_s1_3 + temp_v0_4, (&B_801AB620_usa)[var_s7] + temp_v0_4, B_8018EA50_usa + 0x19A10, (HVQM2Arg *) &B_801AABA0_usa, B_8018EA50_usa + 0x1E520);
+                    temp_s0_4 = hvqm2DecodeSP1(&B_8018EA50_usa->unk_00000[spA4], (u32) temp_s0_3, (u16 *) &(*temp_s1_3)[sp94], (u16 *) &B_801AB620_usa[var_s7][sp94], B_8018EA50_usa + 0x19A10, (HVQM2Arg *) &B_801AABA0_usa, B_8018EA50_usa + 0x1E520);
+
                     osWritebackDCacheAll();
                     if ((s32) temp_s0_4 > 0) {
                         osInvalDCache(*temp_s1_3, 0x25800);
@@ -1011,19 +1056,33 @@ loop_83:
                         osRecvMesg(&B_8018EAD0_usa, NULL, 1);
                     }
                 }
+
                 if (sp6C & 0x1000) {
-                    func_80021414_usa(sp40, 0xF2, 0xD0, (&B_801AB620_usa)[var_s4]);
+                    func_80021414_usa(sp40, 0xF2, 0xD0, B_801AB620_usa[var_s4]);
                 }
-                temp_a0_3 = &(&B_801C6E48_usa)[var_s4];
+
+                #if 0
+                temp_a0_3 = &B_801C6E48_usa[var_s4];
                 *temp_a0_3 |= 1;
-                if ((((u32) ~var_s7 >> 0x1F) & (var_s7 != var_s4)) && (var_s7 >= 0)) {
-                    temp_v0_5 = &(&B_801C6E48_usa)[var_s7];
-                    *temp_v0_5 &= ~1;
+                #else
+                func_8003E638_usa(var_s4);
+                #endif
+
+                if ((var_s7 >= 0) && (var_s7 != var_s4)) {
+                    #if 0
+                    if (var_s7 >= 0) {
+                        temp_v0_4 = &B_801C6E48_usa[var_s7];
+                        *temp_v0_4 &= ~1;
+                    }
+                    #else
+                    func_8003E658_usa(var_s7);
+                    #endif
                 }
-                temp_s1_4 = (&B_801AB620_usa)[var_s4];
-                temp_s0_6 = &(&B_801C6E48_usa)[var_s4];
+                temp_s1_4 = B_801AB620_usa[var_s4];
+                temp_s0_6 = &B_801C6E48_usa[var_s4];
                 temp_s2_2 = B_8018EB08_usa;
-                temp_s3_3 = B_8018EB0C_usa;
+                temp_s3_3 = *(&B_8018EB08_usa + 4);
+                #if 0
                 *temp_s0_6 |= 2;
 loop_95:
                 if (B_80192F20_usa >= 2) {
@@ -1031,20 +1090,23 @@ loop_95:
                     goto loop_95;
                 }
                 temp_v1_8 = B_80192F24_usa * 0x10;
-                temp_v0_6 = B_80192F24_usa + 1;
-                *(&B_80192F00_usa + temp_v1_8) = temp_s2_2;
-                *(&B_80192F04_usa + temp_v1_8) = temp_s3_3;
-                *(&B_80192F08_usa + temp_v1_8) = temp_s1_4;
-                *(&B_80192F0C_usa + temp_v1_8) = temp_s0_6;
-                B_80192F24_usa = temp_v0_6;
+                temp_v0_5 = B_80192F24_usa + 1;
+                B_80192F00_usa[B_80192F24_usa].disptime = temp_s2_2;
+                // *(B_80192F00_usa + 4 + temp_v1_8) = temp_s3_3;
+                *(&B_80192F00_usa->vaddr + temp_v1_8) = temp_s1_4;
+                *(&B_80192F00_usa->statP + temp_v1_8) = temp_s0_6;
+                B_80192F24_usa = temp_v0_5;
                 var_s7 = var_s4;
-                if (temp_v0_6 == 2) {
+                if (temp_v0_5 == 2) {
                     B_80192F24_usa = 0;
                 }
                 B_80192F20_usa += 1;
-                temp_t1 = B_8018EB0C_usa + sp9C;
-                B_8018EB08_usa += temp_t1 < sp9C;
-                B_8018EB0C_usa = temp_t1;
+                #else
+                func_8003F200_usa(temp_s1_4, temp_s0_6, temp_s2_2);
+                #endif
+                temp_t1_3 = *(&B_8018EB08_usa + 4) + sp9C;
+                B_8018EB08_usa += temp_t1_3 < sp9C;
+                *(&B_8018EB08_usa + 4) = temp_t1_3;
                 B_8018EB00_usa -= 1;
                 if (osRecvMesg(&B_801AB7F0_usa, NULL, 0) == 0) {
                     do {
@@ -1064,11 +1126,13 @@ loop_95:
                 }
             }
         }
+
         if (var_s7 >= 0) {
-            temp_s1_5 = (&B_801AB620_usa)[var_s7];
-            temp_s0_7 = &(&B_801C6E48_usa)[var_s7];
+            temp_s1_5 = B_801AB620_usa[var_s7];
+            temp_s0_7 = &B_801C6E48_usa[var_s7];
             temp_s2_3 = B_8018EB08_usa;
-            temp_s3_4 = B_8018EB0C_usa;
+            temp_s3_4 = *(&B_8018EB08_usa + 4);
+            #if 0
             *temp_s0_7 |= 2;
 loop_108:
             if (B_80192F20_usa >= 2) {
@@ -1076,16 +1140,19 @@ loop_108:
                 goto loop_108;
             }
             temp_v1_9 = B_80192F24_usa * 0x10;
-            temp_v0_7 = B_80192F24_usa + 1;
-            *(&B_80192F00_usa + temp_v1_9) = temp_s2_3;
-            *(&B_80192F04_usa + temp_v1_9) = temp_s3_4;
-            *(&B_80192F08_usa + temp_v1_9) = temp_s1_5;
-            *(&B_80192F0C_usa + temp_v1_9) = temp_s0_7;
-            B_80192F24_usa = temp_v0_7;
-            if (temp_v0_7 == 2) {
+            temp_v0_6 = B_80192F24_usa + 1;
+            B_80192F00_usa[B_80192F24_usa].disptime = temp_s2_3;
+            // *(B_80192F00_usa + 4 + temp_v1_9) = temp_s3_4;
+            *(&B_80192F00_usa->vaddr + temp_v1_9) = temp_s1_5;
+            *(&B_80192F00_usa->statP + temp_v1_9) = temp_s0_7;
+            B_80192F24_usa = temp_v0_6;
+            if (temp_v0_6 == 2) {
                 B_80192F24_usa = 0;
             }
             B_80192F20_usa += 1;
+            #else
+            func_8003F200_usa(temp_s1_5, temp_s0_7, temp_s2_3);
+            #endif
         }
         var_s0_7 = 0;
         if (sp8C == 0) {
@@ -1115,28 +1182,28 @@ loop_114:
             do {
                 temp_a0_4 = var_a0_6 + 4;
                 var_a1_2 -= 1;
-                *var_v1_4 = *var_a0_6;
+                *var_v1_4 = (s32) *var_a0_6;
                 temp_v1_10 = var_v1_4 + 4;
                 temp_a0_5 = temp_a0_4 + 4;
-                *temp_v1_10 = *temp_a0_4;
+                *temp_v1_10 = (s32) *temp_a0_4;
                 temp_v1_11 = temp_v1_10 + 4;
                 temp_a0_6 = temp_a0_5 + 4;
-                *temp_v1_11 = *temp_a0_5;
+                *temp_v1_11 = (s32) *temp_a0_5;
                 temp_v1_12 = temp_v1_11 + 4;
                 temp_a0_7 = temp_a0_6 + 4;
-                *temp_v1_12 = *temp_a0_6;
+                *temp_v1_12 = (s32) *temp_a0_6;
                 temp_v1_13 = temp_v1_12 + 4;
                 temp_a0_8 = temp_a0_7 + 4;
-                *temp_v1_13 = *temp_a0_7;
+                *temp_v1_13 = (s32) *temp_a0_7;
                 temp_v1_14 = temp_v1_13 + 4;
                 temp_a0_9 = temp_a0_8 + 4;
-                *temp_v1_14 = *temp_a0_8;
+                *temp_v1_14 = (s32) *temp_a0_8;
                 temp_v1_15 = temp_v1_14 + 4;
                 temp_a0_10 = temp_a0_9 + 4;
-                *temp_v1_15 = *temp_a0_9;
+                *temp_v1_15 = (s32) *temp_a0_9;
                 temp_v1_16 = temp_v1_15 + 4;
                 var_a0_6 = temp_a0_10 + 4;
-                *temp_v1_16 = *temp_a0_10;
+                *temp_v1_16 = (s32) *temp_a0_10;
                 var_v1_4 = temp_v1_16 + 4;
             } while (var_a1_2 != -1);
             var_s0_8 = 0;
@@ -1161,27 +1228,29 @@ loop_123:
             do {
                 var_v1_5 = &D_803B5000;
                 var_a1_3 = 0x95FF;
-loop_127:
-                *var_v1_5 = 0;
-                var_a1_3 -= 1;
-                var_v1_5 += 4;
-                if (var_a1_3 != -1) {
-                    goto loop_127;
+
+                while (var_a1_3 != -1) {
+                    *var_v1_5 = 0;
+                    var_v1_5++;
+                    var_a1_3 -= 1;
                 }
+
+
                 var_v1_6 = &D_803DA800;
                 var_a1_4 = 0x95FF;
-loop_129:
-                *var_v1_6 = 0;
-                var_a1_4 -= 1;
-                var_v1_6 += 4;
-                if (var_a1_4 != -1) {
-                    goto loop_129;
+
+                while (var_a1_4 != -1) {
+                    *var_v1_6 = 0;
+                    var_v1_6++;
+                    var_a1_4 -= 1;
                 }
+
             } while (sp8C != 0);
         }
         osViBlack(0U);
         var_v0 = sp84;
     }
+
     return var_v0;
 }
 #else
