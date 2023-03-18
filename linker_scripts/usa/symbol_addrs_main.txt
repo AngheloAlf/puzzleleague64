@@ -2960,7 +2960,7 @@ B_801AAB9C_usa = 0x801AAB9C; //
 B_801AABA0_usa = 0x801AABA0; //
 
 B_801AB61C_usa = 0x801AB61C; //
-B_801AB620_usa = 0x801AB620; // size:0x8
+gCfbBuffers = 0x801AB620; // size:0x8
 B_801AB628_usa = 0x801AB628; //
 
 B_801AB7E0_usa = 0x801AB7E0; //

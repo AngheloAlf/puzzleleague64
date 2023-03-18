@@ -22,7 +22,7 @@ void Cfb_ReleaseAll(void);
 s32 Cfb_GetCurrentIndex(void);
 
 
-extern CFBPix *B_801AB620_usa[CFB_NUM];
+extern CFBPix *gCfbBuffers[CFB_NUM];
 extern u32 gCfbStatus[CFB_NUM];
 
 

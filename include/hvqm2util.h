@@ -39,4 +39,6 @@ typedef struct struct_8018EA50_usa {
 
 extern struct_8018EA50_usa *B_8018EA50_usa;
 
+extern ADPCMstate B_8018EB10_usa;
+
 #endif
