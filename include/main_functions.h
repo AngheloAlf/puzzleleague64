@@ -235,7 +235,7 @@ s32 func_8001CAD0_usa(const char *, u32 *);
 // void func_8001CC74_usa();
 // void func_8001CC7C_usa();
 // void func_8001D1F8_usa();
-void func_8001D278_usa();
+s32 func_8001D278_usa(void);
 // void func_8001D304_usa();
 // void func_8001D310_usa();
 // void func_8001D524_usa();
