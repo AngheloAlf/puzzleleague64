@@ -21,7 +21,42 @@ INLINE void RomCopy(void *dest, romoffset_t src, size_t len, s32 pri, OSIoMesg *
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/hvqm2util", func_8003E60C_eur);
+extern OSIoMesg B_8018DB98_eur;
+
+typedef struct struct_8003E60C_eur_s0 {
+    /* 0x0 */ u8 unk_0;
+    /* 0x1 */ u8 unk_1;
+    /* 0x2 */ u8 unk_2;
+    /* 0x3 */ u8 unk_3;
+    /* 0x4 */ s32 unk_4;
+    /* 0x8 */ UNK_TYPE1 unk_8[0x4];
+    /* 0xC */ s32 unk_C;
+} struct_8003E60C_eur_s0; // size = 0x10
+
+extern u32 B_8018DBFC_eur;
+extern u32 B_8018DB58_eur;
+
+INLINE void func_8003E60C_eur(const char *arg0, HVQM2Header *arg1) {
+    u8 sp20[sizeof(struct_8003E60C_eur_s0) + 0x10];
+    u32 sp40;
+    struct_8003E60C_eur_s0 *temp_s0;
+
+    if (func_8001CAD0_usa(arg0, &sp40) == 0) {
+        B_8018DBFC_eur = B_8018DB58_eur + 0x3C;
+        return;
+    }
+
+    temp_s0 = OS_DCACHE_ROUNDUP_ADDR(sp20);
+    B_8018DBFC_eur = sp40 + sizeof(struct_8003E60C_eur_s0);
+    RomCopy(temp_s0, sp40, sizeof(struct_8003E60C_eur_s0), OS_MESG_PRI_NORMAL, &B_8018DB98_eur, &B_8018EAB0_usa);
+
+    arg1->audio_format = temp_s0->unk_0;
+    arg1->channels = temp_s0->unk_1;
+    arg1->sample_bits = temp_s0->unk_2;
+    arg1->audio_quantize_step = temp_s0->unk_3;
+    arg1->total_audio_records = temp_s0->unk_4;
+    arg1->max_audio_record_size = temp_s0->unk_C;
+}
 #endif
 
 #if VERSION_USA || VERSION_EUR
@@ -478,16 +513,6 @@ u32 HVQM2Util_GetNextAudioRecord(void *arg0) {
 
 #if VERSION_USA
 #ifdef NON_MATCHING
-extern OSMesg B_8018EA90_usa[1];
-extern OSIoMesg B_8018EA98_usa;
-extern OSMesgQueue B_8018EAB0_usa;
-extern OSMesg B_8018EAC8_usa[1];
-extern OSMesgQueue B_8018EAD0_usa;
-extern OSMesg B_8018EAE8_usa[1];
-extern OSThread B_8019CFA0_usa;
-extern HVQM2Arg B_801AABA0_usa;
-extern OSContPad B_801C7228_usa;
-
 typedef struct struct_8021AAE0_usa {
     /* 0x00 */ OSMesgQueue unk_00;
     /* 0x18 */ UNK_TYPE1 unk_18[0x58];
@@ -626,7 +651,7 @@ s32 HVQM2Util_Play(const char *arg0, u32 arg1, void *arg2) {
 
         osViBlack(1U);
 
-        RomCopy(temp_s1, gHVQM2UtilCurrentVideoRomAddress, 0x3C, 0, &B_8018EA98_usa, &B_8018EAB0_usa);
+        RomCopy(temp_s1, gHVQM2UtilCurrentVideoRomAddress, 0x3C, OS_MESG_PRI_NORMAL, &B_8018EA98_usa, &B_8018EAB0_usa);
 
         gHVQM2UtilTotalVideoFrames = *(u32 *)&temp_s1->total_frames;
         sp9C = *(u32 *)&temp_s1->usec_per_frame;
@@ -867,10 +892,8 @@ tkAudioProc HVQM2Util_Rewind(void) {
 #endif
 
 #if VERSION_EUR
-extern s32 B_8018DB58_eur;
 extern s32 B_8018DBEC_eur;
 extern s32 B_8018DBF4_eur;
-extern u32 B_8018DBFC_eur;
 extern s32 B_8018DC04_eur;
 
 tkAudioProc HVQM2Util_Rewind(void) {
