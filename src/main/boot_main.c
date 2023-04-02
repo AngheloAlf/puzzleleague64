@@ -127,7 +127,7 @@ void func_80000630_usa(void) {
     func_80046E10_usa();
     func_80003E90_usa();
     fileSetup();
-    func_80007204_usa();
+    titleSetup();
     func_800222D0_usa();
     func_8001EC9C_usa();
     func_8002B570_usa();

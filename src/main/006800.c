@@ -5,6 +5,7 @@
 #include "main_functions.h"
 #include "main_variables.h"
 #include "hvqm2util.h"
+#include "the_game.h"
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/006800", func_80005C00_usa);
@@ -445,5 +446,24 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/006800", func_80006EC4_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/006800", func_80007204_usa);
+void titleSetup(void) {
+    s32 i;
+
+    B_8018A7F0_usa = 0x78;
+    B_8018A808_usa = 0;
+    B_FLT_8018A7FC_usa = 0.0f;
+    B_FLT_8018A800_usa = 0.0f;
+    B_FLT_8018A804_usa = 0.0f;
+    B_8021BA98_usa = 0;
+    B_8018A7F8_usa = 0;
+    B_801AB8E0_usa = 0x300;
+    B_8021BEA4_usa = 0;
+    B_8021BEA8_usa = 0;
+
+    for (i = 0; i < ARRAY_COUNT(B_801A6DB8_usa); i++) {
+        menuInitUser(i);
+    }
+
+    func_80046F8C_usa();
+}
 #endif
