@@ -1,3 +1,7 @@
+/**
+ * Original filename: main.c
+ */
+
 #include "libultra.h"
 #include "include_asm.h"
 #include "macros_defines.h"
@@ -42,7 +46,7 @@ void bootproc(void) {
 void Idle_ThreadEntry(void *arg) {
     osCreatePiManager(OS_PRIORITY_PIMGR, &sPiMgrCmdQueue, sPiMgrCmdBuff, ARRAY_COUNT(sPiMgrCmdBuff));
 
-    osCreateThread(&sMainThread, 6, Main_ThreadEntry, arg, STACK_TOP(sMainStack), 0xA);
+    osCreateThread(&sMainThread, 6, pon_main, arg, STACK_TOP(sMainStack), 0xA);
 
     if (D_800B3AC4_usa == 0) {
         osStartThread(&sMainThread);
@@ -122,7 +126,7 @@ void func_80000630_usa(void) {
     func_80001330_usa();
     func_80046E10_usa();
     func_80003E90_usa();
-    func_8001D278_usa();
+    fileSetup();
     func_80007204_usa();
     func_800222D0_usa();
     func_8001EC9C_usa();
@@ -131,30 +135,33 @@ void func_80000630_usa(void) {
     HVQM2Util_80040A4C_usa();
 }
 
-void Main_ThreadEntry(void *arg UNUSED) {
+/**
+ * Original name: pon_main
+ */
+void pon_main(void *arg UNUSED) {
     s32 var_s0 = 0;
 
     func_80000630_usa();
-    B_8019CEC0_usa = 0x2C;
-    D_800BE348_usa = 0x1F4;
-    D_800BE344_usa = -1;
+    gDemo = 0x2C;
+    gMain = 0x1F4;
+    gReset = -1;
     B_801A6D7C_usa[0] = 1;
 
     while (true) {
         B_801A6D7C_usa[1] = 0;
 
-        switch (D_800BE348_usa) {
+        switch (gMain) {
             case 0x258:
             case 0x2BC:
             case 0x28A:
                 B_801A6D7C_usa[0] = 1;
-                B_801F9CB8_usa = 0;
-                var_s0 = func_800009E4_usa(var_s0);
+                gAllVertex = 0;
+                var_s0 = doMenuLoop(var_s0);
                 break;
 
             case 0x383:
                 B_801A6D7C_usa[0] = 2;
-                var_s0 = func_800009E4_usa(var_s0);
+                var_s0 = doMenuLoop(var_s0);
                 break;
 
             case 0x34C:
@@ -166,18 +173,21 @@ void Main_ThreadEntry(void *arg UNUSED) {
             case 0x36D:
             case 0x341:
             case 0x1F4:
-                var_s0 = func_800009E4_usa(var_s0);
+                var_s0 = doMenuLoop(var_s0);
                 break;
 
             default:
-                var_s0 = func_80000EF8_usa(var_s0);
+                var_s0 = doGameLoop(var_s0);
                 break;
         }
     }
 }
 
 #ifdef NON_EQUIVALENT
-s32 func_800009E4_usa(s32 arg0) {
+/**
+ * Original name: doMenuLoop
+ */
+s32 doMenuLoop(s32 arg0) {
     s16 *sp10;
     s32 sp14;
     s32 *var_v1;
@@ -247,21 +257,21 @@ s32 func_800009E4_usa(s32 arg0) {
                 }
 
                 osRecvMesg(&B_801AB988_usa, NULL, 1);
-                if (((D_800BE348_usa == 0x384) || (D_800BE348_usa == 0x341))) {
+                if (((gMain == 0x384) || (gMain == 0x341))) {
                     func_80047050_usa();
                 } else {
                     func_80047208_usa();
                 }
 
-                if ((B_801AB8E0_usa & 0x80) && ((D_800BE348_usa == 0x384) || (D_800BE348_usa == 0x34C)) &&
+                if ((B_801AB8E0_usa & 0x80) && ((gMain == 0x384) || (gMain == 0x34C)) &&
                     (func_80089AEC_usa(&sp14) != 0)) {
-                    D_800BE348_usa = 0x1F4;
-                    D_800BE344_usa = -1;
+                    gMain = 0x1F4;
+                    gReset = -1;
                     var_s1 = 0;
                 } else {
-                    temp_s0_2 = D_800BE348_usa;
+                    temp_s0_2 = gMain;
 
-                    if (D_800BE344_usa == 0) {
+                    if (gReset == 0) {
                         if (temp_s0_2 < 0x384) {
                             switch (temp_s0_2) { /* switch 1; irregular */
                                 case 0x1F4:      /* switch 1 */
@@ -299,13 +309,13 @@ s32 func_800009E4_usa(s32 arg0) {
                                     break;
                             }
 
-                            var_v0_3 = temp_s0_2 == D_800BE348_usa;
+                            var_v0_3 = temp_s0_2 == gMain;
                         } else if ((temp_s0_2 == 0x384) || (temp_s0_2 == 0x388)) {
                             func_800326A0_usa();
-                            var_v0_3 = ((D_800BE348_usa == 0x387) || (D_800BE348_usa == 0x2BC)) == 0;
+                            var_v0_3 = ((gMain == 0x387) || (gMain == 0x2BC)) == 0;
                         } else {
                             func_8003E4BC_usa();
-                            var_v0_3 = (D_800BE348_usa >= 0x38E);
+                            var_v0_3 = (gMain >= 0x38E);
                         }
                         var_s1 &= -var_v0_3;
                     }
@@ -359,10 +369,13 @@ s32 func_800009E4_usa(s32 arg0) {
     return arg0;
 }
 #else
-INCLUDE_ASM("asm/usa/nonmatchings/main/boot_main", func_800009E4_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/boot_main", doMenuLoop);
 #endif
 
-INCLUDE_ASM("asm/usa/nonmatchings/main/boot_main", func_80000EF8_usa);
+/**
+ * Original name: doGameLoop
+ */
+INCLUDE_ASM("asm/usa/nonmatchings/main/boot_main", doGameLoop);
 #endif
 
 #if VERSION_EUR

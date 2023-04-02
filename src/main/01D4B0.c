@@ -75,18 +75,21 @@ void func_80001CAC_usa(uintptr_t, UNK_PTR, size_t); /* extern */
 extern u32 B_8018ABB0_usa;
 extern u32 B_8018E3B8_usa;
 extern u32 B_8018E3BC_usa;
-extern u32 B_8018E3C0_usa;
+extern u32 gnFileCount;
 extern u32 D_9BDB40[];
 
 #ifdef NON_MATCHING
+/**
+ * Original name: fileSetup
+ */
 // rodata alignment issues
-s32 func_8001D278_usa(void) {
-    B_8018E3C0_usa = -1U;
+s32 fileSetup(void) {
+    gnFileCount = -1U;
     B_8018E3B8_usa = -1U;
     B_8018E3BC_usa = -1U;
     func_80001CAC_usa((uintptr_t)D_9BDB40, &B_8018ABB0_usa, 0x3800);
     B_8018E3B8_usa = -1U;
-    B_8018E3C0_usa = B_8018ABB0_usa;
+    gnFileCount = B_8018ABB0_usa;
     if (B_8018ABB0_usa >= 0x256U) {
         osSyncPrintf("fileSetup: Too many files for existing buffersize!");
     }
@@ -94,7 +97,7 @@ s32 func_8001D278_usa(void) {
     return 0;
 }
 #else
-INCLUDE_ASM("asm/usa/nonmatchings/main/01D4B0", func_8001D278_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/01D4B0", fileSetup);
 #endif
 #endif
 

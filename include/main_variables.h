@@ -381,8 +381,8 @@ extern s32 D_800B3AC4_usa;
 // extern UNK_TYPE D_800BDB68_usa;
 // extern UNK_TYPE D_800BE1E8_usa;
 extern s32 D_800BE340_usa;
-extern s32 D_800BE344_usa;
-extern s32 D_800BE348_usa;
+extern s32 gReset; /* Original name: gReset */
+extern s32 gMain; /* Original name: gMain */
 // extern UNK_TYPE D_800BE34C_usa;
 // extern UNK_TYPE D_800BE350_usa;
 // extern UNK_TYPE D_800BE360_usa;
@@ -1015,7 +1015,7 @@ extern OSThread sIdleThread;
 // extern UNK_TYPE B_8018ABB8_usa;
 // extern UNK_TYPE B_8018E3B8_usa;
 // extern UNK_TYPE B_8018E3BC_usa;
-// extern UNK_TYPE B_8018E3C0_usa;
+// extern UNK_TYPE gnFileCount;
 // extern UNK_TYPE B_8018E3D0_usa;
 // extern UNK_TYPE B_8018E3E0_usa;
 // extern UNK_TYPE B_8018E3E8_usa;
@@ -1397,7 +1397,7 @@ extern u32 gTimerKeeperSamplesPerSecond;
 // extern UNK_TYPE B_8019CEAC_usa;
 // extern UNK_TYPE B_8019CEB0_usa;
 // extern UNK_TYPE B_8019CEB1_usa;
-extern s32 B_8019CEC0_usa;
+extern s32 gDemo; /* Original name: gDemo */
 // extern UNK_TYPE B_8019CEC8_usa;
 // extern UNK_TYPE B_8019CECC_usa;
 // extern UNK_TYPE B_8019CED0_usa;
@@ -1918,7 +1918,7 @@ extern struct_801C7BB0_usa B_801C7BB0_usa[];
 // extern UNK_TYPE B_801F9C80_usa;
 // extern UNK_TYPE B_801F9CA4_usa;
 // extern UNK_TYPE B_801F9CA8_usa;
-extern s32 B_801F9CB8_usa;
+extern s32 gAllVertex;
 
 // extern UNK_TYPE B_801F9CC0_usa;
 // extern UNK_TYPE B_801F9CC4_usa;

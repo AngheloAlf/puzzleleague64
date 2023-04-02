@@ -21,5 +21,7 @@ ctx.c.m2c
 *.plf
 *.sym
 
+puzzle_collection/
+
 asdf.c
 asdf.txt

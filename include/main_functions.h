@@ -11,9 +11,9 @@
 // void bootproc();
 void Idle_ThreadEntry(void *arg);
 void func_80000630_usa(void);
-void Main_ThreadEntry(void *arg);
-s32 func_800009E4_usa(s32 arg0);
-s32 func_80000EF8_usa(s32 arg0);
+void pon_main(void *arg);
+s32 doMenuLoop(s32 arg0);
+s32 doGameLoop(s32 arg0);
 
 // void func_80001310_usa();
 void func_80001330_usa();
@@ -235,7 +235,7 @@ s32 func_8001CAD0_usa(const char *, u32 *);
 // void func_8001CC74_usa();
 // void func_8001CC7C_usa();
 // void func_8001D1F8_usa();
-s32 func_8001D278_usa(void);
+s32 fileSetup(void);
 // void func_8001D304_usa();
 // void func_8001D310_usa();
 // void func_8001D524_usa();
