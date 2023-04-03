@@ -88,7 +88,7 @@ segments:
       - [0x01DF10, asm, main/01DF10]
       - [0x01F8B0, asm, main/01F8B0]
       - [0x022EF0, asm, main/022EF0]
-      - [0x02C1D0, asm, main/02C1D0]
+      - [0x02C1D0, c, main/02C1D0]
       - [0x02E800, asm, main/02E800]
       - [0x031B20, asm, main/031B20]
       - [0x034FA0, asm, main/034FA0]

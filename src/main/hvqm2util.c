@@ -9,6 +9,7 @@
 #include "cfb_keep.h"
 #include "timekeeper.h"
 #include "hvqm2util.h"
+#include "file.h"
 
 #if VERSION_USA || VERSION_EUR
 INLINE void RomCopy(void *dest, romoffset_t src, size_t len, s32 pri, OSIoMesg *mb, OSMesgQueue *mq) {
@@ -41,7 +42,7 @@ INLINE void func_8003E60C_eur(const char *arg0, HVQM2Header *arg1) {
     u32 sp40;
     struct_8003E60C_eur_s0 *temp_s0;
 
-    if (func_8001CAD0_usa(arg0, &sp40) == 0) {
+    if (fileGetAddress(arg0, &sp40) == 0) {
         B_8018DBFC_eur = B_8018DB58_eur + 0x3C;
         return;
     }
@@ -522,11 +523,11 @@ typedef struct struct_8021AAE0_usa {
 extern struct_8021AAE0_usa B_8021AAE0_usa;
 
 // stack problems
-s32 HVQM2Util_Play(const char *arg0, u32 arg1, void *arg2) {
+s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
     u8 pad[0x20] UNUSED;
 
     s32 sp40;
-    u32 sp44;
+    UNK_TYPE sp44;
 
     s32 var_v0;
     s32 var_s7;
@@ -540,7 +541,7 @@ s32 HVQM2Util_Play(const char *arg0, u32 arg1, void *arg2) {
         arg2 = ALIGN_PTR(arg2);
     }
 
-    var_v0 = func_8001CAD0_usa(arg0, &sp44);
+    var_v0 = fileGetAddress(arg0, &sp44);
     if (var_v0 != 0) {
         // u8 pad2[0x8] UNUSED;
         u8 sp50[sizeof(HVQM2Record) + 0x10];
@@ -813,7 +814,7 @@ s32 HVQM2Util_Play(const char *arg0, u32 arg1, void *arg2) {
         osViSetEvent(&B_8021AAE0_usa.unk_00, (void *)0x29A, 1U);
         osSetEventMesg(4U, &B_8021AAE0_usa.unk_00, (void *)0x29B);
         osStartThread(&B_8021AAE0_usa.unk_70);
-        func_80003E90_usa();
+        InitGameAudioSystem();
 
         while (sp8C != 0) {
             v1 = (void *)&gFramebuffers[0];

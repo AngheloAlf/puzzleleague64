@@ -11,6 +11,7 @@
 #include "PR/sched.h"
 #include "buffers.h"
 #include "hvqm2util.h"
+#include "file.h"
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/boot_main", func_80000450_usa);
@@ -123,15 +124,15 @@ void func_80000630_usa(void) {
     osScAddClient(&B_8021AAA0_usa, &B_801AB810_usa, &B_801C7058_usa);
     B_801AAB9C_usa = osScGetCmdQ(&B_8021AAA0_usa);
 
-    func_80001330_usa();
-    func_80046E10_usa();
-    func_80003E90_usa();
+    InitGFX();
+    CheckController();
+    InitGameAudioSystem();
     fileSetup();
     titleSetup();
-    func_800222D0_usa();
-    func_8001EC9C_usa();
+    imageSetup();
+    bitmapSetup();
     func_8002B570_usa();
-    func_8002DAC8_usa();
+    peelSetup();
     HVQM2Util_80040A4C_usa();
 }
 
@@ -285,7 +286,7 @@ s32 doMenuLoop(s32 arg0) {
                                     break;
 
                                 case 0x36D: /* switch 1 */
-                                    func_80031894_usa();
+                                    DoBonus();
                                     break;
 
                                 case 0x378: /* switch 1 */

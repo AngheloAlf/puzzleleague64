@@ -34,7 +34,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/01D4B0", func_8001CAC4_usa);
 
 #if VERSION_USA
 #if 0
-s32 func_8001CAD0_usa(const char *arg0, u32 *arg1) {
+s32 fileGetAddress(const char *arg0, u32 *arg1) {
     struct_8001CAD0_usa_sp10 sp10;
     u32 temp;
 
@@ -50,16 +50,16 @@ s32 func_8001CAD0_usa(const char *arg0, u32 *arg1) {
     return 1;
 }
 #else
-INCLUDE_ASM("asm/usa/nonmatchings/main/01D4B0", func_8001CAD0_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/01D4B0", fileGetAddress);
 #endif
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/01D4B0", func_8001CB3C_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/01D4B0", fileOpen);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/01D4B0", func_8001CC74_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/01D4B0", fileClose);
 #endif
 
 #if VERSION_USA

@@ -7,7 +7,7 @@
 
 // extern UNK_TYPE gBufferHeap[];
 
-// extern UNK_TYPE D_803B0500[];
+extern u8 D_803B0500[];
 
 extern u16 gFramebuffers[2][SCREEN_HEIGHT * SCREEN_WIDTH];
 
