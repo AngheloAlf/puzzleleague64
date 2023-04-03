@@ -37,9 +37,9 @@ typedef struct struct_8003E60C_eur_s0 {
 extern u32 B_8018DBFC_eur;
 extern u32 B_8018DB58_eur;
 
-INLINE void func_8003E60C_eur(const char *arg0, HVQM2Header *arg1) {
+INLINE void func_8003E60C_eur(File *arg0, HVQM2Header *arg1) {
     u8 sp20[sizeof(struct_8003E60C_eur_s0) + 0x10];
-    u32 sp40;
+    UNK_TYPE sp40;
     struct_8003E60C_eur_s0 *temp_s0;
 
     if (fileGetAddress(arg0, &sp40) == 0) {
