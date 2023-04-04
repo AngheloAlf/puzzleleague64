@@ -15,7 +15,6 @@
 INCLUDE_ASM("asm/usa/nonmatchings/main/peel", func_8002C2C0_usa);
 #endif
 
-
 typedef struct struct_gaTile_unk_000 {
     /* 0x00 */ u16 unk_00[0x28];
 } struct_gaTile_unk_000; // size = 0x50
@@ -34,7 +33,7 @@ extern UNK_TYPE gnWaveData;
 extern s32 B_8018E93C_usa;
 extern s32 B_801AB8E4_usa;
 
-UNK_RET func_80001CAC_usa(UNK_PTR, UNK_TYPE, UNK_TYPE);                   /* extern */
+UNK_RET func_80001CAC_usa(UNK_PTR, UNK_TYPE, UNK_TYPE);
 extern s32 B_8018E584_usa;
 extern s32 B_8018E58C_usa;
 extern s32 B_8018E590_usa;
@@ -125,7 +124,7 @@ void func_8002CC18_usa(void) {
                 if (B_8018E934_usa >= 0x1F) {
                     gbFadeAlpha = value;
                 } else {
-                    func_80001CAC_usa((void*)(gnWaveData + (B_8018E934_usa * 0x33A)), B_8018E93C_usa, 0x33A);
+                    func_80001CAC_usa((void *)(gnWaveData + (B_8018E934_usa * 0x33A)), B_8018E93C_usa, 0x33A);
                     if (B_8018E934_usa == 7) {
                         gbFadeAlpha = value;
                     }
@@ -157,9 +156,11 @@ void func_8002CC18_usa(void) {
                         var_t1_2 |= ~0xFFF;
                     }
 
-                    //B_8018E660_usa[var_t3] = (temp_v1_3 & 0xFF) | (((var_t0_2 + (var_a1_2 * 2)) & 0xFFF) << 8) | ((var_t1_2 + (var_a3_2 * 2)) << 0x14);
+                    // B_8018E660_usa[var_t3] = (temp_v1_3 & 0xFF) | (((var_t0_2 + (var_a1_2 * 2)) & 0xFFF) << 8) |
+                    // ((var_t1_2 + (var_a3_2 * 2)) << 0x14);
                     new_var = var_t1_2 + (var_a3_2 * 2);
-                    B_8018E660_usa[var_t3] = ((temp_v1_3 & 0xFF) | (((var_t0_2 + (var_a1_2 * 2)) & 0xFFF) << 8)) | (new_var << 0x14);
+                    B_8018E660_usa[var_t3] =
+                        ((temp_v1_3 & 0xFF) | (((var_t0_2 + (var_a1_2 * 2)) & 0xFFF) << 8)) | (new_var << 0x14);
                 }
             }
             break;
