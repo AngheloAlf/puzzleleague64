@@ -14,6 +14,7 @@
 #include "file.h"
 #include "gfx.h"
 #include "controller.h"
+#include "the_game.h"
 
 #if VERSION_USA
 INLINE void func_80000450_usa(void) {
@@ -139,22 +140,22 @@ void pon_main(void *arg UNUSED) {
     gDemo = 0x2C;
     gMain = 0x1F4;
     gReset = -1;
-    B_801A6D7C_usa[0] = 1;
+    gTheGame.unk_9C0C = 1;
 
     while (true) {
-        B_801A6D7C_usa[1] = 0;
+        gTheGame.unk_9C10 = 0;
 
         switch (gMain) {
             case 0x258:
             case 0x2BC:
             case 0x28A:
-                B_801A6D7C_usa[0] = 1;
+                gTheGame.unk_9C0C = 1;
                 gAllVertex = 0;
                 var_s0 = doMenuLoop(var_s0);
                 break;
 
             case 0x383:
-                B_801A6D7C_usa[0] = 2;
+                gTheGame.unk_9C0C = 2;
                 var_s0 = doMenuLoop(var_s0);
                 break;
 

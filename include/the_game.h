@@ -149,8 +149,16 @@ typedef struct struct_801A6DB8_usa {
     /* 0x7BA */ UNK_TYPE1 unk_7BA[0x2];
 } struct_801A6DB8_usa; // size = 0x7BC
 
-// not a real var, it is part of gTheGame
-extern struct_801A6DB8_usa B_801A6DB8_usa[8];
 
+typedef struct TheGame {
+    /* 0x0000 */ UNK_TYPE1 unk_0000[0x9C0C];
+    /* 0x9C0C */ s32 unk_9C0C;
+    /* 0x9C10 */ s32 unk_9C10;
+    /* 0x9C14 */ UNK_TYPE1 unk_9C14[0x34];
+    /* 0x9C48 */ struct_801A6DB8_usa unk_9C48[8];
+} TheGame; // size >= 0xDA28
+
+
+extern TheGame gTheGame;
 
 #endif

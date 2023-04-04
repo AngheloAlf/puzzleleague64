@@ -348,8 +348,8 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_80019F44_usa);
 
 #if VERSION_USA
 s32 menuInitUser(u32 arg0) {
-    if (arg0 < ARRAY_COUNT(B_801A6DB8_usa)) {
-        struct_801A6DB8_usa *temp_s0 = &B_801A6DB8_usa[arg0];
+    if (arg0 < ARRAY_COUNT(gTheGame.unk_9C48)) {
+        struct_801A6DB8_usa *temp_s0 = &gTheGame.unk_9C48[arg0];
 
         temp_s0->unk_000 = arg0;
         temp_s0->unk_010 = 0;

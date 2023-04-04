@@ -17,7 +17,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/006800", func_80005EC0_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/006800", func_8000620C_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/006800", DrawTitle);
 #endif
 
 #if VERSION_USA
@@ -443,7 +443,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/006800", DoTitle);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/006800", func_80006EC4_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/006800", InitTitle);
 #endif
 
 #if VERSION_USA
@@ -461,7 +461,7 @@ void titleSetup(void) {
     B_8021BEA4_usa = 0;
     B_8021BEA8_usa = 0;
 
-    for (i = 0; i < ARRAY_COUNT(B_801A6DB8_usa); i++) {
+    for (i = 0; i < ARRAY_COUNT(gTheGame.unk_9C48); i++) {
         menuInitUser(i);
     }
 

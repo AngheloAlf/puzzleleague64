@@ -1411,21 +1411,6 @@ extern OSTask hvqtask;
 
 extern OSMesgQueue B_8019D158_usa;
 // extern UNK_TYPE gTheGame;
-extern s32 B_801A6D7C_usa[];
-// extern UNK_TYPE B_801A6D84_usa;
-// extern UNK_TYPE B_801A6D88_usa;
-// extern UNK_TYPE B_801A6D8C_usa;
-// extern UNK_TYPE B_801A6D90_usa;
-// extern UNK_TYPE B_801A6D94_usa;
-// extern UNK_TYPE B_801A6D98_usa;
-// extern UNK_TYPE B_801A6D9C_usa;
-// extern UNK_TYPE B_801A6D9E_usa;
-// extern UNK_TYPE B_801A6DA0_usa;
-// extern UNK_TYPE B_801A6DA4_usa;
-// extern UNK_TYPE B_801A6DA8_usa;
-// extern UNK_TYPE B_801A6DAC_usa;
-// extern UNK_TYPE B_801A6DB0_usa;
-// extern UNK_TYPE B_801A6DB4_usa;
 
 // extern UNK_TYPE B_801AAB98_usa;
 extern OSMesgQueue *B_801AAB9C_usa;
