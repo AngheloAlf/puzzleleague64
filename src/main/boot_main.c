@@ -21,10 +21,10 @@ INLINE void func_80000450_usa(void) {
     s32 var_s0;
 
     if (osRecvMesg(&B_801AB7F0_usa, NULL, OS_MESG_NOBLOCK) == 0) {
-        #if VERSION_EUR
+#if VERSION_EUR
         osViSetYScale(1.0f);
         osViBlack(1);
-        #endif
+#endif
 
         var_s0 = -1;
         func_80002D5C_usa();
@@ -132,9 +132,9 @@ void func_80000630_usa(void) {
     peelSetup();
     HVQM2Util_80040A4C_usa();
 
-    #if VERSION_EUR
+#if VERSION_EUR
     osViSetYScale(0.833);
-    #endif
+#endif
 }
 #endif
 
