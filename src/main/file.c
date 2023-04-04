@@ -75,7 +75,6 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/file", func_8001D1F8_usa);
 #endif
 
 #if VERSION_USA
-void func_80001CAC_usa(uintptr_t, UNK_PTR, size_t); /* extern */
 extern u32 B_8018ABB0_usa;
 extern u32 B_8018E3B8_usa;
 extern u32 B_8018E3BC_usa;

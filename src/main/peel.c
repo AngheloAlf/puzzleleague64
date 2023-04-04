@@ -30,10 +30,9 @@ extern UNK_PTR gapVtxPeel[];
 extern s32 B_8018E598_usa;
 extern struct_gaTile *gaTile[0x30];
 extern UNK_TYPE gnWaveData;
-extern s32 B_8018E93C_usa;
+extern void *B_8018E93C_usa;
 extern s32 B_801AB8E4_usa;
 
-UNK_RET func_80001CAC_usa(UNK_PTR, UNK_TYPE, UNK_TYPE);
 extern s32 B_8018E584_usa;
 extern s32 B_8018E58C_usa;
 extern s32 B_8018E590_usa;
@@ -124,7 +123,7 @@ void func_8002CC18_usa(void) {
                 if (B_8018E934_usa >= 0x1F) {
                     gbFadeAlpha = value;
                 } else {
-                    func_80001CAC_usa((void *)(gnWaveData + (B_8018E934_usa * 0x33A)), B_8018E93C_usa, 0x33A);
+                    func_80001CAC_usa((RomOffset)(gnWaveData + (B_8018E934_usa * 0x33A)), B_8018E93C_usa, 0x33A);
                     if (B_8018E934_usa == 7) {
                         gbFadeAlpha = value;
                     }
@@ -224,7 +223,7 @@ void peelSetup(void) {
     gapVtxPeel[1] = (void *)temp_a0;
 
     temp_a0 = (temp_a0 - 0x33A) & ~0xF;
-    B_8018E93C_usa = temp_a0;
+    B_8018E93C_usa = (void *)temp_a0;
 
     for (i = 0; i < ARRAY_COUNT(gaTile); i++) {
         temp_a0 = (temp_a0 - 0xC80) & ~0xF;

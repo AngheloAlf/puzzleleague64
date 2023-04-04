@@ -12,7 +12,7 @@
 #include "file.h"
 
 #if VERSION_USA || VERSION_EUR
-INLINE void RomCopy(void *dest, romoffset_t src, size_t len, s32 pri, OSIoMesg *mb, OSMesgQueue *mq) {
+INLINE void RomCopy(void *dest, RomOffset src, size_t len, s32 pri, OSIoMesg *mb, OSMesgQueue *mq) {
     osInvalDCache(dest, len);
 
     while (osPiStartDma(mb, pri, 0, src, dest, len, mq) == -1) {}
@@ -414,8 +414,8 @@ INLINE void TimeKeeper_AddVideoFrame(void *vaddr, u32 *statP, u64 disptime) {
 
 #if VERSION_USA || VERSION_EUR
 // get_record
-INLINE romoffset_t HVQM2Util_GetRecord(HVQM2Record *header, void *body, u16 type, romoffset_t src, OSIoMesg *mb,
-                                       OSMesgQueue *mq) {
+INLINE RomOffset HVQM2Util_GetRecord(HVQM2Record *header, void *body, u16 type, RomOffset src, OSIoMesg *mb,
+                                     OSMesgQueue *mq) {
     size_t bodySize;
     s32 pri = type == HVQM2_AUDIO ? OS_MESG_PRI_HIGH : OS_MESG_PRI_NORMAL;
 

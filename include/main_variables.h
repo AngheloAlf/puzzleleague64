@@ -1875,11 +1875,8 @@ extern OSMesgQueue B_801C7058_usa;
 // extern UNK_TYPE B_801C7BA0_usa;
 // extern UNK_TYPE B_801C7BAB_usa;
 // extern UNK_TYPE B_801C7BAC_usa;
-extern struct_801C7BB0_usa B_801C7BB0_usa[];
-// extern UNK_TYPE B_801E0BD0_usa;
-// extern UNK_TYPE B_801E0BF0_usa;
-// extern UNK_TYPE B_801F9C18_usa;
-// extern UNK_TYPE B_801F9C38_usa;
+extern struct_gInfo gInfo[2];
+
 // extern UNK_TYPE B_801F9C44_usa;
 // extern UNK_TYPE B_801F9C48_usa;
 // extern UNK_TYPE B_801F9C4C_usa;

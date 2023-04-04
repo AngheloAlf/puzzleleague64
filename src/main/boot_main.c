@@ -12,6 +12,7 @@
 #include "buffers.h"
 #include "hvqm2util.h"
 #include "file.h"
+#include "gfx.h"
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/boot_main", func_80000450_usa);
@@ -131,7 +132,7 @@ void func_80000630_usa(void) {
     titleSetup();
     imageSetup();
     bitmapSetup();
-    func_8002B570_usa();
+    screenSetup();
     peelSetup();
     HVQM2Util_80040A4C_usa();
 }
@@ -198,7 +199,7 @@ s32 doMenuLoop(s32 arg0) {
     s32 var_v0;
     s32 var_v0_3;
     u32 var_s2;
-    void *temp_s0;
+    struct_gInfo *temp_s0;
 
     var_s2 = 0;
     var_s1 = 1;
@@ -248,10 +249,10 @@ s32 doMenuLoop(s32 arg0) {
             case 0x1:
                 osContStartReadData(&B_801AB988_usa);
                 if (var_s2 < 2U) {
-                    temp_s0 = &B_801C7BB0_usa[arg0];
+                    temp_s0 = &gInfo[arg0];
                     func_80059F84_usa(temp_s0);
                     D_800BE340_usa += 1;
-                    if (func_800013AC_usa(temp_s0) != 0) {
+                    if (CreateMenuGfxTask(temp_s0) != 0) {
                         var_s2 += 1;
                         arg0 ^= 1;
                     }

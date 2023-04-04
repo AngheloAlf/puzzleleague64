@@ -64,12 +64,12 @@ extern s32 gTimeKeeperVideoRingIndex;
 
 extern u32 gHVQM2UtilTotalVideoFrames;
 extern u32 gHVQM2UtilTotalAudioRecords;
-extern romoffset_t gHVQM2UtilVideoStreamP;
-extern romoffset_t gHVQM2UtilAudioStreamP;
+extern RomOffset gHVQM2UtilVideoStreamP;
+extern RomOffset gHVQM2UtilAudioStreamP;
 extern u32 gHVQM2UtilRemainingAudioRecords;
 extern u32 gHVQM2UtilRemainingVideoFrames;
 extern u64 gHVQM2UtilDispTime;
 
-extern romoffset_t gHVQM2UtilCurrentVideoRomAddress;
+extern RomOffset gHVQM2UtilCurrentVideoRomAddress;
 
 #endif

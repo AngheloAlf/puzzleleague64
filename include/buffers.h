@@ -5,7 +5,7 @@
 #include "attributes.h"
 #include "macros_defines.h"
 
-// extern UNK_TYPE gBufferHeap[];
+extern u8 gBufferHeap[];
 
 extern u8 D_803B0500[];
 

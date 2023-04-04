@@ -79,7 +79,8 @@ segments:
     subalign: null
     subsegments:
       - [0x001050, c, main/boot_main]
-      - [0x001F10, asm, main/001F10]
+      - [0x001F10, c, main/001F10]
+      - [0x001F30, c, main/gfx]
       - [0x002710, asm, main/002710]
       - [0x004A90, asm, main/004A90]
       - [0x006800, c, main/006800]
@@ -87,7 +88,7 @@ segments:
       - [0x01D4B0, c, main/file]
       - [0x01DF10, asm, main/01DF10]
       - [0x01F8B0, asm, main/01F8B0]
-      - [0x022EF0, asm, main/022EF0]
+      - [0x022EF0, c, main/screen]
       - [0x02C1D0, c, main/02C1D0]
       - [0x02CEC0, c, main/peel]
       - [0x02E800, asm, main/02E800]
@@ -343,7 +344,8 @@ segments:
       - [0x0C4BF0, rodata, main/0C4BF0]
       - [0x0C4C50, rodata, main/0C4C50]
       - [0x0C4C60, rodata, main/0C4C60]
-      - [0x0C4C70, rodata, main/0C4C70]
+      - [0x0C4C70, .rodata, main/screen]
+      - [0x0C4E18, rodata, main/0C4E18]
       - [0x0C4E90, .rodata, main/peel]
       - [0x0C4ED0, rodata, main/0C4ED0]
       - [0x0C5580, rodata, main/0C5580]
@@ -410,8 +412,14 @@ segments:
       - [0x0CA4A0, c, buffers/framebuffer]
       - { start: 0x0CA4A0, type: .bss, vram: 0x803B5000, name: buffers/framebuffer }
 
-  - type: bin
+  - name: segment_0CA4A0
+    type: bin
     start: 0x0CA4A0
     follows_vram: main
+
+  - name: segment_0FB480
+    type: bin
+    start: 0x0FB480
+    follows_vram: segment_0CA4A0
 
   - [0x1FCF900]
