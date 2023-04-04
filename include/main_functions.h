@@ -7,7 +7,7 @@
 #include "version.h"
 
 
-// void func_80000450_usa();
+void func_80000450_usa(void);
 // void bootproc();
 void Idle_ThreadEntry(void *arg);
 void func_80000630_usa(void);
@@ -55,7 +55,7 @@ void func_80002DE8_usa();
 // void func_80002E34_usa();
 // void func_80002E70_usa();
 // void func_80002EB8_usa();
-// void func_80002F48_usa();
+// void SetSongTempo();
 // void func_80002F68_usa();
 // void func_80002F88_usa();
 // void func_80002F98_usa();
@@ -85,7 +85,7 @@ void LoadDataMain();
 void InitGameAudioSystem();
 // void func_80004060_usa();
 // void func_800040D8_usa();
-// void func_800045D8_usa();
+// void PlayGameSong();
 // void func_80004848_usa();
 // void func_8000486C_usa();
 // void func_800048C0_usa();
@@ -878,7 +878,7 @@ void DoTutorial();
 s32 DemoCheck(s32 *arg0);
 // void func_80089BE0_usa();
 // void func_80089E6C_usa();
-// void func_8008A7B4_usa();
+// void DoTetris();
 // void func_8008ADB4_usa();
 // void func_8008AE20_usa();
 // void func_8008AF74_usa();
