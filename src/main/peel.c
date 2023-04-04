@@ -43,7 +43,8 @@ extern f32 B_FLT_8018E924_usa;
 extern s32 D_800B6444_usa;
 
 #if VERSION_USA
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
+//#if 1
 void func_8002CC18_usa(void) {
     s32 var_a1;
     s32 var_a1_2;
@@ -66,103 +67,97 @@ void func_8002CC18_usa(void) {
 
     D_800B6444_usa++;
 
-    switch (temp) {
-        case -0x1:
-            return;
+    if (temp == -1) {
+        return;
+    } else if (temp == 7) {
+        if ((D_800B6444_usa % 4) == 0) {
+            if (B_8018E590_usa < 0x10) {
+                B_8018E590_usa *= 2;
 
-        case 0x7:
-            if ((D_800B6444_usa % 4) == 0) {
-                if (B_8018E590_usa < 0x10) {
-                    B_8018E590_usa *= 2;
+                for (var_t3 = 0; var_t3 < 0x30; var_t3++) {
+                    for (var_t1 = 0; var_t1 < 0x28; var_t1 += B_8018E590_usa) {
+                        for (var_t0 = 0; var_t0 < 0x28; var_t0 += B_8018E590_usa) {
+                            var_a0 = &gaTile[var_t3]->unk_000[var_t1].unk_00[var_t0];
+                            temp_t2 = *var_a0;
 
-                    for (var_t3 = 0; var_t3 < 0x30; var_t3++) {
-                        for (var_t1 = 0; var_t1 < 0x28; var_t1 += B_8018E590_usa) {
-                            for (var_t0 = 0; var_t0 < 0x28; var_t0 += B_8018E590_usa) {
-                                var_a0 = &gaTile[var_t3]->unk_000[var_t1].unk_00[var_t0];
-                                temp_t2 = *var_a0;
-
-                                for (var_a3 = 0; var_a3 < B_8018E590_usa; var_a3++) {
-                                    if ((var_t1 + var_a3) >= 0x28) {
-                                        break;
-                                    }
-
-                                    for (var_a1 = 0; var_a1 < B_8018E590_usa; var_a1++) {
-                                        if ((var_t0 + var_a1) < 0x28) {
-                                            *var_a0 = temp_t2;
-                                        }
-                                        var_a0++;
-                                    }
-                                    var_a0 += (0x28 - B_8018E590_usa);
+                            for (var_a3 = 0; var_a3 < B_8018E590_usa; var_a3++) {
+                                if ((var_t1 + var_a3) >= 0x28) {
+                                    break;
                                 }
+
+                                for (var_a1 = 0; var_a1 < B_8018E590_usa; var_a1++) {
+                                    if ((var_t0 + var_a1) < 0x28) {
+                                        *var_a0 = temp_t2;
+                                    }
+                                    var_a0++;
+                                }
+                                var_a0 += (0x28 - B_8018E590_usa);
                             }
                         }
                     }
-                } else {
-                    gbFadeAlpha = value;
                 }
-            }
-            break;
-
-        case 0x2:
-            B_FLT_8018E920_usa += 8.0;
-            if (B_FLT_8018E920_usa >= 64.0) {
+            } else {
                 gbFadeAlpha = value;
             }
+        }
+    } else if (temp == 2) {
+        B_FLT_8018E920_usa += 8.0;
+        if (B_FLT_8018E920_usa >= 64.0) {
+            gbFadeAlpha = value;
+        }
 
-            B_FLT_8018E924_usa = B_FLT_8018E924_usa + 4.0;
-            if (B_FLT_8018E924_usa >= 360.0) {
-                B_FLT_8018E924_usa -= 360.0;
-            }
+        B_FLT_8018E924_usa += 4.0;
+        if (B_FLT_8018E924_usa >= 360.0) {
+            B_FLT_8018E924_usa -= 360.0;
+        }
 
-            break;
-
-        case 0x1:
-            if ((D_800B6444_usa % 2) == 0) {
-                B_8018E584_usa = 4;
-                B_8018E934_usa++;
-                if (B_8018E934_usa >= 0x1F) {
+    } else if (temp == 1) {
+        if ((D_800B6444_usa % 2) == 0) {
+            B_8018E584_usa = 4;
+            B_8018E934_usa++;
+            if (B_8018E934_usa >= 0x1F) {
+                gbFadeAlpha = value;
+            } else {
+                func_80001CAC_usa(gnWaveData + (B_8018E934_usa * 0x33A), B_8018E93C_usa, 0x33A);
+                if (B_8018E934_usa == 7) {
                     gbFadeAlpha = value;
-                } else {
-                    func_80001CAC_usa((RomOffset)(gnWaveData + (B_8018E934_usa * 0x33A)), B_8018E93C_usa, 0x33A);
-                    if (B_8018E934_usa == 7) {
-                        gbFadeAlpha = value;
-                    }
                 }
             }
-            break;
+        }
+    } else if ((temp != 0xE) && (temp != 7)) {
+#define ABS(x) (((x) < 0) ? -(x) : (x))
 
-        default:
-            if ((temp != 0xE) && (temp != 7)) {
-                for (var_t3 = 0; var_t3 < 0x30; var_t3++) {
-                    temp_v1_3 = B_8018E660_usa[var_t3];
-                    var_a1_2 = temp_v1_3 & 0xF;
-                    if (temp_v1_3 & 8) {
-                        var_a1_2 = -(temp_v1_3 & 7);
-                    }
-                    temp_a0 = temp_v1_3 >> 4;
-                    var_a3_2 = temp_a0 & 0xF;
-                    if (temp_a0 & 8) {
-                        var_a3_2 = -(temp_a0 & 7);
-                    }
-                    temp_v0_2 = temp_v1_3 >> 8;
-                    var_t0_2 = temp_v0_2 & 0xFFF;
-                    if (temp_v0_2 & 0x800) {
-                        var_t0_2 |= ~0xFFF;
-                    }
-                    temp_v0_3 = temp_v1_3 >> 0x14;
-                    var_t1_2 = temp_v0_3 & 0xFFF;
-                    if (temp_v0_3 & 0x800) {
-                        var_t1_2 |= ~0xFFF;
-                    }
-
-                    // B_8018E660_usa[var_t3] = (temp_v1_3 & 0xFF) | (((var_t0_2 + (var_a1_2 * 2)) & 0xFFF) << 8) |
-                    // ((var_t1_2 + (var_a3_2 * 2)) << 0x14);
-                    new_var = var_t1_2 + (var_a3_2 * 2);
-                    B_8018E660_usa[var_t3] =
-                        ((temp_v1_3 & 0xFF) | (((var_t0_2 + (var_a1_2 * 2)) & 0xFFF) << 8)) | (new_var << 0x14);
-                }
+        for (var_t3 = 0; var_t3 < 0x30; var_t3++) {
+            temp_v1_3 = B_8018E660_usa[var_t3];
+            var_a1_2 = temp_v1_3 & 0xF;
+            if (temp_v1_3 & 8) {
+                var_a1_2 = -(temp_v1_3 & 7);
             }
-            break;
+            // var_a1_2 = ((s8)temp_v1_3) / 16;
+            // var_a1_2 = ABS((temp_v1_3)) >> 4 & 0xF;
+
+            temp_a0 = temp_v1_3 >> 4;
+            var_a3_2 = temp_a0 & 0xF;
+            if (temp_a0 & 8) {
+                var_a3_2 = -(temp_a0 & 7);
+            }
+            temp_v0_2 = temp_v1_3 >> 8;
+            var_t0_2 = temp_v0_2 & 0xFFF;
+            if (temp_v0_2 & 0x800) {
+                var_t0_2 |= ~0xFFF;
+            }
+            temp_v0_3 = temp_v1_3 >> 0x14;
+            var_t1_2 = temp_v0_3 & 0xFFF;
+            if (temp_v0_3 & 0x800) {
+                var_t1_2 |= ~0xFFF;
+            }
+
+            // B_8018E660_usa[var_t3] = (temp_v1_3 & 0xFF) | (((var_t0_2 + (var_a1_2 * 2)) & 0xFFF) << 8) | ((var_t1_2 +
+            // (var_a3_2 * 2)) << 0x14);
+            new_var = var_t1_2 + (var_a3_2 * 2);
+            B_8018E660_usa[var_t3] =
+                ((temp_v1_3 & 0xFF) | (((var_t0_2 + (var_a1_2 * 2)) & 0xFFF) << 8)) | (new_var << 0x14);
+        }
     }
 
     if (gbFadeAlpha != 0) {
