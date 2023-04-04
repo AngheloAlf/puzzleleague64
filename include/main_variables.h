@@ -380,7 +380,7 @@ extern s32 D_800B3AC4_usa;
 // extern UNK_TYPE D_800BD7B8_usa;
 // extern UNK_TYPE D_800BDB68_usa;
 // extern UNK_TYPE D_800BE1E8_usa;
-extern s32 D_800BE340_usa;
+extern s32 gCounter;
 extern s32 gReset; /* Original name: gReset */
 extern s32 gMain; /* Original name: gMain */
 // extern UNK_TYPE D_800BE34C_usa;
@@ -1736,7 +1736,7 @@ extern OSMesgQueue B_801AB7F0_usa;
 // extern UNK_TYPE B_801AB8C0_usa;
 // extern UNK_TYPE B_801AB8D8_usa;
 // extern UNK_TYPE B_801AB8DC_usa;
-extern s32 B_801AB8E0_usa;
+extern s32 gGameStatus;
 // extern UNK_TYPE B_801AB8E4_usa;
 // extern UNK_TYPE B_801AB8E8_usa;
 // extern UNK_TYPE B_801AB8EC_usa;
@@ -1751,7 +1751,7 @@ extern s32 B_801AB8E0_usa;
 // extern UNK_TYPE B_801AB980_usa;
 // extern UNK_TYPE B_801AB984_usa;
 // extern UNK_TYPE B_801AB985_usa;
-extern OSMesgQueue B_801AB988_usa;
+extern OSMesgQueue gSerialMsgQ;
 extern STACK(gBootStack, BOOT_STACK_SIZE);
 // extern UNK_TYPE B_801AD9A0_usa;
 // extern UNK_TYPE B_801AD9B0_usa;

@@ -35,7 +35,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/02C1D0", func_8002B8B0_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/02C1D0", func_8002B8E8_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/02C1D0", DoStory);
 #endif
 
 #if VERSION_USA

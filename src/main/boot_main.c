@@ -191,19 +191,18 @@ void pon_main(void *arg UNUSED) {
  */
 s32 doMenuLoop(s32 arg0) {
     s32 var_s2 = 0;
-    s32 var_s1 = 1;
+    bool var_s1 = true;
     s32 sp14 = 0;
     s16 *sp10 = NULL;
-    u32 *var_v1;
     s32 var_s0;
-    s32 var_v0;
 
-    while (var_s1 != 0) {
+    while (var_s1) {
         osRecvMesg(&B_801C7058_usa, (OSMesg)&sp10, OS_MESG_BLOCK);
         if (osRecvMesg(&B_801AB7F0_usa, NULL, OS_MESG_NOBLOCK) == 0) {
             var_s0 = -1;
             func_80002D5C_usa();
             func_80002DE8_usa();
+
             while (true) {
                 if (var_s0 != 0) {
                     var_s0 &= -(~osAfterPreNMI() == 0);
@@ -211,57 +210,47 @@ s32 doMenuLoop(s32 arg0) {
                 while (osViGetCurrentLine() != 0) {}
                 while (osViGetCurrentLine() == 0) {}
 
-                var_v1 = (void *)gFramebuffers[0];
-                for (var_v0 = 0x95FF; var_v0 != -1; var_v0--) {
-                    *var_v1 = 0;
-                    var_v1++;
-                }
-                var_v1 = (void *)gFramebuffers[1];
-                for (var_v0 = 0x95FF; var_v0 != -1; var_v0--) {
-                    *var_v1 = 0;
-                    var_v1++;
-                }
+                FRAMEBUFFERS_BACKWARD_SET(0);
             }
         }
 
         switch (*sp10) {
             case 1:
-                osContStartReadData(&B_801AB988_usa);
+                osContStartReadData(&gSerialMsgQ);
                 if (var_s2 < 2U) {
-                    func_80059F84_usa(&gInfo[arg0]);
-                    D_800BE340_usa += 1;
+                    UpdateBuffer(&gInfo[arg0]);
+                    gCounter += 1;
                     if (CreateMenuGfxTask(&gInfo[arg0]) != 0) {
                         var_s2 += 1;
                         arg0 ^= 1;
                     }
                 }
-                osRecvMesg(&B_801AB988_usa, NULL, OS_MESG_BLOCK);
+                osRecvMesg(&gSerialMsgQ, NULL, OS_MESG_BLOCK);
                 if (((gMain == 0x384) || (gMain == 0x341)) != 0) {
                     UpdateController();
                 } else {
                     UpdateMenuController();
                 }
 
-                if ((B_801AB8E0_usa & 0x80) && (((gMain == 0x384) || (gMain == 0x34C)) != 0) &&
+                if ((gGameStatus & 0x80) && (((gMain == 0x384) || (gMain == 0x34C)) != 0) &&
                     (DemoCheck(&sp14) != 0)) {
                     gMain = 0x1F4;
                     gReset = -1;
-                    var_s1 = 0;
+                    var_s1 = false;
                 } else {
-                    s32 temp_s0_2;
-                    temp_s0_2 = gMain;
+                    s32 temp_s0_2 = gMain;
 
                     if (gReset == 0) {
                         if (gMain < 0x384) {
-                            switch (gMain) { /* switch 1; irregular */
+                            switch (gMain) {
                                 case 0x1F4:
-                                    func_800062D0_usa();
+                                    DoTitle();
                                     break;
 
                                 case 0x258:
                                 case 0x28A:
                                 case 0x2BC:
-                                    func_8001AEB0_usa();
+                                    DoMenu();
                                     break;
 
                                 case 0x36D:
@@ -269,36 +258,36 @@ s32 doMenuLoop(s32 arg0) {
                                     break;
 
                                 case 0x378:
-                                    func_800308A8_usa();
+                                    DoEditor();
                                     break;
 
                                 case 0x383:
-                                    func_8002B8E8_usa();
+                                    DoStory();
                                     break;
 
                                 case 0x341:
-                                    func_80085EEC_usa();
+                                    DoMimic();
                                     break;
 
                                 case 0x34C:
-                                    func_80088570_usa();
+                                    DoTutorial();
                                     break;
 
                                 case 0x357:
-                                    func_80033B10_usa();
+                                    DoStageClearIntro();
                                     break;
                             }
 
                             var_s1 &= -(temp_s0_2 == gMain);
                         } else if (((gMain == 0x384) || (gMain == 0x388))) {
-                            func_800326A0_usa();
+                            DoCountDown();
                             var_s1 &= -(((gMain == 0x387) || (gMain == 0x2BC)) == 0);
                         } else {
-                            func_8003E4BC_usa();
+                            DoGameOver();
                             var_s1 &= -(gMain >= 0x38E);
                         }
                     }
-                    func_800039C0_usa();
+                    LoadDataMain();
                 }
                 break;
 
@@ -324,16 +313,7 @@ s32 doMenuLoop(s32 arg0) {
                 while (osViGetCurrentLine() != 0) {}
                 while (osViGetCurrentLine() == 0) {}
 
-                var_v1 = (void *)gFramebuffers[0];
-                for (var_v0 = 0x95FF; var_v0 != -1; var_v0--) {
-                    *var_v1 = 0;
-                    var_v1++;
-                }
-                var_v1 = (void *)gFramebuffers[1];
-                for (var_v0 = 0x95FF; var_v0 != -1; var_v0--) {
-                    *var_v1 = 0;
-                    var_v1++;
-                }
+                FRAMEBUFFERS_BACKWARD_SET(0);
             }
         }
     }

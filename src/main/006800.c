@@ -100,7 +100,7 @@ extern s32 B_801A6DB0_usa;
 extern s32 B_801A6DB4_usa;
 extern UNK_TYPE B_801A6DB8_usa;
 extern UNK_TYPE B_801AB860_usa;
-extern s32 B_801AB8E0_usa;
+extern s32 gGameStatus;
 extern s32 B_801AD9BC_usa;
 extern s32 B_801ADAE8_usa;
 extern s32 B_801C6FA0_usa;
@@ -118,7 +118,7 @@ extern const char RO_STR_800C3144_usa[];
 extern const char RO_STR_800C314C_usa[];
 extern const char RO_STR_800C3154_usa[];
 
-void func_800062D0_usa(void) {
+void DoTitle(void) {
     s32 sp10;
     s32 sp14;
     s32 sp18;
@@ -250,7 +250,7 @@ block_36:
                     if ((*(&B_801AB860_usa + (((temp_a1_2 - 4) & 0xF) * 4)) == 0x4000) && (*((((temp_a1_2 - 3) & 0xF) * 4) + &B_801AB860_usa) == 0x8000)) {
                         temp_v1_2 = *((((temp_a1_2 - 2) & 0xF) * 4) + &B_801AB860_usa);
                         if ((temp_v1_2 == 0x20) && (*((((temp_a1_2 - 1) & 0xF) * 4) + &B_801AB860_usa) == temp_v1_2)) {
-                            B_801AB8E0_usa ^= 1;
+                            gGameStatus ^= 1;
                             func_80005184_usa(&D_800B4160_usa, 9);
                         }
                     }
@@ -299,7 +299,7 @@ block_36:
                     B_801A59A4_usa = 0;
                     B_801AD9BC_usa = -1;
                     B_801ADAE8_usa = -1;
-                    B_801AB8E0_usa |= 0x80;
+                    gGameStatus |= 0x80;
                     B_8018A7F8_usa++;
                     if (B_8018A7F8_usa == 0xA) {
                         B_8018A7F8_usa = 1;
@@ -393,7 +393,7 @@ block_36:
                             gDemo = 0x2C;
                             *B_801A6D7C_usa = 2;
                             gReset = 0;
-                            B_801AB8E0_usa &= ~0x80;
+                            gGameStatus &= ~0x80;
                             B_8018A7F4_usa->unk_00 = 0;
                             B_8018A7F4_usa->unk_10 = 0;
                             B_8018A7F4_usa->unk_14 = 7;
@@ -426,7 +426,7 @@ block_36:
                     gMain = 0x258;
                     gReset = -1;
                     gDemo = 0x2C;
-                    B_801AB8E0_usa &= ~0x80;
+                    gGameStatus &= ~0x80;
                 }
             }
             B_8018A7F4_usa->unk_04 = var_s3;
@@ -438,7 +438,7 @@ block_36:
     }
 }
 #else
-INCLUDE_ASM("asm/usa/nonmatchings/main/006800", func_800062D0_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/006800", DoTitle);
 #endif
 #endif
 
@@ -457,7 +457,7 @@ void titleSetup(void) {
     B_FLT_8018A804_usa = 0.0f;
     B_8021BA98_usa = 0;
     B_8018A7F8_usa = 0;
-    B_801AB8E0_usa = 0x300;
+    gGameStatus = 0x300;
     B_8021BEA4_usa = 0;
     B_8021BEA8_usa = 0;
 

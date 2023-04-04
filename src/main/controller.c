@@ -14,8 +14,8 @@
 extern OSMesg B_801AB80C_usa[1];
 
 void InitController(void) {
-    osCreateMesgQueue(&B_801AB988_usa, B_801AB80C_usa, ARRAY_COUNT(B_801AB80C_usa));
-    osSetEventMesg(OS_EVENT_SI, &B_801AB988_usa, (OSMesg)1);
+    osCreateMesgQueue(&gSerialMsgQ, B_801AB80C_usa, ARRAY_COUNT(B_801AB80C_usa));
+    osSetEventMesg(OS_EVENT_SI, &gSerialMsgQ, (OSMesg)1);
     CheckController();
 }
 
@@ -29,12 +29,12 @@ extern u8 D_800B69B0_usa;
 void CheckController(void) {
     s32 var_a0;
 
-    if (osContInit(&B_801AB988_usa, &D_800B69B0_usa, B_801F9CA8_usa) != 0) {
+    if (osContInit(&gSerialMsgQ, &D_800B69B0_usa, B_801F9CA8_usa) != 0) {
         osSyncPrintf("InitController(): Failure initing controllers\n");
     }
     osContSetCh(2U);
-    osContStartQuery(&B_801AB988_usa);
-    osRecvMesg(&B_801AB988_usa, NULL, 1);
+    osContStartQuery(&gSerialMsgQ);
+    osRecvMesg(&gSerialMsgQ, NULL, 1);
     osContGetQuery(&B_801F9CA8_usa);
     D_800B69B0_usa = 0;
 
@@ -61,8 +61,8 @@ void func_80046F8C_usa(void) {
     OSContStatus sp10[MAXCONTROLLERS];
     s32 i;
 
-    osContReset(&B_801AB988_usa, sp10);
-    osSetEventMesg(OS_EVENT_SI, &B_801AB988_usa, (OSMesg)1);
+    osContReset(&gSerialMsgQ, sp10);
+    osSetEventMesg(OS_EVENT_SI, &gSerialMsgQ, (OSMesg)1);
     osContSetCh(2);
 
     for (i = 0; i < MAXCONTROLLERS; i++) {

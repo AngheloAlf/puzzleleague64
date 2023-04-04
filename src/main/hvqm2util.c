@@ -682,7 +682,7 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
             if (sp74 >= 5) {
                 osViBlack(0U);
             }
-            osContStartReadData(&B_801AB988_usa);
+            osContStartReadData(&gSerialMsgQ);
             temp_s2 = OS_DCACHE_ROUNDUP_ADDR(sp50);
 
             gHVQM2UtilVideoStreamP = HVQM2Util_GetRecord(temp_s2, B_8018EA50_usa->hvqbuf, 1, gHVQM2UtilVideoStreamP,
@@ -754,7 +754,7 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
                 break;
             }
 
-            osRecvMesg(&B_801AB988_usa, NULL, 1);
+            osRecvMesg(&gSerialMsgQ, NULL, 1);
             osContGetReadData(&B_801C7228_usa);
 
             if (B_801C7228_usa.button == 0) {

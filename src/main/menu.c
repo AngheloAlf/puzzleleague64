@@ -446,7 +446,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_8001AD2C_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_8001AEB0_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/menu", DoMenu);
 #endif
 
 #if VERSION_USA
