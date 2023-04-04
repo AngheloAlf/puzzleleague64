@@ -9,7 +9,12 @@
 
 
 typedef struct struct_gInfo {
-    /* 0x00000 */ UNK_TYPE1 unk_00000[0x19020];
+    /* 0x00000 */ UNK_TYPE1 unk_00000[0x19010];
+    #if VERSION_USA
+    // EUR is 0x10 smaller
+    // TODO: figure out exactly which members are not present
+    /* 0x19010 */ UNK_TYPE1 unk_19010[0x10];
+    #endif
     /* 0x19020 */ s16 unk_19020;
     /* 0x19022 */ UNK_TYPE1 unk_19022[0x2];
     /* 0x19024 */ UNK_TYPE1 unk_19024[0x1C];
