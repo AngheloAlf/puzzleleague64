@@ -6,6 +6,7 @@
 #include "main_variables.h"
 #include "hvqm2util.h"
 #include "the_game.h"
+#include "controller.h"
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/006800", func_80005C00_usa);

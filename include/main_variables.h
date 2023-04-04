@@ -1725,7 +1725,6 @@ extern OSMesgQueue *B_801AAB9C_usa;
 // extern UNK_TYPE B_801AB7E8_usa;
 extern OSMesgQueue B_801AB7F0_usa;
 // extern UNK_TYPE B_801AB808_usa;
-// extern UNK_TYPE B_801AB80C_usa;
 
 // extern UNK_TYPE B_801AB860_usa;
 // extern UNK_TYPE B_801AB89C_usa;

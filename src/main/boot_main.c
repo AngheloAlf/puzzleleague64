@@ -13,6 +13,7 @@
 #include "hvqm2util.h"
 #include "file.h"
 #include "gfx.h"
+#include "controller.h"
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/boot_main", func_80000450_usa);
@@ -126,7 +127,7 @@ void func_80000630_usa(void) {
     B_801AAB9C_usa = osScGetCmdQ(&B_8021AAA0_usa);
 
     InitGFX();
-    CheckController();
+    InitController();
     InitGameAudioSystem();
     fileSetup();
     titleSetup();
@@ -260,13 +261,12 @@ s32 doMenuLoop(s32 arg0) {
 
                 osRecvMesg(&B_801AB988_usa, NULL, 1);
                 if (((gMain == 0x384) || (gMain == 0x341))) {
-                    func_80047050_usa();
+                    UpdateController();
                 } else {
-                    func_80047208_usa();
+                    UpdateMenuController();
                 }
 
-                if ((B_801AB8E0_usa & 0x80) && ((gMain == 0x384) || (gMain == 0x34C)) &&
-                    (func_80089AEC_usa(&sp14) != 0)) {
+                if ((B_801AB8E0_usa & 0x80) && ((gMain == 0x384) || (gMain == 0x34C)) && (DemoCheck(&sp14) != 0)) {
                     gMain = 0x1F4;
                     gReset = -1;
                     var_s1 = 0;
