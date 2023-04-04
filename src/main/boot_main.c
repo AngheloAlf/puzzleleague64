@@ -186,30 +186,132 @@ void pon_main(void *arg UNUSED) {
     }
 }
 
-#ifdef NON_EQUIVALENT
 /**
  * Original name: doMenuLoop
  */
 s32 doMenuLoop(s32 arg0) {
-    s16 *sp10;
-    s32 sp14;
-    s32 *var_v1;
-    s32 temp_s0_2;
+    s32 var_s2 = 0;
+    s32 var_s1 = 1;
+    s32 sp14 = 0;
+    s16 *sp10 = NULL;
+    u32 *var_v1;
     s32 var_s0;
-    s32 var_s1;
     s32 var_v0;
-    s32 var_v0_3;
-    u32 var_s2;
-    struct_gInfo *temp_s0;
 
-    var_s2 = 0;
-    var_s1 = 1;
-    sp14 = 0;
-    sp10 = NULL;
+    while (var_s1 != 0) {
+        osRecvMesg(&B_801C7058_usa, (OSMesg)&sp10, OS_MESG_BLOCK);
+        if (osRecvMesg(&B_801AB7F0_usa, NULL, OS_MESG_NOBLOCK) == 0) {
+            var_s0 = -1;
+            func_80002D5C_usa();
+            func_80002DE8_usa();
+            while (true) {
+                if (var_s0 != 0) {
+                    var_s0 &= -(~osAfterPreNMI() == 0);
+                }
+                while (osViGetCurrentLine() != 0) {}
+                while (osViGetCurrentLine() == 0) {}
 
-    while (true) {
-        osRecvMesg(&B_801C7058_usa, &sp10, 1);
-        if (osRecvMesg(&B_801AB7F0_usa, NULL, 0) == 0) {
+                var_v1 = (void *)gFramebuffers[0];
+                for (var_v0 = 0x95FF; var_v0 != -1; var_v0--) {
+                    *var_v1 = 0;
+                    var_v1++;
+                }
+                var_v1 = (void *)gFramebuffers[1];
+                for (var_v0 = 0x95FF; var_v0 != -1; var_v0--) {
+                    *var_v1 = 0;
+                    var_v1++;
+                }
+            }
+        }
+
+        switch (*sp10) {
+            case 1:
+                osContStartReadData(&B_801AB988_usa);
+                if (var_s2 < 2U) {
+                    func_80059F84_usa(&gInfo[arg0]);
+                    D_800BE340_usa += 1;
+                    if (CreateMenuGfxTask(&gInfo[arg0]) != 0) {
+                        var_s2 += 1;
+                        arg0 ^= 1;
+                    }
+                }
+                osRecvMesg(&B_801AB988_usa, NULL, OS_MESG_BLOCK);
+                if (((gMain == 0x384) || (gMain == 0x341)) != 0) {
+                    UpdateController();
+                } else {
+                    UpdateMenuController();
+                }
+
+                if ((B_801AB8E0_usa & 0x80) && (((gMain == 0x384) || (gMain == 0x34C)) != 0) &&
+                    (DemoCheck(&sp14) != 0)) {
+                    gMain = 0x1F4;
+                    gReset = -1;
+                    var_s1 = 0;
+                } else {
+                    s32 temp_s0_2;
+                    temp_s0_2 = gMain;
+
+                    if (gReset == 0) {
+                        if (gMain < 0x384) {
+                            switch (gMain) { /* switch 1; irregular */
+                                case 0x1F4:
+                                    func_800062D0_usa();
+                                    break;
+
+                                case 0x258:
+                                case 0x28A:
+                                case 0x2BC:
+                                    func_8001AEB0_usa();
+                                    break;
+
+                                case 0x36D:
+                                    DoBonus();
+                                    break;
+
+                                case 0x378:
+                                    func_800308A8_usa();
+                                    break;
+
+                                case 0x383:
+                                    func_8002B8E8_usa();
+                                    break;
+
+                                case 0x341:
+                                    func_80085EEC_usa();
+                                    break;
+
+                                case 0x34C:
+                                    func_80088570_usa();
+                                    break;
+
+                                case 0x357:
+                                    func_80033B10_usa();
+                                    break;
+                            }
+
+                            var_s1 &= -(temp_s0_2 == gMain);
+                        } else if (((gMain == 0x384) || (gMain == 0x388))) {
+                            func_800326A0_usa();
+                            var_s1 &= -(((gMain == 0x387) || (gMain == 0x2BC)) == 0);
+                        } else {
+                            func_8003E4BC_usa();
+                            var_s1 &= -(gMain >= 0x38E);
+                        }
+                    }
+                    func_800039C0_usa();
+                }
+                break;
+
+            case 2:
+                var_s2 -= 1;
+                break;
+        }
+    }
+
+    while (var_s2 != 0) {
+        osRecvMesg(&B_801C7058_usa, (OSMesg)&sp10, OS_MESG_BLOCK);
+        var_s2 -= *sp10 == 2;
+        if (osRecvMesg(&B_801AB7F0_usa, NULL, OS_MESG_NOBLOCK) == 0) {
             var_s0 = -1;
             func_80002D5C_usa();
             func_80002DE8_usa();
@@ -218,161 +320,26 @@ s32 doMenuLoop(s32 arg0) {
                 if (var_s0 != 0) {
                     var_s0 &= -(~osAfterPreNMI() == 0);
                 }
-                do {
 
-                } while (osViGetCurrentLine() != 0);
-                do {
-                } while (osViGetCurrentLine() == 0);
+                while (osViGetCurrentLine() != 0) {}
+                while (osViGetCurrentLine() == 0) {}
 
                 var_v1 = (void *)gFramebuffers[0];
-                var_v0 = 0x95FF;
-                do {
+                for (var_v0 = 0x95FF; var_v0 != -1; var_v0--) {
                     *var_v1 = 0;
-                    var_v0 -= 1;
-                    var_v1 += 4;
-                } while (var_v0 != -1);
-
+                    var_v1++;
+                }
                 var_v1 = (void *)gFramebuffers[1];
-                var_v0 = 0x95FF;
-                do {
+                for (var_v0 = 0x95FF; var_v0 != -1; var_v0--) {
                     *var_v1 = 0;
-                    var_v0 -= 1;
-                    var_v1 += 4;
-                } while (var_v0 != -1);
-            }
-        }
-
-        switch (*sp10) {
-            case 0x2:
-                var_s2 -= 1;
-                break;
-
-            case 0x1:
-                osContStartReadData(&B_801AB988_usa);
-                if (var_s2 < 2U) {
-                    temp_s0 = &gInfo[arg0];
-                    func_80059F84_usa(temp_s0);
-                    D_800BE340_usa += 1;
-                    if (CreateMenuGfxTask(temp_s0) != 0) {
-                        var_s2 += 1;
-                        arg0 ^= 1;
-                    }
-                }
-
-                osRecvMesg(&B_801AB988_usa, NULL, 1);
-                if (((gMain == 0x384) || (gMain == 0x341))) {
-                    UpdateController();
-                } else {
-                    UpdateMenuController();
-                }
-
-                if ((B_801AB8E0_usa & 0x80) && ((gMain == 0x384) || (gMain == 0x34C)) && (DemoCheck(&sp14) != 0)) {
-                    gMain = 0x1F4;
-                    gReset = -1;
-                    var_s1 = 0;
-                } else {
-                    temp_s0_2 = gMain;
-
-                    if (gReset == 0) {
-                        if (temp_s0_2 < 0x384) {
-                            switch (temp_s0_2) { /* switch 1; irregular */
-                                case 0x1F4:      /* switch 1 */
-                                    func_800062D0_usa();
-                                    break;
-
-                                case 0x258: /* switch 1 */
-                                case 0x28A: /* switch 1 */
-                                case 0x2BC: /* switch 1 */
-                                    func_8001AEB0_usa();
-                                    break;
-
-                                case 0x36D: /* switch 1 */
-                                    DoBonus();
-                                    break;
-
-                                case 0x378: /* switch 1 */
-                                    func_800308A8_usa();
-                                    break;
-
-                                case 0x383: /* switch 1 */
-                                    func_8002B8E8_usa();
-                                    break;
-
-                                case 0x341: /* switch 1 */
-                                    func_80085EEC_usa();
-                                    break;
-
-                                case 0x34C: /* switch 1 */
-                                    func_80088570_usa();
-                                    break;
-
-                                case 0x357: /* switch 1 */
-                                    func_80033B10_usa();
-                                    break;
-                            }
-
-                            var_v0_3 = temp_s0_2 == gMain;
-                        } else if ((temp_s0_2 == 0x384) || (temp_s0_2 == 0x388)) {
-                            func_800326A0_usa();
-                            var_v0_3 = ((gMain == 0x387) || (gMain == 0x2BC)) == 0;
-                        } else {
-                            func_8003E4BC_usa();
-                            var_v0_3 = (gMain >= 0x38E);
-                        }
-                        var_s1 &= -var_v0_3;
-                    }
-                    func_800039C0_usa();
-                }
-                break;
-        }
-
-        if (var_s1 != 0) {
-            continue;
-        }
-
-        while (var_s2 != 0) {
-            osRecvMesg(&B_801C7058_usa, &sp10, 1);
-            if (*sp10 == 2) {
-                var_s2--;
-            }
-
-            if (osRecvMesg(&B_801AB7F0_usa, NULL, 0) == 0) {
-                var_s0 = -1;
-                func_80002D5C_usa();
-                func_80002DE8_usa();
-
-                while (true) {
-                    if (var_s0 != 0) {
-                        var_s0 &= -(~osAfterPreNMI() == 0);
-                    }
-
-                    while (osViGetCurrentLine() != 0) {}
-                    while (osViGetCurrentLine() == 0) {}
-
-                    var_v1 = (void *)gFramebuffers[0];
-                    for (var_v0 = 0x95FF; var_v0 != -1; var_v0--) {
-                        *var_v1 = 0;
-                        var_v1++;
-                    }
-
-                    var_v1 = (void *)gFramebuffers[1];
-                    for (var_v0 = 0x95FF; var_v0 != -1; var_v0--) {
-                        *var_v1 = 0;
-                        var_v1++;
-                    }
+                    var_v1++;
                 }
             }
-        }
-        if (var_s2 == 0) {
-            break;
         }
     }
 
     return arg0;
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/boot_main", doMenuLoop);
-#endif
 
 /**
  * Original name: doGameLoop
