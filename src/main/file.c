@@ -1,3 +1,7 @@
+/**
+ * Original name: file.c
+ */
+
 #include "libultra.h"
 #include "include_asm.h"
 #include "macros_defines.h"
@@ -6,7 +10,7 @@
 #include "main_variables.h"
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/01D4B0", func_8001C8B0_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/file", func_8001C8B0_usa);
 #endif
 
 typedef struct struct_8001CAD0_usa_sp10 {
@@ -29,7 +33,7 @@ s32 func_8001CA94_usa(const char *arg0) {
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/01D4B0", func_8001CAC4_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/file", func_8001CAC4_usa);
 #endif
 
 #if VERSION_USA
@@ -50,24 +54,24 @@ s32 fileGetAddress(const char *arg0, u32 *arg1) {
     return 1;
 }
 #else
-INCLUDE_ASM("asm/usa/nonmatchings/main/01D4B0", fileGetAddress);
+INCLUDE_ASM("asm/usa/nonmatchings/main/file", fileGetAddress);
 #endif
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/01D4B0", fileOpen);
+INCLUDE_ASM("asm/usa/nonmatchings/main/file", fileOpen);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/01D4B0", fileClose);
+INCLUDE_ASM("asm/usa/nonmatchings/main/file", fileClose);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/01D4B0", func_8001CC7C_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/file", func_8001CC7C_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/01D4B0", func_8001D1F8_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/file", func_8001D1F8_usa);
 #endif
 
 #if VERSION_USA
@@ -97,7 +101,7 @@ s32 fileSetup(void) {
     return 0;
 }
 #else
-INCLUDE_ASM("asm/usa/nonmatchings/main/01D4B0", fileSetup);
+INCLUDE_ASM("asm/usa/nonmatchings/main/file", fileSetup);
 #endif
 #endif
 
