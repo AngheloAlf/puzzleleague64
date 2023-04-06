@@ -527,7 +527,7 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
     u8 pad[0x20] UNUSED;
 
     s32 sp40;
-    UNK_TYPE sp44;
+    RomOffset sp44;
 
     s32 var_v0;
     s32 var_s7;

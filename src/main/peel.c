@@ -29,7 +29,7 @@ extern s32 gbFadeAlpha;
 extern UNK_PTR gapVtxPeel[];
 extern s32 B_8018E598_usa;
 extern struct_gaTile *gaTile[0x30];
-extern UNK_TYPE gnWaveData;
+extern RomOffset gnWaveData;
 extern void *B_8018E93C_usa;
 extern s32 B_801AB8E4_usa;
 

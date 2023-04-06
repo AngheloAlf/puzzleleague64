@@ -1004,7 +1004,7 @@ extern s32 B_8018A808_usa;
 // extern UNK_TYPE B_8018AB88_usa;
 // extern UNK_TYPE B_8018ABA8_usa;
 // extern UNK_TYPE B_8018ABAC_usa;
-// extern UNK_TYPE B_8018ABB0_usa;
+// extern UNK_TYPE gacBuffer;
 // extern UNK_TYPE B_8018ABB1_usa;
 // extern UNK_TYPE B_8018ABB2_usa;
 // extern UNK_TYPE B_8018ABB3_usa;
