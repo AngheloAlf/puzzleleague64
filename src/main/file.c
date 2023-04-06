@@ -24,70 +24,74 @@ typedef struct struct_gacBuffer_unk_0004 {
 
 typedef struct struct_gacBuffer {
     /* 0x0000 */ s32 unk_0000;
-    /* 0x0004 */ struct_gacBuffer_unk_0004 unk_0004[0x255]; // idk
-} struct_gacBuffer;                                         // size = 0x3808
+    /* 0x0004 */ u8 unk_0004[0x3800];
+} struct_gacBuffer; // size = 0x3808
 
-extern struct_gacBuffer gacBuffer;
+//extern struct_gacBuffer gacBuffer;
+extern u8 gacBuffer[0x3808];
 extern s32 B_8018E3B8_usa;
 extern s32 B_8018E3BC_usa;
 extern u32 gnFileCount;
 extern u32 D_9BDB40[];
 
-#if VERSION_USA
-#ifdef NON_EQUIVALENT
-// maybe equivalent
-s32 fileFind(File *arg0, const char *arg1) {
-    s8 sp10[0x10];
-    s8 *temp = (s8 *)arg1;
-    s32 var_a2;
-    s32 var_t2;
-    s32 var_a2_2;
-    struct_gacBuffer_unk_0004 *new_var = gacBuffer.unk_0004;
-
-    for (var_a2 = 0; temp[var_a2] != 0; var_a2++) {
-        if ((u8)temp[var_a2] - 'a' < 'z' - 'a' + 1U) {
-            sp10[var_a2] = temp[var_a2] - ('a' - 'A');
-        } else {
-            sp10[var_a2] = temp[var_a2];
-        }
-    }
-
-    if (gnFileCount != -1) {
+STATIC_INLINE void somefunc() {
+    u32 var_a2_2;
+    if (gnFileCount != -1U) {
         var_a2_2 = (gnFileCount * 0x18) + 4;
     } else {
         var_a2_2 = 0x3800;
     }
-    func_80001CAC_usa((u32)D_9BDB40, &gacBuffer, var_a2_2);
+    func_80001CAC_usa((RomOffset) D_9BDB40, gacBuffer, var_a2_2);
     B_8018E3B8_usa = -1;
+}
 
-    for (var_t2 = 0; var_t2 < gnFileCount; var_t2++) {
-        s32 var_a2_3;
+#if VERSION_USA
+s32 fileFind(File *arg0, char *arg1) {
+    char sp10[0x10];
+    s32 temp_v0;
+    s32 var_a1_2;
+    s32 var_a2;
+    s32 a2;
+    u32 var_a2_2;
+    u32 var_t2;
+    u8 temp_v1;
 
-        for (var_a2_3 = 0; var_a2_3 < var_a2; var_a2_3++) {
-            if (new_var[var_t2].unk_08[var_a2_3] != sp10[var_a2_3]) {
+    for (var_a2 = 0; arg1[var_a2] != 0; var_a2++) {
+        if (arg1[var_a2] >= 'a' && arg1[var_a2] <= 'z') {
+            sp10[var_a2] = arg1[var_a2] - ('a' - 'A');
+        } else {
+            sp10[var_a2] = arg1[var_a2];
+        }
+    }
+    a2 = var_a2;
+    somefunc();
+    var_t2 = 0;
+    while (var_t2 < gnFileCount) {
+        s32 idx = 4 + (var_t2 * 0x18);
+
+        for (var_a2 = 0; var_a2 < a2; var_a2++) {
+            if (gacBuffer[8 + idx + var_a2] != sp10[var_a2]) {
                 break;
             }
         }
 
-        if (var_a2_3 == var_a2) {
-            u32 temp;
+        if (var_a2 == a2) {
+            int new_var1;
+            int new_var;
 
-            temp = ((gacBuffer.unk_0004[var_t2].unk_04 << 0x18) | (gacBuffer.unk_0004[var_t2].unk_05 << 0x10) |
-                    (gacBuffer.unk_0004[var_t2].unk_06 << 8) | gacBuffer.unk_0004[var_t2].unk_07);
+
+            new_var1 = (gacBuffer[idx + 0] << 0x18) | (gacBuffer[idx + 1] << 0x10) | (gacBuffer[idx + 2] << 8) | gacBuffer[idx + 3];
+            new_var = (gacBuffer[idx + 0 + 4] << 0x18) | (gacBuffer[idx + 1 + 4] << 0x10) | (gacBuffer[idx + 2 + 4] << 8) | gacBuffer[idx + 3 + 4];
             arg0->unk_00 = var_t2;
-            arg0->unk_04 = (gacBuffer.unk_0004[var_t2].unk_00 << 0x18) | (gacBuffer.unk_0004[var_t2].unk_01 << 0x10) |
-                           (gacBuffer.unk_0004[var_t2].unk_02 << 8) | gacBuffer.unk_0004[var_t2].unk_03;
-            arg0->unk_08 = temp;
-            arg0->unk_08 += (RomOffset)D_9BDB40;
-            return arg0->unk_04;
+            arg0->unk_04 = new_var1;
+            arg0->unk_08 = (u32) (new_var + (u32)D_9BDB40);
+            return new_var1;
         }
+        var_t2 += 1;
     }
+
     return 0;
 }
-#else
-s32 fileFind(File *arg0, const char *arg1);
-INCLUDE_ASM("asm/usa/nonmatchings/main/file", fileFind);
-#endif
 #endif
 
 #if VERSION_USA
@@ -213,9 +217,9 @@ s32 fileSetup(void) {
     gnFileCount = -1U;
     B_8018E3B8_usa = -1U;
     B_8018E3BC_usa = -1U;
-    func_80001CAC_usa((uintptr_t)D_9BDB40, &gacBuffer, 0x3800);
-    B_8018E3B8_usa = -1U;
-    gnFileCount = gacBuffer.unk_0000;
+
+    somefunc();
+    gnFileCount = *(u32*)gacBuffer;
     if (gnFileCount >= 0x256U) {
         osSyncPrintf("fileSetup: Too many files for existing buffersize!");
     }
