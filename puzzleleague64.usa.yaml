@@ -334,8 +334,7 @@ segments:
 
       - [0x0C3000, rodata, main/0C3000]
       - [0x0C3800, rodata, main/0C3800] # rsp?
-      - [0x0C3BC0, rodata, main/0C3BC0]
-      - [0x0C3BF0, rodata, main/0C3BF0]
+      - [0x0C3BC0, rodata, main/002710]
       - [0x0C3C90, rodata, main/0C3C90]
       - [0x0C3CD0, .rodata, main/006800]
       - [0x0C3DC0, rodata, main/0C3DC0]

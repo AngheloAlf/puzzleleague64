@@ -5,8 +5,6 @@
 #include "main_functions.h"
 #include "main_variables.h"
 
-#if VERSION_USA
 void func_80001310_usa(RomOffset segmentRom, void *dstAddr, size_t segmentSize) {
     func_80001CAC_usa(segmentRom, dstAddr, segmentSize);
 }
-#endif

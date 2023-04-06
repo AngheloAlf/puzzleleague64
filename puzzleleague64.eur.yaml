@@ -79,7 +79,8 @@ segments:
     subalign: null
     subsegments:
       - [0x001050, c, main/boot_main]
-      - [0x001FD0, asm, main/001FD0]
+      - [0x001FD0, c, main/001F10]
+      - [0x001FF0, asm, main/gfx]
       - [0x0027D0, asm, main/0027D0]
       - [0x004B50, asm, main/004B50]
       - [0x0068C0, asm, main/0068C0]
