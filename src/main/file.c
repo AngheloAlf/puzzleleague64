@@ -216,11 +216,9 @@ s32 fileSeek(File *arg0, s32 mode, s32 offset) {
 #endif
 
 #if VERSION_USA
-#ifdef NON_MATCHING
 /**
  * Original name: fileSetup
  */
-// rodata alignment issues
 s32 fileSetup(void) {
     gnFileCount = -1U;
     giFileBuffer = -1U;
@@ -234,10 +232,10 @@ s32 fileSetup(void) {
 
     return 0;
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/file", fileSetup);
 #endif
-#endif
+
+// hack to ensure correct alignment of rodata
+const f64 sFileBumpRodataAlignment = 0;
 
 #if VERSION_USA
 s32 func_8001D304_usa(void) {
