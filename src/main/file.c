@@ -44,7 +44,6 @@ STATIC_INLINE s32 inlinedfunc(void) {
 
 STATIC_INLINE s32 fileBuffer(File *arg0, s32 arg1) {
     s32 __n;
-    s32 v1;
 
     if (arg0 == (File *)-1) {
         __n = inlinedfunc();
