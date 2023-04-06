@@ -81,7 +81,7 @@ segments:
       - [0x001050, c, main/boot_main]
       - [0x001F10, c, main/001F10]
       - [0x001F30, c, main/gfx]
-      - [0x002710, asm, main/002710]
+      - [0x002710, c, main/002710]
       - [0x004A90, asm, main/004A90]
       - [0x006800, c, main/006800]
       - [0x007EA0, c, main/menu]
@@ -334,7 +334,7 @@ segments:
 
       - [0x0C3000, rodata, main/0C3000]
       - [0x0C3800, rodata, main/0C3800] # rsp?
-      - [0x0C3BC0, rodata, main/002710]
+      - [0x0C3BC0, .rodata, main/002710]
       - [0x0C3C90, rodata, main/0C3C90]
       - [0x0C3CD0, .rodata, main/006800]
       - [0x0C3DC0, rodata, main/0C3DC0]
