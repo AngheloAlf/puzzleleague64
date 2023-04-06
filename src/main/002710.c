@@ -156,9 +156,13 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/002710", func_80002D30_usa);
 INCLUDE_ASM("asm/usa/nonmatchings/main/002710", func_80002D5C_usa);
 #endif
 
+#if VERSION_USA
 INCLUDE_RODATA("asm/usa/nonmatchings/main/002710", RO_STR_800C2FD8_usa);
+#endif
 
+#if VERSION_USA
 INCLUDE_RODATA("asm/usa/nonmatchings/main/002710", RO_STR_800C2FF0_usa);
+#endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/002710", func_80002D8C_usa);
