@@ -55,11 +55,11 @@ STATIC_INLINE s32 fileBuffer(File *arg0, s32 arg1) {
     }
 
     if (giFileBuffer == arg0->unk_00) {
-        v1 = gnOffsetBuffer;
+        if (gnOffsetBuffer <= arg0->unk_0C) {
+            __n = MIN(arg1, 0x3800);
 
-        if (v1 <= arg0->unk_0C) {
-            if (MIN(arg1, 0x3800) > (arg1 + (arg0->unk_0C - v1))) {
-                return arg1;
+            if (__n > (arg1 + (arg0->unk_0C - gnOffsetBuffer))) {
+                return __n;
             }
         }
     }
@@ -153,8 +153,6 @@ bool fileGetAddress(File *arg0, RomOffset *arg1) {
 #endif
 
 #if VERSION_USA
-#ifdef NON_MATCHING
-// regalloc
 s32 fileOpen(File *arg0, char *arg1) {
     if (fileFind(arg0, arg1) != 0) {
         arg0->unk_0C = 0;
@@ -166,9 +164,6 @@ s32 fileOpen(File *arg0, char *arg1) {
     arg0->unk_00 = -1;
     return 0;
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/file", fileOpen);
-#endif
 #endif
 
 #if VERSION_USA
