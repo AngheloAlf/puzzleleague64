@@ -1470,7 +1470,7 @@ D_800B45C0_ger = 0x800B45C0; //
 D_800B45CC_ger = 0x800B45CC; //
 D_800B45D0_ger = 0x800B45D0; //
 
-D_800B7100_ger = 0x800B7100; //
+gBuildDate = 0x800B7100; //
 D_800B7110_ger = 0x800B7110; //
 
 // .rodata

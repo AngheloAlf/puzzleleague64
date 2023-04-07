@@ -400,7 +400,7 @@ extern s32 gMain; /* Original name: gMain */
 
 // extern UNK_TYPE D_800C1230_usa;
 // extern UNK_TYPE D_800C1270_usa;
-// extern UNK_TYPE D_800C13E0_usa;
+
 // extern UNK_TYPE D_800C13F0_usa;
 // extern UNK_TYPE D_800C16B0_usa;
 
@@ -802,7 +802,6 @@ extern s32 gMain; /* Original name: gMain */
 // extern UNK_TYPE RO_DBL_800C78E0_usa;
 // extern UNK_TYPE RO_DBL_800C78E8_usa;
 
-// extern UNK_TYPE RO_STR_800C9878_usa;
 
 
 

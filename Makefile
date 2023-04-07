@@ -20,6 +20,8 @@ CC_CHECK_COMP ?= clang
 OBJDUMP_BUILD ?= 1
 # 
 MULTISTEP_BUILD ?= 0
+# 
+MODDING ?= 0
 
 # Set prefix to mips binutils binaries (mips-linux-gnu-ld => 'mips-linux-gnu-') - Change at your own risk!
 # In nearly all cases, not having 'mips-linux-gnu-*' binaries on the PATH is indicative of missing dependencies
@@ -36,6 +38,7 @@ TARGET               := puzzleleague64
 
 BUILD_DIR := build
 ROM       := $(BUILD_DIR)/$(TARGET).$(VERSION).z64
+BIN       := $(BUILD_DIR)/$(TARGET).$(VERSION).bin
 ELF       := $(BUILD_DIR)/$(TARGET).$(VERSION).elf
 LD_MAP    := $(BUILD_DIR)/$(TARGET).$(VERSION).map
 LD_SCRIPT := linker_scripts/$(VERSION)/$(TARGET).ld
@@ -57,7 +60,12 @@ else
 $(error Invalid VERSION variable detected. Please use either 'usa', 'eur', 'fra' or 'ger')
 endif
 
-ifeq ($(NON_MATCHING),1)
+ifneq ($(MODDING),0)
+	BUILD_DEFINES   += -DMODDING=1
+	NON_MATCHING := 1
+endif
+
+ifneq ($(NON_MATCHING),0)
 	BUILD_DEFINES   += -DNON_MATCHING -DAVOID_UB
 	COMPARE  := 0
 endif
@@ -187,7 +195,7 @@ ifneq ($(COMPARE),0)
 endif
 
 clean:
-	$(RM) -r $(BUILD_DIR)/asm $(BUILD_DIR)/bin $(BUILD_DIR)/src $(ROM) $(ELF)
+	$(RM) -r $(BUILD_DIR)/asm $(BUILD_DIR)/bin $(BUILD_DIR)/src $(ROM) $(BIN) $(ELF)
 
 distclean: clean
 	$(RM) -r $(BUILD_DIR) asm/ bin/ .splat/
@@ -226,9 +234,13 @@ tidy:
 
 #### Various Recipes ####
 
-$(ROM): $(ELF)
-	$(OBJCOPY) -O binary --pad-to=0x2000000 --gap-fill=0xFF $< $@
+$(ROM): $(BIN)
+	$(OBJCOPY) -I binary -O binary --pad-to=0x2000000 --gap-fill=0xFF $< $@
 # TODO: update header
+
+# Copy without pad-to to fill the gaps with zeroes
+$(BIN): $(ELF)
+	$(OBJCOPY) -O binary --gap-fill=0x00 $< $@
 
 $(ELF): $(O_FILES) $(LD_SCRIPT) $(BUILD_DIR)/linker_scripts/hardware_regs.ld $(BUILD_DIR)/linker_scripts/libultra_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/undefined_syms.ld $(BUILD_DIR)/linker_scripts/common_undef_syms.ld
 	$(LD) $(LDFLAGS) -T $(LD_SCRIPT) \

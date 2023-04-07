@@ -1485,7 +1485,7 @@ D_800BEB6C_eur = 0x800BEB6C; //
 D_800BEB70_eur = 0x800BEB70; //
 
 
-D_800C1910_eur = 0x800C1910; //
+gBuildDate = 0x800C1910; //
 D_800C1920_eur = 0x800C1920; //
 
 

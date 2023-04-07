@@ -318,6 +318,8 @@ segments:
       - [0x0B0560, asm, libkmc/0B0560] # __udivdi3
       - [0x0B0580, asm, libkmc/0B0580] # __umoddi3
 
+      - [0x0B05C0, c, main/build]
+
       - [0x0B05C0, data, libultra/rsp/rspboot]
       - [0x0B0690, data, main/0B0690] # rsp?
       - [0x0B14B0, data, libhvqm/rsp/hvqm2sp1]
@@ -327,7 +329,9 @@ segments:
 
       - [0x0C1E30, data, libhvqm/adpcmdec]
 
-      - [0x0C1FE0, data, main/0C1FE0]
+      - [0x0C1FE0, .data, main/build]
+
+      - [0x0C1FF0, data, main/0C1FF0]
 
       # rodata start is a  guess
       - [0x0C22B0, rodata, libhvqm/rsp/hvqm2sp1]
@@ -381,7 +385,7 @@ segments:
       - [0x0CA1C0, rodata, main/0CA1C0]
       - [0x0CA1E0, rodata, main/0CA1E0]
       - [0x0CA3E0, rodata, main/0CA3E0]
-      - [0x0CA478, rodata, main/build]
+      - [0x0CA478, .rodata, main/build]
 
       - { start: 0x0CA4A0, type: bss, vram: 0x800C98A0, name: main/800C98A0 }
 

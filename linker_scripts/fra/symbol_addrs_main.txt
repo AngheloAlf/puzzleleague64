@@ -1466,7 +1466,7 @@ D_800BD39C_fra = 0x800BD39C; //
 D_800BD3A0_fra = 0x800BD3A0; //
 
 
-D_800C0140_fra = 0x800C0140; //
+gBuildDate = 0x800C0140; //
 D_800C0150_fra = 0x800C0150; //
 
 // .rodata
