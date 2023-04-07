@@ -16,12 +16,12 @@
 #include "controller.h"
 #include "the_game.h"
 
-#if VERSION_USA || VERSION_EUR
+#if VERSION_USA || VERSION_EUR || VERSION_GER
 INLINE void func_80000450_usa(void) {
     s32 var_s0;
 
     if (osRecvMesg(&B_801AB7F0_usa, NULL, OS_MESG_NOBLOCK) == 0) {
-#if VERSION_EUR
+#if VERSION_EUR || VERSION_GER
         osViSetYScale(1.0f);
         osViBlack(1);
 #endif
@@ -48,10 +48,6 @@ INLINE void func_80000450_usa(void) {
 INCLUDE_ASM("asm/fra/nonmatchings/main/boot_main", func_80000450_fra);
 #endif
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/boot_main", func_80000450_ger);
-#endif
-
 void bootproc(void) {
     s32 pad[0x10] UNUSED;
 
@@ -66,7 +62,7 @@ void bootproc(void) {
     osStartThread(&sIdleThread);
 }
 
-#if VERSION_USA || VERSION_EUR
+#if VERSION_USA || VERSION_EUR || VERSION_GER
 void Idle_ThreadEntry(void *arg) {
     osCreatePiManager(OS_PRIORITY_PIMGR, &sPiMgrCmdQueue, sPiMgrCmdBuff, ARRAY_COUNT(sPiMgrCmdBuff));
 
@@ -138,7 +134,17 @@ void func_80000630_usa(void) {
 }
 #endif
 
-#if VERSION_USA || VERSION_EUR
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/boot_main", Idle_ThreadEntry);
+
+INCLUDE_ASM("asm/fra/nonmatchings/main/boot_main", func_80000654_fra);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/boot_main", func_80000630_usa);
+#endif
+
+#if VERSION_USA || VERSION_EUR || VERSION_GER
 /**
  * Original name: pon_main
  */
@@ -188,7 +194,7 @@ void pon_main(void *arg UNUSED) {
 }
 #endif
 
-#if VERSION_USA || VERSION_EUR
+#if VERSION_USA || VERSION_EUR || VERSION_GER
 /**
  * Original name: doMenuLoop
  */
@@ -286,8 +292,14 @@ s32 doMenuLoop(s32 arg0) {
     }
 
     while (var_s2 != 0) {
+#if VERSION_GER
+        if (osRecvMesg(&B_801C7058_usa, (OSMesg)&sp10, OS_MESG_NOBLOCK) == 0) {
+            var_s2 -= *sp10 == 2;
+        }
+#else
         osRecvMesg(&B_801C7058_usa, (OSMesg)&sp10, OS_MESG_BLOCK);
         var_s2 -= *sp10 == 2;
+#endif
 
         func_80000450_usa();
     }
@@ -466,26 +478,14 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/boot_main", doGameLoop);
 INCLUDE_ASM("asm/eur/nonmatchings/main/boot_main", doGameLoop);
 #endif
 
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/boot_main", doGameLoop);
+#endif
+
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/boot_main", Idle_ThreadEntry);
-
-INCLUDE_ASM("asm/fra/nonmatchings/main/boot_main", func_80000654_fra);
-
 INCLUDE_ASM("asm/fra/nonmatchings/main/boot_main", func_800008AC_fra);
 
 INCLUDE_ASM("asm/fra/nonmatchings/main/boot_main", func_80000A3C_fra);
 
 INCLUDE_ASM("asm/fra/nonmatchings/main/boot_main", func_80000F90_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/boot_main", Idle_ThreadEntry);
-
-INCLUDE_ASM("asm/ger/nonmatchings/main/boot_main", func_80000654_ger);
-
-INCLUDE_ASM("asm/ger/nonmatchings/main/boot_main", func_800008AC_ger);
-
-INCLUDE_ASM("asm/ger/nonmatchings/main/boot_main", func_80000A3C_ger);
-
-INCLUDE_ASM("asm/ger/nonmatchings/main/boot_main", func_80000F90_ger);
 #endif
