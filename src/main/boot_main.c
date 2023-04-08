@@ -16,12 +16,11 @@
 #include "controller.h"
 #include "the_game.h"
 
-#if VERSION_USA || VERSION_EUR || VERSION_GER
 INLINE void func_80000450_usa(void) {
     s32 var_s0;
 
     if (osRecvMesg(&B_801AB7F0_usa, NULL, OS_MESG_NOBLOCK) == 0) {
-#if VERSION_EUR || VERSION_GER
+#if REGION_PAL
         osViSetYScale(1.0f);
         osViBlack(1);
 #endif
@@ -42,11 +41,6 @@ INLINE void func_80000450_usa(void) {
         }
     }
 }
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/boot_main", func_80000450_fra);
-#endif
 
 void bootproc(void) {
     s32 pad[0x10] UNUSED;
@@ -62,7 +56,6 @@ void bootproc(void) {
     osStartThread(&sIdleThread);
 }
 
-#if VERSION_USA || VERSION_EUR || VERSION_GER
 void Idle_ThreadEntry(void *arg) {
     osCreatePiManager(OS_PRIORITY_PIMGR, &sPiMgrCmdQueue, sPiMgrCmdBuff, ARRAY_COUNT(sPiMgrCmdBuff));
 
@@ -75,14 +68,12 @@ void Idle_ThreadEntry(void *arg) {
 
     while (true) {}
 }
-#endif
 
 extern OSScClient B_801AB810_usa;
 extern OSSched B_8021AAA0_usa;
 
 extern STACK(B_8021DF50_usa, OS_SC_STACKSIZE);
 
-#if VERSION_USA || VERSION_EUR
 void func_80000630_usa(void) {
     s32 mode;
 
@@ -113,7 +104,7 @@ void func_80000630_usa(void) {
     }
 
     osCreateScheduler(&B_8021AAA0_usa, STACK_TOP(B_8021DF50_usa), 0x12, mode, 1);
-    osSetEventMesg(0xEU, &B_801AB7F0_usa, (OSMesg)1);
+    osSetEventMesg(OS_EVENT_PRENMI, &B_801AB7F0_usa, (OSMesg)1);
     osScAddClient(&B_8021AAA0_usa, &B_801AB810_usa, &B_801C7058_usa);
     B_801AAB9C_usa = osScGetCmdQ(&B_8021AAA0_usa);
 
@@ -128,23 +119,11 @@ void func_80000630_usa(void) {
     peelSetup();
     HVQM2Util_80040A4C_usa();
 
-#if VERSION_EUR
+#if REGION_PAL
     osViSetYScale(0.833);
 #endif
 }
-#endif
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/boot_main", Idle_ThreadEntry);
-
-INCLUDE_ASM("asm/fra/nonmatchings/main/boot_main", func_80000654_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/boot_main", func_80000630_usa);
-#endif
-
-#if VERSION_USA || VERSION_EUR || VERSION_GER
 /**
  * Original name: pon_main
  */
@@ -192,9 +171,7 @@ void pon_main(void *arg UNUSED) {
         }
     }
 }
-#endif
 
-#if VERSION_USA || VERSION_EUR || VERSION_GER
 /**
  * Original name: doMenuLoop
  */
@@ -292,7 +269,7 @@ s32 doMenuLoop(s32 arg0) {
     }
 
     while (var_s2 != 0) {
-#if VERSION_GER
+#if VERSION_GER || VERSION_FRA
         if (osRecvMesg(&B_801C7058_usa, (OSMesg)&sp10, OS_MESG_NOBLOCK) == 0) {
             var_s2 -= *sp10 == 2;
         }
@@ -306,7 +283,6 @@ s32 doMenuLoop(s32 arg0) {
 
     return arg0;
 }
-#endif
 
 #if VERSION_USA
 /**
@@ -483,9 +459,5 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/boot_main", doGameLoop);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/boot_main", func_800008AC_fra);
-
-INCLUDE_ASM("asm/fra/nonmatchings/main/boot_main", func_80000A3C_fra);
-
-INCLUDE_ASM("asm/fra/nonmatchings/main/boot_main", func_80000F90_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/boot_main", doGameLoop);
 #endif
