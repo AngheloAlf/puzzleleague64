@@ -10,7 +10,7 @@ void InitGFX(void);
 s32 CreateMenuGfxTask(struct_gInfo *arg0);
 // void func_800016D8_usa();
 // void func_8000177C_usa();
-// void func_8000182C_usa();
+void func_8000182C_usa(struct_gInfo *info);
 // void func_800019C0_usa();
 
 #endif

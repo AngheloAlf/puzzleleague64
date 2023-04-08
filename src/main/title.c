@@ -9,39 +9,39 @@
 #include "controller.h"
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/006800", func_80005C00_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/title", func_80005C00_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/006800", func_80005EC0_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/title", func_80005EC0_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/006800", DrawTitle);
+INCLUDE_ASM("asm/usa/nonmatchings/main/title", DrawTitle);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/006800", func_8000628C_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/title", func_8000628C_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/006800", RO_STR_800C3128_usa);
+INCLUDE_RODATA("asm/usa/nonmatchings/main/title", RO_STR_800C3128_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/006800", RO_STR_800C3134_usa);
+INCLUDE_RODATA("asm/usa/nonmatchings/main/title", RO_STR_800C3134_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/006800", RO_STR_800C3144_usa);
+INCLUDE_RODATA("asm/usa/nonmatchings/main/title", RO_STR_800C3144_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/006800", RO_STR_800C314C_usa);
+INCLUDE_RODATA("asm/usa/nonmatchings/main/title", RO_STR_800C314C_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/006800", RO_STR_800C3154_usa);
+INCLUDE_RODATA("asm/usa/nonmatchings/main/title", RO_STR_800C3154_usa);
 #endif
 
 #if VERSION_USA
@@ -438,12 +438,12 @@ block_36:
     }
 }
 #else
-INCLUDE_ASM("asm/usa/nonmatchings/main/006800", DoTitle);
+INCLUDE_ASM("asm/usa/nonmatchings/main/title", DoTitle);
 #endif
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/006800", InitTitle);
+INCLUDE_ASM("asm/usa/nonmatchings/main/title", InitTitle);
 #endif
 
 #if VERSION_USA

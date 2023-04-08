@@ -816,21 +816,23 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
         osStartThread(&B_8021AAE0_usa.unk_70);
         InitGameAudioSystem();
 
-        while (sp8C != 0) {
-            v1 = (void *)&gFramebuffers[0];
-            a1 = 0x95FF;
+        if (sp8C != 0) {
+            while (true) {
+                v1 = (void *)&gFramebuffers[0];
+                a1 = 0x95FF;
 
-            while (a1 != -1) {
-                *v1++ = 0;
-                a1 -= 1;
-            }
+                while (a1 != -1) {
+                    *v1++ = 0;
+                    a1 -= 1;
+                }
 
-            v1 = (void *)&gFramebuffers[1];
-            a1 = 0x95FF;
+                v1 = (void *)&gFramebuffers[1];
+                a1 = 0x95FF;
 
-            while (a1 != -1) {
-                *v1++ = 0;
-                a1 -= 1;
+                while (a1 != -1) {
+                    *v1++ = 0;
+                    a1 -= 1;
+                }
             }
         }
 

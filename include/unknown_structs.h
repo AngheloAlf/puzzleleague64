@@ -9,7 +9,9 @@
 
 
 typedef struct struct_gInfo {
-    /* 0x00000 */ UNK_TYPE1 unk_00000[0x19010];
+    /* 0x00000 */ OSScTask scTask;
+    /* 0x00068 */ Gfx unk_00068[UNK_SIZE];
+    /* 0x00070 */ UNK_TYPE1 unk_00070[0x18FA0];
     #if VERSION_USA
     // EUR is 0x10 smaller
     // TODO: figure out exactly which members are not present

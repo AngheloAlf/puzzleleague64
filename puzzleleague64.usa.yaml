@@ -28,7 +28,7 @@ options:
   mips_abi_float_regs: o32
   do_c_func_detection: True
   o_as_suffix: True
-  # gfx_ucode: f3dex2
+  gfx_ucode: f3dex
   mnemonic_ljust: 12
   rom_address_padding: True
   dump_symbols: True
@@ -83,7 +83,7 @@ segments:
       - [0x001F30, c, main/gfx]
       - [0x002710, c, main/002710]
       - [0x004A90, asm, main/004A90]
-      - [0x006800, c, main/006800]
+      - [0x006800, c, main/title]
       - [0x007EA0, c, main/menu]
       - [0x01D4B0, c, main/file]
       - [0x01DF10, asm, main/01DF10]
@@ -321,9 +321,10 @@ segments:
       - [0x0B05C0, c, main/build]
 
       - [0x0B05C0, data, libultra/rsp/rspboot]
-      - [0x0B0690, data, main/0B0690] # rsp?
+      - [0x0B0690, data, libultra/rsp/aspMain]
       - [0x0B14B0, data, libhvqm/rsp/hvqm2sp1]
-      - [0x0B1A80, data, main/0B1A80] # rsp?
+      - [0x0B1A80, data, libultra/rsp/f3dex]
+      - [0x0B2EB0, data, libultra/rsp/s2dex]
 
       - [0x0B4690, data, main/0B4690]
 
@@ -331,16 +332,14 @@ segments:
 
       - [0x0C1FE0, .data, main/build]
 
-      - [0x0C1FF0, data, main/0C1FF0]
-
-      # rodata start is a  guess
+      - [0x0C1FF0, rodata, libultra/rsp/aspMain]
       - [0x0C22B0, rodata, libhvqm/rsp/hvqm2sp1]
+      - [0x0C3000, rodata, libultra/rsp/f3dex]
+      - [0x0C3800, rodata, libultra/rsp/s2dex]
 
-      - [0x0C3000, rodata, main/0C3000]
-      - [0x0C3800, rodata, main/0C3800] # rsp?
       - [0x0C3BC0, .rodata, main/002710]
       - [0x0C3C90, rodata, main/0C3C90]
-      - [0x0C3CD0, .rodata, main/006800]
+      - [0x0C3CD0, .rodata, main/title]
       - [0x0C3DC0, rodata, main/0C3DC0]
       - [0x0C3E90, rodata, main/0C3E90]
       - [0x0C3EF0, rodata, main/0C3EF0]

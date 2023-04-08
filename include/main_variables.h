@@ -12,12 +12,11 @@
 
 
 // extern UNK_TYPE D_800AF9C0_usa;
-// extern UNK_TYPE D_800AFA90_usa;
+
 // extern UNK_TYPE D_800B08B0_usa;
-// extern UNK_TYPE D_800B0E80_usa;
-// extern UNK_TYPE D_800B22B0_usa;
+
 // extern UNK_TYPE D_800B3A90_usa;
-// extern UNK_TYPE D_800B3AB0_usa;
+
 // extern UNK_TYPE D_800B3AC0_usa;
 extern s32 D_800B3AC4_usa;
 // extern UNK_TYPE D_800B3AC8_usa;
@@ -401,16 +400,9 @@ extern s32 gMain; /* Original name: gMain */
 // extern UNK_TYPE D_800C1230_usa;
 // extern UNK_TYPE D_800C1270_usa;
 
-// extern UNK_TYPE D_800C13F0_usa;
-// extern UNK_TYPE D_800C16B0_usa;
-
-
 
 // .rodata
 
-
-// extern UNK_TYPE RO_800C2400_usa;
-// extern UNK_TYPE RO_800C2C00_usa;
 // extern UNK_TYPE RO_STR_800C2FC0_usa;
 // extern UNK_TYPE RO_STR_800C2FD8_usa;
 // extern UNK_TYPE RO_STR_800C2FF0_usa;
@@ -1612,7 +1604,7 @@ extern s32 gAllVertex;
 // extern UNK_TYPE B_801F9E20_usa;
 // extern UNK_TYPE B_801F9E24_usa;
 // extern UNK_TYPE B_801F9E28_usa;
-// extern UNK_TYPE B_80219E30_usa;
+
 // extern UNK_TYPE B_8021AA30_usa;
 // extern UNK_TYPE B_8021AA80_usa;
 // extern UNK_TYPE B_8021AAA0_usa;
@@ -1644,11 +1636,11 @@ extern OSMesg B_8021BA28_usa[1];
 // extern UNK_TYPE B_8021BA7C_usa;
 
 extern s32 B_8021BA98_usa;
-// extern UNK_TYPE B_8021BAA0_usa;
+
 // extern UNK_TYPE B_8021BEA0_usa;
 extern s32 B_8021BEA4_usa;
 extern s32 B_8021BEA8_usa;
-// extern UNK_TYPE B_8021BEAC_usa;
+extern Gfx *B_8021BEAC_usa;
 // extern UNK_TYPE B_8021BEB0_usa;
 // extern UNK_TYPE B_8021BEB8_usa;
 // extern UNK_TYPE B_8021BEBC_usa;
@@ -1657,10 +1649,10 @@ extern s32 B_8021BEA8_usa;
 
 // extern UNK_TYPE B_8021BEE4_usa;
 // extern UNK_TYPE B_8021BEE8_usa;
-// extern UNK_TYPE B_8021BF30_usa;
+
 // extern UNK_TYPE B_8021DF30_usa;
 // extern UNK_TYPE B_8021DF48_usa;
-// extern UNK_TYPE B_8021FF50_usa;
+extern STACK(B_8021FF50_usa, 0x1000);
 
 
 #endif
