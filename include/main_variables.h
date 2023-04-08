@@ -381,7 +381,7 @@ extern s32 D_800B3AC4_usa;
 // extern UNK_TYPE D_800BE1E8_usa;
 extern s32 gCounter;
 extern s32 gReset; /* Original name: gReset */
-extern s32 gMain; /* Original name: gMain */
+extern enum_gMain gMain; /* Original name: gMain */
 // extern UNK_TYPE D_800BE34C_usa;
 // extern UNK_TYPE D_800BE350_usa;
 // extern UNK_TYPE D_800BE360_usa;

@@ -50,21 +50,21 @@ s32 CreateMenuGfxTask(struct_gInfo *info) {
         gReset = 0;
 
         gSPDisplayList(glistp++, initRDPstart);
-        if (gMain == 0x1F4) {
+        if (gMain == GMAIN_TITLE) {
             InitTitle();
-        } else if (((gMain == 0x258) || (gMain == 0x28A)) || (gMain == 0x2BC)) {
+        } else if ((gMain == GMAIN_258) || (gMain == GMAIN_28A) || (gMain == GMAIN_2BC)) {
             InitMenu();
-        } else if (gMain == 0x36D) {
+        } else if (gMain == GMAIN_BONUS) {
             InitBonus();
-        } else if (gMain == 0x378) {
+        } else if (gMain == GMAIN_EDITOR) {
             InitEditor();
-        } else if (gMain == 0x383) {
+        } else if (gMain == GMAIN_STORY) {
             InitStory();
-        } else if (gMain == 0x341) {
+        } else if (gMain == GMAIN_MIMIC) {
             InitMimic();
-        } else if (gMain == 0x34C) {
+        } else if (gMain == GMAIN_TUTORIAL) {
             InitTutorial();
-        } else if (gMain == 0x357) {
+        } else if (gMain == GMAIN_STAGE_CLEAR_INTRO) {
             InitStageClearIntro();
         } else {
             InitTetrisWell();
@@ -73,19 +73,19 @@ s32 CreateMenuGfxTask(struct_gInfo *info) {
 
     InitDisplayList(info);
 
-    if (gMain == 0x1F4) {
+    if (gMain == GMAIN_TITLE) {
         DrawTitle();
-    } else if (((gMain == 0x258) || (gMain == 0x28A)) || (gMain == 0x2BC)) {
+    } else if (((gMain == GMAIN_258) || (gMain == GMAIN_28A)) || (gMain == GMAIN_2BC)) {
         DrawMenu(temp_s2);
-    } else if (gMain == 0x36D) {
+    } else if (gMain == GMAIN_BONUS) {
         DrawBonus(temp_s2);
-    } else if (gMain == 0x378) {
+    } else if (gMain == GMAIN_EDITOR) {
         DrawEditor(temp_s2);
-    } else if (gMain == 0x383) {
+    } else if (gMain == GMAIN_STORY) {
         DrawStory(temp_s2);
-    } else if ((gMain == 0x341) || (gMain == 0x34C)) {
+    } else if ((gMain == GMAIN_MIMIC) || (gMain == GMAIN_TUTORIAL)) {
         DrawMT(temp_s2);
-    } else if (gMain == 0x357) {
+    } else if (gMain == GMAIN_STAGE_CLEAR_INTRO) {
         DrawStageClearIntro(temp_s2);
     } else {
         DrawTetris(temp_s2);

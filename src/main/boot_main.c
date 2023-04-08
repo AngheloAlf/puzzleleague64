@@ -132,7 +132,7 @@ void pon_main(void *arg UNUSED) {
 
     func_80000630_usa();
     gDemo = 0x2C;
-    gMain = 0x1F4;
+    gMain = GMAIN_TITLE;
     gReset = -1;
     gTheGame.unk_9C0C = 1;
 
@@ -140,28 +140,28 @@ void pon_main(void *arg UNUSED) {
         gTheGame.unk_9C10 = 0;
 
         switch (gMain) {
-            case 0x258:
-            case 0x2BC:
-            case 0x28A:
+            case GMAIN_258:
+            case GMAIN_2BC:
+            case GMAIN_28A:
                 gTheGame.unk_9C0C = 1;
                 gAllVertex = 0;
                 var_s0 = doMenuLoop(var_s0);
                 break;
 
-            case 0x383:
+            case GMAIN_STORY:
                 gTheGame.unk_9C0C = 2;
                 var_s0 = doMenuLoop(var_s0);
                 break;
 
-            case 0x34C:
-            case 0x378:
-            case 0x384:
-            case 0x357:
-            case 0x14D:
-            case 0x38E:
-            case 0x36D:
-            case 0x341:
-            case 0x1F4:
+            case GMAIN_TUTORIAL:
+            case GMAIN_EDITOR:
+            case GMAIN_384:
+            case GMAIN_STAGE_CLEAR_INTRO:
+            case GMAIN_14D:
+            case GMAIN_38E:
+            case GMAIN_BONUS:
+            case GMAIN_MIMIC:
+            case GMAIN_TITLE:
                 var_s0 = doMenuLoop(var_s0);
                 break;
 
@@ -191,71 +191,76 @@ s32 doMenuLoop(s32 arg0) {
                 osContStartReadData(&gSerialMsgQ);
                 if (var_s2 < 2U) {
                     UpdateBuffer(&gInfo[arg0]);
-                    gCounter += 1;
+                    gCounter++;
                     if (CreateMenuGfxTask(&gInfo[arg0]) != 0) {
-                        var_s2 += 1;
+                        var_s2++;
                         arg0 ^= 1;
                     }
                 }
+
                 osRecvMesg(&gSerialMsgQ, NULL, OS_MESG_BLOCK);
-                if (((gMain == 0x384) || (gMain == 0x341)) != 0) {
+                if ((gMain == GMAIN_384) || (gMain == GMAIN_MIMIC)) {
                     UpdateController();
                 } else {
                     UpdateMenuController();
                 }
 
-                if ((gGameStatus & 0x80) && (((gMain == 0x384) || (gMain == 0x34C)) != 0) && (DemoCheck(&sp14) != 0)) {
-                    gMain = 0x1F4;
+                if ((gGameStatus & 0x80) && ((gMain == GMAIN_384) || (gMain == GMAIN_TUTORIAL)) &&
+                    (DemoCheck(&sp14) != 0)) {
+                    gMain = GMAIN_TITLE;
                     gReset = -1;
                     var_s1 = false;
                 } else {
-                    s32 temp_s0_2 = gMain;
+                    enum_gMain temp_s0_2 = gMain;
 
                     if (gReset == 0) {
-                        if (gMain < 0x384) {
+                        if (gMain < GMAIN_384) {
                             switch (gMain) {
-                                case 0x1F4:
+                                case GMAIN_TITLE:
                                     DoTitle();
                                     break;
 
-                                case 0x258:
-                                case 0x28A:
-                                case 0x2BC:
+                                case GMAIN_258:
+                                case GMAIN_28A:
+                                case GMAIN_2BC:
                                     DoMenu();
                                     break;
 
-                                case 0x36D:
+                                case GMAIN_BONUS:
                                     DoBonus();
                                     break;
 
-                                case 0x378:
+                                case GMAIN_EDITOR:
                                     DoEditor();
                                     break;
 
-                                case 0x383:
+                                case GMAIN_STORY:
                                     DoStory();
                                     break;
 
-                                case 0x341:
+                                case GMAIN_MIMIC:
                                     DoMimic();
                                     break;
 
-                                case 0x34C:
+                                case GMAIN_TUTORIAL:
                                     DoTutorial();
                                     break;
 
-                                case 0x357:
+                                case GMAIN_STAGE_CLEAR_INTRO:
                                     DoStageClearIntro();
+                                    break;
+
+                                default:
                                     break;
                             }
 
                             var_s1 &= -(temp_s0_2 == gMain);
-                        } else if (((gMain == 0x384) || (gMain == 0x388))) {
+                        } else if (((gMain == GMAIN_384) || (gMain == GMAIN_388))) {
                             DoCountDown();
-                            var_s1 &= -(((gMain == 0x387) || (gMain == 0x2BC)) == 0);
+                            var_s1 &= -(((gMain == GMAIN_387) || (gMain == GMAIN_2BC)) == 0);
                         } else {
                             DoGameOver();
-                            var_s1 &= -(gMain >= 0x38E);
+                            var_s1 &= -(gMain >= GMAIN_38E);
                         }
                     }
                     LoadDataMain();
