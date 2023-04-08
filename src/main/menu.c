@@ -442,7 +442,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_8001ACA8_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_8001AD2C_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/menu", DrawMenu);
 #endif
 
 #if VERSION_USA
@@ -450,7 +450,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/menu", DoMenu);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_8001BB54_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/menu", InitMenu);
 #endif
 
 #if VERSION_USA

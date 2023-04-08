@@ -313,8 +313,8 @@ s32 doMenuLoop(s32 arg0) {
  * Original name: doGameLoop
  */
 #if 0
-//? func_800016D8_usa(struct_gInfo *);                /* extern */
-//s32 func_8000177C_usa(struct_gInfo *);              /* extern */
+//? CreateGameGfxTask1(struct_gInfo *);                /* extern */
+//s32 CreateGameGfxTask2(struct_gInfo *);              /* extern */
 //? SetSongTempo(s32, ?);                        /* extern */
 //? PlayGameSong(? *);                           /* extern */
 //? DoTetris();                              /* extern */
@@ -391,7 +391,7 @@ loop_3:
         case 0x1:
             if (var_s1 < 2U) {
                 osContStartReadData(&gSerialMsgQ);
-                func_800016D8_usa(&gInfo[var_s0]);
+                CreateGameGfxTask1(&gInfo[var_s0]);
                 osRecvMesg(&gSerialMsgQ, NULL, 1);
                 UpdateController();
                 if ((gGameStatus & 0x80) && (DemoCheck(&sp14) != 0)) {
@@ -417,7 +417,7 @@ loop_3:
                     }
                     LoadDataMain();
                     gCounter += 1;
-                    if (func_8000177C_usa(&gInfo[var_s0]) != 0) {
+                    if (CreateGameGfxTask2(&gInfo[var_s0]) != 0) {
                         var_s1 += 1;
                         var_s0 ^= 1;
                     }

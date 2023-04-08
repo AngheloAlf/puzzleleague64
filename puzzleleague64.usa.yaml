@@ -417,9 +417,11 @@ segments:
       - { start: 0x0CA4A0, type: .bss, vram: 0x803B5000, name: buffers/framebuffer }
 
   - name: segment_0CA4A0
-    type: bin
+    type: code
     start: 0x0CA4A0
-    follows_vram: main
+    vram: 0x01000000
+    subsegments:
+      - [0x0CA4A0, data]
 
   # no idea where it ends
   - name: segment_0FB480

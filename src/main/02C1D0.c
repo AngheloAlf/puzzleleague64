@@ -39,9 +39,9 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/02C1D0", DoStory);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/02C1D0", func_8002BD30_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/02C1D0", DrawStory);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/02C1D0", func_8002BE98_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/02C1D0", InitStory);
 #endif
