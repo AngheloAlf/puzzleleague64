@@ -17,6 +17,7 @@ options:
     - linker_scripts/ger/symbol_addrs_libkmc.txt
     - linker_scripts/ger/symbol_addrs_libhvqm.txt
     - linker_scripts/ger/symbol_addrs_buffers.txt
+    - linker_scripts/ger/symbol_addrs_assets.txt
     - linker_scripts/ger/ignored_addresses.txt
   reloc_addrs_path:
     - relocs/reloc_addrs.ger.txt
@@ -81,6 +82,7 @@ segments:
       - [0x001050, c, main/boot_main]
       - [0x001FE0, c, main/001F10]
       - [0x002000, asm, main/gfx]
+      - [0x002690, asm, main/002690]
       - [0x0027E0, asm, main/0027E0]
       - [0x004B50, asm, main/004B50]
       - [0x005DF0, asm, main/005DF0]

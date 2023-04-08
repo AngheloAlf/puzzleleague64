@@ -11,6 +11,5 @@ s32 CreateMenuGfxTask(struct_gInfo *info);
 void CreateGameGfxTask1(struct_gInfo *info);
 s32 CreateGameGfxTask2(struct_gInfo *info);
 void BuildTask(struct_gInfo *info);
-// void func_800019C0_usa();
 
 #endif

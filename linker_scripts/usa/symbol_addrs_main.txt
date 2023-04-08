@@ -1080,7 +1080,7 @@ gspF3DEX_fifoTextStart = 0x800B0E80; // name_end:gspF3DEX_fifoTextEnd
 gspS2DEX_fifoTextStart = 0x800B22B0; // name_end:gspS2DEX_fifoTextEnd
 
 D_800B3A90_usa = 0x800B3A90; //
-D_800B3AB0_usa = 0x800B3AB0; //
+staticSegment = 0x800B3AB0; //
 D_800B3AC0_usa = 0x800B3AC0; //
 D_800B3AC4_usa = 0x800B3AC4; //
 D_800B3AC8_usa = 0x800B3AC8; //
@@ -2695,7 +2695,7 @@ B_801C6CA4_usa = 0x801C6CA4; //
 B_801C6CA5_usa = 0x801C6CA5; //
 gCfbStatus = 0x801C6E48; //
 
-B_801C6E54_usa = 0x801C6E54; //
+fb = 0x801C6E54; //
 B_801C6E58_usa = 0x801C6E58; //
 B_801C6E5C_usa = 0x801C6E5C; //
 B_801C6E60_usa = 0x801C6E60; //

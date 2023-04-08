@@ -1476,7 +1476,7 @@ extern STACK(gBootStack, BOOT_STACK_SIZE);
 // extern UNK_TYPE B_801C6CA4_usa;
 // extern UNK_TYPE B_801C6CA5_usa;
 
-extern struct_gInfo **B_801C6E54_usa;
+extern struct_gInfo **fb;
 // extern UNK_TYPE B_801C6E58_usa;
 extern OSMesg B_801C6E5C_usa[1];
 // extern UNK_TYPE B_801C6E60_usa;
