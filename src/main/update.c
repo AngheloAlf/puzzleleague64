@@ -111,7 +111,107 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80059A58_usa);
 INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80059A98_usa);
 #endif
 
-#if VERSION_USA
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_800578F0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_800579F4_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80057BF0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80057FBC_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058030_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_800580D8_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058180_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_8005824C_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058334_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058430_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058524_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058614_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058720_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058934_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058A94_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058BFC_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058CD8_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058DA8_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80059030_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_800590B8_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80059300_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80059C8C_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80059CE0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80059D20_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80059D60_eur);
+#endif
+
+#if VERSION_USA || VERSION_EUR
 void UpdateBuffer(struct_gInfo *info) {
     if (gTheGame.unk_9C0C == 1) {
         Update2DBuffer(info);
@@ -124,7 +224,7 @@ void UpdateBuffer(struct_gInfo *info) {
 extern s8 D_800B7508_usa[];
 extern s8 TetrisBlockFrame[];
 
-#if VERSION_USA
+#if VERSION_USA || VERSION_EUR
 void Update2DBuffer(struct_gInfo *info) {
     struct_gInfo_unk_00068 *new_var5 = &info->unk_00068;
     s8 *sp14;
@@ -323,4 +423,8 @@ void Update3DBuffer(struct_gInfo *info) {
 #else
 INCLUDE_ASM("asm/usa/nonmatchings/main/update", Update3DBuffer);
 #endif
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", Update3DBuffer);
 #endif

@@ -274,12 +274,7 @@ typedef struct struct_gInfo_unk_00068 {
     /* 0x18308 */ TheGame_unk_0000_unk_3FB0 unk_18308[THEGAME_BUFFER_LEN];
     /* 0x184B8 */ Mtx unk_184B8[THEGAME_BUFFER_LEN];
     /* 0x18538 */ Mtx unk_18538[THEGAME_BUFFER_LEN];
-    /* 0x185B8 */ UNK_TYPE1 unk_185B8[0x130];
-    #if VERSION_USA
-    // EUR is 0x10 smaller
-    // TODO: figure out exactly which members are not present
-    /* 0x186E8 */ UNK_TYPE1 unk_186E8[0x10];
-    #endif
+    /* 0x185B8 */ UNK_TYPE1 unk_185B8[0x140];
     /* 0x186F8 */ TheGame_unk_90C8 unk_186F8;
 } struct_gInfo_unk_00068; // size = 0x18FB8
 
