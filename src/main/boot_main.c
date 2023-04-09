@@ -15,6 +15,7 @@
 #include "gfx.h"
 #include "controller.h"
 #include "the_game.h"
+#include "update.h"
 
 INLINE void func_80000450_usa(void) {
     s32 var_s0;
@@ -176,7 +177,7 @@ void pon_main(void *arg UNUSED) {
  * Original name: doMenuLoop
  */
 s32 doMenuLoop(s32 arg0) {
-    s32 var_s2 = 0;
+    u32 var_s2 = 0;
     bool var_s1 = true;
     s32 sp14 = 0;
     s16 *sp10 = NULL;
@@ -189,7 +190,7 @@ s32 doMenuLoop(s32 arg0) {
         switch (*sp10) {
             case 1:
                 osContStartReadData(&gSerialMsgQ);
-                if (var_s2 < 2U) {
+                if (var_s2 < ARRAY_COUNTU(gInfo)) {
                     UpdateBuffer(&gInfo[arg0]);
                     gCounter++;
                     if (CreateMenuGfxTask(&gInfo[arg0]) != 0) {
@@ -254,13 +255,21 @@ s32 doMenuLoop(s32 arg0) {
                                     break;
                             }
 
-                            var_s1 &= -(temp_s0_2 == gMain);
+                            if (temp_s0_2 != gMain) {
+                                var_s1 = false;
+                            }
                         } else if (((gMain == GMAIN_384) || (gMain == GMAIN_388))) {
                             DoCountDown();
-                            var_s1 &= -(((gMain == GMAIN_387) || (gMain == GMAIN_2BC)) == 0);
+
+                            if ((gMain == GMAIN_387) || (gMain == GMAIN_2BC)) {
+                                var_s1 = false;
+                            }
                         } else {
                             DoGameOver();
-                            var_s1 &= -(gMain >= GMAIN_38E);
+
+                            if (gMain < GMAIN_38E) {
+                                var_s1 = false;
+                            }
                         }
                     }
                     AudioUpdate();
@@ -268,19 +277,23 @@ s32 doMenuLoop(s32 arg0) {
                 break;
 
             case 2:
-                var_s2 -= 1;
+                var_s2--;
                 break;
         }
     }
 
-    while (var_s2 != 0) {
+    while (var_s2 > 0) {
 #if VERSION_GER || VERSION_FRA
         if (osRecvMesg(&gfxFrameMsgQ, (OSMesg *)&sp10, OS_MESG_NOBLOCK) == 0) {
-            var_s2 -= *sp10 == 2;
+            if (*sp10 == 2) {
+                var_s2--;
+            }
         }
 #else
         osRecvMesg(&gfxFrameMsgQ, (OSMesg *)&sp10, OS_MESG_BLOCK);
-        var_s2 -= *sp10 == 2;
+        if (*sp10 == 2) {
+            var_s2--;
+        }
 #endif
 
         func_80000450_usa();
@@ -339,10 +352,10 @@ s32 doGameLoop(s32 arg0) {
                                 SetSongTempo(last_song_handle, 0x6E);
                             }
                         } else {
-                            if (gTheGame.unk_0000.unk_43B8 == 0) {
-                                PlayGameSong(&gTheGame.unk_4430);
+                            if (gTheGame.unk_0000[0].unk_43B8 == 0) {
+                                PlayGameSong(&gTheGame.unk_0000[1]);
                             } else {
-                                PlayGameSong(&gTheGame.unk_0000);
+                                PlayGameSong(&gTheGame.unk_0000[0]);
                             }
                         }
 

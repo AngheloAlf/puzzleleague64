@@ -3,7 +3,7 @@
 
 #include "libultra.h"
 #include "unk.h"
-#include "unknown_structs.h"
+#include "the_game.h"
 
 
 void InitGFX(void);

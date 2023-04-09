@@ -311,7 +311,7 @@ extern s32 last_song_handle;
 // extern UNK_TYPE D_FLT_800B74F0_usa;
 // extern UNK_TYPE D_FLT_800B74FC_usa;
 // extern UNK_TYPE D_800B7508_usa;
-// extern UNK_TYPE D_800B751C_usa;
+// extern UNK_TYPE TetrisBlockFrame;
 // extern UNK_TYPE D_800B7530_usa;
 // extern UNK_TYPE D_800B7544_usa;
 // extern UNK_TYPE D_800B7558_usa;
@@ -1496,7 +1496,7 @@ extern OSMesg B_801C6EA0_usa[8];
 
 // extern UNK_TYPE B_801C6EC1_usa;
 // extern UNK_TYPE B_801C6EE8_usa;
-// extern UNK_TYPE B_801C6EEC_usa;
+extern s32 gOverflow;
 // extern UNK_TYPE B_801C6EF0_usa;
 // extern UNK_TYPE B_801C6EF4_usa;
 // extern UNK_TYPE B_801C6EF6_usa;

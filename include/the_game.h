@@ -4,11 +4,77 @@
 #include "libultra.h"
 #include "unk.h"
 
+typedef struct TheGame_unk_0000_unk_0000_unk_000_unk_000 {
+    /* 0x00 */ UNK_TYPE1 unk_00[0x24];
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ UNK_TYPE1 unk_28[0x4];
+} TheGame_unk_0000_unk_0000_unk_000_unk_000; // size = 0x2C
+
+typedef struct TheGame_unk_0000_unk_0000_unk_000 {
+    TheGame_unk_0000_unk_0000_unk_000_unk_000 unk_000[6];
+    /* 0x108 */ UNK_TYPE1 unk_108[0x210];
+} TheGame_unk_0000_unk_0000_unk_000; // size = 0x318
+
+typedef struct TheGame_unk_0000_unk_0000 {
+    /* 0x0000 */ TheGame_unk_0000_unk_0000_unk_000 unk_0000[0xC];
+} TheGame_unk_0000_unk_0000; // size = 0x2520
+
+typedef struct TheGame_unk_0000_unk_2520 {
+    /* 0x000 */ UNK_TYPE1 unk_000[0x5A0];
+} TheGame_unk_0000_unk_2520; // size = 0x5A0
+
+typedef struct TheGame_unk_0000_unk_2AC0 {
+    /* 0x000 */ UNK_TYPE1 unk_000[0x410];
+} TheGame_unk_0000_unk_2AC0; // size = 0x410
+
+typedef struct TheGame_unk_0000_unk_2ED0 {
+    /* 0x000 */ UNK_TYPE1 unk_000[0x960];
+} TheGame_unk_0000_unk_2ED0; // size = 0x960
+
+typedef struct TheGame_unk_0000_unk_3830 {
+    /* 0x000 */ UNK_TYPE1 unk_000[0x6C0];
+} TheGame_unk_0000_unk_3830; // size = 0x6C0
+
+typedef struct TheGame_unk_0000_unk_3EF0 {
+    /* 0x00 */ UNK_TYPE1 unk_00[0x90];
+} TheGame_unk_0000_unk_3EF0; // size = 0x90
+
+typedef struct TheGame_unk_0000_unk_3F80 {
+    /* 0x00 */ UNK_TYPE1 unk_00[0x18];
+} TheGame_unk_0000_unk_3F80; // size = 0x18
+
+typedef struct TheGame_unk_0000_unk_3F98 {
+    /* 0x00 */ UNK_TYPE1 unk_00[0x18];
+} TheGame_unk_0000_unk_3F98; // size = 0x18
+
 
 typedef struct TheGame_unk_0000 {
-    /* 0x0000 */ UNK_TYPE1 unk_0000[0x43B8];
+    /* 0x0000 */ TheGame_unk_0000_unk_0000 unk_0000;
+    /* 0x2520 */ TheGame_unk_0000_unk_2520 unk_2520;
+    /* 0x2AC0 */ TheGame_unk_0000_unk_2AC0 unk_2AC0;
+    /* 0x2ED0 */ TheGame_unk_0000_unk_2ED0 unk_2ED0;
+    /* 0x3830 */ TheGame_unk_0000_unk_3830 unk_3830;
+    /* 0x3EF0 */ TheGame_unk_0000_unk_3EF0 unk_3EF0;
+    /* 0x3F80 */ TheGame_unk_0000_unk_3F80 unk_3F80;
+    /* 0x3F98 */ TheGame_unk_0000_unk_3F98 unk_3F98;
+    /* 0x3FB0 */ UNK_TYPE1 unk_3FB0[0x408];
     /* 0x43B8 */ s32 unk_43B8;
-} TheGame_unk_0000; // size >= 0x43BC
+    /* 0x43BC */ UNK_TYPE1 unk_43BC[0x74];
+} TheGame_unk_0000; // size >= 0x4430
+
+
+typedef struct TheGame_unk_8860 {
+    /* 0x00 */ UNK_TYPE1 unk_00[0x1C];
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ UNK_TYPE1 unk_20[0x90];
+} TheGame_unk_8860; // size = 0xB0
+
+
+typedef struct TheGame_unk_90C8 {
+    /* 0x000 */ UNK_TYPE1 unk_000[0x8C0];
+} TheGame_unk_90C8; // size = 0x8C0
+
+
 
 
 typedef struct struct_801A6DB8_usa_unk_002 {
@@ -156,12 +222,59 @@ typedef struct struct_801A6DB8_usa {
 } struct_801A6DB8_usa; // size = 0x7BC
 
 
+typedef struct struct_gInfo_unk_10208_unk_0 {
+    /* 0x0 */ UNK_TYPE1 unk_0[0x4];
+} struct_gInfo_unk_10208_unk_0; // size = 0x4
+
+typedef struct struct_gInfo_unk_10208 {
+    /* 0x0 */ struct_gInfo_unk_10208_unk_0 unk_0;
+    /* 0x4 */ UNK_TYPE1 unk_4[0xA];
+} struct_gInfo_unk_10208; // size = 0xE
+
+#define THEGAME_BUFFER_LEN 2
+
+typedef struct struct_gInfo_unk_00068 {
+    /* 0x00000 */ Gfx unk_00000[UNK_SIZE];
+    /* 0x00008 */ UNK_TYPE1 unk_00008[0x10200];
+    /* 0x10208 */ struct_gInfo_unk_10208 unk_10208[THEGAME_BUFFER_LEN];
+    /* 0x10224 */ UNK_TYPE1 unk_10224[0x1C];
+    /* 0x10240 */ UNK_TYPE unk_10240;
+    /* 0x10244 */ TheGame_unk_0000_unk_0000 unk_10244[THEGAME_BUFFER_LEN];
+    /* 0x14C84 */ UNK_TYPE1 unk_14C84[0x4];
+    /* 0x14C88 */ TheGame_unk_0000_unk_2520 unk_14C88[THEGAME_BUFFER_LEN];
+    /* 0x157C8 */ TheGame_unk_0000_unk_2AC0 unk_157C8[THEGAME_BUFFER_LEN];
+    /* 0x15FE8 */ TheGame_unk_0000_unk_2ED0 unk_15FE8[THEGAME_BUFFER_LEN];
+    /* 0x172A8 */ TheGame_unk_8860 unk_172A8[THEGAME_BUFFER_LEN];
+    /* 0x17408 */ TheGame_unk_0000_unk_3830 unk_17408[THEGAME_BUFFER_LEN];
+    /* 0x18188 */ TheGame_unk_0000_unk_3EF0 unk_18188[THEGAME_BUFFER_LEN];
+    /* 0x182A8 */ TheGame_unk_0000_unk_3F80 unk_182A8[THEGAME_BUFFER_LEN];
+    /* 0x182D8 */ TheGame_unk_0000_unk_3F98 unk_182D8[THEGAME_BUFFER_LEN];
+    /* 0x18308 */ UNK_TYPE1 unk_18308[0x3E0];
+    #if VERSION_USA
+    // EUR is 0x10 smaller
+    // TODO: figure out exactly which members are not present
+    /* 0x186E8 */ UNK_TYPE1 unk_186E8[0x10];
+    #endif
+    /* 0x186F8 */ TheGame_unk_90C8 unk_186F8;
+} struct_gInfo_unk_00068; // size = 0x18FB8
+
+typedef struct struct_gInfo {
+    /* 0x00000 */ OSScTask scTask;
+    /* 0x00068 */ struct_gInfo_unk_00068 unk_00068;
+    /* 0x19020 */ s16 unk_19020;
+    /* 0x19022 */ UNK_TYPE1 unk_19022[0x2];
+    /* 0x19024 */ UNK_TYPE1 unk_19024[0x1C];
+    /* 0x19040 */ void *unk_19040;
+    /* 0x19044 */ UNK_TYPE1 unk_19044[0x4];
+} struct_gInfo; // size = 0x19048
+
+
 typedef struct TheGame {
-    ///* 0x0000 */ UNK_TYPE1 unk_0000[0x9C0C];
-    /* 0x0000 */ TheGame_unk_0000 unk_0000;
-    /* 0x43BC */ UNK_TYPE1 unk_43BC[0x74];
-    /* 0x4430 */ TheGame_unk_0000 unk_4430;
-    /* 0x87EC */ UNK_TYPE1 unk_87EC[0x141C];
+    /* 0x0000 */ TheGame_unk_0000 unk_0000[THEGAME_BUFFER_LEN];
+    /* 0x8860 */ TheGame_unk_8860 unk_8860[THEGAME_BUFFER_LEN];
+    /* 0x89C0 */ UNK_TYPE1 unk_89C0[0x708];
+    /* 0x90C8 */ TheGame_unk_90C8 unk_90C8;
+    /* 0x9988 */ UNK_TYPE1 unk_9988[0x280];
     /* 0x9C08 */ s32 unk_9C08;
     /* 0x9C0C */ s32 unk_9C0C;
     /* 0x9C10 */ s32 unk_9C10;

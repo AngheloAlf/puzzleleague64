@@ -5,6 +5,7 @@
 #include "unk.h"
 #include "unknown_structs.h"
 #include "version.h"
+#include "the_game.h"
 
 
 void func_80000450_usa(void);
@@ -568,34 +569,7 @@ void InitDisplayList(struct_gInfo *info);
 // void func_80056F70_usa();
 // void func_800572B4_usa();
 // void func_8005731C_usa();
-// void func_80057650_usa();
-// void func_80057754_usa();
-// void func_80057950_usa();
-// void func_80057D1C_usa();
-// void func_80057D68_usa();
-// void func_80057E10_usa();
-// void func_80057EB8_usa();
-// void func_80057F84_usa();
-// void func_8005806C_usa();
-// void func_80058168_usa();
-// void func_8005825C_usa();
-// void func_8005834C_usa();
-// void func_80058458_usa();
-// void func_8005866C_usa();
-// void func_800587CC_usa();
-// void func_80058934_usa();
-// void func_80058A10_usa();
-// void func_80058AE0_usa();
-// void func_80058D68_usa();
-// void func_80058DF0_usa();
-// void func_80059038_usa();
-// void func_800599C4_usa();
-// void func_80059A18_usa();
-// void func_80059A58_usa();
-// void func_80059A98_usa();
-void UpdateBuffer(struct_gInfo *arg0);
-// void func_80059FC4_usa();
-// void func_8005A2E8_usa();
+
 // void func_8005A8D0_usa();
 // void func_8005A990_usa();
 // void func_8005A9EC_usa();
