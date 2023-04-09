@@ -49,7 +49,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/002710", func_80001ED8_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/002710", func_80001F1C_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/002710", IsTuneBufferFree);
 #endif
 
 #if VERSION_USA
@@ -73,7 +73,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/002710", func_8000222C_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/002710", func_80002348_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/002710", LoadSFXBank);
 #endif
 
 #if VERSION_USA
@@ -109,7 +109,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/002710", func_800027FC_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/002710", func_8000288C_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/002710", SetAudioSystemMixer);
 #endif
 
 #if VERSION_USA
@@ -133,11 +133,11 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/002710", func_80002C50_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/002710", func_80002C7C_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/002710", FadeOutTuneBuffer);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/002710", func_80002CB4_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/002710", FadeOutSong);
 #endif
 
 #if VERSION_USA

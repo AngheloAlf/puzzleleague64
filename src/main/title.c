@@ -58,8 +58,8 @@ typedef struct struct_8018A7F4_usa {
 } struct_8018A7F4_usa; // size >= 0x84
 
 
-void func_80002CB4_usa(s32, UNK_TYPE);                        /* extern */
-void func_80005130_usa(UNK_TYPE *, UNK_TYPE, UNK_TYPE, UNK_TYPE);                  /* extern */
+void FadeOutSong(s32, UNK_TYPE);                        /* extern */
+void PlayMIDI(UNK_TYPE *, UNK_TYPE, UNK_TYPE, UNK_TYPE);                  /* extern */
 void func_80005184_usa(UNK_TYPE *arg0, UNK_TYPE arg1);
 void func_80005C00_usa(void *);                        /* extern */
 void func_80009D30_usa(s32, s32);                      /* extern */
@@ -109,7 +109,7 @@ extern s32 B_8021BA98_usa;
 extern UNK_TYPE *B_8021BEA4_usa;
 extern UNK_TYPE *B_8021BEA8_usa;
 extern s32 last_song_handle;
-extern UNK_TYPE D_800B3FB0_usa;
+extern UNK_TYPE BGM_INIT_TABLE;
 extern UNK_TYPE D_800B4160_usa;
 extern u8 D_800B69B0_usa;
 extern const char RO_STR_800C3128_usa[];
@@ -195,7 +195,7 @@ block_12:
                 B_8018A7F4_usa->unk_10 = temp_a1;
                 if (sp18 < temp_a1) {
                     gReset = -1;
-                    func_80002CB4_usa(last_song_handle, 0x3C);
+                    FadeOutSong(last_song_handle, 0x3C);
                 } else {
                     func_80009D30_usa(temp_s0, temp_a1);
                 }
@@ -225,7 +225,7 @@ block_12:
                 B_8018A7F4_usa->unk_08 = temp_v0;
                 B_8018A7F4_usa->unk_00 = 0;
                 B_8018A7F4_usa->unk_14 = 6;
-                func_80005130_usa(&D_800B3FB0_usa, 0x3C, 0, 0);
+                PlayMIDI(&BGM_INIT_TABLE, 0x3C, 0, 0);
             }
             break;
         default:                                    /* switch 1 */
@@ -288,7 +288,7 @@ block_36:
                 temp_v1_3 = B_8018A7F4_usa->unk_0C + 1;
                 B_8018A7F4_usa->unk_0C = temp_v1_3;
                 if ((temp_v1_3 == 0x384) && (B_8018A7F8_usa != 8)) {
-                    func_80002CB4_usa(last_song_handle, 0x3C);
+                    FadeOutSong(last_song_handle, 0x3C);
                 }
                 if (B_8018A7F4_usa->unk_0C >= 0x3C0) {
                     gDemo = 0xB;

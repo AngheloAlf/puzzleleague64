@@ -21,7 +21,7 @@ CPP_FLAGS = [
     "-Ilib/libhvqm/include",
 
     "-D_LANGUAGE_C",
-    "-DF3DEX_GBI_2",
+    "-DF3DEX_GBI",
     "-D__USE_ISOC99",
     # "-DNDEBUG",
     # "-D_FINALROM",
@@ -46,10 +46,16 @@ def import_c_file(in_file, version: str) -> str:
         CPP_FLAGS.append("-DVERSION_USA=1")
     elif version == "eur":
         CPP_FLAGS.append("-DVERSION_EUR=1")
+        CPP_FLAGS.append("-DNDEBUG")
+        CPP_FLAGS.append("-D_FINALROM")
     elif version == "fra":
         CPP_FLAGS.append("-DVERSION_FRA=1")
+        CPP_FLAGS.append("-DNDEBUG")
+        CPP_FLAGS.append("-D_FINALROM")
     elif version == "ger":
         CPP_FLAGS.append("-DVERSION_GER=1")
+        CPP_FLAGS.append("-DNDEBUG")
+        CPP_FLAGS.append("-D_FINALROM")
 
     cpp_command = ["gcc", "-E", "-P", "-undef", "-dM", *CPP_FLAGS, in_file]
     cpp_command2 = ["gcc", "-E", "-P", "-undef", *CPP_FLAGS, in_file]

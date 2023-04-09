@@ -16,6 +16,7 @@
 #include "controller.h"
 #include "the_game.h"
 #include "update.h"
+#include "tetsound.h"
 
 INLINE void func_80000450_usa(void) {
     s32 var_s0;
@@ -306,9 +307,6 @@ s32 doMenuLoop(s32 arg0) {
 /**
  * Original name: doGameLoop
  */
-s32 PlayGameSong(TheGame_unk_0000 *game);
-UNK_RET SetSongTempo(UNK_TYPE, UNK_TYPE);
-
 #ifdef NON_EQUIVALENT
 s32 doGameLoop(s32 arg0) {
     s32 sp14;
