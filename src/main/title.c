@@ -104,7 +104,7 @@ extern s32 gGameStatus;
 extern s32 B_801AD9BC_usa;
 extern s32 B_801ADAE8_usa;
 extern s32 B_801C6FA0_usa;
-extern s32 B_801F9CF8_usa;
+extern s32 gSelection;
 extern s32 B_8021BA98_usa;
 extern UNK_TYPE *B_8021BEA4_usa;
 extern UNK_TYPE *B_8021BEA8_usa;
@@ -309,28 +309,28 @@ block_36:
                             gMain = 0x34C;
                             B_801A6D78_usa = 1;
                             *B_801A6D7C_usa = 1;
-                            B_801F9CF8_usa = 0x64;
+                            gSelection = 0x64;
                             B_801A6D98_usa = 1;
                             break;
                         case 0x3:
                             gMain = 0x34C;
                             B_801A6D78_usa = 1;
                             *B_801A6D7C_usa = 1;
-                            B_801F9CF8_usa = 0x64;
+                            gSelection = 0x64;
                             B_801A6D98_usa = 2;
                             break;
                         case 0x5:
                             gMain = 0x34C;
                             B_801A6D78_usa = 1;
                             *B_801A6D7C_usa = 1;
-                            B_801F9CF8_usa = 0x64;
+                            gSelection = 0x64;
                             B_801A6D98_usa = 3;
                             break;
                         case 0x7:
                             gMain = 0x34C;
                             B_801A6D78_usa = 1;
                             *B_801A6D7C_usa = 1;
-                            B_801F9CF8_usa = 0x64;
+                            gSelection = 0x64;
                             B_801A6D98_usa = 4;
                             break;
                         case 0x2:
@@ -342,7 +342,7 @@ block_36:
                                 var_a0 = 1;
                             }
                             *B_801A6D7C_usa = var_a0;
-                            B_801F9CF8_usa = 0x8C;
+                            gSelection = 0x8C;
                             B_801A6D98_usa = 1;
                             B_801A6DA4_usa = 0;
                             B_801A6DA0_usa = 1;
@@ -359,7 +359,7 @@ block_36:
                                 var_a0_2 = 1;
                             }
                             *B_801A6D7C_usa = var_a0_2;
-                            B_801F9CF8_usa = 0xA0;
+                            gSelection = 0xA0;
                             B_801A6D98_usa = 0;
                             B_801A6DA4_usa = 0;
                             var_v1_2 = 3;

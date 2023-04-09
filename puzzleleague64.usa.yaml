@@ -332,6 +332,8 @@ segments:
       - [0x0B4690, data, main/0B4690]
       - [0x0B46B0, .data, main/gfx]
       - [0x0B46C0, data, main/0B46C0]
+      - [0x0B80D0, data, main/0B80D0] # update? maybe wrong end
+      - [0x0B8130, data, main/0B8130]
 
       - [0x0C1E30, data, libhvqm/adpcmdec]
 
