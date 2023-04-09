@@ -108,7 +108,7 @@ extern s32 B_801F9CF8_usa;
 extern s32 B_8021BA98_usa;
 extern UNK_TYPE *B_8021BEA4_usa;
 extern UNK_TYPE *B_8021BEA8_usa;
-extern s32 D_800B3AD8_usa;
+extern s32 last_song_handle;
 extern UNK_TYPE D_800B3FB0_usa;
 extern UNK_TYPE D_800B4160_usa;
 extern u8 D_800B69B0_usa;
@@ -195,7 +195,7 @@ block_12:
                 B_8018A7F4_usa->unk_10 = temp_a1;
                 if (sp18 < temp_a1) {
                     gReset = -1;
-                    func_80002CB4_usa(D_800B3AD8_usa, 0x3C);
+                    func_80002CB4_usa(last_song_handle, 0x3C);
                 } else {
                     func_80009D30_usa(temp_s0, temp_a1);
                 }
@@ -288,7 +288,7 @@ block_36:
                 temp_v1_3 = B_8018A7F4_usa->unk_0C + 1;
                 B_8018A7F4_usa->unk_0C = temp_v1_3;
                 if ((temp_v1_3 == 0x384) && (B_8018A7F8_usa != 8)) {
-                    func_80002CB4_usa(D_800B3AD8_usa, 0x3C);
+                    func_80002CB4_usa(last_song_handle, 0x3C);
                 }
                 if (B_8018A7F4_usa->unk_0C >= 0x3C0) {
                     gDemo = 0xB;

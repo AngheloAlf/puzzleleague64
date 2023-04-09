@@ -189,7 +189,7 @@ void BuildTask(struct_gInfo *info) {
 
     scTask->flags = OS_SC_SWAPBUFFER | OS_SC_LAST_TASK | OS_SC_NEEDS_RSP | OS_SC_NEEDS_RDP;
     scTask->next = NULL;
-    scTask->msgQ = &B_801C7058_usa;
+    scTask->msgQ = &gfxFrameMsgQ;
     scTask->msg = &info->unk_19020;
     scTask->framebuffer = info->unk_19040;
     osSendMesg(B_801AAB9C_usa, scTask, OS_MESG_BLOCK);

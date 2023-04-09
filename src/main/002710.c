@@ -285,7 +285,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/002710", func_800038E4_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/002710", LoadDataMain);
+INCLUDE_ASM("asm/usa/nonmatchings/main/002710", AudioUpdate);
 #endif
 
 #if VERSION_USA

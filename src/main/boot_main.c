@@ -78,12 +78,12 @@ void func_80000630_usa(void) {
     s32 mode;
 
     osCreateMesgQueue(&B_801AB7F0_usa, B_801C6E5C_usa, ARRAY_COUNT(B_801C6E5C_usa));
-    osSetEventMesg(OS_EVENT_PRENMI, &B_801AB7F0_usa, (OSMesg)1);
+    osSetEventMesg(OS_EVENT_PRENMI, &B_801AB7F0_usa, (OSMesg *)1);
 
     func_80000450_usa();
 
     osCreateMesgQueue(&B_8019D158_usa, B_8021BA28_usa, ARRAY_COUNT(B_8021BA28_usa));
-    osCreateMesgQueue(&B_801C7058_usa, B_801C6EA0_usa, ARRAY_COUNT(B_801C6EA0_usa));
+    osCreateMesgQueue(&gfxFrameMsgQ, B_801C6EA0_usa, ARRAY_COUNT(B_801C6EA0_usa));
 
     switch (osTvType) {
         case OS_TV_PAL:
@@ -104,8 +104,8 @@ void func_80000630_usa(void) {
     }
 
     osCreateScheduler(&B_8021AAA0_usa, STACK_TOP(B_8021DF50_usa), 0x12, mode, 1);
-    osSetEventMesg(OS_EVENT_PRENMI, &B_801AB7F0_usa, (OSMesg)1);
-    osScAddClient(&B_8021AAA0_usa, &B_801AB810_usa, &B_801C7058_usa);
+    osSetEventMesg(OS_EVENT_PRENMI, &B_801AB7F0_usa, (OSMesg *)1);
+    osScAddClient(&B_8021AAA0_usa, &B_801AB810_usa, &gfxFrameMsgQ);
     B_801AAB9C_usa = osScGetCmdQ(&B_8021AAA0_usa);
 
     InitGFX();
@@ -182,7 +182,7 @@ s32 doMenuLoop(s32 arg0) {
     s16 *sp10 = NULL;
 
     while (var_s1) {
-        osRecvMesg(&B_801C7058_usa, (OSMesg)&sp10, OS_MESG_BLOCK);
+        osRecvMesg(&gfxFrameMsgQ, (OSMesg *)&sp10, OS_MESG_BLOCK);
 
         func_80000450_usa();
 
@@ -263,7 +263,7 @@ s32 doMenuLoop(s32 arg0) {
                             var_s1 &= -(gMain >= GMAIN_38E);
                         }
                     }
-                    LoadDataMain();
+                    AudioUpdate();
                 }
                 break;
 
@@ -275,11 +275,11 @@ s32 doMenuLoop(s32 arg0) {
 
     while (var_s2 != 0) {
 #if VERSION_GER || VERSION_FRA
-        if (osRecvMesg(&B_801C7058_usa, (OSMesg)&sp10, OS_MESG_NOBLOCK) == 0) {
+        if (osRecvMesg(&gfxFrameMsgQ, (OSMesg *)&sp10, OS_MESG_NOBLOCK) == 0) {
             var_s2 -= *sp10 == 2;
         }
 #else
-        osRecvMesg(&B_801C7058_usa, (OSMesg)&sp10, OS_MESG_BLOCK);
+        osRecvMesg(&gfxFrameMsgQ, (OSMesg *)&sp10, OS_MESG_BLOCK);
         var_s2 -= *sp10 == 2;
 #endif
 
@@ -293,162 +293,85 @@ s32 doMenuLoop(s32 arg0) {
 /**
  * Original name: doGameLoop
  */
-#if 0
-//? CreateGameGfxTask1(struct_gInfo *);                /* extern */
-//s32 CreateGameGfxTask2(struct_gInfo *);              /* extern */
-//? SetSongTempo(s32, ?);                        /* extern */
-//? PlayGameSong(? *);                           /* extern */
-//? DoTetris();                              /* extern */
-extern ? gTheGame;
-extern ? B_801A6D78_usa;
-extern s32 B_801C70A8_usa;
-extern u32 B_801C70AC_usa;
-extern s32 D_800B3AD8_usa;
+s32 PlayGameSong(TheGame_unk_0000 *game);
+UNK_RET SetSongTempo(UNK_TYPE, UNK_TYPE);
 
+#ifdef NON_EQUIVALENT
 s32 doGameLoop(s32 arg0) {
-    void *sp10;
     s32 sp14;
-    ? *var_a0;
-    s16 temp_v1;
-    s32 var_s0;
-    s32 var_s0_2;
-    s32 var_s0_3;
-    s32 var_s2;
-    s32 var_v0;
-    s32 var_v0_2;
-    s32 var_v0_3;
-    s32 var_v0_4;
-    u16 (*var_v1)[0x12C00];
-    u16 (*var_v1_2)[0x12C00];
-    u16 (*var_v1_3)[0x12C00];
-    u16 (*var_v1_4)[0x12C00];
+    s16 *sp10;
+    bool var_s2;
     u32 var_s1;
-    u64 temp_ret;
 
-    var_s0 = arg0;
     var_s1 = 0;
-    var_s2 = 1;
+    var_s2 = true;
     sp14 = 0;
     sp10 = NULL;
-    temp_ret = osGetTime();
-    B_801C70A8_usa = temp_ret;
-    B_801C70AC_usa = (u32) temp_ret;
-loop_1:
-    osRecvMesg(&B_801C7058_usa, &sp10, 1);
-    if (osRecvMesg(&B_801AB7F0_usa, NULL, 0) == 0) {
-        var_s0_2 = -1;
-        func_80002D5C_usa();
-        func_80002DE8_usa();
-loop_3:
-        if (var_s0_2 != 0) {
-            var_s0_2 &= -(~osAfterPreNMI() == 0);
-        }
-        do {
 
-        } while (osViGetCurrentLine() != 0);
-        do {
-            var_v0 = 0x95FF;
-        } while (osViGetCurrentLine() == 0);
-        var_v1 = gFramebuffers;
-        do {
-            *var_v1 = 0;
-            var_v0 -= 1;
-            var_v1 += 4;
-        } while (var_v0 != -1);
-        var_v1_2 = gFramebuffers + 0x25800;
-        var_v0_2 = 0x95FF;
-        do {
-            *var_v1_2 = 0;
-            var_v0_2 -= 1;
-            var_v1_2 += 4;
-        } while (var_v0_2 != -1);
-        goto loop_3;
-    }
-    temp_v1 = *sp10;
-    switch (temp_v1) {                              /* irregular */
-        case 0x2:
-            var_s1 -= 1;
-            break;
-        case 0x1:
-            if (var_s1 < 2U) {
-                osContStartReadData(&gSerialMsgQ);
-                CreateGameGfxTask1(&gInfo[var_s0]);
-                osRecvMesg(&gSerialMsgQ, NULL, 1);
-                UpdateController();
-                if ((gGameStatus & 0x80) && (DemoCheck(&sp14) != 0)) {
-                    gMain = 0x1F4;
-                    gReset = -1;
-                    var_s2 = 0;
-                } else {
-                    DoTetris();
-                    var_s2 &= -((u32) (gMain - 0x387) < 2U);
-                    UpdateBuffer(&gInfo[var_s0]);
-                    if (B_801A6D78_usa.unk_0 == 1) {
-                        PlayGameSong(&gTheGame);
-                        if (gGameStatus & 0x20) {
-                            SetSongTempo(D_800B3AD8_usa, 0x6E);
-                        }
+    gTime = osGetTime();
+
+    while (var_s2) {
+        osRecvMesg(&gfxFrameMsgQ, (OSMesg *)&sp10, OS_MESG_BLOCK);
+        func_80000450_usa();
+
+        switch (*sp10) {
+            case 0x1:
+                if (var_s1 < 2U) {
+                    osContStartReadData(&gSerialMsgQ);
+                    CreateGameGfxTask1(&gInfo[arg0]);
+                    osRecvMesg(&gSerialMsgQ, NULL, OS_MESG_BLOCK);
+                    UpdateController();
+                    if ((gGameStatus & 0x80) && (DemoCheck(&sp14) != 0)) {
+                        gMain = GMAIN_TITLE;
+                        gReset = -1;
+                        var_s2 = false;
                     } else {
-                        if (B_801A6D78_usa.unk_-5850 != 0) {
-                            var_a0 = (&B_801A6D78_usa - 0x5850) - 0x43B8;
-                        } else {
-                            var_a0 = &B_801A6D78_usa - 0x57D8;
-                        }
-                        PlayGameSong(var_a0);
-                    }
-                    LoadDataMain();
-                    gCounter += 1;
-                    if (CreateGameGfxTask2(&gInfo[var_s0]) != 0) {
-                        var_s1 += 1;
-                        var_s0 ^= 1;
-                    }
-                }
-            }
-            break;
-    }
-    if (var_s2 == 0) {
-        if (var_s1 != 0) {
-loop_32:
-            osRecvMesg(&B_801C7058_usa, &sp10, 1);
-            var_s1 -= *sp10 == 2;
-            if (osRecvMesg(&B_801AB7F0_usa, NULL, 0) == 0) {
-                var_s0_3 = -1;
-                func_80002D5C_usa();
-                func_80002DE8_usa();
-loop_34:
-                if (var_s0_3 != 0) {
-                    var_s0_3 &= -(~osAfterPreNMI() == 0);
-                }
-                do {
+                        DoTetris();
 
-                } while (osViGetCurrentLine() != 0);
-                do {
-                    var_v0_3 = 0x95FF;
-                } while (osViGetCurrentLine() == 0);
-                var_v1_3 = gFramebuffers;
-                do {
-                    *var_v1_3 = 0;
-                    var_v0_3 -= 1;
-                    var_v1_3 += 4;
-                } while (var_v0_3 != -1);
-                var_v1_4 = gFramebuffers + 0x25800;
-                var_v0_4 = 0x95FF;
-                do {
-                    *var_v1_4 = 0;
-                    var_v0_4 -= 1;
-                    var_v1_4 += 4;
-                } while (var_v0_4 != -1);
-                goto loop_34;
-            }
-            if (var_s1 == 0) {
-                /* Duplicate return node #44. Try simplifying control flow for better match */
-                return var_s0;
-            }
-            goto loop_32;
+                        if ((gMain < GMAIN_387) || (gMain > GMAIN_388)) {
+                            var_s2 = false;
+                        }
+                        UpdateBuffer(&gInfo[arg0]);
+
+                        if (gTheGame.unk_9C08 == 1) {
+                            PlayGameSong(&gTheGame.unk_0000);
+                            if (gGameStatus & 0x20) {
+                                SetSongTempo(last_song_handle, 0x6E);
+                            }
+                        } else {
+                            if (gTheGame.unk_0000.unk_43B8 == 0) {
+                                PlayGameSong(&gTheGame.unk_4430);
+                            } else {
+                                PlayGameSong(&gTheGame.unk_0000);
+                            }
+                        }
+
+                        AudioUpdate();
+                        gCounter++;
+                        if (CreateGameGfxTask2(&gInfo[arg0]) != 0) {
+                            var_s1++;
+                            arg0 ^= 1;
+                        }
+                    }
+                }
+                break;
+
+            case 0x2:
+                var_s1--;
+                break;
         }
-        return var_s0;
     }
-    goto loop_1;
+
+    while (var_s1 != 0) {
+        osRecvMesg(&gfxFrameMsgQ, (OSMesg *)&sp10, OS_MESG_BLOCK);
+        if (*sp10 == 2) {
+            var_s1--;
+        }
+
+        func_80000450_usa();
+    }
+
+    return arg0;
 }
 #else
 INCLUDE_ASM("asm/usa/nonmatchings/main/boot_main", doGameLoop);

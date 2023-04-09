@@ -5,6 +5,12 @@
 #include "unk.h"
 
 
+typedef struct TheGame_unk_0000 {
+    /* 0x0000 */ UNK_TYPE1 unk_0000[0x43B8];
+    /* 0x43B8 */ s32 unk_43B8;
+} TheGame_unk_0000; // size >= 0x43BC
+
+
 typedef struct struct_801A6DB8_usa_unk_002 {
     /* 0x0 */ UNK_TYPE1 unk_0[0xE];
 } struct_801A6DB8_usa_unk_002; // size = 0xE
@@ -151,7 +157,12 @@ typedef struct struct_801A6DB8_usa {
 
 
 typedef struct TheGame {
-    /* 0x0000 */ UNK_TYPE1 unk_0000[0x9C0C];
+    ///* 0x0000 */ UNK_TYPE1 unk_0000[0x9C0C];
+    /* 0x0000 */ TheGame_unk_0000 unk_0000;
+    /* 0x43BC */ UNK_TYPE1 unk_43BC[0x74];
+    /* 0x4430 */ TheGame_unk_0000 unk_4430;
+    /* 0x87EC */ UNK_TYPE1 unk_87EC[0x141C];
+    /* 0x9C08 */ s32 unk_9C08;
     /* 0x9C0C */ s32 unk_9C0C;
     /* 0x9C10 */ s32 unk_9C10;
     /* 0x9C14 */ UNK_TYPE1 unk_9C14[0x34];
