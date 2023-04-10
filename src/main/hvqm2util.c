@@ -539,7 +539,7 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
     temp_s5 = arg1 >> 0x10;
     arg1 = arg1 & 0xFFFF;
     if (arg1 & 0x1000) {
-        func_8001F6B8_usa(&sp40, "iSkip16.BIF", &arg2);
+        imageLoad(&sp40, "iSkip16.BIF", &arg2);
         arg2 = ALIGN_PTR(arg2);
     }
 

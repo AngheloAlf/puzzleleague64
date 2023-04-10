@@ -7,7 +7,7 @@
 
 // void func_8001ECB0_usa();
 // void func_8001EDE0_usa();
-s32 func_8001F6B8_usa(s32 *arg0, const char *arg1, void **arg2);
+s32 imageLoad(s32 *arg0, const char *arg1, void **arg2);
 // void func_8001FC08_usa();
 // void func_8001FD0C_usa();
 // void func_8001FD94_usa();

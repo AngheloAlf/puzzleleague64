@@ -174,9 +174,8 @@ s32 fileClose(File *arg0 UNUSED) {
 #endif
 
 #if VERSION_USA
-// fileGet?
 #ifdef NON_EQUIVALENT
-s32 func_8001CC7C_usa(File *arg0, u8 *arg1, s32 arg2) {
+s32 fileGet(File *arg0, u8 *arg1, s32 arg2) {
     u8 *var_v1;
     s32 var_a0;
     s32 var_s1;
@@ -324,7 +323,7 @@ s32 func_8001CC7C_usa(File *arg0, u8 *arg1, s32 arg2) {
     return var_s1;
 }
 #else
-INCLUDE_ASM("asm/usa/nonmatchings/main/file", func_8001CC7C_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/file", fileGet);
 #endif
 #endif
 

@@ -22,6 +22,7 @@
 #include "editor.h"
 #include "story.h"
 #include "end.h"
+#include "screen.h"
 
 INLINE void func_80000450_usa(void) {
     s32 var_s0;

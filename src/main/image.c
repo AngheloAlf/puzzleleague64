@@ -22,7 +22,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_8001EDE0_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_8001F6B8_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/image", imageLoad);
 #endif
 
 #if VERSION_USA

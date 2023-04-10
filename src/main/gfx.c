@@ -15,6 +15,7 @@
 #include "assets_variables.h"
 #include "story.h"
 #include "editor.h"
+#include "screen.h"
 
 #if VERSION_USA
 void *staticSegment = NULL;

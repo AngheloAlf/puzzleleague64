@@ -7,9 +7,59 @@
 #include "hvqm2util.h"
 #include "the_game.h"
 #include "controller.h"
+#include "build.h"
+#include "buffers.h"
+#include "sfxlimit.h"
+#include "segment_symbols.h"
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/title", func_80005C00_usa);
+extern u32 D_800B5890_usa[];
+
+void func_80005C00_usa(void) {
+    if (B_8018A808_usa < 7) {
+        u32 temp_v1 = D_800B5890_usa[B_8018A808_usa];
+        f32 temp_ft2 = (temp_v1 >> 0x18) & 0xFF;
+        f32 temp_ft1 = (temp_v1 >> 0x10) & 0xFF;
+        f32 temp_ft0 = (temp_v1 >> 8) & 0xFF;
+
+        if (B_FLT_8018A7FC_usa < temp_ft2) {
+            if ((B_FLT_8018A7FC_usa += 6.0) > temp_ft2) {
+                B_FLT_8018A7FC_usa = temp_ft2;
+            }
+        }
+        if (B_FLT_8018A7FC_usa > temp_ft2) {
+            if ((B_FLT_8018A7FC_usa -= 6.0) < temp_ft2) {
+                B_FLT_8018A7FC_usa = temp_ft2;
+            }
+        }
+
+        if (B_FLT_8018A800_usa < temp_ft1) {
+            if ((B_FLT_8018A800_usa += 6.0) > temp_ft1){
+            B_FLT_8018A800_usa = temp_ft1;
+            }
+        }
+        if (temp_ft1 < B_FLT_8018A800_usa) {
+            if ((B_FLT_8018A800_usa -= 6.0) < temp_ft1) {
+            B_FLT_8018A800_usa = temp_ft1;
+            }
+        }
+
+        if (B_FLT_8018A804_usa < temp_ft0) {
+            if ((B_FLT_8018A804_usa += 6.0) > temp_ft0) {
+                B_FLT_8018A804_usa = temp_ft0;
+            }
+        }
+        if (temp_ft0 < B_FLT_8018A804_usa) {
+            if ((B_FLT_8018A804_usa -= 6.0) < temp_ft0) {
+                B_FLT_8018A804_usa = temp_ft0;
+            }
+        }
+
+        if ((B_FLT_8018A7FC_usa == temp_ft2) && (B_FLT_8018A800_usa == temp_ft1) && (B_FLT_8018A804_usa == temp_ft0)) {
+            B_8018A808_usa++;
+        }
+    }
+}
 #endif
 
 #if VERSION_USA
@@ -78,7 +128,7 @@ s32 func_8002DA70_usa(void);
 s32 HVQM2Util_Play(UNK_TYPE *, UNK_TYPE, s32);                 /* extern */
 void func_80089BE0_usa(UNK_TYPE arg0, UNK_TYPE arg1);
 extern s32 B_8018A7F0_usa;
-extern struct_8018A7F4_usa *B_8018A7F4_usa;
+extern struct_8018A7F4_usa *gpData;
 extern s32 B_8018A7F8_usa;
 extern s32 B_8018A808_usa;
 extern s32 B_801A1574_usa;
@@ -153,13 +203,13 @@ void DoTitle(void) {
     u32 temp_s0_3;
     u32 temp_v0_2;
 
-    temp_s0 = B_8018A7F4_usa->unk_08;
-    B_8018A7F4_usa->unk_00++;
+    temp_s0 = gpData->unk_08;
+    gpData->unk_00++;
     sp10 = 0;
     sp14 = 0;
     func_8002629C_usa(&sp10);
-    temp_v1 = B_8018A7F4_usa->unk_14;
-    temp_s2 = B_8018A7F4_usa->unk_00;
+    temp_v1 = gpData->unk_14;
+    temp_s2 = gpData->unk_00;
     switch (temp_v1) {                              /* switch 1; irregular */
         case 0x1:                                   /* switch 1 */
             osViBlack(1U);
@@ -191,8 +241,8 @@ block_12:
             }
             if (temp_s2 == ((temp_s2 / 600) * 0x258)) {
                 func_8001ACA8_usa(&sp18);
-                temp_a1 = B_8018A7F4_usa->unk_10 + 1;
-                B_8018A7F4_usa->unk_10 = temp_a1;
+                temp_a1 = gpData->unk_10 + 1;
+                gpData->unk_10 = temp_a1;
                 if (sp18 < temp_a1) {
                     gReset = -1;
                     FadeOutSong(last_song_handle, 0x3C);
@@ -206,30 +256,30 @@ block_12:
             break;
 
         case 0x3:                                   /* switch 1 */
-            func_80005C00_usa(B_8018A7F4_usa);
+            func_80005C00_usa(gpData);
             if (B_8018A808_usa == 7) {
-                B_8018A7F4_usa->unk_00 = 0;
-                B_8018A7F4_usa->unk_14 = 4;
-                B_8018A7F4_usa->unk_80 = func_800273BC_usa(&RO_STR_800C3128_usa, 0x8E001);
+                gpData->unk_00 = 0;
+                gpData->unk_14 = 4;
+                gpData->unk_80 = func_800273BC_usa(&RO_STR_800C3128_usa, 0x8E001);
             }
             break;
         case 0x4:                                   /* switch 1 */
             if ((func_80024C2C_usa() == 0) && (func_80024C14_usa() == 0) && (func_80024BF4_usa(&sp1C) != 0)) {
                 HVQM2Util_Play(&RO_STR_800C3134_usa, 0, sp1C);
-                B_8018A7F4_usa->unk_14 = 5;
+                gpData->unk_14 = 5;
             }
             break;
         case 0x5:                                   /* switch 1 */
             temp_v0 = func_800273BC_usa(&RO_STR_800C3144_usa, 0x8E401);
             if (temp_v0 != temp_s0) {
-                B_8018A7F4_usa->unk_08 = temp_v0;
-                B_8018A7F4_usa->unk_00 = 0;
-                B_8018A7F4_usa->unk_14 = 6;
+                gpData->unk_08 = temp_v0;
+                gpData->unk_00 = 0;
+                gpData->unk_14 = 6;
                 PlayMIDI(&BGM_INIT_TABLE, 0x3C, 0, 0);
             }
             break;
         default:                                    /* switch 1 */
-            var_s3 = B_8018A7F4_usa->unk_04;
+            var_s3 = gpData->unk_04;
             if (B_8018A7F0_usa > 0) {
                 B_8018A7F0_usa -= 1;
                 func_800284E4_usa(temp_s0, 0x6E);
@@ -280,17 +330,17 @@ block_36:
             var_v0_2 = var_s3 & 4;
             if (var_s3 & 2) {
                 var_s3 = (-(D_800B69B0_usa & 1) & 5) | 1;
-                B_8018A7F4_usa->unk_0C = 0;
-                B_8018A7F4_usa->unk_00 = 0;
+                gpData->unk_0C = 0;
+                gpData->unk_00 = 0;
                 var_v0_2 = var_s3 & 4;
             }
             if (var_v0_2 != 0) {
-                temp_v1_3 = B_8018A7F4_usa->unk_0C + 1;
-                B_8018A7F4_usa->unk_0C = temp_v1_3;
+                temp_v1_3 = gpData->unk_0C + 1;
+                gpData->unk_0C = temp_v1_3;
                 if ((temp_v1_3 == 0x384) && (B_8018A7F8_usa != 8)) {
                     FadeOutSong(last_song_handle, 0x3C);
                 }
-                if (B_8018A7F4_usa->unk_0C >= 0x3C0) {
+                if (gpData->unk_0C >= 0x3C0) {
                     gDemo = 0xB;
                     B_8021BEA4_usa = &B_801A6DB8_usa;
                     B_8021BEA8_usa = &B_801A6DB8_usa;
@@ -394,12 +444,12 @@ block_36:
                             *B_801A6D7C_usa = 2;
                             gReset = 0;
                             gGameStatus &= ~0x80;
-                            B_8018A7F4_usa->unk_00 = 0;
-                            B_8018A7F4_usa->unk_10 = 0;
-                            B_8018A7F4_usa->unk_14 = 7;
+                            gpData->unk_00 = 0;
+                            gpData->unk_10 = 0;
+                            gpData->unk_14 = 7;
                             temp_v0_3 = func_800273BC_usa(&RO_STR_800C314C_usa, 0x8E401);
-                            B_8018A7F4_usa->unk_08 = temp_v0_3;
-                            func_80009D30_usa(temp_v0_3, B_8018A7F4_usa->unk_10);
+                            gpData->unk_08 = temp_v0_3;
+                            func_80009D30_usa(temp_v0_3, gpData->unk_10);
                             break;
                     }
                 }
@@ -429,7 +479,7 @@ block_36:
                     gGameStatus &= ~0x80;
                 }
             }
-            B_8018A7F4_usa->unk_04 = var_s3;
+            gpData->unk_04 = var_s3;
             break;
     }
 
@@ -443,7 +493,111 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/title", DoTitle);
 #endif
 
 #if VERSION_USA
+typedef struct struct_gpData {
+    /* 0x00 */ UNK_TYPE4 unk_00;
+    /* 0x04 */ UNK_TYPE4 unk_04;
+    /* 0x08 */ UNK_TYPE4 unk_08;
+    /* 0x0C */ UNK_TYPE4 unk_0C;
+    /* 0x10 */ UNK_TYPE4 unk_10;
+    /* 0x14 */ UNK_TYPE4 unk_14;
+} struct_gpData; // size = 0x18
+
+extern struct_gpData *gpData;
+extern s32 B_801AB89C_usa;
+extern s32 B_801C6FA0_usa;
+extern u8 D_800B69B0_usa;
+extern u32 D_CA4A0[];
+extern u32 D_FB480[];
+extern const char RO_STR_800C3128_usa[];
+extern const char RO_STR_800C3144_usa[];
+
+#if 0
+// ? func_80002D8C_usa(?);                             /* extern */
+// s32 func_800273BC_usa(s8 *, s32, s32);              /* extern */
+// ? func_80027D0C_usa(s32, ?);                        /* extern */
+// ? func_80028F44_usa(s32, ?, ? *);                   /* extern */
+// ? func_800296B0_usa(? *, s8 *, ?);                  /* extern */
+// s32 func_8002A708_usa(s32 *, s8 *);                 /* extern */
+// s32 screenLoad(? *, s32 *);                  /* extern */
+
+void InitTitle(void) {
+    s16 sp10[0x80];
+    s32 sp110;
+    s32 sp114;
+    s32 *var_v1;
+    s32 temp_a0;
+    s32 temp_v0;
+    s32 var_a0;
+    s32 var_a1;
+    char *var_a0_2;
+
+    var_a0 = 0xF;
+    var_v1 = &B_801AB89C_usa;
+    gTheGame.unk_9C0C = 2;
+    B_801C6FA0_usa = 0;
+    do {
+        *var_v1 = 0;
+        var_a0 -= 1;
+        var_v1 -= 1;
+    } while (var_a0 >= 0);
+    temp_a0 = (((uintptr_t)gBufferHeap + 0xF) + SEGMENT_ROM_SIZE(segment_0CA4A0)) & ~0xF;
+    B_8021BEA4_usa = &gTheGame.unk_9C48;
+    B_8021BEA8_usa = &gTheGame.unk_9C48;
+    sp110 = temp_a0;
+    gpData = temp_a0;
+    sp110 = (void*)((uintptr_t)temp_a0 + 0x18);
+    bzero((void *) temp_a0, 0x18);
+    gpData->unk_14 = 0;
+    gpData->unk_04 = 2;
+
+    if (screenLoad("TITLE.SBF", &sp110) != 0) {
+        if (B_8018A7F0_usa > 0) {
+            if (osTvType == 0) {
+                var_a0_2 = "BLANK";
+                gpData->unk_14 = 1;
+            } else if (D_800B69B0_usa & 1) {
+                var_a0_2 = RO_STR_800C3128_usa;
+                gpData->unk_00 = 0;
+                gpData->unk_14 = 4;
+            } else {
+                var_a0_2 = "NO-CONTROLLER";
+                gpData->unk_14 = 2;
+            }
+            gpData->unk_08 = func_800273BC_usa(var_a0_2, 0xFF401);
+        } else {
+            var_a1 = -1;
+            if ((gDemo == 0x16) || (gDemo == 0x21) || (B_8018A7F8_usa == 9)) {
+                var_a1 = 0xE;
+            }
+            gpData->unk_14 = 6;
+            gpData->unk_08 = func_800273BC_usa(RO_STR_800C3144_usa, ((var_a1 << 0xC) & 0x7F000) | 0x80401);
+            gDemo = 0x2C;
+        }
+
+        if (func_8002A708_usa(&sp114, "COPYRIGHT") != 0) {
+            func_800296B0_usa(&sp10, gBuildDate, 0x80);
+            func_80028F44_usa(sp114, 0x64, &sp10);
+        }
+        if (func_8002A708_usa(&sp114, RO_STR_800C3144_usa) != 0) {
+            func_800296B0_usa(&sp10, gBuildDate, 0x80);
+            func_80028F44_usa(sp114, 0x64, &sp10);
+        }
+        if (func_8002A708_usa(&sp114, RO_STR_800C3144_usa) != 0) {
+            func_80027D0C_usa(sp114, 0x64);
+        }
+    }
+
+    func_80002E0C_usa(0x1E);
+    func_80002D8C_usa(0x1E);
+    if (gpData->unk_14 == 6) {
+        PlayMIDI(BGM_INIT_TABLE, 0x3C, 0, 1);
+    }
+    func_80002E70_usa(D_FLT_800B3B10_usa * 0x7FFF);
+    func_80002E34_usa(D_FLT_800B3B14_usa * 0x7FFF);
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/title", InitTitle);
+#endif
 #endif
 
 #if VERSION_USA
@@ -458,8 +612,8 @@ void titleSetup(void) {
     B_8021BA98_usa = 0;
     B_8018A7F8_usa = 0;
     gGameStatus = 0x300;
-    B_8021BEA4_usa = 0;
-    B_8021BEA8_usa = 0;
+    B_8021BEA4_usa = NULL;
+    B_8021BEA8_usa = NULL;
 
     for (i = 0; i < ARRAY_COUNT(gTheGame.unk_9C48); i++) {
         menuInitUser(i);
