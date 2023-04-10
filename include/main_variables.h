@@ -34,7 +34,7 @@ extern s32 last_song_handle;
 // extern UNK_TYPE D_800B3AEC_usa;
 // extern UNK_TYPE D_800B3AF0_usa;
 // extern UNK_TYPE D_800B3AF4_usa;
-// extern UNK_TYPE D_800B3AF8_usa;
+extern s16 D_800B3AF8_usa;
 // extern UNK_TYPE D_800B3AFA_usa;
 // extern UNK_TYPE D_800B3AFC_usa;
 // extern UNK_TYPE D_800B3AFE_usa;

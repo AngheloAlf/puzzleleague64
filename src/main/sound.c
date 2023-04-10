@@ -83,7 +83,13 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/sound", func_800027FC_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/sound", SetAudioSystemMixer);
+void SetAudioSystemMixer(s16 arg0) {
+    if (!arg0) {
+        D_800B3AF8_usa = 0;
+    } else {
+        D_800B3AF8_usa = 1;
+    }
+}
 #endif
 
 #if VERSION_USA

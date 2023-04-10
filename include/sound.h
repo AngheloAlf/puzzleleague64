@@ -23,7 +23,7 @@ void LoadSFXBank(s32 arg0, s32 arg1);
 // void func_8000272C_usa();
 // void func_8000274C_usa();
 void func_800027FC_usa(void);
-void SetAudioSystemMixer(s32 arg0);
+void SetAudioSystemMixer(s16 arg0);
 // void func_800028B8_usa();
 // void func_800028D8_usa();
 // void func_80002A10_usa();
