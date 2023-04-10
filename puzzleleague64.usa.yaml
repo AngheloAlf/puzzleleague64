@@ -444,7 +444,7 @@ segments:
     follows_vram: segment_0CA4A0
 
   - name: bin_file
-    type: bin
+    type: bin_file
     start: 0x9BDB40
 
   - name: segment_17C2A80

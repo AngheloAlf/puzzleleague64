@@ -1,7 +1,6 @@
 .splat/
 asm/
 bin/
-assets/
 build/
 
 undefined_funcs_auto.ld

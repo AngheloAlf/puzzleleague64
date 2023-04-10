@@ -175,12 +175,22 @@ SRC_DIRS      := $(shell find src -type d)
 ASM_DIRS      := $(shell find asm/$(VERSION) -type d -not -path "asm/$(VERSION)/nonmatchings/*")
 BIN_DIRS      := $(shell find bin -type d)
 
+BINFILE_DIR   := bin/$(VERSION)/bin_file
+
+BINFILE_FILES_RAW := $(shell [ -f assets/$(VERSION)/bin_file.txt ] && cat assets/$(VERSION)/bin_file.txt)
+BINFILE_FILES := $(foreach f,$(BINFILE_FILES_RAW),$(BINFILE_DIR)/$f)
+
+ifeq ($(VERSION),usa)
+ARCHIVE_FILES := $(BUILD_DIR)/bin/$(VERSION)/bin_file.archive
+endif
+
 C_FILES       := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
 S_FILES       := $(foreach dir,$(ASM_DIRS) $(SRC_DIRS),$(wildcard $(dir)/*.s))
 BIN_FILES     := $(foreach dir,$(BIN_DIRS),$(wildcard $(dir)/*.bin))
 O_FILES       := $(foreach f,$(C_FILES:.c=.o),$(BUILD_DIR)/$f) \
                  $(foreach f,$(S_FILES:.s=.o),$(BUILD_DIR)/$f) \
-                 $(foreach f,$(BIN_FILES:.bin=.o),$(BUILD_DIR)/$f)
+                 $(foreach f,$(BIN_FILES:.bin=.o),$(BUILD_DIR)/$f) \
+                 $(ARCHIVE_FILES:.archive=.o)
 
 
 # Automatic dependency files
@@ -263,6 +273,14 @@ $(BUILD_DIR)/%.ld: %.ld
 
 $(BUILD_DIR)/%.o: %.bin
 	$(OBJCOPY) -I binary -O elf32-big $< $@
+
+
+%.o: %.archive
+	$(OBJCOPY) -I binary -O elf32-big $< $@
+
+%.archive: $(BINFILE_FILES)
+	./tools/package_bin_file.py assets/$(VERSION)/bin_file.txt $(BINFILE_DIR) $@
+
 
 $(BUILD_DIR)/%.o: %.s
 	$(CPP) $(CPPFLAGS) $(BUILD_DEFINES) $(IINC) -I $(dir $*) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(AS_DEFINES) $< | $(AS) $(ASFLAGS) $(ENDIAN) $(IINC) -I $(dir $*) -o $@
