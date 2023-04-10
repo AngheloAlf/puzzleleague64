@@ -23,6 +23,7 @@
 #include "story.h"
 #include "end.h"
 #include "screen.h"
+#include "tetris.h"
 
 INLINE void func_80000450_usa(void) {
     s32 var_s0;
@@ -139,7 +140,7 @@ void pon_main(void *arg UNUSED) {
     s32 var_s0 = 0;
 
     func_80000630_usa();
-    gDemo = 0x2C;
+    gDemo = GDEMO_2C;
     gMain = GMAIN_TITLE;
     gReset = -1;
     gTheGame.unk_9C0C = 1;

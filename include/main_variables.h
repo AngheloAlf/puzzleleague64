@@ -1352,7 +1352,7 @@ extern u32 gTimerKeeperSamplesPerSecond;
 // extern UNK_TYPE B_8019CEAC_usa;
 // extern UNK_TYPE B_8019CEB0_usa;
 // extern UNK_TYPE B_8019CEB1_usa;
-extern s32 gDemo; /* Original name: gDemo */
+extern enum_gDemo gDemo; /* Original name: gDemo */
 // extern UNK_TYPE B_8019CEC8_usa;
 // extern UNK_TYPE B_8019CECC_usa;
 // extern UNK_TYPE B_8019CED0_usa;
@@ -1391,7 +1391,7 @@ extern OSMesgQueue B_801AB7F0_usa;
 // extern UNK_TYPE B_801AB8C0_usa;
 // extern UNK_TYPE B_801AB8D8_usa;
 // extern UNK_TYPE B_801AB8DC_usa;
-extern s32 gGameStatus;
+extern u32 gGameStatus;
 // extern UNK_TYPE B_801AB8E4_usa;
 // extern UNK_TYPE B_801AB8E8_usa;
 // extern UNK_TYPE B_801AB8EC_usa;

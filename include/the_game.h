@@ -292,13 +292,19 @@ typedef struct struct_gInfo {
 typedef struct TheGame {
     /* 0x0000 */ TheGame_unk_0000 unk_0000[THEGAME_BUFFER_LEN];
     /* 0x8860 */ TheGame_unk_8860 unk_8860[THEGAME_BUFFER_LEN];
-    /* 0x89C0 */ UNK_TYPE1 unk_89C0[0x708];
+    /* 0x89C0 */ UNK_TYPE1 unk_89C0[0x4];
+    /* 0x89C4 */ u16 unk_89C4;
+    /* 0x89C6 */ UNK_TYPE1 unk_89C6[0x2];
+    /* 0x89C8 */ UNK_TYPE1 unk_89C8[0x700];
     /* 0x90C8 */ TheGame_unk_90C8 unk_90C8;
     /* 0x9988 */ UNK_TYPE1 unk_9988[0x280];
     /* 0x9C08 */ s32 unk_9C08; // playercount?
     /* 0x9C0C */ s32 unk_9C0C;
     /* 0x9C10 */ s32 unk_9C10;
-    /* 0x9C14 */ UNK_TYPE1 unk_9C14[0x34];
+    /* 0x9C14 */ s32 unk_9C14;
+    /* 0x9C18 */ s32 unk_9C18;
+    /* 0x9C1C */ s32 unk_9C1C;
+    /* 0x9C20 */ UNK_TYPE1 unk_9C20[0x28];
     /* 0x9C48 */ struct_801A6DB8_usa unk_9C48[8];
 } TheGame; // size >= 0xDA28
 

@@ -32,14 +32,16 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80023868_usa);
 #endif
 
 #if VERSION_USA
-#ifdef NON_MATCHING
+#if 1
 // regalloc
 void screenWipeImages(void) {
-    s32 i;
-    s32 var_a1;
+    s32 i;   
+    s32 j;   
+    s32 k;   
+    s32 l;
 
-    for (var_a1 = 0; var_a1 < gnImageCount; var_a1++) {
-        gapImage[var_a1] = 0;
+    for (k = 0; k < gnImageCount; k++) {
+        gapImage[k] = 0;
     }
 
     B_8018E550_usa = 0;
@@ -48,16 +50,16 @@ void screenWipeImages(void) {
     B_8018E56C_usa = 0;
 
     for (i = 0; i < gnScreenCount; i++) {
-        for (var_a1 = 0; var_a1 < gaScreen[i].unk_08; var_a1++) {
-            gaScreen[i].unk_18[var_a1].unk_0C = 0;
+        for (j = 0; j < gaScreen[i].unk_08; j++) {
+            gaScreen[i].unk_18[j].unk_0C = 0;
         }
 
-        for (var_a1 = 0; var_a1 < gaScreen[i].unk_10; var_a1++) {
-            gaScreen[i].unk_20[var_a1].unk_14 = 0;
+        for (k = 0; k < gaScreen[i].unk_10; k++) {
+            gaScreen[i].unk_20[k].unk_14 = 0;
         }
 
-        for (var_a1 = 0; var_a1 < gaScreen[i].unk_14; var_a1++) {
-            gaScreen[i].unk_24[var_a1].unk_20 = 0;
+        for (l = 0; l < gaScreen[i].unk_14; l++) {
+            gaScreen[i].unk_24[l].unk_20 = 0;
         }
     }
 }
