@@ -54,7 +54,7 @@ STATIC_INLINE s32 fileBuffer(File *arg0, s32 arg1) {
         return __n;
     }
 
-    if (giFileBuffer == arg0->unk_00) {
+    if (giFileBuffer == arg0->index) {
         if (gnOffsetBuffer <= arg0->unk_0C) {
             __n = MIN(arg0->unk_04, 0x3800);
 
@@ -66,7 +66,7 @@ STATIC_INLINE s32 fileBuffer(File *arg0, s32 arg1) {
 
     __n = arg0->unk_04 - (arg0->unk_0C & ~1);
     __n = MIN(__n, 0x3800);
-    giFileBuffer = arg0->unk_00;
+    giFileBuffer = arg0->index;
     gnOffsetBuffer = arg0->unk_0C & ~1;
     func_80001CAC_usa(arg0->unk_08 + gnOffsetBuffer, gacBuffer, (__n + 1) & ~1);
 
@@ -108,7 +108,7 @@ s32 fileFind(File *arg0, char *arg1) {
                        gacBuffer[index + 3];
             new_var = (gacBuffer[index + 0 + 4] << 0x18) | (gacBuffer[index + 1 + 4] << 0x10) |
                       (gacBuffer[index + 2 + 4] << 8) | gacBuffer[index + 3 + 4];
-            arg0->unk_00 = var_t2;
+            arg0->index = var_t2;
             arg0->unk_04 = new_var1;
             arg0->unk_08 = (u32)(new_var + (u32)D_9BDB40);
             return new_var1;
@@ -133,7 +133,7 @@ s32 func_8001CA94_usa(char *filename) {
 
 #if VERSION_USA
 INLINE bool fileTest(File *arg0) {
-    return arg0->unk_00 < 0x255;
+    return arg0->index < 0x255;
 }
 #endif
 
@@ -159,10 +159,10 @@ s32 fileOpen(File *arg0, char *arg1) {
         arg0->unk_0C = 0;
 
         fileBuffer(arg0, arg0->unk_04);
-        return arg0->unk_00 + 1;
+        return arg0->index + 1;
     }
 
-    arg0->unk_00 = -1;
+    arg0->index = -1;
     return 0;
 }
 #endif

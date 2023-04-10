@@ -8,10 +8,10 @@
 
 
 typedef struct File {
-    /* 0x00 */ u32 unk_00;
-    /* 0x04 */ s32 unk_04;
+    /* 0x00 */ u32 index;
+    /* 0x04 */ s32 unk_04; // size?
     /* 0x09 */ RomOffset unk_08;
-    /* 0x0C */ s32 unk_0C;
+    /* 0x0C */ s32 unk_0C; // offset?
 } File; // size = 0x10
 
 

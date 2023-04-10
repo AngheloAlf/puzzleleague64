@@ -25,3 +25,8 @@ puzzle_collection/
 
 asdf.c
 asdf.txt
+
+*.HVQM
+*.BIF
+*.SBF
+*.RDF

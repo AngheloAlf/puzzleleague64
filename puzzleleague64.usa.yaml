@@ -443,9 +443,12 @@ segments:
     start: 0x0FB480
     follows_vram: segment_0CA4A0
 
-  # no idea where it ends
   - name: bin_file
     type: bin
     start: 0x9BDB40
+
+  - name: segment_17C2A80
+    type: bin
+    start: 0x17C2A80
 
   - [0x1FCF900]
