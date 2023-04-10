@@ -10,6 +10,7 @@
 #include "main_functions.h"
 #include "main_variables.h"
 #include "sfxlimit.h"
+#include "sound.h"
 
 #if VERSION_USA
 void InitGameAudioSystem(void) {

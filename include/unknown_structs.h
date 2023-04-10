@@ -5,6 +5,7 @@
 #include "libultra.h"
 #include "libc/stdint.h"
 #include "libc/stdbool.h"
+#include "other_types.h"
 #include "unk.h"
 
 typedef enum enum_gMain {

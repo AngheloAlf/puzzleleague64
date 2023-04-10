@@ -4,6 +4,7 @@
 #include "libultra.h"
 #include "unk.h"
 #include "unknown_structs.h"
+#include "other_types.h"
 #include "stack.h"
 #include "hasm.h"
 

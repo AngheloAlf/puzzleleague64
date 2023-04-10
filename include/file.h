@@ -2,9 +2,9 @@
 #define FILE_H
 
 #include "libultra.h"
-#include "unk.h"
-#include "libc/stdint.h"
+#include "other_types.h"
 #include "libc/stdbool.h"
+#include "unk.h"
 
 
 typedef struct File {

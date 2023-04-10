@@ -9,6 +9,7 @@
 #include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
+#include "sound.h"
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/tetris", func_800896C0_usa);
