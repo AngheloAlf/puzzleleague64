@@ -1002,7 +1002,7 @@ extern s32 B_8018A808_usa;
 // extern UNK_TYPE gnOffsetBuffer;
 // extern UNK_TYPE gnFileCount;
 // extern UNK_TYPE B_8018E3D0_usa;
-// extern UNK_TYPE gnSizeWaveLast;
+
 // extern UNK_TYPE B_8018E3E8_usa;
 // extern UNK_TYPE B_8018E4F0_usa;
 // extern UNK_TYPE B_8018E4F4_usa;

@@ -17,6 +17,8 @@
 #include "the_game.h"
 #include "update.h"
 #include "tetsound.h"
+#include "image.h"
+#include "bitmap.h"
 
 INLINE void func_80000450_usa(void) {
     s32 var_s0;

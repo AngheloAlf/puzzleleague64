@@ -102,6 +102,7 @@ CPP             := $(MIPS_BINUTILS_PREFIX)cpp
 STRIP           := $(MIPS_BINUTILS_PREFIX)strip
 # ICONV           := iconv
 
+PYTHON            ?= python3
 SPLAT             ?= tools/splat/split.py
 SPLAT_YAML        ?= $(TARGET).$(VERSION).yaml
 
@@ -215,7 +216,7 @@ setup:
 
 extract:
 	$(RM) -r asm/$(VERSION) bin/$(VERSION)
-	$(SPLAT) $(SPLAT_YAML)
+	$(PYTHON) $(SPLAT) $(SPLAT_YAML)
 
 diff-init: all
 	$(RM) -rf expected/
