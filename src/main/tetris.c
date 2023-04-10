@@ -10,7 +10,6 @@
 #include "main_functions.h"
 #include "main_variables.h"
 
-
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/tetris", func_800896C0_usa);
 #endif

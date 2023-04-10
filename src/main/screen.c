@@ -35,9 +35,9 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80023868_usa);
 #if 1
 // regalloc
 void screenWipeImages(void) {
-    s32 i;   
-    s32 j;   
-    s32 k;   
+    s32 i;
+    s32 j;
+    s32 k;
     s32 l;
 
     for (k = 0; k < gnImageCount; k++) {

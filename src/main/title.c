@@ -34,13 +34,13 @@ void func_80005C00_usa(void) {
         }
 
         if (B_FLT_8018A800_usa < temp_ft1) {
-            if ((B_FLT_8018A800_usa += 6.0) > temp_ft1){
-            B_FLT_8018A800_usa = temp_ft1;
+            if ((B_FLT_8018A800_usa += 6.0) > temp_ft1) {
+                B_FLT_8018A800_usa = temp_ft1;
             }
         }
         if (temp_ft1 < B_FLT_8018A800_usa) {
             if ((B_FLT_8018A800_usa -= 6.0) < temp_ft1) {
-            B_FLT_8018A800_usa = temp_ft1;
+                B_FLT_8018A800_usa = temp_ft1;
             }
         }
 

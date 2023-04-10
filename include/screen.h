@@ -126,7 +126,7 @@ extern s32 gnImageCount;
 extern UNK_TYPE4 * gapImage;
 extern UNK_TYPE *B_8018E510_usa;
 extern s32 gnScreenCount;
-extern s32 gnScreenCount;
+
 extern struct_gaScreen *gaScreen;
 extern s32 B_8018E520_usa;
 extern s32 B_8018E524_usa;
