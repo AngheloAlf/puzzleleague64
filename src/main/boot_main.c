@@ -19,6 +19,9 @@
 #include "tetsound.h"
 #include "image.h"
 #include "bitmap.h"
+#include "editor.h"
+#include "story.h"
+#include "end.h"
 
 INLINE void func_80000450_usa(void) {
     s32 var_s0;

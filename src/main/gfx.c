@@ -13,6 +13,8 @@
 #include "the_game.h"
 #include "buffers.h"
 #include "assets_variables.h"
+#include "story.h"
+#include "editor.h"
 
 #if VERSION_USA
 void *staticSegment = NULL;
