@@ -151,11 +151,13 @@ segments:
 
       - [0x08BA20, asm, libmus/player]
       - [0x08FBB0, asm, libmus/player_fx]
-      - [0x090470, asm, main/090470]
-      - [0x0908F0, asm, main/0908F0]
-      - [0x0909B0, asm, main/0909B0]
-      - [0x090BA0, asm, main/090BA0]
-      - [0x090E90, asm, main/090E90]
+      - [0x090470, asm, libmus/aud_dma]
+      - [0x0908F0, asm, libmus/aud_samples]
+      - [0x0909B0, asm, libmus/aud_sched]
+      - [0x090BA0, asm, libmus/aud_thread]
+      - [0x090E90, asm, libmus/lib_memory]
+
+      # Probably an unknown library
       - [0x090FE0, asm, main/090FE0]
 
       # Uses libgultra_d
