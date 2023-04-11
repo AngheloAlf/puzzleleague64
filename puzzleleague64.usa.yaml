@@ -148,8 +148,10 @@ segments:
       - [0x088690, asm, main/088690]
       - [0x089540, asm, main/089540]
       - [0x08A2C0, c, main/tetris]
-      - [0x08BA20, asm, main/08BA20]
-      - [0x08FBB0, asm, main/08FBB0]
+
+      - [0x08BA20, asm, libmus/player]
+      - [0x08FBB0, asm, libmus/player_fx]
+      - [0x090470, asm, main/090470]
       - [0x0908F0, asm, main/0908F0]
       - [0x0909B0, asm, main/0909B0]
       - [0x090BA0, asm, main/090BA0]
@@ -337,6 +339,8 @@ segments:
       - [0x0B46C0, data, main/0B46C0]
       - [0x0B80D0, data, main/0B80D0] # update? maybe wrong end
       - [0x0B8130, data, main/0B8130]
+      - [0x0BF020, data, libmus/player_fx]
+      - [0x0BF230, data, main/0BF230]
 
       - [0x0C1E30, data, libhvqm/adpcmdec]
 
