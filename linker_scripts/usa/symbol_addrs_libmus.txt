@@ -1,0 +1,182 @@
+// .text
+
+Fenvelope = 0x8008AE20; // type:func
+MusInitialize = 0x8008AF74; // type:func
+func_8008B21C_usa = 0x8008B21C; // type:func
+MusSetMasterVolume = 0x8008B2B0; // type:func
+MusStartSong = 0x8008B2DC; // type:func
+func_8008B310_usa = 0x8008B310; // type:func
+MusStartSongFromMarker = 0x8008B344; // type:func
+MusStartEffect = 0x8008B598; // type:func
+MusStartEffect2 = 0x8008B620; // type:func
+MusStop = 0x8008B740; // type:func
+MusAsk = 0x8008B80C; // type:func
+MusHandleStop = 0x8008B890; // type:func
+MusHandleAsk = 0x8008B948; // type:func
+MusHandleSetVolume = 0x8008B9A4; // type:func
+MusHandleSetPan = 0x8008BA08; // type:func
+MusHandleSetFreqOffset = 0x8008BA7C; // type:func
+MusHandleSetTempo = 0x8008BAF0; // type:func
+MusHandleSetReverb = 0x8008BB88; // type:func
+MusPtrBankInitialize = 0x8008BC14; // type:func
+MusPtrBankSetSingle = 0x8008BC54; // type:func
+MusPtrBankSetCurrent = 0x8008BC80; // type:func
+MusPtrBankGetCurrent = 0x8008BCA4; // type:func
+MusHandleGetPtrBank = 0x8008BCB4; // type:func
+MusHandlePause = 0x8008BD14; // type:func
+MusHandleUnPause = 0x8008BD3C; // type:func
+MusSetFxType = 0x8008BD68; // type:func
+MusSetSongFxChange = 0x8008BD9C; // type:func
+MusFxBankInitialize = 0x8008BDFC; // type:func
+MusFxBankNumberOfEffects = 0x8008BE80; // type:func
+MusFxBankSetCurrent = 0x8008BE8C; // type:func
+MusFxBankSetSingle = 0x8008BE9C; // type:func
+MusFxBankGetCurrent = 0x8008BEAC; // type:func
+MusFxBankSetPtrBank = 0x8008BEBC; // type:func
+MusFxBankGetPtrBank = 0x8008BEC4; // type:func
+MusSetScheduler = 0x8008BED0; // type:func
+MusHandleWaveCount = 0x8008BEE0; // type:func
+MusHandleWaveAddress = 0x8008BF4C; // type:func
+MusSetMarkerCallback = 0x8008BFCC; // type:func
+__MusIntFifoOpen = 0x8008BFDC; // type:func
+__MusIntFifoProcessCommand = 0x8008C044; // type:func
+__MusIntFifoAddCommand = 0x8008C0CC; // type:func
+__MusIntMain = 0x8008C170; // type:func
+__MusIntGetNewNote = 0x8008C478; // type:func
+__MusIntFlushPending = 0x8008CA00; // type:func
+__MusIntSetVolumeAndPan = 0x8008CA90; // type:func
+__MusIntSetPitch = 0x8008CC78; // type:func
+__MusIntInitEnvelope = 0x8008CD98; // type:func
+__MusIntProcessEnvelope = 0x8008CE10; // type:func
+__MusIntInitSweep = 0x8008D028; // type:func
+__MusIntProcessSweep = 0x8008D044; // type:func
+__MusIntProcessWobble = 0x8008D0FC; // type:func
+__MusIntProcessVibrato = 0x8008D158; // type:func
+__MusIntProcessContinuousVolume = 0x8008D1C4; // type:func
+__MusIntProcessContinuousPitchBend = 0x8008D288; // type:func
+__MusIntPowerOf2 = 0x8008D3A4; // type:func
+__MusIntRemapPtrBank = 0x8008D544; // type:func
+__MusIntRandom = 0x8008D6E0; // type:func
+__MusIntInitialiseChannel = 0x8008D77C; // type:func
+__MusIntFindChannel = 0x8008D8D4; // type:func
+__MusIntRemapPtrs = 0x8008DAA4; // type:func
+__MusIntStartEffect = 0x8008DADC; // type:func
+__MusIntFindChannelAndStart = 0x8008DB90; // type:func
+__MusIntStartSong = 0x8008DD3C; // type:func
+__MusIntHandleSetFlag = 0x8008DFAC; // type:func
+func_8008E000_usa = 0x8008E000; // type:func
+Fstop = 0x8008E518; // type:func
+Fwave = 0x8008E538; // type:func
+Fport = 0x8008E568; // type:func
+Fportoff = 0x8008E588; // type:func
+Fdefa = 0x8008E594; // type:func
+Ftempo = 0x8008E6C4; // type:func
+Fendit = 0x8008E7C0; // type:func
+Fcutoff = 0x8008E7D4; // type:func
+Fvibup = 0x8008E7F8; // type:func
+Fvibdown = 0x8008E868; // type:func
+Fviboff = 0x8008E8DC; // type:func
+Flength = 0x8008E8EC; // type:func
+Fignore = 0x8008E91C; // type:func
+Ftrans = 0x8008E92C; // type:func
+Fignore_trans = 0x8008E93C; // type:func
+Fdistort = 0x8008E94C; // type:func
+Fenvoff = 0x8008E9A4; // type:func
+Fenvon = 0x8008E9B4; // type:func
+Ftroff = 0x8008E9C0; // type:func
+Ftron = 0x8008E9D0; // type:func
+Ffor = 0x8008E9DC; // type:func
+Fnext = 0x8008EA98; // type:func
+Fwobble = 0x8008EB58; // type:func
+Fwobbleoff = 0x8008EB80; // type:func
+Fvelon = 0x8008EB8C; // type:func
+Fveloff = 0x8008EB9C; // type:func
+Fvelocity = 0x8008EBA8; // type:func
+Fpan = 0x8008EBBC; // type:func
+Fstereo = 0x8008EBD0; // type:func
+Fdrums = 0x8008EBD8; // type:func
+Fdrumsoff = 0x8008EC20; // type:func
+Fprint = 0x8008EC2C; // type:func
+Fgoto = 0x8008EC34; // type:func
+Freverb = 0x8008ECA4; // type:func
+FrandNote = 0x8008ECB4; // type:func
+FrandVolume = 0x8008ED08; // type:func
+FrandPan = 0x8008ED5C; // type:func
+Fvolume = 0x8008EDB0; // type:func
+Fstartfx = 0x8008EDC0; // type:func
+Fbendrange = 0x8008EE98; // type:func
+Fsweep = 0x8008EED4; // type:func
+Fchangefx = 0x8008EEE4; // type:func
+Fmarker = 0x8008EF2C; // type:func
+Flength0 = 0x8008EFA0; // type:func
+CustomInit = 0x8008EFB0; // type:func
+CustomSynNew = 0x8008F00C; // type:func
+CustomAllocFX = 0x8008F2DC; // type:func
+CustomFxNew = 0x8008F374; // type:func
+CustomFxSet = 0x8008F4CC; // type:func
+SetForCustom = 0x8008F76C; // type:func
+GetFxMostSections = 0x8008F784; // type:func
+GetFxLongest = 0x8008F7C8; // type:func
+ChangeCustomEffect = 0x8008F80C; // type:func
+__MusIntDmaInit = 0x8008F870; // type:func
+__MusIntDmaProcess = 0x8008F9F4; // type:func
+__CallBackDmaNew = 0x8008FACC; // type:func
+__CallBackDmaProcess = 0x8008FADC; // type:func
+__MusIntDmaSample = 0x8008FB4C; // type:func
+__MusIntSamplesInit = 0x8008FCF0; // type:func
+__MusIntSamplesCurrent = 0x8008FD44; // type:func
+__MusIntSchedInit = 0x8008FDB0; // type:func
+__OsSchedInstall = 0x8008FDC0; // type:func
+func_8008FE28_usa = 0x8008FE28; // type:func
+__OsSchedWaitFrame = 0x8008FE58; // type:func
+__OsSchedDoTask = 0x8008FEBC; // type:func
+__MusIntAudManInit = 0x8008FFA0; // type:func
+__MusIntThreadProcess = 0x80090108; // type:func
+__MusIntMemInit = 0x80090290; // type:func
+__MusIntMemMalloc = 0x800902E0; // type:func
+__MusIntMemRemaining = 0x80090314; // type:func
+__MusIntMemGetHeapAddr = 0x8009032C; // type:func
+__MusIntMemSet = 0x8009033C; // type:func
+__MusIntMemMove = 0x80090368; // type:func
+
+
+// .data
+
+jumptable = 0x800BE360; //
+D_800BE420_usa = 0x800BE420; //
+BigRoomParams = 0x800BE488; //
+D_800BE510_usa = 0x800BE510; //
+D_800BE538_usa = 0x800BE538; //
+D_800BE5C0_usa = 0x800BE5C0; //
+D_800BE5E8_usa = 0x800BE5E8; //
+EffectCount = 0x800BE610; //
+EffectList = 0x800BE614; //
+default_sched = 0x800BE630; //
+__libmus_current_sched = 0x800BE63C; //
+last_task = 0x800BE640; //
+
+
+// .rodata
+
+// TODO
+
+
+// .bss
+
+
+diskrom_handle = 0x801930DC; //
+frame_samples = 0x801930E0; //
+frame_samples_min = 0x801930E4; //
+extra_samples = 0x801930E8; //
+audio_sched = 0x801930F0; //
+sched_mem = 0x801930F4; //
+
+
+audio_heap = 0x80193110; //
+
+
+__muscontrol_flag = 0x801F9CC0; //
+
+__libmus_alglobals = 0x8021AA30; //
+
+gReverbFx = 0x8021BA30; //

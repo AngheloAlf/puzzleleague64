@@ -379,18 +379,6 @@ extern s32 gReset; /* Original name: gReset */
 extern enum_gMain gMain; /* Original name: gMain */
 // extern UNK_TYPE D_800BE34C_usa;
 // extern UNK_TYPE D_800BE350_usa;
-// extern UNK_TYPE jumptable;
-// extern UNK_TYPE D_800BE420_usa;
-// extern UNK_TYPE BigRoomParams;
-// extern UNK_TYPE D_800BE510_usa;
-// extern UNK_TYPE D_800BE538_usa;
-// extern UNK_TYPE D_800BE5C0_usa;
-// extern UNK_TYPE D_800BE5E8_usa;
-// extern UNK_TYPE EffectCount;
-// extern UNK_TYPE EffectList;
-// extern UNK_TYPE D_800BE630_usa;
-// extern UNK_TYPE __libmus_current_sched;
-// extern UNK_TYPE last_task;
 
 // extern UNK_TYPE D_800C1230_usa;
 // extern UNK_TYPE D_800C1270_usa;
@@ -1144,16 +1132,11 @@ extern u32 gTimerKeeperSamplesPerSecond;
 // extern UNK_TYPE B_801930B8_usa;
 // extern UNK_TYPE B_801930C0_usa;
 // extern UNK_TYPE B_801930D8_usa;
-// extern UNK_TYPE diskrom_handle;
-// extern UNK_TYPE frame_samples;
-// extern UNK_TYPE frame_samples_min;
-// extern UNK_TYPE extra_samples;
-// extern UNK_TYPE audio_sched;
-// extern UNK_TYPE sched_mem;
+
 // extern UNK_TYPE B_80193100_usa;
 // extern UNK_TYPE B_80193104_usa;
 // extern UNK_TYPE B_80193108_usa;
-// extern UNK_TYPE audio_heap;
+
 // extern UNK_TYPE B_80193114_usa;
 // extern UNK_TYPE B_80193120_usa;
 // extern UNK_TYPE B_80193130_usa;
@@ -1547,7 +1530,6 @@ extern struct_gInfo gInfo[2];
 // extern UNK_TYPE B_801F9CA8_usa;
 extern s32 gAllVertex;
 
-// extern UNK_TYPE __muscontrol_flag;
 // extern UNK_TYPE B_801F9CC4_usa;
 // extern UNK_TYPE B_801F9CC8_usa;
 // extern UNK_TYPE B_801F9CCC_usa;
@@ -1570,7 +1552,6 @@ extern s32 gSelection;
 // extern UNK_TYPE B_801F9E24_usa;
 // extern UNK_TYPE B_801F9E28_usa;
 
-// extern UNK_TYPE __libmus_alglobals;
 // extern UNK_TYPE B_8021AA80_usa;
 // extern UNK_TYPE B_8021AAA0_usa;
 // extern UNK_TYPE B_8021AAE0_usa;
@@ -1583,7 +1564,7 @@ extern s32 gSelection;
 // extern UNK_TYPE B_8021B968_usa;
 
 extern OSMesg B_8021BA28_usa[1];
-// extern UNK_TYPE gReverbFx;
+
 // extern UNK_TYPE B_8021BA40_usa;
 // extern UNK_TYPE B_8021BA44_usa;
 // extern UNK_TYPE B_8021BA48_usa;

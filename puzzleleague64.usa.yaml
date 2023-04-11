@@ -15,6 +15,7 @@ options:
     - linker_scripts/usa/symbol_addrs_main.txt
     - linker_scripts/usa/symbol_addrs_libultra.txt
     - linker_scripts/usa/symbol_addrs_libkmc.txt
+    - linker_scripts/usa/symbol_addrs_libmus.txt
     - linker_scripts/usa/symbol_addrs_libhvqm.txt
     - linker_scripts/usa/symbol_addrs_buffers.txt
     - linker_scripts/usa/symbol_addrs_assets.txt
@@ -341,8 +342,13 @@ segments:
       - [0x0B46C0, data, main/0B46C0]
       - [0x0B80D0, data, main/0B80D0] # update? maybe wrong end
       - [0x0B8130, data, main/0B8130]
+
+      - [0x0BEF60, data, libmus/player]
       - [0x0BF020, data, libmus/player_fx]
-      - [0x0BF230, data, main/0BF230]
+      - [0x0BF230, data, libmus/aud_sched]
+      - [0x0BF240, data, libmus/aud_thread]
+
+      - [0x0BF250, data, libultra/0BF250] # TODO: find file splits
 
       - [0x0C1E30, data, libhvqm/adpcmdec]
 

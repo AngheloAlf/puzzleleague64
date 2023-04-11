@@ -13,6 +13,7 @@
                 "lib/libultra_j/include",
                 "lib/libultra_j/include/PR",
                 "lib/libhvqm/include",
+                "lib/libmus/include",
                 "."
             ],
             "defines": [

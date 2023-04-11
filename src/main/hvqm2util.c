@@ -13,6 +13,7 @@
 #include "tetsound.h"
 #include "image.h"
 #include "sound.h"
+#include "libmus.h"
 
 #if VERSION_USA || VERSION_EUR
 INLINE void RomCopy(void *dest, RomOffset src, size_t len, s32 pri, OSIoMesg *mb, OSMesgQueue *mq) {
