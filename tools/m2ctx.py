@@ -19,6 +19,7 @@ CPP_FLAGS = [
     "-Ilib/libultra_j/include/gcc",
     "-Ilib/libultra_j/include/PR",
     "-Ilib/libhvqm/include",
+    "-Ilib/libmus/include",
 
     "-D_LANGUAGE_C",
     "-DF3DEX_GBI",

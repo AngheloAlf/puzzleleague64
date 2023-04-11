@@ -1,149 +1,140 @@
 #ifndef LIBMUS_H
 #define LIBMUS_H
 
-// TODO: do libmus headers properly
+#include "libultra.h"
 
+typedef struct {
+    unsigned long control_flag;
 
-// void Fenvelope();
-// void MusInitialize();
+    int channels;
+    void *sched;
+    int thread_priority;
+    unsigned char *heap;
+    int heap_length;
+
+    unsigned char *ptr;
+    unsigned char *wbk;
+
+    void *default_fxbank;
+
+    int fifo_length;
+
+    int syn_updates;
+    int syn_output_rate;
+    int syn_rsp_cmds;
+    int syn_retraceCount;
+    int syn_num_dma_bufs;
+    int syn_dma_buf_size;
+
+    // Special Addition
+    OSPiHandle *diskrom_handle;
+} musConfig;
+
+typedef enum {
+    MUSBOOL_OFF,
+    MUSBOOL_ON,
+} musBool;
+
+typedef struct {
+    u64 *data;       /* address of Acmd list			*/
+    int data_size;   /* size of Acmd list			*/
+    u64 *ucode;      /* address of microcode code	*/
+    u64 *ucode_data; /* address of microcode data	*/
+} musTask;
+
+typedef unsigned long musHandle;
+
+typedef void (*LIBMUScb_marker)(musHandle, int);
+
+typedef void (*LIBMUScb_install)(void);
+typedef void (*LIBMUScb_waitframe)(void);
+typedef void (*LIBMUScb_dotask)(musTask *);
+
+typedef struct {
+    LIBMUScb_install install;     /* called when thread starts		*/
+    LIBMUScb_waitframe waitframe; /* called to wait for vsync message */
+    LIBMUScb_dotask dotask;       /* called to process RSP task		*/
+} musSched;
+
+/* control flags */
+#define MUSCONTROL_RAM (1 << 0)
+
+/* channel types flags */
+#define MUSFLAG_EFFECTS 1
+#define MUSFLAG_SONGS 2
+
+/* initialise */
+int MusInitialize(musConfig *config);
+
 void func_8008B21C_usa(void);
-// void MusSetMasterVolume();
-// void MusStartSong();
+
+/* audio configuration */
+int MusSetFxType(int fxtype);
+int MusSetSongFxChange(musBool onoff);
+
+/* set master volume levels */
+void MusSetMasterVolume(unsigned long flags, int volume);
+
+/* start songs and sound effects */
+musHandle MusStartSong(void *addr);
 // void func_8008B310_usa();
-// void MusStartSongFromMarker();
-// void MusStartEffect();
-// void MusStartEffect2();
-// void MusStop();
-// void MusAsk();
-// void MusHandleStop();
-// void MusHandleAsk();
-// void MusHandleSetVolume();
-// void MusHandleSetPan();
-// void MusHandleSetFreqOffset();
-// void MusHandleSetTempo();
-// void MusHandleSetReverb();
-// void MusPtrBankInitialize();
-// void MusPtrBankSetSingle();
-// void MusPtrBankSetCurrent();
-// void MusPtrBankGetCurrent();
-// void MusHandleGetPtrBank();
-// void MusHandlePause();
-// void MusHandleUnPause();
-// void MusSetFxType();
-// void MusSetSongFxChange();
-// void MusFxBankInitialize();
-// void MusFxBankNumberOfEffects();
-// void MusFxBankSetCurrent();
-// void MusFxBankSetSingle();
-// void MusFxBankGetCurrent();
-// void MusFxBankSetPtrBank();
-// void MusFxBankGetPtrBank();
-// void MusSetScheduler();
-// void MusHandleWaveCount();
-// void MusHandleWaveAddress();
-// void MusSetMarkerCallback();
-// void __MusIntFifoOpen();
-// void __MusIntFifoProcessCommand();
-// void __MusIntFifoAddCommand();
-// void __MusIntMain();
-// void __MusIntGetNewNote();
-// void __MusIntFlushPending();
-// void __MusIntSetVolumeAndPan();
-// void __MusIntSetPitch();
-// void __MusIntInitEnvelope();
-// void __MusIntProcessEnvelope();
-// void __MusIntInitSweep();
-// void __MusIntProcessSweep();
-// void __MusIntProcessWobble();
-// void __MusIntProcessVibrato();
-// void __MusIntProcessContinuousVolume();
-// void __MusIntProcessContinuousPitchBend();
-// void __MusIntPowerOf2();
-// void __MusIntRemapPtrBank();
-// void __MusIntRandom();
-// void __MusIntInitialiseChannel();
-// void __MusIntFindChannel();
-// void __MusIntRemapPtrs();
-// void __MusIntStartEffect();
-// void __MusIntFindChannelAndStart();
-// void __MusIntStartSong();
-// void __MusIntHandleSetFlag();
-// void func_8008E000_usa();
-// void Fstop();
-// void Fwave();
-// void Fport();
-// void Fportoff();
-// void Fdefa();
-// void Ftempo();
-// void Fendit();
-// void Fcutoff();
-// void Fvibup();
-// void Fvibdown();
-// void Fviboff();
-// void Flength();
-// void Fignore();
-// void Ftrans();
-// void Fignore_trans();
-// void Fdistort();
-// void Fenvoff();
-// void Fenvon();
-// void Ftroff();
-// void Ftron();
-// void Ffor();
-// void Fnext();
-// void Fwobble();
-// void Fwobbleoff();
-// void Fvelon();
-// void Fveloff();
-// void Fvelocity();
-// void Fpan();
-// void Fstereo();
-// void Fdrums();
-// void Fdrumsoff();
-// void Fprint();
-// void Fgoto();
-// void Freverb();
-// void FrandNote();
-// void FrandVolume();
-// void FrandPan();
-// void Fvolume();
-// void Fstartfx();
-// void Fbendrange();
-// void Fsweep();
-// void Fchangefx();
-// void Fmarker();
-// void Flength0();
-// void CustomInit();
-// void CustomSynNew();
-// void CustomAllocFX();
-// void CustomFxNew();
-// void CustomFxSet();
-// void SetForCustom();
-// void GetFxMostSections();
-// void GetFxLongest();
-// void ChangeCustomEffect();
-// void __MusIntDmaInit();
-// void __MusIntDmaProcess();
-// void __CallBackDmaNew();
-// void __CallBackDmaProcess();
-// void __MusIntDmaSample();
-// void __MusIntSamplesInit();
-// void __MusIntSamplesCurrent();
-// void __MusIntSchedInit();
-// void __OsSchedInstall();
-// void func_8008FE28_usa();
-// void __OsSchedWaitFrame();
-// void __OsSchedDoTask();
-// void __MusIntAudManInit();
-// void __MusIntThreadProcess();
-// void __MusIntMemInit();
-// void __MusIntMemMalloc();
-// void __MusIntMemRemaining();
-// void __MusIntMemGetHeapAddr();
-// void __MusIntMemSet();
-// void __MusIntMemMove();
+musHandle MusStartSongFromMarker(void *addr, int marker);
+musHandle MusStartEffect(int number);
+musHandle MusStartEffect2(int number, int volume, int pan, int restartflag, int priority);
 
+/* stop and query sound types */
+void MusStop(unsigned long flags, int speed);
+int MusAsk(unsigned long flags);
 
+/* handle based processing */
+int MusHandleAsk(musHandle handle);
+int MusHandleStop(musHandle handle, int speed);
+int MusHandleSetVolume(musHandle handle, int volume);
+int MusHandleSetPan(musHandle handle, int pan);
+int MusHandleSetFreqOffset(musHandle handle, float offset);
+int MusHandleSetTempo(musHandle handle, int tempo);
+int MusHandleSetReverb(musHandle handle, int reverb);
+int MusHandlePause(musHandle handle);
+int MusHandleUnPause(musHandle handle);
+void *MusHandleGetPtrBank(musHandle handle);
+
+/* sample bank support */
+void MusPtrBankInitialize(void *pbank, void *wbank);
+void *MusPtrBankSetSingle(void *ipbank);
+void MusPtrBankSetCurrent(void *ipbank);
+void *MusPtrBankGetCurrent(void);
+
+/* sound effect bank support */
+void MusFxBankInitialize(void *fxbank);
+void MusFxBankSetSingle(void *ifxbank);
+void MusFxBankSetCurrent(void *ifxbank);
+void *MusFxBankGetCurrent(void);
+int MusFxBankNumberOfEffects(void *ifxbank);
+void MusFxBankSetPtrBank(void *ifxbank, void *ipbank);
+void *MusFxBankGetPtrBank(void *ifxbank);
+void MusFxBankSetSingle(void *ifxbank);
+
+/* scheduler support */
+void MusSetScheduler(musSched *sched_list);
+
+/* marker callback support */
+void MusSetMarkerCallback(void *callback);
+
+/* wave list lookup in song header */
+int MusHandleWaveCount(musHandle handle);
+unsigned short *MusHandleWaveAddress(musHandle handle);
+
+/* macros to support previous sample bank functions - use is not recommended! */
+#define MusBankInitialize(pbank, wbank) MusPtrBankInitialize(pbank, wbank)
+
+#define MusBankStartSong(ipbank, addr) MusStartSong((addr) == (void *)MusPtrBankSetSingle(ipbank) ? (addr) : (addr))
+
+#define MusBankStartEffect(ipbank, number) \
+    MusStartEffect((number) == (int)MusPtrBankSetSingle(ipbank) ? (number) : (number))
+
+#define MusBankStartEffect2(ipbank, number, volume, pan, restartflag, priority)                                   \
+    MusStartEffect2((number) == (int)MusPtrBankSetSingle(ipbank) ? (number) : (number), volume, pan, restartflag, \
+                    priority)
 
 // extern UNK_TYPE jumptable;
 // extern UNK_TYPE D_800BE420_usa;
@@ -157,8 +148,6 @@ void func_8008B21C_usa(void);
 // extern UNK_TYPE default_sched;
 // extern UNK_TYPE __libmus_current_sched;
 // extern UNK_TYPE last_task;
-
-
 
 // extern UNK_TYPE diskrom_handle;
 // extern UNK_TYPE frame_samples;

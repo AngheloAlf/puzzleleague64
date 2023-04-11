@@ -9,6 +9,7 @@
 #include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
+#include "libmus.h"
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/sound", func_80001D60_usa);
