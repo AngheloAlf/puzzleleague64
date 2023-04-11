@@ -87,7 +87,7 @@ segments:
       - [0x004B50, asm, main/004B50]
       - [0x0068C0, asm, main/0068C0]
       - [0x007F60, asm, main/007F60]
-      - [0x01D5F0, asm, main/01D5F0]
+      - [0x01D5F0, asm, main/file]
       - [0x01E050, asm, main/01E050]
       - [0x01F9F0, asm, main/01F9F0]
       - [0x02E920, asm, main/02E920]
@@ -347,7 +347,7 @@ segments:
       - [0x0C42F0, rodata, main/0C42F0]
       - [0x0C43C0, rodata, main/0C43C0]
       - [0x0C4420, rodata, main/0C4420]
-      - [0x0C50E0, rodata, main/0C50E0]
+      - [0x0C50E0, rodata, main/file]
       - [0x0C5120, rodata, main/0C5120]
       - [0x0C5150, rodata, main/0C5150]
       - [0x0C5160, rodata, main/0C5160]
@@ -420,7 +420,17 @@ segments:
       - { start: 0x0CA750, type: .bss, vram: 0x803B5000, name: buffers/framebuffer }
 
   - type: bin
+    # name: segment_0CA4A0
     start: 0x0CA750
     follows_vram: main
+
+  - name: bin_file
+    type: bin_file
+    start: 0x9BDDF0
+
+  # no idea where it ends
+  - type: bin
+    # name: segment_17C2A80
+    start: 0x17C2D72
 
   - [0x1FCFC00]

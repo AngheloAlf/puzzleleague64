@@ -54,7 +54,12 @@ DECLARE_SEGMENT(buffer2);
 DECLARE_SEGMENT(framebuffer);
 
 DECLARE_SEGMENT(segment_0CA4A0);
+
 // DECLARE_SEGMENT(segment_0FB480);
+
+DECLARE_SEGMENT(bin_file);
+
+// DECLARE_SEGMENT(segment_17C2A80);
 
 
 #endif

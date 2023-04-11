@@ -9,6 +9,7 @@
 #include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
+#include "segment_symbols.h"
 
 typedef struct struct_gacBuffer_unk_0004 {
     /* 0x00 */ u8 unk_00;
@@ -32,7 +33,6 @@ extern u8 gacBuffer[0x3808];
 extern s32 giFileBuffer;
 extern s32 gnOffsetBuffer;
 extern u32 gnFileCount;
-extern u32 D_9BDB40[]; // bin_file
 
 #if VERSION_USA
 STATIC_INLINE s32 inlinedfunc(void) {
@@ -49,7 +49,7 @@ STATIC_INLINE s32 fileBuffer(File *arg0, s32 arg1) {
     if (arg0 == (File *)-1) {
         __n = inlinedfunc();
 
-        func_80001CAC_usa((RomOffset)D_9BDB40, gacBuffer, __n);
+        func_80001CAC_usa(SEGMENT_ROM_START(bin_file), gacBuffer, __n);
         giFileBuffer = -1;
         return __n;
     }
@@ -110,7 +110,7 @@ s32 fileFind(File *arg0, char *arg1) {
                       (gacBuffer[index + 2 + 4] << 8) | gacBuffer[index + 3 + 4];
             arg0->index = var_t2;
             arg0->unk_04 = new_var1;
-            arg0->unk_08 = (u32)(new_var + (u32)D_9BDB40);
+            arg0->unk_08 = (u32)(new_var + SEGMENT_ROM_START(bin_file));
             return new_var1;
         }
         var_t2 += 1;

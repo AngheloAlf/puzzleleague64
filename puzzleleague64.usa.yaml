@@ -443,8 +443,8 @@ segments:
       - [0x0CA4A0, data, assets/segment_0CA4A0]
 
   # no idea where it ends
-  - name: segment_0FB480
-    type: bin
+  - type: bin
+    # name: segment_0FB480
     start: 0x0FB480
     follows_vram: segment_0CA4A0
 
@@ -452,8 +452,9 @@ segments:
     type: bin_file
     start: 0x9BDB40
 
-  - name: segment_17C2A80
-    type: bin
+  # no idea where it ends
+  - type: bin
+    # name: segment_17C2A80
     start: 0x17C2A80
 
   - [0x1FCF900]

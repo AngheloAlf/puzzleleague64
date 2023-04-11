@@ -177,12 +177,9 @@ BIN_DIRS      := $(shell find bin -type d)
 
 BINFILE_DIR   := bin/$(VERSION)/bin_file
 
-BINFILE_FILES_RAW := $(shell [ -f assets/$(VERSION)/bin_file.txt ] && cat assets/$(VERSION)/bin_file.txt)
-BINFILE_FILES := $(foreach f,$(BINFILE_FILES_RAW),$(BINFILE_DIR)/$f)
+BINFILE_FILES := $(shell find $(BINFILE_DIR) -type f)
 
-ifeq ($(VERSION),usa)
 ARCHIVE_FILES := $(BUILD_DIR)/bin/$(VERSION)/bin_file.archive
-endif
 
 C_FILES       := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
 S_FILES       := $(foreach dir,$(ASM_DIRS) $(SRC_DIRS),$(wildcard $(dir)/*.s))
@@ -279,7 +276,7 @@ $(BUILD_DIR)/%.o: %.bin
 	$(OBJCOPY) -I binary -O elf32-big $< $@
 
 %.archive: $(BINFILE_FILES)
-	./tools/package_bin_file.py assets/$(VERSION)/bin_file.txt $(BINFILE_DIR) $@
+	./tools/package_bin_file.py $(BINFILE_DIR) $@
 
 
 $(BUILD_DIR)/%.o: %.s

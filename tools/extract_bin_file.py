@@ -12,9 +12,9 @@ import spimdisasm
 
 bin_file_offset = {
     "usa": 0x9BDB40,
-    "eur": -1,
-    "fra": -1,
-    "ger": -1,
+    "eur": 0x9BDDF0,
+    "fra": 0x9BC450,
+    "ger": 0x9B2BB0,
 }
 
 ENTRY_SIZE = 4 + 4 + 0x10

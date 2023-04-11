@@ -20,13 +20,11 @@ class BinEntry:
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("file_list", help="")
     parser.add_argument("files_folder", help="Folder of the binary files")
     parser.add_argument("output", help="Path and name to the resulting binary")
 
     args = parser.parse_args()
 
-    fileListPath = Path(args.file_list)
     filesFolderPath = Path(args.files_folder)
     outputPath = Path(args.output)
 
@@ -34,11 +32,12 @@ def main():
 
     fileList: list[BinEntry] = []
 
-    with fileListPath.open() as f:
-        for line in f:
-            filename = line.strip()
-            assert filename, "empty filename"
-            fileList.append(BinEntry(filename))
+    for filepath in filesFolderPath.iterdir():
+        # The system expects filenames in all caps
+        filename = filepath.name.upper()
+        fileList.append(BinEntry(filename))
+
+    fileList.sort(key=lambda x: x.filename)
 
     currentOffset = 4 + 0x18 * len(fileList)
     for entry in fileList:
