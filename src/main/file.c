@@ -175,7 +175,8 @@ s32 fileClose(File *arg0 UNUSED) {
 
 #if VERSION_USA
 #ifdef NON_EQUIVALENT
-s32 fileGet(File *arg0, u8 *arg1, s32 arg2) {
+s32 fileGet(File *arg0, void *arg1, s32 arg2) {
+    u8 *a1 = arg1;
     u8 *var_v1;
     s32 var_a0;
     s32 var_s1;
@@ -195,11 +196,11 @@ s32 fileGet(File *arg0, u8 *arg1, s32 arg2) {
     for (; arg2 != 0; arg2 -= var_s1, arg0->unk_0C += var_s1) {
         if ((arg2 > 0x1f)) {
             if (!(arg2 & 1)) {
-                if (!((u32)arg1 & 0xF)) { // change from GC? (GC = 0x7)
+                if (!((u32)a1 & 0xF)) { // change from GC? (GC = 0x7)
                     temp_a0_2 = arg0->unk_08 + arg0->unk_0C;
                     if (!(temp_a0_2 & 1)) {
                         var_s1 = arg2;
-                        func_80001CAC_usa((RomOffset)temp_a0_2, (u8 *)arg1, var_s1);
+                        func_80001CAC_usa((RomOffset)temp_a0_2, (u8 *)a1, var_s1);
                         continue;
                     }
                 }
@@ -211,59 +212,59 @@ s32 fileGet(File *arg0, u8 *arg1, s32 arg2) {
 
         var_a0 = var_s1;
         if (!(var_s1 & 3)) {
-            if (!((u32)arg1 & 3)) {
+            if (!((u32)a1 & 3)) {
                 if (!((s32)var_v1 & 3)) {
                     var_a0 = var_a0 >> 2;
 
                     while (var_a0 >= 8) {
-                        *((u32 *)arg1) = *((u32 *)var_v1);
-                        arg1 += sizeof(u32);
+                        *((u32 *)a1) = *((u32 *)var_v1);
+                        a1 += sizeof(u32);
                         var_v1 += sizeof(u32);
-                        *((u32 *)arg1) = *((u32 *)var_v1);
-                        arg1 += sizeof(u32);
+                        *((u32 *)a1) = *((u32 *)var_v1);
+                        a1 += sizeof(u32);
                         var_v1 += sizeof(u32);
-                        *((u32 *)arg1) = *((u32 *)var_v1);
-                        arg1 += sizeof(u32);
+                        *((u32 *)a1) = *((u32 *)var_v1);
+                        a1 += sizeof(u32);
                         var_v1 += sizeof(u32);
-                        *((u32 *)arg1) = *((u32 *)var_v1);
-                        arg1 += sizeof(u32);
+                        *((u32 *)a1) = *((u32 *)var_v1);
+                        a1 += sizeof(u32);
                         var_v1 += sizeof(u32);
-                        *((u32 *)arg1) = *((u32 *)var_v1);
-                        arg1 += sizeof(u32);
+                        *((u32 *)a1) = *((u32 *)var_v1);
+                        a1 += sizeof(u32);
                         var_v1 += sizeof(u32);
-                        *((u32 *)arg1) = *((u32 *)var_v1);
-                        arg1 += sizeof(u32);
+                        *((u32 *)a1) = *((u32 *)var_v1);
+                        a1 += sizeof(u32);
                         var_v1 += sizeof(u32);
-                        *((u32 *)arg1) = *((u32 *)var_v1);
-                        arg1 += sizeof(u32);
+                        *((u32 *)a1) = *((u32 *)var_v1);
+                        a1 += sizeof(u32);
                         var_v1 += sizeof(u32);
-                        *((u32 *)arg1) = *((u32 *)var_v1);
-                        arg1 += sizeof(u32);
+                        *((u32 *)a1) = *((u32 *)var_v1);
+                        a1 += sizeof(u32);
                         var_v1 += sizeof(u32);
 
                         var_a0 -= 8;
                     }
 
                     while (var_a0 >= 4) {
-                        *((u32 *)arg1) = *((u32 *)var_v1);
-                        arg1 += sizeof(u32);
+                        *((u32 *)a1) = *((u32 *)var_v1);
+                        a1 += sizeof(u32);
                         var_v1 += sizeof(u32);
-                        *((u32 *)arg1) = *((u32 *)var_v1);
-                        arg1 += sizeof(u32);
+                        *((u32 *)a1) = *((u32 *)var_v1);
+                        a1 += sizeof(u32);
                         var_v1 += sizeof(u32);
-                        *((u32 *)arg1) = *((u32 *)var_v1);
-                        arg1 += sizeof(u32);
+                        *((u32 *)a1) = *((u32 *)var_v1);
+                        a1 += sizeof(u32);
                         var_v1 += sizeof(u32);
-                        *((u32 *)arg1) = *((u32 *)var_v1);
-                        arg1 += sizeof(u32);
+                        *((u32 *)a1) = *((u32 *)var_v1);
+                        a1 += sizeof(u32);
                         var_v1 += sizeof(u32);
                         var_a0 -= 4;
                     }
 
                     var_a0--;
                     while (var_a0 != -1) {
-                        *((u32 *)arg1) = *((u32 *)var_v1);
-                        arg1 += sizeof(u32);
+                        *((u32 *)a1) = *((u32 *)var_v1);
+                        a1 += sizeof(u32);
                         var_v1 += sizeof(u32);
                         var_a0--;
                     }
@@ -273,49 +274,49 @@ s32 fileGet(File *arg0, u8 *arg1, s32 arg2) {
         }
 
         while (var_a0 >= 0x10) {
-            *arg1++ = *var_v1++;
-            *arg1++ = *var_v1++;
-            *arg1++ = *var_v1++;
-            *arg1++ = *var_v1++;
-            *arg1++ = *var_v1++;
-            *arg1++ = *var_v1++;
-            *arg1++ = *var_v1++;
-            *arg1++ = *var_v1++;
+            *a1++ = *var_v1++;
+            *a1++ = *var_v1++;
+            *a1++ = *var_v1++;
+            *a1++ = *var_v1++;
+            *a1++ = *var_v1++;
+            *a1++ = *var_v1++;
+            *a1++ = *var_v1++;
+            *a1++ = *var_v1++;
 
-            *arg1++ = *var_v1++;
-            *arg1++ = *var_v1++;
-            *arg1++ = *var_v1++;
-            *arg1++ = *var_v1++;
-            *arg1++ = *var_v1++;
-            *arg1++ = *var_v1++;
-            *arg1++ = *var_v1++;
-            *arg1++ = *var_v1++;
+            *a1++ = *var_v1++;
+            *a1++ = *var_v1++;
+            *a1++ = *var_v1++;
+            *a1++ = *var_v1++;
+            *a1++ = *var_v1++;
+            *a1++ = *var_v1++;
+            *a1++ = *var_v1++;
+            *a1++ = *var_v1++;
             var_a0 -= 0x10;
         }
 
         while (var_a0 >= 8) {
-            *arg1++ = *var_v1++;
-            *arg1++ = *var_v1++;
-            *arg1++ = *var_v1++;
-            *arg1++ = *var_v1++;
-            *arg1++ = *var_v1++;
-            *arg1++ = *var_v1++;
-            *arg1++ = *var_v1++;
-            *arg1++ = *var_v1++;
+            *a1++ = *var_v1++;
+            *a1++ = *var_v1++;
+            *a1++ = *var_v1++;
+            *a1++ = *var_v1++;
+            *a1++ = *var_v1++;
+            *a1++ = *var_v1++;
+            *a1++ = *var_v1++;
+            *a1++ = *var_v1++;
             var_a0 -= 8;
         }
 
         while (var_a0 >= 4) {
-            *arg1++ = *var_v1++;
-            *arg1++ = *var_v1++;
-            *arg1++ = *var_v1++;
-            *arg1++ = *var_v1++;
+            *a1++ = *var_v1++;
+            *a1++ = *var_v1++;
+            *a1++ = *var_v1++;
+            *a1++ = *var_v1++;
             var_a0 -= 4;
         }
 
         var_a0--;
         while (var_a0 != -1) {
-            *arg1++ = *var_v1++;
+            *a1++ = *var_v1++;
             var_a0--;
         }
     }

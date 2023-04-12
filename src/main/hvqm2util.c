@@ -450,7 +450,7 @@ void HVQM2Util_PrintInfo(HVQM2Header *header) {
     s32 var_s0;
 
     osSyncPrintf("\n");
-    osSyncPrintf("File version        : %s\n", header);
+    osSyncPrintf("File version        : %s\n", header->file_version);
     osSyncPrintf("File size           : %d\n", header->file_size);
     osSyncPrintf("Image width         : %d\n", header->width);
     osSyncPrintf("Image height        : %d\n", header->height);
