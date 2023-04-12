@@ -19,14 +19,16 @@
 #include "sound.h"
 #include "screen.h"
 
-extern u32 D_800B5890_usa[];
+u32 D_800B5890_usa[] = {
+    0xFF000000, 0x00FF0000, 0x0000FF00, 0x00FFFF00, 0xFF00FF00, 0xFFFF0000, 0x00000000,
+};
 
 extern const char RO_STR_800C3128_usa[];
 extern const char RO_STR_800C3144_usa[];
 
 #if VERSION_USA
 void func_80005C00_usa(void) {
-    if (B_8018A808_usa < 7) {
+    if (B_8018A808_usa < ARRAY_COUNT(D_800B5890_usa)) {
         u32 temp_v1 = D_800B5890_usa[B_8018A808_usa];
         f32 temp_ft2 = (temp_v1 >> 0x18) & 0xFF;
         f32 temp_ft1 = (temp_v1 >> 0x10) & 0xFF;

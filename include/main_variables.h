@@ -81,6 +81,7 @@ extern UNK_TYPE BGM_INIT_TABLE[];
 // extern UNK_TYPE D_800B55B0_usa;
 // extern UNK_TYPE D_800B55BC_usa;
 
+// extern UNK_TYPE D_800B58B0_usa;
 // extern UNK_TYPE D_800B58B4_usa;
 // extern UNK_TYPE D_800B58B6_usa;
 // extern UNK_TYPE D_800B58B8_usa;
