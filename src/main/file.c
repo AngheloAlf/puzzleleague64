@@ -10,26 +10,29 @@
 #include "main_functions.h"
 #include "main_variables.h"
 #include "segment_symbols.h"
+#include "libc/stddef.h"
 
-typedef struct struct_gacBuffer_unk_0004 {
-    /* 0x00 */ u8 unk_00;
-    /* 0x00 */ u8 unk_01;
-    /* 0x00 */ u8 unk_02;
-    /* 0x00 */ u8 unk_03;
-    /* 0x00 */ u8 unk_04;
-    /* 0x00 */ u8 unk_05;
-    /* 0x00 */ u8 unk_06;
-    /* 0x00 */ u8 unk_07;
-    /* 0x10 */ char unk_08[0x10];
-} struct_gacBuffer_unk_0004; // size = 0x18
+// Not actually used, keept as a reference
+typedef struct BinfileEntry {
+    /* 0x00 */ u32 size;            // size of the file
+    /* 0x04 */ u32 offset;          // offset relative to the binfile segment
+    /* 0x10 */ char filename[0x10]; // uppercase filename, including nul terminator
+} BinfileEntry;                     // size = 0x18
 
-typedef struct struct_gacBuffer {
-    /* 0x0000 */ s32 unk_0000;
-    /* 0x0004 */ u8 unk_0004[0x3800];
-} struct_gacBuffer; // size = 0x3808
+#define FILE_BINFILE_MAX_COUNT (0x255)
 
-// extern struct_gacBuffer gacBuffer;
-extern u8 gacBuffer[0x3808];
+#define FILE_BINFILE_ENTRIES_BUFSIZE ((s32)ALIGN16(FILE_BINFILE_MAX_COUNT * sizeof(BinfileEntry)))
+
+typedef union GacBuffer {
+    u8 buffer[sizeof(s32) + FILE_BINFILE_ENTRIES_BUFSIZE];
+    struct {
+        s32 count;
+        BinfileEntry entries[FILE_BINFILE_MAX_COUNT];
+    } data;
+    u64 force_structure_alignment;
+} GacBuffer; // size = 0x3808
+
+extern GacBuffer gacBuffer;
 extern s32 giFileBuffer;
 extern s32 gnOffsetBuffer;
 extern u32 gnFileCount;
@@ -37,26 +40,26 @@ extern u32 gnFileCount;
 #if VERSION_USA
 STATIC_INLINE s32 inlinedfunc(void) {
     if (gnFileCount != -1) {
-        return (gnFileCount * 0x18) + 4;
+        return (gnFileCount * sizeof(BinfileEntry)) + sizeof(s32);
     } else {
-        return 0x3800;
+        return FILE_BINFILE_ENTRIES_BUFSIZE;
     }
 }
 
 STATIC_INLINE s32 fileBuffer(File *arg0, s32 arg1) {
     s32 __n;
 
-    if (arg0 == (File *)-1) {
+    if (arg0 == FILE_NULL) {
         __n = inlinedfunc();
 
-        func_80001CAC_usa(SEGMENT_ROM_START(bin_file), gacBuffer, __n);
+        func_80001CAC_usa(SEGMENT_ROM_START(bin_file), &gacBuffer.buffer, __n);
         giFileBuffer = -1;
         return __n;
     }
 
     if (giFileBuffer == arg0->index) {
         if (gnOffsetBuffer <= arg0->unk_0C) {
-            __n = MIN(arg0->unk_04, 0x3800);
+            __n = MIN(arg0->unk_04, FILE_BINFILE_ENTRIES_BUFSIZE);
 
             if (__n > ((arg0->unk_0C - gnOffsetBuffer) + arg1)) {
                 return arg1;
@@ -65,55 +68,56 @@ STATIC_INLINE s32 fileBuffer(File *arg0, s32 arg1) {
     }
 
     __n = arg0->unk_04 - (arg0->unk_0C & ~1);
-    __n = MIN(__n, 0x3800);
+    __n = MIN(__n, FILE_BINFILE_ENTRIES_BUFSIZE);
     giFileBuffer = arg0->index;
     gnOffsetBuffer = arg0->unk_0C & ~1;
-    func_80001CAC_usa(arg0->unk_08 + gnOffsetBuffer, gacBuffer, (__n + 1) & ~1);
+    func_80001CAC_usa(arg0->unk_08 + gnOffsetBuffer, &gacBuffer.buffer, ALIGN2(__n));
 
     return ((__n) > (arg1) ? (arg1) : (__n));
 }
 #endif
 
-#if VERSION_USA
-s32 fileFind(File *arg0, char *arg1) {
-    char sp10[0x10];
-    s32 var_a2;
-    s32 a2;
-    u32 var_t2;
+#define READ_WORD_FROM_BYTEBUF(buf, index) \
+    (((buf)[(index) + 0] << 0x18) | ((buf)[(index) + 1] << 0x10) | ((buf)[(index) + 2] << 8) | ((buf)[(index) + 3]))
 
-    for (var_a2 = 0; arg1[var_a2] != 0; var_a2++) {
-        if (arg1[var_a2] >= 'a' && arg1[var_a2] <= 'z') {
-            sp10[var_a2] = arg1[var_a2] - ('a' - 'A');
+#if VERSION_USA
+s32 fileFind(File *file, char *filename) {
+    char processedName[0x10];
+    s32 j;
+    s32 nameLength;
+    s32 i;
+
+    for (j = 0; filename[j] != 0; j++) {
+        // Copy and capitalize filenames
+        if (filename[j] >= 'a' && filename[j] <= 'z') {
+            processedName[j] = filename[j] - ('a' - 'A');
         } else {
-            sp10[var_a2] = arg1[var_a2];
+            processedName[j] = filename[j];
         }
     }
-    a2 = var_a2;
-    fileBuffer((void *)-1, 0x3800);
-    var_t2 = 0;
-    while (var_t2 < gnFileCount) {
-        s32 index = 4 + (var_t2 * 0x18);
 
-        for (var_a2 = 0; var_a2 < a2; var_a2++) {
-            if (gacBuffer[8 + index + var_a2] != sp10[var_a2]) {
+    nameLength = j;
+    fileBuffer(FILE_NULL, FILE_BINFILE_ENTRIES_BUFSIZE);
+
+    for (i = 0; i < gnFileCount; i++) {
+        s32 index = sizeof(s32) + (i * sizeof(BinfileEntry));
+
+        for (j = 0; j < nameLength; j++) {
+            if (gacBuffer.buffer[index + offsetof(BinfileEntry, filename) + j] != processedName[j]) {
                 break;
             }
         }
 
-        if (var_a2 == a2) {
-            int new_var1;
-            int new_var;
+        if (j == nameLength) {
+            int size = READ_WORD_FROM_BYTEBUF(gacBuffer.buffer, index + offsetof(BinfileEntry, size));
+            int offset = READ_WORD_FROM_BYTEBUF(gacBuffer.buffer, index + offsetof(BinfileEntry, offset));
 
-            new_var1 = (gacBuffer[index + 0] << 0x18) | (gacBuffer[index + 1] << 0x10) | (gacBuffer[index + 2] << 8) |
-                       gacBuffer[index + 3];
-            new_var = (gacBuffer[index + 0 + 4] << 0x18) | (gacBuffer[index + 1 + 4] << 0x10) |
-                      (gacBuffer[index + 2 + 4] << 8) | gacBuffer[index + 3 + 4];
-            arg0->index = var_t2;
-            arg0->unk_04 = new_var1;
-            arg0->unk_08 = (u32)(new_var + SEGMENT_ROM_START(bin_file));
-            return new_var1;
+            file->index = i;
+            file->unk_04 = size;
+            file->unk_08 = (RomOffset)(offset + SEGMENT_ROM_START(bin_file));
+
+            return size;
         }
-        var_t2 += 1;
     }
 
     return 0;
@@ -133,7 +137,7 @@ s32 func_8001CA94_usa(char *filename) {
 
 #if VERSION_USA
 INLINE bool fileTest(File *arg0) {
-    return arg0->index < 0x255;
+    return arg0->index < FILE_BINFILE_MAX_COUNT;
 }
 #endif
 
@@ -173,17 +177,16 @@ s32 fileClose(File *arg0 UNUSED) {
 }
 #endif
 
+#define COPY_TYPE(dst, src, type)        \
+    *((type *)(dst)) = *((type *)(src)); \
+    (dst) += sizeof(type);               \
+    (src) += sizeof(type)
+
 // expects word aligned pointers
-#define COPY_WORD(dst, src)        \
-    *((u32 *)dst) = *((u32 *)src); \
-    dst += sizeof(u32);            \
-    src += sizeof(u32)
+#define COPY_WORD(dst, src) COPY_TYPE(dst, src, u32)
 
 // expects pointers
-#define COPY_BYTE(dst, src)      \
-    *((u8 *)dst) = *((u8 *)src); \
-    dst += sizeof(u8);           \
-    src += sizeof(u8)
+#define COPY_BYTE(dst, src) COPY_TYPE(dst, src, u8)
 
 #if VERSION_USA
 s32 fileGet(File *file, void *dst, s32 totalSize) {
@@ -215,7 +218,7 @@ s32 fileGet(File *file, void *dst, s32 totalSize) {
         }
 
         var_s1 = fileBuffer(file, totalSize);
-        currentSrc = &gacBuffer[file->unk_0C - gnOffsetBuffer];
+        currentSrc = &gacBuffer.buffer[file->unk_0C - gnOffsetBuffer];
 
         var_a0 = var_s1;
         if ((var_s1 % 4 == 0) && ((uintptr_t)dst % 4 == 0) && ((uintptr_t)currentSrc % 4 == 0)) {
@@ -343,9 +346,9 @@ s32 fileSetup(void) {
     giFileBuffer = -1U;
     gnOffsetBuffer = -1U;
 
-    fileBuffer((void *)-1, 0x3800);
-    gnFileCount = *(u32 *)gacBuffer;
-    if (gnFileCount >= 0x256U) {
+    fileBuffer(FILE_NULL, FILE_BINFILE_ENTRIES_BUFSIZE);
+    gnFileCount = gacBuffer.data.count;
+    if (gnFileCount > FILE_BINFILE_MAX_COUNT) {
         osSyncPrintf("fileSetup: Too many files for existing buffersize!");
     }
 

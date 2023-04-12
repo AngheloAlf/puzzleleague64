@@ -14,8 +14,9 @@ typedef struct File {
     /* 0x0C */ s32 unk_0C; // offset?
 } File; // size = 0x10
 
+#define FILE_NULL ((File *)-1)
 
-s32 fileFind(File *arg0, char *arg1);
+s32 fileFind(File *file, char *filename);
 s32 func_8001CA94_usa(char *filename);
 bool fileTest(File *arg0);
 bool fileGetAddress(File *arg0, RomOffset *arg1);

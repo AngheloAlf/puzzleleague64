@@ -1,6 +1,9 @@
 #ifndef STDDEF_H
 #define STDDEF_H
 
+#include "version.h"
+
+
 #ifndef NULL
 #define NULL ((void *)0)
 #endif
@@ -32,7 +35,7 @@
 #endif
 
 #ifndef offsetof
-#ifdef __GNUC__
+#if defined(__GNUC__) && !__IS_KMC__
 #define offsetof(structure, member) __builtin_offsetof (structure, member)
 #else
 #define offsetof(structure, member) ((size_t)&(((structure*)0)->member))
