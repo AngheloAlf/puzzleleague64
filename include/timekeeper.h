@@ -4,6 +4,8 @@
 #include "libultra.h"
 #include "macros_defines.h"
 #include "libc/stdbool.h"
+#include "stack.h"
+#include "other_types.h"
 
 typedef u32 (*tkAudioProc)(void *pcmbuf);
 typedef tkAudioProc (*tkRewindProc)(void);

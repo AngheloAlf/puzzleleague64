@@ -1,3 +1,4 @@
+#include "hvqm2util.h"
 #include "libultra.h"
 #include "include_asm.h"
 #include "macros_defines.h"
@@ -8,12 +9,12 @@
 #include "buffers.h"
 #include "cfb_keep.h"
 #include "timekeeper.h"
-#include "hvqm2util.h"
 #include "file.h"
 #include "tetsound.h"
 #include "image.h"
 #include "sound.h"
 #include "libmus.h"
+#include "peel.h"
 
 #if VERSION_USA || VERSION_EUR
 INLINE void RomCopy(void *dest, RomOffset src, size_t len, s32 pri, OSIoMesg *mb, OSMesgQueue *mq) {

@@ -1,3 +1,8 @@
+/**
+ * Original filename: bonus.c
+ */
+
+#include "bonus.h"
 #include "libultra.h"
 #include "include_asm.h"
 #include "macros_defines.h"

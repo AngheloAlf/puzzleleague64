@@ -18,6 +18,7 @@
 #include "segment_symbols.h"
 #include "sound.h"
 #include "screen.h"
+#include "menu.h"
 
 u32 D_800B5890_usa[] = {
     0xFF000000, 0x00FF0000, 0x0000FF00, 0x00FFFF00, 0xFF00FF00, 0xFFFF0000, 0x00000000,

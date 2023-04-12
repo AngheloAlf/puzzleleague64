@@ -18,6 +18,11 @@
 #include "screen.h"
 #include "tetris.h"
 #include "title.h"
+#include "dlist.h"
+#include "draw2d.h"
+#include "bonus.h"
+#include "tutorial.h"
+#include "menu.h"
 
 #if VERSION_USA
 void *staticSegment = NULL;

@@ -26,6 +26,10 @@
 #include "tetris.h"
 #include "sound.h"
 #include "title.h"
+#include "peel.h"
+#include "menu.h"
+#include "bonus.h"
+#include "tutorial.h"
 
 INLINE void func_80000450_usa(void) {
     s32 var_s0;

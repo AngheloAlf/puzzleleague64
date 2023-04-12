@@ -122,7 +122,7 @@ segments:
       - [0x067FB0, asm, main/067FB0]
       - [0x06B250, asm, main/06B250]
       - [0x06BB30, asm, main/06BB30]
-      - [0x06DAA0, asm, main/06DAA0]
+      - [0x06DAA0, asm, main/draw2d]
       - [0x0707D0, asm, main/0707D0]
       - [0x071B50, asm, main/071B50]
       - [0x0722D0, asm, main/0722D0]
@@ -146,7 +146,7 @@ segments:
       - [0x075540, asm, main/075540]
       - [0x075630, asm, main/075630]
       - [0x075BF0, asm, main/075BF0]
-      - [0x088690, asm, main/088690]
+      - [0x088690, asm, main/tutorial]
       - [0x089540, asm, main/089540]
       - [0x08A2C0, c, main/tetris]
 
@@ -391,11 +391,19 @@ segments:
       - [0x0C77A0, rodata, main/0C77A0]
       - [0x0C79A0, rodata, main/0C79A0]
       - [0x0C7BA0, rodata, main/0C7BA0]
+      - [0x0C7EE0, rodata, main/draw2d]
+      - [0x0C7FA0, rodata, main/0C7FA0]
       - [0x0C8230, rodata, main/0C8230]
-      - [0x0C8300, rodata, main/0C8300]
+      - [0x0C8300, rodata, main/tutorial]
+      - [0x0C83A0, rodata, main/0C83A0]
       - [0x0C83D0, .rodata, main/tetris]
-      - [0x0C8400, rodata, main/0C8400]
-      - [0x0C84E0, rodata, main/0C84E0]
+
+      - [0x0C8400, rodata, libmus/player]
+      - [0x0C84E0, rodata, libmus/player_fx]
+
+      - [0x0C84F0, rodata, main/0C84F0]
+      - [0x0C8570, rodata, main/0C8570]
+      - [0x0C8590, rodata, main/0C8590]
       - [0x0C85A0, rodata, main/0C85A0]
       - [0x0C85F0, rodata, main/0C85F0]
       - [0x0C86F0, rodata, main/0C86F0]
@@ -416,6 +424,8 @@ segments:
       - [0x0CA478, .rodata, main/build]
 
       - { start: 0x0CA4A0, type: bss, vram: 0x800C98A0, name: main/800C98A0 }
+      - { start: 0x0CA4A0, type: bss, vram: 0x8018ABB0, name: main/file }
+      - { start: 0x0CA4A0, type: bss, vram: 0x8018E3D0, name: main/8018E3D0 }
 
   - name: buffer1
     type: code
