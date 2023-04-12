@@ -70,7 +70,7 @@ STATIC_INLINE s32 fileBuffer(File *arg0, s32 arg1) {
     gnOffsetBuffer = arg0->unk_0C & ~1;
     func_80001CAC_usa(arg0->unk_08 + gnOffsetBuffer, gacBuffer, (__n + 1) & ~1);
 
-    return ((arg1) < (__n) ? (arg1) : (__n));
+    return ((__n) > (arg1) ? (arg1) : (__n));
 }
 #endif
 
@@ -173,159 +173,132 @@ s32 fileClose(File *arg0 UNUSED) {
 }
 #endif
 
+// expects word aligned pointers
+#define COPY_WORD(dst, src)        \
+    *((u32 *)dst) = *((u32 *)src); \
+    dst += sizeof(u32);            \
+    src += sizeof(u32)
+
+// expects pointers
+#define COPY_BYTE(dst, src)      \
+    *((u8 *)dst) = *((u8 *)src); \
+    dst += sizeof(u8);           \
+    src += sizeof(u8)
+
 #if VERSION_USA
-#ifdef NON_EQUIVALENT
-s32 fileGet(File *arg0, void *arg1, s32 arg2) {
-    u8 *a1 = arg1;
-    u8 *var_v1;
-    s32 var_a0;
+s32 fileGet(File *file, void *dst, s32 totalSize) {
     s32 var_s1;
-    u32 temp_a0_2;
 
-    if (arg0->unk_04 < (arg0->unk_0C + arg2)) {
-        arg2 = arg0->unk_04 - arg0->unk_0C;
+    if (file->unk_04 < (file->unk_0C + totalSize)) {
+        totalSize = file->unk_04 - file->unk_0C;
     }
-    if (arg2 <= 0) {
+    if (totalSize <= 0) {
         return 0;
     }
 
-    if (!fileTest(arg0)) {
+    if (!fileTest(file)) {
         return 0;
     }
 
-    for (; arg2 != 0; arg2 -= var_s1, arg0->unk_0C += var_s1) {
-        if ((arg2 > 0x1f)) {
-            if (!(arg2 & 1)) {
-                if (!((u32)a1 & 0xF)) { // change from GC? (GC = 0x7)
-                    temp_a0_2 = arg0->unk_08 + arg0->unk_0C;
-                    if (!(temp_a0_2 & 1)) {
-                        var_s1 = arg2;
-                        func_80001CAC_usa((RomOffset)temp_a0_2, (u8 *)a1, var_s1);
-                        continue;
-                    }
-                }
+    for (; totalSize != 0; totalSize -= var_s1, file->unk_0C += var_s1) {
+        s32 var_a0;
+        void *currentSrc;
+
+        if ((totalSize >= 0x20) && (totalSize % 2 == 0) && (((uintptr_t)dst % 16) == 0)) {
+            RomOffset temp_a0_2 = file->unk_08 + file->unk_0C;
+
+            if (temp_a0_2 % 2 == 0) {
+                var_s1 = totalSize;
+                func_80001CAC_usa(temp_a0_2, dst, var_s1);
+                continue;
             }
         }
 
-        var_s1 = fileBuffer(arg0, arg2);
-        var_v1 = &gacBuffer[arg0->unk_0C - gnOffsetBuffer];
+        var_s1 = fileBuffer(file, totalSize);
+        currentSrc = &gacBuffer[file->unk_0C - gnOffsetBuffer];
 
         var_a0 = var_s1;
-        if (!(var_s1 & 3)) {
-            if (!((u32)a1 & 3)) {
-                if (!((s32)var_v1 & 3)) {
-                    var_a0 = var_a0 >> 2;
+        if ((var_s1 % 4 == 0) && ((uintptr_t)dst % 4 == 0) && ((uintptr_t)currentSrc % 4 == 0)) {
+            var_a0 = var_a0 >> 2;
 
-                    while (var_a0 >= 8) {
-                        *((u32 *)a1) = *((u32 *)var_v1);
-                        a1 += sizeof(u32);
-                        var_v1 += sizeof(u32);
-                        *((u32 *)a1) = *((u32 *)var_v1);
-                        a1 += sizeof(u32);
-                        var_v1 += sizeof(u32);
-                        *((u32 *)a1) = *((u32 *)var_v1);
-                        a1 += sizeof(u32);
-                        var_v1 += sizeof(u32);
-                        *((u32 *)a1) = *((u32 *)var_v1);
-                        a1 += sizeof(u32);
-                        var_v1 += sizeof(u32);
-                        *((u32 *)a1) = *((u32 *)var_v1);
-                        a1 += sizeof(u32);
-                        var_v1 += sizeof(u32);
-                        *((u32 *)a1) = *((u32 *)var_v1);
-                        a1 += sizeof(u32);
-                        var_v1 += sizeof(u32);
-                        *((u32 *)a1) = *((u32 *)var_v1);
-                        a1 += sizeof(u32);
-                        var_v1 += sizeof(u32);
-                        *((u32 *)a1) = *((u32 *)var_v1);
-                        a1 += sizeof(u32);
-                        var_v1 += sizeof(u32);
+            while (var_a0 >= 8) {
+                COPY_WORD(dst, currentSrc);
+                COPY_WORD(dst, currentSrc);
+                COPY_WORD(dst, currentSrc);
+                COPY_WORD(dst, currentSrc);
+                COPY_WORD(dst, currentSrc);
+                COPY_WORD(dst, currentSrc);
+                COPY_WORD(dst, currentSrc);
+                COPY_WORD(dst, currentSrc);
 
-                        var_a0 -= 8;
-                    }
-
-                    while (var_a0 >= 4) {
-                        *((u32 *)a1) = *((u32 *)var_v1);
-                        a1 += sizeof(u32);
-                        var_v1 += sizeof(u32);
-                        *((u32 *)a1) = *((u32 *)var_v1);
-                        a1 += sizeof(u32);
-                        var_v1 += sizeof(u32);
-                        *((u32 *)a1) = *((u32 *)var_v1);
-                        a1 += sizeof(u32);
-                        var_v1 += sizeof(u32);
-                        *((u32 *)a1) = *((u32 *)var_v1);
-                        a1 += sizeof(u32);
-                        var_v1 += sizeof(u32);
-                        var_a0 -= 4;
-                    }
-
-                    var_a0--;
-                    while (var_a0 != -1) {
-                        *((u32 *)a1) = *((u32 *)var_v1);
-                        a1 += sizeof(u32);
-                        var_v1 += sizeof(u32);
-                        var_a0--;
-                    }
-                    continue;
-                }
+                var_a0 -= 8;
             }
-        }
 
-        while (var_a0 >= 0x10) {
-            *a1++ = *var_v1++;
-            *a1++ = *var_v1++;
-            *a1++ = *var_v1++;
-            *a1++ = *var_v1++;
-            *a1++ = *var_v1++;
-            *a1++ = *var_v1++;
-            *a1++ = *var_v1++;
-            *a1++ = *var_v1++;
+            while (var_a0 >= 4) {
+                COPY_WORD(dst, currentSrc);
+                COPY_WORD(dst, currentSrc);
+                COPY_WORD(dst, currentSrc);
+                COPY_WORD(dst, currentSrc);
+                var_a0 -= 4;
+            }
 
-            *a1++ = *var_v1++;
-            *a1++ = *var_v1++;
-            *a1++ = *var_v1++;
-            *a1++ = *var_v1++;
-            *a1++ = *var_v1++;
-            *a1++ = *var_v1++;
-            *a1++ = *var_v1++;
-            *a1++ = *var_v1++;
-            var_a0 -= 0x10;
-        }
-
-        while (var_a0 >= 8) {
-            *a1++ = *var_v1++;
-            *a1++ = *var_v1++;
-            *a1++ = *var_v1++;
-            *a1++ = *var_v1++;
-            *a1++ = *var_v1++;
-            *a1++ = *var_v1++;
-            *a1++ = *var_v1++;
-            *a1++ = *var_v1++;
-            var_a0 -= 8;
-        }
-
-        while (var_a0 >= 4) {
-            *a1++ = *var_v1++;
-            *a1++ = *var_v1++;
-            *a1++ = *var_v1++;
-            *a1++ = *var_v1++;
-            var_a0 -= 4;
-        }
-
-        var_a0--;
-        while (var_a0 != -1) {
-            *a1++ = *var_v1++;
             var_a0--;
+            while (var_a0 != -1) {
+                COPY_WORD(dst, currentSrc);
+
+                var_a0--;
+            }
+        } else {
+            while (var_a0 >= 0x10) {
+                COPY_BYTE(dst, currentSrc);
+                COPY_BYTE(dst, currentSrc);
+                COPY_BYTE(dst, currentSrc);
+                COPY_BYTE(dst, currentSrc);
+                COPY_BYTE(dst, currentSrc);
+                COPY_BYTE(dst, currentSrc);
+                COPY_BYTE(dst, currentSrc);
+                COPY_BYTE(dst, currentSrc);
+                COPY_BYTE(dst, currentSrc);
+                COPY_BYTE(dst, currentSrc);
+                COPY_BYTE(dst, currentSrc);
+                COPY_BYTE(dst, currentSrc);
+                COPY_BYTE(dst, currentSrc);
+                COPY_BYTE(dst, currentSrc);
+                COPY_BYTE(dst, currentSrc);
+                COPY_BYTE(dst, currentSrc);
+                var_a0 -= 0x10;
+            }
+
+            while (var_a0 >= 8) {
+                COPY_BYTE(dst, currentSrc);
+                COPY_BYTE(dst, currentSrc);
+                COPY_BYTE(dst, currentSrc);
+                COPY_BYTE(dst, currentSrc);
+                COPY_BYTE(dst, currentSrc);
+                COPY_BYTE(dst, currentSrc);
+                COPY_BYTE(dst, currentSrc);
+                COPY_BYTE(dst, currentSrc);
+                var_a0 -= 8;
+            }
+
+            while (var_a0 >= 4) {
+                COPY_BYTE(dst, currentSrc);
+                COPY_BYTE(dst, currentSrc);
+                COPY_BYTE(dst, currentSrc);
+                COPY_BYTE(dst, currentSrc);
+                var_a0 -= 4;
+            }
+
+            var_a0--;
+            while (var_a0 != -1) {
+                COPY_BYTE(dst, currentSrc);
+                var_a0--;
+            }
         }
     }
 
     return var_s1;
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/file", fileGet);
-#endif
 #endif
 
 #if VERSION_USA
