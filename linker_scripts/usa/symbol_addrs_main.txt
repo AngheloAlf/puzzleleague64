@@ -280,7 +280,7 @@ func_800255D8_usa = 0x800255D8; // type:func
 func_80025850_usa = 0x80025850; // type:func
 func_80025CC4_usa = 0x80025CC4; // type:func
 func_8002629C_usa = 0x8002629C; // type:func
-func_800273BC_usa = 0x800273BC; // type:func
+screenSet = 0x800273BC; // type:func
 func_8002758C_usa = 0x8002758C; // type:func
 func_8002759C_usa = 0x8002759C; // type:func
 func_800275A4_usa = 0x800275A4; // type:func
@@ -2474,8 +2474,7 @@ B_801AB808_usa = 0x801AB808; //
 B_801AB80C_usa = 0x801AB80C; //
 B_801AB810_usa = 0x801AB810; //
 
-B_801AB860_usa = 0x801AB860; //
-B_801AB89C_usa = 0x801AB89C; //
+ganButton = 0x801AB860; // size:0x40
 
 B_801AB8A4_usa = 0x801AB8A4; //
 B_801AB8A8_usa = 0x801AB8A8; //
@@ -2563,7 +2562,7 @@ B_801C6EF6_usa = 0x801C6EF6; //
 B_801C6F00_usa = 0x801C6F00; //
 
 B_801C6F7C_usa = 0x801C6F7C; //
-B_801C6FA0_usa = 0x801C6FA0; //
+giButton = 0x801C6FA0; //
 B_801C6FA8_usa = 0x801C6FA8; //
 B_801C6FAC_usa = 0x801C6FAC; //
 B_801C6FB0_usa = 0x801C6FB0; //

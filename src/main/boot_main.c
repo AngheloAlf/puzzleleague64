@@ -25,6 +25,7 @@
 #include "screen.h"
 #include "tetris.h"
 #include "sound.h"
+#include "title.h"
 
 INLINE void func_80000450_usa(void) {
     s32 var_s0;

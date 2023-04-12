@@ -35,7 +35,7 @@ s32 FadeOutSong(s32 arg0, s32 arg1);
 // void func_80002D04_usa();
 // void func_80002D30_usa();
 void func_80002D5C_usa();
-// void func_80002D8C_usa();
+void func_80002D8C_usa(s32 arg0);
 void func_80002DE8_usa();
 void func_80002E0C_usa(s32 arg0);
 void func_80002E34_usa(s32 arg0);

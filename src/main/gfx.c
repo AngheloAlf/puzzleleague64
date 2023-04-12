@@ -17,6 +17,7 @@
 #include "editor.h"
 #include "screen.h"
 #include "tetris.h"
+#include "title.h"
 
 #if VERSION_USA
 void *staticSegment = NULL;

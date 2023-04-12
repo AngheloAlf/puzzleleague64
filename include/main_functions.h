@@ -24,13 +24,6 @@ void func_80001310_usa(RomOffset segmentRom, void * dstAddr, size_t segmentSize)
 // void func_80001B10_usa();
 void func_80001CAC_usa(RomOffset segmentRom, void * dstAddr, size_t segmentSize);
 
-// void func_80005C00_usa();
-// void func_80005EC0_usa();
-void DrawTitle(void);
-// void func_8000628C_usa();
-void DoTitle();
-void InitTitle(void);
-void titleSetup();
 // void func_800072A0_usa();
 // void func_80007538_usa();
 // void func_800077AC_usa();

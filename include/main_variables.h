@@ -80,7 +80,7 @@ extern UNK_TYPE BGM_INIT_TABLE[];
 // extern UNK_TYPE D_800B55AC_usa;
 // extern UNK_TYPE D_800B55B0_usa;
 // extern UNK_TYPE D_800B55BC_usa;
-// extern UNK_TYPE D_800B5890_usa;
+
 // extern UNK_TYPE D_800B58B4_usa;
 // extern UNK_TYPE D_800B58B6_usa;
 // extern UNK_TYPE D_800B58B8_usa;
@@ -1365,8 +1365,7 @@ extern u8 TenSecond;
 extern OSMesgQueue B_801AB7F0_usa;
 // extern UNK_TYPE B_801AB808_usa;
 
-// extern UNK_TYPE B_801AB860_usa;
-// extern UNK_TYPE B_801AB89C_usa;
+extern s32 ganButton[0x10];
 
 // extern UNK_TYPE B_801AB8A4_usa;
 // extern UNK_TYPE B_801AB8A8_usa;
@@ -1453,7 +1452,7 @@ extern u8 DolbyEnabled;
 // extern UNK_TYPE B_801C6F00_usa;
 
 // extern UNK_TYPE B_801C6F7C_usa;
-// extern UNK_TYPE B_801C6FA0_usa;
+extern s32 giButton;
 // extern UNK_TYPE B_801C6FA8_usa;
 // extern UNK_TYPE B_801C6FAC_usa;
 // extern UNK_TYPE B_801C6FB0_usa;
@@ -1584,7 +1583,7 @@ extern OSMesg B_8021BA28_usa[1];
 extern s32 B_8021BA98_usa;
 
 // extern UNK_TYPE B_8021BEA0_usa;
-extern UNK_PTR B_8021BEA4_usa;
+extern UNK_PTR B_8021BEA4_usa; // maybe gPlayer?
 extern UNK_PTR B_8021BEA8_usa;
 extern Gfx *glistp;
 // extern UNK_TYPE B_8021BEB0_usa;

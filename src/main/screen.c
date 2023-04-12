@@ -34,8 +34,6 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/screen", screenUpdateArea);
 #endif
 
 #if VERSION_USA
-#if 1
-// regalloc
 void screenWipeImages(void) {
     s32 i;
     s32 j;
@@ -65,9 +63,6 @@ void screenWipeImages(void) {
         }
     }
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", screenWipeImages);
-#endif
 #endif
 
 #if VERSION_USA
@@ -119,7 +114,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_8002629C_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_800273BC_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/screen", screenSet);
 #endif
 
 #if VERSION_USA

@@ -11,4 +11,6 @@ void func_80046F8C_usa(void);
 void UpdateController();
 void UpdateMenuController();
 
+extern u8 D_800B69B0_usa;
+
 #endif

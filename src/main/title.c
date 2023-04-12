@@ -1,3 +1,8 @@
+/**
+ * Original filename: title.c
+ */
+
+#include "title.h"
 #include "libultra.h"
 #include "include_asm.h"
 #include "macros_defines.h"
@@ -11,10 +16,15 @@
 #include "buffers.h"
 #include "sfxlimit.h"
 #include "segment_symbols.h"
+#include "sound.h"
+#include "screen.h"
 
-#if VERSION_USA
 extern u32 D_800B5890_usa[];
 
+extern const char RO_STR_800C3128_usa[];
+extern const char RO_STR_800C3144_usa[];
+
+#if VERSION_USA
 void func_80005C00_usa(void) {
     if (B_8018A808_usa < 7) {
         u32 temp_v1 = D_800B5890_usa[B_8018A808_usa];
@@ -118,7 +128,7 @@ s32 func_80024BF4_usa(s32 *);                       /* extern */
 s32 func_80024C14_usa();                            /* extern */
 s32 func_80024C2C_usa(void);
 void func_8002629C_usa(s32 *);                         /* extern */
-s32 func_800273BC_usa(UNK_TYPE *arg0, UNK_TYPE arg1);
+s32 screenSet(UNK_TYPE *arg0, UNK_TYPE arg1);
 void func_80027E80_usa(s32, UNK_TYPE);                        /* extern */
 void func_80028378_usa(s32, UNK_TYPE);                        /* extern */
 void func_800284E4_usa(s32, UNK_TYPE);                        /* extern */
@@ -149,11 +159,11 @@ extern s32 B_801A6DAC_usa;
 extern s32 B_801A6DB0_usa;
 extern s32 B_801A6DB4_usa;
 extern UNK_TYPE B_801A6DB8_usa;
-extern UNK_TYPE B_801AB860_usa;
+extern UNK_TYPE ganButton;
 extern s32 gGameStatus;
 extern s32 B_801AD9BC_usa;
 extern s32 B_801ADAE8_usa;
-extern s32 B_801C6FA0_usa;
+extern s32 giButton;
 extern s32 gSelection;
 extern s32 B_8021BA98_usa;
 extern UNK_TYPE *B_8021BEA4_usa;
@@ -260,7 +270,7 @@ block_12:
             if (B_8018A808_usa == 7) {
                 gpData->unk_00 = 0;
                 gpData->unk_14 = 4;
-                gpData->unk_80 = func_800273BC_usa(&RO_STR_800C3128_usa, 0x8E001);
+                gpData->unk_80 = screenSet(&RO_STR_800C3128_usa, 0x8E001);
             }
             break;
         case 0x4:                                   /* switch 1 */
@@ -270,7 +280,7 @@ block_12:
             }
             break;
         case 0x5:                                   /* switch 1 */
-            temp_v0 = func_800273BC_usa(&RO_STR_800C3144_usa, 0x8E401);
+            temp_v0 = screenSet(&RO_STR_800C3144_usa, 0x8E401);
             if (temp_v0 != temp_s0) {
                 gpData->unk_08 = temp_v0;
                 gpData->unk_00 = 0;
@@ -294,26 +304,26 @@ block_36:
             }
             if (B_801A5B3E_usa & 0x2000) {
                 if (B_801A5B34_usa != 0) {
-                    temp_a1_2 = (B_801C6FA0_usa + 1) & 0xF;
-                    *(&B_801AB860_usa + (B_801C6FA0_usa * 4)) = (s32) B_801A5B34_usa;
-                    B_801C6FA0_usa = temp_a1_2;
-                    if ((*(&B_801AB860_usa + (((temp_a1_2 - 4) & 0xF) * 4)) == 0x4000) && (*((((temp_a1_2 - 3) & 0xF) * 4) + &B_801AB860_usa) == 0x8000)) {
-                        temp_v1_2 = *((((temp_a1_2 - 2) & 0xF) * 4) + &B_801AB860_usa);
-                        if ((temp_v1_2 == 0x20) && (*((((temp_a1_2 - 1) & 0xF) * 4) + &B_801AB860_usa) == temp_v1_2)) {
+                    temp_a1_2 = (giButton + 1) & 0xF;
+                    *(&ganButton + (giButton * 4)) = (s32) B_801A5B34_usa;
+                    giButton = temp_a1_2;
+                    if ((*(&ganButton + (((temp_a1_2 - 4) & 0xF) * 4)) == 0x4000) && (*((((temp_a1_2 - 3) & 0xF) * 4) + &ganButton) == 0x8000)) {
+                        temp_v1_2 = *((((temp_a1_2 - 2) & 0xF) * 4) + &ganButton);
+                        if ((temp_v1_2 == 0x20) && (*((((temp_a1_2 - 1) & 0xF) * 4) + &ganButton) == temp_v1_2)) {
                             gGameStatus ^= 1;
                             func_80005184_usa(&D_800B4160_usa, 9);
                         }
                     }
-                    temp_a2 = *(&B_801AB860_usa + (((B_801C6FA0_usa - 8) & 0xF) * 4));
+                    temp_a2 = *(&ganButton + (((giButton - 8) & 0xF) * 4));
                     if (temp_a2 == 0x8000) {
-                        temp_t0 = *((((B_801C6FA0_usa - 7) & 0xF) * 4) + &B_801AB860_usa);
+                        temp_t0 = *((((giButton - 7) & 0xF) * 4) + &ganButton);
                         if (temp_t0 == 0x4000) {
-                            temp_a3 = *((((B_801C6FA0_usa - 6) & 0xF) * 4) + &B_801AB860_usa);
+                            temp_a3 = *((((giButton - 6) & 0xF) * 4) + &ganButton);
                             if (temp_a3 == 0x10) {
-                                temp_a1_3 = *((((B_801C6FA0_usa - 5) & 0xF) * 4) + &B_801AB860_usa);
+                                temp_a1_3 = *((((giButton - 5) & 0xF) * 4) + &ganButton);
                                 if (temp_a1_3 == temp_a2) {
-                                    temp_a2_2 = *((((B_801C6FA0_usa - 4) & 0xF) * 4) + &B_801AB860_usa);
-                                    if ((temp_a2_2 == temp_a1_3) && (*((((B_801C6FA0_usa - 3) & 0xF) * 4) + &B_801AB860_usa) == temp_t0) && (*((((B_801C6FA0_usa - 2) & 0xF) * 4) + &B_801AB860_usa) == temp_a3) && (*((((B_801C6FA0_usa - 1) & 0xF) * 4) + &B_801AB860_usa) == temp_a2_2)) {
+                                    temp_a2_2 = *((((giButton - 4) & 0xF) * 4) + &ganButton);
+                                    if ((temp_a2_2 == temp_a1_3) && (*((((giButton - 3) & 0xF) * 4) + &ganButton) == temp_t0) && (*((((giButton - 2) & 0xF) * 4) + &ganButton) == temp_a3) && (*((((giButton - 1) & 0xF) * 4) + &ganButton) == temp_a2_2)) {
                                         B_8021BA98_usa = ~B_8021BA98_usa;
                                         func_80005184_usa(&D_800B4160_usa, 9);
                                     }
@@ -447,7 +457,7 @@ block_36:
                             gpData->unk_00 = 0;
                             gpData->unk_10 = 0;
                             gpData->unk_14 = 7;
-                            temp_v0_3 = func_800273BC_usa(&RO_STR_800C314C_usa, 0x8E401);
+                            temp_v0_3 = screenSet(&RO_STR_800C314C_usa, 0x8E401);
                             gpData->unk_08 = temp_v0_3;
                             func_80009D30_usa(temp_v0_3, gpData->unk_10);
                             break;
@@ -493,94 +503,64 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/title", DoTitle);
 #endif
 
 #if VERSION_USA
-typedef struct struct_gpData {
-    /* 0x00 */ UNK_TYPE4 unk_00;
-    /* 0x04 */ UNK_TYPE4 unk_04;
-    /* 0x08 */ UNK_TYPE4 unk_08;
-    /* 0x0C */ UNK_TYPE4 unk_0C;
-    /* 0x10 */ UNK_TYPE4 unk_10;
-    /* 0x14 */ UNK_TYPE4 unk_14;
-} struct_gpData; // size = 0x18
-
-extern struct_gpData *gpData;
-extern s32 B_801AB89C_usa;
-extern s32 B_801C6FA0_usa;
-extern u8 D_800B69B0_usa;
-extern u32 D_CA4A0[];
-extern u32 D_FB480[];
-extern const char RO_STR_800C3128_usa[];
-extern const char RO_STR_800C3144_usa[];
-
-#if 0
-// ? func_80002D8C_usa(?);                             /* extern */
-// s32 func_800273BC_usa(s8 *, s32, s32);              /* extern */
-// ? func_80027D0C_usa(s32, ?);                        /* extern */
-// ? func_80028F44_usa(s32, ?, ? *);                   /* extern */
-// ? func_800296B0_usa(? *, s8 *, ?);                  /* extern */
-// s32 func_8002A708_usa(s32 *, s8 *);                 /* extern */
-// s32 screenLoad(? *, s32 *);                  /* extern */
-
+#if 1
 void InitTitle(void) {
     s16 sp10[0x80];
-    s32 sp110;
+    void *sp110;
     s32 sp114;
-    s32 *var_v1;
-    s32 temp_a0;
-    s32 temp_v0;
-    s32 var_a0;
-    s32 var_a1;
-    char *var_a0_2;
+    s32 i;
 
-    var_a0 = 0xF;
-    var_v1 = &B_801AB89C_usa;
     gTheGame.unk_9C0C = 2;
-    B_801C6FA0_usa = 0;
-    do {
-        *var_v1 = 0;
-        var_a0 -= 1;
-        var_v1 -= 1;
-    } while (var_a0 >= 0);
-    temp_a0 = (((uintptr_t)gBufferHeap + 0xF) + SEGMENT_ROM_SIZE(segment_0CA4A0)) & ~0xF;
+    giButton = 0;
+
+    for (i = ARRAY_COUNT(ganButton) - 1; i >= 0; i--) {
+        ganButton[i] = 0;
+    }
+
+    // funny alignment, current macros does not match
+    sp110 = (void *)((((uintptr_t)gBufferHeap + 0xF) + SEGMENT_ROM_SIZE(segment_0CA4A0)) & ~0xF);
+
     B_8021BEA4_usa = &gTheGame.unk_9C48;
     B_8021BEA8_usa = &gTheGame.unk_9C48;
-    sp110 = temp_a0;
-    gpData = temp_a0;
-    sp110 = (void*)((uintptr_t)temp_a0 + 0x18);
-    bzero((void *) temp_a0, 0x18);
+    gpData = sp110;
+    sp110 = (void *)((uintptr_t)sp110 + sizeof(struct_gpData));
+    bzero(gpData, sizeof(struct_gpData));
     gpData->unk_14 = 0;
     gpData->unk_04 = 2;
 
     if (screenLoad("TITLE.SBF", &sp110) != 0) {
         if (B_8018A7F0_usa > 0) {
             if (osTvType == 0) {
-                var_a0_2 = "BLANK";
                 gpData->unk_14 = 1;
+                gpData->unk_08 = screenSet("BLANK", 0xFF401);
             } else if (D_800B69B0_usa & 1) {
-                var_a0_2 = RO_STR_800C3128_usa;
                 gpData->unk_00 = 0;
                 gpData->unk_14 = 4;
+                gpData->unk_08 = screenSet(RO_STR_800C3128_usa, 0xFF401);
             } else {
-                var_a0_2 = "NO-CONTROLLER";
                 gpData->unk_14 = 2;
+                gpData->unk_08 = screenSet("NO-CONTROLLER", 0xFF401);
             }
-            gpData->unk_08 = func_800273BC_usa(var_a0_2, 0xFF401);
         } else {
-            var_a1 = -1;
-            if ((gDemo == 0x16) || (gDemo == 0x21) || (B_8018A7F8_usa == 9)) {
+            u32 var_a1;
+
+            if ((gDemo == GDEMO_16) || (gDemo == GDEMO_21) || (B_8018A7F8_usa == 9)) {
                 var_a1 = 0xE;
+            } else {
+                var_a1 = -1;
             }
             gpData->unk_14 = 6;
-            gpData->unk_08 = func_800273BC_usa(RO_STR_800C3144_usa, ((var_a1 << 0xC) & 0x7F000) | 0x80401);
-            gDemo = 0x2C;
+            gpData->unk_08 = screenSet(RO_STR_800C3144_usa, ((var_a1 << 0xC) & 0x7F000) | 0x80401);
+            gDemo = GDEMO_2C;
         }
 
         if (func_8002A708_usa(&sp114, "COPYRIGHT") != 0) {
-            func_800296B0_usa(&sp10, gBuildDate, 0x80);
-            func_80028F44_usa(sp114, 0x64, &sp10);
+            func_800296B0_usa(sp10, gBuildDate, 0x80);
+            func_80028F44_usa(sp114, 0x64, sp10);
         }
         if (func_8002A708_usa(&sp114, RO_STR_800C3144_usa) != 0) {
-            func_800296B0_usa(&sp10, gBuildDate, 0x80);
-            func_80028F44_usa(sp114, 0x64, &sp10);
+            func_800296B0_usa(sp10, gBuildDate, 0x80);
+            func_80028F44_usa(sp114, 0x64, sp10);
         }
         if (func_8002A708_usa(&sp114, RO_STR_800C3144_usa) != 0) {
             func_80027D0C_usa(sp114, 0x64);

@@ -23,8 +23,6 @@ extern s32 B_801A5B30_usa;
 extern s32 B_801A5B40_usa;
 extern OSContStatus B_801F9CA8_usa[MAXCONTROLLERS];
 
-extern u8 D_800B69B0_usa;
-
 #ifdef NON_EQUIVALENT
 void CheckController(void) {
     s32 var_a0;
