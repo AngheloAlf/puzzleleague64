@@ -39,6 +39,11 @@ def main():
 
     fileList.sort(key=lambda x: x.filename)
 
+    if len(fileList) > 0x255:
+        spimdisasm.common.Utils.eprint(f"There are more files (0x{len(fileList):X}) in the folder ({filesFolderPath}) than the allowed limit (0x255)")
+        spimdisasm.common.Utils.eprint(f"The files at the end of the list will not be packaged into the bin_file.")
+        fileList = fileList[:0x255]
+
     currentOffset = 4 + 0x18 * len(fileList)
     for entry in fileList:
         currentPath = filesFolderPath / entry.filename

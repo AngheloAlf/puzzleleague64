@@ -46,10 +46,10 @@ STATIC_INLINE s32 inlinedfunc(void) {
     }
 }
 
-STATIC_INLINE s32 fileBuffer(File *arg0, s32 arg1) {
+STATIC_INLINE s32 fileBuffer(File *file, s32 size) {
     s32 __n;
 
-    if (arg0 == FILE_NULL) {
+    if (file == FILE_NULL) {
         __n = inlinedfunc();
 
         func_80001CAC_usa(SEGMENT_ROM_START(bin_file), &gacBuffer.buffer, __n);
@@ -57,23 +57,23 @@ STATIC_INLINE s32 fileBuffer(File *arg0, s32 arg1) {
         return __n;
     }
 
-    if (giFileBuffer == arg0->index) {
-        if (gnOffsetBuffer <= arg0->unk_0C) {
-            __n = MIN(arg0->unk_04, FILE_BINFILE_ENTRIES_BUFSIZE);
+    if (giFileBuffer == file->index) {
+        if (gnOffsetBuffer <= file->inFileOffset) {
+            __n = MIN(file->fileSize, FILE_BINFILE_ENTRIES_BUFSIZE);
 
-            if (__n > ((arg0->unk_0C - gnOffsetBuffer) + arg1)) {
-                return arg1;
+            if (__n > ((file->inFileOffset - gnOffsetBuffer) + size)) {
+                return size;
             }
         }
     }
 
-    __n = arg0->unk_04 - (arg0->unk_0C & ~1);
+    __n = file->fileSize - (file->inFileOffset & ~1);
     __n = MIN(__n, FILE_BINFILE_ENTRIES_BUFSIZE);
-    giFileBuffer = arg0->index;
-    gnOffsetBuffer = arg0->unk_0C & ~1;
-    func_80001CAC_usa(arg0->unk_08 + gnOffsetBuffer, &gacBuffer.buffer, ALIGN2(__n));
+    giFileBuffer = file->index;
+    gnOffsetBuffer = file->inFileOffset & ~1;
+    func_80001CAC_usa(file->romAddress + gnOffsetBuffer, &gacBuffer.buffer, ALIGN2(__n));
 
-    return ((__n) > (arg1) ? (arg1) : (__n));
+    return ((__n) > (size) ? (size) : (__n));
 }
 #endif
 
@@ -113,8 +113,8 @@ s32 fileFind(File *file, char *filename) {
             int offset = READ_WORD_FROM_BYTEBUF(gacBuffer.buffer, index + offsetof(BinfileEntry, offset));
 
             file->index = i;
-            file->unk_04 = size;
-            file->unk_08 = (RomOffset)(offset + SEGMENT_ROM_START(bin_file));
+            file->fileSize = size;
+            file->romAddress = (RomOffset)(offset + SEGMENT_ROM_START(bin_file));
 
             return size;
         }
@@ -129,50 +129,53 @@ s32 func_8001CA94_usa(char *filename) {
     File sp10;
 
     if (fileFind(&sp10, filename) != 0) {
-        return sp10.unk_04;
+        return sp10.fileSize;
     }
     return 0;
 }
 #endif
 
 #if VERSION_USA
-INLINE bool fileTest(File *arg0) {
-    return arg0->index < FILE_BINFILE_MAX_COUNT;
+INLINE bool fileTest(File *file) {
+    return file->index < FILE_BINFILE_MAX_COUNT;
 }
 #endif
 
 #if VERSION_USA
-bool fileGetAddress(File *arg0, RomOffset *arg1) {
+bool fileGetAddress(File *file, RomOffset *dst) {
     File sp10;
 
-    if (fileTest(arg0)) {
-        *arg1 = arg0->unk_08 + arg0->unk_0C;
+    if (fileTest(file)) {
+        *dst = file->romAddress + file->inFileOffset;
         return true;
     }
-    if (fileFind(&sp10, (void *)arg0) != 0) {
-        *arg1 = sp10.unk_08;
+
+    // idk why this is passing file as second arg, @bug?
+    if (fileFind(&sp10, (void *)file) != 0) {
+        *dst = sp10.romAddress;
         return true;
     }
+
     return false;
 }
 #endif
 
 #if VERSION_USA
-s32 fileOpen(File *arg0, char *arg1) {
-    if (fileFind(arg0, arg1) != 0) {
-        arg0->unk_0C = 0;
+s32 fileOpen(File *file, char *filename) {
+    if (fileFind(file, filename) != 0) {
+        file->inFileOffset = 0;
 
-        fileBuffer(arg0, arg0->unk_04);
-        return arg0->index + 1;
+        fileBuffer(file, file->fileSize);
+        return file->index + 1;
     }
 
-    arg0->index = -1;
+    file->index = -1;
     return 0;
 }
 #endif
 
 #if VERSION_USA
-s32 fileClose(File *arg0 UNUSED) {
+s32 fileClose(File *file UNUSED) {
     return 0;
 }
 #endif
@@ -192,8 +195,8 @@ s32 fileClose(File *arg0 UNUSED) {
 s32 fileGet(File *file, void *dst, s32 totalSize) {
     s32 var_s1;
 
-    if (file->unk_04 < (file->unk_0C + totalSize)) {
-        totalSize = file->unk_04 - file->unk_0C;
+    if (file->fileSize < (file->inFileOffset + totalSize)) {
+        totalSize = file->fileSize - file->inFileOffset;
     }
     if (totalSize <= 0) {
         return 0;
@@ -203,12 +206,12 @@ s32 fileGet(File *file, void *dst, s32 totalSize) {
         return 0;
     }
 
-    for (; totalSize != 0; totalSize -= var_s1, file->unk_0C += var_s1) {
+    for (; totalSize != 0; totalSize -= var_s1, file->inFileOffset += var_s1) {
         s32 var_a0;
         void *currentSrc;
 
         if ((totalSize >= 0x20) && (totalSize % 2 == 0) && (((uintptr_t)dst % 16) == 0)) {
-            RomOffset temp_a0_2 = file->unk_08 + file->unk_0C;
+            RomOffset temp_a0_2 = file->romAddress + file->inFileOffset;
 
             if (temp_a0_2 % 2 == 0) {
                 var_s1 = totalSize;
@@ -218,7 +221,7 @@ s32 fileGet(File *file, void *dst, s32 totalSize) {
         }
 
         var_s1 = fileBuffer(file, totalSize);
-        currentSrc = &gacBuffer.buffer[file->unk_0C - gnOffsetBuffer];
+        currentSrc = &gacBuffer.buffer[file->inFileOffset - gnOffsetBuffer];
 
         var_a0 = var_s1;
         if ((var_s1 % 4 == 0) && ((uintptr_t)dst % 4 == 0) && ((uintptr_t)currentSrc % 4 == 0)) {
@@ -305,35 +308,35 @@ s32 fileGet(File *file, void *dst, s32 totalSize) {
 #endif
 
 #if VERSION_USA
-s32 fileSeek(File *arg0, s32 mode, s32 offset) {
+s32 fileSeek(File *file, s32 mode, s32 offset) {
     char new_var = 1;
 
-    if (!fileTest(arg0)) {
+    if (!fileTest(file)) {
         return 0;
     }
 
     switch (mode) {
-        case 0: // SEEK_SET
+        case FILE_SEEK_SET:
             break;
 
-        case 1: // SEEK_CUR
-            offset += arg0->unk_0C;
+        case FILE_SEEK_CUR:
+            offset += file->inFileOffset;
             break;
 
-        case 2: // SEEK_END
-            offset = arg0->unk_04 - (offset + new_var);
+        case FILE_SEEK_END:
+            offset = file->fileSize - (offset + new_var);
             break;
     }
 
     if (offset < 0) {
-        arg0->unk_0C = 0;
-    } else if (offset >= arg0->unk_04) {
-        arg0->unk_0C = arg0->unk_04 - 1;
+        file->inFileOffset = 0;
+    } else if (offset >= file->fileSize) {
+        file->inFileOffset = file->fileSize - 1;
     } else {
-        arg0->unk_0C = offset;
+        file->inFileOffset = offset;
     }
 
-    return arg0->unk_0C;
+    return file->inFileOffset;
 }
 #endif
 
