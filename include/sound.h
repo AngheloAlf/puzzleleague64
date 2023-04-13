@@ -3,6 +3,7 @@
 
 #include "libultra.h"
 #include "unk.h"
+#include "libmus.h"
 
 
 // void func_80001D60_usa();
@@ -30,18 +31,18 @@ void SetAudioSystemMixer(s16 arg0);
 // void func_80002AE8_usa();
 // void func_80002C50_usa();
 s32 FadeOutTuneBuffer(s32 arg0, s32 arg1);
-s32 FadeOutSong(s32 arg0, s32 arg1);
+int FadeOutSong(musHandle handle, int speed);
 // void func_80002CE0_usa();
 // void func_80002D04_usa();
 // void func_80002D30_usa();
 void func_80002D5C_usa();
-void func_80002D8C_usa(s32 arg0);
+void func_80002D8C_usa(s16 speed);
 void func_80002DE8_usa();
-void func_80002E0C_usa(s32 arg0);
-void func_80002E34_usa(s32 arg0);
-void func_80002E70_usa(s32 arg0);
+void func_80002E0C_usa(s16 speed);
+void func_80002E34_usa(s32 volume);
+void func_80002E70_usa(s32 volume);
 // void func_80002EB8_usa();
-UNK_RET SetSongTempo(UNK_TYPE, UNK_TYPE);
+int SetSongTempo(musHandle handle, int tempo);
 // void func_80002F68_usa();
 // void func_80002F88_usa();
 // void func_80002F98_usa();
