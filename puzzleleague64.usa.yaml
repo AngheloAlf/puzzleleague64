@@ -342,7 +342,7 @@ segments:
       - [0x0B46C0, data, main/0B46C0]
       - [0x0B46D0, data, main/sound]
       - [0x0B4710, data, main/0B4710]
-      - [0x0B5F30, data, main/rom_offsets]
+      - [0x0B5F30, .data, main/rom_offsets]
       - [0x0B6490, .data, main/title]
       - [0x0B64B0, data, main/0B64B0]
       - [0x0B80D0, data, main/0B80D0] # update? maybe wrong end

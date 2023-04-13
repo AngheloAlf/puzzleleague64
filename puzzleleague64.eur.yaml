@@ -427,8 +427,12 @@ segments:
     follows_vram: main
 
   - name: bin_file
-    type: bin_file
+    type: bin
     start: 0x9BDDF0
+
+  # garbage data?
+  - type: bin
+    start: 0x17C2D72
 
   # no idea where it ends
   - type: bin
