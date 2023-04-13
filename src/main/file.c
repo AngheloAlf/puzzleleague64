@@ -11,6 +11,7 @@
 #include "main_variables.h"
 #include "segment_symbols.h"
 #include "libc/stddef.h"
+#include "sound.h"
 
 // Not actually used, keept as a reference
 typedef struct BinfileEntry {

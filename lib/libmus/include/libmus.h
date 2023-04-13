@@ -4,31 +4,33 @@
 #include "libultra.h"
 
 typedef struct {
-    unsigned long control_flag;
+    /* 0x00 */ unsigned long control_flag;
 
-    int channels;
-    void *sched;
-    int thread_priority;
-    unsigned char *heap;
-    int heap_length;
+    /* 0x04 */ int channels;
+    /* 0x08 */ void *sched;
+    /* 0x0C */ int thread_priority;
+    /* 0x10 */ unsigned char *heap;
+    /* 0x14 */ int heap_length;
 
-    unsigned char *ptr;
-    unsigned char *wbk;
+    /* 0x18 */ unsigned char *ptr;
+    /* 0x1C */ unsigned char *wbk;
 
-    void *default_fxbank;
+    /* 0x20 */ void *default_fxbank;
 
-    int fifo_length;
+    /* 0x24 */ int fifo_length;
 
-    int syn_updates;
-    int syn_output_rate;
-    int syn_rsp_cmds;
-    int syn_retraceCount;
-    int syn_num_dma_bufs;
-    int syn_dma_buf_size;
+    /* 0x28 */ int syn_updates;
+    /* 0x2C */ int syn_output_rate;
+    /* 0x30 */ int syn_rsp_cmds;
+    /* 0x34 */ int syn_retraceCount;
+    /* 0x38 */ int syn_num_dma_bufs;
+    /* 0x3C */ int syn_dma_buf_size;
 
     // Special Addition
-    OSPiHandle *diskrom_handle;
-} musConfig;
+    #if 0
+    /* 0x40 */ OSPiHandle *diskrom_handle;
+    #endif
+} musConfig; // size = 0x40
 
 typedef enum {
     MUSBOOL_OFF,

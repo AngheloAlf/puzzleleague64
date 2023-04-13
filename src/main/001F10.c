@@ -4,6 +4,7 @@
 #include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
+#include "sound.h"
 
 void func_80001310_usa(RomOffset segmentRom, void *dstAddr, size_t segmentSize) {
     func_80001CAC_usa(segmentRom, dstAddr, segmentSize);

@@ -21,9 +21,6 @@ void func_80001310_usa(RomOffset segmentRom, void * dstAddr, size_t segmentSize)
 
 // void func_800019C0_usa();
 
-// void func_80001B10_usa();
-void func_80001CAC_usa(RomOffset segmentRom, void * dstAddr, size_t segmentSize);
-
 // void func_80030D10_usa();
 // void func_80030D6C_usa();
 // void func_80030DC8_usa();
