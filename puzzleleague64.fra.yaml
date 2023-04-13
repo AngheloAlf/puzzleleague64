@@ -330,6 +330,8 @@ segments:
 
       - [0x0B0650, data, main/0B0650]
       - [0x0B3260, data, main/0B3260]
+      - [0x0B4B00, data, main/rom_offsets]
+      - [0x0B5060, data, main/0B5060]
 
       - [0x0C0B90, data, libhvqm/adpcmdec]
 
@@ -427,6 +429,300 @@ segments:
   # no idea where it ends
   - type: bin
     # name: segment_17C2A80
-    start: 0x171F5C2
+    start: 0x171F5D0
+
+  - name: segment_1A45560
+    type: bin
+    start: 0x199F070
+
+  - name: segment_1A47630
+    type: bin
+    start: 0x19A1140
+
+  - name: segment_1A49850
+    type: bin
+    start: 0x19A3360
+
+  - name: segment_1A49F60
+    type: bin
+    start: 0x19A3A70
+
+  - name: segment_1A4AAC0
+    type: bin
+    start: 0x19A45D0
+
+  - name: segment_1A4DEE0
+    type: bin
+    start: 0x19A79F0
+
+  - name: segment_1A51B40
+    type: bin
+    start: 0x19AB650
+
+  - name: segment_1A52D50
+    type: bin
+    start: 0x19AC860
+
+  - name: segment_1A55860
+    type: bin
+    start: 0x19AF370
+
+  - name: segment_1A57C20
+    type: bin
+    start: 0x19B1730
+
+  - name: segment_1A5C640
+    type: bin
+    start: 0x19B6150
+
+  - name: segment_1A5D6D0
+    type: bin
+    start: 0x19B71E0
+
+  - name: segment_1A5E510
+    type: bin
+    start: 0x19B8020
+
+  - name: segment_1A64950
+    type: bin
+    start: 0x19BE460
+
+  - name: segment_1A6AF50
+    type: bin
+    start: 0x19C4A60
+
+  - name: segment_1A6DAF0
+    type: bin
+    start: 0x19C7600
+
+  - name: segment_1A70610
+    type: bin
+    start: 0x19CA120
+
+  - name: segment_1A712D0
+    type: bin
+    start: 0x19CADE0
+
+  - name: segment_1A72030
+    type: bin
+    start: 0x19CBB40
+
+  - name: segment_1A74380
+    type: bin
+    start: 0x19CDE90
+
+  - name: segment_1A75FF0
+    type: bin
+    start: 0x19CFB00
+
+  - name: segment_1A76940
+    type: bin
+    start: 0x19D0450
+
+  - name: segment_1A776B0
+    type: bin
+    start: 0x19D11C0
+
+  - name: segment_1A79C90
+    type: bin
+    start: 0x19D37A0
+
+  - name: segment_1A7E1B0
+    type: bin
+    start: 0x19D7CC0
+
+  - name: segment_1A7FE50
+    type: bin
+    start: 0x19D9960
+
+  - name: segment_1A81760
+    type: bin
+    start: 0x19DB270
+
+  - name: segment_1A824D0
+    type: bin
+    start: 0x19DBFE0
+
+  - name: segment_1A837A0
+    type: bin
+    start: 0x19DD2B0
+
+  - name: segment_1A85160
+    type: bin
+    start: 0x19DEC70
+
+  - name: segment_1A87870
+    type: bin
+    start: 0x19E1380
+
+  - name: segment_1A87F80
+    type: bin
+    start: 0x19E1A90
+
+  - name: segment_1A88AE0
+    type: bin
+    start: 0x19E25F0
+
+  - name: segment_1A8A210
+    type: bin
+    start: 0x19E3D20
+
+  - name: segment_1A8A8F0
+    type: bin
+    start: 0x19E4400
+
+  - name: segment_1A8B000
+    type: bin
+    start: 0x19E4B10
+
+  - name: segment_1A8BEA0
+    type: bin
+    start: 0x19E5990
+
+  - name: segment_1A8E130
+    type: bin
+    start: 0x19E7C20
+
+  - name: segment_1A910B0
+    type: bin
+    start: 0x19EABA0
+
+  - name: segment_1A93340
+    type: bin
+    start: 0x19ECE30
+
+  - name: segment_1A966A0
+    type: bin
+    start: 0x19F0190
+
+  - name: segment_1A98F30
+    type: bin
+    start: 0x19F2A20
+
+  - name: segment_1A9CB20
+    type: bin
+    start: 0x19F6610
+
+  - name: segment_1A9D1B0
+    type: bin
+    start: 0x19F6CA0
+
+  - name: segment_1A9D850
+    type: bin
+    start: 0x19F7340
+
+  - name: segment_1A9E2E0
+    type: bin
+    start: 0x19F7DD0
+
+  - name: segment_1A9EAC0
+    type: bin
+    start: 0x19F85B0
+
+  - name: segment_1A9F450
+    type: bin
+    start: 0x19F8F40
+
+  - name: segment_1AA0D70
+    type: bin
+    start: 0x19FA860
+
+  - name: segment_1AA3350
+    type: bin
+    start: 0x19FCE40
+
+  - name: segment_1AA7870
+    type: bin
+    start: 0x1A01360
+
+  - name: segment_1AA9510
+    type: bin
+    start: 0x1A03000
+
+  - name: segment_1AAAE20
+    type: bin
+    start: 0x1A04910
+
+  - name: segment_1AABB90
+    type: bin
+    start: 0x1A05680
+
+  - name: segment_1AACE60
+    type: bin
+    start: 0x1A06950
+
+  - name: segment_1AB0280
+    type: bin
+    start: 0x1A09D70
+
+  - name: segment_1AB3EE0
+    type: bin
+    start: 0x1A0D9D0
+
+  - name: segment_1AB5B80
+    type: bin
+    start: 0x1A0F670
+
+  - name: segment_1AB7490
+    type: bin
+    start: 0x1A10F80
+
+  - name: segment_1ABA8B0
+    type: bin
+    start: 0x1A143A0
+
+  - name: segment_1ABE510
+    type: bin
+    start: 0x1A18000
+
+  - name: segment_1AC02C0
+    type: bin
+    start: 0x1A19DB0
+
+  - name: segment_1AC2390
+    type: bin
+    start: 0x1A1BE80
+
+  - name: segment_1AC4120
+    type: bin
+    start: 0x1A1DC10
+
+  - name: segment_1AC5B60
+    type: bin
+    start: 0x1A1F650
+
+  - name: segment_1AC7EB0
+    type: bin
+    start: 0x1A219A0
+
+  - name: segment_1AC9A60
+    type: bin
+    start: 0x1A23550
+
+  - name: segment_1ACAE00
+    type: bin
+    start: 0x1A248F0
+
+  - name: segment_1ACD260
+    type: bin
+    start: 0x1A26D50
+
+  - name: segment_1ACE9B0
+    type: bin
+    start: 0x1A284A0
+
+  - name: segment_1ACF1B0
+    type: bin
+    start: 0x1A28CA0
+
+  - type: bin
+    start: 0x1A2A990
+
+  - name: segment_1D358C0
+    type: bin
+    start: 0x1C71B30
+
+  - type: bin
+    start: 0x1C748E0
 
   - [0x1F875D0]

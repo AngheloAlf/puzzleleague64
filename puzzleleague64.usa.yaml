@@ -342,7 +342,7 @@ segments:
       - [0x0B46C0, data, main/0B46C0]
       - [0x0B46D0, data, main/sound]
       - [0x0B4710, data, main/0B4710]
-      - [0x0B5F30, .data, main/rom_offsets]
+      - [0x0B5F30, data, main/rom_offsets]
       - [0x0B6490, .data, main/title]
       - [0x0B64B0, data, main/0B64B0]
       - [0x0B80D0, data, main/0B80D0] # update? maybe wrong end
@@ -479,5 +479,301 @@ segments:
   - type: bin
     # name: segment_17C2A80
     start: 0x17C2A80
+
+
+
+  - name: segment_1A45560
+    type: bin
+    start: 0x1A45560
+
+  - name: segment_1A47630
+    type: bin
+    start: 0x1A47630
+
+  - name: segment_1A49850
+    type: bin
+    start: 0x1A49850
+
+  - name: segment_1A49F60
+    type: bin
+    start: 0x1A49F60
+
+  - name: segment_1A4AAC0
+    type: bin
+    start: 0x1A4AAC0
+
+  - name: segment_1A4DEE0
+    type: bin
+    start: 0x1A4DEE0
+
+  - name: segment_1A51B40
+    type: bin
+    start: 0x1A51B40
+
+  - name: segment_1A52D50
+    type: bin
+    start: 0x1A52D50
+
+  - name: segment_1A55860
+    type: bin
+    start: 0x1A55860
+
+  - name: segment_1A57C20
+    type: bin
+    start: 0x1A57C20
+
+  - name: segment_1A5C640
+    type: bin
+    start: 0x1A5C640
+
+  - name: segment_1A5D6D0
+    type: bin
+    start: 0x1A5D6D0
+
+  - name: segment_1A5E510
+    type: bin
+    start: 0x1A5E510
+
+  - name: segment_1A64950
+    type: bin
+    start: 0x1A64950
+
+  - name: segment_1A6AF50
+    type: bin
+    start: 0x1A6AF50
+
+  - name: segment_1A6DAF0
+    type: bin
+    start: 0x1A6DAF0
+
+  - name: segment_1A70610
+    type: bin
+    start: 0x1A70610
+
+  - name: segment_1A712D0
+    type: bin
+    start: 0x1A712D0
+
+  - name: segment_1A72030
+    type: bin
+    start: 0x1A72030
+
+  - name: segment_1A74380
+    type: bin
+    start: 0x1A74380
+
+  - name: segment_1A75FF0
+    type: bin
+    start: 0x1A75FF0
+
+  - name: segment_1A76940
+    type: bin
+    start: 0x1A76940
+
+  - name: segment_1A776B0
+    type: bin
+    start: 0x1A776B0
+
+  - name: segment_1A79C90
+    type: bin
+    start: 0x1A79C90
+
+  - name: segment_1A7E1B0
+    type: bin
+    start: 0x1A7E1B0
+
+  - name: segment_1A7FE50
+    type: bin
+    start: 0x1A7FE50
+
+  - name: segment_1A81760
+    type: bin
+    start: 0x1A81760
+
+  - name: segment_1A824D0
+    type: bin
+    start: 0x1A824D0
+
+  - name: segment_1A837A0
+    type: bin
+    start: 0x1A837A0
+
+  - name: segment_1A85160
+    type: bin
+    start: 0x1A85160
+
+  - name: segment_1A87870
+    type: bin
+    start: 0x1A87870
+
+  - name: segment_1A87F80
+    type: bin
+    start: 0x1A87F80
+
+  - name: segment_1A88AE0
+    type: bin
+    start: 0x1A88AE0
+
+  - name: segment_1A8A210
+    type: bin
+    start: 0x1A8A210
+
+  - name: segment_1A8A8F0
+    type: bin
+    start: 0x1A8A8F0
+
+  - name: segment_1A8B000
+    type: bin
+    start: 0x1A8B000
+
+  - name: segment_1A8BEA0
+    type: bin
+    start: 0x1A8BEA0
+
+  - name: segment_1A8E130
+    type: bin
+    start: 0x1A8E130
+
+  - name: segment_1A910B0
+    type: bin
+    start: 0x1A910B0
+
+  - name: segment_1A93340
+    type: bin
+    start: 0x1A93340
+
+  - name: segment_1A966A0
+    type: bin
+    start: 0x1A966A0
+
+  - name: segment_1A98F30
+    type: bin
+    start: 0x1A98F30
+
+  - name: segment_1A9CB20
+    type: bin
+    start: 0x1A9CB20
+
+  - name: segment_1A9D1B0
+    type: bin
+    start: 0x1A9D1B0
+
+  - name: segment_1A9D850
+    type: bin
+    start: 0x1A9D850
+
+  - name: segment_1A9E2E0
+    type: bin
+    start: 0x1A9E2E0
+
+  - name: segment_1A9EAC0
+    type: bin
+    start: 0x1A9EAC0
+
+  - name: segment_1A9F450
+    type: bin
+    start: 0x1A9F450
+
+  - name: segment_1AA0D70
+    type: bin
+    start: 0x1AA0D70
+
+  - name: segment_1AA3350
+    type: bin
+    start: 0x1AA3350
+
+  - name: segment_1AA7870
+    type: bin
+    start: 0x1AA7870
+
+  - name: segment_1AA9510
+    type: bin
+    start: 0x1AA9510
+
+  - name: segment_1AAAE20
+    type: bin
+    start: 0x1AAAE20
+
+  - name: segment_1AABB90
+    type: bin
+    start: 0x1AABB90
+
+  - name: segment_1AACE60
+    type: bin
+    start: 0x1AACE60
+
+  - name: segment_1AB0280
+    type: bin
+    start: 0x1AB0280
+
+  - name: segment_1AB3EE0
+    type: bin
+    start: 0x1AB3EE0
+
+  - name: segment_1AB5B80
+    type: bin
+    start: 0x1AB5B80
+
+  - name: segment_1AB7490
+    type: bin
+    start: 0x1AB7490
+
+  - name: segment_1ABA8B0
+    type: bin
+    start: 0x1ABA8B0
+
+  - name: segment_1ABE510
+    type: bin
+    start: 0x1ABE510
+
+  - name: segment_1AC02C0
+    type: bin
+    start: 0x1AC02C0
+
+  - name: segment_1AC2390
+    type: bin
+    start: 0x1AC2390
+
+  - name: segment_1AC4120
+    type: bin
+    start: 0x1AC4120
+
+  - name: segment_1AC5B60
+    type: bin
+    start: 0x1AC5B60
+
+  - name: segment_1AC7EB0
+    type: bin
+    start: 0x1AC7EB0
+
+  - name: segment_1AC9A60
+    type: bin
+    start: 0x1AC9A60
+
+  - name: segment_1ACAE00
+    type: bin
+    start: 0x1ACAE00
+
+  - name: segment_1ACD260
+    type: bin
+    start: 0x1ACD260
+
+  - name: segment_1ACE9B0
+    type: bin
+    start: 0x1ACE9B0
+
+  - name: segment_1ACF1B0
+    type: bin
+    start: 0x1ACF1B0
+
+  - type: bin
+    start: 0x1AD0EA0
+
+  - name: segment_1D358C0
+    type: bin
+    start: 0x1D358C0
+
+  - type: bin
+    start: 0x1D37FF0
 
   - [0x1FCF900]
