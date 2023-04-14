@@ -325,7 +325,7 @@ segments:
 
       - [0x0A7880, data, main/0A7880]
       - [0x0AA490, data, main/0AA490]
-      - [0x0ABD30, data, main/rom_offsets]
+      - [0x0ABD30, .data, main/rom_offsets]
       - [0x0AC290, data, main/0AC290]
 
       - [0x0B7B50, data, libhvqm/adpcmdec]
@@ -415,10 +415,14 @@ segments:
     type: bin_file
     start: 0x9B2BB0
 
-  # no idea where it ends
-  - type: bin
-    # name: segment_17C2A80
+  - name: segment_17C2A80
+    type: bin
     start: 0x174B240
+
+  - name: segment_17CA780
+    type: bin
+    start: 0x1752F40
+  # unknown end for the above one
 
   - name: segment_1A45560
     type: bin
@@ -704,14 +708,283 @@ segments:
     type: bin
     start: 0x1A543D0
 
-  - type: bin
+  - name: segment_1AD0EA0
+    type: bin
     start: 0x1A560C0
 
-  - name: segment_1D358C0
+  - name: segment_1AD8720
+    type: bin
+    start: 0x1A5D940
+  # unknown end for the above one
+
+  - name: segment_1C5EFB0
+    type: bin
+    start: 0x1BF0E50
+
+  - type: bin
+    start: 0x1BF2530
+
+  - name: segment_1C60AD0
     type: bin
     start: 0x1BF29A0
 
-  - type: bin
+  - name: segment_1C63BE0
+    type: bin
     start: 0x1BF5AB0
+  # unknown end for the above one
+
+  - name: segment_1D358C0
+    type: bin
+    start: 0x1CE8F60
+
+  - name: segment_1D37FF0
+    type: bin
+    start: 0x1CEB6C0
+
+  - name: segment_1D38180
+    type: bin
+    start: 0x1CEB850
+  # unknown end for the above one
+
+  - name: segment_1D3D2C0
+    type: bin
+    start: 0x1CF0990
+
+  - type: bin
+    start: 0x1CF09F0
+
+  - name: segment_1D3D390
+    type: bin
+    start: 0x1CF0A60
+
+  - name: segment_1D3E1A0
+    type: bin
+    start: 0x1CF1870
+  # unknown end for the above one
+
+  - name: segment_1D66C70
+    type: bin
+    start: 0x1D23CC0
+
+  - name: segment_1D66F00
+    type: bin
+    start: 0x1D23F30
+
+  - name: segment_1D67A70
+    type: bin
+    start: 0x1D24AA0
+  # unknown end for the above one
+
+  - name: segment_1D8B4C0
+    type: bin
+    start: 0x1D4BD30
+
+  - name: segment_1D8B6C0
+    type: bin
+    start: 0x1D4BF30
+
+  - name: segment_1D8C620
+    type: bin
+    start: 0x1D4CE90
+  # unknown end for the above one
+
+  - name: segment_1DB4980
+    type: bin
+    start: 0x1D76710
+
+  - name: segment_1DB4C20
+    type: bin
+    start: 0x1D769B0
+
+  - name: segment_1DB5790
+    type: bin
+    start: 0x1D77520
+  # unknown end for the above one
+
+  - name: segment_1DD4750
+    type: bin
+    start: 0x1D95EB0
+
+  - name: segment_1DD4950
+    type: bin
+    start: 0x1D960B0
+
+  - name: segment_1DD54C0
+    type: bin
+    start: 0x1D96C20
+  # unknown end for the above one
+
+  - name: segment_1DF38F0
+    type: bin
+    start: 0x1DB9CC0
+
+  - name: segment_1DF3AF0
+    type: bin
+    start: 0x1DB9EC0
+
+  - name: segment_1DF4660
+    type: bin
+    start: 0x1DBAA30
+  # unknown end for the above one
+
+  - name: segment_1E16C10
+    type: bin
+    start: 0x1DE1A80
+
+  - name: segment_1E16E10
+    type: bin
+    start: 0x1DE1C80
+
+  - name: segment_1E17980
+    type: bin
+    start: 0x1DE27F0
+  # unknown end for the above one
+
+  - name: segment_1E36C00
+    type: bin
+    start: 0x1E127B0
+
+  - name: segment_1E36E00
+    type: bin
+    start: 0x1E129B0
+
+  - name: segment_1E37970
+    type: bin
+    start: 0x1E13520
+  # unknown end for the above one
+
+  - name: segment_1E5D070
+    type: bin
+    start: 0x1E3D060
+
+  - name: segment_1E5D270
+    type: bin
+    start: 0x1E3D260
+
+  - name: segment_1E5DDE0
+    type: bin
+    start: 0x1E3DDD0
+  # unknown end for the above one
+
+  - name: segment_1E7B650
+    type: bin
+    start: 0x1E6A560
+
+  - name: segment_1E7B850
+    type: bin
+    start: 0x1E6A760
+
+  - name: segment_1E7C710
+    type: bin
+    start: 0x1E6B620
+  # unknown end for the above one
+
+  - name: segment_1EA1000
+    type: bin
+    start: 0x1E909D0
+
+  - name: segment_1EA12B0
+    type: bin
+    start: 0x1E90C50
+
+  - name: segment_1EA2170
+    type: bin
+    start: 0x1E91B10
+  # unknown end for the above one
+
+  - name: segment_1ED7210
+    type: bin
+    start: 0x1ECD380
+
+  - name: segment_1ED74C0
+    type: bin
+    start: 0x1ECD610
+
+  - name: segment_1ED8030
+    type: bin
+    start: 0x1ECE180
+  # unknown end for the above one
+
+  - name: segment_1F03840
+    type: bin
+    start: 0x1F04D30
+
+  - name: segment_1F03A40
+    type: bin
+    start: 0x1F04F30
+
+  - name: segment_1F049A0
+    type: bin
+    start: 0x1F05E90
+  # unknown end for the above one
+
+  - name: segment_1F2C5C0
+    type: bin
+    start: 0x1F37700
+
+  - name: segment_1F2C860
+    type: bin
+    start: 0x1F379A0
+
+  - name: segment_1F2D920
+    type: bin
+    start: 0x1F38A60
+  # unknown end for the above one
+
+  - name: segment_1F64640
+    type: bin
+    start: 0x1F6E0D0
+
+  - name: segment_1F64920
+    type: bin
+    start: 0x1F6E3B0
+
+  - name: segment_1F65490
+    type: bin
+    start: 0x1F6EF20
+  # unknown end for the above one
+
+  - name: segment_1F898F0
+    type: bin
+    start: 0x1F97BA0
+
+  - name: segment_1F89AF0
+    type: bin
+    start: 0x1F97DA0
+
+  - name: segment_1F8A660
+    type: bin
+    start: 0x1F98910
+  # unknown end for the above one
+
+  - name: segment_1FA9EB0
+    type: bin
+    start: 0x1FC4490
+
+  - name: segment_1FAA0B0
+    type: bin
+    start: 0x1FC4690
+
+  - name: segment_1FAAC20
+    type: bin
+    start: 0x1FC5200
+  # unknown end for the above one
+
+  - name: segment_1FCDF80
+    type: bin
+    start: 0x1FE8510
+
+  - name: segment_1FCE1A0
+    type: bin
+    start: 0x1FE8710
+
+  - name: segment_1FCE670
+    type: bin
+    start: 0x1FE8BE0
+  # unknown end for the above one
+
+  - name: segment_1FCF820
+    type: bin
+    start: 0x1FE9D90
 
   - [0x1FE9E70]

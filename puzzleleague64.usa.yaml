@@ -87,7 +87,6 @@ segments:
       - [0x002710, c, main/sound]
       - [0x004A90, c, main/tetsound]
       - [0x005D30, c, main/sfxlimit]
-      - [0x006800, c, main/rom_offsets]
       - [0x006800, c, main/title]
       - [0x007EA0, c, main/menu]
       - [0x01D4B0, c, main/file]
