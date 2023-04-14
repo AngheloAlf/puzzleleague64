@@ -171,8 +171,8 @@ void func_80002054_usa(void) {
     RomOffset currentRom;
 
     currentVram = (uintptr_t)B_8016F2B0_usa;
-    remainingSize = D_800B55AC_usa[0].end - D_800B55AC_usa[0].start;
-    currentRom = D_800B55AC_usa[0].start;
+    remainingSize = D_800B5570_usa[3].unk_04 - D_800B5570_usa[3].unk_00;
+    currentRom = D_800B5570_usa[3].unk_00;
     while (remainingSize != 0) {
         size_t blkSize = MIN(remainingSize, 0x4000);
 
@@ -185,8 +185,8 @@ void func_80002054_usa(void) {
     }
 
     currentVram = (uintptr_t)B_801842B0_usa;
-    remainingSize = D_800B5598_usa.end - D_800B5598_usa.start;
-    currentRom = D_800B5598_usa.start;
+    remainingSize = D_800B5570_usa[2].unk_04 - D_800B5570_usa[2].unk_00;
+    currentRom = D_800B5570_usa[2].unk_00;
     while (remainingSize != 0) {
         size_t blkSize = MIN(remainingSize, 0x4000);
 
@@ -212,7 +212,7 @@ void func_80002054_usa(void) {
     sp20.control_flag = 0;
     sp20.default_fxbank = 0;
     sp20.syn_dma_buf_size = 0x800;
-    sp20.wbk = (void *)D_800B55AC_usa[2].start;
+    sp20.wbk = (void *)D_800B5570_usa[3].unk_10;
     MusInitialize(&sp20);
 }
 #endif

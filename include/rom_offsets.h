@@ -22,8 +22,4 @@ extern RomOffsetPair D_800B5330_usa[];
 extern RomOffsetPair D_800B5568_usa;
 extern struct_800B55A0_usa D_800B5570_usa[];
 
-extern RomOffsetPair D_800B5598_usa;
-// D_800B55A0_usa
-extern RomOffsetPair D_800B55AC_usa[];
-
 #endif
