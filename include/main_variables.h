@@ -963,7 +963,7 @@ extern u32 B_8018A808_usa;
 // extern UNK_TYPE giFileBuffer;
 // extern UNK_TYPE gnOffsetBuffer;
 // extern UNK_TYPE gnFileCount;
-// extern UNK_TYPE B_8018E3D0_usa;
+// extern UNK_TYPE gpBitmapLast;
 
 // extern UNK_TYPE B_8018E3E8_usa;
 
