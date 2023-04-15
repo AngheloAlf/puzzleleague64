@@ -531,7 +531,7 @@ extern struct_8021AAE0_usa B_8021AAE0_usa;
 s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
     u8 pad[0x20] UNUSED;
 
-    s32 sp40;
+    struct_imageLoad_arg0 *sp40;
     RomOffset sp44;
 
     s32 var_v0;

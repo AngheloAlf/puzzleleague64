@@ -15,7 +15,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/bitmap", func_8001D310_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/bitmap", func_8001D524_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/bitmap", bitmapLoad);
 #endif
 
 #if VERSION_USA

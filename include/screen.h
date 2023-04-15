@@ -214,8 +214,7 @@ extern s32 B_8018E540_usa;
 extern s32 B_8018E550_usa;
 // extern UNK_TYPE B_8018E554_usa;
 extern s32 B_8018E558_usa;
-extern UNK_TYPE gpImageNo;
-extern UNK_TYPE gpImageYes;
+
 extern s32 B_8018E564_usa;
 extern s32 B_8018E568_usa;
 extern s32 B_8018E56C_usa;

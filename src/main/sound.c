@@ -389,6 +389,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/sound", func_8000274C_usa);
 #endif
 
 #if VERSION_USA
+// InitAudio?
 void func_800027FC_usa(void) {
     s32 i;
 

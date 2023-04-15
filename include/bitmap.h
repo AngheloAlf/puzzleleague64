@@ -5,7 +5,7 @@
 #include "unk.h"
 
 // void func_8001D310_usa();
-// void func_8001D524_usa();
+// void bitmapLoad();
 // void func_8001DCC4_usa();
 // void func_8001E018_usa();
 // void func_8001E0F8_usa();

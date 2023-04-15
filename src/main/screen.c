@@ -13,6 +13,9 @@
 #include "image.h"
 #include "alignment.h"
 
+extern struct_imageLoad_arg0 *gpImageNo;
+extern struct_imageLoad_arg0 *gpImageYes;
+
 #if VERSION_USA
 INCLUDE_RODATA("asm/usa/nonmatchings/main/screen", RO_STR_800C4070_usa);
 #endif
