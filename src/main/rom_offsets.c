@@ -73,11 +73,7 @@ RomOffsetPair D_800B5330_usa[] = {
     { SEGMENT_ROM_START(segment_1ACD260), SEGMENT_ROM_END(segment_1ACD260) },
     { SEGMENT_ROM_START(segment_1ACE9B0), SEGMENT_ROM_END(segment_1ACE9B0) },
     { SEGMENT_ROM_START(segment_1ACF1B0), SEGMENT_ROM_END(segment_1ACF1B0) },
-};
-
-RomOffsetPair D_800B5568_usa = {
-    SEGMENT_ROM_START(segment_1D358C0),
-    SEGMENT_ROM_END(segment_1D358C0),
+    { SEGMENT_ROM_START(segment_1D358C0), SEGMENT_ROM_END(segment_1D358C0) },
 };
 
 struct_800B55A0_usa D_800B5570_usa[] = {

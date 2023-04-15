@@ -56,7 +56,7 @@ func_80002EB8_usa = 0x80002EB8; // type:func
 SetSongTempo = 0x80002F48; // type:func
 func_80002F68_usa = 0x80002F68; // type:func
 func_80002F88_usa = 0x80002F88; // type:func
-func_80002F98_usa = 0x80002F98; // type:func
+SetSongCrossFadeVolume = 0x80002F98; // type:func
 func_80002FD0_usa = 0x80002FD0; // type:func
 func_80003054_usa = 0x80003054; // type:func
 func_800030D0_usa = 0x800030D0; // type:func
@@ -990,16 +990,13 @@ D_800B3F20_usa = 0x800B3F20; //
 D_800B3F54_usa = 0x800B3F54; //
 D_800B3F88_usa = 0x800B3F88; //
 D_800B3F9C_usa = 0x800B3F9C; //
-BGM_INIT_TABLE = 0x800B3FB0; //
-D_800B3FB1_usa = 0x800B3FB1; //
-D_800B40CD_usa = 0x800B40CD; //
+BGM_INIT_TABLE = 0x800B3FB0; // size:0x1B0
 D_800B4160_usa = 0x800B4160; //
 D_800B4165_usa = 0x800B4165; //
 D_800B4E1C_usa = 0x800B4E1C; //
 D_800B4E4C_usa = 0x800B4E4C; //
 
-D_800B5330_usa = 0x800B5330; // size:0x238
-D_800B5568_usa = 0x800B5568; // size:0x8
+D_800B5330_usa = 0x800B5330; // size:0x240
 D_800B5570_usa = 0x800B5570; // size:0x320
 
 D_800B5890_usa = 0x800B5890; //

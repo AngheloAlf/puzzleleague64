@@ -11,6 +11,7 @@
 #include "main_variables.h"
 #include "libmus.h"
 #include "rom_offsets.h"
+#include "sfxlimit.h"
 
 typedef struct struct_8018A748_usa {
     /* 0x00 */ UNK_TYPE4 unk_00;
@@ -45,6 +46,10 @@ extern u8 B_8016F2B0_usa[];
 extern u8 B_801842B0_usa[];
 extern UNK_TYPE B_8021AAA0_usa;
 
+extern s32 B_8018A6C0_usa;
+extern s32 B_8018A6F8_usa;
+extern int B_801C7BAC_usa;
+
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/sound", func_80001B10_usa);
 #endif
@@ -71,15 +76,9 @@ INLINE void func_80001CAC_usa(RomOffset segmentRom, void *dstAddr, size_t segmen
 #endif
 
 #if VERSION_USA
-#if 0
-extern u8 D_800B3FB1_usa;
-extern u8 D_800B40CD_usa;
-
 s16 func_80001D60_usa(s32 arg0, u16 arg1) {
-    s16 temp_a1;
-    u32 temp_a0;
+    s16 temp_a1 = arg1;
 
-    temp_a1 = arg1;
     if (arg1 >= 2) {
         temp_a1 = 0;
     }
@@ -90,23 +89,22 @@ s16 func_80001D60_usa(s32 arg0, u16 arg1) {
     }
 
     B_8018A748_usa[temp_a1].unk_00 = arg0;
-    if (arg0 < 0x47U) {
-        RomOffsetPair *temp_s0 = &D_800B5330_usa[arg0];
+    if (arg0 < ARRAY_COUNTU(D_800B5330_usa) - 1) {
+        RomOffsetPair *pair = &D_800B5330_usa[arg0];
 
         func_80001F68_usa(B_8016F2B0_usa, temp_a1);
-        func_80001F90_usa(temp_s0->start, temp_s0->end - temp_s0->start, temp_a1);
-        func_80002F98_usa(*(&D_800B3FB1_usa + (arg0 * 4)), temp_a1);
+        func_80001F90_usa(pair->start, pair->end - pair->start, temp_a1);
+        SetSongCrossFadeVolume(BGM_INIT_TABLE[arg0].unk_1, temp_a1);
     }
-    if (arg0 == 0x47) {
+    if (arg0 == ARRAY_COUNTU(D_800B5330_usa) - 1) {
+        RomOffsetPair *pair = &D_800B5330_usa[arg0];
+
         func_80001F68_usa(B_801842B0_usa, temp_a1);
-        func_80001F90_usa(D_800B5568_usa.start, D_800B5568_usa.end - D_800B5568_usa.start, temp_a1);
-        func_80002F98_usa(D_800B40CD_usa, temp_a1);
+        func_80001F90_usa(pair->start, pair->end - pair->start, temp_a1);
+        SetSongCrossFadeVolume(BGM_INIT_TABLE[arg0].unk_1, temp_a1);
     }
     return temp_a1;
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/sound", func_80001D60_usa);
-#endif
 #endif
 
 #if VERSION_USA
@@ -162,7 +160,7 @@ void func_80001F90_usa(RomOffset segmentRom, size_t segmentSize, s16 index) {
 #endif
 
 #if VERSION_USA
-void func_80002054_usa(void) {
+int func_80002054_usa(void) {
     musConfig sp20;
     OSIoMesg mb;
     void *sp78;
@@ -213,7 +211,7 @@ void func_80002054_usa(void) {
     sp20.default_fxbank = 0;
     sp20.syn_dma_buf_size = 0x800;
     sp20.wbk = (void *)D_800B5570_usa[3].unk_10;
-    MusInitialize(&sp20);
+    return MusInitialize(&sp20);
 }
 #endif
 
@@ -391,7 +389,21 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/sound", func_8000274C_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/sound", func_800027FC_usa);
+void func_800027FC_usa(void) {
+    s32 i;
+
+    B_801C7BAC_usa = func_80002054_usa();
+    func_80001B10_usa();
+    func_8000222C_usa();
+    func_8000274C_usa();
+    func_80001D60_usa(0x20, 0U);
+    func_80001D60_usa(0x21, 1U);
+    B_8018A6C0_usa = B_8018A6F8_usa;
+
+    for (i = 0; i < 2; i++) {
+        func_80003760_usa(i, 0x80, 0x80);
+    }
+}
 #endif
 
 #if VERSION_USA
@@ -560,12 +572,12 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/sound", func_80002F88_usa);
 extern ? B_8018A76E_usa;
 extern ? D_800B3AFC_usa;
 
-void func_80002F98_usa(s16 arg0, s16 arg1) {
+void SetSongCrossFadeVolume(s16 arg0, s16 arg1) {
     *(&B_8018A76E_usa + (arg1 * 0x38)) = arg0;
     *(&D_800B3AFC_usa + (arg1 * 2)) = arg0;
 }
 #endif
-INCLUDE_ASM("asm/usa/nonmatchings/main/sound", func_80002F98_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/sound", SetSongCrossFadeVolume);
 #endif
 
 #if VERSION_USA

@@ -1139,8 +1139,7 @@ D_800B2D35_fra = 0x800B2D35; // type:s8
 D_800B39EC_fra = 0x800B39EC; // type:s16
 D_800B3A1C_fra = 0x800B3A1C; // type:s16
 
-D_800B5330_usa = 0x800B3F00; // size:0x238
-D_800B5568_usa = 0x800B4138; // size:0x8
+D_800B5330_usa = 0x800B3F00; // size:0x240
 D_800B5570_usa = 0x800B4140; // size:0x320
 
 D_800B4460_fra = 0x800B4460; //

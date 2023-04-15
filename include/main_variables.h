@@ -63,9 +63,7 @@ extern s16 ts_old_alert;
 // extern UNK_TYPE D_800B3F54_usa;
 // extern UNK_TYPE D_800B3F88_usa;
 // extern UNK_TYPE D_800B3F9C_usa;
-extern UNK_TYPE BGM_INIT_TABLE[];
-// extern UNK_TYPE D_800B3FB1_usa;
-// extern UNK_TYPE D_800B40CD_usa;
+
 // extern UNK_TYPE D_800B4160_usa;
 // extern UNK_TYPE D_800B4165_usa;
 // extern UNK_TYPE D_800B4E1C_usa;

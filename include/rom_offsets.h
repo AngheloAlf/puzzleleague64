@@ -18,8 +18,7 @@ typedef struct struct_800B55A0_usa {
 } struct_800B55A0_usa; // size = 0x14
 
 
-extern RomOffsetPair D_800B5330_usa[];
-extern RomOffsetPair D_800B5568_usa;
+extern RomOffsetPair D_800B5330_usa[72];
 extern struct_800B55A0_usa D_800B5570_usa[];
 
 #endif
