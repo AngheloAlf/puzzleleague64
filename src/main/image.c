@@ -19,7 +19,7 @@ void imageMake(struct_imageLoad_arg0 **arg0, void **arg1, u32 arg2) {
     *arg1 = (void *)((uintptr_t)*arg1 + sizeof(struct_imageLoad_arg0));
 
     (*arg0)->unk_2C = *arg1 = (void *)ALIGN4((uintptr_t)*arg1);
-    *arg1 = (void *)((uintptr_t)*arg1 + arg2 * sizeof(struct_imageLoad_arg0_unk_2C*));
+    *arg1 = (void *)((uintptr_t)*arg1 + arg2 * sizeof(struct_imageLoad_arg0_unk_2C *));
 
     (*arg0)->unk_24 = *arg1 = (void *)ALIGN4((uintptr_t)*arg1);
     *arg1 = (void *)((uintptr_t)*arg1 + arg2 * sizeof(s32));
