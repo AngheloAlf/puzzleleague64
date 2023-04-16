@@ -508,9 +508,7 @@ extern enum_gMain gMain; /* Original name: gMain */
 // extern UNK_TYPE RO_STR_800C4010_usa;
 // extern UNK_TYPE RO_DBL_800C4038_usa;
 // extern UNK_TYPE RO_DBL_800C4040_usa;
-// extern UNK_TYPE RO_800C4050_usa;
-// extern UNK_TYPE RO_800C4060_usa;
-// extern UNK_TYPE RO_800C4070_usa;
+
 // extern UNK_TYPE RO_STR_800C41C4_usa;
 // extern UNK_TYPE RO_STR_800C41C8_usa;
 // extern UNK_TYPE RO_STR_800C4204_usa;

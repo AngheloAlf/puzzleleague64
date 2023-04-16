@@ -22,7 +22,7 @@ s32 bitmapLoad(struct_bitmapLoad_arg0 **arg0, File *arg1, void **arg2, s32 arg3)
 // void func_8001DCC4_usa();
 // void func_8001E018_usa();
 // void func_8001E0F8_usa();
-// void func_8001E110_usa();
+s32 func_8001E110_usa(struct_bitmapLoad_arg0 *, u32, s32 *, s32 *);
 // void func_8001E184_usa();
 // void func_8001E1E4_usa();
 void bitmapSetup(void);

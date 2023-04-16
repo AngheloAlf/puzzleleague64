@@ -109,7 +109,15 @@ typedef struct struct_gaScreen {
 } struct_gaScreen; // size = 0x38
 
 
-// void func_800222F0_usa();
+typedef struct struct_800222F0_usa_arg2 {
+    /* 0x00 */ UNK_TYPE unk_00;
+    /* 0x04 */ UNK_TYPE unk_04;
+    /* 0x08 */ UNK_TYPE unk_08;
+    /* 0x0C */ UNK_TYPE unk_0C;
+    /* 0x10 */ UNK_TYPE unk_10;
+} struct_800222F0_usa_arg2; // size >= 0x14
+
+
 s32 screenCenterText(struct_gaScreen_unk_1C *arg0);
 // void func_80022AF4_usa();
 void screenUpdateArea(struct_gaScreen_unk_18 *arg0);
@@ -214,11 +222,6 @@ extern s32 B_8018E540_usa;
 extern s32 B_8018E550_usa;
 // extern UNK_TYPE B_8018E554_usa;
 extern s32 B_8018E558_usa;
-
-extern s32 B_8018E564_usa;
-extern s32 B_8018E568_usa;
-extern s32 B_8018E56C_usa;
-
 
 
 
