@@ -10,6 +10,7 @@
 #include "main_functions.h"
 #include "main_variables.h"
 #include "file.h"
+#include "reend.h"
 
 extern s32 gnSizeWaveLast;
 
@@ -19,7 +20,7 @@ void imageMake(struct_imageLoad_arg0 **arg0, void **arg1, u32 arg2) {
     *arg1 = (void *)((uintptr_t)*arg1 + sizeof(struct_imageLoad_arg0));
 
     (*arg0)->unk_2C = *arg1 = (void *)ALIGN4((uintptr_t)*arg1);
-    *arg1 = (void *)((uintptr_t)*arg1 + arg2 * sizeof(struct_imageLoad_arg0_unk_2C *));
+    *arg1 = (void *)((uintptr_t)*arg1 + arg2 * sizeof(struct_bitmapLoad_arg0 *));
 
     (*arg0)->unk_24 = *arg1 = (void *)ALIGN4((uintptr_t)*arg1);
     *arg1 = (void *)((uintptr_t)*arg1 + arg2 * sizeof(s32));
@@ -43,8 +44,8 @@ void imageMake(struct_imageLoad_arg0 **arg0, void **arg1, u32 arg2) {
     (*arg0)->unk_28 = 0;
     (*arg0)->unk_94 = -1;
     (*arg0)->unk_98 = -1;
-    (*arg0)->unk_30 = 0;
-    (*arg0)->unk_34 = 0;
+    (*arg0)->unk_30 = NULL;
+    (*arg0)->unk_34 = NULL;
 }
 #endif
 
@@ -53,153 +54,118 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_8001EDE0_usa);
 #endif
 
 #if VERSION_USA
-#if 0
-//? bitmapLoad(s32, File *, void **, s32);     /* extern */
-
-s32 imageLoad(struct_imageLoad_arg0 **arg0, char *arg1, void **arg2) {
-    File sp10;
-    s32 sp20;
+s32 imageLoad(struct_imageLoad_arg0 **arg0, char *filename, void **arg2) {
+    File file;
+    u32 magic;
     u32 sp24;
     u8 sp28;
     u8 sp29;
     u8 sp2A;
     u8 sp2B;
     u32 sp2C;
-    u32 sp30;
-    struct_imageLoad_arg0 *temp_a1_4;
-    s32 temp_lo;
-    s32 temp_s0;
-    s32 temp_t0;
-    s32 temp_v0_3;
-    s32 temp_v0_4;
-    s32 var_a0;
-    s32 var_s7;
-    s32 var_t0;
-    s8 *var_a1;
-    u32 *temp_a1;
-    u32 *temp_a1_2;
-    u32 *temp_a1_3;
-    u32 temp_a3;
-    u32 temp_v1;
-    u32 temp_v1_2;
-    u32 temp_v1_3;
-    u32 var_s1;
-    void **temp_t1;
-    void **var_a3;
-    struct_imageLoad_arg0_unk_2C *temp_v0;
-    struct_imageLoad_arg0_unk_2C *temp_v0_2;
+    s32 sp30;
+    s32 needsReend;
+    s32 i;
 
-    if (fileTest((File *) arg1)) {
-        bcopy(arg1, &sp10, 0x10);
+    if (fileTest((void *)filename)) {
+        bcopy(filename, &file, sizeof(File));
     } else {
-        fileOpen(&sp10, arg1);
+        fileOpen(&file, filename);
     }
-    sp20 = 0;
-    fileGet(&sp10, &sp20, 4);
-    if (sp20 == 'BIF3') {
-        var_s7 = 0;
+
+    magic = 0;
+    fileGet(&file, &magic, sizeof(u32));
+    if (magic == 'BIF3') {
+        needsReend = false;
     } else {
-        var_s7 = 1;
-        if (sp20 != '3FIB') {
-            if (!fileTest((File *) arg1)) {
-                var_a1 = arg1;
+        needsReend = true;
+        if (magic != '3FIB') {
+            char *auxName;
+
+            if (!fileTest((void *)filename)) {
+                auxName = filename;
             } else {
-                var_a1 = "<FILE>";
+                auxName = "<FILE>";
             }
-            osSyncPrintf("imageLoad: Could not load IMAGE '%s'\n", var_a1);
+            osSyncPrintf("imageLoad: Could not load IMAGE '%s'\n", auxName);
             return 0;
         }
     }
 
-    fileGet(&sp10, &sp24, 4);
-    fileGet(&sp10, &sp28, 1);
-    fileGet(&sp10, &sp29, 1);
-    fileGet(&sp10, &sp2A, 1);
-    fileGet(&sp10, &sp2B, 1);
-    fileGet(&sp10, &sp2C, 4);
-    if (var_s7 != 0) {
-        sp24 = (sp24 >> 0x18) | ((sp24 >> 8) & 0xFF00) | ((sp24 << 8) & 0xFF0000) | (sp24 << 0x18);
-        sp2C = (sp2C >> 0x18) | ((sp2C >> 8) & 0xFF00) | ((sp2C << 8) & 0xFF0000) | (sp2C << 0x18);
+    fileGet(&file, &sp24, sizeof(u32));
+    fileGet(&file, &sp28, sizeof(u8));
+    fileGet(&file, &sp29, sizeof(u8));
+    fileGet(&file, &sp2A, sizeof(u8));
+    fileGet(&file, &sp2B, sizeof(u8));
+    fileGet(&file, &sp2C, sizeof(u32));
+
+    if (needsReend) {
+        sp24 = REEND_UWORD(sp24);
+        sp2C = REEND_UWORD(sp2C);
     }
+
     imageMake(arg0, arg2, sp2C);
     (*arg0)->unk_0C = sp24;
     (*arg0)->unk_18 = sp2C;
-    (*arg0)->unk_94 = (s32) ((sp28 << 0x18) | (sp29 << 0x10) | (sp2A << 8) | sp2B);
+    (*arg0)->unk_94 = ((sp28 << 0x18) | (sp29 << 0x10) | (sp2A << 8) | sp2B);
     if (sp24 & 0x10) {
-        fileGet(&sp10, &sp28, 1);
-        fileGet(&sp10, &sp29, 1);
-        fileGet(&sp10, &sp2A, 1);
-        fileGet(&sp10, &sp2B, 1);
-        (*arg0)->unk_98 = (s32) ((sp28 << 0x18) | (sp29 << 0x10) | (sp2A << 8) | sp2B);
+        fileGet(&file, &sp28, sizeof(u8));
+        fileGet(&file, &sp29, sizeof(u8));
+        fileGet(&file, &sp2A, sizeof(u8));
+        fileGet(&file, &sp2B, sizeof(u8));
+        (*arg0)->unk_98 = ((sp28 << 0x18) | (sp29 << 0x10) | (sp2A << 8) | sp2B);
     }
+
     if (sp24 & 8) {
-        fileGet(&sp10, &sp30, 4);
-        if (var_s7 != 0) {
-            sp30 = (sp30 >> 0x18) | (((s32) sp30 >> 8) & 0xFF00) | ((sp30 << 8) & 0xFF0000) | (sp30 << 0x18);
+        fileGet(&file, &sp30, 4);
+        if (needsReend) {
+            sp30 = REEND_SWORD(sp30);
         }
-        fileSeek(&sp10, 1, (s32) sp30);
+        fileSeek(&file, FILE_SEEK_CUR, sp30);
     }
 
-    var_s1 = 0;
-    while (var_s1 < sp2C) {
-        temp_s0 = var_s1 * 4;
-        fileGet(&sp10, (*arg0)->unk_1C + temp_s0, 4);
-        fileGet(&sp10, (*arg0)->unk_20 + temp_s0, 4);
-        fileGet(&sp10, (*arg0)->unk_24 + temp_s0, 4);
-        if (var_s7 != 0) {
-            temp_a1 = temp_s0 + (*arg0)->unk_1C;
-            temp_v1 = *temp_a1;
-            *temp_a1 = (temp_v1 >> 0x18) | (((s32) temp_v1 >> 8) & 0xFF00) | ((temp_v1 << 8) & 0xFF0000) | ((temp_v1 << 0x18) & 0xFF000000);
-            temp_a1_2 = temp_s0 + (*arg0)->unk_20;
-            temp_v1_2 = *temp_a1_2;
-            *temp_a1_2 = (temp_v1_2 >> 0x18) | (((s32) temp_v1_2 >> 8) & 0xFF00) | ((temp_v1_2 << 8) & 0xFF0000) | ((temp_v1_2 << 0x18) & 0xFF000000);
-            temp_a1_3 = temp_s0 + (*arg0)->unk_24;
-            temp_v1_3 = *temp_a1_3;
-            *temp_a1_3 = (temp_v1_3 >> 0x18) | (((s32) temp_v1_3 >> 8) & 0xFF00) | ((temp_v1_3 << 8) & 0xFF0000) | ((temp_v1_3 << 0x18) & 0xFF000000);
+    for (i = 0; i < sp2C; i++) {
+        fileGet(&file, &(*arg0)->unk_1C[i], sizeof(s32));
+        fileGet(&file, &(*arg0)->unk_20[i], sizeof(s32));
+        fileGet(&file, &(*arg0)->unk_24[i], sizeof(s32));
+
+        if (needsReend) {
+            (*arg0)->unk_1C[i] = REEND_SWORD((*arg0)->unk_1C[i]);
+            (*arg0)->unk_20[i] = REEND_SWORD((*arg0)->unk_20[i]);
+            (*arg0)->unk_24[i] = REEND_SWORD((*arg0)->unk_24[i]);
         }
-        bitmapLoad((*arg0)->unk_2C + temp_s0, &sp10, arg2, -((sp24 & 0x200) != 0));
-        var_s1 += 1;
+
+        bitmapLoad(&(*arg0)->unk_2C[i], &file, arg2, (sp24 & 0x200) ? -1 : 0);
     }
 
-    var_a0 = 1;
     if (sp24 & 0x200) {
-        temp_a1_4 = *arg0;
-        temp_t1 = temp_a1_4->unk_2C;
-        temp_v0 = *temp_t1;
-        temp_a3 = temp_a1_4->unk_18;
-        var_t0 = temp_v0->unk_04 * temp_v0->unk_10;
+        struct_imageLoad_arg0 *temp_a1_4 = *arg0;
+        struct_bitmapLoad_arg0 *temp_v0 = temp_a1_4->unk_2C[0];
+        s32 var_t0 = temp_v0->unk_04 * temp_v0->unk_10;
+        s32 j;
 
-        var_a3 = temp_t1 + 4;
-        while (var_a0 < (s32) temp_a3) {
-            temp_v0_2 = *var_a3;
-            temp_lo = temp_v0_2->unk_04 * temp_v0_2->unk_10;
-            if (var_t0 < temp_lo) {
-                var_t0 = temp_lo;
-            }
-            var_a0 += 1;
-            var_a3 += 4;
+        for (j = 1; j < temp_a1_4->unk_18; j++) {
+            temp_v0 = temp_a1_4->unk_2C[j];
+            var_t0 = MAX(var_t0, temp_v0->unk_04 * temp_v0->unk_10);
         }
 
-        temp_v0_3 = (s32) (*arg2 + 0xF) & ~0xF;
-        *arg2 = (void *) temp_v0_3;
-        temp_a1_4->unk_30 = temp_v0_3;
-        temp_t0 = (var_t0 + 0xF) & ~0xF;
-        temp_v0_4 = (s32) (*arg2 + temp_t0 + 0xF) & ~0xF;
-        *arg2 = (void *) temp_v0_4;
-        temp_a1_4->unk_34 = temp_v0_4;
-        *arg2 += temp_t0;
+        temp_a1_4->unk_30 = *arg2 = (void *)ALIGN16((uintptr_t)*arg2);
+
+        var_t0 = ALIGN16(var_t0);
+
+        temp_a1_4->unk_34 = *arg2 = (void *)ALIGN16((uintptr_t)*arg2 + var_t0);
+
+        *arg2 = (void *)((uintptr_t)*arg2 + var_t0);
     }
 
-    if (!fileTest((File *) arg1)) {
-        fileClose(&sp10);
+    if (!fileTest((void *)filename)) {
+        fileClose(&file);
+        return -1;
+    } else {
+        bcopy(&file, filename, sizeof(File));
         return -1;
     }
-    bcopy(&sp10, arg1, 0x10);
-    return -1;
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/image", imageLoad);
-#endif
 #endif
 
 #if VERSION_USA

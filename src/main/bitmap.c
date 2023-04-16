@@ -10,39 +10,102 @@
 #include "main_functions.h"
 #include "main_variables.h"
 #include "file.h"
+#include "reend.h"
+
+extern s32 gpBitmapLast;
 
 #if VERSION_USA
+#if 0
+s32 bitmapLoadRLE(struct_bitmapLoad_arg0 *arg0, File *arg1, void *arg2) {
+    u8 sp10;
+    u8 sp11;
+    s32 temp_lo;
+    s32 temp_s2;
+    s32 temp_v0;
+    s32 var_a0;
+    s32 var_a1;
+    s32 var_a2;
+    s32 var_a3;
+    s32 var_s0;
+    s32 var_v0;
+    s32 var_v0_2;
+    u8* temp_s3;
+    u8 *temp_v1;
+    u8 *var_v1;
+    u8 temp_v0_2;
+    u8 temp_v0_3;
+
+    temp_s3 = arg0->unk_08;
+    temp_lo = arg0->unk_04 * arg0->unk_10;
+    if (!(((arg1->fileSize - arg1->inFileOffset) + 0xF) & ~0xF)) {
+        return 0;
+    }
+
+    var_s0 = 0;
+    while (var_s0 < temp_lo) {
+        fileGet(arg1, &sp10, 1);
+        if (!(sp10 & 0x80)) {
+            if (sp10 & 0x40) {
+                temp_v0 = ((sp10 >> 3) & 7) + 2;
+                temp_s2 = (sp10 & 7) + 2;
+                fileGet(arg1, temp_s3 + var_s0, temp_v0);
+                var_a3 = 1;
+                if (temp_s2 > 1) {
+loop_7:
+                    var_a2 = var_a3 * temp_v0;
+                    var_a1 = 0;
+                    if (temp_v0 != 0) {
+                        var_a0 = var_a2 + var_s0;
+                        var_v0_2 = var_s0;
+loop_9:
+                        var_a1 += 1;
+                        temp_v1 = temp_s3 + var_a0;
+                        var_a0 += 1;
+                        *temp_v1 = *(temp_s3 + var_v0_2);
+                        var_a2 += 1;
+                        if (var_a0 < temp_lo) {
+                            var_v0_2 = var_s0 + var_a1;
+                            if (var_a1 >= temp_v0) {
+                                goto block_11;
+                            }
+                            goto loop_9;
+                        }
+                    } else {
+block_11:
+                        var_a3 += 1;
+                        if (((var_s0 + var_a2) < temp_lo) && (var_a3 < temp_s2)) {
+                            goto loop_7;
+                        }
+                    }
+                }
+                var_s0 += temp_v0 * temp_s2;
+            } else {
+                fileGet(arg1, &sp11, 1);
+                sp10 = (sp10 & 0x7F) + 1;
+                var_v1 = var_s0 + temp_s3;
+                while ((sp10 & 0xFF) != 0xFF) {
+                    *var_v1 = sp11;
+                    var_s0 += 1;
+                    sp10--;
+                    var_v1 += 1;
+                }
+            }
+        } else {
+            fileGet(arg1, temp_s3 + var_s0, sp10 + 1);
+            var_s0 += 1 + sp10;
+        }
+    }
+    return -1;
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/bitmap", bitmapLoadRLE);
+#endif
 #endif
 
 #if VERSION_USA
-#ifdef NON_EQUIVALENT
-typedef struct struct_bitmapLoad_arg0 {
-    u32 unk_00;
-    UNK_TYPE unk_04;
-    RomOffset unk_08;
-    UNK_TYPE unk_0C;
-    UNK_TYPE unk_10;
-    UNK_TYPE unk_14;
-    UNK_TYPE2 *unk_18;
-    UNK_TYPE unk_1C;
-    UNK_TYPE4 *unk_20;
-} struct_bitmapLoad_arg0; // size = ?
-
-#define UWORD(x) ((u32)(x))
-#define SWORD(x) ((s32)(x))
-#define REEND_UWORD(x) \
-    ((UWORD(x) >> 0x18) | ((UWORD(x) >> 8) & 0xFF00) | ((UWORD(x) << 8) & 0xFF0000) | ((UWORD(x) << 0x18) & 0xFF000000))
-#define REEND_SWORD(x) \
-    ((UWORD(x) >> 0x18) | ((SWORD(x) >> 8) & 0xFF00) | ((UWORD(x) << 8) & 0xFF0000) | ((UWORD(x) << 0x18) & 0xFF000000))
-
-#define USHORT(x) ((u16)(x))
-#define REEND_USHORT(x) ((USHORT(x) >> 8) | ((USHORT(x) << 8) & ~0xFF))
-
-//? bitmapLoadRLE(u32, File *, u32);              /* extern */
-extern s32 gpBitmapLast;
-
+#ifdef NON_MATCHING
 s32 bitmapLoad(struct_bitmapLoad_arg0 **arg0, File *arg1, void **arg2, s32 arg3) {
+    s32 new_var;
     File sp10;
     s32 sp20;
     u32 sp24;
@@ -60,14 +123,19 @@ s32 bitmapLoad(struct_bitmapLoad_arg0 **arg0, File *arg1, void **arg2, s32 arg3)
     u16 *temp_a0_3;
     u32 *temp_a1;
     u32 var_a0;
+    s32 a3;
     u32 var_a1;
-    u32 var_a3;
+    u8 var_a3;
     u32 var_s0;
     u32 var_t0;
-    u32 var_v1;
+    u8 var_v1;
+    unsigned char new_var2;
+    int new_var3;
+    s32 new_var4;
+    s32 new_var5;
 
     if (fileTest(arg1) != false) {
-        bcopy(arg1, &sp10, 0x10);
+        bcopy(arg1, &sp10, sizeof(File));
     } else {
         fileOpen(&sp10, (char *)arg1);
     }
@@ -105,7 +173,7 @@ s32 bitmapLoad(struct_bitmapLoad_arg0 **arg0, File *arg1, void **arg2, s32 arg3)
         if (var_s3 != 0) {
             sp34 = REEND_SWORD(sp34);
         }
-        fileSeek(&sp10, 1, sp34);
+        fileSeek(&sp10, FILE_SEEK_CUR, sp34);
     }
 
     if (sp24 & 0x400000) {
@@ -134,34 +202,41 @@ s32 bitmapLoad(struct_bitmapLoad_arg0 **arg0, File *arg1, void **arg2, s32 arg3)
     } else {
         var_a0 = sp3C;
     }
+    a3 = var_a0;
 
-    *arg0 = *arg2 = ((uintptr_t)*arg2 + 3) & ~3;
+    new_var4 = sp40;
+    new_var5 = sp38;
+    *arg0 = *arg2 = (void *)(((uintptr_t)*arg2 + 3) & ~3);
+    *arg2 = (void *)((uintptr_t)*arg2 + 0x24);
 
-    *arg2 = (uintptr_t)*arg2 + 0x24;
-    if (sp40 > 0) {
-        (*arg0)->unk_18 = *arg2 = ((uintptr_t)*arg2 + 7) & ~7;
+    if (new_var4 > 0) {
+        new_var3 = new_var4 * 2;
+        (*arg0)->unk_18 = *arg2 = (void *)(((uintptr_t)*arg2 + 7) & ~7);
 
-        *arg2 = (uintptr_t)*arg2 + sp40 * 2;
+        *arg2 = (void *)((uintptr_t)*arg2 + new_var3);
     } else {
         (*arg0)->unk_18 = 0U;
     }
 
-    if (sp38 > 0) {
-        (*arg0)->unk_1C = sp38;
+    if (new_var5 > 0) {
+        //(*arg0)->unk_1C = new_var5;
+        new_var = new_var5;
+        (*arg0)->unk_1C = new_var;
 
-        (*arg0)->unk_20 = *arg2 = ((uintptr_t)*arg2 + 3) & ~3;
-        *arg2 = (uintptr_t)*arg2 + sp38 * 4;
+        (*arg0)->unk_20 = *arg2 = (void *)(((uintptr_t)*arg2 + 3) & ~3);
+        //*arg2 = (uintptr_t)*arg2 + new_var5 * 4;
+        *arg2 = (void *)((uintptr_t)(*arg2) + (new_var * 4));
     } else {
         (*arg0)->unk_1C = 0U;
         (*arg0)->unk_20 = 0U;
     }
 
     if (arg3 == 0) {
-        (*arg0)->unk_08 = *arg2 = ((uintptr_t)*arg2 + 7) & ~7;
+        (*arg0)->unk_08 = *arg2 = (void *)(((uintptr_t)*arg2 + 7) & ~7);
 
-        *arg2 = (uintptr_t)*arg2 + var_a0;
+        *arg2 = (void *)((uintptr_t)*arg2 + a3);
     } else {
-        (*arg0)->unk_08 = 0U;
+        (*arg0)->unk_08 = NULL;
     }
 
     (*arg0)->unk_00 = sp24;
@@ -175,14 +250,14 @@ s32 bitmapLoad(struct_bitmapLoad_arg0 **arg0, File *arg1, void **arg2, s32 arg3)
     }
 
     if (sp40 > 0) {
-        var_t1 = ((uintptr_t)*arg2 + 3) & ~3;
+        var_t1 = (void *)(((uintptr_t)*arg2 + 3) & ~3);
         fileGet(&sp10, var_t1, sp40 * 4);
 
         for (var_a2 = 0; var_a2 < sp40; var_a2++) {
-
             var_v1 = var_t1[var_a2] >> 0x18;
             var_a3 = var_t1[var_a2] >> 0x10;
             var_t0 = var_t1[var_a2] >> 8;
+
             if (sp24 & 0x400) {
                 var_a1 = 0xFF;
                 if (var_a2 == ((sp24 >> 0xC) & 0xFF)) {
@@ -195,8 +270,11 @@ s32 bitmapLoad(struct_bitmapLoad_arg0 **arg0, File *arg1, void **arg2, s32 arg3)
                 var_a1 = 0xFF;
             }
 
+            //(*arg0)->unk_18[var_a2] =
+            //    (((var_v1 >> 3) << 0xB) | ((var_a3 << 3) & 0x7C0) | ((var_t0 >> 2) & 0x3E)) | (var_a1 >> 7);
+            new_var2 = (var_a1 >> 7);
             (*arg0)->unk_18[var_a2] =
-                (var_a1 >> 7) | (((var_v1 >> 3) << 0xB) | ((var_a3 << 3) & 0x7C0) | ((var_t0 >> 2) & 0x3E));
+                ((((var_v1 >> 3) << 0xB) | ((var_a3 << 3) & 0x7C0)) | ((var_t0 >> 2) & 0x3E)) | new_var2;
         }
     }
 
@@ -208,16 +286,16 @@ s32 bitmapLoad(struct_bitmapLoad_arg0 **arg0, File *arg1, void **arg2, s32 arg3)
         (*arg0)->unk_00 &= ~0x800;
     } else if (arg3 != 0) {
         fileGetAddress(&sp10, &sp44);
-        fileSeek(&sp10, 1, sp30 * sp2C);
+        fileSeek(&sp10, FILE_SEEK_CUR, sp30 * sp2C);
 
         (*arg0)->unk_00 |= 0x100000;
-        (*arg0)->unk_08 = sp44;
+        (*arg0)->unk_08 = (void *)sp44;
     } else {
         fileGet(&sp10, (*arg0)->unk_08, sp30 * sp2C);
     }
 
     if (fileTest(arg1) != false) {
-        bcopy(&sp10, arg1, 0x10);
+        bcopy(&sp10, arg1, sizeof(File));
     } else {
         fileClose(&sp10);
     }
@@ -228,7 +306,7 @@ s32 bitmapLoad(struct_bitmapLoad_arg0 **arg0, File *arg1, void **arg2, s32 arg3)
             temp_lo = (sp30 / sizeof(u16)) * sp2C;
 
             for (var_a2 = 0; var_a2 < temp_lo; var_a2++) {
-                temp_a0_3 = var_a2 * sizeof(u16) + (*arg0)->unk_08;
+                temp_a0_3 = (void *)(var_a2 * sizeof(u16) + (uintptr_t)(*arg0)->unk_08);
                 *temp_a0_3 = REEND_USHORT(*temp_a0_3);
             }
         } else if ((sp24 & 0xF) == 5) {
@@ -236,7 +314,7 @@ s32 bitmapLoad(struct_bitmapLoad_arg0 **arg0, File *arg1, void **arg2, s32 arg3)
             temp_lo = (sp30 / sizeof(u32)) * sp2C;
 
             for (var_a2 = 0; var_a2 < temp_lo; var_a2++) {
-                temp_a1 = var_a2 * sizeof(u32) + (*arg0)->unk_08;
+                temp_a1 = (void *)(var_a2 * sizeof(u32) + (uintptr_t)(*arg0)->unk_08);
                 *temp_a1 = REEND_UWORD(*temp_a1);
             }
         }
