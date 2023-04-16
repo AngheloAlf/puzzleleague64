@@ -181,7 +181,7 @@ void func_800296B0_usa(s16 *arg0, const char *arg1, size_t arg2);
 // void func_8002A4FC_usa();
 // void func_8002A574_usa();
 // void func_8002A638_usa();
-s32 screenFind(s32 *arg0, const char *arg1);
+s32 screenFind(s32 *dst, const char *arg1);
 s32 screenLoad(char *arg0, void **arg1);
 void screenSetup(void);
 // void func_8002B5C4_usa();

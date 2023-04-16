@@ -406,36 +406,37 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_8002A638_usa);
 #endif
 
 #if VERSION_USA
-#ifdef NON_MATCHING
-s32 screenFind(s32 *arg0, const char *arg1) {
-    s32 var_t1;
-    s32 var_t2;
-    s32 var_v0;
-    char *var_a3;
-    s32 var_a2;
-    s32 var_v1;
+s32 screenFind(s32 *dst, const char *arg1) {
+    s32 i;
 
-    for (var_t2 = 0; var_t2 < gnScreenCount; var_t2++) {
-        var_a3 = gaScreen[var_t2].unk_00;
+    for (i = 0; i < gnScreenCount; i++) {
+        struct_gaScreen *var = &gaScreen[i];
+        char *var_a3 = var->unk_00;
+        s32 j;
+        s32 var_v0;
 
-        var_t1 = 0;
-        while (var_a3[var_t1] != '\0') {
-            var_a2 = var_a3[var_t1];
+        j = 0;
+        while (var_a3[j] != '\0') {
+            s32 var_a2;
+            s32 var_v1;
+
+            var_a2 = var_a3[j];
             if (var_a2 >= 'a' && var_a2 <= 'z') {
                 var_a2 -= ('a' - 'A');
             }
-            var_v1 = arg1[var_t1];
+            var_v1 = arg1[j];
             if (var_v1 >= 'a' && var_v1 <= 'z') {
                 var_v1 -= ('a' - 'A');
             }
+
             if (var_a2 != var_v1) {
                 var_v0 = 0;
                 goto label;
             }
-            var_t1 += 1;
+            j++;
         }
 
-        if (arg1[var_t1] == '\0') {
+        if (arg1[j] == '\0') {
             var_v0 = -1;
         } else {
             var_v0 = 0;
@@ -443,16 +444,13 @@ s32 screenFind(s32 *arg0, const char *arg1) {
 
     label:
         if (var_v0 != 0) {
-            *arg0 = var_t2;
+            *dst = i;
             return -1;
         }
     }
 
     return 0;
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", screenFind);
-#endif
 #endif
 
 #if VERSION_USA
