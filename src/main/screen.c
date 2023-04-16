@@ -21,31 +21,20 @@ extern struct_imageLoad_arg0 *B_8018E564_usa;
 extern struct_imageLoad_arg0 *B_8018E568_usa;
 extern struct_imageLoad_arg0 *B_8018E56C_usa;
 
-extern const char RO_STR_800C4050_usa[];
-extern const char RO_STR_800C4060_usa[];
-extern const char RO_STR_800C4070_usa[];
-
-#if VERSION_USA
-const char RO_STR_800C4050_usa[] = "fPPLTINY.BIF";
-#endif
-#if VERSION_USA
-const char RO_STR_800C4060_usa[] = "fPPLNORM.BIF";
-#endif
-#if VERSION_USA
-const char RO_STR_800C4070_usa[] = "fPPLHUGE.BIF";
-#endif
-
 #if VERSION_USA
 #ifdef NON_MATCHING
+extern char RO_STR_800C4050_usa[];
+extern char RO_STR_800C4060_usa[];
+extern char RO_STR_800C4070_usa[];
+
 // regalloc
 s32 screenGetTextData(struct_gaScreen_unk_1C *arg0, s32 arg1, struct_800222F0_usa_arg2 *arg2,
-                      struct_imageLoad_arg0 **arg3, s32 *arg4, s32 arg5) {
+                      struct_imageLoad_arg0 **arg3, s32 *arg4, s32 arg5 UNUSED) {
     s32 sp10;
     s32 sp14;
     s32 temp_s2;
     s32 var_s0;
     s32 var_s4;
-    struct_bitmapLoad_arg0 **var_v0;
     struct_imageLoad_arg0 *var_s1;
     u32 temp_v0;
     s32 s7;
@@ -263,6 +252,10 @@ s32 screenGetTextData(struct_gaScreen_unk_1C *arg0, s32 arg1, struct_800222F0_us
     return 1;
 }
 #else
+const char RO_STR_800C4050_usa[] = "fPPLTINY.BIF";
+const char RO_STR_800C4060_usa[] = "fPPLNORM.BIF";
+const char RO_STR_800C4070_usa[] = "fPPLHUGE.BIF";
+
 s32 screenGetTextData(struct_gaScreen_unk_1C *arg0, s32 arg1, struct_800222F0_usa_arg2 *arg2,
                       struct_imageLoad_arg0 **arg3, s32 *arg4, s32 arg5);
 INCLUDE_ASM("asm/usa/nonmatchings/main/screen", screenGetTextData);
