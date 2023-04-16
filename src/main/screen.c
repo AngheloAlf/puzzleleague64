@@ -12,6 +12,7 @@
 #include "file.h"
 #include "image.h"
 #include "alignment.h"
+#include "peel.h"
 
 extern struct_imageLoad_arg0 *gpImageNo;
 extern struct_imageLoad_arg0 *gpImageYes;
@@ -117,7 +118,73 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_8002629C_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", screenSet);
+s32 screenSet(const char *arg0, s32 arg1) {
+    s32 sp10;
+    s32 var_a0;
+    s32 var_s0;
+
+    if ((arg1 & 0x200) && !(arg1 & 0x100) && (peelActive() != 0)) {
+        return B_8018E520_usa;
+    }
+
+    if ((arg1 & 0x7F000) == 0x7F000) {
+        var_s0 = -1;
+    } else if (arg1 & 0x80000) {
+        var_s0 = (arg1 & 0x7F000) >> 0xC;
+    } else {
+        var_s0 = 0;
+    }
+
+    if (screenFind(&sp10, arg0) != 0) {
+        s32 temp;
+
+        if ((geModeFade == 1) || (geModeFade == 3)) {
+            return B_8018E520_usa;
+        }
+
+        // ?
+        if ((u32)(geModeFade - 2) < 2U) {
+            if (sp10 == B_8018E520_usa) {
+                if (geModeFade == 2) {
+                    geModeFade = 1;
+                } else if (geModeFade == 3) {
+                    geModeFade = 0;
+                }
+                B_8018E524_usa = -1;
+                return sp10;
+            }
+
+            return B_8018E520_usa;
+        }
+
+        B_8018E53C_usa = var_s0;
+        if (B_8018E53C_usa != -1) {
+            geModeFade = 3;
+        } else {
+            var_a0 = 1;
+            if (gnAlphaFade == 0xFF) {
+                var_a0 = 2;
+            }
+            geModeFade = var_a0;
+        }
+
+        B_8018E52C_usa = arg1 & 3;
+        B_8018E524_usa = sp10;
+
+        temp = B_8018E504_usa - 4;
+        B_8018E504_usa = temp - B_801C7060_usa;
+
+        if (arg1 & 0x400) {
+            B_8018E530_usa = -1;
+        } else {
+            B_8018E530_usa = 0;
+        }
+
+        return sp10;
+    }
+
+    return -1;
+}
 #endif
 
 #if VERSION_USA
@@ -339,7 +406,53 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_8002A638_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_8002A708_usa);
+#ifdef NON_MATCHING
+s32 screenFind(s32 *arg0, const char *arg1) {
+    s32 var_t1;
+    s32 var_t2;
+    s32 var_v0;
+    char *var_a3;
+    s32 var_a2;
+    s32 var_v1;
+
+    for (var_t2 = 0; var_t2 < gnScreenCount; var_t2++) {
+        var_a3 = gaScreen[var_t2].unk_00;
+
+        var_t1 = 0;
+        while (var_a3[var_t1] != '\0') {
+            var_a2 = var_a3[var_t1];
+            if (var_a2 >= 'a' && var_a2 <= 'z') {
+                var_a2 -= ('a' - 'A');
+            }
+            var_v1 = arg1[var_t1];
+            if (var_v1 >= 'a' && var_v1 <= 'z') {
+                var_v1 -= ('a' - 'A');
+            }
+            if (var_a2 != var_v1) {
+                var_v0 = 0;
+                goto label;
+            }
+            var_t1 += 1;
+        }
+
+        if (arg1[var_t1] == '\0') {
+            var_v0 = -1;
+        } else {
+            var_v0 = 0;
+        }
+
+    label:
+        if (var_v0 != 0) {
+            *arg0 = var_t2;
+            return -1;
+        }
+    }
+
+    return 0;
+}
+#else
+INCLUDE_ASM("asm/usa/nonmatchings/main/screen", screenFind);
+#endif
 #endif
 
 #if VERSION_USA
@@ -371,8 +484,8 @@ s32 screenLoad(char *arg0, void **arg1) {
     var_s7 = 0;
     screenWipeImages();
     B_8018E558_usa = 8;
-    B_8018E538_usa = 0;
-    B_8018E534_usa = -(~B_8018E534_usa != 0) & 0xFF;
+    geModeFade = 0;
+    gnAlphaFade = -(~gnAlphaFade != 0) & 0xFF;
 
     if (fileOpen(&sp10, arg0) == 0) {
         return 0;
@@ -698,8 +811,8 @@ void screenSetup(void) {
     gnScreenCount = 0;
     B_8018E540_usa = 0;
     B_8018E530_usa = 0;
-    B_8018E538_usa = 0;
-    B_8018E534_usa = -1;
+    geModeFade = 0;
+    gnAlphaFade = -1;
     B_8018E524_usa = -1;
     B_8018E520_usa = -1;
 }

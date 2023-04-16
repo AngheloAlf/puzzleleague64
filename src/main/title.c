@@ -137,7 +137,7 @@ void func_80028378_usa(s32, UNK_TYPE);                        /* extern */
 void func_800284E4_usa(s32, UNK_TYPE);                        /* extern */
 void func_8002CC18_usa();                              /* extern */
 void func_8002CFE4_usa(UNK_TYPE);                             /* extern */
-s32 func_8002DA70_usa(void);
+s32 peelActive(void);
 s32 HVQM2Util_Play(UNK_TYPE *, UNK_TYPE, s32);                 /* extern */
 void func_80089BE0_usa(UNK_TYPE arg0, UNK_TYPE arg1);
 extern s32 B_8018A7F0_usa;
@@ -232,7 +232,7 @@ void DoTitle(void) {
             func_800284E4_usa(temp_s0, 0x64);
             break;
         case 0x7:                                   /* switch 1 */
-            if (func_8002DA70_usa() == 0) {
+            if (peelActive() == 0) {
                 var_v1 = 0;
 loop_8:
                 if (*(&B_801A5B30_usa + var_v1) != -1) {
@@ -467,7 +467,7 @@ block_36:
                     }
                 }
             }
-            if ((B_8018A7F0_usa == 0) && (func_8002DA70_usa() == 0) && (gReset == 0) && (func_80024C2C_usa() == 0) && (func_80024C14_usa() == 0)) {
+            if ((B_8018A7F0_usa == 0) && (peelActive() == 0) && (gReset == 0) && (func_80024C2C_usa() == 0) && (func_80024C14_usa() == 0)) {
                 var_v1_4 = 0;
 
                 while (var_v1_4 <= 0) {
@@ -557,15 +557,15 @@ void InitTitle(void) {
             gDemo = GDEMO_2C;
         }
 
-        if (func_8002A708_usa(&sp114, "COPYRIGHT") != 0) {
+        if (screenFind(&sp114, "COPYRIGHT") != 0) {
             func_800296B0_usa(sp10, gBuildDate, 0x80);
             func_80028F44_usa(sp114, 0x64, sp10);
         }
-        if (func_8002A708_usa(&sp114, RO_STR_800C3144_usa) != 0) {
+        if (screenFind(&sp114, RO_STR_800C3144_usa) != 0) {
             func_800296B0_usa(sp10, gBuildDate, 0x80);
             func_80028F44_usa(sp114, 0x64, sp10);
         }
-        if (func_8002A708_usa(&sp114, RO_STR_800C3144_usa) != 0) {
+        if (screenFind(&sp114, RO_STR_800C3144_usa) != 0) {
             func_80027D0C_usa(sp114, 0x64);
         }
     }

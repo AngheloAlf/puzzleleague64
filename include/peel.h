@@ -9,7 +9,7 @@
 // void func_8002CC18_usa();
 void func_8002CFC8_usa(void);
 // void func_8002CFE4_usa();
-// void func_8002DA70_usa();
+s32 peelActive(void);
 void peelSetup(void);
 // void func_8002DBF0_usa();
 

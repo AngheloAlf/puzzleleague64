@@ -186,7 +186,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/peel", func_8002CFE4_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/peel", func_8002DA70_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/peel", peelActive);
 #endif
 
 #if VERSION_USA
