@@ -65,7 +65,9 @@ typedef struct TheGame_unk_0000 {
     /* 0x4088 */ f32 unk_4088;
     /* 0x408C */ UNK_TYPE1 unk_408C[0x32C];
     /* 0x43B8 */ s32 unk_43B8;
-    /* 0x43BC */ UNK_TYPE1 unk_43BC[0x74];
+    /* 0x43BC */ UNK_TYPE1 unk_43BC[0x48];
+    /* 0x4404 */ UNK_TYPE4 unk_4404;
+    /* 0x4408 */ UNK_TYPE1 unk_4408[0x28];
 } TheGame_unk_0000; // size = 0x4430
 
 
@@ -304,7 +306,12 @@ typedef struct TheGame {
     /* 0x9C14 */ s32 unk_9C14;
     /* 0x9C18 */ s32 unk_9C18;
     /* 0x9C1C */ s32 unk_9C1C;
-    /* 0x9C20 */ UNK_TYPE1 unk_9C20[0x28];
+    /* 0x9C20 */ UNK_TYPE1 unk_9C20[0x8];
+    /* 0x9C28 */ UNK_TYPE4 unk_9C28;
+    /* 0x9C2C */ UNK_TYPE4 unk_9C2C;
+    /* 0x9C30 */ UNK_TYPE4 unk_9C30;
+    /* 0x9C34 */ UNK_TYPE4 unk_9C34;
+    /* 0x9C38 */ UNK_TYPE1 unk_9C38[0x10];
     /* 0x9C48 */ struct_801A6DB8_usa unk_9C48[8];
 } TheGame; // size >= 0xDA28
 

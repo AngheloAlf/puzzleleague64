@@ -7,7 +7,7 @@
 
 
 // void func_80054020_usa();
-// void func_8005405C_usa();
+void SetGameFade(void);
 // void func_8005407C_usa();
 // void func_800540AC_usa();
 // void func_80054204_usa();

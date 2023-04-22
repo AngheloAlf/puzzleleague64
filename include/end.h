@@ -34,8 +34,8 @@
 // void func_8003AD18_usa();
 // void func_8003B590_usa();
 // void func_8003BF04_usa();
-// void func_8003BF44_usa();
-// void func_8003D21C_usa();
+void DoGameOver2D(void);
+void DoGameOver3D(void);
 void DoGameOver(void);
 // void func_8003E508_usa();
 

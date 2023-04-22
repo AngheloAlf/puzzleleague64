@@ -414,10 +414,10 @@ void InitMimic(void);
 // void func_80088E38_usa();
 // void func_80088F94_usa();
 // void func_80089108_usa();
-// void func_8008913C_usa();
+s32 func_8008913C_usa(s32 arg0);
 // void func_80089200_usa();
 // void func_8008928C_usa();
-// void func_80089318_usa();
+void func_80089318_usa(s32 arg0);
 // void func_80089338_usa();
 // void func_8008937C_usa();
 

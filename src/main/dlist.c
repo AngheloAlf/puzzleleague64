@@ -15,7 +15,10 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/dlist", func_80054020_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/dlist", func_8005405C_usa);
+void SetGameFade(void) {
+    gBox_Level = 0x8C;
+    gBlock_Level = 0xFF;
+}
 #endif
 
 #if VERSION_USA

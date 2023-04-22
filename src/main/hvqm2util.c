@@ -582,7 +582,7 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
 
         gHVQM2UtilCurrentVideoRomAddress = sp44;
         osViBlack(1U);
-        func_8002CFC8_usa();
+        peelStop();
         func_80002D5C_usa();
         func_80002DE8_usa();
 

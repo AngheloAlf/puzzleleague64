@@ -346,6 +346,7 @@ segments:
       - [0x0B64B0, data, main/0B64B0]
       - [0x0B7010, .data, main/screen]
       - [0x0B7030, data, main/0B7030] # peel may start here
+      - [0x0B70C0, data, main/0B70C0] # bonus may start here
       - [0x0B80D0, data, main/0B80D0] # update? maybe wrong end
       - [0x0B8130, data, main/0B8130]
 

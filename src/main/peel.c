@@ -35,7 +35,7 @@ extern void *B_8018E93C_usa;
 extern s32 B_801AB8E4_usa;
 
 extern s32 B_8018E584_usa;
-extern s32 B_8018E58C_usa;
+extern s32 gnAlphaPeel;
 extern s32 B_8018E590_usa;
 extern u32 B_8018E660_usa[];
 extern s32 B_8018E934_usa;
@@ -162,11 +162,11 @@ void func_8002CC18_usa(void) {
     }
 
     if (gbFadeAlpha != 0) {
-        if (B_8018E58C_usa < B_8018E584_usa) {
+        if (gnAlphaPeel < B_8018E584_usa) {
             geTypePeel = -1;
         } else {
-            B_8018E58C_usa -= B_8018E584_usa;
-            if ((B_8018E58C_usa < 0x10) != 0) {
+            gnAlphaPeel -= B_8018E584_usa;
+            if ((gnAlphaPeel < 0x10) != 0) {
                 geTypePeel = -1;
             }
         }
@@ -178,7 +178,10 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/peel", func_8002CC18_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/peel", func_8002CFC8_usa);
+void peelStop(void) {
+    geTypePeel = -1;
+    gnAlphaPeel = 0;
+}
 #endif
 
 #if VERSION_USA
@@ -186,7 +189,21 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/peel", func_8002CFE4_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/peel", peelActive);
+s32 peelActive(void) {
+    if (gbFadeAlpha != 0) {
+        s32 var_a0 = 0;
+
+        if (geTypePeel != -1) {
+            if (gnAlphaPeel >= 0x81) {
+                var_a0 = -1;
+            }
+        }
+        return var_a0;
+    } else if (geTypePeel != -1) {
+        return -1;
+    }
+    return 0;
+}
 #endif
 
 #if VERSION_USA

@@ -10,8 +10,13 @@
 #include "main_functions.h"
 #include "main_variables.h"
 #include "libmus.h"
+#include "lib/libmus/src/lib_memory.h"
 #include "rom_offsets.h"
 #include "sfxlimit.h"
+
+extern s16 D_800B3AE4_usa;
+
+extern s32 D_800B3AEC_usa;
 
 typedef struct struct_8018A748_usa {
     /* 0x00 */ UNK_TYPE4 unk_00;
@@ -35,7 +40,6 @@ typedef struct struct_8018A748_usa {
 extern struct_8018A748_usa B_8018A748_usa[2];
 
 extern s32 B_800CF2A0_usa;
-extern s32 D_800B3AEC_usa;
 
 extern s16 B_801C6EF6_usa;
 
@@ -50,8 +54,72 @@ extern s32 B_8018A6C0_usa;
 extern s32 B_8018A6F8_usa;
 extern int B_801C7BAC_usa;
 
+extern s16 B_8018A6F0_usa;
+
+extern UNK_PTR B_8018A6B0_usa;
+extern UNK_PTR B_8018A6B4_usa;
+extern UNK_PTR B_8018A6B8_usa;
+extern UNK_PTR B_8018A6BC_usa;
+extern UNK_PTR B_8018A6C4_usa;
+extern UNK_PTR B_8018A6C8_usa;
+extern UNK_PTR B_8018A6CC_usa;
+extern UNK_PTR B_8018A6D0_usa;
+extern UNK_PTR B_8018A6D8_usa;
+extern UNK_PTR B_8018A6DC_usa;
+extern UNK_PTR B_8018A6E4_usa;
+extern UNK_PTR B_8018A6E8_usa;
+extern s32 B_8018A6E0_usa;
+extern s16 B_8018A6EC_usa;
+extern s16 B_8018A6EE_usa;
+extern s16 B_801F9CC4_usa;
+extern s16 D_800B3AD0_usa;
+extern s16 D_800B3AD2_usa;
+extern s16 D_800B3AD4_usa;
+extern s32 D_800B3ADC_usa;
+extern s32 D_800B3AE0_usa;
+extern s16 D_800B3AE6_usa;
+extern s32 D_800B3AE8_usa;
+extern u16 D_800B3AFA_usa;
+extern s16 D_800B3AFC_usa[];
+extern s16 D_800B3AFE_usa;
+extern s32 D_800B3B00_usa;
+
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/sound", func_80001B10_usa);
+void func_80001B10_usa(void) {
+    D_800B3AEC_usa = -1;
+    D_800B3AF8_usa = 1;
+    D_800B3AFA_usa = 8;
+    D_800B3AFC_usa[0] = 0x80;
+    D_800B3AFE_usa = 0x80;
+    D_800B3AD0_usa = 0x1C;
+    D_800B3AD2_usa = 0xC;
+    last_song_handle = 0;
+    D_800B3ADC_usa = 0;
+    D_800B3AE0_usa = 0;
+    D_800B3AE4_usa = 0;
+    D_800B3AE6_usa = 0;
+    D_800B3AE8_usa = 0;
+    B_801C7BAC_usa = 0;
+    B_801F9CC4_usa = 0;
+    B_8018A6EC_usa = 0;
+    B_8018A6EE_usa = 0;
+    B_8018A6F0_usa = 0;
+    D_800B3AD4_usa = 0x1A;
+    D_800B3B00_usa = 0;
+    B_8018A6B8_usa = __MusIntMemMalloc(0xA00);
+    B_8018A6BC_usa = __MusIntMemMalloc(0xA00);
+    B_8018A6C4_usa = __MusIntMemMalloc(0x2000);
+    B_8018A6C8_usa = __MusIntMemMalloc(0x400);
+    B_8018A6CC_usa = __MusIntMemMalloc(0x400);
+    B_8018A6D0_usa = __MusIntMemMalloc(0x400);
+    B_8018A6B0_usa = __MusIntMemMalloc(0x10000);
+    B_8018A6B4_usa = __MusIntMemMalloc(0x10000);
+    B_8018A6E0_usa = 0;
+    B_8018A6D8_usa = B_8018A6C4_usa;
+    B_8018A6DC_usa = B_8018A6C8_usa;
+    B_8018A6E4_usa = B_8018A6CC_usa;
+    B_8018A6E8_usa = B_8018A6D0_usa;
+}
 #endif
 
 #if VERSION_USA
@@ -424,7 +492,21 @@ void *func_800028B8_usa(s32 index) {
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/sound", func_800028D8_usa);
+void func_800028D8_usa(s32 arg0) {
+    if (B_8018A748_usa[D_800B3AE4_usa].unk_1C != 0) {
+        MusHandleStop(B_8018A748_usa[D_800B3AE4_usa].unk_04, D_800B3AFA_usa);
+    }
+
+    MusPtrBankSetSingle(B_8018A748_usa[arg0].unk_08);
+    B_8018A748_usa[arg0].unk_04 = MusStartSong(B_8018A748_usa[arg0].unk_0C);
+    B_8018A748_usa[arg0].unk_28 = 0;
+    B_8018A748_usa[arg0].unk_2C = 0;
+    MusHandleSetVolume(B_8018A748_usa[arg0].unk_04, 0);
+    D_800B3AFC_usa[arg0] = B_8018A748_usa[arg0].unk_26;
+    func_80003054_usa(arg0, D_800B3AFC_usa[arg0], D_800B3AFA_usa, 0);
+    B_8018A748_usa[arg0].unk_1C = 1;
+    last_song_handle = B_8018A748_usa[arg0].unk_04;
+}
 #endif
 
 #if VERSION_USA
@@ -436,12 +518,10 @@ INCLUDE_RODATA("asm/usa/nonmatchings/main/sound", RO_STR_800C2FF0_usa);
 #endif
 
 #if VERSION_USA
-void func_800028D8_usa(s32 arg0);
-extern s16 B_8018A6F0_usa;
-extern s16 D_800B3AE4_usa;
 extern const char RO_STR_800C2FD8_usa[];
 extern const char RO_STR_800C2FF0_usa[];
 
+// PlaySong?
 INLINE s32 func_80002A10_usa(s32 arg0) {
     if (arg0 < 0) {
         osSyncPrintf(RO_STR_800C2FD8_usa, arg0);
@@ -467,7 +547,10 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/sound", func_80002AE8_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/sound", func_80002C50_usa);
+int func_80002C50_usa(musHandle handle) {
+    D_800B3AEC_usa = -1;
+    return MusHandleStop(handle, 0);
+}
 #endif
 
 #if VERSION_USA
@@ -484,7 +567,9 @@ int FadeOutSong(musHandle handle, int speed) {
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/sound", func_80002CE0_usa);
+s16 func_80002CE0_usa(musHandle handle) {
+    return MusHandleAsk(handle);
+}
 #endif
 
 #if VERSION_USA
@@ -569,16 +654,10 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/sound", func_80002F88_usa);
 #endif
 
 #if VERSION_USA
-#if 0
-extern ? B_8018A76E_usa;
-extern ? D_800B3AFC_usa;
-
 void SetSongCrossFadeVolume(s16 arg0, s16 arg1) {
-    *(&B_8018A76E_usa + (arg1 * 0x38)) = arg0;
-    *(&D_800B3AFC_usa + (arg1 * 2)) = arg0;
+    B_8018A748_usa[arg1].unk_26 = arg0;
+    D_800B3AFC_usa[arg1] = arg0;
 }
-#endif
-INCLUDE_ASM("asm/usa/nonmatchings/main/sound", SetSongCrossFadeVolume);
 #endif
 
 #if VERSION_USA
@@ -671,7 +750,25 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/sound", func_800036F0_usa);
 #endif
 
 #if VERSION_USA
+#if 0
+extern ? B_8018A7BC_usa;
+extern ? B_8018A7C0_usa;
+
+void func_80003760_usa(s16 arg0, s16 arg1, s16 arg2) {
+    s16 var_a2;
+    s32 temp_v0;
+
+    var_a2 = arg2;
+    if (D_800B3AF8_usa == 0) {
+        var_a2 = 0x80;
+    }
+    temp_v0 = (s32) (arg0 << 0x10) >> 0xC;
+    *(&B_8018A7BC_usa + temp_v0) = (s32) arg1;
+    *(&B_8018A7C0_usa + temp_v0) = (s32) var_a2;
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/sound", func_80003760_usa);
+#endif
 #endif
 
 #if VERSION_USA
