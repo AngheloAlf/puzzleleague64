@@ -128,7 +128,7 @@ extern s16 ts_old_alert;
 // extern UNK_TYPE D_800B5E08_usa;
 // extern UNK_TYPE D_800B6340_usa;
 // extern UNK_TYPE D_800B6380_usa;
-// extern UNK_TYPE D_800B6410_usa;
+
 // extern UNK_TYPE D_800B6430_usa;
 // extern UNK_TYPE D_800B6440_usa;
 // extern UNK_TYPE D_800B6444_usa;

@@ -133,7 +133,7 @@ s32 func_80024C2C_usa(void);
 void func_8002629C_usa(s32 *);                         /* extern */
 s32 screenSet(UNK_TYPE *arg0, UNK_TYPE arg1);
 void func_80027E80_usa(s32, UNK_TYPE);                        /* extern */
-void func_80028378_usa(s32, UNK_TYPE);                        /* extern */
+void screenHideImage(s32, UNK_TYPE);                        /* extern */
 void func_800284E4_usa(s32, UNK_TYPE);                        /* extern */
 void func_8002CC18_usa();                              /* extern */
 void func_8002CFE4_usa(UNK_TYPE);                             /* extern */
@@ -298,10 +298,10 @@ block_12:
                 func_800284E4_usa(temp_s0, 0x6E);
                 goto block_36;
             }
-            func_80028378_usa(temp_s0, 0x6E);
+            screenHideImage(temp_s0, 0x6E);
             if (temp_s2 & 8) {
 block_36:
-                func_80028378_usa(temp_s0, 0x64);
+                screenHideImage(temp_s0, 0x64);
             } else {
                 func_800284E4_usa(temp_s0, 0x64);
             }
@@ -506,9 +506,8 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/title", DoTitle);
 #endif
 
 #if VERSION_USA
-#if 1
 void InitTitle(void) {
-    s16 sp10[0x80];
+    u16 sp10[0x80];
     void *sp110;
     s32 sp114;
     s32 i;
@@ -558,15 +557,15 @@ void InitTitle(void) {
         }
 
         if (screenFind(&sp114, "COPYRIGHT") != 0) {
-            func_800296B0_usa(sp10, gBuildDate, 0x80);
-            func_80028F44_usa(sp114, 0x64, sp10);
+            func_800296B0_usa(sp10, gBuildDate, ARRAY_COUNT(sp10));
+            screenSetText(sp114, 0x64, sp10);
         }
         if (screenFind(&sp114, RO_STR_800C3144_usa) != 0) {
-            func_800296B0_usa(sp10, gBuildDate, 0x80);
-            func_80028F44_usa(sp114, 0x64, sp10);
+            func_800296B0_usa(sp10, gBuildDate, ARRAY_COUNT(sp10));
+            screenSetText(sp114, 0x64, sp10);
         }
         if (screenFind(&sp114, RO_STR_800C3144_usa) != 0) {
-            func_80027D0C_usa(sp114, 0x64);
+            screenHideText(sp114, 0x64);
         }
     }
 
@@ -578,9 +577,6 @@ void InitTitle(void) {
     func_80002E70_usa(D_FLT_800B3B10_usa * 0x7FFF);
     func_80002E34_usa(D_FLT_800B3B14_usa * 0x7FFF);
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/title", InitTitle);
-#endif
 #endif
 
 #if VERSION_USA
