@@ -142,7 +142,7 @@ void screenWipeImages(void);
 // void func_80024BF4_usa();
 // void func_80024C14_usa();
 s32 screenFlushing(void);
-// void func_80024C54_usa();
+void screenDraw(Gfx **gfxP, void (*callback)(Gfx **, UNK_TYPE, UNK_TYPE));
 s32 screenFindImage(s32 arg0, s32 arg1, struct_gaScreen_unk_1C **arg2);
 // void func_800255D8_usa();
 // void func_80025850_usa();

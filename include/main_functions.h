@@ -414,7 +414,7 @@ s32 func_8008913C_usa(s32 arg0);
 // void func_8008928C_usa();
 void func_80089318_usa(s32 arg0);
 void DoPuzzleEditor(void);
-// void func_8008937C_usa();
+void DrawPuzzleEditor(Gfx *gfx);
 
 // void func_800903E0_usa();
 // void func_80090428_usa();

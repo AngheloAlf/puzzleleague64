@@ -22,7 +22,6 @@ typedef struct struct_gaEditData {
     /* 0x0 */ s32 unk_0;
     /* 0x4 */ struct_gaEditData_unk_4 unk_4;
 } struct_gaEditData; // size = 0x8
-extern struct_gaEditData gaEditData[9];
 
 extern void *Pon_Image_Heap;
 extern void *gpHeapEdit;
@@ -56,6 +55,11 @@ s32 func_8002EDF0_usa(s32 arg0) {
 #endif
 
 #if VERSION_USA
+// extern UNK_TYPE D_800B6450_usa;
+// extern UNK_TYPE D_800B6458_usa;
+// extern UNK_TYPE D_800B6468_usa;
+// extern UNK_TYPE D_FLT_800B646C_usa;
+
 INCLUDE_ASM("asm/usa/nonmatchings/main/editor", func_8002EDFC_usa);
 #endif
 
@@ -109,6 +113,32 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/editor", func_80030278_usa);
 INCLUDE_ASM("asm/usa/nonmatchings/main/editor", func_800304FC_usa);
 #endif
 
+void func_8002F73C_usa(s32 arg0, screenTick_arg0 *arg1);
+void func_8002F984_usa(s32 arg0, screenTick_arg0 *arg1);
+void func_8002FCF0_usa(s32 arg0, screenTick_arg0 *arg1);
+void func_8002FF38_usa(s32 arg0, screenTick_arg0 *arg1);
+void func_80030278_usa(s32 arg0, screenTick_arg0 *arg1);
+void func_800304FC_usa(s32 arg0, screenTick_arg0 *arg1);
+void func_80030D10_usa(s32 arg0, screenTick_arg0 *arg1);
+void func_80030D6C_usa(s32 arg0, screenTick_arg0 *arg1);
+void func_80030DC8_usa(s32 arg0, screenTick_arg0 *arg1);
+
+#if 0
+struct_gaEditData gaEditData[] = {
+    { 1, func_80030D10_usa },
+    { 2, func_8002F73C_usa },
+    { 3, func_8002F984_usa },
+    { 4, func_80030D6C_usa },
+    { 5, func_8002FCF0_usa },
+    { 6, func_8002FF38_usa },
+    { 7, func_80030278_usa },
+    { 8, func_800304FC_usa },
+    { 9, func_80030DC8_usa },
+};
+#else
+extern struct_gaEditData gaEditData[9];
+#endif
+
 #if VERSION_USA
 STATIC_INLINE s32 inlined_func(s32 arg0, struct_gaEditData **sp10) {
     s32 i;
@@ -122,7 +152,9 @@ STATIC_INLINE s32 inlined_func(s32 arg0, struct_gaEditData **sp10) {
 
     return 0;
 }
+#endif
 
+#if VERSION_USA
 INLINE s32 func_800306B0_usa(s32 arg0) {
     struct_gaEditData *sp10;
 
@@ -149,20 +181,11 @@ INLINE s32 func_800306B0_usa(s32 arg0) {
 #endif
 
 #if VERSION_USA
-#if 0
-//? func_80024C54_usa(Gfx **, ? *);                   /* extern */
-//? func_8002C2C0_usa(Gfx **);                        /* extern */
-//? func_8008937C_usa(Gfx *);                         /* extern */
-extern s32 B_801AD9BC_usa;
-extern s32 B_801ADAE8_usa;
-extern UNK_FUN_PTR func_80030E08_usa;
-
 void DrawEditor(Gfx *gfx) {
     if (gnFlushCount > 0) {
-        gnFlushCount--;
+        gnFlushCount = gnFlushCount - 1;
         if (gnFlushCount == 0) {
             gReset = -1;
-
             if (B_8018E9C0_usa == 0xA) {
                 gMain = GMAIN_2BC;
             } else if (B_8018E9C0_usa == 0xB) {
@@ -182,17 +205,14 @@ void DrawEditor(Gfx *gfx) {
     }
 
     if (screenFlushing() == 0) {
-        func_8008937C_usa(gfx); // DrawPuzzleEditor
+        DrawPuzzleEditor(gfx);
     }
 
-    func_80024C54_usa(&glistp, &func_80030E08_usa); // screenDraw
+    screenDraw(&glistp, editDrawImage);
     if (screenFlushing() == 0) {
         func_8002C2C0_usa(&glistp);
     }
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/editor", DrawEditor);
-#endif
 #endif
 
 #if VERSION_USA
@@ -309,5 +329,21 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/editor", func_80030DC8_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/editor", func_80030E08_usa);
+void editDrawImage(Gfx **gfxP, s32 arg1 UNUSED, s32 arg2) {
+    Gfx *gfx = *gfxP;
+
+    if (arg2 == 0xA) {
+        gDPPipeSync(gfx++);
+        gDPSetCycleType(gfx++, G_CYC_FILL);
+        gDPSetRenderMode(gfx++, G_RM_NOOP, G_RM_NOOP2);
+        gSPClearGeometryMode(gfx++, G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_LIGHTING | G_SHADING_SMOOTH);
+        gSPTexture(gfx++, 0x8000, 0x8000, 0, G_TX_RENDERTILE, G_OFF);
+        gDPSetFillColor(gfx++, (GPACK_RGBA5551(0, 0, 0, 1) << 16) | GPACK_RGBA5551(0, 0, 0, 1));
+        gDPFillRectangle(gfx++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
+        gDPPipeSync(gfx++);
+        gDPSetCycleType(gfx++, G_CYC_1CYCLE);
+    }
+
+    *gfxP = gfx;
+}
 #endif

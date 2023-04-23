@@ -659,7 +659,7 @@ s32 screenFlushing(void) {
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80024C54_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/screen", screenDraw);
 #endif
 
 #if VERSION_USA
