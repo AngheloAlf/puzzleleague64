@@ -55,12 +55,63 @@ s32 func_8002EDF0_usa(s32 arg0) {
 #endif
 
 #if VERSION_USA
-// extern UNK_TYPE D_800B6450_usa;
-// extern UNK_TYPE D_800B6458_usa;
-// extern UNK_TYPE D_800B6468_usa;
-// extern UNK_TYPE D_FLT_800B646C_usa;
+Lights1 D_800B6450_usa = {
+    { { { 0x40, 0x40, 0x40 }, 0, { 0x40, 0x40, 0x40 }, 0 } },
+    { { { { 0xE0, 0xE0, 0xE0 }, 0, { 0xE0, 0xE0, 0xE0 }, 0, { 0, -1, 0 }, 0 } } },
+};
+s32 D_800B6468_usa = 0;
+f32 D_FLT_800B646C_usa = 0.0f;
+#endif
 
-INCLUDE_ASM("asm/usa/nonmatchings/main/editor", func_8002EDFC_usa);
+extern Mtx B_8018E940_usa[2];
+
+typedef struct struct_8002EDFC_usa_arg0 {
+    /* 0x0 */ UNK_TYPE1 unk_0[0x4];
+    /* 0x4 */ Gfx ***unk_4;
+    /* 0x8 */ UNK_TYPE4 unk_8;
+} struct_8002EDFC_usa_arg0; // size >= 0xC
+
+#if VERSION_USA
+s32 func_8002EDFC_usa(struct_8002EDFC_usa_arg0 *arg0, Gfx **gfxP) {
+    Gfx *gfx;
+
+    D_800B6468_usa++;
+
+    D_FLT_800B646C_usa += 1.0;
+    if (D_FLT_800B646C_usa >= 360.0) {
+        D_FLT_800B646C_usa = D_FLT_800B646C_usa - 360.0;
+    }
+
+    if (arg0 == NULL) {
+        return 0;
+    }
+
+    gfx = *gfxP;
+
+    gDPPipeSync(gfx++);
+    gDPSetCycleType(gfx++, G_CYC_1CYCLE);
+    gSPClearGeometryMode(gfx++, G_ZBUFFER | G_CULL_BOTH);
+    gSPSetGeometryMode(gfx++, G_SHADE | G_LIGHTING | G_SHADING_SMOOTH);
+    gDPSetTextureLOD(gfx++, G_TL_TILE);
+    gDPSetTextureLUT(gfx++, G_TT_NONE);
+    gDPSetTexturePersp(gfx++, G_TP_PERSP);
+    gDPSetRenderMode(gfx++, G_RM_AA_OPA_SURF, G_RM_AA_OPA_SURF2);
+    gDPSetTextureFilter(gfx++, G_TF_BILERP);
+    gSPTexture(gfx++, 0x8000, 0x8000, 0, G_TX_RENDERTILE, G_OFF);
+    gDPSetCombineMode(gfx++, G_CC_SHADE, G_CC_SHADE);
+    gSPSetLights1(gfx++, D_800B6450_usa);
+
+    guRotate(&B_8018E940_usa[D_800B6468_usa % ARRAY_COUNTU(B_8018E940_usa)], D_FLT_800B646C_usa, 0.0f, 1.0f, 0.0f);
+
+    gSPMatrix(gfx++, &B_8018E940_usa[D_800B6468_usa % ARRAY_COUNTU(B_8018E940_usa)],
+              G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(gfx++, *arg0->unk_4[(D_800B6468_usa & 0xFF) % arg0->unk_8]);
+    gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
+
+    *gfxP = gfx;
+
+    return -1;
+}
 #endif
 
 #if VERSION_USA
@@ -123,20 +174,12 @@ void func_80030D10_usa(s32 arg0, screenTick_arg0 *arg1);
 void func_80030D6C_usa(s32 arg0, screenTick_arg0 *arg1);
 void func_80030DC8_usa(s32 arg0, screenTick_arg0 *arg1);
 
-#if 0
+#if VERSION_USA
 struct_gaEditData gaEditData[] = {
-    { 1, func_80030D10_usa },
-    { 2, func_8002F73C_usa },
-    { 3, func_8002F984_usa },
-    { 4, func_80030D6C_usa },
-    { 5, func_8002FCF0_usa },
-    { 6, func_8002FF38_usa },
-    { 7, func_80030278_usa },
-    { 8, func_800304FC_usa },
-    { 9, func_80030DC8_usa },
+    { 1, func_80030D10_usa }, { 2, func_8002F73C_usa }, { 3, func_8002F984_usa },
+    { 4, func_80030D6C_usa }, { 5, func_8002FCF0_usa }, { 6, func_8002FF38_usa },
+    { 7, func_80030278_usa }, { 8, func_800304FC_usa }, { 9, func_80030DC8_usa },
 };
-#else
-extern struct_gaEditData gaEditData[9];
 #endif
 
 #if VERSION_USA
