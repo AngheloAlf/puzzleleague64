@@ -23,5 +23,9 @@ s32 func_800306B0_usa(s32 arg0);
 void DrawEditor(Gfx *gfx);
 void DoEditor(void);
 void InitEditor(void);
+// void func_80030D10_usa();
+// void func_80030D6C_usa();
+// void func_80030DC8_usa();
+// void func_80030E08_usa();
 
 #endif

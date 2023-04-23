@@ -105,7 +105,7 @@ s32 CreateMenuGfxTask(struct_gInfo *info) {
     gSPEndDisplayList(glistp++);
     osWritebackDCacheAll();
 
-    if (func_80024C2C_usa() == 0) {
+    if (screenFlushing() == 0) {
         BuildTask(info);
         return -1;
     }
@@ -141,7 +141,7 @@ s32 CreateGameGfxTask2(struct_gInfo *info) {
     gSPEndDisplayList(glistp++);
     osWritebackDCacheAll();
 
-    if (func_80024C2C_usa() == 0) {
+    if (screenFlushing() == 0) {
         BuildTask(info);
         return -1;
     }

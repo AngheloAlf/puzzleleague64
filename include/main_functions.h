@@ -21,11 +21,6 @@ void func_80001310_usa(RomOffset segmentRom, void * dstAddr, size_t segmentSize)
 
 // void func_800019C0_usa();
 
-// void func_80030D10_usa();
-// void func_80030D6C_usa();
-// void func_80030DC8_usa();
-// void func_80030E08_usa();
-
 // void func_800343A0_usa();
 // void func_800346B8_usa();
 // void func_8003490C_usa();
@@ -418,7 +413,7 @@ s32 func_8008913C_usa(s32 arg0);
 // void func_80089200_usa();
 // void func_8008928C_usa();
 void func_80089318_usa(s32 arg0);
-// void func_80089338_usa();
+void DoPuzzleEditor(void);
 // void func_8008937C_usa();
 
 // void func_800903E0_usa();

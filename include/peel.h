@@ -6,7 +6,7 @@
 
 
 // void func_8002C2C0_usa();
-// void func_8002CC18_usa();
+void peelTick(void);
 void peelStop(void);
 // void func_8002CFE4_usa();
 s32 peelActive(void);

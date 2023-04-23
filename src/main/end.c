@@ -160,7 +160,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_8003BF04_usa);
 
 #if VERSION_USA
 #if 0
-? func_80005184_usa(? *, ?);                        /* extern */
+? PlaySE(? *, ?);                        /* extern */
 ? func_80005888_usa(?, ?, ?);                       /* extern */
 ? func_80005A08_usa(s32);                           /* extern */
 ? func_8003490C_usa();                              /* extern */
@@ -205,7 +205,7 @@ s32 func_8004FA2C_usa();                            /* extern */
 ? func_8006C9BC_usa(TheGame *, ?);                  /* extern */
 extern u8 B_801C6C90_usa;
 extern s32 B_8021BA5C_usa;
-extern ? D_800B4160_usa;
+extern ? SFX_INIT_TABLE;
 extern s32 D_800B65B0_usa;
 extern ? D_800B66FC_usa;
 
@@ -309,7 +309,7 @@ block_29:
                     D_800B65B0_usa = 0;
                     gTheGame.unk_43EC = 0;
                     if (gTheGame.unk_8860[0].unk_0 == 8) {
-                        func_80005184_usa(&D_800B4160_usa, 0xA0);
+                        PlaySE(&SFX_INIT_TABLE, 0xA0);
                         if (gSelection >= 0x83) {
                             var_a1 = 0x175;
                             goto block_39;
@@ -317,7 +317,7 @@ block_29:
                     } else {
                         var_a1 = 0x174;
                         if (gSelection != 0xBE) {
-                            func_80005184_usa(&D_800B4160_usa, 0xA1);
+                            PlaySE(&SFX_INIT_TABLE, 0xA1);
                             if (gTheGame.unk_9C20[8] != 5) {
                                 if (gTheGame.unk_9C20[0x10] == 5) {
                                     var_a1 = 0x9F;
@@ -328,7 +328,7 @@ block_29:
                             }
                         } else {
 block_39:
-                            func_80005184_usa(&D_800B4160_usa, var_a1);
+                            PlaySE(&SFX_INIT_TABLE, var_a1);
                         }
                     }
                     FadeOutSong(last_song_handle, 0x3C);
@@ -392,7 +392,7 @@ block_62:
                             if (gSelection == 0x8C) {
                                 if (gTheGame.unk_43AC >= 0x2710) {
                                     PlayMIDI(&BGM_INIT_TABLE, 0x46, 0, 2);
-                                    func_80005184_usa(&D_800B4160_usa, 0x7D);
+                                    PlaySE(&SFX_INIT_TABLE, 0x7D);
                                 } else {
                                     goto block_72;
                                 }
@@ -400,7 +400,7 @@ block_62:
                                 if (gTheGame.unk_8860[0].unk_0 != 8) {
                                     if (gTheGame.unk_43AC >= 0x2710) {
                                         PlayMIDI(&BGM_INIT_TABLE, 0x46, 0, 2);
-                                        func_80005184_usa(&D_800B4160_usa, 0x80);
+                                        PlaySE(&SFX_INIT_TABLE, 0x80);
                                     } else {
                                         var_a1_2 = 0x45;
                                         goto block_73;
@@ -463,7 +463,7 @@ block_85:
                         if (gSelection == 0xAA) {
                             if (gTheGame.unk_9C20[8] == 5) {
                                 if (gTheGame.unk_9C20[0xC] == 3) {
-                                    func_80005184_usa(&D_800B4160_usa, 0x81);
+                                    PlaySE(&SFX_INIT_TABLE, 0x81);
                                 } else {
                                     goto block_101;
                                 }
@@ -601,7 +601,7 @@ block_152:
                             var_a1_4 = 0x174;
                         }
                     }
-                    func_80005184_usa(&D_800B4160_usa, var_a1_4);
+                    PlaySE(&SFX_INIT_TABLE, var_a1_4);
                     FadeOutSong(last_song_handle, 0x3C);
                     break;
                 case 0x38F:                         /* switch 2 */
@@ -687,7 +687,7 @@ block_164:
                         gTheGame.unk_43EC = (s32) (gTheGame.unk_43EC - 1);
                     } else {
                         if (gTheGame.unk_43FC == 0x36) {
-                            func_80005184_usa(&D_800B4160_usa, 0xA4);
+                            PlaySE(&SFX_INIT_TABLE, 0xA4);
                         }
                         temp_a0_2 = *(&D_800B66FC_usa + gTheGame.unk_43FC);
                         gTheGame.unk_43FC = (s32) (gTheGame.unk_43FC - 1);
@@ -701,7 +701,7 @@ block_164:
                         gTheGame.unk_0000[1].unk_43EC = (s32) (temp_v0_5 - 1);
                     } else {
                         if (gTheGame.unk_0000[1].unk_43FC == 0x36) {
-                            func_80005184_usa(&D_800B4160_usa, 0xA4);
+                            PlaySE(&SFX_INIT_TABLE, 0xA4);
                         }
                         temp_v0_6 = gTheGame.unk_0000[1].unk_43FC;
                         gTheGame.unk_0000[1].unk_43FC = (s32) (temp_v0_6 - 1);
@@ -727,7 +727,7 @@ block_164:
                     }
                     if ((((gSelection == 0x96) & var_s3) || (((gSelection == 0xA0) | (gSelection == 0xB4)) != 0) || (gSelection == 0xC8)) && (gTheGame.unk_43EC == 0) && (gTheGame.unk_43FC == 0x29)) {
                         if (B_801C6C90_usa != 0x10) {
-                            func_80005184_usa(&D_800B4160_usa, 0x17A);
+                            PlaySE(&SFX_INIT_TABLE, 0x17A);
                         } else {
 block_267:
                             PlayMIDI(&BGM_INIT_TABLE, 0x45, 0, 1);
@@ -869,7 +869,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/end", DoGameOver2D);
 
 #if VERSION_USA
 #if 0
-? func_80005184_usa(? *, ?);                        /* extern */
+? PlaySE(? *, ?);                        /* extern */
 ? func_80005888_usa(?, ?, ?);                       /* extern */
 ? func_80005A08_usa(s32);                           /* extern */
 ? func_80034DB8_usa();                              /* extern */
@@ -914,7 +914,7 @@ s32 func_8004FA2C_usa();                            /* extern */
 ? func_80067CA0_usa(TheGame *, TheGame_unk_8860 *); /* extern */
 extern u8 B_801C6C90_usa;
 extern s32 B_8021BA5C_usa;
-extern ? D_800B4160_usa;
+extern ? SFX_INIT_TABLE;
 extern s32 D_800B65B0_usa;
 extern ? D_800B66FC_usa;
 extern ? D_800B6734_usa;
@@ -1020,7 +1020,7 @@ block_29:
                     D_800B65B0_usa = 0;
                     gTheGame.unk_43EC = 0;
                     if (gTheGame.unk_8860[0].unk_0 == 8) {
-                        func_80005184_usa(&D_800B4160_usa, 0xA0);
+                        PlaySE(&SFX_INIT_TABLE, 0xA0);
                         if (gSelection != 0x82) {
                             var_a1 = 0x175;
                             goto block_39;
@@ -1028,7 +1028,7 @@ block_29:
                     } else {
                         var_a1 = 0x174;
                         if (gSelection != 0xBE) {
-                            func_80005184_usa(&D_800B4160_usa, 0xA1);
+                            PlaySE(&SFX_INIT_TABLE, 0xA1);
                             if (gTheGame.unk_9C20[8] != 5) {
                                 if (gTheGame.unk_9C20[0x10] == 5) {
                                     var_a1 = 0x9F;
@@ -1039,7 +1039,7 @@ block_29:
                             }
                         } else {
 block_39:
-                            func_80005184_usa(&D_800B4160_usa, var_a1);
+                            PlaySE(&SFX_INIT_TABLE, var_a1);
                         }
                     }
                     FadeOutSong(last_song_handle, 0x3C);
@@ -1113,7 +1113,7 @@ block_62:
                             if (gSelection == 0x8C) {
                                 if (gTheGame.unk_43AC >= 0x2710) {
                                     PlayMIDI(BGM_INIT_TABLE, 0x46, 0, 2);
-                                    func_80005184_usa(&D_800B4160_usa, 0x7D);
+                                    PlaySE(&SFX_INIT_TABLE, 0x7D);
                                 } else {
                                     goto block_72;
                                 }
@@ -1121,7 +1121,7 @@ block_62:
                                 if (gTheGame.unk_8860[0].unk_0 != 8) {
                                     if (gTheGame.unk_43AC >= 0x2710) {
                                         PlayMIDI(BGM_INIT_TABLE, 0x46, 0, 2);
-                                        func_80005184_usa(&D_800B4160_usa, 0x80);
+                                        PlaySE(&SFX_INIT_TABLE, 0x80);
                                     } else {
                                         var_a1_2 = 0x45;
                                         goto block_73;
@@ -1187,7 +1187,7 @@ block_85:
                         if (gSelection == 0xAA) {
                             if (gTheGame.unk_9C20[8] == 5) {
                                 if (gTheGame.unk_9C20[0xC] == 3) {
-                                    func_80005184_usa(&D_800B4160_usa, 0x81);
+                                    PlaySE(&SFX_INIT_TABLE, 0x81);
                                 } else {
                                     goto block_101;
                                 }
@@ -1287,7 +1287,7 @@ block_115:
                     } else {
                         var_a1_4 = 0x175;
                     }
-                    func_80005184_usa(&D_800B4160_usa, var_a1_4);
+                    PlaySE(&SFX_INIT_TABLE, var_a1_4);
                     FadeOutSong(last_song_handle, 0x3C);
                     break;
                 case 0x38F:                         /* switch 2 */
@@ -1351,7 +1351,7 @@ block_115:
                         gTheGame.unk_43EC = (s32) (gTheGame.unk_43EC - 1);
                     } else {
                         if (gTheGame.unk_43FC == 0x36) {
-                            func_80005184_usa(&D_800B4160_usa, 0xA4);
+                            PlaySE(&SFX_INIT_TABLE, 0xA4);
                         }
                         temp_a0_4 = *(&D_800B66FC_usa + gTheGame.unk_43FC);
                         gTheGame.unk_43FC = (s32) (gTheGame.unk_43FC - 1);
@@ -1365,7 +1365,7 @@ block_115:
                         gTheGame.unk_0000[1].unk_43EC = (s32) (temp_v0_4 - 1);
                     } else {
                         if (gTheGame.unk_0000[1].unk_43FC == 0x36) {
-                            func_80005184_usa(&D_800B4160_usa, 0xA4);
+                            PlaySE(&SFX_INIT_TABLE, 0xA4);
                         }
                         temp_v0_5 = gTheGame.unk_0000[1].unk_43FC;
                         gTheGame.unk_0000[1].unk_43FC = (s32) (temp_v0_5 - 1);
@@ -1391,7 +1391,7 @@ block_115:
                     }
                     if ((gTheGame.unk_43FC < 0) && ((gMain = 0x392, (((gSelection == 0x96) & var_s4) != 0)) || (((gSelection == 0xA0) | (gSelection == 0xB4)) != 0) || (gSelection == 0xC8))) {
                         if (B_801C6C90_usa != 0x10) {
-                            func_80005184_usa(&D_800B4160_usa, 0x17A);
+                            PlaySE(&SFX_INIT_TABLE, 0x17A);
                         } else {
 block_238:
                             PlayMIDI(BGM_INIT_TABLE, 0x45, 0, 1);

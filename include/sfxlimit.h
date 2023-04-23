@@ -13,7 +13,7 @@ typedef struct struct_bgm_init_table {
 
 
 s32 PlayMIDI(struct_bgm_init_table arg0[], s32 arg1, s32 arg2, s32 arg3);
-// void func_80005184_usa();
+UNK_TYPE PlaySE(u8 *arg0, s32 arg1);
 // void func_80005270_usa();
 // void func_8000541C_usa();
 // void func_80005608_usa();

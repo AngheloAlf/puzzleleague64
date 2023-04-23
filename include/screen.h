@@ -125,6 +125,13 @@ typedef struct struct_800222F0_usa_arg2 {
 } struct_800222F0_usa_arg2; // size >= 0x14
 
 
+typedef struct screenTick_arg0 {
+    /* 0x0 */ s32 unk_0;
+    /* 0x4 */ s32 unk_4;
+} screenTick_arg0; // size = 0x8
+
+
+
 s32 screenCenterText(struct_gaScreen_unk_1C *arg0);
 // void func_80022AF4_usa();
 void screenUpdateArea(struct_gaScreen_unk_18 *arg0);
@@ -134,13 +141,13 @@ void screenWipeImages(void);
 // void func_8002496C_usa();
 // void func_80024BF4_usa();
 // void func_80024C14_usa();
-s32 func_80024C2C_usa(void);
+s32 screenFlushing(void);
 // void func_80024C54_usa();
 s32 screenFindImage(s32 arg0, s32 arg1, struct_gaScreen_unk_1C **arg2);
 // void func_800255D8_usa();
 // void func_80025850_usa();
 // void func_80025CC4_usa();
-// void func_8002629C_usa();
+void screenTick(screenTick_arg0 *arg0);
 s32 screenSet(const char *arg0, s32 arg1);
 // void screenGet();
 // void func_8002759C_usa();

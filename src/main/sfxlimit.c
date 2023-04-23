@@ -34,7 +34,7 @@ s32 PlayMIDI(struct_bgm_init_table arg0[], s32 arg1, s32 arg2, s32 arg3) {
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/sfxlimit", func_80005184_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/sfxlimit", PlaySE);
 #endif
 
 #if VERSION_USA

@@ -46,7 +46,7 @@ extern s32 D_800B6444_usa;
 #if VERSION_USA
 #ifdef NON_EQUIVALENT
 //#if 1
-void func_8002CC18_usa(void) {
+void peelTick(void) {
     s32 var_a1;
     s32 var_a1_2;
     s32 var_a3;
@@ -173,7 +173,7 @@ void func_8002CC18_usa(void) {
     }
 }
 #else
-INCLUDE_ASM("asm/usa/nonmatchings/main/peel", func_8002CC18_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/peel", peelTick);
 #endif
 #endif
 

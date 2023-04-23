@@ -13,22 +13,26 @@
 #include "sound.h"
 #include "file.h"
 #include "image.h"
+#include "peel.h"
+#include "sfxlimit.h"
 
-typedef struct struct_800B6470_usa {
+typedef void (*struct_gaEditData_unk_4)(s32 arg0, screenTick_arg0 *arg1);
+
+typedef struct struct_gaEditData {
     /* 0x0 */ s32 unk_0;
-    /* 0x4 */ UNK_FUN_PTR unk_4;
-} struct_800B6470_usa; // size = 0x8
-extern struct_800B6470_usa gaEditData[9];
+    /* 0x4 */ struct_gaEditData_unk_4 unk_4;
+} struct_gaEditData; // size = 0x8
+extern struct_gaEditData gaEditData[9];
 
 extern void *Pon_Image_Heap;
 extern void *gpHeapEdit;
 
 extern s32 B_8018E9C0_usa; // geMode?
-extern s32 B_8018E9CC_usa; // gnFlushCount?
+extern s32 gnFlushCount;
 extern s32 giScreenEdit;
 extern s32 B_8018E9F0_usa; // gnCursorData?
 
-extern s32 B_8018E9C8_usa;
+extern s32 gnTickCount;
 extern s16 B_8018E9D0_usa;
 extern s16 B_8018E9D2_usa;
 extern s32 B_8018E9DC_usa;
@@ -106,7 +110,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/editor", func_800304FC_usa);
 #endif
 
 #if VERSION_USA
-STATIC_INLINE s32 inlined_func(s32 arg0, struct_800B6470_usa **sp10) {
+STATIC_INLINE s32 inlined_func(s32 arg0, struct_gaEditData **sp10) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNTU(gaEditData); i++) {
@@ -120,14 +124,14 @@ STATIC_INLINE s32 inlined_func(s32 arg0, struct_800B6470_usa **sp10) {
 }
 
 INLINE s32 func_800306B0_usa(s32 arg0) {
-    struct_800B6470_usa *sp10;
+    struct_gaEditData *sp10;
 
     if (arg0 == 0) {
         return 0;
     }
 
     if ((arg0 < 12) && (arg0 >= 10)) {
-        B_8018E9CC_usa = 1;
+        gnFlushCount = 1;
     } else {
         if (inlined_func(arg0, &sp10) == 0) {
             return 0;
@@ -154,13 +158,11 @@ extern s32 B_801ADAE8_usa;
 extern UNK_FUN_PTR func_80030E08_usa;
 
 void DrawEditor(Gfx *gfx) {
-    s32 temp_v0;
-
-    if (B_8018E9CC_usa > 0) {
-        temp_v0 = B_8018E9CC_usa - 1;
-        B_8018E9CC_usa = temp_v0;
-        if (temp_v0 == 0) {
+    if (gnFlushCount > 0) {
+        gnFlushCount--;
+        if (gnFlushCount == 0) {
             gReset = -1;
+
             if (B_8018E9C0_usa == 0xA) {
                 gMain = GMAIN_2BC;
             } else if (B_8018E9C0_usa == 0xB) {
@@ -178,11 +180,13 @@ void DrawEditor(Gfx *gfx) {
             }
         }
     }
-    if (func_80024C2C_usa() == 0) {
+
+    if (screenFlushing() == 0) {
         func_8008937C_usa(gfx); // DrawPuzzleEditor
     }
+
     func_80024C54_usa(&glistp, &func_80030E08_usa); // screenDraw
-    if (func_80024C2C_usa() == 0) {
+    if (screenFlushing() == 0) {
         func_8002C2C0_usa(&glistp);
     }
 }
@@ -192,14 +196,64 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/editor", DrawEditor);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/editor", DoEditor);
+void DoEditor(void) {
+    screenTick_arg0 sp10;
+    struct_gaEditData *sp18;
+
+    if ((screenFlushing() == 0) && (gnFlushCount == -1)) {
+        peelTick();
+    }
+    gnTickCount += 1;
+    if ((screenFlushing() == 0) && (gnFlushCount == -1)) {
+        DoPuzzleEditor();
+    }
+
+    sp10.unk_0 = 0;
+    sp10.unk_4 = 0;
+    if ((screenFlushing() == 0) && (gnFlushCount == -1)) {
+        if (gTheGame.unk_89C4 & 0x4000) {
+            sp10.unk_0 = 0x21;
+        } else if (gTheGame.unk_89C4 & 0x8000) {
+            sp10.unk_0 = 0x20;
+        } else if (gTheGame.unk_89C4 & 0x20) {
+            sp10.unk_0 = 0x18;
+        } else if (gTheGame.unk_89C4 & 0x10) {
+            sp10.unk_0 = 0x19;
+        } else if (gTheGame.unk_89C4 & 0x1000) {
+            sp10.unk_0 = 0x22;
+        } else {
+            if (gTheGame.unk_89C6 & 0x800) {
+                sp10.unk_0 = 1;
+            }
+            if (gTheGame.unk_89C6 & 0x400) {
+                sp10.unk_0 = 2;
+            }
+            if (gTheGame.unk_89C6 & 0x200) {
+                sp10.unk_0 = 3;
+            }
+            if (gTheGame.unk_89C6 & 0x100) {
+                sp10.unk_0 = 4;
+            }
+        }
+    }
+
+    if (inlined_func(B_8018E9C0_usa, &sp18) != 0) {
+        screenHideImage(giScreenEdit, 0x812B8064);
+        sp18->unk_4(gnTickCount, &sp10);
+    }
+
+    screenTick(&sp10);
+    if (sp10.unk_0 != 0) {
+        PlaySE(SFX_INIT_TABLE, 1);
+    }
+}
 #endif
 
 #if VERSION_USA
 void InitEditor(void) {
     B_8018E9C0_usa = 0;
-    B_8018E9C8_usa = 0;
-    B_8018E9CC_usa = -1;
+    gnTickCount = 0;
+    gnFlushCount = -1;
     B_8018E9F0_usa = -1;
     giScreenEdit = -1;
     func_80089318_usa(-1);
@@ -240,4 +294,20 @@ void InitEditor(void) {
 
     func_80002A10_usa(0);
 }
+#endif
+
+#if VERSION_USA
+INCLUDE_ASM("asm/usa/nonmatchings/main/editor", func_80030D10_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_ASM("asm/usa/nonmatchings/main/editor", func_80030D6C_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_ASM("asm/usa/nonmatchings/main/editor", func_80030DC8_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_ASM("asm/usa/nonmatchings/main/editor", func_80030E08_usa);
 #endif

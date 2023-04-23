@@ -650,7 +650,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80024C14_usa);
 #endif
 
 #if VERSION_USA
-s32 func_80024C2C_usa(void) {
+s32 screenFlushing(void) {
     if ((B_8018E504_usa != 0) || (B_8018E524_usa != -1)) {
         return -1;
     }
@@ -691,7 +691,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80025CC4_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_8002629C_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/screen", screenTick);
 #endif
 
 #if VERSION_USA

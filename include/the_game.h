@@ -296,7 +296,7 @@ typedef struct TheGame {
     /* 0x8860 */ TheGame_unk_8860 unk_8860[THEGAME_BUFFER_LEN];
     /* 0x89C0 */ UNK_TYPE1 unk_89C0[0x4];
     /* 0x89C4 */ u16 unk_89C4;
-    /* 0x89C6 */ UNK_TYPE1 unk_89C6[0x2];
+    /* 0x89C6 */ u16 unk_89C6;
     /* 0x89C8 */ UNK_TYPE1 unk_89C8[0x700];
     /* 0x90C8 */ TheGame_unk_90C8 unk_90C8;
     /* 0x9988 */ UNK_TYPE1 unk_9988[0x280];

@@ -96,7 +96,6 @@ segments:
       - [0x02C1D0, c, main/story]
       - [0x02CEC0, c, main/peel]
       - [0x02E800, c, main/editor]
-      - [0x031910, asm, main/031910]
       - [0x031B20, c, main/bonus]
       - [0x034FA0, asm, main/034FA0]
       - [0x036720, asm, main/036720]

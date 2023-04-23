@@ -123,19 +123,19 @@ typedef struct struct_8018A7F4_usa {
 
 void FadeOutSong(s32, UNK_TYPE);                        /* extern */
 void PlayMIDI(UNK_TYPE *, UNK_TYPE, UNK_TYPE, UNK_TYPE);                  /* extern */
-void func_80005184_usa(UNK_TYPE *arg0, UNK_TYPE arg1);
+void PlaySE(UNK_TYPE *arg0, UNK_TYPE arg1);
 void func_80005C00_usa(void *);                        /* extern */
 void func_80009D30_usa(s32, s32);                      /* extern */
 void func_8001ACA8_usa(s32 *);                         /* extern */
 s32 func_80024BF4_usa(s32 *);                       /* extern */
 s32 func_80024C14_usa();                            /* extern */
-s32 func_80024C2C_usa(void);
-void func_8002629C_usa(s32 *);                         /* extern */
+s32 screenFlushing(void);
+void screenTick(s32 *);                         /* extern */
 s32 screenSet(UNK_TYPE *arg0, UNK_TYPE arg1);
 void func_80027E80_usa(s32, UNK_TYPE);                        /* extern */
 void screenHideImage(s32, UNK_TYPE);                        /* extern */
 void func_800284E4_usa(s32, UNK_TYPE);                        /* extern */
-void func_8002CC18_usa();                              /* extern */
+void peelTick();                              /* extern */
 void func_8002CFE4_usa(UNK_TYPE);                             /* extern */
 s32 peelActive(void);
 s32 HVQM2Util_Play(UNK_TYPE *, UNK_TYPE, s32);                 /* extern */
@@ -173,7 +173,7 @@ extern UNK_TYPE *B_8021BEA4_usa;
 extern UNK_TYPE *B_8021BEA8_usa;
 extern s32 last_song_handle;
 extern UNK_TYPE BGM_INIT_TABLE;
-extern UNK_TYPE D_800B4160_usa;
+extern UNK_TYPE SFX_INIT_TABLE;
 extern u8 D_800B69B0_usa;
 extern const char RO_STR_800C3128_usa[];
 extern const char RO_STR_800C3134_usa[];
@@ -220,7 +220,7 @@ void DoTitle(void) {
     gpData->unk_00++;
     sp10 = 0;
     sp14 = 0;
-    func_8002629C_usa(&sp10);
+    screenTick(&sp10);
     temp_v1 = gpData->unk_14;
     temp_s2 = gpData->unk_00;
     switch (temp_v1) {                              /* switch 1; irregular */
@@ -277,7 +277,7 @@ block_12:
             }
             break;
         case 0x4:                                   /* switch 1 */
-            if ((func_80024C2C_usa() == 0) && (func_80024C14_usa() == 0) && (func_80024BF4_usa(&sp1C) != 0)) {
+            if ((screenFlushing() == 0) && (func_80024C14_usa() == 0) && (func_80024BF4_usa(&sp1C) != 0)) {
                 HVQM2Util_Play(&RO_STR_800C3134_usa, 0, sp1C);
                 gpData->unk_14 = 5;
             }
@@ -314,7 +314,7 @@ block_36:
                         temp_v1_2 = *((((temp_a1_2 - 2) & 0xF) * 4) + &ganButton);
                         if ((temp_v1_2 == 0x20) && (*((((temp_a1_2 - 1) & 0xF) * 4) + &ganButton) == temp_v1_2)) {
                             gGameStatus ^= 1;
-                            func_80005184_usa(&D_800B4160_usa, 9);
+                            PlaySE(&SFX_INIT_TABLE, 9);
                         }
                     }
                     temp_a2 = *(&ganButton + (((giButton - 8) & 0xF) * 4));
@@ -328,7 +328,7 @@ block_36:
                                     temp_a2_2 = *((((giButton - 4) & 0xF) * 4) + &ganButton);
                                     if ((temp_a2_2 == temp_a1_3) && (*((((giButton - 3) & 0xF) * 4) + &ganButton) == temp_t0) && (*((((giButton - 2) & 0xF) * 4) + &ganButton) == temp_a3) && (*((((giButton - 1) & 0xF) * 4) + &ganButton) == temp_a2_2)) {
                                         B_8021BA98_usa = ~B_8021BA98_usa;
-                                        func_80005184_usa(&D_800B4160_usa, 9);
+                                        PlaySE(&SFX_INIT_TABLE, 9);
                                     }
                                 }
                             }
@@ -467,7 +467,7 @@ block_36:
                     }
                 }
             }
-            if ((B_8018A7F0_usa == 0) && (peelActive() == 0) && (gReset == 0) && (func_80024C2C_usa() == 0) && (func_80024C14_usa() == 0)) {
+            if ((B_8018A7F0_usa == 0) && (peelActive() == 0) && (gReset == 0) && (screenFlushing() == 0) && (func_80024C14_usa() == 0)) {
                 var_v1_4 = 0;
 
                 while (var_v1_4 <= 0) {
@@ -482,9 +482,9 @@ block_36:
                 }
 
                 if ((var_v0_3 != 0) && (func_80024BF4_usa(&sp1C) != 0)) {
-                    func_80005184_usa(&D_800B4160_usa, 2);
+                    PlaySE(&SFX_INIT_TABLE, 2);
                     if ((func_80024BF4_usa(&sp1C) != 0) && (HVQM2Util_Play(&RO_STR_800C3154_usa, 0x1000, sp1C) != 0)) {
-                        func_80005184_usa(&D_800B4160_usa, 2);
+                        PlaySE(&SFX_INIT_TABLE, 2);
                     }
                     gMain = 0x258;
                     gReset = -1;
@@ -496,8 +496,8 @@ block_36:
             break;
     }
 
-    if (func_80024C2C_usa() == 0) {
-        func_8002CC18_usa();
+    if (screenFlushing() == 0) {
+        peelTick();
     }
 }
 #else
