@@ -34,7 +34,31 @@ s32 PlayMIDI(struct_bgm_init_table arg0[], s32 arg1, s32 arg2, s32 arg3) {
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/sfxlimit", PlaySE);
+musHandle PlaySE(struct_sfx_init_table *arg0, s32 arg1) {
+    struct_sfx_init_table *temp_s0;
+
+    if (B_801C6EF6_usa <= 327.67) {
+        return 0;
+    }
+
+    temp_s0 = &arg0[arg1];
+
+    func_80002620_usa(temp_s0->unk_0);
+
+    if (arg1 == 1) {
+        PlaySFX(temp_s0->number, 1, 0x7F);
+    }
+
+    PlaySFX(temp_s0->number, temp_s0->volume, temp_s0->pan);
+
+    if (temp_s0->offset != 0.0f) {
+        SetFrequencySFX(D_800B3ADC_usa, temp_s0->offset);
+    }
+
+    func_80002620_usa(0);
+
+    return D_800B3ADC_usa;
+}
 #endif
 
 #if VERSION_USA

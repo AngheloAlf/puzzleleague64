@@ -19,7 +19,7 @@ void func_80001F90_usa(RomOffset segmentRom, size_t segmentSize, s16 index);
 int func_80002054_usa(void);
 void func_8000222C_usa(void);
 void LoadSFXBank(s32 arg0, s32 arg1);
-// void func_80002620_usa();
+void func_80002620_usa(s16 arg0);
 // void func_80002684_usa();
 // void func_80002694_usa();
 // void func_800026A0_usa();
@@ -53,10 +53,10 @@ void SetSongCrossFadeVolume(s16 arg0, s16 arg1);
 void func_80003054_usa(s16 arg0, s16 arg1, s16 arg2, s32 arg3);
 // void func_800030D0_usa();
 // void func_800030F0_usa();
-// void func_800032A4_usa();
+musHandle PlaySFX(int number, int volume, int pan);
 // void func_8000337C_usa();
 // void func_8000339C_usa();
-// void func_800033BC_usa();
+int SetFrequencySFX(musHandle handle, f32 offset);
 // void func_800033DC_usa();
 // void func_80003458_usa();
 // void func_80003484_usa();
@@ -76,5 +76,6 @@ void AudioUpdate();
 
 
 extern musHandle last_song_handle;
+extern musHandle D_800B3ADC_usa;
 
 #endif

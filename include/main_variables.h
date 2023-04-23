@@ -64,11 +64,6 @@ extern s16 ts_old_alert;
 // extern UNK_TYPE D_800B3F88_usa;
 // extern UNK_TYPE D_800B3F9C_usa;
 
-extern u8 SFX_INIT_TABLE[];
-// extern UNK_TYPE D_800B4165_usa;
-// extern UNK_TYPE D_800B4E1C_usa;
-// extern UNK_TYPE D_800B4E4C_usa;
-
 // extern UNK_TYPE D_800B58B0_usa;
 // extern UNK_TYPE D_800B58B4_usa;
 // extern UNK_TYPE D_800B58B6_usa;
@@ -1415,7 +1410,7 @@ extern OSMesg B_801C6EA0_usa[8];
 extern s32 gOverflow;
 // extern UNK_TYPE B_801C6EF0_usa;
 extern u8 DolbyEnabled;
-// extern UNK_TYPE B_801C6EF6_usa;
+extern u16 B_801C6EF6_usa;
 
 // extern UNK_TYPE B_801C6F00_usa;
 

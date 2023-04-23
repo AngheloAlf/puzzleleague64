@@ -118,7 +118,7 @@ void func_80001310_usa(RomOffset segmentRom, void * dstAddr, size_t segmentSize)
 // void func_8004F010_usa();
 // void func_8004F4BC_usa();
 // void func_8004F5E4_usa();
-// void func_8004F70C_usa();
+void UpdateAnimation(TheGame *game, s32, s32);
 // void func_8004FA2C_usa();
 // void func_8004FABC_usa();
 // void func_80050420_usa();
@@ -253,7 +253,7 @@ void func_80001310_usa(RomOffset segmentRom, void * dstAddr, size_t segmentSize)
 // void func_8006AF30_usa();
 // void func_8006B24C_usa();
 // void func_8006B314_usa();
-// void func_8006B544_usa();
+void Init2DTetrisBlocksTMEM(TheGame *game, s32);
 // void func_8006B628_usa();
 // void func_8006B6A8_usa();
 // void func_8006B730_usa();
@@ -412,7 +412,7 @@ void InitMimic(void);
 s32 func_8008913C_usa(s32 arg0);
 // void func_80089200_usa();
 // void func_8008928C_usa();
-void func_80089318_usa(s32 arg0);
+void InitPuzzleEditor(s32 arg0);
 void DoPuzzleEditor(void);
 void DrawPuzzleEditor(Gfx *gfx);
 

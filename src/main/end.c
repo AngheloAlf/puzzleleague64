@@ -189,7 +189,7 @@ s32 func_8003A0B8_usa();                            /* extern */
 ? func_8003E508_usa(u32);                           /* extern */
 ? func_8004ADD0_usa(?);                             /* extern */
 ? func_8004C280_usa(s32);                           /* extern */
-? func_8004F70C_usa(TheGame *, ?, ?);               /* extern */
+? UpdateAnimation(TheGame *, ?, ?);               /* extern */
 s32 func_8004FA2C_usa();                            /* extern */
 ? func_80058458_usa(s32, s32);                      /* extern */
 ? func_8005866C_usa(TheGame_unk_8860 *, s32, s32);  /* extern */
@@ -853,11 +853,11 @@ block_254:
                     break;
             }
             if (gTheGame.unk_9C0C == 1) {
-                func_8004F70C_usa(&gTheGame, 0, 0);
+                UpdateAnimation(&gTheGame, 0, 0);
                 var_a0_2 = (TheGame *) &gTheGame.unk_0000[1];
                 var_a1_3 = 1;
 block_270:
-                func_8004F70C_usa(var_a0_2, var_a1_3, 0);
+                UpdateAnimation(var_a0_2, var_a1_3, 0);
             }
         }
     }

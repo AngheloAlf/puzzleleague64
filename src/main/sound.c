@@ -41,8 +41,6 @@ extern struct_8018A748_usa B_8018A748_usa[2];
 
 extern s32 B_800CF2A0_usa;
 
-extern s16 B_801C6EF6_usa;
-
 extern u16 B_8021B968_usa;
 
 extern u8 B_800CF2B0_usa[];
@@ -71,11 +69,11 @@ extern UNK_PTR B_8018A6E8_usa;
 extern s32 B_8018A6E0_usa;
 extern s16 B_8018A6EC_usa;
 extern s16 B_8018A6EE_usa;
-extern s16 B_801F9CC4_usa;
+extern u16 B_801F9CC4_usa;
 extern s16 D_800B3AD0_usa;
 extern s16 D_800B3AD2_usa;
 extern s16 D_800B3AD4_usa;
-extern s32 D_800B3ADC_usa;
+
 extern s32 D_800B3AE0_usa;
 extern s16 D_800B3AE6_usa;
 extern s32 D_800B3AE8_usa;
@@ -702,7 +700,28 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/sound", func_800030F0_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/sound", func_800032A4_usa);
+extern int D_800B3AF0_usa; // priority
+extern int D_800B3AF4_usa; // restartflag
+
+musHandle PlaySFX(int number, int volume, int pan) {
+    if (number > B_801F9CC4_usa) {
+        number = 0;
+    }
+
+    if (D_800B3AF8_usa == 0) {
+        pan = 0x80;
+    }
+
+    if (B_8018A6EC_usa <= D_800B3AD0_usa) {
+        B_8018A6EE_usa = MusAsk(MUSFLAG_EFFECTS);
+        if (D_800B3AD2_usa >= B_8018A6EE_usa) {
+            D_800B3ADC_usa = MusStartEffect2(number, volume, pan, D_800B3AF4_usa, D_800B3AF0_usa);
+            return D_800B3ADC_usa;
+        }
+    }
+
+    return -1;
+}
 #endif
 
 #if VERSION_USA
@@ -714,7 +733,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/sound", func_8000339C_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/sound", func_800033BC_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/sound", SetFrequencySFX);
 #endif
 
 #if VERSION_USA

@@ -319,7 +319,7 @@ void InitEditor(void) {
     gnFlushCount = -1;
     B_8018E9F0_usa = -1;
     giScreenEdit = -1;
-    func_80089318_usa(-1);
+    InitPuzzleEditor(-1);
     func_8008913C_usa(B_801AB808_usa);
     gTheGame.unk_9C34 = 0;
     B_8018E9DC_usa = 3;
