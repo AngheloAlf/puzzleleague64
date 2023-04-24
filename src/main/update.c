@@ -273,7 +273,7 @@ void Update2DBuffer(struct_gInfo *info) {
         bcopy(&__src->unk_2ED0, &new_var5->unk_15FE8[var_s6], sizeof(TheGame_unk_0000_unk_2ED0));
     }
 
-    bcopy(&gTheGame.unk_90C8, &new_var5->unk_186F8, sizeof(TheGame_unk_90C8));
+    bcopy(&gTheGame.unk_90C8, &new_var5->unk_186F8, sizeof(TheGame_unk_90C8) * THEGAME_UNK_90C8_LEN);
 }
 #endif
 

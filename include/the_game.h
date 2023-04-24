@@ -85,9 +85,10 @@ typedef struct TheGame_unk_8860 {
 
 
 typedef struct TheGame_unk_90C8 {
-    /* 0x000 */ UNK_TYPE1 unk_000[0x8C0];
-} TheGame_unk_90C8; // size = 0x8C0
-
+    /* 0x00 */ uObjSprite unk_00;
+    /* 0x18 */ u32 unk_18;
+    /* 0x1C */ UNK_TYPE1 unk_1C[0x4]; // Probably alignment padding
+} TheGame_unk_90C8; // size = 0x20
 
 
 
@@ -256,6 +257,7 @@ typedef struct struct_gInfo_unk_10224 {
 } struct_gInfo_unk_10224; // size = 0xE
 
 #define THEGAME_BUFFER_LEN 2
+#define THEGAME_UNK_90C8_LEN 70
 
 typedef struct struct_gInfo_unk_00068 {
     /* 0x00000 */ Gfx unk_00000[UNK_SIZE];
@@ -280,7 +282,7 @@ typedef struct struct_gInfo_unk_00068 {
     /* 0x184B8 */ Mtx unk_184B8[THEGAME_BUFFER_LEN];
     /* 0x18538 */ Mtx unk_18538[THEGAME_BUFFER_LEN];
     /* 0x185B8 */ UNK_TYPE1 unk_185B8[0x140];
-    /* 0x186F8 */ TheGame_unk_90C8 unk_186F8;
+    /* 0x186F8 */ TheGame_unk_90C8 unk_186F8[THEGAME_UNK_90C8_LEN];
 } struct_gInfo_unk_00068; // size = 0x18FB8
 
 typedef struct struct_gInfo {
@@ -301,7 +303,7 @@ typedef struct TheGame {
     /* 0x89C4 */ u16 unk_89C4;
     /* 0x89C6 */ u16 unk_89C6;
     /* 0x89C8 */ UNK_TYPE1 unk_89C8[0x700];
-    /* 0x90C8 */ TheGame_unk_90C8 unk_90C8;
+    /* 0x90C8 */ TheGame_unk_90C8 unk_90C8[THEGAME_UNK_90C8_LEN];
     /* 0x9988 */ UNK_TYPE1 unk_9988[0xD4];
     /* 0x9A5C */ UNK_TYPE1 unk_9A5C[0x2];
     /* 0x9A5C */ UNK_TYPE2 unk_9A5E;
