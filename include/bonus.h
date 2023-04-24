@@ -15,7 +15,7 @@ void DrawBonus(struct_gInfo_unk_00068 *arg0);
 // void func_80032494_usa();
 // void func_800325F8_usa();
 void DoCountDown();
-// void func_80033004_usa();
+void DrawCountDown(void);
 void InitStageClearIntro(void);
 void DoStageClearIntro();
 // void func_80034140_usa();

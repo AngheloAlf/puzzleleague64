@@ -95,7 +95,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", DoCountDown);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", func_80033004_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", DrawCountDown);
 #endif
 
 #if VERSION_USA

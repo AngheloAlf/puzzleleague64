@@ -358,7 +358,7 @@ extern f32 gRotateYMtx[4][4];
 extern s32 gCounter;
 extern s32 gReset; /* Original name: gReset */
 extern enum_gMain gMain; /* Original name: gMain */
-// extern UNK_TYPE D_800BE34C_usa;
+extern s32 gOverflowFlag;
 // extern UNK_TYPE D_800BE350_usa;
 
 // extern UNK_TYPE D_800C1230_usa;
@@ -1048,7 +1048,7 @@ extern u32 gTimerKeeperSamplesPerSecond;
 // extern UNK_TYPE B_80192FD2_usa;
 // extern UNK_TYPE B_80192FD4_usa;
 // extern UNK_TYPE B_80192FD6_usa;
-// extern UNK_TYPE B_80192FE0_usa;
+extern s32 gLastOverflow;
 // extern UNK_TYPE B_80192FF0_usa;
 // extern UNK_TYPE B_80192FF4_usa;
 // extern UNK_TYPE B_80192FF8_usa;

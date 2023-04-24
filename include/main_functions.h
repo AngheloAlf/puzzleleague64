@@ -25,7 +25,7 @@ void func_80001310_usa(RomOffset segmentRom, void * dstAddr, size_t segmentSize)
 // void func_800346B8_usa();
 // void func_8003490C_usa();
 // void func_80034DB8_usa();
-// void func_8003520C_usa();
+UNK_RET DrawPauseOver(struct_gInfo_unk_00068 *arg0);
 // void func_8003524C_usa();
 // void func_800352DC_usa();
 // void func_8003536C_usa();
@@ -99,7 +99,7 @@ void Draw2DShadeBox(void);
 // void func_8004C1B8_usa();
 // void func_8004C280_usa();
 // void func_8004DA3C_usa();
-// void func_8004DCC0_usa();
+UNK_RET Draw2DText(struct_gInfo_unk_00068 *arg0);
 // void func_8004DF64_usa();
 // void func_8004E450_usa();
 // void func_8004E4E4_usa();
@@ -133,7 +133,7 @@ void func_80050C2C_usa(void);
 // void func_80052400_usa();
 // void func_80052720_usa();
 // void func_80052C28_usa();
-// void func_80052E04_usa();
+UNK_RET Draw2DMiscStuff(struct_gInfo_unk_00068 *arg0);
 // void func_80053140_usa();
 // void func_80053E64_usa();
 

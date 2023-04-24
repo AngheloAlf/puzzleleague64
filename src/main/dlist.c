@@ -30,7 +30,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/dlist", func_800540AC_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/dlist", func_80054204_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/dlist", Draw2DGameFade);
 #endif
 
 #if VERSION_USA

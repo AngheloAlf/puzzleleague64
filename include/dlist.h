@@ -10,7 +10,7 @@
 void SetGameFade(void);
 // void func_8005407C_usa();
 // void func_800540AC_usa();
-// void func_80054204_usa();
+void Draw2DGameFade(void);
 // void func_80054320_usa();
 // void func_8005443C_usa();
 // void func_80054454_usa();

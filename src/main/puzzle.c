@@ -122,7 +122,7 @@ void DrawPuzzleEditor(struct_gInfo_unk_00068 *arg0) {
     gDPSetCombineMode(glistp++, G_CC_DECALRGBA, G_CC_DECALRGBA);
     gDPSetPrimColor(glistp++, 0, 0, 255, 255, 255, 255);
 
-    Draw2DTetrisWell(arg0, &gTheGame, 0);
+    Draw2DTetrisWell(arg0, &gTheGame.unk_0000[0], 0);
 
     gDPSetScissor(glistp++, G_SC_NON_INTERLACE, 0, 7, SCREEN_WIDTH, SCREEN_HEIGHT - 1);
 

@@ -306,7 +306,7 @@ typedef struct TheGame {
     /* 0x9A5C */ UNK_TYPE1 unk_9A5C[0x2];
     /* 0x9A5C */ UNK_TYPE2 unk_9A5E;
     /* 0x9A60 */ UNK_TYPE1 unk_9A60[0x1A8];
-    /* 0x9C08 */ s32 unk_9C08; // playercount?
+    /* 0x9C08 */ s32 unk_9C08; // playercount? // goes up to THEGAME_BUFFER_LEN
     /* 0x9C0C */ s32 unk_9C0C;
     /* 0x9C10 */ s32 unk_9C10;
     /* 0x9C14 */ s32 unk_9C14;
