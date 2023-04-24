@@ -13,7 +13,7 @@ void SetGameFade(void);
 void Draw2DGameFade(void);
 // void func_80054320_usa();
 // void func_8005443C_usa();
-// void func_80054454_usa();
+s32 DoFlashDraw(s32 arg0);
 // void func_800544D4_usa();
 // void func_80054500_usa();
 void func_800545E4_usa(s32 arg0);

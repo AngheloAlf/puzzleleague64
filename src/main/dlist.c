@@ -42,7 +42,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/dlist", func_8005443C_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/dlist", func_80054454_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/dlist", DoFlashDraw);
 #endif
 
 #if VERSION_USA
