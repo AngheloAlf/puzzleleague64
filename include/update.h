@@ -19,10 +19,10 @@
 // void func_8005825C_usa();
 // void func_8005834C_usa();
 // void func_80058458_usa();
-// void func_8005866C_usa();
+// void UpdatePlayerPuzzle();
 // void func_800587CC_usa();
 // void func_80058934_usa();
-// void func_80058A10_usa();
+// void UpdatePlayerStageClear();
 // void func_80058AE0_usa();
 // void func_80058D68_usa();
 // void func_80058DF0_usa();

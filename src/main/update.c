@@ -64,7 +64,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80058458_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_8005866C_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdatePlayerPuzzle);
 #endif
 
 #if VERSION_USA
@@ -76,7 +76,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80058934_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80058A10_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdatePlayerStageClear);
 #endif
 
 #if VERSION_USA

@@ -677,16 +677,7 @@ extern s32 gOverflowFlag;
 // extern UNK_TYPE RO_STR_800C5A00_usa;
 // extern UNK_TYPE RO_800C5BF0_usa;
 // extern UNK_TYPE RO_800C5C18_usa;
-// extern UNK_TYPE RO_STR_800C5E2C_usa;
-// extern UNK_TYPE RO_STR_800C5E38_usa;
-// extern UNK_TYPE RO_800C5E48_usa;
-// extern UNK_TYPE RO_800C5E50_usa;
-// extern UNK_TYPE RO_800C5E58_usa;
-// extern UNK_TYPE RO_800C5E5C_usa;
-// extern UNK_TYPE RO_800C5E64_usa;
-// extern UNK_TYPE RO_STR_800C5E68_usa;
-// extern UNK_TYPE RO_800C5E70_usa;
-// extern UNK_TYPE RO_800C5E78_usa;
+
 // extern UNK_TYPE RO_800C6020_usa;
 // extern UNK_TYPE RO_800C60A0_usa;
 // extern UNK_TYPE RO_DBL_800C6920_usa;

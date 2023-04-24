@@ -192,8 +192,8 @@ s32 func_8003A0B8_usa();                            /* extern */
 ? UpdateAnimation(TheGame *, ?, ?);               /* extern */
 s32 func_8004FA2C_usa();                            /* extern */
 ? func_80058458_usa(s32, s32);                      /* extern */
-? func_8005866C_usa(TheGame_unk_8860 *, s32, s32);  /* extern */
-? func_80058A10_usa(TheGame_unk_8860 *, s32, s32);  /* extern */
+? UpdatePlayerPuzzle(TheGame_unk_8860 *, s32, s32);  /* extern */
+? UpdatePlayerStageClear(TheGame_unk_8860 *, s32, s32);  /* extern */
 ? func_80058D68_usa(s32, s32);                      /* extern */
 ? func_8005D8B4_usa(TheGame *);                     /* extern */
 ? func_8006AF30_usa(TheGame *);                     /* extern */
@@ -264,10 +264,10 @@ void DoGameOver2D(void) {
                 case GMAIN_38E:                     /* switch 1 */
                     if (gSelection != 0x82) {
                         if (gSelection == 0xAA) {
-                            func_80058A10_usa(gTheGame.unk_8860, gTheGame.unk_9C20[0xC], gTheGame.unk_9C20[0x10]);
+                            UpdatePlayerStageClear(gTheGame.unk_8860, gTheGame.unk_9C20[0xC], gTheGame.unk_9C20[0x10]);
                         }
                     } else {
-                        func_8005866C_usa(gTheGame.unk_8860, gTheGame.unk_9C20[8], gTheGame.unk_9C20[0xC]);
+                        UpdatePlayerPuzzle(gTheGame.unk_8860, gTheGame.unk_9C20[8], gTheGame.unk_9C20[0xC]);
                     }
                     func_8003490C_usa();
                     switch (gSelection) {           /* switch 3; irregular */
@@ -872,7 +872,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/end", DoGameOver2D);
 ? PlaySE(? *, ?);                        /* extern */
 ? func_80005888_usa(?, ?, ?);                       /* extern */
 ? func_80005A08_usa(s32);                           /* extern */
-? func_80034DB8_usa();                              /* extern */
+? LoadGameOver3D();                              /* extern */
 ? func_800352DC_usa(TheGame *, s8 *);               /* extern */
 ? func_800353B0_usa(TheGame *, s8 *);               /* extern */
 ? func_80035438_usa(TheGame *, s8 *);               /* extern */
@@ -895,12 +895,12 @@ s32 func_8003A0B8_usa();                            /* extern */
 ? func_8003E508_usa(u32);                           /* extern */
 ? func_8004ADD0_usa(?);                             /* extern */
 ? func_8004C280_usa(s32);                           /* extern */
-? func_8004E450_usa();                              /* extern */
+? InitFlic();                              /* extern */
 s32 func_8004FA2C_usa();                            /* extern */
 ? func_800521A4_usa(?);                             /* extern */
 ? func_80058458_usa(s32, s32);                      /* extern */
-? func_8005866C_usa(TheGame_unk_8860 *, s32, s32);  /* extern */
-? func_80058A10_usa(TheGame_unk_8860 *, s32, s32);  /* extern */
+? UpdatePlayerPuzzle(TheGame_unk_8860 *, s32, s32);  /* extern */
+? UpdatePlayerStageClear(TheGame_unk_8860 *, s32, s32);  /* extern */
 ? func_8005D8B4_usa(TheGame *);                     /* extern */
 ? func_8005D900_usa(TheGame *);                     /* extern */
 ? func_8005DBD8_usa(TheGame *, ?);                  /* extern */
@@ -974,13 +974,13 @@ void DoGameOver3D(void) {
                 case GMAIN_38E:                     /* switch 1 */
                     if (gSelection != 0x82) {
                         if (gSelection == 0xAA) {
-                            func_80058A10_usa(gTheGame.unk_8860, gTheGame.unk_9C20[0xC], gTheGame.unk_9C20[0x10]);
+                            UpdatePlayerStageClear(gTheGame.unk_8860, gTheGame.unk_9C20[0xC], gTheGame.unk_9C20[0x10]);
                         }
                     } else {
-                        func_8005866C_usa(gTheGame.unk_8860, gTheGame.unk_9C20[8], gTheGame.unk_9C20[0xC]);
+                        UpdatePlayerPuzzle(gTheGame.unk_8860, gTheGame.unk_9C20[8], gTheGame.unk_9C20[0xC]);
                     }
-                    func_80034DB8_usa();
-                    func_8004E450_usa();
+                    LoadGameOver3D();
+                    InitFlic();
                     switch (gSelection) {           /* switch 3; irregular */
                         case 0x8C:                  /* switch 3 */
                         case 0xAA:                  /* switch 3 */
@@ -1242,8 +1242,8 @@ block_115:
                         func_80058458_usa(var_s4, var_s3);
                     }
                     var_s0_2 = 0;
-                    func_80034DB8_usa();
-                    func_8004E450_usa();
+                    LoadGameOver3D();
+                    InitFlic();
                     func_8005DD3C_usa(&gTheGame);
                     func_8005DD3C_usa((TheGame *) &gTheGame.unk_0000[1]);
                     func_8005DDF8_usa(&gTheGame);

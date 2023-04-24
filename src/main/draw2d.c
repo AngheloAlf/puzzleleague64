@@ -12,6 +12,7 @@
 #include "assets_variables.h"
 #include "dlist.h"
 #include "bonus.h"
+#include "text.h"
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/draw2d", Draw2DTetrisWell);

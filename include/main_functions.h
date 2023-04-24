@@ -24,7 +24,7 @@ void func_80001310_usa(RomOffset segmentRom, void * dstAddr, size_t segmentSize)
 // void func_800343A0_usa();
 // void func_800346B8_usa();
 // void func_8003490C_usa();
-// void func_80034DB8_usa();
+// void LoadGameOver3D();
 UNK_RET DrawPauseOver(struct_gInfo_unk_00068 *arg0);
 // void func_8003524C_usa();
 // void func_800352DC_usa();
@@ -95,13 +95,8 @@ void Draw2DShadeBox(void);
 // void func_8004B12C_usa();
 // void func_8004B300_usa();
 // void func_8004BC64_usa();
-// void func_8004C020_usa();
-// void func_8004C1B8_usa();
-// void func_8004C280_usa();
-// void func_8004DA3C_usa();
-UNK_RET Draw2DText(struct_gInfo_unk_00068 *arg0);
-// void func_8004DF64_usa();
-// void func_8004E450_usa();
+
+// void InitFlic();
 // void func_8004E4E4_usa();
 // void func_8004E5E8_usa();
 // void func_8004E688_usa();
