@@ -77,7 +77,6 @@ void Draw2DTemplate(struct_gInfo_unk_00068 *arg0) {
     for (i = 0; i < MAGIC_NUMBER; i++) {
         s32 var_v1 = arg0->unk_186F8[i].unk_18;
 
-
         if (var_v1 == -1) {
             continue;
         }
