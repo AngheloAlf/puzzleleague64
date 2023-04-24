@@ -2,13 +2,17 @@
  * Original filename: puzzle.c
  */
 
+#include "puzzle.h"
 #include "libultra.h"
 #include "include_asm.h"
 #include "macros_defines.h"
 #include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
+#include "assets_variables.h"
 #include "tetris.h"
+#include "update.h"
+#include "draw2d.h"
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/puzzle", func_80088940_usa);
@@ -93,102 +97,45 @@ void DoPuzzleEditor(void) {
 #endif
 
 #if VERSION_USA
-#if 0
-// ? Update2DBuffer(struct_gInfo *);                   /* extern */
-// ? func_80047898_usa(u32);                           /* extern */
-// ? func_8004879C_usa(s32, s32);                      /* extern */
-// ? func_80049010_usa();                              /* extern */
-// ? func_8004EB5C_usa(Gfx *, ?, ?, s32);              /* extern */
-// ? func_8006CEA0_usa(Gfx *, TheGame *, ?, u32);      /* extern */
-extern ? D_01000820_usa;
-
-void DrawPuzzleEditor(Gfx *gfx) {
-    Gfx *temp_v0;
-    Gfx *temp_v0_2;
-    Gfx *temp_v0_3;
-    Gfx *temp_v1;
-
+void DrawPuzzleEditor(struct_gInfo_unk_00068 *arg0) {
     Update2DBuffer(*fb);
-    temp_v0 = glistp;
-    glistp = temp_v0 + 8;
-    temp_v0->words.w0 = 0xED000000;
-    glistp = temp_v0 + 0x10;
-    glistp = temp_v0 + 0x18;
-    glistp = temp_v0 + 0x20;
-    glistp = temp_v0 + 0x28;
-    glistp = temp_v0 + 0x30;
-    temp_v0->words.w1 = 0x5003BC;
-    temp_v0->unk_8 = 0xE7000000U;
-    temp_v0->unk_C = 0;
-    temp_v0->unk_10 = 0xBA001402;
-    temp_v0->unk_14 = 0x300000;
-    temp_v0->unk_18 = 0xF7000000;
-    temp_v0->unk_1C = 0x10001;
-    temp_v0->unk_20 = 0xF64FC018;
-    temp_v0->unk_24 = 0;
-    temp_v0->unk_28 = 0xE7000000U;
-    temp_v0->unk_2C = 0;
-    glistp = temp_v0 + 0x38;
-    temp_v0->unk_30 = 0xBA001402;
-    temp_v0->unk_34 = 0;
-    func_8004879C_usa(0x10001, 0xF64FC018);
-    func_8004EB5C_usa(gfx, 1, 3);
+
+    gDPSetScissor(glistp++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 1);
+    gDPPipeSync(glistp++);
+    gDPSetCycleType(glistp++, G_CYC_FILL);
+    gDPSetFillColor(glistp++, (GPACK_RGBA5551(0, 0, 0, 1) << 16) | GPACK_RGBA5551(0, 0, 0, 1));
+    gDPFillRectangle(glistp++, 0, 0, 319, 6);
+    gDPPipeSync(glistp++);
+    gDPSetCycleType(glistp++, G_CYC_1CYCLE);
+
+    Draw2DBackground();
+    Draw2DAnimation(arg0, 1, 3);
     gBox_Level = 0x8C;
-    func_80049010_usa();
-    temp_v0_2 = glistp;
-    glistp = temp_v0_2 + 8;
-    glistp = temp_v0_2 + 0x10;
-    glistp = temp_v0_2 + 0x18;
-    temp_v0_2->unk_14 = 0x8000;
-    glistp = temp_v0_2 + 0x20;
-    temp_v0_2->unk_1C = &D_01000820_usa;
-    glistp = temp_v0_2 + 0x28;
-    glistp = temp_v0_2 + 0x30;
-    glistp = temp_v0_2 + 0x38;
-    glistp = temp_v0_2 + 0x40;
-    temp_v0_2->unk_38 = 0xFA000000;
-    temp_v0_2->words.w0 = 0xED00007C;
-    temp_v0_2->words.w1 = 0x50037C;
-    temp_v0_2->unk_8 = 0xE7000000U;
-    temp_v0_2->unk_C = 0;
-    temp_v0_2->unk_10 = 0xBA000E02;
-    temp_v0_2->unk_18 = 0xC1000017;
-    temp_v0_2->unk_20 = 0xE7000000U;
-    temp_v0_2->unk_24 = 0;
-    temp_v0_2->unk_28 = 0xB900031D;
-    temp_v0_2->unk_2C = 0x0F0A4000;
-    temp_v0_2->unk_30 = 0xFCFFFFFF;
-    temp_v0_2->unk_34 = 0xFFFCF279;
-    temp_v0_2->unk_3C = -1;
-    func_8006CEA0_usa(gfx, &gTheGame, 0, 0x50037CU);
-    temp_v1 = glistp;
-    glistp = temp_v1 + 8;
-    temp_v1->words.w0 = 0xED00001C;
-    temp_v1->words.w1 = 0x5003BC;
-    func_80047898_usa(0xED00001CU);
-    func_8004EB5C_usa(gfx, 4, 4);
-    temp_v0_3 = glistp;
-    glistp = temp_v0_3 + 8;
-    glistp = temp_v0_3 + 0x10;
-    glistp = temp_v0_3 + 0x18;
-    glistp = temp_v0_3 + 0x20;
-    glistp = temp_v0_3 + 0x28;
-    temp_v0_3->words.w0 = 0xE7000000;
-    temp_v0_3->words.w1 = 0;
-    temp_v0_3->unk_8 = 0xBA001402;
-    temp_v0_3->unk_C = 0x300000;
-    temp_v0_3->unk_10 = 0xF7000000;
-    temp_v0_3->unk_14 = 0x63196319;
-    temp_v0_3->unk_18 = 0xF647C230;
-    temp_v0_3->unk_1C = 0x388068;
-    temp_v0_3->unk_20 = 0xE7000000U;
-    temp_v0_3->unk_24 = 0;
-    glistp = temp_v0_3 + 0x30;
-    temp_v0_3->unk_28 = 0xBA001402;
-    temp_v0_3->unk_2C = 0;
-    func_8004EB5C_usa(gfx, 5, 6, 0x63196319);
+    Draw2DShadeBox();
+
+    gDPSetScissor(glistp++, G_SC_NON_INTERLACE, 0, 31, SCREEN_WIDTH, 223);
+    gDPPipeSync(glistp++);
+    gDPSetTextureLUT(glistp++, G_TT_RGBA16);
+    gSPObjLoadTxtr(glistp++, &colorLUT);
+    gDPPipeSync(glistp++);
+    gDPSetRenderMode(glistp++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
+    gDPSetCombineMode(glistp++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+    gDPSetPrimColor(glistp++, 0, 0, 255, 255, 255, 255);
+
+    Draw2DTetrisWell(arg0, &gTheGame, 0);
+
+    gDPSetScissor(glistp++, G_SC_NON_INTERLACE, 0, 7, SCREEN_WIDTH, SCREEN_HEIGHT - 1);
+
+    Draw2DFrame();
+    Draw2DAnimation(arg0, 4, 4);
+
+    gDPPipeSync(glistp++);
+    gDPSetCycleType(glistp++, G_CYC_FILL);
+    gDPSetFillColor(glistp++, (GPACK_RGBA5551(99, 99, 99, 1) << 16) | GPACK_RGBA5551(99, 99, 99, 1));
+    gDPFillRectangle(glistp++, 226, 26, 287, 140);
+    gDPPipeSync(glistp++);
+    gDPSetCycleType(glistp++, G_CYC_1CYCLE);
+
+    Draw2DAnimation(arg0, 5, 6);
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/puzzle", DrawPuzzleEditor);
-#endif
 #endif

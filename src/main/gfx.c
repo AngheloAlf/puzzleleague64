@@ -46,7 +46,7 @@ void InitGFX(void) {
 
 #if VERSION_USA
 s32 CreateMenuGfxTask(struct_gInfo *info) {
-    Gfx *temp_s2 = info->unk_00068.unk_00000;
+    struct_gInfo_unk_00068 *temp_s2 = &info->unk_00068;
 
     fb = &info;
     glistp = info->unk_00068.unk_00000;
@@ -54,7 +54,7 @@ s32 CreateMenuGfxTask(struct_gInfo *info) {
     gSPSegment(glistp++, 0x00, 0x00000000);
 
     gSPSegment(glistp++, 0x01, osVirtualToPhysical(staticSegment));
-    gSPSegment(glistp++, 0x02, osVirtualToPhysical(temp_s2));
+    gSPSegment(glistp++, 0x02, osVirtualToPhysical(temp_s2->unk_00000));
 
     if (gReset != 0) {
         gReset = 0;
@@ -127,7 +127,7 @@ void CreateGameGfxTask1(struct_gInfo *info) {
 
 #if VERSION_USA
 s32 CreateGameGfxTask2(struct_gInfo *info) {
-    Gfx *temp_a0 = info->unk_00068.unk_00000;
+    struct_gInfo_unk_00068 *temp_a0 = &info->unk_00068;
 
     fb = &info;
 

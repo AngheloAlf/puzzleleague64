@@ -15,6 +15,7 @@
 #include "image.h"
 #include "peel.h"
 #include "sfxlimit.h"
+#include "puzzle.h"
 
 typedef void (*struct_gaEditData_unk_4)(s32 arg0, screenTick_arg0 *arg1);
 
@@ -224,7 +225,7 @@ INLINE s32 func_800306B0_usa(s32 arg0) {
 #endif
 
 #if VERSION_USA
-void DrawEditor(Gfx *gfx) {
+void DrawEditor(struct_gInfo_unk_00068 *arg0) {
     if (gnFlushCount > 0) {
         gnFlushCount = gnFlushCount - 1;
         if (gnFlushCount == 0) {
@@ -248,7 +249,7 @@ void DrawEditor(Gfx *gfx) {
     }
 
     if (screenFlushing() == 0) {
-        DrawPuzzleEditor(gfx);
+        DrawPuzzleEditor(arg0);
     }
 
     screenDraw(&glistp, editDrawImage);

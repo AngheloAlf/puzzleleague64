@@ -2,6 +2,7 @@
 #define EDITOR_H
 
 #include "libultra.h"
+#include "the_game.h"
 #include "unk.h"
 
 
@@ -15,7 +16,7 @@ void func_8002F2E8_usa(void);
 // void func_8002F464_usa();
 
 s32 func_800306B0_usa(s32 arg0);
-void DrawEditor(Gfx *gfx);
+void DrawEditor(struct_gInfo_unk_00068 *arg0);
 void DoEditor(void);
 void InitEditor(void);
 

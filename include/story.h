@@ -13,7 +13,7 @@
 // void func_8002B85C_usa();
 // void func_8002B8B0_usa();
 void DoStory(void);
-void DrawStory(Gfx *gfx);
+void DrawStory(struct_gInfo_unk_00068 *arg0);
 void InitStory(void);
 
 #endif

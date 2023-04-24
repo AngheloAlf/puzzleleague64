@@ -2,6 +2,7 @@
 #define MENU_H
 
 #include "libultra.h"
+#include "the_game.h"
 #include "unk.h"
 
 
@@ -96,7 +97,7 @@ s32 menuInitUser(u32 arg0);
 // void func_8001A854_usa();
 // void func_8001AB0C_usa();
 // void func_8001ACA8_usa();
-void DrawMenu(Gfx *gfx);
+void DrawMenu(struct_gInfo_unk_00068 *arg0);
 void DoMenu();
 void InitMenu(void);
 // void func_8001BFF0_usa();
