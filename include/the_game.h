@@ -74,10 +74,13 @@ typedef struct TheGame_unk_0000 {
 typedef struct TheGame_unk_8860 {
     /* 0x00 */ UNK_TYPE1 unk_00[0x4];
     /* 0x04 */ s32 unk_04;
-    /* 0x08 */ UNK_TYPE1 unk_08[0x10];
+    /* 0x08 */ UNK_TYPE1 unk_08[0xC];
+    /* 0x14 */ s32 unk_14;
     /* 0x18 */ s32 unk_18;
     /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ UNK_TYPE1 unk_20[0x90];
+    /* 0x20 */ UNK_TYPE4 unk_20;
+    /* 0x24 */ UNK_TYPE1 unk_24[0x74];
+    /* 0x98 */ uObjSprite unk_98;
 } TheGame_unk_8860; // size = 0xB0
 
 
@@ -299,7 +302,10 @@ typedef struct TheGame {
     /* 0x89C6 */ u16 unk_89C6;
     /* 0x89C8 */ UNK_TYPE1 unk_89C8[0x700];
     /* 0x90C8 */ TheGame_unk_90C8 unk_90C8;
-    /* 0x9988 */ UNK_TYPE1 unk_9988[0x280];
+    /* 0x9988 */ UNK_TYPE1 unk_9988[0xD4];
+    /* 0x9A5C */ UNK_TYPE1 unk_9A5C[0x2];
+    /* 0x9A5C */ UNK_TYPE2 unk_9A5E;
+    /* 0x9A60 */ UNK_TYPE1 unk_9A60[0x1A8];
     /* 0x9C08 */ s32 unk_9C08; // playercount?
     /* 0x9C0C */ s32 unk_9C0C;
     /* 0x9C10 */ s32 unk_9C10;
