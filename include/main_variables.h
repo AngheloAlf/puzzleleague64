@@ -1119,7 +1119,7 @@ extern s32 gLastOverflow;
 // extern UNK_TYPE B_80194978_usa;
 // extern UNK_TYPE B_80194980_usa;
 // extern UNK_TYPE B_80194998_usa;
-// extern UNK_TYPE B_801949A0_usa;
+// extern UNK_TYPE piAccessBuf;
 
 // extern UNK_TYPE B_801949B4_usa;
 // extern UNK_TYPE B_801949B8_usa;
@@ -1129,7 +1129,7 @@ extern s32 gLastOverflow;
 // extern UNK_TYPE B_801949C0_usa;
 // extern UNK_TYPE B_801949C4_usa;
 
-// extern UNK_TYPE B_80194A10_usa;
+// extern UNK_TYPE siAccessBuf;
 
 // extern UNK_TYPE B_80194A28_usa;
 // extern UNK_TYPE B_80195BE0_usa;
@@ -1549,7 +1549,7 @@ extern Gfx *glistp;
 // extern UNK_TYPE B_8021BEE4_usa;
 // extern UNK_TYPE B_8021BEE8_usa;
 
-// extern UNK_TYPE B_8021DF30_usa;
+// extern UNK_TYPE __osSiAccessQueue;
 // extern UNK_TYPE B_8021DF48_usa;
 extern STACK(B_8021FF50_usa, 0x1000);
 

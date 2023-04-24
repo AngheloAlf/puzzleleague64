@@ -372,7 +372,7 @@ D_800BE9E0_usa = 0x800BE9E0; //
 D_800BE9F4_usa = 0x800BE9F4; //
 D_800BE9F8_usa = 0x800BE9F8; //
 D_800BE9FC_usa = 0x800BE9FC; //
-D_800BEA00_usa = 0x800BEA00; //
+__osSiAccessQueueEnabled = 0x800BEA00; //
 __osThreadTail = 0x800BEA10; //
 __osRunQueue = 0x800BEA18; //
 __osActiveQueue = 0x800BEA1C; //
@@ -668,9 +668,13 @@ jtbl_800C9818_usa = 0x800C9818; // type:jtbl
 
 B_801931E0_usa = 0x801931E0; //
 
+piAccessBuf = 0x801949A0; // size:0x4
+
 B_801949B0_usa = 0x801949B0; //
 
 B_801949D0_usa = 0x801949D0; //
+
+siAccessBuf = 0x80194A10; // size:0x4
 
 B_80194A20_usa = 0x80194A20; //
 
@@ -751,3 +755,5 @@ __rmonRcpAtBreak = 0x8021BEC0; // size:0x1
 
 __rmonMQ = 0x8021BEC8; // size:0x18
 __osRdb_IP6_Ct = 0x8021BEE0; // size:0x4
+
+__osSiAccessQueue = 0x8021DF30; //

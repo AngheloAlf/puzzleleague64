@@ -171,7 +171,7 @@ segments:
       - [0x092830, asm, libultra/epilinkhandle] # c
       - [0x092890, asm, libultra/cartrominit] # c
       - [0x092A80, asm, libultra/devmgr] # c
-      - [0x092FC0, asm, libultra/092FC0]
+      - [0x092FC0, asm, libultra/piacs]
       - [0x0930B0, asm, libultra/pidma] # c
       - [0x0932F0, asm, libultra/aigetlen] # c
       - [0x093320, asm, libultra/aigetstat] # c
@@ -237,7 +237,7 @@ segments:
       - [0x09EE30, asm, libultra/sptask] # c
       - [0x09F260, asm, libultra/sched] # c
       - [0x0A0440, asm, libultra/sirawdma] # c
-      - [0x0A0540, asm, libultra/0A0540]
+      - [0x0A0540, asm, libultra/siacs]
       - [0x0A0630, asm, libultra/createthread] # c
       - [0x0A0800, asm, libultra/destroythread] # c
       - [0x0A0920, asm, libultra/getthreadpri] # c
@@ -260,7 +260,7 @@ segments:
       - [0x0A2030, asm, libultra/viswapbuf] # c
       - [0x0A2110, asm, libultra/viswapcontext] # c
       - [0x0A2480, asm, libultra/viblack] # c
-      - [0x0A2520, asm, libultra/0A2520]
+      - [0x0A2520, hasm, libultra/parameters]
       - [0x0A2580, asm, libultra/afterprenmi] # c
       - [0x0A25C0, asm, libultra/initialize] # c
       - [0x0A2B70, asm, libultra/errorasm] # c
@@ -297,11 +297,11 @@ segments:
       - [0x0A6D30, asm, libultra/sptaskyield] # c
       - [0x0A6D60, asm, libultra/sptaskyielded] # c
       - [0x0A6DF0, asm, libultra/sirawread] # c
-      - [0x0A6EB0, asm, libultra/0A6EB0]
+      - [0x0A6EB0, asm, libultra/sirawwrite]
       - [0x0A6F40, hasm, libultra/maptlbrdb]
       - [0x0A6FA0, hasm, libultra/unmaptlball]
       - [0x0A6FF0, asm, libultra/vi] # c
-      - [0x0A7150, asm, libultra/0A7150]
+      - [0x0A7150, asm, libultra/vigetcurrcontext]
       - [0x0A7180, asm, libultra/xlitob] # c
       - [0x0A7530, asm, libultra/xldtob] # c
       - [0x0A86B0, asm, libultra/dp] # c
@@ -313,9 +313,9 @@ segments:
       - [0x0AAD00, asm, libultra/rmonmain] # c
       - [0x0AB150, asm, libultra/spgetstat] # c
       - [0x0AB180, asm, libultra/sprawread] # c
-      - [0x0AB240, asm, libultra/0AB240]
+      - [0x0AB240, asm, libultra/sprawwrite]
       - [0x0AB2D0, asm, libultra/si] # c
-      - [0x0AB320, asm, libultra/0AB320]
+      - [0x0AB320, asm, libultra/getactivequeue]
       - [0x0AB350, asm, libultra/ldiv] # c
       - [0x0AB5B0, hasm, libultra/rmonrcp]
       - [0x0AB650, asm, libultra/rmonbrk] # c
@@ -358,6 +358,10 @@ segments:
       - [0x0BF240, data, libmus/aud_thread]
 
       - [0x0BF250, data, libultra/0BF250] # TODO: find file splits
+      - [0x0BF290, data, libultra/piacs]
+      - [0x0BF2A0, data, libultra/0BF2A0] # TODO: find file splits
+      - [0x0BF600, data, libultra/siacs]
+      - [0x0BF610, data, libultra/0BF610] # TODO: find file splits
 
       - [0x0C1E30, data, libhvqm/adpcmdec]
 
@@ -433,6 +437,10 @@ segments:
       - { start: 0x0CA4A0, type: bss, vram: 0x800C98A0, name: main/800C98A0 }
       - { start: 0x0CA4A0, type: bss, vram: 0x8018ABB0, name: main/file }
       - { start: 0x0CA4A0, type: bss, vram: 0x8018E3D0, name: main/8018E3D0 }
+      - { start: 0x0CA4A0, type: bss, vram: 0x801949A0, name: main/piacs }
+      - { start: 0x0CA4A0, type: bss, vram: 0x801949B0, name: main/801949B0 }
+      - { start: 0x0CA4A0, type: bss, vram: 0x80194A10, name: main/siacs }
+      - { start: 0x0CA4A0, type: bss, vram: 0x80194A20, name: main/80194A20 }
 
   - name: buffer1
     type: code
