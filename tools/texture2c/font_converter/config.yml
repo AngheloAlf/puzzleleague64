@@ -1,0 +1,6 @@
+format: 1bpp
+charWidth: 6
+charHeight: 7
+imageWidth: 32
+imageHeight: 64
+filePrefix: crash_screen_char

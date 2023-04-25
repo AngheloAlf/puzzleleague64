@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:Decompollaborate/texture2c.git
+	branch = main
+	commit = 8b9286713b6136cfbca73ee9f0ebe159e4125013
+	parent = a815217a5d8d2f1aee4fa5f67e0e20e1883df806
+	method = merge
+	cmdver = 0.4.3
