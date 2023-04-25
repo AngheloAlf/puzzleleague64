@@ -12,7 +12,6 @@ LDFLAGS     := -lpng
 
 ifeq ($(DEBUG),0)
   OPTFLAGS  := -Os
-  CFLAGS    += -Werror
 else
   OPTFLAGS  := -O0 -g3
 endif
