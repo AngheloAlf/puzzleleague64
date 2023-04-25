@@ -109,6 +109,7 @@ STRIP           := $(MIPS_BINUTILS_PREFIX)strip
 PYTHON            ?= python3
 SPLAT             ?= tools/splat/split.py
 SPLAT_YAML        ?= $(TARGET).$(VERSION).yaml
+TEXTURE2C         ?= ./tools/texture2c/texture2c.elf
 
 
 IINC       := -Iinclude -Ibin/$(VERSION) -I.
@@ -175,9 +176,12 @@ endif
 
 $(shell mkdir -p asm bin linker_scripts/$(VERSION)/auto)
 
+ASSETS_DIRS   := $(shell find bin/$(VERSION)/assets -type d)
 SRC_DIRS      := $(shell find src -type d)
 ASM_DIRS      := $(shell find asm/$(VERSION) -type d -not -path "asm/$(VERSION)/nonmatchings/*")
-BIN_DIRS      := $(shell find bin -type d)
+BIN_DIRS      := $(shell find bin/$(VERSION) -type d)
+
+PNG_FILES     := $(foreach dir,$(ASSETS_DIRS),$(wildcard $(dir)/*.png))
 
 BINFILE_DIR   := bin/$(VERSION)/bin_file
 
@@ -192,6 +196,8 @@ O_FILES       := $(foreach f,$(C_FILES:.c=.o),$(BUILD_DIR)/$f) \
                  $(foreach f,$(S_FILES:.s=.o),$(BUILD_DIR)/$f) \
                  $(foreach f,$(BIN_FILES:.bin=.o),$(BUILD_DIR)/$f) \
                  $(ARCHIVE_FILES:.archive=.o)
+
+PNG_INC_FILES := $(foreach f,$(PNG_FILES:.png=.inc),$(BUILD_DIR)/$f)
 
 
 # Automatic dependency files
@@ -263,10 +269,19 @@ $(ROM): $(BIN)
 $(BIN): $(ELF)
 	$(OBJCOPY) -O binary --gap-fill=0x00 $< $@
 
-$(ELF): $(O_FILES) $(LD_SCRIPT) $(BUILD_DIR)/linker_scripts/hardware_regs.ld $(BUILD_DIR)/linker_scripts/libultra_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/undefined_syms.ld $(BUILD_DIR)/linker_scripts/common_undef_syms.ld
+$(ELF): $(PNG_INC_FILES) $(O_FILES) $(LD_SCRIPT) $(BUILD_DIR)/linker_scripts/hardware_regs.ld $(BUILD_DIR)/linker_scripts/libultra_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/undefined_syms.ld $(BUILD_DIR)/linker_scripts/common_undef_syms.ld
 	$(LD) $(LDFLAGS) -T $(LD_SCRIPT) \
 		-T $(BUILD_DIR)/linker_scripts/hardware_regs.ld -T $(BUILD_DIR)/linker_scripts/libultra_syms.ld -T $(BUILD_DIR)/linker_scripts/$(VERSION)/undefined_syms.ld -T $(BUILD_DIR)/linker_scripts/common_undef_syms.ld \
 		-Map $(LD_MAP) -o $@
+
+## Order-only prerequisites
+# These ensure e.g. the PNG_INC_FILES are built before the O_FILES.
+# The intermediate phony targets avoid quadratically-many dependencies between the targets and prerequisites.
+
+asset_files: $(PNG_INC_FILES)
+$(O_FILES): | asset_files
+
+.PHONY: asset_files
 
 
 $(BUILD_DIR)/%.ld: %.ld
@@ -298,6 +313,12 @@ else
 endif
 	$(STRIP) $@ -N dummy-symbol-name
 	$(OBJDUMP_CMD)
+
+
+# Make inc files from assets
+
+build/%.inc: %.png
+	$(TEXTURE2C) --raw --image-format=png --pixel-format=$(subst .,,$(suffix $*)) -o $@ $<
 
 
 -include $(DEP_FILES)

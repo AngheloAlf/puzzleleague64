@@ -471,7 +471,163 @@ segments:
     start: 0x0CA4A0
     vram: 0x01000000
     subsegments:
-      - [0x0CA4A0, data, assets/segment_0CA4A0]
+      - start: 0x0CA4A0
+        type: .data
+        name: assets/segment_0CA4A0
+        subsegments:
+        - [0x0CA4A0]
+        - { start: 0x0CA4B0, type: gfx, data_only: True, name: assets/segment_0CA4A0/initRDPstart }
+        - { start: 0x0CA598, type: gfx, data_only: True, name: assets/segment_0CA4A0/D_010000F8_usa }
+        - { start: 0x0CA600, type: gfx, data_only: True, name: assets/segment_0CA4A0/D_01000160_usa }
+        - { start: 0x0CA648, type: gfx, data_only: True, name: assets/segment_0CA4A0/D_010001A8_usa }
+        - [0x0CA690, i8, assets/segment_0CA4A0/D_010001F0_usa.i8, 512, 1] # unknown type and dimensions
+        - [0x0CA890]
+        - [0x0CA8A8, i8, assets/segment_0CA4A0/D_01000408_usa.i8, 512, 1] # unknown type and dimensions
+        - [0x0CAAA8]
+        - [0x0CAAC0, i8, assets/segment_0CA4A0/D_01000620_usa.i8, 512, 1] # unknown type and dimensions
+        - [0x0CACC0]
+        - [0x0CACD8, i8, assets/segment_0CA4A0/D_01000838_usa.i8, 1536, 1] # unknown type and dimensions
+        - [0x0CB2D8, i8, assets/segment_0CA4A0/D_01000E38_usa.i8, 1536, 1] # unknown type and dimensions
+        - [0x0CB8D8]
+        - [0x0CB8F0]
+        - [0x0CB908, i8, assets/segment_0CA4A0/D_01001468_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0CC108, i8, assets/segment_0CA4A0/D_01001C68_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0CC908, i8, assets/segment_0CA4A0/D_01002468_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0CD108, i8, assets/segment_0CA4A0/D_01002C68_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0CD908, i8, assets/segment_0CA4A0/D_01003468_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0CE108, i8, assets/segment_0CA4A0/D_01003C68_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0CE908, i8, assets/segment_0CA4A0/D_01004468_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0CF108, i8, assets/segment_0CA4A0/D_01004C68_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0CF908, i8, assets/segment_0CA4A0/D_01005468_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0D0108, i8, assets/segment_0CA4A0/D_01005C68_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0D0908, i8, assets/segment_0CA4A0/D_01006468_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0D1108, i8, assets/segment_0CA4A0/D_01006C68_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0D1908, i8, assets/segment_0CA4A0/D_01007468_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0D2108, i8, assets/segment_0CA4A0/D_01007C68_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0D2908, i8, assets/segment_0CA4A0/D_01008468_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0D3108, i8, assets/segment_0CA4A0/D_01008C68_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0D3908, i8, assets/segment_0CA4A0/D_01009468_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0D4108, i8, assets/segment_0CA4A0/D_01009C68_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0D4908, i8, assets/segment_0CA4A0/D_0100A468_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0D5108, i8, assets/segment_0CA4A0/D_0100AC68_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0D5908, i8, assets/segment_0CA4A0/D_0100B468_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0D6108, i8, assets/segment_0CA4A0/D_0100BC68_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0D6908, i8, assets/segment_0CA4A0/D_0100C468_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0D7108, i8, assets/segment_0CA4A0/D_0100CC68_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0D7908, i8, assets/segment_0CA4A0/D_0100D468_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0D8108, i8, assets/segment_0CA4A0/D_0100DC68_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0D8908, i8, assets/segment_0CA4A0/D_0100E468_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0D9108, i8, assets/segment_0CA4A0/D_0100EC68_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0D9908, i8, assets/segment_0CA4A0/D_0100F468_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0DA108, i8, assets/segment_0CA4A0/D_0100FC68_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0DA908, i8, assets/segment_0CA4A0/D_01010468_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0DB108, i8, assets/segment_0CA4A0/D_01010C68_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0DB908, i8, assets/segment_0CA4A0/D_01011468_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0DC108, i8, assets/segment_0CA4A0/D_01011C68_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0DC908, i8, assets/segment_0CA4A0/D_01012468_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0DD108, i8, assets/segment_0CA4A0/D_01012C68_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0DD908, i8, assets/segment_0CA4A0/D_01013468_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0DE108, i8, assets/segment_0CA4A0/D_01013C68_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0DE908, i8, assets/segment_0CA4A0/D_01014468_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0DF108, i8, assets/segment_0CA4A0/D_01014C68_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0DF908, i8, assets/segment_0CA4A0/D_01015468_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0E0108, i8, assets/segment_0CA4A0/D_01015C68_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0E0908, i8, assets/segment_0CA4A0/D_01016468_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0E1108, i8, assets/segment_0CA4A0/D_01016C68_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0E1908, i8, assets/segment_0CA4A0/D_01017468_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0E2108, i8, assets/segment_0CA4A0/D_01017C68_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0E2908]
+        - [0x0E2920]
+        - [0x0E2938]
+        - [0x0E2950]
+        - [0x0E2968]
+        - [0x0E2980]
+        - [0x0E2998]
+        - [0x0E29B0]
+        - [0x0E29C8]
+        - [0x0E29E0]
+        - [0x0E29F8]
+        - [0x0E2A10]
+        - [0x0E2A28]
+        - [0x0E2A40]
+        - [0x0E2A58]
+        - [0x0E2A70]
+        - [0x0E2A88]
+        - [0x0E2AA0]
+        - [0x0E2AB8]
+        - [0x0E2AD0]
+        - [0x0E2AE8]
+        - [0x0E2B00]
+        - [0x0E2B18, i8, assets/segment_0CA4A0/D_01018678_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0E3318]
+        - [0x0E3330, i8, assets/segment_0CA4A0/D_01018E90_usa.i8, 1024, 1] # unknown type and dimensions
+        - [0x0E3730]
+        - [0x0E3748, i8, assets/segment_0CA4A0/D_010192A8_usa.i8, 512, 1] # unknown type and dimensions
+        - [0x0E3948]
+        - [0x0E3960, i8, assets/segment_0CA4A0/D_010194C0_usa.i8, 512, 1] # unknown type and dimensions
+        - [0x0E3B60, i8, assets/segment_0CA4A0/D_010196C0_usa.i8, 1536, 1] # unknown type and dimensions
+        - [0x0E4160, i8, assets/segment_0CA4A0/D_01019CC0_usa.i8, 512, 1] # unknown type and dimensions
+        - [0x0E4360, i8, assets/segment_0CA4A0/D_01019EC0_usa.i8, 512, 1] # unknown type and dimensions
+        - [0x0E4560, i8, assets/segment_0CA4A0/D_0101A0C0_usa.i8, 1024, 1] # unknown type and dimensions
+        - [0x0E4960, i8, assets/segment_0CA4A0/D_0101A4C0_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0E5160, i8, assets/segment_0CA4A0/D_0101ACC0_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0E5960, i8, assets/segment_0CA4A0/D_0101B4C0_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0E6160, i8, assets/segment_0CA4A0/D_0101BCC0_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0E6960, i8, assets/segment_0CA4A0/D_0101C4C0_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0E7160, i8, assets/segment_0CA4A0/D_0101CCC0_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0E7960, i8, assets/segment_0CA4A0/D_0101D4C0_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0E8160, i8, assets/segment_0CA4A0/D_0101DCC0_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0E8960, i8, assets/segment_0CA4A0/D_0101E4C0_usa.i8, 1152, 1] # unknown type and dimensions
+        - [0x0E8DE0, i8, assets/segment_0CA4A0/D_0101E940_usa.i8, 1152, 1] # unknown type and dimensions
+        - [0x0E9260, i8, assets/segment_0CA4A0/D_0101EDC0_usa.i8, 1152, 1] # unknown type and dimensions
+        - [0x0E96E0]
+        - [0x0E96F8]
+        - [0x0E9710]
+        - [0x0E9728]
+        - [0x0E9740]
+        - [0x0E9758]
+        - [0x0E9770]
+        - [0x0E9788]
+        - [0x0E97A0]
+        - [0x0E97B8]
+        - [0x0E97D0]
+        - [0x0E97E8]
+        - [0x0E9800]
+        - [0x0E9818, i8, assets/segment_0CA4A0/D_0101F378_usa.i8, 512, 1] # unknown type and dimensions
+        - [0x0E9A18]
+        - [0x0E9A30, i8, assets/segment_0CA4A0/D_0101F590_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0EA230, i8, assets/segment_0CA4A0/D_0101FD90_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0EAA30, i8, assets/segment_0CA4A0/D_01020590_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0EB230, i8, assets/segment_0CA4A0/D_01020D90_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0EBA30, i8, assets/segment_0CA4A0/D_01021590_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0EC230, i8, assets/segment_0CA4A0/D_01021D90_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0ECA30]
+        - [0x0ECA48]
+        - [0x0ECA60]
+        - [0x0ECA78]
+        - [0x0ECA90]
+        - [0x0ECAA8]
+        - [0x0ECAC0, i8, assets/segment_0CA4A0/D_01022620_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0ED2C0]
+        - [0x0ED2D8, i8, assets/segment_0CA4A0/D_01022E38_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0EDAD8]
+        - [0x0EDAF0, i8, assets/segment_0CA4A0/D_01023650_usa.i8, 1024, 1] # unknown type and dimensions
+        - [0x0EDEF0]
+        - [0x0EDF08, i8, assets/segment_0CA4A0/D_01023A68_usa.i8, 512, 1] # unknown type and dimensions
+        - [0x0EE108]
+        - [0x0EE120, i8, assets/segment_0CA4A0/D_01023C80_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0EE920, i8, assets/segment_0CA4A0/D_01024480_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0EF120]
+        - [0x0EF138]
+        - [0x0EF150, i8, assets/segment_0CA4A0/D_01024CB0_usa.i8, 24192, 1] # unknown type and dimensions
+        - [0x0F4FD0, i8, assets/segment_0CA4A0/D_0102AB30_usa.i8, 8960, 1] # unknown type and dimensions
+        - [0x0F72D0, i8, assets/segment_0CA4A0/D_0102CE30_usa.i8, 8320, 1] # unknown type and dimensions
+        - [0x0F9350, i8, assets/segment_0CA4A0/D_0102EEB0_usa.i8, 512, 1] # unknown type and dimensions
+        - [0x0F9550]
+        - [0x0F9568, i8, assets/segment_0CA4A0/D_0102F0C8_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0F9D68]
+        - [0x0F9D80, i8, assets/segment_0CA4A0/D_0102F8E0_usa.i8, 2944, 1] # unknown type and dimensions
+        - [0x0FA900, i8, assets/segment_0CA4A0/D_01030460_usa.i8, 2944, 1] # unknown type and dimensions
 
   # no idea where it ends
   - name: segment_0FB480

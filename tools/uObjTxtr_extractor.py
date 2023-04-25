@@ -97,7 +97,7 @@ def process_TxtrBlock(data: bytearray, name: str):
     tlineStr = f"{tline}"
 
     height = int(round(calculate_block_height(tsize, tline), 0))
-    print(f"/*")
+    print(f"#if 0")
     print(f"height:", height)
     print()
     print(f"Possible widths:")
@@ -109,7 +109,7 @@ def process_TxtrBlock(data: bytearray, name: str):
 
     # TODO
     if tmem == 0:
-        print(f"Possible combinations:")
+        print(f"Possible combinations:", end="")
         for siz, imName in imSizeNames.items():
             width = calculate_block_width(tsize, siz, height)
             width = int(round(width, 0))
@@ -121,12 +121,12 @@ def process_TxtrBlock(data: bytearray, name: str):
             if GS_TB_TLINE(width, siz) != tline:
                 continue
 
+            print()
             print(f"    /* tmem  */ GS_PIX2TMEM(0,       {imName}),")
             print(f"    /* tsize */ GS_TB_TSIZE({width} * {height}, {imName}),")
             print(f"    /* tline */ GS_TB_TLINE({width},      {imName}),")
-            print()
 
-    print(f"*/")
+    print(f"#endif")
 
     flagStr = f"0x{flag:X}"
     if flag == 0xFFFFFFFF:

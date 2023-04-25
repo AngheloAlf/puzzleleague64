@@ -1,4 +1,4 @@
-D_01000000_usa = 0x01000000; // ignore:True
+D_01000000_usa = 0x01000000; //
 D_01000004_usa = 0x01000004; // ignore:True
 D_01000008_usa = 0x01000008; // ignore:True
 initRDPstart = 0x01000010; // type:Gfx
@@ -6,7 +6,7 @@ D_010000F8_usa = 0x010000F8; //
 D_01000160_usa = 0x01000160; // 
 D_010001A8_usa = 0x010001A8; // 
 D_010001F0_usa = 0x010001F0; // 
-D_01000200_usa = 0x01000200; // 
+D_01000200_usa = 0x01000200; // ignore:True
 D_010003F0_usa = 0x010003F0; // size:0x18
 D_01000408_usa = 0x01000408; // 
 D_01000500_usa = 0x01000500; // ignore:True
