@@ -43,10 +43,25 @@ typedef struct {
     bool blobMode;
     bool rawOut;
     bool compress;
+
+    bool verbose;
 } State;
 
 State gState = {
-    NULL, NULL, -1, TextureType_rgba16, -1, NULL, NULL, NULL, false, NULL, false, false, false,
+    .inputFile  = NULL,
+    .outputFile = NULL,
+    .inputFileFormat = -1,
+    .pixelFormat = TextureType_rgba16,
+    .bitGroupSize = -1, 
+    .extraPrefix = NULL,
+    .CType = NULL,
+    .varName = NULL,
+    .extractPalette = false,
+    .paletteFile = NULL,
+    .blobMode = false,
+    .rawOut = false,
+    .compress = false,
+    .verbose = false,
 };
 
 void GuessInputFileFormat() {
@@ -161,7 +176,7 @@ static OptInfo optInfo[] = {
     { { "c-type", required_argument, NULL, 'c' }, "TYPE", "Use TYPE as the type of the C array generated. Default is u8/u16/u32/u64, same as -u" },
     { { "extra-prefix", required_argument, NULL, 'e' }, "PREFIX", "Add PREFIX before the C declaration, e.g. for attributes" },
     { { "image-format", required_argument, NULL, 'i' }, "IMG", "Read image as of format IMG. One of 'jpg', 'png'" },
-    { { "pixel-format", required_argument, NULL, 'p' }, "FMT", "Output pixel data in format FMT. One of rgba32, rgba16, ia16, ia8, ia4, i8, i4. Default: rgba16" },
+    { { "pixel-format", required_argument, NULL, 'p' }, "FMT", "Output pixel data in format FMT. One of rgba32, rgba16, ia16, ia8, ia4, i8, i4, ci8, ci4. Default: rgba16" },
     { { "output-path", required_argument, NULL, 'o' }, "FILE", "Write output to FILE, or stdout if not specified" },
     { { "bit-group-size", required_argument, NULL, 'u' }, "SIZE", "Number of bits in each array element of output. One of 8,16,32,64. Default is inferred from -p, 32 for rgba32, 16 for rgba16/ia16, 8 for the rest" },
     { { "var-name", required_argument, NULL, 'v' }, "NAME", "Use NAME as variable name of C array. Default: inputFileTex" },
@@ -231,7 +246,7 @@ int main(int argc, char** argv) {
 
     if (argc < 2) {
         // TODO
-        printf("Usage: %s [options] inputFile \n"
+        fprintf(stderr, "Usage: %s [options] inputFile \n"
                "Try %s --help for more information.\n",
                argv[0], argv[0]);
         return EXIT_FAILURE;
@@ -249,17 +264,23 @@ int main(int argc, char** argv) {
         switch (opt) {
             /* Options */
             case 'c':
-                printf("Using type: %s\n", optarg);
+                if (gState.verbose) {
+                    printf("Using type: %s\n", optarg);
+                }
                 gState.CType = optarg;
                 break;
 
             case 'e':
-                printf("Adding extra prefix: %s\n", optarg);
+                if (gState.verbose) {
+                    printf("Adding extra prefix: %s\n", optarg);
+                }
                 gState.extraPrefix = optarg;
                 break;
 
             case 'i':
-                printf("Input format: %s\n", optarg);
+                if (gState.verbose) {
+                    printf("Input format: %s\n", optarg);
+                }
                 if ((strcmp(optarg, "png") == 0) || (strcmp(optarg, "PNG") == 0)) {
                     gState.inputFileFormat = FORMAT_PNG;
                 } else if ((strcmp(optarg, "jpg") == 0) || (strcmp(optarg, "JPG") == 0) ||
@@ -269,27 +290,37 @@ int main(int argc, char** argv) {
                 break;
 
             case 'p':
-                printf("Output pixel format: %s\n", optarg);
+                if (gState.verbose) {
+                    printf("Output pixel format: %s\n", optarg);
+                }
                 gState.pixelFormat = (TextureType)BadDictLookup(optarg, textureTypeDict);
                 break;
 
             case 'o':
-                printf("Output path: %s\n", optarg);
+                if (gState.verbose) {
+                    printf("Output path: %s\n", optarg);
+                }
                 gState.outputFile = fopen(optarg, "w");
                 break;
 
             case 'u':
-                printf("Bit grouping size: %s\n", optarg);
+                if (gState.verbose) {
+                    printf("Bit grouping size: %s\n", optarg);
+                }
                 gState.bitGroupSize = (TypeBitWidth)BadDictLookup(optarg, bitGroupSizeDict);
                 break;
 
             case 'v':
-                printf("Output variable name: %s\n", optarg);
+                if (gState.verbose) {
+                    printf("Output variable name: %s\n", optarg);
+                }
                 gState.varName = optarg;
                 break;
 
             case 'l':
-                printf("Extracting palette from PNG: %s\n", optarg);
+                if (gState.verbose) {
+                    printf("Extracting palette from PNG: %s\n", optarg);
+                }
                 gState.extractPalette = true;
                 gState.paletteFile = fopen(optarg, "w");
                 break;
@@ -305,17 +336,21 @@ int main(int argc, char** argv) {
                 return EXIT_FAILURE;
 
             case 'r':
-                printf("Raw mode selected.\n");
+                if (gState.verbose) {
+                    printf("Raw mode selected.\n");
+                }
                 gState.rawOut = true;
                 break;
 
             case 'y':
-                printf("Compressing output...\n");
+                if (gState.verbose) {
+                    printf("Compressing output...\n");
+                }
                 gState.compress = true;
                 break;
 
             default:
-                printf("?? getopt returned character code 0%o ??\n", opt);
+                fprintf(stderr, "?? getopt returned character code 0%o ??\n", opt);
                 exit(EXIT_FAILURE);
                 break;
         }
@@ -323,7 +358,7 @@ int main(int argc, char** argv) {
 
     /* Check and set input file */
     if (argv[optind] == NULL) {
-        printf("Mandatory argument 'input-file' missing\n");
+        fprintf(stderr, "Mandatory argument 'input-file' missing\n");
         return EXIT_FAILURE;
     } else {
         printf("Using input file: %s\n", argv[optind]);
@@ -347,13 +382,13 @@ int main(int argc, char** argv) {
 
     if (gState.rawOut) {
         if (gState.varName != NULL) {
-            printf("note: raw mode will not use var-name\n");
+            fprintf(stderr, "note: raw mode will not use var-name\n");
         }
         if (gState.CType != NULL) {
-            printf("note: raw mode will not use c-type\n");
+            fprintf(stderr, "note: raw mode will not use c-type\n");
         }
         if (gState.extraPrefix != NULL) {
-            printf("note: raw mode will not use extra-prefix\n");
+            fprintf(stderr, "note: raw mode will not use extra-prefix\n");
         }
     }
 
@@ -382,7 +417,7 @@ int main(int argc, char** argv) {
                     break;
 
                 default:
-                    printf("error: unknown texture type specified\n");
+                    fprintf(stderr, "error: unknown texture type specified\n");
                     return EXIT_FAILURE;
             }
         }
@@ -401,7 +436,7 @@ int main(int argc, char** argv) {
         }
 
         if (size != 0) {
-            printf("warning: c-type '%s' does not match bit-group-size %d\n", gState.CType,
+            fprintf(stderr, "warning: c-type '%s' does not match bit-group-size %d\n", gState.CType,
                    1 << (gState.bitGroupSize + 3));
         }
     } else {

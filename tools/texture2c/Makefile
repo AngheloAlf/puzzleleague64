@@ -1,5 +1,4 @@
 DEBUG       ?= 0
-LLD         ?= 1
 ASAN        ?= 0
 TEXTURE_DBG ?= 0
 
@@ -12,7 +11,7 @@ CFLAGS      := -std=c11
 LDFLAGS     := -lpng
 
 ifeq ($(DEBUG),0)
-  OPTFLAGS  := -O2
+  OPTFLAGS  := -Os
   CFLAGS    += -Werror
 else
   OPTFLAGS  := -O0 -g3
@@ -23,10 +22,6 @@ endif
 
 ifneq ($(ASAN),0)
   CFLAGS    += -fsanitize=address -fsanitize=pointer-compare -fsanitize=pointer-subtract -fsanitize=undefined
-endif
-
-ifneq ($(LLD),0)
-  LDFLAGS   += -fuse-ld=lld
 endif
 
 SRC_DIRS    := $(shell find src -type d)

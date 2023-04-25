@@ -6,7 +6,7 @@
 [subrepo]
 	remote = git@github.com:Decompollaborate/texture2c.git
 	branch = main
-	commit = 8b9286713b6136cfbca73ee9f0ebe159e4125013
-	parent = a815217a5d8d2f1aee4fa5f67e0e20e1883df806
+	commit = 9c51950b48f697d7b3472ee46010f810fca81f95
+	parent = 96e1c5a637d1ad7eadf7df70c255055db599887e
 	method = merge
 	cmdver = 0.4.3

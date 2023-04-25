@@ -331,7 +331,7 @@ RGBAPixel ImageBackend_GetPixel(const ImageBackend* image, size_t y, size_t x) {
 uint8_t ImageBackend_GetIndexedPixel(const ImageBackend* image, size_t y, size_t x) {
     assert(y < image->height);
     assert(x < image->width);
-    assert(image->isColorIndexed);
+    //assert(image->isColorIndexed);
 
     return image->pixelMatrix[y][x];
 }
@@ -523,6 +523,7 @@ double ImageBackend_GetBytesPerPixel(const ImageBackend* image) {
         case PNG_COLOR_TYPE_RGBA:
             return 4 * image->bitDepth / 8;
 
+        case PNG_COLOR_TYPE_GRAY:
         case PNG_COLOR_TYPE_RGB:
             return 3 * image->bitDepth / 8;
 
@@ -533,6 +534,7 @@ double ImageBackend_GetBytesPerPixel(const ImageBackend* image) {
             // throw std::invalid_argument("ImageBackend_GetBytesPerPixel(ImageBackend*
             // image,):\n\t Invalid color type.");
             // TODO
+            fprintf(stderr, "image->colorType: %i\n", image->colorType);
             assert(!"Invalid color type");
             return -1;
             break;
