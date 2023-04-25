@@ -417,10 +417,15 @@ segments:
       - [0x0C8DB0, c, buffers/framebuffer]
       - { start: 0x0C8DB0, type: .bss, vram: 0x803B5000, name: buffers/framebuffer }
 
-  - type: bin
-    # name: segment_0CA4A0
+  - name: segment_0CA4A0
+    type: code
     start: 0x0C8DB0
-    follows_vram: main
+    vram: 0x01000000
+    subsegments:
+      - [0x0C8DB0, data, assets/segment_0CA4A0]
+
+  - type: bin
+    start: 0x0F9D90
 
   - name: bin_file
     type: bin

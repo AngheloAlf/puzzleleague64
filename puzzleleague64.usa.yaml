@@ -323,11 +323,7 @@ segments:
       - [0x0AC340, asm, libhvqm/hvqm2decSP1] # TODO: find the bss
       - [0x0B0060, asm, libhvqm/adpcmdec]
 
-      - [0x0B01F0, asm, main/0B01F0]
-
-      - [0x0B03F0, asm, libkmc/0B03F0] # __divdi3
-      - [0x0B0560, asm, libkmc/0B0560] # __udivdi3
-      - [0x0B0580, asm, libkmc/0B0580] # __umoddi3
+      - [0x0B01F0, hasm, libkmc/mmuldi3]
 
       - [0x0B05C0, c, main/build]
 

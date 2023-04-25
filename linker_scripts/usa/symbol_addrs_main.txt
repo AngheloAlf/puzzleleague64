@@ -931,10 +931,6 @@ func_80090C6C_usa = 0x80090C6C; // type:func
 func_80090D2C_usa = 0x80090D2C; // type:func
 func_80090E9C_usa = 0x80090E9C; // type:func
 
-func_800AF5F0_usa = 0x800AF5F0; // type:func
-func_800AF628_usa = 0x800AF628; // type:func
-func_800AF724_usa = 0x800AF724; // type:func
-
 
 // .data
 
@@ -1196,34 +1192,21 @@ D_800B7324_usa = 0x800B7324; //
 D_800B7340_usa = 0x800B7340; //
 D_800B7341_usa = 0x800B7341; //
 D_800B737C_usa = 0x800B737C; //
-D_800B7380_usa = 0x800B7380; //
-D_800B7384_usa = 0x800B7384; //
-D_800B7398_usa = 0x800B7398; //
-D_800B739C_usa = 0x800B739C; //
-D_800B73B0_usa = 0x800B73B0; //
-D_800B73B4_usa = 0x800B73B4; //
-D_800B73C8_usa = 0x800B73C8; //
-D_800B73CC_usa = 0x800B73CC; //
-D_800B73E0_usa = 0x800B73E0; //
-D_800B73E4_usa = 0x800B73E4; //
-D_800B73F8_usa = 0x800B73F8; //
-D_800B73FC_usa = 0x800B73FC; //
-D_800B7410_usa = 0x800B7410; //
-D_800B7414_usa = 0x800B7414; //
-D_800B7428_usa = 0x800B7428; //
-D_800B742C_usa = 0x800B742C; //
-D_800B7440_usa = 0x800B7440; //
-D_800B7444_usa = 0x800B7444; //
-D_800B7458_usa = 0x800B7458; //
-D_800B745C_usa = 0x800B745C; //
-D_800B7470_usa = 0x800B7470; //
-D_800B7474_usa = 0x800B7474; //
-D_800B7488_usa = 0x800B7488; //
-D_800B748C_usa = 0x800B748C; //
-D_800B74A0_usa = 0x800B74A0; //
-D_800B74A4_usa = 0x800B74A4; //
-D_800B74B8_usa = 0x800B74B8; //
-D_800B74BC_usa = 0x800B74BC; //
+D_800B7380_usa = 0x800B7380; // size:0x18
+D_800B7398_usa = 0x800B7398; // size:0x18
+D_800B73B0_usa = 0x800B73B0; // size:0x18
+D_800B73C8_usa = 0x800B73C8; // size:0x18
+D_800B73E0_usa = 0x800B73E0; // size:0x18
+D_800B73F8_usa = 0x800B73F8; // size:0x18
+D_800B7410_usa = 0x800B7410; // size:0x18
+D_800B7428_usa = 0x800B7428; // size:0x18
+D_800B7440_usa = 0x800B7440; // size:0x18
+D_800B7458_usa = 0x800B7458; // size:0x18
+D_800B7470_usa = 0x800B7470; // size:0x18
+D_800B7488_usa = 0x800B7488; // size:0x18
+D_800B74A0_usa = 0x800B74A0; // size:0x18
+D_800B74B8_usa = 0x800B74B8; // size:0x18
+
 rotate_cos = 0x800B74D0; // type:f32 size:0x10
 rotate_sin = 0x800B74E0; // type:f32 size:0x10
 switch_cos = 0x800B74F0; // type:f32 size:0xC

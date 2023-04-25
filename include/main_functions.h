@@ -426,8 +426,8 @@ void InitMimic(void);
 // void hvqm2SetupSP1();
 // void hvqm2InitSP1();
 // void adpcmDecode();
-// void func_800AF5F0_usa();
-// void func_800AF628_usa();
+// void __muldi3();
+// void div64_64();
 // void func_800AF724_usa();
 
 

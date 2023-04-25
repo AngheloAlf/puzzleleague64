@@ -34,6 +34,10 @@ BASEROM              := baserom.$(VERSION).z64
 TARGET               := puzzleleague64
 
 
+# TODO: add to splat
+export SPIMDISASM_ASM_EMIT_SIZE_DIRECTIVE=True
+# export SPIMDISASM_ASM_REFERENCEE_SYMBOLS=True
+
 ### Output ###
 
 BUILD_DIR := build
