@@ -112,7 +112,7 @@ SPLAT_YAML        ?= $(TARGET).$(VERSION).yaml
 TEXTURE2C         ?= ./tools/texture2c/texture2c.elf
 
 
-IINC       := -Iinclude -Ibin/$(VERSION) -I.
+IINC       := -Iinclude -Ibin/$(VERSION) -Ibuild/bin/$(VERSION) -I.
 IINC       += -Ilib -Ilib/libultra_j/include -Ilib/libultra_j/include/PR -Ilib/libhvqm/include -Ilib/libmus/include
 
 # Check code syntax with host compiler
