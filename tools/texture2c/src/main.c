@@ -64,7 +64,7 @@ State gState = {
     .verbose = false,
 };
 
-void GuessInputFileFormat() {
+void GuessInputFileFormat(void) {
 }
 
 typedef struct {
@@ -193,7 +193,7 @@ static OptInfo optInfo[] = {
 static size_t optCount = ARRAY_COUNT(optInfo);
 static struct option longOptions[ARRAY_COUNT(optInfo)];
 
-void ConstructLongOpts() {
+void ConstructLongOpts(void) {
     size_t i;
 
     for (i = 0; i < optCount; i++) {
@@ -220,7 +220,7 @@ void PrintVariablePost(FILE* outFile) {
     fprintf(outFile, "};\n");
 }
 
-void CheckValidProgramArguments() {
+void CheckValidProgramArguments(void) {
     if (!gState.rawOut) {
         if (gState.varName == NULL) {
             fprintf(stderr, "Error: Missing var-name\n");
