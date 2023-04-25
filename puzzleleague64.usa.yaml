@@ -484,10 +484,10 @@ segments:
         - [0x0CA890]
         - [0x0CA8A8, i8, assets/segment_0CA4A0/D_01000408_usa.i8, 512, 1] # unknown type and dimensions
         - [0x0CAAA8]
-        - [0x0CAAC0, rgba16, assets/segment_0CA4A0/D_01000620_usa.rgba16, 16, 16]
+        - [0x0CAAC0, palette, assets/segment_0CA4A0/D_01000620_usa, 16, 16]
         - [0x0CACC0]
-        - { start: 0x0CACD8, type: i8, name: assets/segment_0CA4A0/D_01000838_usa.i8, width: 64, height: 24, palette: assets/segment_0CA4A0/D_01000620_usa.rgba16 } # should be ci8, D_01000620_usa is the TLUT
-        - { start: 0x0CB2D8, type: i8, name: assets/segment_0CA4A0/D_01000E38_usa.i8, width: 64, height: 24, palette: assets/segment_0CA4A0/D_01000620_usa.rgba16 } # should be ci8, D_01000620_usa is the TLUT
+        - { start: 0x0CACD8, type: ci8, name: assets/segment_0CA4A0/D_01000838_usa, width: 64, height: 24, palette: assets/segment_0CA4A0/D_01000620_usa }
+        - { start: 0x0CB2D8, type: ci8, name: assets/segment_0CA4A0/D_01000E38_usa, width: 64, height: 24, palette: assets/segment_0CA4A0/D_01000620_usa }
         - [0x0CB8D8]
         - [0x0CB8F0]
         - [0x0CB908, i8, assets/segment_0CA4A0/D_01001468_usa.i8, 2048, 1] # unknown type and dimensions
