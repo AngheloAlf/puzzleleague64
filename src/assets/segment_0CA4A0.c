@@ -2,6 +2,7 @@
 #include "libultra.h"
 #include "alignment.h"
 
+#if VERSION_USA
 Vp D_01000000_usa = { {
     { 0x0280, 0x01E0, 0x01FF, 0x0000 },
     { 0x0280, 0x01E0, 0x01FF, 0x0000 },
@@ -1375,3 +1376,5 @@ u8 D_0102F8E0_usa[] ALIGNED(8) = {
 u8 D_01030460_usa[] ALIGNED(8) = {
 #include "build/bin/usa/assets/segment_0CA4A0/D_01030460_usa.i8.inc"
 };
+
+#endif
