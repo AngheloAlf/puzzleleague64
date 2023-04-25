@@ -2,20 +2,9 @@
 #include "libultra.h"
 #include "alignment.h"
 
-// TODO: fix splat not using &
-Vp_t D_01000000_usa[1] = { {
-    {
-        0x0280,
-        0x01E0,
-        0x01FF,
-        0x0000,
-    },
-    {
-        0x0280,
-        0x01E0,
-        0x01FF,
-        0x0000,
-    },
+Vp D_01000000_usa = { {
+    { 0x0280, 0x01E0, 0x01FF, 0x0000 },
+    { 0x0280, 0x01E0, 0x01FF, 0x0000 },
 } };
 
 Gfx initRDPstart[] = {
