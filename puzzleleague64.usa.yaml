@@ -472,7 +472,7 @@ segments:
     vram: 0x01000000
     subsegments:
       - start: 0x0CA4A0
-        type: data
+        type: .data
         name: assets/segment_0CA4A0
         subsegments:
         - [0x0CA4A0]
@@ -595,12 +595,12 @@ segments:
         - [0x0E9800]
         - [0x0E9818, rgba16, assets/segment_0CA4A0/D_0101F378_usa.rgba16, 16, 16]
         - [0x0E9A18]
-        - [0x0E9A30, i8, assets/segment_0CA4A0/D_0101F590_usa.i8, 2048, 1] # unknown type and dimensions
-        - [0x0EA230, i8, assets/segment_0CA4A0/D_0101FD90_usa.i8, 2048, 1] # unknown type and dimensions
-        - [0x0EAA30, i8, assets/segment_0CA4A0/D_01020590_usa.i8, 2048, 1] # unknown type and dimensions
-        - [0x0EB230, i8, assets/segment_0CA4A0/D_01020D90_usa.i8, 2048, 1] # unknown type and dimensions
-        - [0x0EBA30, i8, assets/segment_0CA4A0/D_01021590_usa.i8, 2048, 1] # unknown type and dimensions
-        - [0x0EC230, i8, assets/segment_0CA4A0/D_01021D90_usa.i8, 2048, 1] # unknown type and dimensions
+        - [0x0E9A30, i8, assets/segment_0CA4A0/D_0101F590_usa.i8, 64, 32] # should be ci8, palette: assets/segment_0CA4A0/D_0101F378_usa.rgba16
+        - [0x0EA230, i8, assets/segment_0CA4A0/D_0101FD90_usa.i8, 64, 32] # should be ci8, palette: assets/segment_0CA4A0/D_0101F378_usa.rgba16
+        - [0x0EAA30, i8, assets/segment_0CA4A0/D_01020590_usa.i8, 64, 32] # should be ci8, palette: assets/segment_0CA4A0/D_0101F378_usa.rgba16
+        - [0x0EB230, i8, assets/segment_0CA4A0/D_01020D90_usa.i8, 64, 32] # should be ci8, palette: assets/segment_0CA4A0/D_0101F378_usa.rgba16
+        - [0x0EBA30, i8, assets/segment_0CA4A0/D_01021590_usa.i8, 64, 32] # should be ci8, palette: assets/segment_0CA4A0/D_0101F378_usa.rgba16
+        - [0x0EC230, i8, assets/segment_0CA4A0/D_01021D90_usa.i8, 64, 32] # should be ci8, palette: assets/segment_0CA4A0/D_0101F378_usa.rgba16
         - [0x0ECA30]
         - [0x0ECA48]
         - [0x0ECA60]
