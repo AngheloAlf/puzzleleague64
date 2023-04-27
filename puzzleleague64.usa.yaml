@@ -635,10 +635,12 @@ segments:
     start: 0x0FB480
 
   - type: bin
-    # name: segment_101A80
+    name: segment_101A80
     start: 0x101A80
 
-    # 12C1B0
+  - type: bin
+    # name: segment_12C1B0
+    start: 0x12C1B0
 
     # 1336B0
 

@@ -119,12 +119,12 @@ INLINE void OverFlow(struct_gInfo_unk_00068 *arg0) {
     while (var_s0 > 0) {
         s32 var_v1 = MIN(var_s0, 0xE8);
 
-        gTheGame.unk_9A5E = var_v1 * 4;
+        gTheGame.unk_9A50.b.frameH = var_v1 * 4;
         var_s0 -= 0xE8;
         Draw2DBackground();
     }
 
-    gTheGame.unk_9A5E = 0x3A0;
+    gTheGame.unk_9A50.b.frameH = 0xE8 * 4;
 }
 #endif
 
