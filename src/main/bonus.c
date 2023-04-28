@@ -171,7 +171,7 @@ void InitBonus(void) {
     }
 
     for (var_s2 = 0; var_s2 < new_var; var_s2++) {
-        var_s0 = &gTheGame.unk_8C88[var_s2+1];
+        var_s0 = &gTheGame.unk_8C88[var_s2 + 1];
 
         var_s0->b.imageX = 0;
         var_s0->b.imageW = sp28[var_s2].unk_0 << 2;

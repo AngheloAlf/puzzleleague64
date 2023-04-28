@@ -637,6 +637,21 @@ segments:
   - type: bin
     name: segment_101A80
     start: 0x101A80
+    # vram: 0x02000000 # arbitrary
+    # subsegments:
+    # - start: 0x101A80
+    #   type: data
+    #   name: assets/segment_101A80
+    #   subsegments:
+    #   - [0x101A80, rgba16, assets/segment_101A80/D_00101A80.rgba16, 320, 232]
+    #   - [0x125E80, rgba16, assets/segment_101A80/D_00125E80.rgba16, 64, 62]
+    #   - [0x127D80, bin] # palette
+    #   - [0x127F70, bin] # palette
+    #   - [0x128170, i8, assets/segment_101A80/D_128170.i8, 192, 47] # ci8
+    #   - [0x12A4B0, i8, assets/segment_101A80/D_12A4B0.i8, 64, 29] # ci8
+    #   - [0x12ABF0, i8, assets/segment_101A80/D_12ABF0.i8, 64, 29] # ci8
+    #   - [0x12B330, i8, assets/segment_101A80/D_12B330.i8, 64, 29] # ci8
+    #   - [0x12BA70, i8, assets/segment_101A80/D_12DC30.i8, 64, 29] # ci8
 
   - type: bin
     # name: segment_12C1B0
