@@ -62,7 +62,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/dlist", func_80054624_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/dlist", func_800547E0_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/dlist", InitTetrisState);
 #endif
 
 #if VERSION_USA

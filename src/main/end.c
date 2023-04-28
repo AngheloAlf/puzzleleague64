@@ -204,7 +204,7 @@ s32 func_8004FA2C_usa();                            /* extern */
 ? func_8006C7A0_usa(?, ?);                          /* extern */
 ? func_8006C9BC_usa(TheGame *, ?);                  /* extern */
 extern u8 B_801C6C90_usa;
-extern s32 B_8021BA5C_usa;
+extern s32 gWhatever;
 extern ? SFX_INIT_TABLE;
 extern s32 D_800B65B0_usa;
 extern ? D_800B66FC_usa;
@@ -257,7 +257,7 @@ void DoGameOver2D(void) {
         var_v1 += 0x20;
     } while (var_v1 < 0x8C0);
     func_8004C280_usa(-1);
-    if ((gMain < 0x396) || (B_8021BA5C_usa < 6) || (func_8003A0B8_usa() == 0)) {
+    if ((gMain < 0x396) || (gWhatever < 6) || (func_8003A0B8_usa() == 0)) {
         var_s3 = 0;
         if (gTheGame.unk_9C08 == 1) {
             switch (gMain) {                        /* switch 1 */
@@ -305,7 +305,7 @@ block_29:
                     }
                     gMain = 0x38F;
                     gTheGame.unk_43FC = 0x25;
-                    B_8021BA5C_usa = 0;
+                    gWhatever = 0;
                     D_800B65B0_usa = 0;
                     gTheGame.unk_43EC = 0;
                     if (gTheGame.unk_8860[0].unk_0 == 8) {
@@ -366,29 +366,29 @@ block_50:
                     }
                     break;
                 case 0x391:                         /* switch 1 */
-                    temp_v0_2 = B_8021BA5C_usa;
+                    temp_v0_2 = gWhatever;
                     if (temp_v0_2 == 0) {
                         if ((gSelection != 0x82) || (gTheGame.unk_9C20[8] != 0)) {
                             func_8003E508_usa();
                         }
                     }
-                    B_8021BA5C_usa = temp_v0_2 + 1;
+                    gWhatever = temp_v0_2 + 1;
                     if (((gSelection == 0x8C) | (gSelection == 0xBE)) != 0) {
                         func_8006B628_usa(&gTheGame);
                         var_s0 = func_8003901C_usa(&gTheGame);
-                        if (B_8021BA5C_usa == 0x55) {
+                        if (gWhatever == 0x55) {
                             var_a0 = -1;
                             if (func_8004FA2C_usa() != 0) {
                                 goto block_62;
                             }
                         } else {
                             var_a0 = 0;
-                            if (B_8021BA5C_usa >= 0x56) {
+                            if (gWhatever >= 0x56) {
 block_62:
                                 func_8004ADD0_usa(var_a0);
                             }
                         }
-                        if (B_8021BA5C_usa == 0x5A) {
+                        if (gWhatever == 0x5A) {
                             if (gSelection == 0x8C) {
                                 if (gTheGame.unk_43AC >= 0x2710) {
                                     PlayMIDI(&BGM_INIT_TABLE, 0x46, 0, 2);
@@ -420,7 +420,7 @@ block_73:
                             func_8005D8B4_usa(&gTheGame);
                         }
                     }
-                    if ((var_s0 == 0) && (B_8021BA5C_usa >= 0x5B)) {
+                    if ((var_s0 == 0) && (gWhatever >= 0x5B)) {
                         gMain = 0x392;
                     }
                     if (gMain == 0x392) {
@@ -473,7 +473,7 @@ block_101:
                             }
                         }
                     }
-                    B_8021BA5C_usa = 0;
+                    gWhatever = 0;
                     gMain = 0x396;
                     break;
                 case 0x396:                         /* switch 1 */
@@ -503,7 +503,7 @@ block_111:
                             }
                             break;
                     }
-                    B_8021BA5C_usa += 1;
+                    gWhatever += 1;
                     break;
             }
             var_a0_2 = &gTheGame;
@@ -576,7 +576,7 @@ block_120:
                         func_8006C9BC_usa((TheGame *) &gTheGame.unk_0000[1], 1);
                     }
                     gMain = 0x38F;
-                    B_8021BA5C_usa = 0;
+                    gWhatever = 0;
                     gTheGame.unk_43EC = 0;
                     gTheGame.unk_0000[1].unk_43EC = 0;
                     if (gTheGame.unk_8860[0].unk_0 == 8) {
@@ -617,7 +617,7 @@ block_152:
                     }
                     break;
                 case 0x390:                         /* switch 2 */
-                    temp_v0_3 = B_8021BA5C_usa;
+                    temp_v0_3 = gWhatever;
                     if (temp_v0_3 == 0) {
                         if (gSelection != 0x96) {
                             var_a0_3 = (u32) (gGameStatus & 0xF00) >> 8;
@@ -631,7 +631,7 @@ block_164:
                             func_8003E508_usa(var_a0_3);
                         }
                     }
-                    B_8021BA5C_usa = temp_v0_3 + 1;
+                    gWhatever = temp_v0_3 + 1;
                     if (gTheGame.unk_43EC != 0) {
                         gTheGame.unk_43EC = (s32) (gTheGame.unk_43EC - 1);
                     } else {
@@ -809,7 +809,7 @@ block_267:
                     gTheGame.unk_0000[1].unk_43FC = -1;
                     gTheGame.unk_43EC = 0;
                     gTheGame.unk_0000[1].unk_43EC = 0;
-                    B_8021BA5C_usa = 0;
+                    gWhatever = 0;
                     var_a0_7 = 0;
                     if ((var_s3 != 0) || (var_a0_7 = 1, (var_s1 != 0))) {
                         func_8006C4A0_usa(var_a0_7);
@@ -845,8 +845,8 @@ block_254:
                     }
                     func_80035584_usa(&gTheGame.unk_9988[0x158]);
                     func_80035584_usa(&gTheGame.unk_9988[0x158] + 0x28);
-                    temp_v0_7 = B_8021BA5C_usa + 1;
-                    B_8021BA5C_usa = temp_v0_7;
+                    temp_v0_7 = gWhatever + 1;
+                    gWhatever = temp_v0_7;
                     if ((temp_v0_7 == 0xDC) && ((gSelection != 0x96) || ((var_s3 != 0) & (var_s1 == 0)))) {
                         goto block_267;
                     }
@@ -913,7 +913,7 @@ s32 func_8004FA2C_usa();                            /* extern */
 ? func_8006780C_usa(TheGame_unk_0000 *, TheGame_unk_8860 *); /* extern */
 ? func_80067CA0_usa(TheGame *, TheGame_unk_8860 *); /* extern */
 extern u8 B_801C6C90_usa;
-extern s32 B_8021BA5C_usa;
+extern s32 gWhatever;
 extern ? SFX_INIT_TABLE;
 extern s32 D_800B65B0_usa;
 extern ? D_800B66FC_usa;
@@ -967,7 +967,7 @@ void DoGameOver3D(void) {
         var_v1 += 0x20;
     } while (var_v1 < 0x8C0);
     func_8004C280_usa(-1);
-    if ((gMain < 0x395) || (B_8021BA5C_usa < 6) || (func_8003A0B8_usa() == 0)) {
+    if ((gMain < 0x395) || (gWhatever < 6) || (func_8003A0B8_usa() == 0)) {
         var_s4 = 0;
         if (gTheGame.unk_9C08 == 1) {
             switch (gMain) {                        /* switch 1 */
@@ -1016,7 +1016,7 @@ block_29:
                     }
                     gMain = 0x38F;
                     gTheGame.unk_43FC = 0x25;
-                    B_8021BA5C_usa = 0;
+                    gWhatever = 0;
                     D_800B65B0_usa = 0;
                     gTheGame.unk_43EC = 0;
                     if (gTheGame.unk_8860[0].unk_0 == 8) {
@@ -1085,11 +1085,11 @@ block_108:
                     }
                     break;
                 case 0x391:                         /* switch 1 */
-                    temp_v0_2 = B_8021BA5C_usa;
+                    temp_v0_2 = gWhatever;
                     if (temp_v0_2 == 0) {
                         func_8003E508_usa();
                     }
-                    B_8021BA5C_usa = temp_v0_2 + 1;
+                    gWhatever = temp_v0_2 + 1;
                     if (gTheGame.unk_43EC != 0) {
                         gTheGame.unk_43EC = (s32) (gTheGame.unk_43EC - 1);
                         goto block_108;
@@ -1097,19 +1097,19 @@ block_108:
                     if (((gSelection == 0x8C) | (gSelection == 0xBE)) != 0) {
                         func_8005DD3C_usa(&gTheGame);
                         var_s0 = func_8003901C_usa(&gTheGame);
-                        if (B_8021BA5C_usa == 0x55) {
+                        if (gWhatever == 0x55) {
                             var_a0_2 = -1;
                             if (func_8004FA2C_usa() != 0) {
                                 goto block_62;
                             }
                         } else {
                             var_a0_2 = 0;
-                            if (B_8021BA5C_usa >= 0x56) {
+                            if (gWhatever >= 0x56) {
 block_62:
                                 func_8004ADD0_usa(var_a0_2);
                             }
                         }
-                        if (B_8021BA5C_usa == 0x5A) {
+                        if (gWhatever == 0x5A) {
                             if (gSelection == 0x8C) {
                                 if (gTheGame.unk_43AC >= 0x2710) {
                                     PlayMIDI(BGM_INIT_TABLE, 0x46, 0, 2);
@@ -1141,7 +1141,7 @@ block_73:
                             func_8005D8B4_usa(&gTheGame);
                         }
                     }
-                    if ((var_s0 == 0) && (B_8021BA5C_usa >= 0x5B)) {
+                    if ((var_s0 == 0) && (gWhatever >= 0x5B)) {
                         gMain = 0x392;
                     }
                     var_a0 = &gTheGame;
@@ -1197,7 +1197,7 @@ block_101:
                             }
                         }
                     }
-                    B_8021BA5C_usa = 0;
+                    gWhatever = 0;
                     gMain = 0x395;
                     var_a0 = &gTheGame;
                     break;
@@ -1208,7 +1208,7 @@ block_101:
                     if ((((gSelection == 0xAA) | (gSelection == 0x82)) != 0) && (gTheGame.unk_8860[0].unk_0 == 7)) {
                         func_80035584_usa(&gTheGame.unk_9988[0x108] + 0x28);
                     }
-                    B_8021BA5C_usa += 1;
+                    gWhatever += 1;
                     goto block_108;
             }
             var_a1_3 = gTheGame.unk_8860;
@@ -1271,7 +1271,7 @@ block_115:
                         func_8005E128_usa((TheGame *) &gTheGame.unk_0000[1], 1);
                     }
                     gMain = 0x38F;
-                    B_8021BA5C_usa = 0;
+                    gWhatever = 0;
                     gTheGame.unk_43EC = 0;
                     gTheGame.unk_0000[1].unk_43EC = 0;
                     if (gTheGame.unk_8860[0].unk_0 == 8) {
@@ -1309,12 +1309,12 @@ block_115:
                     temp_v1_2 = gTheGame.unk_0000[1].unk_43FC - 1;
                     gTheGame.unk_43FC = (s32) (gTheGame.unk_43FC - 1);
                     gTheGame.unk_0000[1].unk_43FC = temp_v1_2;
-                    if ((B_8021BA5C_usa == 0) && (gTheGame.unk_43FC < -0x3C) && (temp_v1_2 < -0x3C)) {
+                    if ((gWhatever == 0) && (gTheGame.unk_43FC < -0x3C) && (temp_v1_2 < -0x3C)) {
                         temp_a0_3 = (u32) (gGameStatus & 0xF00) >> 8;
                         if ((gTheGame.unk_4404 == temp_a0_3) || (gTheGame.unk_0000[1].unk_4404 == temp_a0_3)) {
                             func_8003E508_usa(temp_a0_3);
                         }
-                        B_8021BA5C_usa += 1;
+                        gWhatever += 1;
                     }
                     if ((gTheGame.unk_43FC < -0x5A) && (gTheGame.unk_0000[1].unk_43FC < -0x5A)) {
                         gMain = 0x390;
@@ -1453,7 +1453,7 @@ block_238:
                     gTheGame.unk_0000[1].unk_43FC = -1;
                     gTheGame.unk_43EC = 0;
                     gTheGame.unk_0000[1].unk_43EC = 0;
-                    B_8021BA5C_usa = 0;
+                    gWhatever = 0;
                     if (var_s4 != var_s3) {
                         gMain = 0x393;
                     } else {
@@ -1494,8 +1494,8 @@ block_221:
                     }
                     func_80035584_usa(&gTheGame.unk_9988[0x158]);
                     func_80035584_usa(&gTheGame.unk_9988[0x158] + 0x28);
-                    temp_v0_6 = B_8021BA5C_usa + 1;
-                    B_8021BA5C_usa = temp_v0_6;
+                    temp_v0_6 = gWhatever + 1;
+                    gWhatever = temp_v0_6;
                     if (temp_v0_6 == 0xDC) {
                         if ((gSelection != 0x96) || ((var_s4 != 0) & (var_s3 == 0))) {
                             goto block_238;

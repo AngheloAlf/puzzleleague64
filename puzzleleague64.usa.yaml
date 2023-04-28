@@ -670,6 +670,14 @@ segments:
 
     # 25E7F0
 
+  - type: bin
+    name: segment_50F3F0
+    start: 0x50F3F0
+
+  - type: bin
+    # name: segment_5337F0
+    start: 0x5337F0
+
   - name: bin_file
     type: bin_file
     start: 0x9BDB40

@@ -4,6 +4,7 @@
 #include "libultra.h"
 #include "unk.h"
 
+// TetrisState?
 typedef struct TheGame_unk_0000_unk_0000_unk_000_unk_000 {
     /* 0x00 */ UNK_TYPE1 unk_00[0x4];
     /* 0x04 */ UNK_TYPE4 unk_04;
@@ -112,7 +113,7 @@ typedef struct TheGame_unk_8860 {
 
 typedef struct TheGame_unk_8B98 {
     /* 0x00 */ UNK_TYPE4 unk_00;
-    /* 0x04 */ UNK_TYPE4 unk_04;
+    /* 0x04 */ UNK_PTR unk_04;
     /* 0x08 */ UNK_TYPE2 unk_08;
     /* 0x0A */ UNK_TYPE2 unk_0A;
     /* 0x0C */ UNK_TYPE2 unk_0C;

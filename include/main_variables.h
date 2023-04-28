@@ -1525,7 +1525,7 @@ extern OSMesg B_8021BA28_usa[1];
 // extern UNK_TYPE B_8021BA50_usa;
 // extern UNK_TYPE B_8021BA54_usa;
 
-// extern UNK_TYPE B_8021BA5C_usa;
+// extern UNK_TYPE gWhatever;
 // extern UNK_TYPE B_8021BA60_usa;
 // extern UNK_TYPE B_8021BA64_usa;
 // extern UNK_TYPE B_8021BA68_usa;

@@ -1,0 +1,17 @@
+rom:0x031CFC symbol:segment_0CA4A0_ROM_START reloc:MIPS_HI16
+rom:0x031D00 symbol:segment_0CA4A0_ROM_START reloc:MIPS_LO16
+
+rom:0x031CF4 symbol:segment_0CA4A0_ROM_END reloc:MIPS_HI16
+rom:0x031CF8 symbol:segment_0CA4A0_ROM_END reloc:MIPS_LO16
+
+rom:0x031D40 symbol:segment_101A80_ROM_START reloc:MIPS_HI16
+rom:0x031D44 symbol:segment_101A80_ROM_START reloc:MIPS_LO16
+
+rom:0x031D4C symbol:segment_101A80_ROM_END reloc:MIPS_HI16
+rom:0x031D50 symbol:segment_101A80_ROM_END reloc:MIPS_LO16
+
+rom:0x0322B4 symbol:segment_50F3F0_ROM_START reloc:MIPS_HI16
+rom:0x0322B8 symbol:segment_50F3F0_ROM_START reloc:MIPS_LO16
+
+rom:0x0322BC symbol:segment_50F3F0_ROM_END reloc:MIPS_HI16
+rom:0x0322C0 symbol:segment_50F3F0_ROM_END reloc:MIPS_LO16
