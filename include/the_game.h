@@ -248,11 +248,11 @@ typedef struct struct_801A6DB8_usa {
     /* 0x0DD */ u8 unk_0DD;
     /* 0x0DE */ u8 unk_0DE;
     /* 0x0DF */ u8 unk_0DF;
-    /* 0x0E0 */ u8 unk_0E0;
-    /* 0x0E1 */ u8 unk_0E1;
-    /* 0x0E2 */ u8 unk_0E2;
-    /* 0x0E3 */ u8 unk_0E3;
-    /* 0x0E4 */ u8 unk_0E4;
+    /* 0x0E0 */ s8 unk_0E0;
+    /* 0x0E1 */ s8 unk_0E1;
+    /* 0x0E2 */ s8 unk_0E2;
+    /* 0x0E3 */ s8 unk_0E3;
+    /* 0x0E4 */ s8 unk_0E4;
     /* 0x0E5 */ u8 unk_0E5;
     /* 0x0E6 */ u8 unk_0E6;
     /* 0x0E7 */ u8 unk_0E7;

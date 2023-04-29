@@ -12,6 +12,9 @@
 #include "segment_symbols.h"
 #include "sfxlimit.h"
 #include "buffers.h"
+#include "end.h"
+#include "text.h"
+#include "tetris.h"
 
 typedef struct struct_800C4490_usa {
     /* 0x0 */ UNK_TYPE4 unk_0;
@@ -290,64 +293,38 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", InitBonus);
 #endif
 
 #if VERSION_USA
-#ifdef NON_EQUIVALENT
-s32 func_8003228C_usa(void);
-s32 DoGameOverTryAgain(void);
-void SaveRom(void);
-void SetText(s32, s32, const char *, s32);
-s32 AnimationRandom(s32);
-void Init2DTetrisTMEM(TheGame_unk_0000_unk_0000_unk_000_unk_000 *arg0, TheGame_unk_0000_unk_000 *arg1);
-s32 RandomBlock(TheGame_unk_0000 *arg0);
-extern s8 gameoverBounce[];
-
 typedef struct struct_800C4660_usa {
     /* 0x0 */ UNK_TYPE4 unk_0;
     /* 0x4 */ UNK_TYPE4 unk_4;
 } struct_800C4660_usa; // size = 0x8
 
 typedef struct struct_800C48A8_usa {
-    /* 0x0 */ UNK_TYPE2 unk_0;
-    /* 0x2 */ UNK_TYPE2 unk_2;
+    /* 0x0 */ u16 unk_0;
+    /* 0x2 */ u16 unk_2;
 } struct_800C48A8_usa; // size = 0x4
 
 void DoBonus(void) {
     s32 var_s5 = 0;
     char sp10[8];
     struct_800C4660_usa sp18[] = {
-        { 0x00000002, 0x00000078 }, { 0x00000004, 0x00000076 }, { 0x00000006, 0x00000075 }, { 0x00000008, 0x00000073 },
-        { 0x0000000A, 0x00000072 }, { 0x0000000C, 0x00000071 }, { 0x0000000E, 0x00000070 }, { 0x00000010, 0x0000006F },
-        { 0x00000012, 0x0000006E }, { 0x00000014, 0x0000006E }, { 0x00000016, 0x0000006D }, { 0x00000018, 0x0000006D },
-        { 0x0000001A, 0x0000006C }, { 0x0000001C, 0x0000006C }, { 0x0000001E, 0x0000006C }, { 0x0000001E, 0x0000006C },
-        { 0x00000020, 0x0000006D }, { 0x00000022, 0x0000006E }, { 0x00000024, 0x0000006F }, { 0x00000026, 0x00000070 },
-        { 0x00000028, 0x00000072 }, { 0x0000002A, 0x00000074 }, { 0x0000002C, 0x00000076 }, { 0x0000002E, 0x00000078 },
-        { 0x00000030, 0x0000007A }, { 0x00000032, 0x0000007C }, { 0x00000034, 0x0000007F }, { 0x00000036, 0x00000082 },
-        { 0x00000038, 0x00000085 }, { 0x0000003A, 0x00000088 }, { 0x0000003C, 0x0000008C }, { 0x0000003E, 0x00000090 },
-        { 0x00000040, 0x00000095 }, { 0x00000042, 0x0000009A }, { 0x00000044, 0x0000009F }, { 0x00000046, 0x000000A4 },
-        { 0x00000047, 0x000000A9 }, { 0x00000049, 0x000000AE }, { 0x0000004B, 0x000000B4 }, { 0x0000004C, 0x000000BA },
-        { 0x0000004D, 0x000000C0 }, { 0x0000004E, 0x000000C6 }, { 0x0000004F, 0x000000CC }, { 0x00000050, 0x000000D2 },
-        { 0x00000051, 0x000000D8 }, { 0x00000052, 0x000000DE }, { 0x00000053, 0x000000E4 }, { 0x00000053, 0x000000EA },
-        { 0x00000054, 0x000000F0 }, { 0x00000055, 0x000000F6 }, { 0x00000056, 0x000000FC }, { 0x00000057, 0x00000102 },
-        { 0x00000058, 0x00000108 }, { 0x00000058, 0x0000010E }, { 0x00000059, 0x00000114 }, { 0x0000005A, 0x0000011A },
-        { 0x0000005B, 0x0000011E },
+        { 2, 120 },  { 4, 118 },  { 6, 117 },  { 8, 115 },  { 10, 114 }, { 12, 113 }, { 14, 112 }, { 16, 111 },
+        { 18, 110 }, { 20, 110 }, { 22, 109 }, { 24, 109 }, { 26, 108 }, { 28, 108 }, { 30, 108 }, { 30, 108 },
+        { 32, 109 }, { 34, 110 }, { 36, 111 }, { 38, 112 }, { 40, 114 }, { 42, 116 }, { 44, 118 }, { 46, 120 },
+        { 48, 122 }, { 50, 124 }, { 52, 127 }, { 54, 130 }, { 56, 133 }, { 58, 136 }, { 60, 140 }, { 62, 144 },
+        { 64, 149 }, { 66, 154 }, { 68, 159 }, { 70, 164 }, { 71, 169 }, { 73, 174 }, { 75, 180 }, { 76, 186 },
+        { 77, 192 }, { 78, 198 }, { 79, 204 }, { 80, 210 }, { 81, 216 }, { 82, 222 }, { 83, 228 }, { 83, 234 },
+        { 84, 240 }, { 85, 246 }, { 86, 252 }, { 87, 258 }, { 88, 264 }, { 88, 270 }, { 89, 276 }, { 90, 282 },
+        { 91, 286 },
     };
-    UNK_TYPE4 sp1E0[] = {
-        0x00000002, 0x00000005, 0x00000008, 0x0000000B, 0x0000000E, 0x00000010, 0x00000012, 0x00000013,
-        0x00000013, 0x00000013, 0x00000012, 0x00000010, 0x0000000E, 0x0000000B, 0x00000008, 0x00000005,
-        0x00000002, 0xFFFFFFFF, 0xFFFFFFFB, 0xFFFFFFF7, 0xFFFFFFF3, 0xFFFFFFEE, 0xFFFFFFE9, 0xFFFFFFE4,
-        0xFFFFFFDE, 0xFFFFFFD8, 0xFFFFFFD2, 0xFFFFFFCC, 0xFFFFFFC5, 0xFFFFFFBE, 0xFFFFFFB7, 0xFFFFFFB0,
+    s32 sp1E0[] = {
+        2, 5,  8,  11, 14,  16,  18,  19,  19,  19,  18,  16,  14,  11,  8,   5,
+        2, -1, -5, -9, -13, -18, -23, -28, -34, -40, -46, -52, -59, -66, -73, -80,
     };
     struct_800C48A8_usa sp260[] UNUSED = {
         0xF81D, 0xF01B, 0xE019, 0xC817, 0xB815, 0xA813, 0xB815, 0xC817, 0xE019, 0xF01B,
     };
     TheGame_unk_0000 *var_s2;
-    s16 var_v0_5;
-    s32 temp_ret;
-    s32 temp_v1_2;
-    s32 var_a0;
-    s32 var_s3;
-    s8 *var_s0;
     s32 i;
-    s32 t0;
 
     gTheGame.unk_90C0 = 6;
 
@@ -358,27 +335,34 @@ void DoBonus(void) {
     var_s2 = &gTheGame.unk_0000[0];
 
     if (gSelection == 0x96) {
+        s32 var_a0;
+        s32 var_s3;
+        s32 t0;
+
         if (gWhatever == 0) {
             t0 = DoGameOverTryAgain();
         }
+
         if ((t0 != 0) || (gWhatever != 0)) {
             if (gWhatever == 0) {
                 if (gTheGame.unk_9C24 == 0) {
+                    s8 *var_s0;
+
                     switch (gTheGame.unk_9C28) {
                         case 0x1:
-                            var_s0 = gPlayer + 0xE0;
+                            var_s0 = &gPlayer[0]->unk_0E0;
                             break;
                         case 0x2:
-                            var_s0 = gPlayer + 0xE1;
+                            var_s0 = &gPlayer[0]->unk_0E1;
                             break;
                         case 0x3:
-                            var_s0 = gPlayer + 0xE2;
+                            var_s0 = &gPlayer[0]->unk_0E2;
                             break;
                         case 0x4:
-                            var_s0 = gPlayer + 0xE3;
+                            var_s0 = &gPlayer[0]->unk_0E3;
                             break;
                         case 0x5:
-                            var_s0 = gPlayer + 0xE4;
+                            var_s0 = &gPlayer[0]->unk_0E4;
                             break;
                     }
 
@@ -415,12 +399,13 @@ void DoBonus(void) {
             var_s2->unk_43FC = 0x27;
         }
 
-        gTheGame.unk_8C88[1].b.frameY = ((gTheGame.unk_8C88[1].b.frameY >> 0x2) - var_s5) * 4;
+        var_a0 = gTheGame.unk_8C88[1].b.frameY >> 0x2;
+        gTheGame.unk_8C88[1].b.frameY = (var_a0 - var_s5) << 2;
 
-        var_s3 = 0;
-        while (var_s3 < 6) {
+        for (var_s3 = 0; var_s3 < 6; var_s3++) {
             if (var_s2->unk_0000.unk_0000[0].unk_000[var_s3].unk_10 == 0) {
-                temp_ret = AnimationRandom(0x1F4);
+                s32 temp_ret = AnimationRandom(0x1F4);
+
                 if (temp_ret == ((temp_ret / 21) * 0x15)) {
                     var_s2->unk_0000.unk_0000[0].unk_000[var_s3].unk_10 = RandomBlock(var_s2);
                     Init2DTetrisTMEM(&var_s2->unk_0000.unk_0000[0].unk_000[var_s3], &var_s2->unk_3830.unk_000[var_s3]);
@@ -444,16 +429,11 @@ void DoBonus(void) {
                     var_s2->unk_0000.unk_0000[0].unk_000[var_s3].unk_08 = 0;
                 }
 
-                // if (gTheGame.unk_0000[0].unk_0000.unk_0000) {}
-
                 switch (var_s3) {
                     case 1:
                         if ((var_a0 >= 0x95) || (var_s2->unk_0000.unk_0000[0].unk_000[1].unk_08 != 0)) {
-                            var_v0_5 = (0x9B - sp1E0[var_s2->unk_0000.unk_0000[0].unk_000[1].unk_08++]) * 4;
-                        } else {
-                            var_v0_5 = var_a0 * 4;
+                            var_a0 = (0x9B - sp1E0[var_s2->unk_0000.unk_0000[0].unk_000[1].unk_08++]);
                         }
-                        var_s2->unk_3830.unk_000[var_s3].unk_08 = var_v0_5;
                         break;
 
                     case 3:
@@ -461,34 +441,30 @@ void DoBonus(void) {
                             if (var_s2->unk_0000.unk_0000[0].unk_000[3].unk_08 == 0) {
                                 var_s2->unk_0000.unk_0000[0].unk_000[3].unk_0C = 8;
                             }
-                            goto block_58;
                         }
-                        var_v0_5 = var_a0 * 4;
-                        if (var_s2->unk_0000.unk_0000[0].unk_000[3].unk_08 != 0) {
-                        block_58:
+
+                        if ((var_a0 >= 0x46) || (var_s2->unk_0000.unk_0000[0].unk_000[3].unk_08 != 0)) {
+                            s32 temp_v1_2;
+
                             if (var_s2->unk_0000.unk_0000[0].unk_000[3].unk_0C != 0) {
                                 var_s2->unk_0000.unk_0000[0].unk_000[3].unk_0C--;
                             }
-                            var_v0_5 = var_a0 * 4;
+
                             temp_v1_2 = var_s2->unk_0000.unk_0000[0].unk_000[3].unk_08;
                             var_s2->unk_0000.unk_0000[0].unk_000[3].unk_08++;
                             if (var_s2->unk_0000.unk_0000[0].unk_000[3].unk_08 >= 2) {
-                                var_s2->unk_3830.unk_000[0].unk_00 = (sp18[temp_v1_2 - 1].unk_0 + 0x5A) * 4;
+                                t0 = temp_v1_2 - 1;
 
-                                var_v0_5 = (sp18[temp_v1_2 - 1].unk_4 - 0x35) * 4;
+                                var_s2->unk_3830.unk_000[3].unk_00 = (sp18[t0].unk_0 + 0x5A) << 2;
+
+                                var_a0 = (sp18[temp_v1_2 - 1].unk_4 - 0x35);
                             }
                         }
-
-                        var_s2->unk_3830.unk_000[var_s3].unk_08 = var_v0_5;
-                        break;
-
-                    default:
-                        var_s2->unk_3830.unk_000[var_s3].unk_08 = var_a0 * 4;
                         break;
                 }
-            }
 
-            var_s3 += 1;
+                var_s2->unk_3830.unk_000[var_s3].unk_08 = var_a0 << 2;
+            }
         }
 
         sprintf(sp10, "%02d", gTheGame.unk_9C30);
@@ -498,9 +474,6 @@ void DoBonus(void) {
         gMain = GMAIN_258;
     }
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", DoBonus);
-#endif
 #endif
 
 #if VERSION_USA

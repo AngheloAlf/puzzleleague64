@@ -3,9 +3,10 @@
 
 #include "libultra.h"
 #include "unk.h"
+#include "the_game.h"
 
 
-// void RandomBlock();
+s32 RandomBlock(TheGame_unk_0000 *arg0);
 // void func_80089778_usa();
 // void func_80089828_usa();
 // void func_8008997C_usa();

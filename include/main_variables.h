@@ -128,7 +128,7 @@ extern s16 ts_old_alert;
 // extern UNK_TYPE D_800B6440_usa;
 // extern UNK_TYPE D_800B6444_usa;
 
-// extern UNK_TYPE gameoverBounce;
+extern s8 gameoverBounce[];
 // extern UNK_TYPE D_800B64E8_usa;
 // extern UNK_TYPE D_800B64E9_usa;
 // extern UNK_TYPE D_800B64F8_usa;

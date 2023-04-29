@@ -3,13 +3,13 @@
 
 #include "libultra.h"
 
-#define UNK_TYPE s32
-#define UNK_TYPE1 s8
-#define UNK_TYPE2 s16
-#define UNK_TYPE4 s32
-#define UNK_TYPE8 s64
-#define UNK_PTR void*
-#define UNK_RET UNK_TYPE
+typedef s32 UNK_TYPE;
+typedef s8 UNK_TYPE1;
+typedef s16 UNK_TYPE2;
+typedef s32 UNK_TYPE4;
+typedef s64 UNK_TYPE8;
+typedef void* UNK_PTR;
+typedef UNK_TYPE UNK_RET;
 #define UNK_ARGS 
 #define UNK_FUN_ARG void(*)(void)
 //#define UNK_FUN_PTR(name) void(*name)(void)
