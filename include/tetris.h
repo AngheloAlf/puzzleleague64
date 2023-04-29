@@ -5,7 +5,7 @@
 #include "unk.h"
 
 
-// void func_800896C0_usa();
+// void RandomBlock();
 // void func_80089778_usa();
 // void func_80089828_usa();
 // void func_8008997C_usa();

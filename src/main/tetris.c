@@ -13,7 +13,7 @@
 #include "dlist.h"
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/tetris", func_800896C0_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/tetris", RandomBlock);
 #endif
 
 #if VERSION_USA
@@ -68,7 +68,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/tetris", func_80089BE0_usa);
 ? func_800325F8_usa();                              /* extern */
 ? func_800343A0_usa();                              /* extern */
 ? func_800346B8_usa();                              /* extern */
-s32 func_8004EDA0_usa(?);                           /* extern */
+s32 AnimationRandom(?);                           /* extern */
 ? func_80052720_usa();                              /* extern */
 ? func_80054020_usa();                              /* extern */
 ? func_80054500_usa(s8 *);                          /* extern */
@@ -228,7 +228,7 @@ loop_4:
                     var_s1 = (s32) var_s0 < (s32) temp_s7;
                     do {
 loop_15:
-                        temp_v1_2 = &sp10 + func_8004EDA0_usa(6);
+                        temp_v1_2 = &sp10 + AnimationRandom(6);
                         if (*temp_v1_2 != 0) {
                             goto loop_15;
                         }
@@ -283,14 +283,14 @@ block_54:
                 default:                            /* switch 1 */
                     if (var_fp == 0) {
                         bzero(&sp10, 0x12);
-                        var_s0_2 = (func_8004EDA0_usa(0xE) * 6) + &D_800B6AA0_usa;
+                        var_s0_2 = (AnimationRandom(0xE) * 6) + &D_800B6AA0_usa;
                         temp_s7_2 = var_s0_2 + 0xC;
                         temp_s5 = var_s0_2 + 6;
                         temp_s6_2 = temp_s5;
                         var_s1_2 = (s32) var_s0_2 < (s32) temp_s7_2;
                         do {
 loop_33:
-                            temp_v1_3 = &sp10 + func_8004EDA0_usa(6);
+                            temp_v1_3 = &sp10 + AnimationRandom(6);
                             if (*temp_v1_3 != 0) {
                                 goto loop_33;
                             }
@@ -308,14 +308,14 @@ loop_33:
                     }
                     if (gTheGame.unk_0000[0].unk_43BC[0x28] != temp_s3->unk_43E4) {
                         bzero(&sp10, 0x12);
-                        var_s0_3 = (func_8004EDA0_usa(0xE) * 6) + &D_800B6AA0_usa;
+                        var_s0_3 = (AnimationRandom(0xE) * 6) + &D_800B6AA0_usa;
                         temp_s7_3 = var_s0_3 + 0xC;
                         temp_s5_2 = var_s0_3 + 6;
                         temp_s6_3 = temp_s5_2;
                         var_s1_3 = (s32) var_s0_3 < (s32) temp_s7_3;
                         do {
 loop_44:
-                            temp_v1_4 = &sp10 + func_8004EDA0_usa(6);
+                            temp_v1_4 = &sp10 + AnimationRandom(6);
                             if (*temp_v1_4 != 0) {
                                 goto loop_44;
                             }
@@ -355,7 +355,7 @@ loop_44:
                     var_s1_4 = (s32) var_s0_4 < (s32) temp_s7_4;
                     do {
 loop_65:
-                        temp_v1_5 = &sp10 + func_8004EDA0_usa(0x12);
+                        temp_v1_5 = &sp10 + AnimationRandom(0x12);
                         if (*temp_v1_5 != 0) {
                             goto loop_65;
                         }
@@ -375,14 +375,14 @@ block_95:
                 default:
                     if (var_fp == 0) {
                         bzero(&sp10, 0x12);
-                        var_s0_5 = (func_8004EDA0_usa(0xE) * 6) + &D_800B6AA0_usa;
+                        var_s0_5 = (AnimationRandom(0xE) * 6) + &D_800B6AA0_usa;
                         temp_s7_5 = var_s0_5 + 0xC;
                         temp_s6_5 = var_s0_5 + 6;
                         temp_s5_4 = var_s0_5 + 0x12;
                         var_s1_5 = (s32) var_s0_5 < (s32) temp_s7_5;
                         do {
 loop_76:
-                            temp_v1_6 = &sp10 + func_8004EDA0_usa(0x12);
+                            temp_v1_6 = &sp10 + AnimationRandom(0x12);
                             if (*temp_v1_6 != 0) {
                                 goto loop_76;
                             }
@@ -400,14 +400,14 @@ loop_76:
                     }
                     if (gTheGame.unk_0000[0].unk_43BC[0x28] != temp_s3->unk_43E4) {
                         bzero(&sp10, 0x12);
-                        var_s0_6 = (func_8004EDA0_usa(0xE) * 6) + &D_800B6AA0_usa;
+                        var_s0_6 = (AnimationRandom(0xE) * 6) + &D_800B6AA0_usa;
                         temp_s7_6 = var_s0_6 + 0xC;
                         temp_s6_6 = var_s0_6 + 6;
                         temp_s5_5 = var_s0_6 + 0x12;
                         var_s1_6 = (s32) var_s0_6 < (s32) temp_s7_6;
                         do {
 loop_87:
-                            temp_v1_7 = &sp10 + func_8004EDA0_usa(0x12);
+                            temp_v1_7 = &sp10 + AnimationRandom(0x12);
                             if (*temp_v1_7 != 0) {
                                 goto loop_87;
                             }

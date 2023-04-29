@@ -23,7 +23,7 @@
 // void func_8003880C_usa();
 // void func_80038944_usa();
 // void func_80038B98_usa();
-// void func_80038C54_usa();
+// void DoGameOverTryAgain();
 // void func_80038F84_usa();
 // void func_8003901C_usa();
 // void func_8003991C_usa();
@@ -37,6 +37,6 @@
 void DoGameOver2D(void);
 void DoGameOver3D(void);
 void DoGameOver(void);
-// void func_8003E508_usa();
+// void SaveRom();
 
 #endif

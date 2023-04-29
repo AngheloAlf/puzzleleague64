@@ -328,7 +328,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_80018EF8_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_800192F4_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/menu", menuSaveData);
 #endif
 
 #if VERSION_USA

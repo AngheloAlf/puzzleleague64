@@ -290,19 +290,217 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", InitBonus);
 #endif
 
 #if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/bonus", RO_800C4660_usa);
-#endif
+#ifdef NON_EQUIVALENT
+s32 func_8003228C_usa(void);
+s32 DoGameOverTryAgain(void);
+void SaveRom(void);
+void SetText(s32, s32, const char *, s32);
+s32 AnimationRandom(s32);
+void Init2DTetrisTMEM(TheGame_unk_0000_unk_0000_unk_000_unk_000 *arg0, TheGame_unk_0000_unk_000 *arg1);
+s32 RandomBlock(TheGame_unk_0000 *arg0);
+extern s8 gameoverBounce[];
 
-#if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/bonus", RO_800C4828_usa);
-#endif
+typedef struct struct_800C4660_usa {
+    /* 0x0 */ UNK_TYPE4 unk_0;
+    /* 0x4 */ UNK_TYPE4 unk_4;
+} struct_800C4660_usa; // size = 0x8
 
-#if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/bonus", RO_800C48A8_usa);
-#endif
+typedef struct struct_800C48A8_usa {
+    /* 0x0 */ UNK_TYPE2 unk_0;
+    /* 0x2 */ UNK_TYPE2 unk_2;
+} struct_800C48A8_usa; // size = 0x4
 
-#if VERSION_USA
+void DoBonus(void) {
+    s32 var_s5 = 0;
+    char sp10[8];
+    struct_800C4660_usa sp18[] = {
+        { 0x00000002, 0x00000078 }, { 0x00000004, 0x00000076 }, { 0x00000006, 0x00000075 }, { 0x00000008, 0x00000073 },
+        { 0x0000000A, 0x00000072 }, { 0x0000000C, 0x00000071 }, { 0x0000000E, 0x00000070 }, { 0x00000010, 0x0000006F },
+        { 0x00000012, 0x0000006E }, { 0x00000014, 0x0000006E }, { 0x00000016, 0x0000006D }, { 0x00000018, 0x0000006D },
+        { 0x0000001A, 0x0000006C }, { 0x0000001C, 0x0000006C }, { 0x0000001E, 0x0000006C }, { 0x0000001E, 0x0000006C },
+        { 0x00000020, 0x0000006D }, { 0x00000022, 0x0000006E }, { 0x00000024, 0x0000006F }, { 0x00000026, 0x00000070 },
+        { 0x00000028, 0x00000072 }, { 0x0000002A, 0x00000074 }, { 0x0000002C, 0x00000076 }, { 0x0000002E, 0x00000078 },
+        { 0x00000030, 0x0000007A }, { 0x00000032, 0x0000007C }, { 0x00000034, 0x0000007F }, { 0x00000036, 0x00000082 },
+        { 0x00000038, 0x00000085 }, { 0x0000003A, 0x00000088 }, { 0x0000003C, 0x0000008C }, { 0x0000003E, 0x00000090 },
+        { 0x00000040, 0x00000095 }, { 0x00000042, 0x0000009A }, { 0x00000044, 0x0000009F }, { 0x00000046, 0x000000A4 },
+        { 0x00000047, 0x000000A9 }, { 0x00000049, 0x000000AE }, { 0x0000004B, 0x000000B4 }, { 0x0000004C, 0x000000BA },
+        { 0x0000004D, 0x000000C0 }, { 0x0000004E, 0x000000C6 }, { 0x0000004F, 0x000000CC }, { 0x00000050, 0x000000D2 },
+        { 0x00000051, 0x000000D8 }, { 0x00000052, 0x000000DE }, { 0x00000053, 0x000000E4 }, { 0x00000053, 0x000000EA },
+        { 0x00000054, 0x000000F0 }, { 0x00000055, 0x000000F6 }, { 0x00000056, 0x000000FC }, { 0x00000057, 0x00000102 },
+        { 0x00000058, 0x00000108 }, { 0x00000058, 0x0000010E }, { 0x00000059, 0x00000114 }, { 0x0000005A, 0x0000011A },
+        { 0x0000005B, 0x0000011E },
+    };
+    UNK_TYPE4 sp1E0[] = {
+        0x00000002, 0x00000005, 0x00000008, 0x0000000B, 0x0000000E, 0x00000010, 0x00000012, 0x00000013,
+        0x00000013, 0x00000013, 0x00000012, 0x00000010, 0x0000000E, 0x0000000B, 0x00000008, 0x00000005,
+        0x00000002, 0xFFFFFFFF, 0xFFFFFFFB, 0xFFFFFFF7, 0xFFFFFFF3, 0xFFFFFFEE, 0xFFFFFFE9, 0xFFFFFFE4,
+        0xFFFFFFDE, 0xFFFFFFD8, 0xFFFFFFD2, 0xFFFFFFCC, 0xFFFFFFC5, 0xFFFFFFBE, 0xFFFFFFB7, 0xFFFFFFB0,
+    };
+    struct_800C48A8_usa sp260[] UNUSED = {
+        0xF81D, 0xF01B, 0xE019, 0xC817, 0xB815, 0xA813, 0xB815, 0xC817, 0xE019, 0xF01B,
+    };
+    TheGame_unk_0000 *var_s2;
+    s16 var_v0_5;
+    s32 temp_ret;
+    s32 temp_v1_2;
+    s32 var_a0;
+    s32 var_s3;
+    s8 *var_s0;
+    s32 i;
+    s32 t0;
+
+    gTheGame.unk_90C0 = 6;
+
+    for (i = ARRAY_COUNT(gTheGame.unk_90C8) - 1; i >= 0; i--) {
+        gTheGame.unk_90C8[i].unk_18 = -1;
+    }
+
+    var_s2 = &gTheGame.unk_0000[0];
+
+    if (gSelection == 0x96) {
+        if (gWhatever == 0) {
+            t0 = DoGameOverTryAgain();
+        }
+        if ((t0 != 0) || (gWhatever != 0)) {
+            if (gWhatever == 0) {
+                if (gTheGame.unk_9C24 == 0) {
+                    switch (gTheGame.unk_9C28) {
+                        case 0x1:
+                            var_s0 = B_8021BEA4_usa + 0xE0;
+                            break;
+                        case 0x2:
+                            var_s0 = B_8021BEA4_usa + 0xE1;
+                            break;
+                        case 0x3:
+                            var_s0 = B_8021BEA4_usa + 0xE2;
+                            break;
+                        case 0x4:
+                            var_s0 = B_8021BEA4_usa + 0xE3;
+                            break;
+                        case 0x5:
+                            var_s0 = B_8021BEA4_usa + 0xE4;
+                            break;
+                    }
+
+                    if (gTheGame.unk_9C30 < 0x63) {
+                        gTheGame.unk_9C30++;
+                    }
+
+                    if (*var_s0 < 0x63) {
+                        *var_s0 += 1;
+                    }
+                }
+            }
+
+            gWhatever++;
+            if (gWhatever >= 0x14) {
+                gReset = -1;
+                if (gTheGame.unk_9C24 == 0) {
+                    gMain = GMAIN_384;
+                    SaveRom();
+                    if (gTheGame.unk_9C2C == 0x12) {
+                        gTheGame.unk_9C2C = 0x13;
+                        gMain = GMAIN_STORY;
+                    }
+                } else {
+                    gMain = GMAIN_258;
+                }
+            }
+        }
+
+        if (var_s2->unk_43FC >= 0) {
+            var_s5 = gameoverBounce[var_s2->unk_43FC];
+            var_s2->unk_43FC--;
+        } else {
+            var_s2->unk_43FC = 0x27;
+        }
+
+        gTheGame.unk_8C88[1].b.frameY = ((gTheGame.unk_8C88[1].b.frameY >> 0x2) - var_s5) * 4;
+
+        var_s3 = 0;
+        while (var_s3 < 6) {
+            if (var_s2->unk_0000.unk_0000[0].unk_000[var_s3].unk_10 == 0) {
+                temp_ret = AnimationRandom(0x1F4);
+                if (temp_ret == ((temp_ret / 21) * 0x15)) {
+                    var_s2->unk_0000.unk_0000[0].unk_000[var_s3].unk_10 = RandomBlock(var_s2);
+                    Init2DTetrisTMEM(&var_s2->unk_0000.unk_0000[0].unk_000[var_s3], &var_s2->unk_3830.unk_000[var_s3]);
+                    var_s2->unk_3830.unk_000[var_s3].unk_00 = var_s2->unk_0000.unk_0000[0].unk_000[var_s3].unk_04 * 4;
+                }
+            } else {
+                var_a0 = var_s2->unk_3830.unk_000[var_s3].unk_08 >> 2;
+                if (var_a0 < 0x28) {
+                    var_a0 = var_a0 + 4;
+                } else if (var_a0 < 0x32) {
+                    var_a0 = var_a0 + 5;
+                } else if (var_a0 < 0x82) {
+                    var_a0 = var_a0 + 6;
+                } else {
+                    var_a0 = var_a0 + 7;
+                }
+
+                if (var_a0 >= 0xF0) {
+                    var_a0 = -0x14;
+                    var_s2->unk_0000.unk_0000[0].unk_000[var_s3].unk_10 = 0;
+                    var_s2->unk_0000.unk_0000[0].unk_000[var_s3].unk_08 = 0;
+                }
+
+                // if (gTheGame.unk_0000[0].unk_0000.unk_0000) {}
+
+                switch (var_s3) {
+                    case 1:
+                        if ((var_a0 >= 0x95) || (var_s2->unk_0000.unk_0000[0].unk_000[1].unk_08 != 0)) {
+                            var_v0_5 = (0x9B - sp1E0[var_s2->unk_0000.unk_0000[0].unk_000[1].unk_08++]) * 4;
+                        } else {
+                            var_v0_5 = var_a0 * 4;
+                        }
+                        var_s2->unk_3830.unk_000[var_s3].unk_08 = var_v0_5;
+                        break;
+
+                    case 3:
+                        if (var_a0 >= 0x46) {
+                            if (var_s2->unk_0000.unk_0000[0].unk_000[3].unk_08 == 0) {
+                                var_s2->unk_0000.unk_0000[0].unk_000[3].unk_0C = 8;
+                            }
+                            goto block_58;
+                        }
+                        var_v0_5 = var_a0 * 4;
+                        if (var_s2->unk_0000.unk_0000[0].unk_000[3].unk_08 != 0) {
+                        block_58:
+                            if (var_s2->unk_0000.unk_0000[0].unk_000[3].unk_0C != 0) {
+                                var_s2->unk_0000.unk_0000[0].unk_000[3].unk_0C--;
+                            }
+                            var_v0_5 = var_a0 * 4;
+                            temp_v1_2 = var_s2->unk_0000.unk_0000[0].unk_000[3].unk_08;
+                            var_s2->unk_0000.unk_0000[0].unk_000[3].unk_08++;
+                            if (var_s2->unk_0000.unk_0000[0].unk_000[3].unk_08 >= 2) {
+                                var_s2->unk_3830.unk_000[0].unk_00 = (sp18[temp_v1_2 - 1].unk_0 + 0x5A) * 4;
+
+                                var_v0_5 = (sp18[temp_v1_2 - 1].unk_4 - 0x35) * 4;
+                            }
+                        }
+
+                        var_s2->unk_3830.unk_000[var_s3].unk_08 = var_v0_5;
+                        break;
+
+                    default:
+                        var_s2->unk_3830.unk_000[var_s3].unk_08 = var_a0 * 4;
+                        break;
+                }
+            }
+
+            var_s3 += 1;
+        }
+
+        sprintf(sp10, "%02d", gTheGame.unk_9C30);
+        SetText(0x103, 0x17, sp10, 0x17);
+    } else if (func_8003228C_usa() != 0) {
+        gReset = -1;
+        gMain = GMAIN_258;
+    }
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", DoBonus);
+#endif
 #endif
 
 #if VERSION_USA

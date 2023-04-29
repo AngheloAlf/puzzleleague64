@@ -91,7 +91,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80038B98_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80038C54_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/end", DoGameOverTryAgain);
 #endif
 
 #if VERSION_USA
@@ -186,7 +186,7 @@ s32 func_8003901C_usa(TheGame *);                   /* extern */
 ? func_80039A54_usa(?);                             /* extern */
 ? func_80039B78_usa();                              /* extern */
 s32 func_8003A0B8_usa();                            /* extern */
-? func_8003E508_usa(u32);                           /* extern */
+? SaveRom(u32);                           /* extern */
 ? func_8004ADD0_usa(?);                             /* extern */
 ? func_8004C280_usa(s32);                           /* extern */
 ? UpdateAnimation(TheGame *, ?, ?);               /* extern */
@@ -369,7 +369,7 @@ block_50:
                     temp_v0_2 = gWhatever;
                     if (temp_v0_2 == 0) {
                         if ((gSelection != 0x82) || (gTheGame.unk_9C20[8] != 0)) {
-                            func_8003E508_usa();
+                            SaveRom();
                         }
                     }
                     gWhatever = temp_v0_2 + 1;
@@ -628,7 +628,7 @@ block_152:
                             }
                         } else if (-var_s3 != 0) {
 block_164:
-                            func_8003E508_usa(var_a0_3);
+                            SaveRom(var_a0_3);
                         }
                     }
                     gWhatever = temp_v0_3 + 1;
@@ -892,7 +892,7 @@ s32 func_8003901C_usa(TheGame *);                   /* extern */
 ? func_80039A54_usa(?);                             /* extern */
 ? func_80039B78_usa();                              /* extern */
 s32 func_8003A0B8_usa();                            /* extern */
-? func_8003E508_usa(u32);                           /* extern */
+? SaveRom(u32);                           /* extern */
 ? func_8004ADD0_usa(?);                             /* extern */
 ? func_8004C280_usa(s32);                           /* extern */
 ? InitFlic();                              /* extern */
@@ -1087,7 +1087,7 @@ block_108:
                 case 0x391:                         /* switch 1 */
                     temp_v0_2 = gWhatever;
                     if (temp_v0_2 == 0) {
-                        func_8003E508_usa();
+                        SaveRom();
                     }
                     gWhatever = temp_v0_2 + 1;
                     if (gTheGame.unk_43EC != 0) {
@@ -1312,7 +1312,7 @@ block_115:
                     if ((gWhatever == 0) && (gTheGame.unk_43FC < -0x3C) && (temp_v1_2 < -0x3C)) {
                         temp_a0_3 = (u32) (gGameStatus & 0xF00) >> 8;
                         if ((gTheGame.unk_4404 == temp_a0_3) || (gTheGame.unk_0000[1].unk_4404 == temp_a0_3)) {
-                            func_8003E508_usa(temp_a0_3);
+                            SaveRom(temp_a0_3);
                         }
                         gWhatever += 1;
                     }
@@ -1530,5 +1530,5 @@ void DoGameOver(void) {
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_8003E508_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/end", SaveRom);
 #endif

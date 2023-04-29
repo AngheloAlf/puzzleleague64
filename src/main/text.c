@@ -136,7 +136,7 @@ s32 InitWhichNumber(TheGame_unk_90C8 *arg0, char arg1, s32 arg2) {
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/text", func_8004C1B8_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/text", SetText);
 #endif
 
 #if VERSION_USA

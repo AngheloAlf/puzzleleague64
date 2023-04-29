@@ -85,7 +85,7 @@
 // void func_80017E18_usa();
 // void func_80018EAC_usa();
 // void func_80018EF8_usa();
-// void func_800192F4_usa();
+// void menuSaveData();
 // void func_800194DC_usa();
 // void func_80019A24_usa();
 // void func_80019DAC_usa();
