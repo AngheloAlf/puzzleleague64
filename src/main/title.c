@@ -169,8 +169,6 @@ extern s32 B_801ADAE8_usa;
 extern s32 giButton;
 extern s32 gSelection;
 extern s32 B_8021BA98_usa;
-extern UNK_TYPE *B_8021BEA4_usa;
-extern UNK_TYPE *B_8021BEA8_usa;
 extern s32 last_song_handle;
 extern UNK_TYPE BGM_INIT_TABLE;
 extern UNK_TYPE SFX_INIT_TABLE;
@@ -355,7 +353,7 @@ block_36:
                 }
                 if (gpData->unk_0C >= 0x3C0) {
                     gDemo = 0xB;
-                    B_8021BEA4_usa = &B_801A6DB8_usa;
+                    gPlayer = &B_801A6DB8_usa;
                     B_8021BEA8_usa = &B_801A6DB8_usa;
                     gReset = -1;
                     B_801A1574_usa = 0;
@@ -522,8 +520,8 @@ void InitTitle(void) {
     // funny alignment, current macros does not match
     sp110 = (void *)((((uintptr_t)gBufferHeap + 0xF) + SEGMENT_ROM_SIZE(segment_0CA4A0)) & ~0xF);
 
-    B_8021BEA4_usa = &gTheGame.unk_9C48;
-    B_8021BEA8_usa = &gTheGame.unk_9C48;
+    gPlayer[0] = gTheGame.unk_9C48;
+    gPlayer[1] = gTheGame.unk_9C48;
     gpData = sp110;
     sp110 = (void *)((uintptr_t)sp110 + sizeof(struct_gpData));
     bzero(gpData, sizeof(struct_gpData));
@@ -591,8 +589,8 @@ void titleSetup(void) {
     B_8021BA98_usa = 0;
     B_8018A7F8_usa = 0;
     gGameStatus = 0x300;
-    B_8021BEA4_usa = NULL;
-    B_8021BEA8_usa = NULL;
+    gPlayer[0] = NULL;
+    gPlayer[1] = NULL;
 
     for (i = 0; i < ARRAY_COUNT(gTheGame.unk_9C48); i++) {
         menuInitUser(i);

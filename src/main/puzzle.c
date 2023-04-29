@@ -56,9 +56,9 @@ s32 func_8008913C_usa(s32 arg0) {
     u8 temp_v0;
     void *temp_s0;
 
-    temp_s0 = B_8021BEA4_usa + (((arg0 - 1) * 0x6E) + 0x121);
+    temp_s0 = gPlayer + (((arg0 - 1) * 0x6E) + 0x121);
     if (gTheGame.unk_9C30 == 0) {
-        temp_v0 = (B_8021BEA4_usa + arg0)->unk_792;
+        temp_v0 = (gPlayer + arg0)->unk_792;
         gTheGame.unk_9C30 = (s32) temp_v0;
         gTheGame.unk_0000[0].unk_4408[0x20] = (s32) temp_v0;
     }

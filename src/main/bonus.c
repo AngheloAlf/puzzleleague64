@@ -366,19 +366,19 @@ void DoBonus(void) {
                 if (gTheGame.unk_9C24 == 0) {
                     switch (gTheGame.unk_9C28) {
                         case 0x1:
-                            var_s0 = B_8021BEA4_usa + 0xE0;
+                            var_s0 = gPlayer + 0xE0;
                             break;
                         case 0x2:
-                            var_s0 = B_8021BEA4_usa + 0xE1;
+                            var_s0 = gPlayer + 0xE1;
                             break;
                         case 0x3:
-                            var_s0 = B_8021BEA4_usa + 0xE2;
+                            var_s0 = gPlayer + 0xE2;
                             break;
                         case 0x4:
-                            var_s0 = B_8021BEA4_usa + 0xE3;
+                            var_s0 = gPlayer + 0xE3;
                             break;
                         case 0x5:
-                            var_s0 = B_8021BEA4_usa + 0xE4;
+                            var_s0 = gPlayer + 0xE4;
                             break;
                     }
 

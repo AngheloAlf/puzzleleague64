@@ -256,7 +256,7 @@ block_54:
                     Init2DTetrisBlocksTMEM((TheGame *) temp_s3, 0);
                     goto block_99;
                 case 0x78:                          /* switch 1 */
-                    temp_a2 = B_8021BEA4_usa + (((temp_s3->unk_4424 - 1) * 0x6E) + 0x121);
+                    temp_a2 = gPlayer + (((temp_s3->unk_4424 - 1) * 0x6E) + 0x121);
                     sp28 = temp_a2;
                     func_80088AB4_usa(temp_s3, sp34, temp_a2, 1);
                     goto block_54;
@@ -266,7 +266,7 @@ block_54:
                         func_80088AB4_usa(temp_s3, sp34, sp28, func_80088940_usa(&sp28, temp_a1, temp_s3->unk_4424));
                         goto block_54;
                     }
-                    temp_a2_2 = B_8021BEA4_usa + (((temp_s3->unk_4424 - 1) * 0x6E) + 0x121);
+                    temp_a2_2 = gPlayer + (((temp_s3->unk_4424 - 1) * 0x6E) + 0x121);
                     sp28 = temp_a2_2;
                     if (func_80088AB4_usa(temp_s3, sp34, temp_a2_2, 1) == 0) {
                         gReset = -1;

@@ -444,14 +444,14 @@ void func_8004C280_usa(void) {
         case 0xBE:
             if (gSelection == 0x8C) {
                 if (gTheGame.unk_9C0C == 1) {
-                    var_a2 = B_8021BEA4_usa + 0x14;
+                    var_a2 = gPlayer + 0x14;
                 } else {
-                    var_a2 = B_8021BEA4_usa + 0x18;
+                    var_a2 = gPlayer + 0x18;
                 }
             } else if (gTheGame.unk_9C0C == 1) {
-                var_a2 = B_8021BEA4_usa + 0x1C;
+                var_a2 = gPlayer + 0x1C;
             } else {
-                var_a2 = B_8021BEA4_usa + 0x20;
+                var_a2 = gPlayer + 0x20;
             }
             if (gTheGame.unk_0000[0].unk_43AC > 0xF423F) {
                 gTheGame.unk_0000[0].unk_43AC = 0xF423F;

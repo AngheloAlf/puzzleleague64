@@ -1534,8 +1534,7 @@ extern OSMesg B_8021BA28_usa[1];
 extern s32 B_8021BA98_usa;
 
 // extern UNK_TYPE B_8021BEA0_usa;
-extern UNK_PTR B_8021BEA4_usa; // maybe gPlayer?
-extern UNK_PTR B_8021BEA8_usa;
+extern struct_801A6DB8_usa *gPlayer[]; // maybe gPlayer?
 extern Gfx *glistp;
 // extern UNK_TYPE B_8021BEB0_usa;
 // extern UNK_TYPE B_8021BEB8_usa;
