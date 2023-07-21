@@ -388,6 +388,8 @@ segments:
       - [0x0C8D88, .rodata, main/build]
 
       - { start: 0xC8DB0, type: bss, vram: 0x800C81B0, name: main/800C81B0 }
+      - { start: 0xC8DB0, type: bss, vram: 0x80197C20, name: libhvqm/hvqm2decSP1 }
+      - { start: 0xC8DB0, type: bss, vram: 0x8019A620, name: main/8019A620 }
 
   - name: buffer1
     type: code

@@ -320,7 +320,7 @@ segments:
       - [0x0AB5B0, hasm, libultra/rmonrcp]
       - [0x0AB650, asm, libultra/rmonbrk] # c
 
-      - [0x0AC340, asm, libhvqm/hvqm2decSP1] # TODO: find the bss
+      - [0x0AC340, asm, libhvqm/hvqm2decSP1]
       - [0x0B0060, asm, libhvqm/adpcmdec]
 
       - [0x0B01F0, hasm, libkmc/mmuldi3]
@@ -365,6 +365,7 @@ segments:
 
       - [0x0C1FF0, rodata, libultra/rsp/aspMain]
       - [0x0C22B0, rodata, libhvqm/rsp/hvqm2sp1]
+
       - [0x0C3000, rodata, libultra/rsp/f3dex]
       - [0x0C3800, rodata, libultra/rsp/s2dex]
 
@@ -437,6 +438,8 @@ segments:
       - { start: 0x0CA4A0, type: bss, vram: 0x801949B0, name: main/801949B0 }
       - { start: 0x0CA4A0, type: bss, vram: 0x80194A10, name: main/siacs }
       - { start: 0x0CA4A0, type: bss, vram: 0x80194A20, name: main/80194A20 }
+      - { start: 0x0CA4A0, type: bss, vram: 0x8019A4C0, name: libhvqm/hvqm2decSP1 }
+      - { start: 0x0CA4A0, type: bss, vram: 0x8019CEC0, name: main/8019CEC0 }
 
   - name: buffer1
     type: code

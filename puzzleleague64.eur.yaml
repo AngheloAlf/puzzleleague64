@@ -392,6 +392,8 @@ segments:
       - [0x0CA728, .rodata, main/build]
 
       - { start: 0xCA750, type: bss, vram: 0x800C9B50, name: main/800C9B50 }
+      - { start: 0xCA750, type: bss, vram: 0x801995C0, name: libhvqm/hvqm2decSP1 }
+      - { start: 0xCA750, type: bss, vram: 0x8019BFC0, name: main/8019BFC0 }
 
   - name: buffer1
     type: code
