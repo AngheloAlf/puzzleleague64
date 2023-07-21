@@ -13,6 +13,8 @@ Matching decomp of Pokémon Puzzle League
 
 ## Dependencies
 
+### System packages
+
 The build process has the following package requirements:
 
 * make
@@ -31,10 +33,30 @@ sudo apt update
 sudo apt install make git build-essential clang binutils-mips-linux-gnu gcc-mips-linux-gnu python3 python3-pip
 ```
 
+### Python dependencies
+
 To install the dependencies Python dependencies run:
 
 ```bash
 pip3 install -r requirements.txt
+```
+
+### Rust dependencies
+
+To install Rust run the following command and follow the on-screen instructions
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+The following Rust programs are required by the build process:
+
+* pigment64
+
+To install those programs run the following commands:
+
+```bash
+cargo install pigment64 --version ">=0.3.0,<1.*"
 ```
 
 ## Building

@@ -66,13 +66,11 @@ def main():
 
     outputPath.parent.mkdir(parents=True, exist_ok=True)
     with outputPath.open("wb") as f:
-        buffer = bytearray(4)
-        spimdisasm.common.Utils.wordsToBytes([len(fileList)], buffer)
+        buffer = spimdisasm.common.Utils.wordsToBytes([len(fileList)])
         f.write(buffer)
 
         for entry in fileList:
-            buffer = bytearray(0x8)
-            spimdisasm.common.Utils.wordsToBytes([entry.size, entry.offset], buffer)
+            buffer = spimdisasm.common.Utils.wordsToBytes([entry.size, entry.offset])
             f.write(buffer)
 
             buffer = bytearray(entry.filename.encode("ascii"))

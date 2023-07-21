@@ -24,11 +24,9 @@ KMC_BINUTILS    := $(KMC_DIR)/as
 
 
 all: $(KMC_GCC) $(KMC_BINUTILS)
-	$(MAKE) -C texture2c
 
 clean:
 	$(RM) -rf $(KMC_DIR) gcc_kmc
-	$(MAKE) -C texture2c clean
 
 distclean: clean
 

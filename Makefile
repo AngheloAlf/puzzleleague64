@@ -109,7 +109,7 @@ STRIP           := $(MIPS_BINUTILS_PREFIX)strip
 PYTHON            ?= python3
 SPLAT             ?= tools/splat/split.py
 SPLAT_YAML        ?= $(TARGET).$(VERSION).yaml
-TEXTURE2C         ?= ./tools/texture2c/texture2c.elf
+PIGMENT64         ?= pigment64
 
 
 IINC       := -Iinclude -Ibin/$(VERSION) -Ibuild/bin/$(VERSION) -I.
@@ -318,7 +318,7 @@ endif
 # Make inc files from assets
 
 build/%.inc: %.png
-	$(TEXTURE2C) --raw --image-format=png --pixel-format=$(subst .,,$(suffix $*)) -o $@ $<
+	$(PIGMENT64) to-bin --c-array --format $(subst .,,$(suffix $*)) -o $@ $<
 
 
 -include $(DEP_FILES)
