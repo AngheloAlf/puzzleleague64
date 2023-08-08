@@ -11,5 +11,8 @@
         "*.h": "c",
         "*.s": "n64asm",
         "*.txt": "plaintext"
-    }
+    },
+    "python.analysis.extraPaths": [
+        "./tools/splat",
+    ]
 }
