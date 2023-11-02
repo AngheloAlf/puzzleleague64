@@ -99,10 +99,6 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80038F84_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_8003901C_usa);
-#endif
-
-#if VERSION_USA
 INCLUDE_RODATA("asm/usa/nonmatchings/main/end", RO_800C49D0_usa);
 #endif
 
@@ -115,7 +111,7 @@ INCLUDE_RODATA("asm/usa/nonmatchings/main/end", RO_800C4A70_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/end", RO_800C4B00_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_8003901C_usa);
 #endif
 
 #if VERSION_USA

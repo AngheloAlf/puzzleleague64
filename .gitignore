@@ -6,6 +6,8 @@ build/
 undefined_funcs_auto.ld
 undefined_syms_auto.ld
 puzzleleague64.ld
+*.d
+linker_scripts/*/partial/
 
 __pycache__/
 .make_options
