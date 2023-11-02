@@ -115,6 +115,7 @@ STRIP           := $(MIPS_BINUTILS_PREFIX)strip
 PYTHON            ?= python3
 SPLAT             ?= tools/splat/split.py
 SPLAT_YAML        ?= $(TARGET).$(VERSION).yaml
+CHECKSUMMER       ?= tools/checksummer.py
 PIGMENT64         ?= pigment64
 
 
@@ -287,8 +288,8 @@ tidy:
 #### Various Recipes ####
 
 $(ROM): $(BIN)
-	$(OBJCOPY) -I binary -O binary --pad-to=0x2000000 --gap-fill=0xFF $< $@
-# TODO: update header
+	$(OBJCOPY) -I binary -O binary --pad-to=0x2000000 --gap-fill=0xFF $< $(@:.z64=.bin_no_checksum)
+	$(CHECKSUMMER) $(@:.z64=.bin_no_checksum) $@
 
 # Copy without pad-to to fill the gaps with zeroes
 $(BIN): $(ELF)
