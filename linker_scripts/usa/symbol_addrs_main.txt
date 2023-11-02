@@ -2576,8 +2576,8 @@ B_801C7384_usa = 0x801C7384; //
 B_801C7BA0_usa = 0x801C7BA0; //
 B_801C7BAB_usa = 0x801C7BAB; //
 B_801C7BAC_usa = 0x801C7BAC; //
-gInfo = 0x801C7BB0; // size:0x32090 maybe larger
-B_801F9C40_usa = 0x801F9C40; //
+gInfo = 0x801C7BB0; // size:0x32090
+
 gBlock_Level = 0x801F9C44; //
 B_801F9C48_usa = 0x801F9C48; //
 B_801F9C4C_usa = 0x801F9C4C; //

@@ -134,7 +134,7 @@ CFLAGS          += -nostdinc -fno-PIC -G 0 -mgp32 -mfp32 -fno-common
 
 WARNINGS        := -w
 
-ASFLAGS         := -march=vr4300 -32 -G0
+ASFLAGS         := -march=vr4300 -mabi=32 -G0 -no-pad-sections
 COMMON_DEFINES  := -D_MIPS_SZLONG=32 -D__USE_ISOC99
 GBI_DEFINES     := -DF3DEX_GBI
 
@@ -194,8 +194,11 @@ S_FILES       := $(foreach dir,$(ASM_DIRS) $(SRC_DIRS),$(wildcard $(dir)/*.s))
 BIN_FILES     := $(foreach dir,$(BIN_DIRS),$(wildcard $(dir)/*.bin))
 O_FILES       := $(foreach f,$(C_FILES:.c=.o),$(BUILD_DIR)/$f) \
                  $(foreach f,$(S_FILES:.s=.o),$(BUILD_DIR)/$f) \
-                 $(foreach f,$(BIN_FILES:.bin=.o),$(BUILD_DIR)/$f) \
-                 $(ARCHIVE_FILES:.archive=.o)
+                 $(foreach f,$(BIN_FILES:.bin=.o),$(BUILD_DIR)/$f)
+
+ifeq ($(VERSION),$(filter $(VERSION), usa ger))
+    O_FILES   += $(ARCHIVE_FILES:.archive=.o)
+endif
 
 PNG_INC_FILES := $(foreach f,$(PNG_FILES:.png=.inc),$(BUILD_DIR)/$f)
 

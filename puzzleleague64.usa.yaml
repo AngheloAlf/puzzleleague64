@@ -62,7 +62,7 @@ segments:
       - [0x000000, .data, rom_header/rom_header]
 
   - name: boot
-    type: bin
+    type: databin
     start: 0x40
 
   - name: entry
@@ -327,11 +327,11 @@ segments:
 
       - [0x0B05C0, c, main/build]
 
-      - [0x0B05C0, data, libultra/rsp/rspboot]
-      - [0x0B0690, data, libultra/rsp/aspMain]
-      - [0x0B14B0, data, libhvqm/rsp/hvqm2sp1]
-      - [0x0B1A80, data, libultra/rsp/f3dex]
-      - [0x0B2EB0, data, libultra/rsp/s2dex]
+      - [0x0B05C0, textbin, libultra/rsp/rspboot]
+      - [0x0B0690, textbin, libultra/rsp/aspMain]
+      - [0x0B14B0, textbin, libhvqm/rsp/hvqm2sp1]
+      - [0x0B1A80, textbin, libultra/rsp/f3dex]
+      - [0x0B2EB0, textbin, libultra/rsp/s2dex]
 
       - [0x0B4690, data, main/0B4690]
       - [0x0B46B0, .data, main/gfx]
@@ -363,11 +363,10 @@ segments:
 
       - [0x0C1FE0, .data, main/build]
 
-      - [0x0C1FF0, rodata, libultra/rsp/aspMain]
-      - [0x0C22B0, rodata, libhvqm/rsp/hvqm2sp1]
-
-      - [0x0C3000, rodata, libultra/rsp/f3dex]
-      - [0x0C3800, rodata, libultra/rsp/s2dex]
+      - [0x0C1FF0, databin, libultra/rsp/aspMain]
+      - [0x0C22B0, databin, libhvqm/rsp/hvqm2sp1]
+      - [0x0C3000, databin, libultra/rsp/f3dex]
+      - [0x0C3800, databin, libultra/rsp/s2dex]
 
       - [0x0C3BC0, .rodata, main/sound]
       - [0x0C3C90, .rodata, main/sfxlimit]
@@ -634,10 +633,10 @@ segments:
 
   # no idea where it ends
   - name: segment_0FB480
-    type: bin
+    type: databin
     start: 0x0FB480
 
-  - type: bin
+  - type: databin
     name: segment_101A80
     start: 0x101A80
     # vram: 0x02000000 # arbitrary
@@ -648,15 +647,15 @@ segments:
     #   subsegments:
     #   - [0x101A80, rgba16, assets/segment_101A80/D_00101A80.rgba16, 320, 232]
     #   - [0x125E80, rgba16, assets/segment_101A80/D_00125E80.rgba16, 64, 62]
-    #   - [0x127D80, bin] # palette
-    #   - [0x127F70, bin] # palette
+    #   - [0x127D80, databin] # palette
+    #   - [0x127F70, databin] # palette
     #   - [0x128170, i8, assets/segment_101A80/D_128170.i8, 192, 47] # ci8
     #   - [0x12A4B0, i8, assets/segment_101A80/D_12A4B0.i8, 64, 29] # ci8
     #   - [0x12ABF0, i8, assets/segment_101A80/D_12ABF0.i8, 64, 29] # ci8
     #   - [0x12B330, i8, assets/segment_101A80/D_12B330.i8, 64, 29] # ci8
     #   - [0x12BA70, i8, assets/segment_101A80/D_12DC30.i8, 64, 29] # ci8
 
-  - type: bin
+  - type: databin
     # name: segment_12C1B0
     start: 0x12C1B0
 
@@ -688,11 +687,11 @@ segments:
 
     # 25E7F0
 
-  - type: bin
+  - type: databin
     name: segment_50F3F0
     start: 0x50F3F0
 
-  - type: bin
+  - type: databin
     # name: segment_5337F0
     start: 0x5337F0
 
@@ -701,575 +700,575 @@ segments:
     start: 0x9BDB40
 
   - name: segment_17C2A80
-    type: bin
+    type: databin
     start: 0x17C2A80
 
   - name: segment_17CA780
-    type: bin
+    type: databin
     start: 0x17CA780
   # unknown end for the above one
 
   - name: segment_1A45560
-    type: bin
+    type: databin
     start: 0x1A45560
 
   - name: segment_1A47630
-    type: bin
+    type: databin
     start: 0x1A47630
 
   - name: segment_1A49850
-    type: bin
+    type: databin
     start: 0x1A49850
 
   - name: segment_1A49F60
-    type: bin
+    type: databin
     start: 0x1A49F60
 
   - name: segment_1A4AAC0
-    type: bin
+    type: databin
     start: 0x1A4AAC0
 
   - name: segment_1A4DEE0
-    type: bin
+    type: databin
     start: 0x1A4DEE0
 
   - name: segment_1A51B40
-    type: bin
+    type: databin
     start: 0x1A51B40
 
   - name: segment_1A52D50
-    type: bin
+    type: databin
     start: 0x1A52D50
 
   - name: segment_1A55860
-    type: bin
+    type: databin
     start: 0x1A55860
 
   - name: segment_1A57C20
-    type: bin
+    type: databin
     start: 0x1A57C20
 
   - name: segment_1A5C640
-    type: bin
+    type: databin
     start: 0x1A5C640
 
   - name: segment_1A5D6D0
-    type: bin
+    type: databin
     start: 0x1A5D6D0
 
   - name: segment_1A5E510
-    type: bin
+    type: databin
     start: 0x1A5E510
 
   - name: segment_1A64950
-    type: bin
+    type: databin
     start: 0x1A64950
 
   - name: segment_1A6AF50
-    type: bin
+    type: databin
     start: 0x1A6AF50
 
   - name: segment_1A6DAF0
-    type: bin
+    type: databin
     start: 0x1A6DAF0
 
   - name: segment_1A70610
-    type: bin
+    type: databin
     start: 0x1A70610
 
   - name: segment_1A712D0
-    type: bin
+    type: databin
     start: 0x1A712D0
 
   - name: segment_1A72030
-    type: bin
+    type: databin
     start: 0x1A72030
 
   - name: segment_1A74380
-    type: bin
+    type: databin
     start: 0x1A74380
 
   - name: segment_1A75FF0
-    type: bin
+    type: databin
     start: 0x1A75FF0
 
   - name: segment_1A76940
-    type: bin
+    type: databin
     start: 0x1A76940
 
   - name: segment_1A776B0
-    type: bin
+    type: databin
     start: 0x1A776B0
 
   - name: segment_1A79C90
-    type: bin
+    type: databin
     start: 0x1A79C90
 
   - name: segment_1A7E1B0
-    type: bin
+    type: databin
     start: 0x1A7E1B0
 
   - name: segment_1A7FE50
-    type: bin
+    type: databin
     start: 0x1A7FE50
 
   - name: segment_1A81760
-    type: bin
+    type: databin
     start: 0x1A81760
 
   - name: segment_1A824D0
-    type: bin
+    type: databin
     start: 0x1A824D0
 
   - name: segment_1A837A0
-    type: bin
+    type: databin
     start: 0x1A837A0
 
   - name: segment_1A85160
-    type: bin
+    type: databin
     start: 0x1A85160
 
   - name: segment_1A87870
-    type: bin
+    type: databin
     start: 0x1A87870
 
   - name: segment_1A87F80
-    type: bin
+    type: databin
     start: 0x1A87F80
 
   - name: segment_1A88AE0
-    type: bin
+    type: databin
     start: 0x1A88AE0
 
   - name: segment_1A8A210
-    type: bin
+    type: databin
     start: 0x1A8A210
 
   - name: segment_1A8A8F0
-    type: bin
+    type: databin
     start: 0x1A8A8F0
 
   - name: segment_1A8B000
-    type: bin
+    type: databin
     start: 0x1A8B000
 
   - name: segment_1A8BEA0
-    type: bin
+    type: databin
     start: 0x1A8BEA0
 
   - name: segment_1A8E130
-    type: bin
+    type: databin
     start: 0x1A8E130
 
   - name: segment_1A910B0
-    type: bin
+    type: databin
     start: 0x1A910B0
 
   - name: segment_1A93340
-    type: bin
+    type: databin
     start: 0x1A93340
 
   - name: segment_1A966A0
-    type: bin
+    type: databin
     start: 0x1A966A0
 
   - name: segment_1A98F30
-    type: bin
+    type: databin
     start: 0x1A98F30
 
   - name: segment_1A9CB20
-    type: bin
+    type: databin
     start: 0x1A9CB20
 
   - name: segment_1A9D1B0
-    type: bin
+    type: databin
     start: 0x1A9D1B0
 
   - name: segment_1A9D850
-    type: bin
+    type: databin
     start: 0x1A9D850
 
   - name: segment_1A9E2E0
-    type: bin
+    type: databin
     start: 0x1A9E2E0
 
   - name: segment_1A9EAC0
-    type: bin
+    type: databin
     start: 0x1A9EAC0
 
   - name: segment_1A9F450
-    type: bin
+    type: databin
     start: 0x1A9F450
 
   - name: segment_1AA0D70
-    type: bin
+    type: databin
     start: 0x1AA0D70
 
   - name: segment_1AA3350
-    type: bin
+    type: databin
     start: 0x1AA3350
 
   - name: segment_1AA7870
-    type: bin
+    type: databin
     start: 0x1AA7870
 
   - name: segment_1AA9510
-    type: bin
+    type: databin
     start: 0x1AA9510
 
   - name: segment_1AAAE20
-    type: bin
+    type: databin
     start: 0x1AAAE20
 
   - name: segment_1AABB90
-    type: bin
+    type: databin
     start: 0x1AABB90
 
   - name: segment_1AACE60
-    type: bin
+    type: databin
     start: 0x1AACE60
 
   - name: segment_1AB0280
-    type: bin
+    type: databin
     start: 0x1AB0280
 
   - name: segment_1AB3EE0
-    type: bin
+    type: databin
     start: 0x1AB3EE0
 
   - name: segment_1AB5B80
-    type: bin
+    type: databin
     start: 0x1AB5B80
 
   - name: segment_1AB7490
-    type: bin
+    type: databin
     start: 0x1AB7490
 
   - name: segment_1ABA8B0
-    type: bin
+    type: databin
     start: 0x1ABA8B0
 
   - name: segment_1ABE510
-    type: bin
+    type: databin
     start: 0x1ABE510
 
   - name: segment_1AC02C0
-    type: bin
+    type: databin
     start: 0x1AC02C0
 
   - name: segment_1AC2390
-    type: bin
+    type: databin
     start: 0x1AC2390
 
   - name: segment_1AC4120
-    type: bin
+    type: databin
     start: 0x1AC4120
 
   - name: segment_1AC5B60
-    type: bin
+    type: databin
     start: 0x1AC5B60
 
   - name: segment_1AC7EB0
-    type: bin
+    type: databin
     start: 0x1AC7EB0
 
   - name: segment_1AC9A60
-    type: bin
+    type: databin
     start: 0x1AC9A60
 
   - name: segment_1ACAE00
-    type: bin
+    type: databin
     start: 0x1ACAE00
 
   - name: segment_1ACD260
-    type: bin
+    type: databin
     start: 0x1ACD260
 
   - name: segment_1ACE9B0
-    type: bin
+    type: databin
     start: 0x1ACE9B0
 
   - name: segment_1ACF1B0
-    type: bin
+    type: databin
     start: 0x1ACF1B0
 
   - name: segment_1AD0EA0
-    type: bin
+    type: databin
     start: 0x1AD0EA0
 
   - name: segment_1AD8720
-    type: bin
+    type: databin
     start: 0x1AD8720
   # unknown end for the above one
 
   - name: segment_1C5EFB0
-    type: bin
+    type: databin
     start: 0x1C5EFB0
 
-  - type: bin
+  - type: databin
     start: 0x1C60660
 
   - name: segment_1C60AD0
-    type: bin
+    type: databin
     start: 0x1C60AD0
 
   - name: segment_1C63BE0
-    type: bin
+    type: databin
     start: 0x1C63BE0
   # unknown end for the above one
 
   - name: segment_1D358C0
-    type: bin
+    type: databin
     start: 0x1D358C0
 
   - name: segment_1D37FF0
-    type: bin
+    type: databin
     start: 0x1D37FF0
 
   - name: segment_1D38180
-    type: bin
+    type: databin
     start: 0x1D38180
   # unknown end for the above one
 
   - name: segment_1D3D2C0
-    type: bin
+    type: databin
     start: 0x1D3D2C0
 
-  - type: bin
+  - type: databin
     start: 0x1D3D320
 
   - name: segment_1D3D390
-    type: bin
+    type: databin
     start: 0x1D3D390
 
   - name: segment_1D3E1A0
-    type: bin
+    type: databin
     start: 0x1D3E1A0
   # unknown end for the above one
 
   - name: segment_1D66C70
-    type: bin
+    type: databin
     start: 0x1D66C70
 
   - name: segment_1D66F00
-    type: bin
+    type: databin
     start: 0x1D66F00
 
   - name: segment_1D67A70
-    type: bin
+    type: databin
     start: 0x1D67A70
   # unknown end for the above one
 
   - name: segment_1D8B4C0
-    type: bin
+    type: databin
     start: 0x1D8B4C0
 
   - name: segment_1D8B6C0
-    type: bin
+    type: databin
     start: 0x1D8B6C0
 
   - name: segment_1D8C620
-    type: bin
+    type: databin
     start: 0x1D8C620
   # unknown end for the above one
 
   - name: segment_1DB4980
-    type: bin
+    type: databin
     start: 0x1DB4980
 
   - name: segment_1DB4C20
-    type: bin
+    type: databin
     start: 0x1DB4C20
 
   - name: segment_1DB5790
-    type: bin
+    type: databin
     start: 0x1DB5790
   # unknown end for the above one
 
   - name: segment_1DD4750
-    type: bin
+    type: databin
     start: 0x1DD4750
 
   - name: segment_1DD4950
-    type: bin
+    type: databin
     start: 0x1DD4950
 
   - name: segment_1DD54C0
-    type: bin
+    type: databin
     start: 0x1DD54C0
   # unknown end for the above one
 
   - name: segment_1DF38F0
-    type: bin
+    type: databin
     start: 0x1DF38F0
 
   - name: segment_1DF3AF0
-    type: bin
+    type: databin
     start: 0x1DF3AF0
 
   - name: segment_1DF4660
-    type: bin
+    type: databin
     start: 0x1DF4660
   # unknown end for the above one
 
   - name: segment_1E16C10
-    type: bin
+    type: databin
     start: 0x1E16C10
 
   - name: segment_1E16E10
-    type: bin
+    type: databin
     start: 0x1E16E10
 
   - name: segment_1E17980
-    type: bin
+    type: databin
     start: 0x1E17980
   # unknown end for the above one
 
   - name: segment_1E36C00
-    type: bin
+    type: databin
     start: 0x1E36C00
 
   - name: segment_1E36E00
-    type: bin
+    type: databin
     start: 0x1E36E00
 
   - name: segment_1E37970
-    type: bin
+    type: databin
     start: 0x1E37970
   # unknown end for the above one
 
   - name: segment_1E5D070
-    type: bin
+    type: databin
     start: 0x1E5D070
 
   - name: segment_1E5D270
-    type: bin
+    type: databin
     start: 0x1E5D270
 
   - name: segment_1E5DDE0
-    type: bin
+    type: databin
     start: 0x1E5DDE0
   # unknown end for the above one
 
   - name: segment_1E7B650
-    type: bin
+    type: databin
     start: 0x1E7B650
 
   - name: segment_1E7B850
-    type: bin
+    type: databin
     start: 0x1E7B850
 
   - name: segment_1E7C710
-    type: bin
+    type: databin
     start: 0x1E7C710
   # unknown end for the above one
 
   - name: segment_1EA1000
-    type: bin
+    type: databin
     start: 0x1EA1000
 
   - name: segment_1EA12B0
-    type: bin
+    type: databin
     start: 0x1EA12B0
 
   - name: segment_1EA2170
-    type: bin
+    type: databin
     start: 0x1EA2170
   # unknown end for the above one
 
   - name: segment_1ED7210
-    type: bin
+    type: databin
     start: 0x1ED7210
 
   - name: segment_1ED74C0
-    type: bin
+    type: databin
     start: 0x1ED74C0
 
   - name: segment_1ED8030
-    type: bin
+    type: databin
     start: 0x1ED8030
   # unknown end for the above one
 
   - name: segment_1F03840
-    type: bin
+    type: databin
     start: 0x1F03840
 
   - name: segment_1F03A40
-    type: bin
+    type: databin
     start: 0x1F03A40
 
   - name: segment_1F049A0
-    type: bin
+    type: databin
     start: 0x1F049A0
   # unknown end for the above one
 
   - name: segment_1F2C5C0
-    type: bin
+    type: databin
     start: 0x1F2C5C0
 
   - name: segment_1F2C860
-    type: bin
+    type: databin
     start: 0x1F2C860
 
   - name: segment_1F2D920
-    type: bin
+    type: databin
     start: 0x1F2D920
   # unknown end for the above one
 
   - name: segment_1F64640
-    type: bin
+    type: databin
     start: 0x1F64640
 
   - name: segment_1F64920
-    type: bin
+    type: databin
     start: 0x1F64920
 
   - name: segment_1F65490
-    type: bin
+    type: databin
     start: 0x1F65490
   # unknown end for the above one
 
   - name: segment_1F898F0
-    type: bin
+    type: databin
     start: 0x1F898F0
 
   - name: segment_1F89AF0
-    type: bin
+    type: databin
     start: 0x1F89AF0
 
   - name: segment_1F8A660
-    type: bin
+    type: databin
     start: 0x1F8A660
   # unknown end for the above one
 
   - name: segment_1FA9EB0
-    type: bin
+    type: databin
     start: 0x1FA9EB0
 
   - name: segment_1FAA0B0
-    type: bin
+    type: databin
     start: 0x1FAA0B0
 
   - name: segment_1FAAC20
-    type: bin
+    type: databin
     start: 0x1FAAC20
   # unknown end for the above one
 
   - name: segment_1FCDF80
-    type: bin
+    type: databin
     start: 0x1FCDF80
 
   - name: segment_1FCE1A0
-    type: bin
+    type: databin
     start: 0x1FCE1A0
 
   - name: segment_1FCE670
-    type: bin
+    type: databin
     start: 0x1FCE670
   # unknown end for the above one
 
   - name: segment_1FCF820
-    type: bin
+    type: databin
     start: 0x1FCF820
 
   - [0x1FCF900]
