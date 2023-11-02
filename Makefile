@@ -53,13 +53,13 @@ LD_SCRIPT := linker_scripts/$(VERSION)/$(TARGET).ld
 BUILD_DEFINES ?=
 
 ifeq ($(VERSION),usa)
-	BUILD_DEFINES   += -DVERSION_USA=1
+	BUILD_DEFINES   += -DVERSION_USA=1 -DVERSION_STR=\"usa\"
 else ifeq ($(VERSION),eur)
-	BUILD_DEFINES   += -DVERSION_EUR=1
+	BUILD_DEFINES   += -DVERSION_EUR=1 -DVERSION_STR=\"eur\"
 else ifeq ($(VERSION),fra)
-	BUILD_DEFINES   += -DVERSION_FRA=1
+	BUILD_DEFINES   += -DVERSION_FRA=1 -DVERSION_STR=\"fra\"
 else ifeq ($(VERSION),ger)
-	BUILD_DEFINES   += -DVERSION_GER=1
+	BUILD_DEFINES   += -DVERSION_GER=1 -DVERSION_STR=\"ger\"
 else
 $(error Invalid VERSION variable detected. Please use either 'usa', 'eur', 'fra' or 'ger')
 endif
@@ -196,9 +196,6 @@ O_FILES       := $(foreach f,$(C_FILES:.c=.o),$(BUILD_DIR)/$f) \
                  $(foreach f,$(S_FILES:.s=.o),$(BUILD_DIR)/$f) \
                  $(foreach f,$(BIN_FILES:.bin=.o),$(BUILD_DIR)/$f)
 
-ifeq ($(VERSION),$(filter $(VERSION), usa ger))
-    O_FILES   += $(ARCHIVE_FILES:.archive=.o)
-endif
 
 PNG_INC_FILES := $(foreach f,$(PNG_FILES:.png=.inc),$(BUILD_DIR)/$f)
 
@@ -214,6 +211,8 @@ $(shell mkdir -p $(BUILD_DIR)/linker_scripts/$(VERSION) $(foreach dir,$(SRC_DIRS
 # directory flags
 
 # per-file flags
+
+$(BUILD_DIR)/src/bin_file/bin_file.o: $(ARCHIVE_FILES)
 
 
 #### Main Targets ###
@@ -290,16 +289,9 @@ $(O_FILES): | asset_files
 $(BUILD_DIR)/%.ld: %.ld
 	$(CPP) $(CPPFLAGS) $(BUILD_DEFINES) $(IINC) $< > $@
 
-$(BUILD_DIR)/%.o: %.bin
-	$(OBJCOPY) -I binary -O elf32-big $< $@
-
-
-%.o: %.archive
-	$(OBJCOPY) -I binary -O elf32-big $< $@
 
 %.archive: $(BINFILE_FILES)
 	./tools/package_bin_file.py $(BINFILE_DIR) $@
-
 
 $(BUILD_DIR)/%.o: %.s
 	$(CPP) $(CPPFLAGS) $(BUILD_DEFINES) $(IINC) -I $(dir $*) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(AS_DEFINES) $< | $(AS) $(ASFLAGS) $(ENDIAN) $(IINC) -I $(dir $*) -o $@

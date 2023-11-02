@@ -435,12 +435,9 @@ segments:
     start: 0x0FB730
 
   - name: bin_file
-    type: bin
+    type: .bin_file
+    dir: bin_file
     start: 0x9BDDF0
-
-  # garbage data?
-  # - type: bin
-  #   start: 0x17C2D72
 
   - name: segment_17C2A80
     type: databin

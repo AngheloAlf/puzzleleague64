@@ -16,10 +16,12 @@ ENTRY_SIZE = 4 + 4 + 0x10
 
 class N64SegBin_file(N64Segment):
     def out_path(self) -> Optional[Path]:
+        if self.type.startswith("."):
+            return options.opts.src_path / self.dir / f"{self.name}.s"
         return options.opts.asset_path / self.dir / f"{self.name}.bin"
 
     def folder_path(self) -> Path:
-        return options.opts.asset_path / self.dir / self.name
+        return options.opts.asset_path / self.dir
 
     def split(self, rom_bytes):
         path = self.out_path()
@@ -39,7 +41,10 @@ class N64SegBin_file(N64Segment):
 
         offset = self.rom_start
         filecount = spimdisasm.common.Utils.bytesToWords(rom_bytes, offset, offset+4)[0]
+        assert filecount > 0
         offset += 4
+
+        lastFileEnd = 0
 
         for i in range(filecount):
             fileSize, fileOffset = spimdisasm.common.Utils.bytesToWords(rom_bytes, offset, offset+8)
@@ -53,7 +58,22 @@ class N64SegBin_file(N64Segment):
                 fileStart = fileOffset + self.rom_start
                 fileEnd = fileStart + fileSize
                 f.write(rom_bytes[fileStart:fileEnd])
+                lastFileEnd = fileEnd
 
             self.log(f"Wrote {fileName} to {currentFile}")
 
             offset += ENTRY_SIZE
+
+        if lastFileEnd != self.rom_end:
+            fileName = ".garbage.garbage"
+            currentFile = outputFolder / fileName
+
+            with currentFile.open("wb") as f:
+                fileStart = lastFileEnd
+                fileEnd = self.rom_end
+                f.write(rom_bytes[fileStart:fileEnd])
+
+            self.log(f"Wrote {fileName} to {currentFile}")
+
+    def should_split(self) -> bool:
+        return options.opts.is_mode_active(self.type)

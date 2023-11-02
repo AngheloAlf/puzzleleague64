@@ -422,7 +422,8 @@ segments:
     start: 0x0EF470
 
   - name: bin_file
-    type: bin_file
+    type: .bin_file
+    dir: bin_file
     start: 0x9B2BB0
 
   - name: segment_17C2A80
