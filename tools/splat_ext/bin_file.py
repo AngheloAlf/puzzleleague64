@@ -7,9 +7,9 @@ from pathlib import Path
 from typing import Optional
 import spimdisasm
 
-from util import log, options
+from splat.util import log, options
 
-from segtypes.n64.segment import N64Segment
+from splat.segtypes.n64.segment import N64Segment
 
 
 ENTRY_SIZE = 4 + 4 + 0x10

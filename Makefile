@@ -113,7 +113,7 @@ STRIP           := $(MIPS_BINUTILS_PREFIX)strip
 # ICONV           := iconv
 
 PYTHON            ?= python3
-SPLAT             ?= tools/splat/split.py
+SPLAT             ?= $(PYTHON) -m splat split
 SPLAT_YAML        ?= $(TARGET).$(VERSION).yaml
 CHECKSUMMER       ?= tools/checksummer.py
 PIGMENT64         ?= pigment64
@@ -259,7 +259,7 @@ setup:
 
 extract:
 	$(RM) -r asm/$(VERSION) bin/$(VERSION)
-	$(PYTHON) $(SPLAT) $(SPLAT_YAML)
+	$(SPLAT) $(SPLAT_YAML)
 
 diff-init: all
 	$(RM) -rf expected/
