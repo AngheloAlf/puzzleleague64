@@ -264,7 +264,7 @@ extract:
 diff-init: all
 	$(RM) -rf expected/
 	mkdir -p expected/
-	cp -r $(BUILD_DIR) expected/$(BUILD_DIR)
+	cp -r $(BUILD_DIR) expected/
 
 init:
 	$(MAKE) distclean

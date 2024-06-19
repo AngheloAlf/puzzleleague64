@@ -232,8 +232,7 @@ segments:
       - [0x090BA0, asm, libmus/aud_thread]
       - [0x090E90, asm, libmus/lib_memory]
 
-      # Probably an unknown library
-      - [0x090FE0, asm, main/090FE0]
+      - [0x090FE0, asm, flash/osFlash] # IDO 5.3 -g
 
       # Uses libgultra_d
       - [0x091D10, hasm, libultra/setintmask]

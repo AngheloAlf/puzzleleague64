@@ -1088,25 +1088,13 @@ extern s32 gLastOverflow;
 // extern UNK_TYPE B_80193108_usa;
 
 // extern UNK_TYPE B_80193114_usa;
-// extern UNK_TYPE B_80193120_usa;
-// extern UNK_TYPE B_80193130_usa;
-// extern UNK_TYPE B_80193132_usa;
-// extern UNK_TYPE B_80193134_usa;
-// extern UNK_TYPE B_80193138_usa;
-// extern UNK_TYPE B_8019313C_usa;
-// extern UNK_TYPE B_80193140_usa;
-// extern UNK_TYPE B_80193148_usa;
-// extern UNK_TYPE B_80193160_usa;
-// extern UNK_TYPE B_80193164_usa;
-// extern UNK_TYPE B_80193165_usa;
-// extern UNK_TYPE B_80193166_usa;
-// extern UNK_TYPE B_80193167_usa;
-// extern UNK_TYPE B_80193168_usa;
-// extern UNK_TYPE B_80193169_usa;
-// extern UNK_TYPE B_8019316C_usa;
-// extern UNK_TYPE B_80193170_usa;
-// extern UNK_TYPE B_801931D4_usa;
-// extern UNK_TYPE B_801931D8_usa;
+
+// extern UNK_TYPE __osFlashID;
+// extern UNK_TYPE __osFlashMsg;
+// extern UNK_TYPE __osFlashMessageQ;
+// extern UNK_TYPE __osFlashHandler;
+// extern UNK_TYPE __osFlashMsgBuf;
+// extern UNK_TYPE __osFlashVersion;
 
 // extern UNK_TYPE B_80194390_usa;
 // extern UNK_TYPE B_80194940_usa;

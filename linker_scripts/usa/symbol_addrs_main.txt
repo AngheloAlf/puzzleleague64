@@ -911,25 +911,21 @@ InitTetrisWell = 0x80089E6C; // type:func
 DoTetris = 0x8008A7B4; // type:func
 func_8008ADB4_usa = 0x8008ADB4; // type:func
 
-func_800903E0_usa = 0x800903E0; // type:func
-func_80090428_usa = 0x80090428; // type:func
-func_80090498_usa = 0x80090498; // type:func
-func_800904A0_usa = 0x800904A0; // type:func
-func_800904A8_usa = 0x800904A8; // type:func
-func_800904D8_usa = 0x800904D8; // type:func
-func_800904E0_usa = 0x800904E0; // type:func
-func_800904E8_usa = 0x800904E8; // type:func
-func_8009061C_usa = 0x8009061C; // type:func
-func_800906D0_usa = 0x800906D0; // type:func
-func_800907D4_usa = 0x800907D4; // type:func
-func_80090838_usa = 0x80090838; // type:func
-func_80090988_usa = 0x80090988; // type:func
-func_800909F0_usa = 0x800909F0; // type:func
-func_80090A94_usa = 0x80090A94; // type:func
-func_80090BF4_usa = 0x80090BF4; // type:func
-func_80090C6C_usa = 0x80090C6C; // type:func
-func_80090D2C_usa = 0x80090D2C; // type:func
-func_80090E9C_usa = 0x80090E9C; // type:func
+osFlashGetAddr = 0x800903E0; // type:func
+osFlashReInit = 0x80090428; // type:func size:0x80
+osFlashChange = 0x800904A8; // type:func size:0x40
+osFlashInit = 0x800904E8; // type:func
+osFlashReadStatus = 0x8009061C; // type:func
+osFlashReadId = 0x800906D0; // type:func
+osFlashClearStatus = 0x800907D4; // type:func
+osFlashAllErase = 0x80090838; // type:func
+osFlashAllEraseThrough = 0x80090988; // type:func
+osFlashCheckEraseEnd = 0x800909F0; // type:func
+osFlashSectorErase = 0x80090A94; // type:func
+osFlashSectorEraseThrough = 0x80090BF4; // type:func
+osFlashWriteBuffer = 0x80090C6C; // type:func
+osFlashWriteArray = 0x80090D2C; // type:func
+osFlashReadArray = 0x80090E9C; // type:func
 
 
 // .data
@@ -2203,25 +2199,13 @@ B_80193104_usa = 0x80193104; //
 B_80193108_usa = 0x80193108; //
 
 B_80193114_usa = 0x80193114; //
-B_80193120_usa = 0x80193120; //
-B_80193130_usa = 0x80193130; //
-B_80193132_usa = 0x80193132; //
-B_80193134_usa = 0x80193134; //
-B_80193138_usa = 0x80193138; //
-B_8019313C_usa = 0x8019313C; //
-B_80193140_usa = 0x80193140; //
-B_80193148_usa = 0x80193148; //
-B_80193160_usa = 0x80193160; //
-B_80193164_usa = 0x80193164; //
-B_80193165_usa = 0x80193165; //
-B_80193166_usa = 0x80193166; //
-B_80193167_usa = 0x80193167; //
-B_80193168_usa = 0x80193168; //
-B_80193169_usa = 0x80193169; //
-B_8019316C_usa = 0x8019316C; //
-B_80193170_usa = 0x80193170; //
-B_801931D4_usa = 0x801931D4; //
-B_801931D8_usa = 0x801931D8; //
+
+__osFlashID = 0x80193120; // size:0x10
+__osFlashMsg = 0x80193130; // size:0x18
+__osFlashMessageQ = 0x80193148; // size:0x18
+__osFlashHandler = 0x80193160; // size:0x74
+__osFlashMsgBuf = 0x801931D4; // size:0x4
+__osFlashVersion = 0x801931D8; // size:0x4
 
 B_80194390_usa = 0x80194390; //
 B_80194940_usa = 0x80194940; //
