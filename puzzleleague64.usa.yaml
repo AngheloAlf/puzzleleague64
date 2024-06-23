@@ -4,7 +4,7 @@ options:
   basename: puzzleleague64
   target_path: baserom.usa.z64
   ld_script_path: linker_scripts/usa/puzzleleague64.ld
-  elf_path: build/puzzleleague64.usa.elf
+  elf_path: build/usa/puzzleleague64.usa.elf
   base_path: .
   compiler: GCC
   find_file_boundaries: True
@@ -92,11 +92,11 @@ options:
   ld_dependencies: True
   ld_partial_linking: False
   ld_partial_scripts_path: linker_scripts/usa/partial
-  ld_partial_build_segments_path: build/segments/usa
+  ld_partial_build_segments_path: build/usa/segments/
 
   asm_path: asm/usa
   src_path: src
-  build_path: build
+  build_path: build/usa
   asset_path: bin/usa
   extensions_path: tools/splat_ext
   mips_abi_float_regs: o32

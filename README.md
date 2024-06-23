@@ -1,4 +1,6 @@
-# Pokémon Puzzle League [![Build Status]][actions] ![Code usa Progress] ![Code eur Progress] ![Code fra Progress] ![Code ger Progress]
+# Pokémon Puzzle League
+
+[![Build Status]][actions] ![Code usa Progress] ![Code eur Progress] ![Code fra Progress] ![Code ger Progress]
 
 [Build Status]: <https://github.com/AngheloAlf/puzzleleague64/actions/workflows/ci.yml/badge.svg>
 [actions]: <https://github.com/AngheloAlf/puzzleleague64/actions/workflows/ci.yml>
@@ -72,7 +74,7 @@ make
 to download the appropriate compiler versions, build libultra, extract data from the rom using splat, and build the files back into a rom. If successful, the last line of output should say
 
 ```bash
-build/puzzleleague64.usa.z64: OK
+build/usa/puzzleleague64.usa.z64: OK
 ```
 
 ### Other versions
@@ -85,7 +87,7 @@ To build other version place your ROM in the root of the repo and rename it to `
 
 TODO: write some contributing guidelines.
 
-Work should be done hopefully per-file but smaller efforts are still appreciated. Just open a PR and try to address any review comments left by other contributors c:
+Small efforts are appreciated. Just open a PR and try to address any review comments left by other contributors c:
 
 ### Important note
 

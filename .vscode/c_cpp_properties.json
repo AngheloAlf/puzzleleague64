@@ -1,18 +1,12 @@
 {
     "configurations": [
         {
-            "name": "Linux",
+            "name": "usa",
             "includePath": [
                 "${workspaceFolder}/**",
                 "include",
                 "bin/usa",
-                "bin/eur",
-                "bin/fra",
-                "bin/ger",
-                "build/bin/usa",
-                "build/bin/eur",
-                "build/bin/fra",
-                "build/bin/ger",
+                "build/usa/bin/usa",
                 "lib",
                 "lib/libultra_j/include",
                 "lib/libultra_j/include/PR",
@@ -32,10 +26,46 @@
                 //"_FINALROM",
                 "__USE_ISOC99",
                 "__mips__",
-                "VERSION_USA=1",
-                "VERSION_EUR=1",
-                "VERSION_FRA=1",
-                "VERSION_GER=1"
+                "VERSION_USA=1"
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "compilerPath": "/usr/bin/clang",
+            "intelliSenseMode": "linux-clang-x86",
+            "compilerArgs": [
+                "-m32",
+                "-nostdinc++"
+            ],
+            "cStandard": "gnu89"
+        },
+        {
+            "name": "eur",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "include",
+                "bin/eur",
+                "build/eur/bin/eur",
+                "lib",
+                "lib/libultra_j/include",
+                "lib/libultra_j/include/PR",
+                "lib/libhvqm/include",
+                "lib/libmus/include",
+                "."
+            ],
+            "defines": [
+                "NON_EQUIVALENT",
+                "NON_MATCHING",
+                "AVOID_UB",
+                "_LANGUAGE_C",
+                // "F3DEX_GBI_2",
+                "_MIPS_SZLONG=32",
+                "__USE_ISOC99",
+                "NDEBUG",
+                //"_FINALROM",
+                "__USE_ISOC99",
+                "__mips__",
+                "VERSION_EUR=1"
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true
@@ -45,8 +75,84 @@
             "compilerArgs": [
                 "-m32",
                 "-nostdinc++",
-                "-Wincompatible-pointer-types",
-                "-Werror=incompatible-pointer-types"
+            ],
+            "cStandard": "gnu89"
+        },
+        {
+            "name": "fra",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "include",
+                "bin/fra",
+                "build/fra/bin/fra",
+                "lib",
+                "lib/libultra_j/include",
+                "lib/libultra_j/include/PR",
+                "lib/libhvqm/include",
+                "lib/libmus/include",
+                "."
+            ],
+            "defines": [
+                "NON_EQUIVALENT",
+                "NON_MATCHING",
+                "AVOID_UB",
+                "_LANGUAGE_C",
+                // "F3DEX_GBI_2",
+                "_MIPS_SZLONG=32",
+                "__USE_ISOC99",
+                "NDEBUG",
+                //"_FINALROM",
+                "__USE_ISOC99",
+                "__mips__",
+                "VERSION_FRA=1"
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "compilerPath": "/usr/bin/clang",
+            "intelliSenseMode": "linux-clang-x86",
+            "compilerArgs": [
+                "-m32",
+                "-nostdinc++"
+            ],
+            "cStandard": "gnu89"
+        },
+        {
+            "name": "ger",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "include",
+                "bin/ger",
+                "build/ger/bin/ger",
+                "lib",
+                "lib/libultra_j/include",
+                "lib/libultra_j/include/PR",
+                "lib/libhvqm/include",
+                "lib/libmus/include",
+                "."
+            ],
+            "defines": [
+                "NON_EQUIVALENT",
+                "NON_MATCHING",
+                "AVOID_UB",
+                "_LANGUAGE_C",
+                // "F3DEX_GBI_2",
+                "_MIPS_SZLONG=32",
+                "__USE_ISOC99",
+                "NDEBUG",
+                //"_FINALROM",
+                "__USE_ISOC99",
+                "__mips__",
+                "VERSION_GER=1"
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "compilerPath": "/usr/bin/clang",
+            "intelliSenseMode": "linux-clang-x86",
+            "compilerArgs": [
+                "-m32",
+                "-nostdinc++"
             ],
             "cStandard": "gnu89"
         }

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# SPDX-FileCopyrightText: © 2023 AngheloAlf
+# SPDX-FileCopyrightText: © 2023-2024 AngheloAlf
 # SPDX-License-Identifier: MIT
 
 from __future__ import annotations
@@ -11,10 +11,9 @@ from pathlib import Path
 
 
 ASMPATH = Path("asm")
-NONMATCHINGS = "nonmatchings"
 
 
-def getProgressFromMapFile(mapFile: mapfile_parser.MapFile, asmPath: Path, nonmatchings: Path, aliases: dict[str, str]=dict(), pathIndex: int=2) -> tuple[mapfile_parser.ProgressStats, dict[str, mapfile_parser.ProgressStats]]:
+def getProgressFromMapFile(mapFile: mapfile_parser.MapFile, asmPath: Path, aliases: dict[str, str]=dict(), pathIndex: int=2, fullPath: bool=False) -> tuple[mapfile_parser.ProgressStats, dict[str, mapfile_parser.ProgressStats]]:
     totalStats = mapfile_parser.ProgressStats()
     progressPerFolder: dict[str, mapfile_parser.ProgressStats] = dict()
 
@@ -23,9 +22,14 @@ def getProgressFromMapFile(mapFile: mapfile_parser.MapFile, asmPath: Path, nonma
             if len(file) == 0:
                 continue
 
-            folder = file.filepath.parts[pathIndex]
-            if folder in aliases:
-                folder = aliases[folder]
+            folderParts = list(file.filepath.parts[pathIndex:])
+            if "src" in folderParts:
+                folderParts.remove("src")
+            if folderParts[0] in aliases:
+                folderParts[0] = aliases[folderParts[0]]
+            if not fullPath:
+                folderParts = folderParts[:1]
+            folder = "/".join(folderParts)
 
             if folder not in progressPerFolder:
                 progressPerFolder[folder] = mapfile_parser.ProgressStats()
@@ -56,8 +60,7 @@ def getProgressFromMapFile(mapFile: mapfile_parser.MapFile, asmPath: Path, nonma
 
     return totalStats, progressPerFolder
 
-
-def getProgress(mapPath: Path, version: str) -> tuple[mapfile_parser.ProgressStats, dict[str, mapfile_parser.ProgressStats]]:
+def getProgress(mapPath: Path, version: str, subpaths: bool=False) -> tuple[mapfile_parser.ProgressStats, dict[str, mapfile_parser.ProgressStats]]:
     mapFile = mapfile_parser.MapFile()
     mapFile.readMapFile(mapPath)
 
@@ -67,6 +70,8 @@ def getProgress(mapPath: Path, version: str) -> tuple[mapfile_parser.ProgressSta
                 continue
 
             filepathParts = list(file.filepath.parts)
+            if version in filepathParts:
+                filepathParts.remove(version)
             if version in filepathParts:
                 filepathParts.remove(version)
             file.filepath = Path(*filepathParts)
@@ -79,31 +84,49 @@ def getProgress(mapPath: Path, version: str) -> tuple[mapfile_parser.ProgressSta
                         realSym.size = sym.size
                         sym.size = 0
 
-    nonMatchingsPath = ASMPATH / version / NONMATCHINGS
+    fullPath = False
+    if subpaths:
+        fullPath = True
 
-    return getProgressFromMapFile(mapFile.filterBySectionType(".text"), ASMPATH / version, nonMatchingsPath, aliases={"ultralib": "libultra"})
+    return getProgressFromMapFile(mapFile.filterBySectionType(".text"), ASMPATH / version, aliases={"ultralib": "libultra"}, fullPath=fullPath)
+
 
 def progressMain():
     parser = argparse.ArgumentParser()
     parser.add_argument("-v", "--version", help="version to process", default="usa")
     parser.add_argument("-p", "--subpaths", help="Make a summary for one level deeper in the path tree", action="store_true")
     parser.add_argument("-s", "--sort", help="Sort by decomped size instead of the ROM sorting", action="store_true")
+    parser.add_argument("-r", "--remaining", help="Print an extra column indicating the remaining percentage to match of each entry", action="store_true")
 
     args = parser.parse_args()
 
-    mapPath = Path("build") / f"puzzleleague64.{args.version}.map"
+    remaining: bool = args.remaining
 
-    totalStats, progressPerFolder = getProgress(mapPath, args.version)
+    mapPath = Path("build") / args.version / f"puzzleleague64.{args.version}.map"
 
-    mapfile_parser.ProgressStats.printHeader()
-    totalStats.print("all", totalStats)
+    totalStats, progressPerFolder = getProgress(mapPath, args.version, args.subpaths)
+
+    # Calculate the size for the first column
+    columnSize = 27
+    for folder in progressPerFolder:
+        if len(folder) > columnSize:
+            columnSize = len(folder)
+    columnSize += 1
+
+    print(mapfile_parser.ProgressStats.getHeaderAsStr(categoryColumnSize=columnSize))
+    print(totalStats.getEntryAsStr("all", totalStats, categoryColumnSize=columnSize))
     print()
 
     progressesList = list(progressPerFolder.items())
     if args.sort:
-        progressesList.sort(key=lambda x: (x[1].decompedSize / x[1].total, x[1].total), reverse=True)
+        progressesList.sort(key=lambda x: (x[1].decompedSize / x[1].total, x[1].total, x[0]), reverse=True)
     for folder, statsEntry in progressesList:
-        statsEntry.print(folder, totalStats)
+        print(statsEntry.getEntryAsStr(folder, totalStats, categoryColumnSize=columnSize), end="")
+        if remaining and statsEntry.undecompedSize != 0:
+            remainingPercentage = statsEntry.total / totalStats.total * 100 - statsEntry.decompedPercentageTotal(totalStats)
+            print(f"{remainingPercentage:>8.4f}%", end="")
+        print()
+
 
 if __name__ == "__main__":
     progressMain()

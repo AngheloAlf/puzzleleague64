@@ -25,7 +25,7 @@ def uploadProgressMain():
     version: str = args.version
     category: str = "code"
     apikey: str = args.apikey
-    mapPath = Path("build") / f"puzzleleague64.{args.version}.map"
+    mapPath = Path("build") / version / f"puzzleleague64.{version}.map"
 
     totalStats, progressPerFolder = progress.getProgress(mapPath, version)
 

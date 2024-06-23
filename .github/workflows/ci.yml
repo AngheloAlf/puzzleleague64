@@ -55,7 +55,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: puzzleleague64.${{ matrix.version }}.map
-        path: build/puzzleleague64.${{ matrix.version }}.map
+        path: build/${{ matrix.version }}/puzzleleague64.${{ matrix.version }}.map
 
     - name: Generate PJ64 symbols file
       run: python3 tools/pj64_syms.py --version ${{ matrix.version }} -o puzzleleague64.${{ matrix.version }}.sym

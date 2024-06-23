@@ -46,7 +46,7 @@ export SPIMDISASM_ASM_EMIT_SIZE_DIRECTIVE=True
 
 ### Output ###
 
-BUILD_DIR := build
+BUILD_DIR := build/$(VERSION)
 ROM       := $(BUILD_DIR)/$(TARGET).$(VERSION).z64
 BIN       := $(BUILD_DIR)/$(TARGET).$(VERSION).bin
 ELF       := $(BUILD_DIR)/$(TARGET).$(VERSION).elf
@@ -119,8 +119,8 @@ CHECKSUMMER       ?= tools/checksummer.py
 PIGMENT64         ?= pigment64
 
 
-IINC       := -Iinclude -Ibin/$(VERSION) -Ibuild/bin/$(VERSION) -I.
-IINC       += -Ilib -Ilib/libultra_j/include -Ilib/libultra_j/include/PR -Ilib/libhvqm/include -Ilib/libmus/include
+IINC       := -I include -I bin/$(VERSION) -I $(BUILD_DIR)/bin/$(VERSION) -I .
+IINC       += -I lib -I lib/libultra_j/include -I lib/libultra_j/include/PR -I lib/libhvqm/include -I lib/libmus/include
 
 # Check code syntax with host compiler
 CHECK_WARNINGS := -Wall -Wextra -Wimplicit-fallthrough -Wno-unknown-pragmas -Wno-missing-braces -Wno-sign-compare -Wno-uninitialized
@@ -185,7 +185,7 @@ endif
 
 #### Files ####
 
-$(shell mkdir -p asm bin linker_scripts/$(VERSION)/auto)
+$(shell mkdir -p asm/$(VERSION) bin/$(VERSION) linker_scripts/$(VERSION)/auto)
 
 ASSETS_DIRS   := $(shell find bin/$(VERSION)/assets -type d)
 SRC_DIRS      := $(shell find src -type d)
@@ -211,7 +211,7 @@ PNG_INC_FILES := $(foreach f,$(PNG_FILES:.png=.inc),$(BUILD_DIR)/$f)
 SEGMENTS_SCRIPTS := $(wildcard linker_scripts/$(VERSION)/partial/*.ld)
 SEGMENTS_D       := $(SEGMENTS_SCRIPTS:.ld=.d)
 SEGMENTS         := $(foreach f, $(SEGMENTS_SCRIPTS:.ld=), $(notdir $f))
-SEGMENTS_O       := $(foreach f, $(SEGMENTS), $(BUILD_DIR)/segments/$(VERSION)/$f.o)
+SEGMENTS_O       := $(foreach f, $(SEGMENTS), $(BUILD_DIR)/segments/$f.o)
 
 LINKER_SCRIPTS   := $(LD_SCRIPT) $(BUILD_DIR)/linker_scripts/hardware_regs.ld $(BUILD_DIR)/linker_scripts/libultra_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/undefined_syms.ld $(BUILD_DIR)/linker_scripts/common_undef_syms.ld
 
@@ -228,7 +228,7 @@ ifneq ($(DEP_INCLUDE), 0)
 endif
 
 # create build directories
-$(shell mkdir -p $(BUILD_DIR)/linker_scripts/$(VERSION))
+$(shell mkdir -p $(BUILD_DIR)/linker_scripts/$(VERSION) $(BUILD_DIR)/segments)
 $(shell mkdir -p $(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(BIN_DIRS),$(BUILD_DIR)/$(dir)))
 
 
@@ -315,17 +315,17 @@ $(BUILD_DIR)/%.ld: %.ld
 	./tools/package_bin_file.py $(BINFILE_DIR) $@
 
 $(BUILD_DIR)/%.o: %.s
-	$(CPP) $(CPPFLAGS) $(BUILD_DEFINES) $(IINC) -I $(dir $*) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(AS_DEFINES) $(COMP_VERBOSE_FLAG) $< | $(AS) $(ASFLAGS) $(ENDIAN) $(IINC) -I $(dir $*) $(COMP_VERBOSE_FLAG) -o $@
+	$(CPP) $(CPPFLAGS) $(BUILD_DEFINES) $(IINC) -I $(dir $*) -I $(BUILD_DIR)/$(dir $*) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(AS_DEFINES) $(COMP_VERBOSE_FLAG) $< | $(AS) $(ASFLAGS) $(ENDIAN) $(IINC) -I $(dir $*) $(COMP_VERBOSE_FLAG) -o $@
 	$(OBJDUMP_CMD)
 
 $(BUILD_DIR)/%.o: %.c
-	$(CC_CHECK) $(CC_CHECK_FLAGS) $(IINC) -I $(dir $*) $(CHECK_WARNINGS) $(BUILD_DEFINES) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(C_DEFINES) $(MIPS_BUILTIN_DEFS) -o $@ $<
+	$(CC_CHECK) $(CC_CHECK_FLAGS) $(IINC) -I $(dir $*) -I $(BUILD_DIR)/$(dir $*) $(CHECK_WARNINGS) $(BUILD_DEFINES) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(C_DEFINES) $(MIPS_BUILTIN_DEFS) -o $@ $<
 ifeq ($(MULTISTEP_BUILD), 0)
-	$(CC) $(C_COMPILER_FLAGS) -I $(dir $*) $(COMP_VERBOSE_FLAG) -E $< | $(CC) -x c $(C_COMPILER_FLAGS) -I $(dir $*) -c $(COMP_VERBOSE_FLAG) -o $@ -
+	$(CC) $(C_COMPILER_FLAGS) -I $(dir $*) -I $(BUILD_DIR)/$(dir $*) $(COMP_VERBOSE_FLAG) -E $< | $(CC) -x c $(C_COMPILER_FLAGS) -I $(dir $*) -c $(COMP_VERBOSE_FLAG) -o $@ -
 else
-	$(CC) $(C_COMPILER_FLAGS) -I $(dir $*) $(COMP_VERBOSE_FLAG) -E $< -o $(@:.o=.i)
-	$(CC) $(C_COMPILER_FLAGS) -I $(dir $*) $(COMP_VERBOSE_FLAG) -S -o $(@:.o=.s) $(@:.o=.i)
-	$(CC) $(C_COMPILER_FLAGS) -I $(dir $*) $(COMP_VERBOSE_FLAG) -c -o $@ $(@:.o=.s)
+	$(CC) $(C_COMPILER_FLAGS) -I $(dir $*) -I $(BUILD_DIR)/$(dir $*) $(COMP_VERBOSE_FLAG) -E $< -o $(@:.o=.i)
+	$(CC) $(C_COMPILER_FLAGS) -I $(dir $*) -I $(BUILD_DIR)/$(dir $*) $(COMP_VERBOSE_FLAG) -S -o $(@:.o=.s) $(@:.o=.i)
+	$(CC) $(C_COMPILER_FLAGS) -I $(dir $*) -I $(BUILD_DIR)/$(dir $*) $(COMP_VERBOSE_FLAG) -c -o $@ $(@:.o=.s)
 endif
 	$(STRIP) $@ -N dummy-symbol-name
 	$(OBJDUMP_CMD)
@@ -333,7 +333,7 @@ endif
 
 # Make inc files from assets
 
-build/%.inc: %.png
+$(BUILD_DIR)/%.inc: %.png
 	$(PIGMENT64) to-bin --c-array --format $(subst .,,$(suffix $*)) -o $@ $<
 
 
