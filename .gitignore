@@ -31,3 +31,7 @@ asdf.txt
 *.BIF
 *.SBF
 *.RDF
+
+*.flash
+*.bin
+*.log
