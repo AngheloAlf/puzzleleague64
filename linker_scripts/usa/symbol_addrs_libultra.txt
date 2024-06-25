@@ -355,7 +355,7 @@ D_800BE7F0_usa = 0x800BE7F0; //
 D_800BE818_usa = 0x800BE818; //
 D_800BE840_usa = 0x800BE840; //
 alGlobals = 0x800BE960; //
-D_800BE970_usa = 0x800BE970; //
+__osContinitialized = 0x800BE970; //
 FLT_800BE980 = 0x800BE980; // type:f32
 D_800BE990_usa = 0x800BE990; //
 D_800BE992_usa = 0x800BE992; //
@@ -381,13 +381,7 @@ __osActiveQueue = 0x800BEA1C; //
 __osRunningThread = 0x800BEA20; //
 __osFaultedThread = 0x800BEA24; //
 __osTimerList = 0x800BEA30; //
-__osViDevMgr = 0x800BEA40; //
-D_800BEA44_usa = 0x800BEA44; //
-D_800BEA48_usa = 0x800BEA48; //
-D_800BEA4C_usa = 0x800BEA4C; //
-D_800BEA50_usa = 0x800BEA50; //
-D_800BEA54_usa = 0x800BEA54; //
-D_800BEA58_usa = 0x800BEA58; //
+__osViDevMgr = 0x800BEA40; // size:0x1C
 __additional_scanline = 0x800BEA5C; //
 osViModeTable = 0x800BEA60; //
 osViModeNtscLan1 = 0x800BFC80; //
@@ -398,7 +392,7 @@ D_800C0D64_usa = 0x800C0D64; //
 osViClock = 0x800C0D68; //
 __osShutdown = 0x800C0D6C; //
 __OSGlobalIntMask = 0x800C0D70; //
-D_800C0D80_usa = 0x800C0D80; //
+errorLog = 0x800C0D80; //
 __osErrorHandler = 0x800C0D94; //
 D_800C0DA0_usa = 0x800C0DA0; //
 D_800C0DA4_usa = 0x800C0DA4; //
@@ -668,7 +662,7 @@ jtbl_800C9818_usa = 0x800C9818; // type:jtbl
 
 // .bss
 
-B_801931E0_usa = 0x801931E0; //
+piThread = 0x801931E0; //
 
 piAccessBuf = 0x801949A0; // size:0x4
 

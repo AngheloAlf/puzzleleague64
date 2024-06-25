@@ -394,7 +394,7 @@ segments:
       - [0x0B0A80, asm, libkmc/0B0A80] # __udivdi3
       - [0x0B0AA0, asm, libkmc/0B0AA0] # __umoddi3
 
-      - [0x0B0AE0, c, main/build]
+      - [auto, c, main/build]
 
       - [0x0B0AE0, textbin, libultra/rsp/rspboot]
       - [0x0B0BB0, data, main/0B0BB0] # rsp?

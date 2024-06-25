@@ -395,7 +395,7 @@ segments:
       - [0x0AF130, asm, libkmc/0AF130] # __udivdi3
       - [0x0AF150, asm, libkmc/0AF150] # __umoddi3
 
-      - [0x0AF190, c, main/build]
+      - [auto, c, main/build]
 
       - [0x0AF190, textbin, libultra/rsp/rspboot]
       - [0x0AF260, data, main/0AF260]

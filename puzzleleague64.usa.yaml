@@ -398,7 +398,7 @@ segments:
 
       - [0x0B01F0, hasm, libkmc/mmuldi3]
 
-      - [0x0B05C0, c, main/build]
+      - [auto, c, main/build]
 
       - [0x0B05C0, textbin, libultra/rsp/rspboot]
       - [0x0B0690, textbin, libultra/rsp/aspMain]
@@ -426,11 +426,40 @@ segments:
       - [0x0BF230, data, libmus/aud_sched]
       - [0x0BF240, data, libmus/aud_thread]
 
-      - [0x0BF250, data, libultra/0BF250] # TODO: find file splits
+      - [0x0BF250, data, libultra/pimgr]
+      - [0x0BF280, data, libultra/cartrominit]
       - [0x0BF290, data, libultra/piacs]
-      - [0x0BF2A0, data, libultra/0BF2A0] # TODO: find file splits
+      - [0x0BF2A0, data, libultra/aisetnextbuf]
+      - [0x0BF2B0, data, libultra/drvrnew]
+      - [0x0BF440, data, libultra/env]
+      - [0x0BF560, data, libultra/sl]
+      - [0x0BF570, data, libultra/controller]
+      - [0x0BF580, data, libultra/rotate]
+      - [0x0BF590, data, libultra/us2dex_emu]
+      - [0x0BF5C0, data, libultra/rdbsend]
+      - [0x0BF5D0, data, libultra/syncprintf]
+      - [0x0BF5E0, data, libultra/seteventmesg]
+      - [0x0BF5F0, data, libultra/sched]
       - [0x0BF600, data, libultra/siacs]
-      - [0x0BF610, data, libultra/0BF610] # TODO: find file splits
+      - [0x0BF610, data, libultra/thread]
+      - [0x0BF630, data, libultra/timerintr]
+      - [0x0BF640, data, libultra/vimgr]
+      - [0x0BF660, data, libultra/vitbl]
+      - [0x0C0880, data, libultra/vimodentsclan1]
+      - [0x0C0CE0, data, libultra/vimodepallan1]
+      - [0x0C1140, data, libultra/vimodempallan1]
+      - [0x0C1960, data, libultra/initialize] # TODO: weird symbol order?
+      - [0x0C1980, data, libultra/error]
+      - [0x0C19A0, data, libultra/kmcprintf]
+      - [0x0C1BE0, data, libultra/exceptasm]
+      - [0x0C1C20, data, libultra/kdebugserver]
+      - [0x0C1C30, data, libultra/readhost]
+      - [0x0C1C40, data, libultra/xprintf]
+      - [0x0C1C90, data, libultra/log]
+      - [0x0C1CA0, data, libultra/vi]
+      - [0x0C1D10, data, libultra/xlitob]
+      - [0x0C1D40, data, libultra/rmoncmds]
+      - [0x0C1E20, data, libultra/rmonmain]
 
       - [0x0C1E30, data, libhvqm/adpcmdec]
 
@@ -444,9 +473,7 @@ segments:
       - [0x0C3BC0, .rodata, main/sound]
       - [0x0C3C90, .rodata, main/sfxlimit]
       - [0x0C3CD0, .rodata, main/title]
-      - [0x0C3DC0, rodata, main/0C3DC0]
-      - [0x0C3E90, rodata, main/0C3E90]
-      - [0x0C3EF0, rodata, main/0C3EF0]
+      - [0x0C3DC0, .rodata, main/menu]
       - [0x0C4BB0, .rodata, main/file]
       - [0x0C4BF0, .rodata, main/image]
       - [0x0C4C50, .rodata, main/screen]
@@ -481,37 +508,75 @@ segments:
       - [0x0C8400, rodata, libmus/player]
       - [0x0C84E0, rodata, libmus/player_fx]
 
-      - [0x0C84F0, rodata, main/0C84F0]
-      - [0x0C8570, rodata, main/0C8570]
-      - [0x0C8590, rodata, main/0C8590]
-      - [0x0C85A0, rodata, main/0C85A0]
-      - [0x0C85F0, rodata, main/0C85F0]
-      - [0x0C86F0, rodata, main/0C86F0]
-      - [0x0C8720, rodata, main/0C8720]
-      - [0x0C87A0, rodata, main/0C87A0]
-      - [0x0C87D0, rodata, main/0C87D0]
-      - [0x0C8810, rodata, main/0C8810]
-      - [0x0C8890, rodata, main/0C8890]
-      - [0x0C88C0, rodata, main/0C88C0]
-      - [0x0C8910, rodata, main/0C8910]
-      - [0x0C8920, rodata, main/0C8920]
-      - [0x0CA120, rodata, main/0CA120]
-      - [0x0CA140, rodata, main/0CA140]
-      - [0x0CA150, rodata, main/0CA150]
-      - [0x0CA1C0, rodata, main/0CA1C0]
-      - [0x0CA1E0, rodata, main/0CA1E0]
-      - [0x0CA3E0, rodata, main/0CA3E0]
+      - [0x0C84F0, rodata, libultra/setintmask]
+      - [0x0C8570, rodata, libultra/devmgr]
+      - [0x0C8590, rodata, libultra/aisetfreq]
+      - [0x0C85A0, rodata, libultra/drvrnew]
+      - [0x0C85F0, rodata, libultra/env]
+      - [0x0C86F0, rodata, libultra/resample]
+      - [0x0C8720, rodata, libultra/reverb]
+      - [0x0C8780, rodata, libultra/save]
+      - [0x0C878C, rodata, libultra/heapalloc]
+      - [0x0C87A0, rodata, libultra/synthesizer]
+      - [0x0C87D0, rodata, libultra/assert]
+      - [0x0C87F0, rodata, libultra/lookat]
+      - [0x0C8810, rodata, libultra/perspective]
+      - [0x0C8830, rodata, libultra/sinf]
+      - [0x0C8890, rodata, libultra/sched]
+      - [0x0C88C0, rodata, libultra/sirawdma]
+      - [0x0C88D0, rodata, libultra/visetevent]
+      - [0x0C88E4, rodata, libultra/visetmode]
+      - [0x0C88F4, rodata, libultra/viswapbuf]
+      - [0x0C8910, rodata, libultra/viswapcontext]
+      - [0x0C8920, rodata, libultra/kmcprintf]
+      - [0x0CA0B0, rodata, libultra/exceptasm]
+      - [0x0CA120, rodata, libultra/epirawread]
+      - [0x0CA140, rodata, libultra/libm_vals]
+      - [0x0CA150, rodata, libultra/cosf]
+      - [0x0CA1C0, rodata, libultra/xprintf]
+      - [0x0CA338, rodata, libultra/sprawdma]
+      - [0x0CA348, rodata, libultra/sirawread]
+      - [0x0CA358, rodata, libultra/sirawwrite]
+      - [0x0CA3B8, rodata, libultra/xldtob]
+      - [0x0CA3E0, rodata, libultra/rmonmem]
+      - [0x0CA3F0, rodata, libultra/sprawread]
+      - [0x0CA400, rodata, libultra/sprawwrite]
+      - [0x0CA418, rodata, libultra/rmonbrk]
+
       - [0x0CA478, .rodata, main/build]
 
-      - { start: 0x0CA4A0, type: bss, vram: 0x800C98A0, name: main/800C98A0 }
-      - { start: 0x0CA4A0, type: bss, vram: 0x8018ABB0, name: main/file }
-      - { start: 0x0CA4A0, type: bss, vram: 0x8018E3D0, name: main/8018E3D0 }
-      - { start: 0x0CA4A0, type: bss, vram: 0x801949A0, name: main/piacs }
-      - { start: 0x0CA4A0, type: bss, vram: 0x801949B0, name: main/801949B0 }
-      - { start: 0x0CA4A0, type: bss, vram: 0x80194A10, name: main/siacs }
-      - { start: 0x0CA4A0, type: bss, vram: 0x80194A20, name: main/80194A20 }
-      - { start: 0x0CA4A0, type: bss, vram: 0x8019A4C0, name: libhvqm/hvqm2decSP1 }
-      - { start: 0x0CA4A0, type: bss, vram: 0x8019CEC0, name: main/8019CEC0 }
+      - { type: bss, vram: 0x800C98A0, name: main/800C98A0 }
+      - { type: bss, vram: 0x8018ABB0, name: main/file }
+      - { type: bss, vram: 0x8018E3D0, name: main/8018E3D0 }
+
+      - { type: bss, vram: 0x80193030, name: libmus/player }
+      - { type: bss, vram: 0x801930A0, name: libmus/aud_dma }
+      - { type: bss, vram: 0x801930E0, name: libmus/aud_samples }
+      - { type: bss, vram: 0x801930F0, name: libmus/aud_sched }
+      - { type: bss, vram: 0x80193100, name: libmus/aud_thread }
+      - { type: bss, vram: 0x80193110, name: libmus/lib_memory }
+
+      - { type: bss, vram: 0x80193120, name: flash/osFlash }
+
+      - { type: bss, vram: 0x801931E0, name: libultra/pimgr }
+      - { type: bss, vram: 0x801949A0, name: libultra/piacs }
+      - { type: bss, vram: 0x801949B0, name: libultra/us2dex_emu }
+      - { type: bss, vram: 0x801949D0, name: libultra/sptask }
+      - { type: bss, vram: 0x80194A10, name: libultra/siacs }
+      - { type: bss, vram: 0x80194A20, name: libultra/vimgr }
+      - { type: bss, vram: 0x80195C40, name: libultra/error }
+      - { type: bss, vram: 0x80195C90, name: libultra/kdebugserver }
+      - { type: bss, vram: 0x80195CA0, name: libultra/readhost }
+      - { type: bss, vram: 0x80195CC0, name: libultra/log }
+      - { type: bss, vram: 0x80195CE0, name: libultra/rmonsio }
+      - { type: bss, vram: 0x80195D00, name: libultra/rmonmisc }
+      - { type: bss, vram: 0x80199F10, name: libultra/rmonregs }
+      - { type: bss, vram: 0x80199F30, name: libultra/rmonmain }
+      - { type: bss, vram: 0x8019A3B0, name: libultra/rmonbrk }
+
+      - { type: bss, vram: 0x8019A4C0, name: libhvqm/hvqm2decSP1 }
+
+      - { type: bss, vram: 0x8019CEC0, name: main/8019CEC0 }
 
   - name: buffer1
     type: code

@@ -1100,9 +1100,9 @@ extern s32 gLastOverflow;
 // extern UNK_TYPE B_80194940_usa;
 // extern UNK_TYPE B_80194958_usa;
 // extern UNK_TYPE B_80194960_usa;
-// extern UNK_TYPE B_80194978_usa;
+// extern UNK_TYPE freeRamromBuf;
 // extern UNK_TYPE B_80194980_usa;
-// extern UNK_TYPE B_80194998_usa;
+// extern UNK_TYPE piEventBuf;
 // extern UNK_TYPE piAccessBuf;
 
 // extern UNK_TYPE B_801949B4_usa;
@@ -1124,7 +1124,7 @@ extern s32 gLastOverflow;
 // extern UNK_TYPE B_80195C28_usa;
 // extern UNK_TYPE B_80195C2A_usa;
 // extern UNK_TYPE B_80195C2C_usa;
-// extern UNK_TYPE B_80195C40_usa;
+// extern UNK_TYPE errorLogData;
 
 // extern UNK_TYPE B_80195C95_usa;
 

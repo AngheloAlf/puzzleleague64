@@ -2,6 +2,7 @@
 asm/
 bin/
 build/
+expected/
 
 undefined_funcs_auto.ld
 undefined_syms_auto.ld
