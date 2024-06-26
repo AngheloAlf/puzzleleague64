@@ -400,11 +400,11 @@ segments:
 
       - [auto, c, main/build]
 
-      - [0x0B05C0, textbin, libultra/rsp/rspboot]
-      - [0x0B0690, textbin, libultra/rsp/aspMain]
-      - [0x0B14B0, textbin, libhvqm/rsp/hvqm2sp1]
-      - [0x0B1A80, textbin, libultra/rsp/f3dex]
-      - [0x0B2EB0, textbin, libultra/rsp/s2dex]
+      - [0x0B05C0, textbin, rsp/rspboot]
+      - [0x0B0690, textbin, rsp/aspMain]
+      - [0x0B14B0, textbin, rsp/hvqm2sp1]
+      - [0x0B1A80, textbin, rsp/f3dex]
+      - [0x0B2EB0, textbin, rsp/s2dex]
 
       - [0x0B4690, data, main/0B4690]
       - [0x0B46B0, .data, main/gfx]
@@ -465,10 +465,10 @@ segments:
 
       - [0x0C1FE0, .data, main/build]
 
-      - [0x0C1FF0, databin, libultra/rsp/aspMain]
-      - [0x0C22B0, databin, libhvqm/rsp/hvqm2sp1]
-      - [0x0C3000, databin, libultra/rsp/f3dex]
-      - [0x0C3800, databin, libultra/rsp/s2dex]
+      - [0x0C1FF0, databin, rsp/aspMain]
+      - [0x0C22B0, databin, rsp/hvqm2sp1]
+      - [0x0C3000, databin, rsp/f3dex]
+      - [0x0C3800, databin, rsp/s2dex]
 
       - [0x0C3BC0, .rodata, main/sound]
       - [0x0C3C90, .rodata, main/sfxlimit]

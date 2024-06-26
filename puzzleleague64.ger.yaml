@@ -231,13 +231,13 @@ segments:
       - [0x090960, hasm, libultra/setintmask]
       - [0x090A00, asm, libultra/pimgr] # c
       - [0x090CB0, asm, libultra/epirawdma] # c
-      - [0x090EA0, asm, libultra/090EA0]
-      - [0x090F00, asm, libultra/090F00]
+      - [0x090EA0, asm, libultra/epiwrite]
+      - [0x090F00, asm, libultra/epiread]
       - [0x090F60, asm, libultra/epidma] # c
       - [0x091000, asm, libultra/epilinkhandle] # c
       - [0x091050, asm, libultra/cartrominit] # c
       - [0x0911D0, asm, libultra/devmgr] # c
-      - [0x091590, asm, libultra/091590]
+      - [0x091590, asm, libultra/piacs]
       - [0x091680, asm, libultra/pidma] # c
       - [0x091730, asm, libultra/aigetlen] # c
       - [0x091740, asm, libultra/aigetstat] # c
@@ -301,7 +301,7 @@ segments:
       - [0x099500, asm, libultra/sptask] # c
       - [0x099740, asm, libultra/sched] # c
       - [0x09A1E0, asm, libultra/sirawdma] # c
-      - [0x09A290, asm, libultra/09A290]
+      - [0x09A290, asm, libultra/siacs]
       - [0x09A380, asm, libultra/createthread] # c
       - [0x09A450, asm, libultra/destroythread] # c
       - [0x09A530, asm, libultra/getthreadpri] # c
@@ -314,8 +314,8 @@ segments:
       - [0x09A920, asm, libultra/settimer] # c
       - [0x09A9C0, asm, libultra/timerintr] # c
       - [0x09AD60, hasm, libultra/probetlb]
-      - [0x09AE20, asm, libultra/09AE20]
-      - [0x09AE60, asm, libultra/09AE60]
+      - [0x09AE20, asm, libultra/vigetcurrframebuf]
+      - [0x09AE60, asm, libultra/vigetnextframebuf]
       - [0x09AEA0, asm, libultra/vigetline] # c
       - [0x09AEB0, asm, libultra/vimgr] # c
       - [0x09B1F0, asm, libultra/visetevent] # c
@@ -325,7 +325,7 @@ segments:
       - [0x09B460, asm, libultra/viswapbuf] # c
       - [0x09B4B0, asm, libultra/viswapcontext] # c
       - [0x09B7C0, asm, libultra/viblack] # c
-      - [0x09B820, asm, libultra/09B820]
+      - [0x09B820, hasm, libultra/parameters]
       - [0x09B880, asm, libultra/afterprenmi] # c
       - [0x09B8A0, asm, libultra/initialize] # c
       - [0x09BCA0, hasm, libultra/exceptasm]
@@ -358,12 +358,12 @@ segments:
       - [0x09E380, asm, libultra/sprawdma] # c
       - [0x09E410, asm, libultra/sptaskyield] # c
       - [0x09E430, asm, libultra/sptaskyielded] # c
-      - [0x09E480, asm, libultra/09E480]
-      - [0x09E4D0, asm, libultra/09E4D0]
+      - [0x09E480, asm, libultra/sirawread]
+      - [0x09E4D0, asm, libultra/sirawwrite]
       - [0x09E520, hasm, libultra/maptlbrdb]
       - [0x09E580, hasm, libultra/unmaptlball]
       - [0x09E5D0, asm, libultra/vi] # c
-      - [0x09E6E0, asm, libultra/09E6E0]
+      - [0x09E6E0, asm, libultra/vigetcurrcontext]
       - [0x09E6F0, asm, libultra/xlitob] # c
       - [0x09E940, asm, libultra/xldtob] # c
       - [0x09F3C0, asm, libultra/dp] # c
@@ -374,10 +374,10 @@ segments:
       - [0x0A07F0, asm, libultra/rmontask] # c
       - [0x0A10C0, asm, libultra/rmonmain] # c
       - [0x0A1460, asm, libultra/spgetstat] # c
-      - [0x0A1470, asm, libultra/0A1470]
-      - [0x0A14C0, asm, libultra/0A14C0]
+      - [0x0A1470, asm, libultra/sprawread]
+      - [0x0A14C0, asm, libultra/sprawwrite]
       - [0x0A1510, asm, libultra/si] # c
-      - [0x0A1530, asm, libultra/0A1530]
+      - [0x0A1530, asm, libultra/getactivequeue]
       - [0x0A1540, asm, libultra/ldiv] # c
       - [0x0A1700, hasm, libultra/rmonrcp]
       - [0x0A17A0, asm, libultra/rmonbrk] # c
@@ -394,13 +394,11 @@ segments:
       - [auto, c, main/build]
 
       - [0x0A63C0, textbin, rsp/rspboot]
+      - [0x0A6490, textbin, rsp/aspMain]
+      - [0x0A72B0, textbin, rsp/hvqm2sp1]
+      - [0x0A7880, textbin, rsp/f3dex]
+      - [0x0A8CB0, textbin, rsp/s2dex]
 
-      - [0x0A6490, data, main/0A6490] # rsp?
-
-      # TODO: textbin
-      - [0x0A72B0, data, libhvqm/rsp/hvqm2sp1]
-
-      - [0x0A7880, data, main/0A7880]
       - [0x0AA490, data, main/0AA490]
       - [0x0ABD30, .data, main/rom_offsets]
       - [0x0AC290, data, main/0AC290]
@@ -409,13 +407,13 @@ segments:
 
       - [0x0B7D00, .data, main/build]
 
-      - [0x0B7D10, data, main/0B7D10]
-
-      - [0x0B7FD0, databin, libhvqm/rsp/hvqm2sp1]
+      - [0x0B7D10, databin, rsp/aspMain]
+      - [0x0B7FD0, databin, rsp/hvqm2sp1]
+      - [0x0B8D20, databin, rsp/f3dex]
+      - [0x0B9520, databin, rsp/s2dex]
 
       # rodata start is a guess
-      - [0x0B8D20, rodata, main/0B8D20]
-      - [0x0B9520, rodata, main/0B9520]
+      - [0x0B98E0, rodata, main/0B98E0]
       - [0x0B9910, rodata, main/0B9910]
       - [0x0B99B0, rodata, main/0B99B0]
       - [0x0B9AE0, rodata, main/0B9AE0]

@@ -927,12 +927,13 @@ osFlashWriteBuffer = 0x80090C6C; // type:func
 osFlashWriteArray = 0x80090D2C; // type:func
 osFlashReadArray = 0x80090E9C; // type:func
 
-
-// .data
-
+rspbootTextStart = 0x800AF9C0; // name_end:rspbootTextEnd dont_allow_addend:True
 aspMainTextStart = 0x800AFA90; // name_end:aspMainTextEnd
 gspF3DEX_fifoTextStart = 0x800B0E80; // name_end:gspF3DEX_fifoTextEnd
 gspS2DEX_fifoTextStart = 0x800B22B0; // name_end:gspS2DEX_fifoTextEnd
+
+
+// .data
 
 D_800B3A90_usa = 0x800B3A90; //
 staticSegment = 0x800B3AB0; //
@@ -1280,12 +1281,13 @@ D_800BE350_usa = 0x800BE350; //
 
 gBuildDate = 0x800C13E0; //
 
+aspMainDataStart = 0x800C13F0; // name_end:aspMainDataEnd
+gspF3DEX_fifoDataStart = 0x800C2400; // name_end:gspF3DEX_fifoDataEnd
+gspS2DEX_fifoDataStart = 0x800C2C00; // name_end:gspS2DEX_fifoDataEnd
+
 
 // .rodata
 
-aspMainDataStart = 0x800C13F0; // // name_end:aspMainDataEnd
-gspF3DEX_fifoDataStart = 0x800C2400; // name_end:gspF3DEX_fifoDataEnd
-gspS2DEX_fifoDataStart = 0x800C2C00; // name_end:gspS2DEX_fifoDataEnd
 RO_STR_800C2FC0_usa = 0x800C2FC0; // type:asciz
 RO_STR_800C2FD8_usa = 0x800C2FD8; // type:asciz
 RO_STR_800C2FF0_usa = 0x800C2FF0; // type:asciz

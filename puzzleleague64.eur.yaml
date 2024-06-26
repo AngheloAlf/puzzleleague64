@@ -235,7 +235,7 @@ segments:
       - [0x092C10, asm, libultra/epilinkhandle] # c
       - [0x092C70, asm, libultra/cartrominit] # c
       - [0x092E60, asm, libultra/devmgr] # c
-      - [0x0933A0, asm, libultra/0933A0]
+      - [0x0933A0, asm, libultra/piacs]
       - [0x093490, asm, libultra/pidma] # c
       - [0x0936D0, asm, libultra/aigetlen] # c
       - [0x093700, asm, libultra/aigetstat] # c
@@ -301,7 +301,7 @@ segments:
       - [0x09F210, asm, libultra/sptask] # c
       - [0x09F640, asm, libultra/sched] # c
       - [0x0A0820, asm, libultra/sirawdma] # c
-      - [0x0A0920, asm, libultra/0A0920]
+      - [0x0A0920, asm, libultra/siacs]
       - [0x0A0A10, asm, libultra/createthread] # c
       - [0x0A0BE0, asm, libultra/destroythread] # c
       - [0x0A0D00, asm, libultra/getthreadpri] # c
@@ -325,7 +325,7 @@ segments:
       - [0x0A2550, asm, libultra/viswapbuf] # c
       - [0x0A2630, asm, libultra/viswapcontext] # c
       - [0x0A29A0, asm, libultra/viblack] # c
-      - [0x0A2A40, asm, libultra/0A2A40]
+      - [0x0A2A40, hasm, libultra/parameters]
       - [0x0A2AA0, asm, libultra/afterprenmi] # c
       - [0x0A2AE0, asm, libultra/initialize] # c
       - [0x0A3090, asm, libultra/errorasm] # c
@@ -362,11 +362,11 @@ segments:
       - [0x0A7250, asm, libultra/sptaskyield] # c
       - [0x0A7280, asm, libultra/sptaskyielded] # c
       - [0x0A7310, asm, libultra/sirawread] # c
-      - [0x0A73D0, asm, libultra/0A73D0]
+      - [0x0A73D0, asm, libultra/sirawwrite]
       - [0x0A7460, hasm, libultra/maptlbrdb]
       - [0x0A74C0, hasm, libultra/unmaptlball]
       - [0x0A7510, asm, libultra/vi] # c
-      - [0x0A7670, asm, libultra/0A7670]
+      - [0x0A7670, asm, libultra/vigetcurrcontext]
       - [0x0A76A0, asm, libultra/xlitob] # c
       - [0x0A7A50, asm, libultra/xldtob] # c
       - [0x0A8BD0, asm, libultra/dp] # c
@@ -378,9 +378,9 @@ segments:
       - [0x0AB220, asm, libultra/rmonmain] # c
       - [0x0AB670, asm, libultra/spgetstat] # c
       - [0x0AB6A0, asm, libultra/sprawread] # c
-      - [0x0AB760, asm, libultra/0AB760]
+      - [0x0AB760, asm, libultra/sprawwrite]
       - [0x0AB7F0, asm, libultra/si] # c
-      - [0x0AB840, asm, libultra/0AB840]
+      - [0x0AB840, asm, libultra/getactivequeue]
       - [0x0AB870, asm, libultra/ldiv] # c
       - [0x0ABAD0, hasm, libultra/rmonrcp]
       - [0x0ABB70, asm, libultra/rmonbrk] # c
@@ -396,13 +396,11 @@ segments:
 
       - [auto, c, main/build]
 
-      - [0x0B0AE0, textbin, libultra/rsp/rspboot]
-      - [0x0B0BB0, data, main/0B0BB0] # rsp?
-
-      # TODO: change to textbin
-      - [0x0B19D0, data, libhvqm/rsp/hvqm2sp1]
-
-      - [0x0B1FA0, data, main/0B1FA0]
+      - [0x0B0AE0, textbin, rsp/rspboot]
+      - [0x0B0BB0, textbin, rsp/aspMain]
+      - [0x0B19D0, textbin, rsp/hvqm2sp1]
+      - [0x0B1FA0, textbin, rsp/f3dex]
+      - [0x0B33D0, textbin, rsp/s2dex]
 
       - [0x0B4BB0, data, main/0B4BB0]
       - [0x0B6450, .data, main/rom_offsets]
@@ -412,13 +410,13 @@ segments:
 
       - [0x0C2510, .data, main/build]
 
-      - [0x0C2520, data, main/0C2520]
-
-      - [0x0C27E0, databin, libhvqm/rsp/hvqm2sp1]
+      - [0x0C2520, databin, rsp/aspMain]
+      - [0x0C27E0, databin, rsp/hvqm2sp1]
+      - [0x0C3530, databin, rsp/f3dex]
+      - [0x0C3D30, databin, rsp/s2dex]
 
       # rodata start is a guess
-      - [0x0C3530, rodata, main/0C3530]
-      - [0x0C3D30, rodata, main/0C3D30]
+      - [0x0C40F0, rodata, main/0C40F0]
       - [0x0C4120, rodata, main/0C4120]
       - [0x0C41C0, rodata, main/0C41C0]
       - [0x0C42F0, rodata, main/0C42F0]

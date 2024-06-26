@@ -1073,14 +1073,14 @@ func_800AFB14_eur = 0x800AFB14; // type:func
 func_800AFB48_eur = 0x800AFB48; // type:func
 func_800AFC44_eur = 0x800AFC44; // type:func
 
+rspbootTextStart = 0x800AFEE0; // name_end:rspbootTextEnd
+aspMainTextStart = 0x800AFFB0; // name_end:aspMainTextEnd
+gspF3DEX_fifoTextStart = 0x800B13A0; // name_end:gspF3DEX_fifoTextEnd
+gspS2DEX_fifoTextStart = 0x800B27D0; // name_end:gspS2DEX_fifoTextEnd
+
 
 // .data
 
-D_800AFEE0_eur = 0x800AFEE0; //
-D_800AFFB0_eur = 0x800AFFB0; //
-
-D_800B13A0_eur = 0x800B13A0; //
-D_800B27D0_eur = 0x800B27D0; //
 D_800B3FB0_eur = 0x800B3FB0; //
 D_800B3FD0_eur = 0x800B3FD0; //
 D_800B3FE0_eur = 0x800B3FE0; //
@@ -1479,15 +1479,15 @@ D_800BEB60_eur = 0x800BEB60; //
 D_800BEB6C_eur = 0x800BEB6C; //
 D_800BEB70_eur = 0x800BEB70; //
 
-
 gBuildDate = 0x800C1910; //
-D_800C1920_eur = 0x800C1920; //
+
+aspMainDataStart = 0x800C1920; // name_end:aspMainDataEnd
+gspF3DEX_fifoDataStart = 0x800C2930; // name_end:gspF3DEX_fifoDataEnd
+gspS2DEX_fifoDataStart = 0x800C3130; // name_end:gspS2DEX_fifoDataEnd
 
 
 // .rodata
 
-RO_800C2930_eur = 0x800C2930; //
-RO_800C3130_eur = 0x800C3130; //
 RO_STR_800C34F0_eur = 0x800C34F0; // type:asciz
 RO_800C3508_eur = 0x800C3508; //
 RO_800C3520_eur = 0x800C3520; //

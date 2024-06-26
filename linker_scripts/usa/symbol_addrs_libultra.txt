@@ -332,9 +332,6 @@ rmonFindFaultedThreads = 0x800AB63C; // type:func
 
 // .data
 
-rspbootTextStart = 0x800AF9C0; // name_end:rspbootTextEnd dont_allow_addend:True
-
-
 __osPiDevMgr = 0x800BE650; //
 D_800BE654_usa = 0x800BE654; //
 D_800BE658_usa = 0x800BE658; //
