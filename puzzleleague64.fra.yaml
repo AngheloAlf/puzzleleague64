@@ -218,12 +218,15 @@ segments:
       - [0x082630, asm, main/082630]
       - [0x088010, asm, main/088010]
       - [0x088D10, asm, main/088D10]
-      - [0x08A4A0, asm, main/08A4A0]
-      - [0x08E630, asm, main/08E630]
-      - [0x08F370, asm, main/08F370]
-      - [0x08F430, asm, main/08F430]
-      - [0x08F630, asm, main/08F630]
-      - [0x08F920, asm, main/08F920]
+
+      - [0x08A4A0, asm, libmus/player]
+      - [0x08E630, asm, libmus/player_fx]
+      - [0x08EEF0, asm, libmus/aud_dma]
+      - [0x08F370, asm, libmus/aud_samples]
+      - [0x08F430, asm, libmus/aud_sched]
+      - [0x08F630, asm, libmus/aud_thread]
+      - [0x08F920, asm, libmus/lib_memory]
+
       - [0x08FA70, asm, main/08FA70]
 
       # Uses libgultra_d
@@ -407,6 +410,13 @@ segments:
       - [0x0B4B00, .data, main/rom_offsets]
       - [0x0B5060, data, main/0B5060]
 
+      - [0x0BDCC0, data, libmus/player]
+      - [0x0BDD80, data, libmus/player_fx]
+      - [0x0BDF90, data, libmus/aud_sched]
+      - [0x0BDFA0, data, libmus/aud_thread]
+
+      - [0x0BDFB0, data, libultra/0BDFB0]
+
       - [0x0C0B90, data, libhvqm/adpcmdec]
 
       - [0x0C0D40, .data, main/build]
@@ -441,8 +451,11 @@ segments:
       - [0x0C64B0, rodata, main/0C64B0]
       - [0x0C6B40, rodata, main/0C6B40]
       - [0x0C6C10, rodata, main/0C6C10]
-      - [0x0C6D10, rodata, main/0C6D10]
-      - [0x0C6DF0, rodata, main/0C6DF0]
+
+      - [0x0C6D10, rodata, libmus/player]
+      - [0x0C6DF0, rodata, libmus/player_fx]
+
+      - [0x0C6E00, rodata, main/0C6E00]
       - [0x0C6EB0, rodata, main/0C6EB0]
       - [0x0C6F00, rodata, main/0C6F00]
       - [0x0C7000, rodata, main/0C7000]
@@ -459,11 +472,23 @@ segments:
       - [0x0C8AD0, rodata, main/0C8AD0]
       - [0x0C8AF0, rodata, main/0C8AF0]
       - [0x0C8CF0, rodata, main/0C8CF0]
+
       - [0x0C8D88, .rodata, main/build]
 
-      - { start: 0xC8DB0, type: bss, vram: 0x800C81B0, name: main/800C81B0 }
-      - { start: 0xC8DB0, type: bss, vram: 0x80197C20, name: libhvqm/hvqm2decSP1 }
-      - { start: 0xC8DB0, type: bss, vram: 0x8019A620, name: main/8019A620 }
+      - { type: bss, vram: 0x800C81B0, name: main/800C81B0 }
+
+      - { type: bss, vram: 0x80190790, name: libmus/player }
+      - { type: bss, vram: 0x80190800, name: libmus/aud_dma }
+      - { type: bss, vram: 0x80190840, name: libmus/aud_sample }
+      - { type: bss, vram: 0x80190850, name: libmus/aud_sched }
+      - { type: bss, vram: 0x80190860, name: libmus/aud_thread }
+      - { type: bss, vram: 0x80190870, name: libmus/lib_memory }
+
+      - { type: bss, vram: 0x80190880, name: main/80190880 }
+
+      - { type: bss, vram: 0x80197C20, name: libhvqm/hvqm2decSP1 }
+
+      - { type: bss, vram: 0x8019A620, name: main/8019A620 }
 
   - name: buffer1
     type: code

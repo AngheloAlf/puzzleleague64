@@ -118,6 +118,8 @@ SPLAT_YAML        ?= $(TARGET).$(VERSION).yaml
 CHECKSUMMER       ?= tools/checksummer.py
 PIGMENT64         ?= pigment64
 
+export SPIMDISASM_PANIC_RANGE_CHECK="True"
+
 
 IINC       := -I include -I bin/$(VERSION) -I $(BUILD_DIR)/bin/$(VERSION) -I .
 IINC       += -I lib -I lib/libultra_j/include -I lib/libultra_j/include/PR -I lib/libhvqm/include -I lib/libmus/include
@@ -185,7 +187,7 @@ endif
 
 #### Files ####
 
-$(shell mkdir -p asm/$(VERSION) bin/$(VERSION) linker_scripts/$(VERSION)/auto)
+$(shell mkdir -p asm/$(VERSION) bin/$(VERSION)/assets linker_scripts/$(VERSION)/auto)
 
 ASSETS_DIRS   := $(shell find bin/$(VERSION)/assets -type d)
 SRC_DIRS      := $(shell find src -type d)
@@ -262,9 +264,9 @@ extract:
 	$(SPLAT) $(SPLAT_YAML)
 
 diff-init: all
-	$(RM) -rf expected/
-	mkdir -p expected/
-	cp -r $(BUILD_DIR) expected/
+	$(RM) -rf expected/$(BUILD_DIR)
+	mkdir -p expected/$(BUILD_DIR)
+	cp -r $(BUILD_DIR)/* expected/$(BUILD_DIR)
 
 init:
 	$(MAKE) distclean
@@ -296,7 +298,8 @@ $(BIN): $(ELF)
 	$(OBJCOPY) -O binary --gap-fill=0x00 $< $@
 
 $(ELF): $(LINKER_SCRIPTS)
-	$(LD) $(ENDIAN) $(LDFLAGS) -Map $(LD_MAP) $(foreach ld, $(LINKER_SCRIPTS), -T $(ld)) -o $@ $(filter %.o, $^)
+	$(file >$(BUILD_DIR)/o_files, $(filter %.o, $^))
+	$(LD) $(ENDIAN) $(LDFLAGS) -Map $(LD_MAP) $(foreach ld, $(LINKER_SCRIPTS), -T $(ld)) -o $@ @$(BUILD_DIR)/o_files
 
 ## Order-only prerequisites
 # These ensure e.g. the PNG_INC_FILES are built before the O_FILES.

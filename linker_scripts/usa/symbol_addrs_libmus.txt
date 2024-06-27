@@ -171,8 +171,44 @@ extra_samples = 0x801930E8; //
 audio_sched = 0x801930F0; //
 sched_mem = 0x801930F4; //
 
+plr_player = 0x80193030; // size:0x14
+max_channels = 0x80193044; //
+mus_voices = 0x80193048; //
+mus_channels = 0x8019304C; //
+mus_channels2 = 0x80193050; //
+mus_vsyncs_per_second = 0x80193054; //
+mus_next_frame_time = 0x80193058; //
+mus_master_volume_effects = 0x8019305C; //
+mus_master_volume_songs = 0x8019305E; //
+mus_current_handle = 0x80193060; //
+mus_random_seed = 0x80193064; //
+mus_init_bank = 0x80193068; //
+mus_default_bank = 0x8019306C; //
+mus_songfxchange_flag = 0x80193070; //
+mus_last_fxtype = 0x80193074; //
+libmus_fxheader_current = 0x80193078; //
+libmus_fxheader_single = 0x8019307C; //
+marker_callback = 0x80193080; //
+fifo_start = 0x80193084; //
+fifo_current = 0x80193088; //
+fifo_limit = 0x8019308C; //
+fifo_addr = 0x80193090; //
+dma_buffer_head = 0x801930A0; //
+dma_buffer_free = 0x801930A4; //
+dma_buffer_list = 0x801930A8; //
+audio_IO_mess_buf = 0x801930AC; //
+audio_mess_buf = 0x801930B0; //
+audio_dma_size = 0x801930B4; //
+audio_dma_count = 0x801930B8; // size:0x4
+audDMAMessageQ = 0x801930C0; //
+cartrom_handle = 0x801930D8; //
 
-audio_heap = 0x80193110; //
+
+__MusIntAudManInit$in_function_static$stack_addr = 0x80193100; //
+
+audio_heap = 0x80193110; // size:0x10
+audio_tasks = 0x80193104; //
+audio_command_list = 0x80193108; //
 
 
 __muscontrol_flag = 0x801F9CC0; //
