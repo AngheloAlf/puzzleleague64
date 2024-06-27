@@ -13,6 +13,8 @@ COMPARE ?= 1
 NON_MATCHING ?= 0
 # if WERROR is 1, pass -Werror to CC_CHECK, so warnings would be treated as errors
 WERROR ?= 0
+# Disassembles all asm from the ROM instead of skipping files which are entirely in C
+FULL_DISASM ?= 0
 # Check code syntax with host compiler
 RUN_CC_CHECK ?= 1
 CC_CHECK_COMP ?= clang
@@ -118,10 +120,15 @@ SPLAT_YAML        ?= $(TARGET).$(VERSION).yaml
 CHECKSUMMER       ?= tools/checksummer.py
 PIGMENT64         ?= pigment64
 
+SPLAT_FLAGS       ?=
+ifneq ($(FULL_DISASM),0)
+    SPLAT_FLAGS       += --disassemble-all
+endif
+
 export SPIMDISASM_PANIC_RANGE_CHECK="True"
 
 
-IINC       += -I lib -I lib/libultra_j/include -I lib/libultra_j/include/PR -I lib/libhvqm/include -I lib/libmus/include
+IINC       += -I lib -I lib/libultra_j/include -I lib/libultra_j/include/PR -I lib/libhvqm/include
 IINC       += -I include -I bin/$(VERSION) -I $(BUILD_DIR)/bin/$(VERSION) -I .
 
 # Check code syntax with host compiler
@@ -139,7 +146,7 @@ else
 	CC_CHECK          := @:
 endif
 
-CFLAGS          += -nostdinc -fno-PIC -G 0 -mgp32 -mfp32 -fno-common
+CFLAGS          += -nostdinc -fno-PIC -G 0 -mgp32 -mfp32 -Wa,--force-n64align
 
 WARNINGS        := -w
 
@@ -162,12 +169,12 @@ C_DEFINES       := -D_LANGUAGE_C
 ENDIAN          := -EB
 
 OPTFLAGS        := -O2
-OPTFLAGS        += -g
+DBGFLAGS        := -g
 MIPS_VERSION    := -mips3
 # ICONV_FLAGS     := --from-code=UTF-8 --to-code=Shift-JIS
 
 # Variable to simplify C compiler invocation
-C_COMPILER_FLAGS = $(CFLAGS) $(BUILD_DEFINES) $(IINC) $(WARNINGS) $(MIPS_VERSION) $(ENDIAN) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(C_DEFINES) $(OPTFLAGS)
+C_COMPILER_FLAGS = $(CFLAGS) $(BUILD_DEFINES) $(IINC) $(WARNINGS) $(MIPS_VERSION) $(ENDIAN) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(C_DEFINES) $(OPTFLAGS) $(DBGFLAGS)
 
 # Use relocations and abi fpr names in the dump
 OBJDUMP_FLAGS := --disassemble --reloc --disassemble-zeroes -Mreg-names=32 -Mno-aliases
@@ -236,6 +243,13 @@ $(shell mkdir -p $(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(BIN_DIRS),$(BUILD_DIR)/
 
 # directory flags
 
+$(BUILD_DIR)/src/libmus/%.o:        CHECK_WARNINGS += -w
+$(BUILD_DIR)/src/libmus/%.o:        IINC += -I include/libmus
+$(BUILD_DIR)/src/libmus/player.o:   OPTFLAGS := -O3
+
+$(BUILD_DIR)/src/buffers/%.o:  CFLAGS   += -fno-common
+
+
 # per-file flags
 
 $(BUILD_DIR)/src/bin_file/bin_file.o: $(ARCHIVE_FILES)
@@ -261,7 +275,7 @@ setup:
 
 extract:
 	$(RM) -r asm/$(VERSION) bin/$(VERSION)
-	$(SPLAT) $(SPLAT_YAML)
+	$(SPLAT) $(SPLAT_YAML) $(SPLAT_FLAGS)
 
 diff-init: all
 	$(RM) -rf expected/$(BUILD_DIR)
@@ -276,10 +290,10 @@ init:
 	$(MAKE) diff-init
 
 format:
-	clang-format-11 -i -style=file $(C_FILES)
+	clang-format-11 -i -style=file $(filter-out src/libmus/%, $(C_FILES))
 
 tidy:
-	clang-tidy-11 -p . --fix --fix-errors $(C_FILES) -- $(CC_CHECK_FLAGS) $(IINC) $(CHECK_WARNINGS) $(BUILD_DEFINES) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(C_DEFINES) $(MIPS_BUILTIN_DEFS)
+	clang-tidy-11 -p . --fix --fix-errors $(filter-out src/libmus/%, $(C_FILES)) -- $(CC_CHECK_FLAGS) $(IINC) $(CHECK_WARNINGS) $(BUILD_DEFINES) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(C_DEFINES) $(MIPS_BUILTIN_DEFS)
 
 .PHONY: all clean distclean setup extract diff-init init format tidy
 .DEFAULT_GOAL := all

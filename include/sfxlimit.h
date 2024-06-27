@@ -2,7 +2,7 @@
 #define SFXLIMIT_H
 
 #include "libultra.h"
-#include "libmus.h"
+#include "libmus/libmus.h"
 #include "unk.h"
 
 typedef struct struct_bgm_init_table {

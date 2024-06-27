@@ -69,7 +69,7 @@ static OSMesgQueue     audDMAMessageQ;
 
 /* EPI handles for ROM access */
 static OSPiHandle *cartrom_handle;
-/*static*/ OSPiHandle *diskrom_handle;
+static OSPiHandle *diskrom_handle;
 
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -94,7 +94,7 @@ ALDMANew __MusIntDmaInit(int dma_buffer_count, int dma_buffer_size)
 	/* get ROM access handles */
 	cartrom_handle = osCartRomInit();
 // Go to MusInitailize()
-//	diskrom_handle = osDriveRomInit();
+	diskrom_handle = osCartRomInit();
 
 	/* allocate memory for DMA messages */
 	audio_IO_mess_buf = __MusIntMemMalloc(dma_buffer_count*2*sizeof(OSIoMesg));
@@ -290,8 +290,6 @@ static dma_list_t *__MusIntDmaSample(unsigned long sample_addr, int sample_lengt
 		/* is it contained in this buffer? */
 		if(sample_addr_end<=current_dma_buffer->sample_addr+audio_dma_size)
 		{
-			/* modification 99.01.12 from Yutaka Murakami v3.13 */
-			current_dma_buffer->keep_count = 1+FRAME_LAG;
 			return (current_dma_buffer);
 		}
 

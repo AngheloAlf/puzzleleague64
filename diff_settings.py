@@ -18,7 +18,7 @@ def add_custom_arguments(parser: argparse.ArgumentParser):
 def apply(config, args):
     version = args.version
 
-    config["baseimg"] = f"expected/{version}/build/puzzleleague64.{version}.z64"
+    config["baseimg"] = f"expected/build/{version}/puzzleleague64.{version}.z64"
     config["myimg"]   = f"build/{version}/puzzleleague64.{version}.z64"
     config["mapfile"] = f"build/{version}/puzzleleague64.{version}.map"
     config["source_directories"] = ["./src", "./include", "./asm", "./lib"]

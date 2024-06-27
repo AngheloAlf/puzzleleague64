@@ -48,7 +48,6 @@ extern OSMesgQueue B_8018EAB0_usa;
 extern OSMesg B_8018EAC8_usa[1];
 extern OSMesgQueue B_8018EAD0_usa;
 extern OSMesg B_8018EAE8_usa[1];
-extern OSThread B_8019CFA0_usa;
 extern HVQM2Arg B_801AABA0_usa;
 extern OSContPad B_801C7228_usa;
 

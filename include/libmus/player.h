@@ -30,7 +30,7 @@ typedef struct
 	unsigned char	pitch;	/* semitone */
 } drum_t;
 
-typedef struct 
+typedef struct song_t
 {
 	unsigned long	version;		/* 16.16 version number */
 	long			num_channels;	/* number of channels in this song */
@@ -216,7 +216,7 @@ typedef struct
   unsigned short	for_pb_count	[FORNEXT_DEPTH];
   unsigned char		for_count	[FORNEXT_DEPTH];	
   unsigned char		for_volume	[FORNEXT_DEPTH];
-  float		        for_pitchbend	[FORNEXT_DEPTH];
+  unsigned char		for_pitchbend	[FORNEXT_DEPTH];
 
 #ifndef SUPPORT_EFFECTS
   unsigned char padding[4]; /* pad for data cache */

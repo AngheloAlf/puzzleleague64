@@ -392,11 +392,6 @@ void CustomFxSet(s32 *param)
 			d->lp = gReverbFx.pLowPass;
 			d->lp->fstate = gReverbFx.pLpfState;
 			d->lp->fc = param[j++];
-#ifdef _OLD_AUDIO_LIBRARY
-			init_lpfilter(d->lp);
-#else
-			_init_lpfilter(d->lp);
-#endif
 		}
 		else
 		{

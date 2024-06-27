@@ -21,6 +21,9 @@ extern ALGlobals   __libmus_alglobals;
 void   __MusIntAudManInit(musConfig *config, int vsyncs_per_second, int fx_type);
 
 
+extern OSThread B_8019CFA0_usa;
+
+
 #endif /* _LIBMUS_AUD_THREAD_H_ */
 
 /* end of file */

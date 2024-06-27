@@ -24,8 +24,7 @@
 
 /* internal workspace */
 static u32 frame_samples;
-static u32 frame_samples_min;
-static u32 frame_samples_max;
+static s32 frame_samples_min;
 static u32 extra_samples;
 
 
@@ -47,14 +46,14 @@ static u32 extra_samples;
 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
 #ifndef SUPPORT_NAUDIO
-u32 __MusIntSamplesInit(u32 retrace_count, u32 output_rate, u32 vsyncs_per_sec, u32 extra_rate)
+u32 __MusIntSamplesInit(f32 retrace_count, f32 output_rate, f32 vsyncs_per_sec, u32 extra_rate)
 {
-	u32 calc;
+	s32 calc;
 
-	calc = (retrace_count*output_rate + vsyncs_per_sec - 1)/vsyncs_per_sec;
-	frame_samples = ((calc/16) + 1)*16;
+	calc = (retrace_count*output_rate)/vsyncs_per_sec;
+	frame_samples = (calc + 0xF) & ~0xF;
 	frame_samples_min = frame_samples-16;
-	extra_samples = frame_samples*extra_rate/100;
+	extra_samples = extra_rate;
 	return (frame_samples+16+extra_samples);
 }
 #else    /* SUPPORT_NAUDIO */
@@ -86,9 +85,11 @@ u32 __MusIntSamplesInit(u32 retrace_count, u32 output_rate, u32 vsyncs_per_sec, 
 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
 #ifndef SUPPORT_NAUDIO
-u32 __MusIntSamplesCurrent(u32 samples)
+u32 __MusIntSamplesCurrent(void)
 {
-	samples = (frame_samples+extra_samples+16-samples)&(~15);
+  s32 samples;
+
+	samples = (frame_samples+extra_samples+16-((osAiGetLength() / 4)))&(~15);
 	if (samples<frame_samples_min)
 		return (frame_samples_min);
 	return (samples);

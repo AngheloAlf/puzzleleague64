@@ -14,8 +14,8 @@
 #define _LIBMUS_AUD_SAMPLES_H_
 
 
-u32 __MusIntSamplesInit		(u32 retrace_count, u32 output_rate, u32 vsyncs_per_sec, u32 extra_rate);
-u32 __MusIntSamplesCurrent	(u32 samples);
+u32 __MusIntSamplesInit		(f32 retrace_count, f32 output_rate, f32 vsyncs_per_sec, u32 extra_rate);
+u32 __MusIntSamplesCurrent	(void);
 
 
 #endif /* _LIBMUS_AUD_SAMPLES_H_ */

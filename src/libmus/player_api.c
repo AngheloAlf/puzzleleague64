@@ -33,9 +33,6 @@ int MusInitialize(musConfig *config)
 	ALVoiceConfig vc;  
 	int i;
 
-	/* set DDROM handle */
-	diskrom_handle = config->diskrom_handle;
-
 	/* main control flag */
 	__muscontrol_flag = config->control_flag;
 
@@ -75,7 +72,7 @@ int MusInitialize(musConfig *config)
 	marker_callback=NULL;
 
 	/* initialise audio thread */
-	mus_last_fxtype = AL_FX_BIGROOM;
+	mus_last_fxtype = AL_FX_NONE;
    __MusIntAudManInit(config, mus_vsyncs_per_second, mus_last_fxtype);
 
 	/* set volumes to maxiumum level */
@@ -83,7 +80,7 @@ int MusInitialize(musConfig *config)
 
 	/* initialise player vars */
 	mus_current_handle = 1;
-	mus_random_seed = 0x12345678;
+	mus_random_seed = 0x87654321;
 
 	/* sign into the synthesis driver */
 	plr_player.next       = NULL;
@@ -105,6 +102,19 @@ int MusInitialize(musConfig *config)
 	}
 	return (__MusIntMemRemaining());
 }	
+
+void func_8008B21C_usa(void) {
+  s32 max = 44;
+  s32 i;
+
+  func_8008FE28_usa();
+  osDestroyThread(&B_8019CFA0_usa);
+  for (i = MAX_SONGS; i < max; i++) {
+    alSynFreeVoice(&__libmus_alglobals.drvr, &mus_voices[i - MAX_SONGS]);
+  }
+  alSynRemovePlayer(&__libmus_alglobals.drvr, &plr_player);
+  alClose(&__libmus_alglobals);
+}
 
 /*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*
   [API FUNCTION]
@@ -150,6 +160,14 @@ musHandle MusStartSong(void *addr)
 	handle = __MusIntStartSong(addr);
 	MusHandleUnPause(handle);
 	return (handle);
+}
+
+musHandle func_8008B310_usa(struct song_t *addr, int volscale, int panscale, int temscale) {
+    musHandle handle;
+
+    handle = func_8008E000_usa(addr, volscale, panscale, temscale);
+    MusHandleUnPause(handle);
+    return handle;
 }
 
 /*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*

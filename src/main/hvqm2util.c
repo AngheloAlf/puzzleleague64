@@ -1,5 +1,9 @@
 #include "hvqm2util.h"
+
 #include "libultra.h"
+#include "libmus/libmus.h"
+#include "libmus/aud_thread.h"
+
 #include "include_asm.h"
 #include "macros_defines.h"
 #include "unknown_structs.h"
@@ -13,7 +17,6 @@
 #include "tetsound.h"
 #include "image.h"
 #include "sound.h"
-#include "libmus.h"
 #include "peel.h"
 
 #if VERSION_USA || VERSION_EUR

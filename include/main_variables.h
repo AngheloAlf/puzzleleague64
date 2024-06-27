@@ -22,22 +22,7 @@
 extern s32 D_800B3AC4_usa;
 // extern UNK_TYPE D_800B3AC8_usa;
 // extern UNK_TYPE D_800B3ACC_usa;
-// extern UNK_TYPE D_800B3AD0_usa;
-// extern UNK_TYPE D_800B3AD2_usa;
-// extern UNK_TYPE D_800B3AD4_usa;
-// extern UNK_TYPE D_800B3ADC_usa;
-// extern UNK_TYPE D_800B3AE0_usa;
-// extern UNK_TYPE D_800B3AE4_usa;
-// extern UNK_TYPE D_800B3AE6_usa;
-// extern UNK_TYPE D_800B3AE8_usa;
-// extern UNK_TYPE D_800B3AEC_usa;
-// extern UNK_TYPE D_800B3AF0_usa;
-// extern UNK_TYPE D_800B3AF4_usa;
-extern s16 D_800B3AF8_usa;
-// extern UNK_TYPE D_800B3AFA_usa;
-// extern UNK_TYPE D_800B3AFC_usa;
-// extern UNK_TYPE D_800B3AFE_usa;
-// extern UNK_TYPE D_800B3B00_usa;
+
 extern f32 D_FLT_800B3B10_usa;
 extern f32 D_FLT_800B3B14_usa;
 extern u8 D_800B3B18_usa;
@@ -1498,7 +1483,6 @@ extern s32 gSelection;
 // extern UNK_TYPE B_8021AD5C_usa;
 // extern UNK_TYPE B_8021B960_usa;
 // extern UNK_TYPE B_8021B964_usa;
-// extern UNK_TYPE B_8021B968_usa;
 
 extern OSMesg B_8021BA28_usa[1];
 

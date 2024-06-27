@@ -88,6 +88,10 @@ static void __OsSchedInstall(void)
    osScAddClient(audio_sched, &sched_mem->client, &sched_mem->frame_queue);
 }
 
+void func_8008FE28_usa(void) {
+    osScRemoveClient(audio_sched, sched_mem);
+}
+
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
   [CALLBACK FUNCTION]
   __OsSchedWaitFrame()

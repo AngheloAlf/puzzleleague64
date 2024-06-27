@@ -45,9 +45,6 @@ typedef struct
   int 		syn_retraceCount;
   int		syn_num_dma_bufs;
   int		syn_dma_buf_size;
-
-// Special Addition
-  OSPiHandle	*diskrom_handle;
 } musConfig;
 
 /* enabled/disable flag */
@@ -101,6 +98,8 @@ typedef struct
 /* initialise */
 extern int MusInitialize			(musConfig *config);
 
+void func_8008B21C_usa(void);
+
 /* audio configuration */
 extern int MusSetFxType			(int fxtype);
 extern int MusSetSongFxChange		(musBool onoff);
@@ -110,6 +109,8 @@ extern void MusSetMasterVolume		(unsigned long flags, int volume);
 
 /* start songs and sound effects */
 extern musHandle MusStartSong		(void *addr);
+struct song_t;
+extern musHandle func_8008B310_usa(struct song_t *addr, int volscale, int panscale, int temscale);
 extern musHandle MusStartSongFromMarker	(void *addr, int marker);
 extern musHandle MusStartEffect		(int number);
 extern musHandle MusStartEffect2		(int number, int volume, int pan , int restartflag, int priority);
@@ -144,7 +145,6 @@ extern void *MusFxBankGetCurrent		(void);
 extern int  MusFxBankNumberOfEffects	(void *ifxbank);
 extern void MusFxBankSetPtrBank		(void *ifxbank, void *ipbank);
 extern void *MusFxBankGetPtrBank		(void *ifxbank);
-extern void MusFxBankSetSingle		(void *ifxbank);
 
 /* scheduler support */
 extern void MusSetScheduler			(musSched *sched_list);

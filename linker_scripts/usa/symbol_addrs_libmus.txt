@@ -215,4 +215,4 @@ __muscontrol_flag = 0x801F9CC0; //
 
 __libmus_alglobals = 0x8021AA30; //
 
-gReverbFx = 0x8021BA30; //
+gReverbFx = 0x8021BA30; // size:0x28

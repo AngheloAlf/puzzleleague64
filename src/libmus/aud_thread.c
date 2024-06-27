@@ -83,11 +83,12 @@ ALGlobals   __libmus_alglobals;
   NONE
 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
+OSThread B_8019CFA0_usa;
+
 void   __MusIntAudManInit(musConfig *config, int vsyncs_per_second, int fx_type)
 {
-   static OSThread thread;
    static u64 *stack_addr;
-   u32 i;
+   s32 i;
    ALSynConfig syn_config;
    u32 extra_rate;
    u32 samples_per_frame;
@@ -105,12 +106,13 @@ void   __MusIntAudManInit(musConfig *config, int vsyncs_per_second, int fx_type)
 
    /* initialise sample buffer manager */
 #ifndef SUPPORT_NAUDIO
-   extra_rate = EXTRA_SAMPLES;
+   extra_rate = (config->syn_output_rate >= 22050) ? 0xF0 : 0x50;
 #else
    extra_rate = EXTRA_SAMPLES_N;
+   #error ""
 #endif
 
-   samples_per_frame = __MusIntSamplesInit((u32)config->syn_retraceCount, (u32)syn_config.outputRate, (u32)vsyncs_per_second, extra_rate);
+   samples_per_frame = __MusIntSamplesInit(config->syn_retraceCount, syn_config.outputRate, vsyncs_per_second, extra_rate);
 
    /* allocate audio command list */
    audio_command_list = (Acmd*)__MusIntMemMalloc(config->syn_rsp_cmds*sizeof(Acmd));
@@ -122,9 +124,9 @@ void   __MusIntAudManInit(musConfig *config, int vsyncs_per_second, int fx_type)
 
    /* create and start thread */
    stack_addr = __MusIntMemMalloc(AUDIO_STACKSIZE);
-   osCreateThread(&thread, 3, __MusIntThreadProcess, 0,
+   osCreateThread(&B_8019CFA0_usa, 3, __MusIntThreadProcess, 0,
                    (void *)(stack_addr+AUDIO_STACKSIZE/sizeof(u64)), config->thread_priority);
-   osStartThread(&thread);
+   osStartThread(&B_8019CFA0_usa);
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -141,13 +143,14 @@ void   __MusIntAudManInit(musConfig *config, int vsyncs_per_second, int fx_type)
   NONE
 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
+audio_task_t *B_801AB980_usa;
+
 static void __MusIntThreadProcess(void *ignored)
 {
    static audio_task_t *last_task=NULL;
    Acmd *cmdp;
    s32 commands;
-   u32 task_count;
-   u32 samples;
+   s32 task_count;
    u32 status;
    audio_task_t *task;
    musTask sched_task;
@@ -170,38 +173,34 @@ static void __MusIntThreadProcess(void *ignored)
       /* wait for frame sync message */
       __MusIntSched_waitframe();
 
+      /* process dma buffers (find free ones) */
+      __MusIntDmaProcess();
+
       /* get AI parameters */
       status = osAiGetStatus();
-      samples = osAiGetLength()>>2;
 
       /* check AI status */
       if(status & AI_STATUS_FIFO_FULL)
          continue;
 
-      /* process dma buffers (find free ones) */
-      __MusIntDmaProcess();
-
       /* set relevant output buffer */
-      if (last_task && commands)
+      if (last_task) {
          osAiSetNextBuffer(last_task->data, last_task->frame_samples<<2);
+         B_801AB980_usa = last_task;
+      }
 
       /* call driver to generate audio commands and download samples */
-      task = &audio_tasks[task_count];
-      task->frame_samples = __MusIntSamplesCurrent(samples);
+      task = &audio_tasks[task_count % NUM_OUTPUT_BUFFERS];
+      task->frame_samples = __MusIntSamplesCurrent();
       cmdp = alAudioFrame(audio_command_list, &commands, (short *)osVirtualToPhysical(task->data), task->frame_samples);
       /* start audio task if required */
       if(commands)
       {
          sched_task.data_size = (cmdp - audio_command_list) * sizeof(Acmd);
          __MusIntSched_dotask(&sched_task);
-#ifdef _AUDIODEBUG
-         if (last_task && !samples && last_samples)
-            osSyncPrintf("AUD_THREAD.C : libaudio out of samples.\n");
-	 last_samples = samples;
-#endif
          last_task = task;
       }
-      task_count = (task_count+1) % NUM_OUTPUT_BUFFERS;
+      task_count++;
    }
 }
 

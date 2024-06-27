@@ -35,6 +35,9 @@
   #include "player_fx.h"
 #endif
 
+// puzzle league headers
+#include "sound.h"
+
 
 /* define note data */
 #define REST		   96	/* c8 = rest				*/
@@ -103,6 +106,14 @@ unsigned long __muscontrol_flag;                /* music player control flag */
 unsigned long _mus_cpu_last = 0;                /* driver CPU usage for last frame */
 unsigned long _mus_cpu_worst = 0;               /* driver CPU usage for worst case */
 #endif
+
+extern s32 B_8019D150_usa;
+extern s32 B_801ADC0C_usa;
+extern s32 B_801C6BE8_usa;
+extern s32 B_801C6F00_usa;
+extern s32 B_801F9E28_usa;
+
+musHandle func_8008E000_usa(song_t *addr, int volscale, int panscale, int temscale);
 
 
 /* C files included directly (to avoid lots of global variables in the library)*/
@@ -178,16 +189,16 @@ static ALMicroTime __MusIntMain(void *node)
     /* process until note or stop for this frame is found */
     if(cp->length != 0x7fff)
     {
-      while (((long)(cp->note_end_frame-cp->channel_frame))<0 && cp->pdata!=NULL)
+      while (cp->note_end_frame<cp->channel_frame && cp->pdata!=NULL)
          __MusIntGetNewNote(cp, x);
       /* cancel processing if channel stopped */
       if(!cp->pdata)
          continue;
     }
     /* process volume and pitchbend continous data streams */
-    if(cp->pvolume && ((long)(cp->volume_frame-cp->channel_frame))<0)
+    if(cp->pvolume && cp->volume_frame<cp->channel_frame)
       __MusIntProcessContinuousVolume(cp);
-    if(cp->ppitchbend && ((long)(cp->pitchbend_frame-cp->channel_frame))<0)
+    if(cp->ppitchbend && cp->pitchbend_frame<cp->channel_frame)
       __MusIntProcessContinuousPitchBend(cp);
 
     /* process fade down and stop API command */
@@ -212,7 +223,7 @@ static ALMicroTime __MusIntMain(void *node)
       
       if(cp->env_phase)
         __MusIntProcessEnvelope(cp);
-      if(cp->sweep_speed && ((long)(cp->sweep_frame-cp->channel_frame))<0)
+      if(cp->sweep_speed && cp->sweep_frame<cp->channel_frame)
         __MusIntProcessSweep(cp);
 
       total = cp->freqoffset;
@@ -226,8 +237,8 @@ static ALMicroTime __MusIntMain(void *node)
 	total += __MusIntProcessWobble(cp);
       if (!cp->pending)
       {
-	__MusIntSetPitch(cp, x, total);
 	__MusIntSetVolumeAndPan(cp, x);
+	__MusIntSetPitch(cp, x, total);
       }
     }
     /* increment channel counters */
@@ -296,15 +307,13 @@ static void __MusIntGetNewNote(channel_t *cp,  int x)
         /* this was only a problem if the first note in the loop was a rest, */
         /* and the last note was a quiet note using low velocity */
         u8 vel = *cp->pdata++;
+        cp->velocity = vel;
         if(vel >= 0x80)
         {
-            vel &= 0x7F;
+            cp->velocity &= 0x7F;
             cp->velocity_on = 0;
-            cp->default_velocity = vel;
+            cp->default_velocity = cp->velocity;
         }
-
-        if(note != REST)
-            cp->velocity = vel;
     }
     else
       cp->velocity = cp->default_velocity;
@@ -492,19 +501,33 @@ static void __MusIntSetVolumeAndPan(channel_t *cp, int x)
 {
   u32	volume;
 
-  /* process volume */
-  volume = ((u32)(cp->volume)*(u32)(cp->env_current)*(u32)(cp->velocity)*(u32)(cp->volscale))>>13;
-  if (volume>32767)
-    volume = 32767;
+  B_801F9E28_usa = cp->volume;
+  B_801C6F00_usa = cp->env_current;
+  B_801C6BE8_usa = cp->velocity;
+  B_801ADC0C_usa = cp->volscale;
+
+  if (D_800B3AF8_usa == 0) {
+    cp->panscale = 0x80;
+    cp->pan = 0x40;
+  }
+
+  if (cp->volscale != 0) {
+    /* process volume */
+    volume = ((u32)(cp->volume)*(u32)(cp->env_current)*(u32)(cp->velocity)*(u32)(cp->volscale))>>13;
+    if (volume>32767)
+      volume = 32767;
 
 
-   if (!cp->fx_addr)
-    volume *= mus_master_volume_songs;
-  else
-    volume *= mus_master_volume_effects;
-  volume >>= 15;
-  if (cp->stopping != -1)
-    volume = (volume*cp->stopping)/cp->stopping_speed;
+    if (!cp->fx_addr)
+      volume *= mus_master_volume_songs;
+    else
+      volume *= mus_master_volume_effects;
+    volume >>= 15;
+    if (cp->stopping != -1)
+      volume = (volume*cp->stopping)/cp->stopping_speed;
+  } else {
+    volume = 0;
+  }
 
   if (volume!=cp->old_volume)
   {
@@ -514,9 +537,10 @@ static void __MusIntSetVolumeAndPan(channel_t *cp, int x)
   }
 
   /* process pan */
-  volume = ((cp->pan*cp->panscale)>>7)&0x7f;
+  volume = cp->pan;
   if (volume!=cp->old_pan)
   {
+    volume = ((s32)(volume*cp->panscale)>>7)&0x7f;
     cp->old_pan = volume;
     alSynSetPan(&__libmus_alglobals.drvr, mus_voices+x, volume);
   }
@@ -607,11 +631,12 @@ static void __MusIntInitEnvelope(channel_t *cp)
   }
   else
   {
-    cp->release_frame = cp->note_start_frame+0x7fffffff; /* release tomorrow please! */
+    cp->release_frame = 0x7fffffff; /* release tomorrow please! */
   }    
   cp->env_current = cp->env_init_vol;
   cp->env_count = cp->env_speed;
   cp->env_phase = 1;
+  B_8019D150_usa = cp->env_count;
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -632,7 +657,7 @@ static void __MusIntProcessEnvelope(channel_t *cp)
 {
   int env_phase_count;
  
-  if(((long)(cp->release_frame-cp->channel_frame))<0 && cp->env_phase<4)
+  if(cp->channel_frame>=cp->release_frame && cp->env_phase<4)
   {
     /* Start Release */
     cp->env_phase = 4;
@@ -640,11 +665,9 @@ static void __MusIntProcessEnvelope(channel_t *cp)
     cp->release_start_vol = cp->env_current;
   }
 
-  /* 99.01.29 - Removed this decrement and check of env_count - TW */
-  /* It looks like this should have been remived at the time env_speed_calc was introduced */
-  /* assuming it works ok, env_count can be removed from the channel structure */
-  /* cp->env_count--; *.
-  /* if(!cp->env_count) */
+  B_8019D150_usa = cp->env_count;
+  cp->env_count--;
+  if(!cp->env_count)
   {
     cp->env_count = cp->env_speed;
 
@@ -775,7 +798,7 @@ void __MusIntProcessSweep(channel_t *cp)
 	cp->sweep_dir = 0;
       }    
     }
-  } while ((long)(cp->sweep_frame-cp->channel_frame)<0);
+  } while (cp->sweep_frame<cp->channel_frame);
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -939,7 +962,7 @@ static void __MusIntProcessContinuousVolume(channel_t *cp)
 	cp->cont_vol_repeat_count=1;
       }
     }
-  } while ((long)(cp->volume_frame-cp->channel_frame)<0);
+  } while (cp->volume_frame<cp->channel_frame);
 
 #ifdef SUPPORT_EFFECTS
   __MusIntSpecialVol(cp);
@@ -1018,7 +1041,7 @@ static void __MusIntProcessContinuousPitchBend(channel_t *cp)
 	cp->cont_pb_repeat_count=1;
       }
     }
-  } while ((long)(cp->pitchbend_frame-cp->channel_frame)<0);
+  } while (cp->pitchbend_frame<cp->channel_frame);
 
 #ifdef SUPPORT_EFFECTS
   __MusIntSpecialPitchBend(cp);
@@ -1510,5 +1533,116 @@ static void __MusIntHandleSetFlag(unsigned long handle, unsigned long clear, uns
   }
 }
 
+// Modified version of __MusIntInitialiseChannel
+static inline void __MusIntInitialiseChannel_inline(channel_t *cp, int volscale, int panscale, int temscale)
+{
+  unsigned char old_playing, *work_ptr;
+  int i;
+
+  /* disable channel processing 1st!!! */
+  cp->pdata = NULL;
+  old_playing = cp->playing;
+
+  /* zero out channel */
+  work_ptr = (unsigned char *)cp;
+  for (i=0; i<sizeof(channel_t); i++)
+    *work_ptr++ = 0;
+
+  /* set none zero values */
+  cp->old_volume    	= 0xffff;
+  cp->old_reverb    	= 0xff;
+  cp->old_pan       	= 0xff;
+  cp->old_frequency 	= 99.9;
+
+  cp->channel_tempo = cp->channel_tempo_save = 96*256/mus_vsyncs_per_second;
+
+  cp->length        	= 1;
+
+  cp->default_velocity 	= 127;
+  cp->volume		= 127;
+  cp->bendrange		= 2*(1.0/64.0);
+  cp->pan		= 64;
+
+  cp->cont_vol_repeat_count = 1;
+  cp->cont_pb_repeat_count = 1;
+
+  cp->stopping  = -1;
+
+  /* new volume and pan scales */
+  cp->volscale = volscale;
+  cp->panscale = panscale;
+  cp->temscale = temscale;
+  
+  /* setup a default envelope */
+  cp->env_speed = 1;
+  cp->env_attack_speed = 1;
+  cp->env_attack_calc = 1.0F;
+  cp->env_max_vol = 127;
+  cp->env_decay_speed = 255;
+  cp->env_decay_calc = 1.0/255.0;
+  cp->env_sustain_vol = 127;
+  cp->env_release_speed = 15;
+  cp->env_release_calc = 1.0/15.0;
+
+  /* set current sample bank */
+  cp->sample_bank = mus_init_bank ? mus_init_bank : mus_default_bank;
+
+  /* restore channel status flag */
+  cp->playing = old_playing;
+}
+
+// A modified version of __MusIntStartSong
+musHandle func_8008E000_usa(song_t *addr, int volscale, int panscale, int temscale) {
+	song_t *song_addr;
+  int i;
+  int channels;
+  channel_t *cp;
+  musHandle handle;
+
+  song_addr = addr;
+  channels = song_addr->num_channels;
+  //! @bug check should be `!(song_addr->flags & SONGFLAG_INITIALISED)`
+  if (!song_addr->flags & SONGFLAG_INITIALISED) {
+    song_addr->flags |= SONGFLAG_INITIALISED;
+
+    /* convert header offsets to pointers */
+    __MusIntRemapPtrs(SONGHDR_ADR(song_addr), addr, SONGHDR_COUNT);
+      /* convert pointer tables */
+    __MusIntRemapPtrs(song_addr->data_list, addr, channels);
+    __MusIntRemapPtrs(song_addr->volume_list, addr, channels);
+    __MusIntRemapPtrs(song_addr->pbend_list, addr, channels);
+  }
+
+	/* get next handle */
+  handle = mus_current_handle++;
+
+   /* start master track last - always gets started! */
+  cp = mus_channels + __MusIntFindChannel(song_addr, -1);
+  __MusIntInitialiseChannel_inline(cp, volscale, panscale, temscale);
+  cp->velocity_on = 1; 		/* enable velocity for songs */
+  cp->channel_flag |= CHFLAG_PAUSE|CHFLAG_MASTERTRACK;
+  cp->song_addr = song_addr;
+  cp->pdata = cp->pbase = song_addr->master_track;
+  cp->handle = handle;
+
+  for (i = 0; i < channels; i++) {
+    if (song_addr->data_list[i] != NULL) { /* should never happen but just in case! */
+      cp = mus_channels + __MusIntFindChannel(song_addr, i);
+      __MusIntInitialiseChannel_inline(cp, volscale, panscale, temscale);
+
+      cp->velocity_on = 1; 		/* enable velocity for songs */
+      cp->channel_flag |= CHFLAG_PAUSE;
+      cp->song_addr = song_addr;
+      cp->pvolume = cp->pvolumebase = song_addr->volume_list[i];
+      cp->ppitchbend = cp->ppitchbendbase = song_addr->pbend_list[i];
+			/* pdata must be set last to avoid processing clash */
+      cp->pdata = cp->pbase = song_addr->data_list[i];
+      cp->handle = handle;
+    }
+  }
+	/* reset any single sample bank override */
+  mus_init_bank = NULL;
+  return handle;
+}
 
 /* end of file */

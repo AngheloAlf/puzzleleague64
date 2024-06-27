@@ -13,6 +13,7 @@ root_dir = os.path.abspath(os.path.join(script_dir, ".."))
 CPP_FLAGS = [
     "-I.",
     "-Iinclude",
+    "-Iinclude/libmus",
     "-Ibin",
     "-Ilib",
     "-Ilib/libultra_j/include",

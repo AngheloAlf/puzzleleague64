@@ -9,8 +9,8 @@
 #include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
-#include "libmus.h"
-#include "lib/libmus/src/lib_memory.h"
+#include "libmus/libmus.h"
+#include "libmus/lib_memory.h"
 #include "rom_offsets.h"
 #include "sfxlimit.h"
 
@@ -22,7 +22,7 @@ typedef struct struct_8018A748_usa {
     /* 0x00 */ UNK_TYPE4 unk_00;
     /* 0x04 */ musHandle unk_04;
     /* 0x08 */ void *unk_08;
-    /* 0x0C */ void *unk_0C;
+    /* 0x0C */ struct song_t *song_addr;
     /* 0x10 */ UNK_TYPE4 unk_10;
     /* 0x14 */ UNK_TYPE4 unk_14;
     /* 0x18 */ UNK_TYPE4 unk_18;
@@ -40,8 +40,6 @@ typedef struct struct_8018A748_usa {
 extern struct_8018A748_usa B_8018A748_usa[2];
 
 extern s32 B_800CF2A0_usa;
-
-extern u16 B_8021B968_usa;
 
 extern u8 B_800CF2B0_usa[];
 extern u8 B_8016F2B0_usa[];
@@ -208,8 +206,8 @@ s16 IsTuneBufferFree(s32 index) {
 #endif
 
 #if VERSION_USA
-void func_80001F40_usa(void *arg0, s16 index) {
-    B_8018A748_usa[index].unk_0C = arg0;
+void func_80001F40_usa(struct song_t *arg0, s16 index) {
+    B_8018A748_usa[index].song_addr = arg0;
 }
 #endif
 
@@ -484,8 +482,8 @@ void SetAudioSystemMixer(s16 arg0) {
 #endif
 
 #if VERSION_USA
-void *func_800028B8_usa(s32 index) {
-    return B_8018A748_usa[index].unk_0C;
+struct song_t *func_800028B8_usa(s32 index) {
+    return B_8018A748_usa[index].song_addr;
 }
 #endif
 
@@ -496,7 +494,7 @@ void func_800028D8_usa(s32 arg0) {
     }
 
     MusPtrBankSetSingle(B_8018A748_usa[arg0].unk_08);
-    B_8018A748_usa[arg0].unk_04 = MusStartSong(B_8018A748_usa[arg0].unk_0C);
+    B_8018A748_usa[arg0].unk_04 = MusStartSong(B_8018A748_usa[arg0].song_addr);
     B_8018A748_usa[arg0].unk_28 = 0;
     B_8018A748_usa[arg0].unk_2C = 0;
     MusHandleSetVolume(B_8018A748_usa[arg0].unk_04, 0);
@@ -541,7 +539,21 @@ INLINE s32 func_80002A10_usa(s32 arg0) {
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/sound", func_80002AE8_usa);
+musHandle func_80002AE8_usa(s32 index, s32 volscale, s32 panscale, s32 temscale) {
+    if ((B_8018A748_usa[index].unk_1C != 1) && (B_8018A6F0_usa < 0x1B) && (D_800B3AEC_usa != index)) {
+        MusHandleStop(B_8018A748_usa[D_800B3AE4_usa].unk_04, D_800B3AFA_usa);
+        MusPtrBankSetSingle(B_8018A748_usa[index].unk_08);
+        B_8018A748_usa[index].unk_04 = func_8008B310_usa(B_8018A748_usa[index].song_addr, volscale, panscale, temscale);
+        B_8018A748_usa[index].unk_28 = volscale;
+        B_8018A748_usa[index].unk_2C = volscale;
+        B_8018A748_usa[index].unk_1C = 1;
+        D_800B3AEC_usa = index;
+        D_800B3AE4_usa = index;
+        last_song_handle = B_8018A748_usa[index].unk_04;
+        return last_song_handle;
+    }
+    return last_song_handle;
+}
 #endif
 
 #if VERSION_USA

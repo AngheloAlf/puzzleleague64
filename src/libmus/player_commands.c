@@ -396,6 +396,8 @@ static unsigned char *Fnext (channel_t *cp, unsigned char *ptr)
       cp->for_stack_count = index;
       index = -1;
     }
+  } else {
+    B_8021B968_usa = 1;
   }
   /* unstack pointers if necessary */
   if (index>-1)
@@ -646,7 +648,7 @@ static unsigned char *Fstartfx(channel_t *cp, unsigned char *ptr)
 static unsigned char *Fbendrange(channel_t *cp, unsigned char *ptr)
 {
   cp->bendrange = (float)(*ptr++)*(1.0/64.0);
-  cp->pitchbend_precalc = cp->pitchbend*cp->bendrange;
+  cp->pitchbend_precalc = cp->pitchbend*cp->pitchbend;
   return (ptr);
 }
 
