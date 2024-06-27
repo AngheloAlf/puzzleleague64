@@ -121,8 +121,8 @@ PIGMENT64         ?= pigment64
 export SPIMDISASM_PANIC_RANGE_CHECK="True"
 
 
-IINC       := -I include -I bin/$(VERSION) -I $(BUILD_DIR)/bin/$(VERSION) -I .
 IINC       += -I lib -I lib/libultra_j/include -I lib/libultra_j/include/PR -I lib/libhvqm/include -I lib/libmus/include
+IINC       += -I include -I bin/$(VERSION) -I $(BUILD_DIR)/bin/$(VERSION) -I .
 
 # Check code syntax with host compiler
 CHECK_WARNINGS := -Wall -Wextra -Wimplicit-fallthrough -Wno-unknown-pragmas -Wno-missing-braces -Wno-sign-compare -Wno-uninitialized
