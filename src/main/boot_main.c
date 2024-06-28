@@ -46,7 +46,7 @@ INLINE void func_80000450_usa(void) {
 
         while (true) {
             if (var_s0 != 0) {
-                var_s0 &= -(~osAfterPreNMI() == 0);
+                var_s0 &= ~osAfterPreNMI() ? 0 : -1;
             }
 
             while (osViGetCurrentLine() != 0) {}

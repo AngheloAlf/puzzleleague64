@@ -24,6 +24,11 @@
 /* include current header file */
 #include "aud_sched.h"
 
+// puzzle league headers
+#if VERSION_FRA || VERSION_GER
+#include "main_functions.h"
+#endif
+
 /* internal macros */
 #define QUEUE_SIZE	4
 
@@ -112,6 +117,9 @@ static void __OsSchedWaitFrame(void)
 	{
 		osRecvMesg(&sched_mem->frame_queue, (OSMesg *)&message, OS_MESG_BLOCK);
 		osRecvMesg(&sched_mem->frame_queue, NULL, OS_MESG_NOBLOCK);	/* bin any missed syncs! <- only happens if a higher priority thread takes a huge amount of time */
+#if VERSION_FRA || VERSION_GER
+    func_80000450_usa();
+#endif
 	} while (message->type!=OS_SC_RETRACE_MSG);
 }
 

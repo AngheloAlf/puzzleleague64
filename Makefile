@@ -243,9 +243,12 @@ $(shell mkdir -p $(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(BIN_DIRS),$(BUILD_DIR)/
 
 # directory flags
 
-$(BUILD_DIR)/src/libmus/%.o:        CHECK_WARNINGS += -w
-$(BUILD_DIR)/src/libmus/%.o:        IINC += -I include/libmus
-$(BUILD_DIR)/src/libmus/player.o:   OPTFLAGS := -O3
+$(BUILD_DIR)/src/libmus/%.o:    CHECK_WARNINGS += -w
+$(BUILD_DIR)/src/libmus/%.o:    IINC += -I include/libmus
+$(BUILD_DIR)/src/libmus/%.o:    OPTFLAGS := -O3
+ifeq ($(VERSION),fra)
+$(BUILD_DIR)/src/libmus/%.o:    RELEASE_DEFINES :=
+endif
 
 $(BUILD_DIR)/src/buffers/%.o:  CFLAGS   += -fno-common
 

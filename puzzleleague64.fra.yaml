@@ -219,13 +219,13 @@ segments:
       - [0x088010, asm, main/088010]
       - [0x088D10, asm, main/088D10]
 
-      - [0x08A4A0, asm, libmus/player]
-      - [0x08E630, asm, libmus/player_fx]
-      - [0x08EEF0, asm, libmus/aud_dma]
-      - [0x08F370, asm, libmus/aud_samples]
-      - [0x08F430, asm, libmus/aud_sched]
-      - [0x08F630, asm, libmus/aud_thread]
-      - [0x08F920, asm, libmus/lib_memory]
+      - [0x08A4A0, c, libmus/player]
+      - [0x08E630, c, libmus/player_fx]
+      - [0x08EEF0, c, libmus/aud_dma]
+      - [0x08F370, c, libmus/aud_samples]
+      - [0x08F430, c, libmus/aud_sched]
+      - [0x08F630, c, libmus/aud_thread]
+      - [0x08F920, c, libmus/lib_memory]
 
       - [0x08FA70, asm, main/08FA70]
 
@@ -410,10 +410,10 @@ segments:
       - [0x0B4B00, .data, main/rom_offsets]
       - [0x0B5060, data, main/0B5060]
 
-      - [0x0BDCC0, data, libmus/player]
-      - [0x0BDD80, data, libmus/player_fx]
-      - [0x0BDF90, data, libmus/aud_sched]
-      - [0x0BDFA0, data, libmus/aud_thread]
+      - [0x0BDCC0, .data, libmus/player]
+      - [0x0BDD80, .data, libmus/player_fx]
+      - [0x0BDF90, .data, libmus/aud_sched]
+      - [0x0BDFA0, .data, libmus/aud_thread]
 
       - [0x0BDFB0, data, libultra/0BDFB0]
 
@@ -452,8 +452,8 @@ segments:
       - [0x0C6B40, rodata, main/0C6B40]
       - [0x0C6C10, rodata, main/0C6C10]
 
-      - [0x0C6D10, rodata, libmus/player]
-      - [0x0C6DF0, rodata, libmus/player_fx]
+      - [0x0C6D10, .rodata, libmus/player]
+      - [0x0C6DF0, .rodata, libmus/player_fx]
 
       - [0x0C6E00, rodata, main/0C6E00]
       - [0x0C6EB0, rodata, main/0C6EB0]
@@ -477,12 +477,12 @@ segments:
 
       - { type: bss, vram: 0x800C81B0, name: main/800C81B0 }
 
-      - { type: bss, vram: 0x80190790, name: libmus/player }
-      - { type: bss, vram: 0x80190800, name: libmus/aud_dma }
-      - { type: bss, vram: 0x80190840, name: libmus/aud_sample }
-      - { type: bss, vram: 0x80190850, name: libmus/aud_sched }
-      - { type: bss, vram: 0x80190860, name: libmus/aud_thread }
-      - { type: bss, vram: 0x80190870, name: libmus/lib_memory }
+      - { type: .bss, vram: 0x80190790, name: libmus/player }
+      - { type: .bss, vram: 0x80190800, name: libmus/aud_dma }
+      - { type: .bss, vram: 0x80190840, name: libmus/aud_samples }
+      - { type: .bss, vram: 0x80190850, name: libmus/aud_sched }
+      - { type: .bss, vram: 0x80190860, name: libmus/aud_thread }
+      - { type: .bss, vram: 0x80190870, name: libmus/lib_memory }
 
       - { type: bss, vram: 0x80190880, name: main/80190880 }
 
