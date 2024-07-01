@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:decompals/ultralib.git
+	branch = main
+	commit = c618e55320cf097d425dc8fc28c9de8a5c71aed4
+	parent = 47457ae0761a3b302f77dc77b35bacfdc4958875
+	method = merge
+	cmdver = 0.4.3
