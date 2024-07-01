@@ -396,11 +396,7 @@ segments:
       - [0x0AC860, asm, libhvqm/hvqm2decSP1]
       - [0x0B0580, asm, libhvqm/adpcmdec]
 
-      - [0x0B0710, asm, main/0B0710]
-
-      - [0x0B0910, asm, libkmc/0B0910] # __divdi3
-      - [0x0B0A80, asm, libkmc/0B0A80] # __udivdi3
-      - [0x0B0AA0, asm, libkmc/0B0AA0] # __umoddi3
+      - [0x0B0710, hasm, libkmc/mmuldi3]
 
       - [auto, c, main/build]
 

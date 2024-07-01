@@ -1,5 +1,8 @@
 // .text
 
+__muldi3 = 0x800AE1C0; // type:func
+div64_64 = 0x800AE1F8; // type:func
+div64_32 = 0x800AE2F4; // type:func
 __divdi3 = 0x800AE3C0; // type:func
 __udivdi3 = 0x800AE530; // type:func
 __umoddi3 = 0x800AE550; // type:func

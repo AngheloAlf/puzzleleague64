@@ -401,7 +401,7 @@ segments:
       - [0x0AC340, asm, libhvqm/hvqm2decSP1]
       - [0x0B0060, asm, libhvqm/adpcmdec]
 
-      - [0x0B01F0, asm, libkmc/mmuldi3] # hasm
+      - [0x0B01F0, hasm, libkmc/mmuldi3]
 
       - [auto, c, main/build]
 

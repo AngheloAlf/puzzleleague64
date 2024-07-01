@@ -1069,10 +1069,6 @@ osFlashWriteBuffer = 0x8009104C; // type:func size:0xC0
 osFlashWriteArray = 0x8009110C; // type:func size:0x170
 osFlashReadArray = 0x8009127C; // type:func size:0x274
 
-func_800AFB14_eur = 0x800AFB14; // type:func
-func_800AFB48_eur = 0x800AFB48; // type:func
-func_800AFC44_eur = 0x800AFC44; // type:func
-
 rspbootTextStart = 0x800AFEE0; // name_end:rspbootTextEnd
 aspMainTextStart = 0x800AFFB0; // name_end:aspMainTextEnd
 gspF3DEX_fifoTextStart = 0x800B13A0; // name_end:gspF3DEX_fifoTextEnd
