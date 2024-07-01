@@ -1,7 +1,7 @@
 #ifndef STORY_H
 #define STORY_H
 
-#include "libultra.h"
+#include "ultra64.h"
 #include "unk.h"
 
 

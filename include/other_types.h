@@ -1,7 +1,7 @@
 #ifndef OTHER_TYPES_H
 #define OTHER_TYPES_H
 
-#include "libultra.h"
+#include "ultra64.h"
 
 // Header for files that are well known, but don't have a proper header home yet
 

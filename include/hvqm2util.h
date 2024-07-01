@@ -1,10 +1,12 @@
 #ifndef HVQM2_UTIL_H
 #define HVQM2_UTIL_H
 
-#include "libultra.h"
-#include "timekeeper.h"
-#include "libhvqm.h"
+#include "ultra64.h"
+#include "hvqm2dec.h"
+#include "adpcmdec.h"
 #include "libc/stdint.h"
+
+#include "timekeeper.h"
 #include "file.h"
 
 RomOffset HVQM2Util_GetRecord(HVQM2Record *header, void *body, u16 type, RomOffset src, OSIoMesg *mb, OSMesgQueue *mq);

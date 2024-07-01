@@ -1,4 +1,4 @@
-#include "libultra.h"
+#include "ultra64.h"
 #include "version.h"
 
 typedef struct RomHeader {

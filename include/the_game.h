@@ -1,7 +1,9 @@
 #ifndef THE_GAME_H
 #define THE_GAME_H
 
-#include "libultra.h"
+#include "ultra64.h"
+#include "PR/sched.h"
+#include "PR/gs2dex.h"
 #include "unk.h"
 
 // TetrisState?

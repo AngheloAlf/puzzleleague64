@@ -1,7 +1,7 @@
 #ifndef PEEL_H
 #define PEEL_H
 
-#include "libultra.h"
+#include "ultra64.h"
 #include "unk.h"
 
 

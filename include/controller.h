@@ -1,7 +1,7 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-#include "libultra.h"
+#include "ultra64.h"
 #include "unk.h"
 
 

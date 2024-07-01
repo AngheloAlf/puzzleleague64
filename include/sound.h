@@ -1,7 +1,7 @@
 #ifndef SOUND_H
 #define SOUND_H
 
-#include "libultra.h"
+#include "ultra64.h"
 #include "libmus/libmus.h"
 #include "unk.h"
 #include "other_types.h"

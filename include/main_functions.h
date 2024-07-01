@@ -1,7 +1,7 @@
 #ifndef MAIN_FUNCTIONS_H
 #define MAIN_FUNCTIONS_H
 
-#include "libultra.h"
+#include "ultra64.h"
 #include "unk.h"
 #include "unknown_structs.h"
 #include "other_types.h"

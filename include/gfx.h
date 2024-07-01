@@ -1,7 +1,7 @@
 #ifndef GFX_H
 #define GFX_H
 
-#include "libultra.h"
+#include "ultra64.h"
 #include "unk.h"
 #include "the_game.h"
 

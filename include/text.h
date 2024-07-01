@@ -1,7 +1,7 @@
 #ifndef TEXT_H
 #define TEXT_H
 
-#include "libultra.h"
+#include "ultra64.h"
 #include "the_game.h"
 #include "unk.h"
 

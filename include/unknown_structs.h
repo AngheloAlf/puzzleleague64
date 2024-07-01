@@ -2,7 +2,7 @@
 #define UNKNOWN_STRUCTS_H
 
 #include "version.h"
-#include "libultra.h"
+#include "ultra64.h"
 #include "libc/stdint.h"
 #include "libc/stdbool.h"
 #include "other_types.h"

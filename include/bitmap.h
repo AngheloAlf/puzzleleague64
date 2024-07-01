@@ -1,7 +1,7 @@
 #ifndef BITMAP_H
 #define BITMAP_H
 
-#include "libultra.h"
+#include "ultra64.h"
 #include "unk.h"
 #include "file.h"
 

@@ -1,7 +1,7 @@
 #ifndef CFB_KEEP_H
 #define CFB_KEEP_H
 
-#include "libultra.h"
+#include "ultra64.h"
 #include "macros_defines.h"
 
 

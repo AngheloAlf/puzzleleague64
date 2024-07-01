@@ -1,7 +1,7 @@
 #ifndef SFXLIMIT_H
 #define SFXLIMIT_H
 
-#include "libultra.h"
+#include "ultra64.h"
 #include "libmus/libmus.h"
 #include "unk.h"
 

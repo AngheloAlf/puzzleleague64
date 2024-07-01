@@ -3,7 +3,7 @@
  */
 
 #include "text.h"
-#include "libultra.h"
+#include "ultra64.h"
 #include "include_asm.h"
 #include "macros_defines.h"
 #include "unknown_structs.h"

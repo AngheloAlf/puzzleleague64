@@ -1,15 +1,16 @@
 #include "hvqm2util.h"
 
-#include "libultra.h"
+#include "ultra64.h"
 #include "libmus/libmus.h"
 #include "libmus/aud_thread.h"
+#include "HVQM2File.h"
 
 #include "include_asm.h"
 #include "macros_defines.h"
 #include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
-#include "libhvqm.h"
+
 #include "buffers.h"
 #include "cfb_keep.h"
 #include "timekeeper.h"

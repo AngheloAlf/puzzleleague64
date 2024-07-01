@@ -1,7 +1,7 @@
 #ifndef SCREEN_H
 #define SCREEN_H
 
-#include "libultra.h"
+#include "ultra64.h"
 #include "unk.h"
 
 

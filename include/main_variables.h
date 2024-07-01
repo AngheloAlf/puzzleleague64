@@ -1,7 +1,7 @@
 #ifndef MAIN_VARIABLES_H
 #define MAIN_VARIABLES_H
 
-#include "libultra.h"
+#include "ultra64.h"
 #include "unk.h"
 #include "unknown_structs.h"
 #include "other_types.h"

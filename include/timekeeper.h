@@ -1,7 +1,7 @@
 #ifndef TIME_KEEPER_H
 #define TIME_KEEPER_H
 
-#include "libultra.h"
+#include "ultra64.h"
 #include "macros_defines.h"
 #include "libc/stdbool.h"
 #include "stack.h"

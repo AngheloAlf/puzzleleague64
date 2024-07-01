@@ -1,7 +1,7 @@
 #ifndef FILE_H
 #define FILE_H
 
-#include "libultra.h"
+#include "ultra64.h"
 #include "other_types.h"
 #include "libc/stdbool.h"
 #include "unk.h"

@@ -1,7 +1,7 @@
 #ifndef TUTORIAL_H
 #define TUTORIAL_H
 
-#include "libultra.h"
+#include "ultra64.h"
 #include "unk.h"
 
 

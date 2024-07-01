@@ -1,7 +1,7 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
-#include "libultra.h"
+#include "ultra64.h"
 #include "unk.h"
 #include "bitmap.h"
 

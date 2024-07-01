@@ -1,7 +1,7 @@
 #ifndef REEND_H
 #define REEND_H
 
-#include "libultra.h"
+#include "ultra64.h"
 
 
 #define UWORD(x) ((u32)(x))

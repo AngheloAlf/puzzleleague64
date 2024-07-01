@@ -1,7 +1,7 @@
 #ifndef END_H
 #define END_H
 
-#include "libultra.h"
+#include "ultra64.h"
 #include "unk.h"
 
 

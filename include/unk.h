@@ -1,7 +1,7 @@
 #ifndef UNK_H
 #define UNK_H
 
-#include "libultra.h"
+#include "ultra64.h"
 
 typedef s32 UNK_TYPE;
 typedef s8 UNK_TYPE1;

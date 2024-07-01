@@ -1,7 +1,8 @@
 #ifndef ASSETS_VARIABLES_H
 #define ASSETS_VARIABLES_H
 
-#include "libultra.h"
+#include "ultra64.h"
+#include "PR/gs2dex.h"
 #include "unk.h"
 
 // extern Vp D_01000000_usa;

@@ -1,5 +1,5 @@
 #include "assets_variables.h"
-#include "libultra.h"
+#include "ultra64.h"
 #include "alignment.h"
 
 #if VERSION_USA

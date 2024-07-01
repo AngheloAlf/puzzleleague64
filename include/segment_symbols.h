@@ -1,7 +1,7 @@
 #ifndef SEGMENT_SYMBOLS_H
 #define SEGMENT_SYMBOLS_H
 
-#include "libultra.h"
+#include "ultra64.h"
 #include "libc/stdint.h"
 
 #define DECLARE_VRAM_SEGMENT(name) \

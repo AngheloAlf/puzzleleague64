@@ -1,7 +1,7 @@
 #ifndef TITLE_H
 #define TITLE_H
 
-#include "libultra.h"
+#include "ultra64.h"
 #include "unk.h"
 
 
