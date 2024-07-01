@@ -9,6 +9,10 @@
 #define __IS_KMC__ ((__GNUC__== 2) && (__GNUC_MINOR__ == 7))
 #endif
 
+#ifndef __IS_OLD_COMP__
+#define __IS_OLD_COMP__ (__IS_KMC__)
+#endif
+
 
 /**
  * Version macros

@@ -332,13 +332,7 @@ rmonFindFaultedThreads = 0x800AA20C; // type:func
 // .data
 
 
-__osPiDevMgr = 0x800BD3B0; //
-D_800BE654_usa = 0x800BD3B4; //
-D_800BE658_usa = 0x800BD3B8; //
-D_800BE65C_usa = 0x800BD3BC; //
-D_800BE660_usa = 0x800BD3C0; //
-D_800BE664_usa = 0x800BD3C4; //
-D_800BE668_usa = 0x800BD3C8; //
+__osPiDevMgr = 0x800BD3B0; // size:0x1C
 __osPiTable = 0x800BD3CC; //
 __osCurrentHandle = 0x800BD3D0; //
 D_800BE680_usa = 0x800BD3E0; //
@@ -386,10 +380,10 @@ D_800BD7B0_fra = 0x800BD7B0; //
 D_800BD7B4_fra = 0x800BD7B4; //
 D_800BD7B8_fra = 0x800BD7B8; //
 __additional_scanline = 0x800BD7BC; //
-osViModeTable = 0x800BD7C0; //
-osViModeNtscLan1 = 0x800BE9E0; //
-osViModePalLan1 = 0x800BEE40; //
-osViModeMpalLan1 = 0x800BF2A0; //
+osViModeTable = 0x800BD7C0; // size:0x1180
+osViModeNtscLan1 = 0x800BE9E0; // size:0x50
+osViModePalLan1 = 0x800BEE40; // size:0x50
+osViModeMpalLan1 = 0x800BF2A0; // size:0x50
 D_800C0D60_usa = 0x800BFAC0; //
 D_800C0D64_usa = 0x800BFAC4; //
 osViClock = 0x800BFAC8; //

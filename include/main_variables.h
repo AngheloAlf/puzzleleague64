@@ -1447,7 +1447,7 @@ extern s16 gBlock_Level;
 // extern UNK_TYPE B_801F9C5C_usa;
 // extern UNK_TYPE B_801F9C60_usa;
 // extern UNK_TYPE B_801F9C64_usa;
-// extern UNK_TYPE B_801F9C80_usa;
+// extern UNK_TYPE __osBaseTimer;
 // extern UNK_TYPE B_801F9CA4_usa;
 // extern UNK_TYPE B_801F9CA8_usa;
 extern s32 gAllVertex;

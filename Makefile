@@ -128,22 +128,24 @@ endif
 export SPIMDISASM_PANIC_RANGE_CHECK="True"
 
 
-IINC       += -I lib/ultralib/include -I lib/ultralib/include/PR -I lib/libhvqm/include
+IINC       += -I lib/ultralib/include -I lib/ultralib/include/PR -I lib/ultralib/include/gcc -I lib/libhvqm/include
 IINC       += -I include -I bin/$(VERSION) -I $(BUILD_DIR)/bin/$(VERSION) -I .
 
 # Check code syntax with host compiler
 CHECK_WARNINGS := -Wall -Wextra -Wimplicit-fallthrough -Wno-unknown-pragmas -Wno-missing-braces -Wno-sign-compare -Wno-uninitialized
+
+ifneq ($(WERROR), 0)
+    CHECK_WARNINGS += -Werror
+endif
+
 # Have CC_CHECK pretend to be a MIPS compiler
 MIPS_BUILTIN_DEFS := -D_MIPS_ISA_MIPS2=2 -D_MIPS_ISA=_MIPS_ISA_MIPS2 -D_ABIO32=1 -D_MIPS_SIM=_ABIO32 -D_MIPS_SZINT=32 -D_MIPS_SZPTR=32
 ifneq ($(RUN_CC_CHECK),0)
-#	The -MMD flags additionaly creates a .d file with the same name as the .o file.
-	CC_CHECK          := $(CC_CHECK_COMP)
-	CC_CHECK_FLAGS    := -MMD -MP -fno-builtin -fsyntax-only -fdiagnostics-color -std=gnu89 -m32 -DNON_MATCHING -DAVOID_UB -DCC_CHECK=1
-	ifneq ($(WERROR), 0)
-		CHECK_WARNINGS += -Werror
-	endif
+#   The -MMD flags additionaly creates a .d file with the same name as the .o file.
+    CC_CHECK          := $(CC_CHECK_COMP)
+    CC_CHECK_FLAGS    := -MMD -MP -fno-builtin -fsyntax-only -fdiagnostics-color -std=gnu89 -m32 -DNON_MATCHING -DAVOID_UB -DCC_CHECK=1
 else
-	CC_CHECK          := @:
+    CC_CHECK          := @:
 endif
 
 CFLAGS          += -nostdinc -fno-PIC -G 0 -mgp32 -mfp32 -Wa,--force-n64align
@@ -201,6 +203,8 @@ SRC_DIRS      := $(shell find src -type d)
 ASM_DIRS      := $(shell find asm/$(VERSION) -type d -not -path "asm/$(VERSION)/nonmatchings/*")
 BIN_DIRS      := $(shell find bin/$(VERSION) -type d)
 
+LIBULTRA_DIRS := $(shell find lib/ultralib/src -type d -not -path "lib/ultralib/src/voice")
+
 PNG_FILES     := $(foreach dir,$(ASSETS_DIRS),$(wildcard $(dir)/*.png))
 
 BINFILE_DIR   := bin/$(VERSION)/bin_file
@@ -238,7 +242,7 @@ endif
 
 # create build directories
 $(shell mkdir -p $(BUILD_DIR)/linker_scripts/$(VERSION) $(BUILD_DIR)/segments)
-$(shell mkdir -p $(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(BIN_DIRS),$(BUILD_DIR)/$(dir)))
+$(shell mkdir -p $(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(BIN_DIRS) $(LIBULTRA_DIRS),$(BUILD_DIR)/$(dir)))
 
 
 # directory flags
@@ -269,6 +273,9 @@ endif
 clean:
 	$(RM) -r $(BUILD_DIR)/asm $(BUILD_DIR)/bin $(BUILD_DIR)/src $(ROM) $(BIN) $(ELF)
 
+libclean:
+	$(RM) -r $(BUILD_DIR)/lib $(ROM) $(BIN) $(ELF)
+
 distclean: clean
 	$(RM) -r $(BUILD_DIR) asm/ bin/ .splat/
 	$(RM) -r linker_scripts/$(VERSION)/auto $(LD_SCRIPT)
@@ -298,7 +305,7 @@ format:
 tidy:
 	clang-tidy-11 -p . --fix --fix-errors $(filter-out src/libmus/%, $(C_FILES)) -- $(CC_CHECK_FLAGS) $(IINC) $(CHECK_WARNINGS) $(BUILD_DEFINES) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(C_DEFINES) $(MIPS_BUILTIN_DEFS)
 
-.PHONY: all clean distclean setup extract diff-init init format tidy
+.PHONY: all clean libclean distclean setup extract diff-init init format tidy
 .DEFAULT_GOAL := all
 # Prevent removing intermediate files
 .SECONDARY:
@@ -347,8 +354,14 @@ else
 	$(CC) $(C_COMPILER_FLAGS) -I $(dir $*) -I $(BUILD_DIR)/$(dir $*) $(COMP_VERBOSE_FLAG) -S -o $(@:.o=.s) $(@:.o=.i)
 	$(CC) $(C_COMPILER_FLAGS) -I $(dir $*) -I $(BUILD_DIR)/$(dir $*) $(COMP_VERBOSE_FLAG) -c -o $@ $(@:.o=.s)
 endif
-	$(STRIP) $@ -N dummy-symbol-name
 	$(OBJDUMP_CMD)
+
+$(BUILD_DIR)/lib/%.o: lib/%.c
+	$(CC_CHECK) $(CC_CHECK_FLAGS) $(IINC) -I $(dir $*) -I $(BUILD_DIR)/$(dir $*) -w -Wno-implicit-function-declaration $(BUILD_DEFINES) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(C_DEFINES) $(MIPS_BUILTIN_DEFS) -o $@ $<
+	$(MAKE) -C lib VERSION=$(VERSION) CROSS=$(CROSS) ../$@
+
+$(BUILD_DIR)/lib/%.o: lib/%.s
+	$(MAKE) -C lib VERSION=$(VERSION) CROSS=$(CROSS) ../$@
 
 
 # Make inc files from assets

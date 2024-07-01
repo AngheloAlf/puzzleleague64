@@ -93,6 +93,9 @@ options:
   ld_partial_scripts_path: linker_scripts/ger/partial
   ld_partial_build_segments_path: build/ger/segments/
 
+  ld_wildcard_sections: True
+  ld_bss_contains_common: True
+
   asm_path: asm/ger
   src_path: src
   build_path: build/ger
