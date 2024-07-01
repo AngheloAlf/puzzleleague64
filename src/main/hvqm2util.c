@@ -522,7 +522,6 @@ u32 HVQM2Util_GetNextAudioRecord(void *arg0) {
 #endif
 
 #if VERSION_USA
-#ifdef NON_MATCHING
 typedef struct struct_8021AAE0_usa {
     /* 0x00 */ OSMesgQueue unk_00;
     /* 0x18 */ UNK_TYPE1 unk_18[0x58];
@@ -531,7 +530,6 @@ typedef struct struct_8021AAE0_usa {
 
 extern struct_8021AAE0_usa B_8021AAE0_usa;
 
-// stack problems
 s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
     u8 pad[0x20] UNUSED;
 
@@ -552,36 +550,23 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
 
     var_v0 = fileGetAddress(arg0, &sp44);
     if (var_v0 != 0) {
-        // u8 pad2[0x8] UNUSED;
-        u8 sp50[sizeof(HVQM2Record) + 0x10];
-
         HVQM2Record *temp_s2;
-
         s32 sp74;
         s32 sp7C;
         s32 sp84;
         s32 sp8C;
         s32 sp94;
-
         s32 *var_a0_6;
-
         s32 a1;
-
         u32 temp_a2;
-
         s32 *v1;
-
         register OSIntMask temp_s0_8;
         s32 var_s0;
         u16 temp_s0_3;
         s32 temp_s0_4;
-
         HVQM2Header *temp_s1;
-
         s32 var_s4;
-
         s32 temp;
-
         u32 sp9C;
 
         gHVQM2UtilCurrentVideoRomAddress = sp44;
@@ -687,6 +672,8 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
         sp74 = 0;
 
         while (gHVQM2UtilRemainingVideoFrames > 0) {
+            u8 sp50[sizeof(HVQM2Record) + 0x10];
+
             sp74++;
             if (sp74 >= 5) {
                 osViBlack(0U);
@@ -825,23 +812,21 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
         osStartThread(&B_8021AAE0_usa.unk_70);
         InitGameAudioSystem();
 
-        if (sp8C != 0) {
-            while (true) {
-                v1 = (void *)&gFramebuffers[0];
-                a1 = 0x95FF;
+        while (sp8C != 0) {
+            v1 = (void *)&gFramebuffers[0];
+            a1 = 0x95FF;
 
-                while (a1 != -1) {
-                    *v1++ = 0;
-                    a1 -= 1;
-                }
+            while (a1 != -1) {
+                *v1++ = 0;
+                a1 -= 1;
+            }
 
-                v1 = (void *)&gFramebuffers[1];
-                a1 = 0x95FF;
+            v1 = (void *)&gFramebuffers[1];
+            a1 = 0x95FF;
 
-                while (a1 != -1) {
-                    *v1++ = 0;
-                    a1 -= 1;
-                }
+            while (a1 != -1) {
+                *v1++ = 0;
+                a1 -= 1;
             }
         }
 
@@ -851,9 +836,7 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
 
     return var_v0;
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/hvqm2util", HVQM2Util_Play);
-#endif
+
 #endif
 
 #if VERSION_EUR
