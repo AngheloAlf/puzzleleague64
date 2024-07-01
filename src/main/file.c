@@ -121,7 +121,6 @@ s32 fileFind(File *file, char *filename) {
 
             return size;
         }
-
     }
     return 0;
 }
