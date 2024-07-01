@@ -237,7 +237,7 @@ segments:
       - [0x090BA0, c, libmus/aud_thread]
       - [0x090E90, c, libmus/lib_memory]
 
-      - [0x090FE0, asm, flash/osFlash] # IDO 5.3 -g
+      - [0x090FE0, c, flash/osFlash]
 
       # Uses libgultra_d
       - [0x091D10, hasm, ../lib/ultralib/src/os/setintmask]
@@ -614,7 +614,7 @@ segments:
       - { type: .bss, vram: 0x80193100, name: libmus/aud_thread }
       - { type: .bss, vram: 0x80193110, name: libmus/lib_memory }
 
-      - { type: bss, vram: 0x80193120, name: flash/osFlash }
+      - { type: .bss, vram: 0x80193120, name: flash/osFlash }
 
       - { type: .bss, vram: 0x801931E0, name: ../lib/ultralib/src/io/pimgr }
       - { type: .bss, vram: 0x801949A0, name: ../lib/ultralib/src/io/piacs }

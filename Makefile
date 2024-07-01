@@ -5,6 +5,9 @@
 
 MAKEFLAGS += --no-builtin-rules
 
+SHELL = /bin/bash
+.SHELLFLAGS = -o pipefail -c
+
 #### Defaults ####
 
 # If COMPARE is 1, check the output md5sum after building
@@ -104,6 +107,8 @@ endif
 
 COMPILER_DIR    := tools/gcc_kmc/$(DETECTED_OS)/2.7.2
 CC              := COMPILER_PATH=$(COMPILER_DIR) $(COMPILER_DIR)/gcc
+
+IDO_53_CC       := tools/ido_recomp/$(DETECTED_OS)/5.3/cc
 
 AS              := $(MIPS_BINUTILS_PREFIX)as
 LD              := $(MIPS_BINUTILS_PREFIX)ld
@@ -254,7 +259,13 @@ ifeq ($(VERSION),fra)
 $(BUILD_DIR)/src/libmus/%.o:    RELEASE_DEFINES :=
 endif
 
-$(BUILD_DIR)/src/buffers/%.o:  CFLAGS   += -fno-common
+$(BUILD_DIR)/src/flash/%.o:     CC              := $(IDO_53_CC)
+$(BUILD_DIR)/src/flash/%.o:     CFLAGS          := -G 0 -non_shared -Xcpluscomm -nostdinc -Wab,-r4300_mul
+$(BUILD_DIR)/src/flash/%.o:     OPTFLAGS        :=
+$(BUILD_DIR)/src/flash/%.o:     DBGFLAGS        := -g
+$(BUILD_DIR)/src/flash/%.o:     MIPS_VERSION    :=
+
+$(BUILD_DIR)/src/buffers/%.o:   CFLAGS += -fno-common
 
 
 # per-file flags
@@ -354,6 +365,11 @@ else
 	$(CC) $(C_COMPILER_FLAGS) -I $(dir $*) -I $(BUILD_DIR)/$(dir $*) $(COMP_VERBOSE_FLAG) -S -o $(@:.o=.s) $(@:.o=.i)
 	$(CC) $(C_COMPILER_FLAGS) -I $(dir $*) -I $(BUILD_DIR)/$(dir $*) $(COMP_VERBOSE_FLAG) -c -o $@ $(@:.o=.s)
 endif
+	$(OBJDUMP_CMD)
+
+$(BUILD_DIR)/src/flash/%.o: src/flash/%.c
+	$(CC_CHECK) $(CC_CHECK_FLAGS) $(IINC) -I $(dir $*) -I $(BUILD_DIR)/$(dir $*) $(CHECK_WARNINGS) $(BUILD_DEFINES) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(C_DEFINES) $(MIPS_BUILTIN_DEFS) -o $@ $<
+	$(CC) $(C_COMPILER_FLAGS) -I $(dir $*) -c $(COMP_VERBOSE_FLAG) -o $@ $<
 	$(OBJDUMP_CMD)
 
 $(BUILD_DIR)/lib/%.o: lib/%.c

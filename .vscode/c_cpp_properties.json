@@ -7,11 +7,10 @@
                 "include",
                 "bin/usa",
                 "build/usa/bin/usa",
-                "lib",
-                "lib/libultra_j/include",
-                "lib/libultra_j/include/PR",
+                "lib/ultralib/include",
+                "lib/ultralib/include/PR",
                 "lib/libhvqm/include",
-                "lib/libmus/include",
+                "include/libmus",
                 "."
             ],
             "defines": [
@@ -47,11 +46,10 @@
                 "include",
                 "bin/eur",
                 "build/eur/bin/eur",
-                "lib",
-                "lib/libultra_j/include",
-                "lib/libultra_j/include/PR",
+                "lib/ultralib/include",
+                "lib/ultralib/include/PR",
                 "lib/libhvqm/include",
-                "lib/libmus/include",
+                "include/libmus",
                 "."
             ],
             "defines": [
@@ -87,11 +85,10 @@
                 "include",
                 "bin/fra",
                 "build/fra/bin/fra",
-                "lib",
-                "lib/libultra_j/include",
-                "lib/libultra_j/include/PR",
+                "lib/ultralib/include",
+                "lib/ultralib/include/PR",
                 "lib/libhvqm/include",
-                "lib/libmus/include",
+                "include/libmus",
                 "."
             ],
             "defines": [
@@ -127,11 +124,10 @@
                 "include",
                 "bin/ger",
                 "build/ger/bin/ger",
-                "lib",
-                "lib/libultra_j/include",
-                "lib/libultra_j/include/PR",
+                "lib/ultralib/include",
+                "lib/ultralib/include/PR",
                 "lib/libhvqm/include",
-                "lib/libmus/include",
+                "include/libmus",
                 "."
             ],
             "defines": [

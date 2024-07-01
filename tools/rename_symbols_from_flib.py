@@ -1,7 +1,7 @@
 import argparse
 from pathlib import Path
 
-syms: dict[int, str] = {
+syms: dict[int, tuple[str, int|None]] = {
 
 }
 found: set[int] = set()
@@ -22,7 +22,12 @@ def parse_flib_symbols(path: Path):
     for line in a:
         if ", " not in line:
             continue
-        name, addr, *_ = line.strip().split(", ")
+        name, addr, extra, *_ = line.strip().split(", ")
+        size = None
+        temp = int(extra.split(" ")[0], 16)
+        if temp != 0:
+            size = temp
+
         addr = int(addr, 16)
 
         if addr >= 0x90000000:
@@ -51,7 +56,7 @@ def parse_flib_symbols(path: Path):
             duped_syms.add((addr, name))
             continue
 
-        syms[addr] = name
+        syms[addr] = (name, size)
     a.close()
 
 parse_flib_symbols(Path("asdf.txt"))
@@ -63,8 +68,10 @@ for line in b:
         old_name, addr = line.split(";")[0].split(" = ")
         addr = int(addr, 16)
         if addr in syms:
-            new_name = syms[addr]
+            new_name, new_size = syms[addr]
             line = line.replace(old_name, new_name)
+            if new_size is not None:
+                line = line.replace("\n", f" size:0x{new_size:X}\n")
             found.add(addr)
 
     new_data.append(line)
