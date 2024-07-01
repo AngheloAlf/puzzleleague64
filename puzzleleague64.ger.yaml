@@ -411,7 +411,35 @@ segments:
       - [0x0B51C0, .data, libmus/aud_sched]
       - [0x0B51D0, .data, libmus/aud_thread]
 
-      - [0x0B51E0, data, libultra/0B51E0]
+      - [0x0B51E0, data, libultra/pimgr]
+      - [0x0B5210, data, libultra/cartrominit]
+      - [0x0B5220, data, libultra/piacs]
+      - [0x0B5230, data, libultra/aisetnextbuf]
+      - [0x0B5240, data, libultra/drvrnew]
+      - [0x0B53D0, data, libultra/env]
+      - [0x0B54F0, data, libultra/sl]
+      - [0x0B5500, data, libultra/controller]
+      - [0x0B5510, data, libultra/rotate]
+      - [0x0B5520, data, libultra/us2dex_emu]
+      - [0x0B5550, data, libultra/rdbsend]
+      - [0x0B5560, data, libultra/syncprintf]
+      - [0x0B5570, data, libultra/seteventmesg]
+      - [0x0B5580, data, libultra/sched]
+      - [0x0B5590, data, libultra/siacs]
+      - [0x0B55A0, data, libultra/thread]
+      - [0x0B55C0, data, libultra/timerintr]
+      - [0x0B55D0, data, libultra/vimgr]
+      - [0x0B55F0, data, libultra/vitbl]
+      - [0x0B6810, data, libultra/vimodentsclan1]
+      - [0x0B6C70, data, libultra/vimodepallan1]
+      - [0x0B70D0, data, libultra/vimodempallan1]
+      - [0x0B78F0, data, libultra/initialize]
+      - [0x0B7910, data, libultra/0B7910]
+      - [0x0B7970, data, libultra/xprintf]
+      - [0x0B79C0, data, libultra/vi]
+      - [0x0B7A30, data, libultra/xlitob]
+      - [0x0B7A60, data, libultra/rmoncmds]
+      - [0x0B7B40, data, libultra/rmonmain]
 
       - [0x0B7B50, data, libhvqm/adpcmdec]
 
@@ -451,17 +479,28 @@ segments:
       - [0x0BDCD0, .rodata, libmus/player]
       - [0x0BDDB0, .rodata, libmus/player_fx]
 
-      - [0x0BDDC0, rodata, main/0BDDC0]
-      - [0x0BDE70, rodata, main/0BDE70]
-      - [0x0BDEB0, rodata, main/0BDEB0]
-      - [0x0BE100, rodata, main/0BE100]
-      - [0x0BE130, rodata, main/0BE130]
-      - [0x0BE1A0, rodata, main/0BE1A0]
-      - [0x0BE1B0, rodata, main/0BE1B0]
-      - [0x0BE210, rodata, main/0BE210]
-      - [0x0BE230, rodata, main/0BE230]
-      - [0x0BE390, rodata, main/0BE390]
-      - [0x0BE400, rodata, main/0BE400]
+      - [0x0BDDC0, rodata, libultra/setintmask]
+      - [0x0BDE40, rodata, libultra/devmgr]
+      - [0x0BDE60, rodata, libultra/aisetfreq]
+      - [0x0BDE70, rodata, libultra/drvrnew]
+      - [0x0BDEB0, rodata, libultra/env]
+      - [0x0BDFA0, rodata, libultra/resample]
+      - [0x0BDFD0, rodata, libultra/reverb]
+      - [0x0BE020, rodata, libultra/synthesizer]
+      - [0x0BE040, rodata, libultra/lookat]
+      - [0x0BE060, rodata, libultra/perspective]
+      - [0x0BE0A0, rodata, libultra/sinf]
+      - [0x0BE100, rodata, libultra/sched]
+      - [0x0BE120, rodata, libultra/viswapcontext]
+      - [0x0BE130, rodata, libultra/exceptasm]
+      - [0x0BE1A0, rodata, libultra/libm_vals]
+      - [0x0BE1B0, rodata, libultra/cosf]
+      - [0x0BE210, rodata, libultra/xprintf]
+      - [0x0BE390, rodata, libultra/sirawwrite]
+      - [0x0BE3D8, rodata, libultra/xldtob]
+      - [0x0BE400, rodata, libultra/rmonmem]
+      - [0x0BE410, rodata, libultra/rmonbrk]
+
       - [0x0BE470, .rodata, main/build]
 
       - { type: bss, vram: 0x800BD890, name: main/800BD890 }
@@ -474,6 +513,20 @@ segments:
       - { type: .bss, vram: 0x80185F50, name: libmus/lib_memory }
 
       - { type: bss, vram: 0x80185F60, name: main/80185F60 }
+
+      - { type: bss, vram: 0x80186020, name: libultra/pimgr }
+      - { type: bss, vram: 0x801877E0, name: libultra/piacs }
+      - { type: bss, vram: 0x801877F0, name: libultra/us2dex_emu }
+      - { type: bss, vram: 0x80187810, name: libultra/sptask }
+      - { type: bss, vram: 0x80187850, name: libultra/siacs }
+      - { type: bss, vram: 0x80187860, name: libultra/vimgr }
+      - { type: bss, vram: 0x80188A80, name: libultra/kdebugserver }
+      - { type: bss, vram: 0x80188A90, name: libultra/readhost }
+      - { type: bss, vram: 0x80188AB0, name: libultra/rmonsio }
+      - { type: bss, vram: 0x80188AD0, name: libultra/rmonmisc }
+      - { type: bss, vram: 0x8018CCE0, name: libultra/rmonregs }
+      - { type: bss, vram: 0x8018CD00, name: libultra/rmonmain }
+      - { type: bss, vram: 0x8018D180, name: libultra/rmonbrk }
 
       - { type: bss, vram: 0x8018D290, name: libhvqm/hvqm2decSP1 }
 
