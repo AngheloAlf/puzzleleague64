@@ -983,8 +983,8 @@ extern u32 B_8018A808_usa;
 // extern UNK_TYPE B_8018EA40_usa;
 // extern s32 B_8018EA50_usa;
 extern u32 B_8018EA54_usa;
-extern OSIoMesg B_8018EA60_usa;
-extern OSMesgQueue B_8018EA78_usa;
+extern OSIoMesg B_8018EA60_usa; /** Original name: audioDmaMesgBlock */
+extern OSMesgQueue B_8018EA78_usa; /** Original name: audioDmaMessageQ */
 // extern UNK_TYPE B_8018EA90_usa;
 // extern UNK_TYPE B_8018EA98_usa;
 // extern UNK_TYPE B_8018EAB0_usa;

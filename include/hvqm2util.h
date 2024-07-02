@@ -11,7 +11,7 @@
 
 RomOffset HVQM2Util_GetRecord(HVQM2Record *header, void *body, u16 type, RomOffset src, OSIoMesg *mb, OSMesgQueue *mq);
 void HVQM2Util_PrintInfo(HVQM2Header *header);
-u32 HVQM2Util_GetNextAudioRecord(void *arg0);
+u32 HVQM2Util_GetNextAudioRecord(void *pcmbuf);
 s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2);
 s32 HVQM2Util_800409E4_usa(f32 arg0);
 void HVQM2Util_80040A4C_usa(void);
@@ -42,7 +42,7 @@ typedef struct struct_8018EA50_usa {
 
 extern struct_8018EA50_usa *B_8018EA50_usa;
 
-extern ADPCMstate B_8018EB10_usa;
+extern ADPCMstate adpcm_state; /** Original name: adpcm_state */
 
 extern OSMesg B_8018EA90_usa[1];
 extern OSIoMesg B_8018EA98_usa; /** Original name: videoDmaMesgBlock */

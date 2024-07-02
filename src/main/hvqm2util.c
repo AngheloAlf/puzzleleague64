@@ -20,6 +20,12 @@
 #include "sound.h"
 #include "peel.h"
 
+/*
+ * Macro for loading multi-byte data from buffer holding data from stream
+ */
+#define load32(from) (*(u32 *)(from))
+#define load16(from) (*(u16 *)(from))
+
 #if VERSION_USA || VERSION_EUR
 INLINE void RomCopy(void *dest, RomOffset src, size_t len, s32 pri, OSIoMesg *mb, OSMesgQueue *mq) {
     osInvalDCache(dest, len);
@@ -31,8 +37,6 @@ INLINE void RomCopy(void *dest, RomOffset src, size_t len, s32 pri, OSIoMesg *mb
 #endif
 
 #if VERSION_EUR
-extern OSIoMesg B_8018DB98_eur;
-
 typedef struct struct_8003E60C_eur_s0 {
     /* 0x0 */ u8 unk_0;
     /* 0x1 */ u8 unk_1;
@@ -44,28 +48,27 @@ typedef struct struct_8003E60C_eur_s0 {
 } struct_8003E60C_eur_s0; // size = 0x10
 
 extern u32 B_8018DBFC_eur;
-extern u32 B_8018DB58_eur;
 
-INLINE void func_8003E60C_eur(File *arg0, HVQM2Header *arg1) {
+INLINE void func_8003E60C_eur(File *arg0, HVQM2Header *header) {
     u8 sp20[sizeof(struct_8003E60C_eur_s0) + 0x10];
     RomOffset sp40;
     struct_8003E60C_eur_s0 *temp_s0;
 
-    if (fileGetAddress(arg0, &sp40) == 0) {
-        B_8018DBFC_eur = B_8018DB58_eur + 0x3C;
+    if (!fileGetAddress(arg0, &sp40)) {
+        B_8018DBFC_eur = gHVQM2UtilCurrentVideoRomAddress + sizeof(HVQM2Header);
         return;
     }
 
     temp_s0 = OS_DCACHE_ROUNDUP_ADDR(sp20);
     B_8018DBFC_eur = sp40 + sizeof(struct_8003E60C_eur_s0);
-    RomCopy(temp_s0, sp40, sizeof(struct_8003E60C_eur_s0), OS_MESG_PRI_NORMAL, &B_8018DB98_eur, &B_8018EAB0_usa);
+    RomCopy(temp_s0, sp40, sizeof(struct_8003E60C_eur_s0), OS_MESG_PRI_NORMAL, &B_8018EA98_usa, &B_8018EAB0_usa);
 
-    arg1->audio_format = temp_s0->unk_0;
-    arg1->channels = temp_s0->unk_1;
-    arg1->sample_bits = temp_s0->unk_2;
-    arg1->audio_quantize_step = temp_s0->unk_3;
-    arg1->total_audio_records = temp_s0->unk_4;
-    arg1->max_audio_record_size = temp_s0->unk_C;
+    header->audio_format = temp_s0->unk_0;
+    header->channels = temp_s0->unk_1;
+    header->sample_bits = temp_s0->unk_2;
+    header->audio_quantize_step = temp_s0->unk_3;
+    header->total_audio_records = temp_s0->unk_4;
+    header->max_audio_record_size = temp_s0->unk_C;
 }
 #endif
 
@@ -489,39 +492,41 @@ void HVQM2Util_PrintInfo(HVQM2Header *header) {
 #endif
 
 #if VERSION_USA || VERSION_EUR
-// next_audio_record
-u32 HVQM2Util_GetNextAudioRecord(void *arg0) {
-    u8 sp20[sizeof(HVQM2Record) + 0x10];
+/**
+ * Original name: next_audio_record
+ */
+u32 HVQM2Util_GetNextAudioRecord(void *pcmbuf) {
+    u8 header_buffer[sizeof(HVQM2Record) + 0x10];
     s16 *var_a0;
-    HVQM2Record *temp_s2;
-    HVQM2Audio *temp_a0;
-    u32 temp_s0;
-    u32 i;
+    HVQM2Record *record_header;
+    HVQM2Audio *audio_headerP;
+    u32 samples;
+    s32 i;
 
     if (gHVQM2UtilRemainingAudioRecords == 0) {
         return 0;
     }
 
-    temp_s2 = OS_DCACHE_ROUNDUP_ADDR(sp20);
-    gHVQM2UtilAudioStreamP = HVQM2Util_GetRecord(temp_s2, B_8018EA50_usa->adpcmbuf, HVQM2_AUDIO, gHVQM2UtilAudioStreamP,
-                                                 &B_8018EA60_usa, &B_8018EA78_usa);
+    record_header = OS_DCACHE_ROUNDUP_ADDR(header_buffer);
+    gHVQM2UtilAudioStreamP = HVQM2Util_GetRecord(record_header, B_8018EA50_usa->adpcmbuf, HVQM2_AUDIO,
+                                                 gHVQM2UtilAudioStreamP, &B_8018EA60_usa, &B_8018EA78_usa);
 
     gHVQM2UtilRemainingAudioRecords--;
 
-    temp_a0 = (void *)B_8018EA50_usa->adpcmbuf;
-    temp_s0 = *(u32 *)(&temp_a0->samples);
-    adpcmDecode(&temp_a0[1], *(u16 *)(&temp_s2->format), temp_s0, arg0, 1, &B_8018EB10_usa);
+    audio_headerP = (void *)B_8018EA50_usa->adpcmbuf;
+    samples = load32(&audio_headerP->samples);
+    adpcmDecode(&audio_headerP[1], load16(&record_header->format), samples, pcmbuf, 1, &adpcm_state);
 
-    var_a0 = arg0;
+    var_a0 = pcmbuf;
     for (i = 0; i < 0x2ED4U; i++) {
         var_a0[i] = (var_a0[i] * B_8018EA54_usa) >> 16;
     }
 
-    return temp_s0;
+    return samples;
 }
 #endif
 
-#if VERSION_USA
+#if VERSION_USA || VERSION_EUR
 typedef struct struct_8021AAE0_usa {
     /* 0x00 */ OSMesgQueue unk_00;
     /* 0x18 */ UNK_TYPE1 unk_18[0x58];
@@ -638,11 +643,16 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
 
         osViBlack(true);
 
-        RomCopy(header, gHVQM2UtilCurrentVideoRomAddress, sizeof(HVQM2Header), OS_MESG_PRI_NORMAL, &B_8018EA98_usa, &B_8018EAB0_usa);
+        RomCopy(header, gHVQM2UtilCurrentVideoRomAddress, sizeof(HVQM2Header), OS_MESG_PRI_NORMAL, &B_8018EA98_usa,
+                &B_8018EAB0_usa);
 
-        gHVQM2UtilTotalVideoFrames = *(u32 *)&header->total_frames;
-        usec_per_frame = *(u32 *)&header->usec_per_frame;
-        gHVQM2UtilTotalAudioRecords = *(u32 *)&header->total_audio_records;
+#if VERSION_EUR
+        func_8003E60C_eur((void *)"intro.svqm", header);
+#endif
+
+        gHVQM2UtilTotalVideoFrames = load32(&header->total_frames);
+        usec_per_frame = load32(&header->usec_per_frame);
+        gHVQM2UtilTotalAudioRecords = load32(&header->total_audio_records);
 
         /**
          * Determine video display position
@@ -660,7 +670,7 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
 
         Cfb_ReleaseAll();
 
-        TimeKeeper_PlayVideo(HVQM2Util_Rewind, *(u32 *)&header->samples_per_sec);
+        TimeKeeper_PlayVideo(HVQM2Util_Rewind, load32(&header->samples_per_sec));
 
         sp7C = -1;
         sp84 = 0;
@@ -683,13 +693,12 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
             }
             osContStartReadData(&gSerialMsgQ);
 
-
             /**
              * Fetch video record
              */
             record_header = OS_DCACHE_ROUNDUP_ADDR(sp50);
-            gHVQM2UtilVideoStreamP = HVQM2Util_GetRecord(record_header, B_8018EA50_usa->hvqbuf, HVQM2_VIDEO, gHVQM2UtilVideoStreamP,
-                                                         &B_8018EA98_usa, &B_8018EAB0_usa);
+            gHVQM2UtilVideoStreamP = HVQM2Util_GetRecord(record_header, B_8018EA50_usa->hvqbuf, HVQM2_VIDEO,
+                                                         gHVQM2UtilVideoStreamP, &B_8018EA98_usa, &B_8018EAB0_usa);
 
             /**
              * This block is an example of how to force the video to play
@@ -705,12 +714,12 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
              * CPU, leading to a situation where the video can become delayed
              * relative to the audio.
              *
-             *   One way to counter this is to skip to the next keyframe 
+             *   One way to counter this is to skip to the next keyframe
              * whenever the frame to be decoded is late by an amount of
              * time equal to 2 or more frames.
              *
              */
-            if (gHVQM2UtilDispTime > 0) {	/* Excluding the first frame */
+            if (gHVQM2UtilDispTime > 0) { /* Excluding the first frame */
                 if (TimeKeeper_GetTime() > gHVQM2UtilDispTime + usec_per_frame * 2) {
                     Cfb_ReleaseAll();
 
@@ -723,9 +732,10 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
                         }
 
                         gHVQM2UtilVideoStreamP =
-                            HVQM2Util_GetRecord(record_header, B_8018EA50_usa->hvqbuf, HVQM2_VIDEO, gHVQM2UtilVideoStreamP,
-                                                &B_8018EA98_usa, &B_8018EAB0_usa);
-                    } while ((*(u16 *)&record_header->format != HVQM2_VIDEO_KEYFRAME) || (TimeKeeper_GetTime() > gHVQM2UtilDispTime));
+                            HVQM2Util_GetRecord(record_header, B_8018EA50_usa->hvqbuf, HVQM2_VIDEO,
+                                                gHVQM2UtilVideoStreamP, &B_8018EA98_usa, &B_8018EAB0_usa);
+                    } while ((load16(&record_header->format) != HVQM2_VIDEO_KEYFRAME) ||
+                             (TimeKeeper_GetTime() > gHVQM2UtilDispTime));
 
                     if (gHVQM2UtilRemainingVideoFrames == 0) {
                         break;
@@ -736,10 +746,10 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
             /**
              * Decode the compressed image data and expand it in the frame buffer
              */
-            frame_format = *(u16 *)&record_header->format;
+            frame_format = load16(&record_header->format);
             if (frame_format == HVQM2_VIDEO_HOLD) {
                 /**
-                 * Just like when frame_format != HVQM2_VIDEO_HOLD you 
+                 * Just like when frame_format != HVQM2_VIDEO_HOLD you
                  * could call hvqm2Decode*() and decode in a new frame
                  * buffer (in this case, just copying from the buffer of
                  * the preceding frame).  But here we make use of the
@@ -758,8 +768,8 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
                  */
                 hvqtask.t.flags = 0;
                 status = hvqm2DecodeSP1(&B_8018EA50_usa->hvqbuf, frame_format, &gCfbBuffers[bufno][screen_offset],
-                                           &gCfbBuffers[prev_bufno][screen_offset], B_8018EA50_usa->hvqwork, &B_801AABA0_usa,
-                                           B_8018EA50_usa->hvq_spfifo);
+                                        &gCfbBuffers[prev_bufno][screen_offset], B_8018EA50_usa->hvqwork,
+                                        &B_801AABA0_usa, B_8018EA50_usa->hvq_spfifo);
 
                 osWritebackDCacheAll();
 
@@ -800,6 +810,11 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
             gHVQM2UtilRemainingVideoFrames--;
 
             if (osRecvMesg(&B_801AB7F0_usa, NULL, OS_MESG_NOBLOCK) == 0) {
+#if VERSION_EUR
+                osViSetYScale(1.0f);
+                osViBlack(true);
+#endif
+
                 while (osAfterPreNMI() == -1) {}
                 sp8C = -1;
                 break;
@@ -878,10 +893,6 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
 
 #endif
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/hvqm2util", HVQM2Util_Play);
-#endif
-
 #if VERSION_USA || VERSION_EUR
 s32 HVQM2Util_800409E4_usa(f32 arg0) {
     B_8018EA54_usa = arg0 * 0x10000;
@@ -913,28 +924,17 @@ void TimeKeeper_CounterThreadEntry(void *arg UNUSED) {
 }
 #endif
 
-#if VERSION_USA
+#if VERSION_USA || VERSION_EUR
 // rewind
 tkAudioProc HVQM2Util_Rewind(void) {
+#if VERSION_USA
     gHVQM2UtilVideoStreamP = gHVQM2UtilAudioStreamP = gHVQM2UtilCurrentVideoRomAddress + sizeof(HVQM2Header);
+#else
+    gHVQM2UtilVideoStreamP = gHVQM2UtilCurrentVideoRomAddress + sizeof(HVQM2Header);
+    gHVQM2UtilAudioStreamP = B_8018DBFC_eur;
+#endif
     gHVQM2UtilRemainingAudioRecords = gHVQM2UtilTotalAudioRecords;
     gHVQM2UtilRemainingVideoFrames = gHVQM2UtilTotalVideoFrames;
-
-    gHVQM2UtilDispTime = 0;
-    return HVQM2Util_GetNextAudioRecord;
-}
-#endif
-
-#if VERSION_EUR
-extern s32 B_8018DBEC_eur;
-extern s32 B_8018DBF4_eur;
-extern s32 B_8018DC04_eur;
-
-tkAudioProc HVQM2Util_Rewind(void) {
-    B_8018DBF4_eur = B_8018DB58_eur + 0x3C;
-    gHVQM2UtilAudioStreamP = B_8018DBFC_eur;
-    gHVQM2UtilRemainingAudioRecords = gHVQM2UtilTotalAudioRecords;
-    B_8018DC04_eur = B_8018DBEC_eur;
 
     gHVQM2UtilDispTime = 0;
     return HVQM2Util_GetNextAudioRecord;
