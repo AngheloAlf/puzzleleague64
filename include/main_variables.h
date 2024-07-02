@@ -982,33 +982,7 @@ extern u32 B_8018A808_usa;
 // extern UNK_TYPE B_8018EA3C_usa;
 // extern UNK_TYPE B_8018EA40_usa;
 // extern s32 B_8018EA50_usa;
-extern u32 B_8018EA54_usa;
-extern OSIoMesg B_8018EA60_usa; /** Original name: audioDmaMesgBlock */
-extern OSMesgQueue B_8018EA78_usa; /** Original name: audioDmaMessageQ */
-// extern UNK_TYPE B_8018EA90_usa;
-// extern UNK_TYPE B_8018EA98_usa;
-// extern UNK_TYPE B_8018EAB0_usa;
-// extern UNK_TYPE B_8018EAC8_usa;
-// extern UNK_TYPE B_8018EAD0_usa;
-// extern UNK_TYPE B_8018EAE8_usa;
 
-// extern UNK_TYPE B_80192EC0_usa;
-// extern UNK_TYPE B_80192ED8_usa;
-extern OSMesgQueue B_80192EE0_usa;
-// extern UNK_TYPE B_80192EF8_usa;
-// extern UNK_TYPE gTimeKeeperVideoRingBuffer;
-// extern UNK_TYPE gTimeKeeperVideoRingCount;
-// extern UNK_TYPE gTimeKeeperVideoRingIndex;
-// extern UNK_TYPE gTimeKeeperVideoRingReadIndex;
-// extern UNK_TYPE B_80192F30_usa;
-// extern UNK_TYPE gTimeKeeperAudioRingCount;
-// extern UNK_TYPE B_80192F4C_usa;
-// extern UNK_TYPE gTimeKeeperAudioRingRead;
-extern s32 pcmBufferCount; /** Original name: pcmBufferCount */
-extern u32 aiFIFOsamples; /** Original name: aiFIFOsamples */
-extern u32 aiDAsamples; /** Original name: aiDAsamples */
-// extern UNK_TYPE B_80192F60_usa;
-extern u32 gTimerKeeperSamplesPerSecond;
 // extern UNK_TYPE B_80192F80_usa;
 // extern UNK_TYPE B_80192F90_usa;
 // extern UNK_TYPE B_80192FA0_usa;
@@ -1475,8 +1449,7 @@ extern s32 gSelection;
 // extern UNK_TYPE B_801F9E28_usa;
 
 // extern UNK_TYPE B_8021AA80_usa;
-// extern UNK_TYPE B_8021AAA0_usa;
-// extern UNK_TYPE B_8021AAE0_usa;
+
 // extern UNK_TYPE B_8021AD28_usa;
 // extern UNK_TYPE B_8021AD55_usa;
 

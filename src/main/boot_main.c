@@ -2,6 +2,8 @@
  * Original filename: main.c
  */
 
+#include "boot_main.h"
+
 #include "ultra64.h"
 #include "include_asm.h"
 #include "macros_defines.h"
@@ -85,11 +87,6 @@ void Idle_ThreadEntry(void *arg) {
 
     while (true) {}
 }
-
-extern OSScClient B_801AB810_usa;
-extern OSSched B_8021AAA0_usa;
-
-extern STACK(B_8021DF50_usa, OS_SC_STACKSIZE);
 
 void func_80000630_usa(void) {
     s32 mode;

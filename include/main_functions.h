@@ -9,14 +9,6 @@
 #include "the_game.h"
 
 
-void func_80000450_usa(void);
-// void bootproc();
-void Idle_ThreadEntry(void *arg);
-void func_80000630_usa(void);
-void pon_main(void *arg);
-s32 doMenuLoop(s32 arg0);
-s32 doGameLoop(s32 arg0);
-
 void func_80001310_usa(RomOffset segmentRom, void * dstAddr, size_t segmentSize);
 
 // void func_800019C0_usa();

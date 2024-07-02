@@ -582,6 +582,8 @@ segments:
       - [0x0C8D88, .rodata, main/build]
 
       - { type: bss, vram: 0x800C81B0, name: main/800C81B0 }
+      - { type: .bss, vram: 0x8018C1B0, name: main/hvqm2util }
+      - { type: bss, vram: 0x801906E0, name: main/801906E0 }
 
       - { type: .bss, vram: 0x80190790, name: libmus/player }
       - { type: .bss, vram: 0x80190800, name: libmus/aud_dma }

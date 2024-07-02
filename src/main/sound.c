@@ -3,16 +3,20 @@
  */
 
 #include "sound.h"
+
 #include "ultra64.h"
+#include "libmus/libmus.h"
+#include "libmus/lib_memory.h"
+
 #include "include_asm.h"
 #include "macros_defines.h"
 #include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
-#include "libmus/libmus.h"
-#include "libmus/lib_memory.h"
+
 #include "rom_offsets.h"
 #include "sfxlimit.h"
+#include "boot_main.h"
 
 extern s16 D_800B3AE4_usa;
 
@@ -44,7 +48,6 @@ extern s32 B_800CF2A0_usa;
 extern u8 B_800CF2B0_usa[];
 extern u8 B_8016F2B0_usa[];
 extern u8 B_801842B0_usa[];
-extern UNK_TYPE B_8021AAA0_usa;
 
 extern s32 B_8018A6C0_usa;
 extern s32 B_8018A6F8_usa;

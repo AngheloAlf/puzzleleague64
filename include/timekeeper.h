@@ -7,71 +7,48 @@
 #include "stack.h"
 #include "other_types.h"
 
+/*
+ * Size of buffer for video records 
+ */
+#define HVQ_DATASIZE_MAX  30000
+
+/*
+ * Size of buffer for audio records
+ */
+#define AUDIO_RECORD_SIZE_MAX  3000
+
+/*
+ * Size of data area for HVQM2 microcode
+ */
+#define HVQ_SPFIFO_SIZE   20000
+
+/*
+ * Audio DA specifications
+ */
+#define  PCM_CHANNELS        2	/* Number of channels */
+#define  PCM_CHANNELS_SHIFT  1	/* log2(PCM_CHANNELS) */
+#define  PCM_ALIGN           2	/* Alignment of number of samples to send */
+#define  PCM_BYTES_PER_SAMPLE  (2 * PCM_CHANNELS) /* Number of bytes in one sample */
+#define  PCM_BYTES_PER_SAMPLE_SHIFT  2	/* log2(PCM_BYTES_PER_SAMPLE) */
+
+/*
+ * Audio record definitions
+ */
+#define  AUDIO_SAMPLE_BITS	4
+#define  AUDIO_SAMPLES_MAX	(((AUDIO_RECORD_SIZE_MAX-sizeof(HVQM2Audio))*8/AUDIO_SAMPLE_BITS)+1) /* Maximum number of records per sample */
+
+/*
+ * PCM buffer specifications
+ */
+#define  NUM_PCMBUFs	3	/* Number of PCM buffers (2 or more, at least 3 recommended) */
+#define  PCMBUF_SPREAD	((PCM_ALIGN-1)+AUDIO_SAMPLES_MAX) /* Minimum required capacity for PCM buffer = Number of samples carried forward from last time + number of samples newly decoded */
+#define  PCMBUF_ALIGNED  ((PCMBUF_SPREAD+(PCM_ALIGN-1))&(~(PCM_ALIGN-1))) /* pcmbuf[i] address is aligned */
+#define  PCMBUF_SIZE     (PCMBUF_ALIGNED*PCM_CHANNELS)
+
 typedef u32 (*tkAudioProc)(void *pcmbuf);
 typedef tkAudioProc (*tkRewindProc)(void);
 
-typedef struct TimeKeeperCommand {
-    /* 0x0 */ tkRewindProc rewind; /* Pointer to stream rewind function */
-    /* 0x4 */ u32 samples_per_sec; /* Audio sampling rate */
-} TimeKeeperCommand; // size = 0x8
-
-typedef struct TimeKeeperVideoRing {
-    /* 0x00 */ u64 disptime; /* Display time */
-    /* 0x08 */ void *vaddr;  /* Frame buffer address */
-    /* 0x0C */ u32 *statP;   /* Pointer to frame buffer state flag */
-} TimeKeeperVideoRing; // size = 0x10
-
-typedef struct TimeKeeperAudioRing {
-    /* 0x0 */ void *buf; /* PCM data buffer */
-    /* 0x4 */ u32 len;   /* PCM data length */
-} TimeKeeperAudioRing; // size = 0x8
-
-#define TIMEKEEPER_VIDEO_RING_SIZE 2
-#define TIMEKEEPER_AUDIO_RING_SIZE 3
-
-
 u64 TimeKeeper_GetTime(void);
 void TimeKeeper_CounterThreadEntry(void *arg);
-
-
-extern bool gTimerKeeperClockActive;
-extern OSTime gTimerKeeperLastTime;
-extern u64 gTimerKeeperSamplesPlayed;
-
-
-extern TimeKeeperVideoRing gTimeKeeperVideoRingBuffer[TIMEKEEPER_VIDEO_RING_SIZE];
-extern TimeKeeperAudioRing B_80192F30_usa[TIMEKEEPER_AUDIO_RING_SIZE];
-
-extern OSThread gTimeKeeperCounterThread;
-extern STACK(gTimeKeeperCounterStack, 0x2000);
-
-extern OSMesgQueue B_80192EC0_usa;
-extern OSMesg B_80192ED8_usa[2];
-extern OSMesg B_80192EF8_usa[2];
-extern s32 gTimeKeeperVideoRingReadIndex;
-extern s32 gTimeKeeperAudioRingCount;
-extern s32 B_80192F4C_usa;
-extern s32 gTimeKeeperAudioRingRead;
-extern u16 B_80192F60_usa;
-
-extern OSThread gTimeKeeperThread;
-extern STACK(gTimeKeeperStack, 0x2000);
-extern OSMesgQueue B_80192E80_usa;
-extern OSMesg B_80192E98_usa[1];
-extern OSMesgQueue B_80192EA0_usa;
-extern OSMesg B_80192EB8_usa[1];
-
-extern s32 gTimeKeeperVideoRingCount;
-extern s32 gTimeKeeperVideoRingIndex;
-
-extern u32 gHVQM2UtilTotalVideoFrames;
-extern u32 gHVQM2UtilTotalAudioRecords;
-extern RomOffset gHVQM2UtilVideoStreamP; /** Original name: video_streamP */
-extern RomOffset gHVQM2UtilAudioStreamP;
-extern u32 gHVQM2UtilRemainingAudioRecords;
-extern u32 gHVQM2UtilRemainingVideoFrames; /** Original name: video_remain */
-extern u64 gHVQM2UtilDispTime; /** Original name: disptime */
-
-extern RomOffset gHVQM2UtilCurrentVideoRomAddress;
 
 #endif
