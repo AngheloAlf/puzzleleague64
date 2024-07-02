@@ -20,6 +20,7 @@
 #include "sound.h"
 #include "peel.h"
 #include "boot_main.h"
+#include "pon_thread.h"
 
 #define VIDEO_MSG 666
 #define RSP_DONE_MSG 667
@@ -443,16 +444,16 @@ void TimeKeeper_ThreadEntry(void *arg UNUSED) {
 
     /* Acquire retrace event */
     osCreateMesgQueue(&viMessageQ, viMessages, ARRAY_COUNT(viMessages));
-    osViSetEvent(&viMessageQ, NULL, 1U);
+    osViSetEvent(&viMessageQ, NULL, 1);
 
     /* Acquire AI event*/
     osCreateMesgQueue(&aiMessageQ, aiMessages, ARRAY_COUNT(aiMessages));
-    osSetEventMesg(OS_EVENT_AI, &aiMessageQ, (void *)1);
+    osSetEventMesg(OS_EVENT_AI, &aiMessageQ, (OSMesg)1);
 
     /**
      * Create and start audio DA counter thread
      */
-    osCreateThread(&daCounterThread, 4, TimeKeeper_CounterThreadEntry, NULL, STACK_TOP(daCounterStack), 0xD);
+    osCreateThread(&daCounterThread, THREAD_ID_COUNTER, TimeKeeper_CounterThreadEntry, NULL, STACK_TOP(daCounterStack), THREAD_PRI_COUNTER);
     osStartThread(&daCounterThread);
 
     osRecvMesg(&tkCmdMesgQ, (OSMesg *)&cmd, OS_MESG_BLOCK);
@@ -607,7 +608,7 @@ void TimeKeeper_ThreadEntry(void *arg UNUSED) {
              *    has begun (video_started == 1).
              */
             if (video_started) {
-                osSetThreadPri(NULL, 0xE);
+                osSetThreadPri(NULL, THREAD_PRI_COUNTER+1);
 
                 while ((audioRingCount > 0) && (aiFIFOsamples == 0)) {
                     void *buffer = audioRing[audioRingRead].buf;
@@ -636,7 +637,7 @@ void TimeKeeper_ThreadEntry(void *arg UNUSED) {
                     }
                     audioRingCount--;
                 }
-                osSetThreadPri(NULL, 0xC);
+                osSetThreadPri(NULL, THREAD_PRI_TIMEKEEPER);
             }
 
             /**
@@ -716,7 +717,7 @@ void TimeKeeper_ThreadEntry(void *arg UNUSED) {
 INLINE void TimeKeeper_StartThread(void) {
     osCreateMesgQueue(&tkCmdMesgQ, tkCmdMesgBuf, ARRAY_COUNT(tkCmdMesgBuf));
     osCreateMesgQueue(&tkResMesgQ, tkResMesgBuf, ARRAY_COUNT(tkResMesgBuf));
-    osCreateThread(&tkThread, 3, TimeKeeper_ThreadEntry, NULL, STACK_TOP(tkStack), 0xC);
+    osCreateThread(&tkThread, THREAD_ID_TIMEKEEPER, TimeKeeper_ThreadEntry, NULL, STACK_TOP(tkStack), THREAD_PRI_TIMEKEEPER);
     osStartThread(&tkThread);
 }
 

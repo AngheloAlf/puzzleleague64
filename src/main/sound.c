@@ -17,6 +17,7 @@
 #include "rom_offsets.h"
 #include "sfxlimit.h"
 #include "boot_main.h"
+#include "pon_thread.h"
 
 extern s16 D_800B3AE4_usa;
 
@@ -265,7 +266,7 @@ int func_80002054_usa(void) {
 
     sp20.channels = 0x28;
     sp20.sched = &B_8021AAA0_usa;
-    sp20.thread_priority = 0xF;
+    sp20.thread_priority = THREAD_PRI_LIBMUS;
     sp20.heap = B_800CF2B0_usa;
     sp20.heap_length = 0xA0000;
     sp20.ptr = B_8016F2B0_usa;

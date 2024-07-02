@@ -5,12 +5,14 @@
 #include "boot_main.h"
 
 #include "ultra64.h"
+#include "PR/sched.h"
+
 #include "include_asm.h"
 #include "macros_defines.h"
 #include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
-#include "PR/sched.h"
+
 #include "buffers.h"
 #include "hvqm2util.h"
 #include "file.h"
@@ -32,6 +34,7 @@
 #include "menu.h"
 #include "bonus.h"
 #include "tutorial.h"
+#include "pon_thread.h"
 
 INLINE void func_80000450_usa(void) {
     s32 var_s0;
@@ -71,14 +74,14 @@ void bootproc(void) {
     func_80001A80_eur(0);
 #endif
 
-    osCreateThread(&sIdleThread, 1, Idle_ThreadEntry, NULL, STACK_TOP(sIdleStack), 0xA);
+    osCreateThread(&sIdleThread, THREAD_ID_IDLE, Idle_ThreadEntry, NULL, STACK_TOP(sIdleStack), THREAD_PRI_IDLE);
     osStartThread(&sIdleThread);
 }
 
 void Idle_ThreadEntry(void *arg) {
     osCreatePiManager(OS_PRIORITY_PIMGR, &sPiMgrCmdQueue, sPiMgrCmdBuff, ARRAY_COUNT(sPiMgrCmdBuff));
 
-    osCreateThread(&sMainThread, 6, pon_main, arg, STACK_TOP(sMainStack), 0xA);
+    osCreateThread(&sMainThread, THREAD_ID_MAIN, pon_main, arg, STACK_TOP(sMainStack), THREAD_PRI_MAIN);
 
     if (D_800B3AC4_usa == 0) {
         osStartThread(&sMainThread);
@@ -357,16 +360,19 @@ s32 doGameLoop(s32 arg0) {
                         UpdateBuffer(&gInfo[arg0]);
 
                         if (gTheGame.unk_9C08 == 1) {
-                            PlayGameSong(&gTheGame.unk_0000);
+                            PlayGameSong(&gTheGame.unk_0000[0]);
                             if (gGameStatus & 0x20) {
                                 SetSongTempo(last_song_handle, 0x6E);
                             }
                         } else {
-                            if (gTheGame.unk_0000[0].unk_43B8 == 0) {
-                                PlayGameSong(&gTheGame.unk_0000[1]);
+                            TheGame_unk_0000 *temp;
+
+                            if (gTheGame.unk_0000[0].unk_43B8 != 0) {
+                                temp = &gTheGame.unk_0000[0];
                             } else {
-                                PlayGameSong(&gTheGame.unk_0000[0]);
+                                temp = &gTheGame.unk_0000[1];
                             }
+                            PlayGameSong(temp);
                         }
 
                         AudioUpdate();
