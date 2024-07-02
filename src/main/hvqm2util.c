@@ -20,13 +20,12 @@
 #include "sound.h"
 #include "peel.h"
 
-/*
+/**
  * Macro for loading multi-byte data from buffer holding data from stream
  */
 #define load32(from) (*(u32 *)(from))
 #define load16(from) (*(u16 *)(from))
 
-#if VERSION_USA || VERSION_EUR
 INLINE void RomCopy(void *dest, RomOffset src, size_t len, s32 pri, OSIoMesg *mb, OSMesgQueue *mq) {
     osInvalDCache(dest, len);
 
@@ -34,9 +33,8 @@ INLINE void RomCopy(void *dest, RomOffset src, size_t len, s32 pri, OSIoMesg *mb
 
     osRecvMesg(mq, NULL, OS_MESG_BLOCK);
 }
-#endif
 
-#if VERSION_EUR
+#if REGION_PAL
 typedef struct struct_8003E60C_eur_s0 {
     /* 0x0 */ u8 unk_0;
     /* 0x1 */ u8 unk_1;
@@ -72,8 +70,9 @@ INLINE void func_8003E60C_eur(File *arg0, HVQM2Header *header) {
 }
 #endif
 
-#if VERSION_USA || VERSION_EUR
-// init_cfb
+/**
+ * Original name: init_cfb
+ */
 INLINE void Cfb_Init(void) {
     s32 i;
 
@@ -87,26 +86,26 @@ INLINE void Cfb_Init(void) {
         gCfbStatus[i] = CFB_STATUS_FREE;
     }
 }
-#endif
 
-#if VERSION_USA || VERSION_EUR
-// keep_cfb
+/**
+ * Original name: keep_cfb
+ */
 INLINE void Cfb_Keep(s32 index) {
     gCfbStatus[index] |= CFB_STATUS_PRECIOUS;
 }
-#endif
 
-#if VERSION_USA || VERSION_EUR
-// release_cfb
+/**
+ * Original name: release_cfb
+ */
 INLINE void Cfb_Release(s32 index) {
     if (index >= 0) {
         gCfbStatus[index] &= ~CFB_STATUS_PRECIOUS;
     }
 }
-#endif
 
-#if VERSION_USA || VERSION_EUR
-// release_all_cfb
+/**
+ * Original name: release_all_cfb
+ */
 INLINE void Cfb_ReleaseAll(void) {
     s32 i;
 
@@ -114,10 +113,10 @@ INLINE void Cfb_ReleaseAll(void) {
         gCfbStatus[i] &= ~CFB_STATUS_PRECIOUS;
     }
 }
-#endif
 
-#if VERSION_USA || VERSION_EUR
-// get_cfb
+/**
+ * Original name: get_cfb
+ */
 INLINE s32 Cfb_GetCurrentIndex(void) {
     while (true) {
         s32 i;
@@ -131,10 +130,10 @@ INLINE s32 Cfb_GetCurrentIndex(void) {
         osYieldThread();
     }
 }
-#endif
 
-#if VERSION_USA || VERSION_EUR
-// tkGetTime
+/**
+ * Original name: tkGetTime
+ */
 INLINE u64 TimeKeeper_GetTime(void) {
     u64 ret;
 
@@ -150,20 +149,26 @@ INLINE u64 TimeKeeper_GetTime(void) {
 
     return ret;
 }
-#endif
 
-#if VERSION_USA || VERSION_EUR
+/**
+ * Original name: tkClockDisable
+ */
 STATIC_INLINE void tkClockDisable(void) {
     gTimerKeeperClockActive = false;
 }
 
+/**
+ * Original name: tkClockStart
+ */
 STATIC_INLINE void tkClockStart(void) {
     gTimerKeeperSamplesPlayed = 0;
     gTimerKeeperLastTime = osGetTime();
     gTimerKeeperClockActive = true;
 }
 
-// timekeeperProc
+/**
+ * Original name: timekeeperProc
+ */
 void TimeKeeper_ThreadEntry(void *arg UNUSED) {
     TimeKeeperCommand *cmd;
     void *sp24 = NULL;
@@ -214,9 +219,9 @@ void TimeKeeper_ThreadEntry(void *arg UNUSED) {
         sp34 = 0;
         sp3C = 0;
         sp44 = false;
-        B_80192F54_usa = 0;
-        B_80192F5C_usa = 0;
-        B_80192F58_usa = 0;
+        pcmBufferCount = 0;
+        aiDAsamples = 0;
+        aiFIFOsamples = 0;
         B_80192F4C_usa = 0;
         gTimeKeeperAudioRingRead = 0;
         gTimeKeeperAudioRingCount = 0;
@@ -228,7 +233,7 @@ void TimeKeeper_ThreadEntry(void *arg UNUSED) {
 
         sp50 = osGetTime();
         while ((sp3C == 0) || ((gTimeKeeperVideoRingCount > 0) || (var_s6 != 0)) || !sp44 ||
-               (gTimeKeeperAudioRingCount > 0) || (B_80192F58_usa != 0)) {
+               (gTimeKeeperAudioRingCount > 0) || (aiFIFOsamples != 0)) {
             u64 temp_s0;
             OSTime temp_s2;
 
@@ -284,7 +289,7 @@ void TimeKeeper_ThreadEntry(void *arg UNUSED) {
             if (sp34 != 0) {
                 osSetThreadPri(NULL, 0xE);
 
-                while ((gTimeKeeperAudioRingCount > 0) && (B_80192F58_usa == 0)) {
+                while ((gTimeKeeperAudioRingCount > 0) && (aiFIFOsamples == 0)) {
                     void *s0 = B_80192F30_usa[gTimeKeeperAudioRingRead].buf;
                     u32 s1 = B_80192F30_usa[gTimeKeeperAudioRingRead].len;
 
@@ -295,7 +300,7 @@ void TimeKeeper_ThreadEntry(void *arg UNUSED) {
                         break;
                     }
 
-                    B_80192F58_usa = s1 >> 2;
+                    aiFIFOsamples = s1 >> 2;
                     if (!var_s7) {
                         var_s7 = true;
                         tkClockStart();
@@ -310,7 +315,7 @@ void TimeKeeper_ThreadEntry(void *arg UNUSED) {
                 osSetThreadPri(NULL, 0xC);
             }
 
-            if (!sp44 && (gTimeKeeperAudioRingCount < TIMEKEEPER_AUDIO_RING_SIZE) && (B_80192F54_usa < 3)) {
+            if (!sp44 && (gTimeKeeperAudioRingCount < TIMEKEEPER_AUDIO_RING_SIZE) && (pcmBufferCount < 3)) {
                 u32 temp_v0_7;
                 void *temp_s0_4;
                 s32 temp_s2_2;
@@ -320,7 +325,7 @@ void TimeKeeper_ThreadEntry(void *arg UNUSED) {
 
                 temp_v0_7 = sp4C((void *)(&B_8018EA50_usa->pcmbuf[var_s4].unk_0000[var_fp << 1]));
                 if (temp_v0_7 > 0) {
-                    B_80192F54_usa++;
+                    pcmBufferCount++;
 
                     var_a1 = &B_80192F60_usa;
                     var_a0 = (var_fp << 1);
@@ -369,20 +374,20 @@ void TimeKeeper_ThreadEntry(void *arg UNUSED) {
         }
     }
 }
-#endif
 
-#if VERSION_USA || VERSION_EUR
-// createTimekeeper
+/**
+ * Original name: createTimekeeper
+ */
 INLINE void TimeKeeper_StartThread(void) {
     osCreateMesgQueue(&B_80192E80_usa, B_80192E98_usa, ARRAY_COUNT(B_80192E98_usa));
     osCreateMesgQueue(&B_80192EA0_usa, B_80192EB8_usa, ARRAY_COUNT(B_80192EB8_usa));
     osCreateThread(&gTimeKeeperThread, 3, TimeKeeper_ThreadEntry, NULL, STACK_TOP(gTimeKeeperStack), 0xC);
     osStartThread(&gTimeKeeperThread);
 }
-#endif
 
-#if VERSION_USA || VERSION_EUR
-// tkStart
+/**
+ * Original name: tkStart
+ */
 INLINE void TimeKeeper_PlayVideo(tkRewindProc rewind, u32 samples_per_sec) {
     TimeKeeperCommand cmd;
 
@@ -392,18 +397,18 @@ INLINE void TimeKeeper_PlayVideo(tkRewindProc rewind, u32 samples_per_sec) {
     osSendMesg(&B_80192E80_usa, (OSMesg *)&cmd, OS_MESG_BLOCK);
     osRecvMesg(&B_80192EA0_usa, (OSMesg *)NULL, OS_MESG_BLOCK);
 }
-#endif
 
-#if VERSION_USA || VERSION_EUR
-// tkStop
+/**
+ * Original name: tkStop
+ */
 void TimeKeeper_StopVideo(void) {
     osSendMesg(&B_80192E80_usa, NULL, OS_MESG_BLOCK);
     osRecvMesg(&B_80192EA0_usa, NULL, OS_MESG_BLOCK);
 }
-#endif
 
-#if VERSION_USA || VERSION_EUR
-// tkPushVideoframe
+/**
+ * Original name: tkPushVideoframe
+ */
 INLINE void TimeKeeper_AddVideoFrame(void *vaddr, u32 *statP, u64 disptime) {
     *statP |= CFB_STATUS_SHOWING;
 
@@ -422,10 +427,10 @@ INLINE void TimeKeeper_AddVideoFrame(void *vaddr, u32 *statP, u64 disptime) {
 
     gTimeKeeperVideoRingCount++;
 }
-#endif
 
-#if VERSION_USA || VERSION_EUR
-// get_record
+/**
+ * Original name: get_record
+ */
 INLINE RomOffset HVQM2Util_GetRecord(HVQM2Record *header, void *body, u16 type, RomOffset src, OSIoMesg *mb,
                                      OSMesgQueue *mq) {
     size_t bodySize;
@@ -450,12 +455,12 @@ INLINE RomOffset HVQM2Util_GetRecord(HVQM2Record *header, void *body, u16 type, 
 
     return src;
 }
-#endif
 
-#if VERSION_USA || VERSION_EUR
-// print_hvqm_info
+/**
+ * Original name: print_hvqm_info
+ */
 void HVQM2Util_PrintInfo(HVQM2Header *header) {
-    s32 var_s0;
+    s32 errors;
 
     osSyncPrintf("\n");
     osSyncPrintf("File version        : %s\n", header->file_version);
@@ -471,27 +476,25 @@ void HVQM2Util_PrintInfo(HVQM2Header *header) {
     osSyncPrintf("Display mode        : %s\n", "16-bit RGBA");
     osSyncPrintf("\n");
 
-    var_s0 = 0;
-    if (header->max_frame_size > 0x7530) {
-        var_s0 += 1;
+    errors = 0;
+    if (header->max_frame_size > 30000) {
+        errors++;
         osSyncPrintf("ERROR: hvqbuf insufficient\n");
     }
-    if (header->max_audio_record_size > 0xBB8) {
-        var_s0 += 1;
+    if (header->max_audio_record_size > 3000) {
+        errors++;
         osSyncPrintf("ERROR: adpcmbuf insufficient\n");
     }
-    if (header->max_sp_packets > 0x4E20) {
-        var_s0 += 1;
+    if (header->max_sp_packets > 20000) {
+        errors++;
         osSyncPrintf("ERROR: hvq_spfifo insufficient\n");
     }
 
-    if (var_s0) {
+    if (errors) {
         while (true) {}
     }
 }
-#endif
 
-#if VERSION_USA || VERSION_EUR
 /**
  * Original name: next_audio_record
  */
@@ -524,9 +527,18 @@ u32 HVQM2Util_GetNextAudioRecord(void *pcmbuf) {
 
     return samples;
 }
-#endif
 
 #if VERSION_USA || VERSION_EUR
+#define FUNC_80021414_USA_ARG1 0xF2
+#define FUNC_80021414_USA_ARG2 0xD0
+#elif VERSION_FRA
+#define FUNC_80021414_USA_ARG1 0xDE
+#define FUNC_80021414_USA_ARG2 0xCE
+#elif VERSION_GER
+#define FUNC_80021414_USA_ARG1 0xA2
+#define FUNC_80021414_USA_ARG2 0xCE
+#endif
+
 typedef struct struct_8021AAE0_usa {
     /* 0x00 */ OSMesgQueue unk_00;
     /* 0x18 */ UNK_TYPE1 unk_18[0x58];
@@ -646,7 +658,7 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
         RomCopy(header, gHVQM2UtilCurrentVideoRomAddress, sizeof(HVQM2Header), OS_MESG_PRI_NORMAL, &B_8018EA98_usa,
                 &B_8018EAB0_usa);
 
-#if VERSION_EUR
+#if REGION_PAL
         func_8003E60C_eur((void *)"intro.svqm", header);
 #endif
 
@@ -784,7 +796,7 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
             }
 
             if (arg1 & 0x1000) {
-                func_80021414_usa(sp40, 0xF2, 0xD0, gCfbBuffers[bufno]);
+                func_80021414_usa(sp40, FUNC_80021414_USA_ARG1, FUNC_80021414_USA_ARG2, gCfbBuffers[bufno]);
             }
 
             /**
@@ -810,7 +822,7 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
             gHVQM2UtilRemainingVideoFrames--;
 
             if (osRecvMesg(&B_801AB7F0_usa, NULL, OS_MESG_NOBLOCK) == 0) {
-#if VERSION_EUR
+#if REGION_PAL
                 osViSetYScale(1.0f);
                 osViBlack(true);
 #endif
@@ -891,40 +903,33 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
     return var_v0;
 }
 
-#endif
-
-#if VERSION_USA || VERSION_EUR
 s32 HVQM2Util_800409E4_usa(f32 arg0) {
     B_8018EA54_usa = arg0 * 0x10000;
 
     return -1;
 }
-#endif
 
-#if VERSION_USA || VERSION_EUR
 void HVQM2Util_80040A4C_usa(void) {
     B_8018EA54_usa = 0xCCCC;
 }
-#endif
 
-#if VERSION_USA || VERSION_EUR
-// daCounterProc
+/**
+ * Original name: daCounterProc
+ */
 void TimeKeeper_CounterThreadEntry(void *arg UNUSED) {
     while (true) {
         osRecvMesg(&B_80192EE0_usa, NULL, OS_MESG_BLOCK);
         gTimerKeeperLastTime = osGetTime();
 
-        if (B_80192F5C_usa != 0) {
-            B_80192F54_usa--;
+        if (aiDAsamples != 0) {
+            pcmBufferCount--;
         }
-        gTimerKeeperSamplesPlayed += B_80192F5C_usa;
-        B_80192F5C_usa = B_80192F58_usa;
-        B_80192F58_usa = 0;
+        gTimerKeeperSamplesPlayed += aiDAsamples;
+        aiDAsamples = aiFIFOsamples;
+        aiFIFOsamples = 0;
     }
 }
-#endif
 
-#if VERSION_USA || VERSION_EUR
 // rewind
 tkAudioProc HVQM2Util_Rewind(void) {
 #if VERSION_USA
@@ -939,4 +944,3 @@ tkAudioProc HVQM2Util_Rewind(void) {
     gHVQM2UtilDispTime = 0;
     return HVQM2Util_GetNextAudioRecord;
 }
-#endif

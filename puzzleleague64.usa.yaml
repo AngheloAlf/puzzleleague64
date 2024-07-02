@@ -606,6 +606,8 @@ segments:
       - { type: bss, vram: 0x800C98A0, name: main/800C98A0 }
       - { type: bss, vram: 0x8018ABB0, name: main/file }
       - { type: bss, vram: 0x8018E3D0, name: main/8018E3D0 }
+      - { type: bss, vram: 0x8018EA50, name: main/hvqm2util }
+      - { type: bss, vram: 0x80192F80, name: main/80192F80 }
 
       - { type: .bss, vram: 0x80193030, name: libmus/player }
       - { type: .bss, vram: 0x801930A0, name: libmus/aud_dma }

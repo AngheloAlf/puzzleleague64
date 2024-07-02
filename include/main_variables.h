@@ -1004,9 +1004,9 @@ extern OSMesgQueue B_80192EE0_usa;
 // extern UNK_TYPE gTimeKeeperAudioRingCount;
 // extern UNK_TYPE B_80192F4C_usa;
 // extern UNK_TYPE gTimeKeeperAudioRingRead;
-extern s32 B_80192F54_usa;
-extern u32 B_80192F58_usa;
-extern u32 B_80192F5C_usa;
+extern s32 pcmBufferCount; /** Original name: pcmBufferCount */
+extern u32 aiFIFOsamples; /** Original name: aiFIFOsamples */
+extern u32 aiDAsamples; /** Original name: aiDAsamples */
 // extern UNK_TYPE B_80192F60_usa;
 extern u32 gTimerKeeperSamplesPerSecond;
 // extern UNK_TYPE B_80192F80_usa;
