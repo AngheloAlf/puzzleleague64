@@ -128,7 +128,7 @@ options:
   # asm_end_label: endlabel
   asm_jtbl_label_macro: jlabel
   asm_data_macro: dlabel
-  # include_macro_inc: False
+  include_macro_inc: False
   libultra_symbols: True
   hardware_regs: True
 segments:
@@ -160,15 +160,15 @@ segments:
     subsegments:
       - [0x001050, c, main/boot_main]
       - [0x001FE0, c, main/001F10]
-      - [0x002000, asm, main/gfx]
+      - [0x002000, c, main/gfx]
       - [0x002690, asm, main/002690]
       - [0x0027E0, asm, main/0027E0]
       - [0x004B50, asm, main/004B50]
-      - [0x005DF0, asm, main/005DF0]
+      - [0x005DF0, c, main/sfxlimit]
       - [0x0068C0, asm, main/006800]
       - [0x007F40, asm, main/007F40]
-      - [0x01D670, asm, main/file]
-      - [0x01E0D0, asm, main/01E0D0]
+      - [0x01D670, c, main/file]
+      - [0x01E0D0, c, main/bitmap]
       - [0x01FA70, asm, main/01FA70]
       - [0x02C3C0, asm, main/02C3C0]
       - [0x02D0A0, asm, main/02D0A0]
@@ -177,7 +177,7 @@ segments:
       - [0x031C20, asm, main/031C20]
       - [0x0350A0, asm, main/0350A0]
       - [0x036830, asm, main/036830]
-      - [0x037F80, asm, main/037F80]
+      - [0x037F80, c, main/end]
       - [0x03F240, c, main/hvqm2util]
       - [0x041AB0, asm, main/041AB0]
       - [0x043310, asm, main/043310]
@@ -509,18 +509,19 @@ segments:
       # rodata start is a guess
       - [0x0B98E0, rodata, main/0B98E0]
       - [0x0B9910, rodata, main/0B9910]
-      - [0x0B99B0, rodata, main/0B99B0]
+      - [0x0B99B0, .rodata, main/sfxlimit]
+      - [0x0B99F0, rodata, main/0B99F0]
       - [0x0B9AE0, rodata, main/0B9AE0]
       - [0x0B9BB0, rodata, main/0B9BB0]
       - [0x0B9C10, rodata, main/0B9C10]
-      - [0x0BA750, rodata, main/file]
+      - [0x0BA750, .rodata, main/file]
       - [0x0BA790, rodata, main/0BA790]
       - [0x0BA7C0, rodata, main/0BA7C0]
       - [0x0BA7D0, rodata, main/0BA7D0]
       - [0x0BA7E0, rodata, main/0BA7E0]
       - [0x0BA970, rodata, main/0BA970]
       - [0x0BAA20, rodata, main/0BAA20]
-      - [0x0BAF40, rodata, main/0BAF40]
+      - [0x0BAF40, .rodata, main/end]
       - [0x0BB330, .rodata, main/hvqm2util]
       - [0x0BB5F0, rodata, main/0BB5F0]
       - [0x0BB6D0, rodata, main/0BB6D0]

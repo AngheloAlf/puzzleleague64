@@ -453,7 +453,8 @@ void TimeKeeper_ThreadEntry(void *arg UNUSED) {
     /**
      * Create and start audio DA counter thread
      */
-    osCreateThread(&daCounterThread, THREAD_ID_COUNTER, TimeKeeper_CounterThreadEntry, NULL, STACK_TOP(daCounterStack), THREAD_PRI_COUNTER);
+    osCreateThread(&daCounterThread, THREAD_ID_COUNTER, TimeKeeper_CounterThreadEntry, NULL, STACK_TOP(daCounterStack),
+                   THREAD_PRI_COUNTER);
     osStartThread(&daCounterThread);
 
     osRecvMesg(&tkCmdMesgQ, (OSMesg *)&cmd, OS_MESG_BLOCK);
@@ -608,7 +609,7 @@ void TimeKeeper_ThreadEntry(void *arg UNUSED) {
              *    has begun (video_started == 1).
              */
             if (video_started) {
-                osSetThreadPri(NULL, THREAD_PRI_COUNTER+1);
+                osSetThreadPri(NULL, THREAD_PRI_COUNTER + 1);
 
                 while ((audioRingCount > 0) && (aiFIFOsamples == 0)) {
                     void *buffer = audioRing[audioRingRead].buf;
@@ -717,7 +718,8 @@ void TimeKeeper_ThreadEntry(void *arg UNUSED) {
 INLINE void TimeKeeper_StartThread(void) {
     osCreateMesgQueue(&tkCmdMesgQ, tkCmdMesgBuf, ARRAY_COUNT(tkCmdMesgBuf));
     osCreateMesgQueue(&tkResMesgQ, tkResMesgBuf, ARRAY_COUNT(tkResMesgBuf));
-    osCreateThread(&tkThread, THREAD_ID_TIMEKEEPER, TimeKeeper_ThreadEntry, NULL, STACK_TOP(tkStack), THREAD_PRI_TIMEKEEPER);
+    osCreateThread(&tkThread, THREAD_ID_TIMEKEEPER, TimeKeeper_ThreadEntry, NULL, STACK_TOP(tkStack),
+                   THREAD_PRI_TIMEKEEPER);
     osStartThread(&tkThread);
 }
 

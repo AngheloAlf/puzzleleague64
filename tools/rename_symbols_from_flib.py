@@ -4,6 +4,7 @@ from pathlib import Path
 syms: dict[int, tuple[str, int|None]] = {
 
 }
+names: set[str] = set()
 found: set[int] = set()
 duped_addrs: set[int] = set()
 duped_names: set[str] = set()
@@ -23,6 +24,8 @@ def parse_flib_symbols(path: Path):
         if ", " not in line:
             continue
         name, addr, extra, *_ = line.strip().split(", ")
+        if name == "":
+            continue
         size = None
         temp = int(extra.split(" ")[0], 16)
         if temp != 0:
@@ -35,10 +38,12 @@ def parse_flib_symbols(path: Path):
 
         if addr in syms:
             duped_addrs.add(addr)
+            duped_names.add(name)
             duped_syms.add((addr, name))
             del syms[addr]
             continue
-        if name in syms.values():
+        if name in names:
+            duped_addrs.add(addr)
             duped_names.add(name)
             duped_syms.add((addr, name))
             duped_key = None
@@ -46,8 +51,8 @@ def parse_flib_symbols(path: Path):
                 if value == name:
                     duped_key = key
                     break
-            assert duped_key is not None
-            del syms[duped_key]
+            if duped_key is not None:
+                del syms[duped_key]
             continue
         if addr in duped_addrs:
             duped_syms.add((addr, name))
@@ -57,6 +62,7 @@ def parse_flib_symbols(path: Path):
             continue
 
         syms[addr] = (name, size)
+        names.add(name)
     a.close()
 
 parse_flib_symbols(Path("asdf.txt"))

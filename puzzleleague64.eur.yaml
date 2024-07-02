@@ -128,7 +128,7 @@ options:
   # asm_end_label: endlabel
   asm_jtbl_label_macro: jlabel
   asm_data_macro: dlabel
-  # include_macro_inc: False
+  include_macro_inc: False
   libultra_symbols: True
   hardware_regs: True
 segments:
@@ -160,21 +160,24 @@ segments:
     subsegments:
       - [0x001050, c, main/boot_main]
       - [0x001FD0, c, main/001F10]
-      - [0x001FF0, asm, main/gfx]
+      - [0x001FF0, c, main/gfx]
       - [0x002680, asm, main/002680]
-      - [0x0027D0, asm, main/0027D0]
-      - [0x004B50, asm, main/004B50]
+      - [0x0027D0, c, main/sound]
+      - [0x004B50, c, main/tetsound]
+      - [0x005DF0, c, main/sfxlimit]
       - [0x0068C0, asm, main/0068C0]
       - [0x007F60, asm, main/007F60]
-      - [0x01D5F0, asm, main/file]
-      - [0x01E050, asm, main/01E050]
+      - [0x01D5F0, c, main/file]
+      - [0x01E050, c, main/bitmap]
       - [0x01F9F0, asm, main/01F9F0]
+      - [0x02C2F0, c, main/story]
+      - [0x02CFE0, c, main/peel]
       - [0x02E920, asm, main/02E920]
       - [0x02FF20, asm, main/02FF20]
       - [0x031B50, asm, main/031B50]
       - [0x034FD0, asm, main/034FD0]
       - [0x036750, asm, main/036750]
-      - [0x037EA0, asm, main/037EA0]
+      - [0x037EA0, c, main/end]
       - [0x03F160, c, main/hvqm2util]
       - [0x0419D0, asm, main/0419D0]
       - [0x043230, asm, main/043230]
@@ -220,7 +223,7 @@ segments:
       - [0x075870, asm, main/075870]
       - [0x075960, asm, main/075960]
       - [0x075F20, asm, main/075F20]
-      - [0x0898F0, asm, main/0898F0]
+      - [0x0898F0, c, main/puzzle]
       - [0x08A670, asm, main/08A670]
 
       - [0x08BE00, c, libmus/player]
@@ -513,20 +516,21 @@ segments:
       - [0x0C3D30, databin, rsp/s2dex]
 
       # rodata start is a guess
-      - [0x0C40F0, rodata, main/0C40F0]
-      - [0x0C4120, rodata, main/0C4120]
-      - [0x0C41C0, rodata, main/0C41C0]
+      - [0x0C40F0, .rodata, main/sound]
+      - [0x0C41C0, .rodata, main/sfxlimit]
+      - [0x0C4200, rodata, main/0C4200]
       - [0x0C42F0, rodata, main/0C42F0]
       - [0x0C43C0, rodata, main/0C43C0]
       - [0x0C4420, rodata, main/0C4420]
-      - [0x0C50E0, rodata, main/file]
+      - [0x0C50E0, .rodata, main/file]
       - [0x0C5120, rodata, main/0C5120]
       - [0x0C5150, rodata, main/0C5150]
       - [0x0C5160, rodata, main/0C5160]
       - [0x0C5170, rodata, main/0C5170]
-      - [0x0C5300, rodata, main/0C5300]
+      - [0x0C5300, .rodata, main/story]
+      - [0x0C5370, .rodata, main/peel]
       - [0x0C53B0, rodata, main/0C53B0]
-      - [0x0C58D0, rodata, main/0C58D0]
+      - [0x0C58D0, .rodata, main/end]
       - [0x0C5CC0, .rodata, main/hvqm2util]
       - [0x0C5F80, rodata, main/0C5F80]
       - [0x0C6060, rodata, main/0C6060]
@@ -541,6 +545,8 @@ segments:
       - [0x0C7E50, rodata, main/0C7E50]
       - [0x0C84E0, rodata, main/0C84E0]
       - [0x0C85B0, rodata, main/0C85B0]
+      - [0x0C8650, .rodata, main/puzzle]
+      - [0x0C8680, rodata, main/0C8680]
 
       - [0x0C86B0, .rodata, libmus/player]
       - [0x0C8790, .rodata, libmus/player_fx]

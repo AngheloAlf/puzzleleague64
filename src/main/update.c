@@ -160,23 +160,23 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058614_eur);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058720_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058458_usa);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058934_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdatePlayerPuzzle);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058A94_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_800587CC_usa);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058BFC_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058934_usa);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058CD8_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdatePlayerStageClear);
 #endif
 
 #if VERSION_EUR
@@ -184,7 +184,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058DA8_eur);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80059030_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058D68_usa);
 #endif
 
 #if VERSION_EUR
