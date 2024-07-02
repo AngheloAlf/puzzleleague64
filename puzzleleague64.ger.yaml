@@ -565,6 +565,8 @@ segments:
       - [0x0BE470, .rodata, main/build]
 
       - { type: bss, vram: 0x800BD890, name: main/800BD890 }
+      - { type: .bss, vram: 0x8017D9F0, name: main/file }
+      - { type: bss, vram: 0x80181210, name: main/80181210 }
       - { type: .bss, vram: 0x80181890, name: main/hvqm2util }
       - { type: bss, vram: 0x80185DC0, name: main/80185DC0 }
 

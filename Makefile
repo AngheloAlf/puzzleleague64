@@ -160,6 +160,7 @@ WARNINGS        := -w
 ASFLAGS         := -march=vr4300 -mabi=32 -G0 -no-pad-sections
 COMMON_DEFINES  := -D_MIPS_SZLONG=32 -D__USE_ISOC99
 GBI_DEFINES     := -DF3DEX_GBI
+CHAR_SIGN       := -fsigned-char
 
 ifeq ($(VERSION),usa)
 	RELEASE_DEFINES :=
@@ -167,6 +168,7 @@ else ifeq ($(VERSION),eur)
 	RELEASE_DEFINES := -DNDEBUG -D_FINALROM
 else ifeq ($(VERSION),fra)
 	RELEASE_DEFINES := -DNDEBUG -D_FINALROM
+	CHAR_SIGN       := -funsigned-char
 else ifeq ($(VERSION),ger)
 	RELEASE_DEFINES := -DNDEBUG -D_FINALROM
 endif
@@ -181,7 +183,7 @@ MIPS_VERSION    := -mips3
 # ICONV_FLAGS     := --from-code=UTF-8 --to-code=Shift-JIS
 
 # Variable to simplify C compiler invocation
-C_COMPILER_FLAGS = $(CFLAGS) $(BUILD_DEFINES) $(IINC) $(WARNINGS) $(MIPS_VERSION) $(ENDIAN) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(C_DEFINES) $(OPTFLAGS) $(DBGFLAGS)
+C_COMPILER_FLAGS = $(CFLAGS) $(CHAR_SIGN) $(BUILD_DEFINES) $(IINC) $(WARNINGS) $(MIPS_VERSION) $(ENDIAN) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(C_DEFINES) $(OPTFLAGS) $(DBGFLAGS)
 
 # Use relocations and abi fpr names in the dump
 OBJDUMP_FLAGS := --disassemble --reloc --disassemble-zeroes -Mreg-names=32 -Mno-aliases
