@@ -408,6 +408,8 @@ segments:
       - [0x0B1A80, textbin, rsp/s2dex]
 
       - [0x0B3260, data, main/0B3260]
+      - [0x0B3280, .data, main/gfx]
+      - [0x0B3290, data, main/0B3290]
       - [0x0B4B00, .data, main/rom_offsets]
       - [0x0B5060, data, main/0B5060]
 

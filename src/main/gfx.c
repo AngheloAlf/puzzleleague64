@@ -3,13 +3,16 @@
  */
 
 #include "gfx.h"
+
 #include "ultra64.h"
+
 #include "include_asm.h"
 #include "macros_defines.h"
 #include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
 #include "segment_symbols.h"
+
 #include "the_game.h"
 #include "buffers.h"
 #include "assets_variables.h"
@@ -24,15 +27,12 @@
 #include "tutorial.h"
 #include "menu.h"
 
-#if VERSION_USA
 void *staticSegment = NULL;
-#endif
 
 extern STACK(B_80219E30_usa, 0xC00);
 extern STACK(B_8021BAA0_usa, SP_DRAM_STACK_SIZE8);
 extern STACK(B_8021BF30_usa, 0x2000);
 
-#if VERSION_USA
 void InitGFX(void) {
     staticSegment = gBufferHeap;
     func_80001310_usa(SEGMENT_ROM_START(segment_0CA4A0), staticSegment, SEGMENT_ROM_SIZE(segment_0CA4A0));
@@ -42,9 +42,7 @@ void InitGFX(void) {
     gInfo[1].unk_19040 = gFramebuffers[1];
     osViSetSpecialFeatures(OS_VI_DITHER_FILTER_ON | OS_VI_DIVOT_ON | OS_VI_GAMMA_DITHER_OFF | OS_VI_GAMMA_OFF);
 }
-#endif
 
-#if VERSION_USA
 s32 CreateMenuGfxTask(struct_gInfo *info) {
     struct_gInfo_unk_00068 *temp_s2 = &info->unk_00068;
 
@@ -111,9 +109,7 @@ s32 CreateMenuGfxTask(struct_gInfo *info) {
     }
     return 0;
 }
-#endif
 
-#if VERSION_USA
 void CreateGameGfxTask1(struct_gInfo *info) {
     glistp = info->unk_00068.unk_00000;
 
@@ -123,9 +119,7 @@ void CreateGameGfxTask1(struct_gInfo *info) {
 
     InitDisplayList(info);
 }
-#endif
 
-#if VERSION_USA
 s32 CreateGameGfxTask2(struct_gInfo *info) {
     struct_gInfo_unk_00068 *temp_a0 = &info->unk_00068;
 
@@ -147,9 +141,7 @@ s32 CreateGameGfxTask2(struct_gInfo *info) {
     }
     return 0;
 }
-#endif
 
-#if VERSION_USA
 void BuildTask(struct_gInfo *info) {
     Gfx *v1 = info->unk_00068.unk_00000;
     OSScTask *scTask = &info->scTask;
@@ -204,64 +196,3 @@ void BuildTask(struct_gInfo *info) {
     scTask->framebuffer = info->unk_19040;
     osSendMesg(B_801AAB9C_usa, scTask, OS_MESG_BLOCK);
 }
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/gfx", InitGFX);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/gfx", CreateMenuGfxTask);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/gfx", func_80001798_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/gfx", func_8000183C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/gfx", func_800018EC_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/gfx", InitGFX);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/gfx", CreateMenuGfxTask);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/gfx", func_800017A8_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/gfx", func_8000184C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/gfx", func_800018FC_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/gfx", InitGFX);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/gfx", CreateMenuGfxTask);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/gfx", func_800017A8_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/gfx", func_8000184C_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/gfx", func_800018FC_ger);
-#endif

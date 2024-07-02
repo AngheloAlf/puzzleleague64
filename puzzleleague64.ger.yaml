@@ -404,6 +404,8 @@ segments:
       - [0x0A8CB0, textbin, rsp/s2dex]
 
       - [0x0AA490, data, main/0AA490]
+      - [0x0AA4B0, .data, main/gfx]
+      - [0x0AA4C0, data, main/0AA4C0]
       - [0x0ABD30, .data, main/rom_offsets]
       - [0x0AC290, data, main/0AC290]
 
