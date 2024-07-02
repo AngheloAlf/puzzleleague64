@@ -45,14 +45,16 @@ INLINE void func_80000450_usa(void) {
         func_80002DE8_usa();
 
         while (true) {
+            s32 i;
+            u32 *buff;
+
             if (var_s0 != 0) {
                 var_s0 &= ~osAfterPreNMI() ? 0 : -1;
             }
 
-            while (osViGetCurrentLine() != 0) {}
-            while (osViGetCurrentLine() == 0) {}
+            WAIT_FINISH_FRAME();
 
-            FRAMEBUFFERS_BACKWARD_SET(0);
+            FRAMEBUFFERS_BACKWARD_SET(i, buff, 0);
         }
     }
 }

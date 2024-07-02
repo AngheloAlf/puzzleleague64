@@ -66,11 +66,11 @@ extern s32 gTimeKeeperVideoRingIndex;
 
 extern u32 gHVQM2UtilTotalVideoFrames;
 extern u32 gHVQM2UtilTotalAudioRecords;
-extern RomOffset gHVQM2UtilVideoStreamP;
+extern RomOffset gHVQM2UtilVideoStreamP; /** Original name: video_streamP */
 extern RomOffset gHVQM2UtilAudioStreamP;
 extern u32 gHVQM2UtilRemainingAudioRecords;
-extern u32 gHVQM2UtilRemainingVideoFrames;
-extern u64 gHVQM2UtilDispTime;
+extern u32 gHVQM2UtilRemainingVideoFrames; /** Original name: video_remain */
+extern u64 gHVQM2UtilDispTime; /** Original name: disptime */
 
 extern RomOffset gHVQM2UtilCurrentVideoRomAddress;
 

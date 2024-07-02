@@ -40,5 +40,8 @@
 #define saved_reg_f20 0.0f
 #define saved_reg_f22 0.0f
 
+#define WAIT_FINISH_FRAME()                     \
+    do {} while (osViGetCurrentLine() != 0);    \
+    do {} while (osViGetCurrentLine() == 0)
 
 #endif

@@ -45,8 +45,8 @@ extern struct_8018EA50_usa *B_8018EA50_usa;
 extern ADPCMstate B_8018EB10_usa;
 
 extern OSMesg B_8018EA90_usa[1];
-extern OSIoMesg B_8018EA98_usa;
-extern OSMesgQueue B_8018EAB0_usa;
+extern OSIoMesg B_8018EA98_usa; /** Original name: videoDmaMesgBlock */
+extern OSMesgQueue B_8018EAB0_usa; /** Original name: videoDmaMessageQ */
 extern OSMesg B_8018EAC8_usa[1];
 extern OSMesgQueue B_8018EAD0_usa;
 extern OSMesg B_8018EAE8_usa[1];

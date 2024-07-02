@@ -525,22 +525,19 @@ u32 HVQM2Util_GetNextAudioRecord(void *arg0) {
 typedef struct struct_8021AAE0_usa {
     /* 0x00 */ OSMesgQueue unk_00;
     /* 0x18 */ UNK_TYPE1 unk_18[0x58];
-    /* 0x70 */ OSThread unk_70;
+    /* 0x70 */ OSThread thread;
 } struct_8021AAE0_usa; // size >= 0x220
 
 extern struct_8021AAE0_usa B_8021AAE0_usa;
 
 s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
     u8 pad[0x20] UNUSED;
-
+    s32 prev_bufno = -1;
     struct_imageLoad_arg0 *sp40;
     RomOffset sp44;
-
     s32 var_v0;
-    s32 var_s7;
     u32 temp_s5;
 
-    var_s7 = -1;
     temp_s5 = arg1 >> 0x10;
     arg1 = arg1 & 0xFFFF;
     if (arg1 & 0x1000) {
@@ -550,42 +547,34 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
 
     var_v0 = fileGetAddress(arg0, &sp44);
     if (var_v0 != 0) {
-        HVQM2Record *temp_s2;
+        HVQM2Header *header;
         s32 sp74;
         s32 sp7C;
         s32 sp84;
         s32 sp8C;
-        s32 sp94;
-        s32 *var_a0_6;
+        s32 screen_offset;
+        s32 h_offset;
+        s32 v_offset;
         s32 a1;
-        u32 temp_a2;
-        s32 *v1;
-        register OSIntMask temp_s0_8;
-        s32 var_s0;
-        u16 temp_s0_3;
-        s32 temp_s0_4;
-        HVQM2Header *temp_s1;
-        s32 var_s4;
-        s32 temp;
-        u32 sp9C;
+        u32 *current_fb;
+        s32 i;
+        u32 usec_per_frame;
 
         gHVQM2UtilCurrentVideoRomAddress = sp44;
-        osViBlack(1U);
+        osViBlack(true);
         peelStop();
         func_80002D5C_usa();
         func_80002DE8_usa();
 
-        for (var_s0 = 0; var_s0 < 8; var_s0++) {
-            while (osViGetCurrentLine() != 0) {}
-            while (osViGetCurrentLine() == 0) {}
+        for (i = 0; i < 8; i++) {
+            WAIT_FINISH_FRAME();
         }
 
-        osStopThread(&B_8021AAE0_usa.unk_70);
+        osStopThread(&B_8021AAE0_usa.thread);
         osStopThread(&B_8019CFA0_usa);
 
-        for (var_s0 = 0; var_s0 < 8; var_s0++) {
-            while (osViGetCurrentLine() != 0) {}
-            while (osViGetCurrentLine() == 0) {}
+        for (i = 0; i < 8; i++) {
+            WAIT_FINISH_FRAME();
         }
 
         func_8008B21C_usa();
@@ -594,6 +583,7 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
         gCfbBuffers[1] = (void *)&gFramebuffers[1];
 
         B_8018EA50_usa = (void *)ALIGN8((uintptr_t)arg2);
+        // TODO: do something with 0x46290
         arg2 = (void *)((uintptr_t)arg2 + 0x46290);
         if (((uintptr_t)&B_8018EA50_usa->pcmbuf) & 0xF) {
             osSyncPrintf("ERROR: 'pcmbuf' not 16-byte aligned!\n");
@@ -614,10 +604,10 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
             osSyncPrintf("ERROR: 'hvq_yieldbuf' not 16-byte aligned!\n");
         }
 
-        temp_s1 = OS_DCACHE_ROUNDUP_ADDR(&B_8018EA50_usa->unk_46240);
+        header = OS_DCACHE_ROUNDUP_ADDR(&B_8018EA50_usa->unk_46240);
 
         osCreateMesgQueue(&B_8018EAD0_usa, B_8018EAE8_usa, ARRAY_COUNT(B_8018EAE8_usa));
-        osSetEventMesg(4U, &B_8018EAD0_usa, NULL);
+        osSetEventMesg(OS_EVENT_SP, &B_8018EAD0_usa, NULL);
         osCreateMesgQueue(&B_8018EA78_usa, B_8018EA90_usa, ARRAY_COUNT(B_8018EA90_usa));
         osCreateMesgQueue(&B_8018EAB0_usa, B_8018EAC8_usa, ARRAY_COUNT(B_8018EAC8_usa));
 
@@ -629,67 +619,103 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
         hvqtask.t.ucode_size = (u8 *)hvqm2sp1TextEnd - (u8 *)hvqm2sp1TextStart;
         hvqtask.t.ucode_data = (u64 *)hvqm2sp1DataStart;
 
-        hvqtask.t.type = 7;
+        hvqtask.t.type = M_HVQMTASK;
         hvqtask.t.flags = 0;
 
         hvqtask.t.ucode_boot = (void *)rspbootTextStart;
         hvqtask.t.ucode_boot_size = (u8 *)rspbootTextEnd - (u8 *)rspbootTextStart;
-        hvqtask.t.ucode_data_size = 0x70;
+        hvqtask.t.ucode_data_size = HVQM2_UCODE_DATA_SIZE;
 
         hvqtask.t.data_ptr = (void *)&B_801AABA0_usa;
         hvqtask.t.yield_data_ptr = B_8018EA50_usa->hvq_yieldbuf;
         hvqtask.t.yield_data_size = sizeof(B_8018EA50_usa->hvq_yieldbuf);
 
+        /**
+         * Initialize the frame buffer (clear buffer contents and status flag)
+         */
         Cfb_Init();
-
         osViSwapBuffer(gCfbBuffers[1]);
 
-        osViBlack(1U);
+        osViBlack(true);
 
-        RomCopy(temp_s1, gHVQM2UtilCurrentVideoRomAddress, 0x3C, OS_MESG_PRI_NORMAL, &B_8018EA98_usa, &B_8018EAB0_usa);
+        RomCopy(header, gHVQM2UtilCurrentVideoRomAddress, sizeof(HVQM2Header), OS_MESG_PRI_NORMAL, &B_8018EA98_usa, &B_8018EAB0_usa);
 
-        gHVQM2UtilTotalVideoFrames = *(u32 *)&temp_s1->total_frames;
-        sp9C = *(u32 *)&temp_s1->usec_per_frame;
-        gHVQM2UtilTotalAudioRecords = *(u32 *)&temp_s1->total_audio_records;
+        gHVQM2UtilTotalVideoFrames = *(u32 *)&header->total_frames;
+        usec_per_frame = *(u32 *)&header->usec_per_frame;
+        gHVQM2UtilTotalAudioRecords = *(u32 *)&header->total_audio_records;
 
-        temp_a2 = (SCREEN_WIDTH - temp_s1->width) / 2;
-        temp = (SCREEN_HEIGHT - temp_s1->height) / 2;
-        sp94 = (temp * SCREEN_WIDTH) + temp_a2;
-        hvqm2SetupSP1(temp_s1, SCREEN_WIDTH);
+        /**
+         * Determine video display position
+         * (adjust offset so a small image is expanded in the center of the
+         *  frame buffer)
+         */
+        h_offset = (SCREEN_WIDTH - header->width) / 2;
+        v_offset = (SCREEN_HEIGHT - header->height) / 2;
+        screen_offset = (v_offset * SCREEN_WIDTH) + h_offset;
+
+        /**
+         * Setup the HVQM2 image decoder
+         */
+        hvqm2SetupSP1(header, SCREEN_WIDTH);
 
         Cfb_ReleaseAll();
 
-        TimeKeeper_PlayVideo(HVQM2Util_Rewind, *(u32 *)&temp_s1->samples_per_sec);
+        TimeKeeper_PlayVideo(HVQM2Util_Rewind, *(u32 *)&header->samples_per_sec);
 
         sp7C = -1;
         sp84 = 0;
         sp8C = 0;
 
-        if ((temp_s5 != 0) && (temp_s5 < (u32)gHVQM2UtilTotalVideoFrames)) {
-            gHVQM2UtilRemainingVideoFrames = (s32)temp_s5;
+        if ((temp_s5 != 0) && (temp_s5 < gHVQM2UtilTotalVideoFrames)) {
+            gHVQM2UtilRemainingVideoFrames = temp_s5;
         }
 
         sp74 = 0;
-
         while (gHVQM2UtilRemainingVideoFrames > 0) {
             u8 sp50[sizeof(HVQM2Record) + 0x10];
+            HVQM2Record *record_header;
+            u16 frame_format;
+            s32 bufno = 0;
 
             sp74++;
             if (sp74 >= 5) {
-                osViBlack(0U);
+                osViBlack(false);
             }
             osContStartReadData(&gSerialMsgQ);
-            temp_s2 = OS_DCACHE_ROUNDUP_ADDR(sp50);
 
-            gHVQM2UtilVideoStreamP = HVQM2Util_GetRecord(temp_s2, B_8018EA50_usa->hvqbuf, 1, gHVQM2UtilVideoStreamP,
+
+            /**
+             * Fetch video record
+             */
+            record_header = OS_DCACHE_ROUNDUP_ADDR(sp50);
+            gHVQM2UtilVideoStreamP = HVQM2Util_GetRecord(record_header, B_8018EA50_usa->hvqbuf, HVQM2_VIDEO, gHVQM2UtilVideoStreamP,
                                                          &B_8018EA98_usa, &B_8018EAB0_usa);
 
-            if (gHVQM2UtilDispTime > 0) {
-                if (TimeKeeper_GetTime() > gHVQM2UtilDispTime + sp9C * 2) {
+            /**
+             * This block is an example of how to force the video to play
+             * in sync with the audio.
+             *
+             * The video and audio is synchronized and played back by the
+             * timekeeper thread, but this assumes the video (frame buffer)
+             * is always completed and sent to the timekeeper thread before
+             * its scheduled display time.
+             *
+             *   But with mixed I/O the compressed data can be read late and
+             * decoding can take more time due to the increased burden on the
+             * CPU, leading to a situation where the video can become delayed
+             * relative to the audio.
+             *
+             *   One way to counter this is to skip to the next keyframe 
+             * whenever the frame to be decoded is late by an amount of
+             * time equal to 2 or more frames.
+             *
+             */
+            if (gHVQM2UtilDispTime > 0) {	/* Excluding the first frame */
+                if (TimeKeeper_GetTime() > gHVQM2UtilDispTime + usec_per_frame * 2) {
                     Cfb_ReleaseAll();
 
                     do {
-                        gHVQM2UtilDispTime += sp9C;
+                        gHVQM2UtilDispTime += usec_per_frame;
 
                         gHVQM2UtilRemainingVideoFrames--;
                         if (gHVQM2UtilRemainingVideoFrames == 0) {
@@ -697,9 +723,9 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
                         }
 
                         gHVQM2UtilVideoStreamP =
-                            HVQM2Util_GetRecord(temp_s2, B_8018EA50_usa->hvqbuf, 1, gHVQM2UtilVideoStreamP,
+                            HVQM2Util_GetRecord(record_header, B_8018EA50_usa->hvqbuf, HVQM2_VIDEO, gHVQM2UtilVideoStreamP,
                                                 &B_8018EA98_usa, &B_8018EAB0_usa);
-                    } while ((*(u16 *)&temp_s2->format != 0) || (TimeKeeper_GetTime() > gHVQM2UtilDispTime));
+                    } while ((*(u16 *)&record_header->format != HVQM2_VIDEO_KEYFRAME) || (TimeKeeper_GetTime() > gHVQM2UtilDispTime));
 
                     if (gHVQM2UtilRemainingVideoFrames == 0) {
                         break;
@@ -707,50 +733,79 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
                 }
             }
 
-            temp_s0_3 = *(u16 *)&temp_s2->format;
-            var_s4 = 0;
-            if (temp_s0_3 == 2) {
-                var_s4 = var_s7;
+            /**
+             * Decode the compressed image data and expand it in the frame buffer
+             */
+            frame_format = *(u16 *)&record_header->format;
+            if (frame_format == HVQM2_VIDEO_HOLD) {
+                /**
+                 * Just like when frame_format != HVQM2_VIDEO_HOLD you 
+                 * could call hvqm2Decode*() and decode in a new frame
+                 * buffer (in this case, just copying from the buffer of
+                 * the preceding frame).  But here we make use of the
+                 * preceding frame's buffer for the next frame in order
+                 * to speed up the process.
+                 */
+                bufno = prev_bufno;
             } else {
-                var_s4 = Cfb_GetCurrentIndex();
+                s32 status;
 
+                /* Get the frame buffer */
+                bufno = Cfb_GetCurrentIndex();
+
+                /**
+                 * Process first half in the CPU
+                 */
                 hvqtask.t.flags = 0;
-                temp_s0_4 = hvqm2DecodeSP1(&B_8018EA50_usa->hvqbuf, temp_s0_3, &gCfbBuffers[var_s4][sp94],
-                                           &gCfbBuffers[var_s7][sp94], B_8018EA50_usa->hvqwork, &B_801AABA0_usa,
+                status = hvqm2DecodeSP1(&B_8018EA50_usa->hvqbuf, frame_format, &gCfbBuffers[bufno][screen_offset],
+                                           &gCfbBuffers[prev_bufno][screen_offset], B_8018EA50_usa->hvqwork, &B_801AABA0_usa,
                                            B_8018EA50_usa->hvq_spfifo);
 
                 osWritebackDCacheAll();
-                if (temp_s0_4 > 0) {
-                    osInvalDCache(gCfbBuffers[var_s4], 0x25800);
+
+                /**
+                 * Process last half in the RSP
+                 */
+                if (status > 0) {
+                    osInvalDCache(gCfbBuffers[bufno], SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(u16));
                     osSpTaskStart(&hvqtask);
-                    osRecvMesg(&B_8018EAD0_usa, NULL, 1);
+                    osRecvMesg(&B_8018EAD0_usa, NULL, OS_MESG_BLOCK);
                 }
             }
 
             if (arg1 & 0x1000) {
-                func_80021414_usa(sp40, 0xF2, 0xD0, gCfbBuffers[var_s4]);
+                func_80021414_usa(sp40, 0xF2, 0xD0, gCfbBuffers[bufno]);
             }
 
-            Cfb_Keep(var_s4);
+            /**
+             * This completes decoding of the image
+             * This frame is needed for decoding of the next frame, so keep it
+             */
+            Cfb_Keep(bufno);
 
-            if ((var_s7 >= 0) && (var_s7 != var_s4)) {
-                Cfb_Release(var_s7);
+            if ((prev_bufno >= 0) && (prev_bufno != bufno)) {
+                Cfb_Release(prev_bufno);
             }
 
-            TimeKeeper_AddVideoFrame(gCfbBuffers[var_s4], &gCfbStatus[var_s4], gHVQM2UtilDispTime);
+            /**
+             * Entrust the completed frame buffer to the timekeeper
+             */
+            TimeKeeper_AddVideoFrame(gCfbBuffers[bufno], &gCfbStatus[bufno], gHVQM2UtilDispTime);
 
-            var_s7 = var_s4;
-
-            gHVQM2UtilDispTime += sp9C;
+            /**
+             * Go to the process for next frame
+             */
+            prev_bufno = bufno;
+            gHVQM2UtilDispTime += usec_per_frame;
             gHVQM2UtilRemainingVideoFrames--;
 
-            if (osRecvMesg(&B_801AB7F0_usa, NULL, 0) == 0) {
+            if (osRecvMesg(&B_801AB7F0_usa, NULL, OS_MESG_NOBLOCK) == 0) {
                 while (osAfterPreNMI() == -1) {}
                 sp8C = -1;
                 break;
             }
 
-            osRecvMesg(&gSerialMsgQ, NULL, 1);
+            osRecvMesg(&gSerialMsgQ, NULL, OS_MESG_BLOCK);
             osContGetReadData(&B_801C7228_usa);
 
             if (B_801C7228_usa.button == 0) {
@@ -763,74 +818,58 @@ s32 HVQM2Util_Play(File *arg0, u32 arg1, void *arg2) {
             }
         }
 
-        if (var_s7 >= 0) {
-            TimeKeeper_AddVideoFrame(gCfbBuffers[var_s7], (void *)&gCfbStatus[var_s7], gHVQM2UtilDispTime);
+        /**
+         * At this point the processing of the last frame of the movie is complete.
+         */
+
+        /**
+         * Dummy so the last frame will continue to be displayed until disptime
+         */
+        if (prev_bufno >= 0) {
+            TimeKeeper_AddVideoFrame(gCfbBuffers[prev_bufno], (void *)&gCfbStatus[prev_bufno], gHVQM2UtilDispTime);
         }
 
         if (sp8C == 0) {
-            for (var_s0 = 0; var_s0 < 0x10; var_s0++) {
-                while (osViGetCurrentLine() != 0) {}
-                while (osViGetCurrentLine() == 0) {}
+            for (i = 0; i < 16; i++) {
+                WAIT_FINISH_FRAME();
             }
         }
 
-        temp_s0_8 = osSetIntMask(1U);
-        osDestroyThread(&gTimeKeeperCounterThread);
-        osDestroyThread(&gTimeKeeperThread);
-        osSetIntMask(temp_s0_8);
+        {
+            register OSIntMask mask = osSetIntMask(OS_IM_NONE);
+
+            osDestroyThread(&gTimeKeeperCounterThread);
+            osDestroyThread(&gTimeKeeperThread);
+            osSetIntMask(mask);
+        }
 
         if (sp8C == 0) {
-            var_a0_6 = osViGetNextFramebuffer();
-            v1 = (void *)&gFramebuffers[0];
-            if ((void *)var_a0_6 == (void *)&gFramebuffers[0]) {
-                v1 = (void *)&gFramebuffers[1];
+            u32 *next_fb = osViGetNextFramebuffer();
+
+            current_fb = (void *)&gFramebuffers[0];
+            if ((void *)next_fb == (void *)&gFramebuffers[0]) {
+                current_fb = (void *)&gFramebuffers[1];
             }
 
-            a1 = 0x12BF;
-            while (a1 != -1) {
-                *v1++ = *var_a0_6++;
-                *v1++ = *var_a0_6++;
-                *v1++ = *var_a0_6++;
-                *v1++ = *var_a0_6++;
-                *v1++ = *var_a0_6++;
-                *v1++ = *var_a0_6++;
-                *v1++ = *var_a0_6++;
-                *v1++ = *var_a0_6++;
+            FRAMEBUFFERS_COPY(a1, current_fb, next_fb);
 
-                a1 -= 1;
-            }
-
-            for (var_s0 = 0; var_s0 < 0x10; var_s0++) {
-                while (osViGetCurrentLine() != 0) {}
-                while (osViGetCurrentLine() == 0) {}
+            for (i = 0; i < 16; i++) {
+                WAIT_FINISH_FRAME();
             }
         }
 
-        osSetEventMesg(6U, NULL, NULL);
+        osSetEventMesg(OS_EVENT_AI, NULL, NULL);
         osViSetEvent(&B_8021AAE0_usa.unk_00, (void *)0x29A, 1U);
-        osSetEventMesg(4U, &B_8021AAE0_usa.unk_00, (void *)0x29B);
-        osStartThread(&B_8021AAE0_usa.unk_70);
+        osSetEventMesg(OS_EVENT_SP, &B_8021AAE0_usa.unk_00, (void *)0x29B);
+        osStartThread(&B_8021AAE0_usa.thread);
         InitGameAudioSystem();
 
+        // infinite loop?
         while (sp8C != 0) {
-            v1 = (void *)&gFramebuffers[0];
-            a1 = 0x95FF;
-
-            while (a1 != -1) {
-                *v1++ = 0;
-                a1 -= 1;
-            }
-
-            v1 = (void *)&gFramebuffers[1];
-            a1 = 0x95FF;
-
-            while (a1 != -1) {
-                *v1++ = 0;
-                a1 -= 1;
-            }
+            FRAMEBUFFERS_BACKWARD_SET(a1, current_fb, 0);
         }
 
-        osViBlack(0U);
+        osViBlack(false);
         var_v0 = sp84;
     }
 
