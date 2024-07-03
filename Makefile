@@ -266,6 +266,7 @@ $(BUILD_DIR)/src/flash/%.o:     CFLAGS          := -G 0 -non_shared -Xcpluscomm 
 $(BUILD_DIR)/src/flash/%.o:     OPTFLAGS        :=
 $(BUILD_DIR)/src/flash/%.o:     DBGFLAGS        := -g
 $(BUILD_DIR)/src/flash/%.o:     MIPS_VERSION    :=
+$(BUILD_DIR)/src/flash/%.o:     CHAR_SIGN       :=
 
 $(BUILD_DIR)/src/buffers/%.o:   CFLAGS += -fno-common
 
