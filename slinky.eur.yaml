@@ -1,8 +1,8 @@
 settings:
-  base_path: build/eur
+  base_path: build/{version}
   linker_symbols_style: splat
-  target_path: build/eur/puzzleleague64.eur.elf
-  d_path: linker_scripts/eur/puzzleleague64.d
+  target_path: build/{version}/puzzleleague64.{version}.elf
+  d_path: linker_scripts/{version}/puzzleleague64.d
   sections_allowlist:
     - .strtab
     - .symtab
@@ -48,8 +48,8 @@ settings:
     - .interp
     - .eh_frame
   discard_wildcard_section: True
-  partial_scripts_folder: linker_scripts/eur/partial
-  partial_build_segments_folder: build/eur/segments
+  partial_scripts_folder: linker_scripts/{version}/partial
+  partial_build_segments_folder: build/{version}/segments
   alloc_sections:
     - .text
     - .data
@@ -70,7 +70,7 @@ segments:
   - name: ipl3
     section_end_align: null
     files:
-      - { path: asm/eur/data/ipl3.o }
+      - { path: "asm/{version}/data/ipl3.o" }
 
   - name: entry
     fixed_vram: 0x80000400
@@ -84,100 +84,100 @@ segments:
     files:
       - { path: src/main/boot_main.o }
       - { path: src/main/001F10.o }
-      - { path: asm/eur/data/main/0B4BB0.data.o }
+      - { path: "asm/{version}/data/main/0B4BB0.data.o" }
       - { path: src/main/gfx.o }
-      - { path: asm/eur/main/002680.o }
+      - { path: "asm/{version}/main/002680.o" }
       - { path: src/main/sound.o }
       - { path: src/main/tetsound.o }
       - { path: src/main/sfxlimit.o }
-      - { path: asm/eur/main/0068C0.o }
-      - { path: asm/eur/main/007F60.o }
-      - { path: asm/eur/data/main/800C9B50.bss.o }
-      - { path: asm/eur/data/main/0C4200.rodata.o }
-      - { path: asm/eur/data/main/0C42F0.rodata.o }
-      - { path: asm/eur/data/main/0C43C0.rodata.o }
-      - { path: asm/eur/data/main/0C4420.rodata.o }
+      - { path: "asm/{version}/main/0068C0.o" }
+      - { path: "asm/{version}/main/007F60.o" }
+      - { path: "asm/{version}/data/main/800C9B50.bss.o" }
+      - { path: "asm/{version}/data/main/0C4200.rodata.o" }
+      - { path: "asm/{version}/data/main/0C42F0.rodata.o" }
+      - { path: "asm/{version}/data/main/0C43C0.rodata.o" }
+      - { path: "asm/{version}/data/main/0C4420.rodata.o" }
       - { path: src/main/file.o }
       - { path: src/main/bitmap.o }
-      - { path: asm/eur/main/01F9F0.o }
-      - { path: asm/eur/data/main/0C5120.rodata.o }
-      - { path: asm/eur/data/main/0C5150.rodata.o }
-      - { path: asm/eur/data/main/0C5160.rodata.o }
-      - { path: asm/eur/data/main/0C5170.rodata.o }
+      - { path: "asm/{version}/main/01F9F0.o" }
+      - { path: "asm/{version}/data/main/0C5120.rodata.o" }
+      - { path: "asm/{version}/data/main/0C5150.rodata.o" }
+      - { path: "asm/{version}/data/main/0C5160.rodata.o" }
+      - { path: "asm/{version}/data/main/0C5170.rodata.o" }
       - { path: src/main/story.o }
       - { path: src/main/peel.o }
-      - { path: asm/eur/main/02E920.o }
-      - { path: asm/eur/main/02FF20.o }
-      - { path: asm/eur/main/031B50.o }
-      - { path: asm/eur/main/034FD0.o }
-      - { path: asm/eur/main/036750.o }
-      - { path: asm/eur/data/main/0C53B0.rodata.o }
+      - { path: "asm/{version}/main/02E920.o" }
+      - { path: "asm/{version}/main/02FF20.o" }
+      - { path: "asm/{version}/main/031B50.o" }
+      - { path: "asm/{version}/main/034FD0.o" }
+      - { path: "asm/{version}/main/036750.o" }
+      - { path: "asm/{version}/data/main/0C53B0.rodata.o" }
       - { path: src/main/end.o }
-      - { path: asm/eur/data/main/8018D4D0.bss.o }
+      - { path: "asm/{version}/data/main/8018D4D0.bss.o" }
       - { path: src/main/hvqm2util.o }
-      - { path: asm/eur/main/0419D0.o }
-      - { path: asm/eur/main/043230.o }
-      - { path: asm/eur/main/043F40.o }
-      - { path: asm/eur/main/0450B0.o }
-      - { path: asm/eur/main/047CD0.o }
-      - { path: asm/eur/main/04C1A0.o }
-      - { path: asm/eur/main/04F2F0.o }
-      - { path: asm/eur/main/0535C0.o }
-      - { path: asm/eur/main/054EC0.o }
-      - { path: asm/eur/main/0566C0.o }
-      - { path: asm/eur/main/0577B0.o }
-      - { path: asm/eur/data/main/0C5F80.rodata.o }
-      - { path: asm/eur/data/main/0C6060.rodata.o }
-      - { path: asm/eur/data/main/0C6070.rodata.o }
-      - { path: asm/eur/data/main/0C6080.rodata.o }
-      - { path: asm/eur/data/main/0C6720.rodata.o }
-      - { path: asm/eur/data/main/0C68E0.rodata.o }
-      - { path: asm/eur/data/main/0C77D0.rodata.o }
+      - { path: "asm/{version}/main/0419D0.o" }
+      - { path: "asm/{version}/main/043230.o" }
+      - { path: "asm/{version}/main/043F40.o" }
+      - { path: "asm/{version}/main/0450B0.o" }
+      - { path: "asm/{version}/main/047CD0.o" }
+      - { path: "asm/{version}/main/04C1A0.o" }
+      - { path: "asm/{version}/main/04F2F0.o" }
+      - { path: "asm/{version}/main/0535C0.o" }
+      - { path: "asm/{version}/main/054EC0.o" }
+      - { path: "asm/{version}/main/0566C0.o" }
+      - { path: "asm/{version}/main/0577B0.o" }
+      - { path: "asm/{version}/data/main/0C5F80.rodata.o" }
+      - { path: "asm/{version}/data/main/0C6060.rodata.o" }
+      - { path: "asm/{version}/data/main/0C6070.rodata.o" }
+      - { path: "asm/{version}/data/main/0C6080.rodata.o" }
+      - { path: "asm/{version}/data/main/0C6720.rodata.o" }
+      - { path: "asm/{version}/data/main/0C68E0.rodata.o" }
+      - { path: "asm/{version}/data/main/0C77D0.rodata.o" }
       - { path: src/main/update.o }
-      - { path: asm/eur/main/05B790.o }
-      - { path: asm/eur/main/05E500.o }
-      - { path: asm/eur/main/05E7D0.o }
-      - { path: asm/eur/main/05F3E0.o }
-      - { path: asm/eur/main/067640.o }
-      - { path: asm/eur/main/068280.o }
-      - { path: asm/eur/main/06B520.o }
-      - { path: asm/eur/main/06BE00.o }
-      - { path: asm/eur/main/06DD70.o }
-      - { path: asm/eur/main/070AF0.o }
-      - { path: asm/eur/main/071E70.o }
-      - { path: asm/eur/main/0725F0.o }
-      - { path: asm/eur/main/073DC0.o }
-      - { path: asm/eur/main/0745B0.o }
-      - { path: asm/eur/main/074A60.o }
-      - { path: asm/eur/main/074B50.o }
-      - { path: asm/eur/main/074C40.o }
-      - { path: asm/eur/main/074D30.o }
-      - { path: asm/eur/main/074E20.o }
-      - { path: asm/eur/main/074F10.o }
-      - { path: asm/eur/main/075000.o }
-      - { path: asm/eur/main/0750F0.o }
-      - { path: asm/eur/main/0751E0.o }
-      - { path: asm/eur/main/0752D0.o }
-      - { path: asm/eur/main/0753C0.o }
-      - { path: asm/eur/main/0754B0.o }
-      - { path: asm/eur/main/0755A0.o }
-      - { path: asm/eur/main/075690.o }
-      - { path: asm/eur/main/075780.o }
-      - { path: asm/eur/main/075870.o }
-      - { path: asm/eur/main/075960.o }
-      - { path: asm/eur/main/075F20.o }
-      - { path: asm/eur/data/main/0C7A50.rodata.o }
-      - { path: asm/eur/data/main/0C7C50.rodata.o }
-      - { path: asm/eur/data/main/0C7E50.rodata.o }
-      - { path: asm/eur/data/main/0C84E0.rodata.o }
-      - { path: asm/eur/data/main/0C85B0.rodata.o }
+      - { path: "asm/{version}/main/05B790.o" }
+      - { path: "asm/{version}/main/05E500.o" }
+      - { path: "asm/{version}/main/05E7D0.o" }
+      - { path: "asm/{version}/main/05F3E0.o" }
+      - { path: "asm/{version}/main/067640.o" }
+      - { path: "asm/{version}/main/068280.o" }
+      - { path: "asm/{version}/main/06B520.o" }
+      - { path: "asm/{version}/main/06BE00.o" }
+      - { path: "asm/{version}/main/06DD70.o" }
+      - { path: "asm/{version}/main/070AF0.o" }
+      - { path: "asm/{version}/main/071E70.o" }
+      - { path: "asm/{version}/main/0725F0.o" }
+      - { path: "asm/{version}/main/073DC0.o" }
+      - { path: "asm/{version}/main/0745B0.o" }
+      - { path: "asm/{version}/main/074A60.o" }
+      - { path: "asm/{version}/main/074B50.o" }
+      - { path: "asm/{version}/main/074C40.o" }
+      - { path: "asm/{version}/main/074D30.o" }
+      - { path: "asm/{version}/main/074E20.o" }
+      - { path: "asm/{version}/main/074F10.o" }
+      - { path: "asm/{version}/main/075000.o" }
+      - { path: "asm/{version}/main/0750F0.o" }
+      - { path: "asm/{version}/main/0751E0.o" }
+      - { path: "asm/{version}/main/0752D0.o" }
+      - { path: "asm/{version}/main/0753C0.o" }
+      - { path: "asm/{version}/main/0754B0.o" }
+      - { path: "asm/{version}/main/0755A0.o" }
+      - { path: "asm/{version}/main/075690.o" }
+      - { path: "asm/{version}/main/075780.o" }
+      - { path: "asm/{version}/main/075870.o" }
+      - { path: "asm/{version}/main/075960.o" }
+      - { path: "asm/{version}/main/075F20.o" }
+      - { path: "asm/{version}/data/main/0C7A50.rodata.o" }
+      - { path: "asm/{version}/data/main/0C7C50.rodata.o" }
+      - { path: "asm/{version}/data/main/0C7E50.rodata.o" }
+      - { path: "asm/{version}/data/main/0C84E0.rodata.o" }
+      - { path: "asm/{version}/data/main/0C85B0.rodata.o" }
       - { path: src/main/puzzle.o }
-      - { path: asm/eur/main/08A670.o }
-      - { path: asm/eur/data/main/80192080.bss.o }
-      - { path: asm/eur/data/main/0C8680.rodata.o }
-      - { path: asm/eur/data/main/0B4BE0.data.o }
+      - { path: "asm/{version}/main/08A670.o" }
+      - { path: "asm/{version}/data/main/80192080.bss.o" }
+      - { path: "asm/{version}/data/main/0C8680.rodata.o" }
+      - { path: "asm/{version}/data/main/0B4BE0.data.o" }
       - { path: src/main/rom_offsets.o }
-      - { path: asm/eur/data/main/0B69B0.data.o }
+      - { path: "asm/{version}/data/main/0B69B0.data.o" }
       - { path: src/libmus/player.o }
       - { path: src/libmus/player_fx.o }
       - { path: src/libmus/aud_dma.o }
@@ -233,8 +233,8 @@ segments:
       - { path: lib/ultralib/src/io/contquery.o }
       - { path: lib/ultralib/src/io/contreaddata.o }
       - { path: lib/ultralib/src/io/contreset.o }
-      - { path: asm/eur/data/libultra/controller.data.o }
-      - { path: asm/eur/libultra/controller.o }
+      - { path: "asm/{version}/data/libultra/controller.data.o" }
+      - { path: "asm/{version}/libultra/controller.o" }
       - { path: lib/ultralib/src/io/contsetch.o }
       - { path: lib/ultralib/src/os/virtualtophysical.o }
       - { path: lib/ultralib/src/debug/assert.o }
@@ -403,22 +403,22 @@ segments:
       - { path: lib/ultralib/src/libc/ldiv.o }
       - { path: lib/ultralib/src/rmon/rmonrcp.o }
       - { path: lib/ultralib/src/rmon/rmonbrk.o }
-      - { path: asm/eur/data/libhvqm/hvqm2decSP1.bss.o }
-      - { path: asm/eur/libhvqm/hvqm2decSP1.o }
-      - { path: asm/eur/data/libhvqm/adpcmdec.data.o }
-      - { path: asm/eur/libhvqm/adpcmdec.o }
+      - { path: "asm/{version}/data/libhvqm/hvqm2decSP1.bss.o" }
+      - { path: "asm/{version}/libhvqm/hvqm2decSP1.o" }
+      - { path: "asm/{version}/data/libhvqm/adpcmdec.data.o" }
+      - { path: "asm/{version}/libhvqm/adpcmdec.o" }
       - { path: src/libkmc/mmuldi3.o }
       - { path: src/main/build.o }
-      - { path: asm/eur/data/rsp/rspboot.o }
-      - { path: asm/eur/data/rsp/aspMain.o }
-      - { path: asm/eur/data/rsp/aspMain.o }
-      - { path: asm/eur/data/rsp/hvqm2sp1.o }
-      - { path: asm/eur/data/rsp/hvqm2sp1.o }
-      - { path: asm/eur/data/rsp/f3dex.o }
-      - { path: asm/eur/data/rsp/f3dex.o }
-      - { path: asm/eur/data/rsp/s2dex.o }
-      - { path: asm/eur/data/rsp/s2dex.o }
-      - { path: asm/eur/data/main/8019BFC0.bss.o }
+      - { path: "asm/{version}/data/rsp/rspboot.o" }
+      - { path: "asm/{version}/data/rsp/aspMain.o" }
+      - { path: "asm/{version}/data/rsp/aspMain.o" }
+      - { path: "asm/{version}/data/rsp/hvqm2sp1.o" }
+      - { path: "asm/{version}/data/rsp/hvqm2sp1.o" }
+      - { path: "asm/{version}/data/rsp/f3dex.o" }
+      - { path: "asm/{version}/data/rsp/f3dex.o" }
+      - { path: "asm/{version}/data/rsp/s2dex.o" }
+      - { path: "asm/{version}/data/rsp/s2dex.o" }
+      - { path: "asm/{version}/data/main/8019BFC0.bss.o" }
 
   - name: buffer1
     section_end_align: 0x10
@@ -441,12 +441,12 @@ segments:
     fixed_vram: 0x01000000
     section_end_align: 0x10
     files:
-      - { path: asm/eur/data/assets/segment_0CA4A0.data.o }
+      - { path: "asm/{version}/data/assets/segment_0CA4A0.data.o" }
 
   - name: FB730
     section_end_align: null
     files:
-      - { path: asm/eur/data/FB730.o }
+      - { path: "asm/{version}/data/FB730.o" }
 
   - name: bin_file
     section_end_align: null
@@ -456,689 +456,689 @@ segments:
   - name: segment_17C2A80
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_17C2A80.o }
+      - { path: "asm/{version}/data/segment_17C2A80.o" }
 
   - name: segment_17CA780
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_17CA780.o }
+      - { path: "asm/{version}/data/segment_17CA780.o" }
 
   - name: segment_1A45560
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A45560.o }
+      - { path: "asm/{version}/data/segment_1A45560.o" }
 
   - name: segment_1A47630
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A47630.o }
+      - { path: "asm/{version}/data/segment_1A47630.o" }
 
   - name: segment_1A49850
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A49850.o }
+      - { path: "asm/{version}/data/segment_1A49850.o" }
 
   - name: segment_1A49F60
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A49F60.o }
+      - { path: "asm/{version}/data/segment_1A49F60.o" }
 
   - name: segment_1A4AAC0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A4AAC0.o }
+      - { path: "asm/{version}/data/segment_1A4AAC0.o" }
 
   - name: segment_1A4DEE0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A4DEE0.o }
+      - { path: "asm/{version}/data/segment_1A4DEE0.o" }
 
   - name: segment_1A51B40
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A51B40.o }
+      - { path: "asm/{version}/data/segment_1A51B40.o" }
 
   - name: segment_1A52D50
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A52D50.o }
+      - { path: "asm/{version}/data/segment_1A52D50.o" }
 
   - name: segment_1A55860
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A55860.o }
+      - { path: "asm/{version}/data/segment_1A55860.o" }
 
   - name: segment_1A57C20
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A57C20.o }
+      - { path: "asm/{version}/data/segment_1A57C20.o" }
 
   - name: segment_1A5C640
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A5C640.o }
+      - { path: "asm/{version}/data/segment_1A5C640.o" }
 
   - name: segment_1A5D6D0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A5D6D0.o }
+      - { path: "asm/{version}/data/segment_1A5D6D0.o" }
 
   - name: segment_1A5E510
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A5E510.o }
+      - { path: "asm/{version}/data/segment_1A5E510.o" }
 
   - name: segment_1A64950
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A64950.o }
+      - { path: "asm/{version}/data/segment_1A64950.o" }
 
   - name: segment_1A6AF50
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A6AF50.o }
+      - { path: "asm/{version}/data/segment_1A6AF50.o" }
 
   - name: segment_1A6DAF0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A6DAF0.o }
+      - { path: "asm/{version}/data/segment_1A6DAF0.o" }
 
   - name: segment_1A70610
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A70610.o }
+      - { path: "asm/{version}/data/segment_1A70610.o" }
 
   - name: segment_1A712D0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A712D0.o }
+      - { path: "asm/{version}/data/segment_1A712D0.o" }
 
   - name: segment_1A72030
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A72030.o }
+      - { path: "asm/{version}/data/segment_1A72030.o" }
 
   - name: segment_1A74380
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A74380.o }
+      - { path: "asm/{version}/data/segment_1A74380.o" }
 
   - name: segment_1A75FF0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A75FF0.o }
+      - { path: "asm/{version}/data/segment_1A75FF0.o" }
 
   - name: segment_1A76940
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A76940.o }
+      - { path: "asm/{version}/data/segment_1A76940.o" }
 
   - name: segment_1A776B0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A776B0.o }
+      - { path: "asm/{version}/data/segment_1A776B0.o" }
 
   - name: segment_1A79C90
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A79C90.o }
+      - { path: "asm/{version}/data/segment_1A79C90.o" }
 
   - name: segment_1A7E1B0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A7E1B0.o }
+      - { path: "asm/{version}/data/segment_1A7E1B0.o" }
 
   - name: segment_1A7FE50
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A7FE50.o }
+      - { path: "asm/{version}/data/segment_1A7FE50.o" }
 
   - name: segment_1A81760
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A81760.o }
+      - { path: "asm/{version}/data/segment_1A81760.o" }
 
   - name: segment_1A824D0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A824D0.o }
+      - { path: "asm/{version}/data/segment_1A824D0.o" }
 
   - name: segment_1A837A0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A837A0.o }
+      - { path: "asm/{version}/data/segment_1A837A0.o" }
 
   - name: segment_1A85160
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A85160.o }
+      - { path: "asm/{version}/data/segment_1A85160.o" }
 
   - name: segment_1A87870
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A87870.o }
+      - { path: "asm/{version}/data/segment_1A87870.o" }
 
   - name: segment_1A87F80
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A87F80.o }
+      - { path: "asm/{version}/data/segment_1A87F80.o" }
 
   - name: segment_1A88AE0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A88AE0.o }
+      - { path: "asm/{version}/data/segment_1A88AE0.o" }
 
   - name: segment_1A8A210
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A8A210.o }
+      - { path: "asm/{version}/data/segment_1A8A210.o" }
 
   - name: segment_1A8A8F0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A8A8F0.o }
+      - { path: "asm/{version}/data/segment_1A8A8F0.o" }
 
   - name: segment_1A8B000
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A8B000.o }
+      - { path: "asm/{version}/data/segment_1A8B000.o" }
 
   - name: segment_1A8BEA0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A8BEA0.o }
+      - { path: "asm/{version}/data/segment_1A8BEA0.o" }
 
   - name: segment_1A8E130
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A8E130.o }
+      - { path: "asm/{version}/data/segment_1A8E130.o" }
 
   - name: segment_1A910B0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A910B0.o }
+      - { path: "asm/{version}/data/segment_1A910B0.o" }
 
   - name: segment_1A93340
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A93340.o }
+      - { path: "asm/{version}/data/segment_1A93340.o" }
 
   - name: segment_1A966A0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A966A0.o }
+      - { path: "asm/{version}/data/segment_1A966A0.o" }
 
   - name: segment_1A98F30
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A98F30.o }
+      - { path: "asm/{version}/data/segment_1A98F30.o" }
 
   - name: segment_1A9CB20
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A9CB20.o }
+      - { path: "asm/{version}/data/segment_1A9CB20.o" }
 
   - name: segment_1A9D1B0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A9D1B0.o }
+      - { path: "asm/{version}/data/segment_1A9D1B0.o" }
 
   - name: segment_1A9D850
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A9D850.o }
+      - { path: "asm/{version}/data/segment_1A9D850.o" }
 
   - name: segment_1A9E2E0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A9E2E0.o }
+      - { path: "asm/{version}/data/segment_1A9E2E0.o" }
 
   - name: segment_1A9EAC0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A9EAC0.o }
+      - { path: "asm/{version}/data/segment_1A9EAC0.o" }
 
   - name: segment_1A9F450
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1A9F450.o }
+      - { path: "asm/{version}/data/segment_1A9F450.o" }
 
   - name: segment_1AA0D70
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1AA0D70.o }
+      - { path: "asm/{version}/data/segment_1AA0D70.o" }
 
   - name: segment_1AA3350
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1AA3350.o }
+      - { path: "asm/{version}/data/segment_1AA3350.o" }
 
   - name: segment_1AA7870
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1AA7870.o }
+      - { path: "asm/{version}/data/segment_1AA7870.o" }
 
   - name: segment_1AA9510
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1AA9510.o }
+      - { path: "asm/{version}/data/segment_1AA9510.o" }
 
   - name: segment_1AAAE20
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1AAAE20.o }
+      - { path: "asm/{version}/data/segment_1AAAE20.o" }
 
   - name: segment_1AABB90
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1AABB90.o }
+      - { path: "asm/{version}/data/segment_1AABB90.o" }
 
   - name: segment_1AACE60
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1AACE60.o }
+      - { path: "asm/{version}/data/segment_1AACE60.o" }
 
   - name: segment_1AB0280
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1AB0280.o }
+      - { path: "asm/{version}/data/segment_1AB0280.o" }
 
   - name: segment_1AB3EE0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1AB3EE0.o }
+      - { path: "asm/{version}/data/segment_1AB3EE0.o" }
 
   - name: segment_1AB5B80
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1AB5B80.o }
+      - { path: "asm/{version}/data/segment_1AB5B80.o" }
 
   - name: segment_1AB7490
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1AB7490.o }
+      - { path: "asm/{version}/data/segment_1AB7490.o" }
 
   - name: segment_1ABA8B0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1ABA8B0.o }
+      - { path: "asm/{version}/data/segment_1ABA8B0.o" }
 
   - name: segment_1ABE510
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1ABE510.o }
+      - { path: "asm/{version}/data/segment_1ABE510.o" }
 
   - name: segment_1AC02C0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1AC02C0.o }
+      - { path: "asm/{version}/data/segment_1AC02C0.o" }
 
   - name: segment_1AC2390
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1AC2390.o }
+      - { path: "asm/{version}/data/segment_1AC2390.o" }
 
   - name: segment_1AC4120
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1AC4120.o }
+      - { path: "asm/{version}/data/segment_1AC4120.o" }
 
   - name: segment_1AC5B60
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1AC5B60.o }
+      - { path: "asm/{version}/data/segment_1AC5B60.o" }
 
   - name: segment_1AC7EB0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1AC7EB0.o }
+      - { path: "asm/{version}/data/segment_1AC7EB0.o" }
 
   - name: segment_1AC9A60
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1AC9A60.o }
+      - { path: "asm/{version}/data/segment_1AC9A60.o" }
 
   - name: segment_1ACAE00
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1ACAE00.o }
+      - { path: "asm/{version}/data/segment_1ACAE00.o" }
 
   - name: segment_1ACD260
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1ACD260.o }
+      - { path: "asm/{version}/data/segment_1ACD260.o" }
 
   - name: segment_1ACE9B0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1ACE9B0.o }
+      - { path: "asm/{version}/data/segment_1ACE9B0.o" }
 
   - name: segment_1ACF1B0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1ACF1B0.o }
+      - { path: "asm/{version}/data/segment_1ACF1B0.o" }
 
   - name: segment_1AD0EA0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1AD0EA0.o }
+      - { path: "asm/{version}/data/segment_1AD0EA0.o" }
 
   - name: segment_1AD8720
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1AD8720.o }
+      - { path: "asm/{version}/data/segment_1AD8720.o" }
 
   - name: segment_1C5EFB0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1C5EFB0.o }
+      - { path: "asm/{version}/data/segment_1C5EFB0.o" }
 
   - name: _1C60960
     section_end_align: null
     files:
-      - { path: asm/eur/data/1C60960.o }
+      - { path: "asm/{version}/data/1C60960.o" }
 
   - name: segment_1C60AD0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1C60AD0.o }
+      - { path: "asm/{version}/data/segment_1C60AD0.o" }
 
   - name: segment_1C63BE0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1C63BE0.o }
+      - { path: "asm/{version}/data/segment_1C63BE0.o" }
 
   - name: segment_1D358C0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1D358C0.o }
+      - { path: "asm/{version}/data/segment_1D358C0.o" }
 
   - name: segment_1D37FF0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1D37FF0.o }
+      - { path: "asm/{version}/data/segment_1D37FF0.o" }
 
   - name: segment_1D38180
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1D38180.o }
+      - { path: "asm/{version}/data/segment_1D38180.o" }
 
   - name: segment_1D3D2C0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1D3D2C0.o }
+      - { path: "asm/{version}/data/segment_1D3D2C0.o" }
 
   - name: _1D3D620
     section_end_align: null
     files:
-      - { path: asm/eur/data/1D3D620.o }
+      - { path: "asm/{version}/data/1D3D620.o" }
 
   - name: segment_1D3D390
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1D3D390.o }
+      - { path: "asm/{version}/data/segment_1D3D390.o" }
 
   - name: segment_1D3E1A0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1D3E1A0.o }
+      - { path: "asm/{version}/data/segment_1D3E1A0.o" }
 
   - name: segment_1D66C70
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1D66C70.o }
+      - { path: "asm/{version}/data/segment_1D66C70.o" }
 
   - name: segment_1D66F00
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1D66F00.o }
+      - { path: "asm/{version}/data/segment_1D66F00.o" }
 
   - name: segment_1D67A70
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1D67A70.o }
+      - { path: "asm/{version}/data/segment_1D67A70.o" }
 
   - name: segment_1D8B4C0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1D8B4C0.o }
+      - { path: "asm/{version}/data/segment_1D8B4C0.o" }
 
   - name: segment_1D8B6C0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1D8B6C0.o }
+      - { path: "asm/{version}/data/segment_1D8B6C0.o" }
 
   - name: segment_1D8C620
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1D8C620.o }
+      - { path: "asm/{version}/data/segment_1D8C620.o" }
 
   - name: segment_1DB4980
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1DB4980.o }
+      - { path: "asm/{version}/data/segment_1DB4980.o" }
 
   - name: segment_1DB4C20
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1DB4C20.o }
+      - { path: "asm/{version}/data/segment_1DB4C20.o" }
 
   - name: segment_1DB5790
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1DB5790.o }
+      - { path: "asm/{version}/data/segment_1DB5790.o" }
 
   - name: segment_1DD4750
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1DD4750.o }
+      - { path: "asm/{version}/data/segment_1DD4750.o" }
 
   - name: segment_1DD4950
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1DD4950.o }
+      - { path: "asm/{version}/data/segment_1DD4950.o" }
 
   - name: segment_1DD54C0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1DD54C0.o }
+      - { path: "asm/{version}/data/segment_1DD54C0.o" }
 
   - name: segment_1DF38F0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1DF38F0.o }
+      - { path: "asm/{version}/data/segment_1DF38F0.o" }
 
   - name: segment_1DF3AF0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1DF3AF0.o }
+      - { path: "asm/{version}/data/segment_1DF3AF0.o" }
 
   - name: segment_1DF4660
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1DF4660.o }
+      - { path: "asm/{version}/data/segment_1DF4660.o" }
 
   - name: segment_1E16C10
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1E16C10.o }
+      - { path: "asm/{version}/data/segment_1E16C10.o" }
 
   - name: segment_1E16E10
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1E16E10.o }
+      - { path: "asm/{version}/data/segment_1E16E10.o" }
 
   - name: segment_1E17980
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1E17980.o }
+      - { path: "asm/{version}/data/segment_1E17980.o" }
 
   - name: segment_1E36C00
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1E36C00.o }
+      - { path: "asm/{version}/data/segment_1E36C00.o" }
 
   - name: segment_1E36E00
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1E36E00.o }
+      - { path: "asm/{version}/data/segment_1E36E00.o" }
 
   - name: segment_1E37970
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1E37970.o }
+      - { path: "asm/{version}/data/segment_1E37970.o" }
 
   - name: segment_1E5D070
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1E5D070.o }
+      - { path: "asm/{version}/data/segment_1E5D070.o" }
 
   - name: segment_1E5D270
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1E5D270.o }
+      - { path: "asm/{version}/data/segment_1E5D270.o" }
 
   - name: segment_1E5DDE0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1E5DDE0.o }
+      - { path: "asm/{version}/data/segment_1E5DDE0.o" }
 
   - name: segment_1E7B650
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1E7B650.o }
+      - { path: "asm/{version}/data/segment_1E7B650.o" }
 
   - name: segment_1E7B850
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1E7B850.o }
+      - { path: "asm/{version}/data/segment_1E7B850.o" }
 
   - name: segment_1E7C710
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1E7C710.o }
+      - { path: "asm/{version}/data/segment_1E7C710.o" }
 
   - name: segment_1EA1000
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1EA1000.o }
+      - { path: "asm/{version}/data/segment_1EA1000.o" }
 
   - name: segment_1EA12B0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1EA12B0.o }
+      - { path: "asm/{version}/data/segment_1EA12B0.o" }
 
   - name: segment_1EA2170
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1EA2170.o }
+      - { path: "asm/{version}/data/segment_1EA2170.o" }
 
   - name: segment_1ED7210
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1ED7210.o }
+      - { path: "asm/{version}/data/segment_1ED7210.o" }
 
   - name: segment_1ED74C0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1ED74C0.o }
+      - { path: "asm/{version}/data/segment_1ED74C0.o" }
 
   - name: segment_1ED8030
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1ED8030.o }
+      - { path: "asm/{version}/data/segment_1ED8030.o" }
 
   - name: segment_1F03840
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1F03840.o }
+      - { path: "asm/{version}/data/segment_1F03840.o" }
 
   - name: segment_1F03A40
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1F03A40.o }
+      - { path: "asm/{version}/data/segment_1F03A40.o" }
 
   - name: segment_1F049A0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1F049A0.o }
+      - { path: "asm/{version}/data/segment_1F049A0.o" }
 
   - name: segment_1F2C5C0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1F2C5C0.o }
+      - { path: "asm/{version}/data/segment_1F2C5C0.o" }
 
   - name: segment_1F2C860
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1F2C860.o }
+      - { path: "asm/{version}/data/segment_1F2C860.o" }
 
   - name: segment_1F2D920
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1F2D920.o }
+      - { path: "asm/{version}/data/segment_1F2D920.o" }
 
   - name: segment_1F64640
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1F64640.o }
+      - { path: "asm/{version}/data/segment_1F64640.o" }
 
   - name: segment_1F64920
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1F64920.o }
+      - { path: "asm/{version}/data/segment_1F64920.o" }
 
   - name: segment_1F65490
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1F65490.o }
+      - { path: "asm/{version}/data/segment_1F65490.o" }
 
   - name: segment_1F898F0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1F898F0.o }
+      - { path: "asm/{version}/data/segment_1F898F0.o" }
 
   - name: segment_1F89AF0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1F89AF0.o }
+      - { path: "asm/{version}/data/segment_1F89AF0.o" }
 
   - name: segment_1F8A660
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1F8A660.o }
+      - { path: "asm/{version}/data/segment_1F8A660.o" }
 
   - name: segment_1FA9EB0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1FA9EB0.o }
+      - { path: "asm/{version}/data/segment_1FA9EB0.o" }
 
   - name: segment_1FAA0B0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1FAA0B0.o }
+      - { path: "asm/{version}/data/segment_1FAA0B0.o" }
 
   - name: segment_1FAAC20
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1FAAC20.o }
+      - { path: "asm/{version}/data/segment_1FAAC20.o" }
 
   - name: segment_1FCDF80
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1FCDF80.o }
+      - { path: "asm/{version}/data/segment_1FCDF80.o" }
 
   - name: segment_1FCE1A0
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1FCE1A0.o }
+      - { path: "asm/{version}/data/segment_1FCE1A0.o" }
 
   - name: segment_1FCE670
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1FCE670.o }
+      - { path: "asm/{version}/data/segment_1FCE670.o" }
 
   - name: segment_1FCF820
     section_end_align: null
     files:
-      - { path: asm/eur/data/segment_1FCF820.o }
+      - { path: "asm/{version}/data/segment_1FCF820.o" }
