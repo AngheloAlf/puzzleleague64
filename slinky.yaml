@@ -2,7 +2,7 @@ settings:
   base_path: build/{version}
   linker_symbols_style: splat
   target_path: build/{version}/puzzleleague64.{version}.elf
-  d_path: linker_scripts/{version}/puzzleleague64.d
+  d_path: build/{version}/puzzleleague64.{version}.d
   sections_allowlist:
     - .strtab
     - .symtab

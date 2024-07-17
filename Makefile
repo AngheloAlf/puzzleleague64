@@ -56,7 +56,8 @@ ROM       := $(BUILD_DIR)/$(TARGET).$(VERSION).z64
 BIN       := $(BUILD_DIR)/$(TARGET).$(VERSION).bin
 ELF       := $(BUILD_DIR)/$(TARGET).$(VERSION).elf
 LD_MAP    := $(BUILD_DIR)/$(TARGET).$(VERSION).map
-LD_SCRIPT := linker_scripts/$(VERSION)/$(TARGET).ld
+LD_SCRIPT := $(BUILD_DIR)/$(TARGET).$(VERSION).ld
+D_FILE    := $(BUILD_DIR)/$(TARGET).$(VERSION).d
 
 
 #### Setup ####
@@ -129,6 +130,11 @@ SPLAT_FLAGS       ?=
 ifneq ($(FULL_DISASM),0)
     SPLAT_FLAGS       += --disassemble-all
 endif
+
+SLINKY            ?= tools/slinky/slinky-cli
+SLINKY_YAML       ?= slinky.yaml
+
+SLINKY_FLAGS ?=
 
 export SPIMDISASM_PANIC_RANGE_CHECK="True"
 
@@ -237,7 +243,7 @@ LINKER_SCRIPTS   := $(LD_SCRIPT) $(BUILD_DIR)/linker_scripts/hardware_regs.ld $(
 
 
 # Automatic dependency files
-DEP_FILES := $(LD_SCRIPT:.ld=.d) $(SEGMENTS_D)
+DEP_FILES := $(D_FILE) $(SEGMENTS_D)
 
 ifneq ($(DEP_ASM), 0)
 	DEP_FILES += $(O_FILES:.o=.asmproc.d)
@@ -292,10 +298,11 @@ libclean:
 
 distclean: clean
 	$(RM) -r $(BUILD_DIR) asm/ bin/ .splat/
-	$(RM) -r linker_scripts/$(VERSION)/auto $(LD_SCRIPT)
+	$(RM) -r linker_scripts/$(VERSION)/auto
 
 setup:
 	$(MAKE) -C tools
+	$(MAKE) $(LD_SCRIPT)
 
 extract:
 	$(RM) -r asm/$(VERSION) bin/$(VERSION)
@@ -336,8 +343,8 @@ $(BIN): $(ELF)
 	$(OBJCOPY) -O binary --gap-fill=0x00 $< $@
 
 $(ELF): $(LINKER_SCRIPTS)
-	$(file >$(BUILD_DIR)/o_files, $(filter %.o, $^))
-	$(LD) $(ENDIAN) $(LDFLAGS) -Map $(LD_MAP) $(foreach ld, $(LINKER_SCRIPTS), -T $(ld)) -o $@ @$(BUILD_DIR)/o_files
+	$(file >$(@:.elf=.o_files.txt), $(filter %.o, $^))
+	$(LD) $(ENDIAN) $(LDFLAGS) -Map $(LD_MAP) $(foreach ld, $(LINKER_SCRIPTS), -T $(ld)) -o $@ @$(@:.elf=.o_files.txt)
 
 ## Order-only prerequisites
 # These ensure e.g. the PNG_INC_FILES are built before the O_FILES.
@@ -348,6 +355,15 @@ $(O_FILES): | asset_files
 
 .PHONY: asset_files
 
+
+$(LD_SCRIPT): $(SLINKY_YAML) $(SLINKY)
+	$(SLINKY) --custom-options version=$(VERSION) $(SLINKY_FLAGS) -o $@ $<
+
+# The main .d file is a subproduct of generating the main linker script.
+# We have this rule so Make can automatically regenerate the dependencies file
+# if we have touched the slinky yaml (via the `-include` statement), so we
+# always only build the .c/.s files listed on the yaml.
+$(D_FILE): $(LD_SCRIPT)
 
 $(BUILD_DIR)/%.ld: %.ld
 	$(CPP) $(CPPFLAGS) $(BUILD_DEFINES) $(IINC) $(COMP_VERBOSE_FLAG) $< > $@
