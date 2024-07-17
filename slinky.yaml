@@ -3,6 +3,10 @@ settings:
   linker_symbols_style: splat
   target_path: build/{version}/puzzleleague64.{version}.elf
   d_path: build/{version}/puzzleleague64.{version}.d
+
+  partial_scripts_folder: build/{version}/linker_scripts/partial
+  partial_build_segments_folder: segments
+
   sections_allowlist:
     - .strtab
     - .symtab
@@ -48,8 +52,6 @@ settings:
     - .interp
     - .eh_frame
   discard_wildcard_section: True
-  partial_scripts_folder: linker_scripts/{version}/partial
-  partial_build_segments_folder: build/{version}/segments
   alloc_sections:
     - .text
     - .data

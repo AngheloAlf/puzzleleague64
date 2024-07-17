@@ -33,6 +33,8 @@ COMPILER_VERBOSE ?= 0
 DEP_ASM ?= 1
 # If non-zero touching an included file will rebuild any file that depends on it
 DEP_INCLUDE ?= 1
+# If non-zero, partially links each segment, making the first build slower but improving build times afterwards
+PARTIAL_LINKING ?= 0
 
 # Set prefix to mips binutils binaries (mips-linux-gnu-ld => 'mips-linux-gnu-') - Change at your own risk!
 # In nearly all cases, not having 'mips-linux-gnu-*' binaries on the PATH is indicative of missing dependencies
@@ -134,7 +136,10 @@ endif
 SLINKY            ?= tools/slinky/slinky-cli
 SLINKY_YAML       ?= slinky.yaml
 
-SLINKY_FLAGS ?=
+SLINKY_FLAGS      ?=
+ifneq ($(PARTIAL_LINKING),0)
+    SLINKY_FLAGS    += --partial-linking
+endif
 
 export SPIMDISASM_PANIC_RANGE_CHECK="True"
 
@@ -234,7 +239,7 @@ O_FILES       := $(foreach f,$(C_FILES:.c=.o),$(BUILD_DIR)/$f) \
 
 PNG_INC_FILES := $(foreach f,$(PNG_FILES:.png=.inc),$(BUILD_DIR)/$f)
 
-SEGMENTS_SCRIPTS := $(wildcard linker_scripts/$(VERSION)/partial/*.ld)
+SEGMENTS_SCRIPTS := $(wildcard $(BUILD_DIR)/linker_scripts/partial/*.ld)
 SEGMENTS_D       := $(SEGMENTS_SCRIPTS:.ld=.d)
 SEGMENTS         := $(foreach f, $(SEGMENTS_SCRIPTS:.ld=), $(notdir $f))
 SEGMENTS_O       := $(foreach f, $(SEGMENTS), $(BUILD_DIR)/segments/$f.o)
@@ -397,6 +402,10 @@ $(BUILD_DIR)/lib/%.o: lib/%.c
 
 $(BUILD_DIR)/lib/%.o: lib/%.s
 	$(MAKE) -C lib VERSION=$(VERSION) CROSS=$(CROSS) ../$@
+
+$(BUILD_DIR)/segments/%.o: $(BUILD_DIR)/linker_scripts/partial/%.ld
+	$(file >$(@:.o=.o_files.txt), $(filter %.o, $^))
+	$(QUIET_CMD)$(LD) $(ENDIAN) $(LDFLAGS) --relocatable -T $< -Map $(@:.o=.map) -o $@ @$(@:.o=.o_files.txt)
 
 
 # Make inc files from assets
