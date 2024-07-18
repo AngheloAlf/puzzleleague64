@@ -139,7 +139,7 @@ segments:
     subsegments:
       - [0x000000, .data, rom_header/rom_header]
 
-  - name: boot
+  - name: ipl3
     type: databin
     start: 0x40
 
