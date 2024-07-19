@@ -133,6 +133,42 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/sfxlimit", func_80005A08_usa);
 INCLUDE_ASM("asm/eur/nonmatchings/main/sfxlimit", SetMIDIParam);
 #endif
 
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", PlayMIDI);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", PlaySE);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", func_80005330_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", func_800054DC_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", func_800056C8_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", func_80005840_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", func_80005888_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", func_80005A08_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", func_80005C44_fra);
+#endif
+
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/sfxlimit", PlayMIDI);
 #endif

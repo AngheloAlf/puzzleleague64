@@ -3,6 +3,7 @@
  */
 
 #include "title.h"
+
 #include "ultra64.h"
 #include "include_asm.h"
 #include "macros_defines.h"
@@ -20,9 +21,11 @@
 #include "screen.h"
 #include "menu.h"
 
+#if VERSION_USA
 u32 D_800B5890_usa[] = {
     0xFF000000, 0x00FF0000, 0x0000FF00, 0x00FFFF00, 0xFF00FF00, 0xFFFF0000, 0x00000000,
 };
+#endif
 
 extern const char RO_STR_800C3128_usa[];
 extern const char RO_STR_800C3144_usa[];
@@ -598,4 +601,52 @@ void titleSetup(void) {
 
     func_80046F8C_usa();
 }
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/title", func_80005CC0_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/title", func_80005F80_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/title", DrawTitle);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/title", func_8000634C_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/title", RO_800C1E88_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/title", RO_STR_800C1E94_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/title", RO_STR_800C1EA4_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/title", RO_STR_800C1EAC_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/title", RO_STR_800C1EB4_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/title", DoTitle);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/title", InitTitle);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/title", titleSetup);
 #endif

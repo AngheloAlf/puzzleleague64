@@ -187,7 +187,7 @@ segments:
       - [0x047F40, asm, main/047F40]
       - [0x04BF00, asm, main/04BF00] # maybe part of text
       - [0x04CC20, c, main/text]
-      - [0x04F050, asm, main/04F050] # flic starts here
+      - [0x04F050, asm, main/04F050] # flic starts somewhere in this file
       - [0x053320, asm, main/053320]
       - [0x054C20, c, main/dlist]
       - [0x056420, asm, main/056420]
