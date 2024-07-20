@@ -195,3 +195,59 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/puzzle", DoPuzzleEditor);
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/puzzle", DrawPuzzleEditor);
 #endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/puzzle", func_80087410_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/puzzle", func_80087518_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/puzzle", func_80087584_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/puzzle", func_800876D8_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/puzzle", func_80087804_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/puzzle", func_80087908_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/puzzle", func_80087A64_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/puzzle", func_80089108_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/puzzle", func_80087C0C_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/puzzle", func_80087CD0_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/puzzle", func_80087D5C_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/puzzle", func_80087DE8_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/puzzle", func_80087E08_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/puzzle", func_80087E4C_fra);
+#endif

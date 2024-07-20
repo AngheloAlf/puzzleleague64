@@ -535,3 +535,107 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", func_80034140_usa);
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", DrawStageClearIntro);
 #endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C2E90_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C2EA0_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C2EF0_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C2F10_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C2F18_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C2F98_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", InitBonus);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C3060_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C3228_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C32A8_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", DoBonus);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", DrawBonus);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", func_80032218_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", func_8003225C_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", func_800322A4_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C32DC_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C330C_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C3314_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", func_80032420_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", func_80032584_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", DoCountDown);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", func_80032F90_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", InitStageClearIntro);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", DoStageClearIntro);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", func_800340CC_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", DrawStageClearIntro);
+#endif

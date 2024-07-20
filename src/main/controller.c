@@ -240,3 +240,23 @@ void UpdateMenuController(void) {
 INCLUDE_ASM("asm/usa/nonmatchings/main/controller", UpdateMenuController);
 #endif
 #endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/controller", InitController);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/controller", func_800458A4_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/controller", func_800459B4_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/controller", UpdateController);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/controller", UpdateMenuController);
+#endif

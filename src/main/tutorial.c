@@ -28,3 +28,27 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/tutorial", func_8008885C_usa);
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/tutorial", func_800888C4_usa);
 #endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/tutorial", func_80086560_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/tutorial", InitTutorial);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/tutorial", func_80086D68_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/tutorial", DoTutorial);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/tutorial", func_8008732C_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/tutorial", func_80087394_fra);
+#endif

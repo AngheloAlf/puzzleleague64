@@ -286,3 +286,31 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/peel", peelSetup);
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/peel", func_8002DBF0_usa);
 #endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/peel", func_8002C370_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/peel", func_8002CCA0_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/peel", peelStop);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/peel", func_8002D06C_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/peel", func_8002DAF8_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/peel", peelSetup);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/peel", func_8002DC60_fra);
+#endif
