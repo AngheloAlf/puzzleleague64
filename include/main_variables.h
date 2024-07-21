@@ -445,7 +445,7 @@ extern s32 gOverflowFlag;
 // extern UNK_TYPE RO_STR_800C3634_usa;
 // extern UNK_TYPE RO_STR_800C3644_usa;
 // extern UNK_TYPE RO_800C3930_usa;
-// extern UNK_TYPE RO_800C3AB0_usa;
+// extern UNK_TYPE RO_STR_800C3AB0_usa;
 // extern UNK_TYPE RO_STR_800C3AC8_usa;
 // extern UNK_TYPE RO_STR_800C3B1C_usa;
 // extern UNK_TYPE RO_STR_800C3BA8_usa;

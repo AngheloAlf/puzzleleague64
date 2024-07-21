@@ -464,6 +464,195 @@ INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3634_usa);
 INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3644_usa);
 #endif
 
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3650_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3660_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3670_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3680_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3690_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C36A0_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C36B0_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C36C0_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C36D0_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C36E0_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C36F0_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3700_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3710_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3720_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3730_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3740_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3750_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3760_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3770_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3780_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3790_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C37A0_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C37B0_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C37C0_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C37D0_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C37E0_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C37F0_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3800_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3810_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3820_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3830_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3840_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3850_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3860_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3870_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3880_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3890_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C38A0_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C38B0_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C38C0_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C38D0_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C38E0_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C38F0_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3900_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3910_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3920_usa);
+#endif
+
+
+
+
+
 #if VERSION_USA
 INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_800C3930_usa);
 #endif
@@ -1317,6 +1506,190 @@ INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3B64_eur);
 
 #if VERSION_EUR
 INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3B74_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3B80_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3B90_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3BA0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3BB0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3BC0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3BD0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3BE0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3BF0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3C00_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3C10_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3C20_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3C30_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3C40_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3C50_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3C60_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3C70_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3C80_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3C90_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3CA0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3CB0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3CC0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3CD0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3CE0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3CF0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3D00_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3D10_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3D20_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3D30_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3D40_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3D50_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3D60_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3D70_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3D80_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3D90_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3DA0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3DB0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3DC0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3DD0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3DE0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3DF0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3E00_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3E10_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3E20_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3E30_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3E40_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3E50_eur);
 #endif
 
 #if VERSION_EUR
