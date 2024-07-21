@@ -459,6 +459,42 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/tetris", DoTetris);
 INCLUDE_ASM("asm/usa/nonmatchings/main/tetris", func_8008ADB4_usa);
 #endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", func_80089A70_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", func_80089B28_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", func_80089BD8_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", func_80089D2C_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", DemoCheck);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", func_80089FC8_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", InitTetrisWell);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", func_8008AB9C_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", func_8008B19C_eur);
+#endif
+
 #if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/tetris", func_80088110_fra);
 #endif

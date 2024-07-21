@@ -603,6 +603,70 @@ void titleSetup(void) {
 }
 #endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/title", func_80005CC0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/title", func_80005F80_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/title", DrawTitle);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/title", func_8000634C_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/title", RO_800C3658_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/title", RO_STR_800C3664_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/title", RO_STR_800C3674_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/title", RO_STR_800C367C_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/title", RO_STR_800C3684_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/title", DoTitle);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/title", InitTitle);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/title", titleSetup);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/title", RO_STR_800C36B4_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/title", RO_STR_800C36C0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/title", RO_STR_800C36C8_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/title", RO_STR_800C36D8_eur);
+#endif
+
 #if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/title", func_80005CC0_fra);
 #endif

@@ -94,6 +94,31 @@ void func_8002F2E8_usa(void) {
 }
 #endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/02E800", func_8002DD20_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/02E800", func_8002EE1C_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/02E800", func_8002EE28_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/02E800", func_8002F1C0_eur);
+#endif
+
+#if VERSION_EUR
+void func_8002F30C_eur(void) {
+}
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/02E800", func_8002F314_eur);
+#endif
+
 #if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/02E800", func_8002DC70_fra);
 #endif
