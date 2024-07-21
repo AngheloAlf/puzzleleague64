@@ -251,3 +251,59 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/puzzle", func_80087E08_fra);
 #if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/puzzle", func_80087E4C_fra);
 #endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/puzzle", func_800875D0_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/puzzle", func_800876D8_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/puzzle", func_80087744_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/puzzle", func_80087898_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/puzzle", func_800879C4_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/puzzle", func_80087AC8_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/puzzle", func_80087C24_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/puzzle", func_80089108_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/puzzle", func_80087DCC_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/puzzle", func_80087E90_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/puzzle", func_80087F1C_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/puzzle", func_80087FA8_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/puzzle", func_80087FC8_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/puzzle", func_8008800C_ger);
+#endif

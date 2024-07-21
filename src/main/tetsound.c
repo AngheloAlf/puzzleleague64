@@ -252,3 +252,48 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", func_800050D0_fra);
 #if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", func_80005178_fra);
 #endif
+
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", InitGameAudioSystem);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", func_80004118_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", func_80004190_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", func_80004690_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", func_80004900_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", func_80004924_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", func_80004978_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", func_80004C54_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", func_80004EC8_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", func_800050D0_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", func_80005178_ger);
+#endif

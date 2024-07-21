@@ -714,3 +714,67 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/title", InitTitle);
 #if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/title", titleSetup);
 #endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/title", func_80005CC0_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/title", func_80005F80_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/title", DrawTitle);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/title", func_8000634C_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_RODATA("asm/ger/nonmatchings/main/title", RO_STR_800B8E48_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_RODATA("asm/ger/nonmatchings/main/title", RO_STR_800B8E54_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_RODATA("asm/ger/nonmatchings/main/title", RO_STR_800B8E64_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_RODATA("asm/ger/nonmatchings/main/title", RO_STR_800B8E6C_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_RODATA("asm/ger/nonmatchings/main/title", RO_STR_800B8E74_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/title", DoTitle);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/title", InitTitle);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/title", titleSetup);
+#endif
+
+#if VERSION_GER
+INCLUDE_RODATA("asm/ger/nonmatchings/main/title", RO_STR_800B8EA4_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_RODATA("asm/ger/nonmatchings/main/title", RO_STR_800B8EB0_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_RODATA("asm/ger/nonmatchings/main/title", RO_STR_800B8EB8_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_RODATA("asm/ger/nonmatchings/main/title", RO_STR_800B8EC8_ger);
+#endif

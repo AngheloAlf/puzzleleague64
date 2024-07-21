@@ -314,3 +314,31 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/peel", peelSetup);
 #if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/peel", func_8002DC60_fra);
 #endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/peel", func_8002C4A0_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/peel", func_8002CDF8_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/peel", peelStop);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/peel", func_8002D1C4_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/peel", func_8002DC50_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/peel", peelSetup);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/peel", func_8002DDD0_ger);
+#endif

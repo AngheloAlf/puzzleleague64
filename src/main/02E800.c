@@ -143,3 +143,28 @@ void func_8002F25C_fra(void) {
 #if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/02E800", func_8002F264_fra);
 #endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/02E800", func_8002DDE0_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/02E800", func_8002EEDC_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/02E800", func_8002EEE8_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/02E800", func_8002F280_ger);
+#endif
+
+#if VERSION_GER
+void func_8002F3CC_ger(void) {
+}
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/02E800", func_8002F3D4_ger);
+#endif

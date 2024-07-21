@@ -280,3 +280,24 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/controller", UpdateController);
 #if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/controller", UpdateMenuController);
 #endif
+
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/controller", InitController);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/controller", func_80045A14_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/controller", func_80045B24_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/controller", UpdateController);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/controller", UpdateMenuController);
+#endif

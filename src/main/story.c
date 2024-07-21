@@ -151,3 +151,52 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/story", DrawStory);
 #if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/story", InitStory);
 #endif
+
+#if VERSION_GER
+void func_8002B7C0_ger(void) {
+}
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/story", func_8002B7C8_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/story", func_8002B7F0_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/story", func_8002B95C_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/story", func_8002B9B8_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/story", func_8002BA4C_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/story", func_8002BAA0_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_RODATA("asm/ger/nonmatchings/main/story", RO_800B9D84_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_RODATA("asm/ger/nonmatchings/main/story", RO_800B9D90_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/story", DoStory);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/story", DrawStory);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/story", InitStory);
+#endif
