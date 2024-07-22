@@ -18,11 +18,6 @@
 
 // extern UNK_TYPE D_800B3A90_usa;
 
-// extern UNK_TYPE D_800B3AC0_usa;
-extern s32 D_800B3AC4_usa;
-// extern UNK_TYPE D_800B3AC8_usa;
-// extern UNK_TYPE D_800B3ACC_usa;
-
 extern f32 D_FLT_800B3B10_usa;
 extern f32 D_FLT_800B3B14_usa;
 extern u8 D_800B3B18_usa;

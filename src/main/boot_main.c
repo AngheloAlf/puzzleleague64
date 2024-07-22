@@ -35,6 +35,7 @@
 #include "bonus.h"
 #include "tutorial.h"
 #include "pon_thread.h"
+#include "0025C0.h"
 
 INLINE void func_80000450_usa(void) {
     s32 var_s0;
@@ -71,7 +72,7 @@ void bootproc(void) {
     osAiSetFrequency(0x4B00);
 
 #if REGION_PAL
-    func_800019C0_usa(0);
+    func_800019C0_usa(NULL);
 #endif
 
     osCreateThread(&sIdleThread, THREAD_ID_IDLE, Idle_ThreadEntry, NULL, STACK_TOP(sIdleStack), THREAD_PRI_IDLE);
@@ -83,7 +84,7 @@ void Idle_ThreadEntry(void *arg) {
 
     osCreateThread(&sMainThread, THREAD_ID_MAIN, pon_main, arg, STACK_TOP(sMainStack), THREAD_PRI_MAIN);
 
-    if (D_800B3AC4_usa == 0) {
+    if (!D_800B3AC4_usa) {
         osStartThread(&sMainThread);
     }
     osSetThreadPri(NULL, 0);

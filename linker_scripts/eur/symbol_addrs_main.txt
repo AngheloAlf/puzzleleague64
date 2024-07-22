@@ -1079,10 +1079,10 @@ gspS2DEX_fifoTextStart = 0x800B27D0; // name_end:gspS2DEX_fifoTextEnd
 
 D_800B3FB0_eur = 0x800B3FB0; //
 staticSegment = 0x800B3FD0; //
-D_800B3FE0_eur = 0x800B3FE0; //
+D_800B3AC0_usa = 0x800B3FE0; //
 D_800B3AC4_usa = 0x800B3FE4; //
-D_800B3FE8_eur = 0x800B3FE8; //
-D_800B3FEC_eur = 0x800B3FEC; //
+D_800B3AC8_usa = 0x800B3FE8; //
+D_800B3ACC_usa = 0x800B3FEC; //
 D_800B3AD0_usa = 0x800B3FF0; //
 D_800B3AD2_usa = 0x800B3FF2; //
 D_800B3AD4_usa = 0x800B3FF4; //

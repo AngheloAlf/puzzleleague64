@@ -11,8 +11,6 @@
 
 void func_80001310_usa(RomOffset segmentRom, void * dstAddr, size_t segmentSize);
 
-// void func_800019C0_usa();
-
 // void func_800343A0_usa();
 // void func_800346B8_usa();
 // void func_8003490C_usa();
@@ -418,11 +416,6 @@ void InitMimic(void);
 // void hvqm2SetupSP1();
 // void hvqm2InitSP1();
 // void adpcmDecode();
-
-
-#if REGION_PAL
-void func_800019C0_usa(UNK_TYPE);
-#endif
 
 
 #endif

@@ -412,7 +412,7 @@ segments:
 
       - [0x0B3260, data, main/0B3260]
       - [0x0B3280, .data, main/gfx]
-      - [0x0B3290, data, main/0B3290]
+      - [0x0B3290, .data, main/0025C0]
       - [0x0B32A0, data, main/sound]
       - [0x0B32E0, data, main/0B32E0]
       - [0x0B4B00, .data, main/rom_offsets]

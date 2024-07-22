@@ -89,9 +89,7 @@ segments:
       - { path: src/main/gfx.o }
       - { path: src/main/0025C0.o }
 
-      - { path: "asm/{version}/data/main/0B46C0.data.o", include_if_any: [[version, usa]] }
-      - { path: "asm/{version}/data/main/0B4BE0.data.o", include_if_any: [[version, eur]] }
-      - { path: "asm/{version}/data/main/0B3290.data.o", include_if_any: [[version, fra]] }
+      - { path: "asm/{version}/data/main/0B4BF0.data.o", include_if_any: [[version, eur]] }
 
       - { path: src/main/sound.o }
       - { path: "asm/{version}/data/main/sound.data.o", include_if_any: [[version, usa], [version, fra]] }
@@ -101,7 +99,7 @@ segments:
 
       - { path: "asm/{version}/data/main/0B4710.data.o", include_if_any: [[version, usa]] }
       - { path: "asm/{version}/data/main/0B32E0.data.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/data/main/0AA4C0.data.o", include_if_any: [[version, ger]] }
+      - { path: "asm/{version}/data/main/0AA4D0.data.o", include_if_any: [[version, ger]] }
 
       - { path: src/main/rom_offsets.o }
       - { path: src/main/title.o }

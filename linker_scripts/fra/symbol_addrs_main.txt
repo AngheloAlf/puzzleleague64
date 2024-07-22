@@ -1076,10 +1076,10 @@ gspS2DEX_fifoTextStart = 0x800B0E80; // name_end:gspS2DEX_fifoTextEnd
 
 D_800B2660_fra = 0x800B2660; //
 staticSegment = 0x800B2680; //
-D_800B2690_fra = 0x800B2690; //
+D_800B3AC0_usa = 0x800B2690; //
 D_800B3AC4_usa = 0x800B2694; //
-D_800B2698_fra = 0x800B2698; //
-D_800B269C_fra = 0x800B269C; //
+D_800B3AC8_usa = 0x800B2698; //
+D_800B3ACC_usa = 0x800B269C; //
 D_800B26A0_fra = 0x800B26A0; // type:s16
 D_800B26A2_fra = 0x800B26A2; // type:s16
 D_800B26A4_fra = 0x800B26A4; // type:s16

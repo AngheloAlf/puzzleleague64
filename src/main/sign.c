@@ -5,7 +5,6 @@
 #include "main_functions.h"
 #include "main_variables.h"
 
-
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/sign", func_800343A0_usa);
 #endif
@@ -134,7 +133,6 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/sign", func_80035584_usa);
 INCLUDE_ASM("asm/eur/nonmatchings/main/sign", func_8003561C_eur);
 #endif
 
-
 #if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/sign", func_80034330_fra);
 #endif
@@ -198,7 +196,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/sign", func_80035584_usa);
 #if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/sign", func_8003558C_fra);
 #endif
-
 
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/sign", func_800344A0_ger);

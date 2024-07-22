@@ -1,22 +1,66 @@
-#include "ultra64.h"
-#include "include_asm.h"
+#include "0025C0.h"
+
 #include "macros_defines.h"
-#include "unknown_structs.h"
-#include "main_functions.h"
-#include "main_variables.h"
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/0025C0", func_800019C0_usa);
-#endif
+bool D_800B3AC0_usa = false;
+bool D_800B3AC4_usa = false;
+bool D_800B3AC8_usa = false;
+bool D_800B3ACC_usa = false;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/0025C0", func_800019C0_usa);
-#endif
+void func_800019C0_usa(char *arg0) {
+    const char *sub_strs[32];
+    // Why this does start at index 1?
+    s32 count = 1;
+    const char **subs_p = sub_strs;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/0025C0", func_800019C0_usa);
-#endif
+    if ((arg0 == NULL) || (*arg0 == '\0')) {
+        return;
+    }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/0025C0", func_800019C0_usa);
-#endif
+    do {
+        // Skip space
+        while ((*arg0 != '\0') && (*arg0 == ' ')) {
+            *arg0++ = '\0';
+        }
+
+        // Store substring if not empty
+        if (*arg0 != '\0') {
+            sub_strs[count++] = arg0;
+        }
+
+        // Advance to the non space character
+        while ((*arg0 != '\0') && (*arg0 != ' ')) {
+            arg0++;
+        }
+    } while (*arg0 != '\0');
+
+    while (count > 1) {
+        const char *c = subs_p[1];
+
+        // Proccess all substrings until a non "short option"-like one is found
+        if (c[0] != '-') {
+            break;
+        }
+
+        switch (c[1]) {
+            case 'd':
+                D_800B3AC4_usa = true;
+                break;
+
+            case 'v':
+                D_800B3AC0_usa = true;
+                break;
+
+            case 's':
+                D_800B3AC8_usa = true;
+                break;
+
+            case 'l':
+                D_800B3ACC_usa = true;
+                break;
+        }
+
+        count--;
+        subs_p++;
+    }
+}

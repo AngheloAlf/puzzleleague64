@@ -414,7 +414,8 @@ segments:
 
       - [0x0B4BB0, data, main/0B4BB0]
       - [0x0B4BD0, .data, main/gfx]
-      - [0x0B4BE0, data, main/0B4BE0]
+      - [0x0B4BE0, .data, main/0025C0]
+      - [0x0B4BF0, data, main/0B4BF0]
       - [0x0B6450, .data, main/rom_offsets]
       - [0x0B69B0, data, main/0B69B0]
 
