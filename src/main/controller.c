@@ -281,7 +281,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/controller", UpdateController);
 INCLUDE_ASM("asm/fra/nonmatchings/main/controller", UpdateMenuController);
 #endif
 
-
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/controller", InitController);
 #endif

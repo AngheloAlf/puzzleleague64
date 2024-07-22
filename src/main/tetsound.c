@@ -253,7 +253,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", func_800050D0_fra);
 INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", func_80005178_fra);
 #endif
 
-
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", InitGameAudioSystem);
 #endif

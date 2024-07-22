@@ -217,7 +217,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/dlist", func_8005343C_fra);
 INCLUDE_ASM("asm/fra/nonmatchings/main/dlist", func_80053D04_fra);
 #endif
 
-
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/dlist", func_80052BB0_ger);
 #endif

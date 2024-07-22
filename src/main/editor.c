@@ -440,7 +440,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/editor", func_80030D58_fra);
 INCLUDE_ASM("asm/fra/nonmatchings/main/editor", func_80030D98_fra);
 #endif
 
-
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/editor", func_8002F3E0_ger);
 #endif

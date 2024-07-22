@@ -162,7 +162,7 @@ segments:
       - [0x001050, c, main/boot_main]
       - [0x001F10, c, main/001F10]
       - [0x001F30, c, main/gfx]
-      - [0x0025C0, asm, main/0025C0]
+      - [0x0025C0, c, main/0025C0]
       - [0x002710, c, main/sound]
       - [0x004A90, c, main/tetsound]
       - [0x005D30, c, main/sfxlimit]
@@ -177,7 +177,7 @@ segments:
       - [0x02E800, c, main/02E800] # maybe model.c? need to confirm
       - [0x02FEF0, c, main/editor]
       - [0x031B20, c, main/bonus]
-      - [0x034FA0, asm, main/034FA0]
+      - [0x034FA0, c, main/sign]
       - [0x036720, asm, main/036720]
       - [0x037E70, c, main/end]
       - [0x03F130, c, main/hvqm2util]

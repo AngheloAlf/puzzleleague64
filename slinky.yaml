@@ -87,11 +87,7 @@ segments:
       - { path: "asm/{version}/data/main/0AA490.data.o", include_if_any: [[version, ger]] }
 
       - { path: src/main/gfx.o }
-
-      - { path: "asm/{version}/main/0025C0.o", include_if_any: [[version, usa]] }
-      - { path: "asm/{version}/main/002680.o", include_if_any: [[version, eur]] }
-      - { path: "asm/{version}/main/002690.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/main/002690.o", include_if_any: [[version, ger]] }
+      - { path: src/main/0025C0.o }
 
       - { path: "asm/{version}/data/main/0B46C0.data.o", include_if_any: [[version, usa]] }
       - { path: "asm/{version}/data/main/0B4BE0.data.o", include_if_any: [[version, eur]] }
@@ -147,20 +143,14 @@ segments:
       - { path: "asm/{version}/data/main/editor.data.o", include_if_any: [[version, fra]] }
 
       - { path: src/main/bonus.o }
+      - { path: src/main/sign.o }
 
-      - { path: "asm/{version}/main/034F30.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/main/0366C0.o", include_if_any: [[version, fra]] }
-
-      - { path: "asm/{version}/main/034FA0.o", include_if_any: [[version, usa]] }
       - { path: "asm/{version}/main/036720.o", include_if_any: [[version, usa]] }
-      - { path: "asm/{version}/main/034FD0.o", include_if_any: [[version, eur]] }
       - { path: "asm/{version}/main/036750.o", include_if_any: [[version, eur]] }
-
-      - { path: "asm/{version}/main/0350A0.o", include_if_any: [[version, ger]] }
+      - { path: "asm/{version}/main/0366C0.o", include_if_any: [[version, fra]] }
       - { path: "asm/{version}/main/036830.o", include_if_any: [[version, ger]] }
 
       - { path: src/main/end.o }
-
       - { path: src/main/hvqm2util.o }
 
       - { path: "asm/{version}/main/041780.o", include_if_any: [[version, usa]] }

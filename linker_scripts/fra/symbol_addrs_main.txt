@@ -14,7 +14,7 @@ CreateMenuGfxTask = 0x8000147C; // type:func
 CreateGameGfxTask1 = 0x800017A8; // type:func
 CreateGameGfxTask2 = 0x8000184C; // type:func
 BuildTask = 0x800018FC; // type:func
-func_80001A80_eur = 0x80001A90; // type:func
+func_800019C0_usa = 0x80001A90; // type:func
 
 func_80001BE0_fra = 0x80001BE0; // type:func
 func_80001CAC_usa = 0x80001D70; // type:func

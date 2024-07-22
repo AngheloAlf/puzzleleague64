@@ -1503,7 +1503,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80003DAC_fra);
 INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80003EC4_fra);
 #endif
 
-
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80001BE0_ger);
 #endif

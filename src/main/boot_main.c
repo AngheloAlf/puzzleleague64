@@ -71,7 +71,7 @@ void bootproc(void) {
     osAiSetFrequency(0x4B00);
 
 #if REGION_PAL
-    func_80001A80_eur(0);
+    func_800019C0_usa(0);
 #endif
 
     osCreateThread(&sIdleThread, THREAD_ID_IDLE, Idle_ThreadEntry, NULL, STACK_TOP(sIdleStack), THREAD_PRI_IDLE);

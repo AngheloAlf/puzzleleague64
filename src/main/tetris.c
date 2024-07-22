@@ -531,7 +531,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/tetris", func_8008923C_fra);
 INCLUDE_ASM("asm/fra/nonmatchings/main/tetris", func_8008983C_fra);
 #endif
 
-
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/tetris", func_800882D0_ger);
 #endif

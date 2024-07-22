@@ -464,7 +464,6 @@ INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3634_usa);
 INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3644_usa);
 #endif
 
-
 #if VERSION_USA
 INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3650_usa);
 #endif
@@ -648,10 +647,6 @@ INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3910_usa);
 #if VERSION_USA
 INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3920_usa);
 #endif
-
-
-
-
 
 #if VERSION_USA
 INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_800C3930_usa);
@@ -2951,7 +2946,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_8001C958_fra);
 #if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_8001C97C_fra);
 #endif
-
 
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_80007340_ger);

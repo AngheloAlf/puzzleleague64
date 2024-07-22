@@ -421,7 +421,7 @@ void InitMimic(void);
 
 
 #if REGION_PAL
-void func_80001A80_eur(UNK_TYPE);
+void func_800019C0_usa(UNK_TYPE);
 #endif
 
 
