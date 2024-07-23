@@ -1,9 +1,16 @@
-#include "ultra64.h"
+/**
+ * Original filename: sign.c
+ */
+
+#include "sign.h"
+
 #include "include_asm.h"
 #include "macros_defines.h"
 #include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
+
+#include "end.h"
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/sign", func_800343A0_usa);
@@ -22,7 +29,13 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/sign", LoadGameOver3D);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/sign", DrawPauseOver);
+void DrawPauseOver(struct_gInfo_unk_00068 *arg0) {
+    if (gMain == GMAIN_388) {
+        DrawPause(arg0);
+    } else {
+        DrawGameOver(arg0);
+    }
+}
 #endif
 
 #if VERSION_USA

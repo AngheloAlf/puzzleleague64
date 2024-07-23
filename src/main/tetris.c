@@ -32,7 +32,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/tetris", func_8008997C_usa);
 s32 DemoCheck(s32 *arg0) {
     func_800545E4_usa(1);
 
-    if ((gTheGame.unk_89C4 != 0) || (gDemo == GDEMO_16)) {
+    if ((gTheGame.unk_89C4[0].unk_00 != 0) || (gDemo == GDEMO_16)) {
         gDemo = GDEMO_16;
         gTheGame.unk_9C1C = 0;
         gTheGame.unk_9C18 = 0;

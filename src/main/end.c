@@ -4,17 +4,17 @@
 
 #include "end.h"
 
-#include "ultra64.h"
-
 #include "include_asm.h"
 #include "macros_defines.h"
 #include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
-#include "dlist.h"
+
+#include "fade.h"
 #include "sound.h"
 #include "sfxlimit.h"
 #include "update.h"
+#include "menu.h"
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80037270_usa);
@@ -44,13 +44,207 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_800379D4_usa);
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80037B0C_usa);
 #endif
 
-#if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/end", RO_800C4980_usa);
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80037270_usa);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80037CBC_usa);
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80037358_usa);
 #endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80037440_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80037724_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80037900_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_800379D4_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80037B0C_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80037270_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80037358_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80037440_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80037724_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80037900_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_800379D4_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80037B0C_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80037270_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80037358_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80037440_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80037724_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80037900_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_800379D4_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80037B0C_usa);
+#endif
+
+s32 EndingExplosion(TheGame *the_game) {
+    u8 sp18[][2] = {
+        { 0x0B, 0x00 }, { 0x07, 0x02 }, { 0x01, 0x00 }, { 0x09, 0x04 }, { 0x03, 0x02 }, { 0x05, 0x04 },
+        { 0x07, 0x00 }, { 0x0B, 0x04 }, { 0x05, 0x02 }, { 0x01, 0x04 }, { 0x09, 0x02 }, { 0x03, 0x00 },
+        { 0x0B, 0x02 }, { 0x07, 0x04 }, { 0x09, 0x00 }, { 0x01, 0x02 }, { 0x05, 0x00 }, { 0x03, 0x04 },
+    };
+    s32 var_s0;
+    s32 var_s2;
+
+    if (gSelection == 0x82) {
+        switch (the_game->unk_0000[0].unk_4420) {
+            case 0x0:
+            case 0x1:
+            case 0x4:
+                var_s0 = 1;
+                break;
+
+            case 0x2:
+            case 0x3:
+            case 0x5:
+                if (the_game->unk_0000[0].unk_4424 < 0x1F) {
+                    var_s0 = 1;
+                } else if (the_game->unk_0000[0].unk_4424 < 0x29) {
+                    var_s0 = 2;
+                } else {
+                    var_s0 = 3;
+                }
+                break;
+
+            case 0x6:
+                if (the_game->unk_0000[0].unk_4424 < 0x1F) {
+                    var_s0 = 1;
+                } else if (the_game->unk_0000[0].unk_4424 < 0x29) {
+                    var_s0 = 2;
+                } else {
+                    var_s0 = 3;
+                }
+                break;
+        }
+    }
+
+    if (gWhatever == 3) {
+        if (gSelection == 0xAA) {
+            if (the_game->unk_0000[0].unk_4428 < 3) {
+                PlaySE(SFX_INIT_TABLE, 0x12C);
+            } else if (the_game->unk_0000[0].unk_4428 < 5) {
+                PlaySE(SFX_INIT_TABLE, 0x12D);
+            } else {
+                PlaySE(SFX_INIT_TABLE, 0x12E);
+            }
+        } else if (gSelection == 0x82) {
+            switch (var_s0) {
+                case 1:
+                    PlaySE(SFX_INIT_TABLE, 0x12C);
+                    break;
+
+                case 2:
+                    PlaySE(SFX_INIT_TABLE, 0x12D);
+                    break;
+
+                case 3:
+                    PlaySE(SFX_INIT_TABLE, 0x12E);
+                    break;
+            }
+        } else {
+            PlaySE(SFX_INIT_TABLE, 0x12C);
+        }
+    }
+
+    if (gWhatever < 0x6D) {
+        s32 temp_v1_5 = gWhatever / 3;
+
+        if (gWhatever == (temp_v1_5 * 3)) {
+            s32 var_a1_2;
+
+            if (gWhatever > ARRAY_COUNT(sp18) * 3) {
+                var_a1_2 = temp_v1_5 - 1 - ARRAY_COUNT(sp18);
+            } else {
+                var_a1_2 = temp_v1_5 - 1;
+            }
+
+            if (gTheGame.unk_9C0C == 1) {
+                StartExplosion(the_game, 0, sp18[var_a1_2][0], sp18[var_a1_2][1], 0x1F);
+            } else {
+                StartExplosion(the_game, 0, sp18[var_a1_2][0], sp18[var_a1_2][1] + 2, 0x1F);
+            }
+        }
+    }
+
+    if (gSelection == 0xAA) {
+        if (the_game->unk_0000[0].unk_4428 < 3) {
+            var_s2 = 0x82;
+        } else if (the_game->unk_0000[0].unk_4428 < 5) {
+            var_s2 = 0xAA;
+        } else {
+            var_s2 = 0xCD;
+        }
+    } else if (gSelection != 0x82) {
+        var_s2 = 0x82;
+    } else {
+        switch (var_s0) {
+            case 0x1:
+                var_s2 = 0x82;
+                break;
+
+            case 0x2:
+                var_s2 = 0xAA;
+                break;
+
+            case 0x3:
+                var_s2 = 0xCD;
+                break;
+        }
+    }
+
+    return (var_s2 >= gWhatever) ? -1 : 0;
+}
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80038018_usa);
@@ -92,9 +286,213 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80038944_usa);
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80038B98_usa);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", DoGameOverTryAgain);
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80038018_usa);
 #endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003813C_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80038228_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003837C_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003853C_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_800386D4_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_800387AC_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003880C_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80038944_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80038B98_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80038018_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003813C_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80038228_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003837C_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003853C_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_800386D4_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_800387AC_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003880C_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80038944_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80038B98_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80038018_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003813C_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80038228_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003837C_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003853C_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_800386D4_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_800387AC_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003880C_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80038944_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80038B98_usa);
+#endif
+
+s32 DoGameOverTryAgain(void) {
+    u16 temp_v1 = gTheGame.unk_89C4[0].unk_00;
+    s32 *temp_s2 = &gTheGame.unk_9C24;
+
+    if (temp_v1 & 0x200) {
+        if (*temp_s2 != 0) {
+            PlaySE(SFX_INIT_TABLE, 0x167);
+        }
+        *temp_s2 = 0;
+    } else if (temp_v1 & 0x100) {
+        if (*temp_s2 != 1) {
+            PlaySE(SFX_INIT_TABLE, 0x168);
+        }
+        *temp_s2 = 1;
+    } else if (temp_v1 & (0x8000 | 0x1000)) {
+        FadeOutSong(last_song_handle, 0x5A);
+        func_80002E0C_usa(0x1E);
+        if (*temp_s2 == 0) {
+            PlaySE(SFX_INIT_TABLE, 5);
+        } else {
+            PlaySE(SFX_INIT_TABLE, 6);
+        }
+        return -1;
+    }
+
+    if (gTheGame.unk_9C0C == 1) {
+        TheGame_unk_9AE0 *var_s0 = &gTheGame.unk_9AE0;
+
+        if (*temp_s2 == 0) {
+            var_s0->unk_0A = 0x60;
+            var_s0->unk_0E = 0x60;
+
+            if ((var_s0->unk_10 != B_801ADC10_usa + 0x2B780) && (var_s0->unk_10 != (B_801ADC10_usa + 0x2DE80))) {
+                var_s0->unk_10 = B_801ADC10_usa + 0x2B780;
+            }
+            if (DoFlashDrawAlways() != 0) {
+                var_s0->unk_10 = B_801ADC10_usa + 0x2B780;
+            } else {
+                var_s0->unk_10 = B_801ADC10_usa + 0x2DE80;
+            }
+        } else {
+            var_s0->unk_0A = 0x60;
+            var_s0->unk_0E = 0x60;
+
+            if ((var_s0->unk_10 != B_801ADC10_usa + 0x26980) && (var_s0->unk_10 != (B_801ADC10_usa + 0x29080))) {
+                var_s0->unk_10 = B_801ADC10_usa + 0x26980;
+            }
+            if (DoFlashDrawAlways() != 0) {
+                var_s0->unk_10 = B_801ADC10_usa + 0x26980;
+            } else {
+                var_s0->unk_10 = B_801ADC10_usa + 0x29080;
+            }
+        }
+        osWritebackDCache(&gTheGame.unk_9AE0, sizeof(TheGame_unk_9AE0));
+    } else {
+        TheGame_unk_9AE0 *var_s0 = &gTheGame.unk_9AE0;
+
+        if (*temp_s2 == 0) {
+            var_s0->unk_0A = 0x60;
+            var_s0->unk_0E = 0x60;
+
+            if ((var_s0->unk_10 != B_801ADC10_usa + 0x2B780) && (var_s0->unk_10 != (B_801ADC10_usa + 0x2DE80))) {
+                var_s0->unk_10 = B_801ADC10_usa + 0x2B780;
+            }
+            if (DoFlashDrawAlways() != 0) {
+                var_s0->unk_10 = B_801ADC10_usa + 0x2B780;
+            } else {
+                var_s0->unk_10 = B_801ADC10_usa + 0x2DE80;
+            }
+        } else {
+            var_s0->unk_0A = 0x60;
+            var_s0->unk_0E = 0x60;
+
+            if ((var_s0->unk_10 != B_801ADC10_usa + 0x26980) && (var_s0->unk_10 != (B_801ADC10_usa + 0x29080))) {
+                var_s0->unk_10 = B_801ADC10_usa + 0x26980;
+            }
+            if (DoFlashDrawAlways() != 0) {
+                var_s0->unk_10 = B_801ADC10_usa + 0x26980;
+            } else {
+                var_s0->unk_10 = B_801ADC10_usa + 0x29080;
+            }
+        }
+        osWritebackDCache(&gTheGame.unk_9AE0, sizeof(TheGame_unk_9AE0));
+    }
+
+    return 0;
+}
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80038F84_usa);
@@ -144,17 +542,189 @@ INCLUDE_RODATA("asm/usa/nonmatchings/main/end", RO_800C4B24_usa);
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_8003A0B8_usa);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_8003AD18_usa);
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80038F84_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/end", RO_800C4D20_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/end", RO_800C4D30_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/end", RO_800C4DC0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003901C_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003991C_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80039A54_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80039B78_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80039DB0_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/end", RO_800C4E64_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/end", RO_800C4E74_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003A0B8_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80038F84_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/end", RO_800C33D0_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/end", RO_800C33E0_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/end", RO_800C3470_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003901C_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003991C_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80039A54_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80039B78_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80039DB0_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/end", RO_800C3514_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/end", RO_800C3524_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003A0B8_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80038F84_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_RODATA("asm/ger/nonmatchings/main/end", RO_800BA390_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_RODATA("asm/ger/nonmatchings/main/end", RO_800BA3A0_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_RODATA("asm/ger/nonmatchings/main/end", RO_800BA430_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003901C_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003991C_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80039A54_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80039B78_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80039DB0_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_RODATA("asm/ger/nonmatchings/main/end", RO_800BA4D4_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_RODATA("asm/ger/nonmatchings/main/end", RO_800BA4E4_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003A0B8_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_8003B590_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/end", Draw2DGameOver);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", Draw2DGameOver);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", Draw2DGameOver);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", Draw2DGameOver);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_8003BF04_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/end", Draw3DGameOver);
 #endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", Draw3DGameOver);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", Draw3DGameOver);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", Draw3DGameOver);
+#endif
+
+void DrawGameOver(struct_gInfo_unk_00068 *arg0) {
+    if (gTheGame.unk_9C0C == 2) {
+        Draw3DGameOver(arg0);
+    } else {
+        Draw2DGameOver(arg0);
+    }
+}
 
 #if VERSION_USA
 #if 0
@@ -173,7 +743,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_8003BF04_usa);
 ? func_80037724_usa(TheGame *);                     /* extern */
 ? func_80037900_usa(TheGame *);                     /* extern */
 ? func_80037B0C_usa(TheGame *, TheGame_unk_8860 *); /* extern */
-s32 func_80037CBC_usa(TheGame *);                   /* extern */
+s32 EndingExplosion(TheGame *);                   /* extern */
 ? func_80038018_usa(TheGame *, ?);                  /* extern */
 ? func_8003813C_usa(TheGame *);                     /* extern */
 ? func_8003837C_usa(TheGame *, ?);                  /* extern */
@@ -414,7 +984,7 @@ block_73:
                     } else {
                         var_s0 = 0;
                         if (gTheGame.unk_8860[0].unk_0 == 7) {
-                            var_s0 = func_80037CBC_usa(&gTheGame);
+                            var_s0 = EndingExplosion(&gTheGame);
                             func_8005D8B4_usa(&gTheGame);
                         }
                     }
@@ -881,7 +1451,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/end", DoGameOver2D);
 ? func_80037724_usa(TheGame *);                     /* extern */
 ? func_800379D4_usa(TheGame *, TheGame_unk_8860 *); /* extern */
 ? func_80037B0C_usa(TheGame *, TheGame_unk_8860 *); /* extern */
-s32 func_80037CBC_usa(TheGame *);                   /* extern */
+s32 EndingExplosion(TheGame *);                   /* extern */
 ? func_8003813C_usa(TheGame *);                     /* extern */
 ? func_80038228_usa(TheGame *, TheGame_unk_8860 *, ?); /* extern */
 ? func_8003880C_usa();                              /* extern */
@@ -1135,7 +1705,7 @@ block_73:
                     } else {
                         var_s0 = 0;
                         if (gTheGame.unk_8860[0].unk_0 == 7) {
-                            var_s0 = func_80037CBC_usa(&gTheGame);
+                            var_s0 = EndingExplosion(&gTheGame);
                             func_8005D8B4_usa(&gTheGame);
                         }
                     }
@@ -1515,316 +2085,12 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/end", DoGameOver3D);
 #endif
 #endif
 
-#if VERSION_USA
-void DoGameOver(void) {
-    SetGameFade();
-
-    if (gTheGame.unk_9C0C == 2) {
-        DoGameOver3D();
-    } else {
-        DoGameOver2D();
-    }
-}
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", SaveRom);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80037270_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80037358_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80037440_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80037724_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80037900_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_800379D4_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80037B0C_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/end", RO_800C4CD0_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80037CBC_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80038018_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003813C_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80038228_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003837C_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003853C_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_800386D4_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_800387AC_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003880C_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80038944_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80038B98_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", DoGameOverTryAgain);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80038F84_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/end", RO_800C4D20_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/end", RO_800C4D30_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/end", RO_800C4DC0_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003901C_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003991C_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80039A54_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80039B78_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80039DB0_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/end", RO_800C4E64_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/end", RO_800C4E74_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003A0B8_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003AD18_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003B590_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003BF04_usa);
-#endif
-
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/end", DoGameOver2D);
 #endif
 
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/end", DoGameOver3D);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", DoGameOver);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", SaveRom);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80037270_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80037358_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80037440_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80037724_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80037900_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_800379D4_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80037B0C_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/end", RO_800C3380_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80037CBC_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80038018_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003813C_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80038228_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003837C_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003853C_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_800386D4_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_800387AC_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003880C_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80038944_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80038B98_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", DoGameOverTryAgain);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80038F84_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/end", RO_800C33D0_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/end", RO_800C33E0_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/end", RO_800C3470_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003901C_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003991C_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80039A54_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80039B78_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80039DB0_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/end", RO_800C3514_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/end", RO_800C3524_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003A0B8_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003AD18_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003B590_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003BF04_usa);
 #endif
 
 #if VERSION_FRA
@@ -1835,154 +2101,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/end", DoGameOver2D);
 INCLUDE_ASM("asm/fra/nonmatchings/main/end", DoGameOver3D);
 #endif
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", DoGameOver);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", SaveRom);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80037270_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80037358_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80037440_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80037724_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80037900_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_800379D4_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80037B0C_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/end", RO_800BA340_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80037CBC_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80038018_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003813C_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80038228_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003837C_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003853C_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_800386D4_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_800387AC_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003880C_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80038944_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80038B98_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", DoGameOverTryAgain);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80038F84_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/end", RO_800BA390_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/end", RO_800BA3A0_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/end", RO_800BA430_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003901C_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003991C_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80039A54_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80039B78_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80039DB0_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/end", RO_800BA4D4_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/end", RO_800BA4E4_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003A0B8_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003AD18_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003B590_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003BF04_usa);
-#endif
-
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/end", DoGameOver2D);
 #endif
@@ -1991,10 +2109,16 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/end", DoGameOver2D);
 INCLUDE_ASM("asm/ger/nonmatchings/main/end", DoGameOver3D);
 #endif
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", DoGameOver);
-#endif
+void DoGameOver(void) {
+    SetGameFade();
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", SaveRom);
-#endif
+    if (gTheGame.unk_9C0C == 2) {
+        DoGameOver3D();
+    } else {
+        DoGameOver2D();
+    }
+}
+
+void SaveRom(void) {
+    menuSaveData(1);
+}

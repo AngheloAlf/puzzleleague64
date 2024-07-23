@@ -187,27 +187,27 @@ void DoEditor(void) {
     sp10.unk_0 = 0;
     sp10.unk_4 = 0;
     if ((screenFlushing() == 0) && (gnFlushCount == -1)) {
-        if (gTheGame.unk_89C4 & 0x4000) {
+        if (gTheGame.unk_89C4[0].unk_00 & 0x4000) {
             sp10.unk_0 = 0x21;
-        } else if (gTheGame.unk_89C4 & 0x8000) {
+        } else if (gTheGame.unk_89C4[0].unk_00 & 0x8000) {
             sp10.unk_0 = 0x20;
-        } else if (gTheGame.unk_89C4 & 0x20) {
+        } else if (gTheGame.unk_89C4[0].unk_00 & 0x20) {
             sp10.unk_0 = 0x18;
-        } else if (gTheGame.unk_89C4 & 0x10) {
+        } else if (gTheGame.unk_89C4[0].unk_00 & 0x10) {
             sp10.unk_0 = 0x19;
-        } else if (gTheGame.unk_89C4 & 0x1000) {
+        } else if (gTheGame.unk_89C4[0].unk_00 & 0x1000) {
             sp10.unk_0 = 0x22;
         } else {
-            if (gTheGame.unk_89C6 & 0x800) {
+            if (gTheGame.unk_89C4[0].unk_02 & 0x800) {
                 sp10.unk_0 = 1;
             }
-            if (gTheGame.unk_89C6 & 0x400) {
+            if (gTheGame.unk_89C4[0].unk_02 & 0x400) {
                 sp10.unk_0 = 2;
             }
-            if (gTheGame.unk_89C6 & 0x200) {
+            if (gTheGame.unk_89C4[0].unk_02 & 0x200) {
                 sp10.unk_0 = 3;
             }
-            if (gTheGame.unk_89C6 & 0x100) {
+            if (gTheGame.unk_89C4[0].unk_02 & 0x100) {
                 sp10.unk_0 = 4;
             }
         }

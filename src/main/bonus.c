@@ -39,7 +39,7 @@ typedef struct struct_800C4598_usa {
 } struct_800C4598_usa; // size = 0x8
 
 extern u8 B_801C6C90_usa;
-extern s32 gWhatever;
+
 extern u32 D_1030FE0[];
 extern u32 D_104C660[];
 extern u32 D_105B710[];

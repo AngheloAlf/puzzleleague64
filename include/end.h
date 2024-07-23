@@ -4,6 +4,8 @@
 #include "ultra64.h"
 #include "unk.h"
 
+struct TheGame;
+struct struct_gInfo_unk_00068;
 
 // void func_80037270_usa();
 // void func_80037358_usa();
@@ -12,7 +14,7 @@
 // void func_80037900_usa();
 // void func_800379D4_usa();
 // void func_80037B0C_usa();
-// void func_80037CBC_usa();
+s32 EndingExplosion(struct TheGame *the_game);
 // void func_80038018_usa();
 // void func_8003813C_usa();
 // void func_80038228_usa();
@@ -31,9 +33,9 @@ s32 DoGameOverTryAgain(void);
 // void func_80039B78_usa();
 // void func_80039DB0_usa();
 // void func_8003A0B8_usa();
-// void func_8003AD18_usa();
-// void func_8003B590_usa();
-// void func_8003BF04_usa();
+void Draw2DGameOver(struct struct_gInfo_unk_00068 *arg0);
+void Draw3DGameOver(struct struct_gInfo_unk_00068 *arg0);
+void DrawGameOver(struct struct_gInfo_unk_00068 *arg0);
 void DoGameOver2D(void);
 void DoGameOver3D(void);
 void DoGameOver(void);

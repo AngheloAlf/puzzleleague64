@@ -221,6 +221,7 @@ segments:
       - { path: "asm/{version}/data/main/0BBD90.rodata.o", include_if_any: [[version, ger]] }
       - { path: "asm/{version}/data/main/0BBF00.rodata.o", include_if_any: [[version, ger]] }
 
+      - { path: src/main/fade.o }
       - { path: src/main/dlist.o }
 
       - { path: "asm/{version}/main/056420.o", include_if_any: [[version, usa]] }

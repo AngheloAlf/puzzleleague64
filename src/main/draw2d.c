@@ -3,16 +3,19 @@
  */
 
 #include "draw2d.h"
-#include "ultra64.h"
+
 #include "include_asm.h"
 #include "macros_defines.h"
 #include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
-#include "assets_variables.h"
-#include "dlist.h"
+
 #include "bonus.h"
+#include "fade.h"
+#include "sign.h"
 #include "text.h"
+
+#include "assets_variables.h"
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/draw2d", Draw2DTetrisWell);
@@ -133,7 +136,7 @@ void Draw2DTetris(struct_gInfo_unk_00068 *arg0) {
     s32 sp10[THEGAME_BUFFER_LEN];
     s32 i;
 
-    gDPSetScissor(glistp++, G_SC_NON_INTERLACE, 0, 7, 320, 239);
+    gDPSetScissor(glistp++, G_SC_NON_INTERLACE, 0, 7, SCREEN_WIDTH, SCREEN_HEIGHT - 1);
 
     Draw2DBackground();
 
@@ -145,7 +148,7 @@ void Draw2DTetris(struct_gInfo_unk_00068 *arg0) {
     if ((gMain != GMAIN_384) || (gCounter >= 0x64)) {
         Draw2DShadeBox();
 
-        gDPSetScissor(glistp++, G_SC_NON_INTERLACE, 0, 31, 320, 223);
+        gDPSetScissor(glistp++, G_SC_NON_INTERLACE, 0, 31, SCREEN_WIDTH, SCREEN_HEIGHT - 17);
         gDPPipeSync(glistp++);
         gDPSetTextureLUT(glistp++, G_TT_RGBA16);
         gSPObjLoadTxtr(glistp++, &colorLUT);
@@ -157,7 +160,7 @@ void Draw2DTetris(struct_gInfo_unk_00068 *arg0) {
             sp10[i] = Draw2DAttackBlock(arg0, i);
         }
 
-        gDPSetScissor(glistp++, G_SC_NON_INTERLACE, 0, 7, 320, 239);
+        gDPSetScissor(glistp++, G_SC_NON_INTERLACE, 0, 7, SCREEN_WIDTH, SCREEN_HEIGHT - 1);
 
         Draw2DFrame();
         Draw2DAnimation(arg0, 4, 4);

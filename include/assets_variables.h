@@ -9,9 +9,9 @@
 // extern UNK_TYPE D_01000004_usa;
 // extern UNK_TYPE D_01000008_usa;
 extern Gfx initRDPstart[];
-extern Gfx D_010000F8_usa[];
-extern Gfx D_01000160_usa[];
-extern Gfx D_010001A8_usa[];
+extern Gfx initRDP_dl[];
+extern Gfx init2D_dl[];
+extern Gfx init3D_dl[];
 // extern UNK_TYPE D_010001F0_usa;
 // extern UNK_TYPE D_01000200_usa;
 // extern UNK_TYPE D_010003F0_usa;

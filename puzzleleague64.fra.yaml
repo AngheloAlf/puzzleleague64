@@ -189,7 +189,8 @@ segments:
       - [0x04A920, asm, main/04A920]
       - [0x04DA60, asm, main/04DA60]
       - [0x051D30, asm, main/051D30]
-      - [0x053630, c, main/dlist]
+      - [0x053630, c, main/fade]
+      - [0x053B10, c, main/dlist]
       - [0x054E30, asm, main/054E30]
       - [0x055F20, asm, main/055F20] # update.c is around here
       - [0x059ED0, asm, main/059ED0]

@@ -190,12 +190,13 @@ segments:
       - [0x04CC20, c, main/text]
       - [0x04F050, asm, main/04F050] # flic starts somewhere in this file
       - [0x053320, asm, main/053320]
-      - [0x054C20, c, main/dlist]
+      - [0x054C20, c, main/fade]
+      - [0x055100, c, main/dlist]
       - [0x056420, asm, main/056420]
       - [0x057510, asm, main/057510]
       - [0x058250, c, main/update]
       - [0x05B4D0, asm, main/05B4D0]
-      - [0x05E230, asm, main/05E230]
+      - [0x05E230, asm, main/05E230] # explode.c?
       - [0x05E500, asm, main/05E500]
       - [0x05F110, asm, main/05F110]
       - [0x067370, asm, main/067370]
@@ -680,9 +681,9 @@ segments:
         subsegments:
         - [0x0CA4A0]
         - { start: 0x0CA4B0, type: gfx, data_only: True, name: assets/segment_0CA4A0/initRDPstart }
-        - { start: 0x0CA598, type: gfx, data_only: True, name: assets/segment_0CA4A0/D_010000F8_usa }
-        - { start: 0x0CA600, type: gfx, data_only: True, name: assets/segment_0CA4A0/D_01000160_usa }
-        - { start: 0x0CA648, type: gfx, data_only: True, name: assets/segment_0CA4A0/D_010001A8_usa }
+        - { start: 0x0CA598, type: gfx, data_only: True, name: assets/segment_0CA4A0/initRDP_dl }
+        - { start: 0x0CA600, type: gfx, data_only: True, name: assets/segment_0CA4A0/init2D_dl }
+        - { start: 0x0CA648, type: gfx, data_only: True, name: assets/segment_0CA4A0/init3D_dl }
         - [0x0CA690, i8, assets/segment_0CA4A0/D_010001F0_usa.i8, 512, 1] # unknown type and dimensions
         - [0x0CA890]
         - [0x0CA8A8, i8, assets/segment_0CA4A0/D_01000408_usa.i8, 512, 1] # unknown type and dimensions

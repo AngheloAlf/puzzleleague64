@@ -34,6 +34,7 @@ s32 PlayMIDI(struct_bgm_init_table arg0[], s32 arg1, s32 arg2, s32 arg3) {
 #endif
 
 #if VERSION_USA
+// TODO: enum for arg1?
 musHandle PlaySE(struct_sfx_init_table *arg0, s32 arg1) {
     struct_sfx_init_table *temp_s0;
 

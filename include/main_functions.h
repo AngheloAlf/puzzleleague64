@@ -11,28 +11,12 @@
 
 void func_80001310_usa(RomOffset segmentRom, void * dstAddr, size_t segmentSize);
 
-// void func_800343A0_usa();
-// void func_800346B8_usa();
-// void func_8003490C_usa();
-// void LoadGameOver3D();
-UNK_RET DrawPauseOver(struct_gInfo_unk_00068 *arg0);
-// void func_8003524C_usa();
-// void func_800352DC_usa();
-// void func_8003536C_usa();
-// void func_800353B0_usa();
-// void func_800353F4_usa();
-// void func_80035438_usa();
-// void func_8003547C_usa();
-// void func_800354C0_usa();
-// void func_80035504_usa();
-// void func_80035584_usa();
-// void func_800355EC_usa();
 // void func_80035B20_usa();
 // void func_80035FF0_usa();
 // void func_800364BC_usa();
 // void func_800364FC_usa();
 // void func_80036A68_usa();
-// void func_8003722C_usa();
+void DrawPause(struct_gInfo_unk_00068 *arg0);
 
 // void func_80040B80_usa();
 // void func_80040DE4_usa();
@@ -158,7 +142,7 @@ UNK_RET Draw2DMiscStuff(struct_gInfo_unk_00068 *arg0);
 // void func_8005CB30_usa();
 // void func_8005CF68_usa();
 // void func_8005D630_usa();
-// void func_8005D868_usa();
+void StartExplosion(TheGame *the_game, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 // void func_8005D8B4_usa();
 // void func_8005D900_usa();
 // void func_8005DB88_usa();

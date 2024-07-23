@@ -974,10 +974,8 @@ extern u32 B_8018A808_usa;
 // extern UNK_TYPE B_80192FB0_usa;
 // extern UNK_TYPE B_80192FC0_usa;
 // extern UNK_TYPE B_80192FC4_usa;
-// extern UNK_TYPE B_80192FD0_usa;
-// extern UNK_TYPE B_80192FD2_usa;
-// extern UNK_TYPE B_80192FD4_usa;
-// extern UNK_TYPE B_80192FD6_usa;
+extern s16 Flash_period[];
+extern s16 Flash_count[];
 extern s32 gLastOverflow;
 // extern UNK_TYPE B_80192FF0_usa;
 // extern UNK_TYPE B_80192FF4_usa;
@@ -1287,7 +1285,10 @@ extern s32 B_801AD9BC_usa;
 extern s32 B_801ADAE8_usa;
 
 // extern UNK_TYPE B_801ADC0C_usa;
-// extern UNK_TYPE B_801ADC10_usa;
+
+// maybe endSegment?
+extern s32 B_801ADC10_usa;
+
 // extern UNK_TYPE B_801C6BD8_usa;
 // extern UNK_TYPE B_801C6BDC_usa;
 // extern UNK_TYPE B_801C6BE0_usa;
@@ -1352,7 +1353,7 @@ extern OSTime gTime;
 // extern UNK_TYPE Pon_Image_Heap;
 // extern UNK_TYPE B_801C70B8_usa;
 // extern UNK_TYPE B_801C70D4_usa;
-// extern UNK_TYPE B_801C70D8_usa;
+extern s32 B_801C70D8_usa;
 
 // extern UNK_TYPE B_801C70E4_usa;
 // extern UNK_TYPE B_801C70E5_usa;
@@ -1421,7 +1422,10 @@ extern s32 gAllVertex;
 // extern UNK_TYPE B_801F9CDC_usa;
 // extern UNK_TYPE B_801F9CE0_usa;
 // extern UNK_TYPE B_801F9CE4_usa;
+
+// TODO: enum?
 extern s32 gSelection;
+
 // extern UNK_TYPE B_801F9CFC_usa;
 // extern UNK_TYPE B_801F9D00_usa;
 // extern UNK_TYPE B_801F9D04_usa;
@@ -1450,7 +1454,9 @@ extern OSMesg B_8021BA28_usa[1];
 // extern UNK_TYPE B_8021BA50_usa;
 // extern UNK_TYPE B_8021BA54_usa;
 
-// extern UNK_TYPE gWhatever;
+// TODO: enum?
+extern s32 gWhatever;
+
 // extern UNK_TYPE B_8021BA60_usa;
 // extern UNK_TYPE B_8021BA64_usa;
 // extern UNK_TYPE B_8021BA68_usa;

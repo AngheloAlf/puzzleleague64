@@ -12,16 +12,16 @@ Gfx initRDPstart[] = {
 #include "assets/segment_0CA4A0/initRDPstart.gfx.inc.c"
 };
 
-Gfx D_010000F8_usa[] = {
-#include "assets/segment_0CA4A0/D_010000F8_usa.gfx.inc.c"
+Gfx initRDP_dl[] = {
+#include "assets/segment_0CA4A0/initRDP_dl.gfx.inc.c"
 };
 
-Gfx D_01000160_usa[] = {
-#include "assets/segment_0CA4A0/D_01000160_usa.gfx.inc.c"
+Gfx init2D_dl[] = {
+#include "assets/segment_0CA4A0/init2D_dl.gfx.inc.c"
 };
 
-Gfx D_010001A8_usa[] = {
-#include "assets/segment_0CA4A0/D_010001A8_usa.gfx.inc.c"
+Gfx init3D_dl[] = {
+#include "assets/segment_0CA4A0/init3D_dl.gfx.inc.c"
 };
 
 u8 D_010001F0_usa[] ALIGNED(8) = {
