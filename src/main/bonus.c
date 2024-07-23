@@ -292,7 +292,90 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", InitBonus);
 #endif
 #endif
 
-#if VERSION_USA
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/bonus", RO_800C47E0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/bonus", RO_800C47F0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/bonus", RO_800C4840_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/bonus", RO_800C4860_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/bonus", RO_800C4868_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/bonus", RO_800C48E8_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/bonus", InitBonus);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C2E90_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C2EA0_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C2EF0_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C2F10_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C2F18_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C2F98_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", InitBonus);
+#endif
+
+#if VERSION_GER
+INCLUDE_RODATA("asm/ger/nonmatchings/main/bonus", RO_800B9E50_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_RODATA("asm/ger/nonmatchings/main/bonus", RO_800B9E60_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_RODATA("asm/ger/nonmatchings/main/bonus", RO_800B9EB0_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_RODATA("asm/ger/nonmatchings/main/bonus", RO_800B9ED0_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_RODATA("asm/ger/nonmatchings/main/bonus", RO_800B9ED8_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_RODATA("asm/ger/nonmatchings/main/bonus", RO_800B9F58_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/bonus", InitBonus);
+#endif
+
 typedef struct struct_800C4660_usa {
     /* 0x0 */ UNK_TYPE4 unk_0;
     /* 0x4 */ UNK_TYPE4 unk_4;
@@ -346,23 +429,28 @@ void DoBonus(void) {
         if ((t0 != 0) || (gWhatever != 0)) {
             if (gWhatever == 0) {
                 if (gTheGame.unk_9C24 == 0) {
+#if VERSION_FRA
+                    u8 *var_s0;
+#else
                     s8 *var_s0;
+#endif
 
                     switch (gTheGame.unk_9C28) {
+                        // TODO: remove `(void *)`
                         case 0x1:
-                            var_s0 = &gPlayer[0]->unk_0E0;
+                            var_s0 = (void *)&gPlayer[0]->unk_0E0;
                             break;
                         case 0x2:
-                            var_s0 = &gPlayer[0]->unk_0E1;
+                            var_s0 = (void *)&gPlayer[0]->unk_0E1;
                             break;
                         case 0x3:
-                            var_s0 = &gPlayer[0]->unk_0E2;
+                            var_s0 = (void *)&gPlayer[0]->unk_0E2;
                             break;
                         case 0x4:
-                            var_s0 = &gPlayer[0]->unk_0E3;
+                            var_s0 = (void *)&gPlayer[0]->unk_0E3;
                             break;
                         case 0x5:
-                            var_s0 = &gPlayer[0]->unk_0E4;
+                            var_s0 = (void *)&gPlayer[0]->unk_0E4;
                             break;
                     }
 
@@ -469,20 +557,43 @@ void DoBonus(void) {
 
         sprintf(sp10, "%02d", gTheGame.unk_9C30);
         SetText(0x103, 0x17, sp10, 0x17);
-    } else if (func_8003228C_usa() != 0) {
+    } else if (DoWatchMenu() != 0) {
         gReset = -1;
         gMain = GMAIN_258;
     }
 }
-#endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", DrawBonus);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", func_8003228C_usa);
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/bonus", DrawBonus);
 #endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", DrawBonus);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/bonus", DrawBonus);
+#endif
+
+s32 DoWatchMenu(void) {
+    s32 ret = 0;
+    s32 pad[2] UNUSED;
+
+    if (gTheGame.unk_89C4[0].unk_00 & 0x9000) {
+        ret = 1;
+    } else if (gTheGame.unk_89C4[0].unk_00 & 0x4000) {
+        ret = 2;
+    }
+
+    if (ret) {
+        return ret;
+    }
+    return 0;
+}
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", func_800322D0_usa);
@@ -534,58 +645,6 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", func_80034140_usa);
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", DrawStageClearIntro);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/bonus", RO_800C47E0_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/bonus", RO_800C47F0_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/bonus", RO_800C4840_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/bonus", RO_800C4860_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/bonus", RO_800C4868_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/bonus", RO_800C48E8_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/bonus", InitBonus);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/bonus", RO_800C49B0_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/bonus", RO_800C4B78_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/bonus", RO_800C4BF8_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/bonus", DoBonus);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/bonus", DrawBonus);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/bonus", func_800322BC_eur);
 #endif
 
 #if VERSION_EUR
@@ -641,58 +700,6 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/bonus", DrawStageClearIntro);
 #endif
 
 #if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C2E90_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C2EA0_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C2EF0_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C2F10_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C2F18_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C2F98_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", InitBonus);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C3060_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C3228_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C32A8_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", DoBonus);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", DrawBonus);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", func_80032218_fra);
-#endif
-
-#if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", func_8003225C_fra);
 #endif
 
@@ -742,58 +749,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", func_800340CC_fra);
 
 #if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", DrawStageClearIntro);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/bonus", RO_800B9E50_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/bonus", RO_800B9E60_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/bonus", RO_800B9EB0_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/bonus", RO_800B9ED0_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/bonus", RO_800B9ED8_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/bonus", RO_800B9F58_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/bonus", InitBonus);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/bonus", RO_800BA020_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/bonus", RO_800BA1E8_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/bonus", RO_800BA268_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/bonus", DoBonus);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/bonus", DrawBonus);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/bonus", func_8003238C_ger);
 #endif
 
 #if VERSION_GER

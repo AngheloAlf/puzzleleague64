@@ -3,12 +3,14 @@
  */
 
 #include "bitmap.h"
+
 #include "ultra64.h"
 #include "include_asm.h"
 #include "macros_defines.h"
 #include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
+
 #include "file.h"
 #include "reend.h"
 
@@ -22,79 +24,67 @@ s32 bitmapLoadRLE(struct_bitmapLoad_arg0 *arg0, File *arg1, void *arg2) {
     s32 temp_lo;
     s32 temp_s2;
     s32 temp_v0;
-    s32 var_a0;
     s32 var_a1;
     s32 var_a2;
     s32 var_a3;
     s32 var_s0;
-    s32 var_v0;
-    s32 var_v0_2;
-    u8* temp_s3;
-    u8 *temp_v1;
-    u8 *var_v1;
-    u8 temp_v0_2;
-    u8 temp_v0_3;
+    u8 *temp_s3;
+    s32 fileSize;
+    s32 inFileOffset;
 
-    temp_s3 = arg0->unk_08;
+    fileSize = arg1->fileSize;
+    inFileOffset = arg1->inFileOffset;
     temp_lo = arg0->unk_04 * arg0->unk_10;
-    if (!(((arg1->fileSize - arg1->inFileOffset) + 0xF) & ~0xF)) {
+    temp_s3 = arg0->unk_08;
+
+    if (ALIGN16(fileSize - inFileOffset) == 0) {
         return 0;
     }
 
     var_s0 = 0;
     while (var_s0 < temp_lo) {
         fileGet(arg1, &sp10, 1);
-        if (!(sp10 & 0x80)) {
+        if (sp10 & 0x80) {
             if (sp10 & 0x40) {
                 temp_v0 = ((sp10 >> 3) & 7) + 2;
                 temp_s2 = (sp10 & 7) + 2;
-                fileGet(arg1, temp_s3 + var_s0, temp_v0);
-                var_a3 = 1;
-                if (temp_s2 > 1) {
-loop_7:
+                fileGet(arg1, &temp_s3[var_s0], temp_v0);
+
+                for (var_a3 = 1; var_a3 < temp_s2; var_a3++) {
                     var_a2 = var_a3 * temp_v0;
                     var_a1 = 0;
-                    if (temp_v0 != 0) {
-                        var_a0 = var_a2 + var_s0;
-                        var_v0_2 = var_s0;
-loop_9:
+
+                    while (var_a1 < temp_v0) {
+                        temp_s3[var_a2 + var_s0] = temp_s3[var_s0 + var_a1];
+
                         var_a1 += 1;
-                        temp_v1 = temp_s3 + var_a0;
-                        var_a0 += 1;
-                        *temp_v1 = *(temp_s3 + var_v0_2);
                         var_a2 += 1;
-                        if (var_a0 < temp_lo) {
-                            var_v0_2 = var_s0 + var_a1;
-                            if (var_a1 >= temp_v0) {
-                                goto block_11;
-                            }
-                            goto loop_9;
-                        }
-                    } else {
-block_11:
-                        var_a3 += 1;
-                        if (((var_s0 + var_a2) < temp_lo) && (var_a3 < temp_s2)) {
-                            goto loop_7;
+                        if (var_s0 + var_a2 >= temp_lo) {
+                            break;
                         }
                     }
+
+                    if (var_s0 + var_a2 >= temp_lo) {
+                        break;
+                    }
                 }
+
                 var_s0 += temp_v0 * temp_s2;
             } else {
                 fileGet(arg1, &sp11, 1);
                 sp10 = (sp10 & 0x7F) + 1;
-                var_v1 = var_s0 + temp_s3;
                 while ((sp10 & 0xFF) != 0xFF) {
-                    *var_v1 = sp11;
+                    temp_s3[var_s0] = sp11;
                     var_s0 += 1;
-                    sp10--;
-                    var_v1 += 1;
+                    sp10 = sp10 - 1;
                 }
             }
         } else {
-            fileGet(arg1, temp_s3 + var_s0, sp10 + 1);
-            var_s0 += 1 + sp10;
+            fileGet(arg1, &temp_s3[var_s0], sp10 + 1);
+            var_s0 = var_s0 + 1 + sp10;
         }
     }
+
     return -1;
 }
 #else
@@ -338,28 +328,6 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/bitmap", func_8001E018_usa);
 INCLUDE_ASM("asm/usa/nonmatchings/main/bitmap", func_8001E0F8_usa);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/bitmap", func_8001E110_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/bitmap", func_8001E184_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/bitmap", func_8001E1E4_usa);
-#endif
-
-#if VERSION_USA
-void bitmapSetup(void) {
-}
-#endif
-
-#if VERSION_USA
-void func_8001ECA4_usa(void) {
-}
-#endif
-
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/bitmap", bitmapLoadRLE);
 #endif
@@ -378,27 +346,6 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/bitmap", func_8001E018_usa);
 
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/bitmap", func_8001E0F8_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/bitmap", func_8001E110_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/bitmap", func_8001E184_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/bitmap", func_8001E1E4_usa);
-#endif
-
-#if VERSION_EUR
-void bitmapSetup(void) {
-}
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/bitmap", func_8001ECA4_usa);
 #endif
 
 #if VERSION_FRA
@@ -421,27 +368,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/bitmap", func_8001E018_usa);
 INCLUDE_ASM("asm/fra/nonmatchings/main/bitmap", func_8001E0F8_usa);
 #endif
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/bitmap", func_8001E110_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/bitmap", func_8001E184_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/bitmap", func_8001E1E4_usa);
-#endif
-
-#if VERSION_FRA
-void bitmapSetup(void) {
-}
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/bitmap", func_8001ECA4_usa);
-#endif
-
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/bitmap", bitmapLoadRLE);
 #endif
@@ -462,8 +388,42 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/bitmap", func_8001E018_usa);
 INCLUDE_ASM("asm/ger/nonmatchings/main/bitmap", func_8001E0F8_usa);
 #endif
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/bitmap", func_8001E110_usa);
+s32 func_8001E110_usa(struct_bitmapLoad_arg0 *arg0, s32 arg1, s32 *arg2, s32 *arg3) {
+    if (arg0 != NULL) {
+        if (((arg0->unk_00 >> 22) & 1) && (arg1 >= 0)) {
+            if (arg1 < arg0->unk_1C) {
+                *arg2 = arg0->unk_20[arg1] & 0x3F;
+                *arg3 = (arg0->unk_20[arg1] >> 6) & 0x3F;
+                return -1;
+            }
+        }
+    }
+
+    return 0;
+}
+
+#if VERSION_USA
+INCLUDE_ASM("asm/usa/nonmatchings/main/bitmap", func_8001E184_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_ASM("asm/usa/nonmatchings/main/bitmap", func_8001E1E4_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/bitmap", func_8001E184_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/bitmap", func_8001E1E4_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/bitmap", func_8001E184_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/bitmap", func_8001E1E4_usa);
 #endif
 
 #if VERSION_GER
@@ -474,11 +434,8 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/bitmap", func_8001E184_usa);
 INCLUDE_ASM("asm/ger/nonmatchings/main/bitmap", func_8001E1E4_usa);
 #endif
 
-#if VERSION_GER
 void bitmapSetup(void) {
 }
-#endif
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/bitmap", func_8001ECA4_usa);
-#endif
+void func_8001ECA4_usa(void) {
+}

@@ -9,7 +9,7 @@
 void InitBonus(void);
 void DoBonus(void);
 void DrawBonus(struct_gInfo_unk_00068 *arg0);
-s32 func_8003228C_usa(void);
+s32 DoWatchMenu(void);
 // void func_800322D0_usa();
 // void func_80032318_usa();
 // void func_80032494_usa();

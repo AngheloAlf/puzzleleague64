@@ -460,7 +460,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/tetris", func_8008ADB4_usa);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", func_80089A70_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", RandomBlock);
 #endif
 
 #if VERSION_EUR
@@ -496,7 +496,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", func_8008B19C_eur);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tetris", func_80088110_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/tetris", RandomBlock);
 #endif
 
 #if VERSION_FRA
@@ -532,7 +532,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/tetris", func_8008983C_fra);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tetris", func_800882D0_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/tetris", RandomBlock);
 #endif
 
 #if VERSION_GER
