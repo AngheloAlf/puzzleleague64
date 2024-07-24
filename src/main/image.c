@@ -329,7 +329,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_8001FD1C_eur);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_8001FE20_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_8001FD0C_usa);
 #endif
 
 #if VERSION_EUR
@@ -422,7 +422,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_8001FD2C_fra);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_8001FE30_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_8001FD0C_usa);
 #endif
 
 #if VERSION_FRA
@@ -515,7 +515,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_8001FD9C_ger);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_8001FEA0_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_8001FD0C_usa);
 #endif
 
 #if VERSION_GER

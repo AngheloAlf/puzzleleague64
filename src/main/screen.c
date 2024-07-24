@@ -884,7 +884,7 @@ s32 screenHideText(s32 arg0, s32 arg1) {
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80027E80_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/screen", screenShowImage);
 #endif
 
 #if VERSION_USA
@@ -1110,7 +1110,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80029EC4_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_8002A074_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/screen", screenSetNumber);
 #endif
 
 #if VERSION_USA
@@ -1692,7 +1692,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80027E54_eur);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80027FC8_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/screen", screenShowImage);
 #endif
 
 #if VERSION_EUR
@@ -1816,7 +1816,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_8002A02C_eur);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_8002A074_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/screen", screenSetNumber);
 #endif
 
 #if VERSION_EUR
@@ -1909,7 +1909,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/screen", screenFlushing);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80024D0C_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/screen", screenDraw);
 #endif
 
 #if VERSION_FRA
@@ -1933,7 +1933,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80026354_fra);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80027474_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/screen", screenSet);
 #endif
 
 #if VERSION_FRA
@@ -1999,7 +1999,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80027DC4_fra);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80027F38_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/screen", screenShowImage);
 #endif
 
 #if VERSION_FRA
@@ -2123,7 +2123,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80029FC0_fra);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_8002A170_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/screen", screenSetNumber);
 #endif
 
 #if VERSION_FRA
@@ -2159,7 +2159,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_8002A804_fra);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_8002A8D0_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/screen", screenLoad);
 #endif
 
 #if VERSION_FRA
@@ -2215,7 +2215,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/screen", screenFlushing);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80024D94_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/screen", screenDraw);
 #endif
 
 #if VERSION_GER
@@ -2239,7 +2239,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_800263DC_ger);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_800274FC_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/screen", screenSet);
 #endif
 
 #if VERSION_GER
@@ -2305,7 +2305,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80027E4C_ger);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80027FC0_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/screen", screenShowImage);
 #endif
 
 #if VERSION_GER
@@ -2429,7 +2429,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_8002A0F8_ger);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_8002A2A8_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/screen", screenSetNumber);
 #endif
 
 #if VERSION_GER
@@ -2465,7 +2465,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_8002A93C_ger);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_8002AA08_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/screen", screenLoad);
 #endif
 
 #if VERSION_GER

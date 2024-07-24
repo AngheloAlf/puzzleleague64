@@ -1372,7 +1372,7 @@ INCLUDE_RODATA("asm/fra/nonmatchings/main/sound", RO_800C1D50_fra);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002E50_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002D8C_usa);
 #endif
 
 #if VERSION_FRA
@@ -1640,7 +1640,7 @@ INCLUDE_RODATA("asm/ger/nonmatchings/main/sound", RO_800B8D10_ger);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002E50_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002D8C_usa);
 #endif
 
 #if VERSION_GER

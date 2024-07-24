@@ -18,7 +18,7 @@ void DoCountDown();
 void DrawCountDown(void);
 void InitStageClearIntro(void);
 void DoStageClearIntro();
-// void func_80034140_usa();
+void func_80034140_usa(Gfx **gfxP, s32 arg1, s32 arg2);
 void DrawStageClearIntro(struct_gInfo_unk_00068 *arg0);
 
 #endif

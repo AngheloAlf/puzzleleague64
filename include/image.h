@@ -37,7 +37,7 @@ void imageMake(struct_imageLoad_arg0 **arg0, void **arg1, u32 arg2);
 // void func_8001EDE0_usa();
 s32 imageLoad(struct_imageLoad_arg0 **arg0, char *filename, void **arg2);
 // void func_8001FC08_usa();
-// void func_8001FD0C_usa();
+s32 func_8001FD0C_usa(struct_imageLoad_arg0 **arg0, RomOffset arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, void **heapP);
 // void func_8001FD94_usa();
 // void func_8001FF70_usa();
 // void func_80020044_usa();

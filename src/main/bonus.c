@@ -3,18 +3,25 @@
  */
 
 #include "bonus.h"
-#include "ultra64.h"
+
 #include "include_asm.h"
 #include "macros_defines.h"
 #include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
+
 #include "segment_symbols.h"
-#include "sfxlimit.h"
+
 #include "buffers.h"
 #include "end.h"
+#include "image.h"
+#include "peel.h"
+#include "screen.h"
+#include "sfxlimit.h"
+#include "sound.h"
 #include "text.h"
 #include "tetris.h"
+#include "update.h"
 
 typedef struct struct_800C4490_usa {
     /* 0x0 */ UNK_TYPE4 unk_0;
@@ -429,28 +436,23 @@ void DoBonus(void) {
         if ((t0 != 0) || (gWhatever != 0)) {
             if (gWhatever == 0) {
                 if (gTheGame.unk_9C24 == 0) {
-#if VERSION_FRA
-                    u8 *var_s0;
-#else
-                    s8 *var_s0;
-#endif
+                    char *var_s0;
 
                     switch (gTheGame.unk_9C28) {
-                        // TODO: remove `(void *)`
                         case 0x1:
-                            var_s0 = (void *)&gPlayer[0]->unk_0E0;
+                            var_s0 = &gPlayer[0]->unk_0E0;
                             break;
                         case 0x2:
-                            var_s0 = (void *)&gPlayer[0]->unk_0E1;
+                            var_s0 = &gPlayer[0]->unk_0E1;
                             break;
                         case 0x3:
-                            var_s0 = (void *)&gPlayer[0]->unk_0E2;
+                            var_s0 = &gPlayer[0]->unk_0E2;
                             break;
                         case 0x4:
-                            var_s0 = (void *)&gPlayer[0]->unk_0E3;
+                            var_s0 = &gPlayer[0]->unk_0E3;
                             break;
                         case 0x5:
-                            var_s0 = (void *)&gPlayer[0]->unk_0E4;
+                            var_s0 = &gPlayer[0]->unk_0E4;
                             break;
                     }
 
@@ -631,22 +633,6 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", DoCountDown);
 INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", DrawCountDown);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", InitStageClearIntro);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", DoStageClearIntro);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", func_80034140_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", DrawStageClearIntro);
-#endif
-
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/bonus", func_80032300_eur);
 #endif
@@ -681,22 +667,6 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/bonus", DoCountDown);
 
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/bonus", func_80033034_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/bonus", InitStageClearIntro);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/bonus", DoStageClearIntro);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/bonus", func_80034170_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/bonus", DrawStageClearIntro);
 #endif
 
 #if VERSION_FRA
@@ -735,22 +705,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", DoCountDown);
 INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", func_80032F90_fra);
 #endif
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", InitStageClearIntro);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", DoStageClearIntro);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", func_800340CC_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", DrawStageClearIntro);
-#endif
-
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/bonus", func_800323D0_ger);
 #endif
@@ -787,8 +741,154 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/bonus", DoCountDown);
 INCLUDE_ASM("asm/ger/nonmatchings/main/bonus", func_80033104_ger);
 #endif
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/bonus", InitStageClearIntro);
+void InitStageClearIntro(void) {
+    s32 pad[0x6] UNUSED;
+    s16 sp38[12];
+    s32 pad2[0xA] UNUSED;
+    void *sp78;
+    s32 var_a3;
+    s32 var_s0;
+    s32 temp;
+    s32 a4;
+    s32 a5;
+    s32 temp2;
+
+    if (B_801F9CFC_usa == 0) {
+        func_80002D8C_usa(0x1E);
+    }
+
+    sp78 = &gBufferHeap[SEGMENT_ROM_SIZE(segment_0CA4A0)];
+    B_8018EA10_usa = NULL;
+    if ((gPlayer[0]->unk_02B.unk_0 & 0x1F) == 0x1F) {
+        if (((gPlayer[0]->unk_02B.unk_1 & 0x1F) == 0x1F) && ((gPlayer[0]->unk_02B.unk_2 & 0x1F) == 0x1F) &&
+            ((gPlayer[0]->unk_02B.unk_3 & 0x1F) == 0x00) && ((gPlayer[0]->unk_02B.unk_4 & 0x1F) == 0x00) &&
+            ((gPlayer[0]->unk_02B.unk_5 & 0x1F) == 0x00)) {
+            if (!(gPlayer[0]->unk_02B.unk_2 & 0x40)) {
+                gTheGame.unk_9C28 = 5;
+                gPlayer[0]->unk_02B.unk_2 |= 0x40;
+            } else if ((gTheGame.unk_9C28 == 2) && (gTheGame.unk_8860[0].unk_00 == 7)) {
+                B_8018EA10_usa = "spaTR2.HVQM";
+            }
+        }
+
+        if (((gPlayer[0]->unk_02B.unk_0 & 0x1F) == 0x1F) && ((gPlayer[0]->unk_02B.unk_1 & 0x1F) == 0x1F) &&
+            ((gPlayer[0]->unk_02B.unk_2 & 0x1F) == 0x1F) && ((gPlayer[0]->unk_02B.unk_3 & 0x1F) == 0x1F) &&
+            ((gPlayer[0]->unk_02B.unk_4 & 0x1F) == 0x1F)) {
+            if (((gPlayer[0]->unk_02B.unk_5 & 0x1F) == (gPlayer[0]->unk_02B.unk_0 & 0x1F)) &&
+                !(gPlayer[0]->unk_02B.unk_5 & 0x40)) {
+                B_8018EA10_usa = "spaTR1.HVQM";
+                gTheGame.unk_9C28 = 5;
+                gPlayer[0]->unk_02B.unk_5 |= 0x40;
+            }
+        }
+    }
+
+    if (gTheGame.unk_9C28 == 5) {
+        if (gTheGame.unk_9C2C >= 5) {
+            var_s0 = 7;
+        } else {
+            var_s0 = 6;
+        }
+    } else {
+        var_s0 = gTheGame.unk_9C2C - 1;
+    }
+
+    B_8018EA2C_usa = D_800B64E8_usa[var_s0][0];
+    B_8018EA30_usa = D_800B64E8_usa[var_s0][1];
+    B_8018EA34_usa = D_800B64F8_usa[var_s0][0];
+    B_8018EA38_usa = D_800B64F8_usa[var_s0][1];
+
+    func_80001CAC_usa(D_800B6528_usa[var_s0], sp38, sizeof(sp38));
+
+    if (sp38[0] == 0x10) {
+        var_a3 = 0x54;
+    } else if (sp38[1] == 0) {
+        var_a3 = 0x33;
+    } else {
+        var_a3 = 0x13;
+    }
+    a4 = sp38[2];
+    a5 = sp38[3];
+    temp = (a4 * a5 * 2);
+    func_8001FD0C_usa(&B_8018EA24_usa, D_800B6528_usa[var_s0] + sizeof(sp38), 0, var_a3, a4, a5, &sp78);
+
+    if (sp38[6] == 0x10) {
+        var_a3 = 0x54;
+    } else if (sp38[7] == 0) {
+        var_a3 = 0x33;
+    } else {
+        var_a3 = 0x13;
+    }
+    a4 = sp38[8];
+    a5 = sp38[9];
+    temp2 = temp + sizeof(sp38);
+    func_8001FD0C_usa(&B_8018EA28_usa, D_800B6528_usa[var_s0] + temp2, 0, var_a3, a4, a5, &sp78);
+    func_8001FD0C_usa(&B_8018EA20_usa, D_800B6508_usa[var_s0], 0, 0x800054, 0x140, 0xE8, &sp78);
+
+    gWhatever = gTheGame.unk_9C0C = (gTheGame.unk_9C2C >= 4) ? 2 : 1;
+
+    UpdatePlayerStageClearTimeScore(gTheGame.unk_8860, -1, gTheGame.unk_9C2C, 1);
+
+    gTheGame.unk_9C1C = 0;
+    gTheGame.unk_9C18 = 0;
+    gTheGame.unk_9C14 = 0;
+    gCounter = 0;
+    gTheGame.unk_8860[0].unk_00 = 0;
+    if (screenLoad("CLEAR.SBF", &sp78) != 0) {
+        u32 x;
+
+        gnTickClear = 0;
+        if (B_8018EA10_usa != NULL) {
+            x = 0xFF001;
+        } else {
+            x = 0x1;
+        }
+        giScreenClear = screenSet("CLEAR", x | 0x400);
+
+        screenSetNumber(giScreenClear, 0x32, gTheGame.unk_0000[0].unk_43AC, -1);
+        if (gTheGame.unk_9C28 == 5) {
+            if (gTheGame.unk_9C2C < 5) {
+                gnTagTextClear = -0xC8;
+                screenShowImage(giScreenClear, 0x19A);
+            } else {
+                gnTagTextClear = -0xFA;
+                screenShowImage(giScreenClear, 0x1A4);
+            }
+        } else {
+            gnTagTextClear = -(((gTheGame.unk_9C2C - 1) * 0xA) + 0x64);
+            screenShowImage(giScreenClear, gTheGame.unk_9C2C + 0x18F);
+        }
+    }
+
+    if (B_801F9CFC_usa == 0) {
+        PlayMIDI(BGM_INIT_TABLE, 0x14, 0, 1);
+    }
+
+    B_801F9CFC_usa = 0;
+}
+
+#if VERSION_USA
+INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", DoStageClearIntro);
+#endif
+
+#if VERSION_USA
+INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", func_80034140_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/bonus", DoStageClearIntro);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/bonus", func_80034140_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", DoStageClearIntro);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", func_80034140_usa);
 #endif
 
 #if VERSION_GER
@@ -796,9 +896,12 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/bonus", DoStageClearIntro);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/bonus", func_80034240_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/bonus", func_80034140_usa);
 #endif
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/bonus", DrawStageClearIntro);
-#endif
+void DrawStageClearIntro(struct_gInfo_unk_00068 *arg0 UNUSED) {
+    screenDraw(&glistp, func_80034140_usa);
+    if (screenFlushing() == 0) {
+        func_8002C2C0_usa(&glistp);
+    }
+}

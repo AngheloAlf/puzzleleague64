@@ -135,7 +135,7 @@ s32 func_80024C14_usa();                            /* extern */
 s32 screenFlushing(void);
 void screenTick(s32 *);                         /* extern */
 s32 screenSet(UNK_TYPE *arg0, UNK_TYPE arg1);
-void func_80027E80_usa(s32, UNK_TYPE);                        /* extern */
+void screenShowImage(s32, UNK_TYPE);                        /* extern */
 void screenHideImage(s32, UNK_TYPE);                        /* extern */
 void func_800284E4_usa(s32, UNK_TYPE);                        /* extern */
 void peelTick();                              /* extern */
@@ -229,7 +229,7 @@ void DoTitle(void) {
             osViBlack(1U);
             break;
         case 0x2:                                   /* switch 1 */
-            func_80027E80_usa(temp_s0, 0x64);
+            screenShowImage(temp_s0, 0x64);
             func_800284E4_usa(temp_s0, 0x64);
             break;
         case 0x7:                                   /* switch 1 */

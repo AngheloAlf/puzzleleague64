@@ -8,6 +8,8 @@
 #include "stack.h"
 #include "hasm.h"
 
+struct struct_imageLoad_arg0;
+
 
 // .data
 
@@ -109,12 +111,10 @@ extern s16 ts_old_alert;
 // extern UNK_TYPE D_800B6444_usa;
 
 extern s8 gameoverBounce[];
-// extern UNK_TYPE D_800B64E8_usa;
-// extern UNK_TYPE D_800B64E9_usa;
-// extern UNK_TYPE D_800B64F8_usa;
-// extern UNK_TYPE D_800B64F9_usa;
-// extern UNK_TYPE D_800B6508_usa;
-// extern UNK_TYPE D_800B6528_usa;
+extern char D_800B64E8_usa[][2];
+extern char D_800B64F8_usa[][2];
+extern RomOffset D_800B6508_usa[];
+extern RomOffset D_800B6528_usa[];
 // extern UNK_TYPE D_800B6550_usa;
 // extern UNK_TYPE D_800B6578_usa;
 // extern UNK_TYPE D_800B657C_usa;
@@ -952,17 +952,17 @@ extern u32 B_8018A808_usa;
 // extern UNK_TYPE B_8018EA04_usa;
 // extern UNK_TYPE B_8018EA08_usa;
 // extern UNK_TYPE B_8018EA0C_usa;
-// extern UNK_TYPE B_8018EA10_usa;
-// extern UNK_TYPE B_8018EA14_usa;
-// extern UNK_TYPE B_8018EA18_usa;
-// extern UNK_TYPE B_8018EA1C_usa;
-// extern UNK_TYPE B_8018EA20_usa;
-// extern UNK_TYPE B_8018EA24_usa;
-// extern UNK_TYPE B_8018EA28_usa;
-// extern UNK_TYPE B_8018EA2C_usa;
-// extern UNK_TYPE B_8018EA30_usa;
-// extern UNK_TYPE B_8018EA34_usa;
-// extern UNK_TYPE B_8018EA38_usa;
+extern const char *B_8018EA10_usa;
+extern s32 gnTickClear;
+extern s32 giScreenClear;
+extern s32 gnTagTextClear;
+extern struct struct_imageLoad_arg0 *B_8018EA20_usa;
+extern struct struct_imageLoad_arg0 *B_8018EA24_usa;
+extern struct struct_imageLoad_arg0 *B_8018EA28_usa;
+extern s32 B_8018EA2C_usa;
+extern s32 B_8018EA30_usa;
+extern s32 B_8018EA34_usa;
+extern s32 B_8018EA38_usa;
 // extern UNK_TYPE B_8018EA3C_usa;
 // extern UNK_TYPE B_8018EA40_usa;
 // extern s32 B_8018EA50_usa;
@@ -1426,7 +1426,7 @@ extern s32 gAllVertex;
 // TODO: enum?
 extern s32 gSelection;
 
-// extern UNK_TYPE B_801F9CFC_usa;
+extern u8 B_801F9CFC_usa;
 // extern UNK_TYPE B_801F9D00_usa;
 // extern UNK_TYPE B_801F9D04_usa;
 // extern UNK_TYPE B_801F9D30_usa;

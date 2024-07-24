@@ -80,7 +80,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdatePlayerStageClear);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80058AE0_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdatePlayerStageClearTimeScore);
 #endif
 
 #if VERSION_USA
@@ -180,7 +180,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdatePlayerStageClear);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058DA8_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdatePlayerStageClearTimeScore);
 #endif
 
 #if VERSION_EUR
