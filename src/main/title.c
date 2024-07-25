@@ -135,9 +135,9 @@ s32 func_80024C14_usa();                            /* extern */
 s32 screenFlushing(void);
 void screenTick(s32 *);                         /* extern */
 s32 screenSet(UNK_TYPE *arg0, UNK_TYPE arg1);
-void screenShowImage(s32, UNK_TYPE);                        /* extern */
+void screenShowText(s32, UNK_TYPE);                        /* extern */
 void screenHideImage(s32, UNK_TYPE);                        /* extern */
-void func_800284E4_usa(s32, UNK_TYPE);                        /* extern */
+void screenShowImage(s32, UNK_TYPE);                        /* extern */
 void peelTick();                              /* extern */
 void func_8002CFE4_usa(UNK_TYPE);                             /* extern */
 s32 peelActive(void);
@@ -229,8 +229,8 @@ void DoTitle(void) {
             osViBlack(1U);
             break;
         case 0x2:                                   /* switch 1 */
+            screenShowText(temp_s0, 0x64);
             screenShowImage(temp_s0, 0x64);
-            func_800284E4_usa(temp_s0, 0x64);
             break;
         case 0x7:                                   /* switch 1 */
             if (peelActive() == 0) {
@@ -296,7 +296,7 @@ block_12:
             var_s3 = gpData->unk_04;
             if (B_8018A7F0_usa > 0) {
                 B_8018A7F0_usa -= 1;
-                func_800284E4_usa(temp_s0, 0x6E);
+                screenShowImage(temp_s0, 0x6E);
                 goto block_36;
             }
             screenHideImage(temp_s0, 0x6E);
@@ -304,7 +304,7 @@ block_12:
 block_36:
                 screenHideImage(temp_s0, 0x64);
             } else {
-                func_800284E4_usa(temp_s0, 0x64);
+                screenShowImage(temp_s0, 0x64);
             }
             if (B_801A5B3E_usa & 0x2000) {
                 if (B_801A5B34_usa != 0) {

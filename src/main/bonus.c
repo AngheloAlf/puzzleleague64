@@ -14,6 +14,7 @@
 
 #include "buffers.h"
 #include "end.h"
+#include "hvqm2util.h"
 #include "image.h"
 #include "peel.h"
 #include "screen.h"
@@ -849,14 +850,14 @@ void InitStageClearIntro(void) {
         if (gTheGame.unk_9C28 == 5) {
             if (gTheGame.unk_9C2C < 5) {
                 gnTagTextClear = -0xC8;
-                screenShowImage(giScreenClear, 0x19A);
+                screenShowText(giScreenClear, 0x19A);
             } else {
                 gnTagTextClear = -0xFA;
-                screenShowImage(giScreenClear, 0x1A4);
+                screenShowText(giScreenClear, 0x1A4);
             }
         } else {
             gnTagTextClear = -(((gTheGame.unk_9C2C - 1) * 0xA) + 0x64);
-            screenShowImage(giScreenClear, gTheGame.unk_9C2C + 0x18F);
+            screenShowText(giScreenClear, gTheGame.unk_9C2C + 0x18F);
         }
     }
 
@@ -867,37 +868,194 @@ void InitStageClearIntro(void) {
     B_801F9CFC_usa = 0;
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", DoStageClearIntro);
-#endif
+void DoStageClearIntro(void) {
+    screenTick_arg0 sp10 = { 0, 0 };
+    s32 var_s1 = 0;
+    void *heap;
+    s32 sp1C;
+    struct_func_8002864C_usa_arg2 *sp20;
+    s32 sp24;
+    s32 sp28;
+    s32 var_s0;
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", func_80034140_usa);
-#endif
+    gTheGame.unk_9C08 = 1;
+    screenTick(&sp10);
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/bonus", DoStageClearIntro);
-#endif
+    if (B_8018EA10_usa != NULL) {
+        if ((screenFlushing() == 0) && (func_80024C14_usa() == 0) && (func_80024BF4_usa(&heap) != 0)) {
+            HVQM2Util_Play((File *)B_8018EA10_usa, 0x1000U, heap);
+            B_8018EA10_usa = NULL;
+        }
+        return;
+    }
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/bonus", func_80034140_usa);
-#endif
+    if (gnTagTextClear != -1) {
+        B_8018EA3C_usa = 0;
+        B_8018EA40_usa = 0;
+        if ((gnTagTextClear < 0) || (screenTextDone(giScreenClear, gnTagTextClear) != 0)) {
+            if (screenTextDone(giScreenClear, gnTagTextClear) != 0) {
+                if (screenGetTextType(giScreenClear, gnTagTextClear + 1, &sp1C) != 0) {
+                    screenShowImage(giScreenClear, 0x79);
+                } else if (gnTagTextClear > 0) {
+                    gnTagTextClear = -1;
+                }
+            }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", DoStageClearIntro);
-#endif
+            gnTickClear++;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", func_80034140_usa);
-#endif
+            if (((gnTagTextClear < 0) && (gnTickClear >= 0xF0)) || ((gnTagTextClear >= 0) && (gnTickClear >= 0x708))) {
+                gnTickClear = 0;
+                screenHideImage(giScreenClear, 0x79);
+                if (gnTagTextClear < 0) {
+                    gnTagTextClear = -gnTagTextClear;
+                    screenShowText(giScreenClear, gnTagTextClear);
+                    screenHideText(giScreenClear, 0x81A48190);
+                } else if (screenGetTextType(giScreenClear, gnTagTextClear + 1, &sp1C) != 0) {
+                    screenHideText(giScreenClear, gnTagTextClear);
+                    gnTagTextClear = gnTagTextClear + 1;
+                    screenShowText(giScreenClear, gnTagTextClear);
+                } else {
+                    gnTagTextClear = -1;
+                }
+            } else {
+                if (gTheGame.unk_89C4[0].unk_00 & 0x8000) {
+                    gnTickClear = 0x708;
+                }
+            }
+        } else if (gTheGame.unk_89C4[0].unk_00 & 0x8000) {
+            func_80027AD4_usa();
+        }
+    } else {
+        switch (B_8018EA40_usa) {
+            case 0x0:
+                if (gTheGame.unk_89C4[0].unk_00 & 0x8000) {
+                    B_8018EA40_usa = 1;
+                    screenHideImage(giScreenClear, 0x79);
+                    screenHideImage(giScreenClear, 0x1F4);
+                    screenHideText(giScreenClear, 0x812B8064);
+                }
+                break;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/bonus", DoStageClearIntro);
-#endif
+            case 0x1:
+                if (func_8002864C_usa(giScreenClear, 0x78, &sp20) != 0) {
+                    if (sp20->unk_14 > 0) {
+                        sp20->unk_14 -= 4;
+                        if (sp20->unk_14 <= 0) {
+                            PlaySE(SFX_INIT_TABLE, 0xA4);
+                            B_8018EA40_usa = 2;
+                            sp20->unk_14 = 0;
+                        }
+                    }
+                }
+                break;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/bonus", func_80034140_usa);
-#endif
+            case 0x2:
+                B_8018EA3C_usa += 6;
+                if (B_8018EA3C_usa > 0x80) {
+                    PlaySE(SFX_INIT_TABLE, 0xA4);
+                    B_8018EA40_usa = 3;
+                    screenHideImage(giScreenClear, 0x83);
+                    screenHideImage(giScreenClear, 0x8D);
+                }
+                screenHideText(giScreenClear, 0x32);
+                func_800288D8_usa(giScreenClear, 0x83, -B_8018EA3C_usa, 0x25);
+                func_800288D8_usa(giScreenClear, 0x8D, B_8018EA3C_usa + 0xB8, 0x7F);
+                break;
+
+            case 0x3:
+                var_s0 = 0;
+                if ((func_800289C0_usa(giScreenClear, 0x6E, &sp24, &sp28) != 0) && (sp28 >= -0x99)) {
+                    var_s0 = -1;
+                    func_800288D8_usa(giScreenClear, 0x6E, sp24, sp28 - 6);
+                }
+                if ((func_800289C0_usa(giScreenClear, 0x6F, &sp24, &sp28) != 0) && (sp28 < 0xF1)) {
+                    var_s0 = -1;
+                    func_800288D8_usa(giScreenClear, 0x6F, sp24, sp28 + 4);
+                }
+                if (var_s0 == 0) {
+                    B_8018EA40_usa = 4;
+                }
+                break;
+
+            case 0x4:
+                var_s1 = -1;
+                break;
+        }
+    }
+
+    if (gCounter >= 0x1F) {
+        if ((var_s1 != 0) || (gTheGame.unk_89C4[0].unk_00 & 0x1000)) {
+            PlaySE(SFX_INIT_TABLE, 4);
+            if (B_8018EA40_usa == 0) {
+                B_8018EA40_usa = 1;
+                gnTagTextClear = -1;
+                screenHideImage(giScreenClear, 0x79);
+                screenHideImage(giScreenClear, 0x1F4);
+                screenHideText(giScreenClear, 0x812B8064);
+                screenHideText(giScreenClear, 0x81A48190);
+            } else {
+                gReset = -1;
+                gMain = GMAIN_384;
+                gTheGame.unk_9C0C = gWhatever;
+                gWhatever = 0;
+                FadeOutSong(last_song_handle, 0x5A);
+            }
+        } else if (gTheGame.unk_89C4[0].unk_00 & 0x4000) {
+            gReset = -1;
+            gMain = GMAIN_2BC;
+            PlaySE(SFX_INIT_TABLE, 6);
+        }
+    }
+
+    if (screenFlushing() == 0) {
+        peelTick();
+    }
+}
+
+void func_80034140_usa(Gfx **gfxP, s32 arg1 UNUSED, s32 arg2) {
+    struct_func_8002156C_usa_arg4 sp18;
+    Gfx *gfx = *gfxP;
+
+    switch (arg2) {
+        case 0x64:
+            if (B_8018EA40_usa >= 3U) {
+                func_8002156C_usa(B_8018EA20_usa, &gfx, 0, 0, NULL);
+            }
+            break;
+
+        case 0x82:
+            if (B_8018EA40_usa < 3U) {
+                sp18.unk_00 = B_8018EA2C_usa;
+                sp18.unk_04 = B_8018EA30_usa;
+                sp18.unk_08 = 0x70;
+                sp18.unk_0C = 0x9C;
+                func_8002156C_usa(B_8018EA24_usa, &gfx, -B_8018EA3C_usa, 0x2A, &sp18);
+            }
+            break;
+
+        case 0x8C:
+            if (B_8018EA40_usa < 3U) {
+                sp18.unk_00 = B_8018EA34_usa;
+                sp18.unk_04 = B_8018EA38_usa;
+                sp18.unk_08 = 0x50;
+                sp18.unk_0C = 0x54;
+                func_8002156C_usa(B_8018EA28_usa, &gfx, B_8018EA3C_usa + 0xCB, 0x83, &sp18);
+            }
+            break;
+
+        case 0x96:
+            gDPPipeSync(gfx++);
+            gDPSetCycleType(gfx++, G_CYC_FILL);
+            gDPSetAlphaCompare(gfx++, G_AC_NONE);
+            gDPSetRenderMode(gfx++, G_RM_NOOP, G_RM_NOOP2);
+            gSPClearGeometryMode(gfx++, G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_LIGHTING | G_SHADING_SMOOTH);
+            gDPSetFillColor(gfx++, (GPACK_RGBA5551(0, 0, 0, 1) << 16) | GPACK_RGBA5551(0, 0, 0, 1));
+            gDPFillRectangle(gfx++, 0, 0, SCREEN_WIDTH - 1, 6);
+            break;
+    }
+
+    *gfxP = gfx;
+}
 
 void DrawStageClearIntro(struct_gInfo_unk_00068 *arg0 UNUSED) {
     screenDraw(&glistp, func_80034140_usa);

@@ -292,7 +292,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/peel", func_8002C2C0_usa);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/peel", func_8002CCA0_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/peel", peelTick);
 #endif
 
 #if VERSION_FRA
@@ -320,7 +320,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/peel", func_8002C2C0_usa);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/peel", func_8002CDF8_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/peel", peelTick);
 #endif
 
 #if VERSION_GER

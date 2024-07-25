@@ -4,6 +4,14 @@
 #include "ultra64.h"
 #include "unk.h"
 
+// TODO: enum for arg2?
+typedef void (screenDraw_callback)(Gfx **gfxP, UNK_TYPE arg1, UNK_TYPE arg2);
+
+typedef struct struct_func_8002864C_usa_arg2 {
+    /* 0x00 */ UNK_TYPE1 unk_00[0x14];
+    /* 0x14 */ UNK_TYPE4 unk_14;
+} struct_func_8002864C_usa_arg2; // size >= 0x18
+
 
 typedef struct struct_gaScreen_unk_18_unk_5C {
     /* 0x0 */ u16 unk_0;
@@ -139,10 +147,10 @@ void screenWipeImages(void);
 // void func_8002400C_usa();
 // void func_80024534_usa();
 // void func_8002496C_usa();
-// void func_80024BF4_usa();
-// void func_80024C14_usa();
+s32 func_80024BF4_usa(void **heapP);
+s32 func_80024C14_usa(void);
 s32 screenFlushing(void);
-void screenDraw(Gfx **gfxP, void (*callback)(Gfx **, UNK_TYPE, UNK_TYPE));
+void screenDraw(Gfx **gfxP, screenDraw_callback *callback);
 s32 screenFindImage(s32 arg0, s32 arg1, struct_gaScreen_unk_1C **arg2);
 // void func_800255D8_usa();
 // void func_80025850_usa();
@@ -160,21 +168,21 @@ s32 func_800276CC_usa(s32 arg0, UNK_TYPE4 *arg1, s32 arg2);
 // void func_80027914_usa();
 // void func_800279D8_usa();
 // void func_80027AB0_usa();
-// void func_80027AD4_usa();
-// void func_80027AF4_usa();
+void func_80027AD4_usa();
+s32 screenTextDone(s32 arg0, s32 arg1);
 // void func_80027C04_usa();
 s32 screenHideText(s32 arg0, s32 arg1);
-void screenShowImage(s32 arg0, s32 arg1);
+void screenShowText(s32 arg0, s32 arg1);
 // void func_8002801C_usa();
 // void func_80028034_usa();
 // void func_800282AC_usa();
 s32 screenHideImage(s32 arg0, s32 arg1);
-// void func_800284E4_usa();
-// void func_8002864C_usa();
+void screenShowImage(s32 arg2, s32 arg1);
+s32 func_8002864C_usa(s32 arg0, s32 arg1, struct_func_8002864C_usa_arg2 **arg2);
 // void func_80028718_usa();
 // void func_8002880C_usa();
-// void func_800288D8_usa();
-// void func_800289C0_usa();
+void func_800288D8_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+s32 func_800289C0_usa(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3);
 // void func_80028A98_usa();
 // void func_80028BAC_usa();
 // void func_80028CBC_usa();
@@ -184,7 +192,7 @@ void screenSetText(s32 arg0, s32 arg1, u16 *arg2);
 // void func_80029130_usa();
 // void func_80029244_usa();
 // void func_8002931C_usa();
-// void func_800293FC_usa();
+s32 screenGetTextType(s32 arg0, s32 arg1, s32 *arg2);
 // void func_800294C8_usa();
 // void func_80029594_usa();
 void func_800296B0_usa(u16 *dst, const char *src, s32 dstLen);

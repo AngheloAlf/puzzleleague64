@@ -7,6 +7,8 @@
 #include "unk.h"
 
 
+//! TODO: functions taking this argument sometimes take a string (const char *) too
+//! Maybe change type to be an union?
 typedef struct File {
     /* 0x00 */ u32 index;
     /* 0x04 */ s32 fileSize;
