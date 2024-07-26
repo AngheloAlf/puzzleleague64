@@ -127,7 +127,6 @@ typedef struct struct_8018A7F4_usa {
 void FadeOutSong(s32, UNK_TYPE);                        /* extern */
 void PlayMIDI(UNK_TYPE *, UNK_TYPE, UNK_TYPE, UNK_TYPE);                  /* extern */
 void PlaySE(UNK_TYPE *arg0, UNK_TYPE arg1);
-void func_80005C00_usa(void *);                        /* extern */
 void func_80009D30_usa(s32, s32);                      /* extern */
 void func_8001ACA8_usa(s32 *);                         /* extern */
 s32 func_80024BF4_usa(s32 *);                       /* extern */
@@ -278,7 +277,7 @@ block_12:
             }
             break;
         case 0x4:                                   /* switch 1 */
-            if ((screenFlushing() == 0) && (func_80024C14_usa() == 0) && (func_80024BF4_usa(&sp1C) != 0)) {
+            if (!screenFlushing() && (func_80024C14_usa() == 0) && (func_80024BF4_usa(&sp1C) != 0)) {
                 HVQM2Util_Play(&RO_STR_800C3134_usa, 0, sp1C);
                 gpData->unk_14 = 5;
             }
@@ -468,7 +467,7 @@ block_36:
                     }
                 }
             }
-            if ((B_8018A7F0_usa == 0) && (peelActive() == 0) && (gReset == 0) && (screenFlushing() == 0) && (func_80024C14_usa() == 0)) {
+            if ((B_8018A7F0_usa == 0) && (peelActive() == 0) && (gReset == 0) && !screenFlushing() && (func_80024C14_usa() == 0)) {
                 var_v1_4 = 0;
 
                 while (var_v1_4 <= 0) {
@@ -497,7 +496,7 @@ block_36:
             break;
     }
 
-    if (screenFlushing() == 0) {
+    if (!screenFlushing()) {
         peelTick();
     }
 }

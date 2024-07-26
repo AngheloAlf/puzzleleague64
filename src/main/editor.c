@@ -160,12 +160,12 @@ void DrawEditor(struct_gInfo_unk_00068 *arg0) {
         }
     }
 
-    if (screenFlushing() == 0) {
+    if (!screenFlushing()) {
         DrawPuzzleEditor(arg0);
     }
 
     screenDraw(&glistp, editDrawImage);
-    if (screenFlushing() == 0) {
+    if (!screenFlushing()) {
         func_8002C2C0_usa(&glistp);
     }
 }
@@ -176,17 +176,17 @@ void DoEditor(void) {
     screenTick_arg0 sp10;
     struct_gaEditData *sp18;
 
-    if ((screenFlushing() == 0) && (gnFlushCount == -1)) {
+    if (!screenFlushing() && (gnFlushCount == -1)) {
         peelTick();
     }
     gnTickCount += 1;
-    if ((screenFlushing() == 0) && (gnFlushCount == -1)) {
+    if (!screenFlushing() && (gnFlushCount == -1)) {
         DoPuzzleEditor();
     }
 
     sp10.unk_0 = 0;
     sp10.unk_4 = 0;
-    if ((screenFlushing() == 0) && (gnFlushCount == -1)) {
+    if (!screenFlushing() && (gnFlushCount == -1)) {
         if (gTheGame.unk_89C4[0].unk_00 & 0x4000) {
             sp10.unk_0 = 0x21;
         } else if (gTheGame.unk_89C4[0].unk_00 & 0x8000) {

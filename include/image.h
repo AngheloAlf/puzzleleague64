@@ -55,7 +55,7 @@ s32 func_8001FD0C_usa(struct_imageLoad_arg0 **arg0, RomOffset arg1, s32 arg2, s3
 // void func_8002063C_usa();
 // void func_800206DC_usa();
 // void func_80020754_usa();
-// void func_800207FC_usa();
+s32 func_800207FC_usa(UNK_PTR arg0, s32 arg1);
 // void func_800209BC_usa();
 s32 func_80021414_usa(struct_imageLoad_arg0 *, s32, s32, u16 *);
 s32 func_8002156C_usa(struct_imageLoad_arg0 *arg0, Gfx **gfxP, s32 arg2, s32 arg3, struct_func_8002156C_usa_arg4 *arg4);

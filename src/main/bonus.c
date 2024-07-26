@@ -872,8 +872,8 @@ void DoStageClearIntro(void) {
     screenTick_arg0 sp10 = { 0, 0 };
     s32 var_s1 = 0;
     void *heap;
-    s32 sp1C;
-    struct_func_8002864C_usa_arg2 *sp20;
+    u32 sp1C;
+    struct_gaScreen_unk_20_unk_14 *sp20;
     s32 sp24;
     s32 sp28;
     s32 var_s0;
@@ -882,7 +882,7 @@ void DoStageClearIntro(void) {
     screenTick(&sp10);
 
     if (B_8018EA10_usa != NULL) {
-        if ((screenFlushing() == 0) && (func_80024C14_usa() == 0) && (func_80024BF4_usa(&heap) != 0)) {
+        if (!screenFlushing() && !func_80024C14_usa() && func_80024BF4_usa(&heap)) {
             HVQM2Util_Play((File *)B_8018EA10_usa, 0x1000U, heap);
             B_8018EA10_usa = NULL;
         }
@@ -892,9 +892,9 @@ void DoStageClearIntro(void) {
     if (gnTagTextClear != -1) {
         B_8018EA3C_usa = 0;
         B_8018EA40_usa = 0;
-        if ((gnTagTextClear < 0) || (screenTextDone(giScreenClear, gnTagTextClear) != 0)) {
-            if (screenTextDone(giScreenClear, gnTagTextClear) != 0) {
-                if (screenGetTextType(giScreenClear, gnTagTextClear + 1, &sp1C) != 0) {
+        if ((gnTagTextClear < 0) || screenTextDone(giScreenClear, gnTagTextClear)) {
+            if (screenTextDone(giScreenClear, gnTagTextClear)) {
+                if (screenGetTextType(giScreenClear, gnTagTextClear + 1, &sp1C)) {
                     screenShowImage(giScreenClear, 0x79);
                 } else if (gnTagTextClear > 0) {
                     gnTagTextClear = -1;
@@ -910,7 +910,7 @@ void DoStageClearIntro(void) {
                     gnTagTextClear = -gnTagTextClear;
                     screenShowText(giScreenClear, gnTagTextClear);
                     screenHideText(giScreenClear, 0x81A48190);
-                } else if (screenGetTextType(giScreenClear, gnTagTextClear + 1, &sp1C) != 0) {
+                } else if (screenGetTextType(giScreenClear, gnTagTextClear + 1, &sp1C)) {
                     screenHideText(giScreenClear, gnTagTextClear);
                     gnTagTextClear = gnTagTextClear + 1;
                     screenShowText(giScreenClear, gnTagTextClear);
@@ -937,7 +937,7 @@ void DoStageClearIntro(void) {
                 break;
 
             case 0x1:
-                if (func_8002864C_usa(giScreenClear, 0x78, &sp20) != 0) {
+                if (func_8002864C_usa(giScreenClear, 0x78, &sp20)) {
                     if (sp20->unk_14 > 0) {
                         sp20->unk_14 -= 4;
                         if (sp20->unk_14 <= 0) {
@@ -1007,7 +1007,7 @@ void DoStageClearIntro(void) {
         }
     }
 
-    if (screenFlushing() == 0) {
+    if (!screenFlushing()) {
         peelTick();
     }
 }
@@ -1059,7 +1059,7 @@ void func_80034140_usa(Gfx **gfxP, s32 arg1 UNUSED, s32 arg2) {
 
 void DrawStageClearIntro(struct_gInfo_unk_00068 *arg0 UNUSED) {
     screenDraw(&glistp, func_80034140_usa);
-    if (screenFlushing() == 0) {
+    if (!screenFlushing()) {
         func_8002C2C0_usa(&glistp);
     }
 }

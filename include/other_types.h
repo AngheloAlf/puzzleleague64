@@ -8,4 +8,10 @@
 typedef u32 RomOffset;
 typedef void* TexturePtr;
 
+// For bool like values where the true value is negative instead of positive.
+typedef enum nbool {
+    ntrue = -1,
+    nfalse
+} nbool;
+
 #endif

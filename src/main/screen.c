@@ -642,19 +642,28 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_8002496C_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80024BF4_usa);
+nbool func_80024BF4_usa(void **heapP) {
+    *heapP = ALIGN_PTR(B_8018E4F8_usa);
+
+    return ntrue;
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80024C14_usa);
-#endif
-
-#if VERSION_USA
-s32 screenFlushing(void) {
-    if ((B_8018E504_usa != 0) || (B_8018E524_usa != -1)) {
-        return -1;
+nbool func_80024C14_usa(void) {
+    if (B_8018E524_usa != -1) {
+        return ntrue;
     }
-    return 0;
+    return nfalse;
+}
+#endif
+
+#if VERSION_USA
+nbool screenFlushing(void) {
+    if ((B_8018E504_usa != 0) || (B_8018E524_usa != -1)) {
+        return ntrue;
+    }
+    return nfalse;
 }
 #endif
 
@@ -663,18 +672,18 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/screen", screenDraw);
 #endif
 
 #if VERSION_USA
-INLINE s32 screenFindImage(s32 arg0, s32 arg1, struct_gaScreen_unk_1C **arg2) {
-    s32 var_t0;
+INLINE nbool screenFindImage(s32 arg0, s32 arg1, struct_gaScreen_unk_1C **arg2) {
+    s32 i;
 
     if ((arg1 != -1) && (arg0 >= 0) && (arg0 < gnScreenCount)) {
-        for (var_t0 = 0; var_t0 < gaScreen[arg0].unk_0C; var_t0++) {
-            if (gaScreen[arg0].unk_1C[var_t0].unk_00 == arg1) {
-                *arg2 = &gaScreen[arg0].unk_1C[var_t0];
-                return -1;
+        for (i = 0; i < gaScreen[arg0].unk_0C; i++) {
+            if (gaScreen[arg0].unk_1C[i].unk_00 == arg1) {
+                *arg2 = &gaScreen[arg0].unk_1C[i];
+                return ntrue;
             }
         }
     }
-    return 0;
+    return nfalse;
 }
 #endif
 
@@ -691,7 +700,728 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80025CC4_usa);
 #endif
 
 #if VERSION_USA
+#if 0
+void screenTick(screenTick_arg0 *arg0) {
+    screenTick_arg0 *sp14;
+    ? var_a2_2;
+    s32 temp_a0_3;
+    s32 temp_a0_4;
+    s32 temp_a0_5;
+    s32 temp_a0_6;
+    s32 temp_a1;
+    s32 temp_a1_2;
+    s32 temp_s0;
+    s32 temp_s1;
+    s32 temp_s1_2;
+    s32 temp_s2;
+    s32 temp_v0;
+    s32 temp_v0_2;
+    s32 temp_v0_3;
+    s32 temp_v0_4;
+    s32 temp_v0_5;
+    s32 temp_v0_6;
+    s32 temp_v0_7;
+    s32 temp_v1;
+    s32 temp_v1_10;
+    s32 temp_v1_11;
+    s32 temp_v1_12;
+    s32 temp_v1_13;
+    s32 temp_v1_14;
+    s32 temp_v1_15;
+    s32 temp_v1_16;
+    s32 temp_v1_17;
+    s32 temp_v1_18;
+    s32 temp_v1_19;
+    s32 temp_v1_23;
+    s32 temp_v1_2;
+    s32 temp_v1_3;
+    s32 temp_v1_4;
+    s32 temp_v1_5;
+    s32 temp_v1_6;
+    s32 temp_v1_7;
+    s32 temp_v1_8;
+    s32 temp_v1_9;
+    s32 var_a1;
+    s32 var_a2;
+    s32 var_a2_3;
+    s32 var_a3;
+    s32 var_a3_2;
+    s32 var_a3_3;
+    s32 var_a3_4;
+    s32 var_a3_5;
+    s32 var_fp;
+    s32 var_s0;
+    s32 var_s0_2;
+    s32 var_s0_3;
+    s32 var_s0_4;
+    s32 var_s1;
+    s32 var_s1_2;
+    s32 var_s2;
+    s32 var_s2_2;
+    s32 var_s4;
+    s32 var_s5;
+    s32 var_v0;
+    s32 var_v0_12;
+    s32 var_v0_2;
+    s32 var_v0_3;
+    s32 var_v0_4;
+    s32 var_v0_5;
+    s32 var_v0_6;
+    s32 var_v0_7;
+    s32 var_v0_8;
+    s32 var_v0_9;
+    s32 var_v1;
+    screenTick_arg0 *var_s6;
+    struct_gaScreen *temp_s3;
+    struct_gaScreen *temp_t0;
+    struct_gaScreen *temp_v1_25;
+    struct_gaScreen *var_a0;
+    struct_gaScreen_unk_18 *temp_a0_10;
+    struct_gaScreen_unk_18 *temp_a0_2;
+    struct_gaScreen_unk_18 *temp_a0_7;
+    struct_gaScreen_unk_18 *temp_a0_8;
+    struct_gaScreen_unk_18 *temp_a0_9;
+    struct_gaScreen_unk_18 *temp_v1_21;
+    u16 temp_v1_20;
+    u32 temp_a2;
+    void *temp_a0;
+    void *temp_v1_22;
+    void *temp_v1_24;
+    void *var_v0_10;
+    void *var_v0_11;
+
+    sp14 = arg0;
+    B_8018E540_usa += 1;
+    if (giScreen >= 0) {
+        var_s5 = 0;
+        if (giScreen < gnScreenCount) {
+            temp_s3 = &gaScreen[giScreen];
+            if (B_8018E528_usa > 0) {
+                var_s6 = sp14;
+                var_fp = 0;
+                do {
+                    var_s0 = 0;
+                    if (geModeFade != 0) {
+                        var_s6->unk_0 = 0;
+                    } else {
+                        var_a3 = 0;
+                        if (temp_s3->unk_14 > 0) {
+                            var_a2 = 0;
+                            do {
+                                temp_a0 = temp_s3->unk_24 + var_a2;
+                                temp_v1 = temp_a0->unk_2C;
+                                if (temp_v1 & 0x40) {
+                                    var_a3 = -1;
+                                    if (temp_v1 & 0x80) {
+                                        if (temp_a0->unk_14 == 1) {
+                                            if (var_s6->unk_0 == 4) {
+                                                temp_a0->unk_14 = 0;
+                                            } else {
+                                                goto block_14;
+                                            }
+                                        } else {
+block_14:
+                                            if ((temp_a0->unk_14 == 0) && (var_s6->unk_0 == 3)) {
+                                                temp_a0->unk_14 = 1;
+                                            } else {
+                                                goto block_17;
+                                            }
+                                        }
+                                    } else {
+block_17:
+                                        var_s6->unk_0 = 0;
+                                    }
+                                }
+                                var_s0 += 1;
+                                var_a2 += 0x30;
+                            } while (var_s0 < temp_s3->unk_14);
+                        }
+                        if (var_a3 == 0) {
+                            temp_s2 = (var_fp + temp_s3)->unk_28;
+                            if ((temp_s2 == -1) || (temp_a0_2 = &temp_s3->unk_18[temp_s2], var_s2 = -1, ((temp_a0_2->unk_2C & 0x800) != 0))) {
+                                *(var_fp + sp14) = 0;
+                            } else {
+                                temp_a2 = *(var_fp + sp14);
+                                var_s4 = 0;
+                                switch (temp_a2) {
+                                    case 0x1:
+                                        if (temp_a0_2->unk_50 < temp_a0_2->unk_58) {
+                                            temp_v1_2 = temp_a0_2->unk_40;
+                                            var_v0 = 0;
+                                            if (temp_v1_2 > 0) {
+                                                if (temp_a0_2->unk_2C & 0x1000) {
+loop_28:
+                                                    temp_v0 = temp_a0_2->unk_40 - 1;
+                                                    temp_a0_2->unk_40 = temp_v0;
+                                                    if (temp_v0 != -1) {
+                                                        temp_v1_3 = (temp_v0 * temp_a0_2->unk_34) + temp_a0_2->unk_3C;
+                                                        if (((s32) temp_a0_2->unk_38[temp_v1_3 >> 3] >> (temp_v1_3 & 7)) & 1) {
+                                                            goto block_32;
+                                                        }
+                                                        goto loop_28;
+                                                    }
+                                                    temp_a0_2->unk_40 = temp_v1_2;
+                                                    var_v0 = 0;
+                                                } else {
+                                                    temp_a0_2->unk_40 = temp_v1_2 - 1;
+block_32:
+                                                    screenUpdateArea(temp_a0_2);
+                                                    var_v0 = -1;
+                                                }
+                                            }
+                                            if (var_v0 != 0) {
+                                                var_s4 = 1;
+                                                goto block_176;
+                                            }
+                                            if (temp_a0_2->unk_2C & 0x20000) {
+                                                if (func_800255D8_usa(temp_a0_2, temp_a0_2->unk_3C - 1, temp_a0_2->unk_30 - 1, 1) != 0) {
+                                                    var_s4 = 1;
+                                                    goto block_176;
+                                                }
+                                                temp_s1 = var_s5 | 0x10000;
+                                                var_s2 = func_80025850_usa(temp_s3, temp_a0_2, 3, temp_s1);
+                                                var_v0_2 = var_s5 * 0x10;
+                                                if (var_s2 == -1) {
+                                                    if (temp_a0_2->unk_2C & 0x200000) {
+                                                        var_s2 = func_80025850_usa(temp_s3, temp_a0_2, 1, temp_s1);
+                                                    }
+                                                    var_v0_2 = var_s5 * 0x10;
+                                                    if (var_s2 == -1) {
+                                                        if (temp_a0_2->unk_2C & 0x40000) {
+                                                            var_v0_2 = var_s5 * 0x10;
+                                                            if (func_800255D8_usa(temp_a0_2, temp_a0_2->unk_34 - 1, temp_a0_2->unk_30 - 1, 1) != 0) {
+                                                                var_s4 = 1;
+                                                            }
+                                                        } else {
+                                                            goto block_176;
+                                                        }
+                                                    }
+                                                }
+                                            } else {
+                                                var_a2_2 = 3;
+                                                var_a3_2 = var_s5 | 0x10000;
+                                                goto block_175;
+                                            }
+                                        } else {
+                                            temp_a0_3 = temp_a0_2->unk_30;
+                                            temp_v1_4 = temp_a0_2->unk_40;
+                                            var_v0_3 = 0;
+                                            if (temp_v1_4 < (temp_a0_3 - 1)) {
+                                                if (temp_a0_2->unk_2C & 0x1000) {
+loop_52:
+                                                    temp_v0_2 = temp_a0_2->unk_40 + 1;
+                                                    temp_a0_2->unk_40 = temp_v0_2;
+                                                    if (temp_v0_2 != temp_a0_3) {
+                                                        temp_v1_5 = (temp_v0_2 * temp_a0_2->unk_34) + temp_a0_2->unk_3C;
+                                                        if (((s32) temp_a0_2->unk_38[temp_v1_5 >> 3] >> (temp_v1_5 & 7)) & 1) {
+                                                            goto block_56;
+                                                        }
+                                                        goto loop_52;
+                                                    }
+                                                    temp_a0_2->unk_40 = temp_v1_4;
+                                                    var_v0_3 = 0;
+                                                } else {
+                                                    temp_a0_2->unk_40 = temp_v1_4 + 1;
+block_56:
+                                                    screenUpdateArea(temp_a0_2);
+                                                    var_v0_3 = -1;
+                                                }
+                                            }
+                                            if (var_v0_3 != 0) {
+                                                var_s4 = 1;
+                                            } else {
+                                                var_a2_2 = 3;
+block_174:
+                                                var_a3_2 = var_s5;
+block_175:
+                                                var_s2 = func_80025850_usa(temp_s3, temp_a0_2, var_a2_2, var_a3_2);
+                                            }
+                                        default:
+block_176:
+                                            var_v0_2 = var_s5 * 0x10;
+                                        }
+                                        break;
+                                    case 0x2:
+                                        if (temp_a0_2->unk_50 < temp_a0_2->unk_58) {
+                                            temp_a0_4 = temp_a0_2->unk_30;
+                                            temp_v1_6 = temp_a0_2->unk_40;
+                                            var_v0_4 = 0;
+                                            if (temp_v1_6 < (temp_a0_4 - 1)) {
+                                                if (temp_a0_2->unk_2C & 0x1000) {
+loop_66:
+                                                    temp_v0_3 = temp_a0_2->unk_40 + 1;
+                                                    temp_a0_2->unk_40 = temp_v0_3;
+                                                    if (temp_v0_3 != temp_a0_4) {
+                                                        temp_v1_7 = (temp_v0_3 * temp_a0_2->unk_34) + temp_a0_2->unk_3C;
+                                                        if (((s32) temp_a0_2->unk_38[temp_v1_7 >> 3] >> (temp_v1_7 & 7)) & 1) {
+                                                            goto block_70;
+                                                        }
+                                                        goto loop_66;
+                                                    }
+                                                    temp_a0_2->unk_40 = temp_v1_6;
+                                                    var_v0_4 = 0;
+                                                } else {
+                                                    temp_a0_2->unk_40 = temp_v1_6 + 1;
+block_70:
+                                                    screenUpdateArea(temp_a0_2);
+                                                    var_v0_4 = -1;
+                                                }
+                                            }
+                                            if (var_v0_4 != 0) {
+                                                var_s4 = 2;
+                                                goto block_176;
+                                            }
+                                            if (temp_a0_2->unk_2C & 0x20000) {
+                                                if (func_800255D8_usa(temp_a0_2, temp_a0_2->unk_3C + 1, 0, 2) != 0) {
+                                                    var_s4 = 2;
+                                                    goto block_176;
+                                                }
+                                                temp_s1_2 = var_s5 | 0x10000;
+                                                var_s2 = func_80025850_usa(temp_s3, temp_a0_2, 4, temp_s1_2);
+                                                var_v0_2 = var_s5 * 0x10;
+                                                if (var_s2 == -1) {
+                                                    if (temp_a0_2->unk_2C & 0x200000) {
+                                                        var_s2 = func_80025850_usa(temp_s3, temp_a0_2, 2, temp_s1_2);
+                                                    }
+                                                    var_v0_2 = var_s5 * 0x10;
+                                                    if (var_s2 == -1) {
+                                                        if (temp_a0_2->unk_2C & 0x40000) {
+                                                            var_v0_2 = var_s5 * 0x10;
+                                                            if (func_800255D8_usa(temp_a0_2, 0, 0, 2) != 0) {
+                                                                var_s4 = 2;
+                                                            }
+                                                        } else {
+                                                            goto block_176;
+                                                        }
+                                                    }
+                                                }
+                                            } else {
+                                                var_a2_2 = 4;
+                                                var_a3_2 = var_s5 | 0x10000;
+                                                goto block_175;
+                                            }
+                                        } else {
+                                            temp_v1_8 = temp_a0_2->unk_40;
+                                            var_v0_5 = 0;
+                                            if (temp_v1_8 > 0) {
+                                                if (temp_a0_2->unk_2C & 0x1000) {
+loop_89:
+                                                    temp_v0_4 = temp_a0_2->unk_40 - 1;
+                                                    temp_a0_2->unk_40 = temp_v0_4;
+                                                    if (temp_v0_4 != -1) {
+                                                        temp_v1_9 = (temp_v0_4 * temp_a0_2->unk_34) + temp_a0_2->unk_3C;
+                                                        if (((s32) temp_a0_2->unk_38[temp_v1_9 >> 3] >> (temp_v1_9 & 7)) & 1) {
+                                                            goto block_93;
+                                                        }
+                                                        goto loop_89;
+                                                    }
+                                                    temp_a0_2->unk_40 = temp_v1_8;
+                                                    var_v0_5 = 0;
+                                                } else {
+                                                    temp_a0_2->unk_40 = temp_v1_8 - 1;
+block_93:
+                                                    screenUpdateArea(temp_a0_2);
+                                                    var_v0_5 = -1;
+                                                }
+                                            }
+                                            if (var_v0_5 != 0) {
+                                                var_s4 = 2;
+                                            } else {
+block_173:
+                                                var_a2_2 = 4;
+                                                goto block_174;
+                                            }
+                                            goto block_176;
+                                        }
+                                        break;
+                                    case 0x3:
+                                        if (temp_a0_2->unk_54 >= temp_a0_2->unk_4C) {
+                                            temp_v1_10 = temp_a0_2->unk_3C;
+                                            var_v0_6 = 0;
+                                            if (temp_v1_10 > 0) {
+                                                if (temp_a0_2->unk_2C & 0x1000) {
+loop_102:
+                                                    temp_a1 = temp_a0_2->unk_3C - 1;
+                                                    temp_a0_2->unk_3C = temp_a1;
+                                                    if (temp_a1 != -1) {
+                                                        temp_v1_11 = (temp_a0_2->unk_40 * temp_a0_2->unk_34) + temp_a1;
+                                                        if (((s32) temp_a0_2->unk_38[temp_v1_11 >> 3] >> (temp_v1_11 & 7)) & 1) {
+                                                            goto block_106;
+                                                        }
+                                                        goto loop_102;
+                                                    }
+                                                    temp_a0_2->unk_3C = temp_v1_10;
+                                                    var_v0_6 = 0;
+                                                } else {
+                                                    temp_a0_2->unk_3C = temp_v1_10 - 1;
+block_106:
+                                                    screenUpdateArea(temp_a0_2);
+                                                    var_v0_6 = -1;
+                                                }
+                                            }
+                                            if (var_v0_6 != 0) {
+                                                var_s4 = 3;
+                                                goto block_176;
+                                            }
+                                            temp_v1_12 = temp_a0_2->unk_2C;
+                                            if (temp_v1_12 & 0x400) {
+                                                if (func_800255D8_usa(temp_a0_2, temp_a0_2->unk_34 - 1, temp_a0_2->unk_40 - 1, 3) != 0) {
+                                                    var_s4 = 3;
+                                                    goto block_176;
+                                                }
+                                                var_a3_3 = var_s5;
+                                                if (!(temp_a0_2->unk_2C & 0x200000)) {
+                                                    var_a3_3 = var_s5 | 0x10000;
+                                                }
+                                                var_s2 = func_80025850_usa(temp_s3, temp_a0_2, 1, var_a3_3);
+                                                var_v0_2 = var_s5 * 0x10;
+                                                if (var_s2 == -1) {
+                                                    if (temp_a0_2->unk_2C & 0x40000) {
+                                                        var_v0_7 = func_800255D8_usa(temp_a0_2, temp_a0_2->unk_34 - 1, temp_a0_2->unk_30 - 1, 3);
+                                                        goto block_132;
+                                                    }
+                                                    goto block_176;
+                                                }
+                                            } else {
+                                                var_a3_2 = var_s5;
+                                                if (!(temp_v1_12 & 0x200000)) {
+                                                    var_a3_2 = var_s5 | 0x10000;
+                                                }
+                                                var_a2_2 = 1;
+                                                goto block_175;
+                                            }
+                                        } else {
+                                            temp_a0_5 = temp_a0_2->unk_34;
+                                            temp_v1_13 = temp_a0_2->unk_3C;
+                                            var_v0_7 = 0;
+                                            if (temp_v1_13 < (temp_a0_5 - 1)) {
+                                                if (temp_a0_2->unk_2C & 0x1000) {
+loop_126:
+                                                    temp_v0_5 = temp_a0_2->unk_3C + 1;
+                                                    temp_a0_2->unk_3C = temp_v0_5;
+                                                    if (temp_v0_5 != temp_a0_5) {
+                                                        temp_v1_14 = (temp_a0_2->unk_40 * temp_a0_5) + temp_v0_5;
+                                                        if (((s32) temp_a0_2->unk_38[temp_v1_14 >> 3] >> (temp_v1_14 & 7)) & 1) {
+                                                            goto block_130;
+                                                        }
+                                                        goto loop_126;
+                                                    }
+                                                    temp_a0_2->unk_3C = temp_v1_13;
+                                                    var_v0_7 = 0;
+                                                } else {
+                                                    temp_a0_2->unk_3C = temp_v1_13 + 1;
+block_130:
+                                                    screenUpdateArea(temp_a0_2);
+                                                    var_v0_7 = -1;
+                                                }
+                                            }
+block_132:
+                                            var_v0_2 = var_s5 * 0x10;
+                                            if (var_v0_7 != 0) {
+                                                var_s4 = 3;
+                                            }
+                                        }
+                                        break;
+                                    case 0x4:
+                                        if (temp_a0_2->unk_54 >= temp_a0_2->unk_4C) {
+                                            temp_a0_6 = temp_a0_2->unk_34;
+                                            temp_v1_15 = temp_a0_2->unk_3C;
+                                            var_v0_8 = 0;
+                                            if (temp_v1_15 < (temp_a0_6 - 1)) {
+                                                if (temp_a0_2->unk_2C & 0x1000) {
+loop_138:
+                                                    temp_v0_6 = temp_a0_2->unk_3C + 1;
+                                                    temp_a0_2->unk_3C = temp_v0_6;
+                                                    if (temp_v0_6 != temp_a0_6) {
+                                                        temp_v1_16 = (temp_a0_2->unk_40 * temp_a0_6) + temp_v0_6;
+                                                        if (((s32) temp_a0_2->unk_38[temp_v1_16 >> 3] >> (temp_v1_16 & 7)) & 1) {
+                                                            goto block_142;
+                                                        }
+                                                        goto loop_138;
+                                                    }
+                                                    temp_a0_2->unk_3C = temp_v1_15;
+                                                    var_v0_8 = 0;
+                                                } else {
+                                                    temp_a0_2->unk_3C = temp_v1_15 + 1;
+block_142:
+                                                    screenUpdateArea(temp_a0_2);
+                                                    var_v0_8 = -1;
+                                                }
+                                            }
+                                            if (var_v0_8 != 0) {
+                                                var_s4 = 4;
+                                                goto block_176;
+                                            }
+                                            temp_v1_17 = temp_a0_2->unk_2C;
+                                            if (temp_v1_17 & 0x400) {
+                                                if (func_800255D8_usa(temp_a0_2, 0, temp_a0_2->unk_40 + 1, 4) != 0) {
+                                                    var_s4 = 4;
+                                                    goto block_176;
+                                                }
+                                                var_a3_4 = var_s5;
+                                                if (!(temp_a0_2->unk_2C & 0x200000)) {
+                                                    var_a3_4 = var_s5 | 0x10000;
+                                                }
+                                                var_s2 = func_80025850_usa(temp_s3, temp_a0_2, 2, var_a3_4);
+                                                var_v0_2 = var_s5 * 0x10;
+                                                if (var_s2 == -1) {
+                                                    if (temp_a0_2->unk_2C & 0x40000) {
+                                                        var_v0_9 = func_800255D8_usa(temp_a0_2, 0, 0, 4);
+                                                        goto block_167;
+                                                    }
+                                                    goto block_176;
+                                                }
+                                            } else {
+                                                var_a3_2 = var_s5;
+                                                if (!(temp_v1_17 & 0x200000)) {
+                                                    var_a3_2 = var_s5 | 0x10000;
+                                                }
+                                                var_a2_2 = 2;
+                                                goto block_175;
+                                            }
+                                        } else {
+                                            temp_v1_18 = temp_a0_2->unk_3C;
+                                            var_v0_9 = 0;
+                                            if (temp_v1_18 > 0) {
+                                                if (temp_a0_2->unk_2C & 0x1000) {
+loop_161:
+                                                    temp_a1_2 = temp_a0_2->unk_3C - 1;
+                                                    temp_a0_2->unk_3C = temp_a1_2;
+                                                    if (temp_a1_2 != -1) {
+                                                        temp_v1_19 = (temp_a0_2->unk_40 * temp_a0_2->unk_34) + temp_a1_2;
+                                                        if (((s32) temp_a0_2->unk_38[temp_v1_19 >> 3] >> (temp_v1_19 & 7)) & 1) {
+                                                            goto block_165;
+                                                        }
+                                                        goto loop_161;
+                                                    }
+                                                    temp_a0_2->unk_3C = temp_v1_18;
+                                                    var_v0_9 = 0;
+                                                } else {
+                                                    temp_a0_2->unk_3C = temp_v1_18 - 1;
+block_165:
+                                                    screenUpdateArea(temp_a0_2);
+                                                    var_v0_9 = -1;
+                                                }
+                                            }
+block_167:
+                                            var_v0_2 = var_s5 * 0x10;
+                                            if (var_v0_9 != 0) {
+                                                var_s4 = 4;
+                                            }
+                                        }
+                                        break;
+                                    case 0x13:
+                                        var_s6->unk_0 = 3;
+                                        var_a2_2 = 1;
+                                        goto block_174;
+                                    case 0x14:
+                                        var_s6->unk_0 = 4;
+                                        var_a2_2 = 2;
+                                        goto block_174;
+                                    case 0x11:
+                                        var_s6->unk_0 = 1;
+                                        var_a2_2 = 3;
+                                        goto block_174;
+                                    case 0x12:
+                                        var_s6->unk_0 = 2;
+                                        goto block_173;
+                                }
+                                temp_v1_20 = *(&gTheGame.unk_89C4[0].unk_0A + var_v0_2);
+                                if ((temp_v1_20 & 0x800) || (temp_v1_20 & 0x400) || (temp_v1_20 & 0x200) || (temp_v1_20 & 0x100)) {
+                                    B_8018E558_usa = 8;
+                                    temp_a0_2->unk_2C &= 0xFFFBFFFF;
+                                } else if (B_8018E558_usa > 0) {
+                                    B_8018E558_usa -= 1;
+                                } else {
+                                    temp_a0_2->unk_2C |= 0x40000;
+                                }
+                                if ((var_s2 != -1) && ((((var_s5 ^ 1) * 4) + temp_s3)->unk_28 != var_s2)) {
+                                    if ((temp_a0_2->unk_2C & 0x200) && (var_a1 = var_s2 * 0x60, temp_a0_7 = &temp_s3->unk_18[var_s2], ((temp_a0_7->unk_2C & 0x200) != 0))) {
+                                        if (var_s6->unk_0 == 3) {
+                                            if (temp_a0_2->unk_30 == temp_a0_7->unk_30) {
+                                                temp_a0_7->unk_3C = temp_a0_7->unk_34 - 1;
+                                                goto block_196;
+                                            }
+                                            goto block_193;
+                                        }
+block_193:
+                                        if ((var_s6->unk_0 == 4) && (var_a1 = var_s2 * 0x60, temp_a0_8 = &temp_s3->unk_18[var_s2], (temp_a0_2->unk_30 == temp_a0_8->unk_30))) {
+                                            temp_a0_8->unk_3C = 0;
+block_196:
+                                            (var_a1 + temp_s3->unk_18)->unk_40 = (s32) temp_a0_2->unk_40;
+                                        } else if ((var_s6->unk_0 == 1) && (temp_a0_9 = &temp_s3->unk_18[var_s2], (temp_a0_2->unk_34 == temp_a0_9->unk_34))) {
+                                            temp_a0_9->unk_3C = temp_a0_2->unk_3C;
+                                            temp_v1_21 = &temp_s3->unk_18[var_s2];
+                                            temp_v1_21->unk_40 = temp_v1_21->unk_30 - 1;
+                                        } else if (var_s6->unk_0 == 2) {
+                                            temp_a0_10 = &temp_s3->unk_18[var_s2];
+                                            if (temp_a0_2->unk_34 == temp_a0_10->unk_34) {
+                                                temp_a0_10->unk_3C = temp_a0_2->unk_3C;
+                                                temp_s3->unk_18[var_s2].unk_40 = 0;
+                                            }
+                                        }
+                                    }
+                                    if (var_s6->unk_0 != 2) {
+                                        if (var_s6->unk_0 < 3) {
+                                            if (var_s6->unk_0 == 1) {
+                                                var_s4 = 0x11;
+                                                goto block_217;
+                                            }
+                                            var_v0_10 = var_fp + temp_s3;
+                                        } else {
+                                            switch (var_s6->unk_0) { /* switch 1; irregular */
+                                                case 0x4: /* switch 1 */
+                                                    var_s4 = 0x14;
+                                                    goto block_217;
+                                                default: /* switch 1 */
+                                                    var_v0_10 = var_fp + temp_s3;
+                                                    break;
+                                                case 0x3: /* switch 1 */
+                                                    var_s4 = 0x13;
+                                                    goto block_217;
+                                            }
+                                        }
+                                    } else {
+                                        var_s4 = 0x12;
+block_217:
+                                        var_v0_10 = var_fp + temp_s3;
+                                    }
+                                    var_v0_10->unk_28 = var_s2;
+                                    screenUpdateArea(&temp_s3->unk_18[var_s2]);
+                                }
+                                if (var_s4 != 0) {
+                                    screenUpdateArea(temp_a0_2);
+                                }
+                                var_s6->unk_0 = var_s4;
+                            }
+                        }
+                    }
+                    var_s6 += 4;
+                    var_s5 += 1;
+                    var_fp += 4;
+                } while (var_s5 < B_8018E528_usa);
+            }
+            if (var_s5 == 1) {
+                sp14->unk_4 = 0;
+            }
+            var_s0_2 = 0;
+            func_8002496C_usa();
+            if (temp_s3->unk_10 > 0) {
+                var_s1 = 0;
+                do {
+                    temp_v1_22 = var_s1 + temp_s3->unk_20;
+                    if (!(temp_v1_22->unk_24 & 0x1008)) {
+                        func_800207FC_usa(temp_v1_22->unk_14, B_8018E540_usa);
+                    }
+                    var_s0_2 += 1;
+                    var_s1 += 0x30;
+                } while (var_s0_2 < temp_s3->unk_10);
+            }
+            var_s2_2 = 0;
+            if (temp_s3->unk_08 > 0) {
+                var_s0_3 = 0;
+                do {
+                    temp_v1_23 = (var_s0_3 + temp_s3->unk_18)->unk_2C;
+                    if ((temp_v1_23 & 0x80) && (((var_s2_2 == temp_s3->unk_28) && (temp_v1_23 & 1)) || ((var_s2_2 == temp_s3->unk_2C) && (temp_v1_23 & 2)))) {
+                        func_800207FC_usa((var_s0_3 + temp_s3->unk_18)->unk_C, B_8018E540_usa);
+                        if ((var_s0_3 + temp_s3->unk_18)->unk_2C & 0x4000) {
+                            func_800207FC_usa(B_8018E550_usa, B_8018E540_usa);
+                        }
+                    }
+                    var_s2_2 += 1;
+                    var_s0_3 += 0x60;
+                } while (var_s2_2 < temp_s3->unk_08);
+            }
+            var_s0_4 = 0;
+            if (temp_s3->unk_14 > 0) {
+                var_s1_2 = 0;
+                do {
+                    temp_v1_24 = var_s1_2 + temp_s3->unk_24;
+                    if (temp_v1_24->unk_2C & 1) {
+                        func_800207FC_usa(temp_v1_24->unk_20, B_8018E540_usa);
+                    }
+                    var_s0_4 += 1;
+                    var_s1_2 += 0x30;
+                } while (var_s0_4 < temp_s3->unk_14);
+            }
+            if (gnScreenCount > 0) {
+                var_a2_3 = 0;
+                var_a0 = gaScreen;
+                temp_t0 = &var_a0[gnScreenCount];
+                do {
+                    var_v1 = 0;
+                    if (var_a0->unk_C > 0) {
+                        var_v0_11 = var_a2_3 + gaScreen;
+                        do {
+                            var_v1 += 1;
+                            var_v0_11 = var_a2_3 + gaScreen;
+                        } while (var_v1 < var_v0_11->unk_C);
+                    }
+                    var_a0 += 0x38;
+                    var_a2_3 += 0x38;
+                } while ((s32) var_a0 < (s32) temp_t0);
+            }
+            if (geModeFade == 0) {
+                func_80025CC4_usa(temp_s3);
+            }
+        }
+    }
+    temp_s0 = geModeFade;
+    var_a3_5 = 0;
+    switch (temp_s0) {                              /* switch 2; irregular */
+        case 0x3:                                   /* switch 2 */
+            if (B_8018E504_usa == 0) {
+                var_a3_5 = -1;
+block_256:
+                geModeFade = 0;
+            }
+            break;
+        case 0x2:                                   /* switch 2 */
+            if (B_8018E504_usa == 0) {
+                temp_v0_7 = gnAlphaFade - 0x10;
+                gnAlphaFade = temp_v0_7;
+                if (temp_v0_7 <= 0) {
+                    gnAlphaFade = 0;
+                    if (B_8018E524_usa != -1) {
+                        geModeFade = 1;
+                    } else {
+                        goto block_256;
+                    }
+                }
+            }
+            break;
+        case 0x1:                                   /* switch 2 */
+            if (B_8018E504_usa == 0) {
+                var_v0_12 = gnAlphaFade + 0x10;
+                if (gnAlphaFade == 0) {
+                    if (B_8018E524_usa != -1) {
+                        var_a3_5 = -1;
+                    }
+                    var_v0_12 = gnAlphaFade + 0x10;
+                }
+                gnAlphaFade = var_v0_12;
+                if (var_v0_12 >= 0xFF) {
+                    geModeFade = 0;
+                    gnAlphaFade = 0xFF;
+                }
+            }
+            break;
+    }
+    if (var_a3_5 != 0) {
+        func_8002400C_usa(B_8018E524_usa);
+        B_8018E524_usa = -1;
+        B_8018E528_usa = B_8018E52C_usa;
+    }
+    if ((geModeFade != temp_s0) && (giScreen >= 0) && (giScreen < gnScreenCount)) {
+        temp_v1_25 = &gaScreen[giScreen];
+        if (temp_v1_25->unk_08 > 0) {
+            screenUpdateArea(temp_v1_25->unk_18);
+        }
+    }
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/screen", screenTick);
+#endif
 #endif
 
 #if VERSION_USA
@@ -719,8 +1449,7 @@ s32 screenSet(const char *arg0, s32 arg1) {
             return giScreen;
         }
 
-        // ?
-        if ((u32)(geModeFade - 2) < 2U) {
+        if ((geModeFade > 1) && (geModeFade < 4)) {
             if (sp10 == giScreen) {
                 if (geModeFade == 2) {
                     geModeFade = 1;
@@ -780,17 +1509,75 @@ void func_800275A4_usa(void) {
 }
 #endif
 
+#define is_upper(c) ((c) >= 'a' && (c) <= 'z')
+#define to_upper(c) (is_upper(c) ? ((c) - ('a' - 'A')) : (c))
+
 #if VERSION_USA
+#ifdef NON_EQUIVALENT
+nbool func_800275AC_usa(const char *arg0, const char *arg1) {
+    s32 var_t0;
+
+    for (var_t0 = 0; arg0[var_t0] != 0; var_t0++) {
+        s32 var_a2;
+        s32 var_v1;
+
+        var_a2 = arg0[var_t0];
+        if (is_upper(var_a2)) {
+            var_a2 -= 0x20; // ('a' - 'A')
+        }
+
+        var_v1 = arg1[var_t0];
+        if (is_upper(var_v1)) {
+            var_v1 -= 0x20; // ('a' - 'A')
+        }
+
+        if (var_a2 != var_v1) {
+            return 0;
+        }
+    }
+
+    if (arg1[var_t0] == 0) {
+        return -1;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_800275AC_usa);
+#endif
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80027618_usa);
+nbool func_80027618_usa(s32 arg0, s32 arg1, u32 arg2) {
+    if (arg2 >= GASCREEN_UNK_28_LEN) {
+        return nfalse;
+    }
+
+    if ((arg0 >= 0) && (arg0 < gnScreenCount)) {
+        s32 temp_t1 = gaScreen[arg0].unk_28[arg2];
+        s32 i;
+
+        if (arg1 == -1) {
+            gaScreen[arg0].unk_28[arg2] = arg1;
+            gaScreen[arg0].unk_30[arg2] = temp_t1;
+            return ntrue;
+        }
+
+        for (i = 0; i < gaScreen[arg0].unk_08; i++) {
+            if (gaScreen[arg0].unk_18[i].unk_1C == arg1) {
+                gaScreen[arg0].unk_28[arg2] = i;
+                gaScreen[arg0].unk_30[arg2] = temp_t1;
+                return ntrue;
+            }
+        }
+    }
+
+    return nfalse;
+}
 #endif
 
 #if VERSION_USA
 // screenGetArea?
-INLINE s32 func_800276CC_usa(s32 arg0, UNK_TYPE4 *arg1, s32 arg2) {
+INLINE nbool func_800276CC_usa(s32 arg0, UNK_TYPE4 *arg1, s32 arg2) {
     if (arg2 < GASCREEN_UNK_28_LEN) {
         if ((arg0 >= 0) && (arg0 < gnScreenCount)) {
             s32 var_a0 = gaScreen[arg0].unk_28[arg2];
@@ -801,66 +1588,182 @@ INLINE s32 func_800276CC_usa(s32 arg0, UNK_TYPE4 *arg1, s32 arg2) {
 
             if ((var_a0 >= 0) && (var_a0 < gaScreen[arg0].unk_08)) {
                 *arg1 = gaScreen[arg0].unk_18[var_a0].unk_1C;
-                return -1;
+                return ntrue;
             }
         }
     }
 
+    return nfalse;
+}
+#endif
+
+#if VERSION_USA
+// Not present on ROM?
+STATIC_INLINE nbool inlined_func(s32 arg0, s32 arg1, struct_gaScreen_unk_18 **arg2) {
+    s32 i;
+
+    if ((arg1 != -1) && (arg0 >= 0) && (arg0 < gnScreenCount)) {
+        for (i = 0; i < gaScreen[arg0].unk_08; i++) {
+            if (gaScreen[arg0].unk_18[i].unk_1C == arg1) {
+                *arg2 = &gaScreen[arg0].unk_18[i];
+                return ntrue;
+            }
+        }
+    }
+
+    return nfalse;
+}
+#endif
+
+#if VERSION_USA
+nbool func_8002776C_usa(s32 arg0, s32 arg1) {
+    struct_gaScreen_unk_18 *sp0;
+
+    if (inlined_func(arg0, arg1, &sp0)) {
+        sp0->unk_2C |= 0x800;
+        return ntrue;
+    }
+    return nfalse;
+}
+#endif
+
+#if VERSION_USA
+nbool func_80027838_usa(s32 arg0, s32 arg1) {
+    struct_gaScreen_unk_18 *sp10;
+
+    if (inlined_func(arg0, arg1, &sp10)) {
+        sp10->unk_2C &= ~0x800;
+        screenUpdateArea(sp10);
+        return ntrue;
+    }
+    return nfalse;
+}
+#endif
+
+#if VERSION_USA
+s32 func_80027914_usa(s32 arg0, s32 arg1) {
+    struct_gaScreen_unk_18 *sp0;
+
+    if (inlined_func(arg0, arg1, &sp0)) {
+        return sp0->unk_2C;
+    }
     return 0;
 }
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_8002776C_usa);
+nbool func_800279D8_usa(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3) {
+    struct_gaScreen_unk_18 *sp0;
+
+    if (inlined_func(arg0, arg1, &sp0)) {
+        *arg2 = sp0->unk_30;
+        *arg3 = sp0->unk_34;
+        return ntrue;
+    }
+    return nfalse;
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80027838_usa);
+nbool func_80027AB0_usa(void) {
+    if (B_8018E4FC_usa == 0) {
+        B_8018E4FC_usa = 1;
+    } else {
+        B_8018E4FC_usa = 3;
+    }
+
+    return ntrue;
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80027914_usa);
+nbool func_80027AD4_usa(void) {
+    s32 old = B_8018E4FC_usa;
+
+    B_8018E4FC_usa >>= 1;
+    if (old != 0) {
+        return ntrue;
+    }
+    return nfalse;
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_800279D8_usa);
-#endif
+#ifdef NON_EQUIVALENT
+nbool screenTextDone(s32 arg0, s32 arg1) {
+    struct_gaScreen_unk_1C *sp0;
+    s32 var_v0_2 = screenFindImage(arg0, arg1, &sp0);
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80027AB0_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80027AD4_usa);
-#endif
-
-#if VERSION_USA
+    if (var_v0_2 != 0) {
+        if (sp0->unk_44 & 0x1000) {
+            if (sp0->unk_48 != 0) {
+                if (sp0->unk_38 >= sp0->unk_20) {
+                    return -1;
+                }
+                return 0;
+            }
+            if (sp0->unk_38 >= sp0->unk_20) {
+                if (sp0->unk_10 == 0) {
+                    return -1;
+                }
+            }
+            return 0;
+        }
+        return -1;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/screen", screenTextDone);
 #endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80027C04_usa);
 #endif
 
 #if VERSION_USA
-s32 screenHideText(s32 arg0, s32 arg1) {
-    s32 var_a1;
+#ifdef NON_MATCHING
+nbool func_80027C04_usa(s32 arg0, s32 arg1) {
+    struct_gaScreen_unk_1C *sp0;
+    s32 var_v0_2 = screenFindImage(arg0, arg1, &sp0);
+    s32 var_v0;
+
+    if (var_v0_2 != 0) {
+        var_v0 = -1;
+        if (sp0->unk_44 & 0x1000) {
+            if (sp0->unk_48 != 0) {
+                var_v0 = (sp0->unk_10 != 0) ? -1 : 0;
+            } else if (sp0->unk_38 >= sp0->unk_20) {
+                var_v0 = (sp0->unk_10 == 0) ? -1 : 0;
+            } else {
+                var_v0 = 0;
+            }
+        }
+        return var_v0;
+    }
+    return 0;
+}
+#else
+INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80027C04_usa);
+#endif
+#endif
+
+#if VERSION_USA
+nbool screenHideText(s32 arg0, s32 arg1) {
+    s32 ret;
     s32 var_s1;
     s32 i;
     s32 var_s4;
 
-    if ((arg1 != -1) && ((arg1 & 0xC0000000) == 0xC0000000)) {
+    if ((arg1 != 0xFFFFFFFF) && (CHECK_FLAG_ALL(arg1, 0xC0000000))) {
         var_s4 = arg1 & 0x3FFFFFFF;
         var_s1 = 0x10000;
-    } else if ((arg1 != -1) && ((arg1 & 0x80008000) == 0x80008000)) {
+    } else if ((arg1 != 0xFFFFFFFF) && (CHECK_FLAG_ALL(arg1, 0x80008000))) {
         var_s4 = arg1 & 0x7FFF;
-        var_s1 = (arg1 >> 0x10) & 0x7FFF;
+        var_s1 = (arg1 >> 16) & 0x7FFF;
     } else {
         var_s1 = arg1;
         var_s4 = arg1;
     }
 
-    var_a1 = 0;
+    ret = nfalse;
     if ((arg0 >= 0) && (arg0 < gnScreenCount)) {
         for (i = 0; i < gaScreen[arg0].unk_0C; i++) {
             struct_gaScreen_unk_1C *temp_a0_2 = &gaScreen[arg0].unk_1C[i];
@@ -871,7 +1774,7 @@ s32 screenHideText(s32 arg0, s32 arg1) {
                     screenHideImage(arg0, temp_a0_2->unk_1A);
                 }
 
-                var_a1 = -1;
+                ret = ntrue;
                 if (var_s4 == var_s1) {
                     break;
                 }
@@ -879,16 +1782,61 @@ s32 screenHideText(s32 arg0, s32 arg1) {
         }
     }
 
-    return var_a1;
+    return ret;
 }
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", screenShowText);
+nbool screenShowText(s32 arg0, s32 arg1) {
+    s32 var_s3;
+    s32 var_s4;
+    s32 ret;
+
+    if ((arg1 != 0xFFFFFFFF) && CHECK_FLAG_ALL(arg1, 0x80008000)) {
+        var_s4 = arg1 & 0x7FFF;
+        var_s3 = (arg1 >> 16) & 0x7FFF;
+    } else {
+        var_s4 = var_s3 = arg1;
+    }
+
+    ret = nfalse;
+    if ((arg0 >= 0) && (arg0 < gnScreenCount)) {
+        s32 var_s2;
+
+        for (var_s2 = 0; var_s2 < gaScreen[arg0].unk_0C; var_s2++) {
+            struct_gaScreen_unk_1C *temp_a1 = &gaScreen[arg0].unk_1C[var_s2];
+
+            if ((temp_a1->unk_00 >= var_s4) && (var_s3 >= temp_a1->unk_00)) {
+                temp_a1->unk_44 &= ~0x400;
+                temp_a1->unk_38 = 0;
+                temp_a1->unk_10 = 0;
+                temp_a1->unk_48 &= ~0xF0000000;
+
+                B_8018E554_usa = 0;
+                B_8018E4FC_usa = B_8018E500_usa;
+                if (temp_a1->unk_44 & 0x100000) {
+                    screenShowImage(arg0, temp_a1->unk_1A);
+                }
+
+                ret = ntrue;
+                if (var_s4 == var_s3) {
+                    break;
+                }
+            }
+        }
+    }
+
+    return ret;
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_8002801C_usa);
+s32 func_8002801C_usa(void) {
+    s32 old = B_8018E554_usa;
+
+    B_8018E554_usa = 0;
+    return old;
+}
 #endif
 
 #if VERSION_USA
@@ -896,20 +1844,45 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80028034_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_800282AC_usa);
+// Not present on ROM?
+STATIC_INLINE nbool inlined_func2(s32 arg0, s32 arg1, struct_gaScreen_unk_20 **arg2) {
+    s32 i;
+
+    if ((arg1 != -1) && (arg0 >= 0) && (arg0 < gnScreenCount)) {
+        for (i = 0; i < gaScreen[arg0].unk_10; i++) {
+            if (gaScreen[arg0].unk_20[i].unk_1C == arg1) {
+                *arg2 = &gaScreen[arg0].unk_20[i];
+                return ntrue;
+            }
+        }
+    }
+
+    return nfalse;
+}
 #endif
 
 #if VERSION_USA
-s32 screenHideImage(s32 arg0, s32 arg1) {
-    s32 var_a1;
+nbool func_800282AC_usa(s32 arg0, s32 arg1) {
+    struct_gaScreen_unk_20 *sp0;
+
+    if (inlined_func2(arg0, arg1, &sp0)) {
+        return (sp0->unk_24 & 4) ? ntrue : nfalse;
+    }
+    return nfalse;
+}
+#endif
+
+#if VERSION_USA
+nbool screenHideImage(s32 arg0, s32 arg1) {
+    nbool ret;
     s32 var_s1;
     s32 i;
     s32 var_s4;
 
-    if ((arg1 != -1) && ((arg1 & 0xC0000000) == 0xC0000000)) {
+    if ((arg1 != 0xFFFFFFFF) && CHECK_FLAG_ALL(arg1, 0xC0000000)) {
         var_s4 = arg1 & 0x3FFFFFFF;
         var_s1 = 0x10000;
-    } else if ((arg1 != -1) && ((arg1 & 0x80008000) == 0x80008000)) {
+    } else if ((arg1 != 0xFFFFFFFF) && CHECK_FLAG_ALL(arg1, 0x80008000)) {
         var_s4 = arg1 & 0x7FFF;
         var_s1 = (arg1 >> 0x10) & 0x7FFF;
     } else {
@@ -917,7 +1890,7 @@ s32 screenHideImage(s32 arg0, s32 arg1) {
         var_s4 = arg1;
     }
 
-    var_a1 = 0;
+    ret = nfalse;
     if ((arg0 >= 0) && (arg0 < gnScreenCount)) {
         for (i = 0; i < gaScreen[arg0].unk_10; i++) {
             struct_gaScreen_unk_20 *temp_v1 = &gaScreen[arg0].unk_20[i];
@@ -928,7 +1901,8 @@ s32 screenHideImage(s32 arg0, s32 arg1) {
                 if (temp_v1->unk_20 != -1) {
                     screenHideImage(arg0, temp_v1->unk_20);
                 }
-                var_a1 = -1;
+
+                ret = ntrue;
                 if (var_s4 == var_s1) {
                     break;
                 }
@@ -936,52 +1910,195 @@ s32 screenHideImage(s32 arg0, s32 arg1) {
         }
     }
 
-    return var_a1;
+    return ret;
 }
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", screenShowImage);
+nbool screenShowImage(s32 arg2, s32 arg1) {
+    nbool ret;
+    s32 i;
+    s32 var_s3;
+    s32 var_s4;
+
+    if ((arg1 != 0xFFFFFFFF) && CHECK_FLAG_ALL(arg1, 0x80008000)) {
+        var_s4 = arg1 & 0x7FFF;
+        var_s3 = (arg1 >> 0x10) & 0x7FFF;
+    } else {
+        var_s4 = var_s3 = arg1;
+    }
+
+    ret = nfalse;
+    if ((arg2 >= 0) && (arg2 < gnScreenCount)) {
+        for (i = 0; i < gaScreen[arg2].unk_10; i++) {
+            struct_gaScreen_unk_20 *temp_a1 = &gaScreen[arg2].unk_20[i];
+
+            if ((temp_a1->unk_1C >= var_s4) && (var_s3 >= temp_a1->unk_1C)) {
+                temp_a1->unk_24 &= ~4;
+                if (!(temp_a1->unk_24 & 0x80)) {
+                    temp_a1->unk_08 = 0;
+                }
+
+                if (temp_a1->unk_20 != -1) {
+                    screenShowImage(arg2, temp_a1->unk_20);
+                }
+
+                ret = ntrue;
+                if (var_s4 == var_s3) {
+                    break;
+                }
+            }
+        }
+    }
+
+    return ret;
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_8002864C_usa);
+nbool func_8002864C_usa(s32 arg0, s32 arg1, struct_gaScreen_unk_20_unk_14 **arg2) {
+    struct_gaScreen_unk_20 *sp0;
+
+    if (inlined_func2(arg0, arg1, &sp0)) {
+        *arg2 = sp0->unk_14;
+
+        if (*arg2 != NULL) {
+            return ntrue;
+        }
+        return nfalse;
+    }
+    return nfalse;
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80028718_usa);
+nbool func_80028718_usa(s32 arg0, s32 arg1, f32 arg2) {
+    struct_gaScreen_unk_20 *sp10;
+
+    if (inlined_func2(arg0, arg1, &sp10)) {
+        sp10->unk_10 = arg2;
+
+        if (sp10->unk_20 != -1) {
+            func_80028718_usa(arg0, sp10->unk_20, arg2);
+        }
+        return ntrue;
+    }
+    return nfalse;
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_8002880C_usa);
+nbool func_8002880C_usa(s32 arg0, s32 arg1, f32 *arg2) {
+    struct_gaScreen_unk_20 *sp0;
+
+    if (inlined_func2(arg0, arg1, &sp0)) {
+        *arg2 = sp0->unk_10;
+
+        return ntrue;
+    }
+    return nfalse;
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_800288D8_usa);
+nbool func_800288D8_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    struct_gaScreen_unk_20 *sp10;
+
+    if (inlined_func2(arg0, arg1, &sp10)) {
+        sp10->unk_00 = arg2;
+        sp10->unk_04 = arg3;
+
+        if (sp10->unk_20 != -1) {
+            func_800288D8_usa(arg0, sp10->unk_20, arg2, arg3);
+        }
+        return ntrue;
+    }
+    return nfalse;
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_800289C0_usa);
+nbool func_800289C0_usa(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3) {
+    struct_gaScreen_unk_20 *sp0;
+
+    if (inlined_func2(arg0, arg1, &sp0)) {
+        *arg2 = sp0->unk_00;
+        *arg3 = sp0->unk_04;
+        return ntrue;
+    }
+    return nfalse;
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80028A98_usa);
+nbool func_80028A98_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    struct_gaScreen_unk_18 *sp0;
+
+    if (inlined_func(arg0, arg1, &sp0)) {
+        if (sp0->unk_2C & 0x1000) {
+            s32 temp_a0 = (sp0->unk_34 * arg3) + arg2;
+
+            sp0->unk_38[temp_a0 >> 3] &= ~(1 << (temp_a0 & 7));
+            return ntrue;
+        }
+    }
+
+    return nfalse;
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80028BAC_usa);
+nbool func_80028BAC_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    struct_gaScreen_unk_18 *sp0;
+
+    if (inlined_func(arg0, arg1, &sp0)) {
+        if (sp0->unk_2C & 0x1000) {
+            s32 temp_a0 = (sp0->unk_34 * arg3) + arg2;
+
+            sp0->unk_38[temp_a0 >> 3] |= 1 << (temp_a0 & 7);
+            return ntrue;
+        }
+    }
+    return nfalse;
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80028CBC_usa);
+nbool func_80028CBC_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    struct_gaScreen_unk_18 *sp0;
+
+    if (inlined_func(arg0, arg1, &sp0)) {
+        if ((sp0->unk_2C & 0x1000)) {
+            s32 temp_v1 = (sp0->unk_34 * arg3) + arg2;
+
+            if (((sp0->unk_38[temp_v1 >> 3]) >> (temp_v1 & 7)) & 1) {
+                return ntrue;
+            }
+            return nfalse;
+        }
+    }
+    return nfalse;
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80028DC0_usa);
+void func_80028DC0_usa(s32 arg0, s32 arg1, s32 arg2) {
+    struct_gaScreen_unk_20 *sp0;
+
+    if (inlined_func2(arg0, arg1, &sp0)) {
+        sp0->unk_08 = arg2;
+    }
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80028E80_usa);
+void func_80028E80_usa(s32 arg0, s32 arg1, s32 *arg2) {
+    struct_gaScreen_unk_20 *sp0;
+
+    if (inlined_func2(arg0, arg1, &sp0)) {
+        *arg2 = sp0->unk_08;
+    }
+}
 #endif
 
 #if VERSION_USA
@@ -1021,27 +2138,77 @@ void screenSetText(s32 arg0, s32 arg1, u16 *arg2) {
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80029130_usa);
+INLINE void func_80029130_usa(s32 arg0, s32 arg1, u16 *arg2, s32 arg3) {
+    struct_gaScreen_unk_1C *sp0;
+
+    if (screenFindImage(arg0, arg1, &sp0)) {
+        s32 i;
+
+        for (i = 0; (i < sp0->unk_20) && (i < arg3); i++) {
+            arg2[i] = sp0->unk_50[i];
+        }
+        arg2[i] = 0;
+    }
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80029244_usa);
+nbool func_80029244_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    struct_gaScreen_unk_1C *sp0;
+
+    if (screenFindImage(arg0, arg1, &sp0)) {
+        *sp0->unk_64 = arg2;
+        *sp0->unk_68 = arg3;
+        return ntrue;
+    }
+    return nfalse;
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_8002931C_usa);
+nbool func_8002931C_usa(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3) {
+    struct_gaScreen_unk_1C *sp0;
+
+    if (screenFindImage(arg0, arg1, &sp0)) {
+        *arg2 = *sp0->unk_64;
+        *arg3 = *sp0->unk_68;
+        return ntrue;
+    }
+    return nfalse;
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", screenGetTextType);
+nbool screenGetTextType(s32 arg0, s32 arg1, u32 *arg2) {
+    struct_gaScreen_unk_1C *sp0;
+
+    if (screenFindImage(arg0, arg1, &sp0)) {
+        *arg2 = sp0->unk_44;
+        return ntrue;
+    }
+    return nfalse;
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_800294C8_usa);
+nbool func_800294C8_usa(s32 arg0, s32 arg1, s32 *arg2) {
+    struct_gaScreen_unk_1C *sp0;
+
+    if (screenFindImage(arg0, arg1, &sp0)) {
+        *arg2 = sp0->unk_20;
+        return ntrue;
+    }
+    return nfalse;
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80029594_usa);
+void func_80029594_usa(s32 arg0, s32 arg1, s32 arg2) {
+    u16 sp10[0x40];
+
+    func_80029130_usa(arg0, arg2, sp10, ARRAY_COUNT(sp10));
+    screenSetText(arg0, arg1, sp10);
+}
 #endif
 
 #if VERSION_USA
@@ -1086,31 +2253,196 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_800297C8_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80029980_usa);
+nbool func_80029980_usa(s32 arg0, s32 arg1, s32 arg2) {
+    struct_gaScreen_unk_1C *sp0;
+
+    if (screenFindImage(arg0, arg1, &sp0)) {
+        sp0->unk_0C = arg2;
+        return ntrue;
+    }
+    return nfalse;
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80029A44_usa);
+nbool func_80029A44_usa(s32 arg0, s32 arg1, s32 *arg2) {
+    struct_gaScreen_unk_1C *sp0;
+
+    if (screenFindImage(arg0, arg1, &sp0)) {
+        *arg2 = sp0->unk_0C;
+        return ntrue;
+    }
+    return nfalse;
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80029B10_usa);
+nbool func_80029B10_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    struct_gaScreen_unk_1C *sp10;
+
+    if (screenFindImage(arg0, arg1, &sp10)) {
+        sp10->unk_04 = arg2;
+        sp10->unk_08 = arg3;
+        if (sp10->unk_44 & 0x808000) {
+            screenCenterText(sp10);
+            if ((giScreen >= 0) && (giScreen < gnScreenCount)) {
+                if (gaScreen[giScreen].unk_08 > 0) {
+                    screenUpdateArea(gaScreen[giScreen].unk_18);
+                }
+            }
+        }
+        return ntrue;
+    }
+    return nfalse;
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80029C4C_usa);
+nbool func_80029C4C_usa(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3) {
+    struct_gaScreen_unk_1C *sp0;
+
+    if (screenFindImage(arg0, arg1, &sp0)) {
+        *arg2 = sp0->unk_04;
+        *arg3 = sp0->unk_08;
+        return ntrue;
+    }
+    return nfalse;
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80029D24_usa);
+void func_80029D24_usa(s32 arg0, s32 arg1) {
+    s32 var_s2;
+    s32 var_v1;
+    struct_gaScreen *temp_s0;
+    struct_gaScreen_unk_24 *var_s3;
+
+    if ((arg0 < 0) || (arg0 >= gnScreenCount)) {
+        return;
+    }
+
+    temp_s0 = &gaScreen[arg0];
+
+    for (var_v1 = 0; var_v1 < temp_s0->unk_14; var_v1++) {
+        var_s3 = &temp_s0->unk_24[var_v1];
+        if (var_s3->unk_00 == arg1) {
+            break;
+        }
+    }
+
+    if (var_v1 == temp_s0->unk_14) {
+        return;
+    }
+
+    var_s3->unk_2C &= ~0x40;
+    for (var_s2 = 0; var_s2 < temp_s0->unk_08; var_s2++) {
+        if ((var_s3->unk_2C & 0x20) && (var_s3->unk_18 == temp_s0->unk_18[var_s2].unk_1C)) {
+            temp_s0->unk_18[var_s2].unk_2C |= 0x800;
+            temp_s0->unk_28[0] = temp_s0->unk_30[0];
+            temp_s0->unk_28[1] = temp_s0->unk_30[1];
+            screenUpdateArea(&temp_s0->unk_18[var_s2]);
+        } else {
+            temp_s0->unk_18[var_s2].unk_2C &= ~0x800;
+        }
+    }
+
+    if (var_s3->unk_2C & 0x10) {
+        s32 var_a1;
+
+        for (var_a1 = 0; var_a1 < temp_s0->unk_0C; var_a1++) {
+            if (temp_s0->unk_1C[var_a1].unk_00 == var_s3->unk_1C) {
+                temp_s0->unk_1C[var_a1].unk_44 |= 0x400;
+            }
+        }
+    }
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80029EC4_usa);
+void func_80029EC4_usa(s32 arg0, s32 arg1) {
+    s32 var_a1;
+    s32 var_s2;
+    s32 var_v1;
+    struct_gaScreen *temp_s0;
+    struct_gaScreen_unk_24 *var_s3;
+
+    if ((arg0 < 0) || (arg0 >= gnScreenCount)) {
+        return;
+    }
+
+    temp_s0 = &gaScreen[arg0];
+
+    for (var_v1 = 0; var_v1 < temp_s0->unk_14; var_v1++) {
+        var_s3 = &temp_s0->unk_24[var_v1];
+        if (var_s3->unk_00 == arg1) {
+            break;
+        }
+    }
+
+    if (var_v1 == temp_s0->unk_14) {
+        return;
+    }
+
+    var_s3->unk_14 = 0;
+    var_s3->unk_2C |= 0x40;
+
+    for (var_s2 = 0; var_s2 < temp_s0->unk_08; var_s2++) {
+        if ((var_s3->unk_2C & 0x20) && (var_s3->unk_18 == temp_s0->unk_18[var_s2].unk_1C)) {
+            temp_s0->unk_18[var_s2].unk_2C &= ~0x800;
+            temp_s0->unk_30[0] = temp_s0->unk_28[0];
+            temp_s0->unk_30[1] = temp_s0->unk_28[1];
+            temp_s0->unk_28[1] = var_s2;
+            temp_s0->unk_28[0] = var_s2;
+            screenUpdateArea(&temp_s0->unk_18[var_s2]);
+        } else {
+            ;
+            temp_s0->unk_18[var_s2].unk_2C |= 0x800;
+        }
+    }
+
+    if (var_s3->unk_2C & 0x10) {
+        for (var_a1 = 0; var_a1 < temp_s0->unk_0C; var_a1++) {
+            if (temp_s0->unk_1C[var_a1].unk_00 == var_s3->unk_1C) {
+                temp_s0->unk_1C[var_a1].unk_44 &= ~0x400;
+            }
+        }
+    }
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", screenSetNumber);
+void screenSetNumber(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    char sp10[0x40];
+    struct_gaScreen_unk_1C *sp50;
+
+    if (screenFindImage(arg0, arg1, &sp50)) {
+        s32 var_a2;
+        s32 var_t1_2;
+        s32 temp;
+
+        sprintf(sp10, "%d", arg2);
+
+        var_t1_2 = 0;
+        while (sp10[var_t1_2] != 0) {
+            var_t1_2 += 1;
+        }
+
+        temp = 0;
+        for (var_a2 = 0; var_a2 < sp50->unk_20; var_a2++) {
+            s32 var_a1 = (arg3 != 0) ? 0xA : 0;
+
+            if ((var_t1_2 + var_a2) >= sp50->unk_20) {
+                var_a1 = sp10[temp++] - 0x30;
+                if (var_a1 == 0) {
+                    var_a1 = 0xA;
+                }
+            }
+
+            sp50->unk_50[var_a2] &= 0xFC00;
+            sp50->unk_50[var_a2] |= var_a1 & 0x3FF;
+        }
+    }
+}
 #endif
 
 #if VERSION_USA
