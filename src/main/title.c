@@ -556,15 +556,17 @@ void InitTitle(void) {
             gDemo = GDEMO_2C;
         }
 
-        if (screenFind(&sp114, "COPYRIGHT") != 0) {
-            func_800296B0_usa(sp10, gBuildDate, ARRAY_COUNT(sp10));
+        if (screenFind(&sp114, "COPYRIGHT")) {
+            // Cast const away
+            func_800296B0_usa(sp10, (char *)gBuildDate, ARRAY_COUNT(sp10));
             screenSetText(sp114, 0x64, sp10);
         }
-        if (screenFind(&sp114, RO_STR_800C3144_usa) != 0) {
-            func_800296B0_usa(sp10, gBuildDate, ARRAY_COUNT(sp10));
+        if (screenFind(&sp114, RO_STR_800C3144_usa)) {
+            // Cast const away
+            func_800296B0_usa(sp10, (char *)gBuildDate, ARRAY_COUNT(sp10));
             screenSetText(sp114, 0x64, sp10);
         }
-        if (screenFind(&sp114, RO_STR_800C3144_usa) != 0) {
+        if (screenFind(&sp114, RO_STR_800C3144_usa)) {
             screenHideText(sp114, 0x64);
         }
     }

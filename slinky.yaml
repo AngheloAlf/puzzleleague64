@@ -122,10 +122,10 @@ segments:
 
       - { path: "asm/{version}/data/main/0B64B0.data.o", include_if_any: [[version, usa]] }
       - { path: "asm/{version}/data/main/0B5060.data.o", include_if_any: [[version, fra]] }
+      - { path: "asm/{version}/data/main/0B69B0.data.o", include_if_any: [[version, eur]] }
+      - { path: "asm/{version}/data/main/0AC290.data.o", include_if_any: [[version, ger]] }
 
       - { path: src/main/screen.o }
-      - { path: "asm/{version}/data/main/screen.data.o", include_if_any: [[version, fra]] }
-
       - { path: src/main/story.o }
 
       - { path: src/main/peel.o }
@@ -400,9 +400,9 @@ segments:
       - { path: "asm/{version}/data/main/0B70C0.data.o", include_if_any: [[version, usa]] }
       - { path: "asm/{version}/data/main/0B80D0.data.o", include_if_any: [[version, usa]] }
       - { path: "asm/{version}/data/main/0B8130.data.o", include_if_any: [[version, usa]] }
-      - { path: "asm/{version}/data/main/0B69B0.data.o", include_if_any: [[version, eur]] }
+      - { path: "asm/{version}/data/main/0B7550.data.o", include_if_any: [[version, eur]] }
       - { path: "asm/{version}/data/main/0B5E10.data.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/data/main/0AC290.data.o", include_if_any: [[version, ger]] }
+      - { path: "asm/{version}/data/main/0ACFB0.data.o", include_if_any: [[version, ger]] }
 
       - { path: "asm/{version}/data/main/80192F80.bss.o", include_if_any: [[version, usa]] }
       - { path: "asm/{version}/data/main/80192080.bss.o", include_if_any: [[version, eur]] }

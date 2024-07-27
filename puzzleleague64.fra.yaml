@@ -418,7 +418,7 @@ segments:
       - [0x0B32E0, data, main/0B32E0]
       - [0x0B4B00, .data, main/rom_offsets]
       - [0x0B5060, data, main/0B5060]
-      - [0x0B5D60, data, main/screen]
+      - [0x0B5D60, .data, main/screen]
       - [0x0B5D80, data, main/0B5D80]
       - [0x0B5DA0, data, main/02E800]
       - [0x0B5DC0, data, main/editor]

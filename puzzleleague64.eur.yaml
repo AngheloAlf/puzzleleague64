@@ -419,6 +419,8 @@ segments:
       - [0x0B4BF0, data, main/0B4BF0]
       - [0x0B6450, .data, main/rom_offsets]
       - [0x0B69B0, data, main/0B69B0]
+      - [0x0B7530, .data, main/screen]
+      - [0x0B7550, data, main/0B7550]
 
       - [0x0BF490, .data, libmus/player]
       - [0x0BF550, .data, libmus/player_fx]

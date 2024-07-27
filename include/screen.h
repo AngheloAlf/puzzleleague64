@@ -29,7 +29,7 @@ typedef struct struct_gaScreen_unk_18 {
     /* 0x24 */ UNK_TYPE4 unk_24;
     /* 0x28 */ UNK_TYPE4 unk_28;
     /* 0x2C */ u32 unk_2C;
-    /* 0x30 */ UNK_TYPE4 unk_30;
+    /* 0x30 */ s32 unk_30;
     /* 0x34 */ s32 unk_34;
     /* 0x38 */ u8 *unk_38; // signed?
     /* 0x3C */ UNK_TYPE4 unk_3C;
@@ -84,7 +84,7 @@ typedef struct struct_gaScreen_unk_1C {
     /* 0x44 */ u32 unk_44; // textType? TODO: enum?
     /* 0x48 */ UNK_TYPE4 unk_48;
     /* 0x4C */ UNK_TYPE1 unk_4C[0x4];
-    /* 0x50 */ u16 *unk_50;
+    /* 0x50 */ u16 *unk_50; // TEXT?
     /* 0x54 */ UNK_TYPE unk_54;
     /* 0x58 */ UNK_TYPE unk_58;
     /* 0x5C */ UNK_TYPE unk_5C;
@@ -155,7 +155,7 @@ nbool func_80024C14_usa(void);
 nbool screenFlushing(void);
 void screenDraw(Gfx **gfxP, screenDraw_callback *callback);
 nbool screenFindImage(s32 arg0, s32 arg1, struct_gaScreen_unk_1C **arg2);
-s32 func_800255D8_usa(struct_gaScreen_unk_18 *arg0, s32 arg1, s32 arg2, s32 arg3);
+nbool func_800255D8_usa(struct_gaScreen_unk_18 *arg0, s32 arg1, s32 arg2, s32 arg3);
 s32 func_80025850_usa(struct_gaScreen *arg0, struct_gaScreen_unk_18 *arg1, s32 arg2, s32 arg3);
 void func_80025CC4_usa(struct_gaScreen *arg0);
 void screenTick(screenTick_arg0 *arg0);
@@ -198,26 +198,26 @@ nbool func_8002931C_usa(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3);
 nbool screenGetTextType(s32 arg0, s32 arg1, u32 *arg2);
 nbool func_800294C8_usa(s32 arg0, s32 arg1, s32 *arg2);
 void func_80029594_usa(s32 arg0, s32 arg1, s32 arg2);
-void func_800296B0_usa(u16 *dst, const char *src, s32 dstLen);
+void func_800296B0_usa(u16 *dst, char *src, s32 dstLen);
 // void func_800297C8_usa();
 nbool func_80029980_usa(s32 arg0, s32 arg1, s32 arg2);
 nbool func_80029A44_usa(s32 arg0, s32 arg1, s32 *arg2);
 nbool func_80029B10_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 nbool func_80029C4C_usa(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3);
 void func_80029D24_usa(s32 arg0, s32 arg1);
-// void func_80029EC4_usa();
+void func_80029EC4_usa(s32 arg0, s32 arg1);
 void screenSetNumber(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-// void func_8002A1F4_usa();
-// void func_8002A2E8_usa();
-// void func_8002A3B8_usa();
-// void func_8002A488_usa();
-// void func_8002A4FC_usa();
-// void func_8002A574_usa();
-// void func_8002A638_usa();
-s32 screenFind(s32 *dst, const char *arg1);
+void func_8002A1F4_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+void func_8002A2E8_usa(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3);
+void func_8002A3B8_usa(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3);
+nbool func_8002A488_usa(s32 arg0, s32 arg1);
+nbool func_8002A4FC_usa(s32 arg0, s32 *arg1);
+nbool func_8002A574_usa(s32 arg0, s32 arg1, s32 arg2);
+nbool func_8002A638_usa(s32 arg0, s32 arg1, s32 *arg2);
+nbool screenFind(s32 *dst, const char *arg1);
 s32 screenLoad(char *arg0, void **arg1);
 void screenSetup(void);
-// void func_8002B5C4_usa();
+void func_8002B5C4_usa(void);
 
 
 
