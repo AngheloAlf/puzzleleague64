@@ -33,6 +33,7 @@ SLINKY          := $(SLINKY_DIR)/slinky-cli
 
 
 all: $(KMC_GCC) $(KMC_BINUTILS) $(IDO_53_CC) $(SLINKY)
+	cargo build --release --manifest-path rstools/Cargo.toml
 
 clean:
 	$(RM) -rf $(KMC_DIR) gcc_kmc $(IDO_53_DIR) ido_recomp $(SLINKY_DIR)

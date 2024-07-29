@@ -1,0 +1,15 @@
+[package]
+name = "rstools"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = { version = "1.0.86", features = ["backtrace"] }
+binrw = "0.14.0"
+clap = { version = "4.5.1", features = ["derive"] }
+num = "0.4.3"
+num-derive = "0.4.2"
+num-traits = "0.2.19"
+
+[[bin]]
+name = "fix_relocs"

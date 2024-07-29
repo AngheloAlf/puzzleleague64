@@ -127,6 +127,7 @@ SPLAT             ?= $(PYTHON) -m splat split
 SPLAT_YAML        ?= $(TARGET).$(VERSION).yaml
 CHECKSUMMER       ?= tools/checksummer.py
 PIGMENT64         ?= pigment64
+RELOC_FIXER       ?= tools/rstools/target/release/fix_relocs
 
 SPLAT_FLAGS       ?=
 ifneq ($(FULL_DISASM),0)
@@ -388,6 +389,7 @@ else
 	$(CC) $(C_COMPILER_FLAGS) -I $(dir $*) -I $(BUILD_DIR)/$(dir $*) $(COMP_VERBOSE_FLAG) -S -o $(@:.o=.s) $(@:.o=.i)
 	$(CC) $(C_COMPILER_FLAGS) -I $(dir $*) -I $(BUILD_DIR)/$(dir $*) $(COMP_VERBOSE_FLAG) -c -o $@ $(@:.o=.s)
 endif
+	$(RELOC_FIXER) $@
 	$(OBJDUMP_CMD)
 
 $(BUILD_DIR)/src/flash/%.o: src/flash/%.c
@@ -398,6 +400,7 @@ $(BUILD_DIR)/src/flash/%.o: src/flash/%.c
 $(BUILD_DIR)/lib/%.o: lib/%.c
 	$(CC_CHECK) $(CC_CHECK_FLAGS) $(IINC) -I $(dir $*) -I $(BUILD_DIR)/$(dir $*) -w -Wno-implicit-function-declaration $(BUILD_DEFINES) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(C_DEFINES) $(MIPS_BUILTIN_DEFS) -o $@ $<
 	$(MAKE) -C lib VERSION=$(VERSION) CROSS=$(CROSS) ../$@
+	$(RELOC_FIXER) $@
 
 $(BUILD_DIR)/lib/%.o: lib/%.s
 	$(MAKE) -C lib VERSION=$(VERSION) CROSS=$(CROSS) ../$@
