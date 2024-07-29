@@ -5,6 +5,8 @@
 #include "other_types.h"
 #include "unk.h"
 
+struct struct_imageLoad_arg0;
+
 // TODO: enum for arg2?
 typedef void (screenDraw_callback)(Gfx **gfxP, UNK_TYPE arg1, UNK_TYPE arg2);
 
@@ -17,11 +19,11 @@ typedef struct struct_gaScreen_unk_18_unk_5C {
 } struct_gaScreen_unk_18_unk_5C; // size = 0x8
 
 typedef struct struct_gaScreen_unk_18 {
-    /* 0x00 */ UNK_TYPE4 unk_00;
+    /* 0x00 */ s32 unk_00;
     /* 0x04 */ UNK_TYPE4 unk_04;
-    /* 0x08 */ UNK_TYPE4 unk_08;
-    /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ UNK_TYPE4 unk_10;
+    /* 0x08 */ s32 unk_08;
+    /* 0x0C */ struct struct_imageLoad_arg0 *unk_0C;
+    /* 0x10 */ s32 unk_10;
     /* 0x14 */ UNK_TYPE4 unk_14;
     /* 0x18 */ UNK_TYPE4 unk_18;
     /* 0x1C */ UNK_TYPE4 unk_1C;
@@ -33,7 +35,7 @@ typedef struct struct_gaScreen_unk_18 {
     /* 0x34 */ s32 unk_34;
     /* 0x38 */ u8 *unk_38; // signed?
     /* 0x3C */ UNK_TYPE4 unk_3C;
-    /* 0x40 */ UNK_TYPE4 unk_40;
+    /* 0x40 */ s32 unk_40;
     /* 0x44 */ UNK_TYPE4 unk_44;
     /* 0x48 */ UNK_TYPE4 unk_48;
     /* 0x4C */ UNK_TYPE4 unk_4C;
@@ -43,24 +45,19 @@ typedef struct struct_gaScreen_unk_18 {
     /* 0x5C */ struct_gaScreen_unk_18_unk_5C *unk_5C;
 } struct_gaScreen_unk_18; // size = 0x60
 
-typedef struct struct_gaScreen_unk_20_unk_14 {
-    /* 0x00 */ UNK_TYPE1 unk_00[0x14];
-    /* 0x14 */ UNK_TYPE4 unk_14;
-} struct_gaScreen_unk_20_unk_14; // size >= 0x18
-
 typedef struct struct_gaScreen_unk_20 {
     /* 0x00 */ UNK_TYPE4 unk_00;
     /* 0x04 */ UNK_TYPE4 unk_04;
     /* 0x08 */ UNK_TYPE4 unk_08;
     /* 0x0C */ UNK_TYPE4 unk_0C;
     /* 0x10 */ f32 unk_10;
-    /* 0x14 */ struct_gaScreen_unk_20_unk_14 *unk_14;
-    /* 0x18 */ UNK_TYPE1 unk_18[0x4];
+    /* 0x14 */ struct struct_imageLoad_arg0 *unk_14;
+    /* 0x18 */ UNK_TYPE4 unk_18;
     /* 0x1C */ UNK_TYPE4 unk_1C;
     /* 0x20 */ UNK_TYPE4 unk_20;
     /* 0x24 */ u32 unk_24;
-    /* 0x28 */ UNK_TYPE4 unk_28;
-    /* 0x2C */ UNK_TYPE1 unk_2C[0x4];
+    /* 0x28 */ u32 unk_28;
+    /* 0x2C */ u32 unk_2C;
 } struct_gaScreen_unk_20; // size = 0x30
 
 typedef struct struct_gaScreen_unk_1C {
@@ -77,7 +74,8 @@ typedef struct struct_gaScreen_unk_1C {
     /* 0x24 */ UNK_TYPE unk_24;
     /* 0x28 */ UNK_TYPE1 unk_28[0x4];
     /* 0x2C */ UNK_TYPE *unk_2C;
-    /* 0x30 */ UNK_TYPE1 unk_30[0x8];
+    /* 0x30 */ UNK_TYPE1 unk_30[0x4];
+    /* 0x34 */ UNK_TYPE4 unk_34;
     /* 0x38 */ UNK_TYPE4 unk_38;
     /* 0x3C */ UNK_TYPE unk_3C;
     /* 0x40 */ UNK_TYPE unk_40;
@@ -102,7 +100,7 @@ typedef struct struct_gaScreen_unk_24 {
     /* 0x14 */ UNK_TYPE4 unk_14;
     /* 0x18 */ UNK_TYPE4 unk_18;
     /* 0x1C */ UNK_TYPE4 unk_1C;
-    /* 0x20 */ s32 unk_20;
+    /* 0x20 */ struct struct_imageLoad_arg0 *unk_20;
     /* 0x24 */ UNK_TYPE1 unk_24[0x4];
     /* 0x28 */ UNK_TYPE4 unk_28;
     /* 0x2C */ s32 unk_2C;
@@ -147,9 +145,9 @@ s32 screenCenterText(struct_gaScreen_unk_1C *arg0);
 // void func_80022AF4_usa();
 void screenUpdateArea(struct_gaScreen_unk_18 *arg0);
 void screenWipeImages(void);
-void func_8002400C_usa(s32 arg0);
+void screenChange(s32 arg0);
 // void func_80024534_usa();
-void func_8002496C_usa(void);
+void screenTickTextData(void);
 nbool func_80024BF4_usa(void **heapP);
 nbool func_80024C14_usa(void);
 nbool screenFlushing(void);
@@ -181,7 +179,7 @@ s32 func_8002801C_usa(void);
 nbool func_800282AC_usa(s32 arg0, s32 arg1);
 nbool screenHideImage(s32 arg0, s32 arg1);
 nbool screenShowImage(s32 arg2, s32 arg1);
-nbool func_8002864C_usa(s32 arg0, s32 arg1, struct_gaScreen_unk_20_unk_14 **arg2);
+nbool func_8002864C_usa(s32 arg0, s32 arg1, struct struct_imageLoad_arg0 **arg2);
 nbool func_80028718_usa(s32 arg0, s32 arg1, f32 arg2);
 nbool func_8002880C_usa(s32 arg0, s32 arg1, f32 *arg2);
 nbool func_800288D8_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
@@ -223,12 +221,12 @@ void func_8002B5C4_usa(void);
 
 // extern UNK_TYPE B_8018E4F0_usa;
 extern void *B_8018E4F4_usa;
-extern void *B_8018E4F8_usa;
-extern s32 B_8018E4FC_usa;
-extern s32 B_8018E500_usa;
-extern s32 B_8018E504_usa;
+extern void *gpHeap;
+extern s32 gnMaskRate;
+extern s32 gnMaskRateDefault;
+extern s32 gnFrameSkip;
 extern s32 gnImageCount;
-extern UNK_TYPE4 * gapImage;
+extern struct struct_imageLoad_arg0 **gapImage;
 extern char * *gapNameImage;
 extern s32 gnScreenCount;
 
@@ -242,9 +240,9 @@ extern s32 gnAlphaFade;
 extern s32 geModeFade;
 extern s32 B_8018E53C_usa;
 extern s32 B_8018E540_usa;
-// extern UNK_TYPE B_8018E544_usa;
-// extern UNK_TYPE B_8018E548_usa;
-extern s32 B_8018E550_usa;
+extern s32 gnTagTextBase;
+extern s32 gnCountTextTag;
+extern struct struct_imageLoad_arg0 *B_8018E550_usa;
 extern s32 B_8018E554_usa;
 extern s32 B_8018E558_usa;
 

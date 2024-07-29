@@ -30,7 +30,7 @@ typedef struct struct_imageLoad_arg0 {
     /* 0x94 */ u32 unk_94;
     /* 0x98 */ u32 unk_98;
     /* 0x9C */ UNK_TYPE1 unk_9C[0x4];
-} struct_imageLoad_arg0; // size = ?
+} struct_imageLoad_arg0; // size >= 0xA0
 
 typedef struct struct_func_8002156C_usa_arg4 {
     /* 0x00 */ s32 unk_00;
@@ -45,8 +45,8 @@ void imageMake(struct_imageLoad_arg0 **arg0, void **arg1, u32 arg2);
 s32 imageLoad(struct_imageLoad_arg0 **arg0, char *filename, void **arg2);
 // void func_8001FC08_usa();
 s32 func_8001FD0C_usa(struct_imageLoad_arg0 **arg0, RomOffset arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, void **heapP);
-// void func_8001FD94_usa();
-// void func_8001FF70_usa();
+nbool imageCopy(struct_imageLoad_arg0 **arg0, struct_imageLoad_arg0 *arg1, void **arg2);
+nbool imageMakeScan(struct_imageLoad_arg0 *, void **);
 // void func_80020044_usa();
 // void func_800200B4_usa();
 // void func_80020208_usa();

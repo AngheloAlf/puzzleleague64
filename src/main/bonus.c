@@ -873,7 +873,7 @@ void DoStageClearIntro(void) {
     s32 var_s1 = 0;
     void *heap;
     u32 sp1C;
-    struct_gaScreen_unk_20_unk_14 *sp20;
+    struct_imageLoad_arg0 *sp20;
     s32 sp24;
     s32 sp28;
     s32 var_s0;

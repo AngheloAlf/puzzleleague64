@@ -177,11 +177,57 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_8001FD0C_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_8001FD94_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/image", imageCopy);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_8001FF70_usa);
+#if 0
+s32 imageMakeScan(void *arg0, s32 *arg1) {
+    s32 temp_v0;
+    s32 temp_v0_2;
+    s32 temp_v1;
+    s32 var_a2_2;
+    s32 var_a3;
+    s32 var_t0;
+    s32 var_v1;
+    void **var_a2;
+
+    temp_v0 = arg0->unk_18;
+    var_a3 = 0;
+    var_t0 = 0;
+    if (temp_v0 > 0) {
+        var_a2 = arg0->unk_2C;
+        do {
+            temp_v1 = (*var_a2)->unk_10;
+            if (var_t0 < temp_v1) {
+                var_t0 = temp_v1;
+            }
+            var_a3 += 1;
+            var_a2 += 4;
+        } while (var_a3 < temp_v0);
+    }
+    arg0->unk_8 = (s16) var_t0;
+    var_a2_2 = 0;
+    temp_v0_2 = (*arg1 + 3) & ~3;
+    *arg1 = temp_v0_2;
+    arg0->unk_28 = temp_v0_2;
+    *arg1 += var_t0 * 0xC;
+    if (var_t0 > 0) {
+        var_v1 = 0;
+        do {
+            *(var_v1 + arg0->unk_28) = 0;
+            (var_v1 + arg0->unk_28)->unk_4 = -1;
+            (var_v1 + arg0->unk_28)->unk_8 = 0;
+            var_a2_2 += 1;
+            (var_v1 + arg0->unk_28)->unk_A = 0;
+            var_v1 += 0xC;
+        } while (var_a2_2 < var_t0);
+    }
+    return -1;
+}
+#else
+INCLUDE_ASM("asm/usa/nonmatchings/main/image", imageMakeScan);
+#endif
 #endif
 
 #if VERSION_USA

@@ -93,21 +93,21 @@ s32 screenGetTextData(struct_gaScreen_unk_1C *arg0, s32 arg1, struct_800222F0_us
         case 0x4:
             if (arg0->unk_44 & 0x02000000) {
                 if (B_8018E564_usa == NULL) {
-                    imageLoad(&B_8018E564_usa, RO_STR_800C4050_usa, &B_8018E4F8_usa);
+                    imageLoad(&B_8018E564_usa, RO_STR_800C4050_usa, &gpHeap);
                 }
                 var_s1 = B_8018E564_usa;
                 var_s0 = temp_s2 + 0x23;
                 func_8001E110_usa(*var_s1->unk_2C, var_s0, &sp10, &sp14);
             } else if (arg0->unk_44 & 0x80000) {
                 if (B_8018E568_usa == NULL) {
-                    imageLoad(&B_8018E568_usa, RO_STR_800C4060_usa, &B_8018E4F8_usa);
+                    imageLoad(&B_8018E568_usa, RO_STR_800C4060_usa, &gpHeap);
                 }
                 var_s1 = B_8018E568_usa;
                 var_s0 = temp_s2 + 0x23;
                 func_8001E110_usa(*var_s1->unk_2C, var_s0, &sp10, &sp14);
             } else {
                 if (B_8018E56C_usa == NULL) {
-                    imageLoad(&B_8018E56C_usa, RO_STR_800C4070_usa, &B_8018E4F8_usa);
+                    imageLoad(&B_8018E56C_usa, RO_STR_800C4070_usa, &gpHeap);
                 }
                 var_s1 = B_8018E56C_usa;
                 var_s0 = temp_s2 + 0x23;
@@ -120,7 +120,7 @@ s32 screenGetTextData(struct_gaScreen_unk_1C *arg0, s32 arg1, struct_800222F0_us
             if (temp_s2 > 0) {
                 if (arg0->unk_44 & 0x02000000) {
                     if (B_8018E564_usa == NULL) {
-                        imageLoad(&B_8018E564_usa, RO_STR_800C4050_usa, &B_8018E4F8_usa);
+                        imageLoad(&B_8018E564_usa, RO_STR_800C4050_usa, &gpHeap);
                     }
                     var_s1 = B_8018E564_usa;
                     var_s0 = 0x1A;
@@ -130,7 +130,7 @@ s32 screenGetTextData(struct_gaScreen_unk_1C *arg0, s32 arg1, struct_800222F0_us
                     func_8001E110_usa(*var_s1->unk_2C, var_s0, &sp10, &sp14);
                 } else if (arg0->unk_44 & 0x80000) {
                     if (B_8018E568_usa == NULL) {
-                        imageLoad(&B_8018E568_usa, RO_STR_800C4060_usa, &B_8018E4F8_usa);
+                        imageLoad(&B_8018E568_usa, RO_STR_800C4060_usa, &gpHeap);
                     }
                     var_s1 = B_8018E568_usa;
                     var_s0 = 0x1A;
@@ -140,7 +140,7 @@ s32 screenGetTextData(struct_gaScreen_unk_1C *arg0, s32 arg1, struct_800222F0_us
                     func_8001E110_usa(*var_s1->unk_2C, var_s0, &sp10, &sp14);
                 } else {
                     if (B_8018E56C_usa == NULL) {
-                        imageLoad(&B_8018E56C_usa, RO_STR_800C4070_usa, &B_8018E4F8_usa);
+                        imageLoad(&B_8018E56C_usa, RO_STR_800C4070_usa, &gpHeap);
                     }
                     var_s1 = B_8018E56C_usa;
                     var_s0 = 0x1A;
@@ -161,21 +161,21 @@ s32 screenGetTextData(struct_gaScreen_unk_1C *arg0, s32 arg1, struct_800222F0_us
         case 0x6:
             if (arg0->unk_44 & 0x02000000) {
                 if (B_8018E564_usa == NULL) {
-                    imageLoad(&B_8018E564_usa, RO_STR_800C4050_usa, &B_8018E4F8_usa);
+                    imageLoad(&B_8018E564_usa, RO_STR_800C4050_usa, &gpHeap);
                 }
                 var_s1 = B_8018E564_usa;
                 var_s0 = temp_s2 - 1;
                 func_8001E110_usa(*var_s1->unk_2C, var_s0, &sp10, &sp14);
             } else if (arg0->unk_44 & 0x80000) {
                 if (B_8018E568_usa == NULL) {
-                    imageLoad(&B_8018E568_usa, RO_STR_800C4060_usa, &B_8018E4F8_usa);
+                    imageLoad(&B_8018E568_usa, RO_STR_800C4060_usa, &gpHeap);
                 }
                 var_s1 = B_8018E568_usa;
                 var_s0 = temp_s2 - 1;
                 func_8001E110_usa(*var_s1->unk_2C, var_s0, &sp10, &sp14);
             } else {
                 if (B_8018E56C_usa == NULL) {
-                    imageLoad(&B_8018E56C_usa, RO_STR_800C4070_usa, &B_8018E4F8_usa);
+                    imageLoad(&B_8018E56C_usa, RO_STR_800C4070_usa, &gpHeap);
                 }
                 var_s1 = B_8018E56C_usa;
                 var_s0 = temp_s2 - 1;
@@ -186,21 +186,21 @@ s32 screenGetTextData(struct_gaScreen_unk_1C *arg0, s32 arg1, struct_800222F0_us
         case 0x7:
             if (arg0->unk_44 & 0x02000000) {
                 if (B_8018E564_usa == NULL) {
-                    imageLoad(&B_8018E564_usa, RO_STR_800C4050_usa, &B_8018E4F8_usa);
+                    imageLoad(&B_8018E564_usa, RO_STR_800C4050_usa, &gpHeap);
                 }
                 var_s1 = B_8018E564_usa;
                 var_s0 = temp_s2 - 1;
                 func_8001E110_usa(*var_s1->unk_2C, var_s0, &sp10, &sp14);
             } else if (arg0->unk_44 & 0x80000) {
                 if (B_8018E568_usa == NULL) {
-                    imageLoad(&B_8018E568_usa, RO_STR_800C4060_usa, &B_8018E4F8_usa);
+                    imageLoad(&B_8018E568_usa, RO_STR_800C4060_usa, &gpHeap);
                 }
                 var_s1 = B_8018E568_usa;
                 var_s0 = temp_s2 - 1;
                 func_8001E110_usa(*var_s1->unk_2C, var_s0, &sp10, &sp14);
             } else {
                 if (B_8018E56C_usa == NULL) {
-                    imageLoad(&B_8018E56C_usa, RO_STR_800C4070_usa, &B_8018E4F8_usa);
+                    imageLoad(&B_8018E56C_usa, RO_STR_800C4070_usa, &gpHeap);
                 }
                 var_s1 = B_8018E56C_usa;
                 var_s0 = temp_s2 - 1;
@@ -676,7 +676,168 @@ void screenWipeImages(void) {
 }
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_8002400C_usa);
+void screenChange(s32 arg0) {
+    void *sp10;
+    struct_gaScreen *temp_s3;
+    s32 var_a0_2;
+    struct_imageLoad_arg0 **temp_a3;
+    struct_gaScreen_unk_18 *temp_s0;
+    s32 temp_v1_10;
+    s32 i;
+
+    if ((arg0 < 0) || (arg0 >= gnScreenCount)) {
+        return;
+    }
+
+    temp_s3 = &gaScreen[arg0];
+    if (temp_s3->unk_28[0] == -1) {
+        s32 var_s1 = -1;
+        s32 var_a2 = -1;
+        s32 var_a3 = 0x140;
+        s32 var_a1 = 0;
+
+        for (i = 0; i < temp_s3->unk_08; i++) {
+            temp_s0 = &temp_s3->unk_18[i];
+
+            if (temp_s0->unk_2C & 1) {
+                if (var_a3 > temp_s0->unk_00) {
+                    var_a2 = i;
+                    var_a3 = temp_s0->unk_00;
+                }
+            }
+            if (temp_s0->unk_2C & 2) {
+                if (var_a1 < temp_s0->unk_00) {
+                    var_s1 = i;
+                    var_a1 = temp_s0->unk_00;
+                }
+            }
+        }
+
+        temp_s3->unk_28[0] = var_a2;
+        temp_s3->unk_28[1] = var_s1;
+        if (var_a2 != -1) {
+            screenUpdateArea(&temp_s3->unk_18[var_a2]);
+        }
+        if (var_s1 != -1) {
+            screenUpdateArea(&temp_s3->unk_18[var_s1]);
+        }
+    }
+
+    for (var_a0_2 = 0; var_a0_2 < temp_s3->unk_0C; var_a0_2++) {
+        temp_s3->unk_1C[var_a0_2].unk_38 = 0;
+        temp_s3->unk_1C[var_a0_2].unk_34 = 0;
+    }
+
+    gnTagTextBase = -1;
+
+    screenWipeImages();
+    sp10 = B_8018E4F4_usa;
+    for (i = 0; i < temp_s3->unk_08; i++) {
+        temp_s0 = &temp_s3->unk_18[i];
+        temp_a3 = &temp_s0->unk_0C;
+
+        if (temp_s0->unk_2C & 0x80) {
+            void **new_var = &sp10;
+
+            temp_v1_10 = temp_s0->unk_08;
+
+            if (temp_v1_10 < 0) {
+                temp_s0->unk_0C = NULL;
+            } else if (gapImage[temp_v1_10] == NULL) {
+                imageLoad(&gapImage[temp_v1_10], gapNameImage[temp_v1_10], new_var);
+                temp_s0->unk_0C = gapImage[temp_v1_10];
+            } else {
+                imageCopy(temp_a3, gapImage[temp_v1_10], &sp10);
+            }
+
+            if (temp_s0->unk_2C & 0x4000) {
+                imageCopy(&B_8018E550_usa, temp_s0->unk_0C, &sp10);
+            }
+        }
+    }
+
+    for (i = 0; i < temp_s3->unk_10; i++) {
+        struct_gaScreen_unk_20 *temp_s0_2 = &temp_s3->unk_20[i];
+
+        temp_s0_2->unk_14 = NULL;
+        if (temp_s0_2->unk_24 & 8) {
+            continue;
+        }
+
+        if (!(temp_s0_2->unk_24 & 0x1000)) {
+            void **new_var = &sp10;
+
+            temp_a3 = &temp_s0_2->unk_14;
+            temp_v1_10 = temp_s0_2->unk_0C;
+
+            if (temp_v1_10 >= 0) {
+                if (gapImage[temp_v1_10] == NULL) {
+                    imageLoad(&gapImage[temp_v1_10], gapNameImage[temp_v1_10], new_var);
+                    temp_s0_2->unk_14 = gapImage[temp_v1_10];
+                } else {
+                    imageCopy(temp_a3, gapImage[temp_v1_10], &sp10);
+                }
+            }
+
+            if (temp_s0_2->unk_24 & 0x10) {
+                temp_s0_2->unk_14->unk_14 = 0;
+            }
+            if (temp_s0_2->unk_24 & 0x20) {
+                temp_s0_2->unk_14->unk_0C |= 0xC40;
+            }
+            if (temp_s0_2->unk_24 & 0x100) {
+                temp_s0_2->unk_14->unk_0C |= 0x80;
+            }
+            if (temp_s0_2->unk_24 & 0x200) {
+                temp_s0_2->unk_14->unk_0C |= 0x1000;
+            }
+            if (temp_s0_2->unk_24 & 0x2000) {
+                temp_s0_2->unk_14->unk_0C |= 0x10000;
+            }
+            if (temp_s0_2->unk_24 & 0x400) {
+                temp_s0_2->unk_14->unk_14 = temp_s0_2->unk_18;
+            }
+            if (temp_s0_2->unk_24 & 0x40) {
+                temp_s0_2->unk_14->unk_0C |= 0x10;
+                temp_s0_2->unk_14->unk_94 = temp_s0_2->unk_28;
+                temp_s0_2->unk_14->unk_98 = temp_s0_2->unk_2C;
+            }
+            if (temp_s0_2->unk_24 & 0x800) {
+                imageMakeScan(temp_s0_2->unk_14, &sp10);
+            }
+        }
+    }
+
+    for (i = 0; i < temp_s3->unk_14; i++) {
+        struct_gaScreen_unk_24 *temp_s1_3 = &temp_s3->unk_24[i];
+
+        temp_s1_3->unk_14 = 0;
+        if (temp_s1_3->unk_2C & 1) {
+            void **new_var = &sp10;
+
+            temp_v1_10 = temp_s1_3->unk_0C;
+            temp_a3 = &temp_s1_3->unk_20;
+            if (temp_v1_10 < 0) {
+                temp_s1_3->unk_20 = 0;
+            } else if (gapImage[temp_v1_10] == NULL) {
+                imageLoad(&gapImage[temp_v1_10], gapNameImage[temp_v1_10], new_var);
+                temp_s1_3->unk_20 = gapImage[temp_v1_10];
+            } else {
+                imageCopy(temp_a3, gapImage[temp_v1_10], new_var);
+            }
+        }
+    }
+
+    gnMaskRate = gnMaskRateDefault = 3;
+
+    giScreen = arg0;
+    gnFrameSkip += B_801C7060_usa;
+    gpHeap = sp10;
+
+    if (temp_s3->unk_08 > 0) {
+        screenUpdateArea(temp_s3->unk_18);
+    }
+}
 #endif
 
 #if VERSION_USA
@@ -684,7 +845,76 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80024534_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_8002496C_usa);
+void screenTickTextData(void) {
+    struct_gaScreen_unk_18 *temp_s3;
+
+    if (gaScreen[giScreen].unk_28[0] == -1) {
+        return;
+    }
+
+    temp_s3 = &gaScreen[giScreen].unk_18[gaScreen[giScreen].unk_28[0]];
+    if (temp_s3->unk_2C & 0x2000) {
+        s32 temp_v0 = temp_s3->unk_10;
+        s32 temp_s2 = temp_v0 & 0xFF;
+        s32 temp_s1 = ((temp_v0 >> 8) & 0xFFF) + temp_s3->unk_40 * temp_s2;
+        u32 new_var2;
+
+        if ((temp_s1 < gnTagTextBase) || (gnTagTextBase + temp_s2 - 1 < temp_s1)) {
+            s32 temp = ((temp_v0 >> 8) & 0xFFF);
+            s32 temp2 = (temp_s3->unk_30 * temp_s2);
+
+            gnCountTextTag = 0;
+            gnTagTextBase = temp_s1;
+
+            new_var2 = 0x80008000;
+
+            screenHideText(giScreen, (((temp + temp2) - 1) << 0x10) | (temp | new_var2));
+            screenShowText(giScreen, temp_s1);
+            gnMaskRate = 3;
+            temp_s3->unk_20 = temp_s1;
+            return;
+        }
+
+        if (screenTextDone(giScreen, temp_s3->unk_20)) {
+            gnCountTextTag++;
+
+            if ((gnCountTextTag & 0xFFFF) >= 0x5A) {
+                s32 i;
+
+                for (i = (gnCountTextTag >> 0x10) + 1; i < temp_s2; i++) {
+                    s32 j;
+
+                    for (j = 0; j < gaScreen[giScreen].unk_0C; j++) {
+                        s32 temp_s0 = gaScreen[giScreen].unk_1C[j].unk_00;
+
+                        if (temp_s0 == (temp_s1 + i)) {
+                            gnCountTextTag = i << 0x10;
+
+                            new_var2 = 0x80008000;
+                            screenHideText(giScreen, (((temp_s1 + temp_s2) - 1) << 0x10) | (temp_s1 | new_var2));
+                            screenShowText(giScreen, temp_s0);
+                            gnMaskRate = 3;
+                            temp_s3->unk_20 = temp_s0;
+                            return;
+                        }
+                    }
+                }
+
+                if (((gnCountTextTag & 0xFFFF) >= 0xD2) && ((gnCountTextTag >> 0x10) != 0)) {
+                    gnCountTextTag = 0;
+
+                    new_var2 = 0x80008000;
+                    screenHideText(giScreen, (((temp_s1 + temp_s2) - 1) << 0x10) | (temp_s1 | new_var2));
+                    screenShowText(giScreen, temp_s1);
+                    gnMaskRate = 3;
+                    temp_s3->unk_20 = temp_s1;
+                }
+            }
+        }
+    } else {
+        temp_s3->unk_20 = -1;
+    }
+}
 #endif
 
 #if VERSION_EUR
@@ -724,9 +954,9 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80024A74_ger);
 #endif
 
 //! RENAME TODO: func_80024BF4_usa -> screenGetHeap?
-//! RENAME TODO: B_8018E4F8_usa -> gpHeapNext?
+//! RENAME TODO: gpHeap -> gpHeapNext?
 nbool func_80024BF4_usa(void **heapP) {
-    *heapP = ALIGN_PTR(B_8018E4F8_usa);
+    *heapP = ALIGN_PTR(gpHeap);
 
     return ntrue;
 }
@@ -741,8 +971,7 @@ nbool func_80024C14_usa(void) {
 }
 
 nbool screenFlushing(void) {
-    //! RENAME TODO: B_8018E504_usa -> gnFrameSkip?
-    if ((B_8018E504_usa != 0) || (B_8018E524_usa != -1)) {
+    if ((gnFrameSkip != 0) || (B_8018E524_usa != -1)) {
         return ntrue;
     }
     return nfalse;
@@ -1432,7 +1661,7 @@ block_217:
                 sp14->unk_4 = 0;
             }
             var_s0_2 = 0;
-            func_8002496C_usa();
+            screenTickTextData();
             if (temp_s3->unk_10 > 0) {
                 var_s1 = 0;
                 do {
@@ -1497,14 +1726,14 @@ block_217:
     var_a3_5 = 0;
     switch (temp_s0) {                              /* switch 2; irregular */
         case 0x3:                                   /* switch 2 */
-            if (B_8018E504_usa == 0) {
+            if (gnFrameSkip == 0) {
                 var_a3_5 = -1;
 block_256:
                 geModeFade = 0;
             }
             break;
         case 0x2:                                   /* switch 2 */
-            if (B_8018E504_usa == 0) {
+            if (gnFrameSkip == 0) {
                 temp_v0_7 = gnAlphaFade - 0x10;
                 gnAlphaFade = temp_v0_7;
                 if (temp_v0_7 <= 0) {
@@ -1518,7 +1747,7 @@ block_256:
             }
             break;
         case 0x1:                                   /* switch 2 */
-            if (B_8018E504_usa == 0) {
+            if (gnFrameSkip == 0) {
                 var_v0_12 = gnAlphaFade + 0x10;
                 if (gnAlphaFade == 0) {
                     if (B_8018E524_usa != -1) {
@@ -1535,7 +1764,7 @@ block_256:
             break;
     }
     if (var_a3_5 != 0) {
-        func_8002400C_usa(B_8018E524_usa);
+        screenChange(B_8018E524_usa);
         B_8018E524_usa = -1;
         B_8018E528_usa = B_8018E52C_usa;
     }
@@ -1615,8 +1844,8 @@ s32 screenSet(const char *arg0, s32 arg1) {
         B_8018E52C_usa = arg1 & 3;
         B_8018E524_usa = sp10;
 
-        temp = B_8018E504_usa - 4;
-        B_8018E504_usa = temp - B_801C7060_usa;
+        temp = gnFrameSkip - 4;
+        gnFrameSkip = temp - B_801C7060_usa;
 
         if (arg1 & 0x400) {
             B_8018E530_usa = -1;
@@ -1797,10 +2026,10 @@ nbool func_800279D8_usa(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3) {
 
 #if VERSION_USA
 nbool func_80027AB0_usa(void) {
-    if (B_8018E4FC_usa == 0) {
-        B_8018E4FC_usa = 1;
+    if (gnMaskRate == 0) {
+        gnMaskRate = 1;
     } else {
-        B_8018E4FC_usa = 3;
+        gnMaskRate = 3;
     }
 
     return ntrue;
@@ -1904,9 +2133,9 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80027BF0_ger);
 #endif
 
 nbool func_80027AD4_usa(void) {
-    s32 old = B_8018E4FC_usa;
+    s32 old = gnMaskRate;
 
-    B_8018E4FC_usa >>= 1;
+    gnMaskRate >>= 1;
     if (old != 0) {
         return ntrue;
     }
@@ -2059,7 +2288,7 @@ nbool screenShowText(s32 arg0, s32 arg1) {
                 temp_a1->unk_48 &= ~0xF0000000;
 
                 B_8018E554_usa = 0;
-                B_8018E4FC_usa = B_8018E500_usa;
+                gnMaskRate = gnMaskRateDefault;
                 if (temp_a1->unk_44 & 0x100000) {
                     screenShowImage(arg0, temp_a1->unk_1A);
                 }
@@ -2230,7 +2459,7 @@ nbool screenShowImage(s32 arg2, s32 arg1) {
     return ret;
 }
 
-nbool func_8002864C_usa(s32 arg0, s32 arg1, struct_gaScreen_unk_20_unk_14 **arg2) {
+nbool func_8002864C_usa(s32 arg0, s32 arg1, struct_imageLoad_arg0 **arg2) {
     struct_gaScreen_unk_20 *sp0;
 
     if (inlined_func2(arg0, arg1, &sp0)) {
@@ -3469,12 +3698,12 @@ s32 screenLoad(char *arg0, void **arg1) {
                 *arg1 = (void *)ALIGN((uintptr_t)*arg1, 4);
                 temp_s1_2->unk_2C = *arg1;
                 *arg1 = *arg1 + 0x40;
-                B_8018E4F8_usa = *arg1;
+                gpHeap = *arg1;
 
                 if (screenCenterText(temp_s1_2) == 0) {
                     temp_s1_2->unk_44 &= ~(0x800000 | 0x8000);
                 }
-                *arg1 = B_8018E4F8_usa;
+                *arg1 = gpHeap;
             }
 
             for (var_s0_2 = 0; var_s0_2 < sp40; var_s0_2++) {
@@ -3572,10 +3801,10 @@ s32 screenLoad(char *arg0, void **arg1) {
         imageLoad(&gpImageYes, "dYes.BIF", arg1);
     }
 
-    B_8018E4F8_usa = (void *)ALIGN((uintptr_t)*arg1, 16);
-    B_8018E4F4_usa = B_8018E4F8_usa;
+    gpHeap = (void *)ALIGN((uintptr_t)*arg1, 16);
+    B_8018E4F4_usa = gpHeap;
     gnScreenCount = sp3C;
-    B_8018E504_usa += B_801C7060_usa;
+    gnFrameSkip += B_801C7060_usa;
     osViSetSpecialFeatures(OS_VI_DITHER_FILTER_ON);
     screenWipeImages();
 
@@ -3598,7 +3827,7 @@ void screenSetup(void) {
     gnFrameCount = 0;
     geModeFade = 0;
     */
-    B_8018E504_usa = 0;
+    gnFrameSkip = 0;
     gnImageCount = 0;
     gnScreenCount = 0;
     B_8018E540_usa = 0;
