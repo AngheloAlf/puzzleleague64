@@ -14,7 +14,6 @@
 
 extern s32 gnSizeWaveLast;
 
-#if VERSION_USA
 void imageMake(struct_imageLoad_arg0 **arg0, void **arg1, u32 arg2) {
     *arg0 = *arg1 = (void *)ALIGN4((uintptr_t)*arg1);
     *arg1 = (void *)((uintptr_t)*arg1 + sizeof(struct_imageLoad_arg0));
@@ -47,13 +46,23 @@ void imageMake(struct_imageLoad_arg0 **arg0, void **arg1, u32 arg2) {
     (*arg0)->unk_30 = NULL;
     (*arg0)->unk_34 = NULL;
 }
-#endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_8001EDE0_usa);
 #endif
 
-#if VERSION_USA
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_8001EF20_eur);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_8001EF30_fra);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_8001EFA0_ger);
+#endif
+
 s32 imageLoad(struct_imageLoad_arg0 **arg0, char *filename, void **arg2) {
     File file;
     u32 magic;
@@ -77,19 +86,16 @@ s32 imageLoad(struct_imageLoad_arg0 **arg0, char *filename, void **arg2) {
     fileGet(&file, &magic, sizeof(u32));
     if (magic == 'BIF3') {
         needsReend = false;
-    } else {
+    } else if (magic == '3FIB') {
         needsReend = true;
-        if (magic != '3FIB') {
-            char *auxName;
+    } else {
+#if VERSION_USA
+        char *auxName = fileTest((void *)filename) ? "<FILE>" : filename;
 
-            if (!fileTest((void *)filename)) {
-                auxName = filename;
-            } else {
-                auxName = "<FILE>";
-            }
-            osSyncPrintf("imageLoad: Could not load IMAGE '%s'\n", auxName);
-            return 0;
-        }
+        osSyncPrintf("imageLoad: Could not load IMAGE '%s'\n", auxName);
+#endif
+
+        return 0;
     }
 
     fileGet(&file, &sp24, sizeof(u32));
@@ -166,18 +172,40 @@ s32 imageLoad(struct_imageLoad_arg0 **arg0, char *filename, void **arg2) {
         return -1;
     }
 }
-#endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_8001FC08_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_8001FD1C_eur);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_8001FD2C_fra);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_8001FD9C_ger);
 #endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_8001FD0C_usa);
 #endif
 
-#if VERSION_USA
-enum nbool imageCopy(struct_imageLoad_arg0 **arg0, struct_imageLoad_arg0 *arg1, void **heapP) {
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_8001FD0C_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_8001FD0C_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_8001FD0C_usa);
+#endif
+
+nbool imageCopy(struct_imageLoad_arg0 **arg0, struct_imageLoad_arg0 *arg1, void **heapP) {
     s32 i;
 
     imageMake(arg0, heapP, arg1->unk_18);
@@ -217,9 +245,7 @@ enum nbool imageCopy(struct_imageLoad_arg0 **arg0, struct_imageLoad_arg0 *arg1, 
 
     return ntrue;
 }
-#endif
 
-#if VERSION_USA
 nbool imageMakeScan(struct_imageLoad_arg0 *arg0, void **heapP) {
     s32 i;
     s32 j;
@@ -245,7 +271,6 @@ nbool imageMakeScan(struct_imageLoad_arg0 *arg0, void **heapP) {
 
     return ntrue;
 }
-#endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_80020044_usa);
@@ -296,6 +321,126 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_800207FC_usa);
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_800209BC_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_80020158_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_800201C8_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_8002031C_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_80020418_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_800206C0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_80020750_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_800207F0_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_80020868_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_80020910_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_80020AD0_eur);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_80020168_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_800201D8_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_8002032C_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_80020428_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_800206D0_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_80020760_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_80020800_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_80020878_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_80020920_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_80020AE0_fra);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_800201D8_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_80020248_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_8002039C_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_80020498_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_80020740_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_800207D0_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_80020870_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_800208E8_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_80020990_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_80020B50_ger);
 #endif
 
 #if VERSION_USA
@@ -363,304 +508,69 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_80021414_usa);
 #endif
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/image", imageDraw);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_80022184_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_80022268_usa);
-#endif
-
-#if VERSION_USA
-void imageSetup(void) {
-    gnSizeWaveLast = -1;
-}
-#endif
-
-#if VERSION_USA
-void func_800222E4_usa(void) {
-}
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_8001EDF0_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_8001EF20_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", imageLoad);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_8001FD1C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_8001FD0C_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_8001FEA8_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_80020084_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_80020158_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_800201C8_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_8002031C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_80020418_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_800206C0_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_80020750_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_800207F0_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_80020868_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_80020910_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_80020AD0_eur);
-#endif
-
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_80021414_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", imageDraw);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_80022298_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_8002237C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", imageSetup);
-#endif
-
-#if VERSION_EUR
-void func_800223F8_eur(void) {
-}
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_8001EE00_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_8001EF30_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", imageLoad);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_8001FD2C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_8001FD0C_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_8001FEB8_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_80020094_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_80020168_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_800201D8_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_8002032C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_80020428_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_800206D0_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_80020760_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_80020800_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_80020878_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_80020920_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_80020AE0_fra);
 #endif
 
 #if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_80021414_usa);
 #endif
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", imageDraw);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_800222A8_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_8002238C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", imageSetup);
-#endif
-
-#if VERSION_FRA
-void func_80022408_fra(void) {
-}
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_8001EE70_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_8001EFA0_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/image", imageLoad);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_8001FD9C_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_8001FD0C_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_8001FF28_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_80020104_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_800201D8_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_80020248_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_8002039C_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_80020498_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_80020740_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_800207D0_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_80020870_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_800208E8_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_80020990_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_80020B50_ger);
-#endif
-
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_80021414_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_ASM("asm/usa/nonmatchings/main/image", imageDraw);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/image", imageDraw);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/image", imageDraw);
 #endif
 
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/image", imageDraw);
 #endif
 
+#if VERSION_USA
+INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_80022184_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_80022298_eur);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_800222A8_fra);
+#endif
+
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_80022318_ger);
+#endif
+
+#if VERSION_USA
+INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_80022268_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_8002237C_eur);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_8002238C_fra);
 #endif
 
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_800223FC_ger);
 #endif
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/image", imageSetup);
-#endif
-
-#if VERSION_GER
-void func_80022478_ger(void) {
+void imageSetup(void) {
+    gnSizeWaveLast = -1;
 }
-#endif
+
+void func_800222E4_usa(void) {
+}

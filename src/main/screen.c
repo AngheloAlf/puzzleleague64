@@ -658,7 +658,6 @@ void screenWipeImages(void) {
     }
 }
 
-#if VERSION_USA
 void screenChange(s32 arg0) {
     void *sp10;
     struct_gaScreen *temp_s3;
@@ -821,9 +820,7 @@ void screenChange(s32 arg0) {
         screenUpdateArea(temp_s3->unk_18);
     }
 }
-#endif
 
-#if VERSION_USA
 void screenDrawDialog(struct_gaScreen_unk_24 *arg0, Gfx **gfxP, s32 arg2 UNUSED) {
     Gfx *gfx = *gfxP;
 
@@ -868,9 +865,14 @@ void screenDrawDialog(struct_gaScreen_unk_24 *arg0, Gfx **gfxP, s32 arg2 UNUSED)
 
     *gfxP = gfx;
 }
+
+#if REGION_NTSC
+#define TICK_TEXT_FACTOR (1)
+#elif REGION_PAL
+// Approximately 50 / 60
+#define TICK_TEXT_FACTOR (0.8333)
 #endif
 
-#if VERSION_USA
 void screenTickTextData(void) {
     struct_gaScreen_unk_18 *temp_s3;
 
@@ -904,7 +906,7 @@ void screenTickTextData(void) {
         if (screenTextDone(giScreen, temp_s3->unk_20)) {
             gnCountTextTag++;
 
-            if ((gnCountTextTag & 0xFFFF) >= 0x5A) {
+            if ((gnCountTextTag & 0xFFFF) >= 90 * TICK_TEXT_FACTOR) {
                 s32 i;
 
                 for (i = (gnCountTextTag >> 0x10) + 1; i < temp_s2; i++) {
@@ -926,7 +928,7 @@ void screenTickTextData(void) {
                     }
                 }
 
-                if (((gnCountTextTag & 0xFFFF) >= 0xD2) && ((gnCountTextTag >> 0x10) != 0)) {
+                if (((gnCountTextTag & 0xFFFF) >= 210 * TICK_TEXT_FACTOR) && ((gnCountTextTag >> 0x10) != 0)) {
                     gnCountTextTag = 0;
 
                     new_var2 = 0x80008000;
@@ -941,43 +943,6 @@ void screenTickTextData(void) {
         temp_s3->unk_20 = -1;
     }
 }
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_8002411C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80024644_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80024A7C_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_8002408C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_800245B4_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_800249EC_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80024114_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_8002463C_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80024A74_ger);
-#endif
 
 //! RENAME TODO: func_80024BF4_usa -> screenGetHeap?
 nbool func_80024BF4_usa(void **heapP) {
@@ -2449,7 +2414,6 @@ void func_800275A4_usa(void) {
         }                                           \
     } while (0)
 
-#if VERSION_USA
 nbool func_800275AC_usa(const char *arg0, const char *arg1) {
     s32 i;
 
@@ -2462,9 +2426,7 @@ nbool func_800275AC_usa(const char *arg0, const char *arg1) {
     }
     return nfalse;
 }
-#endif
 
-#if VERSION_USA
 nbool func_80027618_usa(s32 arg0, s32 arg1, u32 arg2) {
     if (arg2 >= GASCREEN_UNK_28_LEN) {
         return nfalse;
@@ -2491,9 +2453,7 @@ nbool func_80027618_usa(s32 arg0, s32 arg1, u32 arg2) {
 
     return nfalse;
 }
-#endif
 
-#if VERSION_USA
 // screenGetArea?
 INLINE nbool func_800276CC_usa(s32 arg0, UNK_TYPE4 *arg1, s32 arg2) {
     if (arg2 < GASCREEN_UNK_28_LEN) {
@@ -2513,7 +2473,6 @@ INLINE nbool func_800276CC_usa(s32 arg0, UNK_TYPE4 *arg1, s32 arg2) {
 
     return nfalse;
 }
-#endif
 
 // Not present on ROM?
 STATIC_INLINE nbool inlined_func(s32 arg0, s32 arg1, struct_gaScreen_unk_18 **arg2) {
@@ -2531,7 +2490,6 @@ STATIC_INLINE nbool inlined_func(s32 arg0, s32 arg1, struct_gaScreen_unk_18 **ar
     return nfalse;
 }
 
-#if VERSION_USA
 nbool func_8002776C_usa(s32 arg0, s32 arg1) {
     struct_gaScreen_unk_18 *sp0;
 
@@ -2541,9 +2499,7 @@ nbool func_8002776C_usa(s32 arg0, s32 arg1) {
     }
     return nfalse;
 }
-#endif
 
-#if VERSION_USA
 nbool func_80027838_usa(s32 arg0, s32 arg1) {
     struct_gaScreen_unk_18 *sp10;
 
@@ -2554,9 +2510,7 @@ nbool func_80027838_usa(s32 arg0, s32 arg1) {
     }
     return nfalse;
 }
-#endif
 
-#if VERSION_USA
 s32 func_80027914_usa(s32 arg0, s32 arg1) {
     struct_gaScreen_unk_18 *sp0;
 
@@ -2565,9 +2519,7 @@ s32 func_80027914_usa(s32 arg0, s32 arg1) {
     }
     return 0;
 }
-#endif
 
-#if VERSION_USA
 nbool func_800279D8_usa(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3) {
     struct_gaScreen_unk_18 *sp0;
 
@@ -2578,9 +2530,7 @@ nbool func_800279D8_usa(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3) {
     }
     return nfalse;
 }
-#endif
 
-#if VERSION_USA
 nbool func_80027AB0_usa(void) {
     if (gnMaskRate == 0) {
         gnMaskRate = 1;
@@ -2590,103 +2540,6 @@ nbool func_80027AB0_usa(void) {
 
     return ntrue;
 }
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_800276F4_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80027760_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80027814_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_800278B4_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80027980_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80027A5C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80027B20_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80027BF8_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80027664_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_800276D0_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80027784_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80027824_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_800278F0_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_800279CC_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80027A90_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80027B68_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_800276EC_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80027758_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_8002780C_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_800278AC_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80027978_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80027A54_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80027B18_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80027BF0_ger);
-#endif
 
 nbool func_80027AD4_usa(void) {
     s32 old = gnMaskRate;
@@ -2860,17 +2713,27 @@ nbool screenShowText(s32 arg0, s32 arg1) {
     return ret;
 }
 
-#if VERSION_USA
 s32 func_8002801C_usa(void) {
     s32 old = B_8018E554_usa;
 
     B_8018E554_usa = 0;
     return old;
 }
-#endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80028034_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80028034_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80028034_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80028034_usa);
 #endif
 
 // Not present on ROM?
@@ -2889,7 +2752,6 @@ STATIC_INLINE nbool inlined_func2(s32 arg0, s32 arg1, struct_gaScreen_unk_20 **a
     return nfalse;
 }
 
-#if VERSION_USA
 nbool func_800282AC_usa(s32 arg0, s32 arg1) {
     struct_gaScreen_unk_20 *sp0;
 
@@ -2898,43 +2760,6 @@ nbool func_800282AC_usa(s32 arg0, s32 arg1) {
     }
     return nfalse;
 }
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80028164_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_8002817C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80028414_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_800280D4_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_800280EC_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80028384_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_8002815C_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80028174_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_8002840C_ger);
-#endif
 
 nbool screenHideImage(s32 arg0, s32 arg1) {
     nbool ret;
@@ -3029,7 +2854,6 @@ nbool func_8002864C_usa(s32 arg0, s32 arg1, struct_imageLoad_arg0 **arg2) {
     return nfalse;
 }
 
-#if VERSION_USA
 nbool func_80028718_usa(s32 arg0, s32 arg1, f32 arg2) {
     struct_gaScreen_unk_20 *sp10;
 
@@ -3043,9 +2867,7 @@ nbool func_80028718_usa(s32 arg0, s32 arg1, f32 arg2) {
     }
     return nfalse;
 }
-#endif
 
-#if VERSION_USA
 nbool func_8002880C_usa(s32 arg0, s32 arg1, f32 *arg2) {
     struct_gaScreen_unk_20 *sp0;
 
@@ -3056,31 +2878,6 @@ nbool func_8002880C_usa(s32 arg0, s32 arg1, f32 *arg2) {
     }
     return nfalse;
 }
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80028880_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80028974_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_800287F0_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_800288E4_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80028878_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_8002896C_ger);
-#endif
 
 nbool func_800288D8_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     struct_gaScreen_unk_20 *sp10;
@@ -3108,7 +2905,6 @@ nbool func_800289C0_usa(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3) {
     return nfalse;
 }
 
-#if VERSION_USA
 nbool func_80028A98_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     struct_gaScreen_unk_18 *sp0;
 
@@ -3123,9 +2919,7 @@ nbool func_80028A98_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 
     return nfalse;
 }
-#endif
 
-#if VERSION_USA
 nbool func_80028BAC_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     struct_gaScreen_unk_18 *sp0;
 
@@ -3139,9 +2933,7 @@ nbool func_80028BAC_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     }
     return nfalse;
 }
-#endif
 
-#if VERSION_USA
 nbool func_80028CBC_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     struct_gaScreen_unk_18 *sp0;
 
@@ -3157,9 +2949,7 @@ nbool func_80028CBC_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     }
     return nfalse;
 }
-#endif
 
-#if VERSION_USA
 void func_80028DC0_usa(s32 arg0, s32 arg1, s32 arg2) {
     struct_gaScreen_unk_20 *sp0;
 
@@ -3167,9 +2957,7 @@ void func_80028DC0_usa(s32 arg0, s32 arg1, s32 arg2) {
         sp0->unk_08 = arg2;
     }
 }
-#endif
 
-#if VERSION_USA
 void func_80028E80_usa(s32 arg0, s32 arg1, s32 *arg2) {
     struct_gaScreen_unk_20 *sp0;
 
@@ -3177,67 +2965,6 @@ void func_80028E80_usa(s32 arg0, s32 arg1, s32 *arg2) {
         *arg2 = sp0->unk_08;
     }
 }
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80028C00_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80028D14_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80028E24_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80028F28_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80028FE8_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80028B70_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80028C84_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80028D94_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80028E98_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80028F58_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80028BF8_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80028D0C_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80028E1C_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80028F20_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80028FE0_ger);
-#endif
 
 void screenSetText(s32 arg0, s32 arg1, u16 *arg2) {
     struct_gaScreen_unk_1C *sp10;
@@ -3408,7 +3135,6 @@ void func_800296B0_usa(u16 *dst, char *src, s32 dstLen) {
     dst[i] = 0;
 }
 
-#if VERSION_USA
 void func_800297C8_usa(s32 arg0, s32 arg1, u16 *arg2) {
     if ((arg0 >= 0) && (arg0 < gnScreenCount)) {
         struct_gaScreen *temp_t0 = &gaScreen[arg0];
@@ -3445,9 +3171,7 @@ void func_800297C8_usa(s32 arg0, s32 arg1, u16 *arg2) {
         }
     }
 }
-#endif
 
-#if VERSION_USA
 nbool func_80029980_usa(s32 arg0, s32 arg1, s32 arg2) {
     struct_gaScreen_unk_1C *sp0;
 
@@ -3457,9 +3181,7 @@ nbool func_80029980_usa(s32 arg0, s32 arg1, s32 arg2) {
     }
     return nfalse;
 }
-#endif
 
-#if VERSION_USA
 nbool func_80029A44_usa(s32 arg0, s32 arg1, s32 *arg2) {
     struct_gaScreen_unk_1C *sp0;
 
@@ -3469,9 +3191,7 @@ nbool func_80029A44_usa(s32 arg0, s32 arg1, s32 *arg2) {
     }
     return nfalse;
 }
-#endif
 
-#if VERSION_USA
 nbool func_80029B10_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     struct_gaScreen_unk_1C *sp10;
 
@@ -3490,9 +3210,7 @@ nbool func_80029B10_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     }
     return nfalse;
 }
-#endif
 
-#if VERSION_USA
 nbool func_80029C4C_usa(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3) {
     struct_gaScreen_unk_1C *sp0;
 
@@ -3503,9 +3221,7 @@ nbool func_80029C4C_usa(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3) {
     }
     return nfalse;
 }
-#endif
 
-#if VERSION_USA
 void func_80029D24_usa(s32 arg0, s32 arg1) {
     s32 var_s2;
     s32 var_v1;
@@ -3551,9 +3267,7 @@ void func_80029D24_usa(s32 arg0, s32 arg1) {
         }
     }
 }
-#endif
 
-#if VERSION_USA
 void func_80029EC4_usa(s32 arg0, s32 arg1) {
     s32 var_a1;
     s32 var_s2;
@@ -3603,91 +3317,6 @@ void func_80029EC4_usa(s32 arg0, s32 arg1) {
         }
     }
 }
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80029930_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80029AE8_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80029BAC_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80029C78_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80029DB4_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80029E8C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_8002A02C_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_800298C4_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80029A7C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80029B40_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80029C0C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80029D48_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80029E20_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80029FC0_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_800299FC_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80029BB4_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80029C78_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80029D44_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80029E80_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80029F58_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_8002A0F8_ger);
-#endif
 
 void screenSetNumber(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     char sp10[0x40];

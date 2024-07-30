@@ -15,9 +15,10 @@ simpleReplace: dict[str, str] = {
 # for example, if there is a space before and an open parenthesis after,
 # like for a function call: ` func_8002E4B4(`
 wordReplace: dict[str, str] = {
-"func_80029484_eur": "func_8002931C_usa",
-"func_800293F4_fra": "func_8002931C_usa",
-"func_8002947C_ger": "func_8002931C_usa",
+"B_8018D4E0_eur": "gnSizeWaveLast",
+"B_8018BB40_fra": "gnSizeWaveLast",
+"B_80181220_ger": "gnSizeWaveLast",
+
 }
 
 # [a-zA-Z0-9_]
