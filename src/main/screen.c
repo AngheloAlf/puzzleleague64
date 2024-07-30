@@ -3,30 +3,29 @@
  */
 
 #include "screen.h"
-#include "ultra64.h"
+
+#include "alignment.h"
 #include "include_asm.h"
 #include "macros_defines.h"
 #include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
+
+#include "controller.h"
 #include "file.h"
 #include "image.h"
-#include "alignment.h"
 #include "peel.h"
+#include "sfxlimit.h"
 
 extern struct_imageLoad_arg0 *gpImageNo;
 extern struct_imageLoad_arg0 *gpImageYes;
 
-extern struct_imageLoad_arg0 *B_8018E564_usa;
-extern struct_imageLoad_arg0 *B_8018E568_usa;
+extern struct_imageLoad_arg0 *gpImageEnglish;
+extern struct_imageLoad_arg0 *gpImageDialogEnglish;
 extern struct_imageLoad_arg0 *B_8018E56C_usa;
 
 #if VERSION_USA
 #ifdef NON_MATCHING
-extern char RO_STR_800C4050_usa[];
-extern char RO_STR_800C4060_usa[];
-extern char RO_STR_800C4070_usa[];
-
 // regalloc
 s32 screenGetTextData(struct_gaScreen_unk_1C *arg0, s32 arg1, struct_800222F0_usa_arg2 *arg2,
                       struct_imageLoad_arg0 **arg3, s32 *arg4, s32 arg5 UNUSED) {
@@ -51,6 +50,7 @@ s32 screenGetTextData(struct_gaScreen_unk_1C *arg0, s32 arg1, struct_800222F0_us
     if (temp_v0 == 0) {
         return 0;
     }
+
     var_s1 = NULL;
     var_s0 = -1;
     s6 = -1;
@@ -60,7 +60,6 @@ s32 screenGetTextData(struct_gaScreen_unk_1C *arg0, s32 arg1, struct_800222F0_us
     sp14 = 0;
     sp10 = 0;
     switch (temp_v0 >> 0xA) {
-
         case 0x0:
             if (temp_s2 == 1) {
                 if (!(arg0->unk_44 & 0x800)) {
@@ -92,22 +91,22 @@ s32 screenGetTextData(struct_gaScreen_unk_1C *arg0, s32 arg1, struct_800222F0_us
 
         case 0x4:
             if (arg0->unk_44 & 0x02000000) {
-                if (B_8018E564_usa == NULL) {
-                    imageLoad(&B_8018E564_usa, RO_STR_800C4050_usa, &gpHeap);
+                if (gpImageEnglish == NULL) {
+                    imageLoad(&gpImageEnglish, "fPPLTINY.BIF", &gpHeap);
                 }
-                var_s1 = B_8018E564_usa;
+                var_s1 = gpImageEnglish;
                 var_s0 = temp_s2 + 0x23;
                 func_8001E110_usa(*var_s1->unk_2C, var_s0, &sp10, &sp14);
             } else if (arg0->unk_44 & 0x80000) {
-                if (B_8018E568_usa == NULL) {
-                    imageLoad(&B_8018E568_usa, RO_STR_800C4060_usa, &gpHeap);
+                if (gpImageDialogEnglish == NULL) {
+                    imageLoad(&gpImageDialogEnglish, "fPPLNORM.BIF", &gpHeap);
                 }
-                var_s1 = B_8018E568_usa;
+                var_s1 = gpImageDialogEnglish;
                 var_s0 = temp_s2 + 0x23;
                 func_8001E110_usa(*var_s1->unk_2C, var_s0, &sp10, &sp14);
             } else {
                 if (B_8018E56C_usa == NULL) {
-                    imageLoad(&B_8018E56C_usa, RO_STR_800C4070_usa, &gpHeap);
+                    imageLoad(&B_8018E56C_usa, "fPPLHUGE.BIF", &gpHeap);
                 }
                 var_s1 = B_8018E56C_usa;
                 var_s0 = temp_s2 + 0x23;
@@ -119,20 +118,20 @@ s32 screenGetTextData(struct_gaScreen_unk_1C *arg0, s32 arg1, struct_800222F0_us
         case 0x5:
             if (temp_s2 > 0) {
                 if (arg0->unk_44 & 0x02000000) {
-                    if (B_8018E564_usa == NULL) {
-                        imageLoad(&B_8018E564_usa, RO_STR_800C4050_usa, &gpHeap);
+                    if (gpImageEnglish == NULL) {
+                        imageLoad(&gpImageEnglish, "fPPLTINY.BIF", &gpHeap);
                     }
-                    var_s1 = B_8018E564_usa;
+                    var_s1 = gpImageEnglish;
                     var_s0 = 0x1A;
                     if (temp_s2 != 0xA) {
                         var_s0 = temp_s2 + 0x1A;
                     }
                     func_8001E110_usa(*var_s1->unk_2C, var_s0, &sp10, &sp14);
                 } else if (arg0->unk_44 & 0x80000) {
-                    if (B_8018E568_usa == NULL) {
-                        imageLoad(&B_8018E568_usa, RO_STR_800C4060_usa, &gpHeap);
+                    if (gpImageDialogEnglish == NULL) {
+                        imageLoad(&gpImageDialogEnglish, "fPPLNORM.BIF", &gpHeap);
                     }
-                    var_s1 = B_8018E568_usa;
+                    var_s1 = gpImageDialogEnglish;
                     var_s0 = 0x1A;
                     if (temp_s2 != 0xA) {
                         var_s0 = temp_s2 + 0x1A;
@@ -140,7 +139,7 @@ s32 screenGetTextData(struct_gaScreen_unk_1C *arg0, s32 arg1, struct_800222F0_us
                     func_8001E110_usa(*var_s1->unk_2C, var_s0, &sp10, &sp14);
                 } else {
                     if (B_8018E56C_usa == NULL) {
-                        imageLoad(&B_8018E56C_usa, RO_STR_800C4070_usa, &gpHeap);
+                        imageLoad(&B_8018E56C_usa, "fPPLHUGE.BIF", &gpHeap);
                     }
                     var_s1 = B_8018E56C_usa;
                     var_s0 = 0x1A;
@@ -150,32 +149,32 @@ s32 screenGetTextData(struct_gaScreen_unk_1C *arg0, s32 arg1, struct_800222F0_us
                     func_8001E110_usa(*var_s1->unk_2C, var_s0, &sp10, &sp14);
                 }
             } else {
-                var_s4 = 0xA;
                 if (arg0->unk_44 & 0x800) {
                     var_s4 = arg0->unk_3C;
                 } else {
+                    var_s4 = 0xA;
                 }
             }
             break;
 
         case 0x6:
             if (arg0->unk_44 & 0x02000000) {
-                if (B_8018E564_usa == NULL) {
-                    imageLoad(&B_8018E564_usa, RO_STR_800C4050_usa, &gpHeap);
+                if (gpImageEnglish == NULL) {
+                    imageLoad(&gpImageEnglish, "fPPLTINY.BIF", &gpHeap);
                 }
-                var_s1 = B_8018E564_usa;
+                var_s1 = gpImageEnglish;
                 var_s0 = temp_s2 - 1;
                 func_8001E110_usa(*var_s1->unk_2C, var_s0, &sp10, &sp14);
             } else if (arg0->unk_44 & 0x80000) {
-                if (B_8018E568_usa == NULL) {
-                    imageLoad(&B_8018E568_usa, RO_STR_800C4060_usa, &gpHeap);
+                if (gpImageDialogEnglish == NULL) {
+                    imageLoad(&gpImageDialogEnglish, "fPPLNORM.BIF", &gpHeap);
                 }
-                var_s1 = B_8018E568_usa;
+                var_s1 = gpImageDialogEnglish;
                 var_s0 = temp_s2 - 1;
                 func_8001E110_usa(*var_s1->unk_2C, var_s0, &sp10, &sp14);
             } else {
                 if (B_8018E56C_usa == NULL) {
-                    imageLoad(&B_8018E56C_usa, RO_STR_800C4070_usa, &gpHeap);
+                    imageLoad(&B_8018E56C_usa, "fPPLHUGE.BIF", &gpHeap);
                 }
                 var_s1 = B_8018E56C_usa;
                 var_s0 = temp_s2 - 1;
@@ -185,22 +184,22 @@ s32 screenGetTextData(struct_gaScreen_unk_1C *arg0, s32 arg1, struct_800222F0_us
 
         case 0x7:
             if (arg0->unk_44 & 0x02000000) {
-                if (B_8018E564_usa == NULL) {
-                    imageLoad(&B_8018E564_usa, RO_STR_800C4050_usa, &gpHeap);
+                if (gpImageEnglish == NULL) {
+                    imageLoad(&gpImageEnglish, "fPPLTINY.BIF", &gpHeap);
                 }
-                var_s1 = B_8018E564_usa;
+                var_s1 = gpImageEnglish;
                 var_s0 = temp_s2 - 1;
                 func_8001E110_usa(*var_s1->unk_2C, var_s0, &sp10, &sp14);
             } else if (arg0->unk_44 & 0x80000) {
-                if (B_8018E568_usa == NULL) {
-                    imageLoad(&B_8018E568_usa, RO_STR_800C4060_usa, &gpHeap);
+                if (gpImageDialogEnglish == NULL) {
+                    imageLoad(&gpImageDialogEnglish, "fPPLNORM.BIF", &gpHeap);
                 }
-                var_s1 = B_8018E568_usa;
+                var_s1 = gpImageDialogEnglish;
                 var_s0 = temp_s2 - 1;
                 func_8001E110_usa(*var_s1->unk_2C, var_s0, &sp10, &sp14);
             } else {
                 if (B_8018E56C_usa == NULL) {
-                    imageLoad(&B_8018E56C_usa, RO_STR_800C4070_usa, &gpHeap);
+                    imageLoad(&B_8018E56C_usa, "fPPLHUGE.BIF", &gpHeap);
                 }
                 var_s1 = B_8018E56C_usa;
                 var_s0 = temp_s2 - 1;
@@ -276,19 +275,11 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80022480_ger);
 
 #if VERSION_USA
 #if 0
-
-#define M2C_ERROR(x) 0
-
 s32 screenCenterText(struct_gaScreen_unk_1C *arg0) {
-    ? sp18;
-    ? sp30;
+    struct_800222F0_usa_arg2 sp18;
+    struct_imageLoad_arg0 *sp30;
     s32 sp34;
-    s32 sp38;
     s32 *var_a0_3;
-    s32 temp_a0;
-    s32 temp_a0_2;
-    s32 temp_a0_3;
-    s32 temp_a1;
     s32 var_a0_2;
     s32 var_fp;
     s32 var_s2;
@@ -297,105 +288,97 @@ s32 screenCenterText(struct_gaScreen_unk_1C *arg0) {
     s32 var_s5;
     s32 var_s6;
     s32 var_s7;
+    s32 var_t0;
     s32 var_v0;
     s32 var_v1;
     u16 var_s0;
     u32 temp_v1;
     u32 var_a0;
 
-    var_fp = saved_reg_fp;
     var_s4 = 0;
     var_s2 = 0;
     var_s3 = 0;
     var_s7 = -1;
-    var_s0 = *arg0->unk_50;
+    var_s0 = arg0->unk_50[var_s3];
     var_s5 = -1;
     var_s6 = 0;
-    if (var_s0 != 0) {
+
+
+    while (var_s0 != 0) {
         var_a0 = var_s0 >> 0xA;
-loop_2:
-        if ((var_a0 != 0) || ((var_s0 & 0x3FF) == 3)) {
-            if (var_a0 < 0x20U) {
-                var_s6 = 0;
-            } else {
-                goto block_7;
-            }
-        } else {
-block_7:
-            if (var_s6 == 0) {
-                var_s6 = -1;
-                var_s5 = var_s3;
-                var_s7 = var_s4;
-            }
+
+        if (((var_a0 != 0) || ((var_s0 & 0x3FF) == 3)) && (var_a0 < 0x20U)) {
+            var_s6 = 0;
+        } else if (var_s6 == 0) {
+            var_s6 = -1;
+            var_s5 = var_s3;
+            var_s7 = var_s4;
         }
-        sp38 = -1;
+
+        var_t0 = -1;
         screenGetTextData(arg0, var_s3, &sp18, &sp30, &sp34, 0);
         temp_v1 = var_s0 >> 0xA;
         var_a0_2 = 0;
-        if (temp_v1 == 0) {
-            var_a0_2 = -((var_s0 & 0x3FF) == 2);
+        if ((temp_v1 == 0) && ((var_s0 & 0x3FF) == 2)) {
+            var_a0_2 = -1;
         }
         if ((temp_v1 != 0) & (temp_v1 < 0x20U)) {
-            var_fp = sp28;
+            var_fp = sp18.unk_10;
             if (arg0->unk_44 & 0x40000000) {
                 var_fp += arg0->unk_40;
             }
         }
-        temp_a1 = arg0->unk_5C;
-        var_s4 += sp24 + sp34;
-        if ((var_s4 >= temp_a1) || (var_a0_2 != 0)) {
+
+        var_s4 += sp18.unk_0C + sp34;
+        if ((var_s4 >= arg0->unk_5C) || var_a0_2) {
+            var_t0 = 0;
             if (var_s5 == -1) {
-                temp_a0 = var_s2 * 4;
+                arg0->unk_2C[var_s2] = (arg0->unk_5C >> 1) - (var_s4 >> 1);
                 var_s2 += 1;
-                *(temp_a0 + arg0->unk_2C) = (temp_a1 >> 1) - (var_s4 >> 1);
             } else {
-                temp_a0_2 = var_s2 * 4;
-                var_s2 += 1;
+                arg0->unk_50[var_s5] = 2;
+                arg0->unk_2C[var_s2] = (arg0->unk_5C >> 1) - (var_s7 >> 1);
                 var_s3 = var_s5;
-                arg0->unk_50[var_s3] = 2;
                 var_s5 = -1;
-                *(temp_a0_2 + arg0->unk_2C) = ((s32) arg0->unk_5C >> 1) - (var_s7 >> 1);
+                var_s2 += 1;
             }
+
             var_s4 = 0;
-            if (var_s2 != 0x10) {
-                goto block_21;
+            if (var_s2 == 0x10) {
+                return 0;
             }
-            return 0;
         }
-block_21:
+
         var_s3 += 1;
         var_s0 = arg0->unk_50[var_s3];
-        var_a0 = var_s0 >> 0xA;
-        if (var_s0 == 0) {
-            goto block_22;
-        }
-        goto loop_2;
     }
-block_22:
+
     if (var_s6 == 0) {
         var_s5 = var_s3;
         var_s7 = var_s4;
     }
-    if (M2C_ERROR(Read from unset register $t0) != 0) {
-        temp_a0_3 = var_s2 * 4;
+
+    if (var_t0 != 0) {
         if (var_s5 == -1) {
+            var_a0_3 = &arg0->unk_2C[var_s2];
             var_s2 += 1;
-            var_a0_3 = temp_a0_3 + arg0->unk_2C;
-            var_v0 = (s32) arg0->unk_5C >> 1;
+            var_v0 = arg0->unk_5C >> 1;
             var_v1 = var_s4 >> 1;
         } else {
+            var_a0_3 = &arg0->unk_2C[var_s2];
             var_s2 += 1;
-            var_a0_3 = temp_a0_3 + arg0->unk_2C;
-            var_v0 = (s32) arg0->unk_5C >> 1;
+            var_v0 = arg0->unk_5C >> 1;
             var_v1 = var_s7 >> 1;
         }
         *var_a0_3 = var_v0 - var_v1;
     }
-    if (!(arg0->unk_44 & 0x8000)) {
-        arg0->unk_1C = 0;
+
+    if ((arg0->unk_44 & 0x8000)) {
+        arg0->unk_1C = (arg0->unk_60 >> 1) - ((var_s2 * var_fp) >> 1);
     } else {
-        arg0->unk_1C = ((s32) arg0->unk_60 >> 1) - ((s32) (var_s2 * var_fp) >> 1);
+        arg0->unk_1C = 0;
     }
+
     return -1;
 }
 #else
@@ -656,8 +639,8 @@ void screenWipeImages(void) {
     }
 
     B_8018E550_usa = 0;
-    B_8018E564_usa = 0;
-    B_8018E568_usa = 0;
+    gpImageEnglish = 0;
+    gpImageDialogEnglish = 0;
     B_8018E56C_usa = 0;
 
     for (i = 0; i < gnScreenCount; i++) {
@@ -841,7 +824,50 @@ void screenChange(s32 arg0) {
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80024534_usa);
+void screenDrawDialog(struct_gaScreen_unk_24 *arg0, Gfx **gfxP, s32 arg2 UNUSED) {
+    Gfx *gfx = *gfxP;
+
+    gDPPipeSync(gfx++);
+    gDPSetAlphaCompare(gfx++, G_AC_NONE);
+    gDPSetRenderMode(gfx++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
+    gDPSetCombineMode(gfx++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
+
+    {
+        u32 a = ((u32)arg0->unk_10) & 0xFF;
+        u8 r = (((u32)arg0->unk_10) >> 0x19) & 0x7F;
+        u8 g = (((u32)arg0->unk_10) >> 0x11) & 0x7F;
+        u8 b = (((u32)arg0->unk_10) >> 9) & 0x7F;
+
+        gDPSetPrimColor(gfx++, 0, 0, r, g, b, a);
+    }
+    gDPScisFillRectangle(gfx++, arg0->unk_04 + arg0->unk_24, arg0->unk_08 - 4, arg0->unk_04 + arg0->unk_24 + 4,
+                         arg0->unk_08 + arg0->unk_28 + 4);
+    gDPScisFillRectangle(gfx++, arg0->unk_04 - 4, arg0->unk_08 + arg0->unk_28, arg0->unk_04 + arg0->unk_24 + 4,
+                         arg0->unk_08 + arg0->unk_28 + 4);
+
+    {
+        u32 r = (arg0->unk_10 >> 0x18) | 0x80;
+        u32 g = ((arg0->unk_10 >> 0x10) & 0xFF) | 0x80;
+        u32 b = (((arg0->unk_10 >> 8) & 0xFF) | 0x80);
+        u32 a = (arg0->unk_10 & 0xFF) | 0x80;
+
+        gDPSetPrimColor(gfx++, 0, 0, r, g, b, a);
+    }
+    gDPScisFillRectangle(gfx++, arg0->unk_04 - 4, arg0->unk_08 - 4, arg0->unk_04 + arg0->unk_24 + 4, arg0->unk_08);
+    gDPScisFillRectangle(gfx++, arg0->unk_04 - 4, arg0->unk_08 - 4, arg0->unk_04, arg0->unk_08 + arg0->unk_28 + 4);
+
+    {
+        u32 r = (arg0->unk_10 >> 0x18);
+        u32 g = (arg0->unk_10 >> 0x10);
+        u32 b = (arg0->unk_10 >> 0x8);
+        u32 a = (arg0->unk_10 >> 0x0) & 0xFF;
+
+        gDPSetPrimColor(gfx++, 0, 0, r, g, b, a);
+    }
+    gDPScisFillRectangle(gfx++, arg0->unk_04, arg0->unk_08, arg0->unk_04 + arg0->unk_24, arg0->unk_08 + arg0->unk_28);
+
+    *gfxP = gfx;
+}
 #endif
 
 #if VERSION_USA
@@ -954,7 +980,6 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80024A74_ger);
 #endif
 
 //! RENAME TODO: func_80024BF4_usa -> screenGetHeap?
-//! RENAME TODO: gpHeap -> gpHeapNext?
 nbool func_80024BF4_usa(void **heapP) {
     *heapP = ALIGN_PTR(gpHeap);
 
@@ -978,7 +1003,190 @@ nbool screenFlushing(void) {
 }
 
 #if VERSION_USA
+#ifdef NON_MATCHING
+void screenDraw(Gfx **gfxP, screenDraw_callback *callback) {
+    Gfx *gfx;
+    s32 var_a3;
+    s32 var_s0;
+    s32 var_s1_3;
+    struct_gaScreen *temp_s2;
+    struct_imageLoad_arg0 *temp_v1_2;
+    struct_gaScreen_unk_1C *temp_a0;
+    struct_gaScreen_unk_18 *temp_s0;
+    struct_gaScreen_unk_24 *temp_s0_3;
+    struct_gaScreen_unk_20 *var_s3;
+
+    if (gnFrameSkip < 0) {
+        gnFrameSkip += 1;
+        return;
+    }
+
+    if (gnFrameSkip > 0) {
+        gnFrameSkip--;
+        if ((gnFrameSkip == 0) && (B_8018E53C_usa != -1)) {
+            func_8002CFE4_usa(B_8018E53C_usa);
+            B_8018E53C_usa = -1;
+        }
+        return;
+    }
+
+    if ((giScreen != -1) && (B_8018E524_usa == -1)) {
+        gpfDraw = callback;
+
+        gfx = *gfxP;
+
+        gDPPipeSync(gfx++);
+        gDPSetCycleType(gfx++, G_CYC_1CYCLE);
+        gDPSetTextureConvert(gfx++, G_TC_FILT);
+        gDPSetColorDither(gfx++, G_CD_DISABLE);
+        gDPSetAlphaDither(gfx++, G_AD_DISABLE);
+
+        if (B_8018E530_usa != 0) {
+            gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            gSPClearGeometryMode(gfx++, G_ZBUFFER | G_CULL_BOTH | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR |
+                                            G_LOD | G_CLIPPING);
+        }
+
+        temp_s2 = &gaScreen[giScreen];
+
+        for (var_s0 = 0; var_s0 < temp_s2->unk_10; var_s0++) {
+            var_s3 = &temp_s2->unk_20[var_s0];
+
+            if (!(var_s3->unk_24 & 6)) {
+                if (var_s3->unk_24 & 8) {
+                    if (!(var_s3->unk_24 & 1) && (callback != NULL)) {
+                        callback(&gfx, giScreen, var_s3->unk_1C);
+                    }
+                } else if (!(var_s3->unk_24 & 0x1000)) {
+                    temp_v1_2 = var_s3->unk_14;
+                    if (!(temp_v1_2->unk_0C & 0x20)) {
+                        temp_v1_2->unk_00 = var_s3->unk_08;
+                    }
+
+                    imageSetScale(var_s3->unk_14, var_s3->unk_10, var_s3->unk_10);
+                    imageDraw(var_s3->unk_14, &gfx, var_s3->unk_00, var_s3->unk_04, NULL);
+                }
+            }
+        }
+
+        for (var_s0 = 0; var_s0 < temp_s2->unk_0C; var_s0++) {
+            temp_a0 = &temp_s2->unk_1C[var_s0];
+            if (((temp_a0->unk_44 & 0x2040) != 0x2040) && !(temp_a0->unk_44 & 0x400)) {
+                func_80022AF4_usa(temp_a0, &gfx);
+            }
+        }
+
+        for (var_s1_3 = 0; var_s1_3 < temp_s2->unk_08; var_s1_3++) {
+            temp_s0 = &temp_s2->unk_18[var_s1_3];
+            if (((temp_s0->unk_2C & 0x880) == 0x80) && (~B_8018E524_usa == 0)) {
+                if ((temp_s0->unk_0C->unk_0C & 0x24) || (((var_s1_3 != temp_s2->unk_28[0]) || (B_8018E540_usa & 8)) &&
+                                                         ((var_s1_3 != temp_s2->unk_28[1]) || !(B_8018E540_usa & 8)))) {
+                    if (((temp_s0->unk_2C & 3) != 2) || ((B_8018E528_usa >= 2) && ((D_800B69B0_usa & 0xE) != 0))) {
+                        if ((!(temp_s0->unk_2C & 0x100) || (var_s1_3 == temp_s2->unk_28[0]) ||
+                             (var_s1_3 == temp_s2->unk_28[1]))) {
+                            temp_s0->unk_0C->unk_00 = 0;
+                            imageDraw(temp_s0->unk_0C, &gfx, temp_s0->unk_44, temp_s0->unk_48, NULL);
+                            if (temp_s0->unk_2C & 0x4000) {
+                                imageDraw(B_8018E550_usa, &gfx,
+                                          temp_s0->unk_44 + temp_s0->unk_18 + (*B_8018E550_usa->unk_2C)->unk_0C,
+                                          temp_s0->unk_48, NULL);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        var_a3 = 0;
+        for (var_s1_3 = 0; var_s1_3 < temp_s2->unk_08; var_s1_3++) {
+            temp_s0 = &temp_s2->unk_18[var_s1_3];
+            if ((temp_s0->unk_2C & 0x8000) && ((temp_s0->unk_2C & 0x100800) != 0x800) &&
+                (var_s1_3 != temp_s2->unk_28[0]) && (var_s1_3 != temp_s2->unk_28[1])) {
+                if (var_a3 == 0) {
+                    var_a3 = -1;
+
+                    gDPPipeSync(gfx++);
+                    gDPSetCycleType(gfx++, G_CYC_1CYCLE);
+                    gDPSetAlphaCompare(gfx++, G_AC_NONE);
+                    gDPSetRenderMode(gfx++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
+                    gDPSetCombineMode(gfx++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
+                    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, 128);
+                    gSPClearGeometryMode(gfx++, G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_LIGHTING | G_SHADING_SMOOTH);
+                }
+
+                gDPFillRectangle(gfx++, temp_s0->unk_00, temp_s0->unk_04, temp_s0->unk_00 + temp_s0->unk_24 + 1,
+                                 temp_s0->unk_04 + temp_s0->unk_28 + 1);
+            }
+        }
+
+        for (var_s0 = 0; var_s0 < temp_s2->unk_10; var_s0++) {
+            var_s3 = &temp_s2->unk_20[var_s0];
+
+            if ((var_s3->unk_24 & (4 | 2)) == 2) {
+                if (var_s3->unk_24 & 8) {
+                    if (!(var_s3->unk_24 & 1)) {
+                        if (callback != NULL) {
+                            callback(&gfx, giScreen, var_s3->unk_1C);
+                        }
+                    }
+                } else if (!(var_s3->unk_24 & 0x1000)) {
+                    var_s3->unk_14->unk_00 = var_s3->unk_08;
+                    imageSetScale(var_s3->unk_14, var_s3->unk_10, var_s3->unk_10);
+                    imageDraw(var_s3->unk_14, &gfx, var_s3->unk_00, var_s3->unk_04, NULL);
+                }
+            }
+        }
+
+        for (var_s0 = 0; var_s0 < temp_s2->unk_0C; var_s0++) {
+            temp_a0 = &temp_s2->unk_1C[var_s0];
+            if ((temp_a0->unk_44 & 0x2440) == 0x40) {
+                func_80022AF4_usa(temp_a0, &gfx);
+            }
+        }
+
+        for (var_s1_3 = 0; var_s1_3 < temp_s2->unk_14; var_s1_3++) {
+            temp_s0_3 = &temp_s2->unk_24[var_s1_3];
+
+            if ((temp_s0_3->unk_2C & 0x42) == 0x42) {
+                screenDrawDialog(temp_s0_3, &gfx, 4);
+            } else if ((temp_s0_3->unk_2C & 0x41) == 0x41) {
+                temp_s0_3->unk_20->unk_00 = 0;
+                imageSetScale(temp_s0_3->unk_20, var_s3->unk_10, var_s3->unk_10);
+                imageDraw(temp_s0_3->unk_20, &gfx, temp_s0_3->unk_04, temp_s0_3->unk_08, NULL);
+            }
+
+            if ((temp_s0_3->unk_2C & 0xC0) == 0xC0) {
+                s32 a2;
+                s32 a3;
+
+                a2 = 8;
+                a2 = (temp_s0_3->unk_04 + (temp_s0_3->unk_24 >> 1) - a2) - (*gpImageYes->unk_2C)->unk_14;
+                a3 = ((temp_s0_3->unk_08 + temp_s0_3->unk_28) - 4) - (*gpImageYes->unk_2C)->unk_10;
+                gpImageYes->unk_00 = (temp_s0_3->unk_14 == 1) ? (!(B_8018E540_usa & 8) ? 1 : 0) : 2;
+                imageDraw(gpImageYes, &gfx, a2, a3, NULL);
+
+                a2 = 8;
+                a2 = temp_s0_3->unk_04 + (temp_s0_3->unk_24 >> 1) + a2;
+                a3 = ((temp_s0_3->unk_08 + temp_s0_3->unk_28) - 4);
+                a3 = a3 - (*gpImageNo->unk_2C)->unk_10;
+                gpImageNo->unk_00 = (temp_s0_3->unk_14 == 0) ? (!(B_8018E540_usa & 8) ? 1 : 0) : 2;
+                imageDraw(gpImageNo, &gfx, a2, a3, NULL);
+            }
+        }
+
+        for (var_s0 = 0; var_s0 < temp_s2->unk_0C; var_s0++) {
+            temp_a0 = &temp_s2->unk_1C[var_s0];
+            if ((temp_a0->unk_44 & 0x2400) == 0x2000) {
+                func_80022AF4_usa(temp_a0, &gfx);
+            }
+        }
+
+        *gfxP = gfx;
+    }
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/screen", screenDraw);
+#endif
 #endif
 
 #if VERSION_EUR
@@ -1008,23 +1216,391 @@ INLINE nbool screenFindImage(s32 arg0, s32 arg1, struct_gaScreen_unk_1C **arg2) 
 }
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_800255D8_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/screen", screenWrapCursor);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80025850_usa);
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/screen", screenWrapCursor);
 #endif
 
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/screen", screenWrapCursor);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/screen", screenWrapCursor);
+#endif
+
+s32 screenFindAreaNear(struct_gaScreen *arg0, struct_gaScreen_unk_18 *arg1, enum_screenFindAreaNear_arg2 arg2,
+                       u32 arg3) {
+    s32 var_t4 = 0x230;
+    s32 var_s1 = -1;
+    u32 var_t6 = !(arg3 & (SCREENFINDAREANEAR_FLAG_1 | SCREENFINDAREANEAR_FLAG_2 | SCREENFINDAREANEAR_FLAG_4 |
+                           SCREENFINDAREANEAR_FLAG_8))
+                     ? 1
+                     : 2;
+    s32 i;
+
+    for (i = 0; i < arg0->unk_08; i++) {
+        if ((arg3 & SCREENFINDAREANEAR_FLAG_20000) || !(arg0->unk_18[i].unk_2C & 0x800)) {
+            struct_gaScreen_unk_18 *temp_v1 = &arg0->unk_18[i];
+
+            if ((temp_v1 != arg1) && (temp_v1->unk_2C & var_t6)) {
+                s32 var_t1 = 0;
+                s32 var_a0 = 0;
+
+                switch (arg2) {
+                    case ENUM_SCREENFINDAREANEAR_ARG2_1:
+                        if (((temp_v1->unk_04 + temp_v1->unk_28) >= arg1->unk_04) &&
+                            ((arg1->unk_04 + arg1->unk_28) >= temp_v1->unk_04)) {
+                            if ((temp_v1->unk_00 + temp_v1->unk_24) < arg1->unk_00) {
+                                var_a0 = arg1->unk_00 - temp_v1->unk_00;
+                                var_t1 = arg1->unk_04 - temp_v1->unk_04;
+                                if (var_t1 < 0) {
+                                    var_t1 = -var_t1;
+                                }
+                            } else {
+                                var_a0 = 0;
+                            }
+                        } else {
+                            var_a0 = 0;
+                        }
+                        break;
+
+                    case ENUM_SCREENFINDAREANEAR_ARG2_2:
+                        if (((temp_v1->unk_04 + temp_v1->unk_28) >= arg1->unk_04) &&
+                            ((arg1->unk_04 + arg1->unk_28) >= temp_v1->unk_04)) {
+                            if ((arg1->unk_00 + arg1->unk_24) < temp_v1->unk_00) {
+                                var_a0 = temp_v1->unk_00 - arg1->unk_00;
+                                var_t1 = temp_v1->unk_04 - arg1->unk_04;
+                                if (var_t1 < 0) {
+                                    var_t1 = -var_t1;
+                                }
+                            } else {
+                                var_a0 = 0;
+                            }
+                        }
+                        break;
+
+                    case ENUM_SCREENFINDAREANEAR_ARG2_3:
+                        if (((temp_v1->unk_00 + temp_v1->unk_24) >= arg1->unk_00) &&
+                            ((arg1->unk_00 + arg1->unk_24) >= temp_v1->unk_00)) {
+                            if ((temp_v1->unk_04 + temp_v1->unk_28) < arg1->unk_04) {
+                                var_t1 = arg1->unk_04 - temp_v1->unk_04;
+                                var_a0 = arg1->unk_00 - temp_v1->unk_00;
+                                if (var_a0 < 0) {
+                                    var_a0 = -var_a0;
+                                }
+                            }
+                        }
+                        break;
+
+                    case ENUM_SCREENFINDAREANEAR_ARG2_4:
+                        if (((temp_v1->unk_00 + temp_v1->unk_24) >= arg1->unk_00) &&
+                            ((arg1->unk_00 + arg1->unk_24) >= temp_v1->unk_00)) {
+                            if ((arg1->unk_04 + arg1->unk_28) < temp_v1->unk_04) {
+                                var_t1 = temp_v1->unk_04 - arg1->unk_04;
+                                var_a0 = temp_v1->unk_00 - arg1->unk_00;
+                                if (var_a0 < 0) {
+                                    var_a0 = -var_a0;
+                                }
+                            }
+                        }
+                        break;
+
+                    default:
+                        return -1;
+                }
+
+                switch (arg2) {
+                    case ENUM_SCREENFINDAREANEAR_ARG2_1:
+                    case ENUM_SCREENFINDAREANEAR_ARG2_2:
+                        if ((var_a0 > 0) && ((var_s1 == -1) || (var_a0 < var_t4))) {
+                            var_s1 = i;
+                            var_t4 = var_a0;
+                        }
+                        break;
+
+                    case ENUM_SCREENFINDAREANEAR_ARG2_3:
+                    case ENUM_SCREENFINDAREANEAR_ARG2_4:
+                        if ((var_t1 > 0) && ((var_s1 == -1) || (var_t1 < var_t4))) {
+                            var_s1 = i;
+                            var_t4 = var_t1;
+                        }
+                        break;
+                }
+            }
+        }
+    }
+
+    if (var_s1 != -1) {
+        return var_s1;
+    }
+
+    if ((arg1->unk_2C & 0x200000) && !(arg3 & SCREENFINDAREANEAR_FLAG_10000)) {
+        if (arg2 == ENUM_SCREENFINDAREANEAR_ARG2_1) {
+            i = screenFindAreaNear(arg0, arg1, ENUM_SCREENFINDAREANEAR_ARG2_3, arg3 | SCREENFINDAREANEAR_FLAG_20000);
+            while (i != -1) {
+                var_s1 = i;
+                i = screenFindAreaNear(arg0, &arg0->unk_18[var_s1], ENUM_SCREENFINDAREANEAR_ARG2_2,
+                                       arg3 | SCREENFINDAREANEAR_FLAG_10000);
+            }
+        } else if (arg2 == ENUM_SCREENFINDAREANEAR_ARG2_2) {
+            i = screenFindAreaNear(arg0, arg1, ENUM_SCREENFINDAREANEAR_ARG2_4, arg3 | SCREENFINDAREANEAR_FLAG_20000);
+            while (i != -1) {
+                var_s1 = i;
+                i = screenFindAreaNear(arg0, &arg0->unk_18[var_s1], ENUM_SCREENFINDAREANEAR_ARG2_1,
+                                       arg3 | SCREENFINDAREANEAR_FLAG_10000);
+            }
+        }
+
+        if (var_s1 != -1) {
+            struct_gaScreen_unk_18 *temp_s0 = &arg0->unk_18[var_s1];
+
+            if (temp_s0->unk_2C & 0x800) {
+                var_s1 = -1;
+            } else if (arg2 == ENUM_SCREENFINDAREANEAR_ARG2_1) {
+                screenWrapCursor(temp_s0, temp_s0->unk_34 - 1, temp_s0->unk_30 - 1, 3);
+                screenUpdateArea(temp_s0);
+            } else if (arg2 == ENUM_SCREENFINDAREANEAR_ARG2_2) {
+                screenWrapCursor(temp_s0, 0, 0, 4);
+                screenUpdateArea(temp_s0);
+            }
+        }
+    }
+
+    return var_s1;
+}
+
 #if VERSION_USA
+#if NON_EQUIVALENT
+void func_80025CC4_usa(struct_gaScreen *arg0) {
+    s32 temp_a0_3;
+    s32 temp_a0_4;
+    s32 temp_a1;
+    s32 var_a0;
+    s32 var_a0_2;
+    s32 var_a0_3;
+    s32 var_a0_4;
+    s32 var_a0_5;
+    s32 var_a1_2;
+    s32 var_a2_2;
+    s32 var_a3;
+    s32 var_s1;
+    s32 var_v1_2;
+    struct_gaScreen_unk_20 *temp_a0_5;
+    u32 temp_a2_2;
+    u32 temp_t0;
+    u32 var_a2;
+    u32 var_a2_3;
+    struct_gaScreen_unk_20 *temp_a1_2;
+    struct_gaScreen_unk_1C *temp_s0;
+
+    for (var_s1 = 0; var_s1 < arg0->unk_0C; var_s1++) {
+        temp_s0 = &arg0->unk_1C[var_s1];
+        if ((temp_s0->unk_44 & 0x1400) == 0x1000) {
+            if (temp_s0->unk_10 > 0) {
+                temp_s0->unk_10--;
+                if (temp_s0->unk_10 == 0) {
+                    var_a2 = temp_s0->unk_48 >> 0x1C;
+                    if (temp_s0->unk_48 != 0) {
+                        if ((temp_s0->unk_48 >> ((var_a2 + 1) << 2)) & 0xF) {
+                            var_a2++;
+                        } else {
+                            temp_s0->unk_10 = 1;
+                        }
+                        temp_s0->unk_48 = ((temp_s0->unk_48 & 0x0FFFFFFF) | (var_a2 << 0x1C));
+                    }
+                }
+                var_a3 = 0;
+                var_a2_2 = (temp_s0->unk_10 >= 0xA);
+            } else {
+                temp_s0->unk_34++;
+                if (!(temp_s0->unk_34 & gnMaskRate)) {
+                    if (temp_s0->unk_38 < temp_s0->unk_20) {
+                        temp_t0 = temp_s0->unk_50[temp_s0->unk_38] >> 0xA;
+                        temp_a1 = temp_s0->unk_50[temp_s0->unk_38] & 0x3FF;
+
+                        switch (temp_t0 & 0xFFFF) {
+                            case 0x20:
+                                gnMaskRate = gnMaskRateDefault = temp_a1 & 0xFFFF;
+                                break;
+
+                            case 0x21:
+                                arg0->unk_1C[var_s1].unk_10 = temp_a1;
+                                break;
+
+                            case 0x22:
+                                B_8018E554_usa = temp_a1;
+                                break;
+                        }
+
+                        temp_s0->unk_38++;
+                        if (temp_s0->unk_48 != 0) {
+                            var_s1 = 0;
+                            for (var_a2_3 = 0; var_a2_3 < (temp_s0->unk_48 >> 0x1C); var_a2_3++) {
+                                var_a0 = (temp_s0->unk_48 >> (var_a2_3 << 2)) & 0xF;
+                                while (var_a0 != 0) {
+                                    if (temp_s0->unk_50[var_s1] == 2) {
+                                        var_a0--;
+                                    }
+                                    var_s1 += 1;
+                                }
+                            }
+
+                            var_a0_2 = 0;
+
+                            for (; var_s1 <= temp_s0->unk_38; var_s1++) {
+                                if ((temp_s0->unk_50[var_s1] == 0) || (temp_s0->unk_50[var_s1] == 2)) {
+                                    var_a0_2 += 1;
+                                }
+                            }
+
+                            if (var_a0_2 == ((temp_s0->unk_48 >> (var_a2_3 << 2)) & 0xF)) {
+                                if (!((temp_s0->unk_48 >> ((var_a2_3 + 1) << 2)) & 0xF)) {
+                                    temp_s0->unk_10 = 0xF0;
+                                } else {
+                                    temp_s0->unk_10 = 0x78;
+                                }
+                            }
+                        }
+
+                        temp_a0_3 = temp_t0 & 0xFFFF;
+                        if (((temp_a0_3 == 0) || (temp_a0_3 == 0x20)) == 0) {
+                            if ((((u32)(temp_t0 - 0x21) < 2U) || (temp_a0_3 == 0x23)) == 0) {
+                                if ((((u32)(temp_t0 - 0x24) < 2U) || (temp_a0_3 == 0x26)) == 0) {
+                                    if (((u32)(temp_t0 - 0x27) >= 2U) && ((temp_s0->unk_44 & 0x100400) == 0x100000)) {
+                                        switch (temp_s0->unk_18) {
+                                            case 0x1:
+                                                var_a1_2 = 0x16E;
+                                                break;
+                                            case 0x2:
+                                                var_a1_2 = 0x16F;
+                                                break;
+                                            case 0x3:
+                                                var_a1_2 = 0x170;
+                                                break;
+                                            default:
+                                            case 0x0:
+                                            case 0x4:
+                                                var_a1_2 = 0x16D;
+                                                break;
+                                        }
+                                        PlaySE(SFX_INIT_TABLE, var_a1_2);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                temp_a2_2 = temp_s0->unk_50[temp_s0->unk_38] >> 0xA;
+                if ((temp_a2_2 == 0) || (temp_a2_2 == 4)) {
+                    var_a3 = 0;
+                    if ((temp_s0->unk_50[temp_s0->unk_38] & 0x3FF) == 0) {
+                        var_a2_2 = -1;
+                    } else {
+                        var_a2_2 = 0;
+                    }
+                } else if (temp_a2_2 == 0x21) {
+                    var_a3 = 0;
+                    if (temp_s0->unk_10 >= 0xA) {
+                        var_a2_2 = -1;
+                    } else {
+                        var_a2_2 = 0;
+                    }
+                } else if ((((temp_a2_2 == 0x20) | (temp_a2_2 == 0x22)) != 0) ||
+                           (((temp_a2_2 == 0x23) || (temp_a2_2 == 0x25)) != 0) ||
+                           (((temp_a2_2 == 0x24) || (temp_a2_2 == 0x26)) != 0) ||
+                           (((u32)(temp_a2_2 - 0x27) < 2U) != 0)) {
+                    var_a2_2 = 0;
+                    var_a3 = 0;
+                } else {
+                    var_a2_2 = 0;
+                    var_a3 = -1;
+                }
+            }
+
+            if ((temp_s0->unk_44 & 0x100400) == 0x100000) {
+                for (var_a0_3 = 0; var_a0_3 < arg0->unk_10; var_a0_3++) {
+                    temp_a1_2 = &arg0->unk_20[var_a0_3];
+                    if (temp_a1_2->unk_1C == temp_s0->unk_1A) {
+                        var_v1_2 = temp_a1_2->unk_08;
+
+                        temp_a0_4 = temp_a1_2->unk_14->unk_18;
+#if 0
+                        if (temp_a0_4 < 8) {
+                            if (temp_a0_4 < 6) {
+                                var_a0_4 = 1;
+                            } else {
+                                var_a0_4 = 3;
+                            }
+                        } else {
+                            if (temp_a0_4 != 8) {
+                                var_a0_4 = 1;
+                            } else {
+                                var_a0_4 = 4;
+                            }
+                        }
+#else
+                        switch (temp_a0_4) {
+                            case 6:
+                            case 7:
+                                var_a0_4 = 3;
+                                break;
+
+                            case 8:
+                                var_a0_4 = 4;
+                                break;
+
+                            default:
+                                var_a0_4 = 1;
+                                break;
+                        }
+#endif
+
+                        if (var_a3 != 0) {
+                            var_v1_2 = ((temp_s0->unk_38 >> 1) % var_a0_4) + 3;
+                        } else if ((u32)(var_v1_2 - 1) < 2U) {
+                            if (!(B_8018E540_usa & 3)) {
+                                var_v1_2 = var_v1_2 + 1;
+                                if (var_v1_2 == 3) {
+                                    var_v1_2 = 0;
+                                }
+                            }
+                        } else {
+                            var_v1_2 = 0;
+                            if (var_a2_2 != 0) {
+                                var_v1_2 = (B_8018E540_usa & 0x3F) == 0;
+                            }
+                        }
+
+                        temp_a1_2->unk_08 = var_v1_2;
+                        if (temp_a1_2->unk_20 != -1) {
+                            for (var_a0_5 = 0; var_a0_5 < arg0->unk_10; var_a0_5++) {
+                                if (arg0->unk_20[var_a0_5].unk_1C == temp_a1_2->unk_20) {
+                                    break;
+                                }
+                            }
+
+                            if (var_a0_5 < arg0->unk_10) {
+                                temp_a0_5 = &arg0->unk_20[var_a0_5];
+
+                                if (temp_a0_5->unk_08 < (temp_a0_5->unk_14->unk_18 - 1)) {
+                                    temp_a0_5->unk_08++;
+                                }
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80025CC4_usa);
 #endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80025720_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80025998_eur);
 #endif
 
 #if VERSION_EUR
@@ -1032,23 +1608,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80025E0C_eur);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80025690_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80025908_fra);
-#endif
-
-#if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80025D7C_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80025718_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80025990_ger);
 #endif
 
 #if VERSION_GER
@@ -1230,22 +1790,22 @@ block_32:
                                                 goto block_176;
                                             }
                                             if (temp_a0_2->unk_2C & 0x20000) {
-                                                if (func_800255D8_usa(temp_a0_2, temp_a0_2->unk_3C - 1, temp_a0_2->unk_30 - 1, 1) != 0) {
+                                                if (screenWrapCursor(temp_a0_2, temp_a0_2->unk_3C - 1, temp_a0_2->unk_30 - 1, 1) != 0) {
                                                     var_s4 = 1;
                                                     goto block_176;
                                                 }
                                                 temp_s1 = var_s5 | 0x10000;
-                                                var_s2 = func_80025850_usa(temp_s3, temp_a0_2, 3, temp_s1);
+                                                var_s2 = screenFindAreaNear(temp_s3, temp_a0_2, 3, temp_s1);
                                                 var_v0_2 = var_s5 * 0x10;
                                                 if (var_s2 == -1) {
                                                     if (temp_a0_2->unk_2C & 0x200000) {
-                                                        var_s2 = func_80025850_usa(temp_s3, temp_a0_2, 1, temp_s1);
+                                                        var_s2 = screenFindAreaNear(temp_s3, temp_a0_2, 1, temp_s1);
                                                     }
                                                     var_v0_2 = var_s5 * 0x10;
                                                     if (var_s2 == -1) {
                                                         if (temp_a0_2->unk_2C & 0x40000) {
                                                             var_v0_2 = var_s5 * 0x10;
-                                                            if (func_800255D8_usa(temp_a0_2, temp_a0_2->unk_34 - 1, temp_a0_2->unk_30 - 1, 1) != 0) {
+                                                            if (screenWrapCursor(temp_a0_2, temp_a0_2->unk_34 - 1, temp_a0_2->unk_30 - 1, 1) != 0) {
                                                                 var_s4 = 1;
                                                             }
                                                         } else {
@@ -1290,7 +1850,7 @@ block_56:
 block_174:
                                                 var_a3_2 = var_s5;
 block_175:
-                                                var_s2 = func_80025850_usa(temp_s3, temp_a0_2, var_a2_2, var_a3_2);
+                                                var_s2 = screenFindAreaNear(temp_s3, temp_a0_2, var_a2_2, var_a3_2);
                                             }
                                         default:
 block_176:
@@ -1328,22 +1888,22 @@ block_70:
                                                 goto block_176;
                                             }
                                             if (temp_a0_2->unk_2C & 0x20000) {
-                                                if (func_800255D8_usa(temp_a0_2, temp_a0_2->unk_3C + 1, 0, 2) != 0) {
+                                                if (screenWrapCursor(temp_a0_2, temp_a0_2->unk_3C + 1, 0, 2) != 0) {
                                                     var_s4 = 2;
                                                     goto block_176;
                                                 }
                                                 temp_s1_2 = var_s5 | 0x10000;
-                                                var_s2 = func_80025850_usa(temp_s3, temp_a0_2, 4, temp_s1_2);
+                                                var_s2 = screenFindAreaNear(temp_s3, temp_a0_2, 4, temp_s1_2);
                                                 var_v0_2 = var_s5 * 0x10;
                                                 if (var_s2 == -1) {
                                                     if (temp_a0_2->unk_2C & 0x200000) {
-                                                        var_s2 = func_80025850_usa(temp_s3, temp_a0_2, 2, temp_s1_2);
+                                                        var_s2 = screenFindAreaNear(temp_s3, temp_a0_2, 2, temp_s1_2);
                                                     }
                                                     var_v0_2 = var_s5 * 0x10;
                                                     if (var_s2 == -1) {
                                                         if (temp_a0_2->unk_2C & 0x40000) {
                                                             var_v0_2 = var_s5 * 0x10;
-                                                            if (func_800255D8_usa(temp_a0_2, 0, 0, 2) != 0) {
+                                                            if (screenWrapCursor(temp_a0_2, 0, 0, 2) != 0) {
                                                                 var_s4 = 2;
                                                             }
                                                         } else {
@@ -1421,7 +1981,7 @@ block_106:
                                             }
                                             temp_v1_12 = temp_a0_2->unk_2C;
                                             if (temp_v1_12 & 0x400) {
-                                                if (func_800255D8_usa(temp_a0_2, temp_a0_2->unk_34 - 1, temp_a0_2->unk_40 - 1, 3) != 0) {
+                                                if (screenWrapCursor(temp_a0_2, temp_a0_2->unk_34 - 1, temp_a0_2->unk_40 - 1, 3) != 0) {
                                                     var_s4 = 3;
                                                     goto block_176;
                                                 }
@@ -1429,11 +1989,11 @@ block_106:
                                                 if (!(temp_a0_2->unk_2C & 0x200000)) {
                                                     var_a3_3 = var_s5 | 0x10000;
                                                 }
-                                                var_s2 = func_80025850_usa(temp_s3, temp_a0_2, 1, var_a3_3);
+                                                var_s2 = screenFindAreaNear(temp_s3, temp_a0_2, 1, var_a3_3);
                                                 var_v0_2 = var_s5 * 0x10;
                                                 if (var_s2 == -1) {
                                                     if (temp_a0_2->unk_2C & 0x40000) {
-                                                        var_v0_7 = func_800255D8_usa(temp_a0_2, temp_a0_2->unk_34 - 1, temp_a0_2->unk_30 - 1, 3);
+                                                        var_v0_7 = screenWrapCursor(temp_a0_2, temp_a0_2->unk_34 - 1, temp_a0_2->unk_30 - 1, 3);
                                                         goto block_132;
                                                     }
                                                     goto block_176;
@@ -1510,7 +2070,7 @@ block_142:
                                             }
                                             temp_v1_17 = temp_a0_2->unk_2C;
                                             if (temp_v1_17 & 0x400) {
-                                                if (func_800255D8_usa(temp_a0_2, 0, temp_a0_2->unk_40 + 1, 4) != 0) {
+                                                if (screenWrapCursor(temp_a0_2, 0, temp_a0_2->unk_40 + 1, 4) != 0) {
                                                     var_s4 = 4;
                                                     goto block_176;
                                                 }
@@ -1518,11 +2078,11 @@ block_142:
                                                 if (!(temp_a0_2->unk_2C & 0x200000)) {
                                                     var_a3_4 = var_s5 | 0x10000;
                                                 }
-                                                var_s2 = func_80025850_usa(temp_s3, temp_a0_2, 2, var_a3_4);
+                                                var_s2 = screenFindAreaNear(temp_s3, temp_a0_2, 2, var_a3_4);
                                                 var_v0_2 = var_s5 * 0x10;
                                                 if (var_s2 == -1) {
                                                     if (temp_a0_2->unk_2C & 0x40000) {
-                                                        var_v0_9 = func_800255D8_usa(temp_a0_2, 0, 0, 4);
+                                                        var_v0_9 = screenWrapCursor(temp_a0_2, 0, 0, 4);
                                                         goto block_167;
                                                     }
                                                     goto block_176;
@@ -1872,38 +2432,36 @@ void func_800275A4_usa(void) {
 #define is_lower(c) ((c) >= 'a' && (c) <= 'z')
 #define to_upper(c) (is_lower(c) ? ((c) - ('a' - 'A')) : (c))
 
+#define CHARS_HALT_IF_DIFFERENT_NOCASE(left, right) \
+    do {                                            \
+        s32 l;                                      \
+        s32 r;                                      \
+        l = left;                                   \
+        if (is_lower(l)) {                          \
+            l -= 'a' - 'A';                         \
+        }                                           \
+        r = right;                                  \
+        if (is_lower(r)) {                          \
+            r -= 'a' - 'A';                         \
+        }                                           \
+        if (l != r) {                               \
+            return nfalse;                          \
+        }                                           \
+    } while (0)
+
 #if VERSION_USA
-#ifdef NON_EQUIVALENT
 nbool func_800275AC_usa(const char *arg0, const char *arg1) {
-    s32 var_t0;
+    s32 i;
 
-    for (var_t0 = 0; arg0[var_t0] != 0; var_t0++) {
-        s32 var_a2;
-        s32 var_v1;
-
-        var_a2 = arg0[var_t0];
-        if (is_lower(var_a2)) {
-            var_a2 -= 0x20; // ('a' - 'A')
-        }
-
-        var_v1 = arg1[var_t0];
-        if (is_lower(var_v1)) {
-            var_v1 -= 0x20; // ('a' - 'A')
-        }
-
-        if (var_a2 != var_v1) {
-            return 0;
-        }
+    for (i = 0; arg0[i] != '\0'; i++) {
+        CHARS_HALT_IF_DIFFERENT_NOCASE(arg0[i], arg1[i]);
     }
 
-    if (arg1[var_t0] == 0) {
-        return -1;
+    if (arg1[i] == '\0') {
+        return ntrue;
     }
-    return 0;
+    return nfalse;
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_800275AC_usa);
-#endif
 #endif
 
 #if VERSION_USA
@@ -1957,7 +2515,6 @@ INLINE nbool func_800276CC_usa(s32 arg0, UNK_TYPE4 *arg1, s32 arg2) {
 }
 #endif
 
-#if VERSION_USA
 // Not present on ROM?
 STATIC_INLINE nbool inlined_func(s32 arg0, s32 arg1, struct_gaScreen_unk_18 **arg2) {
     s32 i;
@@ -1973,7 +2530,6 @@ STATIC_INLINE nbool inlined_func(s32 arg0, s32 arg1, struct_gaScreen_unk_18 **ar
 
     return nfalse;
 }
-#endif
 
 #if VERSION_USA
 nbool func_8002776C_usa(s32 arg0, s32 arg1) {
@@ -2623,7 +3179,66 @@ void func_80028E80_usa(s32 arg0, s32 arg1, s32 *arg2) {
 }
 #endif
 
-#if VERSION_USA
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80028C00_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80028D14_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80028E24_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80028F28_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80028FE8_eur);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80028B70_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80028C84_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80028D94_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80028E98_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80028F58_fra);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80028BF8_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80028D0C_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80028E1C_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80028F20_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80028FE0_ger);
+#endif
+
 void screenSetText(s32 arg0, s32 arg1, u16 *arg2) {
     struct_gaScreen_unk_1C *sp10;
 
@@ -2657,9 +3272,7 @@ void screenSetText(s32 arg0, s32 arg1, u16 *arg2) {
         }
     }
 }
-#endif
 
-#if VERSION_USA
 INLINE void func_80029130_usa(s32 arg0, s32 arg1, u16 *arg2, s32 arg3) {
     struct_gaScreen_unk_1C *sp0;
 
@@ -2672,9 +3285,7 @@ INLINE void func_80029130_usa(s32 arg0, s32 arg1, u16 *arg2, s32 arg3) {
         arg2[i] = 0;
     }
 }
-#endif
 
-#if VERSION_USA
 nbool func_80029244_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     struct_gaScreen_unk_1C *sp0;
 
@@ -2685,9 +3296,7 @@ nbool func_80029244_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     }
     return nfalse;
 }
-#endif
 
-#if VERSION_USA
 nbool func_8002931C_usa(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3) {
     struct_gaScreen_unk_1C *sp0;
 
@@ -2698,115 +3307,6 @@ nbool func_8002931C_usa(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3) {
     }
     return nfalse;
 }
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80028C00_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80028D14_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80028E24_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80028F28_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80028FE8_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_800290AC_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80029298_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_800293AC_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80029484_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80028B70_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80028C84_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80028D94_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80028E98_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80028F58_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_8002901C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80029208_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_8002931C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_800293F4_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80028BF8_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80028D0C_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80028E1C_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80028F20_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80028FE0_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_800290A4_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80029290_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_800293A4_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_8002947C_ger);
-#endif
 
 nbool screenGetTextType(s32 arg0, s32 arg1, u32 *arg2) {
     struct_gaScreen_unk_1C *sp0;
@@ -2818,7 +3318,6 @@ nbool screenGetTextType(s32 arg0, s32 arg1, u32 *arg2) {
     return nfalse;
 }
 
-#if VERSION_USA
 nbool func_800294C8_usa(s32 arg0, s32 arg1, s32 *arg2) {
     struct_gaScreen_unk_1C *sp0;
 
@@ -2828,40 +3327,13 @@ nbool func_800294C8_usa(s32 arg0, s32 arg1, s32 *arg2) {
     }
     return nfalse;
 }
-#endif
 
-#if VERSION_USA
 void func_80029594_usa(s32 arg0, s32 arg1, s32 arg2) {
     u16 sp10[0x40];
 
     func_80029130_usa(arg0, arg2, sp10, ARRAY_COUNT(sp10));
     screenSetText(arg0, arg1, sp10);
 }
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80029630_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_800296FC_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_800295A0_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_8002966C_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80029628_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_800296F4_ger);
-#endif
 
 char D_800B6410_usa[] = {
     '!', '&', '(', ')', '_', '-', '+', '=', '\\', ';', ':', '"', '\'', '.', ',', '?', '/',
@@ -2937,7 +3409,42 @@ void func_800296B0_usa(u16 *dst, char *src, s32 dstLen) {
 }
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_800297C8_usa);
+void func_800297C8_usa(s32 arg0, s32 arg1, u16 *arg2) {
+    if ((arg0 >= 0) && (arg0 < gnScreenCount)) {
+        struct_gaScreen *temp_t0 = &gaScreen[arg0];
+        s32 i;
+
+        for (i = 0; i < temp_t0->unk_0C; i++) {
+            struct_gaScreen_unk_1C *temp_a0 = &temp_t0->unk_1C[i];
+
+            if (temp_a0->unk_00 == arg1) {
+                if (temp_a0->unk_54 != -1) {
+                    s32 var_a1;
+
+                    i = temp_a0->unk_54;
+
+                    for (var_a1 = 0; var_a1 < temp_a0->unk_58; var_a1++) {
+                        temp_a0->unk_50[temp_a0->unk_54 + var_a1] = 3;
+                    }
+
+                    while ((temp_a0->unk_50[i] != 0) && (i < temp_a0->unk_20) && (*arg2 != 0)) {
+                        temp_a0->unk_50[i++] = *arg2++;
+                    }
+
+                    if (temp_a0->unk_44 & 0x808000) {
+                        screenCenterText(temp_a0);
+                        if ((giScreen >= 0) && (giScreen < gnScreenCount)) {
+                            if (gaScreen[giScreen].unk_08 > 0) {
+                                screenUpdateArea(gaScreen[giScreen].unk_18);
+                            }
+                        }
+                    }
+                    return;
+                }
+            }
+        }
+    }
+}
 #endif
 
 #if VERSION_USA
@@ -3215,7 +3722,6 @@ void screenSetNumber(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     }
 }
 
-#if VERSION_USA
 void func_8002A1F4_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     struct_gaScreen_unk_18 *sp10;
 
@@ -3224,14 +3730,12 @@ void func_8002A1F4_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     }
 
     if (inlined_func(arg0, arg1, &sp10)) {
-        if (func_800255D8_usa(sp10, arg2, arg3, 0)) {
+        if (screenWrapCursor(sp10, arg2, arg3, 0)) {
             screenUpdateArea(sp10);
         }
     }
 }
-#endif
 
-#if VERSION_USA
 void func_8002A2E8_usa(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3) {
     struct_gaScreen_unk_18 *sp0;
 
@@ -3240,9 +3744,7 @@ void func_8002A2E8_usa(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3) {
         *arg3 = sp0->unk_40;
     }
 }
-#endif
 
-#if VERSION_USA
 void func_8002A3B8_usa(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3) {
     struct_gaScreen_unk_18 *sp0;
 
@@ -3251,9 +3753,7 @@ void func_8002A3B8_usa(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3) {
         *arg3 = sp0->unk_48;
     }
 }
-#endif
 
-#if VERSION_USA
 nbool func_8002A488_usa(s32 arg0, s32 arg1) {
     if ((arg0 >= 0) && (arg0 < gnScreenCount)) {
         if (gaScreen[arg0].unk_28[0] != -1) {
@@ -3266,9 +3766,7 @@ nbool func_8002A488_usa(s32 arg0, s32 arg1) {
     }
     return nfalse;
 }
-#endif
 
-#if VERSION_USA
 nbool func_8002A4FC_usa(s32 arg0, s32 *arg1) {
     *arg1 = -1;
 
@@ -3284,9 +3782,7 @@ nbool func_8002A4FC_usa(s32 arg0, s32 *arg1) {
     }
     return nfalse;
 }
-#endif
 
-#if VERSION_USA
 // Not present on ROM?
 STATIC_INLINE nbool inlined_func3(s32 arg0, s32 arg1, struct_gaScreen_unk_24 **arg2) {
     s32 i;
@@ -3302,9 +3798,7 @@ STATIC_INLINE nbool inlined_func3(s32 arg0, s32 arg1, struct_gaScreen_unk_24 **a
 
     return nfalse;
 }
-#endif
 
-#if VERSION_USA
 nbool func_8002A574_usa(s32 arg0, s32 arg1, s32 arg2) {
     struct_gaScreen_unk_24 *sp0;
 
@@ -3314,9 +3808,7 @@ nbool func_8002A574_usa(s32 arg0, s32 arg1, s32 arg2) {
     }
     return nfalse;
 }
-#endif
 
-#if VERSION_USA
 nbool func_8002A638_usa(s32 arg0, s32 arg1, s32 *arg2) {
     struct_gaScreen_unk_24 *sp0;
 
@@ -3328,91 +3820,6 @@ nbool func_8002A638_usa(s32 arg0, s32 arg1, s32 *arg2) {
     }
     return nfalse;
 }
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_8002A35C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_8002A450_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_8002A520_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_8002A5F0_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_8002A664_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_8002A6DC_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_8002A7A0_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_8002A2F0_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_8002A3E4_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_8002A4B4_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_8002A584_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_8002A5F8_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_8002A670_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_8002A734_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_8002A428_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_8002A51C_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_8002A5EC_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_8002A6BC_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_8002A730_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_8002A7A8_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_8002A86C_ger);
-#endif
 
 nbool screenFind(s32 *dst, const char *arg1) {
     s32 i;

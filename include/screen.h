@@ -10,6 +10,20 @@ struct struct_imageLoad_arg0;
 // TODO: enum for arg2?
 typedef void (screenDraw_callback)(Gfx **gfxP, UNK_TYPE arg1, UNK_TYPE arg2);
 
+typedef enum enum_screenFindAreaNear_arg2 {
+    /* 1 */ ENUM_SCREENFINDAREANEAR_ARG2_1 = 1,
+    /* 2 */ ENUM_SCREENFINDAREANEAR_ARG2_2,
+    /* 3 */ ENUM_SCREENFINDAREANEAR_ARG2_3,
+    /* 4 */ ENUM_SCREENFINDAREANEAR_ARG2_4,
+} enum_screenFindAreaNear_arg2;
+
+#define SCREENFINDAREANEAR_FLAG_1 0x1
+#define SCREENFINDAREANEAR_FLAG_2 0x2
+#define SCREENFINDAREANEAR_FLAG_4 0x4
+#define SCREENFINDAREANEAR_FLAG_8 0x8
+#define SCREENFINDAREANEAR_FLAG_10000 0x10000
+#define SCREENFINDAREANEAR_FLAG_20000 0x20000
+
 
 typedef struct struct_gaScreen_unk_18_unk_5C {
     /* 0x0 */ u16 unk_0;
@@ -61,32 +75,32 @@ typedef struct struct_gaScreen_unk_20 {
 } struct_gaScreen_unk_20; // size = 0x30
 
 typedef struct struct_gaScreen_unk_1C {
-    /* 0x00 */ UNK_TYPE4 unk_00;
+    /* 0x00 */ s32 unk_00;
     /* 0x04 */ UNK_TYPE4 unk_04;
     /* 0x08 */ UNK_TYPE4 unk_08;
     /* 0x0C */ UNK_TYPE unk_0C;
     /* 0x10 */ UNK_TYPE unk_10;
     /* 0x14 */ UNK_TYPE4 *unk_14;
-    /* 0x18 */ UNK_TYPE1 unk_18[0x2];
+    /* 0x18 */ s16 unk_18;
     /* 0x18 */ u16 unk_1A;
-    /* 0x1C */ UNK_TYPE unk_1C;
-    /* 0x20 */ UNK_TYPE unk_20;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
     /* 0x24 */ UNK_TYPE unk_24;
     /* 0x28 */ UNK_TYPE1 unk_28[0x4];
-    /* 0x2C */ UNK_TYPE *unk_2C;
+    /* 0x2C */ s32 *unk_2C;
     /* 0x30 */ UNK_TYPE1 unk_30[0x4];
     /* 0x34 */ UNK_TYPE4 unk_34;
     /* 0x38 */ UNK_TYPE4 unk_38;
     /* 0x3C */ UNK_TYPE unk_3C;
     /* 0x40 */ UNK_TYPE unk_40;
-    /* 0x44 */ u32 unk_44; // textType? TODO: enum?
-    /* 0x48 */ UNK_TYPE4 unk_48;
+    /* 0x44 */ u32 unk_44; // textType? TODO: enum? or maybe bitwise flags?
+    /* 0x48 */ u32 unk_48;
     /* 0x4C */ UNK_TYPE1 unk_4C[0x4];
     /* 0x50 */ u16 *unk_50; // TEXT?
-    /* 0x54 */ UNK_TYPE unk_54;
+    /* 0x54 */ s32 unk_54;
     /* 0x58 */ UNK_TYPE unk_58;
-    /* 0x5C */ UNK_TYPE unk_5C;
-    /* 0x60 */ UNK_TYPE unk_60;
+    /* 0x5C */ s32 unk_5C;
+    /* 0x60 */ s32 unk_60;
     /* 0x64 */ UNK_TYPE4 *unk_64;
     /* 0x68 */ UNK_TYPE4 *unk_68;
 } struct_gaScreen_unk_1C; // size = 0x6C
@@ -96,14 +110,14 @@ typedef struct struct_gaScreen_unk_24 {
     /* 0x04 */ UNK_TYPE4 unk_04;
     /* 0x08 */ UNK_TYPE4 unk_08;
     /* 0x0C */ UNK_TYPE4 unk_0C;
-    /* 0x10 */ UNK_TYPE4 unk_10;
+    /* 0x10 */ s32 unk_10; // prim_color
     /* 0x14 */ UNK_TYPE4 unk_14;
     /* 0x18 */ UNK_TYPE4 unk_18;
     /* 0x1C */ UNK_TYPE4 unk_1C;
     /* 0x20 */ struct struct_imageLoad_arg0 *unk_20;
-    /* 0x24 */ UNK_TYPE1 unk_24[0x4];
+    /* 0x24 */ UNK_TYPE4 unk_24;
     /* 0x28 */ UNK_TYPE4 unk_28;
-    /* 0x2C */ s32 unk_2C;
+    /* 0x2C */ u32 unk_2C;
 } struct_gaScreen_unk_24; // size = 0x30
 
 
@@ -113,7 +127,7 @@ typedef struct struct_gaScreen {
     /* 0x00 */ char *unk_00;
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ s32 unk_08;
-    /* 0x0C */ UNK_TYPE4 unk_0C;
+    /* 0x0C */ s32 unk_0C;
     /* 0x10 */ s32 unk_10;
     /* 0x14 */ s32 unk_14;
     /* 0x18 */ struct_gaScreen_unk_18 *unk_18;
@@ -142,19 +156,19 @@ typedef struct screenTick_arg0 {
 
 
 s32 screenCenterText(struct_gaScreen_unk_1C *arg0);
-// void func_80022AF4_usa();
+void func_80022AF4_usa(struct_gaScreen_unk_1C * arg0, Gfx **gfxP);
 void screenUpdateArea(struct_gaScreen_unk_18 *arg0);
 void screenWipeImages(void);
 void screenChange(s32 arg0);
-// void func_80024534_usa();
+void screenDrawDialog(struct_gaScreen_unk_24 * arg0, Gfx **gfxP, s32 arg2);
 void screenTickTextData(void);
 nbool func_80024BF4_usa(void **heapP);
 nbool func_80024C14_usa(void);
 nbool screenFlushing(void);
 void screenDraw(Gfx **gfxP, screenDraw_callback *callback);
 nbool screenFindImage(s32 arg0, s32 arg1, struct_gaScreen_unk_1C **arg2);
-nbool func_800255D8_usa(struct_gaScreen_unk_18 *arg0, s32 arg1, s32 arg2, s32 arg3);
-s32 func_80025850_usa(struct_gaScreen *arg0, struct_gaScreen_unk_18 *arg1, s32 arg2, s32 arg3);
+nbool screenWrapCursor(struct_gaScreen_unk_18 *arg0, s32 arg1, s32 arg2, s32 arg3);
+s32 screenFindAreaNear(struct_gaScreen *arg0, struct_gaScreen_unk_18 *arg1, enum_screenFindAreaNear_arg2 arg2, u32 arg3);
 void func_80025CC4_usa(struct_gaScreen *arg0);
 void screenTick(screenTick_arg0 *arg0);
 s32 screenSet(const char *arg0, s32 arg1);
@@ -197,7 +211,7 @@ nbool screenGetTextType(s32 arg0, s32 arg1, u32 *arg2);
 nbool func_800294C8_usa(s32 arg0, s32 arg1, s32 *arg2);
 void func_80029594_usa(s32 arg0, s32 arg1, s32 arg2);
 void func_800296B0_usa(u16 *dst, char *src, s32 dstLen);
-// void func_800297C8_usa();
+void func_800297C8_usa(s32 arg0, s32 arg1, u16 *arg2);
 nbool func_80029980_usa(s32 arg0, s32 arg1, s32 arg2);
 nbool func_80029A44_usa(s32 arg0, s32 arg1, s32 *arg2);
 nbool func_80029B10_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
@@ -219,7 +233,7 @@ void func_8002B5C4_usa(void);
 
 
 
-// extern UNK_TYPE B_8018E4F0_usa;
+extern screenDraw_callback *gpfDraw;
 extern void *B_8018E4F4_usa;
 extern void *gpHeap;
 extern s32 gnMaskRate;
@@ -239,13 +253,12 @@ extern s32 B_8018E530_usa;
 extern s32 gnAlphaFade;
 extern s32 geModeFade;
 extern s32 B_8018E53C_usa;
-extern s32 B_8018E540_usa;
+extern u32 B_8018E540_usa;
 extern s32 gnTagTextBase;
 extern s32 gnCountTextTag;
 extern struct struct_imageLoad_arg0 *B_8018E550_usa;
 extern s32 B_8018E554_usa;
 extern s32 B_8018E558_usa;
-
 
 
 #endif

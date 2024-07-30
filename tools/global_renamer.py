@@ -15,10 +15,9 @@ simpleReplace: dict[str, str] = {
 # for example, if there is a space before and an open parenthesis after,
 # like for a function call: ` func_8002E4B4(`
 wordReplace: dict[str, str] = {
-"func_80029818_eur": "func_800296B0_usa",
-"func_80029788_fra": "func_800296B0_usa",
-"func_80029810_ger": "func_800296B0_usa",
-
+"func_80029484_eur": "func_8002931C_usa",
+"func_800293F4_fra": "func_8002931C_usa",
+"func_8002947C_ger": "func_8002931C_usa",
 }
 
 # [a-zA-Z0-9_]
@@ -82,6 +81,11 @@ def replace_single(file: Path):
 
 def replace_all(repo: Path):
     for filename in (repo / "src").rglob("*"):
+        if filename.is_file():
+            if filename.suffix == '.c' or filename.suffix == '.h':
+                replace_single(filename)
+
+    for filename in (repo / "include").rglob("*"):
         if filename.is_file():
             if filename.suffix == '.c' or filename.suffix == '.h':
                 replace_single(filename)

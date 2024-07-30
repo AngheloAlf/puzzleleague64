@@ -177,57 +177,74 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_8001FD0C_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/image", imageCopy);
+enum nbool imageCopy(struct_imageLoad_arg0 **arg0, struct_imageLoad_arg0 *arg1, void **heapP) {
+    s32 i;
+
+    imageMake(arg0, heapP, arg1->unk_18);
+    (*arg0)->unk_0C = arg1->unk_0C;
+    (*arg0)->unk_18 = arg1->unk_18;
+    (*arg0)->unk_94 = arg1->unk_94;
+    (*arg0)->unk_98 = arg1->unk_98;
+
+    for (i = 0; i < arg1->unk_18; i++) {
+        (*arg0)->unk_2C[i] = arg1->unk_2C[i];
+        (*arg0)->unk_1C[i] = arg1->unk_1C[i];
+        (*arg0)->unk_20[i] = arg1->unk_20[i];
+        (*arg0)->unk_24[i] = arg1->unk_24[i];
+    }
+
+    if (arg1->unk_0C & 0x200) {
+        struct_imageLoad_arg0 *temp_t0 = *arg0;
+        struct_bitmapLoad_arg0 *temp_v0 = temp_t0->unk_2C[0];
+        s32 size = temp_v0->unk_04 * temp_v0->unk_10;
+        s32 j;
+
+        for (j = 1; j < temp_t0->unk_18; j++) {
+            temp_v0 = temp_t0->unk_2C[j];
+            if (size < temp_v0->unk_04 * temp_v0->unk_10) {
+                size = temp_v0->unk_04 * temp_v0->unk_10;
+            }
+        }
+
+        size = ALIGN(size, 16);
+
+        temp_t0->unk_30 = *heapP = (void *)ALIGN(*heapP, 16);
+        *heapP += size;
+
+        temp_t0->unk_34 = *heapP = (void *)ALIGN(*heapP, 16);
+        *heapP += size;
+    }
+
+    return ntrue;
+}
 #endif
 
 #if VERSION_USA
-#if 0
-s32 imageMakeScan(void *arg0, s32 *arg1) {
-    s32 temp_v0;
-    s32 temp_v0_2;
-    s32 temp_v1;
-    s32 var_a2_2;
-    s32 var_a3;
-    s32 var_t0;
-    s32 var_v1;
-    void **var_a2;
+nbool imageMakeScan(struct_imageLoad_arg0 *arg0, void **heapP) {
+    s32 i;
+    s32 j;
+    s32 count;
 
-    temp_v0 = arg0->unk_18;
-    var_a3 = 0;
-    var_t0 = 0;
-    if (temp_v0 > 0) {
-        var_a2 = arg0->unk_2C;
-        do {
-            temp_v1 = (*var_a2)->unk_10;
-            if (var_t0 < temp_v1) {
-                var_t0 = temp_v1;
-            }
-            var_a3 += 1;
-            var_a2 += 4;
-        } while (var_a3 < temp_v0);
+    count = 0;
+    for (i = 0; i < arg0->unk_18; i++) {
+        if (count < arg0->unk_2C[i]->unk_10) {
+            count = arg0->unk_2C[i]->unk_10;
+        }
     }
-    arg0->unk_8 = (s16) var_t0;
-    var_a2_2 = 0;
-    temp_v0_2 = (*arg1 + 3) & ~3;
-    *arg1 = temp_v0_2;
-    arg0->unk_28 = temp_v0_2;
-    *arg1 += var_t0 * 0xC;
-    if (var_t0 > 0) {
-        var_v1 = 0;
-        do {
-            *(var_v1 + arg0->unk_28) = 0;
-            (var_v1 + arg0->unk_28)->unk_4 = -1;
-            (var_v1 + arg0->unk_28)->unk_8 = 0;
-            var_a2_2 += 1;
-            (var_v1 + arg0->unk_28)->unk_A = 0;
-            var_v1 += 0xC;
-        } while (var_a2_2 < var_t0);
+    arg0->unk_08 = count;
+
+    arg0->unk_28 = *heapP = (void *)ALIGN(*heapP, ALIGNOF(*arg0->unk_28));
+    *heapP += count * sizeof(*arg0->unk_28);
+
+    for (j = 0; j < count; j++) {
+        arg0->unk_28[j].unk_0 = 0;
+        arg0->unk_28[j].unk_4 = -1;
+        arg0->unk_28[j].unk_8 = 0;
+        arg0->unk_28[j].unk_A = 0;
     }
-    return -1;
+
+    return ntrue;
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/image", imageMakeScan);
-#endif
 #endif
 
 #if VERSION_USA
@@ -247,7 +264,18 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_80020304_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_800205AC_usa);
+nbool imageSetScale(struct_imageLoad_arg0 *arg0, f32 arg1, f32 arg2) {
+    if ((arg0 != NULL) && (arg1 != 0.0)) {
+        arg0->unk_88 = 1024 / arg1;
+        if (arg1 != arg2) {
+            arg0->unk_8C = 1024 / arg2;
+        } else {
+            arg0->unk_8C = arg0->unk_88;
+        }
+        return ntrue;
+    }
+    return nfalse;
+}
 #endif
 
 #if VERSION_USA
@@ -336,7 +364,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_80021414_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_8002156C_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/image", imageDraw);
 #endif
 
 #if VERSION_USA
@@ -431,7 +459,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_80021414_usa);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_8002156C_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/image", imageDraw);
 #endif
 
 #if VERSION_EUR
@@ -524,7 +552,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_80021414_usa);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_8002156C_usa);
+INCLUDE_ASM("asm/fra/nonmatchings/main/image", imageDraw);
 #endif
 
 #if VERSION_FRA
@@ -617,7 +645,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_80021414_usa);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_8002156C_usa);
+INCLUDE_ASM("asm/ger/nonmatchings/main/image", imageDraw);
 #endif
 
 #if VERSION_GER

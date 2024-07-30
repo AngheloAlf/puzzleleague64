@@ -1019,7 +1019,7 @@ void func_80034140_usa(Gfx **gfxP, s32 arg1 UNUSED, s32 arg2) {
     switch (arg2) {
         case 0x64:
             if (B_8018EA40_usa >= 3U) {
-                func_8002156C_usa(B_8018EA20_usa, &gfx, 0, 0, NULL);
+                imageDraw(B_8018EA20_usa, &gfx, 0, 0, NULL);
             }
             break;
 
@@ -1029,7 +1029,7 @@ void func_80034140_usa(Gfx **gfxP, s32 arg1 UNUSED, s32 arg2) {
                 sp18.unk_04 = B_8018EA30_usa;
                 sp18.unk_08 = 0x70;
                 sp18.unk_0C = 0x9C;
-                func_8002156C_usa(B_8018EA24_usa, &gfx, -B_8018EA3C_usa, 0x2A, &sp18);
+                imageDraw(B_8018EA24_usa, &gfx, -B_8018EA3C_usa, 0x2A, &sp18);
             }
             break;
 
@@ -1039,7 +1039,7 @@ void func_80034140_usa(Gfx **gfxP, s32 arg1 UNUSED, s32 arg2) {
                 sp18.unk_04 = B_8018EA38_usa;
                 sp18.unk_08 = 0x50;
                 sp18.unk_0C = 0x54;
-                func_8002156C_usa(B_8018EA28_usa, &gfx, B_8018EA3C_usa + 0xCB, 0x83, &sp18);
+                imageDraw(B_8018EA28_usa, &gfx, B_8018EA3C_usa + 0xCB, 0x83, &sp18);
             }
             break;
 
