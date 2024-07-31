@@ -2713,6 +2713,8 @@ nbool screenShowText(s32 arg0, s32 arg1) {
     return ret;
 }
 
+//! RENAME TODO: B_8018E554_usa -> gnTickText
+//! RENAME TODO: func_8002801C_usa -> screenGetTextWait
 s32 func_8002801C_usa(void) {
     s32 old = B_8018E554_usa;
 
@@ -2720,21 +2722,76 @@ s32 func_8002801C_usa(void) {
     return old;
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/screen", func_80028034_usa);
-#endif
+//! RENAME TODO: func_80028034_usa -> screenShowTextFull
+nbool func_80028034_usa(s32 arg0, s32 arg1) {
+    struct_gaScreen_unk_1C *sp0;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/screen", func_80028034_usa);
-#endif
+    if (screenFindImage(arg0, arg1, &sp0)) {
+        if (sp0->unk_38 >= sp0->unk_20) {
+            sp0->unk_10 = 0;
+        } else {
+            s32 var_t2 = 0;
+            s32 var_t0;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/screen", func_80028034_usa);
-#endif
+            if (sp0->unk_48 != 0) {
+                s32 new_var = 0; //! FAKE
+                u16 var_a1 = 0;
+                u32 var_a2 = 0;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/screen", func_80028034_usa);
-#endif
+                while ((sp0->unk_48 >> 0x1C) >= var_a2) {
+                    s32 var_a0 = (sp0->unk_48 >> (var_a2 * 4)) & 0xF;
+
+                    while (var_a0 != 0) {
+                        if ((sp0->unk_50[var_a1] == 0) || (sp0->unk_50[var_a1] == 2)) {
+                            var_a0--;
+                        }
+                        var_a1 += 1;
+                    }
+                    var_a2 += 1;
+                }
+
+                var_t0 = var_a1 - 1;
+                if (sp0->unk_50[var_a1 - 1] == new_var) {
+                    var_t0 = var_a1 - 2;
+                }
+            } else {
+                var_t0 = sp0->unk_20;
+            }
+
+            while (sp0->unk_38 < var_t0) {
+                u16 temp_a1 = sp0->unk_50[sp0->unk_38] >> 0xA;
+                u16 temp_v1_2 = sp0->unk_50[sp0->unk_38] & 0x3FF;
+
+                if (temp_a1 == 0x20) {
+                    gnMaskRate = gnMaskRateDefault = temp_v1_2;
+                } else if (temp_a1 == 0x22) {
+                    if (sp0->unk_44 & 0x08000000) {
+                        if (var_t2 == 0) {
+                            sp0->unk_10 = 0;
+                        } else {
+                            break;
+                        }
+                    } else {
+                        B_8018E554_usa = temp_v1_2;
+                    }
+                } else if (temp_a1 == 0x21) {
+                    sp0->unk_10 = temp_v1_2 * TICK_TEXT_FACTOR;
+                } else if ((temp_a1 == 0x23) || (temp_a1 == 0x24) || (temp_a1 == 0x25)) {
+                } else if ((temp_a1 == 0x26) || (temp_a1 == 0x27) || (temp_a1 == 0x28)) {
+                } else if (temp_a1 == 0) {
+                } else {
+                    sp0->unk_10 = 0;
+                }
+
+                var_t2 = -1;
+                sp0->unk_38++;
+            }
+        }
+
+        return ntrue;
+    }
+    return nfalse;
+}
 
 // Not present on ROM?
 STATIC_INLINE nbool inlined_func2(s32 arg0, s32 arg1, struct_gaScreen_unk_20 **arg2) {
@@ -3496,7 +3553,7 @@ nbool screenFind(s32 *dst, const char *arg1) {
     return nfalse;
 }
 
-s32 screenLoad(char *arg0, void **arg1) {
+s32 screenLoad(char *arg0, void **heapP) {
     File sp10;
     s32 sp20[6] UNUSED;
     s32 sp38;
@@ -3541,30 +3598,30 @@ s32 screenLoad(char *arg0, void **arg1) {
     }
 
     fileGet(&sp10, &gnImageCount, 4);
-    *arg1 = (void *)ALIGN((uintptr_t)*arg1, 4);
-    gapImage = *arg1;
-    *arg1 = (void *)ALIGN((uintptr_t)*arg1 + (gnImageCount * 4), 4);
+    *heapP = (void *)ALIGN((uintptr_t)*heapP, 4);
+    gapImage = *heapP;
+    *heapP = (void *)ALIGN((uintptr_t)*heapP + (gnImageCount * 4), 4);
 
-    gapNameImage = *arg1;
-    *arg1 = (void *)((uintptr_t)*arg1 + (gnImageCount * 4));
+    gapNameImage = *heapP;
+    *heapP = (void *)((uintptr_t)*heapP + (gnImageCount * 4));
     var_s1 = 0;
 
     while (var_s1 < gnImageCount) {
-        fileGet(&sp10, *arg1, 0x10);
+        fileGet(&sp10, *heapP, 0x10);
         sp40 = 0;
-        while (*((u8 *)*arg1 + sp40) != 0) {
+        while (*((u8 *)*heapP + sp40) != 0) {
             sp40 = sp40 + 1;
         }
-        gapNameImage[var_s1] = *arg1;
+        gapNameImage[var_s1] = *heapP;
         gapNameImage[var_s1][sp40] = 0;
-        *arg1 = (void *)((uintptr_t)*arg1 + ALIGN(sp40 + 1, 4));
+        *heapP = (void *)((uintptr_t)*heapP + ALIGN(sp40 + 1, 4));
         var_s1 += 1;
     }
 
     fileGet(&sp10, &sp3C, 4);
-    *arg1 = (void *)ALIGN((uintptr_t)*arg1, 4);
-    gaScreen = *arg1;
-    *arg1 = (void *)((uintptr_t)*arg1 + (sp3C * 0x38));
+    *heapP = (void *)ALIGN((uintptr_t)*heapP, 4);
+    gaScreen = *heapP;
+    *heapP = (void *)((uintptr_t)*heapP + (sp3C * 0x38));
 
     for (var_fp = 0; var_fp < sp3C; var_fp++) {
         uintptr_t temp;
@@ -3573,12 +3630,12 @@ s32 screenLoad(char *arg0, void **arg1) {
 
         fileGet(&sp10, &temp_s3->unk_04, 4);
         fileGet(&sp10, &sp40, 4);
-        *arg1 = (void *)ALIGN((uintptr_t)*arg1, 4);
-        temp_s3->unk_00 = *arg1;
+        *heapP = (void *)ALIGN((uintptr_t)*heapP, 4);
+        temp_s3->unk_00 = *heapP;
 
-        temp = (u32)*arg1;
+        temp = (u32)*heapP;
         temp += 1 + sp40;
-        *arg1 = (void *)temp;
+        *heapP = (void *)temp;
 
         fileGet(&sp10, temp_s3->unk_00, sp40);
         temp_s3->unk_00[sp40] = 0;
@@ -3590,9 +3647,9 @@ s32 screenLoad(char *arg0, void **arg1) {
         }
 
         fileGet(&sp10, &temp_s3->unk_08, 4);
-        *arg1 = (void *)ALIGN((uintptr_t)*arg1, 4);
-        temp_s3->unk_18 = (struct_gaScreen_unk_18 *)*arg1;
-        *arg1 = (void *)((uintptr_t)*arg1 + (temp_s3->unk_08 * 0x60));
+        *heapP = (void *)ALIGN((uintptr_t)*heapP, 4);
+        temp_s3->unk_18 = (struct_gaScreen_unk_18 *)*heapP;
+        *heapP = (void *)((uintptr_t)*heapP + (temp_s3->unk_08 * 0x60));
 
         for (var_s4 = 0; var_s4 < temp_s3->unk_08; var_s4++) {
             temp_s1 = &temp_s3->unk_18[var_s4];
@@ -3610,9 +3667,9 @@ s32 screenLoad(char *arg0, void **arg1) {
             fileGet(&sp10, &temp_s1->unk_28, 4);
             fileGet(&sp10, &temp_s1->unk_14, 4);
             if (temp_s1->unk_14 > 0) {
-                *arg1 = (void *)ALIGN((uintptr_t)*arg1, 4);
-                temp_s1->unk_5C = *arg1;
-                *arg1 = (void *)((uintptr_t)*arg1 + (temp_s1->unk_14 * 8));
+                *heapP = (void *)ALIGN((uintptr_t)*heapP, 4);
+                temp_s1->unk_5C = *heapP;
+                *heapP = (void *)((uintptr_t)*heapP + (temp_s1->unk_14 * 8));
                 fileGet(&sp10, temp_s1->unk_5C, temp_s1->unk_14 * 8);
             } else {
                 temp_s1->unk_5C = 0;
@@ -3646,9 +3703,9 @@ s32 screenLoad(char *arg0, void **arg1) {
             }
 
             if ((temp_s1->unk_2C & 0x1000)) {
-                *arg1 = (void *)ALIGN((uintptr_t)*arg1, 4);
-                temp_s1->unk_38 = *arg1;
-                *arg1 = (void *)((uintptr_t)*arg1 + (((temp_s1->unk_30 * temp_s1->unk_34) + 7) >> 3));
+                *heapP = (void *)ALIGN((uintptr_t)*heapP, 4);
+                temp_s1->unk_38 = *heapP;
+                *heapP = (void *)((uintptr_t)*heapP + (((temp_s1->unk_30 * temp_s1->unk_34) + 7) >> 3));
 
                 for (var_s0_2 = 0; var_s0_2 < ((temp_s1->unk_30 * temp_s1->unk_34 + 7) >> 3); var_s0_2++) {
                     temp_s1->unk_38[var_s0_2] = 0xFF;
@@ -3661,9 +3718,9 @@ s32 screenLoad(char *arg0, void **arg1) {
         }
 
         fileGet(&sp10, &temp_s3->unk_0C, 4);
-        *arg1 = (void *)ALIGN((uintptr_t)*arg1, 4);
-        temp_s3->unk_1C = *arg1;
-        *arg1 = (void *)((uintptr_t)*arg1 + (temp_s3->unk_0C * 0x6C));
+        *heapP = (void *)ALIGN((uintptr_t)*heapP, 4);
+        temp_s3->unk_1C = *heapP;
+        *heapP = (void *)((uintptr_t)*heapP + (temp_s3->unk_0C * 0x6C));
 
         for (var_s4 = 0; var_s4 < temp_s3->unk_0C; var_s4++) {
             temp_s1_2 = &temp_s3->unk_1C[var_s4];
@@ -3693,22 +3750,22 @@ s32 screenLoad(char *arg0, void **arg1) {
             }
 
             fileGet(&sp10, &sp40, 4);
-            *arg1 = (void *)ALIGN((uintptr_t)*arg1, 4);
-            temp_s1_2->unk_64 = *arg1;
-            *arg1 = (void *)((uintptr_t)*arg1 + (sp40 * 4));
+            *heapP = (void *)ALIGN((uintptr_t)*heapP, 4);
+            temp_s1_2->unk_64 = *heapP;
+            *heapP = (void *)((uintptr_t)*heapP + (sp40 * 4));
             fileGet(&sp10, temp_s1_2->unk_64, sp40 * 4);
-            *arg1 = (void *)ALIGN((uintptr_t)*arg1, 4);
-            temp_s1_2->unk_68 = *arg1;
-            *arg1 = (void *)((uintptr_t)*arg1 + (sp40 * 4));
+            *heapP = (void *)ALIGN((uintptr_t)*heapP, 4);
+            temp_s1_2->unk_68 = *heapP;
+            *heapP = (void *)((uintptr_t)*heapP + (sp40 * 4));
             fileGet(&sp10, temp_s1_2->unk_68, sp40 * 4);
             fileGet(&sp10, &temp_s1_2->unk_28, 4);
             fileGet(&sp10, &temp_s1_2->unk_48, 4);
             fileGet(&sp10, &temp_s1_2->unk_24, 4);
 
             if (temp_s1_2->unk_24 > 0) {
-                *arg1 = (void *)ALIGN((uintptr_t)*arg1, 4);
-                temp_s1_2->unk_14 = *arg1;
-                *arg1 = (void *)((uintptr_t)*arg1 + (temp_s1_2->unk_24 * 4));
+                *heapP = (void *)ALIGN((uintptr_t)*heapP, 4);
+                temp_s1_2->unk_14 = *heapP;
+                *heapP = (void *)((uintptr_t)*heapP + (temp_s1_2->unk_24 * 4));
                 fileGet(&sp10, temp_s1_2->unk_14, temp_s1_2->unk_24 * 4);
             } else {
                 temp_s1_2->unk_14 = 0;
@@ -3716,9 +3773,9 @@ s32 screenLoad(char *arg0, void **arg1) {
 
             fileGet(&sp10, &sp40, 4);
             temp_s1_2->unk_20 = sp40;
-            *arg1 = (void *)ALIGN((uintptr_t)*arg1, 4);
-            temp_s1_2->unk_50 = *arg1;
-            *arg1 = (void *)((uintptr_t)*arg1 + ((sp40 + 1) * 2));
+            *heapP = (void *)ALIGN((uintptr_t)*heapP, 4);
+            temp_s1_2->unk_50 = *heapP;
+            *heapP = (void *)((uintptr_t)*heapP + ((sp40 + 1) * 2));
             fileGet(&sp10, temp_s1_2->unk_50, sp40 * 2);
             temp_s1_2->unk_50[sp40] = 0;
 
@@ -3731,15 +3788,15 @@ s32 screenLoad(char *arg0, void **arg1) {
 #endif
 
             if (temp_s1_2->unk_44 & 0x808000) {
-                *arg1 = (void *)ALIGN((uintptr_t)*arg1, 4);
-                temp_s1_2->unk_2C = *arg1;
-                *arg1 = *arg1 + 0x40;
-                gpHeap = *arg1;
+                *heapP = (void *)ALIGN((uintptr_t)*heapP, 4);
+                temp_s1_2->unk_2C = *heapP;
+                *heapP = *heapP + 0x40;
+                gpHeap = *heapP;
 
                 if (screenCenterText(temp_s1_2) == 0) {
                     temp_s1_2->unk_44 &= ~(0x800000 | 0x8000);
                 }
-                *arg1 = gpHeap;
+                *heapP = gpHeap;
             }
 
             for (var_s0_2 = 0; var_s0_2 < sp40; var_s0_2++) {
@@ -3769,9 +3826,9 @@ s32 screenLoad(char *arg0, void **arg1) {
         }
 
         fileGet(&sp10, &temp_s3->unk_10, 4);
-        *arg1 = (void *)ALIGN((uintptr_t)*arg1, 4);
-        temp_s3->unk_20 = *arg1;
-        *arg1 = (void *)((uintptr_t)*arg1 + (temp_s3->unk_10 * 0x30));
+        *heapP = (void *)ALIGN((uintptr_t)*heapP, 4);
+        temp_s3->unk_20 = *heapP;
+        *heapP = (void *)((uintptr_t)*heapP + (temp_s3->unk_10 * 0x30));
         var_s1 = 0;
         while (var_s1 < temp_s3->unk_10) {
             temp_s0 = &temp_s3->unk_20[var_s1];
@@ -3799,9 +3856,9 @@ s32 screenLoad(char *arg0, void **arg1) {
         }
 
         fileGet(&sp10, &temp_s3->unk_14, 4);
-        *arg1 = (void *)ALIGN((uintptr_t)*arg1, 4);
-        temp_s3->unk_24 = *arg1;
-        *arg1 = (void *)((uintptr_t)*arg1 + (temp_s3->unk_14 * 0x30));
+        *heapP = (void *)ALIGN((uintptr_t)*heapP, 4);
+        temp_s3->unk_24 = *heapP;
+        *heapP = (void *)((uintptr_t)*heapP + (temp_s3->unk_14 * 0x30));
         var_s1 = 0;
         while (var_s1 < temp_s3->unk_14) {
             temp_s0_2 = &temp_s3->unk_24[var_s1];
@@ -3833,11 +3890,11 @@ s32 screenLoad(char *arg0, void **arg1) {
     }
 
     if (var_s7 & 0x1000) {
-        imageLoad(&gpImageNo, "dNo.BIF", arg1);
-        imageLoad(&gpImageYes, "dYes.BIF", arg1);
+        imageLoad(&gpImageNo, "dNo.BIF", heapP);
+        imageLoad(&gpImageYes, "dYes.BIF", heapP);
     }
 
-    gpHeap = (void *)ALIGN((uintptr_t)*arg1, 16);
+    gpHeap = (void *)ALIGN((uintptr_t)*heapP, 16);
     B_8018E4F4_usa = gpHeap;
     gnScreenCount = sp3C;
     gnFrameSkip += B_801C7060_usa;

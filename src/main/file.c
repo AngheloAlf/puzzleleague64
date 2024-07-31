@@ -366,7 +366,7 @@ s32 fileSetup(void) {
 }
 
 // hack to ensure correct alignment of rodata
-const f64 sFileBumpRodataAlignment = 0;
+static const f64 sFileBumpRodataAlignment UNUSED = 0;
 
 s32 func_8001D304_usa(void) {
     return 0;

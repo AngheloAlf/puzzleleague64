@@ -2,8 +2,10 @@
 #define MENU_H
 
 #include "ultra64.h"
-#include "the_game.h"
+#include "other_types.h"
 #include "unk.h"
+
+#include "the_game.h"
 
 
 // void func_800072A0_usa();
@@ -18,7 +20,7 @@
 // void func_80008818_usa();
 // void func_800088A0_usa();
 // void func_80008BB8_usa();
-// void func_80008EA4_usa();
+nbool func_80008EA4_usa(s32 *arg0, s32 arg1, UNK_PTR arg2);
 // void func_8000901C_usa();
 // void func_80009228_usa();
 // void func_80009440_usa();

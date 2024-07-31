@@ -4,6 +4,7 @@
 #include "ultra64.h"
 
 typedef s32 UNK_TYPE;
+typedef s8 UNK_PAD;
 typedef s8 UNK_TYPE1;
 typedef s16 UNK_TYPE2;
 typedef s32 UNK_TYPE4;

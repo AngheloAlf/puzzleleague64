@@ -167,7 +167,7 @@ typedef struct struct_801A6DB8_usa_unk_02B {
     /* 0x2 */ UNK_TYPE1 unk_2;
     /* 0x3 */ UNK_TYPE1 unk_3;
     /* 0x4 */ UNK_TYPE1 unk_4;
-    /* 0x5 */ UNK_TYPE1 unk_5;
+    /* 0x5 */ u8 unk_5;
 } struct_801A6DB8_usa_unk_02B; // size = 0x6
 
 typedef struct struct_801A6DB8_usa_unk_034 {
@@ -247,7 +247,7 @@ typedef struct struct_801A6DB8_usa_unk_7B4 {
 
 // substruct of gTheGame
 typedef struct struct_801A6DB8_usa {
-    /* 0x000 */ u8 unk_000;
+    /* 0x000 */ char unk_000;
     /* 0x001 */ UNK_TYPE1 unk_001[0x1];
     /* 0x002 */ struct_801A6DB8_usa_unk_002 unk_002;
     /* 0x010 */ u8 unk_010;
@@ -371,7 +371,9 @@ typedef struct TheGame {
     /* 0x8860 */ TheGame_unk_8860 unk_8860[THEGAME_BUFFER_LEN];
     /* 0x89C0 */ UNK_TYPE1 unk_89C0[0x4];
     /* 0x89C4 */ TheGame_unk_89C4 unk_89C4[UNK_SIZE];
-    /* 0x89D4 */ UNK_TYPE1 unk_89C8[0x8B98-0x89D4];
+    /* 0x89D4 */ UNK_TYPE2 unk_89D4;
+    /* 0x89D6 */ UNK_TYPE2 unk_89D6;
+    /* 0x89D8 */ UNK_TYPE1 unk_89D8[0x8B98-0x89D8];
     /* 0x8B98 */ TheGame_unk_8B98 unk_8B98[2];
     /* 0x8BC8 */ UNK_TYPE1 unk_8BC8[0xC0];
     /* 0x8C88 */ uObjBg unk_8C88[0xA];

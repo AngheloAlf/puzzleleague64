@@ -90,7 +90,7 @@ typedef struct struct_gaScreen_unk_1C {
     /* 0x2C */ s32 *unk_2C;
     /* 0x30 */ UNK_TYPE1 unk_30[0x4];
     /* 0x34 */ UNK_TYPE4 unk_34;
-    /* 0x38 */ UNK_TYPE4 unk_38;
+    /* 0x38 */ s32 unk_38;
     /* 0x3C */ UNK_TYPE unk_3C;
     /* 0x40 */ UNK_TYPE unk_40;
     /* 0x44 */ u32 unk_44; // textType? TODO: enum? or maybe bitwise flags?
@@ -189,7 +189,7 @@ nbool func_80027C04_usa(s32 arg0, s32 arg1);
 nbool screenHideText(s32 arg0, s32 arg1);
 nbool screenShowText(s32 arg0, s32 arg1);
 s32 func_8002801C_usa(void);
-// void func_80028034_usa();
+nbool func_80028034_usa(s32 arg0, s32 arg1);
 nbool func_800282AC_usa(s32 arg0, s32 arg1);
 nbool screenHideImage(s32 arg0, s32 arg1);
 nbool screenShowImage(s32 arg2, s32 arg1);
@@ -227,7 +227,7 @@ nbool func_8002A4FC_usa(s32 arg0, s32 *arg1);
 nbool func_8002A574_usa(s32 arg0, s32 arg1, s32 arg2);
 nbool func_8002A638_usa(s32 arg0, s32 arg1, s32 *arg2);
 nbool screenFind(s32 *dst, const char *arg1);
-s32 screenLoad(char *arg0, void **arg1);
+s32 screenLoad(char *arg0, void **heapP);
 void screenSetup(void);
 void func_8002B5C4_usa(void);
 

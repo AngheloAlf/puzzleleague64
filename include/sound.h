@@ -48,7 +48,7 @@ void func_80002E70_usa(s32 volume);
 // void func_80002EB8_usa();
 int SetSongTempo(musHandle handle, int tempo);
 int func_80002F68_usa(musHandle handle, int pan);
-// void func_80002F88_usa();
+void func_80002F88_usa(s16 arg0);
 void SetSongCrossFadeVolume(s16 arg0, s16 arg1);
 // void func_80002FD0_usa();
 void func_80003054_usa(s16 arg0, s16 arg1, s16 arg2, s32 arg3);
