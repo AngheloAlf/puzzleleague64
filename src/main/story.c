@@ -41,10 +41,6 @@ INLINE void func_8002B5D8_usa(Gfx **gfxP) {
     screenDraw(gfxP, storyDrawImage);
 }
 
-#if VERSION_USA
-#ifdef NON_MATCHING
-//#if 1
-
 STATIC_INLINE void inlined_func(void) {
     if (gTheGame.unk_9C2C == 0x10) {
         func_8002B85C_usa(5, 7);
@@ -76,6 +72,9 @@ void func_8002B600_usa(UNK_TYPE4 arg0 UNUSED) {
             break;
 
         case 0x4:
+            var_s0 = 0x10;
+            break;
+
         case 0x5:
             var_s0 = 0x10;
             break;
@@ -104,22 +103,6 @@ void func_8002B600_usa(UNK_TYPE4 arg0 UNUSED) {
         }
     }
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/story", func_8002B600_usa);
-#endif
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/story", func_8002B600_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/story", func_8002B600_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/story", func_8002B600_usa);
-#endif
 
 INLINE void func_8002B76C_usa(void **heapP) {
     if (screenLoad("CHEAT.SBF", heapP) != 0) {

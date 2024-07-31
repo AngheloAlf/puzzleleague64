@@ -79,6 +79,8 @@ segments:
   - name: main
     files:
       - { path: src/main/boot_main.o }
+      - { path: "asm/{version}/data/main/boot_main.bss.o", include_if_any: [[version, usa]] }
+
       - { path: src/main/001F10.o }
 
       - { path: "asm/{version}/data/main/0B4690.data.o", include_if_any: [[version, usa]] }
@@ -93,8 +95,11 @@ segments:
 
       - { path: src/main/sound.o }
       - { path: "asm/{version}/data/main/sound.data.o", include_if_any: [[version, usa], [version, fra]] }
+      - { path: "asm/{version}/data/main/sound.bss.o", include_if_any: [[version, usa]] }
 
       - { path: src/main/tetsound.o }
+      - { path: "asm/{version}/data/main/tetsound.bss.o", include_if_any: [[version, usa]] }
+
       - { path: src/main/sfxlimit.o }
 
       - { path: "asm/{version}/data/main/0B4710.data.o", include_if_any: [[version, usa]] }
@@ -102,10 +107,13 @@ segments:
       - { path: "asm/{version}/data/main/0AA4D0.data.o", include_if_any: [[version, ger]] }
 
       - { path: src/main/rom_offsets.o }
-      - { path: src/main/title.o }
-      - { path: src/main/menu.o }
 
-      - { path: "asm/{version}/data/main/800C98A0.bss.o", include_if_any: [[version, usa]] }
+      - { path: src/main/title.o }
+      - { path: "asm/{version}/data/main/title.bss.o", include_if_any: [[version, usa]] }
+
+      - { path: src/main/menu.o }
+      - { path: "asm/{version}/data/main/menu.bss.o", include_if_any: [[version, usa]] }
+
       - { path: "asm/{version}/data/main/800C9B50.bss.o", include_if_any: [[version, eur]] }
       - { path: "asm/{version}/data/main/800C81B0.bss.o", include_if_any: [[version, fra]] }
       - { path: "asm/{version}/data/main/800BD890.bss.o", include_if_any: [[version, ger]] }

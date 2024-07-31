@@ -607,7 +607,11 @@ segments:
 
       - [0x0CA478, .rodata, main/build]
 
-      - { type: bss, vram: 0x800C98A0, name: main/800C98A0 }
+      - { type: bss, vram: 0x800C98A0, name: main/boot_main }
+      - { type: bss, vram: 0x800CF2A0, name: main/sound }
+      - { type: bss, vram: 0x8018A7E0, name: main/tetsound }
+      - { type: bss, vram: 0x8018A7F0, name: main/title }
+      - { type: bss, vram: 0x8018A810, name: main/menu }
       - { type: .bss, vram: 0x8018ABB0, name: main/file }
       - { type: bss, vram: 0x8018E3D0, name: main/8018E3D0 }
       - { type: .bss, vram: 0x8018EA50, name: main/hvqm2util }
