@@ -26,11 +26,7 @@
  * case, good luck.
  */
 use core::str;
-use std::{
-    fs::{self, File},
-    io::{BufReader, BufWriter, Cursor, Read},
-    path::PathBuf,
-};
+use std::{io::Cursor, path::PathBuf};
 
 use anyhow::Result;
 use binrw::{
@@ -42,6 +38,8 @@ use clap::Parser;
 use num::FromPrimitive;
 use num_derive::FromPrimitive;
 
+use rstools::utils;
+
 // TODO: Add program description to cli
 
 #[derive(Parser)]
@@ -49,26 +47,6 @@ use num_derive::FromPrimitive;
 struct Cli {
     /// Relocatable elf file (.o)
     input: PathBuf,
-}
-
-pub fn read_file_bytes(path: &PathBuf) -> Result<Vec<u8>> {
-    let file = File::open(path)?;
-
-    let mut buf_reader = BufReader::new(file);
-    let mut buffer = Vec::new();
-
-    let _ = buf_reader.read_to_end(&mut buffer);
-
-    Ok(buffer)
-}
-pub fn write_file_bytes(path: &PathBuf, b: &[u8]) -> Result<()> {
-    let file = fs::OpenOptions::new().write(true).open(path)?;
-
-    let mut buf_writer = BufWriter::new(file);
-
-    b.write(&mut buf_writer)?;
-
-    Ok(())
 }
 
 const EI_NIDENT: usize = 16;
@@ -364,6 +342,7 @@ impl Elf32_Rel {
         self.set_r_info(sym, self.r_type());
     }
 
+    #[allow(dead_code)]
     pub fn set_r_type(&mut self, typ: u32) {
         self.set_r_info(self.r_sym(), typ);
     }
@@ -447,7 +426,7 @@ impl Elf32SymbolEntry {
 fn main() {
     let cli = Cli::parse();
 
-    let mut elf_bytes = read_file_bytes(&cli.input).unwrap();
+    let mut elf_bytes = utils::read_file_bytes(&cli.input).unwrap();
 
     let elf_header = Elf32_Ehdr::new(&elf_bytes);
 
@@ -557,7 +536,11 @@ fn main() {
 
                                                 let mut sym_index = 0;
                                                 for aux_sym in &symtab {
-                                                    if aux_sym.sym_type() != Some(SymbolType::STT_SECTION) && aux_sym.sym.st_shndx == sym.sym.st_shndx && aux_sym.sym.st_value.0 == computed_addend {
+                                                    if aux_sym.sym_type()
+                                                        != Some(SymbolType::STT_SECTION)
+                                                        && aux_sym.sym.st_shndx == sym.sym.st_shndx
+                                                        && aux_sym.sym.st_value.0 == computed_addend
+                                                    {
                                                         referenced_sym = Some(aux_sym);
                                                         if !aux_sym.name().contains('.') {
                                                             break;
@@ -566,7 +549,7 @@ fn main() {
                                                     sym_index += 1;
                                                 }
 
-                                                if let Some(refer) = referenced_sym {
+                                                if let Some(_refer) = referenced_sym {
                                                     // println!("0x{:08X} {} + 0x{:X} -> {}", rel.r_offset.0, referenced_section.name(), computed_addend, refer.name());
 
                                                     rel.set_r_sym(sym_index);
@@ -613,5 +596,5 @@ fn main() {
         }
     }
 
-    write_file_bytes(&cli.input, &elf_bytes).unwrap();
+    utils::write_file_bytes(&cli.input, &elf_bytes).unwrap();
 }
