@@ -7,7 +7,7 @@ edition = "2021"
 anyhow = { version = "1.0.86", features = ["backtrace"] }
 binrw = "0.14.0"
 clap = { version = "4.5.1", features = ["derive"] }
-mapfile_parser = "2.4.0"
+mapfile_parser = "2.5.1"
 num = "0.4.3"
 num-derive = "0.4.2"
 num-traits = "0.2.19"

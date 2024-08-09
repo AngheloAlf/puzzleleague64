@@ -96,16 +96,8 @@ fn do_first_diff_impl(
         return Ok(0);
     }
 
-    let built_map_file = {
-        let mut temp = mapfile_parser::MapFile::new();
-        temp.read_map_file(map_path.into());
-        temp
-    };
-    let expected_map_file = {
-        let mut temp = mapfile_parser::MapFile::new();
-        temp.read_map_file(expected_map_path.into());
-        temp
-    };
+    let built_map_file = mapfile_parser::MapFile::new_from_map_file(map_path);
+    let expected_map_file = mapfile_parser::MapFile::new_from_map_file(expected_map_path);
 
     let endian_diff = match endian {
         Endianness::Big => 0,
@@ -189,7 +181,7 @@ fn do_first_diff_impl(
 
     if diffs > 100 {
         if let Some((sym, file, prev_sym)) =
-        built_map_file.find_lowest_differing_symbol(expected_map_file)
+            built_map_file.find_lowest_differing_symbol(&expected_map_file)
         {
             let extra_message = if let Some(prev) = prev_sym {
                 format!(" -- in {}?", prev.name)

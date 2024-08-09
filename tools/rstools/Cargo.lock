@@ -265,9 +265,9 @@ checksum = "97b3888a4aecf77e811145cadf6eef5901f4782c53886191b2f693f24761847c"
 
 [[package]]
 name = "mapfile_parser"
-version = "2.4.0"
+version = "2.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9e7a265ca13a45a7b52da5575159247d82238d14bde6b58f7f1cd272649afd4e"
+checksum = "6d6e730c900b7b410c785a1dd16942006e63fa05565f8a8ed99f1967c6f8f710"
 dependencies = [
  "lazy_static",
  "regex",

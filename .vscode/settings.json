@@ -6,6 +6,7 @@
         "expected/**": true,
         "ctx.c": true,
         ".venv": true,
+        "tools/rstools/target": true,
     },
     "files.associations": {
         "*.C": "c",
