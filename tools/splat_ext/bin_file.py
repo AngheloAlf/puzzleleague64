@@ -9,12 +9,12 @@ import spimdisasm
 
 from splat.util import log, options
 
-from splat.segtypes.n64.segment import N64Segment
+from splat.segtypes.common.segment import Segment
 
 
 ENTRY_SIZE = 4 + 4 + 0x10
 
-class N64SegBin_file(N64Segment):
+class N64SegBin_file(Segment):
     def out_path(self) -> Optional[Path]:
         if self.type.startswith("."):
             return options.opts.src_path / self.dir / f"{self.name}.s"
