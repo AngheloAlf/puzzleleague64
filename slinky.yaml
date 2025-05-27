@@ -707,73 +707,73 @@ segments:
       - { path: src/assets/segment_0CA4A0.o, include_if_any: [[version, usa]] }
       - { path: "asm/{version}/data/assets/segment_0CA4A0.data.o", include_if_any: [[version, eur], [version, fra], [version, ger]] }
 
-  - name: FB480
+  - name: unk_0FB480
     include_if_any: [[version, usa]]
     files:
-      - { path: "asm/{version}/data/FB480.o" }
+      - { path: "asm/{version}/data/unk_0FB480.o" }
 
-  - name: FB730
+  - name: unk_0FB730
     include_if_any: [[version, eur]]
     files:
-      - { path: "asm/{version}/data/FB730.o" }
+      - { path: "asm/{version}/data/unk_0FB730.o" }
 
-  - name: F9D90
+  - name: unk_0F9D90
     include_if_any: [[version, fra]]
     files:
-      - { path: "asm/{version}/data/F9D90.o" }
+      - { path: "asm/{version}/data/unk_0F9D90.o" }
 
-  - name: EF470
+  - name: unk_0EF470
     include_if_any: [[version, ger]]
     files:
-      - { path: "asm/{version}/data/EF470.o" }
+      - { path: "asm/{version}/data/unk_0EF470.o" }
 
   - name: segment_101A80
     files:
       - { path: "asm/{version}/data/segment_101A80.o" }
 
-  - name: _12C1B0
+  - name: unk_12C1B0
     include_if_any: [[version, usa]]
     files:
-      - { path: "asm/{version}/data/12C1B0.o" }
+      - { path: "asm/{version}/data/unk_12C1B0.o" }
 
-  - name: _12C460
+  - name: unk_12C460
     include_if_any: [[version, eur]]
     files:
-      - { path: "asm/{version}/data/12C460.o" }
+      - { path: "asm/{version}/data/unk_12C460.o" }
 
-  - name: _12AAC0
+  - name: unk_12AAC0
     include_if_any: [[version, fra]]
     files:
-      - { path: "asm/{version}/data/12AAC0.o" }
+      - { path: "asm/{version}/data/unk_12AAC0.o" }
 
-  - name: _1201A0
+  - name: unk_1201A0
     include_if_any: [[version, ger]]
     files:
-      - { path: "asm/{version}/data/1201A0.o" }
+      - { path: "asm/{version}/data/unk_1201A0.o" }
 
   - name: segment_50F3F0
     files:
       - { path: "asm/{version}/data/segment_50F3F0.o" }
 
-  - name: _5337F0
+  - name: unk_5337F0
     include_if_any: [[version, usa]]
     files:
-      - { path: "asm/{version}/data/5337F0.o" }
+      - { path: "asm/{version}/data/unk_5337F0.o" }
 
-  - name: _533AA0
+  - name: unk_533AA0
     include_if_any: [[version, eur]]
     files:
-      - { path: "asm/{version}/data/533AA0.o" }
+      - { path: "asm/{version}/data/unk_533AA0.o" }
 
-  - name: _532100
+  - name: unk_532100
     include_if_any: [[version, fra]]
     files:
-      - { path: "asm/{version}/data/532100.o" }
+      - { path: "asm/{version}/data/unk_532100.o" }
 
-  - name: _5277E0
+  - name: unk_5277E0
     include_if_any: [[version, ger]]
     files:
-      - { path: "asm/{version}/data/5277E0.o" }
+      - { path: "asm/{version}/data/unk_5277E0.o" }
 
   - name: bin_file
     files:

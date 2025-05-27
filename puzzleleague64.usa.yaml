@@ -838,6 +838,7 @@ segments:
 
   # no idea where it ends
   - type: databin
+    name: unk_0FB480
     start: 0x0FB480
 
   - type: databin
@@ -860,7 +861,7 @@ segments:
     #   - [0x12BA70, i8, assets/segment_101A80/D_12DC30.i8, 64, 29] # ci8
 
   - type: databin
-    # name: segment_12C1B0
+    name: unk_12C1B0
     start: 0x12C1B0
 
     # 1336B0
@@ -896,7 +897,7 @@ segments:
     start: 0x50F3F0
 
   - type: databin
-    # name: segment_5337F0
+    name: unk_5337F0
     start: 0x5337F0
 
   - name: bin_file

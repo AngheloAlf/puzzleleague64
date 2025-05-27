@@ -665,6 +665,7 @@ segments:
       - [0x0CA750, data, assets/segment_0CA4A0]
 
   - type: databin
+    name: unk_0FB730
     start: 0x0FB730
     # Unknown end
 
@@ -674,6 +675,7 @@ segments:
 
   - type: databin
     start: 0x12C460
+    name: unk_12C460
     # Unknown end
 
   - type: databin
@@ -681,6 +683,7 @@ segments:
     start: 0x50F6A0
 
   - type: databin
+    name: unk_533AA0
     start: 0x533AA0
     # Unknown end
 

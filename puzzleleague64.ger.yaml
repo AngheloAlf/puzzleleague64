@@ -640,6 +640,7 @@ segments:
       - [0x0BE490, data, assets/segment_0CA4A0]
 
   - type: databin
+    name: unk_0EF470
     start: 0x0EF470
     # Unknown end
 
@@ -648,6 +649,7 @@ segments:
     start: 0x0F5A70
 
   - type: databin
+    name: unk_1201A0
     start: 0x1201A0
     # Unknown end
 
@@ -656,6 +658,7 @@ segments:
     start: 0x5033E0
 
   - type: databin
+    name: unk_5277E0
     start: 0x5277E0
     # Unknown end
 
