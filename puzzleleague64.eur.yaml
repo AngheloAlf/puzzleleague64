@@ -666,6 +666,23 @@ segments:
 
   - type: databin
     start: 0x0FB730
+    # Unknown end
+
+  - type: databin
+    name: segment_101A80
+    start: 0x101D30
+
+  - type: databin
+    start: 0x12C460
+    # Unknown end
+
+  - type: databin
+    name: segment_50F3F0
+    start: 0x50F6A0
+
+  - type: databin
+    start: 0x533AA0
+    # Unknown end
 
   - name: bin_file
     type: .bin_file
@@ -979,6 +996,7 @@ segments:
     start: 0x1C5F2B0
 
   - type: databin
+    name: segment_1C60660
     start: 0x1C60960
 
   - name: segment_1C60AD0
@@ -1008,6 +1026,7 @@ segments:
     start: 0x1D3D5C0
 
   - type: databin
+    name: segment_1D3D320
     start: 0x1D3D620
 
   - name: segment_1D3D390

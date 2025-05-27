@@ -707,30 +707,10 @@ segments:
       - { path: src/assets/segment_0CA4A0.o, include_if_any: [[version, usa]] }
       - { path: "asm/{version}/data/assets/segment_0CA4A0.data.o", include_if_any: [[version, eur], [version, fra], [version, ger]] }
 
-  - name: segment_0FB480
+  - name: FB480
     include_if_any: [[version, usa]]
     files:
-      - { path: "asm/{version}/data/segment_0FB480.o" }
-
-  - name: segment_101A80
-    include_if_any: [[version, usa]]
-    files:
-      - { path: "asm/{version}/data/segment_101A80.o" }
-
-  - name: _12C1B0
-    include_if_any: [[version, usa]]
-    files:
-      - { path: "asm/{version}/data/12C1B0.o" }
-
-  - name: segment_50F3F0
-    include_if_any: [[version, usa]]
-    files:
-      - { path: "asm/{version}/data/segment_50F3F0.o" }
-
-  - name: _5337F0
-    include_if_any: [[version, usa]]
-    files:
-      - { path: "asm/{version}/data/5337F0.o" }
+      - { path: "asm/{version}/data/FB480.o" }
 
   - name: FB730
     include_if_any: [[version, eur]]
@@ -746,6 +726,54 @@ segments:
     include_if_any: [[version, ger]]
     files:
       - { path: "asm/{version}/data/EF470.o" }
+
+  - name: segment_101A80
+    files:
+      - { path: "asm/{version}/data/segment_101A80.o" }
+
+  - name: _12C1B0
+    include_if_any: [[version, usa]]
+    files:
+      - { path: "asm/{version}/data/12C1B0.o" }
+
+  - name: _12C460
+    include_if_any: [[version, eur]]
+    files:
+      - { path: "asm/{version}/data/12C460.o" }
+
+  - name: _12AAC0
+    include_if_any: [[version, fra]]
+    files:
+      - { path: "asm/{version}/data/12AAC0.o" }
+
+  - name: _1201A0
+    include_if_any: [[version, ger]]
+    files:
+      - { path: "asm/{version}/data/1201A0.o" }
+
+  - name: segment_50F3F0
+    files:
+      - { path: "asm/{version}/data/segment_50F3F0.o" }
+
+  - name: _5337F0
+    include_if_any: [[version, usa]]
+    files:
+      - { path: "asm/{version}/data/5337F0.o" }
+
+  - name: _533AA0
+    include_if_any: [[version, eur]]
+    files:
+      - { path: "asm/{version}/data/533AA0.o" }
+
+  - name: _532100
+    include_if_any: [[version, fra]]
+    files:
+      - { path: "asm/{version}/data/532100.o" }
+
+  - name: _5277E0
+    include_if_any: [[version, ger]]
+    files:
+      - { path: "asm/{version}/data/5277E0.o" }
 
   - name: bin_file
     files:
@@ -1055,25 +1083,9 @@ segments:
     files:
       - { path: "asm/{version}/data/segment_1C5EFB0.o" }
 
-  - name: _1C60660
-    include_if_any: [[version, usa]]
+  - name: segment_1C60660
     files:
-      - { path: "asm/{version}/data/1C60660.o" }
-
-  - name: _1C60960
-    include_if_any: [[version, eur]]
-    files:
-      - { path: "asm/{version}/data/1C60960.o" }
-
-  - name: _1BB5310
-    include_if_any: [[version, fra]]
-    files:
-      - { path: "asm/{version}/data/1BB5310.o" }
-
-  - name: _1BF2530
-    include_if_any: [[version, ger]]
-    files:
-      - { path: "asm/{version}/data/1BF2530.o" }
+      - { path: "asm/{version}/data/segment_1C60660.o" }
 
   - name: segment_1C60AD0
     files:
@@ -1099,25 +1111,9 @@ segments:
     files:
       - { path: "asm/{version}/data/segment_1D3D2C0.o" }
 
-  - name: _1D3D320
-    include_if_any: [[version, usa]]
+  - name: segment_1D3D320
     files:
-      - { path: "asm/{version}/data/1D3D320.o" }
-
-  - name: _1D3D620
-    include_if_any: [[version, eur]]
-    files:
-      - { path: "asm/{version}/data/1D3D620.o" }
-
-  - name: _1C79C10
-    include_if_any: [[version, fra]]
-    files:
-      - { path: "asm/{version}/data/1C79C10.o" }
-
-  - name: _1CF09F0
-    include_if_any: [[version, ger]]
-    files:
-      - { path: "asm/{version}/data/1CF09F0.o" }
+      - { path: "asm/{version}/data/segment_1D3D320.o" }
 
   - name: segment_1D3D390
     files:

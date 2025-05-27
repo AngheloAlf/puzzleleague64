@@ -1,0 +1,1000 @@
+name: Pokémon Puzzle League
+repo: https://github.com/AngheloAlf/puzzleleague64
+platform: n64
+build_system: make
+versions:
+  - name: usa
+    fullname: usa
+    sha1: 8173866fc8c7652abd44c48efcab85441c6806a1
+    paths:
+      target: "baserom.usa.z64"
+
+      build_dir: "build/usa"
+      map: "build/usa/puzzleleague64.usa.map"
+      compiled_target: "build/usa/puzzleleague64.usa.z64"
+      elf: "build/usa/puzzleleague64.usa.elf"
+
+      expected_dir: "expected/"
+
+      asm: "asm/usa"
+      nonmatchings: "asm/usa/nonmatchings"
+
+  - name: eur
+    fullname: eur
+    sha1: 8173866fc8c7652abd44c48efcab85441c6806a1
+    paths:
+      target: "baserom.eur.z64"
+
+      build_dir: "build/eur"
+      map: "build/eur/puzzleleague64.eur.map"
+      compiled_target: "build/eur/puzzleleague64.eur.z64"
+      elf: "build/eur/puzzleleague64.eur.elf"
+
+      expected_dir: "expected/"
+
+      asm: "asm/eur"
+      nonmatchings: "asm/eur/nonmatchings"
+
+  - name: fra
+    fullname: fra
+    sha1: 8173866fc8c7652abd44c48efcab85441c6806a1
+    paths:
+      target: "baserom.fra.z64"
+
+      build_dir: "build/fra"
+      map: "build/fra/puzzleleague64.fra.map"
+      compiled_target: "build/fra/puzzleleague64.fra.z64"
+      elf: "build/fra/puzzleleague64.fra.elf"
+
+      expected_dir: "expected/"
+
+      asm: "asm/fra"
+      nonmatchings: "asm/fra/nonmatchings"
+
+  - name: ger
+    fullname: ger
+    sha1: 8173866fc8c7652abd44c48efcab85441c6806a1
+    paths:
+      target: "baserom.ger.z64"
+
+      build_dir: "build/ger"
+      map: "build/ger/puzzleleague64.ger.map"
+      compiled_target: "build/ger/puzzleleague64.ger.z64"
+      elf: "build/ger/puzzleleague64.ger.elf"
+
+      expected_dir: "expected/"
+
+      asm: "asm/ger"
+      nonmatchings: "asm/ger/nonmatchings"
+tools:
+  mapfile_parser:
+    progress_report:
+      # output: report.json # Optional
+      check_asm_paths: True
+      # Change if the asm path in the build folder is deeper than two subfolders.
+      # i.e.: "build/us/asm/header.o" -> `path_index: 3`.
+      # i.e.: "build/us/asm/us/header.o" -> `path_index: 4`.
+      path_index: 4
+      prefixes_to_trim:
+        - build/usa/lib/
+        - build/usa/src/
+        - build/usa/asm/usa/data/
+        - build/usa/asm/usa/
+        - build/eur/lib/
+        - build/eur/src/
+        - build/eur/asm/eur/data/
+        - build/eur/asm/eur/
+        - build/fra/lib/
+        - build/fra/src/
+        - build/fra/asm/fra/data/
+        - build/fra/asm/fra/
+        - build/ger/lib/
+        - build/ger/src/
+        - build/ger/asm/ger/data/
+        - build/ger/asm/ger/
+        - build/
+      categories:
+        - id: rom_header
+          name: rom_header
+          paths:
+            - rom_header/
+        - id: ipl3
+          name: ipl3
+          paths:
+            - ipl3
+        - id: entry
+          name: entry
+          paths:
+            - entry/
+
+        - id: main
+          name: main
+          paths:
+            - main/
+
+        - id: libmus
+          name: libmus
+          paths:
+            - libmus/
+        - id: flash
+          name: flash
+          paths:
+            - flash/
+        - id: libultra
+          name: libultra
+          paths:
+            - libultra/
+            - ultralib/
+        - id: libhvqm
+          name: libhvqm
+          paths:
+            - libhvqm/
+        - id: libkmc
+          name: libkmc
+          paths:
+            - libkmc/
+
+        - id: libs
+          name: Libraries
+          paths:
+            - libmus/
+            - flash/
+            - libultra/
+            - ultralib/
+            - libhvqm/
+            - libkmc/
+
+        - id: rsp
+          name: RSP
+          paths:
+            - rsp/
+
+        - id: assets
+          name: Assets
+          paths:
+            - assets/
+            - segment_
+
+        - id: 12C1B0
+          name: 12C1B0
+          paths:
+            - 12C1B0
+        - id: 5337F0
+          name: 5337F0
+          paths:
+            - 5337F0
+        - id: bin_file
+          name: bin_file
+          paths:
+            - bin_file/
+
+        - id: 1C60660
+          name: 1C60660
+          paths:
+            - 1C60660
+
+        - id: 1D3D320
+          name: 1D3D320
+          paths:
+            - 1D3D320
+        - id: segment_1D3D390
+          name: segment_1D3D390
+          paths:
+            - segment_1D3D390
+        - id: segment_1D3E1A0
+          name: segment_1D3E1A0
+          paths:
+            - segment_1D3E1A0
+        - id: segment_1D66C70
+          name: segment_1D66C70
+          paths:
+            - segment_1D66C70
+        - id: segment_1D66F00
+          name: segment_1D66F00
+          paths:
+            - segment_1D66F00
+        - id: segment_1D67A70
+          name: segment_1D67A70
+          paths:
+            - segment_1D67A70
+        - id: segment_1D8B4C0
+          name: segment_1D8B4C0
+          paths:
+            - segment_1D8B4C0
+        - id: segment_1D8B6C0
+          name: segment_1D8B6C0
+          paths:
+            - segment_1D8B6C0
+        - id: segment_1D8C620
+          name: segment_1D8C620
+          paths:
+            - segment_1D8C620
+        - id: segment_1DB4980
+          name: segment_1DB4980
+          paths:
+            - segment_1DB4980
+        - id: segment_1DB4C20
+          name: segment_1DB4C20
+          paths:
+            - segment_1DB4C20
+        - id: segment_1DB5790
+          name: segment_1DB5790
+          paths:
+            - segment_1DB5790
+        - id: segment_1DD4750
+          name: segment_1DD4750
+          paths:
+            - segment_1DD4750
+        - id: segment_1DD4950
+          name: segment_1DD4950
+          paths:
+            - segment_1DD4950
+        - id: segment_1DD54C0
+          name: segment_1DD54C0
+          paths:
+            - segment_1DD54C0
+        - id: segment_1DF38F0
+          name: segment_1DF38F0
+          paths:
+            - segment_1DF38F0
+        - id: segment_1DF3AF0
+          name: segment_1DF3AF0
+          paths:
+            - segment_1DF3AF0
+        - id: segment_1DF4660
+          name: segment_1DF4660
+          paths:
+            - segment_1DF4660
+        - id: segment_1E16C10
+          name: segment_1E16C10
+          paths:
+            - segment_1E16C10
+        - id: segment_1E16E10
+          name: segment_1E16E10
+          paths:
+            - segment_1E16E10
+        - id: segment_1E17980
+          name: segment_1E17980
+          paths:
+            - segment_1E17980
+        - id: segment_1E36C00
+          name: segment_1E36C00
+          paths:
+            - segment_1E36C00
+        - id: segment_1E36E00
+          name: segment_1E36E00
+          paths:
+            - segment_1E36E00
+        - id: segment_1E37970
+          name: segment_1E37970
+          paths:
+            - segment_1E37970
+        - id: segment_1E5D070
+          name: segment_1E5D070
+          paths:
+            - segment_1E5D070
+        - id: segment_1E5D270
+          name: segment_1E5D270
+          paths:
+            - segment_1E5D270
+        - id: segment_1E5DDE0
+          name: segment_1E5DDE0
+          paths:
+            - segment_1E5DDE0
+        - id: segment_1E7B650
+          name: segment_1E7B650
+          paths:
+            - segment_1E7B650
+        - id: segment_1E7B850
+          name: segment_1E7B850
+          paths:
+            - segment_1E7B850
+        - id: segment_1E7C710
+          name: segment_1E7C710
+          paths:
+            - segment_1E7C710
+        - id: segment_1EA1000
+          name: segment_1EA1000
+          paths:
+            - segment_1EA1000
+        - id: segment_1EA12B0
+          name: segment_1EA12B0
+          paths:
+            - segment_1EA12B0
+        - id: segment_1EA2170
+          name: segment_1EA2170
+          paths:
+            - segment_1EA2170
+        - id: segment_1ED7210
+          name: segment_1ED7210
+          paths:
+            - segment_1ED7210
+        - id: segment_1ED74C0
+          name: segment_1ED74C0
+          paths:
+            - segment_1ED74C0
+        - id: segment_1ED8030
+          name: segment_1ED8030
+          paths:
+            - segment_1ED8030
+        - id: segment_1F03840
+          name: segment_1F03840
+          paths:
+            - segment_1F03840
+        - id: segment_1F03A40
+          name: segment_1F03A40
+          paths:
+            - segment_1F03A40
+        - id: segment_1F049A0
+          name: segment_1F049A0
+          paths:
+            - segment_1F049A0
+        - id: segment_1F2C5C0
+          name: segment_1F2C5C0
+          paths:
+            - segment_1F2C5C0
+        - id: segment_1F2C860
+          name: segment_1F2C860
+          paths:
+            - segment_1F2C860
+        - id: segment_1F2D920
+          name: segment_1F2D920
+          paths:
+            - segment_1F2D920
+        - id: segment_1F64640
+          name: segment_1F64640
+          paths:
+            - segment_1F64640
+        - id: segment_1F64920
+          name: segment_1F64920
+          paths:
+            - segment_1F64920
+        - id: segment_1F65490
+          name: segment_1F65490
+          paths:
+            - segment_1F65490
+        - id: segment_1F898F0
+          name: segment_1F898F0
+          paths:
+            - segment_1F898F0
+        - id: segment_1F89AF0
+          name: segment_1F89AF0
+          paths:
+            - segment_1F89AF0
+        - id: segment_1F8A660
+          name: segment_1F8A660
+          paths:
+            - segment_1F8A660
+        - id: segment_1FA9EB0
+          name: segment_1FA9EB0
+          paths:
+            - segment_1FA9EB0
+        - id: segment_1FAA0B0
+          name: segment_1FAA0B0
+          paths:
+            - segment_1FAA0B0
+        - id: segment_1FAAC20
+          name: segment_1FAAC20
+          paths:
+            - segment_1FAAC20
+        - id: segment_1FCDF80
+          name: segment_1FCDF80
+          paths:
+            - segment_1FCDF80
+        - id: segment_1FCE1A0
+          name: segment_1FCE1A0
+          paths:
+            - segment_1FCE1A0
+        - id: segment_1FCE670
+          name: segment_1FCE670
+          paths:
+            - segment_1FCE670
+        - id: segment_1FCF820
+          name: segment_1FCF820
+          paths:
+            - segment_1FCF820
+
+        # Categories by segment
+        - id: segment_.header
+          name: Segment .header
+          paths:
+            - rom_header/rom_header
+        - id: segment_.ipl3
+          name: Segment .ipl3
+          paths:
+            - ipl3
+        - id: segment_.entry
+          name: Segment .entry
+          paths:
+            - entry/entry
+        - id: segment_.main
+          name: Segment .main
+          paths:
+            - main
+            - libmus
+            - flash
+            - ultralib
+            - libultra
+            - libhvqm
+            - libkmc
+            - rsp
+        - id: segment_.segment_0CA4A0
+          name: Segment .segment_0CA4A0
+          paths:
+            - assets/segment_0CA4A0
+        - id: segment_.segment_0FB480
+          name: Segment .segment_0FB480
+          paths:
+            - segment_0FB480
+        - id: segment_.segment_101A80
+          name: Segment .segment_101A80
+          paths:
+            - segment_101A80
+        - id: segment_._12C1B0
+          name: Segment ._12C1B0
+          paths:
+            - 12C1B0
+        - id: segment_.segment_50F3F0
+          name: Segment .segment_50F3F0
+          paths:
+            - segment_50F3F0
+        - id: segment_._5337F0
+          name: Segment ._5337F0
+          paths:
+            - 5337F0
+        - id: segment_.bin_file
+          name: Segment .bin_file
+          paths:
+            - bin_file/bin_file
+        - id: segment_.segment_17C2A80
+          name: Segment .segment_17C2A80
+          paths:
+            - segment_17C2A80
+        - id: segment_.segment_17CA780
+          name: Segment .segment_17CA780
+          paths:
+            - segment_17CA780
+        - id: segment_.segment_1A45560
+          name: Segment .segment_1A45560
+          paths:
+            - segment_1A45560
+        - id: segment_.segment_1A47630
+          name: Segment .segment_1A47630
+          paths:
+            - segment_1A47630
+        - id: segment_.segment_1A49850
+          name: Segment .segment_1A49850
+          paths:
+            - segment_1A49850
+        - id: segment_.segment_1A49F60
+          name: Segment .segment_1A49F60
+          paths:
+            - segment_1A49F60
+        - id: segment_.segment_1A4AAC0
+          name: Segment .segment_1A4AAC0
+          paths:
+            - segment_1A4AAC0
+        - id: segment_.segment_1A4DEE0
+          name: Segment .segment_1A4DEE0
+          paths:
+            - segment_1A4DEE0
+        - id: segment_.segment_1A51B40
+          name: Segment .segment_1A51B40
+          paths:
+            - segment_1A51B40
+        - id: segment_.segment_1A52D50
+          name: Segment .segment_1A52D50
+          paths:
+            - segment_1A52D50
+        - id: segment_.segment_1A55860
+          name: Segment .segment_1A55860
+          paths:
+            - segment_1A55860
+        - id: segment_.segment_1A57C20
+          name: Segment .segment_1A57C20
+          paths:
+            - segment_1A57C20
+        - id: segment_.segment_1A5C640
+          name: Segment .segment_1A5C640
+          paths:
+            - segment_1A5C640
+        - id: segment_.segment_1A5D6D0
+          name: Segment .segment_1A5D6D0
+          paths:
+            - segment_1A5D6D0
+        - id: segment_.segment_1A5E510
+          name: Segment .segment_1A5E510
+          paths:
+            - segment_1A5E510
+        - id: segment_.segment_1A64950
+          name: Segment .segment_1A64950
+          paths:
+            - segment_1A64950
+        - id: segment_.segment_1A6AF50
+          name: Segment .segment_1A6AF50
+          paths:
+            - segment_1A6AF50
+        - id: segment_.segment_1A6DAF0
+          name: Segment .segment_1A6DAF0
+          paths:
+            - segment_1A6DAF0
+        - id: segment_.segment_1A70610
+          name: Segment .segment_1A70610
+          paths:
+            - segment_1A70610
+        - id: segment_.segment_1A712D0
+          name: Segment .segment_1A712D0
+          paths:
+            - segment_1A712D0
+        - id: segment_.segment_1A72030
+          name: Segment .segment_1A72030
+          paths:
+            - segment_1A72030
+        - id: segment_.segment_1A74380
+          name: Segment .segment_1A74380
+          paths:
+            - segment_1A74380
+        - id: segment_.segment_1A75FF0
+          name: Segment .segment_1A75FF0
+          paths:
+            - segment_1A75FF0
+        - id: segment_.segment_1A76940
+          name: Segment .segment_1A76940
+          paths:
+            - segment_1A76940
+        - id: segment_.segment_1A776B0
+          name: Segment .segment_1A776B0
+          paths:
+            - segment_1A776B0
+        - id: segment_.segment_1A79C90
+          name: Segment .segment_1A79C90
+          paths:
+            - segment_1A79C90
+        - id: segment_.segment_1A7E1B0
+          name: Segment .segment_1A7E1B0
+          paths:
+            - segment_1A7E1B0
+        - id: segment_.segment_1A7FE50
+          name: Segment .segment_1A7FE50
+          paths:
+            - segment_1A7FE50
+        - id: segment_.segment_1A81760
+          name: Segment .segment_1A81760
+          paths:
+            - segment_1A81760
+        - id: segment_.segment_1A824D0
+          name: Segment .segment_1A824D0
+          paths:
+            - segment_1A824D0
+        - id: segment_.segment_1A837A0
+          name: Segment .segment_1A837A0
+          paths:
+            - segment_1A837A0
+        - id: segment_.segment_1A85160
+          name: Segment .segment_1A85160
+          paths:
+            - segment_1A85160
+        - id: segment_.segment_1A87870
+          name: Segment .segment_1A87870
+          paths:
+            - segment_1A87870
+        - id: segment_.segment_1A87F80
+          name: Segment .segment_1A87F80
+          paths:
+            - segment_1A87F80
+        - id: segment_.segment_1A88AE0
+          name: Segment .segment_1A88AE0
+          paths:
+            - segment_1A88AE0
+        - id: segment_.segment_1A8A210
+          name: Segment .segment_1A8A210
+          paths:
+            - segment_1A8A210
+        - id: segment_.segment_1A8A8F0
+          name: Segment .segment_1A8A8F0
+          paths:
+            - segment_1A8A8F0
+        - id: segment_.segment_1A8B000
+          name: Segment .segment_1A8B000
+          paths:
+            - segment_1A8B000
+        - id: segment_.segment_1A8BEA0
+          name: Segment .segment_1A8BEA0
+          paths:
+            - segment_1A8BEA0
+        - id: segment_.segment_1A8E130
+          name: Segment .segment_1A8E130
+          paths:
+            - segment_1A8E130
+        - id: segment_.segment_1A910B0
+          name: Segment .segment_1A910B0
+          paths:
+            - segment_1A910B0
+        - id: segment_.segment_1A93340
+          name: Segment .segment_1A93340
+          paths:
+            - segment_1A93340
+        - id: segment_.segment_1A966A0
+          name: Segment .segment_1A966A0
+          paths:
+            - segment_1A966A0
+        - id: segment_.segment_1A98F30
+          name: Segment .segment_1A98F30
+          paths:
+            - segment_1A98F30
+        - id: segment_.segment_1A9CB20
+          name: Segment .segment_1A9CB20
+          paths:
+            - segment_1A9CB20
+        - id: segment_.segment_1A9D1B0
+          name: Segment .segment_1A9D1B0
+          paths:
+            - segment_1A9D1B0
+        - id: segment_.segment_1A9D850
+          name: Segment .segment_1A9D850
+          paths:
+            - segment_1A9D850
+        - id: segment_.segment_1A9E2E0
+          name: Segment .segment_1A9E2E0
+          paths:
+            - segment_1A9E2E0
+        - id: segment_.segment_1A9EAC0
+          name: Segment .segment_1A9EAC0
+          paths:
+            - segment_1A9EAC0
+        - id: segment_.segment_1A9F450
+          name: Segment .segment_1A9F450
+          paths:
+            - segment_1A9F450
+        - id: segment_.segment_1AA0D70
+          name: Segment .segment_1AA0D70
+          paths:
+            - segment_1AA0D70
+        - id: segment_.segment_1AA3350
+          name: Segment .segment_1AA3350
+          paths:
+            - segment_1AA3350
+        - id: segment_.segment_1AA7870
+          name: Segment .segment_1AA7870
+          paths:
+            - segment_1AA7870
+        - id: segment_.segment_1AA9510
+          name: Segment .segment_1AA9510
+          paths:
+            - segment_1AA9510
+        - id: segment_.segment_1AAAE20
+          name: Segment .segment_1AAAE20
+          paths:
+            - segment_1AAAE20
+        - id: segment_.segment_1AABB90
+          name: Segment .segment_1AABB90
+          paths:
+            - segment_1AABB90
+        - id: segment_.segment_1AACE60
+          name: Segment .segment_1AACE60
+          paths:
+            - segment_1AACE60
+        - id: segment_.segment_1AB0280
+          name: Segment .segment_1AB0280
+          paths:
+            - segment_1AB0280
+        - id: segment_.segment_1AB3EE0
+          name: Segment .segment_1AB3EE0
+          paths:
+            - segment_1AB3EE0
+        - id: segment_.segment_1AB5B80
+          name: Segment .segment_1AB5B80
+          paths:
+            - segment_1AB5B80
+        - id: segment_.segment_1AB7490
+          name: Segment .segment_1AB7490
+          paths:
+            - segment_1AB7490
+        - id: segment_.segment_1ABA8B0
+          name: Segment .segment_1ABA8B0
+          paths:
+            - segment_1ABA8B0
+        - id: segment_.segment_1ABE510
+          name: Segment .segment_1ABE510
+          paths:
+            - segment_1ABE510
+        - id: segment_.segment_1AC02C0
+          name: Segment .segment_1AC02C0
+          paths:
+            - segment_1AC02C0
+        - id: segment_.segment_1AC2390
+          name: Segment .segment_1AC2390
+          paths:
+            - segment_1AC2390
+        - id: segment_.segment_1AC4120
+          name: Segment .segment_1AC4120
+          paths:
+            - segment_1AC4120
+        - id: segment_.segment_1AC5B60
+          name: Segment .segment_1AC5B60
+          paths:
+            - segment_1AC5B60
+        - id: segment_.segment_1AC7EB0
+          name: Segment .segment_1AC7EB0
+          paths:
+            - segment_1AC7EB0
+        - id: segment_.segment_1AC9A60
+          name: Segment .segment_1AC9A60
+          paths:
+            - segment_1AC9A60
+        - id: segment_.segment_1ACAE00
+          name: Segment .segment_1ACAE00
+          paths:
+            - segment_1ACAE00
+        - id: segment_.segment_1ACD260
+          name: Segment .segment_1ACD260
+          paths:
+            - segment_1ACD260
+        - id: segment_.segment_1ACE9B0
+          name: Segment .segment_1ACE9B0
+          paths:
+            - segment_1ACE9B0
+        - id: segment_.segment_1ACF1B0
+          name: Segment .segment_1ACF1B0
+          paths:
+            - segment_1ACF1B0
+        - id: segment_.segment_1AD0EA0
+          name: Segment .segment_1AD0EA0
+          paths:
+            - segment_1AD0EA0
+        - id: segment_.segment_1AD8720
+          name: Segment .segment_1AD8720
+          paths:
+            - segment_1AD8720
+        - id: segment_.segment_1C5EFB0
+          name: Segment .segment_1C5EFB0
+          paths:
+            - segment_1C5EFB0
+        - id: segment_._1C60660
+          name: Segment ._1C60660
+          paths:
+            - 1C60660
+        - id: segment_.segment_1C60AD0
+          name: Segment .segment_1C60AD0
+          paths:
+            - segment_1C60AD0
+        - id: segment_.segment_1C63BE0
+          name: Segment .segment_1C63BE0
+          paths:
+            - segment_1C63BE0
+        - id: segment_.segment_1D358C0
+          name: Segment .segment_1D358C0
+          paths:
+            - segment_1D358C0
+        - id: segment_.segment_1D37FF0
+          name: Segment .segment_1D37FF0
+          paths:
+            - segment_1D37FF0
+        - id: segment_.segment_1D38180
+          name: Segment .segment_1D38180
+          paths:
+            - segment_1D38180
+        - id: segment_.segment_1D3D2C0
+          name: Segment .segment_1D3D2C0
+          paths:
+            - segment_1D3D2C0
+        - id: segment_._1D3D320
+          name: Segment ._1D3D320
+          paths:
+            - 1D3D320
+        - id: segment_.segment_1D3D390
+          name: Segment .segment_1D3D390
+          paths:
+            - segment_1D3D390
+        - id: segment_.segment_1D3E1A0
+          name: Segment .segment_1D3E1A0
+          paths:
+            - segment_1D3E1A0
+        - id: segment_.segment_1D66C70
+          name: Segment .segment_1D66C70
+          paths:
+            - segment_1D66C70
+        - id: segment_.segment_1D66F00
+          name: Segment .segment_1D66F00
+          paths:
+            - segment_1D66F00
+        - id: segment_.segment_1D67A70
+          name: Segment .segment_1D67A70
+          paths:
+            - segment_1D67A70
+        - id: segment_.segment_1D8B4C0
+          name: Segment .segment_1D8B4C0
+          paths:
+            - segment_1D8B4C0
+        - id: segment_.segment_1D8B6C0
+          name: Segment .segment_1D8B6C0
+          paths:
+            - segment_1D8B6C0
+        - id: segment_.segment_1D8C620
+          name: Segment .segment_1D8C620
+          paths:
+            - segment_1D8C620
+        - id: segment_.segment_1DB4980
+          name: Segment .segment_1DB4980
+          paths:
+            - segment_1DB4980
+        - id: segment_.segment_1DB4C20
+          name: Segment .segment_1DB4C20
+          paths:
+            - segment_1DB4C20
+        - id: segment_.segment_1DB5790
+          name: Segment .segment_1DB5790
+          paths:
+            - segment_1DB5790
+        - id: segment_.segment_1DD4750
+          name: Segment .segment_1DD4750
+          paths:
+            - segment_1DD4750
+        - id: segment_.segment_1DD4950
+          name: Segment .segment_1DD4950
+          paths:
+            - segment_1DD4950
+        - id: segment_.segment_1DD54C0
+          name: Segment .segment_1DD54C0
+          paths:
+            - segment_1DD54C0
+        - id: segment_.segment_1DF38F0
+          name: Segment .segment_1DF38F0
+          paths:
+            - segment_1DF38F0
+        - id: segment_.segment_1DF3AF0
+          name: Segment .segment_1DF3AF0
+          paths:
+            - segment_1DF3AF0
+        - id: segment_.segment_1DF4660
+          name: Segment .segment_1DF4660
+          paths:
+            - segment_1DF4660
+        - id: segment_.segment_1E16C10
+          name: Segment .segment_1E16C10
+          paths:
+            - segment_1E16C10
+        - id: segment_.segment_1E16E10
+          name: Segment .segment_1E16E10
+          paths:
+            - segment_1E16E10
+        - id: segment_.segment_1E17980
+          name: Segment .segment_1E17980
+          paths:
+            - segment_1E17980
+        - id: segment_.segment_1E36C00
+          name: Segment .segment_1E36C00
+          paths:
+            - segment_1E36C00
+        - id: segment_.segment_1E36E00
+          name: Segment .segment_1E36E00
+          paths:
+            - segment_1E36E00
+        - id: segment_.segment_1E37970
+          name: Segment .segment_1E37970
+          paths:
+            - segment_1E37970
+        - id: segment_.segment_1E5D070
+          name: Segment .segment_1E5D070
+          paths:
+            - segment_1E5D070
+        - id: segment_.segment_1E5D270
+          name: Segment .segment_1E5D270
+          paths:
+            - segment_1E5D270
+        - id: segment_.segment_1E5DDE0
+          name: Segment .segment_1E5DDE0
+          paths:
+            - segment_1E5DDE0
+        - id: segment_.segment_1E7B650
+          name: Segment .segment_1E7B650
+          paths:
+            - segment_1E7B650
+        - id: segment_.segment_1E7B850
+          name: Segment .segment_1E7B850
+          paths:
+            - segment_1E7B850
+        - id: segment_.segment_1E7C710
+          name: Segment .segment_1E7C710
+          paths:
+            - segment_1E7C710
+        - id: segment_.segment_1EA1000
+          name: Segment .segment_1EA1000
+          paths:
+            - segment_1EA1000
+        - id: segment_.segment_1EA12B0
+          name: Segment .segment_1EA12B0
+          paths:
+            - segment_1EA12B0
+        - id: segment_.segment_1EA2170
+          name: Segment .segment_1EA2170
+          paths:
+            - segment_1EA2170
+        - id: segment_.segment_1ED7210
+          name: Segment .segment_1ED7210
+          paths:
+            - segment_1ED7210
+        - id: segment_.segment_1ED74C0
+          name: Segment .segment_1ED74C0
+          paths:
+            - segment_1ED74C0
+        - id: segment_.segment_1ED8030
+          name: Segment .segment_1ED8030
+          paths:
+            - segment_1ED8030
+        - id: segment_.segment_1F03840
+          name: Segment .segment_1F03840
+          paths:
+            - segment_1F03840
+        - id: segment_.segment_1F03A40
+          name: Segment .segment_1F03A40
+          paths:
+            - segment_1F03A40
+        - id: segment_.segment_1F049A0
+          name: Segment .segment_1F049A0
+          paths:
+            - segment_1F049A0
+        - id: segment_.segment_1F2C5C0
+          name: Segment .segment_1F2C5C0
+          paths:
+            - segment_1F2C5C0
+        - id: segment_.segment_1F2C860
+          name: Segment .segment_1F2C860
+          paths:
+            - segment_1F2C860
+        - id: segment_.segment_1F2D920
+          name: Segment .segment_1F2D920
+          paths:
+            - segment_1F2D920
+        - id: segment_.segment_1F64640
+          name: Segment .segment_1F64640
+          paths:
+            - segment_1F64640
+        - id: segment_.segment_1F64920
+          name: Segment .segment_1F64920
+          paths:
+            - segment_1F64920
+        - id: segment_.segment_1F65490
+          name: Segment .segment_1F65490
+          paths:
+            - segment_1F65490
+        - id: segment_.segment_1F898F0
+          name: Segment .segment_1F898F0
+          paths:
+            - segment_1F898F0
+        - id: segment_.segment_1F89AF0
+          name: Segment .segment_1F89AF0
+          paths:
+            - segment_1F89AF0
+        - id: segment_.segment_1F8A660
+          name: Segment .segment_1F8A660
+          paths:
+            - segment_1F8A660
+        - id: segment_.segment_1FA9EB0
+          name: Segment .segment_1FA9EB0
+          paths:
+            - segment_1FA9EB0
+        - id: segment_.segment_1FAA0B0
+          name: Segment .segment_1FAA0B0
+          paths:
+            - segment_1FAA0B0
+        - id: segment_.segment_1FAAC20
+          name: Segment .segment_1FAAC20
+          paths:
+            - segment_1FAAC20
+        - id: segment_.segment_1FCDF80
+          name: Segment .segment_1FCDF80
+          paths:
+            - segment_1FCDF80
+        - id: segment_.segment_1FCE1A0
+          name: Segment .segment_1FCE1A0
+          paths:
+            - segment_1FCE1A0
+        - id: segment_.segment_1FCE670
+          name: Segment .segment_1FCE670
+          paths:
+            - segment_1FCE670
+        - id: segment_.segment_1FCF820
+          name: Segment .segment_1FCF820
+          paths:
+            - segment_1FCF820
