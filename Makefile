@@ -327,10 +327,10 @@ init:
 	$(MAKE) diff-init
 
 format:
-	clang-format-11 -i -style=file $(filter-out src/libmus/%, $(C_FILES))
+	clang-format-14 -i -style=file $(filter-out src/libmus/%, $(C_FILES))
 
 tidy:
-	clang-tidy-11 -p . --fix --fix-errors $(filter-out src/libmus/%, $(C_FILES)) -- $(CC_CHECK_FLAGS) $(IINC) $(CHECK_WARNINGS) $(BUILD_DEFINES) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(C_DEFINES) $(MIPS_BUILTIN_DEFS)
+	clang-tidy-14 -p . --fix --fix-errors $(filter-out src/libmus/%, $(C_FILES)) -- $(CC_CHECK_FLAGS) $(IINC) $(CHECK_WARNINGS) $(BUILD_DEFINES) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(C_DEFINES) $(MIPS_BUILTIN_DEFS)
 
 .PHONY: all clean libclean distclean setup extract diff-init init format tidy
 .DEFAULT_GOAL := all
