@@ -63,7 +63,7 @@ settings:
 
 segments:
   - name: header
-    fixed_vram: 0x80000000
+    fixed_vram: 0x00000000
     files:
       - { path: src/rom_header/rom_header.o }
 
