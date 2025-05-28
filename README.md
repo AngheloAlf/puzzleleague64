@@ -8,10 +8,10 @@
 
 [Build Status]: <https://github.com/AngheloAlf/puzzleleague64/actions/workflows/ci.yml/badge.svg>
 [actions]: <https://github.com/AngheloAlf/puzzleleague64/actions/workflows/ci.yml>
-[Code usa Progress]: https://decomp.dev/AngheloAlf/puzzleleague64/usa.svg?mode=shield&label=us&measure=matched_code_percent
-[Code eur Progress]: https://decomp.dev/AngheloAlf/puzzleleague64/eur.svg?mode=shield&label=us&measure=matched_code_percent
-[Code fra Progress]: https://decomp.dev/AngheloAlf/puzzleleague64/fra.svg?mode=shield&label=us&measure=matched_code_percent
-[Code ger Progress]: https://decomp.dev/AngheloAlf/puzzleleague64/ger.svg?mode=shield&label=us&measure=matched_code_percent
+[Code usa Progress]: https://decomp.dev/AngheloAlf/puzzleleague64/usa.svg?mode=shield&label=usa&measure=matched_code_percent
+[Code eur Progress]: https://decomp.dev/AngheloAlf/puzzleleague64/eur.svg?mode=shield&label=eur&measure=matched_code_percent
+[Code fra Progress]: https://decomp.dev/AngheloAlf/puzzleleague64/fra.svg?mode=shield&label=fra&measure=matched_code_percent
+[Code ger Progress]: https://decomp.dev/AngheloAlf/puzzleleague64/ger.svg?mode=shield&label=ger&measure=matched_code_percent
 
 Matching decomp of Pokémon Puzzle League
 
