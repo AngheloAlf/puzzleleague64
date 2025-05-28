@@ -163,13 +163,13 @@ tools:
             - unk_
 
         - id: assets_bg_screen
-          name: Assets: bg_screen
+          name: "Assets: bg_screen"
           paths:
             - assets/bg_screen/
             - segment_bg_screen
 
         - id: bin_file
-          name: Assets: bin_file
+          name: "Assets: bin_file"
           paths:
             - bin_file/
 

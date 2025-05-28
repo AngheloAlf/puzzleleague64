@@ -24,7 +24,6 @@ typedef struct struct_gaEditData {
     /* 0x4 */ struct_gaEditData_unk_4 unk_4;
 } struct_gaEditData; // size = 0x8
 
-extern void *Pon_Image_Heap;
 extern void *gpHeapEdit;
 
 extern s32 B_8018E9C0_usa; // geMode?

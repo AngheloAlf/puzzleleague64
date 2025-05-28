@@ -12,6 +12,7 @@
 
 #include "segment_symbols.h"
 
+#include "bg_screen_load.h"
 #include "buffers.h"
 #include "end.h"
 #include "hvqm2util.h"
@@ -62,22 +63,6 @@ typedef struct struct_8004EC4C_usa_arg3 {
     /* 0x0 */ UNK_TYPE4 unk_0;
     /* 0x0 */ UNK_TYPE1 unk_4[0x4];
 } struct_8004EC4C_usa_arg3; // size = 0x8
-
-void func_80073C20_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-void func_80073D10_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-void func_80073E00_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-void func_80073EF0_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-void func_80073FE0_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-void func_800740D0_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-void func_800741C0_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-void func_800742B0_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-void func_800743A0_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-void func_80074490_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-void func_80074580_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-void func_80074670_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-void func_80074760_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-void func_80074850_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-void func_80074940_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 
 #if VERSION_USA
 #ifdef NON_EQUIVALENT
@@ -411,7 +396,7 @@ void DoBonus(void) {
         2, -1, -5, -9, -13, -18, -23, -28, -34, -40, -46, -52, -59, -66, -73, -80,
     };
     struct_800C48A8_usa sp260[] UNUSED = {
-        0xF81D, 0xF01B, 0xE019, 0xC817, 0xB815, 0xA813, 0xB815, 0xC817, 0xE019, 0xF01B,
+        { 0xF81D, 0xF01B }, { 0xE019, 0xC817 }, { 0xB815, 0xA813 }, { 0xB815, 0xC817 }, { 0xE019, 0xF01B },
     };
     TheGame_unk_0000 *var_s2;
     s32 i;
@@ -699,10 +684,10 @@ void func_800325F8_usa(void) {
     osInvalDCache(SEGMENT_VRAM_START(segment_0FB480), SEGMENT_VRAM_SIZE(segment_0FB480));
     func_80001310_usa(SEGMENT_ROM_START(segment_0FB480), heap, SEGMENT_ROM_SIZE(segment_0FB480));
     Pon_Image_Heap += SEGMENT_ROM_SIZE(segment_0FB480);
-    B_8018EA00_usa = (void*)((uintptr_t)heap + 0x0000);
-    B_8018EA08_usa = (void*)((uintptr_t)heap + 0x1800);
-    B_8018EA04_usa = (void*)((uintptr_t)heap + 0x3300);
-    B_8018EA0C_usa = (void*)((uintptr_t)heap + 0x4B00);
+    B_8018EA00_usa = (void *)((uintptr_t)heap + 0x0000);
+    B_8018EA08_usa = (void *)((uintptr_t)heap + 0x1800);
+    B_8018EA04_usa = (void *)((uintptr_t)heap + 0x3300);
+    B_8018EA0C_usa = (void *)((uintptr_t)heap + 0x4B00);
 }
 
 #if VERSION_USA

@@ -11,7 +11,6 @@
 #include "main_functions.h"
 #include "main_variables.h"
 
-
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/flic", InitFlic);
 #endif

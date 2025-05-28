@@ -2,6 +2,8 @@
 
 # Adapted from https://github.com/zeldaret/mm/blob/main/tools/namefixer.py
 
+# This script is nice because it renames files too
+
 import argparse
 import os
 from pathlib import Path
@@ -15,8 +17,48 @@ simpleReplace: dict[str, str] = {
 # for example, if there is a space before and an open parenthesis after,
 # like for a function call: ` func_8002E4B4(`
 wordReplace: dict[str, str] = {
-"B_80187EAC_fra": "func_80001E98_usa",
-"func_80001F5C_ger": "func_80001E98_usa",
+"func_80074220_eur": "func_80073EF0_usa",
+"func_80072950_fra": "func_80073EF0_usa",
+"func_80072B00_ger": "func_80073EF0_usa",
+"func_80074310_eur": "func_80073FE0_usa",
+"func_80072A40_fra": "func_80073FE0_usa",
+"func_80072BF0_ger": "func_80073FE0_usa",
+"func_80074400_eur": "func_800740D0_usa",
+"func_80072B30_fra": "func_800740D0_usa",
+"func_80072CE0_ger": "func_800740D0_usa",
+"func_800744F0_eur": "func_800741C0_usa",
+"func_80072C20_fra": "func_800741C0_usa",
+"func_80072DD0_ger": "func_800741C0_usa",
+"func_800745E0_eur": "func_800742B0_usa",
+"func_80072D10_fra": "func_800742B0_usa",
+"func_80072EC0_ger": "func_800742B0_usa",
+"func_800746D0_eur": "func_800743A0_usa",
+"func_80072E00_fra": "func_800743A0_usa",
+"func_80072FB0_ger": "func_800743A0_usa",
+"func_80073F50_eur": "func_80073C20_usa",
+"func_80072680_fra": "func_80073C20_usa",
+"func_80072830_ger": "func_80073C20_usa",
+"func_80074040_eur": "func_80073D10_usa",
+"func_80072770_fra": "func_80073D10_usa",
+"func_80072920_ger": "func_80073D10_usa",
+"func_800747C0_eur": "func_80074490_usa",
+"func_80072EF0_fra": "func_80074490_usa",
+"func_800730A0_ger": "func_80074490_usa",
+"func_800748B0_eur": "func_80074580_usa",
+"func_80072FE0_fra": "func_80074580_usa",
+"func_80073190_ger": "func_80074580_usa",
+"func_800749A0_eur": "func_80074670_usa",
+"func_800730D0_fra": "func_80074670_usa",
+"func_80073280_ger": "func_80074670_usa",
+"func_80074A90_eur": "func_80074760_usa",
+"func_800731C0_fra": "func_80074760_usa",
+"func_80073370_ger": "func_80074760_usa",
+"func_80074B80_eur": "func_80074850_usa",
+"func_800732B0_fra": "func_80074850_usa",
+"func_80073460_ger": "func_80074850_usa",
+"func_80074C70_eur": "func_80074940_usa",
+"func_800733A0_fra": "func_80074940_usa",
+"func_80073550_ger": "func_80074940_usa",
 }
 
 # [a-zA-Z0-9_]
