@@ -1,0 +1,181 @@
+name: Pokémon Puzzle League
+repo: https://github.com/AngheloAlf/puzzleleague64
+platform: n64
+build_system: make
+versions:
+  - name: usa
+    fullname: usa
+    sha1: 8173866fc8c7652abd44c48efcab85441c6806a1
+    paths:
+      target: "baserom.usa.z64"
+
+      build_dir: "build/usa"
+      map: "build/usa/puzzleleague64.usa.map"
+      compiled_target: "build/usa/puzzleleague64.usa.z64"
+      elf: "build/usa/puzzleleague64.usa.elf"
+
+      expected_dir: "expected/"
+
+      asm: "asm/usa"
+      nonmatchings: "asm/usa/nonmatchings"
+
+  - name: eur
+    fullname: eur
+    sha1: 8173866fc8c7652abd44c48efcab85441c6806a1
+    paths:
+      target: "baserom.eur.z64"
+
+      build_dir: "build/eur"
+      map: "build/eur/puzzleleague64.eur.map"
+      compiled_target: "build/eur/puzzleleague64.eur.z64"
+      elf: "build/eur/puzzleleague64.eur.elf"
+
+      expected_dir: "expected/"
+
+      asm: "asm/eur"
+      nonmatchings: "asm/eur/nonmatchings"
+
+  - name: fra
+    fullname: fra
+    sha1: 8173866fc8c7652abd44c48efcab85441c6806a1
+    paths:
+      target: "baserom.fra.z64"
+
+      build_dir: "build/fra"
+      map: "build/fra/puzzleleague64.fra.map"
+      compiled_target: "build/fra/puzzleleague64.fra.z64"
+      elf: "build/fra/puzzleleague64.fra.elf"
+
+      expected_dir: "expected/"
+
+      asm: "asm/fra"
+      nonmatchings: "asm/fra/nonmatchings"
+
+  - name: ger
+    fullname: ger
+    sha1: 8173866fc8c7652abd44c48efcab85441c6806a1
+    paths:
+      target: "baserom.ger.z64"
+
+      build_dir: "build/ger"
+      map: "build/ger/puzzleleague64.ger.map"
+      compiled_target: "build/ger/puzzleleague64.ger.z64"
+      elf: "build/ger/puzzleleague64.ger.elf"
+
+      expected_dir: "expected/"
+
+      asm: "asm/ger"
+      nonmatchings: "asm/ger/nonmatchings"
+tools:
+  mapfile_parser:
+    progress_report:
+      # output: report.json # Optional
+      check_asm_paths: True
+      # Change if the asm path in the build folder is deeper than two subfolders.
+      # i.e.: "build/us/asm/header.o" -> `path_index: 3`.
+      # i.e.: "build/us/asm/us/header.o" -> `path_index: 4`.
+      path_index: 4
+      prefixes_to_trim:
+        - build/usa/lib/
+        - build/usa/src/
+        - build/usa/asm/usa/data/
+        - build/usa/asm/usa/
+        - build/eur/lib/
+        - build/eur/src/
+        - build/eur/asm/eur/data/
+        - build/eur/asm/eur/
+        - build/fra/lib/
+        - build/fra/src/
+        - build/fra/asm/fra/data/
+        - build/fra/asm/fra/
+        - build/ger/lib/
+        - build/ger/src/
+        - build/ger/asm/ger/data/
+        - build/ger/asm/ger/
+        - build/
+      categories:
+        # Categories by path
+        - id: rom_header
+          name: rom_header
+          paths:
+            - rom_header/
+        - id: ipl3
+          name: ipl3
+          paths:
+            - ipl3
+        - id: entry
+          name: entry
+          paths:
+            - entry/
+
+        - id: main
+          name: main
+          paths:
+            - main/
+
+        - id: libmus
+          name: libmus
+          paths:
+            - libmus/
+        - id: flash
+          name: flash
+          paths:
+            - flash/
+        - id: libultra
+          name: libultra
+          paths:
+            - libultra/
+            - ultralib/
+        - id: libhvqm
+          name: libhvqm
+          paths:
+            - libhvqm/
+        - id: libkmc
+          name: libkmc
+          paths:
+            - libkmc/
+
+        - id: libs
+          name: Libraries
+          paths:
+            - libmus/
+            - flash/
+            - libultra/
+            - ultralib/
+            - libhvqm/
+            - libkmc/
+
+        - id: rsp
+          name: RSP
+          paths:
+            - rsp/
+
+        - id: assets
+          name: Assets
+          paths:
+            - assets/
+            - segment_
+            - unk_
+
+        - id: unks
+          name: Unknowns
+          paths:
+            - unk_
+
+        - id: bin_file
+          name: bin_file
+          paths:
+            - bin_file/
+
+        # Categories by segment
+        - id: segment_.main
+          name: Segment .main
+          paths:
+            - main
+            - libmus
+            - flash
+            - ultralib
+            - libultra
+            - libhvqm
+            - libkmc
+            - rsp
