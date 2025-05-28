@@ -61,6 +61,38 @@ DECLARE_SEGMENT(segment_101A80);
 
 DECLARE_SEGMENT(segment_50F3F0);
 
+DECLARE_SEGMENT(segment_bg_screen_62AB10);
+DECLARE_SEGMENT(segment_bg_screen_63FDB0);
+DECLARE_SEGMENT(segment_bg_screen_654B10);
+DECLARE_SEGMENT(segment_bg_screen_66A050);
+DECLARE_SEGMENT(segment_bg_screen_6802B0);
+DECLARE_SEGMENT(segment_bg_screen_69B3D0);
+DECLARE_SEGMENT(segment_bg_screen_6B2890);
+DECLARE_SEGMENT(segment_bg_screen_6D1B50);
+DECLARE_SEGMENT(segment_bg_screen_6E92B0);
+DECLARE_SEGMENT(segment_bg_screen_702ED0);
+DECLARE_SEGMENT(segment_bg_screen_71BB30);
+DECLARE_SEGMENT(segment_bg_screen_7426B0);
+DECLARE_SEGMENT(segment_bg_screen_75ADD0);
+DECLARE_SEGMENT(segment_bg_screen_7727D0);
+DECLARE_SEGMENT(segment_bg_screen_78F870);
+DECLARE_SEGMENT(segment_bg_screen_7B9870);
+DECLARE_SEGMENT(segment_bg_screen_7D39D0);
+DECLARE_SEGMENT(segment_bg_screen_7E5010);
+DECLARE_SEGMENT(segment_bg_screen_7F5BD0);
+DECLARE_SEGMENT(segment_bg_screen_8088D0);
+DECLARE_SEGMENT(segment_bg_screen_81A450);
+DECLARE_SEGMENT(segment_bg_screen_82C890);
+DECLARE_SEGMENT(segment_bg_screen_83EB10);
+DECLARE_SEGMENT(segment_bg_screen_8520D0);
+DECLARE_SEGMENT(segment_bg_screen_865D90);
+DECLARE_SEGMENT(segment_bg_screen_87A4D0);
+DECLARE_SEGMENT(segment_bg_screen_88DA90);
+DECLARE_SEGMENT(segment_bg_screen_8A8050);
+DECLARE_SEGMENT(segment_bg_screen_8BB610);
+DECLARE_SEGMENT(segment_bg_screen_8CE310);
+DECLARE_SEGMENT(segment_bg_screen_8E2A50);
+DECLARE_SEGMENT(segment_bg_screen_902250);
 
 DECLARE_SEGMENT(bin_file);
 

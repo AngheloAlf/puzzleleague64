@@ -259,22 +259,7 @@ void Init2DTetrisTMEM(TheGame_unk_0000_unk_0000_unk_000_unk_000 *arg0, TheGame_u
 // void func_8007371C_usa();
 // void func_800737B8_usa();
 // void func_800739F0_usa();
-// void func_80073B30_usa();
-// void func_80073C20_usa();
-// void func_80073D10_usa();
-// void func_80073E00_usa();
-// void func_80073EF0_usa();
-// void func_80073FE0_usa();
-// void func_800740D0_usa();
-// void func_800741C0_usa();
-// void func_800742B0_usa();
-// void func_800743A0_usa();
-// void func_80074490_usa();
-// void func_80074580_usa();
-// void func_80074670_usa();
-// void func_80074760_usa();
-// void func_80074850_usa();
-// void func_80074940_usa();
+
 // void func_80074A30_usa();
 // void func_80074A58_usa();
 // void func_80074AEC_usa();
