@@ -71,6 +71,28 @@ typedef struct TheGame_unk_0000_unk_3FB0 {
     /* 0x00 */ UNK_TYPE1 unk_00[0xD8];
 } TheGame_unk_0000_unk_3FB0; // size = 0xD8
 
+typedef enum enum_TheGame_unk_0000_unk_4424 {
+    /*  1 */ ENUM_THEGAME_UNK_0000_UNK_4424_1 = 1,
+    /*  2 */ ENUM_THEGAME_UNK_0000_UNK_4424_2,
+    /*  3 */ ENUM_THEGAME_UNK_0000_UNK_4424_3,
+    /*  4 */ ENUM_THEGAME_UNK_0000_UNK_4424_4,
+    /*  5 */ ENUM_THEGAME_UNK_0000_UNK_4424_5,
+    /*  6 */ ENUM_THEGAME_UNK_0000_UNK_4424_6,
+    /*  7 */ ENUM_THEGAME_UNK_0000_UNK_4424_7,
+    /*  8 */ ENUM_THEGAME_UNK_0000_UNK_4424_8,
+    /*  9 */ ENUM_THEGAME_UNK_0000_UNK_4424_9,
+    /* 10 */ ENUM_THEGAME_UNK_0000_UNK_4424_10,
+    /* 11 */ ENUM_THEGAME_UNK_0000_UNK_4424_11,
+    /* 12 */ ENUM_THEGAME_UNK_0000_UNK_4424_12,
+    /* 13 */ ENUM_THEGAME_UNK_0000_UNK_4424_13,
+    /* 14 */ ENUM_THEGAME_UNK_0000_UNK_4424_14,
+    /* 15 */ ENUM_THEGAME_UNK_0000_UNK_4424_15,
+    /* 16 */ ENUM_THEGAME_UNK_0000_UNK_4424_16,
+    /* 18 */ ENUM_THEGAME_UNK_0000_UNK_4424_18 = 18,
+    /* 31 */ ENUM_THEGAME_UNK_0000_UNK_4424_31 = 31,
+    /* 41 */ ENUM_THEGAME_UNK_0000_UNK_4424_41 = 41,
+} enum_TheGame_unk_0000_unk_4424;
+
 
 typedef struct TheGame_unk_0000 {
     /* 0x0000 */ TheGame_unk_0000_unk_0000 unk_0000;
@@ -97,7 +119,7 @@ typedef struct TheGame_unk_0000 {
     /* 0x4404 */ UNK_TYPE4 unk_4404;
     /* 0x4408 */ UNK_TYPE1 unk_4408[0x18];
     /* 0x4420 */ s32 unk_4420; // TODO: enum?
-    /* 0x4424 */ UNK_TYPE4 unk_4424;
+    /* 0x4424 */ s32 unk_4424; // enum_TheGame_unk_0000_unk_4424
     /* 0x4428 */ s32 unk_4428;
     /* 0x442C */ UNK_TYPE1 unk_442C[0x4];
 } TheGame_unk_0000; // size = 0x4430
@@ -367,7 +389,7 @@ typedef struct struct_gInfo {
 
 
 typedef struct TheGame {
-    /* 0x0000 */ TheGame_unk_0000 unk_0000[THEGAME_BUFFER_LEN];
+    /* 0x0000 */ TheGame_unk_0000 unk_0000[THEGAME_BUFFER_LEN]; // tetWell tetrisWell
     /* 0x8860 */ TheGame_unk_8860 unk_8860[THEGAME_BUFFER_LEN];
     /* 0x89C0 */ UNK_TYPE1 unk_89C0[0x4];
     /* 0x89C4 */ TheGame_unk_89C4 unk_89C4[UNK_SIZE];

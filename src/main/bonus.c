@@ -82,17 +82,42 @@ void InitBonus(void) {
         0x1D, 0x30, 0x43, 0x56, 0x69, 0x7C,
     };
     struct_800C4518_usa spA0[] = {
-        { 0xC0, 0x81 }, { 0xC0, 0x87 }, { 0xC0, 0x74 }, { 0xC0, 0x7E }, { 0xC0, 0x79 }, { 0xC0, 0x7A },
-        { 0xC0, 0x6F }, { 0xC0, 0x6B }, { 0xC0, 0x65 }, { 0xC0, 0x6F }, { 0xC0, 0x2F }, { 0xC0, 0x6F },
-        { 0xC0, 0x74 }, { 0xC0, 0x65 }, { 0xC0, 0 },    { 0xC0, 0x5D },
+        { 192, 129 },                             //
+        { 192, BGSCREEN_TEX_7E5010_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_1
+        { 192, BGSCREEN_TEX_7F5BD0_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_2
+        { 192, BGSCREEN_TEX_8088D0_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_3
+        { 192, BGSCREEN_TEX_81A450_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_4
+        { 192, BGSCREEN_TEX_82C890_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_5
+        { 192, BGSCREEN_TEX_83EB10_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_6
+        { 192, BGSCREEN_TEX_8520D0_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_7
+        { 192, BGSCREEN_TEX_865D90_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_8
+        { 192, BGSCREEN_TEX_87A4D0_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_9
+        { 192, BGSCREEN_TEX_88DA90_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_10
+        { 192, BGSCREEN_TEX_8A8050_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_11
+        { 192, BGSCREEN_TEX_8BB610_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_12
+        { 192, BGSCREEN_TEX_8CE310_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_13
+        { 192, BGSCREEN_TEX_8E2A50_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_14
+        { 192, BGSCREEN_TEX_902250_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_15
     };
     struct_800C4598_usa sp120[] = {
-        { 0x00000041, 0x0000003F }, { 0x0000003F, 0x00000039 }, { 0x00000042, 0x0000004C }, { 0x00000047, 0x00000042 },
-        { 0x00000065, 0x00000047 }, { 0x0000004E, 0x00000046 }, { 0x0000007E, 0x00000051 }, { 0x0000004F, 0x00000055 },
-        { 0x0000005D, 0x0000005B }, { 0x00000057, 0x00000051 }, { 0x000000AC, 0x00000091 }, { 0x00000055, 0x00000051 },
-        { 0x00000050, 0x0000004C }, { 0x00000071, 0x0000005B }, { 0x000000C0, 0x000000C0 }, { 0x0000005F, 0x00000063 },
+        { 65, 63 },                              //
+        { 63, BGSCREEN_TEX_7E5010_TOP_HEIGHT },  // ENUM_THEGAME_UNK_0000_UNK_4424_1
+        { 66, BGSCREEN_TEX_7F5BD0_TOP_HEIGHT },  // ENUM_THEGAME_UNK_0000_UNK_4424_2
+        { 71, BGSCREEN_TEX_8088D0_TOP_HEIGHT },  // ENUM_THEGAME_UNK_0000_UNK_4424_3
+        { 101, BGSCREEN_TEX_81A450_TOP_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_4
+        { 78, BGSCREEN_TEX_82C890_TOP_HEIGHT },  // ENUM_THEGAME_UNK_0000_UNK_4424_5
+        { 126, BGSCREEN_TEX_83EB10_TOP_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_6
+        { 79, BGSCREEN_TEX_8520D0_TOP_HEIGHT },  // ENUM_THEGAME_UNK_0000_UNK_4424_7
+        { 93, BGSCREEN_TEX_865D90_TOP_HEIGHT },  // ENUM_THEGAME_UNK_0000_UNK_4424_8
+        { 87, BGSCREEN_TEX_87A4D0_TOP_HEIGHT },  // ENUM_THEGAME_UNK_0000_UNK_4424_9
+        { 172, BGSCREEN_TEX_88DA90_TOP_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_10
+        { 85, BGSCREEN_TEX_8A8050_TOP_HEIGHT },  // ENUM_THEGAME_UNK_0000_UNK_4424_11
+        { 80, BGSCREEN_TEX_8BB610_TOP_HEIGHT },  // ENUM_THEGAME_UNK_0000_UNK_4424_12
+        { 113, BGSCREEN_TEX_8CE310_TOP_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_13
+        { 192, BGSCREEN_TEX_8E2A50_TOP_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_14
+        { 95, BGSCREEN_TEX_902250_TOP_HEIGHT },  // ENUM_THEGAME_UNK_0000_UNK_4424_15
     };
-    s32 temp_s3;
+    enum_TheGame_unk_0000_unk_4424 temp_s3;
     s32 var_s2;
     s32 var_s3;
     uObjBg *var_a0;
@@ -192,55 +217,55 @@ void InitBonus(void) {
     if (gSelection == 0x96) {
         temp_s3 = gTheGame.unk_0000[1].unk_4424;
         switch (temp_s3) {
-            case 0x1:
-                func_80073C20_usa(0, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+            case ENUM_THEGAME_UNK_0000_UNK_4424_1:
+                func_80073C20_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
 
-            case 0x2:
-                func_80073D10_usa(0, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+            case ENUM_THEGAME_UNK_0000_UNK_4424_2:
+                func_80073D10_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
-            case 0x3:
-                func_80073E00_usa(0, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+            case ENUM_THEGAME_UNK_0000_UNK_4424_3:
+                func_80073E00_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
-            case 0x4:
-                func_80073EF0_usa(0, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+            case ENUM_THEGAME_UNK_0000_UNK_4424_4:
+                func_80073EF0_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
-            case 0x5:
-                func_80073FE0_usa(0, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+            case ENUM_THEGAME_UNK_0000_UNK_4424_5:
+                func_80073FE0_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
-            case 0x6:
-                func_800740D0_usa(0, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+            case ENUM_THEGAME_UNK_0000_UNK_4424_6:
+                func_800740D0_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
-            case 0x7:
-                func_800741C0_usa(0, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+            case ENUM_THEGAME_UNK_0000_UNK_4424_7:
+                func_800741C0_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
-            case 0x8:
-                func_800742B0_usa(0, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+            case ENUM_THEGAME_UNK_0000_UNK_4424_8:
+                func_800742B0_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
-            case 0x9:
-                func_800743A0_usa(0, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+            case ENUM_THEGAME_UNK_0000_UNK_4424_9:
+                func_800743A0_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
-            case 0xA:
-                func_80074490_usa(0, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+            case ENUM_THEGAME_UNK_0000_UNK_4424_10:
+                func_80074490_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
-            case 0xB:
-                func_80074580_usa(0, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+            case ENUM_THEGAME_UNK_0000_UNK_4424_11:
+                func_80074580_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
-            case 0xC:
-                func_80074670_usa(0, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+            case ENUM_THEGAME_UNK_0000_UNK_4424_12:
+                func_80074670_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
-            case 0xD:
-                func_80074760_usa(0, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+            case ENUM_THEGAME_UNK_0000_UNK_4424_13:
+                func_80074760_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
-            case 0xE:
-                func_80074850_usa(0, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+            case ENUM_THEGAME_UNK_0000_UNK_4424_14:
+                func_80074850_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
-            case 0xF:
-            case 0x12:
-                func_80074940_usa(0, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+            case ENUM_THEGAME_UNK_0000_UNK_4424_15:
+            case ENUM_THEGAME_UNK_0000_UNK_4424_18:
+                func_80074940_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
 
-            case 0x10:
+            case ENUM_THEGAME_UNK_0000_UNK_4424_16:
                 temp_s4 = Pon_Image_Heap;
                 osInvalDCache((void *)D_104C660, (u32)D_1070A60 - (u32)D_104C660);
                 func_80001310_usa(SEGMENT_ROM_START(segment_50F3F0), temp_s4, SEGMENT_ROM_SIZE(segment_50F3F0));
@@ -254,14 +279,14 @@ void InitBonus(void) {
                 break;
         }
 
-        if (temp_s3 == 0x10) {
+        if (temp_s3 == ENUM_THEGAME_UNK_0000_UNK_4424_16) {
             gTheGame.unk_8C88[6].b.frameX = -0x2C;
             gTheGame.unk_8C88[6].b.frameY = 0x44;
         } else {
             gTheGame.unk_8C88[6].b.frameX = (0xB2 - sp78[temp_s3 - 1].unk_0) << 2;
             gTheGame.unk_8C88[6].b.frameY = (sp120[temp_s3].unk_4 + 0x2B - sp78[temp_s3 - 1].unk_1) << 2;
 
-            for (var_s2 = 7; var_s2 < 0xA; var_s2++) {
+            for (var_s2 = 7; var_s2 < ARRAY_COUNT(gTheGame.unk_8C88); var_s2++) {
                 gTheGame.unk_8C88[var_s2].b.frameX = (0xB2 - sp78[temp_s3 - 1].unk_0) << 2;
                 gTheGame.unk_8C88[var_s2].b.frameY = (0x2B - sp78[temp_s3 - 1].unk_1) << 2;
             }

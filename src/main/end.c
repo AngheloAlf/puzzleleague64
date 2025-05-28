@@ -148,9 +148,9 @@ s32 EndingExplosion(TheGame *the_game) {
             case 0x2:
             case 0x3:
             case 0x5:
-                if (the_game->unk_0000[0].unk_4424 < 0x1F) {
+                if (the_game->unk_0000[0].unk_4424 < ENUM_THEGAME_UNK_0000_UNK_4424_31) {
                     var_s0 = 1;
-                } else if (the_game->unk_0000[0].unk_4424 < 0x29) {
+                } else if (the_game->unk_0000[0].unk_4424 < ENUM_THEGAME_UNK_0000_UNK_4424_41) {
                     var_s0 = 2;
                 } else {
                     var_s0 = 3;
@@ -158,9 +158,9 @@ s32 EndingExplosion(TheGame *the_game) {
                 break;
 
             case 0x6:
-                if (the_game->unk_0000[0].unk_4424 < 0x1F) {
+                if (the_game->unk_0000[0].unk_4424 < ENUM_THEGAME_UNK_0000_UNK_4424_31) {
                     var_s0 = 1;
-                } else if (the_game->unk_0000[0].unk_4424 < 0x29) {
+                } else if (the_game->unk_0000[0].unk_4424 < ENUM_THEGAME_UNK_0000_UNK_4424_41) {
                     var_s0 = 2;
                 } else {
                     var_s0 = 3;

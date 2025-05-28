@@ -11,6 +11,8 @@
 #include "main_functions.h"
 #include "main_variables.h"
 
+#include "bg_screen_load.h"
+
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/flic", InitFlic);
 #endif
@@ -53,7 +55,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/flic", func_8004EC08_usa);
 
 #if VERSION_USA
 #ifdef NON_EQUIVALENT
-void func_8004EC4C_usa(TexturePtr arg0, s32 arg1, s32 arg2, s32 arg3) {
+void func_8004EC4C_usa(TexturePtr arg0, bool arg1, s32 main_height, s32 top_height) {
     s32 sp10[4];
     s32 var_a0;
     s32 var_s2;
@@ -61,34 +63,34 @@ void func_8004EC4C_usa(TexturePtr arg0, s32 arg1, s32 arg2, s32 arg3) {
     uObjBg *var_s0;
     s32 i;
 
-    sp10[0] = arg2;
-    sp10[1] = arg3;
-    sp10[2] = arg3;
-    sp10[3] = arg3;
+    sp10[0] = main_height;
+    sp10[1] = top_height;
+    sp10[2] = top_height;
+    sp10[3] = top_height;
     var_s2 = 0;
 
-    if (arg1 != 0) {
+    if (arg1) {
         var_a0 = 0;
-        var_v0 = 0x18;
+        var_v0 = 24;
     } else {
         var_a0 = 6;
-        var_v0 = 0xBC;
+        var_v0 = 188;
     }
 
     for (i = 0; i < 4; i++) {
         var_s0 = &gTheGame.unk_8C88[var_a0 + i];
 
         var_s0->b.imageX = 0;
-        var_s0->b.imageW = 0x70 << 2;
+        var_s0->b.imageW = BGSCREEN_TEX_WIDTH << 2;
         var_s0->b.frameX = var_v0 << 2;
-        var_s0->b.frameW = 0x6C << 2;
+        var_s0->b.frameW = (BGSCREEN_TEX_WIDTH - 4) << 2;
 
         var_s0->b.imageY = 0;
         var_s0->b.imageH = sp10[i] << 2;
         if (i == 0) {
-            var_s0->b.frameY = (0xD8 - sp10[i]) << 2;
+            var_s0->b.frameY = (216 - sp10[i]) << 2;
         } else {
-            var_s0->b.frameY = 0x18 << 2;
+            var_s0->b.frameY = 24 << 2;
         }
         var_s0->b.frameH = sp10[i] << 2;
 
@@ -100,7 +102,7 @@ void func_8004EC4C_usa(TexturePtr arg0, s32 arg1, s32 arg2, s32 arg3) {
         var_s0->b.imageFlip = 0;
 
         guS2DInitBg(var_s0);
-        var_s2 += sp10[i] * 0xE0;
+        var_s2 += sp10[i] * 224;
     }
 }
 #else
