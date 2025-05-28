@@ -3,6 +3,7 @@
  */
 
 #include "puzzle.h"
+
 #include "ultra64.h"
 #include "include_asm.h"
 #include "macros_defines.h"
@@ -10,9 +11,11 @@
 #include "main_functions.h"
 #include "main_variables.h"
 #include "assets_variables.h"
+
+#include "flic.h"
+#include "draw2d.h"
 #include "tetris.h"
 #include "update.h"
-#include "draw2d.h"
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/puzzle", func_80088940_usa);

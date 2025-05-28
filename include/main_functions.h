@@ -70,17 +70,6 @@ void Draw2DShadeBox(void);
 // void func_8004B300_usa();
 // void func_8004BC64_usa();
 
-// void InitFlic();
-// void func_8004E4E4_usa();
-// void func_8004E5E8_usa();
-// void func_8004E688_usa();
-// void func_8004E854_usa();
-// void func_8004E8CC_usa();
-// void func_8004E9D8_usa();
-// void func_8004EAB8_usa();
-void Draw2DAnimation(struct_gInfo_unk_00068 *arg0, s32 arg1, s32 arg2);
-// void func_8004EC08_usa();
-// void func_8004EC4C_usa();
 s32 AnimationRandom(s32 arg0);
 // void func_8004EE24_usa();
 // void func_8004EEFC_usa();

@@ -113,6 +113,11 @@ tools:
           paths:
             - main/
 
+        - id: bg_screen_load
+          name: bg_screen_load
+          paths:
+            - main/bg_screen_load
+
         - id: libmus
           name: libmus
           paths:

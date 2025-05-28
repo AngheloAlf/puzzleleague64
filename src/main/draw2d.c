@@ -12,6 +12,7 @@
 
 #include "bonus.h"
 #include "fade.h"
+#include "flic.h"
 #include "sign.h"
 #include "text.h"
 
