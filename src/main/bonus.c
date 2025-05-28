@@ -52,7 +52,6 @@ extern u32 D_1030FE0[];
 extern u32 D_104C660[];
 extern u32 D_105B710[];
 extern u32 D_1070A60[];
-extern void *Pon_Image_Heap;
 
 typedef struct struct_8004EC4C_usa_arg2 {
     /* 0x0 */ UNK_TYPE4 unk_0;
@@ -622,18 +621,6 @@ INCLUDE_RODATA("asm/usa/nonmatchings/main/bonus", RO_800C4914_usa);
 INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", func_80032494_usa);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", func_800325F8_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", DoCountDown);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", DrawCountDown);
-#endif
-
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/bonus", func_80032300_eur);
 #endif
@@ -656,18 +643,6 @@ INCLUDE_RODATA("asm/eur/nonmatchings/main/bonus", RO_800C4C64_eur);
 
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/bonus", func_800324C4_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/bonus", func_80032628_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/bonus", DoCountDown);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/bonus", func_80033034_eur);
 #endif
 
 #if VERSION_FRA
@@ -694,18 +669,6 @@ INCLUDE_RODATA("asm/fra/nonmatchings/main/bonus", RO_800C3314_fra);
 INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", func_80032420_fra);
 #endif
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", func_80032584_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", DoCountDown);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", func_80032F90_fra);
-#endif
-
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/bonus", func_800323D0_ger);
 #endif
@@ -730,12 +693,44 @@ INCLUDE_RODATA("asm/ger/nonmatchings/main/bonus", RO_800BA2D4_ger);
 INCLUDE_ASM("asm/ger/nonmatchings/main/bonus", func_80032594_ger);
 #endif
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/bonus", func_800326F8_ger);
+void func_800325F8_usa(void) {
+    void *heap = Pon_Image_Heap;
+
+    osInvalDCache(SEGMENT_VRAM_START(segment_0FB480), SEGMENT_VRAM_SIZE(segment_0FB480));
+    func_80001310_usa(SEGMENT_ROM_START(segment_0FB480), heap, SEGMENT_ROM_SIZE(segment_0FB480));
+    Pon_Image_Heap += SEGMENT_ROM_SIZE(segment_0FB480);
+    B_8018EA00_usa = (void*)((uintptr_t)heap + 0x0000);
+    B_8018EA08_usa = (void*)((uintptr_t)heap + 0x1800);
+    B_8018EA04_usa = (void*)((uintptr_t)heap + 0x3300);
+    B_8018EA0C_usa = (void*)((uintptr_t)heap + 0x4B00);
+}
+
+#if VERSION_USA
+INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", DoCountDown);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/bonus", DoCountDown);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", DoCountDown);
 #endif
 
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/bonus", DoCountDown);
+#endif
+
+#if VERSION_USA
+INCLUDE_ASM("asm/usa/nonmatchings/main/bonus", DrawCountDown);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/bonus", func_80033034_eur);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/bonus", func_80032F90_fra);
 #endif
 
 #if VERSION_GER

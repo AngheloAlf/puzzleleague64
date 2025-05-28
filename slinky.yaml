@@ -707,25 +707,29 @@ segments:
       - { path: src/assets/segment_0CA4A0.o, include_if_any: [[version, usa]] }
       - { path: "asm/{version}/data/assets/segment_0CA4A0.data.o", include_if_any: [[version, eur], [version, fra], [version, ger]] }
 
-  - name: unk_0FB480
+  - name: segment_0FB480
+    files:
+      - { path: "asm/{version}/data/segment_0FB480.o" }
+
+  - name: unk_101A80
     include_if_any: [[version, usa]]
     files:
-      - { path: "asm/{version}/data/unk_0FB480.o" }
+      - { path: "asm/{version}/data/unk_101A80.o" }
 
-  - name: unk_0FB730
+  - name: unk_101D30
     include_if_any: [[version, eur]]
     files:
-      - { path: "asm/{version}/data/unk_0FB730.o" }
+      - { path: "asm/{version}/data/unk_101D30.o" }
 
-  - name: unk_0F9D90
+  - name: unk_100390
     include_if_any: [[version, fra]]
     files:
-      - { path: "asm/{version}/data/unk_0F9D90.o" }
+      - { path: "asm/{version}/data/unk_100390.o" }
 
-  - name: unk_0EF470
+  - name: unk_0F5A70
     include_if_any: [[version, ger]]
     files:
-      - { path: "asm/{version}/data/unk_0EF470.o" }
+      - { path: "asm/{version}/data/unk_0F5A70.o" }
 
   - name: segment_101A80
     files:

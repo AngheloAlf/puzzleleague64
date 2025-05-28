@@ -948,10 +948,12 @@ extern u32 B_8018A808_usa;
 // extern UNK_TYPE B_8018E9E8_usa;
 // extern UNK_TYPE B_8018E9EC_usa;
 // extern UNK_TYPE B_8018E9F0_usa;
-// extern UNK_TYPE B_8018EA00_usa;
-// extern UNK_TYPE B_8018EA04_usa;
-// extern UNK_TYPE B_8018EA08_usa;
-// extern UNK_TYPE B_8018EA0C_usa;
+
+extern void *B_8018EA00_usa;
+extern void *B_8018EA04_usa;
+extern void *B_8018EA08_usa;
+extern void *B_8018EA0C_usa;
+
 extern const char *B_8018EA10_usa;
 extern s32 gnTickClear;
 extern s32 giScreenClear;
@@ -1350,7 +1352,7 @@ extern s32 B_801C7060_usa;
 // extern UNK_TYPE B_801C7089_usa;
 
 extern OSTime gTime;
-// extern UNK_TYPE Pon_Image_Heap;
+extern void *Pon_Image_Heap;
 // extern UNK_TYPE B_801C70B8_usa;
 // extern UNK_TYPE B_801C70D4_usa;
 extern s32 B_801C70D8_usa;

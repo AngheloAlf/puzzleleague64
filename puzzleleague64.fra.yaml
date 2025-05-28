@@ -666,8 +666,12 @@ segments:
       - [0x0C8DB0, data, assets/segment_0CA4A0]
 
   - type: databin
-    name: unk_0F9D90
+    name: segment_0FB480
     start: 0x0F9D90
+
+  - type: databin
+    name: unk_100390
+    start: 0x100390
     # Unknown end
 
   - type: databin
