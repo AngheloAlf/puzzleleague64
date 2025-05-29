@@ -8,7 +8,7 @@
 void InitGameAudioSystem(void);
 void SetSoundOptions(s16 arg0);
 // void func_800040D8_usa();
-s32 PlayGameSong(TheGame_unk_0000 *game);
+s32 PlayGameSong(tetWell *game);
 // void func_80004848_usa();
 // void func_8000486C_usa();
 // void func_800048C0_usa();

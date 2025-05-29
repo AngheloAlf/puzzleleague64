@@ -65,15 +65,15 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/dlist", func_80053174_ger);
 INCLUDE_ASM("asm/ger/nonmatchings/main/dlist", func_800531B4_ger);
 #endif
 
-void InitTetrisState(TheGame_unk_0000_unk_0000_unk_000_unk_000 *arg0) {
-    arg0->unk_00 = 0;
-    arg0->unk_04 = 0;
-    arg0->unk_08 = 0;
-    arg0->unk_0C = 0;
-    arg0->unk_10 = 0;
-    arg0->unk_24 = 0;
-    arg0->unk_14 = 0;
-    arg0->unk_20 = 0;
+void InitTetrisState(block_t *arg0) {
+    arg0->state = 0;
+    arg0->delay = 0;
+    arg0->disappear = 0;
+    arg0->drop = 0;
+    arg0->type = 0;
+    arg0->frame_n = 0;
+    arg0->bomb = 0;
+    arg0->chain_flag = 0;
 }
 
 void InitDisplayList(struct_gInfo *info) {

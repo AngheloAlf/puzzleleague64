@@ -6,7 +6,7 @@
 #include "the_game.h"
 
 
-void Draw2DTetrisWell(struct_gInfo_unk_00068 *arg0, TheGame_unk_0000 *arg1, s32 arg2);
+void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num);
 void Draw2DCursor(struct_gInfo_unk_00068 *arg0);
 UNK_RET Draw2DIcon(struct_gInfo_unk_00068 *arg0, s32 arg1);
 UNK_RET Draw2DAttackBrick(struct_gInfo_unk_00068 *arg0, s32 arg1, s32 arg2);

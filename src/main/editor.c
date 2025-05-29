@@ -150,8 +150,8 @@ void DrawEditor(struct_gInfo_unk_00068 *arg0) {
                 gTheGame.unk_9C0C = 1;
                 gTheGame.unk_9C28 = 0;
                 gTheGame.unk_9C30 = 0;
-                gTheGame.unk_0000[0].unk_4404 = 0;
-                gTheGame.unk_0000[1].unk_4404 = 0;
+                gTheGame.tetrisWell[0].unk_4404 = 0;
+                gTheGame.tetrisWell[1].unk_4404 = 0;
                 B_801AD9BC_usa = -1;
                 B_801ADAE8_usa = -1;
                 gTheGame.unk_9C2C = B_801AB808_usa;

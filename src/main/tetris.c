@@ -193,7 +193,7 @@ void InitTetrisWell(void) {
         sp44 = 0;
         sp4C = 0;
 loop_4:
-        temp_s3 = &gTheGame.unk_0000[0].unk_0000.unk_0000[0].unk_000[0].unk_00[sp4C];
+        temp_s3 = &gTheGame.tetrisWell[0].unk_0000.unk_0000[0].unk_000[0].unk_00[sp4C];
         sp34 = &gTheGame.unk_8860[0].unk_00[sp44];
         bzero(&sp10, 4);
         temp_s3->unk_43B0 = 0;
@@ -253,7 +253,7 @@ block_54:
                     if (((gSelection == 0xAA) | (gSelection == 0xB4)) != 0) {
                         func_8006C0E0_usa(temp_s3, sp34, var_fp);
                     }
-                    Init2DTetrisBlocksTMEM((TheGame *) temp_s3, 0);
+                    Init2DTetrisBlocksTMEM((Game *) temp_s3, 0);
                     goto block_99;
                 case 0x78:                          /* switch 1 */
                     temp_a2 = gPlayer + (((temp_s3->unk_4424 - 1) * 0x6E) + 0x121);
@@ -306,7 +306,7 @@ loop_33:
                         } while ((s32) var_s0_2 < (s32) temp_s5);
                         goto block_52;
                     }
-                    if (gTheGame.unk_0000[0].unk_43BC[0x28] != temp_s3->unk_43E4) {
+                    if (gTheGame.tetrisWell[0].unk_43BC[0x28] != temp_s3->unk_43E4) {
                         bzero(&sp10, 0x12);
                         var_s0_3 = (AnimationRandom(0xE) * 6) + &D_800B6AA0_usa;
                         temp_s7_3 = var_s0_3 + 0xC;
@@ -331,7 +331,7 @@ loop_44:
                         } while ((s32) var_s0_3 < (s32) temp_s5_2);
                         goto block_52;
                     }
-                    bcopy(&gTheGame.unk_0000[0].unk_43BC[0x28] - 0x43E4, temp_s3, 0x2520);
+                    bcopy(&gTheGame.tetrisWell[0].unk_43BC[0x28] - 0x43E4, temp_s3, 0x2520);
                     goto block_54;
             }
         } else {
@@ -398,7 +398,7 @@ loop_76:
                         } while ((s32) var_s0_5 < (s32) temp_s5_4);
                         goto block_95;
                     }
-                    if (gTheGame.unk_0000[0].unk_43BC[0x28] != temp_s3->unk_43E4) {
+                    if (gTheGame.tetrisWell[0].unk_43BC[0x28] != temp_s3->unk_43E4) {
                         bzero(&sp10, 0x12);
                         var_s0_6 = (AnimationRandom(0xE) * 6) + &D_800B6AA0_usa;
                         temp_s7_6 = var_s0_6 + 0xC;
@@ -423,7 +423,7 @@ loop_87:
                         } while ((s32) var_s0_6 < (s32) temp_s5_5);
                         goto block_95;
                     }
-                    bcopy(&gTheGame.unk_0000[0].unk_43BC[0x28] - 0x43E4, temp_s3, 0x2520);
+                    bcopy(&gTheGame.tetrisWell[0].unk_43BC[0x28] - 0x43E4, temp_s3, 0x2520);
                     break;
             }
             func_8005D900_usa(temp_s3);

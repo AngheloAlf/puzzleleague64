@@ -361,17 +361,17 @@ s32 doGameLoop(s32 arg0) {
                         UpdateBuffer(&gInfo[arg0]);
 
                         if (gTheGame.unk_9C08 == 1) {
-                            PlayGameSong(&gTheGame.unk_0000[0]);
+                            PlayGameSong(&gTheGame.tetrisWell[0]);
                             if (gGameStatus & 0x20) {
                                 SetSongTempo(last_song_handle, 0x6E);
                             }
                         } else {
-                            TheGame_unk_0000 *temp;
+                            tetWell *temp;
 
-                            if (gTheGame.unk_0000[0].unk_43B8 != 0) {
-                                temp = &gTheGame.unk_0000[0];
+                            if (gTheGame.tetrisWell[0].unk_43B8 != 0) {
+                                temp = &gTheGame.tetrisWell[0];
                             } else {
-                                temp = &gTheGame.unk_0000[1];
+                                temp = &gTheGame.tetrisWell[1];
                             }
                             PlayGameSong(temp);
                         }

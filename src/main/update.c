@@ -238,42 +238,42 @@ void Update2DBuffer(struct_gInfo *info) {
     }
 
     for (var_s6 = 0; var_s6 < gTheGame.unk_9C08; var_s6++) {
-        TheGame_unk_0000 *__src = &gTheGame.unk_0000[var_s6];
-        TheGame_unk_8860 *temp = &gTheGame.unk_8860[var_s6];
-        TheGame_unk_0000_unk_0000 *var_s0;
+        tetWell *__src = &gTheGame.tetrisWell[var_s6];
+        Game_unk_8860 *temp = &gTheGame.unk_8860[var_s6];
+        block_t(*var_s0)[BLOCK_LEN_B];
         s32 var_a1;
 
-        bcopy(temp, &new_var5->unk_172A8[var_s6], sizeof(TheGame_unk_8860));
-        bcopy(&__src->unk_0000, &new_var5->unk_10244[var_s6], sizeof(TheGame_unk_0000_unk_0000));
+        bcopy(temp, &new_var5->unk_172A8[var_s6], sizeof(Game_unk_8860));
+        bcopy(__src->block, new_var5->unk_10244[var_s6], sizeof(__src->block));
         bzero(&new_var5->unk_10208[var_s6].unk_0, sizeof(struct_gInfo_unk_10208_unk_0));
 
-        var_s0 = &new_var5->unk_10244[var_s6];
-        for (var_a1 = 0; var_a1 < ARRAY_COUNT(var_s0->unk_0000); var_a1++) {
+        var_s0 = new_var5->unk_10244[var_s6];
+        for (var_a1 = 0; var_a1 < BLOCK_LEN_A; var_a1++) {
             s32 var_a0;
 
-            for (var_a0 = 0; var_a0 < ARRAY_COUNT(var_s0->unk_0000[var_a1].unk_000); var_a0++) {
-                TheGame_unk_0000_unk_0000_unk_000_unk_000 *var = &var_s0->unk_0000[var_a1].unk_000[var_a0];
+            for (var_a0 = 0; var_a0 < BLOCK_LEN_B / 3; var_a0++) {
+                block_t *var = &var_s0[var_a1][var_a0];
 
-                var->unk_24 = sp14[var->unk_24];
+                var->frame_n = sp14[var->frame_n];
                 //! FAKE
-                (&(*(&new_var5->unk_10208[var_s6])).unk_0)->unk_0[var->unk_24] = 1;
+                (&(*(&new_var5->unk_10208[var_s6])).unk_0)->unk_0[var->frame_n] = 1;
             }
         }
 
-        bcopy(&__src->unk_3830, &new_var5->unk_17408[var_s6], sizeof(TheGame_unk_0000_unk_3830));
-        bcopy(&__src->unk_3EF0, &new_var5->unk_18188[var_s6], sizeof(TheGame_unk_0000_unk_3EF0));
+        bcopy(&__src->unk_3830, &new_var5->unk_17408[var_s6], sizeof(tetWell_unk_3830));
+        bcopy(&__src->unk_3EF0, &new_var5->unk_18188[var_s6], sizeof(tetWell_unk_3EF0));
 
         if (temp->unk_1C != -1) {
-            bcopy(&__src->unk_3F80, &new_var5->unk_182A8[var_s6], sizeof(TheGame_unk_0000_unk_3F80));
-            bcopy(&__src->unk_3F98, &new_var5->unk_182D8[var_s6], sizeof(TheGame_unk_0000_unk_3F98));
+            bcopy(&__src->unk_3F80, &new_var5->unk_182A8[var_s6], sizeof(tetWell_unk_3F80));
+            bcopy(&__src->unk_3F98, &new_var5->unk_182D8[var_s6], sizeof(tetWell_unk_3F98));
         }
 
-        bcopy(&__src->unk_2AC0, &new_var5->unk_157C8[var_s6], sizeof(TheGame_unk_0000_unk_2AC0));
-        bcopy(&__src->unk_2520, &new_var5->unk_14C88[var_s6], sizeof(TheGame_unk_0000_unk_2520));
-        bcopy(&__src->unk_2ED0, &new_var5->unk_15FE8[var_s6], sizeof(TheGame_unk_0000_unk_2ED0));
+        bcopy(&__src->unk_2AC0, &new_var5->unk_157C8[var_s6], sizeof(tetWell_unk_2AC0));
+        bcopy(&__src->unk_2520, &new_var5->unk_14C88[var_s6], sizeof(tetWell_unk_2520));
+        bcopy(&__src->unk_2ED0, &new_var5->unk_15FE8[var_s6], sizeof(tetWell_unk_2ED0));
     }
 
-    bcopy(&gTheGame.unk_90C8, &new_var5->unk_186F8, sizeof(TheGame_unk_90C8) * THEGAME_UNK_90C8_LEN);
+    bcopy(&gTheGame.unk_90C8, &new_var5->unk_186F8, sizeof(text_t) * GAME_UNK_90C8_LEN);
 }
 #endif
 
@@ -293,10 +293,10 @@ void Update3DBuffer(struct_gInfo *info) {
     s32 var_a2;
     s32 var_fp;
     int var_v1;
-    TheGame_unk_0000 *temp_s2;
-    TheGame_unk_8860 *temp_s4;
-    TheGame_unk_0000_unk_0000_unk_000_unk_000 *var_a1;
-    TheGame_unk_0000_unk_0000 *var_s0;
+    tetWell *temp_s2;
+    Game_unk_8860 *temp_s4;
+    block_t *var_a1;
+    block_t **var_s0;
     s8 *var_s7;
     struct_gInfo_unk_00068 *temp_s1;
     s32 someTemp;
@@ -309,38 +309,38 @@ void Update3DBuffer(struct_gInfo *info) {
     }
 
     for (var_fp = 0; var_fp < gTheGame.unk_9C08; var_fp++) {
-        temp_s2 = &gTheGame.unk_0000[var_fp];
+        temp_s2 = &gTheGame.tetrisWell[var_fp];
         temp_s4 = &gTheGame.unk_8860[var_fp];
 
         bcopy(temp_s4, &temp_s1->unk_172A8[var_fp], 0xB0);
-        bcopy(&temp_s2->unk_0000, &temp_s1->unk_10244[var_fp], 0x2520);
+        bcopy(&temp_s2->block, &temp_s1->unk_10244[var_fp], sizeof(temp_s2->block));
         bzero(&temp_s1->unk_10208[var_fp].unk_0, sizeof(struct_gInfo_unk_10208_unk_0));
         bzero(&temp_s1->unk_10224[var_fp].unk_0, sizeof(struct_gInfo_unk_10224_unk_0));
 
         var_s0 = &temp_s1->unk_10244[var_fp];
         for (var_v1 = 0; var_v1 < 0xC; var_v1++) {
-            TheGame_unk_0000_unk_0000_unk_000 *something = &var_s0->unk_0000[var_v1];
-            s32 unk_24;
+            block_t *something = var_s0[var_v1];
+            s32 frame_n;
 
             for (var_a2 = 1; var_a2 < 9; var_a2++) {
-                var_a1 = &something->unk_000[var_a2];
+                var_a1 = &something[var_a2];
 
-                unk_24 = var_s7[something->unk_000[var_a2].unk_24];
-                something->unk_000[var_a2].unk_24 = unk_24;
-                temp_s1->unk_10208[var_fp].unk_0.unk_0[unk_24] = 1;
+                frame_n = var_s7[something[var_a2].frame_n];
+                something[var_a2].frame_n = frame_n;
+                temp_s1->unk_10208[var_fp].unk_0.unk_0[frame_n] = 1;
             }
 
             for (var_a2 = 9; var_a2 < 0x12; var_a2++) {
-                var_a1 = &something->unk_000[var_a2];
+                var_a1 = &something[var_a2];
 
-                unk_24 = var_s7[something->unk_000[var_a2].unk_24];
-                something->unk_000[var_a2].unk_24 = unk_24;
-                temp_s1->unk_10224[var_fp].unk_0.unk_0[unk_24] = 1;
+                frame_n = var_s7[something[var_a2].frame_n];
+                something[var_a2].frame_n = frame_n;
+                temp_s1->unk_10224[var_fp].unk_0.unk_0[frame_n] = 1;
             }
 
-            unk_24 = var_s7[something->unk_000[0].unk_24];
-            something->unk_000[0].unk_24 = unk_24;
-            temp_s1->unk_10224[var_fp].unk_0.unk_0[unk_24] = 1;
+            frame_n = var_s7[something[0].frame_n];
+            something[0].frame_n = frame_n;
+            temp_s1->unk_10224[var_fp].unk_0.unk_0[frame_n] = 1;
         }
 
         bcopy(&temp_s2->unk_2AC0, &temp_s1->unk_157C8[var_fp], 0x410);

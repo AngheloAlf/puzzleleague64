@@ -77,8 +77,8 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/tetsound", func_800040D8_usa);
 #endif
 
 #if VERSION_USA
-s32 PlayGameSong(TheGame_unk_0000 *game) {
-    ts_current_alert = game->unk_43B8;
+s32 PlayGameSong(tetWell *well) {
+    ts_current_alert = well->unk_43B8;
 
     if (initgameBool) {
         initgameBool = false;

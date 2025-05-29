@@ -51,8 +51,8 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/puzzle", func_80089108_usa);
 
 #if VERSION_USA
 #if 0
-// ? func_8006B314_usa(TheGame *, ?, s32 *);           /* extern */
-// s32 func_80088AB4_usa(TheGame *, TheGame_unk_8860 *, void *, ?); /* extern */
+// ? func_8006B314_usa(Game *, ?, s32 *);           /* extern */
+// s32 func_80088AB4_usa(Game *, Game_unk_8860 *, void *, ?); /* extern */
 
 s32 func_8008913C_usa(s32 arg0) {
     s32 var_v0;
@@ -63,7 +63,7 @@ s32 func_8008913C_usa(s32 arg0) {
     if (gTheGame.unk_9C30 == 0) {
         temp_v0 = (gPlayer + arg0)->unk_792;
         gTheGame.unk_9C30 = (s32) temp_v0;
-        gTheGame.unk_0000[0].unk_4408[0x20] = (s32) temp_v0;
+        gTheGame.tetrisWell[0].unk_4408[0x20] = (s32) temp_v0;
     }
     func_8006B314_usa(&gTheGame, 0, &gTheGame.unk_9C30);
     var_v0 = -1;
@@ -125,7 +125,7 @@ void DrawPuzzleEditor(struct_gInfo_unk_00068 *arg0) {
     gDPSetCombineMode(glistp++, G_CC_DECALRGBA, G_CC_DECALRGBA);
     gDPSetPrimColor(glistp++, 0, 0, 255, 255, 255, 255);
 
-    Draw2DTetrisWell(arg0, &gTheGame.unk_0000[0], 0);
+    Draw2DTetrisWell(arg0, &gTheGame.tetrisWell[0], 0);
 
     gDPSetScissor(glistp++, G_SC_NON_INTERLACE, 0, 7, SCREEN_WIDTH, SCREEN_HEIGHT - 1);
 

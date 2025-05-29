@@ -101,9 +101,14 @@ build/usa/puzzleleague64.usa.z64: OK
 
 ### Other versions
 
-By default this repository builds the USA version of this game, but it also supports the EUR, FRA and GER versions.
+By default this repository builds the USA version of this game, but it also supports the `eur`, `fra` and `ger` versions.
 
-To build other version place your ROM in the root of the repo and rename it to `baserom.VER.z64` and pass `VERSION=VER` to the above make commands (Where VER is either EUR, FRA or GER).
+To build other version place your ROM in the root of the repo and rename it to `baserom.VER.z64` and pass `VERSION=VER` to the above make commands (Where VER is either `eur`, `fra` or `ger`).
+
+## DWARF
+
+This repository uses the DWARF debugging information contained in the `PANEPON.plf` binary from the "Nintendo Puzzle Collection" Gamecube game as a reference for naming symbols and structs.
+Even if at a first glance Panel de Pon and Puzzle League may seem like different games, they share big chunks of the same codebase.
 
 ## Contributing
 

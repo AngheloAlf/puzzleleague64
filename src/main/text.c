@@ -3,6 +3,7 @@
  */
 
 #include "text.h"
+
 #include "ultra64.h"
 #include "include_asm.h"
 #include "macros_defines.h"
@@ -14,37 +15,37 @@
 #define MAGIC_NUMBER 6
 
 #if VERSION_USA
-s32 InitWhichNumber(TheGame_unk_90C8 *arg0, char arg1, s32 arg2) {
-    u16 *imageAdrs;
+s32 InitWhichNumber(text_t *text, char number, s32 type) {
+    u16 *addr;
 
-    if (arg1 == 0) {
+    if (number == 0) {
         return 0;
     }
 
-    imageAdrs = &arg0->unk_00.s.imageAdrs;
+    addr = &text->word.s.imageAdrs;
 
-    switch (arg2) {
+    switch (type) {
         case 0x14:
-            if (arg1 < 0x37) {
-                arg0->unk_18 = 0;
+            if (number < 0x37) {
+                text->texture = 0;
             } else {
-                arg0->unk_18 = 2;
+                text->texture = 2;
             }
             break;
 
         case 0x15:
-            if (arg1 >= 0x37) {
-                arg0->unk_18 = 2;
+            if (number >= 0x37) {
+                text->texture = 2;
             } else {
-                arg0->unk_18 = 1;
+                text->texture = 1;
             }
             break;
 
         case 0x16:
-            if (arg1 < 0x37) {
-                arg0->unk_18 = 3;
+            if (number < 0x37) {
+                text->texture = 3;
             } else {
-                arg0->unk_18 = 5;
+                text->texture = 5;
             }
             break;
 
@@ -52,82 +53,82 @@ s32 InitWhichNumber(TheGame_unk_90C8 *arg0, char arg1, s32 arg2) {
             return 0;
 
         case 0x17:
-            if (arg1 < 0x37) {
-                arg0->unk_18 = 4;
+            if (number < 0x37) {
+                text->texture = 4;
             } else {
-                arg0->unk_18 = 5;
+                text->texture = 5;
             }
             break;
     }
 
-    switch (arg1) {
+    switch (number) {
         default:
             return 0;
 
         case ' ':
-            arg0->unk_18 = 0x46;
+            text->texture = 0x46;
             break;
 
         case '\'':
-            *imageAdrs = 0;
+            *addr = 0;
             break;
 
         case '-':
-            *imageAdrs = 0;
+            *addr = 0;
             break;
 
         case '7':
-            if ((arg2 == 0x14) || (arg2 == 0x16)) {
-                *imageAdrs = 0;
+            if ((type == 0x14) || (type == 0x16)) {
+                *addr = 0;
             } else {
-                *imageAdrs = 0x80;
+                *addr = 0x80;
             }
             break;
 
         case '3':
-            *imageAdrs = 0x80;
+            *addr = 0x80;
             break;
 
         case '8':
-            if ((arg2 == 0x14) || (arg2 == 0x16)) {
+            if ((type == 0x14) || (type == 0x16)) {
                 FALLTHROUGH;
                 case '0':
-                    *imageAdrs = 2;
+                    *addr = 2;
             } else {
-                *imageAdrs = 0x82;
+                *addr = 0x82;
             }
             break;
 
         case '4':
-            *imageAdrs = 0x82;
+            *addr = 0x82;
             break;
 
         case '9':
-            if ((arg2 == 0x14) || (arg2 == 0x16)) {
+            if ((type == 0x14) || (type == 0x16)) {
                 FALLTHROUGH;
                 case '1':
-                    *imageAdrs = 4;
+                    *addr = 4;
             } else {
-                *imageAdrs = 0x84;
+                *addr = 0x84;
             }
             break;
 
         case '5':
-            *imageAdrs = 0x84;
+            *addr = 0x84;
             break;
 
         case ':':
-            if ((arg2 == 0x14) || (arg2 == 0x16)) {
+            if ((type == 0x14) || (type == 0x16)) {
                 FALLTHROUGH;
                 case '2':
-                    *imageAdrs = 6;
+                    *addr = 6;
             } else {
-                *imageAdrs = 0x86;
+                *addr = 0x86;
             }
             break;
 
         case '6':
-            *imageAdrs = 0x86;
+            *addr = 0x86;
             break;
     }
 
@@ -195,7 +196,7 @@ extern const char RO_STR_800C5E78_usa[];
 // UpdateText
 void func_8004C280_usa(void) {
     char sp18[1];
-    TheGame_unk_90C8 *var_s0;
+    text_t *var_s0;
     s16 temp_v0;
     s16 temp_v0_10;
     s16 temp_v0_11;
@@ -453,19 +454,19 @@ void func_8004C280_usa(void) {
             } else {
                 var_a2 = gPlayer + 0x20;
             }
-            if (gTheGame.unk_0000[0].unk_43AC > 0xF423F) {
-                gTheGame.unk_0000[0].unk_43AC = 0xF423F;
+            if (gTheGame.tetrisWell[0].unk_43AC > 0xF423F) {
+                gTheGame.tetrisWell[0].unk_43AC = 0xF423F;
             }
             if (gDemo == GDEMO_2C) {
-                if (gTheGame.unk_0000[0].unk_4420 != 0) {
-                    if (*var_a2 < gTheGame.unk_0000[0].unk_43AC) {
-                        *var_a2 = gTheGame.unk_0000[0].unk_43AC;
+                if (gTheGame.tetrisWell[0].unk_4420 != 0) {
+                    if (*var_a2 < gTheGame.tetrisWell[0].unk_43AC) {
+                        *var_a2 = gTheGame.tetrisWell[0].unk_43AC;
                     }
                     goto block_63;
                 }
             } else {
             block_63:
-                if (gTheGame.unk_0000[0].unk_4420 != 0) {
+                if (gTheGame.tetrisWell[0].unk_4420 != 0) {
                     sprintf(&sp18, &RO_STR_800C5E58_usa, *var_a2);
                     var_s1 = gTheGame.unk_90C0;
                     var_s3_9 = 0xE8;
@@ -489,7 +490,7 @@ void func_8004C280_usa(void) {
                 }
             }
 
-            sprintf(&sp18, &RO_STR_800C5E58_usa, gTheGame.unk_0000[0].unk_43AC);
+            sprintf(&sp18, &RO_STR_800C5E58_usa, gTheGame.tetrisWell[0].unk_43AC);
             var_s1 = gTheGame.unk_90C0;
             var_s3_10 = 0xE8;
             var_s0 = &gTheGame.unk_90C8[var_s1];
@@ -533,7 +534,7 @@ void func_8004C280_usa(void) {
                 gTheGame.unk_90C8[4].unk_18 = -1U;
             } else {
                 if (DoFlashDraw(0) != 0) {
-                    sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.unk_0000[0].unk_43E0);
+                    sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.tetrisWell[0].unk_43E0);
                     var_s1 = gTheGame.unk_90C0;
                     var_s3_12 = 0x10C;
                     var_s0 = &gTheGame.unk_90C8[var_s1];
@@ -555,7 +556,7 @@ void func_8004C280_usa(void) {
                     gTheGame.unk_90C0 = var_s1;
                 }
                 gTheGame.unk_90C8[3].unk_18 = 0;
-                if (gTheGame.unk_0000[0].unk_4408[0x18] < 2) {
+                if (gTheGame.tetrisWell[0].unk_4408[0x18] < 2) {
                     gTheGame.unk_90C8[4].unk_18 = 1;
                 } else {
                     gTheGame.unk_90C8[4].unk_18 = 2;
@@ -564,8 +565,8 @@ void func_8004C280_usa(void) {
             break;
 
         case 0xAA:
-            if (gTheGame.unk_0000[0].unk_4420 != 5) {
-                sprintf(&sp18, &RO_STR_800C5E68_usa, gTheGame.unk_0000[0].unk_4424, gTheGame.unk_0000[0].unk_4428);
+            if (gTheGame.tetrisWell[0].unk_4420 != 5) {
+                sprintf(&sp18, &RO_STR_800C5E68_usa, gTheGame.tetrisWell[0].unk_4424, gTheGame.tetrisWell[0].unk_4428);
                 var_s1 = gTheGame.unk_90C0;
                 var_s3_13 = 0x103;
 
@@ -587,10 +588,10 @@ void func_8004C280_usa(void) {
                 }
                 gTheGame.unk_90C0 = var_s1;
             }
-            if (gTheGame.unk_0000[0].unk_43AC > 0xF423F) {
-                gTheGame.unk_0000[0].unk_43AC = 0xF423F;
+            if (gTheGame.tetrisWell[0].unk_43AC > 0xF423F) {
+                gTheGame.tetrisWell[0].unk_43AC = 0xF423F;
             }
-            sprintf(&sp18, &RO_STR_800C5E58_usa, gTheGame.unk_0000[0].unk_43AC);
+            sprintf(&sp18, &RO_STR_800C5E58_usa, gTheGame.tetrisWell[0].unk_43AC);
             var_s1 = gTheGame.unk_90C0;
             var_s3_14 = 0xE8;
 
@@ -636,7 +637,7 @@ void func_8004C280_usa(void) {
                 gTheGame.unk_90C8[3].unk_18 = -1U;
             } else {
                 if (DoFlashDraw(0) != 0) {
-                    sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.unk_0000[0].unk_43E0);
+                    sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.tetrisWell[0].unk_43E0);
                     var_s1 = gTheGame.unk_90C0;
                     var_s3_16 = 0x10C;
 
@@ -658,9 +659,9 @@ void func_8004C280_usa(void) {
                     }
                     gTheGame.unk_90C0 = var_s1;
                 }
-                if (gTheGame.unk_0000[0].unk_4420 != 5) {
+                if (gTheGame.tetrisWell[0].unk_4420 != 5) {
                     gTheGame.unk_90C8[3].unk_18 = 0;
-                    sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.unk_0000[0].unk_4424);
+                    sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.tetrisWell[0].unk_4424);
                     var_s1 = gTheGame.unk_90C0;
                     var_s3_17 = 0x10C;
 
@@ -689,7 +690,7 @@ void func_8004C280_usa(void) {
             break;
 
         case 0x78:
-            sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.unk_0000[0].unk_4424);
+            sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.tetrisWell[0].unk_4424);
             var_s1 = gTheGame.unk_90C0;
             var_s3_18 = 0x10C;
 
@@ -713,8 +714,8 @@ void func_8004C280_usa(void) {
             break;
 
         case 0x82:
-            if (gTheGame.unk_0000[0].unk_4420 == 0) {
-                sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.unk_0000[0].unk_4424);
+            if (gTheGame.tetrisWell[0].unk_4420 == 0) {
+                sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.tetrisWell[0].unk_4424);
                 var_s1 = gTheGame.unk_90C0;
                 var_s3_19 = 0x10C;
 
@@ -734,8 +735,8 @@ void func_8004C280_usa(void) {
                     var_s1 += 1;
                     var_s0++;
                 }
-            } else if (gTheGame.unk_0000[0].unk_4420 < 4) {
-                sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.unk_0000[0].unk_4420);
+            } else if (gTheGame.tetrisWell[0].unk_4420 < 4) {
+                sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.tetrisWell[0].unk_4420);
                 var_s1 = gTheGame.unk_90C0;
                 var_s3_20 = 0x10C;
 
@@ -756,7 +757,7 @@ void func_8004C280_usa(void) {
                     var_s0++;
                 }
                 gTheGame.unk_90C0 = var_s1;
-                sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.unk_0000[0].unk_4424);
+                sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.tetrisWell[0].unk_4424);
                 var_s1 = gTheGame.unk_90C0;
                 var_s3_21 = 0x10C;
 
@@ -777,7 +778,7 @@ void func_8004C280_usa(void) {
                     var_s0++;
                 }
             } else {
-                sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.unk_0000[0].unk_4420 - 3);
+                sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.tetrisWell[0].unk_4420 - 3);
                 var_s1 = gTheGame.unk_90C0;
                 var_s3_22 = 0x10C;
 
@@ -798,7 +799,7 @@ void func_8004C280_usa(void) {
                     var_s0++;
                 }
                 gTheGame.unk_90C0 = var_s1;
-                sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.unk_0000[0].unk_4424);
+                sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.tetrisWell[0].unk_4424);
                 var_s1 = gTheGame.unk_90C0;
                 var_s3_23 = 0x10C;
 
@@ -823,7 +824,7 @@ void func_8004C280_usa(void) {
             break;
 
         case 0xC8:
-            sprintf(&sp18, &RO_STR_800C5E70_usa, gTheGame.unk_0000[0].unk_43AC % 100000, gTheGame.unk_0000[0].unk_43AC);
+            sprintf(&sp18, &RO_STR_800C5E70_usa, gTheGame.tetrisWell[0].unk_43AC % 100000, gTheGame.tetrisWell[0].unk_43AC);
             var_s1 = gTheGame.unk_90C0;
             var_s3_24 = 0x89;
 
@@ -844,7 +845,7 @@ void func_8004C280_usa(void) {
                 var_s0++;
             }
             gTheGame.unk_90C0 = var_s1;
-            sprintf(&sp18, &RO_STR_800C5E70_usa, gTheGame.unk_0000[1].unk_43AC % 100000, gTheGame.unk_0000[1].unk_43AC);
+            sprintf(&sp18, &RO_STR_800C5E70_usa, gTheGame.tetrisWell[1].unk_43AC % 100000, gTheGame.tetrisWell[1].unk_43AC);
             var_s1 = gTheGame.unk_90C0;
             var_s3_25 = 0x8A;
 
@@ -865,9 +866,9 @@ void func_8004C280_usa(void) {
                 var_s0++;
             }
             gTheGame.unk_90C0 = var_s1;
-            sprintf(&sp18, &RO_STR_800C5E78_usa, gTheGame.unk_0000[0].unk_4428);
+            sprintf(&sp18, &RO_STR_800C5E78_usa, gTheGame.tetrisWell[0].unk_4428);
             var_s3_26 = 0x93;
-            if (gTheGame.unk_0000[0].unk_4428 < 0xA) {
+            if (gTheGame.tetrisWell[0].unk_4428 < 0xA) {
                 var_s1 = gTheGame.unk_90C0;
 
                 var_s0 = &gTheGame.unk_90C8[var_s1];
@@ -908,9 +909,9 @@ void func_8004C280_usa(void) {
                 }
             }
             gTheGame.unk_90C0 = var_s1;
-            sprintf(&sp18, &RO_STR_800C5E78_usa, gTheGame.unk_0000[1].unk_4428);
+            sprintf(&sp18, &RO_STR_800C5E78_usa, gTheGame.tetrisWell[1].unk_4428);
             var_s3_28 = 0xA3;
-            if (gTheGame.unk_0000[1].unk_4428 < 0xA) {
+            if (gTheGame.tetrisWell[1].unk_4428 < 0xA) {
                 var_s1 = gTheGame.unk_90C0;
 
                 var_s0 = &gTheGame.unk_90C8[var_s1];
@@ -955,9 +956,9 @@ void func_8004C280_usa(void) {
 
         case 0xA0:
         case 0xB4:
-            sprintf(&sp18, &RO_STR_800C5E78_usa, gTheGame.unk_0000[0].unk_4420);
+            sprintf(&sp18, &RO_STR_800C5E78_usa, gTheGame.tetrisWell[0].unk_4420);
             var_s3_30 = 0x93;
-            if (gTheGame.unk_0000[0].unk_4420 < 0xA) {
+            if (gTheGame.tetrisWell[0].unk_4420 < 0xA) {
                 var_s1 = gTheGame.unk_90C0;
 
                 var_s0 = &gTheGame.unk_90C8[var_s1];
@@ -998,9 +999,9 @@ void func_8004C280_usa(void) {
                 }
             }
             gTheGame.unk_90C0 = var_s1;
-            sprintf(&sp18, &RO_STR_800C5E78_usa, gTheGame.unk_0000[1].unk_4420);
+            sprintf(&sp18, &RO_STR_800C5E78_usa, gTheGame.tetrisWell[1].unk_4420);
             var_s3_32 = 0xA4;
-            if (gTheGame.unk_0000[1].unk_4420 < 0xA) {
+            if (gTheGame.tetrisWell[1].unk_4420 < 0xA) {
                 var_s1 = gTheGame.unk_90C0;
 
                 var_s0 = &gTheGame.unk_90C8[var_s1];
@@ -1041,9 +1042,9 @@ void func_8004C280_usa(void) {
                 }
             }
             gTheGame.unk_90C0 = var_s1;
-            sprintf(&sp18, &RO_STR_800C5E78_usa, gTheGame.unk_0000[0].unk_4428);
+            sprintf(&sp18, &RO_STR_800C5E78_usa, gTheGame.tetrisWell[0].unk_4428);
             var_s3_34 = 0x93;
-            if (gTheGame.unk_0000[0].unk_4428 < 0xA) {
+            if (gTheGame.tetrisWell[0].unk_4428 < 0xA) {
                 var_s1 = gTheGame.unk_90C0;
 
                 var_s0 = &gTheGame.unk_90C8[var_s1];
@@ -1084,9 +1085,9 @@ void func_8004C280_usa(void) {
                 }
             }
             gTheGame.unk_90C0 = var_s1;
-            sprintf(&sp18, &RO_STR_800C5E78_usa, gTheGame.unk_0000[1].unk_4428);
+            sprintf(&sp18, &RO_STR_800C5E78_usa, gTheGame.tetrisWell[1].unk_4428);
             var_s3_36 = 0xA4;
-            if (gTheGame.unk_0000[1].unk_4428 < 0xA) {
+            if (gTheGame.tetrisWell[1].unk_4428 < 0xA) {
                 var_s1 = gTheGame.unk_90C0;
 
                 var_s0 = &gTheGame.unk_90C8[var_s1];
@@ -1145,7 +1146,7 @@ void Draw2DTemplate(struct_gInfo_unk_00068 *arg0) {
     gSPObjLoadTxtr(glistp++, &otherLUT);
 
     for (i = 0; i < MAGIC_NUMBER; i++) {
-        s32 var_v1 = arg0->unk_186F8[i].unk_18;
+        s32 var_v1 = arg0->unk_186F8[i].texture;
 
         if (var_v1 == -1) {
             continue;
@@ -1201,7 +1202,7 @@ void Draw2DTemplate(struct_gInfo_unk_00068 *arg0) {
             }
         }
 
-        gSPObjRectangle(glistp++, &arg0->unk_186F8[i].unk_00);
+        gSPObjRectangle(glistp++, &arg0->unk_186F8[i].word);
     }
 }
 #endif
@@ -1216,10 +1217,10 @@ void Draw2DText(struct_gInfo_unk_00068 *arg0) {
     Draw2DTemplate(arg0);
     bzero(sp10, MAGIC_NUMBER * sizeof(s8));
 
-    for (i = MAGIC_NUMBER; i < THEGAME_UNK_90C8_LEN; i++) {
-        if (arg0->unk_186F8[i].unk_18 < MAGIC_NUMBER) {
-            sp10[arg0->unk_186F8[i].unk_18] = true;
-        } else if (arg0->unk_186F8[i].unk_18 == -1) {
+    for (i = MAGIC_NUMBER; i < GAME_UNK_90C8_LEN; i++) {
+        if (arg0->unk_186F8[i].texture < MAGIC_NUMBER) {
+            sp10[arg0->unk_186F8[i].texture] = true;
+        } else if (arg0->unk_186F8[i].texture == -1) {
             var_s1 = i;
             break;
         }
@@ -1261,8 +1262,8 @@ void Draw2DText(struct_gInfo_unk_00068 *arg0) {
         }
 
         for (i = MAGIC_NUMBER; i < var_s1; i++) {
-            if (arg0->unk_186F8[i].unk_18 == j) {
-                gSPObjRectangle(glistp++, &arg0->unk_186F8[i].unk_00);
+            if (arg0->unk_186F8[i].texture == j) {
+                gSPObjRectangle(glistp++, &arg0->unk_186F8[i].word);
             }
         }
     }

@@ -83,45 +83,45 @@ void InitBonus(void) {
     };
     struct_800C4518_usa spA0[] = {
         { 192, 129 },                             //
-        { 192, BGSCREEN_TEX_7E5010_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_1
-        { 192, BGSCREEN_TEX_7F5BD0_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_2
-        { 192, BGSCREEN_TEX_8088D0_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_3
-        { 192, BGSCREEN_TEX_81A450_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_4
-        { 192, BGSCREEN_TEX_82C890_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_5
-        { 192, BGSCREEN_TEX_83EB10_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_6
-        { 192, BGSCREEN_TEX_8520D0_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_7
-        { 192, BGSCREEN_TEX_865D90_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_8
-        { 192, BGSCREEN_TEX_87A4D0_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_9
-        { 192, BGSCREEN_TEX_88DA90_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_10
-        { 192, BGSCREEN_TEX_8A8050_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_11
-        { 192, BGSCREEN_TEX_8BB610_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_12
-        { 192, BGSCREEN_TEX_8CE310_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_13
-        { 192, BGSCREEN_TEX_8E2A50_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_14
-        { 192, BGSCREEN_TEX_902250_MAIN_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_15
+        { 192, BGSCREEN_TEX_7E5010_MAIN_HEIGHT }, // ENUM_GAME_UNK_0000_UNK_4424_1
+        { 192, BGSCREEN_TEX_7F5BD0_MAIN_HEIGHT }, // ENUM_GAME_UNK_0000_UNK_4424_2
+        { 192, BGSCREEN_TEX_8088D0_MAIN_HEIGHT }, // ENUM_GAME_UNK_0000_UNK_4424_3
+        { 192, BGSCREEN_TEX_81A450_MAIN_HEIGHT }, // ENUM_GAME_UNK_0000_UNK_4424_4
+        { 192, BGSCREEN_TEX_82C890_MAIN_HEIGHT }, // ENUM_GAME_UNK_0000_UNK_4424_5
+        { 192, BGSCREEN_TEX_83EB10_MAIN_HEIGHT }, // ENUM_GAME_UNK_0000_UNK_4424_6
+        { 192, BGSCREEN_TEX_8520D0_MAIN_HEIGHT }, // ENUM_GAME_UNK_0000_UNK_4424_7
+        { 192, BGSCREEN_TEX_865D90_MAIN_HEIGHT }, // ENUM_GAME_UNK_0000_UNK_4424_8
+        { 192, BGSCREEN_TEX_87A4D0_MAIN_HEIGHT }, // ENUM_GAME_UNK_0000_UNK_4424_9
+        { 192, BGSCREEN_TEX_88DA90_MAIN_HEIGHT }, // ENUM_GAME_UNK_0000_UNK_4424_10
+        { 192, BGSCREEN_TEX_8A8050_MAIN_HEIGHT }, // ENUM_GAME_UNK_0000_UNK_4424_11
+        { 192, BGSCREEN_TEX_8BB610_MAIN_HEIGHT }, // ENUM_GAME_UNK_0000_UNK_4424_12
+        { 192, BGSCREEN_TEX_8CE310_MAIN_HEIGHT }, // ENUM_GAME_UNK_0000_UNK_4424_13
+        { 192, BGSCREEN_TEX_8E2A50_MAIN_HEIGHT }, // ENUM_GAME_UNK_0000_UNK_4424_14
+        { 192, BGSCREEN_TEX_902250_MAIN_HEIGHT }, // ENUM_GAME_UNK_0000_UNK_4424_15
     };
     struct_800C4598_usa sp120[] = {
         { 65, 63 },                              //
-        { 63, BGSCREEN_TEX_7E5010_TOP_HEIGHT },  // ENUM_THEGAME_UNK_0000_UNK_4424_1
-        { 66, BGSCREEN_TEX_7F5BD0_TOP_HEIGHT },  // ENUM_THEGAME_UNK_0000_UNK_4424_2
-        { 71, BGSCREEN_TEX_8088D0_TOP_HEIGHT },  // ENUM_THEGAME_UNK_0000_UNK_4424_3
-        { 101, BGSCREEN_TEX_81A450_TOP_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_4
-        { 78, BGSCREEN_TEX_82C890_TOP_HEIGHT },  // ENUM_THEGAME_UNK_0000_UNK_4424_5
-        { 126, BGSCREEN_TEX_83EB10_TOP_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_6
-        { 79, BGSCREEN_TEX_8520D0_TOP_HEIGHT },  // ENUM_THEGAME_UNK_0000_UNK_4424_7
-        { 93, BGSCREEN_TEX_865D90_TOP_HEIGHT },  // ENUM_THEGAME_UNK_0000_UNK_4424_8
-        { 87, BGSCREEN_TEX_87A4D0_TOP_HEIGHT },  // ENUM_THEGAME_UNK_0000_UNK_4424_9
-        { 172, BGSCREEN_TEX_88DA90_TOP_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_10
-        { 85, BGSCREEN_TEX_8A8050_TOP_HEIGHT },  // ENUM_THEGAME_UNK_0000_UNK_4424_11
-        { 80, BGSCREEN_TEX_8BB610_TOP_HEIGHT },  // ENUM_THEGAME_UNK_0000_UNK_4424_12
-        { 113, BGSCREEN_TEX_8CE310_TOP_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_13
-        { 192, BGSCREEN_TEX_8E2A50_TOP_HEIGHT }, // ENUM_THEGAME_UNK_0000_UNK_4424_14
-        { 95, BGSCREEN_TEX_902250_TOP_HEIGHT },  // ENUM_THEGAME_UNK_0000_UNK_4424_15
+        { 63, BGSCREEN_TEX_7E5010_TOP_HEIGHT },  // ENUM_GAME_UNK_0000_UNK_4424_1
+        { 66, BGSCREEN_TEX_7F5BD0_TOP_HEIGHT },  // ENUM_GAME_UNK_0000_UNK_4424_2
+        { 71, BGSCREEN_TEX_8088D0_TOP_HEIGHT },  // ENUM_GAME_UNK_0000_UNK_4424_3
+        { 101, BGSCREEN_TEX_81A450_TOP_HEIGHT }, // ENUM_GAME_UNK_0000_UNK_4424_4
+        { 78, BGSCREEN_TEX_82C890_TOP_HEIGHT },  // ENUM_GAME_UNK_0000_UNK_4424_5
+        { 126, BGSCREEN_TEX_83EB10_TOP_HEIGHT }, // ENUM_GAME_UNK_0000_UNK_4424_6
+        { 79, BGSCREEN_TEX_8520D0_TOP_HEIGHT },  // ENUM_GAME_UNK_0000_UNK_4424_7
+        { 93, BGSCREEN_TEX_865D90_TOP_HEIGHT },  // ENUM_GAME_UNK_0000_UNK_4424_8
+        { 87, BGSCREEN_TEX_87A4D0_TOP_HEIGHT },  // ENUM_GAME_UNK_0000_UNK_4424_9
+        { 172, BGSCREEN_TEX_88DA90_TOP_HEIGHT }, // ENUM_GAME_UNK_0000_UNK_4424_10
+        { 85, BGSCREEN_TEX_8A8050_TOP_HEIGHT },  // ENUM_GAME_UNK_0000_UNK_4424_11
+        { 80, BGSCREEN_TEX_8BB610_TOP_HEIGHT },  // ENUM_GAME_UNK_0000_UNK_4424_12
+        { 113, BGSCREEN_TEX_8CE310_TOP_HEIGHT }, // ENUM_GAME_UNK_0000_UNK_4424_13
+        { 192, BGSCREEN_TEX_8E2A50_TOP_HEIGHT }, // ENUM_GAME_UNK_0000_UNK_4424_14
+        { 95, BGSCREEN_TEX_902250_TOP_HEIGHT },  // ENUM_GAME_UNK_0000_UNK_4424_15
     };
-    enum_TheGame_unk_0000_unk_4424 temp_s3;
+    enum_tetWell_unk_4424 temp_s3;
     s32 var_s2;
     s32 var_s3;
     uObjBg *var_a0;
-    TheGame_unk_8B98 *var_v1;
+    Game_unk_8B98 *var_v1;
     void *temp_v0;
     uObjBg *var_s0;
     void *temp_s4;
@@ -215,57 +215,57 @@ void InitBonus(void) {
     }
 
     if (gSelection == 0x96) {
-        temp_s3 = gTheGame.unk_0000[1].unk_4424;
+        temp_s3 = gTheGame.tetrisWell[1].unk_4424;
         switch (temp_s3) {
-            case ENUM_THEGAME_UNK_0000_UNK_4424_1:
+            case ENUM_GAME_UNK_0000_UNK_4424_1:
                 func_80073C20_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
 
-            case ENUM_THEGAME_UNK_0000_UNK_4424_2:
+            case ENUM_GAME_UNK_0000_UNK_4424_2:
                 func_80073D10_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
-            case ENUM_THEGAME_UNK_0000_UNK_4424_3:
+            case ENUM_GAME_UNK_0000_UNK_4424_3:
                 func_80073E00_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
-            case ENUM_THEGAME_UNK_0000_UNK_4424_4:
+            case ENUM_GAME_UNK_0000_UNK_4424_4:
                 func_80073EF0_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
-            case ENUM_THEGAME_UNK_0000_UNK_4424_5:
+            case ENUM_GAME_UNK_0000_UNK_4424_5:
                 func_80073FE0_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
-            case ENUM_THEGAME_UNK_0000_UNK_4424_6:
+            case ENUM_GAME_UNK_0000_UNK_4424_6:
                 func_800740D0_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
-            case ENUM_THEGAME_UNK_0000_UNK_4424_7:
+            case ENUM_GAME_UNK_0000_UNK_4424_7:
                 func_800741C0_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
-            case ENUM_THEGAME_UNK_0000_UNK_4424_8:
+            case ENUM_GAME_UNK_0000_UNK_4424_8:
                 func_800742B0_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
-            case ENUM_THEGAME_UNK_0000_UNK_4424_9:
+            case ENUM_GAME_UNK_0000_UNK_4424_9:
                 func_800743A0_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
-            case ENUM_THEGAME_UNK_0000_UNK_4424_10:
+            case ENUM_GAME_UNK_0000_UNK_4424_10:
                 func_80074490_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
-            case ENUM_THEGAME_UNK_0000_UNK_4424_11:
+            case ENUM_GAME_UNK_0000_UNK_4424_11:
                 func_80074580_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
-            case ENUM_THEGAME_UNK_0000_UNK_4424_12:
+            case ENUM_GAME_UNK_0000_UNK_4424_12:
                 func_80074670_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
-            case ENUM_THEGAME_UNK_0000_UNK_4424_13:
+            case ENUM_GAME_UNK_0000_UNK_4424_13:
                 func_80074760_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
-            case ENUM_THEGAME_UNK_0000_UNK_4424_14:
+            case ENUM_GAME_UNK_0000_UNK_4424_14:
                 func_80074850_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
-            case ENUM_THEGAME_UNK_0000_UNK_4424_15:
-            case ENUM_THEGAME_UNK_0000_UNK_4424_18:
+            case ENUM_GAME_UNK_0000_UNK_4424_15:
+            case ENUM_GAME_UNK_0000_UNK_4424_18:
                 func_80074940_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
                 break;
 
-            case ENUM_THEGAME_UNK_0000_UNK_4424_16:
+            case ENUM_GAME_UNK_0000_UNK_4424_16:
                 temp_s4 = Pon_Image_Heap;
                 osInvalDCache((void *)D_104C660, (u32)D_1070A60 - (u32)D_104C660);
                 func_80001310_usa(SEGMENT_ROM_START(segment_50F3F0), temp_s4, SEGMENT_ROM_SIZE(segment_50F3F0));
@@ -279,7 +279,7 @@ void InitBonus(void) {
                 break;
         }
 
-        if (temp_s3 == ENUM_THEGAME_UNK_0000_UNK_4424_16) {
+        if (temp_s3 == ENUM_GAME_UNK_0000_UNK_4424_16) {
             gTheGame.unk_8C88[6].b.frameX = -0x2C;
             gTheGame.unk_8C88[6].b.frameY = 0x44;
         } else {
@@ -293,15 +293,15 @@ void InitBonus(void) {
         }
 
         for (var_s2 = 0; var_s2 < 6; var_s2++) {
-            InitTetrisState(&gTheGame.unk_0000[0].unk_0000.unk_0000[0].unk_000[var_s2]);
-            gTheGame.unk_0000[0].unk_3830.unk_000[var_s2].unk_00 = (s16)(sp98[var_s2] * 4);
-            gTheGame.unk_0000[0].unk_3830.unk_000[var_s2].unk_08 = -0x50;
-            gTheGame.unk_0000[0].unk_0000.unk_0000[0].unk_000[var_s2].unk_04 = (s32)sp98[var_s2];
+            InitTetrisState(&gTheGame.tetrisWell[0].block[0][var_s2]);
+            gTheGame.tetrisWell[0].unk_3830.unk_000[var_s2].unk_00 = (s16)(sp98[var_s2] * 4);
+            gTheGame.tetrisWell[0].unk_3830.unk_000[var_s2].unk_08 = -0x50;
+            gTheGame.tetrisWell[0].block[0][var_s2].delay = (s32)sp98[var_s2];
         }
     }
 
-    gTheGame.unk_0000[0].unk_43EC = 0;
-    gTheGame.unk_0000[0].unk_43FC = 0;
+    gTheGame.tetrisWell[0].unk_43EC = 0;
+    gTheGame.tetrisWell[0].unk_43FC = 0;
     gWhatever = 0;
 }
 #else
@@ -423,16 +423,16 @@ void DoBonus(void) {
     struct_800C48A8_usa sp260[] UNUSED = {
         { 0xF81D, 0xF01B }, { 0xE019, 0xC817 }, { 0xB815, 0xA813 }, { 0xB815, 0xC817 }, { 0xE019, 0xF01B },
     };
-    TheGame_unk_0000 *var_s2;
+    tetWell *var_s2;
     s32 i;
 
     gTheGame.unk_90C0 = 6;
 
     for (i = ARRAY_COUNT(gTheGame.unk_90C8) - 1; i >= 0; i--) {
-        gTheGame.unk_90C8[i].unk_18 = -1;
+        gTheGame.unk_90C8[i].texture = (u32)-1;
     }
 
-    var_s2 = &gTheGame.unk_0000[0];
+    var_s2 = &gTheGame.tetrisWell[0];
 
     if (gSelection == 0x96) {
         s32 var_a0;
@@ -502,14 +502,14 @@ void DoBonus(void) {
         var_a0 = gTheGame.unk_8C88[1].b.frameY >> 0x2;
         gTheGame.unk_8C88[1].b.frameY = (var_a0 - var_s5) << 2;
 
-        for (var_s3 = 0; var_s3 < 6; var_s3++) {
-            if (var_s2->unk_0000.unk_0000[0].unk_000[var_s3].unk_10 == 0) {
+        for (var_s3 = 0; var_s3 < BLOCK_LEN_B / 3; var_s3++) {
+            if (var_s2->block[0][var_s3].type == 0) {
                 s32 temp_ret = AnimationRandom(0x1F4);
 
                 if (temp_ret == ((temp_ret / 21) * 0x15)) {
-                    var_s2->unk_0000.unk_0000[0].unk_000[var_s3].unk_10 = RandomBlock(var_s2);
-                    Init2DTetrisTMEM(&var_s2->unk_0000.unk_0000[0].unk_000[var_s3], &var_s2->unk_3830.unk_000[var_s3]);
-                    var_s2->unk_3830.unk_000[var_s3].unk_00 = var_s2->unk_0000.unk_0000[0].unk_000[var_s3].unk_04 * 4;
+                    var_s2->block[0][var_s3].type = RandomBlock(var_s2);
+                    Init2DTetrisTMEM(&var_s2->block[0][var_s3], &var_s2->unk_3830.unk_000[var_s3]);
+                    var_s2->unk_3830.unk_000[var_s3].unk_00 = var_s2->block[0][var_s3].delay * 4;
                 }
             } else {
                 var_a0 = var_s2->unk_3830.unk_000[var_s3].unk_08 >> 2;
@@ -525,34 +525,34 @@ void DoBonus(void) {
 
                 if (var_a0 >= 0xF0) {
                     var_a0 = -0x14;
-                    var_s2->unk_0000.unk_0000[0].unk_000[var_s3].unk_10 = 0;
-                    var_s2->unk_0000.unk_0000[0].unk_000[var_s3].unk_08 = 0;
+                    var_s2->block[0][var_s3].type = 0;
+                    var_s2->block[0][var_s3].disappear = 0;
                 }
 
                 switch (var_s3) {
                     case 1:
-                        if ((var_a0 >= 0x95) || (var_s2->unk_0000.unk_0000[0].unk_000[1].unk_08 != 0)) {
-                            var_a0 = (0x9B - sp1E0[var_s2->unk_0000.unk_0000[0].unk_000[1].unk_08++]);
+                        if ((var_a0 >= 0x95) || (var_s2->block[0][1].disappear != 0)) {
+                            var_a0 = (0x9B - sp1E0[var_s2->block[0][1].disappear++]);
                         }
                         break;
 
                     case 3:
                         if (var_a0 >= 0x46) {
-                            if (var_s2->unk_0000.unk_0000[0].unk_000[3].unk_08 == 0) {
-                                var_s2->unk_0000.unk_0000[0].unk_000[3].unk_0C = 8;
+                            if (var_s2->block[0][3].disappear == 0) {
+                                var_s2->block[0][3].drop = 8;
                             }
                         }
 
-                        if ((var_a0 >= 0x46) || (var_s2->unk_0000.unk_0000[0].unk_000[3].unk_08 != 0)) {
+                        if ((var_a0 >= 0x46) || (var_s2->block[0][3].disappear != 0)) {
                             s32 temp_v1_2;
 
-                            if (var_s2->unk_0000.unk_0000[0].unk_000[3].unk_0C != 0) {
-                                var_s2->unk_0000.unk_0000[0].unk_000[3].unk_0C--;
+                            if (var_s2->block[0][3].drop != 0) {
+                                var_s2->block[0][3].drop--;
                             }
 
-                            temp_v1_2 = var_s2->unk_0000.unk_0000[0].unk_000[3].unk_08;
-                            var_s2->unk_0000.unk_0000[0].unk_000[3].unk_08++;
-                            if (var_s2->unk_0000.unk_0000[0].unk_000[3].unk_08 >= 2) {
+                            temp_v1_2 = var_s2->block[0][3].disappear;
+                            var_s2->block[0][3].disappear++;
+                            if (var_s2->block[0][3].disappear >= 2) {
                                 t0 = temp_v1_2 - 1;
 
                                 var_s2->unk_3830.unk_000[3].unk_00 = (sp18[t0].unk_0 + 0x5A) << 2;
@@ -851,7 +851,7 @@ void InitStageClearIntro(void) {
         }
         giScreenClear = screenSet("CLEAR", x | 0x400);
 
-        screenSetNumber(giScreenClear, 0x32, gTheGame.unk_0000[0].unk_43AC, -1);
+        screenSetNumber(giScreenClear, 0x32, gTheGame.tetrisWell[0].unk_43AC, -1);
         if (gTheGame.unk_9C28 == 5) {
             if (gTheGame.unk_9C2C < 5) {
                 gnTagTextClear = -0xC8;

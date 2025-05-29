@@ -33,7 +33,7 @@ INLINE void Draw2DCursor(struct_gInfo_unk_00068 *arg0) {
     }
 
     for (i = 0; i < gTheGame.unk_9C08; i++) {
-        TheGame_unk_8860 *temp_a0 = &arg0->unk_172A8[i];
+        Game_unk_8860 *temp_a0 = &arg0->unk_172A8[i];
 
         if (temp_a0->unk_14 < 0xC) {
             gSPObjRectangle(glistp++, &temp_a0->unk_98);
@@ -134,7 +134,7 @@ INLINE void OverFlow(struct_gInfo_unk_00068 *arg0) {
 
 #if VERSION_USA
 void Draw2DTetris(struct_gInfo_unk_00068 *arg0) {
-    s32 sp10[THEGAME_BUFFER_LEN];
+    s32 sp10[GAME_BUFFER_LEN];
     s32 i;
 
     gDPSetScissor(glistp++, G_SC_NON_INTERLACE, 0, 7, SCREEN_WIDTH, SCREEN_HEIGHT - 1);
@@ -157,7 +157,7 @@ void Draw2DTetris(struct_gInfo_unk_00068 *arg0) {
         Draw2DGameFade();
 
         for (i = 0; i < gTheGame.unk_9C08; i++) {
-            Draw2DTetrisWell(arg0, &gTheGame.unk_0000[i], i);
+            Draw2DTetrisWell(arg0, &gTheGame.tetrisWell[i], i);
             sp10[i] = Draw2DAttackBlock(arg0, i);
         }
 
