@@ -742,7 +742,7 @@ void DrawGameOver(struct_gInfo_unk_00068 *arg0) {
 ? func_80037440_usa(Game *);                     /* extern */
 ? func_80037724_usa(Game *);                     /* extern */
 ? func_80037900_usa(Game *);                     /* extern */
-? func_80037B0C_usa(Game *, Game_unk_8860 *); /* extern */
+? func_80037B0C_usa(Game *, cursor_t *); /* extern */
 s32 EndingExplosion(Game *);                   /* extern */
 ? func_80038018_usa(Game *, ?);                  /* extern */
 ? func_8003813C_usa(Game *);                     /* extern */
@@ -760,8 +760,8 @@ s32 func_8003A0B8_usa();                            /* extern */
 ? UpdateAnimation(Game *, ?, ?);               /* extern */
 s32 func_8004FA2C_usa();                            /* extern */
 ? func_80058458_usa(s32, s32);                      /* extern */
-? UpdatePlayerPuzzle(Game_unk_8860 *, s32, s32);  /* extern */
-? UpdatePlayerStageClear(Game_unk_8860 *, s32, s32);  /* extern */
+? UpdatePlayerPuzzle(cursor_t *, s32, s32);  /* extern */
+? UpdatePlayerStageClear(cursor_t *, s32, s32);  /* extern */
 ? func_80058D68_usa(s32, s32);                      /* extern */
 ? func_8005D8B4_usa(Game *);                     /* extern */
 ? func_8006AF30_usa(Game *);                     /* extern */
@@ -1449,11 +1449,11 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/end", DoGameOver2D);
 ? func_80037270_usa(Game *);                     /* extern */
 ? func_80037440_usa(Game *);                     /* extern */
 ? func_80037724_usa(Game *);                     /* extern */
-? func_800379D4_usa(Game *, Game_unk_8860 *); /* extern */
-? func_80037B0C_usa(Game *, Game_unk_8860 *); /* extern */
+? func_800379D4_usa(Game *, cursor_t *); /* extern */
+? func_80037B0C_usa(Game *, cursor_t *); /* extern */
 s32 EndingExplosion(Game *);                   /* extern */
 ? func_8003813C_usa(Game *);                     /* extern */
-? func_80038228_usa(Game *, Game_unk_8860 *, ?); /* extern */
+? func_80038228_usa(Game *, cursor_t *, ?); /* extern */
 ? func_8003880C_usa();                              /* extern */
 s32 func_80038944_usa(s32);                         /* extern */
 s32 func_8003901C_usa(Game *);                   /* extern */
@@ -1467,8 +1467,8 @@ s32 func_8003A0B8_usa();                            /* extern */
 s32 func_8004FA2C_usa();                            /* extern */
 ? func_800521A4_usa(?);                             /* extern */
 ? func_80058458_usa(s32, s32);                      /* extern */
-? UpdatePlayerPuzzle(Game_unk_8860 *, s32, s32);  /* extern */
-? UpdatePlayerStageClear(Game_unk_8860 *, s32, s32);  /* extern */
+? UpdatePlayerPuzzle(cursor_t *, s32, s32);  /* extern */
+? UpdatePlayerStageClear(cursor_t *, s32, s32);  /* extern */
 ? func_8005D8B4_usa(Game *);                     /* extern */
 ? func_8005D900_usa(Game *);                     /* extern */
 ? func_8005DBD8_usa(Game *, ?);                  /* extern */
@@ -1478,8 +1478,8 @@ s32 func_8004FA2C_usa();                            /* extern */
 ? func_8005E0E8_usa(?);                             /* extern */
 ? func_8005E108_usa(?, ?);                          /* extern */
 ? func_8005E128_usa(Game *, ?);                  /* extern */
-? func_8006780C_usa(tetWell *, Game_unk_8860 *); /* extern */
-? func_80067CA0_usa(Game *, Game_unk_8860 *); /* extern */
+? func_8006780C_usa(tetWell *, cursor_t *); /* extern */
+? func_80067CA0_usa(Game *, cursor_t *); /* extern */
 extern u8 B_801C6C90_usa;
 extern s32 gWhatever;
 extern ? SFX_INIT_TABLE;
@@ -1498,7 +1498,7 @@ void DoGameOver3D(void) {
     Game *var_a0;
     Game *var_v1_2;
     tetWell *var_a0_3;
-    Game_unk_8860 *var_a1_3;
+    cursor_t *var_a1_3;
     f64 temp_fv0;
     s32 temp_a0;
     s32 temp_v0;

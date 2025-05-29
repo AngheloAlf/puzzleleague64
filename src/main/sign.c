@@ -99,7 +99,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/sign", LoadGameOver3D);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sign", func_8003523C_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/sign", DrawPauseOver);
 #endif
 
 #if VERSION_EUR
@@ -163,7 +163,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/sign", LoadGameOver3D);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sign", func_800351AC_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/sign", DrawPauseOver);
 #endif
 
 #if VERSION_FRA
@@ -227,7 +227,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/sign", LoadGameOver3D);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sign", func_8003531C_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/sign", DrawPauseOver);
 #endif
 
 #if VERSION_GER

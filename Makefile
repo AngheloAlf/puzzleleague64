@@ -415,6 +415,14 @@ $(BUILD_DIR)/segments/%.o: $(BUILD_DIR)/linker_scripts/partial/%.ld
 $(BUILD_DIR)/%.inc: %.png
 	$(PIGMENT64) to-bin --c-array --format $(subst .,,$(suffix $*)) -o $@ $<
 
+$(BUILD_DIR)/%.ci8.inc: %.ci8.png
+	$(PIGMENT64) to-bin --c-array --format palette -o $(@:.ci8.inc=.palette.inc) $<
+	$(PIGMENT64) to-bin --c-array --format ci8 -o $@ $<
+
+$(BUILD_DIR)/%.ci4.inc: %.ci4.png
+	$(PIGMENT64) to-bin --c-array --format palette -o $(@:.ci4.inc=.palette.inc) $<
+	$(PIGMENT64) to-bin --c-array --format ci4 -o $@ $<
+
 
 -include $(DEP_FILES)
 

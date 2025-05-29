@@ -264,7 +264,7 @@ def main():
     typ = u32(data, 0x0)
     processor = typesProcessors.get(typ)
     if processor is None:
-        fatalError("Provided offset does not point to a valid uObjTxtr")
+        fatalError(f"Provided offset (0x{offset:06X}) does not point to a valid uObjTxtr")
 
     processor(data, name)
 

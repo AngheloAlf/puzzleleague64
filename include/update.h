@@ -23,7 +23,7 @@
 // void func_800587CC_usa();
 // void func_80058934_usa();
 // void UpdatePlayerStageClear();
-void UpdatePlayerStageClearTimeScore(Game_unk_8860 *arg0, s32 arg1, s32 arg2, s32 arg3);
+void UpdatePlayerStageClearTimeScore(cursor_t *cursor, s32 loadsave, s32 round, s32 stage);
 // void func_80058D68_usa();
 // void func_80058DF0_usa();
 // void func_80059038_usa();

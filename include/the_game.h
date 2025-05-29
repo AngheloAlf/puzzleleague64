@@ -6,6 +6,8 @@
 #include "PR/gs2dex.h"
 #include "unk.h"
 
+#include "cursor.h"
+#include "icon.h"
 #include "text.h"
 
 #define BLOCK_LEN_A (12)
@@ -30,39 +32,9 @@ typedef struct tetWell_unk_2520 {
     /* 0x000 */ UNK_TYPE1 unk_000[0x5A0];
 } tetWell_unk_2520; // size = 0x5A0
 
-typedef struct tetWell_unk_2AC0 {
-    /* 0x000 */ UNK_TYPE1 unk_000[0x410];
-} tetWell_unk_2AC0; // size = 0x410
-
 typedef struct tetWell_unk_2ED0 {
     /* 0x000 */ UNK_TYPE1 unk_000[0x960];
 } tetWell_unk_2ED0; // size = 0x960
-
-typedef struct tetWell_unk_000 {
-    /* 0x00 */ UNK_TYPE2 unk_00;
-    /* 0x02 */ UNK_TYPE1 unk_02[0x2];
-    /* 0x04 */ UNK_TYPE1 unk_04[0x4];
-    /* 0x08 */ UNK_TYPE2 unk_08;
-    /* 0x0A */ UNK_TYPE1 unk_0A[0x2];
-    /* 0x0C */ UNK_TYPE1 unk_0C[0xC];
-} tetWell_unk_000; // size = 018
-
-typedef struct tetWell_unk_3830 {
-    /* 0x000 */ tetWell_unk_000 unk_000[6];
-    /* 0x090 */ UNK_TYPE1 unk_090[0x630];
-} tetWell_unk_3830; // size = 0x6C0
-
-typedef struct tetWell_unk_3EF0 {
-    /* 0x00 */ UNK_TYPE1 unk_00[0x90];
-} tetWell_unk_3EF0; // size = 0x90
-
-typedef struct tetWell_unk_3F80 {
-    /* 0x00 */ UNK_TYPE1 unk_00[0x18];
-} tetWell_unk_3F80; // size = 0x18
-
-typedef struct tetWell_unk_3F98 {
-    /* 0x00 */ UNK_TYPE1 unk_00[0x18];
-} tetWell_unk_3F98; // size = 0x18
 
 typedef struct tetWell_unk_3FB0 {
     /* 0x00 */ UNK_TYPE1 unk_00[0xD8];
@@ -91,19 +63,28 @@ typedef enum enum_tetWell_unk_4424 {
 } enum_tetWell_unk_4424;
 
 
+#define TETWELL_OBJSPRITE_LEN_A (12)
+#define TETWELL_OBJSPRITE_LEN_B (BLOCK_LEN_B / 3)
+
+#define TETWELL_UNK_3EF0_LEN_6 (6)
+
+#define ICON_COUNT (10)
+
 /* Original name: tetWell */
 typedef struct tetWell {
     /* 0x0000 */ block_t block[BLOCK_LEN_A][BLOCK_LEN_B]; /* Original name: block */
     /* 0x2520 */ tetWell_unk_2520 unk_2520;
-    /* 0x2AC0 */ tetWell_unk_2AC0 unk_2AC0;
+    /* 0x2AC0 */ icon_t icon[ICON_COUNT];
     /* 0x2ED0 */ tetWell_unk_2ED0 unk_2ED0;
-    /* 0x3830 */ tetWell_unk_3830 unk_3830;
-    /* 0x3EF0 */ tetWell_unk_3EF0 unk_3EF0;
-    /* 0x3F80 */ tetWell_unk_3F80 unk_3F80;
-    /* 0x3F98 */ tetWell_unk_3F98 unk_3F98;
+    /* 0x3830 */ uObjSprite unk_3830[TETWELL_OBJSPRITE_LEN_A][TETWELL_OBJSPRITE_LEN_B];
+    /* 0x3EF0 */ uObjSprite unk_3EF0[TETWELL_UNK_3EF0_LEN_6];
+    /* 0x3F80 */ uObjSprite unk_3F80;
+    /* 0x3F98 */ uObjSprite unk_3F98;
     /* 0x3FB0 */ tetWell_unk_3FB0 unk_3FB0;
     /* 0x4088 */ f32 unk_4088;
-    /* 0x408C */ UNK_TYPE1 unk_408C[0x320];
+    /* 0x408C */ UNK_TYPE1 unk_408C[0x40B0-0x408C];
+    /* 0x40B0 */ s32 unk_40B0;
+    /* 0x40B4 */ UNK_TYPE1 unk_40B4[0x43AC-0x40B4];
     /* 0x43AC */ s32 unk_43AC;
     /* 0x43B0 */ UNK_TYPE1 unk_43B0[0x8];
     /* 0x43B8 */ s32 unk_43B8;
@@ -122,20 +103,6 @@ typedef struct tetWell {
     /* 0x442C */ UNK_TYPE1 unk_442C[0x4];
 } tetWell; // size = 0x4430
 
-
-typedef struct Game_unk_8860 {
-    /* 0x00 */ UNK_TYPE4 unk_00;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ UNK_TYPE1 unk_08[0x4];
-    /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ UNK_TYPE1 unk_10[0x4];
-    /* 0x14 */ s32 unk_14;
-    /* 0x18 */ s32 unk_18;
-    /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ UNK_TYPE4 unk_20;
-    /* 0x24 */ UNK_TYPE1 unk_24[0x74];
-    /* 0x98 */ uObjSprite unk_98;
-} Game_unk_8860; // size = 0xB0
 
 
 typedef struct Game_unk_89C4 {
@@ -354,13 +321,13 @@ typedef struct struct_gInfo_unk_00068 {
     /* 0x10244 */ block_t unk_10244[GAME_BUFFER_LEN][BLOCK_LEN_A][BLOCK_LEN_B];
     /* 0x14C84 */ UNK_TYPE1 unk_14C84[0x4];
     /* 0x14C88 */ tetWell_unk_2520 unk_14C88[GAME_BUFFER_LEN];
-    /* 0x157C8 */ tetWell_unk_2AC0 unk_157C8[GAME_BUFFER_LEN];
+    /* 0x157C8 */ icon_t icon[GAME_BUFFER_LEN][ICON_COUNT];
     /* 0x15FE8 */ tetWell_unk_2ED0 unk_15FE8[GAME_BUFFER_LEN];
-    /* 0x172A8 */ Game_unk_8860 unk_172A8[GAME_BUFFER_LEN];
-    /* 0x17408 */ tetWell_unk_3830 unk_17408[GAME_BUFFER_LEN];
-    /* 0x18188 */ tetWell_unk_3EF0 unk_18188[GAME_BUFFER_LEN];
-    /* 0x182A8 */ tetWell_unk_3F80 unk_182A8[GAME_BUFFER_LEN];
-    /* 0x182D8 */ tetWell_unk_3F98 unk_182D8[GAME_BUFFER_LEN];
+    /* 0x172A8 */ cursor_t cursorBlock[GAME_BUFFER_LEN];
+    /* 0x17408 */ uObjSprite unk_17408[GAME_BUFFER_LEN][TETWELL_OBJSPRITE_LEN_A][TETWELL_OBJSPRITE_LEN_B];
+    /* 0x18188 */ uObjSprite unk_18188[GAME_BUFFER_LEN][TETWELL_UNK_3EF0_LEN_6];
+    /* 0x182A8 */ uObjSprite unk_182A8[GAME_BUFFER_LEN];
+    /* 0x182D8 */ uObjSprite unk_182D8[GAME_BUFFER_LEN];
     /* 0x18308 */ tetWell_unk_3FB0 unk_18308[GAME_BUFFER_LEN];
     /* 0x184B8 */ Mtx unk_184B8[GAME_BUFFER_LEN];
     /* 0x18538 */ Mtx unk_18538[GAME_BUFFER_LEN];
@@ -382,7 +349,7 @@ typedef struct struct_gInfo {
 /* Original name: Game */
 typedef struct Game {
     /* 0x0000 */ tetWell tetrisWell[GAME_BUFFER_LEN]; /* Original name: tetrisWell */
-    /* 0x8860 */ Game_unk_8860 unk_8860[GAME_BUFFER_LEN];
+    /* 0x8860 */ cursor_t unk_8860[GAME_BUFFER_LEN];
     /* 0x89C0 */ UNK_TYPE1 unk_89C0[0x4];
     /* 0x89C4 */ Game_unk_89C4 unk_89C4[UNK_SIZE];
     /* 0x89D4 */ UNK_TYPE2 unk_89D4;

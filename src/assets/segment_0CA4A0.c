@@ -2,7 +2,6 @@
 #include "ultra64.h"
 #include "alignment.h"
 
-#if VERSION_USA
 Vp D_01000000_usa = { {
     { 0x0280, 0x01E0, 0x01FF, 0x0000 },
     { 0x0280, 0x01E0, 0x01FF, 0x0000 },
@@ -39,8 +38,8 @@ uObjTxtr D_010003F0_usa = {
     /* mask  */ 0x0,
 };
 
-u8 D_01000408_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01000408_usa.i8.inc"
+u16 D_01000408_usa[] ALIGNED(8) = {
+#include "assets/segment_0CA4A0/D_0100D468_usa.palette.inc"
 };
 
 uObjTxtr D_01000608_usa = {
@@ -195,312 +194,466 @@ u8 D_0100CC68_usa[] ALIGNED(8) = {
 #include "assets/segment_0CA4A0/D_0100CC68_usa.i8.inc"
 };
 
+/* palette: D_01000408_usa */
 u8 D_0100D468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0100D468_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_0100D468_usa.ci8.inc"
 };
 
+/* palette: D_01000408_usa */
 u8 D_0100DC68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0100DC68_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_0100DC68_usa.ci8.inc"
 };
 
+/* palette: D_01000408_usa */
 u8 D_0100E468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0100E468_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_0100E468_usa.ci8.inc"
 };
 
+/* palette: D_01000408_usa */
 u8 D_0100EC68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0100EC68_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_0100EC68_usa.ci8.inc"
 };
 
+/* palette: D_01000408_usa */
 u8 D_0100F468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0100F468_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_0100F468_usa.ci8.inc"
 };
 
+/* palette: D_01000408_usa */
 u8 D_0100FC68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0100FC68_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_0100FC68_usa.ci8.inc"
 };
 
+/* palette: D_01000408_usa */
 u8 D_01010468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01010468_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_01010468_usa.ci8.inc"
 };
 
+/* palette: D_01000408_usa */
 u8 D_01010C68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01010C68_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_01010C68_usa.ci8.inc"
 };
 
+/* palette: D_01000408_usa */
 u8 D_01011468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01011468_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_01011468_usa.ci8.inc"
 };
 
+/* palette: D_01000408_usa */
 u8 D_01011C68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01011C68_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_01011C68_usa.ci8.inc"
 };
 
+/* palette: D_01000408_usa */
 u8 D_01012468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01012468_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_01012468_usa.ci8.inc"
 };
 
+/* palette: D_01000408_usa */
 u8 D_01012C68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01012C68_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_01012C68_usa.ci8.inc"
 };
 
+/* palette: D_01000408_usa */
 u8 D_01013468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01013468_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_01013468_usa.ci8.inc"
 };
 
+/* palette: D_01000408_usa */
 u8 D_01013C68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01013C68_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_01013C68_usa.ci8.inc"
 };
 
+/* palette: D_01000408_usa */
 u8 D_01014468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01014468_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_01014468_usa.ci8.inc"
 };
 
+/* palette: D_01000408_usa */
 u8 D_01014C68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01014C68_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_01014C68_usa.ci8.inc"
 };
 
+/* palette: D_01000408_usa */
 u8 D_01015468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01015468_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_01015468_usa.ci8.inc"
 };
 
+/* palette: D_01000408_usa */
 u8 D_01015C68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01015C68_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_01015C68_usa.ci8.inc"
 };
 
+/* palette: D_01000408_usa */
 u8 D_01016468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01016468_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_01016468_usa.ci8.inc"
 };
 
+/* palette: D_01000408_usa */
 u8 D_01016C68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01016C68_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_01016C68_usa.ci8.inc"
 };
 
+/* palette: D_01000408_usa */
 u8 D_01017468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01017468_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_01017468_usa.ci8.inc"
 };
 
+/* palette: D_01000408_usa */
 u8 D_01017C68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01017C68_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_01017C68_usa.ci8.inc"
 };
 
-#if 0
+/*
 height: 32
-
-Possible widths:
-    128 (G_IM_SIZ_4b)
-    64 (G_IM_SIZ_8b)
-    32 (G_IM_SIZ_16b)
-    16 (G_IM_SIZ_32b)
-
-Possible combinations:
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_4b),
-    /* tsize */ GS_TB_TSIZE(128 * 32, G_IM_SIZ_4b),
-    /* tline */ GS_TB_TLINE(128,      G_IM_SIZ_4b),
-
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_8b),
-    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
-    /* tline */ GS_TB_TLINE(64,      G_IM_SIZ_8b),
-
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_16b),
-    /* tsize */ GS_TB_TSIZE(32 * 32, G_IM_SIZ_16b),
-    /* tline */ GS_TB_TLINE(32,      G_IM_SIZ_16b),
-
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_32b),
-    /* tsize */ GS_TB_TSIZE(16 * 32, G_IM_SIZ_32b),
-    /* tline */ GS_TB_TLINE(16,      G_IM_SIZ_32b),
-#endif
-uObjTxtr D_01018468_usa = {
+width: 64
+palette: D_01000608_usa
+*/
+uObjTxtr combo1Block = {
     /* type  */ G_OBJLT_TXTRBLOCK,
     /* image */ (u64 *)D_0100D468_usa,
-    /* tmem  */ 0,
-    /* tsize */ 255,
-    /* tline */ 256,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
     /* sid   */ 0,
     /* flag  */ (u32)-1,
     /* mask  */ 0x0,
 };
 
-#if 0
+/*
 height: 32
-
-Possible widths:
-    128 (G_IM_SIZ_4b)
-    64 (G_IM_SIZ_8b)
-    32 (G_IM_SIZ_16b)
-    16 (G_IM_SIZ_32b)
-
-Possible combinations:
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_4b),
-    /* tsize */ GS_TB_TSIZE(128 * 32, G_IM_SIZ_4b),
-    /* tline */ GS_TB_TLINE(128,      G_IM_SIZ_4b),
-
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_8b),
-    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
-    /* tline */ GS_TB_TLINE(64,      G_IM_SIZ_8b),
-
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_16b),
-    /* tsize */ GS_TB_TSIZE(32 * 32, G_IM_SIZ_16b),
-    /* tline */ GS_TB_TLINE(32,      G_IM_SIZ_16b),
-
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_32b),
-    /* tsize */ GS_TB_TSIZE(16 * 32, G_IM_SIZ_32b),
-    /* tline */ GS_TB_TLINE(16,      G_IM_SIZ_32b),
-#endif
-uObjTxtr D_01018480_usa = {
+width: 64
+palette: D_01000608_usa
+*/
+uObjTxtr combo2Block = {
     /* type  */ G_OBJLT_TXTRBLOCK,
     /* image */ (u64 *)D_0100DC68_usa,
-    /* tmem  */ 0,
-    /* tsize */ 255,
-    /* tline */ 256,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
     /* sid   */ 0,
     /* flag  */ (u32)-1,
     /* mask  */ 0x0,
 };
 
-#if 0
+/*
 height: 32
-
-Possible widths:
-    128 (G_IM_SIZ_4b)
-    64 (G_IM_SIZ_8b)
-    32 (G_IM_SIZ_16b)
-    16 (G_IM_SIZ_32b)
-
-Possible combinations:
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_4b),
-    /* tsize */ GS_TB_TSIZE(128 * 32, G_IM_SIZ_4b),
-    /* tline */ GS_TB_TLINE(128,      G_IM_SIZ_4b),
-
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_8b),
-    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
-    /* tline */ GS_TB_TLINE(64,      G_IM_SIZ_8b),
-
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_16b),
-    /* tsize */ GS_TB_TSIZE(32 * 32, G_IM_SIZ_16b),
-    /* tline */ GS_TB_TLINE(32,      G_IM_SIZ_16b),
-
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_32b),
-    /* tsize */ GS_TB_TSIZE(16 * 32, G_IM_SIZ_32b),
-    /* tline */ GS_TB_TLINE(16,      G_IM_SIZ_32b),
-#endif
-uObjTxtr D_01018498_usa = {
+width: 64
+palette: D_01000608_usa
+*/
+uObjTxtr combo3Block = {
     /* type  */ G_OBJLT_TXTRBLOCK,
     /* image */ (u64 *)D_0100E468_usa,
-    /* tmem  */ 0,
-    /* tsize */ 255,
-    /* tline */ 256,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
     /* sid   */ 0,
     /* flag  */ (u32)-1,
     /* mask  */ 0x0,
 };
 
-#if 0
+/*
 height: 32
-
-Possible widths:
-    128 (G_IM_SIZ_4b)
-    64 (G_IM_SIZ_8b)
-    32 (G_IM_SIZ_16b)
-    16 (G_IM_SIZ_32b)
-
-Possible combinations:
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_4b),
-    /* tsize */ GS_TB_TSIZE(128 * 32, G_IM_SIZ_4b),
-    /* tline */ GS_TB_TLINE(128,      G_IM_SIZ_4b),
-
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_8b),
-    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
-    /* tline */ GS_TB_TLINE(64,      G_IM_SIZ_8b),
-
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_16b),
-    /* tsize */ GS_TB_TSIZE(32 * 32, G_IM_SIZ_16b),
-    /* tline */ GS_TB_TLINE(32,      G_IM_SIZ_16b),
-
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_32b),
-    /* tsize */ GS_TB_TSIZE(16 * 32, G_IM_SIZ_32b),
-    /* tline */ GS_TB_TLINE(16,      G_IM_SIZ_32b),
-#endif
-uObjTxtr D_010184B0_usa = {
+width: 64
+palette: D_01000608_usa
+*/
+uObjTxtr combo4Block = {
     /* type  */ G_OBJLT_TXTRBLOCK,
     /* image */ (u64 *)D_0100EC68_usa,
-    /* tmem  */ 0,
-    /* tsize */ 255,
-    /* tline */ 256,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
     /* sid   */ 0,
     /* flag  */ (u32)-1,
     /* mask  */ 0x0,
 };
 
-u32 D_010184C8_usa[] = {
-    0x00001033, (u32)D_0100F468_usa, 0x000000FF, 0x01000000, 0xFFFFFFFF, 0x00000000,
+/*
+height: 32
+width: 64
+palette: D_01000608_usa
+*/
+uObjTxtr combo5Block = {
+    /* type  */ G_OBJLT_TXTRBLOCK,
+    /* image */ (u64 *)D_0100F468_usa,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* sid   */ 0,
+    /* flag  */ (u32)-1,
+    /* mask  */ 0x0,
 };
 
-u32 D_010184E0_usa[] = {
-    0x00001033, (u32)D_0100FC68_usa, 0x000000FF, 0x01000000, 0xFFFFFFFF, 0x00000000,
+/*
+height: 32
+width: 64
+palette: D_01000608_usa
+*/
+uObjTxtr combo6Block = {
+    /* type  */ G_OBJLT_TXTRBLOCK,
+    /* image */ (u64 *)D_0100FC68_usa,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* sid   */ 0,
+    /* flag  */ (u32)-1,
+    /* mask  */ 0x0,
 };
 
-u32 D_010184F8_usa[] = {
-    0x00001033, (u32)D_01010468_usa, 0x000000FF, 0x01000000, 0xFFFFFFFF, 0x00000000,
+/*
+height: 32
+width: 64
+palette: D_01000608_usa
+*/
+uObjTxtr combo7Block = {
+    /* type  */ G_OBJLT_TXTRBLOCK,
+    /* image */ (u64 *)D_01010468_usa,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* sid   */ 0,
+    /* flag  */ (u32)-1,
+    /* mask  */ 0x0,
 };
 
-u32 D_01018510_usa[] = {
-    0x00001033, (u32)D_01010C68_usa, 0x000000FF, 0x01000000, 0xFFFFFFFF, 0x00000000,
+/*
+height: 32
+width: 64
+palette: D_01000608_usa
+*/
+uObjTxtr combo8Block = {
+    /* type  */ G_OBJLT_TXTRBLOCK,
+    /* image */ (u64 *)D_01010C68_usa,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* sid   */ 0,
+    /* flag  */ (u32)-1,
+    /* mask  */ 0x0,
 };
 
-u32 D_01018528_usa[] = {
-    0x00001033, (u32)D_01011468_usa, 0x000000FF, 0x01000000, 0xFFFFFFFF, 0x00000000,
+/*
+height: 32
+width: 64
+palette: D_01000608_usa
+*/
+uObjTxtr combo9Block = {
+    /* type  */ G_OBJLT_TXTRBLOCK,
+    /* image */ (u64 *)D_01011468_usa,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* sid   */ 0,
+    /* flag  */ (u32)-1,
+    /* mask  */ 0x0,
 };
 
-u32 D_01018540_usa[] = {
-    0x00001033, (u32)D_01011C68_usa, 0x000000FF, 0x01000000, 0xFFFFFFFF, 0x00000000,
+/*
+height: 32
+width: 64
+palette: D_01000608_usa
+*/
+uObjTxtr chain1Block = {
+    /* type  */ G_OBJLT_TXTRBLOCK,
+    /* image */ (u64 *)D_01011C68_usa,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* sid   */ 0,
+    /* flag  */ (u32)-1,
+    /* mask  */ 0x0,
 };
 
-u32 D_01018558_usa[] = {
-    0x00001033, (u32)D_01012468_usa, 0x000000FF, 0x01000000, 0xFFFFFFFF, 0x00000000,
+/*
+height: 32
+width: 64
+palette: D_01000608_usa
+*/
+uObjTxtr chain2Block = {
+    /* type  */ G_OBJLT_TXTRBLOCK,
+    /* image */ (u64 *)D_01012468_usa,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* sid   */ 0,
+    /* flag  */ (u32)-1,
+    /* mask  */ 0x0,
 };
 
-u32 D_01018570_usa[] = {
-    0x00001033, (u32)D_01012C68_usa, 0x000000FF, 0x01000000, 0xFFFFFFFF, 0x00000000,
+/*
+height: 32
+width: 64
+palette: D_01000608_usa
+*/
+uObjTxtr chain3Block = {
+    /* type  */ G_OBJLT_TXTRBLOCK,
+    /* image */ (u64 *)D_01012C68_usa,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* sid   */ 0,
+    /* flag  */ (u32)-1,
+    /* mask  */ 0x0,
 };
 
-u32 D_01018588_usa[] = {
-    0x00001033, (u32)D_01013468_usa, 0x000000FF, 0x01000000, 0xFFFFFFFF, 0x00000000,
+/*
+height: 32
+width: 64
+palette: D_01000608_usa
+*/
+uObjTxtr chain4Block = {
+    /* type  */ G_OBJLT_TXTRBLOCK,
+    /* image */ (u64 *)D_01013468_usa,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* sid   */ 0,
+    /* flag  */ (u32)-1,
+    /* mask  */ 0x0,
 };
 
-u32 D_010185A0_usa[] = {
-    0x00001033, (u32)D_01013C68_usa, 0x000000FF, 0x01000000, 0xFFFFFFFF, 0x00000000,
+/*
+height: 32
+width: 64
+palette: D_01000608_usa
+*/
+uObjTxtr chain5Block = {
+    /* type  */ G_OBJLT_TXTRBLOCK,
+    /* image */ (u64 *)D_01013C68_usa,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* sid   */ 0,
+    /* flag  */ (u32)-1,
+    /* mask  */ 0x0,
 };
 
-u32 D_010185B8_usa[] = {
-    0x00001033, (u32)D_01014468_usa, 0x000000FF, 0x01000000, 0xFFFFFFFF, 0x00000000,
+/*
+height: 32
+width: 64
+palette: D_01000608_usa
+*/
+uObjTxtr chain6Block = {
+    /* type  */ G_OBJLT_TXTRBLOCK,
+    /* image */ (u64 *)D_01014468_usa,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* sid   */ 0,
+    /* flag  */ (u32)-1,
+    /* mask  */ 0x0,
 };
 
-u32 D_010185D0_usa[] = {
-    0x00001033, (u32)D_01014C68_usa, 0x000000FF, 0x01000000, 0xFFFFFFFF, 0x00000000,
+/*
+height: 32
+width: 64
+palette: D_01000608_usa
+*/
+uObjTxtr chain7Block = {
+    /* type  */ G_OBJLT_TXTRBLOCK,
+    /* image */ (u64 *)D_01014C68_usa,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* sid   */ 0,
+    /* flag  */ (u32)-1,
+    /* mask  */ 0x0,
 };
 
-u32 D_010185E8_usa[] = {
-    0x00001033, (u32)D_01015468_usa, 0x000000FF, 0x01000000, 0xFFFFFFFF, 0x00000000,
+/*
+height: 32
+width: 64
+palette: D_01000608_usa
+*/
+uObjTxtr chain8Block = {
+    /* type  */ G_OBJLT_TXTRBLOCK,
+    /* image */ (u64 *)D_01015468_usa,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* sid   */ 0,
+    /* flag  */ (u32)-1,
+    /* mask  */ 0x0,
 };
 
-u32 D_01018600_usa[] = {
-    0x00001033, (u32)D_01015C68_usa, 0x000000FF, 0x01000000, 0xFFFFFFFF, 0x00000000,
+/*
+height: 32
+width: 64
+palette: D_01000608_usa
+*/
+uObjTxtr chain9Block = {
+    /* type  */ G_OBJLT_TXTRBLOCK,
+    /* image */ (u64 *)D_01015C68_usa,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* sid   */ 0,
+    /* flag  */ (u32)-1,
+    /* mask  */ 0x0,
 };
 
-u32 D_01018618_usa[] = {
-    0x00001033, (u32)D_01016468_usa, 0x000000FF, 0x01000000, 0xFFFFFFFF, 0x00000000,
+/*
+height: 32
+width: 64
+palette: D_01000608_usa
+*/
+uObjTxtr chain10Block = {
+    /* type  */ G_OBJLT_TXTRBLOCK,
+    /* image */ (u64 *)D_01016468_usa,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* sid   */ 0,
+    /* flag  */ (u32)-1,
+    /* mask  */ 0x0,
 };
 
-u32 D_01018630_usa[] = {
-    0x00001033, (u32)D_01016C68_usa, 0x000000FF, 0x01000000, 0xFFFFFFFF, 0x00000000,
+/*
+height: 32
+width: 64
+palette: D_01000608_usa
+*/
+uObjTxtr chain11Block = {
+    /* type  */ G_OBJLT_TXTRBLOCK,
+    /* image */ (u64 *)D_01016C68_usa,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* sid   */ 0,
+    /* flag  */ (u32)-1,
+    /* mask  */ 0x0,
 };
 
-u32 D_01018648_usa[] = {
-    0x00001033, (u32)D_01017468_usa, 0x000000FF, 0x01000000, 0xFFFFFFFF, 0x00000000,
+/*
+height: 32
+width: 64
+palette: D_01000608_usa
+*/
+uObjTxtr chain12Block = {
+    /* type  */ G_OBJLT_TXTRBLOCK,
+    /* image */ (u64 *)D_01017468_usa,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* sid   */ 0,
+    /* flag  */ (u32)-1,
+    /* mask  */ 0x0,
 };
 
-u32 D_01018660_usa[] = {
-    0x00001033, (u32)D_01017C68_usa, 0x000000FF, 0x01000000, 0xFFFFFFFF, 0x00000000,
+/*
+height: 32
+width: 64
+palette: D_01000608_usa
+*/
+uObjTxtr chain13Block = {
+    /* type  */ G_OBJLT_TXTRBLOCK,
+    /* image */ (u64 *)D_01017C68_usa,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* sid   */ 0,
+    /* flag  */ (u32)-1,
+    /* mask  */ 0x0,
 };
 
 u8 D_01018678_usa[] ALIGNED(8) = {
@@ -1168,5 +1321,3 @@ u8 D_0102F8E0_usa[] ALIGNED(8) = {
 u8 D_01030460_usa[] ALIGNED(8) = {
 #include "assets/segment_0CA4A0/D_01030460_usa.i8.inc"
 };
-
-#endif

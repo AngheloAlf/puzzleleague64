@@ -52,7 +52,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/puzzle", func_80089108_usa);
 #if VERSION_USA
 #if 0
 // ? func_8006B314_usa(Game *, ?, s32 *);           /* extern */
-// s32 func_80088AB4_usa(Game *, Game_unk_8860 *, void *, ?); /* extern */
+// s32 func_80088AB4_usa(Game *, cursor_t *, void *, ?); /* extern */
 
 s32 func_8008913C_usa(s32 arg0) {
     s32 var_v0;

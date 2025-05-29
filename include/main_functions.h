@@ -91,7 +91,7 @@ void func_80050C2C_usa(void);
 // void func_80052400_usa();
 // void func_80052720_usa();
 // void func_80052C28_usa();
-UNK_RET Draw2DMiscStuff(struct_gInfo_unk_00068 *arg0);
+UNK_RET Draw2DMiscStuff(struct_gInfo_unk_00068 *dynamicp);
 // void func_80053140_usa();
 // void func_80053E64_usa();
 
@@ -221,7 +221,7 @@ void Init2DTetrisBlocksTMEM(Game *game, s32);
 // void func_8006C4A0_usa();
 // void func_8006C7A0_usa();
 // void func_8006C9BC_usa();
-void Init2DTetrisTMEM(block_t *arg0, tetWell_unk_000 *arg1);
+void Init2DTetrisTMEM(block_t *arg0, uObjSprite *rect);
 // void func_8006CB30_usa();
 // void func_8006CBEC_usa();
 // void func_8006CCA4_usa();
