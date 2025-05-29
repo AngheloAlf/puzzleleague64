@@ -222,7 +222,7 @@ segments:
       - [0x073EB0, c, main/bg_screen_load/075450]
       - [0x073FA0, c, main/bg_screen_load/075540]
 
-      - [0x074090, asm, main/074090]
+      - [0x074090, c, main/075630]
       - [0x074650, asm, main/074650]
       - [0x082630, asm, main/082630]
       - [0x087160, c, main/tutorial]

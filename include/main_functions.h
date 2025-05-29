@@ -260,10 +260,6 @@ void Init2DTetrisTMEM(block_t *arg0, tetWell_unk_000 *arg1);
 // void func_800737B8_usa();
 // void func_800739F0_usa();
 
-// void func_80074A30_usa();
-// void func_80074A58_usa();
-// void func_80074AEC_usa();
-// void func_80074D4C_usa();
 // void func_80074FF0_usa();
 // void func_80075108_usa();
 // void func_800751B4_usa();

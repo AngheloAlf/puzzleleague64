@@ -227,8 +227,9 @@ segments:
       - [0x075450, c, main/bg_screen_load/075450]
       - [0x075540, c, main/bg_screen_load/075540]
 
-      - [0x075630, asm, main/075630]
+      - [0x075630, c, main/075630]
       - [0x075BF0, asm, main/075BF0]
+      - [0x083B80, asm, main/083B80]
       - [0x088690, c, main/tutorial]
       - [0x089540, c, main/puzzle]
       - [0x08A2C0, c, main/tetris]
