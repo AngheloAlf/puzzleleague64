@@ -353,21 +353,62 @@ void Draw2DIcon(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     }
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/draw2d", Draw2DAttackBrick);
-#endif
+extern uObjTxtr brickTxtr[GAME_BUFFER_LEN][3];
+// either B_801C7368_usa or B_801F9CC8_usa should be explodeTxtr
+extern uObjTxtr B_801C7368_usa[GAME_BUFFER_LEN];
+extern uObjTxtr B_801F9CC8_usa[GAME_BUFFER_LEN];
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/draw2d", Draw2DAttackBrick);
-#endif
+void Draw2DAttackBrick(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 check) {
+    attack_t *attk = dynamicp->attack[num];
+    attack_t *attack;
+    s32 count;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/draw2d", Draw2DAttackBrick);
-#endif
+    gDPPipeSync(glistp++);
+    gDPSetTextureLUT(glistp++, G_TT_NONE);
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/draw2d", Draw2DAttackBrick);
-#endif
+    for (count = check; count >= 0; count--) {
+        attack = &attk[count];
+
+        if ((attack->state == 2 || attack->state == 3) && (attack->disappear < 5)) {
+            if (attack->type < 0xC) {
+                gSPObjLoadTxtr(glistp++, &brickTxtr[num][0]);
+            } else if (attack->type < 0x12) {
+                gSPObjLoadTxtr(glistp++, &brickTxtr[num][1]);
+            } else {
+                gSPObjLoadTxtr(glistp++, &brickTxtr[num][2]);
+            }
+
+            gSPObjRectangle(glistp++, &attack->rect);
+        }
+    }
+
+    gDPPipeSync(glistp++);
+    gDPSetRenderMode(glistp++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
+    gDPSetCombineMode(glistp++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
+    gDPSetPrimColor(glistp++, 0, 0, 255, 255, 255, 100);
+    gDPSetTextureLUT(glistp++, G_TT_RGBA16);
+
+    if (num == 0) {
+        gSPObjLoadTxtr(glistp++, &B_801C7368_usa[1]);
+        gSPObjLoadTxtr(glistp++, &B_801F9CC8_usa[1]);
+    } else {
+        gSPObjLoadTxtr(glistp++, &B_801C7368_usa[0]);
+        gSPObjLoadTxtr(glistp++, &B_801F9CC8_usa[0]);
+    }
+
+    for (count = 0; count <= check; count++) {
+        attack = &attk[count];
+
+        if ((attack->state == 1) && (attack->delay < 0)) {
+            gSPObjRectangle(glistp++, &attack->rect);
+        }
+    }
+
+    gDPPipeSync(glistp++);
+    gDPSetRenderMode(glistp++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
+    gDPSetCombineMode(glistp++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+    gDPSetPrimColor(glistp++, 0, 0, 255, 255, 255, 255);
+}
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/draw2d", Draw2DAttackBlock);
@@ -385,21 +426,56 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/draw2d", Draw2DAttackBlock);
 INCLUDE_ASM("asm/ger/nonmatchings/main/draw2d", Draw2DAttackBlock);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/draw2d", Draw2DExplosion);
-#endif
+void Draw2DExplosion(struct_gInfo_unk_00068 *dynamicp, s32 num) {
+    explode_t *exp = dynamicp->explosion[num];
+    explode_t *explode;
+    s32 fade;
+    s32 count;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/draw2d", Draw2DExplosion);
-#endif
+    gDPPipeSync(glistp++);
+    gDPSetTextureLUT(glistp++, G_TT_RGBA16);
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/draw2d", Draw2DExplosion);
-#endif
+    gSPObjLoadTxtr(glistp++, &B_801C7368_usa[num]);
+    gSPObjLoadTxtr(glistp++, &B_801F9CC8_usa[num]);
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/draw2d", Draw2DExplosion);
-#endif
+    fade = 0;
+    for (count = 0; count < TETWELL_EXPLOSION_LEN; count++) {
+        explode = &exp[count];
+
+        if (explode->type == 0x19) {
+            if ((gGameStatus & 0x10) && ((explode->frame % 2) == 1)) {
+                continue;
+            }
+
+            if ((gGameStatus & 0x8) && (fade == 0)) {
+                gDPPipeSync(glistp++);
+                gDPSetRenderMode(glistp++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
+                gDPSetCombineMode(glistp++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
+                gDPSetPrimColor(glistp++, 0, 0, 255, 255, 255, 100);
+                fade = 1;
+            }
+        } else if (fade == 1) {
+            fade = 2;
+        }
+
+        if (fade == 2) {
+            gDPPipeSync(glistp++);
+            gDPSetRenderMode(glistp++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
+            gDPSetCombineMode(glistp++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+            gDPSetPrimColor(glistp++, 0, 0, 255, 255, 255, 255);
+            fade = 0;
+        }
+
+        if (explode->frame >= 0) {
+            gSPObjRectangle(glistp++, &explode->rect);
+        }
+    }
+
+    gDPPipeSync(glistp++);
+    gDPSetRenderMode(glistp++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
+    gDPSetCombineMode(glistp++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+    gDPSetPrimColor(glistp++, 0, 0, 255, 255, 255, 255);
+}
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/draw2d", Draw2DClearLine);

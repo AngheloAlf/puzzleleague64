@@ -226,11 +226,11 @@ extern s8 TetrisBlockFrame[];
 
 #if VERSION_USA || VERSION_EUR
 void Update2DBuffer(struct_gInfo *info) {
-    struct_gInfo_unk_00068 *new_var5 = &info->unk_00068;
+    struct_gInfo_unk_00068 *dynamicp = &info->unk_00068;
     s8 *sp14;
     s32 var_s6;
 
-    new_var5->unk_10240 = gOverflow;
+    dynamicp->unk_10240 = gOverflow;
 
     sp14 = D_800B7508_usa;
     if (gGameStatus & 0x40) {
@@ -238,16 +238,16 @@ void Update2DBuffer(struct_gInfo *info) {
     }
 
     for (var_s6 = 0; var_s6 < gTheGame.unk_9C08; var_s6++) {
-        tetWell *__src = &gTheGame.tetrisWell[var_s6];
-        cursor_t *temp = &gTheGame.unk_8860[var_s6];
+        tetWell *well = &gTheGame.tetrisWell[var_s6];
+        cursor_t *cursor = &gTheGame.unk_8860[var_s6];
         block_t(*var_s0)[BLOCK_LEN_B];
         s32 var_a1;
 
-        bcopy(temp, &new_var5->cursorBlock[var_s6], sizeof(cursor_t));
-        bcopy(__src->block, new_var5->unk_10244[var_s6], sizeof(__src->block));
-        bzero(&new_var5->unk_10208[var_s6].unk_0, sizeof(struct_gInfo_unk_10208_unk_0));
+        bcopy(cursor, &dynamicp->cursorBlock[var_s6], sizeof(cursor_t));
+        bcopy(well->block, dynamicp->unk_10244[var_s6], sizeof(well->block));
+        bzero(&dynamicp->unk_10208[var_s6].unk_0, sizeof(struct_gInfo_unk_10208_unk_0));
 
-        var_s0 = new_var5->unk_10244[var_s6];
+        var_s0 = dynamicp->unk_10244[var_s6];
         for (var_a1 = 0; var_a1 < BLOCK_LEN_A; var_a1++) {
             s32 var_a0;
 
@@ -256,25 +256,25 @@ void Update2DBuffer(struct_gInfo *info) {
 
                 var->frame_n = sp14[var->frame_n];
                 //! FAKE
-                (&(*(&new_var5->unk_10208[var_s6])).unk_0)->unk_0[var->frame_n] = 1;
+                (&(*(&dynamicp->unk_10208[var_s6])).unk_0)->unk_0[var->frame_n] = 1;
             }
         }
 
-        bcopy(&__src->unk_3830, &new_var5->unk_17408[var_s6],
+        bcopy(&well->unk_3830, &dynamicp->unk_17408[var_s6],
               sizeof(uObjSprite) * TETWELL_OBJSPRITE_LEN_A * TETWELL_OBJSPRITE_LEN_B);
-        bcopy(&__src->unk_3EF0, &new_var5->unk_18188[var_s6], sizeof(uObjSprite) * TETWELL_UNK_3EF0_LEN_6);
+        bcopy(&well->unk_3EF0, &dynamicp->unk_18188[var_s6], sizeof(uObjSprite) * TETWELL_UNK_3EF0_LEN_6);
 
-        if (temp->unk_1C != -1) {
-            bcopy(&__src->unk_3F80, &new_var5->unk_182A8[var_s6], sizeof(uObjSprite));
-            bcopy(&__src->unk_3F98, &new_var5->unk_182D8[var_s6], sizeof(uObjSprite));
+        if (cursor->unk_1C != -1) {
+            bcopy(&well->unk_3F80, &dynamicp->unk_182A8[var_s6], sizeof(uObjSprite));
+            bcopy(&well->unk_3F98, &dynamicp->unk_182D8[var_s6], sizeof(uObjSprite));
         }
 
-        bcopy(&__src->icon, &new_var5->icon[var_s6], sizeof(icon_t) * ICON_COUNT);
-        bcopy(&__src->unk_2520, &new_var5->unk_14C88[var_s6], sizeof(tetWell_unk_2520));
-        bcopy(&__src->unk_2ED0, &new_var5->unk_15FE8[var_s6], sizeof(tetWell_unk_2ED0));
+        bcopy(&well->icon, &dynamicp->icon[var_s6], sizeof(icon_t) * ICON_COUNT);
+        bcopy(&well->attack, &dynamicp->attack[var_s6], sizeof(attack_t) * TETWELL_UNK_2520_LEN);
+        bcopy(&well->explosion, &dynamicp->explosion[var_s6], sizeof(explode_t) * TETWELL_EXPLOSION_LEN);
     }
 
-    bcopy(&gTheGame.unk_90C8, &new_var5->unk_186F8, sizeof(text_t) * GAME_UNK_90C8_LEN);
+    bcopy(&gTheGame.unk_90C8, &dynamicp->unk_186F8, sizeof(text_t) * GAME_UNK_90C8_LEN);
 }
 #endif
 
@@ -345,8 +345,8 @@ void Update3DBuffer(struct_gInfo *info) {
         }
 
         bcopy(&temp_s2->icon, &temp_s1->icon[var_fp], 0x410);
-        bcopy(&temp_s2->unk_2520, &temp_s1->unk_14C88[var_fp], 0x5A0);
-        bcopy(&temp_s2->unk_2ED0, &temp_s1->unk_15FE8[var_fp], 0x960);
+        bcopy(&temp_s2->attack, &temp_s1->attack[var_fp], 0x5A0);
+        bcopy(&temp_s2->explosion, &temp_s1->explosion[var_fp], 0x960);
         bcopy(&temp_s2->unk_3FB0, &temp_s1->unk_18308[var_fp], 0xD8);
 
         if (gSelection == 0x64) {

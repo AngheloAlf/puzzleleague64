@@ -1363,9 +1363,7 @@ extern s32 B_801C70D8_usa;
 // extern UNK_TYPE B_801C70E7_usa;
 // extern UNK_TYPE B_801C70E8_usa;
 // extern UNK_TYPE B_801C7154_usa;
-// extern UNK_TYPE B_801C7158_usa;
-// extern UNK_TYPE B_801C715C_usa;
-// extern UNK_TYPE B_801C71A4_usa;
+// extern UNK_TYPE brickTxtr;
 // extern UNK_TYPE B_801C71E8_usa;
 // extern UNK_TYPE B_801C7200_usa;
 // extern UNK_TYPE B_801C7218_usa;
@@ -1382,15 +1380,6 @@ extern s32 B_801C70D8_usa;
 // extern UNK_TYPE B_801C7360_usa;
 // extern UNK_TYPE B_801C7364_usa;
 // extern UNK_TYPE B_801C7368_usa;
-// extern UNK_TYPE B_801C736C_usa;
-// extern UNK_TYPE B_801C7370_usa;
-// extern UNK_TYPE B_801C7372_usa;
-// extern UNK_TYPE B_801C7374_usa;
-// extern UNK_TYPE B_801C7376_usa;
-// extern UNK_TYPE B_801C7378_usa;
-// extern UNK_TYPE B_801C737C_usa;
-// extern UNK_TYPE B_801C7380_usa;
-// extern UNK_TYPE B_801C7384_usa;
 
 // extern UNK_TYPE B_801C7BA0_usa;
 // extern UNK_TYPE B_801C7BAB_usa;
@@ -1415,15 +1404,6 @@ extern s32 gAllVertex;
 
 // extern UNK_TYPE B_801F9CC4_usa;
 // extern UNK_TYPE B_801F9CC8_usa;
-// extern UNK_TYPE B_801F9CCC_usa;
-// extern UNK_TYPE B_801F9CD0_usa;
-// extern UNK_TYPE B_801F9CD2_usa;
-// extern UNK_TYPE B_801F9CD4_usa;
-// extern UNK_TYPE B_801F9CD6_usa;
-// extern UNK_TYPE B_801F9CD8_usa;
-// extern UNK_TYPE B_801F9CDC_usa;
-// extern UNK_TYPE B_801F9CE0_usa;
-// extern UNK_TYPE B_801F9CE4_usa;
 
 // TODO: enum?
 extern s32 gSelection;

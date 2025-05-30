@@ -6,7 +6,9 @@
 #include "PR/gs2dex.h"
 #include "unk.h"
 
+#include "attack.h"
 #include "cursor.h"
+#include "explode.h"
 #include "icon.h"
 #include "text.h"
 
@@ -27,14 +29,6 @@ typedef struct block_t {
     /* 0x24 */ s32 frame_n; /* Original name: frame_n */
     /* 0x28 */ s32 frame_d; /* Original name: frame_d */
 } block_t; // size = 0x2C
-
-typedef struct tetWell_unk_2520 {
-    /* 0x000 */ UNK_TYPE1 unk_000[0x5A0];
-} tetWell_unk_2520; // size = 0x5A0
-
-typedef struct tetWell_unk_2ED0 {
-    /* 0x000 */ UNK_TYPE1 unk_000[0x960];
-} tetWell_unk_2ED0; // size = 0x960
 
 typedef struct tetWell_unk_3FB0 {
     /* 0x00 */ UNK_TYPE1 unk_00[0xD8];
@@ -70,12 +64,17 @@ typedef enum enum_tetWell_unk_4424 {
 
 #define ICON_COUNT (10)
 
+// TODO: This count seems to be 40 in panepon gc, so maybe it should adjust by player count
+#define TETWELL_UNK_2520_LEN (10 * 2)
+
+#define TETWELL_EXPLOSION_LEN (50)
+
 /* Original name: tetWell */
 typedef struct tetWell {
     /* 0x0000 */ block_t block[BLOCK_LEN_A][BLOCK_LEN_B]; /* Original name: block */
-    /* 0x2520 */ tetWell_unk_2520 unk_2520;
+    /* 0x2520 */ attack_t attack[TETWELL_UNK_2520_LEN];
     /* 0x2AC0 */ icon_t icon[ICON_COUNT];
-    /* 0x2ED0 */ tetWell_unk_2ED0 unk_2ED0;
+    /* 0x2ED0 */ explode_t explosion[TETWELL_EXPLOSION_LEN];
     /* 0x3830 */ uObjSprite unk_3830[TETWELL_OBJSPRITE_LEN_A][TETWELL_OBJSPRITE_LEN_B];
     /* 0x3EF0 */ uObjSprite unk_3EF0[TETWELL_UNK_3EF0_LEN_6];
     /* 0x3F80 */ uObjSprite unk_3F80;
@@ -320,9 +319,9 @@ typedef struct struct_gInfo_unk_00068 {
     /* 0x10240 */ UNK_TYPE unk_10240;
     /* 0x10244 */ block_t unk_10244[GAME_BUFFER_LEN][BLOCK_LEN_A][BLOCK_LEN_B];
     /* 0x14C84 */ UNK_TYPE1 unk_14C84[0x4];
-    /* 0x14C88 */ tetWell_unk_2520 unk_14C88[GAME_BUFFER_LEN];
+    /* 0x14C88 */ attack_t attack[GAME_BUFFER_LEN][TETWELL_UNK_2520_LEN];
     /* 0x157C8 */ icon_t icon[GAME_BUFFER_LEN][ICON_COUNT];
-    /* 0x15FE8 */ tetWell_unk_2ED0 unk_15FE8[GAME_BUFFER_LEN];
+    /* 0x15FE8 */ explode_t explosion[GAME_BUFFER_LEN][TETWELL_EXPLOSION_LEN];
     /* 0x172A8 */ cursor_t cursorBlock[GAME_BUFFER_LEN];
     /* 0x17408 */ uObjSprite unk_17408[GAME_BUFFER_LEN][TETWELL_OBJSPRITE_LEN_A][TETWELL_OBJSPRITE_LEN_B];
     /* 0x18188 */ uObjSprite unk_18188[GAME_BUFFER_LEN][TETWELL_UNK_3EF0_LEN_6];
