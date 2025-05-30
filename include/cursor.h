@@ -16,7 +16,9 @@ typedef struct cursor_t {
     /* 0x18 */ s32 unk_18;
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ UNK_TYPE4 unk_20;
-    /* 0x24 */ UNK_TYPE1 unk_24[0x74];
+    /* 0x24 */ UNK_TYPE1 unk_24[0x4];
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ UNK_TYPE1 unk_2C[0x98-0x2C];
     /* 0x98 */ uObjSprite rect;
 } cursor_t; // size = 0xB0
 

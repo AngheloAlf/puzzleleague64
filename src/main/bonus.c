@@ -138,7 +138,7 @@ void InitBonus(void) {
     osInvalDCache((void *)D_1030FE0, (u32)D_105B710 - (u32)D_1030FE0);
     func_80001310_usa(SEGMENT_ROM_START(segment_101A80), temp_v0, SEGMENT_ROM_SIZE(segment_101A80));
     Pon_Image_Heap += SEGMENT_ROM_SIZE(segment_101A80);
-    if ((gSelection == 0x96) && (gTheGame.unk_8860[0].unk_00 != 7) && (gTheGame.unk_8860[1].unk_00 != 8) &&
+    if ((gSelection == 0x96) && (gTheGame.cursorBlock[0].unk_00 != 7) && (gTheGame.cursorBlock[1].unk_00 != 8) &&
         (B_801C6C90_usa == 0x10)) {
         PlayMIDI(BGM_INIT_TABLE, 0x20, 0, 1);
     }
@@ -772,7 +772,7 @@ void InitStageClearIntro(void) {
             if (!(gPlayer[0]->unk_02B.unk_2 & 0x40)) {
                 gTheGame.unk_9C28 = 5;
                 gPlayer[0]->unk_02B.unk_2 |= 0x40;
-            } else if ((gTheGame.unk_9C28 == 2) && (gTheGame.unk_8860[0].unk_00 == 7)) {
+            } else if ((gTheGame.unk_9C28 == 2) && (gTheGame.cursorBlock[0].unk_00 == 7)) {
                 B_8018EA10_usa = "spaTR2.HVQM";
             }
         }
@@ -833,13 +833,13 @@ void InitStageClearIntro(void) {
 
     gWhatever = gTheGame.unk_9C0C = (gTheGame.unk_9C2C >= 4) ? 2 : 1;
 
-    UpdatePlayerStageClearTimeScore(gTheGame.unk_8860, -1, gTheGame.unk_9C2C, 1);
+    UpdatePlayerStageClearTimeScore(gTheGame.cursorBlock, -1, gTheGame.unk_9C2C, 1);
 
     gTheGame.unk_9C1C = 0;
     gTheGame.unk_9C18 = 0;
     gTheGame.unk_9C14 = 0;
     gCounter = 0;
-    gTheGame.unk_8860[0].unk_00 = 0;
+    gTheGame.cursorBlock[0].unk_00 = 0;
     if (screenLoad("CLEAR.SBF", &sp78) != 0) {
         u32 x;
 

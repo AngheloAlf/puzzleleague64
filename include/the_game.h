@@ -57,7 +57,6 @@ typedef enum enum_tetWell_unk_4424 {
 } enum_tetWell_unk_4424;
 
 
-#define TETWELL_OBJSPRITE_LEN_A (12)
 #define TETWELL_OBJSPRITE_LEN_B (BLOCK_LEN_B / 3)
 
 #define TETWELL_UNK_3EF0_LEN_6 (6)
@@ -75,7 +74,7 @@ typedef struct tetWell {
     /* 0x2520 */ attack_t attack[TETWELL_UNK_2520_LEN];
     /* 0x2AC0 */ icon_t icon[ICON_COUNT];
     /* 0x2ED0 */ explode_t explosion[TETWELL_EXPLOSION_LEN];
-    /* 0x3830 */ uObjSprite unk_3830[TETWELL_OBJSPRITE_LEN_A][TETWELL_OBJSPRITE_LEN_B];
+    /* 0x3830 */ uObjSprite unk_3830[BLOCK_LEN_A][TETWELL_OBJSPRITE_LEN_B];
     /* 0x3EF0 */ uObjSprite unk_3EF0[TETWELL_UNK_3EF0_LEN_6];
     /* 0x3F80 */ uObjSprite unk_3F80;
     /* 0x3F98 */ uObjSprite unk_3F98;
@@ -317,13 +316,13 @@ typedef struct struct_gInfo_unk_00068 {
     /* 0x10208 */ struct_gInfo_unk_10208 unk_10208[GAME_BUFFER_LEN];
     /* 0x10224 */ struct_gInfo_unk_10224 unk_10224[GAME_BUFFER_LEN];
     /* 0x10240 */ UNK_TYPE unk_10240;
-    /* 0x10244 */ block_t unk_10244[GAME_BUFFER_LEN][BLOCK_LEN_A][BLOCK_LEN_B];
+    /* 0x10244 */ block_t block[GAME_BUFFER_LEN][BLOCK_LEN_A][BLOCK_LEN_B];
     /* 0x14C84 */ UNK_TYPE1 unk_14C84[0x4];
     /* 0x14C88 */ attack_t attack[GAME_BUFFER_LEN][TETWELL_UNK_2520_LEN];
     /* 0x157C8 */ icon_t icon[GAME_BUFFER_LEN][ICON_COUNT];
     /* 0x15FE8 */ explode_t explosion[GAME_BUFFER_LEN][TETWELL_EXPLOSION_LEN];
     /* 0x172A8 */ cursor_t cursorBlock[GAME_BUFFER_LEN];
-    /* 0x17408 */ uObjSprite unk_17408[GAME_BUFFER_LEN][TETWELL_OBJSPRITE_LEN_A][TETWELL_OBJSPRITE_LEN_B];
+    /* 0x17408 */ uObjSprite block_rect[GAME_BUFFER_LEN][BLOCK_LEN_A][TETWELL_OBJSPRITE_LEN_B];
     /* 0x18188 */ uObjSprite unk_18188[GAME_BUFFER_LEN][TETWELL_UNK_3EF0_LEN_6];
     /* 0x182A8 */ uObjSprite unk_182A8[GAME_BUFFER_LEN];
     /* 0x182D8 */ uObjSprite unk_182D8[GAME_BUFFER_LEN];
@@ -348,7 +347,7 @@ typedef struct struct_gInfo {
 /* Original name: Game */
 typedef struct Game {
     /* 0x0000 */ tetWell tetrisWell[GAME_BUFFER_LEN]; /* Original name: tetrisWell */
-    /* 0x8860 */ cursor_t unk_8860[GAME_BUFFER_LEN];
+    /* 0x8860 */ cursor_t cursorBlock[GAME_BUFFER_LEN];
     /* 0x89C0 */ UNK_TYPE1 unk_89C0[0x4];
     /* 0x89C4 */ Game_unk_89C4 unk_89C4[UNK_SIZE];
     /* 0x89D4 */ UNK_TYPE2 unk_89D4;

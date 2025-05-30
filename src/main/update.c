@@ -239,15 +239,15 @@ void Update2DBuffer(struct_gInfo *info) {
 
     for (var_s6 = 0; var_s6 < gTheGame.unk_9C08; var_s6++) {
         tetWell *well = &gTheGame.tetrisWell[var_s6];
-        cursor_t *cursor = &gTheGame.unk_8860[var_s6];
+        cursor_t *cursor = &gTheGame.cursorBlock[var_s6];
         block_t(*var_s0)[BLOCK_LEN_B];
         s32 var_a1;
 
         bcopy(cursor, &dynamicp->cursorBlock[var_s6], sizeof(cursor_t));
-        bcopy(well->block, dynamicp->unk_10244[var_s6], sizeof(well->block));
+        bcopy(well->block, dynamicp->block[var_s6], sizeof(well->block));
         bzero(&dynamicp->unk_10208[var_s6].unk_0, sizeof(struct_gInfo_unk_10208_unk_0));
 
-        var_s0 = dynamicp->unk_10244[var_s6];
+        var_s0 = dynamicp->block[var_s6];
         for (var_a1 = 0; var_a1 < BLOCK_LEN_A; var_a1++) {
             s32 var_a0;
 
@@ -260,8 +260,8 @@ void Update2DBuffer(struct_gInfo *info) {
             }
         }
 
-        bcopy(&well->unk_3830, &dynamicp->unk_17408[var_s6],
-              sizeof(uObjSprite) * TETWELL_OBJSPRITE_LEN_A * TETWELL_OBJSPRITE_LEN_B);
+        bcopy(&well->unk_3830, &dynamicp->block_rect[var_s6],
+              sizeof(uObjSprite) * BLOCK_LEN_A * TETWELL_OBJSPRITE_LEN_B);
         bcopy(&well->unk_3EF0, &dynamicp->unk_18188[var_s6], sizeof(uObjSprite) * TETWELL_UNK_3EF0_LEN_6);
 
         if (cursor->unk_1C != -1) {
@@ -311,14 +311,14 @@ void Update3DBuffer(struct_gInfo *info) {
 
     for (var_fp = 0; var_fp < gTheGame.unk_9C08; var_fp++) {
         temp_s2 = &gTheGame.tetrisWell[var_fp];
-        temp_s4 = &gTheGame.unk_8860[var_fp];
+        temp_s4 = &gTheGame.cursorBlock[var_fp];
 
         bcopy(temp_s4, &temp_s1->cursorBlock[var_fp], 0xB0);
-        bcopy(&temp_s2->block, &temp_s1->unk_10244[var_fp], sizeof(temp_s2->block));
+        bcopy(&temp_s2->block, &temp_s1->block[var_fp], sizeof(temp_s2->block));
         bzero(&temp_s1->unk_10208[var_fp].unk_0, sizeof(struct_gInfo_unk_10208_unk_0));
         bzero(&temp_s1->unk_10224[var_fp].unk_0, sizeof(struct_gInfo_unk_10224_unk_0));
 
-        var_s0 = &temp_s1->unk_10244[var_fp];
+        var_s0 = &temp_s1->block[var_fp];
         for (var_v1 = 0; var_v1 < 0xC; var_v1++) {
             block_t *something = var_s0[var_v1];
             s32 frame_n;

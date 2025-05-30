@@ -668,8 +668,19 @@ u8 D_01018E90_usa[] ALIGNED(8) = {
 #include "assets/segment_0CA4A0/D_01018E90_usa.i8.inc"
 };
 
-u32 D_01019290_usa[] = {
-    0x00001033, (u32)D_01018E90_usa, 0x0000007F, 0x01000000, 0xFFFFFFFF, 0x00000000,
+/*
+height: 16
+widht: 64
+*/
+uObjTxtr deadsmoke = {
+    /* type  */ G_OBJLT_TXTRBLOCK,
+    /* image */ (u64 *)D_01018E90_usa,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 16, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* sid   */ 0,
+    /* flag  */ (u32)-1,
+    /* mask  */ 0x0,
 };
 
 u8 D_010192A8_usa[] ALIGNED(8) = {
@@ -1134,7 +1145,7 @@ uObjTxtr D_0101F360_usa = {
 };
 
 u16 D_0101F378_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0101F378_usa.rgba16.inc"
+#include "assets/segment_0CA4A0/D_0101F590_usa.palette.inc"
 };
 
 uObjTxtr numberLUT = {
@@ -1149,27 +1160,27 @@ uObjTxtr numberLUT = {
 };
 
 u8 D_0101F590_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0101F590_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_0101F590_usa.ci8.inc"
 };
 
 u8 D_0101FD90_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0101FD90_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_0101FD90_usa.ci8.inc"
 };
 
 u8 D_01020590_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01020590_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_01020590_usa.ci8.inc"
 };
 
 u8 D_01020D90_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01020D90_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_01020D90_usa.ci8.inc"
 };
 
 u8 D_01021590_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01021590_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_01021590_usa.ci8.inc"
 };
 
 u8 D_01021D90_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01021D90_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_01021D90_usa.ci8.inc"
 };
 
 uObjTxtr numberTexture1 = {
@@ -1247,11 +1258,23 @@ u32 D_01022E20_usa[] = {
 };
 
 u8 D_01022E38_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01022E38_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_01022E38_usa.ci8.inc"
 };
 
-u32 D_01023638_usa[] = {
-    0x00001033, (u32)D_01022E38_usa, 0x000000FF, 0x01000000, 0xFFFFFFFF, 0x00000000,
+/*
+height: 32
+width: 64
+palette: D_0101F378_usa
+*/
+uObjTxtr clearTexture = {
+    /* type  */ G_OBJLT_TXTRBLOCK,
+    /* image */ (u64 *)D_01022E38_usa,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* sid   */ 0,
+    /* flag  */ (u32)-1,
+    /* mask  */ 0x0,
 };
 
 u8 D_01023650_usa[] ALIGNED(8) = {
@@ -1278,12 +1301,78 @@ u8 D_01024480_usa[] ALIGNED(8) = {
 #include "assets/segment_0CA4A0/D_01024480_usa.i8.inc"
 };
 
-u32 D_01024C80_usa[] = {
-    0x00001033, (u32)D_01023C80_usa, 0x000000FF, 0x01000000, 0xFFFFFFFF, 0x00000000,
+#if 0
+height: 32
+
+Possible widths:
+    128 (G_IM_SIZ_4b)
+    64 (G_IM_SIZ_8b)
+    32 (G_IM_SIZ_16b)
+    16 (G_IM_SIZ_32b)
+
+Possible combinations:
+    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_4b),
+    /* tsize */ GS_TB_TSIZE(128 * 32, G_IM_SIZ_4b),
+    /* tline */ GS_TB_TLINE(128,      G_IM_SIZ_4b),
+
+    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64,      G_IM_SIZ_8b),
+
+    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_16b),
+    /* tsize */ GS_TB_TSIZE(32 * 32, G_IM_SIZ_16b),
+    /* tline */ GS_TB_TLINE(32,      G_IM_SIZ_16b),
+
+    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_32b),
+    /* tsize */ GS_TB_TSIZE(16 * 32, G_IM_SIZ_32b),
+    /* tline */ GS_TB_TLINE(16,      G_IM_SIZ_32b),
+#endif
+uObjTxtr stars1Texture = {
+    /* type  */ G_OBJLT_TXTRBLOCK,
+    /* image */ (u64 *)D_01023C80_usa,
+    /* tmem  */ 0,
+    /* tsize */ 255,
+    /* tline */ 256,
+    /* sid   */ 0,
+    /* flag  */ (u32)-1,
+    /* mask  */ 0x0,
 };
 
-u32 D_01024C98_usa[] = {
-    0x00001033, (u32)D_01024480_usa, 0x000000FF, 0x01000000, 0xFFFFFFFF, 0x00000000,
+#if 0
+height: 32
+
+Possible widths:
+    128 (G_IM_SIZ_4b)
+    64 (G_IM_SIZ_8b)
+    32 (G_IM_SIZ_16b)
+    16 (G_IM_SIZ_32b)
+
+Possible combinations:
+    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_4b),
+    /* tsize */ GS_TB_TSIZE(128 * 32, G_IM_SIZ_4b),
+    /* tline */ GS_TB_TLINE(128,      G_IM_SIZ_4b),
+
+    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64,      G_IM_SIZ_8b),
+
+    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_16b),
+    /* tsize */ GS_TB_TSIZE(32 * 32, G_IM_SIZ_16b),
+    /* tline */ GS_TB_TLINE(32,      G_IM_SIZ_16b),
+
+    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_32b),
+    /* tsize */ GS_TB_TSIZE(16 * 32, G_IM_SIZ_32b),
+    /* tline */ GS_TB_TLINE(16,      G_IM_SIZ_32b),
+#endif
+uObjTxtr stars2Texture = {
+    /* type  */ G_OBJLT_TXTRBLOCK,
+    /* image */ (u64 *)D_01024480_usa,
+    /* tmem  */ 0,
+    /* tsize */ 255,
+    /* tline */ 256,
+    /* sid   */ 0,
+    /* flag  */ (u32)-1,
+    /* mask  */ 0x0,
 };
 
 u8 D_01024CB0_usa[] ALIGNED(8) = {

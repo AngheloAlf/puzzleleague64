@@ -376,7 +376,7 @@ void InitStory(void) {
         gTheGame.unk_9C2C = 0xF;
         func_8002B85C_usa(3, 5);
     } else if (gTheGame.unk_9C2C == 0x11) {
-        if ((gTheGame.unk_8860[0].unk_00 == 7) || (gTheGame.unk_8860[1].unk_00 == 8)) {
+        if ((gTheGame.cursorBlock[0].unk_00 == 7) || (gTheGame.cursorBlock[1].unk_00 == 8)) {
             func_8002B85C_usa(5, 8);
         } else {
             func_8002B85C_usa(5, 9);
