@@ -285,16 +285,6 @@ typedef struct struct_801A6DB8_usa {
 } struct_801A6DB8_usa; // size = 0x7BC
 
 
-typedef struct struct_gInfo_unk_10208_unk_0 {
-    /* 0x0 */ UNK_TYPE1 unk_0[0x4];
-} struct_gInfo_unk_10208_unk_0; // size = 0x4
-
-typedef struct struct_gInfo_unk_10208 {
-    /* 0x0 */ struct_gInfo_unk_10208_unk_0 unk_0;
-    /* 0x4 */ UNK_TYPE1 unk_4[0xA];
-} struct_gInfo_unk_10208; // size = 0xE
-
-
 typedef struct struct_gInfo_unk_10224_unk_0 {
     /* 0x0 */ UNK_TYPE1 unk_0[0x4];
 } struct_gInfo_unk_10224_unk_0; // size = 0x4
@@ -307,14 +297,17 @@ typedef struct struct_gInfo_unk_10224 {
 #define GAME_BUFFER_LEN 2
 #define GAME_UNK_90C8_LEN 70
 
+// TODO: Maybe make an enum for this?
+#define STRUCT_GINFO_UNK_00068_UNK_10208_LEN (14)
+
 typedef struct struct_gInfo_unk_00068 {
     /* 0x00000 */ Gfx unk_00000[UNK_SIZE];
     /* 0x00008 */ UNK_TYPE1 unk_00008[0x100F8];
-    /* 0x10100 */ Mtx unk_10100[GAME_BUFFER_LEN];
-    /* 0x10180 */ Mtx unk_10180[GAME_BUFFER_LEN];
+    /* 0x10100 */ Mtx unk_10100[GAME_BUFFER_LEN]; // trans?
+    /* 0x10180 */ Mtx unk_10180[GAME_BUFFER_LEN]; // rotate?
     /* 0x10200 */ UNK_TYPE1 unk_10200[0x8];
-    /* 0x10208 */ struct_gInfo_unk_10208 unk_10208[GAME_BUFFER_LEN];
-    /* 0x10224 */ struct_gInfo_unk_10224 unk_10224[GAME_BUFFER_LEN];
+    /* 0x10208 */ char unk_10208[GAME_BUFFER_LEN][STRUCT_GINFO_UNK_00068_UNK_10208_LEN];
+    /* 0x10224 */ s8 unk_10224[GAME_BUFFER_LEN][0xE];
     /* 0x10240 */ UNK_TYPE unk_10240;
     /* 0x10244 */ block_t block[GAME_BUFFER_LEN][BLOCK_LEN_A][BLOCK_LEN_B];
     /* 0x14C84 */ UNK_TYPE1 unk_14C84[0x4];
@@ -330,7 +323,7 @@ typedef struct struct_gInfo_unk_00068 {
     /* 0x184B8 */ Mtx unk_184B8[GAME_BUFFER_LEN];
     /* 0x18538 */ Mtx unk_18538[GAME_BUFFER_LEN];
     /* 0x185B8 */ UNK_TYPE1 unk_185B8[0x140];
-    /* 0x186F8 */ text_t unk_186F8[GAME_UNK_90C8_LEN];
+    /* 0x186F8 */ text_t drawText[GAME_UNK_90C8_LEN];
 } struct_gInfo_unk_00068; // size = 0x18FB8
 
 typedef struct struct_gInfo {
@@ -360,7 +353,7 @@ typedef struct Game {
     /* 0x8F30 */ UNK_TYPE1 unk_8F30[0x190];
     /* 0x90C0 */ s32 unk_90C0;
     /* 0x90C4 */ UNK_TYPE1 unk_90C4[0x4];
-    /* 0x90C8 */ text_t unk_90C8[GAME_UNK_90C8_LEN];
+    /* 0x90C8 */ text_t drawText[GAME_UNK_90C8_LEN];
     /* 0x9988 */ UNK_TYPE1 unk_9988[0xC8];
     /* 0x9A50 */ uObjBg unk_9A50;
     /* 0x9A78 */ UNK_TYPE1 unk_9A78[0x9AE0 - 0x9A78];

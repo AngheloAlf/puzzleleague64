@@ -14,7 +14,7 @@ extern Gfx init2D_dl[];
 extern Gfx init3D_dl[];
 // extern UNK_TYPE D_010001F0_usa;
 // extern UNK_TYPE D_01000200_usa;
-// extern UNK_TYPE D_010003F0_usa;
+extern uObjTxtr D_010003F0_usa;
 // extern UNK_TYPE D_01000400_usa;
 // extern UNK_TYPE D_01000408_usa;
 // extern UNK_TYPE D_01000500_usa;

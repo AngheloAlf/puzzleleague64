@@ -30,47 +30,32 @@
 #define ADJUST_FRAMERATE(x) (x * 5 / 6)
 #endif
 
-extern uObjTxtr D_010003F0_usa;
-extern uObjTxtr D_800B7380_usa;
-extern uObjTxtr D_800B7398_usa;
-extern uObjTxtr D_800B73B0_usa;
-extern uObjTxtr D_800B73C8_usa;
-extern uObjTxtr D_800B73E0_usa;
-extern uObjTxtr D_800B73F8_usa;
-extern uObjTxtr D_800B7410_usa;
-extern uObjTxtr D_800B7428_usa;
-extern uObjTxtr D_800B7440_usa;
-extern uObjTxtr D_800B7458_usa;
-extern uObjTxtr D_800B7470_usa;
-extern uObjTxtr D_800B7488_usa;
-extern uObjTxtr D_800B74A0_usa;
-extern uObjTxtr D_800B74B8_usa;
-
-#if VERSION_USA
-#ifdef NON_EQUIVALENT
-//#if 1
 void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) {
-    block_t(*temp_t9)[BLOCK_LEN_B];
-    uObjSprite(*var_t0)[TETWELL_OBJSPRITE_LEN_B];
-    cursor_t *temp_t7;
+    block_t *block;
+    cursor_t *cursor;
+    block_t(*array)[BLOCK_LEN_B];
+    uObjSprite(*sprite)[TETWELL_OBJSPRITE_LEN_B];
+    // TODO:
+    /*
+    int which; // r26
+    int total; // r19
+    int row; // r27
+    int col; // r30
+    */
     s32 var_a1;
     s32 var_t1;
     s32 var_t3;
     s32 var_t8;
-    uObjSprite *var_a0_2;
-    uObjTxtr *var_v0;
-    block_t *temp_v1_5;
-    block_t *var_a0;
 
-    var_t8 = 9;
-    if (gMain >= 0x38E) {
-        var_t8 = 13;
-        gLastOverflow = 0x320;
+    var_t8 = STRUCT_GINFO_UNK_00068_UNK_10208_LEN - 5;
+    if (gMain >= GMAIN_38E) {
+        var_t8 = STRUCT_GINFO_UNK_00068_UNK_10208_LEN - 1;
+        gLastOverflow = 800;
     }
 
-    temp_t9 = dynamicp->block[num];
-    var_t0 = dynamicp->block_rect[num];
-    temp_t7 = &dynamicp->cursorBlock[num];
+    array = dynamicp->block[num];
+    sprite = dynamicp->block_rect[num];
+    cursor = &dynamicp->cursorBlock[num];
 
     gDPPipeSync(glistp++);
     gDPSetTextureLUT(glistp++, G_TT_RGBA16);
@@ -82,8 +67,7 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
     }
 
     for (var_t3 = 1; var_t3 <= var_t8; var_t3++) {
-        struct_gInfo_unk_10208 *temp = &dynamicp->unk_10208[num];
-        if (temp->unk_0.unk_0[var_t3] == 0) {
+        if (dynamicp->unk_10208[num][var_t3] == 0) {
             continue;
         }
 
@@ -129,22 +113,21 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
                 break;
         }
 
-        for (var_t1 = 11; var_t1 >= 0; var_t1--) {
-            for (var_a1 = 0; var_a1 < 6; var_a1++) {
-                var_a0 = &temp_t9[var_t1][var_a1];
-                if (var_a0->delay != -2) {
-                    if ((var_a0->type != 9) && (temp_v1_5->state != 2) && (temp_v1_5->state != 3) &&
-                        (var_a0->type != 0) && (var_a0->frame_n == var_t3)) {
-                        gSPObjRectangle(glistp++, &var_t0[var_t1][var_a1]);
-                    }
+        for (var_t1 = BLOCK_LEN_A - 1; var_t1 >= 0; var_t1--) {
+            for (var_a1 = 0; var_a1 < MIN(BLOCK_LEN_B, TETWELL_OBJSPRITE_LEN_B); var_a1++) {
+                block = &array[var_t1][var_a1];
+                if ((block->delay != -2) && (block->type != 9) && (block->state != 2) && (block->state != 3) &&
+                    (block->type != 0) && (block->frame_n == var_t3)) {
+                    gSPObjRectangle(glistp++, &sprite[var_t1][var_a1]);
                 }
             }
         }
     }
 
-    if (temp_t7->unk_1C != -1) {
-        switch (MAX(temp_t9[temp_t7->unk_1C][temp_t7->unk_18 + 1].frame_n,
-                    temp_t9[temp_t7->unk_1C][temp_t7->unk_18 + 0].frame_n)) {
+    if (cursor->unk_1C != -1) {
+        var_t3 =
+            MAX(array[cursor->unk_1C][cursor->unk_18 + 1].frame_n, array[cursor->unk_1C][cursor->unk_18 + 0].frame_n);
+        switch (var_t3) {
             case 0x6:
                 gSPObjLoadTxtr(glistp++, &D_800B73F8_usa);
                 break;
@@ -162,17 +145,17 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
                 break;
         }
 
-        temp_v1_5 = &temp_t9[temp_t7->unk_1C][temp_t7->unk_18 + 1];
-        if ((temp_v1_5->type != 0) && (temp_v1_5->state == 2 || temp_v1_5->state == 3)) {
+        block = &array[cursor->unk_1C][cursor->unk_18 + 1];
+        if ((block->type != 0) && (block->state == 2 || block->state == 3)) {
             gSPObjRectangle(glistp++, &dynamicp->unk_182A8[num]);
         }
-        temp_v1_5 = &temp_t9[temp_t7->unk_1C][temp_t7->unk_18];
-        if ((temp_v1_5->type != 0) && (temp_v1_5->state == 2 || temp_v1_5->state == 3)) {
+        block = &array[cursor->unk_1C][cursor->unk_18];
+        if ((block->type != 0) && (block->state == 2 || block->state == 3)) {
             gSPObjRectangle(glistp++, &dynamicp->unk_182D8[num]);
         }
     }
 
-    if (gMain >= 0x38E) {
+    if (gMain >= GMAIN_38E) {
         if (gGameStatus & 0x40) {
             switch (well->unk_40B0) {
                 case 0x8:
@@ -220,22 +203,6 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
         gSPObjRectangle(glistp++, &dynamicp->unk_18188[num][var_a1]);
     }
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/draw2d", Draw2DTetrisWell);
-#endif
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/draw2d", Draw2DTetrisWell);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/draw2d", Draw2DTetrisWell);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/draw2d", Draw2DTetrisWell);
-#endif
 
 INLINE void Draw2DCursor(struct_gInfo_unk_00068 *dynamicp) {
     s32 i;

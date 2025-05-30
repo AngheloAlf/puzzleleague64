@@ -691,7 +691,7 @@ segments:
         - { start: 0x0CA598, type: gfx, data_only: True, name: assets/segment_0CA4A0/initRDP_dl }
         - { start: 0x0CA600, type: gfx, data_only: True, name: assets/segment_0CA4A0/init2D_dl }
         - { start: 0x0CA648, type: gfx, data_only: True, name: assets/segment_0CA4A0/init3D_dl }
-        - [0x0CA690, i8, assets/segment_0CA4A0/D_010001F0_usa.i8, 512, 1] # unknown type and dimensions
+        - [0x0CA690, rgba16, assets/segment_0CA4A0/D_010001F0_usa.rgba16, 256, 1] # palette
         - [0x0CA890]
         - [0x0CA8A8, palette, assets/segment_0CA4A0/D_01000408_usa]
         - [0x0CAAA8]

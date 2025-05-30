@@ -428,8 +428,8 @@ void DoBonus(void) {
 
     gTheGame.unk_90C0 = 6;
 
-    for (i = ARRAY_COUNT(gTheGame.unk_90C8) - 1; i >= 0; i--) {
-        gTheGame.unk_90C8[i].texture = (u32)-1;
+    for (i = ARRAY_COUNT(gTheGame.drawText) - 1; i >= 0; i--) {
+        gTheGame.drawText[i].texture = (u32)-1;
     }
 
     var_s2 = &gTheGame.tetrisWell[0];

@@ -221,9 +221,6 @@ void UpdateBuffer(struct_gInfo *info) {
 }
 #endif
 
-extern s8 D_800B7508_usa[];
-extern s8 TetrisBlockFrame[];
-
 #if VERSION_USA || VERSION_EUR
 void Update2DBuffer(struct_gInfo *info) {
     struct_gInfo_unk_00068 *dynamicp = &info->unk_00068;
@@ -245,7 +242,8 @@ void Update2DBuffer(struct_gInfo *info) {
 
         bcopy(cursor, &dynamicp->cursorBlock[var_s6], sizeof(cursor_t));
         bcopy(well->block, dynamicp->block[var_s6], sizeof(well->block));
-        bzero(&dynamicp->unk_10208[var_s6].unk_0, sizeof(struct_gInfo_unk_10208_unk_0));
+        // Why only the first 4 bytes? Could this be a bug or is it intentional?
+        bzero(&dynamicp->unk_10208[var_s6], 4);
 
         var_s0 = dynamicp->block[var_s6];
         for (var_a1 = 0; var_a1 < BLOCK_LEN_A; var_a1++) {
@@ -255,8 +253,7 @@ void Update2DBuffer(struct_gInfo *info) {
                 block_t *var = &var_s0[var_a1][var_a0];
 
                 var->frame_n = sp14[var->frame_n];
-                //! FAKE
-                (&(*(&dynamicp->unk_10208[var_s6])).unk_0)->unk_0[var->frame_n] = 1;
+                dynamicp->unk_10208[var_s6][var->frame_n] = 1;
             }
         }
 
@@ -274,117 +271,96 @@ void Update2DBuffer(struct_gInfo *info) {
         bcopy(&well->explosion, &dynamicp->explosion[var_s6], sizeof(explode_t) * TETWELL_EXPLOSION_LEN);
     }
 
-    bcopy(&gTheGame.unk_90C8, &dynamicp->unk_186F8, sizeof(text_t) * GAME_UNK_90C8_LEN);
+    bcopy(&gTheGame.drawText, &dynamicp->drawText, sizeof(text_t) * GAME_UNK_90C8_LEN);
 }
 #endif
 
-extern f32 rotate_cos[];
-extern f32 rotate_sin[];
-extern f32 switch_cos[];
-extern f32 switch_sin[];
-
 #define ABS(x) (((x) < 0) ? -(x) : (x))
 
-#if VERSION_USA
-#ifdef NON_EQUIVALENT
+#if VERSION_USA || VERSION_EUR
 void Update3DBuffer(struct_gInfo *info) {
-    f32 *temp_a0_4;
-    f32 *temp_v0_2;
-    f32 *temp_v1;
+    struct_gInfo_unk_00068 *dynamicp = &info->unk_00068;
+    tetWell *well;
+    cursor_t *cursor;
+    s32 num;
+    s32 frame;
+    // TODO: which one is row and col?
     s32 var_a2;
-    s32 var_fp;
     int var_v1;
-    tetWell *temp_s2;
-    cursor_t *temp_s4;
-    block_t *var_a1;
-    block_t **var_s0;
+    block_t(*var_s0)[BLOCK_LEN_B];
     s8 *var_s7;
-    struct_gInfo_unk_00068 *temp_s1;
-    s32 someTemp;
-
-    temp_s1 = &info->unk_00068;
 
     var_s7 = D_800B7508_usa;
     if (gGameStatus & 0x40) {
         var_s7 = TetrisBlockFrame;
     }
 
-    for (var_fp = 0; var_fp < gTheGame.unk_9C08; var_fp++) {
-        temp_s2 = &gTheGame.tetrisWell[var_fp];
-        temp_s4 = &gTheGame.cursorBlock[var_fp];
+    for (num = 0; num < gTheGame.unk_9C08; num++) {
+        well = &gTheGame.tetrisWell[num];
+        cursor = &gTheGame.cursorBlock[num];
 
-        bcopy(temp_s4, &temp_s1->cursorBlock[var_fp], 0xB0);
-        bcopy(&temp_s2->block, &temp_s1->block[var_fp], sizeof(temp_s2->block));
-        bzero(&temp_s1->unk_10208[var_fp].unk_0, sizeof(struct_gInfo_unk_10208_unk_0));
-        bzero(&temp_s1->unk_10224[var_fp].unk_0, sizeof(struct_gInfo_unk_10224_unk_0));
+        bcopy(cursor, &dynamicp->cursorBlock[num], sizeof(cursor_t));
+        bcopy(&well->block, &dynamicp->block[num], sizeof(block_t) * BLOCK_LEN_A * BLOCK_LEN_B);
 
-        var_s0 = &temp_s1->block[var_fp];
-        for (var_v1 = 0; var_v1 < 0xC; var_v1++) {
+        // Why only the first 4 bytes? Could this be a bug or is it intentional?
+        bzero(&dynamicp->unk_10208[num], 4);
+        // Why only the first 4 bytes? Could this be a bug or is it intentional?
+        bzero(&dynamicp->unk_10224[num], 4);
+
+        var_s0 = dynamicp->block[num];
+        for (var_v1 = 0; var_v1 < BLOCK_LEN_A; var_v1++) {
             block_t *something = var_s0[var_v1];
-            s32 frame_n;
 
-            for (var_a2 = 1; var_a2 < 9; var_a2++) {
-                var_a1 = &something[var_a2];
-
-                frame_n = var_s7[something[var_a2].frame_n];
-                something[var_a2].frame_n = frame_n;
-                temp_s1->unk_10208[var_fp].unk_0.unk_0[frame_n] = 1;
+            for (var_a2 = 1; var_a2 < BLOCK_LEN_B / 2; var_a2++) {
+                frame = var_s7[something[var_a2].frame_n];
+                something[var_a2].frame_n = frame;
+                dynamicp->unk_10208[num][frame] = 1;
             }
 
-            for (var_a2 = 9; var_a2 < 0x12; var_a2++) {
-                var_a1 = &something[var_a2];
-
-                frame_n = var_s7[something[var_a2].frame_n];
-                something[var_a2].frame_n = frame_n;
-                temp_s1->unk_10224[var_fp].unk_0.unk_0[frame_n] = 1;
+            for (var_a2 = BLOCK_LEN_B / 2; var_a2 < BLOCK_LEN_B; var_a2++) {
+                frame = var_s7[something[var_a2].frame_n];
+                something[var_a2].frame_n = frame;
+                dynamicp->unk_10224[num][frame] = 1;
             }
 
-            frame_n = var_s7[something[0].frame_n];
-            something[0].frame_n = frame_n;
-            temp_s1->unk_10224[var_fp].unk_0.unk_0[frame_n] = 1;
+            frame = var_s7[something[0].frame_n];
+            something[0].frame_n = frame;
+            dynamicp->unk_10224[num][frame] = 1;
         }
 
-        bcopy(&temp_s2->icon, &temp_s1->icon[var_fp], 0x410);
-        bcopy(&temp_s2->attack, &temp_s1->attack[var_fp], 0x5A0);
-        bcopy(&temp_s2->explosion, &temp_s1->explosion[var_fp], 0x960);
-        bcopy(&temp_s2->unk_3FB0, &temp_s1->unk_18308[var_fp], 0xD8);
+        bcopy(&well->icon, &dynamicp->icon[num], sizeof(icon_t) * ICON_COUNT);
+        bcopy(&well->attack, &dynamicp->attack[num], sizeof(attack_t) * TETWELL_UNK_2520_LEN);
+        bcopy(&well->explosion, &dynamicp->explosion[num], sizeof(explode_t) * TETWELL_EXPLOSION_LEN);
+        bcopy(&well->unk_3FB0, &dynamicp->unk_18308[num], sizeof(tetWell_unk_3FB0));
 
         if (gSelection == 0x64) {
             gTransMtx[3][0] = -0.51f;
         } else if (gTheGame.unk_9C08 == 1) {
             gTransMtx[3][0] = 0.06f;
-        } else if (var_fp == 0) {
+        } else if (num == 0) {
             gTransMtx[3][0] = -0.51f;
         } else {
             gTransMtx[3][0] = 0.51f;
         }
 
-        gTransMtx[3][1] = temp_s2->unk_4088 + 0.01;
+        gTransMtx[3][1] = well->unk_4088 + 0.01;
 
-        guMtxF2L(gTransMtx, &temp_s1->unk_10100[var_fp]);
+        guMtxF2L(gTransMtx, &dynamicp->unk_10100[num]);
 
-        someTemp = temp_s4->unk_18;
+        if (cursor->unk_18 > 0) {
+            var_v1 = ABS(cursor->unk_18);
 
-        if (someTemp > 0) {
-            var_v1 = ABS(someTemp);
+            gRotateYMtx[0][0] = rotate_cos[var_v1];
+            gRotateYMtx[2][0] = rotate_sin[var_v1];
+            gRotateYMtx[0][2] = -rotate_sin[var_v1];
+            gRotateYMtx[2][2] = rotate_cos[var_v1];
+        } else if (cursor->unk_18 < 0) {
+            var_v1 = ABS(cursor->unk_18);
 
-            temp_a0_4 = &rotate_cos[var_v1];
-            temp_v1 = &rotate_sin[var_v1];
-
-            gRotateYMtx[0][0] = *temp_a0_4;
-            gRotateYMtx[2][0] = *temp_v1;
-            gRotateYMtx[0][2] = -*temp_v1;
-            gRotateYMtx[2][2] = *temp_a0_4;
-        } else if (someTemp < 0) {
-            var_v1 = ABS(someTemp);
-
-            temp_a0_4 = &rotate_cos[var_v1];
-            temp_v1 = &rotate_sin[var_v1];
-
-            gRotateYMtx[0][0] = *temp_a0_4;
-            gRotateYMtx[2][0] = -*temp_v1;
-            gRotateYMtx[0][2] = *temp_v1;
-            gRotateYMtx[2][2] = *temp_a0_4;
+            gRotateYMtx[0][0] = rotate_cos[var_v1];
+            gRotateYMtx[2][0] = -rotate_sin[var_v1];
+            gRotateYMtx[0][2] = rotate_sin[var_v1];
+            gRotateYMtx[2][2] = rotate_cos[var_v1];
         } else {
             gRotateYMtx[0][0] = 1.0f;
             gRotateYMtx[2][0] = 0.0f;
@@ -392,40 +368,29 @@ void Update3DBuffer(struct_gInfo *info) {
             gRotateYMtx[2][2] = 1.0f;
         }
 
-        guMtxF2L(gRotateYMtx, &temp_s1->unk_10180[var_fp]);
+        guMtxF2L(gRotateYMtx, &dynamicp->unk_10180[num]);
 
-        if (temp_s4->unk_1C != -1) {
-            var_v1 = 3 - temp_s4->unk_04;
-            temp_v1 = &switch_cos[var_v1];
-            temp_v0_2 = &switch_sin[var_v1];
+        if (cursor->unk_1C != -1) {
+            var_a2 = 3 - cursor->unk_04;
 
-            gRotateYMtx[0][0] = *temp_v1;
-            gRotateYMtx[2][0] = *temp_v0_2;
-            gRotateYMtx[0][2] = -*temp_v0_2;
-            gRotateYMtx[2][2] = *temp_v1;
+            gRotateYMtx[0][0] = switch_cos[var_a2];
+            gRotateYMtx[2][0] = switch_sin[var_a2];
+            gRotateYMtx[0][2] = -switch_sin[var_a2];
+            gRotateYMtx[2][2] = switch_cos[var_a2];
 
-            guMtxF2L(gRotateYMtx, &temp_s1->unk_184B8[var_fp]);
+            guMtxF2L(gRotateYMtx, &dynamicp->unk_184B8[num]);
 
-            var_v1 = temp_s4->unk_04 - 1;
-            temp_v1 = &switch_cos[var_v1];
-            temp_v0_2 = &switch_sin[var_v1];
+            var_a2 = cursor->unk_04 - 1;
 
-            gRotateYMtx[0][0] = *temp_v1;
-            gRotateYMtx[2][0] = *temp_v0_2;
-            gRotateYMtx[0][2] = -*temp_v0_2;
-            gRotateYMtx[2][2] = *temp_v1;
+            gRotateYMtx[0][0] = switch_cos[var_a2];
+            gRotateYMtx[2][0] = switch_sin[var_a2];
+            gRotateYMtx[0][2] = -switch_sin[var_a2];
+            gRotateYMtx[2][2] = switch_cos[var_a2];
 
-            guMtxF2L(gRotateYMtx, &temp_s1->unk_18538[var_fp]);
+            guMtxF2L(gRotateYMtx, &dynamicp->unk_18538[num]);
         }
     }
 
-    bcopy(&gTheGame.unk_90C8, &temp_s1->unk_186F8, 0x8C0);
+    bcopy(&gTheGame.drawText, &dynamicp->drawText, sizeof(text_t) * GAME_UNK_90C8_LEN);
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", Update3DBuffer);
-#endif
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", Update3DBuffer);
 #endif

@@ -23,8 +23,8 @@ Gfx init3D_dl[] = {
 #include "assets/segment_0CA4A0/init3D_dl.gfx.inc.c"
 };
 
-u8 D_010001F0_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_010001F0_usa.i8.inc"
+u16 D_010001F0_usa[] ALIGNED(8) = {
+#include "assets/segment_0CA4A0/D_010001F0_usa.rgba16.inc"
 };
 
 uObjTxtr D_010003F0_usa = {
