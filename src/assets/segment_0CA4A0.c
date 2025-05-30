@@ -1294,11 +1294,11 @@ u32 D_01023C68_usa[] = {
 };
 
 u8 D_01023C80_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01023C80_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_01023C80_usa.ci8.inc"
 };
 
 u8 D_01024480_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01024480_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_01024480_usa.ci8.inc"
 };
 
 #if 0
