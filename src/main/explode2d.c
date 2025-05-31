@@ -5,7 +5,6 @@
 #include "main_functions.h"
 #include "main_variables.h"
 
-
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/explode2d", Start2DExplosion);
 #endif
@@ -21,7 +20,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/explode2d", Start2DExplosion);
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/explode2d", Start2DExplosion);
 #endif
-
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/explode2d", func_80072FDC_usa);
@@ -102,7 +100,6 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/explode2d", func_80071E1C_ger);
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/explode2d", func_80071FE0_ger);
 #endif
-
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/explode2d", Update2DExplosion);
