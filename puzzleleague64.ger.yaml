@@ -204,7 +204,7 @@ segments:
       - [0x06F3E0, asm, main/06F3E0]
       - [0x070760, asm, main/070760]
       - [0x070EE0, asm, main/070EE0]
-      - [0x0726A0, asm, main/0726A0]
+      - [0x0726A0, c, main/explode2d]
       - [0x072E90, asm, main/072E90]
 
       - [0x073340, c, main/bg_screen_load/074730]

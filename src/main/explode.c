@@ -4,9 +4,10 @@
 
 #include "explode.h"
 
-#include "main_functions.h"
 #include "main_variables.h"
 
+#include "explode2d.h"
+#include "explode3d.h"
 #include "sfxlimit.h"
 #include "the_game.h"
 

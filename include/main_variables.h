@@ -8,6 +8,8 @@
 #include "stack.h"
 #include "hasm.h"
 
+#include "the_game.h"
+
 struct struct_imageLoad_arg0;
 
 
