@@ -177,7 +177,7 @@ segments:
       - [0x02FEF0, c, main/editor]
       - [0x031B20, c, main/bonus]
       - [0x034FA0, c, main/sign]
-      - [0x036720, asm, main/036720]
+      - [0x036720, c, main/pause]
       - [0x037E70, c, main/end]
       - [0x03F130, c, main/hvqm2util]
       - [0x041780, asm, main/041780]

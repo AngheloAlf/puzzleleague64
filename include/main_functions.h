@@ -11,13 +11,6 @@
 
 void func_80001310_usa(RomOffset segmentRom, void * dstAddr, size_t segmentSize);
 
-// void func_80035B20_usa();
-// void func_80035FF0_usa();
-// void func_800364BC_usa();
-// void func_800364FC_usa();
-// void func_80036A68_usa();
-void DrawPause(struct_gInfo_unk_00068 *arg0);
-
 // void func_80040B80_usa();
 void func_80040DE4_usa(Gfx **gfxP);
 // void func_80040F04_usa();
