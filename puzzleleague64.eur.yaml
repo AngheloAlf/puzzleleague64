@@ -194,7 +194,7 @@ segments:
       - [0x0577B0, asm, main/0577B0]
       - [0x0584F0, c, main/update]
       - [0x05B790, asm, main/05B790]
-      - [0x05E500, asm, main/05E500]
+      - [0x05E500, c, main/explode]
       - [0x05E7D0, asm, main/05E7D0]
       - [0x05F3E0, asm, main/05F3E0]
       - [0x067640, asm, main/067640]

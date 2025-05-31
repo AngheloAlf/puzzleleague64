@@ -11,6 +11,7 @@
 #include "main_variables.h"
 
 #include "fade.h"
+#include "explode.h"
 #include "sound.h"
 #include "sfxlimit.h"
 #include "update.h"
@@ -210,9 +211,9 @@ s32 EndingExplosion(Game *the_game) {
             }
 
             if (gTheGame.unk_9C0C == 1) {
-                StartExplosion(the_game, 0, sp18[var_a1_2][0], sp18[var_a1_2][1], 0x1F);
+                StartExplosion(&the_game->tetrisWell[0], 0, sp18[var_a1_2][0], sp18[var_a1_2][1], 0x1F);
             } else {
-                StartExplosion(the_game, 0, sp18[var_a1_2][0], sp18[var_a1_2][1] + 2, 0x1F);
+                StartExplosion(&the_game->tetrisWell[0], 0, sp18[var_a1_2][0], sp18[var_a1_2][1] + 2, 0x1F);
             }
         }
     }
@@ -763,7 +764,7 @@ s32 func_8004FA2C_usa();                            /* extern */
 ? UpdatePlayerPuzzle(cursor_t *, s32, s32);  /* extern */
 ? UpdatePlayerStageClear(cursor_t *, s32, s32);  /* extern */
 ? func_80058D68_usa(s32, s32);                      /* extern */
-? func_8005D8B4_usa(Game *);                     /* extern */
+? UpdateExplosion(Game *);                     /* extern */
 ? func_8006AF30_usa(Game *);                     /* extern */
 ? func_8006B314_usa(Game *, ?);                  /* extern */
 ? func_8006B628_usa(Game *);                     /* extern */
@@ -985,7 +986,7 @@ block_73:
                         var_s0 = 0;
                         if (gTheGame.unk_8860[0].unk_0 == 7) {
                             var_s0 = EndingExplosion(&gTheGame);
-                            func_8005D8B4_usa(&gTheGame);
+                            UpdateExplosion(&gTheGame);
                         }
                     }
                     if ((var_s0 == 0) && (gWhatever >= 0x5B)) {
@@ -1469,7 +1470,7 @@ s32 func_8004FA2C_usa();                            /* extern */
 ? func_80058458_usa(s32, s32);                      /* extern */
 ? UpdatePlayerPuzzle(cursor_t *, s32, s32);  /* extern */
 ? UpdatePlayerStageClear(cursor_t *, s32, s32);  /* extern */
-? func_8005D8B4_usa(Game *);                     /* extern */
+? UpdateExplosion(Game *);                     /* extern */
 ? func_8005D900_usa(Game *);                     /* extern */
 ? func_8005DBD8_usa(Game *, ?);                  /* extern */
 ? func_8005DD3C_usa(Game *);                     /* extern */
@@ -1706,7 +1707,7 @@ block_73:
                         var_s0 = 0;
                         if (gTheGame.unk_8860[0].unk_0 == 7) {
                             var_s0 = EndingExplosion(&gTheGame);
-                            func_8005D8B4_usa(&gTheGame);
+                            UpdateExplosion(&gTheGame);
                         }
                     }
                     if ((var_s0 == 0) && (gWhatever >= 0x5B)) {

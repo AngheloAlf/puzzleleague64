@@ -193,7 +193,7 @@ segments:
       - [0x054E30, asm, main/054E30]
       - [0x055F20, asm, main/055F20] # update.c is around here
       - [0x059ED0, asm, main/059ED0]
-      - [0x05CC40, asm, main/05CC40]
+      - [0x05CC40, c, main/explode]
       - [0x05CF10, asm, main/05CF10]
       - [0x05DB20, asm, main/05DB20]
       - [0x065D80, asm, main/065D80]

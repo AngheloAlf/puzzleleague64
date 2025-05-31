@@ -5,6 +5,8 @@
 #include "PR/gs2dex.h"
 #include "unk.h"
 
+struct tetWell;
+
 typedef struct explode_t {
     /* 0x00 */ s32 type;
     /* 0x04 */ s32 frame;
@@ -23,5 +25,9 @@ struct explode_t {
     uObjSprite rect; // offset 0x18, size 0x18
 };
 #endif
+
+void PlayExplosionSound(s32 num, s32 sound);
+void StartExplosion(struct tetWell *well, s32 num, s32 row, s32 col, s32 type);
+void UpdateExplosion(struct tetWell *well);
 
 #endif

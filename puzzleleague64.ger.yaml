@@ -193,7 +193,7 @@ segments:
       - [0x054FB0, asm, main/054FB0]
       - [0x0560A0, asm, main/0560A0]
       - [0x05A080, asm, main/05A080]
-      - [0x05CDF0, asm, main/05CDF0]
+      - [0x05CDF0, c, main/explode]
       - [0x05D0C0, asm, main/05D0C0]
       - [0x05DCD0, asm, main/05DCD0]
       - [0x065F30, asm, main/065F30]

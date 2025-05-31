@@ -14,194 +14,152 @@
 extern s32 B_801AB7E0_usa;
 extern s32 B_801C7154_usa;
 extern s32 B_8021B960_usa;
-extern struct_bgm_init_table *B_8021BA7C_usa;
+extern SongInitStruct *B_8021BA7C_usa;
 extern s32 B_8021DF48_usa;
 
-#if VERSION_USA
-s32 PlayMIDI(struct_bgm_init_table arg0[], s32 arg1, s32 arg2, s32 arg3) {
-    if (arg1 < 0) {
+s32 PlayMIDI(SongInitStruct bgmArray[], s32 songIndex, s32 songBuffer, s32 crossfade) {
+    if (songIndex < 0) {
         B_801C7154_usa = 0;
         return 0;
     }
 
-    B_8021BA7C_usa = &arg0[arg1];
-    B_8021B960_usa = arg1;
-    B_801AB7E0_usa = arg2;
-    B_8021DF48_usa = arg3;
+    B_8021BA7C_usa = &bgmArray[songIndex];
+    B_8021B960_usa = songIndex;
+    B_801AB7E0_usa = songBuffer;
+    B_8021DF48_usa = crossfade;
     B_801C7154_usa = 1;
     return 0;
 }
-#endif
 
-#if VERSION_USA
-// TODO: enum for arg1?
-musHandle PlaySE(struct_sfx_init_table *arg0, s32 arg1) {
-    struct_sfx_init_table *temp_s0;
+// TODO: enum for sfxIndex?
+musHandle PlaySE(SfxInitStruct *sfxArray, s32 sfxIndex) {
+    SfxInitStruct *sfxPtr;
 
     if (B_801C6EF6_usa <= 327.67) {
         return 0;
     }
 
-    temp_s0 = &arg0[arg1];
+    sfxPtr = &sfxArray[sfxIndex];
 
-    func_80002620_usa(temp_s0->unk_0);
+    func_80002620_usa(sfxPtr->bankRef);
 
-    if (arg1 == 1) {
-        PlaySFX(temp_s0->number, 1, 0x7F);
+    if (sfxIndex == 1) {
+        PlaySFX(sfxPtr->sfxRef, 1, 0x7F);
     }
 
-    PlaySFX(temp_s0->number, temp_s0->volume, temp_s0->pan);
+    PlaySFX(sfxPtr->sfxRef, sfxPtr->vol, sfxPtr->pan);
 
-    if (temp_s0->offset != 0.0f) {
-        SetFrequencySFX(D_800B3ADC_usa, temp_s0->offset);
+    if (sfxPtr->pitch != 0.0f) {
+        SetFrequencySFX(D_800B3ADC_usa, sfxPtr->pitch);
     }
 
     func_80002620_usa(0);
 
     return D_800B3ADC_usa;
 }
-#endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/sfxlimit", func_80005270_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/sfxlimit", func_8000541C_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/sfxlimit", func_80005608_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/sfxlimit", func_80005780_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/sfxlimit", func_80005888_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/sfxlimit", func_80005A08_usa);
-#endif
-
-#if VERSION_USA
-void SetMIDIParam(s32 arg0, struct_bgm_init_table arg1[], s32 arg2, s32 arg3) {
-    struct_bgm_init_table *temp_s0 = &arg1[arg2];
-
-    if (func_80002CE0_usa(arg0) != 0) {
-        SetSongCrossFadeVolume(temp_s0->unk_1, arg3);
-        func_80002F68_usa(last_song_handle, temp_s0->pan);
-        SetSongTempo(last_song_handle, temp_s0->tempo);
-    }
-}
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sfxlimit", PlayMIDI);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sfxlimit", PlaySE);
 #endif
 
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/sfxlimit", func_80005270_usa);
 #endif
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sfxlimit", func_8000541C_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sfxlimit", func_80005608_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sfxlimit", func_80005780_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sfxlimit", func_80005888_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sfxlimit", func_80005A08_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sfxlimit", SetMIDIParam);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", PlayMIDI);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", PlaySE);
-#endif
-
 #if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", func_80005330_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", func_800054DC_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", func_800056C8_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", func_80005840_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", func_80005888_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", func_80005A08_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", func_80005C44_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sfxlimit", PlayMIDI);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sfxlimit", PlaySE);
 #endif
 
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/sfxlimit", func_80005270_usa);
 #endif
 
+#if VERSION_USA
+INCLUDE_ASM("asm/usa/nonmatchings/main/sfxlimit", func_8000541C_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/sfxlimit", func_8000541C_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", func_800054DC_fra);
+#endif
+
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/sfxlimit", func_8000541C_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_ASM("asm/usa/nonmatchings/main/sfxlimit", func_80005608_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/sfxlimit", func_80005608_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", func_800056C8_fra);
 #endif
 
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/sfxlimit", func_80005608_usa);
 #endif
 
+#if VERSION_USA
+INCLUDE_ASM("asm/usa/nonmatchings/main/sfxlimit", func_80005780_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/sfxlimit", func_80005780_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", func_80005840_fra);
+#endif
+
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/sfxlimit", func_80005780_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_ASM("asm/usa/nonmatchings/main/sfxlimit", func_80005888_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/sfxlimit", func_80005888_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", func_80005888_usa);
 #endif
 
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/sfxlimit", func_80005888_usa);
 #endif
 
+#if VERSION_USA
+INCLUDE_ASM("asm/usa/nonmatchings/main/sfxlimit", func_80005A08_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/sfxlimit", func_80005A08_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", func_80005A08_usa);
+#endif
+
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/sfxlimit", func_80005A08_usa);
 #endif
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sfxlimit", SetMIDIParam);
-#endif
+void SetMIDIParam(musHandle handle, SongInitStruct bgmArray[], s32 songIndex, s32 songBuffer) {
+    SongInitStruct *bgmPtr = &bgmArray[songIndex];
+
+    if (func_80002CE0_usa(handle) != 0) {
+        SetSongCrossFadeVolume(bgmPtr->vol, songBuffer);
+        func_80002F68_usa(last_song_handle, bgmPtr->pan);
+        SetSongTempo(last_song_handle, bgmPtr->tempo);
+    }
+}

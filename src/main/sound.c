@@ -186,14 +186,14 @@ s16 func_80001D60_usa(s32 arg0, s16 arg1) {
 
         func_80001F68_usa(B_8016F2B0_usa, arg1);
         func_80001F90_usa(pair->start, pair->end - pair->start, arg1);
-        SetSongCrossFadeVolume(BGM_INIT_TABLE[arg0].unk_1, arg1);
+        SetSongCrossFadeVolume(BGM_INIT_TABLE[arg0].vol, arg1);
     }
     if (arg0 == ARRAY_COUNTU(D_800B5330_usa) - 1) {
         RomOffsetPair *pair = &D_800B5330_usa[arg0];
 
         func_80001F68_usa(B_801842B0_usa, arg1);
         func_80001F90_usa(pair->start, pair->end - pair->start, arg1);
-        SetSongCrossFadeVolume(BGM_INIT_TABLE[arg0].unk_1, arg1);
+        SetSongCrossFadeVolume(BGM_INIT_TABLE[arg0].vol, arg1);
     }
     return arg1;
 }
@@ -245,17 +245,13 @@ void func_80001F40_usa(struct song_t *arg0, s16 index) {
     B_8018A748_usa[index].song_addr = arg0;
 }
 
-#if VERSION_USA
 void func_80001F68_usa(void *arg0, s16 index) {
     B_8018A748_usa[index].unk_08 = arg0;
 }
-#endif
 
-#if VERSION_USA
 void func_80001F90_usa(RomOffset segmentRom, size_t segmentSize, s16 index) {
     func_80001CAC_usa(segmentRom, func_800028B8_usa(index), segmentSize);
 }
-#endif
 
 #if VERSION_USA
 int func_80002054_usa(void) {
@@ -362,14 +358,48 @@ void *LoadSFXBank(u16 arg0, u16 arg1) {
 }
 #endif
 
-#if VERSION_USA
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_80002054_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_8000222C_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/sound", LoadSFXBank);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002118_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_800022F0_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_8000240C_fra);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002118_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_800022F0_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_8000240C_ger);
+#endif
+
 void func_80002620_usa(s16 arg0) {
     if (B_8018A6F8_usa[arg0].unk_4 != NULL) {
         MusFxBankSetCurrent(B_8018A6F8_usa[arg0].unk_4);
         B_801F9CC4_usa = MusFxBankNumberOfEffects(B_8018A6F8_usa[arg0].unk_4) - 1;
     }
 }
-#endif
 
 #if VERSION_USA
 bool func_80002684_usa(void) {
@@ -449,11 +479,105 @@ void SetAudioSystemMixer(s16 arg0) {
 }
 #endif
 
-#if VERSION_USA
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_80002684_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_80002694_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_800026A0_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_800026C0_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_800027EC_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_8000274C_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_800027FC_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/sound", SetAudioSystemMixer);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002748_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002758_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002764_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002784_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_800027F0_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002810_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_800028C0_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002950_fra);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002748_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002758_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002764_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002784_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_800027F0_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002810_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_800028C0_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002950_ger);
+#endif
+
 struct song_t *func_800028B8_usa(s32 index) {
     return B_8018A748_usa[index].song_addr;
 }
-#endif
 
 #if VERSION_USA
 void func_800028D8_usa(s32 arg0) {
@@ -524,79 +648,6 @@ musHandle func_80002AE8_usa(s32 index, s32 volscale, s32 panscale, s32 temscale)
 }
 #endif
 
-#if VERSION_USA
-int func_80002C50_usa(musHandle handle) {
-    D_800B3AEC_usa = -1;
-    return MusHandleStop(handle, 0);
-}
-#endif
-
-#if VERSION_USA
-int FadeOutTuneBuffer(s32 index, int speed) {
-    return MusHandleStop(B_8018A748_usa[index].unk_04, speed);
-}
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_80001F68_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_80001F90_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_80002054_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_8000222C_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", LoadSFXBank);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_80002620_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_80002684_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_80002694_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_800026A0_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_800026C0_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_800027EC_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_8000274C_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_800027FC_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", SetAudioSystemMixer);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_800028B8_usa);
-#endif
-
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_800028D8_usa);
 #endif
@@ -607,74 +658,6 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_80002A10_usa);
 
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_80002AE8_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_80002C50_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", FadeOutTuneBuffer);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80001F68_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80001F90_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002118_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_800022F0_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_8000240C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_800026E4_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002748_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002758_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002764_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002784_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_800027F0_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002810_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_800028C0_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002950_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_8000297C_fra);
 #endif
 
 #if VERSION_FRA
@@ -689,74 +672,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002AD4_fra);
 INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002BAC_fra);
 #endif
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002C50_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002D40_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80001F68_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80001F90_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002118_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_800022F0_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_8000240C_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002620_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002748_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002758_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002764_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002784_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_800027F0_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002810_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_800028C0_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002950_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_8000297C_ger);
-#endif
-
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_8000299C_ger);
 #endif
@@ -769,8 +684,23 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002AD4_ger);
 INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002BAC_ger);
 #endif
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002C50_usa);
+int func_80002C50_usa(musHandle handle) {
+    D_800B3AEC_usa = -1;
+    return MusHandleStop(handle, 0);
+}
+
+#if VERSION_USA
+int FadeOutTuneBuffer(s32 index, int speed) {
+    return MusHandleStop(B_8018A748_usa[index].unk_04, speed);
+}
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/sound", FadeOutTuneBuffer);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002D40_fra);
 #endif
 
 #if VERSION_GER
@@ -782,23 +712,9 @@ int FadeOutSong(musHandle handle, int speed) {
     return MusHandleStop(handle, speed);
 }
 
-#if VERSION_USA
 s16 func_80002CE0_usa(musHandle handle) {
     return MusHandleAsk(handle);
 }
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_80002CE0_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002DA4_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002CE0_usa);
-#endif
 
 #if VERSION_USA
 s16 func_80002D04_usa(void) {
@@ -926,12 +842,6 @@ void func_80002EB8_usa(musHandle arg0, s32 arg1) {
 }
 #endif
 
-#if VERSION_USA
-int SetSongTempo(musHandle handle, int tempo) {
-    return MusHandleSetTempo(handle, tempo);
-}
-#endif
-
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_80002E34_usa);
 #endif
@@ -942,10 +852,6 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_80002E70_usa);
 
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_80002EB8_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_80003008_eur);
 #endif
 
 #if VERSION_FRA
@@ -960,10 +866,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002F34_fra);
 INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002F7C_fra);
 #endif
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_8000300C_fra);
-#endif
-
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002EF8_ger);
 #endif
@@ -976,27 +878,13 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002F34_ger);
 INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002F7C_ger);
 #endif
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_8000300C_ger);
-#endif
+int SetSongTempo(musHandle handle, int tempo) {
+    return MusHandleSetTempo(handle, tempo);
+}
 
-#if VERSION_USA
 int func_80002F68_usa(musHandle handle, int pan) {
     return MusHandleSetPan(handle, pan);
 }
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_80003028_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_8000302C_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_8000302C_ger);
-#endif
 
 void func_80002F88_usa(s16 arg0) {
     D_800B3AFA_usa = arg0;
@@ -1098,7 +986,42 @@ void func_800030F0_usa(void) {
 }
 #endif
 
-#if VERSION_USA
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_80003054_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_80003190_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_800030F0_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80003118_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80003194_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_800031B4_fra);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80003118_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80003194_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_800031B4_ger);
+#endif
+
 extern int D_800B3AF0_usa; // priority
 extern int D_800B3AF4_usa; // restartflag
 
@@ -1123,7 +1046,6 @@ INLINE musHandle PlaySFX(int number, int volume, int pan) {
     D_800B3ADC_usa = MusStartEffect2(number, volume, pan, D_800B3AF4_usa, D_800B3AF0_usa);
     return D_800B3ADC_usa;
 }
-#endif
 
 #if VERSION_USA
 int func_8000337C_usa(musHandle handle, int speed) {
@@ -1137,11 +1059,33 @@ int func_8000339C_usa(musHandle handle, int speed) {
 }
 #endif
 
-#if VERSION_USA
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_8000343C_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_8000345C_eur);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80003440_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80003460_fra);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80003440_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80003460_ger);
+#endif
+
 int SetFrequencySFX(musHandle handle, float offset) {
     return MusHandleSetFreqOffset(handle, offset);
 }
-#endif
 
 #if VERSION_USA
 int func_800033DC_usa(musHandle handle, s16 arg1, s16 arg2) {
@@ -1312,34 +1256,6 @@ void func_800038E4_usa(void) {
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_80003054_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_80003190_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_800030F0_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", PlaySFX);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_8000343C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_8000345C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_8000347C_eur);
-#endif
-
-#if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_800033DC_usa);
 #endif
 
@@ -1388,34 +1304,6 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_800038E4_usa);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80003118_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80003194_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_800031B4_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80003368_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80003440_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80003460_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80003480_fra);
-#endif
-
-#if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_800034A0_fra);
 #endif
 
@@ -1461,34 +1349,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_800038AC_fra);
 
 #if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_800039A8_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80003118_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80003194_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_800031B4_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", PlaySFX);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80003440_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80003460_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80003480_ger);
 #endif
 
 #if VERSION_GER

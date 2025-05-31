@@ -184,7 +184,7 @@ segments:
       - [0x043D10, asm, main/043D10]
       - [0x044E80, asm, main/044E80]
       - [0x047A10, c, main/controller]
-      - [0x047F40, asm, main/047F40]
+      - [0x047F40, asm, main/047F40] # bkground.c starts here
       - [0x04BF00, asm, main/04BF00] # maybe part of text
       - [0x04CC20, c, main/text]
       - [0x04F050, c, main/flic]
@@ -196,7 +196,7 @@ segments:
       - [0x057510, asm, main/057510]
       - [0x058250, c, main/update]
       - [0x05B4D0, asm, main/05B4D0]
-      - [0x05E230, asm, main/05E230] # explode.c?
+      - [0x05E230, c, main/explode]
       - [0x05E500, asm, main/05E500]
       - [0x05F110, asm, main/05F110]
       - [0x067370, asm, main/067370]
