@@ -68,7 +68,7 @@ void Draw2DShadeBox(void);
 // void func_8004B0D8_usa();
 // void func_8004B12C_usa();
 // void func_8004B300_usa();
-// void func_8004BC64_usa();
+s32 ReturnAttackTexValue(UNK_TYPE *arg0, s32 arg1, s32 arg2, u32 arg3);
 
 s32 AnimationRandom(s32 arg0);
 // void func_8004EE24_usa();

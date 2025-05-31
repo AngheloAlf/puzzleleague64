@@ -238,23 +238,23 @@ extern RomOffset D_800B6528_usa[];
 // extern UNK_TYPE D_800B7340_usa;
 // extern UNK_TYPE D_800B7341_usa;
 // extern UNK_TYPE D_800B737C_usa;
-extern uObjTxtr D_800B7380_usa;
+extern uObjTxtr tetrisBlock1;
 // extern UNK_TYPE D_800B7384_usa;
-extern uObjTxtr D_800B7398_usa;
+extern uObjTxtr tetrisBlock2;
 // extern UNK_TYPE D_800B739C_usa;
-extern uObjTxtr D_800B73B0_usa;
+extern uObjTxtr tetrisBlock3;
 // extern UNK_TYPE D_800B73B4_usa;
-extern uObjTxtr D_800B73C8_usa;
+extern uObjTxtr tetrisBlock4;
 // extern UNK_TYPE D_800B73CC_usa;
-extern uObjTxtr D_800B73E0_usa;
+extern uObjTxtr tetrisBlock5;
 // extern UNK_TYPE D_800B73E4_usa;
-extern uObjTxtr D_800B73F8_usa;
+extern uObjTxtr tetrisBlock6;
 // extern UNK_TYPE D_800B73FC_usa;
-extern uObjTxtr D_800B7410_usa;
+extern uObjTxtr tetrisBlock7;
 // extern UNK_TYPE D_800B7414_usa;
-extern uObjTxtr D_800B7428_usa;
+extern uObjTxtr tetrisBlock8;
 // extern UNK_TYPE D_800B742C_usa;
-extern uObjTxtr D_800B7440_usa;
+extern uObjTxtr tetrisBlock9;
 // extern UNK_TYPE D_800B7444_usa;
 extern uObjTxtr D_800B7458_usa;
 // extern UNK_TYPE D_800B745C_usa;
@@ -264,7 +264,7 @@ extern uObjTxtr D_800B7488_usa;
 // extern UNK_TYPE D_800B748C_usa;
 extern uObjTxtr D_800B74A0_usa;
 // extern UNK_TYPE D_800B74A4_usa;
-extern uObjTxtr D_800B74B8_usa;
+extern uObjTxtr tetrisBlockNew;
 // extern UNK_TYPE D_800B74BC_usa;
 extern f32 rotate_cos[];
 extern f32 rotate_sin[];
@@ -1314,16 +1314,7 @@ extern OSMesg B_801C6E5C_usa[1];
 // extern UNK_TYPE B_801C6E60_usa;
 // extern UNK_TYPE B_801C6E68_usa;
 // extern UNK_TYPE B_801C6E6C_usa;
-// extern UNK_TYPE B_801C6E70_usa;
-// extern UNK_TYPE B_801C6E74_usa;
-// extern UNK_TYPE B_801C6E78_usa;
-// extern UNK_TYPE B_801C6E7A_usa;
-// extern UNK_TYPE B_801C6E7C_usa;
-// extern UNK_TYPE B_801C6E7E_usa;
-// extern UNK_TYPE B_801C6E80_usa;
-// extern UNK_TYPE B_801C6E84_usa;
-// extern UNK_TYPE B_801C6E88_usa;
-// extern UNK_TYPE B_801C6E8C_usa;
+extern uObjTxtr B_801C6E70_usa[GAME_BUFFER_LEN]; // TODO: original name
 extern OSMesg B_801C6EA0_usa[8];
 
 // extern UNK_TYPE B_801C6EC1_usa;
@@ -1363,7 +1354,7 @@ extern s32 B_801C70D8_usa;
 // extern UNK_TYPE B_801C70E7_usa;
 // extern UNK_TYPE B_801C70E8_usa;
 // extern UNK_TYPE B_801C7154_usa;
-// extern UNK_TYPE brickTxtr;
+extern uObjTxtr brickTxtr[GAME_BUFFER_LEN][3];
 // extern UNK_TYPE B_801C71E8_usa;
 // extern UNK_TYPE B_801C7200_usa;
 // extern UNK_TYPE B_801C7218_usa;
@@ -1379,7 +1370,9 @@ extern s32 B_801C70D8_usa;
 // extern UNK_TYPE B_801C735C_usa;
 // extern UNK_TYPE B_801C7360_usa;
 // extern UNK_TYPE B_801C7364_usa;
-// extern UNK_TYPE B_801C7368_usa;
+
+// either B_801C7368_usa or B_801F9CC8_usa should be explodeTxtr
+extern uObjTxtr B_801C7368_usa[GAME_BUFFER_LEN];
 
 // extern UNK_TYPE B_801C7BA0_usa;
 // extern UNK_TYPE B_801C7BAB_usa;
@@ -1387,33 +1380,23 @@ extern s32 B_801C70D8_usa;
 extern struct_gInfo gInfo[2];
 
 extern s16 gBlock_Level;
-// extern UNK_TYPE B_801F9C48_usa;
-// extern UNK_TYPE B_801F9C4C_usa;
-// extern UNK_TYPE B_801F9C50_usa;
-// extern UNK_TYPE B_801F9C52_usa;
-// extern UNK_TYPE B_801F9C54_usa;
-// extern UNK_TYPE B_801F9C56_usa;
-// extern UNK_TYPE B_801F9C58_usa;
-// extern UNK_TYPE B_801F9C5C_usa;
-// extern UNK_TYPE B_801F9C60_usa;
-// extern UNK_TYPE B_801F9C64_usa;
+extern uObjTxtr B_801F9C48_usa[GAME_BUFFER_LEN]; // TODO: original name
+// extern UNK_TYPE B_801F9C78_usa;
 // extern UNK_TYPE __osBaseTimer;
 // extern UNK_TYPE B_801F9CA4_usa;
 // extern UNK_TYPE B_801F9CA8_usa;
 extern s32 gAllVertex;
 
 // extern UNK_TYPE B_801F9CC4_usa;
-// extern UNK_TYPE B_801F9CC8_usa;
+
+// either B_801C7368_usa or B_801F9CC8_usa should be explodeTxtr
+extern uObjTxtr B_801F9CC8_usa[GAME_BUFFER_LEN];
 
 // TODO: enum?
 extern s32 gSelection;
 
 extern u8 B_801F9CFC_usa;
-// extern UNK_TYPE B_801F9D00_usa;
-// extern UNK_TYPE B_801F9D04_usa;
-// extern UNK_TYPE B_801F9D30_usa;
-// extern UNK_TYPE B_801F9D90_usa;
-// extern UNK_TYPE B_801F9D94_usa;
+extern uObjTxtr B_801F9D00_usa[GAME_BUFFER_LEN][6]; // TODO: original name
 // extern UNK_TYPE B_801F9E20_usa;
 // extern UNK_TYPE B_801F9E24_usa;
 // extern UNK_TYPE B_801F9E28_usa;

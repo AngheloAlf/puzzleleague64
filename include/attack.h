@@ -10,7 +10,13 @@ typedef struct attack_t {
     /* 0x04 */ s32 type;
     /* 0x08 */ s32 disappear;
     /* 0x0C */ s32 delay;
-    /* 0x10 */ UNK_TYPE1 unk_10[0x30-0x10];
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ UNK_PAD unk_28[0x30-0x28];
     /* 0x30 */ uObjSprite rect;
 } attack_t; // size = 0x48
 

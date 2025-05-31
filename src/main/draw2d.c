@@ -71,33 +71,34 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
             continue;
         }
 
+        // 0xA to 0xD do not exist in gc version
         switch (var_t3) {
             case 0x1:
-                gSPObjLoadTxtr(glistp++, &D_800B7380_usa);
+                gSPObjLoadTxtr(glistp++, &tetrisBlock1);
                 break;
             case 0x2:
-                gSPObjLoadTxtr(glistp++, &D_800B7398_usa);
+                gSPObjLoadTxtr(glistp++, &tetrisBlock2);
                 break;
             case 0x3:
-                gSPObjLoadTxtr(glistp++, &D_800B73B0_usa);
+                gSPObjLoadTxtr(glistp++, &tetrisBlock3);
                 break;
             case 0x4:
-                gSPObjLoadTxtr(glistp++, &D_800B73C8_usa);
+                gSPObjLoadTxtr(glistp++, &tetrisBlock4);
                 break;
             case 0x5:
-                gSPObjLoadTxtr(glistp++, &D_800B73E0_usa);
+                gSPObjLoadTxtr(glistp++, &tetrisBlock5);
                 break;
             case 0x6:
-                gSPObjLoadTxtr(glistp++, &D_800B73F8_usa);
+                gSPObjLoadTxtr(glistp++, &tetrisBlock6);
                 break;
             case 0x7:
-                gSPObjLoadTxtr(glistp++, &D_800B7410_usa);
+                gSPObjLoadTxtr(glistp++, &tetrisBlock7);
                 break;
             case 0x8:
-                gSPObjLoadTxtr(glistp++, &D_800B7428_usa);
+                gSPObjLoadTxtr(glistp++, &tetrisBlock8);
                 break;
             case 0x9:
-                gSPObjLoadTxtr(glistp++, &D_800B7440_usa);
+                gSPObjLoadTxtr(glistp++, &tetrisBlock9);
                 break;
             case 0xA:
                 gSPObjLoadTxtr(glistp++, &D_800B7458_usa);
@@ -129,19 +130,19 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
             MAX(array[cursor->unk_1C][cursor->unk_18 + 1].frame_n, array[cursor->unk_1C][cursor->unk_18 + 0].frame_n);
         switch (var_t3) {
             case 0x6:
-                gSPObjLoadTxtr(glistp++, &D_800B73F8_usa);
+                gSPObjLoadTxtr(glistp++, &tetrisBlock6);
                 break;
             case 0x7:
-                gSPObjLoadTxtr(glistp++, &D_800B7410_usa);
+                gSPObjLoadTxtr(glistp++, &tetrisBlock7);
                 break;
             case 0x8:
-                gSPObjLoadTxtr(glistp++, &D_800B7428_usa);
+                gSPObjLoadTxtr(glistp++, &tetrisBlock8);
                 break;
             case 0x9:
-                gSPObjLoadTxtr(glistp++, &D_800B7440_usa);
+                gSPObjLoadTxtr(glistp++, &tetrisBlock9);
                 break;
             default:
-                gSPObjLoadTxtr(glistp++, &D_800B73B0_usa);
+                gSPObjLoadTxtr(glistp++, &tetrisBlock3);
                 break;
         }
 
@@ -160,19 +161,19 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
             switch (well->unk_40B0) {
                 case 0x8:
                 case 0xD:
-                    gSPObjLoadTxtr(glistp++, &D_800B73F8_usa);
+                    gSPObjLoadTxtr(glistp++, &tetrisBlock6);
                     break;
                 case 0xE:
-                    gSPObjLoadTxtr(glistp++, &D_800B7410_usa);
+                    gSPObjLoadTxtr(glistp++, &tetrisBlock7);
                     break;
                 case 0xF:
-                    gSPObjLoadTxtr(glistp++, &D_800B7428_usa);
+                    gSPObjLoadTxtr(glistp++, &tetrisBlock8);
                     break;
                 case 0x10:
-                    gSPObjLoadTxtr(glistp++, &D_800B7440_usa);
+                    gSPObjLoadTxtr(glistp++, &tetrisBlock9);
                     break;
                 default:
-                    gSPObjLoadTxtr(glistp++, &D_800B74B8_usa);
+                    gSPObjLoadTxtr(glistp++, &tetrisBlockNew);
                     break;
             }
         } else {
@@ -191,12 +192,12 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
                     gSPObjLoadTxtr(glistp++, &D_800B74A0_usa);
                     break;
                 default:
-                    gSPObjLoadTxtr(glistp++, &D_800B74B8_usa);
+                    gSPObjLoadTxtr(glistp++, &tetrisBlockNew);
                     break;
             }
         }
     } else {
-        gSPObjLoadTxtr(glistp++, &D_800B74B8_usa);
+        gSPObjLoadTxtr(glistp++, &tetrisBlockNew);
     }
 
     for (var_a1 = 0; var_a1 < TETWELL_UNK_3EF0_LEN_6; var_a1++) {
@@ -320,11 +321,6 @@ void Draw2DIcon(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     }
 }
 
-extern uObjTxtr brickTxtr[GAME_BUFFER_LEN][3];
-// either B_801C7368_usa or B_801F9CC8_usa should be explodeTxtr
-extern uObjTxtr B_801C7368_usa[GAME_BUFFER_LEN];
-extern uObjTxtr B_801F9CC8_usa[GAME_BUFFER_LEN];
-
 void Draw2DAttackBrick(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 check) {
     attack_t *attk = dynamicp->attack[num];
     attack_t *attack;
@@ -377,21 +373,183 @@ void Draw2DAttackBrick(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 check) {
     gDPSetPrimColor(glistp++, 0, 0, 255, 255, 255, 255);
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/draw2d", Draw2DAttackBlock);
-#endif
+s32 Draw2DAttackBlock(struct_gInfo_unk_00068 *dynamicp, s32 num) {
+    // TODO: name the remaining local variables
+    /*
+    int lev; // r29
+    int row; // r1+0x8
+    int col; // r25
+    int count; // r1+0x1C
+    int which; // r25
+    int check; // r28
+    int value; // r1+0x8
+    int from; // r3
+    int to; // r1+0x18
+    int load; // r1+0x14
+    */
+    s32 var_t2 = -1;
+    block_t(*array)[BLOCK_LEN_B] = dynamicp->block[num];
+    attack_t *attk = dynamicp->attack[num];
+    uObjSprite(*sprite)[TETWELL_OBJSPRITE_LEN_B] = dynamicp->block_rect[num];
+    attack_t *attack;
+    s32 temp_a1;
+    s32 var_v0_2;
+    s32 var_s0;
+    s32 var_s2;
+    s32 var_s5;
+    s32 var_s6;
+    s32 var_fp;
+    s32 var_t1;
+    s32 v0;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/draw2d", Draw2DAttackBlock);
-#endif
+    gDPPipeSync(glistp++);
+    gDPSetTextureLUT(glistp++, G_TT_RGBA16);
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/draw2d", Draw2DAttackBlock);
-#endif
+    if (num == 0) {
+        gSPObjLoadTxtr(glistp++, &B_801C7368_usa[1]);
+    } else {
+        gSPObjLoadTxtr(glistp++, &B_801C7368_usa[0]);
+    }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/draw2d", Draw2DAttackBlock);
-#endif
+    for (var_t1 = 0; var_t1 < TETWELL_UNK_2520_LEN; var_t1++) {
+        if (attk[var_t1].state < 5) {
+            continue;
+        }
+
+        attack = &attk[var_t1];
+        if (attack->disappear != -1) {
+            if (attack->type == 9) {
+                gSPObjLoadTxtr(glistp++, &B_801C6E70_usa[num]);
+                var_t2 = -1;
+            } else if (var_t2 != 0) {
+                gSPObjLoadTxtr(glistp++, &B_801F9D00_usa[num][0]);
+                var_t2 = 0;
+            }
+
+            var_s6 = 0;
+            for (var_s2 = 0; var_s2 < attack->unk_14; var_s2++) {
+                temp_a1 = attack->unk_24 + var_s2;
+                if (temp_a1 < BLOCK_LEN_A) {
+                    for (var_s0 = attack->unk_18; var_s0 < attack->unk_1C; var_s0++) {
+                        if (array[temp_a1][var_s0].type == 9) {
+                            if (array[temp_a1][var_s0].drop == 0) {
+                                gSPObjRectangle(glistp++, &sprite[temp_a1][var_s0]);
+                            } else if (array[temp_a1][var_s0].drop == 1) {
+                                var_s6 = -1;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (var_s6 != 0) {
+                var_s6 = attack->type - 0x16;
+                if (var_s6 == 0xA) {
+                    var_v0_2 = 0;
+                    var_fp = 1;
+                } else if (var_s6 == 0xB) {
+                    var_v0_2 = 1;
+                    var_fp = 3;
+                } else {
+                    var_v0_2 = 3;
+                    var_fp = ARRAY_COUNT(B_801F9D00_usa[0]);
+                }
+
+                var_t2 = -1;
+                for (var_s5 = var_v0_2; var_s5 < var_fp; var_s5++) {
+                    gSPObjLoadTxtr(glistp++, &B_801F9D00_usa[num][var_s5]);
+
+                    for (var_s2 = 1; var_s2 < attack->unk_14; var_s2++) {
+                        temp_a1 = attack->unk_24 + var_s2;
+                        if (temp_a1 < BLOCK_LEN_A) {
+                            for (var_s0 = attack->unk_18; var_s0 < attack->unk_1C; var_s0++) {
+                                v0 = ReturnAttackTexValue(NULL, var_s6, var_s2 - 1, var_s0);
+                                v0 /= 10;
+                                if ((v0 == var_s5) && (array[temp_a1][var_s0].drop == 1)) {
+                                    gSPObjRectangle(glistp++, &sprite[temp_a1][var_s0]);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } else if (attack->type < 0xC) {
+            for (var_s2 = 0; var_s2 < attack->unk_14; var_s2++) {
+                temp_a1 = attack->unk_24 + var_s2;
+                if (temp_a1 < BLOCK_LEN_A) {
+                    switch (attack->type) {
+                        case 0x1:
+                        case 0x2:
+                        case 0x3:
+                        case 0x4:
+                        case 0xA:
+                            if (var_t2 != 0) {
+                                var_t2 = 0;
+                                gSPObjLoadTxtr(glistp++, &B_801F9D00_usa[num][0]);
+                            }
+                            break;
+
+                        case 0x9:
+                            var_t2 = -1;
+                            gSPObjLoadTxtr(glistp++, &B_801C6E70_usa[num]);
+                            break;
+
+                        case 0xB:
+                            var_t2 = -1;
+                            if (var_s2 == 0) {
+                                gSPObjLoadTxtr(glistp++, &B_801F9D00_usa[num][2]);
+                            } else {
+                                gSPObjLoadTxtr(glistp++, &B_801F9D00_usa[num][1]);
+                            }
+                            break;
+                    }
+
+                    for (var_s0 = attack->unk_18; var_s0 < attack->unk_1C; var_s0++) {
+                        gSPObjRectangle(glistp++, &sprite[temp_a1][var_s0]);
+                    }
+                }
+            }
+        } else {
+            var_t2 = -1;
+
+            for (var_s5 = 3; var_s5 < ARRAY_COUNT(B_801F9D00_usa[0]); var_s5++) {
+                gSPObjLoadTxtr(glistp++, &B_801F9D00_usa[num][var_s5]);
+
+                for (var_s2 = 0; var_s2 < attack->unk_14; var_s2++) {
+                    temp_a1 = attack->unk_24 + var_s2;
+                    if (temp_a1 < BLOCK_LEN_A) {
+                        for (var_s0 = attack->unk_18; var_s0 < attack->unk_1C; var_s0++) {
+                            v0 = ReturnAttackTexValue(NULL, attack->type, var_s2, var_s0);
+                            v0 /= 10;
+                            if (v0 == var_s5) {
+                                gSPObjRectangle(glistp++, &sprite[temp_a1][var_s0]);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    var_t2 = -1;
+    for (var_t1 = 0; var_t1 < TETWELL_UNK_2520_LEN; var_t1++) {
+        attack = &attk[var_t1];
+        if (attack->state == 0) {
+            return var_t1 - 1;
+            // TODO: break
+        }
+
+        if ((attack->state >= 7) && (attack->unk_20 != 0) && (attack->disappear == -1) && (attack->unk_10 < 0)) {
+            if (var_t2 != 0) {
+                var_t2 = 0;
+                gSPObjLoadTxtr(glistp++, &B_801F9C48_usa[num]);
+            }
+            gSPObjRectangle(glistp++, &attack->rect);
+        }
+    }
+
+    return TETWELL_UNK_2520_LEN - 1;
+}
 
 void Draw2DExplosion(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     explode_t *exp = dynamicp->explosion[num];
