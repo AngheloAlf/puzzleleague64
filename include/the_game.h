@@ -90,7 +90,8 @@ typedef struct tetWell {
     /* 0x43E0 */ s32 unk_43E0;
     /* 0x43E4 */ UNK_TYPE1 unk_43E4[8];
     /* 0x43EC */ UNK_TYPE4 unk_43EC;
-    /* 0x43F0 */ UNK_TYPE1 unk_43F0[0xC];
+    /* 0x43F0 */ UNK_TYPE1 unk_43F0[0x8];
+    /* 0x43F0 */ s32 unk_43F8; // possibly part of "struct state_t state; // offset 0x4AA8, size 0x38", maybe "current_raise"
     /* 0x43FC */ UNK_TYPE4 unk_43FC;
     /* 0x4400 */ UNK_TYPE1 unk_4400[0x4];
     /* 0x4404 */ UNK_TYPE4 unk_4404;

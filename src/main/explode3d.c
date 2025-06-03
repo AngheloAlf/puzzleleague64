@@ -5,9 +5,7 @@
 #include "explode3d.h"
 
 #include "ultra64.h"
-#include "include_asm.h"
 #include "macros_defines.h"
-#include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
 
@@ -146,18 +144,16 @@ void Start3DIconSplash(tetWell *well, s32 num, s32 row, s32 col) {
     }
 }
 
-void func_8006A9EC_usa(explode_t *explode, s32 arg1);
-#if VERSION_USA
-#ifdef NON_MATCHING
-void func_8006A9EC_usa(explode_t *explode, s32 arg1) {
-    s32 temp;
-    s8 *temp_a0;
+INLINE void Update3DExplode1(explode_t *explode, s32 distance) {
+    s8 *ptr;
+    s32 position;
+    s32 first;
 
-    temp_a0 = Explosion1[explode->frame];
-    temp_a0 += explode->pos * 3;
-    temp = temp_a0[0];
+    ptr = Explosion1[explode->frame];
+    position = explode->pos * 3;
+    first = ptr[position + 0];
 
-    if (temp == 8) {
+    if (first == 8) {
         explode->type = -1;
         explode->frame = -1;
         explode->rect.s.objX = -(40 << 2);
@@ -165,72 +161,131 @@ void func_8006A9EC_usa(explode_t *explode, s32 arg1) {
         return;
     }
 
-    explode->rect.s.objX = temp_a0[1] + explode->x;
-    explode->rect.s.objY = temp_a0[2] + explode->y - arg1;
-    explode->rect.s.imagePal = temp;
+    explode->rect.s.objX = ptr[position + 1] + explode->x;
+    explode->rect.s.objY = ptr[position + 2] + explode->y - distance;
+    explode->rect.s.imagePal = first;
     explode->frame++;
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/explode3d", func_8006A9EC_usa);
-#endif
-#endif
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/explode3d", func_8006ACBC_eur);
-#endif
+void Update3DExplode2(explode_t *explode, s32 distance) {
+    s8 *ptr;
+    s32 position;
+    s32 first;
+    s32 max;
+    uObjSprite_t *s;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/explode3d", func_800693FC_fra);
-#endif
+    switch (explode->type) {
+        case 0x1F:
+            max = 0x14;
+            ptr = Explosion2[explode->frame];
+            break;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/explode3d", func_800695AC_ger);
-#endif
+        case 0x20:
+            max = 0x18;
+            ptr = Explosion3[explode->frame];
+            break;
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/explode3d", func_8006AA88_usa);
-#endif
+        case 0x21:
+            max = 0x18;
+            ptr = Explosion4[explode->frame];
+            break;
+    }
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/explode3d", func_8006AD58_eur);
-#endif
+    position = explode->pos * 4;
+    first = ptr[position + 0];
+    s = &explode->rect.s;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/explode3d", func_80069498_fra);
-#endif
+    if ((first == 8) || (explode->frame == max)) {
+        explode->type = -1;
+        explode->frame = -1;
+        s->objX = -(40 << 2);
+        s->objY = -(40 << 2);
+        return;
+    }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/explode3d", func_80069648_ger);
-#endif
+    if (first < 0) {
+        s->objX = -(40 << 2);
+        s->objY = -(40 << 2);
+    } else {
+        if (first == 0) {
+            s->imageSiz = 16;
+        } else {
+            s->imageSiz = 8;
+        }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/explode3d", func_8006AC3C_usa);
-#endif
+        s->objX = explode->x + ptr[position + 1];
+        s->objY = explode->y + ptr[position + 2] - distance;
+        s->imagePal = first;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/explode3d", func_8006AF0C_eur);
-#endif
+        switch (ptr[position + 3]) {
+            case 1:
+                s->paddingX = 1;
+                s->paddingY = 1;
+                break;
+            case 2:
+                s->paddingX = 0xFFFF;
+                s->paddingY = 1;
+                break;
+            case 3:
+                s->paddingX = 0xFFFF;
+                s->paddingY = 0xFFFF;
+                break;
+            case 4:
+                s->paddingX = 1;
+                s->paddingY = 0xFFFF;
+                break;
+        }
+    }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/explode3d", func_8006964C_fra);
-#endif
+    explode->frame++;
+}
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/explode3d", func_800697FC_ger);
-#endif
+INLINE void func_8006AC3C_usa(explode_t *explode, s32 distance) {
+    s8 *ptr = IconSplash[explode->frame];
+    s32 position;
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/explode3d", Update3DExplosion);
-#endif
+    if (explode->frame == 0x19) {
+        explode->type = -1;
+        explode->frame = -1;
+        explode->rect.s.objX = -(40 << 2);
+        explode->rect.s.objY = -(40 << 2);
+        return;
+    }
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/explode3d", Update3DExplosion);
-#endif
+    position = explode->pos * 2;
+    explode->rect.s.objX = ptr[position + 0] + explode->x;
+    explode->rect.s.objY = ptr[position + 1] + explode->y - distance;
+    explode->frame++;
+}
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/explode3d", Update3DExplosion);
-#endif
+void Update3DExplosion(tetWell *well) {
+    s32 distance = well->unk_43F8 / 2;
+    explode_t *explode;
+    s32 count;
+    s32 temp;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/explode3d", Update3DExplosion);
-#endif
+    for (count = 0; count < TETWELL_EXPLOSION_LEN; count++) {
+        explode = &well->explosion[count];
+
+        if (explode->type == -1) {
+            continue;
+        }
+
+        if (explode->frame < 0) {
+            explode->frame++;
+        } else if (explode->type == 0x17) {
+            Update3DExplode1(explode, 0);
+        } else {
+            Match3DPosition(explode->rect.s.imageFmt, 0, explode->rect.s.scaleW, &explode->x, &temp);
+            if (explode->type == 0x19) {
+                explode->x += 5;
+
+                func_8006AC3C_usa(explode, distance);
+            } else if (explode->type == 0x1E) {
+                Update3DExplode1(explode, distance);
+            } else {
+                Update3DExplode2(explode, distance);
+            }
+        }
+    }
+}

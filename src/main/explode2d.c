@@ -229,7 +229,7 @@ void Update2DExplode2(explode_t *explode) {
 }
 
 INLINE void func_800733D0_usa(explode_t *explode) {
-    s8 *temp_a0;
+    s8 *ptr;
 
     if (explode->frame == 0x28) {
         explode->type = -1;
@@ -239,10 +239,10 @@ INLINE void func_800733D0_usa(explode_t *explode) {
         return;
     }
 
-    temp_a0 = IconSplash[explode->frame];
-    temp_a0 += explode->pos * 2;
-    explode->rect.s.objX = (temp_a0[0] + explode->x) << 2;
-    explode->rect.s.objY = (temp_a0[1] + explode->y) << 2;
+    ptr = IconSplash[explode->frame];
+    ptr += explode->pos * 2;
+    explode->rect.s.objX = (ptr[0] + explode->x) << 2;
+    explode->rect.s.objY = (ptr[1] + explode->y) << 2;
 
     explode->frame++;
     if (explode->pos == 0) {
