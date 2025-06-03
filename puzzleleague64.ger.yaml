@@ -198,7 +198,7 @@ segments:
       - [0x05DCD0, asm, main/05DCD0]
       - [0x065F30, asm, main/065F30]
       - [0x066B70, asm, main/066B70]
-      - [0x069E10, asm, main/069E10]
+      - [0x069E10, c, main/explode3d]
       - [0x06A6F0, asm, main/06A6F0]
       - [0x06C660, c, main/draw2d]
       - [0x06F3E0, asm, main/06F3E0]
