@@ -5,10 +5,7 @@
 #include "explode2d.h"
 
 #include "ultra64.h"
-#include "include_asm.h"
 #include "macros_defines.h"
-#include "unknown_structs.h"
-#include "main_functions.h"
 #include "main_variables.h"
 
 void Start2DExplosion(tetWell *well, s32 row, s32 col, s32 type) {
@@ -136,11 +133,9 @@ void Start2DIconSplash(tetWell *well, s32 x, s32 y) {
     }
 }
 
-#if VERSION_USA
-#ifdef NON_MATCHING
-// INLINE
-void func_80073138_usa(explode_t *explode) {
-    s8 *temp_v1_2;
+INLINE void func_80073138_usa(explode_t *explode) {
+    s8 *ptr;
+    s32 position;
 
     if (explode->frame == 0x14) {
         explode->type = -1;
@@ -150,33 +145,17 @@ void func_80073138_usa(explode_t *explode) {
         return;
     }
 
-    temp_v1_2 = Explosion1[explode->frame];
-    temp_v1_2 += explode->pos * 3;
-    explode->rect.s.objX = (temp_v1_2[1] + explode->x) << 2;
-    explode->rect.s.objY = (temp_v1_2[2] + explode->y) << 2;
-    explode->rect.s.imageAdrs = Explosion2DTMEM[temp_v1_2[0]];
+    ptr = Explosion1[explode->frame];
+    position = explode->pos;
+    explode->rect.s.objX = (ptr[position * 3 + 1] + explode->x) << 2;
+    explode->rect.s.objY = (ptr[position * 3 + 2] + explode->y) << 2;
+    explode->rect.s.imageAdrs = Explosion2DTMEM[ptr[position * 3 + 0]];
 
     explode->frame++;
     if (explode->pos == 0) {
         gOverflow += 0x1E;
     }
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/explode2d", func_80073138_usa);
-#endif
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/explode2d", func_80073138_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/explode2d", func_80073138_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/explode2d", func_80073138_usa);
-#endif
 
 void Update2DExplode2(explode_t *explode) {
     s8 *ptr;
@@ -271,69 +250,22 @@ INLINE void func_800733D0_usa(explode_t *explode) {
     }
 }
 
-#if VERSION_USA
-#ifdef NON_MATCHING
 void Update2DExplosion(tetWell *well) {
-    s32 var_s2;
-    s8 *temp_a0;
-    explode_t *temp_a1;
-    s8 *temp_v1_4;
+    explode_t *explode;
+    s32 count;
 
-    for (var_s2 = 0; var_s2 < TETWELL_EXPLOSION_LEN; var_s2++) {
-        temp_a1 = &well->explosion[var_s2];
-        if (temp_a1->type == -1) {
+    for (count = 0; count < TETWELL_EXPLOSION_LEN; count++) {
+        explode = &well->explosion[count];
+        if (explode->type == -1) {
             continue;
         }
 
-        if (temp_a1->type == 0x19) {
-            if (temp_a1->frame == 0x28) {
-                temp_a1->type = -1;
-                temp_a1->frame = -1;
-                temp_a1->rect.s.objX = -(160 << 2);
-                temp_a1->rect.s.objY = -(160 << 2);
-            } else {
-                temp_a0 = &IconSplash[temp_a1->frame][temp_a1->pos * 2];
-                temp_a1->rect.s.objX = (temp_a0[0] + temp_a1->x) << 2;
-                temp_a1->rect.s.objY = (temp_a0[1] + temp_a1->y) << 2;
-                temp_a1->frame++;
-                if (temp_a1->pos == 0) {
-                    gOverflow += 0x46;
-                }
-            }
-        } else if (temp_a1->type < 0x1F) {
-            if (temp_a1->frame == 0x14) {
-                temp_a1->type = -1;
-                temp_a1->frame = -1;
-                temp_a1->rect.s.objX = -(160 << 2);
-                temp_a1->rect.s.objY = -(160 << 2);
-            } else {
-                temp_v1_4 = &Explosion1[temp_a1->frame][temp_a1->pos * 3];
-                temp_a1->rect.s.objX = (temp_v1_4[1] + temp_a1->x) << 2;
-                temp_a1->rect.s.objY = (temp_v1_4[2] + temp_a1->y) << 2;
-                temp_a1->rect.s.imageAdrs = Explosion2DTMEM[temp_v1_4[0]];
-                temp_a1->frame++;
-                if (temp_a1->pos == 0) {
-                    gOverflow += 0x1E;
-                }
-            }
+        if (explode->type == 0x19) {
+            func_800733D0_usa(explode);
+        } else if (explode->type < 0x1F) {
+            func_80073138_usa(explode);
         } else {
-            Update2DExplode2(temp_a1);
+            Update2DExplode2(explode);
         }
     }
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/explode2d", Update2DExplosion);
-#endif
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/explode2d", Update2DExplosion);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/explode2d", Update2DExplosion);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/explode2d", Update2DExplosion);
-#endif
