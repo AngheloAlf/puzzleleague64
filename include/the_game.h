@@ -369,10 +369,8 @@ typedef struct Game {
     /* 0x9C20 */ UNK_TYPE1 unk_9C20[0x4];
     /* 0x9C24 */ UNK_TYPE4 unk_9C24;
     /* 0x9C28 */ UNK_TYPE4 unk_9C28;
-    /* 0x9C2C */ UNK_TYPE4 unk_9C2C;
-    /* 0x9C30 */ s32 unk_9C30;
-    /* 0x9C34 */ UNK_TYPE4 unk_9C34;
-    /* 0x9C38 */ UNK_TYPE1 unk_9C38[0x10];
+    /* 0x9C2C */ s32 unk_9C2C[UNK_SIZE][4];
+    /* 0x9C3C */ UNK_TYPE1 unk_9C3C[0xC];
     /* 0x9C48 */ struct_801A6DB8_usa unk_9C48[8];
 } Game; // size >= 0xDA28
 

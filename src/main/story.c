@@ -18,6 +18,7 @@
 #include "screen.h"
 #include "sfxlimit.h"
 #include "sound.h"
+#include "041780.h"
 
 #define STRUCT_8018E570_USA_UNK_LEN 0x10
 
@@ -42,11 +43,11 @@ INLINE void func_8002B5D8_usa(Gfx **gfxP) {
 }
 
 STATIC_INLINE void inlined_func(void) {
-    if (gTheGame.unk_9C2C == 0x10) {
+    if (gTheGame.unk_9C2C[0][0] == 0x10) {
         func_8002B85C_usa(5, 7);
-    } else if (gTheGame.unk_9C2C == 0xC) {
+    } else if (gTheGame.unk_9C2C[0][0] == 0xC) {
         func_8002B85C_usa(2, 1);
-    } else if (gTheGame.unk_9C2C >= 2) {
+    } else if (gTheGame.unk_9C2C[0][0] >= 2) {
         func_8002B85C_usa(3, 1);
     } else {
         func_8002B85C_usa(2, 0);
@@ -80,7 +81,7 @@ void func_8002B600_usa(UNK_TYPE4 arg0 UNUSED) {
             break;
     }
 
-    temp_s1 = gTheGame.unk_9C2C;
+    temp_s1 = gTheGame.unk_9C2C[0][0];
     temp_v0_2 = screenGet();
     if (temp_v0_2 != -1) {
         if ((gTheGame.unk_89C4[0].unk_00 & 0x900) && (temp_s1 < var_s0)) {
@@ -96,17 +97,17 @@ void func_8002B600_usa(UNK_TYPE4 arg0 UNUSED) {
             PlaySE(SFX_INIT_TABLE, 2);
         }
 
-        if (temp_s1 != gTheGame.unk_9C2C) {
-            gTheGame.unk_9C2C = temp_s1;
+        if (temp_s1 != gTheGame.unk_9C2C[0][0]) {
+            gTheGame.unk_9C2C[0][0] = temp_s1;
             PlaySE(SFX_INIT_TABLE, 1);
-            screenSetNumber(temp_v0_2, 0x64, gTheGame.unk_9C2C, -1);
+            screenSetNumber(temp_v0_2, 0x64, gTheGame.unk_9C2C[0][0], -1);
         }
     }
 }
 
 INLINE void func_8002B76C_usa(void **heapP) {
     if (screenLoad("CHEAT.SBF", heapP) != 0) {
-        screenSetNumber(screenSet("CHEAT", 0x400), 0x64, gTheGame.unk_9C2C, -1);
+        screenSetNumber(screenSet("CHEAT", 0x400), 0x64, gTheGame.unk_9C2C[0][0], -1);
     }
 }
 
@@ -372,30 +373,30 @@ void InitStory(void) {
         } else {
             func_8002B85C_usa(5, 0);
         }
-    } else if (gTheGame.unk_9C2C == 0x13) {
-        gTheGame.unk_9C2C = 0xF;
+    } else if (gTheGame.unk_9C2C[0][0] == 0x13) {
+        gTheGame.unk_9C2C[0][0] = 0xF;
         func_8002B85C_usa(3, 5);
-    } else if (gTheGame.unk_9C2C == 0x11) {
+    } else if (gTheGame.unk_9C2C[0][0] == 0x11) {
         if ((gTheGame.cursorBlock[0].unk_00 == 7) || (gTheGame.cursorBlock[1].unk_00 == 8)) {
             func_8002B85C_usa(5, 8);
         } else {
             func_8002B85C_usa(5, 9);
         }
     } else {
-        if (gTheGame.unk_9C34 == 0) {
+        if (gTheGame.unk_9C2C[0][2] == 0) {
             inlined_func();
         } else {
-            if (gTheGame.unk_9C2C == 0x2) {
+            if (gTheGame.unk_9C2C[0][0] == 0x2) {
                 func_8002B85C_usa(3, 2);
-            } else if (gTheGame.unk_9C2C == 0xA) {
+            } else if (gTheGame.unk_9C2C[0][0] == 0xA) {
                 func_8002B85C_usa(3, 3);
-            } else if (gTheGame.unk_9C2C == 0xB) {
+            } else if (gTheGame.unk_9C2C[0][0] == 0xB) {
                 func_8002B85C_usa(3, 4);
             } else {
                 func_8002B85C_usa(2, 0);
             }
         }
-        gTheGame.unk_9C34 += 1;
+        gTheGame.unk_9C2C[0][2] += 1;
     }
 }
 #else

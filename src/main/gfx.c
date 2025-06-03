@@ -4,28 +4,25 @@
 
 #include "gfx.h"
 
-#include "ultra64.h"
-
-#include "include_asm.h"
-#include "macros_defines.h"
-#include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
-#include "segment_symbols.h"
-
-#include "the_game.h"
-#include "buffers.h"
 #include "assets_variables.h"
-#include "story.h"
-#include "editor.h"
-#include "screen.h"
-#include "tetris.h"
-#include "title.h"
+
+#include "bonus.h"
+#include "buffers.h"
+
 #include "dlist.h"
 #include "draw2d.h"
-#include "bonus.h"
-#include "tutorial.h"
+#include "editor.h"
 #include "menu.h"
+#include "screen.h"
+#include "stack.h"
+#include "story.h"
+#include "tetris.h"
+#include "the_game.h"
+#include "title.h"
+#include "tutorial.h"
+#include "001F10.h"
 
 void *staticSegment = NULL;
 

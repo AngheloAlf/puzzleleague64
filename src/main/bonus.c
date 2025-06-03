@@ -10,8 +10,6 @@
 #include "main_functions.h"
 #include "main_variables.h"
 
-#include "segment_symbols.h"
-
 #include "bg_screen_load.h"
 #include "buffers.h"
 #include "end.h"
@@ -24,6 +22,7 @@
 #include "text.h"
 #include "tetris.h"
 #include "update.h"
+#include "001F10.h"
 
 typedef struct struct_800C4490_usa {
     /* 0x0 */ UNK_TYPE4 unk_0;
@@ -466,8 +465,8 @@ void DoBonus(void) {
                             break;
                     }
 
-                    if (gTheGame.unk_9C30 < 0x63) {
-                        gTheGame.unk_9C30++;
+                    if (gTheGame.unk_9C2C[0][1] < 0x63) {
+                        gTheGame.unk_9C2C[0][1]++;
                     }
 
                     if (*var_s0 < 0x63) {
@@ -482,8 +481,8 @@ void DoBonus(void) {
                 if (gTheGame.unk_9C24 == 0) {
                     gMain = GMAIN_384;
                     SaveRom();
-                    if (gTheGame.unk_9C2C == 0x12) {
-                        gTheGame.unk_9C2C = 0x13;
+                    if (gTheGame.unk_9C2C[0][0] == 0x12) {
+                        gTheGame.unk_9C2C[0][0] = 0x13;
                         gMain = GMAIN_STORY;
                     }
                 } else {
@@ -567,7 +566,7 @@ void DoBonus(void) {
             }
         }
 
-        sprintf(sp10, "%02d", gTheGame.unk_9C30);
+        sprintf(sp10, "%02d", gTheGame.unk_9C2C[0][1]);
         SetText(0x103, 0x17, sp10, 0x17);
     } else if (DoWatchMenu() != 0) {
         gReset = -1;
@@ -790,13 +789,13 @@ void InitStageClearIntro(void) {
     }
 
     if (gTheGame.unk_9C28 == 5) {
-        if (gTheGame.unk_9C2C >= 5) {
+        if (gTheGame.unk_9C2C[0][0] >= 5) {
             var_s0 = 7;
         } else {
             var_s0 = 6;
         }
     } else {
-        var_s0 = gTheGame.unk_9C2C - 1;
+        var_s0 = gTheGame.unk_9C2C[0][0] - 1;
     }
 
     B_8018EA2C_usa = D_800B64E8_usa[var_s0][0];
@@ -831,9 +830,9 @@ void InitStageClearIntro(void) {
     func_8001FD0C_usa(&B_8018EA28_usa, D_800B6528_usa[var_s0] + temp2, 0, var_a3, a4, a5, &sp78);
     func_8001FD0C_usa(&B_8018EA20_usa, D_800B6508_usa[var_s0], 0, 0x800054, 0x140, 0xE8, &sp78);
 
-    gWhatever = gTheGame.unk_9C0C = (gTheGame.unk_9C2C >= 4) ? 2 : 1;
+    gWhatever = gTheGame.unk_9C0C = (gTheGame.unk_9C2C[0][0] >= 4) ? 2 : 1;
 
-    UpdatePlayerStageClearTimeScore(gTheGame.cursorBlock, -1, gTheGame.unk_9C2C, 1);
+    UpdatePlayerStageClearTimeScore(gTheGame.cursorBlock, -1, gTheGame.unk_9C2C[0][0], 1);
 
     gTheGame.unk_9C1C = 0;
     gTheGame.unk_9C18 = 0;
@@ -853,7 +852,7 @@ void InitStageClearIntro(void) {
 
         screenSetNumber(giScreenClear, 0x32, gTheGame.tetrisWell[0].unk_43AC, -1);
         if (gTheGame.unk_9C28 == 5) {
-            if (gTheGame.unk_9C2C < 5) {
+            if (gTheGame.unk_9C2C[0][0] < 5) {
                 gnTagTextClear = -0xC8;
                 screenShowText(giScreenClear, 0x19A);
             } else {
@@ -861,8 +860,8 @@ void InitStageClearIntro(void) {
                 screenShowText(giScreenClear, 0x1A4);
             }
         } else {
-            gnTagTextClear = -(((gTheGame.unk_9C2C - 1) * 0xA) + 0x64);
-            screenShowText(giScreenClear, gTheGame.unk_9C2C + 0x18F);
+            gnTagTextClear = -(((gTheGame.unk_9C2C[0][0] - 1) * 0xA) + 0x64);
+            screenShowText(giScreenClear, gTheGame.unk_9C2C[0][0] + 0x18F);
         }
     }
 

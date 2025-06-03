@@ -9,14 +9,6 @@
 #include "the_game.h"
 
 
-void func_80001310_usa(RomOffset segmentRom, void * dstAddr, size_t segmentSize);
-
-// void func_80040B80_usa();
-void func_80040DE4_usa(Gfx **gfxP);
-// void func_80040F04_usa();
-// void func_800410A4_usa();
-void func_8004123C_usa(s32 arg0);
-void func_80041F1C_usa(void **heapP, s32 arg1);
 void func_80042400_usa(Gfx **gfxP);
 // void func_80042428_usa();
 // void func_80042660_usa();
@@ -349,6 +341,5 @@ void InitMimic(void);
 // void hvqm2SetupSP1();
 // void hvqm2InitSP1();
 // void adpcmDecode();
-
 
 #endif

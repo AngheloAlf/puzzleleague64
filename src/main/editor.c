@@ -149,12 +149,12 @@ void DrawEditor(struct_gInfo_unk_00068 *arg0) {
                 gTheGame.unk_9C08 = 1;
                 gTheGame.unk_9C0C = 1;
                 gTheGame.unk_9C28 = 0;
-                gTheGame.unk_9C30 = 0;
+                gTheGame.unk_9C2C[0][1] = 0;
                 gTheGame.tetrisWell[0].unk_4404 = 0;
                 gTheGame.tetrisWell[1].unk_4404 = 0;
                 B_801AD9BC_usa = -1;
                 B_801ADAE8_usa = -1;
-                gTheGame.unk_9C2C = B_801AB808_usa;
+                gTheGame.unk_9C2C[0][0] = B_801AB808_usa;
             }
         }
     }
@@ -233,7 +233,7 @@ void InitEditor(void) {
     giScreenEdit = -1;
     InitPuzzleEditor(-1);
     func_8008913C_usa(B_801AB808_usa);
-    gTheGame.unk_9C34 = 0;
+    gTheGame.unk_9C2C[0][2] = 0;
     B_8018E9DC_usa = 3;
     B_8018E9E0_usa = 1;
     B_8018E9E4_usa = 1;

@@ -1,12 +1,10 @@
 #include "bg_screen_load.h"
 
 #include "attributes.h"
-#include "main_functions.h"
 #include "main_variables.h"
 
-#include "segment_symbols.h"
-
 #include "flic.h"
+#include "001F10.h"
 
 #define DEFINE_BGSCREENLOAD_FUNC(name, seg1, seg2) \
     void name (bool arg0, s32 arg1 UNUSED, s32 main_height, s32 top_height) { \

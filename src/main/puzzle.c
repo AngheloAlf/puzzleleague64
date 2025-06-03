@@ -60,12 +60,12 @@ s32 func_8008913C_usa(s32 arg0) {
     void *temp_s0;
 
     temp_s0 = gPlayer + (((arg0 - 1) * 0x6E) + 0x121);
-    if (gTheGame.unk_9C30 == 0) {
+    if (gTheGame.unk_9C2C[0][1] == 0) {
         temp_v0 = (gPlayer + arg0)->unk_792;
-        gTheGame.unk_9C30 = (s32) temp_v0;
+        gTheGame.unk_9C2C[0][1] = (s32) temp_v0;
         gTheGame.tetrisWell[0].unk_4408[0x20] = (s32) temp_v0;
     }
-    func_8006B314_usa(&gTheGame, 0, &gTheGame.unk_9C30);
+    func_8006B314_usa(&gTheGame, 0, &gTheGame.unk_9C2C[0][1]);
     var_v0 = -1;
     if (func_80088AB4_usa(&gTheGame, gTheGame.unk_8860, temp_s0, 1) == 0) {
         func_8006B314_usa(&gTheGame, 0);
