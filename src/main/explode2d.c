@@ -18,7 +18,7 @@ void Start2DExplosion(tetWell *well, s32 row, s32 col, s32 type) {
     uObjSprite *rect;
     explode_t *explode;
 
-    if (row >= BLOCK_LEN_A) {
+    if (row >= BLOCK_LEN_ROWS) {
         return;
     }
 

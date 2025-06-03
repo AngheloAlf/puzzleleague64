@@ -246,7 +246,7 @@ void Update2DBuffer(struct_gInfo *info) {
         bzero(&dynamicp->unk_10208[var_s6], 4);
 
         var_s0 = dynamicp->block[var_s6];
-        for (var_a1 = 0; var_a1 < BLOCK_LEN_A; var_a1++) {
+        for (var_a1 = 0; var_a1 < BLOCK_LEN_ROWS; var_a1++) {
             s32 var_a0;
 
             for (var_a0 = 0; var_a0 < BLOCK_LEN_B / 3; var_a0++) {
@@ -258,7 +258,7 @@ void Update2DBuffer(struct_gInfo *info) {
         }
 
         bcopy(&well->unk_3830, &dynamicp->block_rect[var_s6],
-              sizeof(uObjSprite) * BLOCK_LEN_A * TETWELL_OBJSPRITE_LEN_B);
+              sizeof(uObjSprite) * BLOCK_LEN_ROWS * TETWELL_OBJSPRITE_LEN_B);
         bcopy(&well->unk_3EF0, &dynamicp->unk_18188[var_s6], sizeof(uObjSprite) * TETWELL_UNK_3EF0_LEN_6);
 
         if (cursor->unk_1C != -1) {
@@ -300,7 +300,7 @@ void Update3DBuffer(struct_gInfo *info) {
         cursor = &gTheGame.cursorBlock[num];
 
         bcopy(cursor, &dynamicp->cursorBlock[num], sizeof(cursor_t));
-        bcopy(&well->block, &dynamicp->block[num], sizeof(block_t) * BLOCK_LEN_A * BLOCK_LEN_B);
+        bcopy(&well->block, &dynamicp->block[num], sizeof(block_t) * BLOCK_LEN_ROWS * BLOCK_LEN_B);
 
         // Why only the first 4 bytes? Could this be a bug or is it intentional?
         bzero(&dynamicp->unk_10208[num], 4);
@@ -308,7 +308,7 @@ void Update3DBuffer(struct_gInfo *info) {
         bzero(&dynamicp->unk_10224[num], 4);
 
         var_s0 = dynamicp->block[num];
-        for (var_v1 = 0; var_v1 < BLOCK_LEN_A; var_v1++) {
+        for (var_v1 = 0; var_v1 < BLOCK_LEN_ROWS; var_v1++) {
             block_t *something = var_s0[var_v1];
 
             for (var_a2 = 1; var_a2 < BLOCK_LEN_B / 2; var_a2++) {

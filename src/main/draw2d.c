@@ -114,7 +114,7 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
                 break;
         }
 
-        for (var_t1 = BLOCK_LEN_A - 1; var_t1 >= 0; var_t1--) {
+        for (var_t1 = BLOCK_LEN_ROWS - 1; var_t1 >= 0; var_t1--) {
             for (var_a1 = 0; var_a1 < MIN(BLOCK_LEN_B, TETWELL_OBJSPRITE_LEN_B); var_a1++) {
                 block = &array[var_t1][var_a1];
                 if ((block->delay != -2) && (block->type != 9) && (block->state != 2) && (block->state != 3) &&
@@ -429,7 +429,7 @@ s32 Draw2DAttackBlock(struct_gInfo_unk_00068 *dynamicp, s32 num) {
             var_s6 = 0;
             for (var_s2 = 0; var_s2 < attack->unk_14; var_s2++) {
                 temp_a1 = attack->unk_24 + var_s2;
-                if (temp_a1 < BLOCK_LEN_A) {
+                if (temp_a1 < BLOCK_LEN_ROWS) {
                     for (var_s0 = attack->unk_18; var_s0 < attack->unk_1C; var_s0++) {
                         if (array[temp_a1][var_s0].type == 9) {
                             if (array[temp_a1][var_s0].drop == 0) {
@@ -461,7 +461,7 @@ s32 Draw2DAttackBlock(struct_gInfo_unk_00068 *dynamicp, s32 num) {
 
                     for (var_s2 = 1; var_s2 < attack->unk_14; var_s2++) {
                         temp_a1 = attack->unk_24 + var_s2;
-                        if (temp_a1 < BLOCK_LEN_A) {
+                        if (temp_a1 < BLOCK_LEN_ROWS) {
                             for (var_s0 = attack->unk_18; var_s0 < attack->unk_1C; var_s0++) {
                                 v0 = ReturnAttackTexValue(NULL, var_s6, var_s2 - 1, var_s0);
                                 v0 /= 10;
@@ -476,7 +476,7 @@ s32 Draw2DAttackBlock(struct_gInfo_unk_00068 *dynamicp, s32 num) {
         } else if (attack->type < 0xC) {
             for (var_s2 = 0; var_s2 < attack->unk_14; var_s2++) {
                 temp_a1 = attack->unk_24 + var_s2;
-                if (temp_a1 < BLOCK_LEN_A) {
+                if (temp_a1 < BLOCK_LEN_ROWS) {
                     switch (attack->type) {
                         case 0x1:
                         case 0x2:
@@ -517,7 +517,7 @@ s32 Draw2DAttackBlock(struct_gInfo_unk_00068 *dynamicp, s32 num) {
 
                 for (var_s2 = 0; var_s2 < attack->unk_14; var_s2++) {
                     temp_a1 = attack->unk_24 + var_s2;
-                    if (temp_a1 < BLOCK_LEN_A) {
+                    if (temp_a1 < BLOCK_LEN_ROWS) {
                         for (var_s0 = attack->unk_18; var_s0 < attack->unk_1C; var_s0++) {
                             v0 = ReturnAttackTexValue(NULL, attack->type, var_s2, var_s0);
                             v0 /= 10;
@@ -647,7 +647,7 @@ void Draw2DSmoke(struct_gInfo_unk_00068 *dynamicp, s32 num) {
         gDPSetPrimColor(glistp++, 0, 0, 255, 255, 255, 255);
 
         for (var_t6 = 0; var_t6 < 6; var_t6++) {
-            new_var = BLOCK_LEN_A - 1;
+            new_var = BLOCK_LEN_ROWS - 1;
             if ((dynamicp->block[num][new_var][var_t6].type != 0) &&
                 (dynamicp->explosion[num][var_t6].frame >= -0x13)) {
                 gSPObjRectangle(glistp++, &dynamicp->explosion[num][var_t6].rect);
@@ -670,7 +670,7 @@ void Draw2DSmallStars(struct_gInfo_unk_00068 *dynamicp, s32 layer) {
     gDPSetTextureLUT(glistp++, G_TT_RGBA16);
     gSPObjLoadTxtr(glistp++, &numberLUT);
 
-    for (i = 0; i < BLOCK_LEN_A; i++) {
+    for (i = 0; i < BLOCK_LEN_ROWS; i++) {
         for (j = 0; j < MIN(BLOCK_LEN_B, TETWELL_OBJSPRITE_LEN_B); j++) {
             if (dynamicp->block[num][i][j].bomb == layer) {
                 switch (dynamicp->block[num][i][j].currRow) {

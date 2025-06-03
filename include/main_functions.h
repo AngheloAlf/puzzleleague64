@@ -117,7 +117,7 @@ UNK_RET Draw2DMiscStuff(struct_gInfo_unk_00068 *dynamicp);
 // void func_8005BFB4_usa();
 // void func_8005C2C4_usa();
 // void func_8005C460_usa();
-// void func_8005C554_usa();
+void Match3DPosition(s32 num, s32 row, s32 col, s32 *x, s32 *y);
 // void func_8005C718_usa();
 // void func_8005C780_usa();
 // void func_8005CAF0_usa();
