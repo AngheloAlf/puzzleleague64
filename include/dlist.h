@@ -7,7 +7,7 @@
 
 // void func_80054500_usa();
 void func_800545E4_usa(s32 arg0);
-// void func_80054624_usa();
+void func_80054624_usa(s32 arg0);
 void InitTetrisState(block_t *arg0);
 void InitDisplayList(struct_gInfo *info);
 // void func_800549A4_usa();

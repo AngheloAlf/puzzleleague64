@@ -10,11 +10,11 @@
 
 #include "bonus.h"
 #include "buffers.h"
-
 #include "dlist.h"
 #include "draw2d.h"
 #include "editor.h"
 #include "menu.h"
+#include "mimic.h"
 #include "screen.h"
 #include "stack.h"
 #include "story.h"

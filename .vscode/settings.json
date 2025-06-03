@@ -19,5 +19,10 @@
     ],
     "rust-analyzer.linkedProjects": [
         "${workspaceFolder}/tools/rstools/Cargo.toml"
-    ]
+    ],
+    "C_Cpp.files.exclude": {
+        "puzzle_collection/": true,
+        "**/.vscode": true,
+        "**/.vs": true
+    }
 }

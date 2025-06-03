@@ -54,6 +54,18 @@ void InitGameAudioSystem(void) {
 }
 #endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/tetsound", InitGameAudioSystem);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", InitGameAudioSystem);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", InitGameAudioSystem);
+#endif
+
 #if VERSION_USA
 void SetSoundOptions(s16 arg0) {
     if (arg0 == false) {
@@ -72,8 +84,32 @@ void SetSoundOptions(s16 arg0) {
 }
 #endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/tetsound", SetSoundOptions);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", SetSoundOptions);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", SetSoundOptions);
+#endif
+
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/tetsound", func_800040D8_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/tetsound", func_800040D8_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", func_800040D8_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", func_800040D8_usa);
 #endif
 
 #if VERSION_USA
@@ -166,18 +202,6 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/tetsound", func_800050C0_usa);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tetsound", InitGameAudioSystem);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tetsound", SetSoundOptions);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tetsound", func_800040D8_usa);
-#endif
-
-#if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/tetsound", PlayGameSong);
 #endif
 
@@ -210,18 +234,6 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/tetsound", func_800050C0_usa);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", InitGameAudioSystem);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", func_80004118_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", func_80004190_fra);
-#endif
-
-#if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", func_80004690_fra);
 #endif
 
@@ -251,18 +263,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", func_800050D0_fra);
 
 #if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", func_80005178_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", InitGameAudioSystem);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", func_80004118_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", func_80004190_ger);
 #endif
 
 #if VERSION_GER

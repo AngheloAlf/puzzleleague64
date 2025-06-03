@@ -86,9 +86,10 @@ void func_800410A4_usa(void) {
         var_s1 = 1;
     } else {
         var_s1 = 0;
-        #if VERSION_USA
-        osSyncPrintf("ShowWinner: Internal error: No clear winner? (%d,%d)\n", gTheGame.cursorBlock[0].unk_00, gTheGame.cursorBlock[1].unk_00);
-        #endif
+#if VERSION_USA
+        osSyncPrintf("ShowWinner: Internal error: No clear winner? (%d,%d)\n", gTheGame.cursorBlock[0].unk_00,
+                     gTheGame.cursorBlock[1].unk_00);
+#endif
     }
 
     B_80192F80_usa->unk_34 = var_s1;
@@ -100,9 +101,9 @@ void func_800410A4_usa(void) {
 
     if (var_s0 >= 16) {
         var_s0 = 0;
-        #if VERSION_USA
+#if VERSION_USA
         osSyncPrintf("ShowWinner: Internal error: Character out-of-range! (%d)\n", 0);
-        #endif
+#endif
     }
 
     B_80192F80_usa->unk_30 = 0;

@@ -1311,7 +1311,7 @@ extern s16 gBox_Level;
 // extern UNK_TYPE B_801C6CA5_usa;
 
 extern struct_gInfo **fb;
-// extern UNK_TYPE B_801C6E58_usa;
+extern s32 B_801C6E58_usa;
 extern OSMesg B_801C6E5C_usa[1];
 // extern UNK_TYPE B_801C6E60_usa;
 // extern UNK_TYPE B_801C6E68_usa;
@@ -1320,7 +1320,7 @@ extern uObjTxtr B_801C6E70_usa[GAME_BUFFER_LEN]; // TODO: original name
 extern OSMesg B_801C6EA0_usa[8];
 
 // extern UNK_TYPE B_801C6EC1_usa;
-// extern UNK_TYPE B_801C6EE8_usa;
+extern s32 B_801C6EE8_usa;
 extern s32 gOverflow;
 // extern UNK_TYPE B_801C6EF0_usa;
 extern u8 DolbyEnabled;

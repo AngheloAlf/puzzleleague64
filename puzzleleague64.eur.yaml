@@ -227,7 +227,7 @@ segments:
 
       - [0x075960, c, main/075630]
       - [0x075F20, asm, main/075F20]
-      - [0x083F10, asm, main/083F10]
+      - [0x083F10, c, main/mimic]
       - [0x088A40, c, main/tutorial]
       - [0x0898F0, c, main/puzzle]
       - [0x08A670, c, main/tetris]
@@ -554,7 +554,7 @@ segments:
       - [0x0C7E50, rodata, main/0C7E50]
       - [0x0C8190, .rodata, main/draw2d]
       - [0x0C8250, rodata, main/0C8250]
-      - [0x0C84E0, rodata, main/0C84E0]
+      - [0x0C84E0, .rodata, main/mimic]
       - [0x0C85B0, .rodata, main/tutorial]
       - [0x0C8650, .rodata, main/puzzle]
       - [0x0C8680, .rodata, main/tetris]

@@ -536,7 +536,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002810_fra);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_800028C0_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_800027FC_usa);
 #endif
 
 #if VERSION_FRA
@@ -568,7 +568,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002810_ger);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_800028C0_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_800027FC_usa);
 #endif
 
 #if VERSION_GER
@@ -855,11 +855,11 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_80002EB8_usa);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002EF8_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002E34_usa);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002F34_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002E70_usa);
 #endif
 
 #if VERSION_FRA
@@ -867,11 +867,11 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002F7C_fra);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002EF8_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002E34_usa);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002F34_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002E70_usa);
 #endif
 
 #if VERSION_GER

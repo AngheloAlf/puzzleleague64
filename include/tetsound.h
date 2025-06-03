@@ -7,7 +7,7 @@
 
 void InitGameAudioSystem(void);
 void SetSoundOptions(s16 arg0);
-// void func_800040D8_usa();
+UNK_RET func_800040D8_usa(UNK_TYPE arg0, UNK_TYPE arg1, UNK_TYPE arg2);
 s32 PlayGameSong(tetWell *game);
 // void func_80004848_usa();
 // void func_8000486C_usa();
