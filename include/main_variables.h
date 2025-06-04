@@ -1251,10 +1251,7 @@ extern OSMesgQueue B_801AB7F0_usa;
 extern s32 ganButton[0x10];
 
 // extern UNK_TYPE B_801AB8A4_usa;
-// extern UNK_TYPE B_801AB8A8_usa;
-// extern UNK_TYPE B_801AB8AC_usa;
-// extern UNK_TYPE B_801AB8B0_usa;
-// extern UNK_TYPE B_801AB8C0_usa;
+extern TexturePtr B_801AB8A8_usa[2][6];
 // extern UNK_TYPE B_801AB8D8_usa;
 // extern UNK_TYPE B_801AB8DC_usa;
 extern u32 gGameStatus;
@@ -1294,8 +1291,7 @@ extern s32 B_801ADAE8_usa;
 extern s32 B_801ADC10_usa;
 
 // extern UNK_TYPE B_801C6BD8_usa;
-// extern UNK_TYPE B_801C6BDC_usa;
-// extern UNK_TYPE B_801C6BE0_usa;
+extern s32 B_801C6BDC_usa[2];
 extern s32 GarbageBlockBaseSfx_L;
 // extern UNK_TYPE B_801C6BE8_usa;
 // extern UNK_TYPE B_801C6BF0_usa;
@@ -1305,8 +1301,7 @@ extern s32 GarbageBlockBaseSfx_L;
 // extern UNK_TYPE B_801C6C90_usa;
 // extern UNK_TYPE B_801C6C94_usa;
 extern s32 GarbageBlockBaseSfx_R;
-// extern UNK_TYPE B_801C6C9C_usa;
-// extern UNK_TYPE B_801C6CA0_usa;
+extern TexturePtr B_801C6C9C_usa[2];
 extern s16 gBox_Level;
 // extern UNK_TYPE B_801C6CA5_usa;
 
@@ -1338,10 +1333,8 @@ extern s32 giButton;
 // extern UNK_TYPE B_801C7050_usa;
 extern OSMesgQueue gfxFrameMsgQ;
 extern s32 B_801C7060_usa;
-// extern UNK_TYPE B_801C7070_usa;
-// extern UNK_TYPE B_801C7074_usa;
-// extern UNK_TYPE B_801C7078_usa;
-// extern UNK_TYPE B_801C707C_usa;
+extern TexturePtr B_801C7070_usa[2][3];
+// extern UNK_TYPE B_801C7088_usa;
 // extern UNK_TYPE B_801C7089_usa;
 
 extern OSTime gTime;
@@ -1370,8 +1363,7 @@ extern uObjTxtr brickTxtr[GAME_BUFFER_LEN][3];
 // extern UNK_TYPE B_801C7350_usa;
 // extern UNK_TYPE B_801C7358_usa;
 // extern UNK_TYPE B_801C735C_usa;
-// extern UNK_TYPE B_801C7360_usa;
-// extern UNK_TYPE B_801C7364_usa;
+extern TexturePtr B_801C7360_usa[2];
 
 // either B_801C7368_usa or B_801F9CC8_usa should be explodeTxtr
 extern uObjTxtr B_801C7368_usa[GAME_BUFFER_LEN];
@@ -1399,8 +1391,7 @@ extern s32 gSelection;
 
 extern u8 B_801F9CFC_usa;
 extern uObjTxtr B_801F9D00_usa[GAME_BUFFER_LEN][6]; // TODO: original name
-// extern UNK_TYPE B_801F9E20_usa;
-// extern UNK_TYPE B_801F9E24_usa;
+extern TexturePtr B_801F9E20_usa[2];
 // extern UNK_TYPE B_801F9E28_usa;
 
 // extern UNK_TYPE B_8021AA80_usa;
@@ -1424,8 +1415,7 @@ extern OSMesg B_8021BA28_usa[1];
 // TODO: enum?
 extern s32 gWhatever;
 
-// extern UNK_TYPE B_8021BA60_usa;
-// extern UNK_TYPE B_8021BA64_usa;
+extern TexturePtr B_8021BA60_usa[2];
 // extern UNK_TYPE B_8021BA68_usa;
 // extern UNK_TYPE B_8021BA70_usa;
 // extern UNK_TYPE B_8021BA74_usa;

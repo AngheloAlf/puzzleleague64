@@ -14,6 +14,7 @@
 #include "segment_symbols.h"
 
 #include "buffers.h"
+#include "character.h"
 #include "dlist.h"
 #include "tetsound.h"
 
@@ -31,7 +32,7 @@ void func_80082F80_usa(void **heapP) {
     }
 
     func_80054624_usa(temp_a0);
-    func_8004B300_usa(0x385, -1);
+    InitCharacter(0x385, -1);
     func_800040D8_usa(0x19, 9, 9);
 
     *heapP = Pon_Image_Heap;

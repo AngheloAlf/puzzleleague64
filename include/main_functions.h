@@ -33,28 +33,6 @@ void func_800449C4_usa(Gfx **gfxP);
 void func_80046648_usa(s32 arg0);
 void func_80046C2C_usa(void **heapP, s32 arg1);
 
-// void func_80047340_usa();
-void Draw2DFrame(void);
-// void func_80047A00_usa();
-// void func_80047D20_usa();
-// void func_80047E64_usa();
-void Draw2DBackground(void);
-// void func_800488AC_usa();
-// void func_80048D94_usa();
-void Draw2DShadeBox(void);
-// void func_8004917C_usa();
-// void func_80049584_usa();
-// void func_80049960_usa();
-// void func_8004A26C_usa();
-// void Draw2DBigScreen();
-// void func_8004AA48_usa();
-// void func_8004ADD0_usa();
-// void func_8004AE90_usa();
-// void func_8004B0D8_usa();
-// void func_8004B12C_usa();
-UNK_RET func_8004B300_usa(UNK_TYPE arg0, UNK_TYPE arg1);
-s32 ReturnAttackTexValue(UNK_TYPE *arg0, s32 arg1, s32 arg2, u32 arg3);
-
 s32 AnimationRandom(s32 arg0);
 // void func_8004EE24_usa();
 // void func_8004EEFC_usa();

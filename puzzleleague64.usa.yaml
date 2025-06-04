@@ -185,8 +185,8 @@ segments:
       - [0x043D10, asm, main/043D10]
       - [0x044E80, asm, main/044E80]
       - [0x047A10, c, main/controller]
-      - [0x047F40, asm, main/047F40] # bkground.c starts here
-      - [0x04BF00, asm, main/04BF00] # maybe part of text
+      - [0x047F40, c, main/bkground]
+      - [0x04BF00, c, main/character]
       - [0x04CC20, c, main/text]
       - [0x04F050, c, main/flic]
       - [0x04F9A0, asm, main/04F9A0] # animation starts here
@@ -553,7 +553,8 @@ segments:
       - [0x0C5D80, rodata, main/0C5D80]
       - [0x0C6440, rodata, main/0C6440]
       - [0x0C6600, .rodata, main/controller]
-      - [0x0C6630, rodata, main/0C6630]
+      - [0x0C6630, .rodata, main/bkground]
+      - [0x0C6818, .rodata, main/character]
       - [0x0C69C0, .rodata, main/text]
       - [0x0C6C20, rodata, main/0C6C20]
       - [0x0C7240, .rodata, main/dlist]

@@ -12,8 +12,9 @@
 #include "main_variables.h"
 #include "assets_variables.h"
 
-#include "flic.h"
+#include "bkground.h"
 #include "draw2d.h"
+#include "flic.h"
 #include "tetris.h"
 #include "update.h"
 
