@@ -911,8 +911,52 @@ segments:
     start: 0x50F3F0
 
   - type: databin
-    name: unk_5337F0
+    name: segment_character_5337F0
     start: 0x5337F0
+
+  - type: databin
+    name: segment_character_53A9F0
+    start: 0x53A9F0
+
+  - type: databin
+    name: segment_character_541BF0
+    start: 0x541BF0
+
+  - type: databin
+    name: segment_character_548DF0
+    start: 0x548DF0
+
+  - type: databin
+    name: segment_character_54FFF0
+    start: 0x54FFF0
+
+  - type: databin
+    name: segment_character_5571F0
+    start: 0x5571F0
+
+  - type: databin
+    name: segment_character_55E3F0
+    start: 0x55E3F0
+
+  - type: databin
+    name: segment_character_5655F0
+    start: 0x5655F0
+
+  - type: databin
+    name: segment_character_56C7F0
+    start: 0x56C7F0
+
+  - type: databin
+    name: segment_character_5739F0
+    start: 0x5739F0
+
+  - type: databin
+    name: segment_character_57ABF0
+    start: 0x57ABF0
+
+  - type: databin
+    name: unk_581DF0
+    start: 0x581DF0
     # Unknown end
 
   # bg_screen start

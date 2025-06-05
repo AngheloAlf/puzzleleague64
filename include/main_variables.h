@@ -1251,7 +1251,8 @@ extern OSMesgQueue B_801AB7F0_usa;
 extern s32 ganButton[0x10];
 
 // extern UNK_TYPE B_801AB8A4_usa;
-extern TexturePtr B_801AB8A8_usa[2][6];
+#define B_801F9D00_USA_LEN (6)
+extern TexturePtr B_801AB8A8_usa[GAME_BUFFER_LEN][B_801F9D00_USA_LEN];
 // extern UNK_TYPE B_801AB8D8_usa;
 // extern UNK_TYPE B_801AB8DC_usa;
 extern u32 gGameStatus;
@@ -1333,7 +1334,8 @@ extern s32 giButton;
 // extern UNK_TYPE B_801C7050_usa;
 extern OSMesgQueue gfxFrameMsgQ;
 extern s32 B_801C7060_usa;
-extern TexturePtr B_801C7070_usa[2][3];
+#define BRICKTXTR_LEN (3)
+extern TexturePtr B_801C7070_usa[GAME_BUFFER_LEN][BRICKTXTR_LEN];
 // extern UNK_TYPE B_801C7088_usa;
 // extern UNK_TYPE B_801C7089_usa;
 
@@ -1349,7 +1351,7 @@ extern s32 B_801C70D8_usa;
 // extern UNK_TYPE B_801C70E7_usa;
 // extern UNK_TYPE B_801C70E8_usa;
 // extern UNK_TYPE B_801C7154_usa;
-extern uObjTxtr brickTxtr[GAME_BUFFER_LEN][3];
+extern uObjTxtr brickTxtr[GAME_BUFFER_LEN][BRICKTXTR_LEN];
 // extern UNK_TYPE B_801C71E8_usa;
 // extern UNK_TYPE B_801C7200_usa;
 // extern UNK_TYPE B_801C7218_usa;
@@ -1390,7 +1392,7 @@ extern uObjTxtr B_801F9CC8_usa[GAME_BUFFER_LEN];
 extern s32 gSelection;
 
 extern u8 B_801F9CFC_usa;
-extern uObjTxtr B_801F9D00_usa[GAME_BUFFER_LEN][6]; // TODO: original name
+extern uObjTxtr B_801F9D00_usa[GAME_BUFFER_LEN][B_801F9D00_USA_LEN]; // TODO: original name
 extern TexturePtr B_801F9E20_usa[2];
 // extern UNK_TYPE B_801F9E28_usa;
 

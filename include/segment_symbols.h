@@ -58,6 +58,17 @@ DECLARE_SEGMENT(segment_0FB480);
 
 DECLARE_SEGMENT(segment_101A80);
 
+DECLARE_SEGMENT(segment_character_5337F0);
+DECLARE_SEGMENT(segment_character_53A9F0);
+DECLARE_SEGMENT(segment_character_541BF0);
+DECLARE_SEGMENT(segment_character_548DF0);
+DECLARE_SEGMENT(segment_character_54FFF0);
+DECLARE_SEGMENT(segment_character_5571F0);
+DECLARE_SEGMENT(segment_character_55E3F0);
+DECLARE_SEGMENT(segment_character_5655F0);
+DECLARE_SEGMENT(segment_character_56C7F0);
+DECLARE_SEGMENT(segment_character_5739F0);
+DECLARE_SEGMENT(segment_character_57ABF0);
 
 DECLARE_SEGMENT(segment_50F3F0);
 
