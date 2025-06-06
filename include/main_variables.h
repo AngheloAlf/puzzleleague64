@@ -146,7 +146,7 @@ extern RomOffset D_800B6528_usa[];
 // extern UNK_TYPE D_800B6990_usa;
 
 // extern UNK_TYPE D_800B69C0_usa;
-// extern UNK_TYPE D_800B69C4_usa;
+extern s32 D_800B69C4_usa;
 
 extern char attack_combo4[];
 extern char attack_combo5[];

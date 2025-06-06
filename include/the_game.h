@@ -355,8 +355,11 @@ typedef struct Game {
     /* 0x90C0 */ s32 unk_90C0;
     /* 0x90C4 */ UNK_TYPE1 unk_90C4[0x4];
     /* 0x90C8 */ text_t drawText[GAME_UNK_90C8_LEN];
-    /* 0x9988 */ UNK_TYPE1 unk_9988[0xC8];
-    /* 0x9A50 */ uObjBg unk_9A50;
+    /* 0x9988 */ uObjBg frame;
+    /* 0x99B0 */ UNK_TYPE1 unk_99B0[0x28];
+    /* 0x99D8 */ uObjTxtr unk_99D8;
+    /* 0x99F0 */ UNK_PAD unk_99F0[0x60];
+    /* 0x9A50 */ uObjBg unk_9A50; // bkground?
     /* 0x9A78 */ UNK_TYPE1 unk_9A78[0x9AE0 - 0x9A78];
     /* 0x9AE0 */ Game_unk_9AE0 unk_9AE0;
     /* 0x9B08 */ UNK_TYPE1 unk_9B08[0x9C08 - 0x9B08];
