@@ -2,26 +2,26 @@ name: Puzzle League N64 (European (basic spec.))
 sha1: 184f0cac8fdfad47590c515fc637076d2ded58d7
 options:
   basename: puzzleleague64
-  target_path: baserom.eur.z64
-  ld_script_path: linker_scripts/eur/puzzleleague64.ld
+  target_path: config/eur/baserom.eur.z64
+  ld_script_path: .splat/eur/puzzleleague64.ld
   elf_path: build/eur/puzzleleague64.eur.elf
-  base_path: .
+  base_path: ../../
   compiler: GCC
   find_file_boundaries: True
   header_encoding: ASCII
   platform: n64
-  undefined_funcs_auto_path: linker_scripts/eur/auto/undefined_funcs_auto.ld
-  undefined_syms_auto_path: linker_scripts/eur/auto/undefined_syms_auto.ld
+  undefined_funcs_auto_path: .splat/eur/auto/undefined_funcs_auto.ld
+  undefined_syms_auto_path: .splat/eur/auto/undefined_syms_auto.ld
   symbol_addrs_path:
-    - linker_scripts/eur/symbol_addrs_main.txt
-    - linker_scripts/eur/symbol_addrs_libultra.txt
-    - linker_scripts/eur/symbol_addrs_libkmc.txt
-    - linker_scripts/eur/symbol_addrs_libhvqm.txt
-    - linker_scripts/eur/symbol_addrs_buffers.txt
-    - linker_scripts/eur/symbol_addrs_assets.txt
-    - linker_scripts/eur/ignored_addresses.txt
+    - config/eur/symbol_addrs/symbol_addrs_main.txt
+    - config/eur/symbol_addrs/symbol_addrs_libultra.txt
+    - config/eur/symbol_addrs/symbol_addrs_libkmc.txt
+    - config/eur/symbol_addrs/symbol_addrs_libhvqm.txt
+    - config/eur/symbol_addrs/symbol_addrs_buffers.txt
+    - config/eur/symbol_addrs/symbol_addrs_assets.txt
+    - config/eur/symbol_addrs/ignored_addresses.txt
   reloc_addrs_path:
-    - relocs/reloc_addrs.eur.txt
+    - config/eur/relocs/reloc_addrs.eur.txt
 
   auto_link_sections: [".text", ".data", ".rodata", ".bss"]
 
@@ -90,7 +90,7 @@ options:
 
   ld_dependencies: True
   ld_partial_linking: False
-  ld_partial_scripts_path: linker_scripts/eur/partial
+  ld_partial_scripts_path: .splat/eur/partial
   ld_partial_build_segments_path: build/eur/segments
 
   ld_wildcard_sections: True

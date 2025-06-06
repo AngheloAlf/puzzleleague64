@@ -39,6 +39,7 @@ clean:
 	$(RM) -rf $(KMC_DIR) gcc_kmc $(IDO_53_DIR) ido_recomp $(SLINKY_DIR)
 
 distclean: clean
+	cargo clean --manifest-path rstools/Cargo.toml
 
 .PHONY: all clean distclean
 

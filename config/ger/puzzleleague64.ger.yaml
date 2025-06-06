@@ -2,26 +2,26 @@ name: Puzzle League N64 (German)
 sha1: dbc9d0de131f3604a9115b58368e9050f1a6303f
 options:
   basename: puzzleleague64
-  target_path: baserom.ger.z64
-  ld_script_path: linker_scripts/ger/puzzleleague64.ld
+  target_path: config/ger/baserom.ger.z64
+  ld_script_path: .splat/ger/puzzleleague64.ld
   elf_path: build/ger/puzzleleague64.ger.elf
-  base_path: .
+  base_path: ../../
   compiler: GCC
   find_file_boundaries: True
   header_encoding: ASCII
   platform: n64
-  undefined_funcs_auto_path: linker_scripts/ger/auto/undefined_funcs_auto.ld
-  undefined_syms_auto_path: linker_scripts/ger/auto/undefined_syms_auto.ld
+  undefined_funcs_auto_path: .splat/ger/auto/undefined_funcs_auto.ld
+  undefined_syms_auto_path: .splat/ger/auto/undefined_syms_auto.ld
   symbol_addrs_path:
-    - linker_scripts/ger/symbol_addrs_main.txt
-    - linker_scripts/ger/symbol_addrs_libultra.txt
-    - linker_scripts/ger/symbol_addrs_libkmc.txt
-    - linker_scripts/ger/symbol_addrs_libhvqm.txt
-    - linker_scripts/ger/symbol_addrs_buffers.txt
-    - linker_scripts/ger/symbol_addrs_assets.txt
-    - linker_scripts/ger/ignored_addresses.txt
+    - config/ger/symbol_addrs/symbol_addrs_main.txt
+    - config/ger/symbol_addrs/symbol_addrs_libultra.txt
+    - config/ger/symbol_addrs/symbol_addrs_libkmc.txt
+    - config/ger/symbol_addrs/symbol_addrs_libhvqm.txt
+    - config/ger/symbol_addrs/symbol_addrs_buffers.txt
+    - config/ger/symbol_addrs/symbol_addrs_assets.txt
+    - config/ger/symbol_addrs/ignored_addresses.txt
   reloc_addrs_path:
-    - relocs/reloc_addrs.ger.txt
+    - config/ger/relocs/reloc_addrs.ger.txt
 
   auto_link_sections: [".text", ".data", ".rodata", ".bss"]
 
@@ -90,7 +90,7 @@ options:
 
   ld_dependencies: True
   ld_partial_linking: False
-  ld_partial_scripts_path: linker_scripts/ger/partial
+  ld_partial_scripts_path: .splat/ger/partial
   ld_partial_build_segments_path: build/ger/segments/
 
   ld_wildcard_sections: True

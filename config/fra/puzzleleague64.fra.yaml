@@ -2,26 +2,26 @@ name: Puzzle League N64 (French)
 sha1: 72760a2d87ed3e70756a4aa689b9b26786669a52
 options:
   basename: puzzleleague64
-  target_path: baserom.fra.z64
-  ld_script_path: linker_scripts/fra/puzzleleague64.ld
+  target_path: config/fra/baserom.fra.z64
+  ld_script_path: .splat/fra/puzzleleague64.ld
   elf_path: build/fra/puzzleleague64.fra.elf
-  base_path: .
+  base_path: ../../
   compiler: GCC
   find_file_boundaries: True
   header_encoding: ASCII
   platform: n64
-  undefined_funcs_auto_path: linker_scripts/fra/auto/undefined_funcs_auto.ld
-  undefined_syms_auto_path: linker_scripts/fra/auto/undefined_syms_auto.ld
+  undefined_funcs_auto_path: .splat/fra/auto/undefined_funcs_auto.ld
+  undefined_syms_auto_path: .splat/fra/auto/undefined_syms_auto.ld
   symbol_addrs_path:
-    - linker_scripts/fra/symbol_addrs_main.txt
-    - linker_scripts/fra/symbol_addrs_libultra.txt
-    - linker_scripts/fra/symbol_addrs_libkmc.txt
-    - linker_scripts/fra/symbol_addrs_libhvqm.txt
-    - linker_scripts/fra/symbol_addrs_buffers.txt
-    - linker_scripts/fra/symbol_addrs_assets.txt
-    - linker_scripts/fra/ignored_addresses.txt
+    - config/fra/symbol_addrs/symbol_addrs_main.txt
+    - config/fra/symbol_addrs/symbol_addrs_libultra.txt
+    - config/fra/symbol_addrs/symbol_addrs_libkmc.txt
+    - config/fra/symbol_addrs/symbol_addrs_libhvqm.txt
+    - config/fra/symbol_addrs/symbol_addrs_buffers.txt
+    - config/fra/symbol_addrs/symbol_addrs_assets.txt
+    - config/fra/symbol_addrs/ignored_addresses.txt
   reloc_addrs_path:
-    - relocs/reloc_addrs.fra.txt
+    - config/fra/relocs/reloc_addrs.fra.txt
 
   auto_link_sections: [".text", ".data", ".rodata", ".bss"]
 
@@ -90,7 +90,7 @@ options:
 
   ld_dependencies: True
   ld_partial_linking: False
-  ld_partial_scripts_path: linker_scripts/fra/partial
+  ld_partial_scripts_path: .splat/fra/partial
   ld_partial_build_segments_path: build/fra/segments
 
   ld_wildcard_sections: True

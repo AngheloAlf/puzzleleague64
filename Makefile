@@ -43,7 +43,7 @@ MIPS_BINUTILS_PREFIX ?= mips-linux-gnu-
 
 VERSION ?= usa
 
-BASEROM              := baserom.$(VERSION).z64
+BASEROM              := config/$(VERSION)/baserom.$(VERSION).z64
 TARGET               := puzzleleague64
 
 
@@ -124,7 +124,7 @@ STRIP           := $(MIPS_BINUTILS_PREFIX)strip
 
 PYTHON            ?= python3
 SPLAT             ?= $(PYTHON) -m splat split
-SPLAT_YAML        ?= $(TARGET).$(VERSION).yaml
+SPLAT_YAML        ?= config/$(VERSION)/$(TARGET).$(VERSION).yaml
 CHECKSUMMER       ?= tools/checksummer.py
 PIGMENT64         ?= pigment64
 RELOC_FIXER       ?= tools/rstools/target/release/fix_relocs
@@ -135,7 +135,7 @@ ifneq ($(FULL_DISASM),0)
 endif
 
 SLINKY            ?= tools/slinky/slinky-cli
-SLINKY_YAML       ?= slinky.yaml
+SLINKY_YAML       ?= config/slinky.yaml
 
 SLINKY_FLAGS      ?=
 ifneq ($(PARTIAL_LINKING),0)
@@ -215,7 +215,9 @@ endif
 
 #### Files ####
 
-$(shell mkdir -p asm/$(VERSION) bin/$(VERSION)/assets linker_scripts/$(VERSION)/auto)
+BINFILE_DIR   := bin/$(VERSION)/bin_file
+
+$(shell mkdir -p asm/$(VERSION) bin/$(VERSION)/assets $(BINFILE_DIR))
 
 ASSETS_DIRS   := $(shell find bin/$(VERSION)/assets -type d)
 SRC_DIRS      := $(shell find src -type d)
@@ -225,8 +227,6 @@ BIN_DIRS      := $(shell find bin/$(VERSION) -type d)
 LIBULTRA_DIRS := $(shell find lib/ultralib/src -type d -not -path "lib/ultralib/src/voice")
 
 PNG_FILES     := $(foreach dir,$(ASSETS_DIRS),$(wildcard $(dir)/*.png))
-
-BINFILE_DIR   := bin/$(VERSION)/bin_file
 
 BINFILE_FILES := $(shell find $(BINFILE_DIR) -type f)
 
@@ -245,7 +245,7 @@ SEGMENTS_D       := $(SEGMENTS_SCRIPTS:.ld=.d)
 SEGMENTS         := $(foreach f, $(SEGMENTS_SCRIPTS:.ld=), $(notdir $f))
 SEGMENTS_O       := $(foreach f, $(SEGMENTS), $(BUILD_DIR)/segments/$f.o)
 
-LINKER_SCRIPTS   := $(LD_SCRIPT) $(BUILD_DIR)/linker_scripts/hardware_regs.ld $(BUILD_DIR)/linker_scripts/libultra_syms.ld $(BUILD_DIR)/linker_scripts/$(VERSION)/undefined_syms.ld $(BUILD_DIR)/linker_scripts/common_undef_syms.ld
+LINKER_SCRIPTS   := $(LD_SCRIPT) $(BUILD_DIR)/config/$(VERSION)/linker_scripts/undefined_syms.ld $(BUILD_DIR)/config/linker_scripts/common_undef_syms.ld
 
 
 # Automatic dependency files
@@ -260,7 +260,7 @@ ifneq ($(DEP_INCLUDE), 0)
 endif
 
 # create build directories
-$(shell mkdir -p $(BUILD_DIR)/linker_scripts/$(VERSION) $(BUILD_DIR)/segments)
+$(shell mkdir -p $(BUILD_DIR)/config/linker_scripts $(BUILD_DIR)/config/$(VERSION)/linker_scripts $(BUILD_DIR)/segments)
 $(shell mkdir -p $(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(BIN_DIRS) $(LIBULTRA_DIRS),$(BUILD_DIR)/$(dir)))
 
 
@@ -293,7 +293,7 @@ $(BUILD_DIR)/src/bin_file/bin_file.o: $(ARCHIVE_FILES)
 all: $(ROM)
 ifneq ($(COMPARE),0)
 	@md5sum $(ROM)
-	@md5sum -c $(TARGET).$(VERSION).md5
+	@md5sum -c config/$(VERSION)/$(TARGET).$(VERSION).md5
 endif
 
 clean:
@@ -304,7 +304,7 @@ libclean:
 
 distclean: clean
 	$(RM) -r $(BUILD_DIR) asm/ bin/ .splat/
-	$(RM) -r linker_scripts/$(VERSION)/auto
+	$(MAKE) -C tools distclean
 
 setup:
 	$(MAKE) -C tools
