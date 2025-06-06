@@ -9,6 +9,7 @@
 #include "hasm.h"
 
 #include "the_game.h"
+#include "unknown_defines.h"
 
 struct struct_imageLoad_arg0;
 
@@ -1251,7 +1252,6 @@ extern OSMesgQueue B_801AB7F0_usa;
 extern s32 ganButton[0x10];
 
 // extern UNK_TYPE B_801AB8A4_usa;
-#define B_801F9D00_USA_LEN (6)
 extern TexturePtr B_801AB8A8_usa[GAME_BUFFER_LEN][B_801F9D00_USA_LEN];
 // extern UNK_TYPE B_801AB8D8_usa;
 // extern UNK_TYPE B_801AB8DC_usa;
@@ -1334,7 +1334,6 @@ extern s32 giButton;
 // extern UNK_TYPE B_801C7050_usa;
 extern OSMesgQueue gfxFrameMsgQ;
 extern s32 B_801C7060_usa;
-#define BRICKTXTR_LEN (3)
 extern TexturePtr B_801C7070_usa[GAME_BUFFER_LEN][BRICKTXTR_LEN];
 // extern UNK_TYPE B_801C7088_usa;
 // extern UNK_TYPE B_801C7089_usa;

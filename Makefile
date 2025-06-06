@@ -247,6 +247,9 @@ SEGMENTS_O       := $(foreach f, $(SEGMENTS), $(BUILD_DIR)/segments/$f.o)
 
 LINKER_SCRIPTS   := $(LD_SCRIPT) $(BUILD_DIR)/config/$(VERSION)/linker_scripts/undefined_syms.ld $(BUILD_DIR)/config/linker_scripts/common_undef_syms.ld
 
+ASSETS_YAMLS_DIRS:= $(shell find config/assets -type d)
+ASSETS_YAMLS     := $(foreach dir,$(ASSETS_YAMLS_DIRS),$(wildcard $(dir)/*.yaml))
+ASSETS_YAMLS_OUT := $(foreach f,$(ASSETS_YAMLS:.yaml=.gen),$(BUILD_DIR)/$f)
 
 # Automatic dependency files
 DEP_FILES := $(D_FILE) $(SEGMENTS_D)
@@ -260,7 +263,7 @@ ifneq ($(DEP_INCLUDE), 0)
 endif
 
 # create build directories
-$(shell mkdir -p $(BUILD_DIR)/config/linker_scripts $(BUILD_DIR)/config/$(VERSION)/linker_scripts $(BUILD_DIR)/segments)
+$(shell mkdir -p $(BUILD_DIR)/config/linker_scripts $(BUILD_DIR)/config/$(VERSION)/linker_scripts $(BUILD_DIR)/config/assets $(BUILD_DIR)/segments)
 $(shell mkdir -p $(foreach dir,$(SRC_DIRS) $(ASM_DIRS) $(BIN_DIRS) $(LIBULTRA_DIRS),$(BUILD_DIR)/$(dir)))
 
 
@@ -313,6 +316,10 @@ setup:
 extract:
 	$(RM) -r asm/$(VERSION) bin/$(VERSION)
 	$(SPLAT) $(SPLAT_YAML) $(SPLAT_FLAGS)
+	$(MAKE) extract-assets
+
+extract-assets:
+	$(MAKE) $(ASSETS_YAMLS_OUT)
 
 diff-init: all
 	$(RM) -rf expected/$(BUILD_DIR)
@@ -332,7 +339,7 @@ format:
 tidy:
 	clang-tidy-14 -p . --fix --fix-errors $(filter-out src/libmus/%, $(C_FILES)) -- $(CC_CHECK_FLAGS) $(IINC) $(CHECK_WARNINGS) $(BUILD_DEFINES) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(C_DEFINES) $(MIPS_BUILTIN_DEFS)
 
-.PHONY: all clean libclean distclean setup extract diff-init init format tidy
+.PHONY: all clean libclean distclean setup extract extract-assets diff-init init format tidy
 .DEFAULT_GOAL := all
 # Prevent removing intermediate files
 .SECONDARY:
@@ -423,6 +430,18 @@ $(BUILD_DIR)/%.ci4.inc: %.ci4.png
 	$(PIGMENT64) to-bin --c-array --format palette -o $(@:.ci4.inc=.palette.inc) $<
 	$(PIGMENT64) to-bin --c-array --format ci4 -o $@ $<
 
+
+# splat
+
+$(BUILD_DIR)/config/assets/%.gen: config/assets/%.yaml bin/$(VERSION)/assets_bins/%.databin.bin
+	$(RM) -r $@
+	$(RM) -r bin/usa/assets/$*
+	mkdir -p $(BUILD_DIR)/config/assets/$(dir $*)
+	cp $< $(BUILD_DIR)/$<
+	echo "  target_path: bin/$(VERSION)/assets_bins/$*.databin.bin" >> $(BUILD_DIR)/$<
+	echo "  asset_path: bin/$(VERSION)/assets" >> $(BUILD_DIR)/$<
+	$(SPLAT) $(BUILD_DIR)/$< --modes img vtx
+#	touch $@
 
 -include $(DEP_FILES)
 

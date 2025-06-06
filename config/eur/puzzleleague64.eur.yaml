@@ -857,47 +857,47 @@ segments:
     start: 0x50F6A0
 
   - type: databin
-    name: segment_character_5337F0
+    name: assets_bins/character_block/5337F0
     start: 0x533AA0
 
   - type: databin
-    name: segment_character_53A9F0
+    name: assets_bins/character_block/53A9F0
     start: 0x53ACA0
 
   - type: databin
-    name: segment_character_541BF0
+    name: assets_bins/character_block/541BF0
     start: 0x541EA0
 
   - type: databin
-    name: segment_character_548DF0
+    name: assets_bins/character_block/548DF0
     start: 0x5490A0
 
   - type: databin
-    name: segment_character_54FFF0
+    name: assets_bins/character_block/54FFF0
     start: 0x5502A0
 
   - type: databin
-    name: segment_character_5571F0
+    name: assets_bins/character_block/5571F0
     start: 0x5574A0
 
   - type: databin
-    name: segment_character_55E3F0
+    name: assets_bins/character_block/55E3F0
     start: 0x55E6A0
 
   - type: databin
-    name: segment_character_5655F0
+    name: assets_bins/character_block/5655F0
     start: 0x5658A0
 
   - type: databin
-    name: segment_character_56C7F0
+    name: assets_bins/character_block/56C7F0
     start: 0x56CAA0
 
   - type: databin
-    name: segment_character_5739F0
+    name: assets_bins/character_block/5739F0
     start: 0x573CA0
 
   - type: databin
-    name: segment_character_57ABF0
+    name: assets_bins/character_block/57ABF0
     start: 0x57AEA0
 
   - type: databin

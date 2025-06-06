@@ -18,10 +18,6 @@
 #define ALIGNED(x) __attribute__ ((aligned (x)))
 #endif
 
-#ifndef ALIGNED8
-#define ALIGNED8 __attribute__ ((aligned (8)))
-#endif
-
 #ifndef ALIGNOF
 #ifdef __sgi /* IDO compiler */
 #define ALIGNOF(x) __builtin_alignof(x)

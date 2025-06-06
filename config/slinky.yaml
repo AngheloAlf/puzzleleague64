@@ -63,7 +63,7 @@ settings:
 
 vram_classes:
   # TODO: figure out these weird vrams. They probably follows some other segment
-  - { name: asset_character,   fixed_vram: 0x01070A60 }
+  - { name: asset_character_block,   fixed_vram: 0x01070A60 }
   - { name: asset_bg_screen_A, fixed_vram: 0x01077C60 }
   - { name: asset_bg_screen_B, fixed_vram: 0x0108CF00 }
 
@@ -702,60 +702,60 @@ segments:
     files:
       - { path: "asm/{version}/data/segment_50F3F0.o" }
 
-  - name: segment_character_5337F0
-    vram_class: asset_character
+  - name: segment_character_block_5337F0
+    vram_class: asset_character_block
     files:
-      - { path: "asm/{version}/data/segment_character_5337F0.o" }
+      - { path: src/assets/character_block/5337F0.o }
 
-  - name: segment_character_53A9F0
-    vram_class: asset_character
+  - name: segment_character_block_53A9F0
+    vram_class: asset_character_block
     files:
-      - { path: "asm/{version}/data/segment_character_53A9F0.o" }
+      - { path: src/assets/character_block/53A9F0.o }
 
-  - name: segment_character_541BF0
-    vram_class: asset_character
+  - name: segment_character_block_541BF0
+    vram_class: asset_character_block
     files:
-      - { path: "asm/{version}/data/segment_character_541BF0.o" }
+      - { path: src/assets/character_block/541BF0.o }
 
-  - name: segment_character_548DF0
-    vram_class: asset_character
+  - name: segment_character_block_548DF0
+    vram_class: asset_character_block
     files:
-      - { path: "asm/{version}/data/segment_character_548DF0.o" }
+      - { path: src/assets/character_block/548DF0.o }
 
-  - name: segment_character_54FFF0
-    vram_class: asset_character
+  - name: segment_character_block_54FFF0
+    vram_class: asset_character_block
     files:
-      - { path: "asm/{version}/data/segment_character_54FFF0.o" }
+      - { path: src/assets/character_block/54FFF0.o }
 
-  - name: segment_character_5571F0
-    vram_class: asset_character
+  - name: segment_character_block_5571F0
+    vram_class: asset_character_block
     files:
-      - { path: "asm/{version}/data/segment_character_5571F0.o" }
+      - { path: src/assets/character_block/5571F0.o }
 
-  - name: segment_character_55E3F0
-    vram_class: asset_character
+  - name: segment_character_block_55E3F0
+    vram_class: asset_character_block
     files:
-      - { path: "asm/{version}/data/segment_character_55E3F0.o" }
+      - { path: src/assets/character_block/55E3F0.o }
 
-  - name: segment_character_5655F0
-    vram_class: asset_character
+  - name: segment_character_block_5655F0
+    vram_class: asset_character_block
     files:
-      - { path: "asm/{version}/data/segment_character_5655F0.o" }
+      - { path: src/assets/character_block/5655F0.o }
 
-  - name: segment_character_56C7F0
-    vram_class: asset_character
+  - name: segment_character_block_56C7F0
+    vram_class: asset_character_block
     files:
-      - { path: "asm/{version}/data/segment_character_56C7F0.o" }
+      - { path: src/assets/character_block/56C7F0.o }
 
-  - name: segment_character_5739F0
-    vram_class: asset_character
+  - name: segment_character_block_5739F0
+    vram_class: asset_character_block
     files:
-      - { path: "asm/{version}/data/segment_character_5739F0.o" }
+      - { path: src/assets/character_block/5739F0.o }
 
-  - name: segment_character_57ABF0
-    vram_class: asset_character
+  - name: segment_character_block_57ABF0
+    vram_class: asset_character_block
     files:
-      - { path: "asm/{version}/data/segment_character_57ABF0.o" }
+      - { path: src/assets/character_block/57ABF0.o }
 
   - name: unk_581DF0
     include_if_any: [[version, usa]]

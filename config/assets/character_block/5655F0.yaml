@@ -1,0 +1,38 @@
+segments:
+  - type: group
+    start: 0x0
+    dir: character_block/5655F0
+    subsegments:
+      - { start: auto, type: ci8, name: D_01070A60_usa.ci8, width: 64, height: 32, palettes: [D_1074A60_usa] }
+
+      - { start: auto, type: ci8, name: D_01071260_usa.ci8, width: 64, height: 32, palettes: [D_1074A60_usa] }
+      - { start: auto, type: ci8, name: D_01071A60_usa.ci8, width: 64, height: 32, palettes: [D_1074A60_usa] }
+      - { start: auto, type: ci8, name: D_01072260_usa.ci8, width: 64, height: 32, palettes: [D_1074A60_usa] }
+      - { start: auto, type: ci8, name: D_01072A60_usa.ci8, width: 64, height: 32, palettes: [D_1074A60_usa] }
+      - { start: auto, type: ci8, name: D_01073260_usa.ci8, width: 64, height: 32, palettes: [D_1074A60_usa] }
+      - { start: auto, type: ci8, name: D_01073A60_usa.ci8, width: 64, height: 32, palettes: [D_1074A60_usa] }
+
+      - { start: auto, type: ci8, name: D_01074260_usa.ci8, width: 64, height: 16, palettes: [D_1074A60_usa] }
+      - { start: auto, type: ci8, name: D_01074660_usa.ci8, width: 64, height: 16, palettes: [D_1074A60_usa] }
+
+      - { start: auto, type: palette, name: D_1074A60_usa, size: 0x0200 }
+
+      - { start: auto, type: rgba16, name: D_01074C60_usa.rgba16, width: 64, height: 32 }
+      - { start: auto, type: rgba16, name: D_01075C60_usa.rgba16, width: 64, height: 32 }
+      - { start: auto, type: rgba16, name: D_01076C60_usa.rgba16, width: 64, height: 32 }
+  - [0x7200]
+
+options:
+  basename: ""
+  base_path: ../../../../../
+  compiler: GCC
+  find_file_boundaries: False
+  platform: n64
+  extensions_path: tools/splat_ext
+
+  do_c_func_detection: False
+  o_as_suffix: True
+  gfx_ucode: f3dex
+  use_legacy_include_asm: False
+  create_undefined_funcs_auto: False
+  create_undefined_syms_auto: False
