@@ -31,9 +31,11 @@ IDO_53_CC       := $(IDO_53_DIR)/cc
 SLINKY_DIR      := slinky
 SLINKY          := $(SLINKY_DIR)/slinky-cli
 
+FIRST_DIFF      := rstools/target/release/first_diff
+FIX_RELOCS      := rstools/target/release/fix_relocs
 
-all: $(KMC_GCC) $(KMC_BINUTILS) $(IDO_53_CC) $(SLINKY)
-	cargo build --release --manifest-path rstools/Cargo.toml
+
+all: $(KMC_GCC) $(KMC_BINUTILS) $(IDO_53_CC) $(SLINKY) $(FIRST_DIFF) $(FIX_RELOCS)
 
 clean:
 	$(RM) -rf $(KMC_DIR) gcc_kmc $(IDO_53_DIR) ido_recomp $(SLINKY_DIR)
@@ -59,9 +61,12 @@ $(IDO_53_CC): | $(IDO_53_DIR)
 	$(RM) ido-5.3-recomp-$(DETECTED_OS).tar.gz
 
 $(SLINKY): | $(SLINKY_DIR)
-	wget https://github.com/decompals/slinky/releases/download/0.2.5/slinky-cli-$(HOST_TRIPLE).tar.gz
+	wget https://github.com/decompals/slinky/releases/download/0.3.0/slinky-cli-$(HOST_TRIPLE).tar.gz
 	tar xf slinky-cli-$(HOST_TRIPLE).tar.gz -C $(SLINKY_DIR)
 	$(RM) slinky-cli-$(HOST_TRIPLE).tar.gz
+
+$(FIRST_DIFF) $(FIX_RELOCS):
+	cargo build --release --manifest-path rstools/Cargo.toml
 
 $(KMC_DIR):
 	mkdir -p $@

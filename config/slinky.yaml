@@ -649,8 +649,6 @@ segments:
     fixed_vram: 0x01000000
     files:
       - { path: src/assets/segment_0CA4A0.o }
-      # - { path: src/assets/segment_0CA4A0.o, include_if_any: [[version, usa]] }
-      # - { path: "asm/{version}/data/assets/segment_0CA4A0.data.o", include_if_any: [[version, eur], [version, fra], [version, ger]] }
 
   - name: segment_0FB480
     files:
@@ -1484,3 +1482,13 @@ segments:
   - name: segment_1FCF820
     files:
       - { path: "asm/{version}/data/segment_1FCF820.o" }
+
+entry: entrypoint
+
+asserts:
+  - check: buffer1_VRAM_END <= 0x803B0500
+    error_message: The segment 'buffer1' is overflowing the ram limit
+  - check: buffer2_BSS_START == 0x803B0500
+    error_message: buffer2 shifted?
+  - check: framebuffer_BSS_START == 0x803B5000
+    error_message: framebuffer shifted?
