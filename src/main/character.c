@@ -291,18 +291,199 @@ void InitCharacter(s32 left, s32 right) {
     }
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/character", ReturnAttackTexValue);
-#endif
+s32 ReturnAttackTexValue(attack_t *attack, s32 type, s32 lev, s32 pos) {
+    char *ptr;
+    s32 actual;
+    s32 value;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/character", ReturnAttackTexValue);
-#endif
+    if ((gTheGame.unk_9C0C == 2) && (type >= 0xE)) {
+        type -= 2;
+    }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/character", ReturnAttackTexValue);
-#endif
+    switch (type) {
+        case 0x1:
+            ptr = attack_combo4;
+            break;
+        case 0x2:
+            ptr = attack_combo5;
+            break;
+        case 0x3:
+            ptr = attack_combo6;
+            break;
+        case 0x4:
+            ptr = attack_combo7;
+            break;
+        case 0xA:
+            ptr = attack_combo7;
+            break;
+        case 0x9:
+            ptr = attack_chain3[0];
+            break;
+        case 0xB:
+            if (gTheGame.unk_9C0C == 1) {
+                ptr = attack_chain3[lev];
+            } else {
+                ptr = ring_chain3;
+            }
+            break;
+        case 0xC:
+            ptr = attack_chain4;
+            break;
+        case 0xD:
+            ptr = attack_chain5;
+            break;
+        case 0xE:
+            ptr = attack_chain6;
+            break;
+        case 0xF:
+            ptr = attack_chain7;
+            break;
+        case 0x10:
+            ptr = attack_chain8;
+            break;
+        case 0x11:
+            ptr = attack_chain9;
+            break;
+        case 0x12:
+            ptr = attack_chain10;
+            break;
+        case 0x13:
+            ptr = attack_chain11;
+            break;
+        case 0x14:
+            ptr = attack_chain12;
+            break;
+        case 0x15:
+            ptr = attack_chain13;
+            break;
+        case 0x16:
+            ptr = attack_chain13;
+            break;
+        default:
+            return 0;
+    }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/character", ReturnAttackTexValue);
-#endif
+    if ((gTheGame.unk_9C0C == 1) || (type < 0xC)) {
+        if (type >= 0xC) {
+            value = ptr[lev];
+            switch (value) {
+                case 0x1:
+                    value = attackRow1[pos];
+                    break;
+                case 0x2:
+                    value = attackRow2[pos];
+                    break;
+                case 0x3:
+                    value = attackRow3[pos];
+                    break;
+                case 0x4:
+                    value = attackRow4[pos];
+                    break;
+                case 0x5:
+                    value = attackRow5[pos];
+                    break;
+                case 0x6:
+                    value = attackRow6[pos];
+                    break;
+                case 0x7:
+                    value = attackRow7[pos];
+                    break;
+                case 0x8:
+                    value = attackRow8[pos];
+                    break;
+                case 0x9:
+                    value = attackRow9[pos];
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            value = ptr[pos];
+        }
+
+        return value;
+    }
+
+    if (attack->unk_18 >= 0xA) {
+        actual = attack->unk_18 - 0xA;
+    } else {
+        actual = attack->unk_18 + 8;
+    }
+
+    if (attack->type > 0x16) {
+        type = attack->type - 0x16;
+    } else {
+        type = attack->type;
+    }
+
+    if ((type == 0xC) || (type == 0xD)) {
+        if (pos == actual) {
+            pos = 2;
+        } else if (pos == (actual + 1)) {
+            pos = 3;
+        } else {
+            pos = 1;
+        }
+    } else if (pos == actual) {
+        pos = 2;
+    } else if (pos == (actual + 1)) {
+        pos = 3;
+    } else if (actual % 2 == 0) {
+        if (pos % 2 == 0) {
+            pos = 4;
+        } else {
+            pos = 1;
+        }
+    } else if (pos % 2 == 1) {
+        pos = 4;
+    } else {
+        pos = 1;
+    }
+
+    switch (type) {
+        case 0xC:
+            value = attack_combo7[pos];
+            break;
+
+        case 0xD:
+            value = attack_chain3[lev][pos];
+            break;
+
+        default:
+            value = ptr[lev];
+            switch (value) {
+                case 0x1:
+                    value = attackRow1[pos];
+                    break;
+                case 0x2:
+                    value = attackRow2[pos];
+                    break;
+                case 0x3:
+                    value = attackRow3[pos];
+                    break;
+                case 0x4:
+                    value = attackRow4[pos];
+                    break;
+                case 0x5:
+                    value = attackRow5[pos];
+                    break;
+                case 0x6:
+                    value = attackRow6[pos];
+                    break;
+                case 0x7:
+                    value = attackRow7[pos];
+                    break;
+                case 0x8:
+                    value = attackRow8[pos];
+                    break;
+                case 0x9:
+                    value = attackRow9[pos];
+                    break;
+                default:
+                    break;
+            }
+            break;
+    }
+
+    return value;
+}

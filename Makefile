@@ -434,12 +434,12 @@ $(BUILD_DIR)/%.ci4.inc: %.ci4.png
 # splat
 
 $(BUILD_DIR)/config/assets/%.gen: config/assets/%.yaml bin/$(VERSION)/assets_bins/%.databin.bin
-	$(RM) -r $@
-	$(RM) -r bin/usa/assets/$*
-	mkdir -p $(BUILD_DIR)/config/assets/$(dir $*)
+	@$(RM) -r $@
+	@$(RM) -r bin/usa/assets/$*
+	@mkdir -p $(BUILD_DIR)/config/assets/$(dir $*)
 	cp $< $(BUILD_DIR)/$<
-	echo "  target_path: bin/$(VERSION)/assets_bins/$*.databin.bin" >> $(BUILD_DIR)/$<
-	echo "  asset_path: bin/$(VERSION)/assets" >> $(BUILD_DIR)/$<
+	@echo "  target_path: bin/$(VERSION)/assets_bins/$*.databin.bin" >> $(BUILD_DIR)/$<
+	@echo "  asset_path: bin/$(VERSION)/assets" >> $(BUILD_DIR)/$<
 	$(SPLAT) $(BUILD_DIR)/$< --modes img vtx
 #	touch $@
 
