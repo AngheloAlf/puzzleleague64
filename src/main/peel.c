@@ -119,7 +119,7 @@ void peelTick(void) {
             if (B_8018E934_usa >= 0x1F) {
                 gbFadeAlpha = value;
             } else {
-                func_80001CAC_usa(gnWaveData + (B_8018E934_usa * 0x33A), B_8018E93C_usa, 0x33A);
+                DmaRomToRam(gnWaveData + (B_8018E934_usa * 0x33A), B_8018E93C_usa, 0x33A);
                 if (B_8018E934_usa == 7) {
                     gbFadeAlpha = value;
                 }

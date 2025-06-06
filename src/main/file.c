@@ -57,7 +57,7 @@ STATIC_INLINE s32 fileBuffer(File *file, s32 size) {
     if (file == FILE_NULL) {
         __n = inlinedfunc();
 
-        func_80001CAC_usa(SEGMENT_ROM_START(bin_file), &gacBuffer.buffer, __n);
+        DmaRomToRam(SEGMENT_ROM_START(bin_file), &gacBuffer.buffer, __n);
         giFileBuffer = -1;
         return __n;
     }
@@ -76,7 +76,7 @@ STATIC_INLINE s32 fileBuffer(File *file, s32 size) {
     __n = MIN(__n, FILE_BINFILE_ENTRIES_BUFSIZE);
     giFileBuffer = file->index;
     gnOffsetBuffer = file->inFileOffset & ~1;
-    func_80001CAC_usa(file->romAddress + gnOffsetBuffer, &gacBuffer.buffer, ALIGN2(__n));
+    DmaRomToRam(file->romAddress + gnOffsetBuffer, &gacBuffer.buffer, ALIGN2(__n));
 
     return ((__n) > (size) ? (size) : (__n));
 }
@@ -223,7 +223,7 @@ s32 fileGet(File *file, void *dst, s32 totalSize) {
 
             if (temp_a0_2 % 2 == 0) {
                 var_s1 = totalSize;
-                func_80001CAC_usa(temp_a0_2, dst, var_s1);
+                DmaRomToRam(temp_a0_2, dst, var_s1);
                 continue;
             }
         }

@@ -16,6 +16,18 @@
 
 extern s32 gpBitmapLast;
 
+// TODO: some functions may be misnamed
+#if 0
+static void bitmapMake(struct_bitmap_c_14 * * ppBitmap /* r1+0x0 */, void * ppHeap /* r1+0x4 */, int nPixel /* r1+0x8 */, int nColor /* r1+0xC */, int bDMA /* r1+0x10 */) {}
+static int bitmapLoadRLE(struct_bitmap_c_14 * pBitmap /* r1+0x8 */, struct_bitmap_c_43 * pFile /* r27 */) {
+int bitmapLoad(struct_bitmap_c_14 * * ppBitmap /* r31 */, void * pNameOrFile /* r28 */, void * ppHeap /* r30 */, int bDMA /* r27 */) {
+int bitmapLoadROM(struct_bitmap_c_14 * * ppBitmap /* r27 */, void * pROMData /* r28 */, void * pROMCLUT /* r5 */, int nType /* r29 */, int nSizeX /* r7 */, int nSizeY /* r1+0x1C */, void * ppHeap /* r1+0x20 */) {
+int bitmapFlip(struct_bitmap_c_14 * pBitmap /* r26 */) {
+int bitmapLoadData(struct_bitmap_c_14 * pBitmap /* r3 */, void * pPixel /* r4 */) {}
+int bitmapLoadTile(struct_bitmap_c_14 * pBitmap /* r1+0x8 */, int bLoad /* r4 */, union_pon_gc_c_173 * * ppGfx /* r1+0x10 */, struct_bitmap_c_332 * pTile /* r1+0x14 */, int * pnPixels /* r1+0x18 */) {
+void bitmapSetup() {}
+#endif
+
 #if VERSION_USA
 #if 0
 s32 bitmapLoadRLE(struct_bitmapLoad_arg0 *arg0, File *arg1, void *arg2) {

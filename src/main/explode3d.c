@@ -240,7 +240,7 @@ void Update3DExplode2(explode_t *explode, s32 distance) {
     explode->frame++;
 }
 
-INLINE void func_8006AC3C_usa(explode_t *explode, s32 distance) {
+INLINE void Update3DIconSplash(explode_t *explode, s32 distance) {
     s8 *ptr = IconSplash[explode->frame];
     s32 position;
 
@@ -280,7 +280,7 @@ void Update3DExplosion(tetWell *well) {
             if (explode->type == 0x19) {
                 explode->x += 5;
 
-                func_8006AC3C_usa(explode, distance);
+                Update3DIconSplash(explode, distance);
             } else if (explode->type == 0x1E) {
                 Update3DExplode1(explode, distance);
             } else {

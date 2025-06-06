@@ -12,7 +12,7 @@ struct song_t;
 typedef void (struct_8018A748_usa_callback)(musHandle, s32);
 
 void func_80001B10_usa(void);
-void func_80001CAC_usa(RomOffset segmentRom, void *dstAddr, size_t segmentSize);
+void DmaRomToRam(RomOffset segmentRom, void *dstAddr, size_t segmentSize);
 s16 func_80001D60_usa(s32 arg0, s16 arg1);
 s16 func_80001E98_usa(musHandle handle);
 s16 func_80001ED8_usa(void);

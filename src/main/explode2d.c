@@ -133,7 +133,7 @@ void Start2DIconSplash(tetWell *well, s32 x, s32 y) {
     }
 }
 
-INLINE void func_80073138_usa(explode_t *explode) {
+INLINE void Update2DExplode1(explode_t *explode) {
     s8 *ptr;
     s32 position;
 
@@ -228,7 +228,7 @@ void Update2DExplode2(explode_t *explode) {
     }
 }
 
-INLINE void func_800733D0_usa(explode_t *explode) {
+INLINE void Update2DIconSplash(explode_t *explode) {
     s8 *ptr;
 
     if (explode->frame == 0x28) {
@@ -261,9 +261,9 @@ void Update2DExplosion(tetWell *well) {
         }
 
         if (explode->type == 0x19) {
-            func_800733D0_usa(explode);
+            Update2DIconSplash(explode);
         } else if (explode->type < 0x1F) {
-            func_80073138_usa(explode);
+            Update2DExplode1(explode);
         } else {
             Update2DExplode2(explode);
         }

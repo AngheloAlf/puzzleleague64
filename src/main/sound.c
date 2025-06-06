@@ -153,7 +153,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80001B10_usa);
 INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80001B10_usa);
 #endif
 
-INLINE void func_80001CAC_usa(RomOffset segmentRom, void *dstAddr, size_t segmentSize) {
+INLINE void DmaRomToRam(RomOffset segmentRom, void *dstAddr, size_t segmentSize) {
     uintptr_t currentVram = (uintptr_t)dstAddr;
     s32 remainingSize = segmentSize;
     RomOffset currentRom = segmentRom;
@@ -250,15 +250,15 @@ void func_80001F68_usa(void *arg0, s16 index) {
 }
 
 void func_80001F90_usa(RomOffset segmentRom, size_t segmentSize, s16 index) {
-    func_80001CAC_usa(segmentRom, func_800028B8_usa(index), segmentSize);
+    DmaRomToRam(segmentRom, func_800028B8_usa(index), segmentSize);
 }
 
 #if VERSION_USA
 int func_80002054_usa(void) {
     musConfig sp20;
 
-    func_80001CAC_usa(D_800B5570_usa[3].unk_00, B_8016F2B0_usa, D_800B5570_usa[3].unk_04 - D_800B5570_usa[3].unk_00);
-    func_80001CAC_usa(D_800B5570_usa[2].unk_00, B_801842B0_usa, D_800B5570_usa[2].unk_04 - D_800B5570_usa[2].unk_00);
+    DmaRomToRam(D_800B5570_usa[3].unk_00, B_8016F2B0_usa, D_800B5570_usa[3].unk_04 - D_800B5570_usa[3].unk_00);
+    DmaRomToRam(D_800B5570_usa[2].unk_00, B_801842B0_usa, D_800B5570_usa[2].unk_04 - D_800B5570_usa[2].unk_00);
 
     sp20.channels = 0x28;
     sp20.sched = &B_8021AAA0_usa;
@@ -323,11 +323,11 @@ void *LoadSFXBank(u16 arg0, u16 arg1) {
     temp_s6 = &D_800B5570_usa[arg0];
 
     if (temp_s6->unk_00 != 0) {
-        func_80001CAC_usa(temp_s6->unk_00, B_8018A6F8_usa[arg1].unk_8, temp_s6->unk_04 - temp_s6->unk_00);
+        DmaRomToRam(temp_s6->unk_00, B_8018A6F8_usa[arg1].unk_8, temp_s6->unk_04 - temp_s6->unk_00);
     }
 
     if (temp_s6->unk_08 != 0) {
-        func_80001CAC_usa(temp_s6->unk_08, B_8018A6F8_usa[arg1].unk_4, temp_s6->unk_0C - temp_s6->unk_08);
+        DmaRomToRam(temp_s6->unk_08, B_8018A6F8_usa[arg1].unk_4, temp_s6->unk_0C - temp_s6->unk_08);
 
         if (arg0 == 0) {
             B_8018A6F8_usa[arg1].unk_4 = B_8018A6D8_usa;

@@ -803,7 +803,7 @@ void InitStageClearIntro(void) {
     B_8018EA34_usa = D_800B64F8_usa[var_s0][0];
     B_8018EA38_usa = D_800B64F8_usa[var_s0][1];
 
-    func_80001CAC_usa(D_800B6528_usa[var_s0], sp38, sizeof(sp38));
+    DmaRomToRam(D_800B6528_usa[var_s0], sp38, sizeof(sp38));
 
     if (sp38[0] == 0x10) {
         var_a3 = 0x54;

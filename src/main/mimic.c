@@ -18,7 +18,7 @@
 #include "dlist.h"
 #include "tetsound.h"
 
-void func_80082F80_usa(void **heapP) {
+void SetupMimic(void **heapP) {
     s32 temp_a0;
 
     B_801C6EE8_usa = 1;
@@ -38,7 +38,7 @@ void func_80082F80_usa(void **heapP) {
     *heapP = Pon_Image_Heap;
 }
 
-void func_80083038_usa(void) {
+void QuitMimic(void) {
     gGameStatus = gGameStatus >> 0x10;
 }
 
