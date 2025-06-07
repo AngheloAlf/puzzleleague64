@@ -1278,7 +1278,7 @@ uObjTxtr clearTexture = {
 };
 
 u8 D_01023650_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01023650_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_01023650_usa.ci8.inc"
 };
 
 uObjTxtr transTexture = {
