@@ -145,7 +145,7 @@ extern RomOffset D_800B6528_usa[];
 // extern UNK_TYPE D_800B6950_usa;
 // extern UNK_TYPE D_800B6990_usa;
 
-// extern UNK_TYPE D_800B69C0_usa;
+extern s32 D_800B69C0_usa;
 extern s32 D_800B69C4_usa;
 
 extern char attack_combo4[];
@@ -1306,7 +1306,6 @@ extern s32 GarbageBlockBaseSfx_L;
 extern s32 GarbageBlockBaseSfx_R;
 extern TexturePtr B_801C6C9C_usa[2];
 extern s16 gBox_Level;
-// extern UNK_TYPE B_801C6CA5_usa;
 
 extern struct_gInfo **fb;
 extern s32 B_801C6E58_usa;

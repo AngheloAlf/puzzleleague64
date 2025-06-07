@@ -815,7 +815,7 @@ segments:
         - { start: 0x0ED588, type: ci8, name: assets/segment_0CA4A0/D_01022E38_usa.ci8, width: 64, height: 32, palettes: [assets/segment_0CA4A0/D_0101F378_usa] }
         - [0x0EDD88]
 
-        - [0x0EDDA0, i8, assets/segment_0CA4A0/D_01023650_usa.i8, 1024, 1] # unknown type and dimensions
+        - { start: 0x0EDDA0, type: ci8, name: assets/segment_0CA4A0/D_01023650_usa.ci8, width: 64, height: 16, palettes: [assets/segment_0CA4A0/D_0101F378_usa] }
         - [0x0EE1A0]
         - [0x0EE1B8, i8, assets/segment_0CA4A0/D_01023A68_usa.i8, 512, 1] # unknown type and dimensions
         - [0x0EE3B8]

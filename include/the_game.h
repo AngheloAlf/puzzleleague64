@@ -349,7 +349,7 @@ typedef struct Game {
     /* 0x89D8 */ UNK_TYPE1 unk_89D8[0x8B98-0x89D8];
     /* 0x8B98 */ Game_unk_8B98 unk_8B98[2];
     /* 0x8BC8 */ UNK_TYPE1 unk_8BC8[0xC0];
-    /* 0x8C88 */ uObjBg unk_8C88[0xA];
+    /* 0x8C88 */ uObjBg unk_8C88[10];
     /* 0x8E18 */ UNK_TYPE1 unk_8E18[0x118];
     /* 0x8F30 */ UNK_TYPE1 unk_8F30[0x190];
     /* 0x90C0 */ s32 unk_90C0;
@@ -358,7 +358,8 @@ typedef struct Game {
     /* 0x9988 */ uObjBg frame;
     /* 0x99B0 */ UNK_TYPE1 unk_99B0[0x28];
     /* 0x99D8 */ uObjTxtr unk_99D8;
-    /* 0x99F0 */ UNK_PAD unk_99F0[0x60];
+    /* 0x99F0 */ UNK_PAD unk_99F0[0x18];
+    /* 0x9A08 */ uObjSprite unk_9A08[3];
     /* 0x9A50 */ uObjBg unk_9A50; // bkground?
     /* 0x9A78 */ UNK_TYPE1 unk_9A78[0x9AE0 - 0x9A78];
     /* 0x9AE0 */ Game_unk_9AE0 unk_9AE0;

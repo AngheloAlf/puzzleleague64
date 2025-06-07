@@ -156,7 +156,7 @@ extern uObjTxtr numberTexture6;
 // extern UNK_TYPE D_01022E38_usa;
 extern uObjTxtr clearTexture;
 // extern UNK_TYPE D_01023650_usa;
-// extern UNK_TYPE D_01023A50_usa;
+extern uObjTxtr transTexture;
 // extern UNK_TYPE D_01023A68_usa;
 // extern UNK_TYPE D_01023C68_usa;
 // extern UNK_TYPE D_01023C80_usa;

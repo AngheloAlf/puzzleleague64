@@ -2500,8 +2500,8 @@ B_801C6C90_usa = 0x801C6C90; //
 B_801C6C94_usa = 0x801C6C94; //
 GarbageBlockBaseSfx_R = 0x801C6C98; //
 B_801C6C9C_usa = 0x801C6C9C; // size:0x8
-gBox_Level = 0x801C6CA4; //
-B_801C6CA5_usa = 0x801C6CA5; //
+gBox_Level = 0x801C6CA4; // size:0x2
+B_801C6CA6_usa = 0x801C6CA6; //
 gCfbStatus = 0x801C6E48; //
 
 fb = 0x801C6E54; //

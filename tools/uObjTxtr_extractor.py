@@ -245,7 +245,7 @@ def main():
 
     args = parser.parse_args()
 
-    baseromPath = Path(f"baserom.{args.version}.z64")
+    baseromPath = Path(f"config/{args.version}/baserom.{args.version}.z64")
     if not baseromPath.exists():
         fatalError(baseromPath, "not found")
 

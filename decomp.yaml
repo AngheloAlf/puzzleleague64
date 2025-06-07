@@ -7,7 +7,7 @@ versions:
     fullname: usa
     sha1: 8173866fc8c7652abd44c48efcab85441c6806a1
     paths:
-      target: "baserom.usa.z64"
+      target: "config/usa/baserom.usa.z64"
 
       build_dir: "build/usa"
       map: "build/usa/puzzleleague64.usa.map"
@@ -23,7 +23,7 @@ versions:
     fullname: eur
     sha1: 8173866fc8c7652abd44c48efcab85441c6806a1
     paths:
-      target: "baserom.eur.z64"
+      target: "config/eur/baserom.eur.z64"
 
       build_dir: "build/eur"
       map: "build/eur/puzzleleague64.eur.map"
@@ -39,7 +39,7 @@ versions:
     fullname: fra
     sha1: 8173866fc8c7652abd44c48efcab85441c6806a1
     paths:
-      target: "baserom.fra.z64"
+      target: "config/fra/baserom.fra.z64"
 
       build_dir: "build/fra"
       map: "build/fra/puzzleleague64.fra.map"
@@ -55,7 +55,7 @@ versions:
     fullname: ger
     sha1: 8173866fc8c7652abd44c48efcab85441c6806a1
     paths:
-      target: "baserom.ger.z64"
+      target: "config/ger/baserom.ger.z64"
 
       build_dir: "build/ger"
       map: "build/ger/puzzleleague64.ger.map"

@@ -1281,8 +1281,15 @@ u8 D_01023650_usa[] ALIGNED(8) = {
 #include "assets/segment_0CA4A0/D_01023650_usa.i8.inc"
 };
 
-u32 D_01023A50_usa[] = {
-    0x00001033, (u32)D_01023650_usa, 0x0000007F, 0x01000000, 0xFFFFFFFF, 0x00000000,
+uObjTxtr transTexture = {
+    /* type  */ G_OBJLT_TXTRBLOCK,
+    /* image */ (u64 *)D_01023650_usa,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 16, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* sid   */ 0,
+    /* flag  */ (u32)-1,
+    /* mask  */ 0x0,
 };
 
 u8 D_01023A68_usa[] ALIGNED(8) = {
