@@ -189,8 +189,8 @@ segments:
       - [0x04BF00, c, main/character]
       - [0x04CC20, c, main/text]
       - [0x04F050, c, main/flic]
-      - [0x04F9A0, asm, main/04F9A0] # animation starts here
-      - [0x053320, asm, main/053320]
+      - [0x04F9A0, c, main/animation]
+      - [0x053320, c, main/other]
       - [0x054C20, c, main/fade]
       - [0x055100, c, main/dlist]
       - [0x056420, asm, main/056420]
@@ -556,7 +556,8 @@ segments:
       - [0x0C6630, .rodata, main/bkground]
       - [0x0C6818, .rodata, main/character]
       - [0x0C69C0, .rodata, main/text]
-      - [0x0C6C20, rodata, main/0C6C20]
+      - [0x0C6C20, .rodata, main/animation]
+      - [0x0C6D78, .rodata, main/other]
       - [0x0C7240, .rodata, main/dlist]
       - [0x0C7520, rodata, main/0C7520]
       - [0x0C7570, .rodata, main/update]
@@ -777,7 +778,7 @@ segments:
         - [0x0E3318]
         - [0x0E3330, i8, assets/segment_0CA4A0/D_01018E90_usa.i8, 64, 16]
         - [0x0E3730]
-        - [0x0E3748, i8, assets/segment_0CA4A0/D_010192A8_usa.i8, 512, 1] # unknown type and dimensions
+        - [0x0E3748, palette, assets/segment_0CA4A0/D_010192A8_usa]
         - [0x0E3948]
         - [0x0E3960, i8, assets/segment_0CA4A0/D_010194C0_usa.i8, 512, 1] # unknown type and dimensions
         - [0x0E3B60, i8, assets/segment_0CA4A0/D_010196C0_usa.i8, 1536, 1] # unknown type and dimensions
@@ -792,9 +793,9 @@ segments:
         - [0x0E7160, i8, assets/segment_0CA4A0/D_0101CCC0_usa.i8, 2048, 1] # unknown type and dimensions
         - [0x0E7960, i8, assets/segment_0CA4A0/D_0101D4C0_usa.i8, 2048, 1] # unknown type and dimensions
         - [0x0E8160, i8, assets/segment_0CA4A0/D_0101DCC0_usa.i8, 2048, 1] # unknown type and dimensions
-        - [0x0E8960, i8, assets/segment_0CA4A0/D_0101E4C0_usa.i8, 1152, 1] # unknown type and dimensions
-        - [0x0E8DE0, i8, assets/segment_0CA4A0/D_0101E940_usa.i8, 1152, 1] # unknown type and dimensions
-        - [0x0E9260, i8, assets/segment_0CA4A0/D_0101EDC0_usa.i8, 1152, 1] # unknown type and dimensions
+        - { start: 0x0E8960, type: ci8, name: assets/segment_0CA4A0/D_0101E4C0_usa.ci8, width: 48, height: 24, palettes: [assets/segment_0CA4A0/D_010192A8_usa] }
+        - { start: 0x0E8DE0, type: ci8, name: assets/segment_0CA4A0/D_0101E940_usa.ci8, width: 48, height: 24, palettes: [assets/segment_0CA4A0/D_010192A8_usa] }
+        - { start: 0x0E9260, type: ci8, name: assets/segment_0CA4A0/D_0101EDC0_usa.ci8, width: 48, height: 24, palettes: [assets/segment_0CA4A0/D_010192A8_usa] }
         - [0x0E96E0]
         - [0x0E96F8]
         - [0x0E9710]

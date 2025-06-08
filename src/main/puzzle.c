@@ -12,6 +12,7 @@
 #include "main_variables.h"
 #include "assets_variables.h"
 
+#include "animation.h"
 #include "bkground.h"
 #include "draw2d.h"
 #include "flic.h"
@@ -97,7 +98,7 @@ void InitPuzzleEditor(s32 arg0 UNUSED) {
 #if VERSION_USA
 void DoPuzzleEditor(void) {
     Init2DTetrisBlocksTMEM(&gTheGame.tetrisWell[0], -1);
-    UpdateAnimation(&gTheGame, 0, 0);
+    UpdateAnimation(&gTheGame.tetrisWell[0], 0, 0);
 }
 #endif
 

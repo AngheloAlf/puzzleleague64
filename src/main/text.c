@@ -1218,7 +1218,7 @@ void Draw2DText(struct_gInfo_unk_00068 *arg0) {
     bzero(sp10, MAGIC_NUMBER * sizeof(s8));
 
     for (i = MAGIC_NUMBER; i < GAME_UNK_90C8_LEN; i++) {
-        if (arg0->drawText[i].texture < MAGIC_NUMBER) {
+        if (arg0->drawText[i].texture < ARRAY_COUNTU(sp10)) {
             sp10[arg0->drawText[i].texture] = true;
         } else if (arg0->drawText[i].texture == -1) {
             var_s1 = i;

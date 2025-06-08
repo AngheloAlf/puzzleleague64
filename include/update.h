@@ -25,7 +25,7 @@
 // void UpdatePlayerStageClear();
 void UpdatePlayerStageClearTimeScore(cursor_t *cursor, s32 loadsave, s32 round, s32 stage);
 // void func_80058D68_usa();
-// void func_80058DF0_usa();
+// void UpdateComboChainCount();
 // void func_80059038_usa();
 // void func_800599C4_usa();
 // void func_80059A18_usa();

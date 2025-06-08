@@ -683,8 +683,8 @@ uObjTxtr deadsmoke = {
     /* mask  */ 0x0,
 };
 
-u8 D_010192A8_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_010192A8_usa.i8.inc"
+u16 D_010192A8_usa[] ALIGNED(8) = {
+#include "assets/segment_0CA4A0/D_0101E4C0_usa.palette.inc"
 };
 
 uObjTxtr otherLUT = {
@@ -751,15 +751,15 @@ u8 D_0101DCC0_usa[] ALIGNED(8) = {
 };
 
 u8 D_0101E4C0_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0101E4C0_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_0101E4C0_usa.ci8.inc"
 };
 
 u8 D_0101E940_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0101E940_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_0101E940_usa.ci8.inc"
 };
 
 u8 D_0101EDC0_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0101EDC0_usa.i8.inc"
+#include "assets/segment_0CA4A0/D_0101EDC0_usa.ci8.inc"
 };
 
 #if 0
@@ -1058,16 +1058,49 @@ uObjTxtr D_0101F2E8_usa = {
     /* mask  */ 0x0,
 };
 
-u32 D_0101F300_usa[] = {
-    0x00001033, (u32)D_0101E4C0_usa, 0x0000008F, 0x01560000, 0xFFFFFFFF, 0x00000000,
+/*
+width: 48
+height: 24
+*/
+uObjTxtr otherTexture9 = {
+    /* type  */ G_OBJLT_TXTRBLOCK,
+    /* image */ (u64 *)D_0101E4C0_usa,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(48 * 24, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(48, G_IM_SIZ_8b),
+    /* sid   */ 0,
+    /* flag  */ (u32)-1,
+    /* mask  */ 0x0,
 };
 
-u32 D_0101F318_usa[] = {
-    0x00001033, (u32)D_0101E940_usa, 0x0000008F, 0x01560000, 0xFFFFFFFF, 0x00000000,
+/*
+width: 48
+height: 24
+*/
+uObjTxtr otherTexture10 = {
+    /* type  */ G_OBJLT_TXTRBLOCK,
+    /* image */ (u64 *)D_0101E940_usa,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(48 * 24, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(48, G_IM_SIZ_8b),
+    /* sid   */ 0,
+    /* flag  */ (u32)-1,
+    /* mask  */ 0x0,
 };
 
-u32 D_0101F330_usa[] = {
-    0x00001033, (u32)D_0101EDC0_usa, 0x0000008F, 0x01560000, 0xFFFFFFFF, 0x00000000,
+/*
+width: 48
+height: 24
+*/
+uObjTxtr otherTexture11 = {
+    /* type  */ G_OBJLT_TXTRBLOCK,
+    /* image */ (u64 *)D_0101EDC0_usa,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(48 * 24, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(48, G_IM_SIZ_8b),
+    /* sid   */ 0,
+    /* flag  */ (u32)-1,
+    /* mask  */ 0x0,
 };
 
 #if 0

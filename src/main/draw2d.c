@@ -10,11 +10,13 @@
 #include "main_functions.h"
 #include "main_variables.h"
 
+#include "animation.h"
 #include "bkground.h"
 #include "bonus.h"
 #include "character.h"
 #include "fade.h"
 #include "flic.h"
+#include "other.h"
 #include "sign.h"
 #include "text.h"
 

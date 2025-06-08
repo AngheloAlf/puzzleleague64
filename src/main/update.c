@@ -88,7 +88,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80058D68_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80058DF0_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdateComboChainCount);
 #endif
 
 #if VERSION_USA

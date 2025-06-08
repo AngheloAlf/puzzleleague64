@@ -10,6 +10,7 @@
 #include "main_functions.h"
 #include "main_variables.h"
 
+#include "animation.h"
 #include "bg_screen_load.h"
 #include "buffers.h"
 #include "end.h"
@@ -504,7 +505,7 @@ void DoBonus(void) {
 
         for (var_s3 = 0; var_s3 < BLOCK_LEN_B / 3; var_s3++) {
             if (var_s2->block[0][var_s3].type == 0) {
-                s32 temp_ret = AnimationRandom(0x1F4);
+                s32 temp_ret = AnimationRandom(500);
 
                 if (temp_ret == ((temp_ret / 21) * 0x15)) {
                     var_s2->block[0][var_s3].type = RandomBlock(var_s2);

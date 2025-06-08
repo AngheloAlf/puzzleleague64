@@ -17,12 +17,12 @@ extern s32 D_800B6CC4_usa[];
 #define D_800B80B0_usa_HEIGHT (145)
 extern u16 D_800B80B0_usa[];
 
-void func_80074A30_usa(s32 arg0) {
+void func_80074A30_usa(tetWell *well UNUSED) {
     B_8021AD28_usa = 0;
-    func_80074AEC_usa(arg0);
+    func_80074AEC_usa();
 }
 
-void func_80074A58_usa(s32 arg0, s32 arg1, s32 arg2) {
+void func_80074A58_usa(tetWell *well UNUSED, s32 arg1, s32 arg2) {
     if (arg2 < 0) {
         arg2 = MIN(-arg2, 0xC) - 1;
         B_8021AD28_usa -= D_800B6CC4_usa[arg2];
@@ -31,12 +31,13 @@ void func_80074A58_usa(s32 arg0, s32 arg1, s32 arg2) {
         B_8021AD28_usa -= D_800B6BB0_usa[arg1];
     }
 
-    func_80074AEC_usa(arg0);
+    func_80074AEC_usa();
 }
 
 #if VERSION_USA
 #ifdef NON_EQUIVALENT
-void func_80074AEC_usa(s32 arg0) {
+//#if 1
+void func_80074AEC_usa(void) {
     s32 sp14;
     s32 sp1C;
     s32 temp_a2;
@@ -46,12 +47,13 @@ void func_80074AEC_usa(s32 arg0) {
     s32 var_s0;
     s32 var_s2;
     u16 *temp_v1;
+    s32 a0;
 
     if (B_8021AD28_usa <= 0) {
         var_s0 = 0;
     } else {
-        arg0 = gTheGame.unk_9C0C;
-        var_s0 = (B_8021AD28_usa * 0x30) / (arg0 * 0x270);
+        a0 = gTheGame.unk_9C0C;
+        var_s0 = (B_8021AD28_usa * 0x30) / (a0 * 0x270);
     }
 
     temp_fp = var_s0 < 0xD;

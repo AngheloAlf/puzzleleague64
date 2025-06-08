@@ -188,7 +188,8 @@ segments:
       - [0x04C1A0, c, main/character]
       - [0x04CEC0, asm, main/04CEC0]
       - [0x04F2F0, asm, main/04F2F0]
-      - [0x0535C0, asm, main/0535C0]
+      - [0x04FC40, c, main/animation]
+      - [0x0535C0, c, main/other]
       - [0x054EC0, c, main/fade]
       - [0x0553A0, c, main/dlist]
       - [0x0566C0, asm, main/0566C0]
@@ -549,6 +550,8 @@ segments:
       - [0x0C68E0, .rodata, main/bkground]
       - [0x0C6AC8, .rodata, main/character]
       - [0x0C6C70, rodata, main/0C6C70]
+      - [0x0C6ED0, .rodata, main/animation]
+      - [0x0C7028, .rodata, main/other]
       - [0x0C74F0, .rodata, main/dlist]
       - [0x0C77D0, rodata, main/0C77D0]
       - [0x0C7820, .rodata, main/update]
@@ -765,7 +768,7 @@ segments:
         - [0x0E35C8]
         - [0x0E35E0, i8, assets/segment_0CA4A0/D_01018E90_usa.i8, 64, 16]
         - [0x0E39E0]
-        - [0x0E39F8, i8, assets/segment_0CA4A0/D_010192A8_usa.i8, 512, 1] # unknown type and dimensions
+        - [0x0E39F8, palette, assets/segment_0CA4A0/D_010192A8_usa]
         - [0x0E3BF8]
         - [0x0E3C10, i8, assets/segment_0CA4A0/D_010194C0_usa.i8, 512, 1] # unknown type and dimensions
         - [0x0E3E10, i8, assets/segment_0CA4A0/D_010196C0_usa.i8, 1536, 1] # unknown type and dimensions
@@ -780,9 +783,9 @@ segments:
         - [0x0E7410, i8, assets/segment_0CA4A0/D_0101CCC0_usa.i8, 2048, 1] # unknown type and dimensions
         - [0x0E7C10, i8, assets/segment_0CA4A0/D_0101D4C0_usa.i8, 2048, 1] # unknown type and dimensions
         - [0x0E8410, i8, assets/segment_0CA4A0/D_0101DCC0_usa.i8, 2048, 1] # unknown type and dimensions
-        - [0x0E8C10, i8, assets/segment_0CA4A0/D_0101E4C0_usa.i8, 1152, 1] # unknown type and dimensions
-        - [0x0E9090, i8, assets/segment_0CA4A0/D_0101E940_usa.i8, 1152, 1] # unknown type and dimensions
-        - [0x0E9510, i8, assets/segment_0CA4A0/D_0101EDC0_usa.i8, 1152, 1] # unknown type and dimensions
+        - { start: 0x0E8C10, type: ci8, name: assets/segment_0CA4A0/D_0101E4C0_usa.ci8, width: 48, height: 24, palettes: [assets/segment_0CA4A0/D_010192A8_usa] }
+        - { start: 0x0E9090, type: ci8, name: assets/segment_0CA4A0/D_0101E940_usa.ci8, width: 48, height: 24, palettes: [assets/segment_0CA4A0/D_010192A8_usa] }
+        - { start: 0x0E9510, type: ci8, name: assets/segment_0CA4A0/D_0101EDC0_usa.ci8, width: 48, height: 24, palettes: [assets/segment_0CA4A0/D_010192A8_usa] }
         - [0x0E9990]
         - [0x0E99A8]
         - [0x0E99C0]

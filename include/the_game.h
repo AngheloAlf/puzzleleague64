@@ -82,7 +82,8 @@ typedef struct tetWell {
     /* 0x4088 */ f32 unk_4088;
     /* 0x408C */ UNK_TYPE1 unk_408C[0x40B0-0x408C];
     /* 0x40B0 */ s32 unk_40B0;
-    /* 0x40B4 */ UNK_TYPE1 unk_40B4[0x43AC-0x40B4];
+    /* 0x40B4 */ UNK_TYPE1 unk_40B4[0x43A8-0x40B4];
+    /* 0x43A8 */ s32 unk_43A8;
     /* 0x43AC */ s32 unk_43AC;
     /* 0x43B0 */ UNK_TYPE1 unk_43B0[0x8];
     /* 0x43B8 */ s32 unk_43B8;
@@ -363,7 +364,12 @@ typedef struct Game {
     /* 0x9A50 */ uObjBg unk_9A50; // bkground?
     /* 0x9A78 */ UNK_TYPE1 unk_9A78[0x9AE0 - 0x9A78];
     /* 0x9AE0 */ Game_unk_9AE0 unk_9AE0;
-    /* 0x9B08 */ UNK_TYPE1 unk_9B08[0x9C08 - 0x9B08];
+    /* 0x9B08 */ UNK_TYPE1 unk_9B08[0x9B48 - 0x9B08];
+    /* 0x9B48 */ s32 unk_9B48;
+    /* 0x9B4C */ UNK_TYPE1 unk_9B4C[0x9B50 - 0x9B4C];
+    /* 0x9B50 */ uObjBg unk_9B50[2]; // at least 2
+    /* 0x9BA0 */ UNK_TYPE1 unk_9BA0[0x9BF0 - 0x9BA0];
+    /* 0x9BF0 */ uObjTxtr unk_9BF0;
     /* 0x9C08 */ s32 unk_9C08;
     /* 0x9C0C */ s32 unk_9C0C;
     /* 0x9C10 */ s32 unk_9C10;

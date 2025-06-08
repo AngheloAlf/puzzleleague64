@@ -10,6 +10,7 @@
 #include "main_functions.h"
 #include "main_variables.h"
 
+#include "animation.h"
 #include "dlist.h"
 
 #if VERSION_USA
@@ -218,7 +219,7 @@ void Init2DSmallStars(s32 num) {
             block->currRow = AnimationRandom(4);
             block->frame_n = AnimationRandom(4);
             block->frame_d = 0;
-            block->drop = stars_DROP[AnimationRandom(0xA)];
+            block->drop = stars_DROP[AnimationRandom(ARRAY_COUNT(stars_DROP))];
 
             if (var_s3 % 2 == 0) {
                 block->bomb = 1;
