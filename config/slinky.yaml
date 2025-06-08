@@ -253,50 +253,32 @@ segments:
       - { path: "asm/{version}/main/05E500.o", include_if_any: [[version, usa]] }
       - { path: "asm/{version}/main/05F110.o", include_if_any: [[version, usa]] }
       - { path: "asm/{version}/main/067370.o", include_if_any: [[version, usa]] }
-      - { path: "asm/{version}/main/067FB0.o", include_if_any: [[version, usa]] }
+      - { path: "asm/{version}/data/main/0C77A0.rodata.o", include_if_any: [[version, usa]] }
+      - { path: "asm/{version}/data/main/0C79A0.rodata.o", include_if_any: [[version, usa]] }
 
       - { path: "asm/{version}/main/05E7D0.o", include_if_any: [[version, eur]] }
       - { path: "asm/{version}/main/05F3E0.o", include_if_any: [[version, eur]] }
       - { path: "asm/{version}/main/067640.o", include_if_any: [[version, eur]] }
-      - { path: "asm/{version}/main/068280.o", include_if_any: [[version, eur]] }
+      - { path: "asm/{version}/data/main/0C7A50.rodata.o", include_if_any: [[version, eur]] }
+      - { path: "asm/{version}/data/main/0C7C50.rodata.o", include_if_any: [[version, eur]] }
 
       - { path: "asm/{version}/main/05CF10.o", include_if_any: [[version, fra]] }
       - { path: "asm/{version}/main/05DB20.o", include_if_any: [[version, fra]] }
       - { path: "asm/{version}/main/065D80.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/main/0669C0.o", include_if_any: [[version, fra]] }
+      - { path: "asm/{version}/data/main/0C5E30.rodata.o", include_if_any: [[version, fra]] }
+      - { path: "asm/{version}/data/main/0C5E80.rodata.o", include_if_any: [[version, fra]] }
+      - { path: "asm/{version}/data/main/0C62B0.rodata.o", include_if_any: [[version, fra]] }
 
       - { path: "asm/{version}/main/05D0C0.o", include_if_any: [[version, ger]] }
       - { path: "asm/{version}/main/05DCD0.o", include_if_any: [[version, ger]] }
       - { path: "asm/{version}/main/065F30.o", include_if_any: [[version, ger]] }
-      - { path: "asm/{version}/main/066B70.o", include_if_any: [[version, ger]] }
-
-      - { path: src/main/explode3d.o }
-
-      - { path: "asm/{version}/main/06BB30.o", include_if_any: [[version, usa]] }
-      - { path: "asm/{version}/data/main/0C77A0.rodata.o", include_if_any: [[version, usa]] }
-      - { path: "asm/{version}/data/main/0C79A0.rodata.o", include_if_any: [[version, usa]] }
-      - { path: "asm/{version}/data/main/0C7BA0.rodata.o", include_if_any: [[version, usa]] }
-
-      - { path: "asm/{version}/main/06BE00.o", include_if_any: [[version, eur]] }
-
-      - { path: "asm/{version}/data/main/0C7A50.rodata.o", include_if_any: [[version, eur]] }
-      - { path: "asm/{version}/data/main/0C7C50.rodata.o", include_if_any: [[version, eur]] }
-      - { path: "asm/{version}/data/main/0C7E50.rodata.o", include_if_any: [[version, eur]] }
-
-      - { path: "asm/{version}/main/06A540.o", include_if_any: [[version, fra]] }
-
-      - { path: "asm/{version}/data/main/0C5E30.rodata.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/data/main/0C5E80.rodata.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/data/main/0C62B0.rodata.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/data/main/0C64B0.rodata.o", include_if_any: [[version, fra]] }
-
-      - { path: "asm/{version}/main/06A6F0.o", include_if_any: [[version, ger]] }
-
       - { path: "asm/{version}/data/main/0BCDF0.rodata.o", include_if_any: [[version, ger]] }
       - { path: "asm/{version}/data/main/0BCE40.rodata.o", include_if_any: [[version, ger]] }
       - { path: "asm/{version}/data/main/0BD270.rodata.o", include_if_any: [[version, ger]] }
-      - { path: "asm/{version}/data/main/0BD470.rodata.o", include_if_any: [[version, ger]] }
 
+      - { path: src/main/067FB0.o }
+      - { path: src/main/explode3d.o }
+      - { path: src/main/init2d.o }
       - { path: src/main/draw2d.o }
       - { path: src/main/0707D0.o }
       - { path: src/main/071B50.o }

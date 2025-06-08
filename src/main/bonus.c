@@ -15,6 +15,7 @@
 #include "end.h"
 #include "hvqm2util.h"
 #include "image.h"
+#include "init2d.h"
 #include "peel.h"
 #include "screen.h"
 #include "sfxlimit.h"

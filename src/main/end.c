@@ -769,7 +769,7 @@ s32 func_8004FA2C_usa();                            /* extern */
 ? func_8006B314_usa(Game *, ?);                  /* extern */
 ? func_8006B628_usa(Game *);                     /* extern */
 ? func_8006B730_usa(Game *);                     /* extern */
-? func_8006C4A0_usa(?);                             /* extern */
+? Init2DSmallStars(?);                             /* extern */
 ? func_8006C7A0_usa(?, ?);                          /* extern */
 ? func_8006C9BC_usa(Game *, ?);                  /* extern */
 extern u8 B_801C6C90_usa;
@@ -1381,7 +1381,7 @@ block_267:
                     gWhatever = 0;
                     var_a0_7 = 0;
                     if ((var_s3 != 0) || (var_a0_7 = 1, (var_s1 != 0))) {
-                        func_8006C4A0_usa(var_a0_7);
+                        Init2DSmallStars(var_a0_7);
                     }
                     if (var_s3 != var_s1) {
                         gMain = 0x395;
