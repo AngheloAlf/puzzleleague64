@@ -32,7 +32,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/tetris", func_8008997C_usa);
 s32 DemoCheck(s32 *arg0) {
     func_800545E4_usa(1);
 
-    if ((gTheGame.unk_89C4[0].unk_00 != 0) || (gDemo == GDEMO_16)) {
+    if ((gTheGame.controller[0].touch_button != 0) || (gDemo == GDEMO_16)) {
         gDemo = GDEMO_16;
         gTheGame.unk_9C1C = 0;
         gTheGame.unk_9C18 = 0;
@@ -86,9 +86,9 @@ s32 AnimationRandom(?);                           /* extern */
 ? func_8006AF30_usa(s8 *);                          /* extern */
 ? func_8006B24C_usa(s8 *, s32);                     /* extern */
 ? func_8006B314_usa(s8 *, s32);                     /* extern */
-? func_8006B628_usa(s8 *);                          /* extern */
+? Init2DIcons(s8 *);                          /* extern */
 ? func_8006B6A8_usa(s8 *);                          /* extern */
-? func_8006B730_usa(s8 *);                          /* extern */
+? Init2DExplosion(s8 *);                          /* extern */
 ? func_8006B798_usa();                              /* extern */
 ? func_8006C0E0_usa(s8 *, s8 *, s32);               /* extern */
 ? func_80074FF0_usa(s8 *, s8 *, ? *);               /* extern */
@@ -246,9 +246,9 @@ block_52:
                     func_8008997C_usa(temp_s3, &sp10, 6);
 block_54:
                     func_8006AF30_usa(temp_s3);
-                    func_8006B628_usa(temp_s3);
+                    Init2DIcons(temp_s3);
                     func_8006B6A8_usa(temp_s3);
-                    func_8006B730_usa(temp_s3);
+                    Init2DExplosion(temp_s3);
                     func_8006B798_usa();
                     if (((gSelection == 0xAA) | (gSelection == 0xB4)) != 0) {
                         func_8006C0E0_usa(temp_s3, sp34, var_fp);

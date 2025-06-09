@@ -596,9 +596,9 @@ s32 DoWatchMenu(void) {
     s32 ret = 0;
     s32 pad[2] UNUSED;
 
-    if (gTheGame.unk_89C4[0].unk_00 & 0x9000) {
+    if (gTheGame.controller[0].touch_button & (CONT_A | Z_TRIG)) {
         ret = 1;
-    } else if (gTheGame.unk_89C4[0].unk_00 & 0x4000) {
+    } else if (gTheGame.controller[0].touch_button & B_BUTTON) {
         ret = 2;
     }
 
@@ -924,17 +924,17 @@ void DoStageClearIntro(void) {
                     gnTagTextClear = -1;
                 }
             } else {
-                if (gTheGame.unk_89C4[0].unk_00 & 0x8000) {
+                if (gTheGame.controller[0].touch_button & A_BUTTON) {
                     gnTickClear = 0x708;
                 }
             }
-        } else if (gTheGame.unk_89C4[0].unk_00 & 0x8000) {
+        } else if (gTheGame.controller[0].touch_button & A_BUTTON) {
             func_80027AD4_usa();
         }
     } else {
         switch (B_8018EA40_usa) {
             case 0x0:
-                if (gTheGame.unk_89C4[0].unk_00 & 0x8000) {
+                if (gTheGame.controller[0].touch_button & A_BUTTON) {
                     B_8018EA40_usa = 1;
                     screenHideImage(giScreenClear, 0x79);
                     screenHideImage(giScreenClear, 0x1F4);
@@ -990,7 +990,7 @@ void DoStageClearIntro(void) {
     }
 
     if (gCounter >= 0x1F) {
-        if ((var_s1 != 0) || (gTheGame.unk_89C4[0].unk_00 & 0x1000)) {
+        if ((var_s1 != 0) || (gTheGame.controller[0].touch_button & START_BUTTON)) {
             PlaySE(SFX_INIT_TABLE, 4);
             if (B_8018EA40_usa == 0) {
                 B_8018EA40_usa = 1;
@@ -1006,7 +1006,7 @@ void DoStageClearIntro(void) {
                 gWhatever = 0;
                 FadeOutSong(last_song_handle, 0x5A);
             }
-        } else if (gTheGame.unk_89C4[0].unk_00 & 0x4000) {
+        } else if (gTheGame.controller[0].touch_button & B_BUTTON) {
             gReset = -1;
             gMain = GMAIN_2BC;
             PlaySE(SFX_INIT_TABLE, 6);

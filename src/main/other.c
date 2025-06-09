@@ -30,19 +30,19 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/other", func_800512B0_ger);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/other", func_80052C28_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/other", UpdateMiscStuff);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/other", func_80052EC8_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/other", UpdateMiscStuff);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/other", func_80051638_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/other", UpdateMiscStuff);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/other", func_800517B8_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/other", UpdateMiscStuff);
 #endif
 
 void Draw2DMiscStuff(struct_gInfo_unk_00068 *dynamicp) {

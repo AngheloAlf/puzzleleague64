@@ -20,27 +20,27 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/0707D0", func_8006FF90_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/0707D0", func_800703B8_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/0707D0", Move2DCursorUp);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/0707D0", func_80070428_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/0707D0", Move2DCursorDown);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/0707D0", func_80070478_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/0707D0", Move2DCursorLeft);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/0707D0", func_800704C8_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/0707D0", Move2DCursorRight);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/0707D0", func_8007051C_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/0707D0", Switch2DBlocks);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/0707D0", func_80070B40_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/0707D0", Update2DSwitching);
 #endif
 
 #if VERSION_USA
@@ -60,27 +60,27 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/0707D0", func_800702B0_eur);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/0707D0", func_800706D8_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/0707D0", Move2DCursorUp);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/0707D0", func_80070748_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/0707D0", Move2DCursorDown);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/0707D0", func_80070798_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/0707D0", Move2DCursorLeft);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/0707D0", func_800707E8_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/0707D0", Move2DCursorRight);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/0707D0", func_8007083C_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/0707D0", Switch2DBlocks);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/0707D0", func_80070E60_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/0707D0", Update2DSwitching);
 #endif
 
 #if VERSION_EUR
@@ -100,27 +100,27 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/0707D0", func_8006E9F0_fra);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/0707D0", func_8006EE18_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/0707D0", Move2DCursorUp);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/0707D0", func_8006EE88_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/0707D0", Move2DCursorDown);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/0707D0", func_8006EED8_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/0707D0", Move2DCursorLeft);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/0707D0", func_8006EF28_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/0707D0", Move2DCursorRight);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/0707D0", func_8006EF7C_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/0707D0", Switch2DBlocks);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/0707D0", func_8006F5A0_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/0707D0", Update2DSwitching);
 #endif
 
 #if VERSION_FRA
@@ -140,27 +140,27 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/0707D0", func_8006EBA0_ger);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/0707D0", func_8006EFC8_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/0707D0", Move2DCursorUp);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/0707D0", func_8006F038_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/0707D0", Move2DCursorDown);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/0707D0", func_8006F088_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/0707D0", Move2DCursorLeft);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/0707D0", func_8006F0D8_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/0707D0", Move2DCursorRight);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/0707D0", func_8006F12C_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/0707D0", Switch2DBlocks);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/0707D0", func_8006F750_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/0707D0", Update2DSwitching);
 #endif
 
 #if VERSION_GER

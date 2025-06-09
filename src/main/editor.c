@@ -3,19 +3,22 @@
  */
 
 #include "editor.h"
+
 #include "ultra64.h"
 #include "include_asm.h"
 #include "macros_defines.h"
 #include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
-#include "screen.h"
-#include "sound.h"
+
+#include "ai.h"
 #include "file.h"
 #include "image.h"
 #include "peel.h"
-#include "sfxlimit.h"
 #include "puzzle.h"
+#include "screen.h"
+#include "sfxlimit.h"
+#include "sound.h"
 
 typedef void (*struct_gaEditData_unk_4)(s32 arg0, screenTick_arg0 *arg1);
 
@@ -152,8 +155,8 @@ void DrawEditor(struct_gInfo_unk_00068 *arg0) {
                 gTheGame.unk_9C2C[0][1] = 0;
                 gTheGame.tetrisWell[0].unk_4404 = 0;
                 gTheGame.tetrisWell[1].unk_4404 = 0;
-                B_801AD9BC_usa = -1;
-                B_801ADAE8_usa = -1;
+                brainbrain[0].unk_00C = -1;
+                brainbrain[1].unk_00C = -1;
                 gTheGame.unk_9C2C[0][0] = B_801AB808_usa;
             }
         }
@@ -186,27 +189,27 @@ void DoEditor(void) {
     sp10.unk_0 = 0;
     sp10.unk_4 = 0;
     if (!screenFlushing() && (gnFlushCount == -1)) {
-        if (gTheGame.unk_89C4[0].unk_00 & 0x4000) {
+        if (gTheGame.controller[0].touch_button & B_BUTTON) {
             sp10.unk_0 = 0x21;
-        } else if (gTheGame.unk_89C4[0].unk_00 & 0x8000) {
+        } else if (gTheGame.controller[0].touch_button & A_BUTTON) {
             sp10.unk_0 = 0x20;
-        } else if (gTheGame.unk_89C4[0].unk_00 & 0x20) {
+        } else if (gTheGame.controller[0].touch_button & L_TRIG) {
             sp10.unk_0 = 0x18;
-        } else if (gTheGame.unk_89C4[0].unk_00 & 0x10) {
+        } else if (gTheGame.controller[0].touch_button & R_TRIG) {
             sp10.unk_0 = 0x19;
-        } else if (gTheGame.unk_89C4[0].unk_00 & 0x1000) {
+        } else if (gTheGame.controller[0].touch_button & START_BUTTON) {
             sp10.unk_0 = 0x22;
         } else {
-            if (gTheGame.unk_89C4[0].unk_02 & 0x800) {
+            if (gTheGame.controller[0].hold_button & U_JPAD) {
                 sp10.unk_0 = 1;
             }
-            if (gTheGame.unk_89C4[0].unk_02 & 0x400) {
+            if (gTheGame.controller[0].hold_button & D_JPAD) {
                 sp10.unk_0 = 2;
             }
-            if (gTheGame.unk_89C4[0].unk_02 & 0x200) {
+            if (gTheGame.controller[0].hold_button & L_JPAD) {
                 sp10.unk_0 = 3;
             }
-            if (gTheGame.unk_89C4[0].unk_02 & 0x100) {
+            if (gTheGame.controller[0].hold_button & R_JPAD) {
                 sp10.unk_0 = 4;
             }
         }

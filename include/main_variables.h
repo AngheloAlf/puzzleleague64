@@ -1231,7 +1231,7 @@ extern enum_gDemo gDemo; /* Original name: gDemo */
 // extern UNK_TYPE B_8019CF40_usa;
 extern OSTask hvqtask;
 // extern UNK_TYPE B_8019CF98_usa;
-// extern UNK_TYPE B_8019CF9C_usa;
+extern void *B_8019CF9C_usa;
 // extern UNK_TYPE B_8019CFA0_usa;
 // extern UNK_TYPE B_8019D150_usa;
 
@@ -1275,19 +1275,8 @@ extern u32 gGameStatus;
 extern OSMesgQueue gSerialMsgQ;
 extern STACK(gBootStack, BOOT_STACK_SIZE);
 // extern UNK_TYPE B_801AD9A0_usa;
-// extern UNK_TYPE B_801AD9B0_usa;
-extern s32 B_801AD9BC_usa;
-// extern UNK_TYPE B_801AD9D4_usa;
-// extern UNK_TYPE B_801AD9D8_usa;
-// extern UNK_TYPE B_801AD9DC_usa;
-// extern UNK_TYPE B_801AD9E0_usa;
-// extern UNK_TYPE B_801AD9E4_usa;
-// extern UNK_TYPE B_801AD9E8_usa;
-// extern UNK_TYPE B_801AD9EC_usa;
-// extern UNK_TYPE B_801ADAB4_usa;
-// extern UNK_TYPE B_801ADADC_usa;
-extern s32 B_801ADAE8_usa;
 
+// extern UNK_TYPE B_801ADC08_usa;
 // extern UNK_TYPE B_801ADC0C_usa;
 
 // maybe endSegment?
@@ -1361,7 +1350,7 @@ extern uObjTxtr brickTxtr[GAME_BUFFER_LEN][BRICKTXTR_LEN];
 
 // extern UNK_TYPE B_801C7340_usa;
 // extern UNK_TYPE B_801C7344_usa;
-// extern UNK_TYPE B_801C7348_usa;
+extern u8 B_801C7348_usa;
 // extern UNK_TYPE B_801C7350_usa;
 // extern UNK_TYPE B_801C7358_usa;
 // extern UNK_TYPE B_801C735C_usa;

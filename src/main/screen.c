@@ -2391,7 +2391,7 @@ s32 screenGet(void) {
 void func_8002759C_usa(void) {
 }
 
-void func_800275A4_usa(void) {
+void screenSetBackLayers(s32 nCount UNUSED) {
 }
 
 #define is_lower(c) ((c) >= 'a' && (c) <= 'z')

@@ -7,6 +7,14 @@
 
 #include "the_game.h"
 
+typedef enum enum_menuTickFairy_ePosition {
+    MFP_NONE = 0,
+    MFP_LEFT = 1,
+    MFP_LEFT_MIDDLE = 2,
+    MFP_RIGHT_MIDDLE = 3,
+    MFP_RIGHT = 4,
+} enum_menuTickFairy_ePosition;
+
 
 // void func_800072A0_usa();
 // void func_80007538_usa();
@@ -96,7 +104,8 @@ s32 menuInitUser(u32 arg0);
 // void func_8001A330_usa();
 // void func_8001A50C_usa();
 // void func_8001A7D0_usa();
-// void func_8001A854_usa();
+void menuTickFairy(s32, s32, s32, s32, s32, s32, s32, s32);
+// void menuTickFairy(s32 iScreen, s32 nFrame, s32 nTagText, s32 nOffsetText, s32 nOffsetBox, enum_menuTickFairy_ePosition ePosition, s32 bArrow);
 // void func_8001AB0C_usa();
 // void func_8001ACA8_usa();
 void DrawMenu(struct_gInfo_unk_00068 *arg0);

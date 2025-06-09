@@ -5,6 +5,8 @@
 #include "unk.h"
 #include "the_game.h"
 
+struct cursor_t;
+struct tetWell;
 
 // void func_80057650_usa();
 // void func_80057754_usa();
@@ -25,11 +27,11 @@
 // void UpdatePlayerStageClear();
 void UpdatePlayerStageClearTimeScore(cursor_t *cursor, s32 loadsave, s32 round, s32 stage);
 // void func_80058D68_usa();
-// void UpdateComboChainCount();
-// void func_80059038_usa();
-// void func_800599C4_usa();
-// void func_80059A18_usa();
-// void func_80059A58_usa();
+void UpdateComboChainCount(s32 num, s32 combo, s32 total);
+void UpdateWell(struct tetWell *well, struct cursor_t *cursor, s32 num, s32 total);
+void UpdateCursor(struct tetWell *well, struct cursor_t *cursor);
+void UpdateIcon(struct tetWell *well, struct cursor_t *cursor, s32 num);
+void UpdateDistance(struct tetWell *well, struct cursor_t *cursor);
 // void func_80059A98_usa();
 void UpdateBuffer(struct_gInfo *info);
 void Update2DBuffer(struct_gInfo *info);

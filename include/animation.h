@@ -21,7 +21,7 @@ void func_80050420_usa(void);
 void func_8005076C_usa(void);
 // void func_80050BA8_usa();
 void func_80050C2C_usa(void);
-// void func_800512E0_usa();
+void func_800512E0_usa(void);
 // void func_80051998_usa();
 // void func_800521A4_usa();
 // void func_80052258_usa();

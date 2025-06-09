@@ -92,19 +92,19 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdateComboChainCount);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80059038_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdateWell);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_800599C4_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdateCursor);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80059A18_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdateIcon);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80059A58_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdateDistance);
 #endif
 
 #if VERSION_USA
@@ -192,19 +192,19 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_800590B8_eur);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80059300_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdateWell);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80059C8C_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdateCursor);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80059CE0_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdateIcon);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80059D20_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdateDistance);
 #endif
 
 #if VERSION_EUR

@@ -408,23 +408,23 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80038B98_usa);
 #endif
 
 s32 DoGameOverTryAgain(void) {
-    u16 temp_v1 = gTheGame.unk_89C4[0].unk_00;
-    s32 *temp_s2 = &gTheGame.unk_9C24;
+    u16 button = gTheGame.controller[0].touch_button;
+    s32 *pos = &gTheGame.unk_9C24;
 
-    if (temp_v1 & 0x200) {
-        if (*temp_s2 != 0) {
+    if (button & L_JPAD) {
+        if (*pos != 0) {
             PlaySE(SFX_INIT_TABLE, 0x167);
         }
-        *temp_s2 = 0;
-    } else if (temp_v1 & 0x100) {
-        if (*temp_s2 != 1) {
+        *pos = 0;
+    } else if (button & R_JPAD) {
+        if (*pos != 1) {
             PlaySE(SFX_INIT_TABLE, 0x168);
         }
-        *temp_s2 = 1;
-    } else if (temp_v1 & (0x8000 | 0x1000)) {
+        *pos = 1;
+    } else if (button & (A_BUTTON | START_BUTTON)) {
         FadeOutSong(last_song_handle, 0x5A);
         func_80002E0C_usa(0x1E);
-        if (*temp_s2 == 0) {
+        if (*pos == 0) {
             PlaySE(SFX_INIT_TABLE, 5);
         } else {
             PlaySE(SFX_INIT_TABLE, 6);
@@ -435,7 +435,7 @@ s32 DoGameOverTryAgain(void) {
     if (gTheGame.unk_9C0C == 1) {
         Game_unk_9AE0 *var_s0 = &gTheGame.unk_9AE0;
 
-        if (*temp_s2 == 0) {
+        if (*pos == 0) {
             var_s0->unk_0A = 0x60;
             var_s0->unk_0E = 0x60;
 
@@ -464,7 +464,7 @@ s32 DoGameOverTryAgain(void) {
     } else {
         Game_unk_9AE0 *var_s0 = &gTheGame.unk_9AE0;
 
-        if (*temp_s2 == 0) {
+        if (*pos == 0) {
             var_s0->unk_0A = 0x60;
             var_s0->unk_0E = 0x60;
 
@@ -767,8 +767,8 @@ s32 func_8004FA2C_usa();                            /* extern */
 ? UpdateExplosion(Game *);                     /* extern */
 ? func_8006AF30_usa(Game *);                     /* extern */
 ? func_8006B314_usa(Game *, ?);                  /* extern */
-? func_8006B628_usa(Game *);                     /* extern */
-? func_8006B730_usa(Game *);                     /* extern */
+? Init2DIcons(Game *);                     /* extern */
+? Init2DExplosion(Game *);                     /* extern */
 ? Init2DSmallStars(?);                             /* extern */
 ? func_8006C7A0_usa(?, ?);                          /* extern */
 ? func_8006C9BC_usa(Game *, ?);                  /* extern */
@@ -853,8 +853,8 @@ void DoGameOver2D(void) {
                             break;
                     }
                     gGameStatus &= ~0x20;
-                    func_8006B628_usa(&gTheGame);
-                    func_8006B730_usa(&gTheGame);
+                    Init2DIcons(&gTheGame);
+                    Init2DExplosion(&gTheGame);
                     gTheGame.unk_9C20[4] = 0;
                     gTheGame.unk_89C8[0x6E8] = -0x280;
                     gTheGame.unk_89C8[0x6D0] = -0x280;
@@ -943,7 +943,7 @@ block_50:
                     }
                     gWhatever = temp_v0_2 + 1;
                     if (((gSelection == 0x8C) | (gSelection == 0xBE)) != 0) {
-                        func_8006B628_usa(&gTheGame);
+                        Init2DIcons(&gTheGame);
                         var_s0 = func_8003901C_usa(&gTheGame);
                         if (gWhatever == 0x55) {
                             var_a0 = -1;
@@ -995,7 +995,7 @@ block_73:
                     if (gMain == 0x392) {
                         func_8006B314_usa(&gTheGame, 0);
                         func_8006AF30_usa(&gTheGame);
-                        func_8006B628_usa(&gTheGame);
+                        Init2DIcons(&gTheGame);
                         if ((gSelection >= 0x83) || (gTheGame.unk_8860[0].unk_0 != 7)) {
                             if ((gSelection == 0xAA) && (gTheGame.unk_8860[0].unk_0 == 7)) {
                                 goto block_85;
@@ -1116,10 +1116,10 @@ block_120:
                     var_s0_2 = 0;
                     func_8003490C_usa();
                     gOverflow = 0;
-                    func_8006B628_usa(&gTheGame);
-                    func_8006B628_usa((Game *) &gTheGame.tetrisWell[1]);
-                    func_8006B730_usa(&gTheGame);
-                    func_8006B730_usa((Game *) &gTheGame.tetrisWell[1]);
+                    Init2DIcons(&gTheGame);
+                    Init2DIcons((Game *) &gTheGame.tetrisWell[1]);
+                    Init2DExplosion(&gTheGame);
+                    Init2DExplosion((Game *) &gTheGame.tetrisWell[1]);
                     var_a0_4 = &gTheGame.tetrisWell[1];
                     var_v1_3 = &gTheGame;
                     gTheGame.unk_9C20[4] = 0;
@@ -1480,7 +1480,7 @@ s32 func_8004FA2C_usa();                            /* extern */
 ? func_8005E108_usa(?, ?);                          /* extern */
 ? func_8005E128_usa(Game *, ?);                  /* extern */
 ? func_8006780C_usa(tetWell *, cursor_t *); /* extern */
-? func_80067CA0_usa(Game *, cursor_t *); /* extern */
+? Check3DVisibleBlocks(Game *, cursor_t *); /* extern */
 extern u8 B_801C6C90_usa;
 extern s32 gWhatever;
 extern ? SFX_INIT_TABLE;
@@ -2074,11 +2074,11 @@ block_221:
             }
             func_8006780C_usa(gTheGame.tetrisWell, gTheGame.unk_8860);
             func_8006780C_usa(&gTheGame.tetrisWell[1], &gTheGame.unk_8860[1]);
-            func_80067CA0_usa(&gTheGame, gTheGame.unk_8860);
+            Check3DVisibleBlocks(&gTheGame, gTheGame.unk_8860);
             var_a0 = (Game *) &gTheGame.tetrisWell[1];
             var_a1_3 = &gTheGame.unk_8860[1];
         }
-        func_80067CA0_usa(var_a0, var_a1_3);
+        Check3DVisibleBlocks(var_a0, var_a1_3);
     }
 }
 #else

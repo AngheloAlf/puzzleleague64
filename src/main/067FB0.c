@@ -23,7 +23,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/067FB0", func_80067860_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/067FB0", func_80067CA0_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/067FB0", Check3DVisibleBlocks);
 #endif
 
 #if VERSION_USA
@@ -75,7 +75,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/067FB0", func_80067B30_eur);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/067FB0", func_80067CA0_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/067FB0", Check3DVisibleBlocks);
 #endif
 
 #if VERSION_EUR
@@ -127,7 +127,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/067FB0", func_80066270_fra);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/067FB0", func_80067CA0_usa);
+INCLUDE_ASM("asm/fra/nonmatchings/main/067FB0", Check3DVisibleBlocks);
 #endif
 
 #if VERSION_FRA
@@ -179,7 +179,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/067FB0", func_80066420_ger);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/067FB0", func_80067CA0_usa);
+INCLUDE_ASM("asm/ger/nonmatchings/main/067FB0", Check3DVisibleBlocks);
 #endif
 
 #if VERSION_GER

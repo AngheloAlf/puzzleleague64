@@ -32,13 +32,13 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/dlist", func_80053090_ger);
 void func_800545E4_usa(s32 arg0) {
     // TODO: REGION_NTSC?
 #if VERSION_USA
-    gTheGame.unk_89C4[arg0].unk_04 = 0xA;
+    gTheGame.controller[arg0].unk_08 = 0xA;
 #else
-    gTheGame.unk_89C4[arg0].unk_04 = 0x8;
+    gTheGame.controller[arg0].unk_08 = 0x8;
 #endif
-    gTheGame.unk_89C4[arg0].unk_00 = 0;
-    gTheGame.unk_89C4[arg0].unk_02 = 0;
-    gTheGame.unk_89C4[arg0].unk_0A = 0;
+    gTheGame.controller[arg0].touch_button = 0;
+    gTheGame.controller[arg0].hold_button = 0;
+    gTheGame.controller[arg0].unk_0E = 0;
 }
 
 void func_80054624_usa(s32 arg0 UNUSED) {

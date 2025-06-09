@@ -174,7 +174,7 @@ void screenTick(screenTick_arg0 *arg0);
 s32 screenSet(const char *arg0, s32 arg1);
 s32 screenGet(void);
 void func_8002759C_usa(void);
-void func_800275A4_usa(void);
+void screenSetBackLayers(s32 nCount );
 nbool func_800275AC_usa(const char *arg0, const char *arg1);
 nbool func_80027618_usa(s32 arg0, s32 arg1, u32 arg2);
 nbool func_800276CC_usa(s32 arg0, UNK_TYPE4 *arg1, s32 arg2);

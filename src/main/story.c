@@ -84,15 +84,15 @@ void func_8002B600_usa(UNK_TYPE4 arg0 UNUSED) {
     temp_s1 = gTheGame.unk_9C2C[0][0];
     temp_v0_2 = screenGet();
     if (temp_v0_2 != -1) {
-        if ((gTheGame.unk_89C4[0].unk_00 & 0x900) && (temp_s1 < var_s0)) {
+        if ((gTheGame.controller[0].touch_button & (U_JPAD | R_JPAD)) && (temp_s1 < var_s0)) {
             temp_s1++;
         }
 
-        if (((gTheGame.unk_89C4[0].unk_00 & 0x600)) && (temp_s1 >= 2)) {
+        if (((gTheGame.controller[0].touch_button & (D_JPAD | L_JPAD))) && (temp_s1 >= 2)) {
             temp_s1--;
         }
 
-        if (gTheGame.unk_89C4[0].unk_00 & 0x8000) {
+        if (gTheGame.controller[0].touch_button & A_BUTTON) {
             inlined_func();
             PlaySE(SFX_INIT_TABLE, 2);
         }
@@ -209,24 +209,24 @@ void DoStory(void) {
         }
     } else {
         if (screenFlushing()) {
-            gTheGame.unk_89C4[0].unk_00 = 0;
-            gTheGame.unk_89C4[0].unk_02 = 0;
-            gTheGame.unk_89D4 = 0;
-            gTheGame.unk_89D6 = 0;
+            gTheGame.controller[0].touch_button = 0;
+            gTheGame.controller[0].hold_button = 0;
+            gTheGame.controller[1].touch_button = 0;
+            gTheGame.controller[1].hold_button = 0;
         }
 
         sp10.unk_0 = 0;
         sp10.unk_4 = 0;
-        if (gTheGame.unk_89C4[0].unk_00 & 0x800) {
+        if (gTheGame.controller[0].touch_button & U_JPAD) {
             sp10.unk_0 = 1;
         }
-        if (gTheGame.unk_89C4[0].unk_00 & 0x400) {
+        if (gTheGame.controller[0].touch_button & D_JPAD) {
             sp10.unk_0 = 2;
         }
-        if (gTheGame.unk_89C4[0].unk_00 & 0x200) {
+        if (gTheGame.controller[0].touch_button & L_JPAD) {
             sp10.unk_0 = 3;
         }
-        if (gTheGame.unk_89C4[0].unk_00 & 0x100) {
+        if (gTheGame.controller[0].touch_button & R_JPAD) {
             sp10.unk_0 = 4;
         }
         screenTick(&sp10);
@@ -236,7 +236,7 @@ void DoStory(void) {
         }
 
         if (B_8018E570_usa->unk_00 > 0) {
-            if (gTheGame.unk_89C4[0].unk_00 & 0x4000) {
+            if (gTheGame.controller[0].touch_button & B_BUTTON) {
                 nbool var_a3 = ((B_8018E570_usa->unk_58[B_8018E570_usa->unk_00 - 1] == 2) &&
                                 (B_8018E570_usa->unk_18[B_8018E570_usa->unk_00 - 1] == 1))
                                    ? ntrue

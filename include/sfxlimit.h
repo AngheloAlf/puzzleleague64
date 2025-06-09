@@ -28,7 +28,7 @@ musHandle PlaySE(SfxInitStruct *sfxArray, s32 sfxIndex);
 // void func_8000541C_usa();
 // void func_80005608_usa();
 // void func_80005780_usa();
-// void func_80005888_usa();
+void func_80005888_usa(s32 arg0, s32 arg1, s32 arg2);
 // void func_80005A08_usa();
 void SetMIDIParam(musHandle handle, SongInitStruct bgmArray[], s32 songIndex, s32 songBuffer);
 

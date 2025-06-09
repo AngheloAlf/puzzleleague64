@@ -6,9 +6,12 @@
 #include "PR/gs2dex.h"
 #include "unk.h"
 
+#include "unknown_defines.h"
+
 #include "attack.h"
 #include "cursor.h"
 #include "explode.h"
+#include "gamepad.h"
 #include "icon.h"
 #include "text.h"
 
@@ -82,12 +85,16 @@ typedef struct tetWell {
     /* 0x4088 */ f32 unk_4088;
     /* 0x408C */ UNK_TYPE1 unk_408C[0x40B0-0x408C];
     /* 0x40B0 */ s32 unk_40B0;
-    /* 0x40B4 */ UNK_TYPE1 unk_40B4[0x43A8-0x40B4];
+    /* 0x40B4 */ UNK_TYPE1 unk_40B4[0x43A4-0x40B4];
+    /* 0x43A4 */ s32 unk_43A4;
     /* 0x43A8 */ s32 unk_43A8;
     /* 0x43AC */ s32 unk_43AC;
     /* 0x43B0 */ UNK_TYPE1 unk_43B0[0x8];
     /* 0x43B8 */ s32 unk_43B8;
-    /* 0x43BC */ UNK_TYPE1 unk_43BC[0x24];
+    /* 0x43BC */ s32 unk_43BC;
+    /* 0x43C0 */ UNK_TYPE1 unk_43C0[0x43C4-0x43C0];
+    /* 0x43C4 */ s32 unk_43C4;
+    /* 0x43C8 */ UNK_TYPE1 unk_43C8[0x43E0-0x43C8];
     /* 0x43E0 */ s32 unk_43E0;
     /* 0x43E4 */ UNK_TYPE1 unk_43E4[8];
     /* 0x43EC */ UNK_TYPE4 unk_43EC;
@@ -296,7 +303,6 @@ typedef struct struct_gInfo_unk_10224 {
     /* 0x4 */ UNK_TYPE1 unk_4[0xA];
 } struct_gInfo_unk_10224; // size = 0xE
 
-#define GAME_BUFFER_LEN 2
 #define GAME_UNK_90C8_LEN 70
 
 // TODO: Maybe make an enum for this?
@@ -343,11 +349,8 @@ typedef struct struct_gInfo {
 typedef struct Game {
     /* 0x0000 */ tetWell tetrisWell[GAME_BUFFER_LEN]; /* Original name: tetrisWell */
     /* 0x8860 */ cursor_t cursorBlock[GAME_BUFFER_LEN];
-    /* 0x89C0 */ UNK_TYPE1 unk_89C0[0x4];
-    /* 0x89C4 */ Game_unk_89C4 unk_89C4[UNK_SIZE];
-    /* 0x89D4 */ UNK_TYPE2 unk_89D4;
-    /* 0x89D6 */ UNK_TYPE2 unk_89D6;
-    /* 0x89D8 */ UNK_TYPE1 unk_89D8[0x8B98-0x89D8];
+    /* 0x89C0 */ gamepad_t controller[GAME_BUFFER_LEN];
+    /* 0x89E0 */ UNK_TYPE1 unk_89E0[0x8B98-0x89E0];
     /* 0x8B98 */ Game_unk_8B98 unk_8B98[2];
     /* 0x8BC8 */ UNK_TYPE1 unk_8BC8[0xC0];
     /* 0x8C88 */ uObjBg unk_8C88[10];
@@ -371,7 +374,7 @@ typedef struct Game {
     /* 0x9BA0 */ UNK_TYPE1 unk_9BA0[0x9BF0 - 0x9BA0];
     /* 0x9BF0 */ uObjTxtr unk_9BF0;
     /* 0x9C08 */ s32 unk_9C08;
-    /* 0x9C0C */ s32 unk_9C0C;
+    /* 0x9C0C */ s32 unk_9C0C; // dimension?
     /* 0x9C10 */ s32 unk_9C10;
     /* 0x9C14 */ s32 unk_9C14;
     /* 0x9C18 */ s32 unk_9C18;
@@ -383,6 +386,50 @@ typedef struct Game {
     /* 0x9C3C */ UNK_TYPE1 unk_9C3C[0xC];
     /* 0x9C48 */ struct_801A6DB8_usa unk_9C48[8];
 } Game; // size >= 0xDA28
+
+#if 0
+struct Game {
+    // total size: 0x21C08
+    struct tetWell tetrisWell[4]; // offset 0x0, size 0x15F00
+    struct cursor_t cursorBlock[4]; // offset 0x15F00, size 0x440
+    struct gamepad_t controller[4]; // offset 0x16340, size 0x40
+    struct flic_t flic[340]; // offset 0x16380, size 0x2A80
+    struct action_t action[40]; // offset 0x18E00, size 0x1E0
+    uObjTxtr gLUT[40]; // offset 0x18FE0, size 0x3C0
+    uObjBg gBG[200]; // offset 0x193A0, size 0x1F40
+    uObjTxtr gTEXT[80]; // offset 0x1B2E0, size 0x780
+    uObjSprite gSPRITE[160]; // offset 0x1BA60, size 0xF00
+    int currentText; // offset 0x1C960, size 0x4
+    struct text_t drawText[70]; // offset 0x1C968, size 0x8C0
+    uObjBg frame; // offset 0x1D228, size 0x28
+    uObjTxtr frameLUT; // offset 0x1D250, size 0x18
+    uObjSprite shadeBOX[4]; // offset 0x1D268, size 0x60
+    uObjBg bkground; // offset 0x1D2C8, size 0x28
+    uObjTxtr bkgroundLUT; // offset 0x1D2F0, size 0x18
+    uObjBg sign[8]; // offset 0x1D308, size 0x140
+    uObjBg alpha[4]; // offset 0x1D448, size 0xA0
+    uObjTxtr signLUT; // offset 0x1D4E8, size 0x18
+    int miscToggle; // offset 0x1D500, size 0x4
+    uObjBg misc[4]; // offset 0x1D508, size 0xA0
+    uObjTxtr miscLUT[4]; // offset 0x1D5A8, size 0x60
+    int totalPlayer; // offset 0x1D608, size 0x4
+    int dimension; // offset 0x1D60C, size 0x4
+    int seed; // offset 0x1D610, size 0x4
+    int hour; // offset 0x1D614, size 0x4
+    int minute; // offset 0x1D618, size 0x4
+    int second; // offset 0x1D61C, size 0x4
+    struct help_t help; // offset 0x1D620, size 0x8
+    struct menu_t menu[4]; // offset 0x1D628, size 0x60
+    struct player_t player[8]; // offset 0x1D688, size 0x4400
+    int LastAlivePlayer; // offset 0x21A88, size 0x4
+    int NoEntryPlayer; // offset 0x21A8C, size 0x4
+    struct MultiModeData_t MultiModeData; // offset 0x21A90, size 0x168
+    char kPLAYER4VTL_2D1st[4]; // offset 0x21BF8, size 0x4
+    char kPLAYER4VTL_2D2nd[4]; // offset 0x21BFC, size 0x4
+    char kPLAYER4VTL_2D3rd[4]; // offset 0x21C00, size 0x4
+    char kPLAYER4VTL_2D4th[4]; // offset 0x21C04, size 0x4
+};
+#endif
 
 
 /* Original name: gTheGame */

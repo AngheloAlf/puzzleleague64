@@ -38,3 +38,5 @@ asdf.txt
 *.flash
 *.bin
 *.log
+
+report.json
