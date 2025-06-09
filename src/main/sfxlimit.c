@@ -13,7 +13,6 @@
 
 extern s32 B_801AB7E0_usa;
 extern s32 B_801C7154_usa;
-extern s32 B_8021B960_usa;
 extern SongInitStruct *B_8021BA7C_usa;
 extern s32 B_8021DF48_usa;
 

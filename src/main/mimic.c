@@ -182,21 +182,17 @@ void UpdateMTController(tetWell *well, cursor_t *cursor, s32 num) {
     }
 }
 
-#if VERSION_USA
-// Silly reorder at the top
-#ifdef NON_MATCHING
 void DoMT(void) {
-    s32 pad[2] UNUSED;
-    cursor_t *temp_s1; // cursor
-    s32 temp_s2;       // count
-    s32 var_s3;        // num
-    s32 var_s6;        // total
-    tetWell *temp_s0;  // well
-
-    var_s6 = 1;
-
-    pad[0] = 0;
-    pad[1] = 0;
+    typedef struct Padding {
+        s32 unk_0;
+        s32 unk_4;
+    } Padding;
+    cursor_t *cursor;
+    tetWell *well;
+    s32 count;
+    s32 num;
+    s32 total = 1;
+    Padding pad UNUSED = { 0, 0 };
 
     if (gSelection == 0x6E) {
         MimicCheckState(&gTheGame.tetrisWell[0], &gTheGame.cursorBlock[0]);
@@ -209,84 +205,68 @@ void DoMT(void) {
     }
 
     if ((gSelection == 0x64) && (gTheGame.unk_9C28 == 3)) {
-        var_s6 = 2;
+        total = 2;
     }
 
-    for (var_s3 = 0; var_s3 < var_s6; var_s3++) {
-        temp_s0 = &gTheGame.tetrisWell[var_s3];
-        temp_s1 = &gTheGame.cursorBlock[var_s3];
+    for (num = 0; num < total; num++) {
+        well = &gTheGame.tetrisWell[num];
+        cursor = &gTheGame.cursorBlock[num];
 
-        if (temp_s1->unk_00 != 0x34C) {
-            CompactWell(temp_s0, var_s3);
+        if (cursor->unk_00 != 0x34C) {
+            CompactWell(well, num);
         }
 
-        if (var_s3 == 0) {
-            UpdateMTController(temp_s0, temp_s1, var_s3);
+        if (num == 0) {
+            UpdateMTController(well, cursor, num);
         }
 
-        if (temp_s1->unk_00 != 0x34C) {
-            if (temp_s0->unk_43C4 != 0) {
-                CheckCollision(temp_s0);
+        if (cursor->unk_00 != 0x34C) {
+            if (well->unk_43C4 != 0) {
+                CheckCollision(well);
             }
 
-            temp_s0->unk_43C4 = 0;
-            CheckChainCounter(temp_s0, temp_s1);
-            temp_s2 = ComboCount(temp_s0, temp_s1);
-            temp_s0->unk_43BC = 0;
+            well->unk_43C4 = 0;
+            CheckChainCounter(well, cursor);
+            count = ComboCount(well, cursor);
+            well->unk_43BC = 0;
 
             if (gSelection == 0x64) {
-                CheckShake(temp_s0, temp_s1);
+                CheckShake(well, cursor);
             }
 
-            CheckIcon(temp_s0, temp_s2);
-            StartAttack(temp_s0, var_s3);
-            UpdateWell(temp_s0, temp_s1, var_s3, temp_s2);
+            CheckIcon(well, count);
+            StartAttack(well, num);
+            UpdateWell(well, cursor, num, count);
 
             if (gSelection == 0x64) {
-                ChangeAttack(temp_s0, temp_s1, var_s3, temp_s2);
+                ChangeAttack(well, cursor, num, count);
             }
-            UpdateCursor(temp_s0, temp_s1);
-            UpdateIcon(temp_s0, temp_s1, var_s3);
+            UpdateCursor(well, cursor);
+            UpdateIcon(well, cursor, num);
             if (gSelection == 0x64) {
-                UpdateAttack(temp_s0, temp_s1, var_s3);
+                UpdateAttack(well, cursor, num);
             }
-            UpdateExplosion(temp_s0);
-            UpdateDistance(temp_s0, temp_s1);
-            UpdateAnimation(temp_s0, var_s3, 0);
-            UpdateMiscStuff(temp_s0, temp_s1, var_s3);
-            if ((temp_s1->unk_00 <= 0) && (temp_s0->unk_43F8 >= (gTheGame.unk_9C0C * 0x10))) {
+            UpdateExplosion(well);
+            UpdateDistance(well, cursor);
+            UpdateAnimation(well, num, 0);
+            UpdateMiscStuff(well, cursor, num);
+            if ((cursor->unk_00 <= 0) && (well->unk_43F8 >= (gTheGame.unk_9C0C * 0x10))) {
 
-                temp_s0->unk_43C4 = -1;
+                well->unk_43C4 = -1;
 
-                AddNewRow(temp_s0, temp_s1, var_s3);
-                temp_s0->unk_43F8 = 0;
+                AddNewRow(well, cursor, num);
+                well->unk_43F8 = 0;
             }
 
             if (gTheGame.unk_9C0C == 2) {
-                Check3DVisibleBlocks(temp_s0, temp_s1);
+                Check3DVisibleBlocks(well, cursor);
             }
 
-            temp_s0->unk_43FC = 0;
-            temp_s0->unk_43A4 = 0;
+            well->unk_43FC = 0;
+            well->unk_43A4 = 0;
         }
     }
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/mimic", DoMT);
-#endif
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", DoMT);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/mimic", DoMT);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", DoMT);
-#endif
 
 void MimicCheckState(tetWell *well, cursor_t *cursor) {
     s32 result;

@@ -111,37 +111,29 @@ void TutorialCheckState(tetWell *well, cursor_t *cursor) {
                 anim_sp = -0x34C;
             }
         }
-    } else if (anim_bg == 0) {
-        if (anim_sp == 0) {
-            anim_bg = 0x25;
-            anim_sp = 0;
-            cursor->unk_00 = 0x34C;
-            PlaySE(SFX_INIT_TABLE, 0xA0);
-            PlaySE(SFX_INIT_TABLE, 0x175);
-        } else {
-            // TODO: get rid of goto
-            goto block_21;
-        }
-    } else {
-    block_21:
-        if (anim_bg != -0x34C) {
-            well->unk_43FC = anim_bg;
-            well->unk_43EC = anim_sp;
-            if (well->unk_43FC >= 0) {
-                s32 v1 = well->unk_43FC;
+    } else if ((anim_bg == 0) && (anim_sp == 0)) {
+        anim_bg = 0x25;
+        anim_sp = 0;
+        cursor->unk_00 = 0x34C;
+        PlaySE(SFX_INIT_TABLE, 0xA0);
+        PlaySE(SFX_INIT_TABLE, 0x175);
+    } else if (anim_bg != -0x34C) {
+        well->unk_43FC = anim_bg;
+        well->unk_43EC = anim_sp;
+        if (well->unk_43FC >= 0) {
+            s32 v1 = well->unk_43FC;
 
-                well->unk_4088 += ((f32)dead1Shake[v1] / 250.0);
-                well->unk_43FC = v1 - 1;
-            }
-            AllDeadBlocks(well);
-            anim_bg = well->unk_43FC;
-            anim_sp = well->unk_43EC;
-            well->unk_43FC = 0;
-            well->unk_43EC = 0;
-            if (gMain == GMAIN_390) {
-                anim_bg = -0x34C;
-                anim_sp = -0x34C;
-            }
+            well->unk_4088 += ((f32)dead1Shake[v1] / 250.0);
+            well->unk_43FC = v1 - 1;
+        }
+        AllDeadBlocks(well);
+        anim_bg = well->unk_43FC;
+        anim_sp = well->unk_43EC;
+        well->unk_43FC = 0;
+        well->unk_43EC = 0;
+        if (gMain == GMAIN_390) {
+            anim_bg = -0x34C;
+            anim_sp = -0x34C;
         }
     }
 

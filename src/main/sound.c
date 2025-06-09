@@ -1402,7 +1402,6 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_800039A8_ger);
 extern s32 B_801AB7E0_usa;
 extern s16 B_801AB7E2_usa;
 extern s32 B_801C7154_usa;
-extern s32 B_8021B960_usa;
 extern u8 *B_8021BA7C_usa;
 extern s32 B_8021DF48_usa;
 

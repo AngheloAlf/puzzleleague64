@@ -9,7 +9,6 @@
 
 #include "fade.h"
 
-extern s32 anim_sp;
 extern s32 D_800B6BB0_usa[];
 extern s32 D_800B6CC4_usa[];
 
