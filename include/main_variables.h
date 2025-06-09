@@ -129,7 +129,7 @@ extern RomOffset D_800B6528_usa[];
 // extern UNK_TYPE D_800B6665_usa;
 // extern UNK_TYPE D_800B6698_usa;
 // extern UNK_TYPE D_800B66FC_usa;
-// extern UNK_TYPE D_800B6734_usa;
+extern s8 dead1Shake[];
 // extern UNK_TYPE D_800B675C_usa;
 // extern UNK_TYPE D_800B6790_usa;
 // extern UNK_TYPE D_800B6794_usa;
@@ -984,17 +984,17 @@ extern u32 B_8018EA40_usa;
 extern s16 Flash_period[];
 extern s16 Flash_count[];
 extern s32 gLastOverflow;
-// extern UNK_TYPE B_80192FF0_usa;
-// extern UNK_TYPE B_80192FF4_usa;
-// extern UNK_TYPE B_80192FF8_usa;
-// extern UNK_TYPE B_80192FFC_usa;
-// extern UNK_TYPE B_80193000_usa;
-// extern UNK_TYPE B_80193004_usa;
-// extern UNK_TYPE B_80193008_usa;
-// extern UNK_TYPE B_8019300C_usa;
+extern s32 B_80192FF0_usa;
+extern s32 giScreenMimic;
+extern s32 B_80192FF8_usa;
+extern s32 B_80192FFC_usa;
+extern s32 B_80193000_usa;
+extern s32 B_80193004_usa;
+
+extern s32 B_8019300C_usa;
 // extern UNK_TYPE B_8019300E_usa;
-// extern UNK_TYPE B_80193010_usa;
-// extern UNK_TYPE B_80193014_usa;
+extern s32 gnTagTextMimic;
+extern s32 B_80193014_usa;
 // extern UNK_TYPE B_80193020_usa;
 // extern UNK_TYPE B_80193022_usa;
 // extern UNK_TYPE plr_player;
@@ -1321,7 +1321,7 @@ extern s32 giButton;
 // extern UNK_TYPE B_801C6FB0_usa;
 // extern UNK_TYPE B_801C6FB4_usa;
 // extern UNK_TYPE B_801C6FB8_usa;
-// extern UNK_TYPE B_801C7050_usa;
+extern s32 gMax;
 extern OSMesgQueue gfxFrameMsgQ;
 extern s32 B_801C7060_usa;
 extern TexturePtr B_801C7070_usa[GAME_BUFFER_LEN][BRICKTXTR_LEN];
@@ -1385,14 +1385,14 @@ extern uObjTxtr B_801F9D00_usa[GAME_BUFFER_LEN][B_801F9D00_USA_LEN]; // TODO: or
 extern TexturePtr B_801F9E20_usa[2];
 // extern UNK_TYPE B_801F9E28_usa;
 
-// extern UNK_TYPE B_8021AA80_usa;
+extern s32 anim_bg;
 
-// extern UNK_TYPE B_8021AD28_usa;
+extern s32 anim_sp;
 // extern UNK_TYPE B_8021AD55_usa;
 
 // extern UNK_TYPE B_8021AD5C_usa;
-// extern UNK_TYPE B_8021B960_usa;
-// extern UNK_TYPE B_8021B964_usa;
+extern s32 B_8021B960_usa;
+extern struct_gInfo_unk_00068 *tut_dynamicp;
 
 extern OSMesg B_8021BA28_usa[1];
 

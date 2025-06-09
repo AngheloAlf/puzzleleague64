@@ -18,15 +18,15 @@
 #include "menu.h"
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80037270_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/end", GameOverSmoke);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80037358_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/end", DeadBlocksShakeOne2D);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80037440_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/end", AllDeadBlocks);
 #endif
 
 #if VERSION_USA
@@ -46,15 +46,15 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80037B0C_usa);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80037270_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", GameOverSmoke);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80037358_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", DeadBlocksShakeOne2D);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80037440_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", AllDeadBlocks);
 #endif
 
 #if VERSION_EUR
@@ -74,15 +74,15 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80037B0C_usa);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80037270_usa);
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", GameOverSmoke);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80037358_usa);
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", DeadBlocksShakeOne2D);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80037440_usa);
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", AllDeadBlocks);
 #endif
 
 #if VERSION_FRA
@@ -102,15 +102,15 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80037B0C_usa);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80037270_usa);
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", GameOverSmoke);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80037358_usa);
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", DeadBlocksShakeOne2D);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80037440_usa);
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", AllDeadBlocks);
 #endif
 
 #if VERSION_GER
@@ -738,9 +738,9 @@ void DrawGameOver(struct_gInfo_unk_00068 *arg0) {
 ? func_800353F4_usa(Game *, s8 *);               /* extern */
 ? func_8003547C_usa(Game *, s8 *);               /* extern */
 ? func_80035584_usa(s8 *);                          /* extern */
-? func_80037270_usa(Game *);                     /* extern */
-? func_80037358_usa(Game *);                     /* extern */
-? func_80037440_usa(Game *);                     /* extern */
+? GameOverSmoke(Game *);                     /* extern */
+? DeadBlocksShakeOne2D(Game *);                     /* extern */
+? AllDeadBlocks(Game *);                     /* extern */
 ? func_80037724_usa(Game *);                     /* extern */
 ? func_80037900_usa(Game *);                     /* extern */
 ? func_80037B0C_usa(Game *, cursor_t *); /* extern */
@@ -771,7 +771,7 @@ s32 func_8004FA2C_usa();                            /* extern */
 ? Init2DExplosion(Game *);                     /* extern */
 ? Init2DSmallStars(?);                             /* extern */
 ? func_8006C7A0_usa(?, ?);                          /* extern */
-? func_8006C9BC_usa(Game *, ?);                  /* extern */
+? Init2DGameOverSmoke(Game *, ?);                  /* extern */
 extern u8 B_801C6C90_usa;
 extern s32 gWhatever;
 extern ? SFX_INIT_TABLE;
@@ -859,7 +859,7 @@ void DoGameOver2D(void) {
                     gTheGame.unk_89C8[0x6E8] = -0x280;
                     gTheGame.unk_89C8[0x6D0] = -0x280;
                     if (gTheGame.unk_8860[0].unk_0 == 8) {
-                        func_8006C9BC_usa(&gTheGame, 0);
+                        Init2DGameOverSmoke(&gTheGame, 0);
                     }
                     func_80039A54_usa(0);
                     if (gSelection == 0x8C) {
@@ -904,9 +904,9 @@ block_39:
                     break;
                 case 0x38F:                         /* switch 1 */
                     if (gTheGame.unk_8860[0].unk_0 == 8) {
-                        func_80037270_usa(&gTheGame);
-                        func_80037358_usa(&gTheGame);
-                        func_80037440_usa(&gTheGame);
+                        GameOverSmoke(&gTheGame);
+                        DeadBlocksShakeOne2D(&gTheGame);
+                        AllDeadBlocks(&gTheGame);
                     } else {
                         func_80037724_usa(&gTheGame);
                     }
@@ -1139,10 +1139,10 @@ block_120:
                     gTheGame.unk_9988[0x1D6] = 0x374;
                     gTheGame.unk_9988[0x1FE] = 0x374;
                     if (gTheGame.unk_8860[0].unk_0 == 8) {
-                        func_8006C9BC_usa(&gTheGame, 0);
+                        Init2DGameOverSmoke(&gTheGame, 0);
                     }
                     if (gTheGame.unk_8860[1] == 8) {
-                        func_8006C9BC_usa((Game *) &gTheGame.tetrisWell[1], 1);
+                        Init2DGameOverSmoke((Game *) &gTheGame.tetrisWell[1], 1);
                     }
                     gMain = 0x38F;
                     gWhatever = 0;
@@ -1175,12 +1175,12 @@ block_152:
                     break;
                 case 0x38F:                         /* switch 2 */
                     if (var_s3 == 0) {
-                        func_80037270_usa(&gTheGame);
+                        GameOverSmoke(&gTheGame);
                         func_80038018_usa(&gTheGame, 0);
                         func_8003813C_usa(&gTheGame);
                     }
                     if (var_s1 == 0) {
-                        func_80037270_usa((Game *) &gTheGame.tetrisWell[1]);
+                        GameOverSmoke((Game *) &gTheGame.tetrisWell[1]);
                         func_80038018_usa((Game *) &gTheGame.tetrisWell[1], 1);
                         func_8003813C_usa((Game *) &gTheGame.tetrisWell[1]);
                     }
@@ -1447,8 +1447,8 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/end", DoGameOver2D);
 ? func_80035438_usa(Game *, s8 *);               /* extern */
 ? func_800354C0_usa(Game *, s8 *);               /* extern */
 ? func_80035584_usa(s8 *);                          /* extern */
-? func_80037270_usa(Game *);                     /* extern */
-? func_80037440_usa(Game *);                     /* extern */
+? GameOverSmoke(Game *);                     /* extern */
+? AllDeadBlocks(Game *);                     /* extern */
 ? func_80037724_usa(Game *);                     /* extern */
 ? func_800379D4_usa(Game *, cursor_t *); /* extern */
 ? func_80037B0C_usa(Game *, cursor_t *); /* extern */
@@ -1486,7 +1486,7 @@ extern s32 gWhatever;
 extern ? SFX_INIT_TABLE;
 extern s32 D_800B65B0_usa;
 extern ? D_800B66FC_usa;
-extern ? D_800B6734_usa;
+extern ? dead1Shake;
 extern ? D_800B675C_usa;
 
 void DoGameOver3D(void) {
@@ -1616,13 +1616,13 @@ block_39:
                     break;
                 case 0x38F:                         /* switch 1 */
                     if (gTheGame.unk_8860[0].unk_0 == 8) {
-                        func_80037270_usa(&gTheGame);
+                        GameOverSmoke(&gTheGame);
                         if (gTheGame.unk_43FC >= 0) {
-                            temp_fv0 = (f64) gTheGame.tetrisWell[0].unk_4088 + ((f64) (f32) *(&D_800B6734_usa + gTheGame.unk_43FC) / 250.0);
+                            temp_fv0 = (f64) gTheGame.tetrisWell[0].unk_4088 + ((f64) (f32) *(&dead1Shake + gTheGame.unk_43FC) / 250.0);
                             gTheGame.unk_43FC = (s32) (gTheGame.unk_43FC - 1);
                             gTheGame.tetrisWell[0].unk_4088 = (f32) temp_fv0;
                         }
-                        func_80037440_usa(&gTheGame);
+                        AllDeadBlocks(&gTheGame);
                     } else {
                         func_80037724_usa(&gTheGame);
                     }
@@ -1861,14 +1861,14 @@ block_115:
                     break;
                 case 0x38F:                         /* switch 2 */
                     if (var_s4 == 0) {
-                        func_80037270_usa(&gTheGame);
+                        GameOverSmoke(&gTheGame);
                         if (gTheGame.unk_43FC >= 0) {
                             gTheGame.tetrisWell[0].unk_4088 = (f32) ((f64) gTheGame.tetrisWell[0].unk_4088 + ((f64) (f32) *(&D_800B675C_usa + gTheGame.unk_43FC) / 250.0));
                             func_8003813C_usa(&gTheGame);
                         }
                     }
                     if (var_s3 == 0) {
-                        func_80037270_usa((Game *) &gTheGame.tetrisWell[1]);
+                        GameOverSmoke((Game *) &gTheGame.tetrisWell[1]);
                         temp_v0_3 = gTheGame.tetrisWell[1].unk_43FC;
                         if (temp_v0_3 >= 0) {
                             gTheGame.tetrisWell[1].unk_4088 = (f32) ((f64) gTheGame.tetrisWell[1].unk_4088 + ((f64) (f32) *(&D_800B675C_usa + temp_v0_3) / 250.0));

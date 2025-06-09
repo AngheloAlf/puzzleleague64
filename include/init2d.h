@@ -20,7 +20,7 @@ void Init2DExplosion(struct tetWell *well);
 // void func_8006C204_usa();
 void Init2DSmallStars(s32 num);
 // void func_8006C7A0_usa();
-// void func_8006C9BC_usa();
+void Init2DGameOverSmoke(struct tetWell *well, s32 num);
 void Init2DTetrisTMEM(struct block_t *block, uObjSprite *rect);
 // void func_8006CB30_usa();
 // void func_8006CBEC_usa();

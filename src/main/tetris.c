@@ -101,7 +101,7 @@ s32 func_80088AB4_usa(s8 *, s8 *, void *, s32);     /* extern */
 extern s32 B_801AAB98_usa;
 extern s32 B_801AB61C_usa;
 extern ? B_801ADADC_usa;
-extern s32 B_801C7050_usa;
+extern s32 gMax;
 extern s32 B_801C70D8_usa;
 extern ? D_800B6AA0_usa;
 extern ? D_800B6AF4_usa;
@@ -178,7 +178,7 @@ void InitTetrisWell(void) {
     if (temp_a0 == 1) {
         var_v0 = 6;
     }
-    B_801C7050_usa = var_v0;
+    gMax = var_v0;
     Pon_Image_Heap = (&D_FB480 - &D_CA4A0) + &gBufferHeap;
     var_fp = 0;
     func_80054624_usa(temp_a0);

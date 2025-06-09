@@ -46,4 +46,10 @@
     do {} while (osViGetCurrentLine() != 0);    \
     do {} while (osViGetCurrentLine() == 0)
 
+#if REGION_NTSC
+#define ADJUST_FRAMERATE(x) (x)
+#else
+#define ADJUST_FRAMERATE(x) (x * 5 / 6)
+#endif
+
 #endif

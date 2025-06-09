@@ -28,12 +28,6 @@
 #define COUNTER_VALUE (80)
 #endif
 
-#if REGION_NTSC
-#define ADJUST_FRAMERATE(x) (x)
-#else
-#define ADJUST_FRAMERATE(x) (x * 5 / 6)
-#endif
-
 void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) {
     block_t *block;
     cursor_t *cursor;

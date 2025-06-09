@@ -259,19 +259,19 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", func_8006B360_ger);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", func_8006C9BC_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", Init2DGameOverSmoke);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", func_8006C9BC_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", Init2DGameOverSmoke);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", func_8006C9BC_usa);
+INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", Init2DGameOverSmoke);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", func_8006C9BC_usa);
+INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", Init2DGameOverSmoke);
 #endif
 
 void Init2DTetrisTMEM(block_t *block, uObjSprite *rect) {

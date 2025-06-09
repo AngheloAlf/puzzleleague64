@@ -3092,11 +3092,11 @@ nbool func_8002931C_usa(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3) {
     return nfalse;
 }
 
-nbool screenGetTextType(s32 arg0, s32 arg1, u32 *arg2) {
+nbool screenGetTextType(s32 iScreen, s32 nTagText, u32 *pnType) {
     struct_gaScreen_unk_1C *sp0;
 
-    if (screenFindImage(arg0, arg1, &sp0)) {
-        *arg2 = sp0->unk_44;
+    if (screenFindImage(iScreen, nTagText, &sp0)) {
+        *pnType = sp0->unk_44;
         return ntrue;
     }
     return nfalse;

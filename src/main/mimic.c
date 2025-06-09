@@ -20,14 +20,17 @@
 #include "dlist.h"
 #include "init2d.h"
 #include "other.h"
+#include "peel.h"
+#include "screen.h"
 #include "sfxlimit.h"
+#include "sound.h"
 #include "tetsound.h"
 #include "tutorial.h"
 #include "update.h"
 #include "067FB0.h"
 #include "0707D0.h"
 
-void SetupMimic(void **heapP) {
+INLINE void SetupMimic(void **heapP) {
     s32 temp_a0;
 
     B_801C6EE8_usa = 1;
@@ -42,12 +45,12 @@ void SetupMimic(void **heapP) {
 
     func_80054624_usa(temp_a0);
     InitCharacter(0x385, -1);
-    func_800040D8_usa(0x19, 9, 9);
+    LoadFairySoundData(0x19, 9, 9);
 
     *heapP = Pon_Image_Heap;
 }
 
-void QuitMimic(void) {
+INLINE void QuitMimic(void) {
     gGameStatus = gGameStatus >> 0x10;
 }
 
@@ -352,11 +355,11 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/mimic", func_80084D24_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/mimic", func_80084D84_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/mimic", Draw2DMT);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/mimic", func_8008554C_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/mimic", Draw3DMT);
 #endif
 
 #if VERSION_USA
@@ -376,11 +379,11 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", func_800850DC_eur);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", func_8008513C_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", Draw2DMT);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", func_80085904_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", Draw3DMT);
 #endif
 
 #if VERSION_EUR
@@ -400,11 +403,11 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/mimic", func_800837FC_fra);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/mimic", func_8008385C_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/mimic", Draw2DMT);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/mimic", func_80084024_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/mimic", Draw3DMT);
 #endif
 
 #if VERSION_FRA
@@ -424,32 +427,39 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", func_800839BC_ger);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", func_80083A1C_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", Draw2DMT);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", func_800841E4_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", Draw3DMT);
 #endif
 
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", func_80084960_ger);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/mimic", DrawMT);
-#endif
+void DrawMT(struct_gInfo_unk_00068 *dynamicp) {
+    tut_dynamicp = dynamicp;
+    screenDraw(&glistp, DrawTUT);
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", DrawMT);
-#endif
+    if (screenFlushing()) {
+        return;
+    }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/mimic", DrawMT);
-#endif
+    if ((gMain == GMAIN_MIMIC) && (geModeMimic >= MM_STAGE)) {
+        if (gTheGame.unk_9C0C == 1) {
+            Draw2DMT(dynamicp);
+        } else {
+            Draw3DMT(dynamicp);
+        }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", DrawMT);
-#endif
+        if (!screenFlushing()) {
+            func_8002C2C0_usa(&glistp);
+        }
+    }
+
+    func_8002C2C0_usa(&glistp);
+}
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/mimic", DoMimic);
@@ -467,34 +477,59 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/mimic", DoMimic);
 INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", DoMimic);
 #endif
 
-#if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/mimic", RO_800C76E4_usa);
-#endif
+const char RO_800C76E4_usa[] = "MIMIC?.SBF";
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/mimic", InitMimic);
-#endif
+// maybe mimicShowText?
+STATIC_INLINE void inlined_function() {
+    u32 nType;
+    s32 temp_s0;
+    s32 temp_s0_2;
 
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/mimic", RO_800C7994_eur);
-#endif
+    giScreenMimic = screenSet("MIMIC", 0x401);
+    temp_s0 = gnTagTextMimic;
+    geModeMimic = MM_NONE;
+    B_80193014_usa = 0;
+    gnTagTextMimic = (gTheGame.unk_9C2C[0][1] * 0xA) + 0x1EA;
+    if (screenGetTextType(giScreenMimic, gnTagTextMimic, &nType)) {
+        screenHideText(giScreenMimic, -0x3FFFFE0C);
+        screenShowText(giScreenMimic, gnTagTextMimic);
+    } else {
+        gnTagTextMimic = temp_s0;
+    }
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", InitMimic);
-#endif
+    temp_s0_2 = ((B_8019300C_usa & 0xFFFF) == 0x258) ? 0x259 : 0x258;
+    if ((B_8019300C_usa == 0) || ((B_8019300C_usa >> 0x10) != 0)) {
+        B_8019300C_usa = temp_s0_2;
+        func_80028DC0_usa(giScreenMimic, temp_s0_2, 0);
+        func_800288D8_usa(giScreenMimic, temp_s0_2, 0x9E, 0x48);
+    }
+}
 
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/mimic", RO_800C5FF4_fra);
-#endif
+void InitMimic(void) {
+    void *sp10;
+    char *temp;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/mimic", InitMimic);
-#endif
+    gnTagTextMimic = -1;
+    B_80192FF0_usa = 0;
+    B_8019300C_usa = 0;
+    B_80193004_usa = 0;
+    B_80193000_usa = 0;
+    B_80192FFC_usa = 0;
+    B_80192FF8_usa = 0;
 
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/mimic", RO_800BCFB4_ger);
-#endif
+    SetupMimic(&sp10);
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", InitMimic);
-#endif
+    //! @bug: Modifies a `const` symbol.
+    // cast const away
+    temp = (char *)RO_800C76E4_usa;
+    temp[5] = gTheGame.unk_9C2C[0][1] + '0';
+
+    if (screenLoad(temp, &sp10) != 0) {
+        inlined_function();
+    }
+
+    if (B_8021B960_usa != 0x40) {
+        func_80002D8C_usa(0x1E);
+        PlayMIDI(BGM_INIT_TABLE, 0x40, 0, 1);
+    }
+}

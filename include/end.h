@@ -6,10 +6,11 @@
 
 struct Game;
 struct struct_gInfo_unk_00068;
+struct tetWell;
 
-// void func_80037270_usa();
-// void func_80037358_usa();
-// void func_80037440_usa();
+void GameOverSmoke(struct tetWell *well);
+void DeadBlocksShakeOne2D(struct tetWell *well);
+void AllDeadBlocks(struct tetWell *well);
 // void func_80037724_usa();
 // void func_80037900_usa();
 // void func_800379D4_usa();

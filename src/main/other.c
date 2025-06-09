@@ -29,21 +29,77 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/other", func_80051130_fra);
 INCLUDE_ASM("asm/ger/nonmatchings/main/other", func_800512B0_ger);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/other", UpdateMiscStuff);
-#endif
+void UpdateMiscStuff(tetWell *well, cursor_t *cursor, s32 num) {
+    s32 shake;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/other", UpdateMiscStuff);
-#endif
+    switch (gSelection) {
+        case 0x8C:
+        case 0xAA:
+        case 0xBE:
+            if (gGameStatus & 0x20) {
+                cursor->unk_0C = 0;
+            } else if (cursor->unk_0C > 0) {
+                if (gTheGame.unk_9B48 == 0) {
+                    gTheGame.unk_9B48 = 1;
+                }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/other", UpdateMiscStuff);
-#endif
+                if (cursor->unk_0C > ADJUST_FRAMERATE(600)) {
+                    shake = 0x32;
+                } else if (cursor->unk_0C > ADJUST_FRAMERATE(360)) {
+                    shake = 0x1E;
+                } else if (cursor->unk_0C > ADJUST_FRAMERATE(120)) {
+                    shake = 0xF;
+                } else {
+                    shake = 5;
+                }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/other", UpdateMiscStuff);
-#endif
+                if (gCounter % shake == 0) {
+                    if (shake >= 0xF) {
+                        if (gTheGame.unk_9B48 == 1) {
+                            gTheGame.unk_9B48 = 2;
+                        } else {
+                            gTheGame.unk_9B48 = 1;
+                        }
+                    } else if (gTheGame.unk_9B48 == 1) {
+                        gTheGame.unk_9B48 = 4;
+                    } else if (gTheGame.unk_9B48 == 2) {
+                        gTheGame.unk_9B48 = 3;
+                    } else if (gTheGame.unk_9B48 == 3) {
+                        gTheGame.unk_9B48 = 4;
+                    } else {
+                        gTheGame.unk_9B48 = 3;
+                    }
+                }
+            } else {
+                gTheGame.unk_9B48 = 0;
+            }
+            break;
+
+        case 0x78:
+        case 0x82:
+            if (gTheGame.unk_9B48 > 1) {
+                gTheGame.unk_9B48--;
+            } else {
+                gTheGame.unk_9B48 = -1;
+            }
+
+            if (cursor->unk_2C % 2 == 0) {
+                gTheGame.drawText[3].word.s.imageAdrs = 0;
+            } else {
+                gTheGame.drawText[3].word.s.imageAdrs = 3;
+            }
+            break;
+
+        case 0x64:
+        case 0x96:
+        case 0xA0:
+        case 0xB4:
+        case 0xC8:
+            gTheGame.unk_9B48 = -1;
+            gTheGame.unk_9B50[num].b.frameY = well->unk_441C * 4;
+            break;
+    }
+}
 
 void Draw2DMiscStuff(struct_gInfo_unk_00068 *dynamicp) {
     s32 index;

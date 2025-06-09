@@ -596,7 +596,7 @@ s32 DoWatchMenu(void) {
     s32 ret = 0;
     s32 pad[2] UNUSED;
 
-    if (gTheGame.controller[0].touch_button & (CONT_A | Z_TRIG)) {
+    if (gTheGame.controller[0].touch_button & (A_BUTTON | START_BUTTON)) {
         ret = 1;
     } else if (gTheGame.controller[0].touch_button & B_BUTTON) {
         ret = 2;

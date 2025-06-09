@@ -97,19 +97,19 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", SetSoundOptions);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/tetsound", func_800040D8_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/tetsound", LoadFairySoundData);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tetsound", func_800040D8_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/tetsound", LoadFairySoundData);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", func_800040D8_usa);
+INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", LoadFairySoundData);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", func_800040D8_usa);
+INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", LoadFairySoundData);
 #endif
 
 #if VERSION_USA

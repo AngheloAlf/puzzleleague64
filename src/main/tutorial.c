@@ -11,23 +11,142 @@
 #include "main_functions.h"
 #include "main_variables.h"
 
+#include "end.h"
 #include "image.h"
+#include "init2d.h"
 #include "menu.h"
 #include "mimic.h"
 #include "peel.h"
 #include "screen.h"
+#include "sfxlimit.h"
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/tutorial", func_80087A90_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/tutorial", func_80087E40_eur);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/tutorial", func_80086560_fra);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/tutorial", func_80086720_ger);
 #endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/tutorial", InitTutorial);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/tutorial", TutorialCheckState);
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/tutorial", InitTutorial);
 #endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/tutorial", InitTutorial);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/tutorial", InitTutorial);
+#endif
+
+void TutorialCheckState(tetWell *well, cursor_t *cursor) {
+    s32 temp_s1;
+    s32 var_a2;
+    s32 col;
+
+    var_a2 = 0;
+    if (gTheGame.controller[0].touch_button & B_BUTTON) {
+        gMain = GMAIN_2BC;
+        gReset = -1;
+        PlaySE(SFX_INIT_TABLE, 6);
+        gGameStatus = gGameStatus >> 16;
+        return;
+    }
+
+    if ((gTheGame.unk_9C28 == 1) || (gTheGame.unk_9C28 == 5)) {
+        for (col = 0; col < gMax; col++) {
+            block_t *block = &well->block[BLOCK_LEN_ROWS - 1][col];
+
+            if (block->type != 0) {
+                break;
+            }
+        }
+
+        if (col != gMax) {
+            var_a2 = -1;
+        }
+    }
+
+    if (var_a2 == 0) {
+        return;
+    }
+
+    temp_s1 = gTheGame.unk_9C0C;
+    if (temp_s1 == 1) {
+        if ((anim_bg == 0) && (anim_sp == 0)) {
+            Init2DExplosion(well);
+            gTheGame.unk_9C08 = 2;
+            Init2DGameOverSmoke(well, 0);
+            anim_bg = 0x25;
+            gTheGame.unk_9C08 = temp_s1;
+            anim_sp = 0;
+            cursor->unk_00 = 0x34C;
+            PlaySE(SFX_INIT_TABLE, 0xA0);
+            PlaySE(SFX_INIT_TABLE, 0x175);
+        } else if (anim_bg != -0x34C) {
+            well->unk_43FC = anim_bg;
+            well->unk_43EC = anim_sp;
+            GameOverSmoke(well);
+            DeadBlocksShakeOne2D(well);
+            AllDeadBlocks(well);
+            anim_bg = well->unk_43FC;
+            anim_sp = well->unk_43EC;
+            well->unk_43FC = 0;
+            well->unk_43EC = 0;
+            if (gMain == GMAIN_390) {
+                anim_bg = -0x34C;
+                anim_sp = -0x34C;
+            }
+        }
+    } else if (anim_bg == 0) {
+        if (anim_sp == 0) {
+            anim_bg = 0x25;
+            anim_sp = 0;
+            cursor->unk_00 = 0x34C;
+            PlaySE(SFX_INIT_TABLE, 0xA0);
+            PlaySE(SFX_INIT_TABLE, 0x175);
+        } else {
+            // TODO: get rid of goto
+            goto block_21;
+        }
+    } else {
+    block_21:
+        if (anim_bg != -0x34C) {
+            well->unk_43FC = anim_bg;
+            well->unk_43EC = anim_sp;
+            if (well->unk_43FC >= 0) {
+                s32 v1 = well->unk_43FC;
+
+                well->unk_4088 += ((f32)dead1Shake[v1] / 250.0);
+                well->unk_43FC = v1 - 1;
+            }
+            AllDeadBlocks(well);
+            anim_bg = well->unk_43FC;
+            anim_sp = well->unk_43EC;
+            well->unk_43FC = 0;
+            well->unk_43EC = 0;
+            if (gMain == GMAIN_390) {
+                anim_bg = -0x34C;
+                anim_sp = -0x34C;
+            }
+        }
+    }
+
+    gMain = GMAIN_TUTORIAL;
+}
 
 #if VERSION_USA
 // Probably equivalent.
@@ -110,7 +229,6 @@ void DoTutorial(void) {
     struct_imageLoad_arg0 *sp28;
     s32 temp_a0;
     s32 temp_s2;
-    s32 temp_v0_2;
     s32 temp_v0_3;
     s32 temp_v0_4;
     s32 var_a2;
@@ -202,44 +320,12 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/tutorial", DoTutorial);
 INCLUDE_ASM("asm/usa/nonmatchings/main/tutorial", func_8008885C_usa);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/tutorial", func_800888C4_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tutorial", func_80087E40_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tutorial", InitTutorial);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tutorial", TutorialCheckState);
-#endif
-
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/tutorial", DoTutorial);
 #endif
 
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/tutorial", func_80088C0C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tutorial", func_80088C74_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tutorial", func_80086560_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tutorial", InitTutorial);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tutorial", TutorialCheckState);
 #endif
 
 #if VERSION_FRA
@@ -250,22 +336,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/tutorial", DoTutorial);
 INCLUDE_ASM("asm/fra/nonmatchings/main/tutorial", func_8008732C_fra);
 #endif
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tutorial", func_80087394_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tutorial", func_80086720_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tutorial", InitTutorial);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tutorial", TutorialCheckState);
-#endif
-
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/tutorial", DoTutorial);
 #endif
@@ -274,6 +344,12 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/tutorial", DoTutorial);
 INCLUDE_ASM("asm/ger/nonmatchings/main/tutorial", func_800874EC_ger);
 #endif
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tutorial", func_80087554_ger);
-#endif
+void DrawTUT(Gfx **gfxP, s32 arg1 UNUSED, s32 arg2) {
+    glistp = *gfxP;
+    if (arg2 == 0x64) {
+        Draw2DMT(tut_dynamicp);
+    } else if (arg2 == 0x6E) {
+        Draw3DMT(tut_dynamicp);
+    }
+    *gfxP = glistp;
+}

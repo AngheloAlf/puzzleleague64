@@ -9,7 +9,7 @@
 
 #include "fade.h"
 
-extern s32 B_8021AD28_usa;
+extern s32 anim_sp;
 extern s32 D_800B6BB0_usa[];
 extern s32 D_800B6CC4_usa[];
 
@@ -18,17 +18,17 @@ extern s32 D_800B6CC4_usa[];
 extern u16 D_800B80B0_usa[];
 
 void func_80074A30_usa(tetWell *well UNUSED) {
-    B_8021AD28_usa = 0;
+    anim_sp = 0;
     func_80074AEC_usa();
 }
 
 void func_80074A58_usa(tetWell *well UNUSED, s32 arg1, s32 arg2) {
     if (arg2 < 0) {
         arg2 = MIN(-arg2, 0xC) - 1;
-        B_8021AD28_usa -= D_800B6CC4_usa[arg2];
+        anim_sp -= D_800B6CC4_usa[arg2];
     } else if (arg1 >= 4) {
         arg1 = MIN(arg1, 0x48) - 4;
-        B_8021AD28_usa -= D_800B6BB0_usa[arg1];
+        anim_sp -= D_800B6BB0_usa[arg1];
     }
 
     func_80074AEC_usa();
@@ -49,11 +49,11 @@ void func_80074AEC_usa(void) {
     u16 *temp_v1;
     s32 a0;
 
-    if (B_8021AD28_usa <= 0) {
+    if (anim_sp <= 0) {
         var_s0 = 0;
     } else {
         a0 = gTheGame.unk_9C0C;
-        var_s0 = (B_8021AD28_usa * 0x30) / (a0 * 0x270);
+        var_s0 = (anim_sp * 0x30) / (a0 * 0x270);
     }
 
     temp_fp = var_s0 < 0xD;
@@ -144,8 +144,8 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/075630", func_80074AEC_usa);
 
 void func_80074D4C_usa(void) {
     if ((gMain == GMAIN_384) && (gCounter == ((gCounter / 3) * 3))) {
-        if (B_8021AD28_usa < (gTheGame.unk_9C0C * 0x270)) {
-            B_8021AD28_usa += gTheGame.unk_9C0C * 0xD;
+        if (anim_sp < (gTheGame.unk_9C0C * 0x270)) {
+            anim_sp += gTheGame.unk_9C0C * 0xD;
         }
     }
 

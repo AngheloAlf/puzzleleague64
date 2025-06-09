@@ -103,23 +103,52 @@ typedef struct tetWell {
     /* 0x43FC */ UNK_TYPE4 unk_43FC;
     /* 0x4400 */ UNK_TYPE1 unk_4400[0x4];
     /* 0x4404 */ UNK_TYPE4 unk_4404;
-    /* 0x4408 */ UNK_TYPE1 unk_4408[0x18];
+    /* 0x4408 */ UNK_TYPE1 unk_4408[0x14];
+    /* 0x441C */ s32 unk_441C;
     /* 0x4420 */ s32 unk_4420; // TODO: enum?
     /* 0x4424 */ s32 unk_4424; // enum_tetWell_unk_4424
     /* 0x4428 */ s32 unk_4428;
     /* 0x442C */ UNK_TYPE1 unk_442C[0x4];
 } tetWell; // size = 0x4430
 
-
-
-typedef struct Game_unk_89C4 {
-    /* 0x00 */ u16 unk_00;
-    /* 0x02 */ u16 unk_02;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ UNK_TYPE1 unk_08[2];
-    /* 0x0A */ s16 unk_0A;
-    /* 0x0C */ UNK_TYPE1 unk_0C[4];
-} Game_unk_89C4; // size = 0x10
+#if 0
+struct tetWell {
+    // total size: 0x57C0
+    struct block_t block[12][18]; // offset 0x0, size 0x2520
+    struct attack_t attack[40]; // offset 0x2520, size 0xC80
+    struct icon_t icon[10]; // offset 0x31A0, size 0x410
+    struct explode_t explosion[50]; // offset 0x35B0, size 0x960
+    uObjSprite block_rect[12][6]; // offset 0x3F10, size 0x6C0
+    uObjSprite new_block_rect[6]; // offset 0x45D0, size 0x90
+    uObjSprite left2D; // offset 0x4660, size 0x18
+    uObjSprite right2D; // offset 0x4678, size 0x18
+    char visible[12][18]; // offset 0x4690, size 0xD8
+    float translation; // offset 0x4768, size 0x4
+    struct block_t new_block[18]; // offset 0x476C, size 0x318
+    struct chain_t reaction; // offset 0x4A84, size 0x8
+    int score; // offset 0x4A8C, size 0x4
+    int raise; // offset 0x4A90, size 0x4
+    int danger; // offset 0x4A94, size 0x4
+    int alert; // offset 0x4A98, size 0x4
+    int defrost; // offset 0x4A9C, size 0x4
+    int chain_garbage; // offset 0x4AA0, size 0x4
+    int collision; // offset 0x4AA4, size 0x4
+    struct state_t state; // offset 0x4AA8, size 0x38
+    struct extra_t extra; // offset 0x4AE0, size 0x1C
+    int bot_height; // offset 0x4AFC, size 0x4
+    struct menu_t menu; // offset 0x4B00, size 0x18
+    struct attack_t attack4p[40]; // offset 0x4B18, size 0xC80
+    int LastChainType; // offset 0x5798, size 0x4
+    int LastComboType; // offset 0x579C, size 0x4
+    int LastEXComboType; // offset 0x57A0, size 0x4
+    int ChainAttackWhom; // offset 0x57A4, size 0x4
+    int ComboAttackWhom; // offset 0x57A8, size 0x4
+    int LastAttackWhom; // offset 0x57AC, size 0x4
+    int RankingSignRaise; // offset 0x57B0, size 0x4
+    int RankingSignColor; // offset 0x57B4, size 0x4
+    int EntryNo; // offset 0x57B8, size 0x4
+};
+#endif
 
 
 typedef struct Game_unk_8B98 {
