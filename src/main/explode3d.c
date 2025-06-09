@@ -4,10 +4,11 @@
 
 #include "explode3d.h"
 
-#include "ultra64.h"
 #include "macros_defines.h"
 #include "main_functions.h"
 #include "main_variables.h"
+
+#include "attack.h"
 
 void Start3DExplosion(tetWell *well, s32 num, s32 row, s32 col, s32 type) {
     explode_t *explode;

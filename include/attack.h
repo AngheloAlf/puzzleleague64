@@ -5,6 +5,9 @@
 #include "PR/gs2dex.h"
 #include "unk.h"
 
+struct cursor_t;
+struct tetWell;
+
 typedef struct attack_t {
     /* 0x00 */ s32 state;
     /* 0x04 */ s32 type;
@@ -39,5 +42,24 @@ struct attack_t {
     int ComboCriminalPlayerNo; // offset 0x4C, size 0x4
 };
 #endif
+
+// void func_8005A8D0_usa();
+// void func_8005A990_usa();
+// void func_8005A9EC_usa();
+// void func_8005AAE0_usa();
+// void func_8005AE18_usa();
+// void func_8005B6E4_usa();
+// void func_8005BBF4_usa();
+// void func_8005BD24_usa();
+// void func_8005BEFC_usa();
+// void func_8005BFB4_usa();
+// void func_8005C2C4_usa();
+// void func_8005C460_usa();
+void Match3DPosition(s32 num, s32 row, s32 col, s32 *x, s32 *y);
+void UpdateAttack(struct tetWell *well, struct cursor_t *cursor, s32 num);
+// void func_8005C780_usa();
+void ChangeAttack(struct tetWell *well, struct cursor_t *cursor, s32 num, s32 combo);
+// void func_8005CB30_usa();
+void StartAttack(struct tetWell *well, s32 num);
 
 #endif

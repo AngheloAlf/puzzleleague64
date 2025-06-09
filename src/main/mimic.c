@@ -14,9 +14,11 @@
 #include "segment_symbols.h"
 
 #include "ai.h"
+#include "animate3d.h"
 #include "animation.h"
 #include "buffers.h"
 #include "character.h"
+#include "combo.h"
 #include "dlist.h"
 #include "init2d.h"
 #include "other.h"

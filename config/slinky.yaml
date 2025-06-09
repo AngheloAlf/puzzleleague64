@@ -219,57 +219,45 @@ segments:
       - { path: src/main/other.o }
       - { path: src/main/fade.o }
       - { path: src/main/dlist.o }
+      - { path: src/main/combo.o }
 
-      - { path: "asm/{version}/main/056420.o", include_if_any: [[version, usa]] }
       - { path: "asm/{version}/main/057510.o", include_if_any: [[version, usa]] }
-
-      - { path: "asm/{version}/main/0566C0.o", include_if_any: [[version, eur]] }
-      - { path: "asm/{version}/main/0577B0.o", include_if_any: [[version, eur]] }
       - { path: "asm/{version}/data/main/0C7520.rodata.o", include_if_any: [[version, usa]] }
+
+      - { path: "asm/{version}/main/0577B0.o", include_if_any: [[version, eur]] }
       - { path: "asm/{version}/data/main/0C77D0.rodata.o", include_if_any: [[version, eur]] }
 
-      - { path: "asm/{version}/main/054E30.o", include_if_any: [[version, fra]] }
-
       - { path: src/main/update.o, include_if_any: [[version, usa], [version, eur]] }
-
-      - { path: "asm/{version}/main/054FB0.o", include_if_any: [[version, ger]] }
 
       - { path: "asm/{version}/main/055F20.o", include_if_any: [[version, fra]] }
       - { path: "asm/{version}/main/0560A0.o", include_if_any: [[version, ger]] }
 
-      - { path: "asm/{version}/main/05B4D0.o", include_if_any: [[version, usa]] }
-      - { path: "asm/{version}/main/05B790.o", include_if_any: [[version, eur]] }
-      - { path: "asm/{version}/main/059ED0.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/main/05A080.o", include_if_any: [[version, ger]] }
+      - { path: "asm/{version}/data/main/0C5E30.rodata.o", include_if_any: [[version, fra]] }
+      - { path: "asm/{version}/data/main/0C5E80.rodata.o", include_if_any: [[version, fra]] }
 
+      - { path: "asm/{version}/data/main/0BCDF0.rodata.o", include_if_any: [[version, ger]] }
+      - { path: "asm/{version}/data/main/0BCE40.rodata.o", include_if_any: [[version, ger]] }
+
+      - { path: src/main/attack.o }
       - { path: src/main/explode.o }
 
       - { path: "asm/{version}/main/05E500.o", include_if_any: [[version, usa]] }
       - { path: "asm/{version}/main/05F110.o", include_if_any: [[version, usa]] }
-      - { path: "asm/{version}/main/067370.o", include_if_any: [[version, usa]] }
-      - { path: "asm/{version}/data/main/0C77A0.rodata.o", include_if_any: [[version, usa]] }
       - { path: "asm/{version}/data/main/0C79A0.rodata.o", include_if_any: [[version, usa]] }
 
       - { path: "asm/{version}/main/05E7D0.o", include_if_any: [[version, eur]] }
       - { path: "asm/{version}/main/05F3E0.o", include_if_any: [[version, eur]] }
-      - { path: "asm/{version}/main/067640.o", include_if_any: [[version, eur]] }
-      - { path: "asm/{version}/data/main/0C7A50.rodata.o", include_if_any: [[version, eur]] }
       - { path: "asm/{version}/data/main/0C7C50.rodata.o", include_if_any: [[version, eur]] }
 
       - { path: "asm/{version}/main/05CF10.o", include_if_any: [[version, fra]] }
       - { path: "asm/{version}/main/05DB20.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/main/065D80.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/data/main/0C5E30.rodata.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/data/main/0C5E80.rodata.o", include_if_any: [[version, fra]] }
       - { path: "asm/{version}/data/main/0C62B0.rodata.o", include_if_any: [[version, fra]] }
 
       - { path: "asm/{version}/main/05D0C0.o", include_if_any: [[version, ger]] }
       - { path: "asm/{version}/main/05DCD0.o", include_if_any: [[version, ger]] }
-      - { path: "asm/{version}/main/065F30.o", include_if_any: [[version, ger]] }
-      - { path: "asm/{version}/data/main/0BCDF0.rodata.o", include_if_any: [[version, ger]] }
-      - { path: "asm/{version}/data/main/0BCE40.rodata.o", include_if_any: [[version, ger]] }
       - { path: "asm/{version}/data/main/0BD270.rodata.o", include_if_any: [[version, ger]] }
 
+      - { path: src/main/animate3d.o }
       - { path: src/main/067FB0.o }
       - { path: src/main/explode3d.o }
       - { path: src/main/init2d.o }
