@@ -1137,7 +1137,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/text", func_8004C280_usa);
 #endif
 
 #if VERSION_USA
-void Draw2DTemplate(struct_gInfo_unk_00068 *arg0) {
+void Draw2DTemplate(struct_gInfo_unk_00068 *dynamicp) {
     s32 var_t1 = -1;
     s32 i;
 
@@ -1146,7 +1146,7 @@ void Draw2DTemplate(struct_gInfo_unk_00068 *arg0) {
     gSPObjLoadTxtr(glistp++, &otherLUT);
 
     for (i = 0; i < MAGIC_NUMBER; i++) {
-        s32 var_v1 = arg0->drawText[i].texture;
+        s32 var_v1 = dynamicp->drawText[i].texture;
 
         if (var_v1 == -1) {
             continue;
@@ -1202,25 +1202,25 @@ void Draw2DTemplate(struct_gInfo_unk_00068 *arg0) {
             }
         }
 
-        gSPObjRectangle(glistp++, &arg0->drawText[i].word);
+        gSPObjRectangle(glistp++, &dynamicp->drawText[i].word);
     }
 }
 #endif
 
 #if VERSION_USA
-void Draw2DText(struct_gInfo_unk_00068 *arg0) {
+void Draw2DText(struct_gInfo_unk_00068 *dynamicp) {
     s8 sp10[MAGIC_NUMBER];
     s32 i;
     s32 var_s1 = 0;
     s32 j;
 
-    Draw2DTemplate(arg0);
+    Draw2DTemplate(dynamicp);
     bzero(sp10, MAGIC_NUMBER * sizeof(s8));
 
     for (i = MAGIC_NUMBER; i < GAME_UNK_90C8_LEN; i++) {
-        if (arg0->drawText[i].texture < ARRAY_COUNTU(sp10)) {
-            sp10[arg0->drawText[i].texture] = true;
-        } else if (arg0->drawText[i].texture == -1) {
+        if (dynamicp->drawText[i].texture < ARRAY_COUNTU(sp10)) {
+            sp10[dynamicp->drawText[i].texture] = true;
+        } else if (dynamicp->drawText[i].texture == -1) {
             var_s1 = i;
             break;
         }
@@ -1262,8 +1262,8 @@ void Draw2DText(struct_gInfo_unk_00068 *arg0) {
         }
 
         for (i = MAGIC_NUMBER; i < var_s1; i++) {
-            if (arg0->drawText[i].texture == j) {
-                gSPObjRectangle(glistp++, &arg0->drawText[i].word);
+            if (dynamicp->drawText[i].texture == j) {
+                gSPObjRectangle(glistp++, &dynamicp->drawText[i].word);
             }
         }
     }

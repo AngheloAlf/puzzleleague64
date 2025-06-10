@@ -8,7 +8,7 @@
 void InitGameAudioSystem(void);
 void SetSoundOptions(s16 arg0);
 UNK_RET LoadFairySoundData(UNK_TYPE arg0, UNK_TYPE arg1, UNK_TYPE arg2);
-s32 PlayGameSong(tetWell *game);
+s32 PlayGameSong(tetWell *well);
 // void func_80004848_usa();
 // void func_8000486C_usa();
 // void func_800048C0_usa();

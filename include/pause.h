@@ -11,6 +11,6 @@ struct struct_gInfo_unk_00068;
 // void func_800364BC_usa();
 void Draw2DPause(struct struct_gInfo_unk_00068 *dynamicp);
 void Draw3DPause(struct struct_gInfo_unk_00068 *dynamicp);
-void DrawPause(struct struct_gInfo_unk_00068 *arg0);
+void DrawPause(struct struct_gInfo_unk_00068 *dynamicp);
 
 #endif

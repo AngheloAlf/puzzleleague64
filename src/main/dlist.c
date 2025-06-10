@@ -75,15 +75,15 @@ void func_80054624_usa(s32 arg0 UNUSED) {
     }
 }
 
-void InitTetrisState(block_t *arg0) {
-    arg0->state = 0;
-    arg0->delay = 0;
-    arg0->disappear = 0;
-    arg0->drop = 0;
-    arg0->type = 0;
-    arg0->frame_n = 0;
-    arg0->bomb = 0;
-    arg0->chain_flag = 0;
+void InitTetrisState(block_t *block) {
+    block->state = 0;
+    block->delay = 0;
+    block->disappear = 0;
+    block->drop = 0;
+    block->type = 0;
+    block->frame_n = 0;
+    block->bomb = 0;
+    block->chain_flag = 0;
 }
 
 void InitDisplayList(struct_gInfo *info) {

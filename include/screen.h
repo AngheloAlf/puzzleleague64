@@ -207,7 +207,7 @@ void screenSetText(s32 arg0, s32 arg1, u16 *arg2);
 void func_80029130_usa(s32 arg0, s32 arg1, u16 *arg2, s32 arg3);
 nbool func_80029244_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 nbool func_8002931C_usa(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3);
-nbool screenGetTextType(s32 arg0, s32 arg1, u32 *arg2);
+nbool screenGetTextType(s32 iScreen, s32 nTagText, u32 *pnType);
 nbool func_800294C8_usa(s32 arg0, s32 arg1, s32 *arg2);
 void func_80029594_usa(s32 arg0, s32 arg1, s32 arg2);
 void func_800296B0_usa(u16 *dst, char *src, s32 dstLen);
