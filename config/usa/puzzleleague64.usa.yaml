@@ -194,7 +194,7 @@ segments:
       - [0x054C20, c, main/fade]
       - [0x055100, c, main/dlist]
       - [0x056420, c, main/combo]
-      - [0x057510, asm, main/057510] # animate.c?
+      - [0x057510, c, main/animate]
       - [0x058250, c, main/update]
       - [0x05B4D0, c, main/attack]
       - [0x05E230, c, main/explode]
@@ -559,7 +559,7 @@ segments:
       - [0x0C6C20, .rodata, main/animation]
       - [0x0C6D78, .rodata, main/other]
       - [0x0C7240, .rodata, main/dlist]
-      - [0x0C7520, rodata, main/0C7520]
+      - [0x0C7520, .rodata, main/animate]
       - [0x0C7570, .rodata, main/update]
       - [0x0C77A0, .rodata, main/attack]
       - [0x0C79A0, rodata, main/0C79A0]

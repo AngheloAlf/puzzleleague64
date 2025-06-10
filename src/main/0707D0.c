@@ -44,7 +44,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/0707D0", Update2DSwitching);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/0707D0", func_80070CA4_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/0707D0", Add2DNewRow);
 #endif
 
 #if VERSION_EUR
@@ -84,7 +84,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/0707D0", Update2DSwitching);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/0707D0", func_80070FC4_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/0707D0", Add2DNewRow);
 #endif
 
 #if VERSION_FRA
@@ -124,7 +124,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/0707D0", Update2DSwitching);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/0707D0", func_8006F704_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/0707D0", Add2DNewRow);
 #endif
 
 #if VERSION_GER
@@ -164,5 +164,5 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/0707D0", Update2DSwitching);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/0707D0", func_8006F8B4_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/0707D0", Add2DNewRow);
 #endif

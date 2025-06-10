@@ -220,22 +220,14 @@ segments:
       - { path: src/main/fade.o }
       - { path: src/main/dlist.o }
       - { path: src/main/combo.o }
-
-      - { path: "asm/{version}/main/057510.o", include_if_any: [[version, usa]] }
-      - { path: "asm/{version}/data/main/0C7520.rodata.o", include_if_any: [[version, usa]] }
-
-      - { path: "asm/{version}/main/0577B0.o", include_if_any: [[version, eur]] }
-      - { path: "asm/{version}/data/main/0C77D0.rodata.o", include_if_any: [[version, eur]] }
+      - { path: src/main/animate.o }
 
       - { path: src/main/update.o, include_if_any: [[version, usa], [version, eur]] }
 
-      - { path: "asm/{version}/main/055F20.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/main/0560A0.o", include_if_any: [[version, ger]] }
-
-      - { path: "asm/{version}/data/main/0C5E30.rodata.o", include_if_any: [[version, fra]] }
+      - { path: "asm/{version}/main/056C60.o", include_if_any: [[version, fra]] }
       - { path: "asm/{version}/data/main/0C5E80.rodata.o", include_if_any: [[version, fra]] }
 
-      - { path: "asm/{version}/data/main/0BCDF0.rodata.o", include_if_any: [[version, ger]] }
+      - { path: "asm/{version}/main/056DE0.o", include_if_any: [[version, ger]] }
       - { path: "asm/{version}/data/main/0BCE40.rodata.o", include_if_any: [[version, ger]] }
 
       - { path: src/main/attack.o }

@@ -123,17 +123,17 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/animate3d", Update3DSwitching);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/animate3d", func_800671B4_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/animate3d", Add3DNewRow);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/animate3d", func_80067484_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/animate3d", Add3DNewRow);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/animate3d", func_80065BC4_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/animate3d", Add3DNewRow);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/animate3d", func_80065D74_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/animate3d", Add3DNewRow);
 #endif

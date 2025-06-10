@@ -14,6 +14,6 @@ s32 Move3DCursorLeft(struct cursor_t *cursor, s32 hold);
 s32 Move3DCursorRight(struct cursor_t *cursor, s32 hold);
 s32 Switch3DBlocks(struct tetWell *well, struct cursor_t *cursor, s32 num);
 void Update3DSwitching(struct tetWell *well, struct cursor_t *cursor);
-// void func_800671B4_usa();
+void Add3DNewRow(struct tetWell *well, struct cursor_t *cursor, s32 num);
 
 #endif

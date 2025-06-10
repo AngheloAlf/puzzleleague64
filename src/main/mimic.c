@@ -4,7 +4,6 @@
 
 #include "mimic.h"
 
-#include "ultra64.h"
 #include "include_asm.h"
 #include "macros_defines.h"
 #include "unknown_structs.h"
@@ -14,6 +13,7 @@
 #include "segment_symbols.h"
 
 #include "ai.h"
+#include "animate.h"
 #include "animate3d.h"
 #include "animation.h"
 #include "buffers.h"

@@ -33,14 +33,6 @@ void func_800449C4_usa(Gfx **gfxP);
 void func_80046648_usa(s32 arg0);
 void func_80046C2C_usa(void **heapP, s32 arg1);
 
-// void func_80056910_usa();
-void AddNewRow(struct tetWell *well, struct cursor_t *cursor, s32 num);
-// void func_80056A7C_usa();
-// void func_80056BAC_usa();
-void CheckShake(struct tetWell *well, struct cursor_t *cursor);
-s32 CheckFieldActive(struct tetWell *well);
-// void func_8005731C_usa();
-
 // void func_8005D900_usa();
 // void func_8005DB88_usa();
 // void func_8005DBD8_usa();
