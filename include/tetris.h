@@ -3,10 +3,12 @@
 
 #include "ultra64.h"
 #include "unk.h"
-#include "the_game.h"
 
+#include "block.h"
 
-s32 RandomBlock(tetWell *arg0);
+struct tetWell;
+
+BlockType RandomBlock(struct tetWell *well);
 // void func_80089778_usa();
 // void func_80089828_usa();
 // void func_8008997C_usa();

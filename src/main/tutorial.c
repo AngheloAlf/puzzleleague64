@@ -70,7 +70,7 @@ void TutorialCheckState(tetWell *well, cursor_t *cursor) {
         for (col = 0; col < gMax; col++) {
             block_t *block = &well->block[BLOCK_LEN_ROWS - 1][col];
 
-            if (block->type != 0) {
+            if (block->type != BLOCKTYPE_0) {
                 break;
             }
         }

@@ -87,19 +87,19 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/animate", CheckShake);
 INCLUDE_ASM("asm/ger/nonmatchings/main/animate", CheckShake);
 #endif
 
-s32 CheckFieldActive(tetWell *well) {
+nbool CheckFieldActive(tetWell *well) {
     s32 row;
     s32 col;
 
     for (row = 0; row < BLOCK_LEN_ROWS; row++) {
         for (col = 0; col < gMax; col++) {
-            if (well->block[row][col].state != 0) {
-                return -1;
+            if (well->block[row][col].state != BLOCKSTATE_0) {
+                return ntrue;
             }
         }
     }
 
-    return 0;
+    return nfalse;
 }
 
 #if VERSION_USA

@@ -56,7 +56,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/attack", func_8005C2C4_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/attack", func_8005C460_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/attack", ReturnAttackSlot);
 #endif
 
 #if VERSION_USA
@@ -116,7 +116,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/attack", func_8005C59C_eur);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/attack", func_8005C738_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/attack", ReturnAttackSlot);
 #endif
 
 #if VERSION_EUR
@@ -176,7 +176,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/attack", func_8005ACDC_fra);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/attack", func_8005AE78_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/attack", ReturnAttackSlot);
 #endif
 
 #if VERSION_FRA
@@ -236,7 +236,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/attack", func_8005AE8C_ger);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/attack", func_8005B028_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/attack", ReturnAttackSlot);
 #endif
 
 #if VERSION_GER

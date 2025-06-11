@@ -115,8 +115,8 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
         for (var_t1 = BLOCK_LEN_ROWS - 1; var_t1 >= 0; var_t1--) {
             for (var_a1 = 0; var_a1 < MIN(BLOCK_LEN_B, TETWELL_OBJSPRITE_LEN_B); var_a1++) {
                 block = &array[var_t1][var_a1];
-                if ((block->delay != -2) && (block->type != 9) && (block->state != 2) && (block->state != 3) &&
-                    (block->type != 0) && (block->frame_n == var_t3)) {
+                if ((block->delay != -2) && (block->type != BLOCKTYPE_9) && (block->state != BLOCKSTATE_2) &&
+                    (block->state != BLOCKSTATE_3) && (block->type != BLOCKTYPE_0) && (block->frame_n == var_t3)) {
                     gSPObjRectangle(glistp++, &sprite[var_t1][var_a1]);
                 }
             }
@@ -145,11 +145,11 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
         }
 
         block = &array[cursor->unk_1C][cursor->unk_18 + 1];
-        if ((block->type != 0) && (block->state == 2 || block->state == 3)) {
+        if ((block->type != BLOCKTYPE_0) && (block->state == BLOCKSTATE_2 || block->state == BLOCKSTATE_3)) {
             gSPObjRectangle(glistp++, &dynamicp->unk_182A8[num]);
         }
         block = &array[cursor->unk_1C][cursor->unk_18];
-        if ((block->type != 0) && (block->state == 2 || block->state == 3)) {
+        if ((block->type != BLOCKTYPE_0) && (block->state == BLOCKSTATE_2 || block->state == BLOCKSTATE_3)) {
             gSPObjRectangle(glistp++, &dynamicp->unk_182D8[num]);
         }
     }
@@ -429,7 +429,7 @@ s32 Draw2DAttackBlock(struct_gInfo_unk_00068 *dynamicp, s32 num) {
                 temp_a1 = attack->unk_24 + var_s2;
                 if (temp_a1 < BLOCK_LEN_ROWS) {
                     for (var_s0 = attack->unk_18; var_s0 < attack->unk_1C; var_s0++) {
-                        if (array[temp_a1][var_s0].type == 9) {
+                        if (array[temp_a1][var_s0].type == BLOCKTYPE_9) {
                             if (array[temp_a1][var_s0].drop == 0) {
                                 gSPObjRectangle(glistp++, &sprite[temp_a1][var_s0]);
                             } else if (array[temp_a1][var_s0].drop == 1) {
@@ -646,7 +646,7 @@ void Draw2DSmoke(struct_gInfo_unk_00068 *dynamicp, s32 num) {
 
         for (var_t6 = 0; var_t6 < 6; var_t6++) {
             new_var = BLOCK_LEN_ROWS - 1;
-            if ((dynamicp->block[num][new_var][var_t6].type != 0) &&
+            if ((dynamicp->block[num][new_var][var_t6].type != BLOCKTYPE_0) &&
                 (dynamicp->explosion[num][var_t6].frame >= -0x13)) {
                 gSPObjRectangle(glistp++, &dynamicp->explosion[num][var_t6].rect);
             }

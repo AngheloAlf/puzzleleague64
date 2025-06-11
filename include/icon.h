@@ -6,11 +6,14 @@
 #include "unk.h"
 
 typedef struct icon_t {
-    /* 0x00 */ int flag;
-    /* 0x04 */ int type;
-    /* 0x08 */ int total;
-    /* 0x0C */ UNK_TYPE1 unk_0C[0x01C-0x00C];
-    /* 0x1C */ int count;
+    /* 0x00 */ s32 flag;
+    /* 0x04 */ s32 type;
+    /* 0x08 */ s32 total;
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 count;
     /* 0x20 */ UNK_TYPE1 unk_20[0x28-0x020];
     /* 0x28 */ uObjSprite unk_28;
     /* 0x40 */ UNK_TYPE1 unk_40[0x68-0x040];

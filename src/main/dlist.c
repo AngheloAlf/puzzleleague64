@@ -76,11 +76,11 @@ void func_80054624_usa(s32 arg0 UNUSED) {
 }
 
 void InitTetrisState(block_t *block) {
-    block->state = 0;
+    block->state = BLOCKSTATE_0;
     block->delay = 0;
     block->disappear = 0;
     block->drop = 0;
-    block->type = 0;
+    block->type = BLOCKTYPE_0;
     block->frame_n = 0;
     block->bomb = 0;
     block->chain_flag = 0;

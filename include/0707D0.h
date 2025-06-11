@@ -8,8 +8,8 @@ struct cursor_t;
 struct tetWell;
 
 // combo2d.c
-// void func_8006FBD0_usa();
-// void func_8006FC50_usa();
+void Compact2DAttackNoWhere(struct tetWell *well);
+void Compact2DAttack(struct tetWell *well, s32 count);
 
 // animate2d.c
 // void func_8006FF90_usa();

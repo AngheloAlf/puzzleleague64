@@ -9,29 +9,12 @@
 #include "unknown_defines.h"
 
 #include "attack.h"
+#include "block.h"
 #include "cursor.h"
 #include "explode.h"
 #include "gamepad.h"
 #include "icon.h"
 #include "text.h"
-
-#define BLOCK_LEN_ROWS (12)
-#define BLOCK_LEN_B (18)
-
-/* Original name: block_t. */
-typedef struct block_t {
-    /* 0x00 */ s32 state; /* Original name: state */
-    /* 0x04 */ s32 delay; /* Original name: delay */
-    /* 0x08 */ s32 disappear; /* Original name: disappear */
-    /* 0x0C */ s32 drop; /* Original name: drop */
-    /* 0x10 */ s32 type; /* Original name: type */
-    /* 0x14 */ s32 bomb; /* Original name: bomb */
-    /* 0x18 */ s32 sound; /* Original name: sound */
-    /* 0x1C */ s32 currRow; /* Original name: currRow */
-    /* 0x20 */ s32 chain_flag; /* Original name: chain_flag */
-    /* 0x24 */ s32 frame_n; /* Original name: frame_n */
-    /* 0x28 */ s32 frame_d; /* Original name: frame_d */
-} block_t; // size = 0x2C
 
 typedef struct tetWell_unk_3FB0 {
     /* 0x00 */ UNK_TYPE1 unk_00[0xD8];
@@ -59,8 +42,6 @@ typedef enum enum_tetWell_unk_4424 {
     /* 41 */ ENUM_GAME_UNK_0000_UNK_4424_41 = 41,
 } enum_tetWell_unk_4424;
 
-
-#define TETWELL_OBJSPRITE_LEN_B (BLOCK_LEN_B / 3)
 
 #define TETWELL_UNK_3EF0_LEN_6 (6)
 
@@ -92,9 +73,10 @@ typedef struct tetWell {
     /* 0x43B0 */ UNK_TYPE1 unk_43B0[0x8];
     /* 0x43B8 */ s32 unk_43B8;
     /* 0x43BC */ s32 unk_43BC;
-    /* 0x43C0 */ UNK_TYPE1 unk_43C0[0x43C4-0x43C0];
+    /* 0x43C0 */ s32 unk_43C0;
     /* 0x43C4 */ s32 unk_43C4;
-    /* 0x43C8 */ UNK_TYPE1 unk_43C8[0x43E0-0x43C8];
+    /* 0x43C8 */ s32 unk_43C8;
+    /* 0x43CC */ UNK_TYPE1 unk_43CC[0x43E0-0x43CC];
     /* 0x43E0 */ s32 unk_43E0;
     /* 0x43E4 */ UNK_TYPE1 unk_43E4[8];
     /* 0x43EC */ UNK_TYPE4 unk_43EC;

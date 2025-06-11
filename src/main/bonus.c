@@ -504,7 +504,7 @@ void DoBonus(void) {
         gTheGame.unk_8C88[1].b.frameY = (var_a0 - var_s5) << 2;
 
         for (var_s3 = 0; var_s3 < BLOCK_LEN_B / 3; var_s3++) {
-            if (var_s2->block[0][var_s3].type == 0) {
+            if (var_s2->block[0][var_s3].type == BLOCKTYPE_0) {
                 s32 temp_ret = AnimationRandom(500);
 
                 if (temp_ret == ((temp_ret / 21) * 0x15)) {
@@ -526,7 +526,7 @@ void DoBonus(void) {
 
                 if (var_a0 >= 0xF0) {
                     var_a0 = -0x14;
-                    var_s2->block[0][var_s3].type = 0;
+                    var_s2->block[0][var_s3].type = BLOCKTYPE_0;
                     var_s2->block[0][var_s3].disappear = 0;
                 }
 

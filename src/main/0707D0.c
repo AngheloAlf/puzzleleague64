@@ -8,11 +8,11 @@
 #include "main_variables.h"
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/0707D0", func_8006FBD0_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/0707D0", Compact2DAttackNoWhere);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/0707D0", func_8006FC50_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/0707D0", Compact2DAttack);
 #endif
 
 #if VERSION_USA
@@ -48,11 +48,11 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/0707D0", Add2DNewRow);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/0707D0", func_8006FEF0_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/0707D0", Compact2DAttackNoWhere);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/0707D0", func_8006FF70_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/0707D0", Compact2DAttack);
 #endif
 
 #if VERSION_EUR
@@ -88,11 +88,11 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/0707D0", Add2DNewRow);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/0707D0", func_8006E630_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/0707D0", Compact2DAttackNoWhere);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/0707D0", func_8006E6B0_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/0707D0", Compact2DAttack);
 #endif
 
 #if VERSION_FRA
@@ -128,11 +128,11 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/0707D0", Add2DNewRow);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/0707D0", func_8006E7E0_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/0707D0", Compact2DAttackNoWhere);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/0707D0", func_8006E860_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/0707D0", Compact2DAttack);
 #endif
 
 #if VERSION_GER

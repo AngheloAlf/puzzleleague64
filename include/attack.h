@@ -54,7 +54,7 @@ struct attack_t {
 // void func_8005BEFC_usa();
 // void func_8005BFB4_usa();
 // void func_8005C2C4_usa();
-// void func_8005C460_usa();
+s32 ReturnAttackSlot(struct tetWell * well, s32 row, s32 col);
 void Match3DPosition(s32 num, s32 row, s32 col, s32 *x, s32 *y);
 void UpdateAttack(struct tetWell *well, struct cursor_t *cursor, s32 num);
 // void func_8005C780_usa();

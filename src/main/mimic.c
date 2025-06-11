@@ -277,7 +277,7 @@ void MimicCheckState(tetWell *well, cursor_t *cursor) {
         cursor->unk_28 = well->unk_43A8;
     }
 
-    if (CheckFieldActive(well) == 0) {
+    if (!CheckFieldActive(well)) {
         if ((brainbrain[0].unk_00C == -1) && (well->unk_43A8 == 0)) {
             if (brainbrain[0].unk_03C == 5) {
                 if (cursor->unk_2C == 0) {

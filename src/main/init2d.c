@@ -64,14 +64,14 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", func_8006B314_usa);
 void Init2DTetrisBlocksTMEM(tetWell *well, s32 clear) {
     s32 row;
     s32 col;
-    s32 type;
+    BlockType type;
     block_t *block;
 
     for (row = 0; row < BLOCK_LEN_ROWS; row++) {
         for (col = 0; col < TETWELL_OBJSPRITE_LEN_B; col++) {
             block = &well->block[row][col];
             type = block->type;
-            if (type != 0) {
+            if (type != BLOCKTYPE_0) {
                 if (clear != 0) {
                     InitTetrisState(block);
                 }
@@ -276,35 +276,35 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", Init2DGameOverSmoke);
 
 void Init2DTetrisTMEM(block_t *block, uObjSprite *rect) {
     switch (block->type) {
-        case 0x1:
+        case BLOCKTYPE_1:
             rect->s.imageAdrs = 0;
             break;
 
-        case 0x2:
+        case BLOCKTYPE_2:
             rect->s.imageAdrs = 2;
             break;
 
-        case 0x3:
+        case BLOCKTYPE_3:
             rect->s.imageAdrs = 4;
             break;
 
-        case 0x4:
+        case BLOCKTYPE_4:
             rect->s.imageAdrs = 6;
             break;
 
-        case 0x5:
+        case BLOCKTYPE_5:
             rect->s.imageAdrs = 0x80;
             break;
 
-        case 0x6:
+        case BLOCKTYPE_6:
             rect->s.imageAdrs = 0x82;
             break;
 
-        case 0x7:
+        case BLOCKTYPE_7:
             rect->s.imageAdrs = 0x84;
             break;
 
-        case 0x8:
+        case BLOCKTYPE_8:
             rect->s.imageAdrs = 0x86;
             break;
 
