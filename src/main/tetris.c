@@ -3,14 +3,13 @@
  */
 
 #include "tetris.h"
-#include "ultra64.h"
 #include "include_asm.h"
 #include "macros_defines.h"
-#include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
-#include "sound.h"
+
 #include "dlist.h"
+#include "sound.h"
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/tetris", RandomBlock);

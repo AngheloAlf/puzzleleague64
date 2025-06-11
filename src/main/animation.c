@@ -6,12 +6,12 @@
 
 #include "include_asm.h"
 #include "macros_defines.h"
-#include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
 
 #include "sfxlimit.h"
 #include "update.h"
+
 #include "075630.h"
 
 s32 AnimationRandom(s32 max) {

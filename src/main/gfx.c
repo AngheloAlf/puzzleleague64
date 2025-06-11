@@ -6,6 +6,7 @@
 
 #include "main_functions.h"
 #include "main_variables.h"
+
 #include "assets_variables.h"
 
 #include "bonus.h"
@@ -22,6 +23,7 @@
 #include "the_game.h"
 #include "title.h"
 #include "tutorial.h"
+
 #include "001F10.h"
 
 void *staticSegment = NULL;

@@ -6,7 +6,6 @@
 
 #include "include_asm.h"
 #include "macros_defines.h"
-#include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
 
@@ -18,6 +17,7 @@
 #include "screen.h"
 #include "sfxlimit.h"
 #include "sound.h"
+
 #include "041780.h"
 
 #define STRUCT_8018E570_USA_UNK_LEN 0x10

@@ -4,22 +4,22 @@
 
 #include "title.h"
 
-#include "ultra64.h"
 #include "include_asm.h"
 #include "macros_defines.h"
-#include "unknown_structs.h"
+
 #include "main_functions.h"
 #include "main_variables.h"
-#include "hvqm2util.h"
-#include "the_game.h"
-#include "controller.h"
-#include "build.h"
+
 #include "buffers.h"
-#include "sfxlimit.h"
-#include "segment_symbols.h"
-#include "sound.h"
-#include "screen.h"
+#include "build.h"
+#include "controller.h"
+#include "hvqm2util.h"
 #include "menu.h"
+#include "screen.h"
+#include "segment_symbols.h"
+#include "sfxlimit.h"
+#include "sound.h"
+#include "the_game.h"
 
 #if VERSION_USA
 u32 D_800B5890_usa[] = {

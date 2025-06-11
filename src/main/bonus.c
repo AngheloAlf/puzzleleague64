@@ -6,7 +6,6 @@
 
 #include "include_asm.h"
 #include "macros_defines.h"
-#include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
 
@@ -21,9 +20,10 @@
 #include "screen.h"
 #include "sfxlimit.h"
 #include "sound.h"
-#include "text.h"
 #include "tetris.h"
+#include "text.h"
 #include "update.h"
+
 #include "001F10.h"
 
 typedef struct struct_800C4490_usa {

@@ -4,12 +4,11 @@
 
 #include "menu.h"
 
-#include "ultra64.h"
 #include "include_asm.h"
 #include "macros_defines.h"
-#include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
+
 #include "the_game.h"
 
 #if VERSION_USA

@@ -4,7 +4,6 @@
 
 #include "explode2d.h"
 
-#include "ultra64.h"
 #include "macros_defines.h"
 #include "main_variables.h"
 

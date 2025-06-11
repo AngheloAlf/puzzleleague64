@@ -4,20 +4,18 @@
 
 #include "sound.h"
 
-#include "ultra64.h"
-#include "libmus/libmus.h"
 #include "libmus/lib_memory.h"
+#include "libmus/libmus.h"
 
 #include "include_asm.h"
 #include "macros_defines.h"
-#include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
 
-#include "rom_offsets.h"
-#include "sfxlimit.h"
 #include "boot_main.h"
 #include "pon_thread.h"
+#include "rom_offsets.h"
+#include "sfxlimit.h"
 
 extern s16 D_800B3AE4_usa;
 

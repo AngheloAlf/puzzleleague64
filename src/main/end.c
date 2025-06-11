@@ -6,16 +6,15 @@
 
 #include "include_asm.h"
 #include "macros_defines.h"
-#include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
 
-#include "fade.h"
 #include "explode.h"
-#include "sound.h"
-#include "sfxlimit.h"
-#include "update.h"
+#include "fade.h"
 #include "menu.h"
+#include "sfxlimit.h"
+#include "sound.h"
+#include "update.h"
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", GameOverSmoke);

@@ -6,7 +6,6 @@
 
 #include "include_asm.h"
 #include "macros_defines.h"
-#include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
 
@@ -30,6 +29,7 @@
 #include "tetsound.h"
 #include "tutorial.h"
 #include "update.h"
+
 #include "067FB0.h"
 
 INLINE void SetupMimic(void **heapP) {

@@ -4,12 +4,10 @@
 
 #include "boot_main.h"
 
-#include "ultra64.h"
 #include "PR/sched.h"
 
 #include "include_asm.h"
 #include "macros_defines.h"
-#include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
 
@@ -27,15 +25,16 @@
 #include "mimic.h"
 #include "peel.h"
 #include "pon_thread.h"
-#include "story.h"
 #include "screen.h"
 #include "sound.h"
-#include "tetsound.h"
+#include "story.h"
 #include "tetris.h"
+#include "tetsound.h"
 #include "the_game.h"
 #include "title.h"
 #include "tutorial.h"
 #include "update.h"
+
 #include "0025C0.h"
 
 INLINE void func_80000450_usa(void) {

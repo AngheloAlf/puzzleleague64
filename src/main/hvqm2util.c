@@ -1,26 +1,25 @@
 #include "hvqm2util.h"
 
-#include "ultra64.h"
-#include "libmus/libmus.h"
-#include "libmus/aud_thread.h"
 #include "HVQM2File.h"
+#include "libmus/libmus.h"
+
+#include "libmus/aud_thread.h"
 
 #include "include_asm.h"
 #include "macros_defines.h"
-#include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
 
+#include "boot_main.h"
 #include "buffers.h"
 #include "cfb_keep.h"
-#include "timekeeper.h"
 #include "file.h"
-#include "tetsound.h"
 #include "image.h"
-#include "sound.h"
 #include "peel.h"
-#include "boot_main.h"
 #include "pon_thread.h"
+#include "sound.h"
+#include "tetsound.h"
+#include "timekeeper.h"
 
 #define VIDEO_MSG 666
 #define RSP_DONE_MSG 667

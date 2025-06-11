@@ -1,5 +1,5 @@
 #include "assets_variables.h"
-#include "ultra64.h"
+
 #include "alignment.h"
 
 Vp D_01000000_usa = { {

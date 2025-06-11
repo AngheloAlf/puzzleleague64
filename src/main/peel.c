@@ -3,14 +3,14 @@
  */
 
 #include "peel.h"
-#include "ultra64.h"
+
 #include "include_asm.h"
 #include "macros_defines.h"
-#include "unknown_structs.h"
 #include "main_functions.h"
 #include "main_variables.h"
-#include "file.h"
+
 #include "buffers.h"
+#include "file.h"
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/peel", func_8002C2C0_usa);
