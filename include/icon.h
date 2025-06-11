@@ -3,16 +3,24 @@
 
 #include "ultra64.h"
 #include "PR/gs2dex.h"
+#include "macros_defines.h"
 #include "unk.h"
 
+typedef enum IconType {
+    /* 10 */ ICONTYPE_10 = 10,
+    /* 11 */ ICONTYPE_11,
+    /* 12 */ ICONTYPE_12,
+    /* 13 */ ICONTYPE_13,
+} IconType;
+
 typedef struct icon_t {
-    /* 0x00 */ s32 flag;
-    /* 0x04 */ s32 type;
+    /* 0x00 */ s32 flag; // bool?
+    /* 0x04 */ ENUM_TYPE(IconType, s32) type;
     /* 0x08 */ s32 total;
-    /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
-    /* 0x18 */ s32 unk_18;
+    /* 0x0C */ s32 from_x;
+    /* 0x10 */ s32 from_y;
+    /* 0x14 */ s32 to_x;
+    /* 0x18 */ s32 to_y;
     /* 0x1C */ s32 count;
     /* 0x20 */ UNK_TYPE1 unk_20[0x28-0x020];
     /* 0x28 */ uObjSprite unk_28;

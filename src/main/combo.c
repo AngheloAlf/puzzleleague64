@@ -11,10 +11,10 @@
 #include "main_variables.h"
 
 #include "attack.h"
+#include "combo2d.h"
 #include "dlist.h"
 #include "init2d.h"
 #include "sfxlimit.h"
-#include "0707D0.h"
 
 void CheckCollision(tetWell *well) {
     CheckRowCombos(well);
@@ -77,7 +77,7 @@ void CompactWell(tetWell *well, s32 num) {
                                 bot_block->state = BLOCKSTATE_1;
                             } else if (well->block[sp74][col].type == BLOCKTYPE_9) {
                                 temp_v0_2 = ReturnAttackSlot(well, sp74, col);
-                                if ((temp_v0_2 != -1) && (well->attack[temp_v0_2].state != 6)) {
+                                if ((temp_v0_2 != -1) && (well->attack[temp_v0_2].state != ATTACKSTATE_6)) {
                                     sp6C = -1;
                                 }
                             } else {
@@ -144,6 +144,7 @@ void CompactWell(tetWell *well, s32 num) {
         }
 
         if (gTheGame.unk_9C0C == 1) {
+            // Use TETWELL_OBJSPRITE_LEN_B instead?
             if (col == BLOCK_LEN_B / 3) {
                 Compact2DAttackNoWhere(well);
             }
@@ -153,21 +154,130 @@ void CompactWell(tetWell *well, s32 num) {
     }
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/combo", CheckIcon);
+void CheckIcon(tetWell *well, s32 total) {
+    icon_t *icon;
+    s32 var_t2 = 0;
+    nbool var_t9 = ntrue;
+    nbool var_t6 = nfalse;
+    nbool var_t5 = nfalse;
+    s32 var_a3_2;
+    s32 var_t1;
+    s32 var_t4;
+
+#if 0
+    int count; // r12
+    int special; // r31
+    int left; // r7
+    int top; // r8
+    int bonus; // r9
+    int clear_chain; // r5
+    int clear_combo; // r10
 #endif
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/combo", CheckIcon);
-#endif
+    if (total == 0) {
+        return;
+    }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/combo", CheckIcon);
-#endif
+    var_t4 = gMax;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/combo", CheckIcon);
-#endif
+    for (var_t1 = 0; var_t1 < ICON_COUNT; var_t1++) {
+        if ((well->icon[var_t1].flag != 0) && (well->icon[var_t1].count < 0)) {
+            icon = &well->icon[var_t1];
+
+            if (var_t2 < icon->to_y) {
+                var_t2 = icon->to_y;
+                var_t4 = icon->from_x;
+            }
+
+            if ((icon->from_x < var_t4) && (icon->to_y >= var_t2)) {
+                var_t2 = icon->to_y;
+                var_t4 = icon->from_x;
+            }
+        }
+    }
+
+    if ((total != well->unk_43A4)) {
+        if (total == 3) {
+            var_t5 = ntrue;
+        }
+    }
+
+    for (var_t1 = 0; var_t1 < ICON_COUNT; var_t1++) {
+        if ((well->icon[var_t1].flag == 0) || (well->icon[var_t1].type != ICONTYPE_10) ||
+            (well->icon[var_t1].count >= 0)) {
+            continue;
+        }
+
+        icon = &well->icon[var_t1];
+
+        if (!var_t6) {
+            icon->count = -total;
+            if (total >= 4) {
+                var_t5 = ntrue;
+            }
+
+            icon->from_x = var_t4;
+            icon->to_y = var_t2;
+            var_t6 = ntrue;
+
+            if ((well->unk_43B4 != 0) && (gTheGame.unk_9C08 == 1) && !(gGameStatus & 0x20)) {
+                for (var_a3_2 = 0; var_a3_2 < ICON_COUNT; var_a3_2++) {
+                    if (well->icon[var_a3_2].flag == 0) {
+                        well->icon[var_a3_2].flag = -1;
+                        well->icon[var_a3_2].type = ICONTYPE_11;
+                        well->icon[var_a3_2].count = -1;
+                        well->icon[var_a3_2].from_x = var_t4;
+                        well->icon[var_a3_2].to_y = var_t2;
+                        break;
+                    }
+                }
+            }
+        } else {
+            icon->flag = 0;
+        }
+    }
+
+    for (var_t1 = 0; var_t1 < ICON_COUNT; var_t1++) {
+        if ((well->icon[var_t1].flag == 0) || (well->icon[var_t1].type != ICONTYPE_12) ||
+            (well->icon[var_t1].count >= 0)) {
+            continue;
+        }
+
+        icon = &well->icon[var_t1];
+        if (var_t9) {
+            var_a3_2 = ~well->unk_43A8;
+            if (well->unk_43A8 < 0) {
+                var_t9 = nfalse;
+                if (var_a3_2 >= ARRAY_COUNT(D_800B6CC4_usa)) {
+                    var_a3_2 = ARRAY_COUNT(D_800B6CC4_usa) - 1;
+                }
+                well->unk_43AC += D_800B6CC4_usa[var_a3_2];
+            }
+        }
+
+        if (!var_t5) {
+            icon->count = -total;
+            icon->from_x = var_t4;
+            icon->to_y = var_t2;
+            var_t5 = ntrue;
+
+            if ((well->unk_43B4 != 0) && (total != 3) && (gTheGame.unk_9C08 == 1) && !(gGameStatus & 0x20)) {
+                for (var_a3_2 = 0; var_a3_2 < ICON_COUNT; var_a3_2++) {
+                    if (well->icon[var_a3_2].flag == 0) {
+                        well->icon[var_a3_2].flag = -1;
+                        well->icon[var_a3_2].type = ICONTYPE_11;
+                        well->icon[var_a3_2].count = -1;
+                        well->icon[var_a3_2].from_x = var_t4;
+                        well->icon[var_a3_2].to_y = var_t2;
+                        break;
+                    }
+                }
+            }
+        } else {
+            icon->flag = 0;
+        }
+    }
+}
 
 void CheckRowCombos(tetWell *well) {
     s32 row;
@@ -254,13 +364,13 @@ void SetRowState(tetWell *well, s32 count, s32 row, s32 col) {
     icon_t *icon = NULL;
     s32 bomb = 0x1E;
     s32 sound = 0x64;
-    s32 kind = 0xC;
+    IconType kind = ICONTYPE_12;
     block_t *block;
     s32 i;
 
     for (i = 0; i < count; i++) {
         if (well->block[row][col - i].chain_flag != 0) {
-            kind = 0xA;
+            kind = ICONTYPE_10;
         }
     }
 
@@ -268,7 +378,7 @@ void SetRowState(tetWell *well, s32 count, s32 row, s32 col) {
         bomb = 0x1F;
     }
 
-    if (kind != 0xC) {
+    if (kind != ICONTYPE_12) {
         i = well->unk_43A8;
         if (i < -1) {
             bomb = 0x21;
@@ -295,7 +405,7 @@ void SetRowState(tetWell *well, s32 count, s32 row, s32 col) {
         block->state = BLOCKSTATE_7;
         block->bomb = bomb;
         block->sound = sound;
-        if (kind == 0xA) {
+        if (kind == ICONTYPE_10) {
             block->chain_flag = -1;
         }
     }
@@ -303,11 +413,11 @@ void SetRowState(tetWell *well, s32 count, s32 row, s32 col) {
     if (icon != NULL) {
         icon->type = kind;
         icon->flag = -1;
-        icon->unk_0C = col - (count - 1);
+        icon->from_x = col - (count - 1);
         icon->count = -count;
-        icon->unk_10 = row;
-        icon->unk_14 = col;
-        icon->unk_18 = row;
+        icon->from_y = row;
+        icon->to_x = col;
+        icon->to_y = row;
 
         if (well->block[row][col].type == BLOCKTYPE_7) {
             well->unk_43A4 += count;
@@ -319,13 +429,13 @@ void SetColState(tetWell *well, s32 count, s32 row, s32 col) {
     icon_t *icon = NULL;
     s32 bomb = 0x1E;
     s32 sound = 0x64;
-    s32 kind = 0xC;
+    IconType kind = ICONTYPE_12;
     block_t *block;
     s32 i;
 
     for (i = 0; i < count; i++) {
         if (well->block[row - i][col].chain_flag != 0) {
-            kind = 0xA;
+            kind = ICONTYPE_10;
         }
     }
 
@@ -333,7 +443,7 @@ void SetColState(tetWell *well, s32 count, s32 row, s32 col) {
         bomb = 0x1F;
     }
 
-    if (kind != 0xC) {
+    if (kind != ICONTYPE_12) {
         i = well->unk_43A8;
         if (i < -1) {
             bomb = 0x21;
@@ -360,7 +470,7 @@ void SetColState(tetWell *well, s32 count, s32 row, s32 col) {
         block->state = BLOCKSTATE_7;
         block->bomb = bomb;
         block->sound = sound;
-        if (kind == 0xA) {
+        if (kind == ICONTYPE_10) {
             block->chain_flag = -1;
         }
     }
@@ -368,11 +478,11 @@ void SetColState(tetWell *well, s32 count, s32 row, s32 col) {
     if (icon != NULL) {
         icon->type = kind;
         icon->flag = -1;
-        icon->unk_10 = row - (count - 1);
+        icon->from_y = row - (count - 1);
         icon->count = -count;
-        icon->unk_0C = col;
-        icon->unk_14 = col;
-        icon->unk_18 = row;
+        icon->from_x = col;
+        icon->to_x = col;
+        icon->to_y = row;
 
         if (well->block[row][col].type == BLOCKTYPE_7) {
             well->unk_43A4 += count;

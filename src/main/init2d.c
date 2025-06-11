@@ -14,19 +14,19 @@
 #include "dlist.h"
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", func_8006AF30_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", Init2DNewRow);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", func_8006AF30_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", Init2DNewRow);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", func_8006AF30_usa);
+INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", Init2DNewRow);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", func_8006AF30_usa);
+INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", Init2DNewRow);
 #endif
 
 #if VERSION_USA
@@ -346,19 +346,19 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", func_8006CBEC_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", func_8006CCA4_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", Init2DAttackTMEM);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", func_8006CF74_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", Init2DAttackTMEM);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", func_8006B6B4_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", Init2DAttackTMEM);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", func_8006B864_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", Init2DAttackTMEM);
 #endif
 
 #if VERSION_USA

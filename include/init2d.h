@@ -8,7 +8,7 @@
 struct tetWell;
 struct block_t;
 
-// void func_8006AF30_usa();
+void Init2DNewRow(struct tetWell *well);
 // void func_8006B24C_usa();
 // void func_8006B314_usa();
 void Init2DTetrisBlocksTMEM(struct tetWell *well, s32 clear);
@@ -24,7 +24,7 @@ void Init2DGameOverSmoke(struct tetWell *well, s32 num);
 void Init2DTetrisTMEM(struct block_t *block, uObjSprite *rect);
 // void func_8006CB30_usa();
 // void func_8006CBEC_usa();
-// void func_8006CCA4_usa();
+void Init2DAttackTMEM(uObjSprite *rect, s32 type, s32 lev, s32 pos);
 // void func_8006CD64_usa();
 // void func_8006CE14_usa();
 

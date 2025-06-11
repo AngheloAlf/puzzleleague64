@@ -267,7 +267,7 @@ void Update2DBuffer(struct_gInfo *info) {
         }
 
         bcopy(&well->icon, &dynamicp->icon[var_s6], sizeof(icon_t) * ICON_COUNT);
-        bcopy(&well->attack, &dynamicp->attack[var_s6], sizeof(attack_t) * TETWELL_UNK_2520_LEN);
+        bcopy(&well->attack, &dynamicp->attack[var_s6], sizeof(attack_t) * ATTACK_COUNT);
         bcopy(&well->explosion, &dynamicp->explosion[var_s6], sizeof(explode_t) * TETWELL_EXPLOSION_LEN);
     }
 
@@ -329,7 +329,7 @@ void Update3DBuffer(struct_gInfo *info) {
         }
 
         bcopy(&well->icon, &dynamicp->icon[num], sizeof(icon_t) * ICON_COUNT);
-        bcopy(&well->attack, &dynamicp->attack[num], sizeof(attack_t) * TETWELL_UNK_2520_LEN);
+        bcopy(&well->attack, &dynamicp->attack[num], sizeof(attack_t) * ATTACK_COUNT);
         bcopy(&well->explosion, &dynamicp->explosion[num], sizeof(explode_t) * TETWELL_EXPLOSION_LEN);
         bcopy(&well->unk_3FB0, &dynamicp->unk_18308[num], sizeof(tetWell_unk_3FB0));
 

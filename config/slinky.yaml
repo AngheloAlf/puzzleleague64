@@ -254,7 +254,8 @@ segments:
       - { path: src/main/explode3d.o }
       - { path: src/main/init2d.o }
       - { path: src/main/draw2d.o }
-      - { path: src/main/0707D0.o }
+      - { path: src/main/combo2d.o }
+      - { path: src/main/animate2d.o }
       - { path: src/main/071B50.o }
 
       - { path: "asm/{version}/main/0722D0.o", include_if_any: [[version, usa]] }

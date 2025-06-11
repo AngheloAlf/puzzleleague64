@@ -83,7 +83,7 @@ s32 AnimationRandom(?);                           /* extern */
 ? func_8005DDF8_usa(s8 *);                          /* extern */
 ? func_8005DE28_usa();                              /* extern */
 ? func_8005DE58_usa(s8 *, s8 *, s32);               /* extern */
-? func_8006AF30_usa(s8 *);                          /* extern */
+? Init2DNewRow(s8 *);                          /* extern */
 ? func_8006B24C_usa(s8 *, s32);                     /* extern */
 ? func_8006B314_usa(s8 *, s32);                     /* extern */
 ? Init2DIcons(s8 *);                          /* extern */
@@ -245,7 +245,7 @@ loop_15:
 block_52:
                     func_8008997C_usa(temp_s3, &sp10, 6);
 block_54:
-                    func_8006AF30_usa(temp_s3);
+                    Init2DNewRow(temp_s3);
                     Init2DIcons(temp_s3);
                     func_8006B6A8_usa(temp_s3);
                     Init2DExplosion(temp_s3);

@@ -1,5 +1,5 @@
-#ifndef _0707D0_H
-#define _0707D0_H
+#ifndef ANIMATE2D_H
+#define ANIMATE2D_H
 
 #include "ultra64.h"
 #include "unk.h"
@@ -7,11 +7,6 @@
 struct cursor_t;
 struct tetWell;
 
-// combo2d.c
-void Compact2DAttackNoWhere(struct tetWell *well);
-void Compact2DAttack(struct tetWell *well, s32 count);
-
-// animate2d.c
 // void func_8006FF90_usa();
 s32 Move2DCursorUp(struct tetWell *well, struct cursor_t *cursor, s32 hold);
 s32 Move2DCursorDown(struct cursor_t *cursor, s32 hold);

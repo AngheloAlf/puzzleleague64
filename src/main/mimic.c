@@ -14,6 +14,7 @@
 
 #include "ai.h"
 #include "animate.h"
+#include "animate2d.h"
 #include "animate3d.h"
 #include "animation.h"
 #include "buffers.h"
@@ -30,7 +31,6 @@
 #include "tutorial.h"
 #include "update.h"
 #include "067FB0.h"
-#include "0707D0.h"
 
 INLINE void SetupMimic(void **heapP) {
     s32 temp_a0;

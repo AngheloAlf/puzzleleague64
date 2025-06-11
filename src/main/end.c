@@ -765,7 +765,7 @@ s32 func_8004FA2C_usa();                            /* extern */
 ? UpdatePlayerStageClear(cursor_t *, s32, s32);  /* extern */
 ? func_80058D68_usa(s32, s32);                      /* extern */
 ? UpdateExplosion(Game *);                     /* extern */
-? func_8006AF30_usa(Game *);                     /* extern */
+? Init2DNewRow(Game *);                     /* extern */
 ? func_8006B314_usa(Game *, ?);                  /* extern */
 ? Init2DIcons(Game *);                     /* extern */
 ? Init2DExplosion(Game *);                     /* extern */
@@ -930,7 +930,7 @@ block_39:
 block_50:
                         if (var_v0 == var_v1_2) {
                             func_8006B314_usa(&gTheGame, 0);
-                            func_8006AF30_usa(&gTheGame);
+                            Init2DNewRow(&gTheGame);
                         }
                     }
                     break;
@@ -994,7 +994,7 @@ block_73:
                     }
                     if (gMain == 0x392) {
                         func_8006B314_usa(&gTheGame, 0);
-                        func_8006AF30_usa(&gTheGame);
+                        Init2DNewRow(&gTheGame);
                         Init2DIcons(&gTheGame);
                         if ((gSelection >= 0x83) || (gTheGame.unk_8860[0].unk_0 != 7)) {
                             if ((gSelection == 0xAA) && (gTheGame.unk_8860[0].unk_0 == 7)) {

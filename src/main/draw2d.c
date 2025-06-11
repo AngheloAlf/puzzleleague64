@@ -156,7 +156,7 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
 
     if (gMain >= GMAIN_38E) {
         if (gGameStatus & 0x40) {
-            switch (well->unk_40B0) {
+            switch (well->new_block[0].frame_n) {
                 case 0x8:
                 case 0xD:
                     gSPObjLoadTxtr(glistp++, &tetrisBlock6);
@@ -175,7 +175,7 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
                     break;
             }
         } else {
-            switch (well->unk_40B0) {
+            switch (well->new_block[0].frame_n) {
                 case 0x8:
                 case 0x10:
                     gSPObjLoadTxtr(glistp++, &D_800B7458_usa);
@@ -215,7 +215,7 @@ INLINE void Draw2DCursor(struct_gInfo_unk_00068 *dynamicp) {
     for (i = 0; i < gTheGame.unk_9C08; i++) {
         cursor_t *cursor = &dynamicp->cursorBlock[i];
 
-        if (cursor->unk_14 < 0xC) {
+        if (cursor->y < 0xC) {
             gSPObjRectangle(glistp++, &cursor->rect);
         }
     }
@@ -250,7 +250,7 @@ void Draw2DIcon(struct_gInfo_unk_00068 *dynamicp, s32 num) {
         }
 
         switch (icon->type) {
-            case 0xC:
+            case ICONTYPE_12:
                 if (icon->total < 12) {
                     gSPObjLoadTxtr(glistp++, &combo1Block);
                 } else if (icon->total < 20) {
@@ -272,7 +272,7 @@ void Draw2DIcon(struct_gInfo_unk_00068 *dynamicp, s32 num) {
                 }
                 break;
 
-            case 0xA:
+            case ICONTYPE_10:
                 if (icon->total < 9) {
                     gSPObjLoadTxtr(glistp++, &chain1Block);
                 } else if (icon->total < 17) {
@@ -302,8 +302,8 @@ void Draw2DIcon(struct_gInfo_unk_00068 *dynamicp, s32 num) {
                 }
                 break;
 
-            case 0xB:
-            case 0xD:
+            case ICONTYPE_11:
+            case ICONTYPE_13:
                 gSPObjLoadTxtr(glistp++, &combo9Block);
                 break;
         }
@@ -330,7 +330,7 @@ void Draw2DAttackBrick(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 check) {
     for (count = check; count >= 0; count--) {
         attack = &attk[count];
 
-        if ((attack->state == 2 || attack->state == 3) && (attack->disappear < 5)) {
+        if ((attack->state == ATTACKSTATE_2 || attack->state == ATTACKSTATE_3) && (attack->disappear < 5)) {
             if (attack->type < 0xC) {
                 gSPObjLoadTxtr(glistp++, &brickTxtr[num][0]);
             } else if (attack->type < 0x12) {
@@ -360,7 +360,7 @@ void Draw2DAttackBrick(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 check) {
     for (count = 0; count <= check; count++) {
         attack = &attk[count];
 
-        if ((attack->state == 1) && (attack->delay < 0)) {
+        if ((attack->state == ATTACKSTATE_1) && (attack->delay < 0)) {
             gSPObjRectangle(glistp++, &attack->rect);
         }
     }
@@ -409,8 +409,8 @@ s32 Draw2DAttackBlock(struct_gInfo_unk_00068 *dynamicp, s32 num) {
         gSPObjLoadTxtr(glistp++, &B_801C7368_usa[0]);
     }
 
-    for (var_t1 = 0; var_t1 < TETWELL_UNK_2520_LEN; var_t1++) {
-        if (attk[var_t1].state < 5) {
+    for (var_t1 = 0; var_t1 < ATTACK_COUNT; var_t1++) {
+        if (attk[var_t1].state < ATTACKSTATE_5) {
             continue;
         }
 
@@ -530,14 +530,15 @@ s32 Draw2DAttackBlock(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     }
 
     var_t2 = -1;
-    for (var_t1 = 0; var_t1 < TETWELL_UNK_2520_LEN; var_t1++) {
+    for (var_t1 = 0; var_t1 < ATTACK_COUNT; var_t1++) {
         attack = &attk[var_t1];
-        if (attack->state == 0) {
+        if (attack->state == ATTACKSTATE_0) {
             return var_t1 - 1;
             // TODO: break
         }
 
-        if ((attack->state >= 7) && (attack->unk_20 != 0) && (attack->disappear == -1) && (attack->unk_10 < 0)) {
+        if ((attack->state >= ATTACKSTATE_7) && (attack->unk_20 != 0) && (attack->disappear == -1) &&
+            (attack->unk_10 < 0)) {
             if (var_t2 != 0) {
                 var_t2 = 0;
                 gSPObjLoadTxtr(glistp++, &B_801F9C48_usa[num]);
@@ -546,7 +547,7 @@ s32 Draw2DAttackBlock(struct_gInfo_unk_00068 *dynamicp, s32 num) {
         }
     }
 
-    return TETWELL_UNK_2520_LEN - 1;
+    return ATTACK_COUNT - 1;
 }
 
 void Draw2DExplosion(struct_gInfo_unk_00068 *dynamicp, s32 num) {

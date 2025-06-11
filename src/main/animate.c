@@ -10,8 +10,8 @@
 #include "main_functions.h"
 #include "main_variables.h"
 
+#include "animate2d.h"
 #include "animate3d.h"
-#include "0707D0.h"
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/animate", func_80056910_usa);
@@ -56,19 +56,19 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/animate", func_8005560C_ger);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/animate", func_80056BAC_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/animate", AfterSwitch);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/animate", func_80056E4C_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/animate", AfterSwitch);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/animate", func_800555BC_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/animate", AfterSwitch);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/animate", func_8005573C_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/animate", AfterSwitch);
 #endif
 
 #if VERSION_USA

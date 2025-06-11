@@ -177,7 +177,7 @@ extern char attackRow9[];
 // extern UNK_TYPE D_800B6AA0_usa;
 // extern UNK_TYPE D_800B6AF4_usa;
 // extern UNK_TYPE D_800B6BB0_usa;
-// extern UNK_TYPE D_800B6CC4_usa;
+extern s32 D_800B6CC4_usa[12];
 // extern UNK_TYPE D_800B6CF4_usa;
 // extern UNK_TYPE D_800B6E80_usa;
 // extern UNK_TYPE D_800B6E81_usa;

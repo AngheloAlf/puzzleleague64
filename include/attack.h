@@ -3,13 +3,24 @@
 
 #include "ultra64.h"
 #include "PR/gs2dex.h"
+#include "macros_defines.h"
 #include "unk.h"
 
 struct cursor_t;
 struct tetWell;
 
+typedef enum AttackState {
+    /* 0 */ ATTACKSTATE_0,
+    /* 1 */ ATTACKSTATE_1,
+    /* 2 */ ATTACKSTATE_2,
+    /* 3 */ ATTACKSTATE_3,
+    /* 5 */ ATTACKSTATE_5 = 5,
+    /* 6 */ ATTACKSTATE_6,
+    /* 7 */ ATTACKSTATE_7,
+} AttackState;
+
 typedef struct attack_t {
-    /* 0x00 */ s32 state;
+    /* 0x00 */ ENUM_TYPE(AttackState, s32) state;
     /* 0x04 */ s32 type;
     /* 0x08 */ s32 disappear;
     /* 0x0C */ s32 delay;

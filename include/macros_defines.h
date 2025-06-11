@@ -29,6 +29,13 @@
 #define INLINE inline
 #endif
 
+// Allows having m2c to use enum variants whenever possible.
+#ifdef M2CTX
+#define ENUM_TYPE(e, t) e
+#else
+#define ENUM_TYPE(e, t) t
+#endif
+
 #define saved_reg_s0 0
 #define saved_reg_s1 0
 #define saved_reg_s2 0

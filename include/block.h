@@ -2,6 +2,7 @@
 #define BLOCK_H
 
 #include "ultra64.h"
+#include "macros_defines.h"
 
 #define BLOCK_LEN_ROWS (12)
 #define BLOCK_LEN_B (18)
@@ -30,16 +31,16 @@ typedef enum BlockType {
     /* 6 */ BLOCKTYPE_6,
     /* 7 */ BLOCKTYPE_7,
     /* 8 */ BLOCKTYPE_8,
-    /* 9 */ BLOCKTYPE_9 = 9,
+    /* 9 */ BLOCKTYPE_9,
 } BlockType;
 
 /* Original name: block_t. */
 typedef struct block_t {
-    /* 0x00 */ s32 state; /* Original name: state */ // BlockState
+    /* 0x00 */ ENUM_TYPE(BlockState, s32) state; /* Original name: state */
     /* 0x04 */ s32 delay; /* Original name: delay */
     /* 0x08 */ s32 disappear; /* Original name: disappear */
     /* 0x0C */ s32 drop; /* Original name: drop */
-    /* 0x10 */ s32 type; /* Original name: type */ // BlockType
+    /* 0x10 */ ENUM_TYPE(BlockType, s32) type; /* Original name: type */
     /* 0x14 */ s32 bomb; /* Original name: bomb */
     /* 0x18 */ s32 sound; /* Original name: sound */
     /* 0x1C */ s32 currRow; /* Original name: currRow */

@@ -48,14 +48,14 @@ typedef enum enum_tetWell_unk_4424 {
 #define ICON_COUNT (10)
 
 // TODO: This count seems to be 40 in panepon gc, so maybe it should adjust by player count
-#define TETWELL_UNK_2520_LEN (10 * 2)
+#define ATTACK_COUNT (10 * 2)
 
 #define TETWELL_EXPLOSION_LEN (50)
 
 /* Original name: tetWell */
 typedef struct tetWell {
     /* 0x0000 */ block_t block[BLOCK_LEN_ROWS][BLOCK_LEN_B]; /* Original name: block */
-    /* 0x2520 */ attack_t attack[TETWELL_UNK_2520_LEN];
+    /* 0x2520 */ attack_t attack[ATTACK_COUNT];
     /* 0x2AC0 */ icon_t icon[ICON_COUNT];
     /* 0x2ED0 */ explode_t explosion[TETWELL_EXPLOSION_LEN];
     /* 0x3830 */ uObjSprite unk_3830[BLOCK_LEN_ROWS][TETWELL_OBJSPRITE_LEN_B];
@@ -64,13 +64,12 @@ typedef struct tetWell {
     /* 0x3F98 */ uObjSprite unk_3F98;
     /* 0x3FB0 */ tetWell_unk_3FB0 unk_3FB0;
     /* 0x4088 */ f32 unk_4088;
-    /* 0x408C */ UNK_TYPE1 unk_408C[0x40B0-0x408C];
-    /* 0x40B0 */ s32 unk_40B0;
-    /* 0x40B4 */ UNK_TYPE1 unk_40B4[0x43A4-0x40B4];
+    /* 0x408C */ block_t new_block[BLOCK_LEN_B];
     /* 0x43A4 */ s32 unk_43A4;
     /* 0x43A8 */ s32 unk_43A8;
     /* 0x43AC */ s32 unk_43AC;
-    /* 0x43B0 */ UNK_TYPE1 unk_43B0[0x8];
+    /* 0x43B0 */ UNK_TYPE1 unk_43B0[0x4];
+    /* 0x43B4 */ s32 unk_43B4;
     /* 0x43B8 */ s32 unk_43B8;
     /* 0x43BC */ s32 unk_43BC;
     /* 0x43C0 */ s32 unk_43C0;
@@ -330,7 +329,7 @@ typedef struct struct_gInfo_unk_00068 {
     /* 0x10240 */ UNK_TYPE unk_10240;
     /* 0x10244 */ block_t block[GAME_BUFFER_LEN][BLOCK_LEN_ROWS][BLOCK_LEN_B];
     /* 0x14C84 */ UNK_TYPE1 unk_14C84[0x4];
-    /* 0x14C88 */ attack_t attack[GAME_BUFFER_LEN][TETWELL_UNK_2520_LEN];
+    /* 0x14C88 */ attack_t attack[GAME_BUFFER_LEN][ATTACK_COUNT];
     /* 0x157C8 */ icon_t icon[GAME_BUFFER_LEN][ICON_COUNT];
     /* 0x15FE8 */ explode_t explosion[GAME_BUFFER_LEN][TETWELL_EXPLOSION_LEN];
     /* 0x172A8 */ cursor_t cursorBlock[GAME_BUFFER_LEN];
