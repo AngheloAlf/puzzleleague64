@@ -888,24 +888,10 @@ void func_80002F88_usa(s16 arg0) {
     D_800B3AFA_usa = arg0;
 }
 
-#if VERSION_USA
 void SetSongCrossFadeVolume(s16 arg0, s16 arg1) {
     B_8018A748_usa[arg1].unk_26 = arg0;
     D_800B3AFC_usa[arg1] = arg0;
 }
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", SetSongCrossFadeVolume);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", SetSongCrossFadeVolume);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", SetSongCrossFadeVolume);
-#endif
 
 #if VERSION_USA
 void func_80002FD0_usa(musHandle handle, s16 arg1, s16 arg2, struct_8018A748_usa_callback *arg3) {

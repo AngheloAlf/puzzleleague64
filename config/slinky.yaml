@@ -250,7 +250,8 @@ segments:
       - { path: "asm/{version}/data/main/0BD270.rodata.o", include_if_any: [[version, ger]] }
 
       - { path: src/main/animate3d.o }
-      - { path: src/main/067FB0.o }
+      - { path: src/main/update3d.o }
+      - { path: src/main/attack3d.o }
       - { path: src/main/explode3d.o }
       - { path: src/main/init2d.o }
       - { path: src/main/draw2d.o }

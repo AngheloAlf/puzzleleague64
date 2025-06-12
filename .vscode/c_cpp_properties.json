@@ -16,7 +16,7 @@
             "defines": [
                 "NON_EQUIVALENT",
                 "NON_MATCHING",
-                "AVOID_UB",
+                "PRESERVE_UB",
                 "_LANGUAGE_C",
                 // "F3DEX_GBI_2",
                 "_MIPS_SZLONG=32",
@@ -55,7 +55,7 @@
             "defines": [
                 "NON_EQUIVALENT",
                 "NON_MATCHING",
-                "AVOID_UB",
+                "PRESERVE_UB",
                 "_LANGUAGE_C",
                 // "F3DEX_GBI_2",
                 "_MIPS_SZLONG=32",
@@ -94,7 +94,7 @@
             "defines": [
                 "NON_EQUIVALENT",
                 "NON_MATCHING",
-                "AVOID_UB",
+                "PRESERVE_UB",
                 "_LANGUAGE_C",
                 // "F3DEX_GBI_2",
                 "_MIPS_SZLONG=32",
@@ -133,7 +133,7 @@
             "defines": [
                 "NON_EQUIVALENT",
                 "NON_MATCHING",
-                "AVOID_UB",
+                "PRESERVE_UB",
                 "_LANGUAGE_C",
                 // "F3DEX_GBI_2",
                 "_MIPS_SZLONG=32",

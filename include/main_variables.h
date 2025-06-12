@@ -218,7 +218,7 @@ extern s32 D_800B6CC4_usa[12];
 // extern UNK_TYPE D_800B70D4_usa;
 // extern UNK_TYPE D_800B7174_usa;
 // extern UNK_TYPE D_800B718C_usa;
-// extern UNK_TYPE D_800B71A4_usa;
+extern UNK_TYPE st_Attack3DTopPosition[][6];
 // extern UNK_TYPE D_800B71BC_usa;
 // extern UNK_TYPE D_800B71D4_usa;
 // extern UNK_TYPE D_800B71D5_usa;
@@ -1255,7 +1255,7 @@ extern s32 ganButton[0x10];
 
 // extern UNK_TYPE B_801AB8A4_usa;
 extern TexturePtr B_801AB8A8_usa[GAME_BUFFER_LEN][B_801F9D00_USA_LEN];
-// extern UNK_TYPE B_801AB8D8_usa;
+extern s32 attack_chain2[GAME_BUFFER_LEN];
 // extern UNK_TYPE B_801AB8DC_usa;
 extern u32 gGameStatus;
 // extern UNK_TYPE B_801AB8E4_usa;
@@ -1290,7 +1290,7 @@ extern s32 GarbageBlockBaseSfx_L;
 // extern UNK_TYPE B_801C6BF4_usa;
 // extern UNK_TYPE B_801C6C50_usa;
 // extern UNK_TYPE B_801C6C69_usa;
-// extern UNK_TYPE B_801C6C90_usa;
+extern u8 B_801C6C90_usa;
 // extern UNK_TYPE B_801C6C94_usa;
 extern s32 GarbageBlockBaseSfx_R;
 extern TexturePtr B_801C6C9C_usa[2];
@@ -1326,7 +1326,8 @@ extern OSMesgQueue gfxFrameMsgQ;
 extern s32 B_801C7060_usa;
 extern TexturePtr B_801C7070_usa[GAME_BUFFER_LEN][BRICKTXTR_LEN];
 // extern UNK_TYPE B_801C7088_usa;
-// extern UNK_TYPE B_801C7089_usa;
+extern u8 B_801C7089_usa;
+
 
 extern OSTime gTime;
 extern void *Pon_Image_Heap;

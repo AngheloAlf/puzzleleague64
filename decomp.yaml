@@ -118,6 +118,28 @@ tools:
           paths:
             - main/bg_screen_load
 
+        - id: files_2d
+          name: 2D code
+          paths:
+            - main/animate2d
+            - main/attack2d
+            - main/combo2d
+            - main/draw2d
+            - main/explode2d
+            - main/init2d
+            - main/update2d
+
+        - id: files_3d
+          name: 3D code
+          paths:
+            - main/animate3d
+            - main/attack3d
+            - main/combo3d
+            - main/draw3d
+            - main/explode3d
+            - main/init3d
+            - main/update3d
+
         - id: libmus
           name: libmus
           paths:

@@ -330,9 +330,9 @@ void Draw2DAttackBrick(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 check) {
         attack = &attk[count];
 
         if ((attack->state == ATTACKSTATE_2 || attack->state == ATTACKSTATE_3) && (attack->disappear < 5)) {
-            if (attack->type < 0xC) {
+            if (attack->type < ATTACKTYPE_12) {
                 gSPObjLoadTxtr(glistp++, &brickTxtr[num][0]);
-            } else if (attack->type < 0x12) {
+            } else if (attack->type < ATTACKTYPE_18) {
                 gSPObjLoadTxtr(glistp++, &brickTxtr[num][1]);
             } else {
                 gSPObjLoadTxtr(glistp++, &brickTxtr[num][2]);
@@ -415,7 +415,7 @@ s32 Draw2DAttackBlock(struct_gInfo_unk_00068 *dynamicp, s32 num) {
 
         attack = &attk[var_t1];
         if (attack->disappear != -1) {
-            if (attack->type == 9) {
+            if (attack->type == ATTACKTYPE_9) {
                 gSPObjLoadTxtr(glistp++, &B_801C6E70_usa[num]);
                 var_t2 = -1;
             } else if (var_t2 != 0) {
@@ -470,28 +470,28 @@ s32 Draw2DAttackBlock(struct_gInfo_unk_00068 *dynamicp, s32 num) {
                     }
                 }
             }
-        } else if (attack->type < 0xC) {
+        } else if (attack->type < ATTACKTYPE_12) {
             for (var_s2 = 0; var_s2 < attack->unk_14; var_s2++) {
                 temp_a1 = attack->unk_24 + var_s2;
                 if (temp_a1 < BLOCK_LEN_ROWS) {
                     switch (attack->type) {
-                        case 0x1:
-                        case 0x2:
-                        case 0x3:
-                        case 0x4:
-                        case 0xA:
+                        case ATTACKTYPE_1:
+                        case ATTACKTYPE_2:
+                        case ATTACKTYPE_3:
+                        case ATTACKTYPE_4:
+                        case ATTACKTYPE_10:
                             if (var_t2 != 0) {
                                 var_t2 = 0;
                                 gSPObjLoadTxtr(glistp++, &B_801F9D00_usa[num][0]);
                             }
                             break;
 
-                        case 0x9:
+                        case ATTACKTYPE_9:
                             var_t2 = -1;
                             gSPObjLoadTxtr(glistp++, &B_801C6E70_usa[num]);
                             break;
 
-                        case 0xB:
+                        case ATTACKTYPE_11:
                             var_t2 = -1;
                             if (var_s2 == 0) {
                                 gSPObjLoadTxtr(glistp++, &B_801F9D00_usa[num][2]);

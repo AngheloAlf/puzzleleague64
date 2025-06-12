@@ -84,7 +84,7 @@ ifneq ($(MODDING),0)
 endif
 
 ifneq ($(NON_MATCHING),0)
-	BUILD_DEFINES   += -DNON_MATCHING -DAVOID_UB
+	BUILD_DEFINES   += -DNON_MATCHING=1 -DPRESERVE_UB=1
 	COMPARE  := 0
 endif
 
@@ -160,7 +160,7 @@ MIPS_BUILTIN_DEFS := -D_MIPS_ISA_MIPS2=2 -D_MIPS_ISA=_MIPS_ISA_MIPS2 -D_ABIO32=1
 ifneq ($(RUN_CC_CHECK),0)
 #   The -MMD flags additionaly creates a .d file with the same name as the .o file.
     CC_CHECK          := $(CC_CHECK_COMP)
-    CC_CHECK_FLAGS    := -MMD -MP -fno-builtin -fsyntax-only -fdiagnostics-color -std=gnu89 -m32 -DNON_MATCHING -DAVOID_UB -DCC_CHECK=1
+    CC_CHECK_FLAGS    := -MMD -MP -fno-builtin -fsyntax-only -fdiagnostics-color -std=gnu89 -m32 -DNON_MATCHING=1 -DPRESERVE_UB=1 -DCC_CHECK=1
 else
     CC_CHECK          := @:
 endif

@@ -48,8 +48,6 @@ typedef struct struct_800C4598_usa {
     /* 0x4 */ UNK_TYPE4 unk_4;
 } struct_800C4598_usa; // size = 0x8
 
-extern u8 B_801C6C90_usa;
-
 extern u32 D_1030FE0[];
 extern u32 D_104C660[];
 extern u32 D_105B710[];

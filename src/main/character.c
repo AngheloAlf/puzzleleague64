@@ -290,6 +290,7 @@ void InitCharacter(s32 left, s32 right) {
     }
 }
 
+// `type` is `AttackType`?
 s32 ReturnAttackTexValue(attack_t *attack, s32 type, s32 lev, s32 pos) {
     char *ptr;
     s32 actual;

@@ -19,9 +19,21 @@ typedef enum AttackState {
     /* 7 */ ATTACKSTATE_7,
 } AttackState;
 
+typedef enum AttackType {
+    /*  1 */ ATTACKTYPE_1 = 1,
+    /*  2 */ ATTACKTYPE_2,
+    /*  3 */ ATTACKTYPE_3,
+    /*  4 */ ATTACKTYPE_4,
+    /*  9 */ ATTACKTYPE_9 = 9,
+    /* 10 */ ATTACKTYPE_10,
+    /* 11 */ ATTACKTYPE_11,
+    /* 12 */ ATTACKTYPE_12,
+    /* 18 */ ATTACKTYPE_18 = 18,
+} AttackType;
+
 typedef struct attack_t {
     /* 0x00 */ ENUM_TYPE(AttackState, s32) state;
-    /* 0x04 */ s32 type;
+    /* 0x04 */ ENUM_TYPE(AttackType, s32) type;
     /* 0x08 */ s32 disappear;
     /* 0x0C */ s32 delay;
     /* 0x10 */ s32 unk_10;
@@ -30,7 +42,8 @@ typedef struct attack_t {
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ s32 unk_24;
-    /* 0x28 */ UNK_PAD unk_28[0x30-0x28];
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ UNK_PAD unk_2C[0x30-0x2C]; // alignment padding?
     /* 0x30 */ uObjSprite rect;
 } attack_t; // size = 0x48
 
@@ -64,13 +77,13 @@ struct attack_t {
 // void func_8005BD24_usa();
 // void func_8005BEFC_usa();
 // void func_8005BFB4_usa();
-// void func_8005C2C4_usa();
+void AttackPackEmpty(struct tetWell * well, s32 num);
 s32 ReturnAttackSlot(struct tetWell * well, s32 row, s32 col);
 void Match3DPosition(s32 num, s32 row, s32 col, s32 *x, s32 *y);
 void UpdateAttack(struct tetWell *well, struct cursor_t *cursor, s32 num);
 // void func_8005C780_usa();
 void ChangeAttack(struct tetWell *well, struct cursor_t *cursor, s32 num, s32 combo);
-// void func_8005CB30_usa();
+// void InitFlyAttack(struct tetWell *well, struct attack_t *attack, s32 posX, s32 posY, s32 type, s32 num);
 void StartAttack(struct tetWell *well, s32 num);
 
 #endif

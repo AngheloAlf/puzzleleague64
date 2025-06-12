@@ -29,8 +29,7 @@
 #include "tetsound.h"
 #include "tutorial.h"
 #include "update.h"
-
-#include "067FB0.h"
+#include "update3d.h"
 
 INLINE void SetupMimic(void **heapP) {
     s32 temp_a0;

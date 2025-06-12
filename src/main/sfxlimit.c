@@ -120,21 +120,62 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", func_80005840_fra);
 INCLUDE_ASM("asm/ger/nonmatchings/main/sfxlimit", func_80005780_usa);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/sfxlimit", func_80005888_usa);
-#endif
+void func_80005888_usa(s32 arg0, s32 arg1, s32 arg2) {
+    s32 var_s2;
+    s32 var_a0;
+    s32 var_s3;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sfxlimit", func_80005888_usa);
-#endif
+    if (arg1 < 2) {
+        var_s2 = 3;
+    } else {
+        var_s2 = 4;
+    }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", func_80005888_usa);
-#endif
+    switch (arg1) {
+        case 1:
+            var_s3 = 0x44;
+            break;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sfxlimit", func_80005888_usa);
-#endif
+        default:
+            var_s3 = 0xBC;
+            break;
+
+        case 0:
+            var_s3 = 0x80;
+            break;
+    }
+
+    arg0 = arg0 - 1;
+    arg0 = MAX(arg0, 0);
+
+    func_80002620_usa(var_s2);
+    if (arg2 > 10) {
+        var_a0 = arg0 * 4;
+        var_a0 += arg2;
+        var_a0 -= 10;
+    } else {
+        if ((arg2 == 2) && (((var_s2 == 3) && (B_801C7089_usa == 0)) || ((var_s2 == 4) && (B_801C6C90_usa == 0)))) {
+            B_801C7348_usa++;
+            B_801C7348_usa %= 5;
+
+            if (B_801C7348_usa < 4) {
+                arg2 = B_801C7348_usa + 5;
+            }
+        }
+
+        if ((gSelection == 0x82) || (gSelection == 0x78)) {
+            if (B_801C7089_usa == 0xD) {
+                if (arg2 == 0 || arg2 == 1) {
+                    arg2 += 11;
+                }
+            }
+        }
+        var_a0 = arg2 + 13;
+    }
+
+    PlaySFX(var_a0, 0x100, var_s3);
+    func_80002620_usa(0);
+}
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/sfxlimit", func_80005A08_usa);

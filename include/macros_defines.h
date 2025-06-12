@@ -29,6 +29,8 @@
 #define INLINE inline
 #endif
 
+#define DATA_INLINE_CONST const
+
 // Allows having m2c to use enum variants whenever possible.
 #ifdef M2CTX
 #define ENUM_TYPE(e, t) e
