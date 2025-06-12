@@ -43,7 +43,6 @@ s32 Move2DCursorUp(tetWell *well, cursor_t *cursor, s32 hold) {
 
     if (well->unk_43F8 == 0) {
         if (cursor->y < 11) {
-
             pixel = cursor->rect.s.objY >> 2;
             cursor->rect.s.objY = (pixel - 16) << 2;
             cursor->y++;

@@ -63,7 +63,7 @@ settings:
 
 vram_classes:
   # TODO: figure out these weird vrams. They probably follows some other segment
-  - { name: asset_character_block,   fixed_vram: 0x01070A60 }
+  - { name: asset_character_block, fixed_vram: 0x01070A60 }
   - { name: asset_bg_screen_A, fixed_vram: 0x01077C60 }
   - { name: asset_bg_screen_B, fixed_vram: 0x0108CF00 }
 
