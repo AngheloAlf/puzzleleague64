@@ -30,7 +30,7 @@ void func_8007371C_usa(void) {
     func_8004E4E4_usa(temp_s1, -1, 0, 2, 0, 0, 0);
 }
 
-void func_800737B8_usa(enum_func_800737B8_usa_arg0 arg0) {
+void func_800737B8_usa(ENUM_TYPE(enum_func_800737B8_usa_arg0, s32) arg0) {
     void *temp_s1;
 
     temp_s1 = Pon_Image_Heap;
@@ -71,7 +71,7 @@ void func_800737B8_usa(enum_func_800737B8_usa_arg0 arg0) {
     func_8004E4E4_usa(temp_s1, -1, 0, 2, 0, 0, 0);
 }
 
-void func_800739F0_usa(enum_func_800739F0_usa_arg0 arg0) {
+void func_800739F0_usa(ENUM_TYPE(enum_func_800739F0_usa_arg0, s32) arg0) {
     void *temp_s1;
 
     temp_s1 = Pon_Image_Heap;

@@ -12,8 +12,8 @@
 #include "sfxlimit.h"
 #include "update.h"
 
-#include "075630.h"
 #include "074280.h"
+#include "075630.h"
 
 s32 AnimationRandom(s32 max) {
     s32 temp_v0 = gTheGame.unk_9C10;
