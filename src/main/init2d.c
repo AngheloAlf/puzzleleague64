@@ -360,21 +360,63 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", Init2DAttackTMEM);
 INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", Init2DAttackTMEM);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", func_8006CD64_usa);
-#endif
+void Init2DBrickTMEM(attack_t *attack) {
+    uObjSprite_t *s = &attack->rect.s;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", func_8006D034_eur);
-#endif
+    s->imageW = 20 << 5;
+    s->scaleW = 32 << 5;
+    s->imageStride = 16;
+    s->imageFmt = G_IM_FMT_RGBA;
+    s->imageSiz = G_IM_SIZ_16b;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", func_8006B774_fra);
-#endif
+    switch (attack->type) {
+        case ATTACKTYPE_1:
+            s->imageW = 24 << 5;
+            s->imageAdrs = 0;
+            break;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", func_8006B924_ger);
-#endif
+        case ATTACKTYPE_12:
+        case ATTACKTYPE_18:
+            s->imageAdrs = 0;
+            break;
+
+        case ATTACKTYPE_2:
+            s->imageW = 16 << 5;
+            s->imageAdrs = 6;
+            break;
+
+        case ATTACKTYPE_3:
+            s->imageW = 24 << 5;
+            s->imageAdrs = 0xA;
+            break;
+
+        case ATTACKTYPE_9:
+        case ATTACKTYPE_15:
+        case ATTACKTYPE_21:
+            s->imageAdrs = 0x100;
+            break;
+
+        case ATTACKTYPE_4:
+        case ATTACKTYPE_10:
+        case ATTACKTYPE_16:
+            s->imageAdrs = 0x105;
+            break;
+
+        case ATTACKTYPE_13:
+        case ATTACKTYPE_19:
+            s->imageAdrs = 5;
+            break;
+
+        case ATTACKTYPE_14:
+        case ATTACKTYPE_20:
+            s->imageAdrs = 0xA;
+            break;
+
+        default:
+            s->imageAdrs = 0x10A;
+            break;
+    }
+}
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", func_8006CE14_usa);

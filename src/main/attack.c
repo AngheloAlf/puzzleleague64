@@ -9,7 +9,9 @@
 #include "main_functions.h"
 #include "main_variables.h"
 
+#include "attack2d.h"
 #include "attack3d.h"
+#include "init2d.h"
 #include "sfxlimit.h"
 
 #if VERSION_USA
@@ -78,11 +80,141 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/attack", func_8005A990_usa);
 #endif
 
 #if VERSION_USA
+#ifdef NON_MATCHING
+void func_8005A9EC_usa(tetWell *well, attack_t *attack) {
+    AttackType temp_v1;
+    s32 temp_lo;
+    s32 var_v0;
+    s32 var_a1;
+
+    var_v0 = attack->unk_28;
+    attack->unk_28++;
+    temp_v1 = attack->type;
+    if (var_v0 < 0) {
+        var_v0 = -var_v0;
+    }
+    var_v0--;
+    switch (temp_v1) {
+        case ATTACKTYPE_1:
+            var_a1 = D_800B7530_usa[var_v0];
+            break;
+        case ATTACKTYPE_2:
+            var_a1 = D_800B7544_usa[var_v0];
+            break;
+        case ATTACKTYPE_3:
+            var_a1 = D_800B7558_usa[var_v0];
+            break;
+        case ATTACKTYPE_4:
+        case ATTACKTYPE_9:
+        case ATTACKTYPE_10:
+        case ATTACKTYPE_11:
+        case ATTACKTYPE_12:
+            var_a1 = D_800B7570_usa[var_v0];
+            break;
+        case ATTACKTYPE_13:
+        case ATTACKTYPE_14:
+        case ATTACKTYPE_15:
+            var_a1 = D_800B759C_usa[var_v0];
+            break;
+        default:
+            var_a1 = D_800B75E0_usa[var_v0];
+            break;
+    }
+    temp_lo = var_a1 * gTheGame.unk_9C0C;
+    well->unk_43FC += temp_lo;
+    well->unk_43F8 += temp_lo;
+    well->unk_441C -= temp_lo;
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/attack", func_8005A9EC_usa);
+#endif
 #endif
 
 #if VERSION_USA
+
+#ifdef NON_MATCHING
+// regalloc
+void AttackFly(tetWell *well, attack_t *attack, s32 num) {
+    f32 temp_ft1;
+    f32 temp_ft2;
+    s32 temp_t0; // multi
+    s32 var_a0;  // index?
+    uObjSprite_t *temp_a3;
+
+    f32 temp;
+
+    attack->delay--;
+    if (attack->delay > 0) {
+        return;
+    }
+
+    gOverflow += 0x1E;
+    temp_a3 = &attack->rect.s;
+    temp_t0 = (num == 0) ? -1 : 1;
+    if (attack->delay >= -5) {
+        attack->unk_10 -= temp_t0 * 2;
+        attack->unk_24 += 2;
+    } else if (attack->delay >= -0x18) {
+        var_a0 = -attack->delay - 6;
+        attack->unk_10 += D_800B762C_usa[var_a0] * temp_t0;
+        attack->unk_24 += D_800B7640_usa[var_a0];
+    } else {
+        if (attack->disappear == -1) {
+            if ((attack->type == ATTACKTYPE_10) && (attack->unk_28 != -1)) {
+                attack->disappear = well->attack[attack->unk_28].disappear;
+            } else {
+                if (gTheGame.unk_9C0C == 1) {
+                    var_a0 = st_Attack2DTopPosition[num][0];
+                    st_Attack2DTopPosition[num][0]++;
+                } else {
+                    var_a0 = st_Attack3DTopPosition[num][0];
+                    st_Attack3DTopPosition[num][0]++;
+                }
+
+                var_a0 = MIN(var_a0, 6 - 1);
+                attack->disappear = var_a0;
+            }
+        }
+
+        if (gTheGame.unk_9C0C == 1) {
+            temp_ft2 = st_Attack2DTopPosition[num][attack->disappear];
+            temp_ft1 = (10.0 - (f32)attack->unk_24) / (temp_ft2 - attack->unk_10);
+            attack->unk_10 += temp_t0 * 5;
+            temp = (10.0 - (f64)(temp_ft1 * temp_ft2));
+            attack->unk_24 = (temp_ft1 * attack->unk_10) + temp;
+        } else {
+            temp_ft2 = st_Attack3DTopPosition[num][attack->disappear];
+            temp_ft1 = (10.0 - (f32)attack->unk_24) / (temp_ft2 - attack->unk_10);
+            attack->unk_10 += temp_t0 * 5;
+            temp = (10.0 - (f64)(temp_ft1 * temp_ft2));
+            attack->unk_24 = (temp_ft1 * attack->unk_10) + temp;
+        }
+    }
+
+    if (gTheGame.unk_9C0C == 1) {
+        temp_a3->objX = attack->unk_10 << 2;
+        temp_a3->objY = attack->unk_24 << 2;
+        if (attack->unk_24 < 0xB) {
+            attack->delay = 0x3C;
+            temp_a3->objX = st_Attack2DTopPosition[num][attack->disappear] << 2;
+            temp_a3->objY = 10 << 2;
+            Init2DBrickTMEM(attack);
+            attack->state = ATTACKSTATE_2;
+        }
+    } else {
+        temp_a3->scaleW = attack->unk_10;
+        temp_a3->scaleH = attack->unk_24;
+        if (attack->unk_24 < 0xB) {
+            attack->delay = 0x3C;
+            temp_a3->objX = st_Attack3DTopPosition[num][attack->disappear];
+            temp_a3->objY = (2 << 2) + 2;
+            attack->state = ATTACKSTATE_2;
+        }
+    }
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/attack", AttackFly);
+#endif
 #endif
 
 #if VERSION_USA
@@ -94,7 +226,64 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/attack", AttackFall);
 #endif
 
 #if VERSION_USA
+#ifdef NON_MATCHING
+void AttackShake(tetWell *well, cursor_t *cursor, attack_t *attack) {
+    s32 temp_a0;
+    s32 temp_lo;
+    s32 var_v0;
+    s32 var_a1;
+
+    if (attack->unk_28 < 0) {
+        if (cursor->unk_00 != 2) {
+            cursor->unk_00 = 4;
+        }
+        var_v0 = attack->unk_28;
+        attack->unk_28 = var_v0 + 1;
+
+        if (var_v0 < 0) {
+            var_v0 = -var_v0;
+        }
+        temp_a0 = var_v0 - 1;
+        switch (attack->type) {
+            case ATTACKTYPE_1:
+                var_a1 = D_800B7530_usa[temp_a0];
+                break;
+            case ATTACKTYPE_2:
+                var_a1 = D_800B7544_usa[temp_a0];
+                break;
+            case ATTACKTYPE_3:
+                var_a1 = D_800B7558_usa[temp_a0];
+                break;
+            case ATTACKTYPE_4:
+            case ATTACKTYPE_9:
+            case ATTACKTYPE_10:
+            case ATTACKTYPE_11:
+            case ATTACKTYPE_12:
+                var_a1 = D_800B7570_usa[temp_a0];
+                break;
+            case 0xD:
+            case 0xE:
+            case 0xF:
+                var_a1 = D_800B759C_usa[temp_a0];
+                break;
+            default:
+                var_a1 = D_800B75E0_usa[temp_a0];
+                break;
+        }
+        temp_lo = var_a1 * gTheGame.unk_9C0C;
+        well->unk_43FC += temp_lo;
+        well->unk_43F8 += temp_lo;
+        well->unk_441C -= temp_lo;
+        return;
+    }
+    attack->state = 8;
+    if (cursor->unk_00 == 4) {
+        cursor->unk_00 = 0;
+    }
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/attack", AttackShake);
+#endif
 #endif
 
 #if VERSION_USA

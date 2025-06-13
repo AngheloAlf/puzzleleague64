@@ -29,7 +29,14 @@ typedef enum AttackType {
     /* 10 */ ATTACKTYPE_10,
     /* 11 */ ATTACKTYPE_11,
     /* 12 */ ATTACKTYPE_12,
+    /* 13 */ ATTACKTYPE_13,
+    /* 14 */ ATTACKTYPE_14,
+    /* 15 */ ATTACKTYPE_15,
+    /* 16 */ ATTACKTYPE_16,
     /* 18 */ ATTACKTYPE_18 = 18,
+    /* 19 */ ATTACKTYPE_19,
+    /* 20 */ ATTACKTYPE_20,
+    /* 21 */ ATTACKTYPE_21,
 } AttackType;
 
 typedef struct attack_t {
@@ -70,7 +77,7 @@ struct attack_t {
 
 // void func_8005A8D0_usa();
 // void func_8005A990_usa();
-// void func_8005A9EC_usa();
+void func_8005A9EC_usa(struct tetWell *well, struct attack_t *attack);
 void AttackFly(struct tetWell *well, struct attack_t *attack, s32 num);
 void AttackTop(struct tetWell *well, struct cursor_t *cursor, struct attack_t *attack, s32 num, s32 actual);
 void AttackFall(struct tetWell *well, struct cursor_t *cursor, struct attack_t *attack, s32 *sound);

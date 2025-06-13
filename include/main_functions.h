@@ -81,19 +81,6 @@ void Check3DConnectCombos(struct tetWell *well);
 // void func_8006648C_usa();
 // void func_800666F0_usa();
 
-void Init2DAttackPosition(struct attack_t *attack, s32 type, s32 num);
-// void func_8007194C_usa();
-// void func_8007197C_usa();
-void Update2DAttack(struct tetWell *well, struct cursor_t *cursor, s32 num);
-// void func_80072198_usa();
-// void func_800724A4_usa();
-void Change2DAttack(struct tetWell *well, struct cursor_t *cursor, s32 num, s32 combo);
-
-// void func_80073680_usa();
-// void func_8007371C_usa();
-// void func_800737B8_usa();
-// void func_800739F0_usa();
-
 // void func_80074FF0_usa();
 // void func_80075108_usa();
 // void func_800751B4_usa();

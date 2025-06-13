@@ -216,10 +216,9 @@ extern s32 D_800B6CC4_usa[12];
 // extern UNK_TYPE D_800B7084_usa;
 // extern UNK_TYPE D_800B70AC_usa;
 // extern UNK_TYPE D_800B70D4_usa;
-// extern UNK_TYPE D_800B7174_usa;
-// extern UNK_TYPE D_800B718C_usa;
-extern UNK_TYPE st_Attack3DTopPosition[][6];
-// extern UNK_TYPE D_800B71BC_usa;
+#define ATTACKTOPPOS_COUNT 6
+extern s32 st_Attack2DTopPosition[GAME_BUFFER_LEN][ATTACKTOPPOS_COUNT];
+extern s32 st_Attack3DTopPosition[GAME_BUFFER_LEN][ATTACKTOPPOS_COUNT];
 // extern UNK_TYPE D_800B71D4_usa;
 // extern UNK_TYPE D_800B71D5_usa;
 // extern UNK_TYPE D_800B71D6_usa;
@@ -277,14 +276,17 @@ extern f32 switch_cos[];
 extern f32 switch_sin[];
 extern s8 D_800B7508_usa[];
 extern s8 TetrisBlockFrame[];
-// extern UNK_TYPE D_800B7530_usa;
-// extern UNK_TYPE D_800B7544_usa;
-// extern UNK_TYPE D_800B7558_usa;
-// extern UNK_TYPE D_800B7570_usa;
-// extern UNK_TYPE D_800B759C_usa;
-// extern UNK_TYPE D_800B75E0_usa;
-// extern UNK_TYPE D_800B762C_usa;
-// extern UNK_TYPE D_800B7640_usa;
+extern s8 D_800B7530_usa[];
+extern s8 D_800B7544_usa[];
+extern s8 D_800B7558_usa[];
+extern s8 D_800B7570_usa[];
+extern s8 D_800B759C_usa[];
+extern s8 D_800B75E0_usa[];
+
+// TODO: attack_flyingX and attack_flyingY
+extern s8 D_800B762C_usa[];
+extern s8 D_800B7640_usa[];
+
 extern s8 Explosion1[][12];
 extern s8 Explosion2[][16];
 extern s8 Explosion3[][24];
