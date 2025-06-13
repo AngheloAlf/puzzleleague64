@@ -12,12 +12,63 @@
 
 #include "bg_screen_load.h"
 
+extern s8 FlicLayer[6];
+
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/flic", InitFlic);
+void InitFlic(void) {
+    Game_unk_89E0 *var_v1;
+    Game_unk_8B20 *var_v1_2;
+    s32 var_a0;
+
+    for (var_a0 = 0; var_a0 < GAME_UNK_89E0; var_a0++) {
+        var_v1 = &gTheGame.unk_89E0[var_a0];
+        var_v1->unk_00 = -1;
+        var_v1->unk_04 = -1;
+        var_v1->unk_08 = -1;
+        var_v1->unk_0C = 0xA;
+        var_v1->unk_10 = -1;
+        var_v1->unk_14 = -1;
+        var_v1->unk_18 = -1;
+        var_v1->unk_1C = -1;
+    }
+
+    for (var_a0 = 0; var_a0 < GAME_UNK_8B20; var_a0++) {
+        var_v1_2 = &gTheGame.unk_8B20[var_a0];
+        var_v1_2->unk_0 = 0;
+        var_v1_2->unk_4 = 0;
+        var_v1_2->unk_8 = 0;
+    }
+
+    for (var_a0 = 0; var_a0 < ARRAY_COUNT(FlicLayer); var_a0++) {
+        FlicLayer[var_a0] = 0xA;
+    }
+}
 #endif
 
 #if VERSION_USA
+#if 0
+void func_8004E4E4_usa(s32 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+    s32 var_v0 = 0;
+
+    if (arg2 != 0) {
+        var_v0 = func_8004E5E8_usa(arg0, var_v0, (arg1 == 0) ? 5 : 0, arg2);
+    }
+    if (arg3 != 0) {
+        var_v0 = func_8004E688_usa(arg0, var_v0, (arg1 == 0) ? 6 : 0, arg3);
+    }
+    if (arg4 != 0) {
+        var_v0 = func_8004E8CC_usa(arg0, var_v0, (arg1 == 0) ? 5 : 0, arg4);
+    }
+    if (arg5 != 0) {
+        var_v0 = func_8004E9D8_usa(arg0, var_v0, (arg1 == 0) ? 5 : 0, arg5);
+    }
+    if (arg6 != 0) {
+        var_v0 = func_8004EAB8_usa(arg0, var_v0, (arg1 == 0) ? 5 : 0, arg6);
+    }
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/flic", func_8004E4E4_usa);
+#endif
 #endif
 
 #if VERSION_USA

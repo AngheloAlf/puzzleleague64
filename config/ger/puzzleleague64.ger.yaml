@@ -886,9 +886,56 @@ segments:
     start: 0x56EBE0
 
   - type: databin
-    name: unk_575DE0
+    name: assets_bins/assets_074280/581DF0
     start: 0x575DE0
-    # Unknown end
+
+  - type: databin
+    name: assets_bins/assets_074280/58D730
+    start: 0x581720
+
+  - type: databin
+    name: assets_bins/assets_074280/599F70
+    start: 0x58DF60
+
+  - type: databin
+    name: assets_bins/assets_074280/5A8C10
+    start: 0x59CC00
+
+  - type: databin
+    name: assets_bins/assets_074280/5B6730
+    start: 0x5AA720
+
+  - type: databin
+    name: assets_bins/assets_074280/5C62D0
+    start: 0x5BA2C0
+
+  - type: databin
+    name: assets_bins/assets_074280/5D4870
+    start: 0x5C8860
+
+  - type: databin
+    name: assets_bins/assets_074280/5E6490
+    start: 0x5DA480
+
+  - type: databin
+    name: assets_bins/assets_074280/5F3090
+    start: 0x5E7080
+
+  - type: databin
+    name: assets_bins/assets_074280/5FF430
+    start: 0x5F3420
+
+  - type: databin
+    name: assets_bins/assets_074280/60BBD0
+    start: 0x5FFBC0
+
+  - type: databin
+    name: assets_bins/assets_074280/615150
+    start: 0x609140
+
+  - type: databin
+    name: assets_bins/assets_074280/61DC70
+    start: 0x611C60
 
   # bg_screen start
   - type: databin

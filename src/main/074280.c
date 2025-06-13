@@ -1,70 +1,93 @@
 #include "074280.h"
 
-#include "include_asm.h"
 #include "macros_defines.h"
 #include "main_functions.h"
 #include "main_variables.h"
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/074280", func_80073680_usa);
-#endif
+#include "001F10.h"
+#include "flic.h"
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/074280", func_8007371C_usa);
-#endif
+#define LOAD_DATA_SEGMENT(dst, segment, heap)                                        \
+    osInvalDCache(SEGMENT_VRAM_START(segment), SEGMENT_VRAM_SIZE(segment));          \
+    func_80001310_usa(SEGMENT_ROM_START(segment), (dst), SEGMENT_ROM_SIZE(segment)); \
+    heap = (void *)((uintptr_t)heap + SEGMENT_ROM_SIZE(segment))
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/074280", func_800737B8_usa);
-#endif
+void func_80073680_usa(void) {
+    void *temp_s1;
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/074280", func_800739F0_usa);
-#endif
+    temp_s1 = Pon_Image_Heap;
+    LOAD_DATA_SEGMENT(temp_s1, segment_assets_074280_581DF0, Pon_Image_Heap);
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/074280", func_800739B0_eur);
-#endif
+    func_8004E4E4_usa(temp_s1, -1, 0, 2, 0, 0, 0);
+}
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/074280", func_80073A4C_eur);
-#endif
+void func_8007371C_usa(void) {
+    void *temp_s1;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/074280", func_80073AE8_eur);
-#endif
+    temp_s1 = Pon_Image_Heap;
+    LOAD_DATA_SEGMENT(temp_s1, segment_assets_074280_58D730, Pon_Image_Heap);
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/074280", func_80073D20_eur);
-#endif
+    func_8004E4E4_usa(temp_s1, -1, 0, 2, 0, 0, 0);
+}
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/074280", func_800720E0_fra);
-#endif
+void func_800737B8_usa(enum_func_800737B8_usa_arg0 arg0) {
+    void *temp_s1;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/074280", func_8007217C_fra);
-#endif
+    temp_s1 = Pon_Image_Heap;
+    switch (arg0) {
+        case ENUM_FUNC_800737B8_USA_ARG0_1:
+            LOAD_DATA_SEGMENT(temp_s1, segment_assets_074280_599F70, Pon_Image_Heap);
+            break;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/074280", func_80072218_fra);
-#endif
+        case ENUM_FUNC_800737B8_USA_ARG0_2:
+            LOAD_DATA_SEGMENT(temp_s1, segment_assets_074280_5A8C10, Pon_Image_Heap);
+            break;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/074280", func_80072450_fra);
-#endif
+        case ENUM_FUNC_800737B8_USA_ARG0_3:
+            if (gTheGame.tetrisWell[0].unk_4420 == 5) {
+                LOAD_DATA_SEGMENT(temp_s1, segment_assets_074280_5F3090, Pon_Image_Heap);
+            } else {
+                LOAD_DATA_SEGMENT(temp_s1, segment_assets_074280_5B6730, Pon_Image_Heap);
+            }
+            break;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/074280", func_80072290_ger);
-#endif
+        case ENUM_FUNC_800737B8_USA_ARG0_4:
+            LOAD_DATA_SEGMENT(temp_s1, segment_assets_074280_5C62D0, Pon_Image_Heap);
+            break;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/074280", func_8007232C_ger);
-#endif
+        case ENUM_FUNC_800737B8_USA_ARG0_5:
+            LOAD_DATA_SEGMENT(temp_s1, segment_assets_074280_5D4870, Pon_Image_Heap);
+            break;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/074280", func_800723C8_ger);
-#endif
+        case ENUM_FUNC_800737B8_USA_ARG0_6:
+            if (gTheGame.tetrisWell[0].unk_4420 == 5) {
+                LOAD_DATA_SEGMENT(temp_s1, segment_assets_074280_5FF430, Pon_Image_Heap);
+            } else {
+                LOAD_DATA_SEGMENT(temp_s1, segment_assets_074280_5E6490, Pon_Image_Heap);
+            }
+            break;
+    }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/074280", func_80072600_ger);
-#endif
+    func_8004E4E4_usa(temp_s1, -1, 0, 2, 0, 0, 0);
+}
+
+void func_800739F0_usa(enum_func_800739F0_usa_arg0 arg0) {
+    void *temp_s1;
+
+    temp_s1 = Pon_Image_Heap;
+    switch (arg0) {
+        case ENUM_FUNC_800739F0_USA_ARG0_1:
+            LOAD_DATA_SEGMENT(temp_s1, segment_assets_074280_60BBD0, Pon_Image_Heap);
+            break;
+
+        case ENUM_FUNC_800739F0_USA_ARG0_2:
+            LOAD_DATA_SEGMENT(temp_s1, segment_assets_074280_615150, Pon_Image_Heap);
+            break;
+
+        case ENUM_FUNC_800739F0_USA_ARG0_3:
+            LOAD_DATA_SEGMENT(temp_s1, segment_assets_074280_61DC70, Pon_Image_Heap);
+            break;
+    }
+
+    func_8004E4E4_usa(temp_s1, -1, 0, 2, 0, 0, 0);
+}

@@ -2575,10 +2575,10 @@ B_80219E30_usa = 0x80219E30; //
 
 anim_bg = 0x8021AA80; //
 
-B_8021AAA0_usa = 0x8021AAA0; // size:288
+B_8021AAA0_usa = 0x8021AAA0; // size:0x288
 
 anim_sp = 0x8021AD28; //
-B_8021AD55_usa = 0x8021AD55; //
+FlicLayer = 0x8021AD50; // size:0x6
 
 B_8021AD5C_usa = 0x8021AD5C; //
 B_8021B960_usa = 0x8021B960; //

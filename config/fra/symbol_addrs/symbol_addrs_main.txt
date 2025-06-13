@@ -531,7 +531,7 @@ func_8004C448_fra = 0x8004C448; // type:func
 Draw2DText = 0x8004C6CC; // type:func
 func_8004C970_fra = 0x8004C970; // type:func
 InitFlic = 0x8004CE60; // type:func
-func_8004CEF4_fra = 0x8004CEF4; // type:func
+func_8004E4E4_usa = 0x8004CEF4; // type:func
 func_8004CFF8_fra = 0x8004CFF8; // type:func
 func_8004D098_fra = 0x8004D098; // type:func
 func_8004D264_fra = 0x8004D264; // type:func
@@ -780,10 +780,10 @@ Update2DExplode1 = 0x80071B98; // type:func
 Update2DExplode2 = 0x80071C6C; // type:func
 Update2DIconSplash = 0x80071E30; // type:func
 Update2DExplosion = 0x80071EE8; // type:func
-func_800720E0_fra = 0x800720E0; // type:func
-func_8007217C_fra = 0x8007217C; // type:func
-func_80072218_fra = 0x80072218; // type:func
-func_80072450_fra = 0x80072450; // type:func
+func_80073680_usa = 0x800720E0; // type:func
+func_8007371C_usa = 0x8007217C; // type:func
+func_800737B8_usa = 0x80072218; // type:func
+func_800739F0_usa = 0x80072450; // type:func
 func_80073B30_usa = 0x80072590; // type:func
 func_80073C20_usa = 0x80072680; // type:func
 func_80073D10_usa = 0x80072770; // type:func
@@ -2828,7 +2828,7 @@ __libmus_alglobals = 0x801F8150; //
 
 anim_bg = 0x801F81A0; //
 
-B_8021AAA0_usa = 0x801F81C0; // size:288
+B_8021AAA0_usa = 0x801F81C0; // size:0x288
 anim_sp = 0x801F8448; //
 B_801F8475_fra = 0x801F8475; // type:s8
 
