@@ -427,7 +427,7 @@ s32 Draw2DAttackBlock(struct_gInfo_unk_00068 *dynamicp, s32 num) {
             for (var_s2 = 0; var_s2 < attack->unk_14; var_s2++) {
                 temp_a1 = attack->unk_24 + var_s2;
                 if (temp_a1 < BLOCK_LEN_ROWS) {
-                    for (var_s0 = attack->unk_18; var_s0 < attack->unk_1C; var_s0++) {
+                    for (var_s0 = attack->start; var_s0 < attack->unk_1C; var_s0++) {
                         if (array[temp_a1][var_s0].type == BLOCKTYPE_9) {
                             if (array[temp_a1][var_s0].drop == 0) {
                                 gSPObjRectangle(glistp++, &sprite[temp_a1][var_s0]);
@@ -459,7 +459,7 @@ s32 Draw2DAttackBlock(struct_gInfo_unk_00068 *dynamicp, s32 num) {
                     for (var_s2 = 1; var_s2 < attack->unk_14; var_s2++) {
                         temp_a1 = attack->unk_24 + var_s2;
                         if (temp_a1 < BLOCK_LEN_ROWS) {
-                            for (var_s0 = attack->unk_18; var_s0 < attack->unk_1C; var_s0++) {
+                            for (var_s0 = attack->start; var_s0 < attack->unk_1C; var_s0++) {
                                 v0 = ReturnAttackTexValue(NULL, var_s6, var_s2 - 1, var_s0);
                                 v0 /= 10;
                                 if ((v0 == var_s5) && (array[temp_a1][var_s0].drop == 1)) {
@@ -501,7 +501,7 @@ s32 Draw2DAttackBlock(struct_gInfo_unk_00068 *dynamicp, s32 num) {
                             break;
                     }
 
-                    for (var_s0 = attack->unk_18; var_s0 < attack->unk_1C; var_s0++) {
+                    for (var_s0 = attack->start; var_s0 < attack->unk_1C; var_s0++) {
                         gSPObjRectangle(glistp++, &sprite[temp_a1][var_s0]);
                     }
                 }
@@ -515,7 +515,7 @@ s32 Draw2DAttackBlock(struct_gInfo_unk_00068 *dynamicp, s32 num) {
                 for (var_s2 = 0; var_s2 < attack->unk_14; var_s2++) {
                     temp_a1 = attack->unk_24 + var_s2;
                     if (temp_a1 < BLOCK_LEN_ROWS) {
-                        for (var_s0 = attack->unk_18; var_s0 < attack->unk_1C; var_s0++) {
+                        for (var_s0 = attack->start; var_s0 < attack->unk_1C; var_s0++) {
                             v0 = ReturnAttackTexValue(NULL, attack->type, var_s2, var_s0);
                             v0 /= 10;
                             if (v0 == var_s5) {

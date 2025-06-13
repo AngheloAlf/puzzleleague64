@@ -11,12 +11,13 @@ struct tetWell;
 
 typedef enum AttackState {
     /* 0 */ ATTACKSTATE_0,
-    /* 1 */ ATTACKSTATE_1,
-    /* 2 */ ATTACKSTATE_2,
-    /* 3 */ ATTACKSTATE_3,
-    /* 5 */ ATTACKSTATE_5 = 5,
-    /* 6 */ ATTACKSTATE_6,
-    /* 7 */ ATTACKSTATE_7,
+    /* 1 */ ATTACKSTATE_1, // AttackFly
+    /* 2 */ ATTACKSTATE_2, // AttackTop
+    /* 3 */ ATTACKSTATE_3, // AttackTop
+    /* 4 */ ATTACKSTATE_4, // AttackTop
+    /* 5 */ ATTACKSTATE_5, // AttackFall
+    /* 6 */ ATTACKSTATE_6, // AttackFall
+    /* 7 */ ATTACKSTATE_7, // AttackShake
 } AttackState;
 
 typedef enum AttackType {
@@ -38,7 +39,7 @@ typedef struct attack_t {
     /* 0x0C */ s32 delay;
     /* 0x10 */ s32 unk_10;
     /* 0x14 */ s32 unk_14;
-    /* 0x18 */ s32 unk_18;
+    /* 0x18 */ s32 start;
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ s32 unk_24;
@@ -70,10 +71,10 @@ struct attack_t {
 // void func_8005A8D0_usa();
 // void func_8005A990_usa();
 // void func_8005A9EC_usa();
-// void func_8005AAE0_usa();
-// void func_8005AE18_usa();
-// void func_8005B6E4_usa();
-// void func_8005BBF4_usa();
+void AttackFly(struct tetWell *well, struct attack_t *attack, s32 num);
+void AttackTop(struct tetWell *well, struct cursor_t *cursor, struct attack_t *attack, s32 num, s32 actual);
+void AttackFall(struct tetWell *well, struct cursor_t *cursor, struct attack_t *attack, s32 *sound);
+void AttackShake(struct tetWell *well, struct cursor_t *cursor, struct attack_t *attack);
 // void func_8005BD24_usa();
 // void func_8005BEFC_usa();
 // void func_8005BFB4_usa();

@@ -404,10 +404,10 @@ s32 ReturnAttackTexValue(attack_t *attack, s32 type, s32 lev, s32 pos) {
         return value;
     }
 
-    if (attack->unk_18 >= 0xA) {
-        actual = attack->unk_18 - 0xA;
+    if (attack->start >= 0xA) {
+        actual = attack->start - 0xA;
     } else {
-        actual = attack->unk_18 + 8;
+        actual = attack->start + 8;
     }
 
     if (attack->type > 0x16) {

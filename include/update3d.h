@@ -7,9 +7,9 @@
 struct cursor_t;
 struct tetWell;
 
-// void func_800673B0_usa();
-// void func_80067484_usa();
-// void func_8006780C_usa();
+void Update3DDistance(struct tetWell *well, struct cursor_t *cursor);
+void Update3DPosition(struct tetWell *well, struct cursor_t *cursor, s32 flag);
+void Update3DCursor(struct tetWell *well, struct cursor_t *cursor);
 // void func_80067860_usa();
 void Check3DVisibleBlocks(struct tetWell *well, struct cursor_t *cursor);
 

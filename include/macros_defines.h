@@ -38,6 +38,9 @@
 #define ENUM_TYPE(e, t) t
 #endif
 
+// A way to make easier finding double literals.
+#define DOUBLE_LITERAL(x) (x)
+
 #define saved_reg_s0 0
 #define saved_reg_s1 0
 #define saved_reg_s2 0

@@ -53,7 +53,7 @@ void Compact2DAttack(tetWell *well, s32 count) {
     temp_a1 = temp_s3->unk_24;
     var_a2 = 0;
     if (temp_a1 < BLOCK_LEN_ROWS) {
-        for (var_s1 = temp_s3->unk_18; var_s1 < temp_s3->unk_1C; var_s1++) {
+        for (var_s1 = temp_s3->start; var_s1 < temp_s3->unk_1C; var_s1++) {
             temp_a0 = &well->block[temp_a1][var_s1];
             if (temp_a0->delay != 0) {
                 temp_a0->delay--;
@@ -71,7 +71,7 @@ void Compact2DAttack(tetWell *well, s32 count) {
     }
 
     temp_a1 = temp_s3->unk_24 - 1;
-    for (var_s1 = temp_s3->unk_18; var_s1 < temp_s3->unk_1C; var_s1++) {
+    for (var_s1 = temp_s3->start; var_s1 < temp_s3->unk_1C; var_s1++) {
         temp_a0 = &well->block[temp_a1][var_s1];
         if ((temp_a0->type != BLOCKTYPE_0) || (temp_a0->state == BLOCKSTATE_2) || (temp_a0->state == BLOCKSTATE_3)) {
             break;
@@ -87,7 +87,7 @@ void Compact2DAttack(tetWell *well, s32 count) {
 
         if (temp_s3->unk_24 + var_s6 < BLOCK_LEN_ROWS) {
             temp_a1 = temp_s3->unk_24 + var_s6 - 1;
-            for (var_s1 = temp_s3->unk_18; var_s1 < temp_s3->unk_1C; var_s1++) {
+            for (var_s1 = temp_s3->start; var_s1 < temp_s3->unk_1C; var_s1++) {
                 temp_a1_4 = &well->block[temp_a1][var_s1];
                 temp_s0 = &well->block[temp_s3->unk_24 + var_s6][var_s1];
 
@@ -98,7 +98,7 @@ void Compact2DAttack(tetWell *well, s32 count) {
             }
         } else if (temp_s3->unk_24 + var_s6 == BLOCK_LEN_ROWS) {
             temp_a1 = BLOCK_LEN_ROWS - 1;
-            for (var_s1 = temp_s3->unk_18; var_s1 < temp_s3->unk_1C; var_s1++) {
+            for (var_s1 = temp_s3->start; var_s1 < temp_s3->unk_1C; var_s1++) {
                 well->block[temp_a1][var_s1].type = BLOCKTYPE_9;
 
                 Init2DAttackTMEM(&well->unk_3830[temp_a1][var_s1], temp_s3->type, var_s6, var_s5);

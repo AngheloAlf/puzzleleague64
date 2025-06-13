@@ -82,19 +82,19 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/attack", func_8005A9EC_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/attack", func_8005AAE0_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/attack", AttackFly);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/attack", func_8005AE18_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/attack", AttackTop);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/attack", func_8005B6E4_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/attack", AttackFall);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/attack", func_8005BBF4_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/attack", AttackShake);
 #endif
 
 #if VERSION_USA
@@ -122,19 +122,19 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/attack", func_8005ACAC_eur);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/attack", func_8005ADA0_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/attack", AttackFly);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/attack", func_8005B0D8_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/attack", AttackTop);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/attack", func_8005B9BC_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/attack", AttackFall);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/attack", func_8005BECC_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/attack", AttackShake);
 #endif
 
 #if VERSION_EUR
@@ -162,19 +162,19 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/attack", func_800593EC_fra);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/attack", func_800594E0_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/attack", AttackFly);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/attack", func_80059818_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/attack", AttackTop);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/attack", func_8005A0FC_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/attack", AttackFall);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/attack", func_8005A60C_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/attack", AttackShake);
 #endif
 
 #if VERSION_FRA
@@ -202,19 +202,19 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/attack", func_8005959C_ger);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/attack", func_80059690_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/attack", AttackFly);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/attack", func_800599C8_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/attack", AttackTop);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/attack", func_8005A2AC_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/attack", AttackFall);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/attack", func_8005A7BC_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/attack", AttackShake);
 #endif
 
 #if VERSION_GER
@@ -305,11 +305,11 @@ s32 ReturnAttackSlot(tetWell *well, s32 row, s32 col) {
             continue;
         }
 
-        if (attack->unk_18 == attack->unk_1C) {
+        if (attack->start == attack->unk_1C) {
             return count;
-        } else if (attack->unk_1C < attack->unk_18) {
+        } else if (attack->unk_1C < attack->start) {
             // TODO: macro-ify 0x12
-            for (temp = attack->unk_18; temp < 0x12; temp++) {
+            for (temp = attack->start; temp < 0x12; temp++) {
                 if (col == temp) {
                     return count;
                 }
@@ -320,7 +320,7 @@ s32 ReturnAttackSlot(tetWell *well, s32 row, s32 col) {
                     return count;
                 }
             }
-        } else if ((col >= attack->unk_18) && (col < attack->unk_1C)) {
+        } else if ((col >= attack->start) && (col < attack->unk_1C)) {
             return count;
         }
     }

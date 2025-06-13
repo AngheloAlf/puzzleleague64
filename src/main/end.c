@@ -1478,7 +1478,7 @@ s32 func_8004FA2C_usa();                            /* extern */
 ? func_8005E0E8_usa(?);                             /* extern */
 ? func_8005E108_usa(?, ?);                          /* extern */
 ? func_8005E128_usa(Game *, ?);                  /* extern */
-? func_8006780C_usa(tetWell *, cursor_t *); /* extern */
+? Update3DCursor(tetWell *, cursor_t *); /* extern */
 ? Check3DVisibleBlocks(Game *, cursor_t *); /* extern */
 extern u8 B_801C6C90_usa;
 extern s32 gWhatever;
@@ -2071,8 +2071,8 @@ block_221:
                     }
                     break;
             }
-            func_8006780C_usa(gTheGame.tetrisWell, gTheGame.unk_8860);
-            func_8006780C_usa(&gTheGame.tetrisWell[1], &gTheGame.unk_8860[1]);
+            Update3DCursor(gTheGame.tetrisWell, gTheGame.unk_8860);
+            Update3DCursor(&gTheGame.tetrisWell[1], &gTheGame.unk_8860[1]);
             Check3DVisibleBlocks(&gTheGame, gTheGame.unk_8860);
             var_a0 = (Game *) &gTheGame.tetrisWell[1];
             var_a1_3 = &gTheGame.unk_8860[1];
