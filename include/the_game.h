@@ -8,10 +8,12 @@
 
 #include "unknown_defines.h"
 
+#include "action.h"
 #include "attack.h"
 #include "block.h"
 #include "cursor.h"
 #include "explode.h"
+#include "flic.h"
 #include "gamepad.h"
 #include "icon.h"
 #include "text.h"
@@ -130,38 +132,6 @@ struct tetWell {
     int EntryNo; // offset 0x57B8, size 0x4
 };
 #endif
-
-
-typedef struct Game_unk_89E0 {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 unk_08;
-    /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
-    /* 0x18 */ s32 unk_18;
-    /* 0x1C */ s32 unk_1C;
-} Game_unk_89E0; // size = 0x20
-
-
-typedef struct Game_unk_8B20 {
-    /* 0x0 */ s32 unk_0;
-    /* 0x4 */ s32 unk_4;
-    /* 0x8 */ s32 unk_8;
-} Game_unk_8B20; // size = 0xC
-
-
-typedef struct Game_unk_8B98 {
-    /* 0x00 */ UNK_TYPE4 unk_00;
-    /* 0x04 */ UNK_PTR unk_04;
-    /* 0x08 */ UNK_TYPE2 unk_08;
-    /* 0x0A */ UNK_TYPE2 unk_0A;
-    /* 0x0C */ UNK_TYPE2 unk_0C;
-    /* 0x0E */ UNK_TYPE2 unk_0E;
-    /* 0x10 */ UNK_TYPE4 unk_10;
-    /* 0x14 */ UNK_TYPE4 unk_14;
-} Game_unk_8B98; // size = 0x18
-
 
 typedef struct Game_unk_9AE0 {
     /* 0x00 */ UNK_TYPE1 unk_00[0xA];
@@ -373,22 +343,21 @@ typedef struct struct_gInfo {
     /* 0x19044 */ UNK_TYPE1 unk_19044[0x4];
 } struct_gInfo; // size = 0x19048
 
-#define GAME_UNK_89E0 10
-#define GAME_UNK_8B20 10
-
-
 /* Original name: Game */
 typedef struct Game {
     /* 0x0000 */ tetWell tetrisWell[GAME_BUFFER_LEN]; /* Original name: tetrisWell */
     /* 0x8860 */ cursor_t cursorBlock[GAME_BUFFER_LEN];
     /* 0x89C0 */ gamepad_t controller[GAME_BUFFER_LEN];
-    /* 0x89E0 */ Game_unk_89E0 unk_89E0[GAME_UNK_89E0]; // flic?
-    /* 0x8B20 */ Game_unk_8B20 unk_8B20[GAME_UNK_8B20]; // action?
-    /* 0x8B98 */ Game_unk_8B98 unk_8B98[2];
+    /* 0x89E0 */ flic_t flic[FLIC_COUNT];
+    /* 0x8B20 */ action_t action[ACTION_COUNT];
+    /* 0x8B98 */ uObjTxtr unk_8B98[2 * UNK_SIZE]; // gLUT?
     /* 0x8BC8 */ UNK_TYPE1 unk_8BC8[0xC0];
-    /* 0x8C88 */ uObjBg unk_8C88[10];
-    /* 0x8E18 */ UNK_TYPE1 unk_8E18[0x118];
-    /* 0x8F30 */ UNK_TYPE1 unk_8F30[0x190];
+    /* 0x8C88 */ uObjBg unk_8C88[10]; // gBG?
+    /* 0x8E18 */ UNK_TYPE1 unk_8E18[0xC8];
+    /* 0x8EE0 */ uObjTxtr unk_8EE0[UNK_SIZE]; // gTEXT?
+    /* 0x8EF8 */ UNK_PAD unk_8EF8[0x8FD0-0x8EF8];
+    /* 0x8FD0 */ uObjSprite unk_8FD0[UNK_SIZE];
+    /* 0x8FE8 */ UNK_TYPE1 unk_8FE8[0x90C0-0x8FE8];
     /* 0x90C0 */ s32 unk_90C0;
     /* 0x90C4 */ UNK_TYPE1 unk_90C4[0x4];
     /* 0x90C8 */ text_t drawText[GAME_UNK_90C8_LEN];

@@ -186,7 +186,7 @@ segments:
       - [0x046AD0, c, main/bkground]
       - [0x04AA90, c, main/character]
       - [0x04B7B0, asm, main/04B7B0]
-      - [0x04DBE0, asm, main/04DBE0]
+      - [0x04DBE0, c, main/flic]
       - [0x04E530, c, main/animation]
       - [0x051EB0, c, main/other]
       - [0x0537B0, c, main/fade]

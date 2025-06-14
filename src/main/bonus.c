@@ -120,7 +120,7 @@ void InitBonus(void) {
     s32 var_s2;
     s32 var_s3;
     uObjBg *var_a0;
-    Game_unk_8B98 *var_v1;
+    uObjTxtr *var_v1;
     void *temp_v0;
     uObjBg *var_s0;
     void *temp_s4;

@@ -99,6 +99,8 @@ def write_c(name: str, headers: list[FlicAnimeBGHeader]):
 #include "assets/flic_anime_bg.h"
 
 #include "alignment.h"
+#include "libc/assert.h"
+#include "macros_defines.h"
 """)
         for i in range(len(headers)):
             header = headers[i]
@@ -106,11 +108,14 @@ def write_c(name: str, headers: list[FlicAnimeBGHeader]):
             # assert header.bpp == 16, name
             c_file.write(f"""\
 
+#define TEX_{i}_WIDTH {header.width}
+#define TEX_{i}_HEIGHT {header.height}
+
 FlicAnimeBGHeader flic_anime_bg_{name}_{i}_header = {{
     {header.bpp}, // bpp
     {header.is_intensity}, // is_intensity
-    {header.width}, // width
-    {header.height}, // height
+    TEX_{i}_WIDTH, // width
+    TEX_{i}_HEIGHT, // height
     {header.x}, // x
     {header.y}, // y
 }};
@@ -125,6 +130,7 @@ FlicAnimeBGHeader flic_anime_bg_{name}_{i}_header = {{
 u16 flic_anime_bg_{name}_{i}_texture[] ALIGNED(8) = {{
 #include "assets/flic_anime_bg/{name}/tex{i}.rgba16.inc"
 }};
+static_assert(ARRAY_COUNT(flic_anime_bg_{name}_{i}_texture) == TEX_{i}_WIDTH * TEX_{i}_HEIGHT, "The texture doesn't have the expected dimensions.");
 """)
 
 
