@@ -710,7 +710,7 @@ segments:
   - name: segment_assets_074280_581DF0
     vram_class: asset_assets_074280
     files:
-      - { path: "asm/{version}/data/assets_bins/assets_074280/581DF0.o" }
+      - { path: src/assets/assets_074280/581DF0.o }
 
   - name: segment_assets_074280_58D730
     vram_class: asset_assets_074280
