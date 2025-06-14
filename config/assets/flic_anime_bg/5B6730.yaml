@@ -1,0 +1,23 @@
+segments:
+  - type: group
+    start: 0x0
+    dir: flic_anime_bg/5B6730
+    subsegments:
+      - { start: 0x18, type: rgba16, name: tex0.rgba16, width: 128, height: 184 }
+      - { start: auto, type: rgba16, name: tex1.rgba16, width:  96, height:  90 }
+  - [0x00FBA0]
+
+options:
+  basename: ""
+  base_path: ../../../../../
+  compiler: GCC
+  find_file_boundaries: False
+  platform: n64
+  extensions_path: tools/splat_ext
+
+  do_c_func_detection: False
+  o_as_suffix: True
+  gfx_ucode: f3dex
+  use_legacy_include_asm: False
+  create_undefined_funcs_auto: False
+  create_undefined_syms_auto: False

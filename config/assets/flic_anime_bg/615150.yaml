@@ -1,11 +1,11 @@
 segments:
   - type: group
     start: 0x0
-    dir: assets_074280/581DF0
+    dir: flic_anime_bg/615150
     subsegments:
-      - { start: 0x18, type: rgba16, name: tex0.rgba16, width: 112, height: 155 }
-      - { start: auto, type: rgba16, name: tex1.rgba16, width:  88, height:  72 }
-  - [0x00B940]
+      - { start: 0x18, type: rgba16, name: tex0.rgba16, width:  64, height: 170 }
+      - { start: auto, type: rgba16, name: tex1.rgba16, width:  96, height:  72 }
+  - [0x008B20]
 
 options:
   basename: ""

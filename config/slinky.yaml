@@ -65,7 +65,7 @@ vram_classes:
   # TODO: figure out these weird vrams. They probably follows some other segment
   - { name: asset_character_block, fixed_vram: 0x01070A60 }
   - { name: asset_bg_screen_A, fixed_vram: 0x01077C60 }
-  - { name: asset_assets_074280, fixed_vram: 0x01077C60}
+  - { name: asset_flic_anime_bg, fixed_vram: 0x01077C60 }
   - { name: asset_bg_screen_B, fixed_vram: 0x0108CF00 }
 
 segments:
@@ -707,70 +707,70 @@ segments:
     files:
       - { path: src/assets/character_block/57ABF0.o }
 
-  - name: segment_assets_074280_581DF0
-    vram_class: asset_assets_074280
+  - name: segment_flic_anime_bg_581DF0
+    vram_class: asset_flic_anime_bg
     files:
-      - { path: src/assets/assets_074280/581DF0.o }
+      - { path: src/assets/flic_anime_bg/581DF0.o }
 
-  - name: segment_assets_074280_58D730
-    vram_class: asset_assets_074280
+  - name: segment_flic_anime_bg_58D730
+    vram_class: asset_flic_anime_bg
     files:
-      - { path: "asm/{version}/data/assets_bins/assets_074280/58D730.o" }
+      - { path: src/assets/flic_anime_bg/58D730.o }
 
-  - name: segment_assets_074280_599F70
-    vram_class: asset_assets_074280
+  - name: segment_flic_anime_bg_599F70
+    vram_class: asset_flic_anime_bg
     files:
-      - { path: "asm/{version}/data/assets_bins/assets_074280/599F70.o" }
+      - { path: src/assets/flic_anime_bg/599F70.o }
 
-  - name: segment_assets_074280_5A8C10
-    vram_class: asset_assets_074280
+  - name: segment_flic_anime_bg_5A8C10
+    vram_class: asset_flic_anime_bg
     files:
-      - { path: "asm/{version}/data/assets_bins/assets_074280/5A8C10.o" }
+      - { path: src/assets/flic_anime_bg/5A8C10.o }
 
-  - name: segment_assets_074280_5B6730
-    vram_class: asset_assets_074280
+  - name: segment_flic_anime_bg_5B6730
+    vram_class: asset_flic_anime_bg
     files:
-      - { path: "asm/{version}/data/assets_bins/assets_074280/5B6730.o" }
+      - { path: src/assets/flic_anime_bg/5B6730.o }
 
-  - name: segment_assets_074280_5C62D0
-    vram_class: asset_assets_074280
+  - name: segment_flic_anime_bg_5C62D0
+    vram_class: asset_flic_anime_bg
     files:
-      - { path: "asm/{version}/data/assets_bins/assets_074280/5C62D0.o" }
+      - { path: src/assets/flic_anime_bg/5C62D0.o }
 
-  - name: segment_assets_074280_5D4870
-    vram_class: asset_assets_074280
+  - name: segment_flic_anime_bg_5D4870
+    vram_class: asset_flic_anime_bg
     files:
-      - { path: "asm/{version}/data/assets_bins/assets_074280/5D4870.o" }
+      - { path: src/assets/flic_anime_bg/5D4870.o }
 
-  - name: segment_assets_074280_5E6490
-    vram_class: asset_assets_074280
+  - name: segment_flic_anime_bg_5E6490
+    vram_class: asset_flic_anime_bg
     files:
-      - { path: "asm/{version}/data/assets_bins/assets_074280/5E6490.o" }
+      - { path: src/assets/flic_anime_bg/5E6490.o }
 
-  - name: segment_assets_074280_5F3090
-    vram_class: asset_assets_074280
+  - name: segment_flic_anime_bg_5F3090
+    vram_class: asset_flic_anime_bg
     files:
-      - { path: "asm/{version}/data/assets_bins/assets_074280/5F3090.o" }
+      - { path: src/assets/flic_anime_bg/5F3090.o }
 
-  - name: segment_assets_074280_5FF430
-    vram_class: asset_assets_074280
+  - name: segment_flic_anime_bg_5FF430
+    vram_class: asset_flic_anime_bg
     files:
-      - { path: "asm/{version}/data/assets_bins/assets_074280/5FF430.o" }
+      - { path: src/assets/flic_anime_bg/5FF430.o }
 
-  - name: segment_assets_074280_60BBD0
-    vram_class: asset_assets_074280
+  - name: segment_flic_anime_bg_60BBD0
+    vram_class: asset_flic_anime_bg
     files:
-      - { path: "asm/{version}/data/assets_bins/assets_074280/60BBD0.o" }
+      - { path: src/assets/flic_anime_bg/60BBD0.o }
 
-  - name: segment_assets_074280_615150
-    vram_class: asset_assets_074280
+  - name: segment_flic_anime_bg_615150
+    vram_class: asset_flic_anime_bg
     files:
-      - { path: "asm/{version}/data/assets_bins/assets_074280/615150.o" }
+      - { path: src/assets/flic_anime_bg/615150.o }
 
-  - name: segment_assets_074280_61DC70
-    vram_class: asset_assets_074280
+  - name: segment_flic_anime_bg_61DC70
+    vram_class: asset_flic_anime_bg
     files:
-      - { path: "asm/{version}/data/assets_bins/assets_074280/61DC70.o" }
+      - { path: src/assets/flic_anime_bg/61DC70.o }
 
   - name: segment_bg_screen_62AB10
     vram_class: asset_bg_screen_A

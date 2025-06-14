@@ -961,55 +961,55 @@ segments:
     start: 0x57ABF0
 
   - type: databin
-    name: assets_bins/assets_074280/581DF0
+    name: assets_bins/flic_anime_bg/581DF0
     start: 0x581DF0
 
   - type: databin
-    name: assets_bins/assets_074280/58D730
+    name: assets_bins/flic_anime_bg/58D730
     start: 0x58D730
 
   - type: databin
-    name: assets_bins/assets_074280/599F70
+    name: assets_bins/flic_anime_bg/599F70
     start: 0x599F70
 
   - type: databin
-    name: assets_bins/assets_074280/5A8C10
+    name: assets_bins/flic_anime_bg/5A8C10
     start: 0x5A8C10
 
   - type: databin
-    name: assets_bins/assets_074280/5B6730
+    name: assets_bins/flic_anime_bg/5B6730
     start: 0x5B6730
 
   - type: databin
-    name: assets_bins/assets_074280/5C62D0
+    name: assets_bins/flic_anime_bg/5C62D0
     start: 0x5C62D0
 
   - type: databin
-    name: assets_bins/assets_074280/5D4870
+    name: assets_bins/flic_anime_bg/5D4870
     start: 0x5D4870
 
   - type: databin
-    name: assets_bins/assets_074280/5E6490
+    name: assets_bins/flic_anime_bg/5E6490
     start: 0x5E6490
 
   - type: databin
-    name: assets_bins/assets_074280/5F3090
+    name: assets_bins/flic_anime_bg/5F3090
     start: 0x5F3090
 
   - type: databin
-    name: assets_bins/assets_074280/5FF430
+    name: assets_bins/flic_anime_bg/5FF430
     start: 0x5FF430
 
   - type: databin
-    name: assets_bins/assets_074280/60BBD0
+    name: assets_bins/flic_anime_bg/60BBD0
     start: 0x60BBD0
 
   - type: databin
-    name: assets_bins/assets_074280/615150
+    name: assets_bins/flic_anime_bg/615150
     start: 0x615150
 
   - type: databin
-    name: assets_bins/assets_074280/61DC70
+    name: assets_bins/flic_anime_bg/61DC70
     start: 0x61DC70
 
   # bg_screen start
