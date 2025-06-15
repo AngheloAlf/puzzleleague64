@@ -348,7 +348,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/mimic", Draw2DMT);
 // ? Draw3DIcon(s32, ?);                        /* extern */
 // ? Draw3DExplosion(s32, ?, ?, ?);                  /* extern */
 // gIdent?
-extern s32 B_8021BEE8_usa; // uObjBg?
+extern s32 gIdent; // uObjBg?
 
 // shade3d?
 extern s32 D_01024CB0_usa;
@@ -471,7 +471,7 @@ void Draw3DMT(struct_gInfo_unk_00068 *dynamicp) {
     gDPSetCombineMode(glistp++, G_CC_MODULATEIA, G_CC_MODULATEIA);
     gDPSetRenderMode(glistp++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
 
-    gSPBgRect1Cyc(glistp++, &B_8021BEE8_usa);
+    gSPBgRect1Cyc(glistp++, &gIdent);
     gSPMatrix(glistp++, temp_a3, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
 
 

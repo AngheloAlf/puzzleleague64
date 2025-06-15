@@ -21,7 +21,8 @@ typedef enum AttackState {
 } AttackState;
 
 typedef enum AttackType {
-    /*  1 */ ATTACKTYPE_1 = 1,
+    /*  0 */ ATTACKTYPE_0,
+    /*  1 */ ATTACKTYPE_1,
     /*  2 */ ATTACKTYPE_2,
     /*  3 */ ATTACKTYPE_3,
     /*  4 */ ATTACKTYPE_4,

@@ -34,24 +34,6 @@ void func_800449C4_usa(Gfx **gfxP);
 void func_80046648_usa(s32 arg0);
 void func_80046C2C_usa(void **heapP, s32 arg1);
 
-void Init3DNewRow(struct tetWell *well);
-void Init3DCursor(struct cursor_t *cursor, s32 num);
-// void func_8005DBD8_usa();
-// void func_8005DCA8_usa();
-void Init3DIcons(struct tetWell *well);
-void Init3DAttackBlocks(struct tetWell *well);
-void Init3DExplosion(struct tetWell *well);
-// void func_8005DE28_usa();
-// void func_8005DE58_usa();
-// void func_8005DE94_usa();
-// void func_8005E0E8_usa();
-// void func_8005E108_usa();
-// void func_8005E128_usa();
-// void func_8005E2DC_usa();
-void Init3DMatrixBlocks(void);
-// void func_8005E3F4_usa();
-// void func_8005E484_usa();
-
 // void func_8005E510_usa();
 // void func_8005E740_usa();
 // void func_8005E7A4_usa();

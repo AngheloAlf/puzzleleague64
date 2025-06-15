@@ -1427,7 +1427,7 @@ extern Gfx *glistp;
 // extern UNK_TYPE B_8021BEC1_usa;
 
 // extern UNK_TYPE B_8021BEE4_usa;
-// extern UNK_TYPE B_8021BEE8_usa;
+extern Mtx gIdent;
 
 // extern UNK_TYPE __osSiAccessQueue;
 // extern UNK_TYPE B_8021DF48_usa;

@@ -10,6 +10,7 @@
 #include "main_variables.h"
 
 #include "animate.h"
+#include "init3d.h"
 #include "sfxlimit.h"
 
 // TODO REGION_NTSC?
@@ -162,7 +163,7 @@ void Add3DNewRow(tetWell *well, cursor_t *cursor, s32 num) {
         bcopy(&well->new_block[var_s5], &well->block[0][var_s5], 0x2C);
     }
 
-    well->unk_4088 = 0.0f;
+    well->translation = 0.0f;
 
     for (var_a0 = 0; var_a0 < 0x14; var_a0++) {
         if (well->attack[var_a0].state >= 7) {

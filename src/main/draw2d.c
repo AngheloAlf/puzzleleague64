@@ -307,7 +307,7 @@ void Draw2DIcon(struct_gInfo_unk_00068 *dynamicp, s32 num) {
                 break;
         }
 
-        gSPObjRectangle(glistp++, &icon->unk_28);
+        gSPObjRectangle(glistp++, &icon->thing.rect);
     }
 
     if (gGameStatus & 8) {

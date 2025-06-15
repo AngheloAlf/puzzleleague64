@@ -7,11 +7,17 @@
 #include "unk.h"
 
 typedef enum IconType {
+    // -1 ?
     /* 10 */ ICONTYPE_10 = 10,
     /* 11 */ ICONTYPE_11,
     /* 12 */ ICONTYPE_12,
     /* 13 */ ICONTYPE_13,
 } IconType;
+
+typedef union IconThing {
+    uObjSprite rect;
+    Mtx move;
+} IconThing;
 
 typedef struct icon_t {
     /* 0x00 */ s32 flag; // bool?
@@ -22,9 +28,9 @@ typedef struct icon_t {
     /* 0x14 */ s32 to_x;
     /* 0x18 */ s32 to_y;
     /* 0x1C */ s32 count;
-    /* 0x20 */ UNK_TYPE1 unk_20[0x28-0x020];
-    /* 0x28 */ uObjSprite unk_28;
-    /* 0x40 */ UNK_TYPE1 unk_40[0x68-0x040];
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ UNK_TYPE1 unk_24[0x28-0x024]; // alignment padding?
+    /* 0x28 */ IconThing thing;
 } icon_t; // size = 0x68
 
 #if 0

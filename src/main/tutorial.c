@@ -16,6 +16,7 @@
 #include "end.h"
 #include "image.h"
 #include "init2d.h"
+#include "init3d.h"
 #include "menu.h"
 #include "mimic.h"
 #include "other.h"
@@ -236,7 +237,7 @@ void InitTutorial(void) {
             Init3DCursor(s1, 0);
             Init3DPuzzle(s2, s1, tutorial3, 1);
             s3->unk_03C = 5;
-            s2->unk_4088 = 0.0f;
+            s2->translation = 0.0f;
             Init3DIcons(s2);
             Init3DAttackBlocks(s2);
             Init3DExplosion(s2);
@@ -385,7 +386,7 @@ void TutorialCheckState(tetWell *well, cursor_t *cursor) {
         if (well->unk_43FC >= 0) {
             s32 v1 = well->unk_43FC;
 
-            well->unk_4088 += ((f32)dead1Shake[v1] / 250.0);
+            well->translation += ((f32)dead1Shake[v1] / 250.0);
             well->unk_43FC = v1 - 1;
         }
         AllDeadBlocks(well);

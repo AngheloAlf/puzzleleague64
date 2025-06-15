@@ -18,10 +18,6 @@
 #include "icon.h"
 #include "text.h"
 
-typedef struct tetWell_unk_3FB0 {
-    /* 0x00 */ UNK_TYPE1 unk_00[0xD8];
-} tetWell_unk_3FB0; // size = 0xD8
-
 typedef enum enum_tetWell_unk_4424 {
     /*  1 */ ENUM_GAME_UNK_0000_UNK_4424_1 = 1,
     /*  2 */ ENUM_GAME_UNK_0000_UNK_4424_2,
@@ -64,8 +60,8 @@ typedef struct tetWell {
     /* 0x3EF0 */ uObjSprite unk_3EF0[TETWELL_UNK_3EF0_LEN_6];
     /* 0x3F80 */ uObjSprite unk_3F80;
     /* 0x3F98 */ uObjSprite unk_3F98;
-    /* 0x3FB0 */ tetWell_unk_3FB0 unk_3FB0;
-    /* 0x4088 */ f32 unk_4088;
+    /* 0x3FB0 */ char visible[BLOCK_LEN_ROWS][BLOCK_LEN_B];
+    /* 0x4088 */ f32 translation;
     /* 0x408C */ block_t new_block[BLOCK_LEN_B];
     /* 0x43A4 */ s32 unk_43A4;
     /* 0x43A8 */ s32 unk_43A8;
@@ -328,7 +324,7 @@ typedef struct struct_gInfo_unk_00068 {
     /* 0x18188 */ uObjSprite unk_18188[GAME_BUFFER_LEN][TETWELL_UNK_3EF0_LEN_6];
     /* 0x182A8 */ uObjSprite unk_182A8[GAME_BUFFER_LEN];
     /* 0x182D8 */ uObjSprite unk_182D8[GAME_BUFFER_LEN];
-    /* 0x18308 */ tetWell_unk_3FB0 unk_18308[GAME_BUFFER_LEN];
+    /* 0x18308 */ char unk_18308[GAME_BUFFER_LEN][BLOCK_LEN_ROWS][BLOCK_LEN_B];
     /* 0x184B8 */ Mtx unk_184B8[GAME_BUFFER_LEN];
     /* 0x18538 */ Mtx unk_18538[GAME_BUFFER_LEN];
     /* 0x185B8 */ UNK_TYPE1 unk_185B8[0x140];

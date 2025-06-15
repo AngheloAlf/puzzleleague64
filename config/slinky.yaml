@@ -230,22 +230,19 @@ segments:
 
       - { path: src/main/attack.o }
       - { path: src/main/explode.o }
+      - { path: src/main/init3d.o }
 
-      - { path: "asm/{version}/main/05E500.o", include_if_any: [[version, usa]] }
       - { path: "asm/{version}/main/05F110.o", include_if_any: [[version, usa]] }
-      - { path: "asm/{version}/data/main/0C79A0.rodata.o", include_if_any: [[version, usa]] }
+      - { path: "asm/{version}/data/main/0C7A40.rodata.o", include_if_any: [[version, usa]] }
 
-      - { path: "asm/{version}/main/05E7D0.o", include_if_any: [[version, eur]] }
       - { path: "asm/{version}/main/05F3E0.o", include_if_any: [[version, eur]] }
-      - { path: "asm/{version}/data/main/0C7C50.rodata.o", include_if_any: [[version, eur]] }
+      - { path: "asm/{version}/data/main/0C7CF0.rodata.o", include_if_any: [[version, eur]] }
 
-      - { path: "asm/{version}/main/05CF10.o", include_if_any: [[version, fra]] }
       - { path: "asm/{version}/main/05DB20.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/data/main/0C62B0.rodata.o", include_if_any: [[version, fra]] }
+      - { path: "asm/{version}/data/main/0C6350.rodata.o", include_if_any: [[version, fra]] }
 
-      - { path: "asm/{version}/main/05D0C0.o", include_if_any: [[version, ger]] }
       - { path: "asm/{version}/main/05DCD0.o", include_if_any: [[version, ger]] }
-      - { path: "asm/{version}/data/main/0BD270.rodata.o", include_if_any: [[version, ger]] }
+      - { path: "asm/{version}/data/main/0BD310.rodata.o", include_if_any: [[version, ger]] }
 
       - { path: src/main/animate3d.o }
       - { path: src/main/update3d.o }

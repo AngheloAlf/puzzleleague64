@@ -15,6 +15,7 @@
 #include "combo.h"
 #include "dlist.h"
 #include "fade.h"
+#include "init3d.h"
 #include "other.h"
 #include "peel.h"
 #include "sound.h"
@@ -168,7 +169,7 @@ s32 AnimationRandom(?);                           /* extern */
 ? func_800552F4_usa();                              /* extern */
 ? Init3DNewRow(s8 *);                          /* extern */
 ? Init3DCursor(s8 *, s32);                     /* extern */
-? func_8005DBD8_usa(s8 *, s32);                     /* extern */
+? Init3DTetrisBlocks(s8 *, s32);                     /* extern */
 ? Init3DIcons(s8 *);                          /* extern */
 ? Init3DAttackBlocks(s8 *);                          /* extern */
 ? Init3DExplosion(s8 *);                          /* extern */
@@ -427,7 +428,7 @@ loop_44:
             }
         } else {
             Init3DCursor(sp34, var_fp);
-            func_8005DBD8_usa(temp_s3, var_fp);
+            Init3DTetrisBlocks(temp_s3, var_fp);
             temp_s3->unk_4088 = -0.768f;
             switch (gSelection) {                   /* irregular */
                 case 0x82:

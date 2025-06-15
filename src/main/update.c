@@ -331,7 +331,7 @@ void Update3DBuffer(struct_gInfo *info) {
         bcopy(&well->icon, &dynamicp->icon[num], sizeof(icon_t) * ICON_COUNT);
         bcopy(&well->attack, &dynamicp->attack[num], sizeof(attack_t) * ATTACK_COUNT);
         bcopy(&well->explosion, &dynamicp->explosion[num], sizeof(explode_t) * TETWELL_EXPLOSION_LEN);
-        bcopy(&well->unk_3FB0, &dynamicp->unk_18308[num], sizeof(tetWell_unk_3FB0));
+        bcopy(&well->visible, &dynamicp->unk_18308[num], sizeof(char) * BLOCK_LEN_ROWS * BLOCK_LEN_B);
 
         if (gSelection == 0x64) {
             gTransMtx[3][0] = -0.51f;
@@ -343,7 +343,7 @@ void Update3DBuffer(struct_gInfo *info) {
             gTransMtx[3][0] = 0.51f;
         }
 
-        gTransMtx[3][1] = well->unk_4088 + 0.01;
+        gTransMtx[3][1] = well->translation + 0.01;
 
         guMtxF2L(gTransMtx, &dynamicp->unk_10100[num]);
 

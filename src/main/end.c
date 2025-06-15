@@ -11,6 +11,7 @@
 
 #include "explode.h"
 #include "fade.h"
+#include "init3d.h"
 #include "menu.h"
 #include "sfxlimit.h"
 #include "sound.h"
@@ -1471,7 +1472,7 @@ s32 func_8004FA2C_usa();                            /* extern */
 ? UpdatePlayerStageClear(cursor_t *, s32, s32);  /* extern */
 ? UpdateExplosion(Game *);                     /* extern */
 ? Init3DNewRow(Game *);                     /* extern */
-? func_8005DBD8_usa(Game *, ?);                  /* extern */
+? Init3DTetrisBlocks(Game *, ?);                  /* extern */
 ? Init3DIcons(Game *);                     /* extern */
 ? Init3DAttackBlocks(Game *);                     /* extern */
 ? Init3DExplosion(Game *);                     /* extern */
@@ -1641,7 +1642,7 @@ block_39:
                             gMain = 0x391;
                             var_a0 = &gTheGame;
                             if (gSelection == 0xBE) {
-                                func_8005DBD8_usa(&gTheGame, 0);
+                                Init3DTetrisBlocks(&gTheGame, 0);
                                 Init3DNewRow(&gTheGame);
                                 var_a0 = &gTheGame;
                             }
@@ -1714,7 +1715,7 @@ block_73:
                     }
                     var_a0 = &gTheGame;
                     if (gMain == 0x392) {
-                        func_8005DBD8_usa(&gTheGame, 0);
+                        Init3DTetrisBlocks(&gTheGame, 0);
                         Init3DNewRow(&gTheGame);
                         Init3DIcons(&gTheGame);
                         if ((gSelection >= 0x83) || (gTheGame.unk_8860[0].unk_0 != 7)) {
@@ -1899,8 +1900,8 @@ block_115:
                     }
                     if (var_a0_4 != 0) {
                         gMain = 0x391;
-                        func_8005DBD8_usa(&gTheGame, 0);
-                        func_8005DBD8_usa((Game *) &gTheGame.tetrisWell[1], 1);
+                        Init3DTetrisBlocks(&gTheGame, 0);
+                        Init3DTetrisBlocks((Game *) &gTheGame.tetrisWell[1], 1);
                         Init3DNewRow(&gTheGame);
                         Init3DNewRow((Game *) &gTheGame.tetrisWell[1]);
                         Init3DAttackBlocks(&gTheGame);

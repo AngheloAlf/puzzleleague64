@@ -647,8 +647,8 @@ StartExplosion = 0x8005D868; // type:func
 UpdateExplosion = 0x8005D8B4; // type:func
 Init3DNewRow = 0x8005D900; // type:func
 Init3DCursor = 0x8005DB88; // type:func
-func_8005DBD8_usa = 0x8005DBD8; // type:func
-func_8005DCA8_usa = 0x8005DCA8; // type:func
+Init3DTetrisBlocks = 0x8005DBD8; // type:func
+Init3DTetrisBlocksState = 0x8005DCA8; // type:func
 Init3DIcons = 0x8005DD3C; // type:func
 Init3DAttackBlocks = 0x8005DDB4; // type:func
 Init3DExplosion = 0x8005DDF8; // type:func
@@ -2605,7 +2605,7 @@ B_8021BEBC_usa = 0x8021BEBC; //
 B_8021BEC1_usa = 0x8021BEC1; //
 
 B_8021BEE4_usa = 0x8021BEE4; //
-B_8021BEE8_usa = 0x8021BEE8; //
+gIdent = 0x8021BEE8; // size:0x40
 B_8021BF30_usa = 0x8021BF30; //
 
 B_8021DF48_usa = 0x8021DF48; //
