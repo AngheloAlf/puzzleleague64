@@ -9,6 +9,16 @@
 #include "main_functions.h"
 #include "main_variables.h"
 
+#include "animate.h"
+#include "sfxlimit.h"
+
+// TODO REGION_NTSC?
+#if VERSION_USA
+#define HOLD_VAL 10
+#else
+#define HOLD_VAL 8
+#endif
+
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/animate3d", func_80066770_usa);
 #endif
@@ -35,7 +45,7 @@ s32 Move3DCursorUp(tetWell *well, cursor_t *cursor, s32 hold) {
             cursor->y += 1;
             temp = cursor->rect.s.objY >> 2;
             cursor->rect.s.objY = (temp << 2) - (4 << 2);
-            if ((hold == 0xA) || (hold == 0)) {
+            if ((hold == HOLD_VAL) || (hold == 0)) {
                 return -1;
             }
         }
@@ -44,7 +54,7 @@ s32 Move3DCursorUp(tetWell *well, cursor_t *cursor, s32 hold) {
             cursor->y++;
             temp = cursor->rect.s.objY >> 2;
             cursor->rect.s.objY = (temp << 2) - 0x10;
-            if ((hold == 0xA) || (hold == 0)) {
+            if ((hold == HOLD_VAL) || (hold == 0)) {
                 return -1;
             }
         }
@@ -68,21 +78,20 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/animate3d", Move3DCursorUp);
 INCLUDE_ASM("asm/ger/nonmatchings/main/animate3d", Move3DCursorUp);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/animate3d", Move3DCursorDown);
-#endif
+s32 Move3DCursorDown(cursor_t *cursor, s32 hold) {
+    if (cursor->y > 0) {
+        s32 temp = cursor->rect.s.objY;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/animate3d", Move3DCursorDown);
-#endif
+        cursor->rect.s.objY = temp + 0x10;
+        cursor->y -= 1;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/animate3d", Move3DCursorDown);
-#endif
+        if ((hold == HOLD_VAL) || (hold == 0)) {
+            return -1;
+        }
+    }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/animate3d", Move3DCursorDown);
-#endif
+    return 0;
+}
 
 s32 Move3DCursorLeft(cursor_t *cursor, s32 hold UNUSED) {
     if (cursor->unk_18 == 0) {
@@ -118,24 +127,83 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/animate3d", Switch3DBlocks);
 INCLUDE_ASM("asm/ger/nonmatchings/main/animate3d", Switch3DBlocks);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/animate3d", Update3DSwitching);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/animate3d", Update3DSwitching);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/animate3d", Update3DSwitching);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/animate3d", Update3DSwitching);
-#endif
+void Update3DSwitching(tetWell *well, cursor_t *cursor) {
+    if (cursor->unk_1C != -1) {
+        cursor->unk_04--;
+        if ((cursor->unk_04 == 0) || (cursor->unk_18 != 0)) {
+            AfterSwitch(well, cursor, &well->block[cursor->unk_1C][4], &well->block[cursor->unk_1C][5], 2);
+        }
+    }
+}
 
 #if VERSION_USA
+#ifdef NON_EQUIVALENT
+void Add3DNewRow(tetWell *well, cursor_t *cursor, s32 num) {
+    cursor_t *sp14;
+    s32 sp1C;
+    s32 sp24;
+    s32 temp_v1;
+    s32 var_a0;
+    s32 var_s1;
+    s32 var_s5;
+    s32 var_v0;
+    s32 temp;
+
+    sp14 = cursor;
+    sp1C = num;
+    sp24 = 0;
+
+    for (var_s5 = 0; var_s5 < 18; var_s5++) {
+        for (var_s1 = 11; var_s1 > 0; var_s1--) {
+            bcopy(&well->block[var_s1 - 1][var_s5], &well->block[var_s1][var_s5], 0x2C);
+            well->block[var_s1][var_s5].currRow = var_s1;
+        }
+
+        bcopy(&well->new_block[var_s5], &well->block[0][var_s5], 0x2C);
+    }
+
+    well->unk_4088 = 0.0f;
+
+    for (var_a0 = 0; var_a0 < 0x14; var_a0++) {
+        if (well->attack[var_a0].state >= 7) {
+            well->attack[var_a0].unk_24 += 1;
+        }
+    }
+
+    Init3DNewRow(well);
+
+    if ((sp14->unk_1C != -1) && (sp14->unk_1C < 0xB)) {
+        sp14->unk_1C++;
+    }
+
+    temp_v1 = sp14->y;
+    var_v0 = temp_v1 + 1;
+    if (temp_v1 >= 0xA) {
+        if (temp_v1 <= 0) {
+            sp24 = 0;
+        } else {
+            sp24 = -1;
+            temp = sp14->rect.s.objY;
+            sp14->rect.s.objY = temp + 4 << 2;
+            sp14->y--;
+        }
+        var_v0 = sp14->y + 1;
+    }
+    sp14->y = var_v0;
+
+    if (sp24 != 0) {
+        if (gTheGame.unk_9C08 == 1) {
+            PlaySE(&SFX_INIT_TABLE, 0x96);
+        } else if (sp1C == 0) {
+            PlaySE(&SFX_INIT_TABLE, 0x97);
+        } else {
+            PlaySE(&SFX_INIT_TABLE, 0x98);
+        }
+    }
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/animate3d", Add3DNewRow);
+#endif
 #endif
 
 #if VERSION_EUR

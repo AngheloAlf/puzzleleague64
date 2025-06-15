@@ -13,19 +13,19 @@
 #include "animate3d.h"
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/animate", func_80056910_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/animate", CheckGameInput);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/animate", func_80056BB0_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/animate", CheckGameInput);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/animate", func_80055320_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/animate", CheckGameInput);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/animate", func_800554A0_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/animate", CheckGameInput);
 #endif
 
 #if 1

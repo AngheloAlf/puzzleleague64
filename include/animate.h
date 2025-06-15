@@ -9,7 +9,7 @@ struct block_t;
 struct cursor_t;
 struct tetWell;
 
-// void func_80056910_usa();
+void CheckGameInput(struct tetWell *well, struct cursor_t *cursor, s32 num);
 void AddNewRow(struct tetWell *well, struct cursor_t *cursor, s32 num);
 // void func_80056A7C_usa();
 void AfterSwitch(struct tetWell *well, struct cursor_t *cursor, struct block_t *block1, struct block_t *block2, s32 dimen);

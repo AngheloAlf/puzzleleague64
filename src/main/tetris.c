@@ -3,32 +3,105 @@
  */
 
 #include "tetris.h"
+
 #include "include_asm.h"
 #include "macros_defines.h"
 #include "main_functions.h"
 #include "main_variables.h"
 
+#include "ai.h"
+#include "animate.h"
+#include "animation.h"
+#include "combo.h"
 #include "dlist.h"
+#include "fade.h"
+#include "other.h"
+#include "peel.h"
 #include "sound.h"
+#include "text.h"
+#include "update.h"
+#include "update3d.h"
 
 #if VERSION_USA
+#ifdef NON_EQUIVALENT
+BlockType RandomBlock(tetWell *well) {
+    s32 temp_a0;
+    s32 var_t0 = 6;
+    s32 temp3 = 1;
+    f32 temp;
+
+    if (well->unk_43E4 != 0) {
+        var_t0 = 5;
+    }
+    temp_a0 = gTheGame.unk_9C10 + 0x29A74E;
+    gTheGame.unk_9C10 = temp_a0 + (temp_a0 * 0x31EF68);
+    temp = (gTheGame.unk_9C10 & 0x7FFFFFFF);
+    temp /= 0x7FFFFFFF;
+    temp *= var_t0;
+    temp += temp3;
+    temp_a0 = temp;
+    return temp_a0;
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/tetris", RandomBlock);
 #endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/tetris", func_80089778_usa);
 #endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", RandomBlock);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/tetris", RandomBlock);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/tetris", RandomBlock);
+#endif
+
+INLINE void ReturnSecond(s32 *second) {
+    OSTime time = osGetTime();
+    u64 microseconds = OS_CYCLES_TO_USEC(time - gTime);
+
+    *second = microseconds / 1000000;
+    if (*second == 1) {
+        gTime = time;
+    }
+}
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/tetris", func_80089828_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", func_80089BD8_eur);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/tetris", func_80088278_fra);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/tetris", func_80088438_ger);
 #endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/tetris", func_8008997C_usa);
 #endif
 
-#if VERSION_USA
-s32 DemoCheck(s32 *arg0) {
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", func_80089D2C_eur);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/tetris", func_800883CC_fra);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/tetris", func_8008858C_ger);
+#endif
+
+s32 DemoCheck(s32 *frame) {
     func_800545E4_usa(1);
 
     if ((gTheGame.controller[0].touch_button != 0) || (gDemo == GDEMO_16)) {
@@ -36,29 +109,48 @@ s32 DemoCheck(s32 *arg0) {
         gTheGame.unk_9C1C = 0;
         gTheGame.unk_9C18 = 0;
         gTheGame.unk_9C14 = 0;
-        gGameStatus = gGameStatus >> 0x10;
-        FadeOutSong(last_song_handle, 0x3C);
+
+#if VERSION_USA
+        gGameStatus >>= 0x10;
+#else
+        if (B_801C607C_eur != 9) {
+            gGameStatus >>= 0x10;
+        }
+#endif
+
+        FadeOutSong(last_song_handle, 60);
         return -1;
     }
 
-    if ((*arg0 > 1800) && (gMain == GMAIN_387)) {
+    if ((*frame > ADJUST_FRAMERATE(1800)) && (gMain == GMAIN_387)) {
         gDemo = GDEMO_21;
         gTheGame.unk_9C1C = 0;
         gTheGame.unk_9C18 = 0;
         gTheGame.unk_9C14 = 0;
-        gGameStatus = gGameStatus >> 0x10;
-        FadeOutSong(last_song_handle, 0x3C);
+        gGameStatus >>= 0x10;
+        FadeOutSong(last_song_handle, 60);
         return -1;
     }
 
-    *arg0 += 1;
+    *frame += 1;
     gDemo = GDEMO_0B;
     return 0;
 }
-#endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/tetris", func_80089BE0_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", func_80089FC8_eur);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/tetris", func_80088668_fra);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/tetris", func_80088828_ger);
 #endif
 
 #if VERSION_USA
@@ -74,7 +166,7 @@ s32 AnimationRandom(?);                           /* extern */
 ? func_800545E4_usa(s32);                           /* extern */
 ? func_80054624_usa(s32);                           /* extern */
 ? func_800552F4_usa();                              /* extern */
-? func_8005D900_usa(s8 *);                          /* extern */
+? Init3DNewRow(s8 *);                          /* extern */
 ? func_8005DB88_usa(s8 *, s32);                     /* extern */
 ? func_8005DBD8_usa(s8 *, s32);                     /* extern */
 ? func_8005DD3C_usa(s8 *);                          /* extern */
@@ -425,7 +517,7 @@ loop_87:
                     bcopy(&gTheGame.tetrisWell[0].unk_43BC[0x28] - 0x43E4, temp_s3, 0x2520);
                     break;
             }
-            func_8005D900_usa(temp_s3);
+            Init3DNewRow(temp_s3);
             func_8005DD3C_usa(temp_s3);
             func_8005DDB4_usa(temp_s3);
             func_8005DDF8_usa(temp_s3);
@@ -450,118 +542,185 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/tetris", InitTetrisWell);
 #endif
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/tetris", DoTetris);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/tetris", func_8008ADB4_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", RandomBlock);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", func_80089B28_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", func_80089BD8_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", func_80089D2C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", DemoCheck);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", func_80089FC8_eur);
-#endif
-
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", InitTetrisWell);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", func_8008AB9C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", func_8008B19C_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tetris", RandomBlock);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tetris", func_800881C8_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tetris", func_80088278_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tetris", func_800883CC_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tetris", DemoCheck);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tetris", func_80088668_fra);
 #endif
 
 #if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/tetris", InitTetrisWell);
 #endif
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tetris", func_8008923C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tetris", func_8008983C_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tetris", RandomBlock);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tetris", func_80088388_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tetris", func_80088438_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tetris", func_8008858C_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tetris", DemoCheck);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tetris", func_80088828_ger);
-#endif
-
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/tetris", InitTetrisWell);
 #endif
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tetris", func_800893FC_ger);
+void DoTetris(void) {
+    typedef struct Padding {
+        s32 unk_0;
+        s32 unk_4;
+    } Padding;
+
+    tetWell *well;
+    cursor_t *cursor;
+    s32 sp28 = 0; // elapsed seconds
+    s32 var_a0;
+    s32 var_s2;
+    s32 num;
+    s32 count;
+
+#if 0
+    int interval; // r20
+    int blockHSize; // r31
 #endif
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tetris", func_800899FC_ger);
-#endif
+    Padding pad UNUSED = { 0, 0 };
+    s32 pad2[4] UNUSED;
+
+    gTheGame.unk_90C0 = 6;
+    for (count = 6; count < DRAWTEXT_COUNT; count++) {
+        gTheGame.drawText[count].texture = -1;
+    }
+
+    ReturnSecond(&sp28);
+
+    DoGameFade(5);
+    UpdateMainState();
+    if (gMain >= GMAIN_38E) {
+        return;
+    }
+
+    if (D_800BE350_usa == 0) {
+        gOverflow = 0;
+    }
+
+    for (num = 0; num < gTheGame.unk_9C08; num++) {
+        well = &gTheGame.tetrisWell[num];
+        cursor = &gTheGame.cursorBlock[num];
+
+        if (D_800BE350_usa == 1) {
+            B_801C6C94_usa = 0;
+            if (gTheGame.controller[num].touch_button & Z_TRIG) {
+                B_801C6C94_usa = -1;
+            }
+
+            if (B_801C6C94_usa == 0) {
+                continue;
+            }
+        }
+
+        B_801AAB98_usa += 1;
+        if (!(gGameStatus & 0x20) || (gCounter % 2 != 0)) {
+            if (gMain == GMAIN_387) {
+                if ((cursor->unk_04 == 0) && (cursor->unk_0C == 0) && (well->unk_43F4 == 0) && (well->unk_43B0 == 0) &&
+                    (gSelection >= 0x83) && (B_801AB61C_usa == 0) && (cursor->unk_00 <= 0) && (cursor->unk_08 == 0)) {
+                    well->unk_43EC += well->unk_43F0;
+
+                    if (well->unk_43EC >= 0x1000U) {
+                        var_s2 = well->unk_43EC & 0xFFFF0000;
+                        if (var_s2 < 0) {
+                            var_a0 = var_s2 | 0xFFFF;
+                        } else {
+                            var_a0 = var_s2;
+                        }
+                        well->unk_43EC &= 0xFFFF;
+                        var_s2 = (var_a0 >> 0x10);
+                        well->unk_43FC = var_s2 * gTheGame.unk_9C0C;
+                        well->unk_43F8 += well->unk_43FC;
+                        if (gTheGame.unk_9C0C * 0x10 < well->unk_43F8) {
+                            well->unk_43FC = gTheGame.unk_9C0C * 0x10 - (well->unk_43F8 - well->unk_43FC);
+                            well->unk_43F8 = gTheGame.unk_9C0C * 0x10;
+                        }
+                    }
+                }
+
+                CompactWell(well, num);
+            }
+        }
+
+        CheckGameInput(well, cursor, num);
+        var_s2 = 0;
+        if (gMain == GMAIN_387) {
+            if ((gGameStatus & 0x20) && (gCounter % 2 == 0)) {
+                if (gTheGame.unk_9C0C == 2) {
+                    Update3DCursor(well, cursor);
+                }
+            } else {
+                if (well->unk_43C4 != 0) {
+                    CheckCollision(well);
+                }
+
+                well->unk_43C4 = 0;
+                CheckChainCounter(well, cursor);
+                var_s2 = ComboCount(well, cursor);
+                if (well->unk_43BC != 0) {
+                    well->unk_43C0 = 0;
+                    well->unk_43BC = 0;
+                }
+                CheckShake(well, cursor);
+                CheckIcon(well, var_s2);
+                StartAttack(well, num);
+                if (brainbrain[num].unk_00C != -1) {
+                    UpdateAI(well, cursor, &brainbrain[num], num);
+                }
+                UpdateWell(well, cursor, num, var_s2);
+                if ((gSelection == 0xA0) || (gSelection == 0x96)) {
+                    ChangeAttack(well, cursor, num, var_s2);
+                }
+                UpdateCursor(well, cursor);
+                UpdateIcon(well, cursor, num);
+                if ((gSelection == 0xA0) || (gSelection == 0x96)) {
+                    UpdateAttack(well, cursor, num);
+                }
+
+                UpdateExplosion(well);
+            }
+
+            UpdateNextLevel(well);
+            UpdateDistance(well, cursor);
+            UpdateAnimation(well, num, var_s2);
+            UpdateMiscStuff(well, cursor, num);
+
+            if ((cursor->unk_00 <= 0) && (well->unk_43F8 >= (gTheGame.unk_9C0C * 0x10))) {
+                well->unk_43C4 = -1;
+                AddNewRow(well, cursor, num);
+                well->unk_43F8 = 0;
+                if ((gSelection == 0xAA) || (gSelection == 0xB4)) {
+                    cursor->unk_28 -= 1;
+                }
+            }
+
+            if (gTheGame.unk_9C0C == 2) {
+                Check3DVisibleBlocks(well, cursor);
+            }
+
+            HackGame(well);
+            well->unk_43FC = 0;
+            well->unk_43A4 = 0;
+        }
+    }
+
+    if (gMain == GMAIN_387) {
+        UpdateTime(sp28);
+    }
+
+    UpdateText();
+    peelTick();
+}
+
+void HackGame(tetWell *well) {
+    s32 count;
+
+    if (gTheGame.unk_9C08 != 1) {
+        for (count = 0; count < ATTACK_COUNT; count++) {
+            if ((well->attack[count].type > ATTACKTYPE_4) && (well->attack[count].type < ATTACKTYPE_9)) {
+                well->attack[count].state = ATTACKSTATE_0;
+                well->attack[count].type = 0;
+                well->attack[count].disappear = -1;
+                well->attack[count].delay = 0;
+                well->attack[count].unk_10 = 0;
+                well->attack[count].unk_24 = -1;
+                well->attack[count].unk_28 = -1;
+            }
+        }
+    }
+}

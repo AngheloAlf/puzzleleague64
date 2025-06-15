@@ -8,6 +8,7 @@
 #include "version.h"
 #include "the_game.h"
 
+struct ai_t;
 
 void func_80042400_usa(Gfx **gfxP);
 // void func_80042428_usa();
@@ -33,7 +34,7 @@ void func_800449C4_usa(Gfx **gfxP);
 void func_80046648_usa(s32 arg0);
 void func_80046C2C_usa(void **heapP, s32 arg1);
 
-// void func_8005D900_usa();
+void Init3DNewRow(struct tetWell *well);
 // void func_8005DB88_usa();
 // void func_8005DBD8_usa();
 // void func_8005DCA8_usa();
@@ -137,7 +138,7 @@ void Check3DConnectCombos(struct tetWell *well);
 // void func_80080AF0_usa();
 // void func_800812A4_usa();
 // void func_800814CC_usa();
-// void func_800816DC_usa();
+void UpdateAI(struct tetWell *well, struct cursor_t *cursor, struct ai_t *brain, s32 num);
 // void func_80082740_usa();
 // void func_800829BC_usa();
 // void func_80082CA0_usa();

@@ -18,7 +18,7 @@ typedef struct text_t {
 // TODO: enum or defines for `type`
 s32 InitWhichNumber(text_t *text, char number, s32 type);
 void SetText(s32 x, s32 y, const char *str, s32 type);
-// void func_8004C280_usa();
+void UpdateText(void);
 void Draw2DTemplate(struct struct_gInfo_unk_00068 *dynamicp);
 void Draw2DText(struct struct_gInfo_unk_00068 *dynamicp);
 // void func_8004DF64_usa();

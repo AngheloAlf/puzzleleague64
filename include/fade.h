@@ -8,7 +8,7 @@
 // void func_80054020_usa();
 void SetGameFade(void);
 // void func_8005407C_usa();
-// void func_800540AC_usa();
+void DoGameFade(s32 factor);
 void Draw2DGameFade(void);
 // void func_80054320_usa();
 // void func_8005443C_usa();

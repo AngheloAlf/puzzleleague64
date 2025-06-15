@@ -16,11 +16,11 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80057650_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80057754_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdateTime);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80057950_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdateNextLevel);
 #endif
 
 #if VERSION_USA
@@ -108,7 +108,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdateDistance);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80059A98_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdateMainState);
 #endif
 
 #if VERSION_EUR
@@ -116,11 +116,11 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_800578F0_eur);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_800579F4_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdateTime);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80057BF0_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdateNextLevel);
 #endif
 
 #if VERSION_EUR
@@ -208,7 +208,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdateDistance);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80059D60_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdateMainState);
 #endif
 
 #if VERSION_USA || VERSION_EUR
@@ -271,7 +271,7 @@ void Update2DBuffer(struct_gInfo *info) {
         bcopy(&well->explosion, &dynamicp->explosion[var_s6], sizeof(explode_t) * TETWELL_EXPLOSION_LEN);
     }
 
-    bcopy(&gTheGame.drawText, &dynamicp->drawText, sizeof(text_t) * GAME_UNK_90C8_LEN);
+    bcopy(&gTheGame.drawText, &dynamicp->drawText, sizeof(text_t) * DRAWTEXT_COUNT);
 }
 #endif
 
@@ -391,6 +391,6 @@ void Update3DBuffer(struct_gInfo *info) {
         }
     }
 
-    bcopy(&gTheGame.drawText, &dynamicp->drawText, sizeof(text_t) * GAME_UNK_90C8_LEN);
+    bcopy(&gTheGame.drawText, &dynamicp->drawText, sizeof(text_t) * DRAWTEXT_COUNT);
 }
 #endif

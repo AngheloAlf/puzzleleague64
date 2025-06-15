@@ -193,7 +193,7 @@ extern const char RO_STR_800C5E70_usa[];
 extern const char RO_STR_800C5E78_usa[];
 
 // UpdateText
-void func_8004C280_usa(void) {
+void UpdateText(void) {
     char sp18[1];
     text_t *var_s0;
     s16 temp_v0;
@@ -1131,7 +1131,7 @@ void func_8004C280_usa(void) {
     }
 }
 #else
-INCLUDE_ASM("asm/usa/nonmatchings/main/text", func_8004C280_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/text", UpdateText);
 #endif
 #endif
 
@@ -1216,7 +1216,7 @@ void Draw2DText(struct_gInfo_unk_00068 *dynamicp) {
     Draw2DTemplate(dynamicp);
     bzero(sp10, MAGIC_NUMBER * sizeof(s8));
 
-    for (i = MAGIC_NUMBER; i < GAME_UNK_90C8_LEN; i++) {
+    for (i = MAGIC_NUMBER; i < DRAWTEXT_COUNT; i++) {
         if (dynamicp->drawText[i].texture < ARRAY_COUNTU(sp10)) {
             sp10[dynamicp->drawText[i].texture] = true;
         } else if (dynamicp->drawText[i].texture == -1) {

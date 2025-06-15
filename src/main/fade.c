@@ -47,19 +47,19 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/fade", func_80052C0C_ger);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/fade", func_800540AC_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/fade", DoGameFade);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/fade", func_8005434C_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/fade", DoGameFade);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/fade", func_80052ABC_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/fade", DoGameFade);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/fade", func_80052C3C_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/fade", DoGameFade);
 #endif
 
 void Draw2DGameFade(void) {

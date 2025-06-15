@@ -346,7 +346,7 @@ extern s32 gCounter;
 extern s32 gReset; /* Original name: gReset */
 extern enum_gMain gMain; /* Original name: gMain */
 extern s32 gOverflowFlag;
-// extern UNK_TYPE D_800BE350_usa;
+extern s32 D_800BE350_usa;
 
 // extern UNK_TYPE D_800C1230_usa;
 // extern UNK_TYPE D_800C1270_usa;
@@ -1240,11 +1240,11 @@ extern void *B_8019CF9C_usa;
 extern OSMesgQueue B_8019D158_usa;
 // extern UNK_TYPE gTheGame;
 
-// extern UNK_TYPE B_801AAB98_usa;
+extern s32 B_801AAB98_usa;
 extern OSMesgQueue *B_801AAB9C_usa;
 // extern UNK_TYPE B_801AABA0_usa;
 
-// extern UNK_TYPE B_801AB61C_usa;
+extern s32 B_801AB61C_usa;
 extern u8 TenSecond;
 
 // extern UNK_TYPE B_801AB7E0_usa;
@@ -1293,7 +1293,7 @@ extern s32 GarbageBlockBaseSfx_L;
 // extern UNK_TYPE B_801C6C50_usa;
 // extern UNK_TYPE B_801C6C69_usa;
 extern u8 B_801C6C90_usa;
-// extern UNK_TYPE B_801C6C94_usa;
+extern s32 B_801C6C94_usa;
 extern s32 GarbageBlockBaseSfx_R;
 extern TexturePtr B_801C6C9C_usa[2];
 extern s16 gBox_Level;
@@ -1434,5 +1434,9 @@ extern Gfx *glistp;
 // extern UNK_TYPE B_8021DF48_usa;
 extern STACK(B_8021FF50_usa, 0x1000);
 
+
+
+
+extern s32 B_801C607C_eur;
 
 #endif

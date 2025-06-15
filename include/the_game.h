@@ -70,7 +70,7 @@ typedef struct tetWell {
     /* 0x43A4 */ s32 unk_43A4;
     /* 0x43A8 */ s32 unk_43A8;
     /* 0x43AC */ s32 unk_43AC;
-    /* 0x43B0 */ UNK_TYPE1 unk_43B0[0x4];
+    /* 0x43B0 */ s32 unk_43B0;
     /* 0x43B4 */ s32 unk_43B4;
     /* 0x43B8 */ s32 unk_43B8;
     /* 0x43BC */ s32 unk_43BC;
@@ -79,10 +79,12 @@ typedef struct tetWell {
     /* 0x43C8 */ s32 unk_43C8;
     /* 0x43CC */ UNK_TYPE1 unk_43CC[0x43E0-0x43CC];
     /* 0x43E0 */ s32 unk_43E0;
-    /* 0x43E4 */ UNK_TYPE1 unk_43E4[8];
+    /* 0x43E4 */ s32 unk_43E4;
+    /* 0x43E8 */ UNK_PAD unk_43E8[0x4];
     /* 0x43EC */ UNK_TYPE4 unk_43EC;
-    /* 0x43F0 */ UNK_TYPE1 unk_43F0[0x8];
-    /* 0x43F0 */ s32 unk_43F8; // possibly part of "struct state_t state; // offset 0x4AA8, size 0x38", maybe "current_raise"
+    /* 0x43F0 */ s32 unk_43F0;
+    /* 0x43F4 */ s32 unk_43F4;
+    /* 0x43F8 */ s32 unk_43F8; // possibly part of "struct state_t state; // offset 0x4AA8, size 0x38", maybe "current_raise"
     /* 0x43FC */ s32 unk_43FC;
     /* 0x4400 */ UNK_TYPE1 unk_4400[0x4];
     /* 0x4404 */ UNK_TYPE4 unk_4404;
@@ -302,7 +304,7 @@ typedef struct struct_gInfo_unk_10224 {
     /* 0x4 */ UNK_TYPE1 unk_4[0xA];
 } struct_gInfo_unk_10224; // size = 0xE
 
-#define GAME_UNK_90C8_LEN 70
+#define DRAWTEXT_COUNT 70
 
 // TODO: Maybe make an enum for this?
 #define STRUCT_GINFO_UNK_00068_UNK_10208_LEN (14)
@@ -330,7 +332,7 @@ typedef struct struct_gInfo_unk_00068 {
     /* 0x184B8 */ Mtx unk_184B8[GAME_BUFFER_LEN];
     /* 0x18538 */ Mtx unk_18538[GAME_BUFFER_LEN];
     /* 0x185B8 */ UNK_TYPE1 unk_185B8[0x140];
-    /* 0x186F8 */ text_t drawText[GAME_UNK_90C8_LEN];
+    /* 0x186F8 */ text_t drawText[DRAWTEXT_COUNT];
 } struct_gInfo_unk_00068; // size = 0x18FB8
 
 typedef struct struct_gInfo {
@@ -360,7 +362,7 @@ typedef struct Game {
     /* 0x8FE8 */ UNK_TYPE1 unk_8FE8[0x90C0-0x8FE8];
     /* 0x90C0 */ s32 unk_90C0;
     /* 0x90C4 */ UNK_TYPE1 unk_90C4[0x4];
-    /* 0x90C8 */ text_t drawText[GAME_UNK_90C8_LEN];
+    /* 0x90C8 */ text_t drawText[DRAWTEXT_COUNT];
     /* 0x9988 */ uObjBg frame;
     /* 0x99B0 */ UNK_TYPE1 unk_99B0[0x28];
     /* 0x99D8 */ uObjTxtr unk_99D8;
