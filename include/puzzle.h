@@ -5,12 +5,14 @@
 #include "the_game.h"
 #include "unk.h"
 
+struct cursor_t;
+struct tetWell;
 
 // void func_80088940_usa();
 // void func_80088A48_usa();
-// void func_80088AB4_usa();
+s32 Init2DPuzzle(struct tetWell *well, struct cursor_t *cursor, u8 *ptr, s32 number);
 // void func_80088C08_usa();
-// void func_80088D34_usa();
+s32 Init3DPuzzle(struct tetWell *well, struct cursor_t *cursor, u8 *ptr, s32 number);
 // void func_80088E38_usa();
 // void func_80088F94_usa();
 // void func_80089108_usa();

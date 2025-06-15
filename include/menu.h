@@ -103,7 +103,7 @@ void menuSaveData(UNK_TYPE arg0);
 s32 menuInitUser(u32 arg0);
 // void func_8001A330_usa();
 // void func_8001A50C_usa();
-// void func_8001A7D0_usa();
+void menuInitFairy(enum_menuTickFairy_ePosition ePosition);
 void menuTickFairy(s32, s32, s32, s32, s32, s32, s32, s32);
 // void menuTickFairy(s32 iScreen, s32 nFrame, s32 nTagText, s32 nOffsetText, s32 nOffsetBox, enum_menuTickFairy_ePosition ePosition, s32 bArrow);
 // void func_8001AB0C_usa();

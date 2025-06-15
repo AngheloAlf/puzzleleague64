@@ -12,19 +12,19 @@
 #include "assets_variables.h"
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/dlist", func_80054500_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/dlist", InitCursor);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/dlist", func_800547A0_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/dlist", InitCursor);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/dlist", func_80052F10_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/dlist", InitCursor);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/dlist", func_80053090_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/dlist", InitCursor);
 #endif
 
 // TODO: maybe void InitGamePad(int num /* r1+0x0 */)?
@@ -40,7 +40,7 @@ void func_800545E4_usa(s32 arg0) {
     gTheGame.controller[arg0].unk_0E = 0;
 }
 
-void func_80054624_usa(s32 arg0 UNUSED) {
+void func_80054624_usa(void) {
     if (gGameStatus & 0x40) {
         tetrisBlock1.block.image = (u64 *)D_01008468_usa;
         tetrisBlock2.block.image = (u64 *)D_01008C68_usa;
@@ -126,7 +126,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/dlist", func_80054C44_eur);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/dlist", func_80054CCC_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/dlist", InitGameStateVar);
 #endif
 
 #if VERSION_EUR
@@ -138,7 +138,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/dlist", func_800533B4_fra);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/dlist", func_8005343C_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/dlist", InitGameStateVar);
 #endif
 
 #if VERSION_FRA
@@ -150,7 +150,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/dlist", func_80053534_ger);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/dlist", func_800535BC_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/dlist", InitGameStateVar);
 #endif
 
 #if VERSION_GER

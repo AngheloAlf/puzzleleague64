@@ -7,7 +7,7 @@
 struct cursor_t;
 struct tetWell;
 
-// void func_80087A90_usa();
+// void TutorialPattern();
 void InitTutorial(void);
 void TutorialCheckState(struct tetWell *well, struct cursor_t *cursor);
 void DoTutorial(void);

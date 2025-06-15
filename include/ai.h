@@ -9,9 +9,17 @@
 typedef struct ai_t {
     /* 0x000 */ UNK_PAD unk_000[0xC];
     /* 0x00C */ s32 unk_00C;
-    /* 0x010 */ UNK_PAD unk_010[0x03C-0x010];
+    /* 0x010 */ UNK_PAD unk_010[0x024-0x010];
+    /* 0x024 */ s32 unk_024;
+    /* 0x028 */ s32 unk_028;
+    /* 0x02C */ s32 unk_02C;
+    /* 0x030 */ s32 unk_30;
+    /* 0x034 */ s32 unk_34;
+    /* 0x038 */ s32 unk_038;
     /* 0x03C */ s32 unk_03C;
-    /* 0x040 */ UNK_PAD unk_040[0x104-0x040];
+    /* 0x040 */ s32 unk_040;
+    /* 0x044 */ s32 unk_044;
+    /* 0x048 */ UNK_PAD unk_048[0x104-0x048];
     /* 0x104 */ s32 unk_104;
     /* 0x108 */ UNK_PAD unk_108[0x12C-0x108];
 } ai_t; // size = 0x12C

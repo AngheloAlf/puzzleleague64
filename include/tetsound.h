@@ -3,12 +3,13 @@
 
 #include "ultra64.h"
 #include "unk.h"
-#include "the_game.h"
+
+struct tetWell;
 
 void InitGameAudioSystem(void);
 void SetSoundOptions(s16 arg0);
-UNK_RET LoadFairySoundData(UNK_TYPE arg0, UNK_TYPE arg1, UNK_TYPE arg2);
-s32 PlayGameSong(tetWell *well);
+s32 LoadFairySoundData(s16 arg0, s16 arg1, s16 arg2);
+s32 PlayGameSong(struct tetWell *well);
 // void func_80004848_usa();
 // void func_8000486C_usa();
 // void func_800048C0_usa();

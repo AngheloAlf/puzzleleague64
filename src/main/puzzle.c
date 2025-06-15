@@ -28,7 +28,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/puzzle", func_80088A48_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/puzzle", func_80088AB4_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/puzzle", Init2DPuzzle);
 #endif
 
 #if VERSION_USA
@@ -36,7 +36,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/puzzle", func_80088C08_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/puzzle", func_80088D34_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/puzzle", Init3DPuzzle);
 #endif
 
 #if VERSION_USA
@@ -53,8 +53,8 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/puzzle", func_80089108_usa);
 
 #if VERSION_USA
 #if 0
-// ? func_8006B314_usa(Game *, ?, s32 *);           /* extern */
-// s32 func_80088AB4_usa(Game *, cursor_t *, void *, ?); /* extern */
+// ? Init2DTetrisBlocks(Game *, ?, s32 *);           /* extern */
+// s32 Init2DPuzzle(Game *, cursor_t *, void *, ?); /* extern */
 
 s32 func_8008913C_usa(s32 arg0) {
     s32 var_v0;
@@ -67,10 +67,10 @@ s32 func_8008913C_usa(s32 arg0) {
         gTheGame.unk_9C2C[0][1] = (s32) temp_v0;
         gTheGame.tetrisWell[0].unk_4408[0x20] = (s32) temp_v0;
     }
-    func_8006B314_usa(&gTheGame, 0, &gTheGame.unk_9C2C[0][1]);
+    Init2DTetrisBlocks(&gTheGame, 0, &gTheGame.unk_9C2C[0][1]);
     var_v0 = -1;
-    if (func_80088AB4_usa(&gTheGame, gTheGame.unk_8860, temp_s0, 1) == 0) {
-        func_8006B314_usa(&gTheGame, 0);
+    if (Init2DPuzzle(&gTheGame, gTheGame.unk_8860, temp_s0, 1) == 0) {
+        Init2DTetrisBlocks(&gTheGame, 0);
         var_v0 = 0;
     }
     return var_v0;
@@ -154,7 +154,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/puzzle", func_80088A48_usa);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/puzzle", func_80088AB4_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/puzzle", Init2DPuzzle);
 #endif
 
 #if VERSION_EUR
@@ -162,7 +162,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/puzzle", func_80088C08_usa);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/puzzle", func_80088D34_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/puzzle", Init3DPuzzle);
 #endif
 
 #if VERSION_EUR
@@ -210,7 +210,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/puzzle", func_80087518_fra);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/puzzle", func_80087584_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/puzzle", Init2DPuzzle);
 #endif
 
 #if VERSION_FRA
@@ -218,7 +218,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/puzzle", func_800876D8_fra);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/puzzle", func_80087804_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/puzzle", Init3DPuzzle);
 #endif
 
 #if VERSION_FRA
@@ -266,7 +266,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/puzzle", func_800876D8_ger);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/puzzle", func_80087744_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/puzzle", Init2DPuzzle);
 #endif
 
 #if VERSION_GER
@@ -274,7 +274,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/puzzle", func_80087898_ger);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/puzzle", func_800879C4_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/puzzle", Init3DPuzzle);
 #endif
 
 #if VERSION_GER

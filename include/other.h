@@ -8,7 +8,7 @@ struct cursor_t;
 struct struct_gInfo_unk_00068;
 struct tetWell;
 
-// void func_80052720_usa();
+void InitMiscStuff(void);
 void UpdateMiscStuff(struct tetWell *well, struct cursor_t *cursor, s32 num);
 void Draw2DMiscStuff(struct struct_gInfo_unk_00068 *dynamicp);
 // void func_80053140_usa();

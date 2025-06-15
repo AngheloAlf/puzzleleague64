@@ -13,19 +13,19 @@
 #include "the_game.h"
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/other", func_80052720_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/other", InitMiscStuff);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/other", func_800529C0_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/other", InitMiscStuff);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/other", func_80051130_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/other", InitMiscStuff);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/other", func_800512B0_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/other", InitMiscStuff);
 #endif
 
 void UpdateMiscStuff(tetWell *well, cursor_t *cursor, s32 num) {

@@ -6,15 +6,16 @@
 #include "unk.h"
 
 struct attack_t;
+struct cursor_t;
 struct block_t;
 struct tetWell;
 
 void Init2DNewRow(struct tetWell *well);
-// void func_8006B24C_usa();
-// void func_8006B314_usa();
+void Init2DCursor(struct cursor_t *cursor, s32 num);
+void Init2DTetrisBlocks(struct tetWell *well, s32 num);
 void Init2DTetrisBlocksTMEM(struct tetWell *well, s32 clear);
 void Init2DIcons(struct tetWell *well);
-// void func_8006B6A8_usa();
+void Init2DAttackBlocks(struct tetWell * well);
 void Init2DExplosion(struct tetWell *well);
 // void func_8006B798_usa();
 // void func_8006C0E0_usa();

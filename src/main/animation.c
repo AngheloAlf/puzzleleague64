@@ -98,8 +98,6 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/animation", func_8004F5E4_usa);
 #endif
 #endif
 
-extern UNK_TYPE B_801C7340_usa[];
-
 #if VERSION_USA
 #if 0
 void UpdateAnimation(tetWell *well, s32 num, s32 combo) {
@@ -121,7 +119,7 @@ void UpdateAnimation(tetWell *well, s32 num, s32 combo) {
     }
 
     temp_a0 = well->unk_43A8;
-    temp_v1 = B_801C7340_usa[num];
+    temp_v1 = chain_check[num];
     if (temp_a0 != temp_v1) {
         if (temp_a0 == 0) {
             if (temp_v1 == -1) {
@@ -129,7 +127,7 @@ void UpdateAnimation(tetWell *well, s32 num, s32 combo) {
             } else if (temp_v1 < -1) {
                 var_s2 = 0x270F;
             }
-            temp_s0 = &B_801C7340_usa[num];
+            temp_s0 = &chain_check[num];
             UpdateComboChainCount(num, 0, -*temp_s0);
             temp_s0_2 = *temp_s0;
 
@@ -143,7 +141,7 @@ void UpdateAnimation(tetWell *well, s32 num, s32 combo) {
         }
 
         temp_v1_2 = well->unk_43A8;
-        B_801C7340_usa[num] = temp_v1_2;
+        chain_check[num] = temp_v1_2;
         if (temp_v1_2 < 0) {
             var_s2 = temp_v1_2;
         }

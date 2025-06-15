@@ -160,34 +160,34 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/tetris", func_80088828_ger);
 ? func_800343A0_usa();                              /* extern */
 ? func_800346B8_usa();                              /* extern */
 s32 AnimationRandom(?);                           /* extern */
-? func_80052720_usa();                              /* extern */
+? InitMiscStuff();                              /* extern */
 ? func_80054020_usa();                              /* extern */
-? func_80054500_usa(s8 *);                          /* extern */
+? InitCursor(s8 *);                          /* extern */
 ? func_800545E4_usa(s32);                           /* extern */
 ? func_80054624_usa(s32);                           /* extern */
 ? func_800552F4_usa();                              /* extern */
 ? Init3DNewRow(s8 *);                          /* extern */
-? func_8005DB88_usa(s8 *, s32);                     /* extern */
+? Init3DCursor(s8 *, s32);                     /* extern */
 ? func_8005DBD8_usa(s8 *, s32);                     /* extern */
-? func_8005DD3C_usa(s8 *);                          /* extern */
-? func_8005DDB4_usa(s8 *);                          /* extern */
-? func_8005DDF8_usa(s8 *);                          /* extern */
+? Init3DIcons(s8 *);                          /* extern */
+? Init3DAttackBlocks(s8 *);                          /* extern */
+? Init3DExplosion(s8 *);                          /* extern */
 ? func_8005DE28_usa();                              /* extern */
 ? func_8005DE58_usa(s8 *, s8 *, s32);               /* extern */
 ? Init2DNewRow(s8 *);                          /* extern */
-? func_8006B24C_usa(s8 *, s32);                     /* extern */
-? func_8006B314_usa(s8 *, s32);                     /* extern */
+? Init2DCursor(s8 *, s32);                     /* extern */
+? Init2DTetrisBlocks(s8 *, s32);                     /* extern */
 ? Init2DIcons(s8 *);                          /* extern */
-? func_8006B6A8_usa(s8 *);                          /* extern */
+? Init2DAttackBlocks(s8 *);                          /* extern */
 ? Init2DExplosion(s8 *);                          /* extern */
 ? func_8006B798_usa();                              /* extern */
 ? func_8006C0E0_usa(s8 *, s8 *, s32);               /* extern */
-? func_80074FF0_usa(s8 *, s8 *, ? *);               /* extern */
+? InitAI(s8 *, s8 *, ? *);               /* extern */
 ? func_800755B0_usa(? *, s32, s32);                 /* extern */
 s32 func_80088940_usa(void **, s32, s32);           /* extern */
 s32 func_80088A48_usa(void **, s32, s32);           /* extern */
-s32 func_80088AB4_usa(s8 *, s8 *, void *, s32);     /* extern */
-? func_80088D34_usa(s8 *, s8 *, void *, s32);       /* extern */
+s32 Init2DPuzzle(s8 *, s8 *, void *, s32);     /* extern */
+? Init3DPuzzle(s8 *, s8 *, void *, s32);       /* extern */
 ? func_8008997C_usa(s8 *, ? *, ?);                  /* extern */
 extern s32 B_801AAB98_usa;
 extern s32 B_801AB61C_usa;
@@ -276,7 +276,7 @@ void InitTetrisWell(void) {
     InitGameStateVar();
     func_800325F8_usa();
     func_800552F4_usa();
-    func_80052720_usa();
+    InitMiscStuff();
     func_800343A0_usa();
     func_800346B8_usa();
     func_80054020_usa();
@@ -299,12 +299,12 @@ loop_4:
         temp_s3->unk_441C = 0xDF;
         temp_s3->unk_43F8 = 0;
         temp_s3->unk_43FC = 0;
-        func_80054500_usa(sp34);
+        InitCursor(sp34);
         func_800545E4_usa(var_fp);
         temp_s0 = gTheGame.unk_9C0C;
         if (temp_s0 == 1) {
-            func_8006B24C_usa(sp34, var_fp);
-            func_8006B314_usa(temp_s3, var_fp);
+            Init2DCursor(sp34, var_fp);
+            Init2DTetrisBlocks(temp_s3, var_fp);
             switch (gSelection) {                   /* switch 1; irregular */
                 case 0xAA:                          /* switch 1 */
                     bzero(&sp10, 0x12);
@@ -338,7 +338,7 @@ block_52:
 block_54:
                     Init2DNewRow(temp_s3);
                     Init2DIcons(temp_s3);
-                    func_8006B6A8_usa(temp_s3);
+                    Init2DAttackBlocks(temp_s3);
                     Init2DExplosion(temp_s3);
                     func_8006B798_usa();
                     if (((gSelection == 0xAA) | (gSelection == 0xB4)) != 0) {
@@ -349,17 +349,17 @@ block_54:
                 case 0x78:                          /* switch 1 */
                     temp_a2 = gPlayer + (((temp_s3->unk_4424 - 1) * 0x6E) + 0x121);
                     sp28 = temp_a2;
-                    func_80088AB4_usa(temp_s3, sp34, temp_a2, 1);
+                    Init2DPuzzle(temp_s3, sp34, temp_a2, 1);
                     goto block_54;
                 case 0x82:                          /* switch 1 */
                     temp_a1 = temp_s3->unk_4420;
                     if (temp_a1 != 0) {
-                        func_80088AB4_usa(temp_s3, sp34, sp28, func_80088940_usa(&sp28, temp_a1, temp_s3->unk_4424));
+                        Init2DPuzzle(temp_s3, sp34, sp28, func_80088940_usa(&sp28, temp_a1, temp_s3->unk_4424));
                         goto block_54;
                     }
                     temp_a2_2 = gPlayer + (((temp_s3->unk_4424 - 1) * 0x6E) + 0x121);
                     sp28 = temp_a2_2;
-                    if (func_80088AB4_usa(temp_s3, sp34, temp_a2_2, 1) == 0) {
+                    if (Init2DPuzzle(temp_s3, sp34, temp_a2_2, 1) == 0) {
                         gReset = -1;
                         gMain = GMAIN_2BC;
                         return;
@@ -368,7 +368,7 @@ block_54:
                 case 0x96:                          /* switch 1 */
                     if (var_fp == temp_s0) {
                         func_800755B0_usa(&B_801ADADC_usa, gTheGame.unk_9C28, gTheGame.unk_9C2C);
-                        func_80074FF0_usa(temp_s3, sp34, &B_801ADADC_usa);
+                        InitAI(temp_s3, sp34, &B_801ADADC_usa);
                     }
                     /* fallthrough */
                 default:                            /* switch 1 */
@@ -426,12 +426,12 @@ loop_44:
                     goto block_54;
             }
         } else {
-            func_8005DB88_usa(sp34, var_fp);
+            Init3DCursor(sp34, var_fp);
             func_8005DBD8_usa(temp_s3, var_fp);
             temp_s3->unk_4088 = -0.768f;
             switch (gSelection) {                   /* irregular */
                 case 0x82:
-                    func_80088D34_usa(temp_s3, sp34, sp28, func_80088A48_usa(&sp28, temp_s3->unk_4420, temp_s3->unk_4424));
+                    Init3DPuzzle(temp_s3, sp34, sp28, func_80088A48_usa(&sp28, temp_s3->unk_4420, temp_s3->unk_4424));
                     break;
                 case 0xAA:
                     bzero(&sp10, 0x12);
@@ -518,9 +518,9 @@ loop_87:
                     break;
             }
             Init3DNewRow(temp_s3);
-            func_8005DD3C_usa(temp_s3);
-            func_8005DDB4_usa(temp_s3);
-            func_8005DDF8_usa(temp_s3);
+            Init3DIcons(temp_s3);
+            Init3DAttackBlocks(temp_s3);
+            Init3DExplosion(temp_s3);
             func_8005DE28_usa();
             if (((gSelection == 0xAA) | (gSelection == 0xB4)) != 0) {
                 func_8005DE58_usa(temp_s3, sp34, var_fp);

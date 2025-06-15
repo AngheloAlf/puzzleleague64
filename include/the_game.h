@@ -359,7 +359,21 @@ typedef struct Game {
     /* 0x8EE0 */ uObjTxtr unk_8EE0[UNK_SIZE]; // gTEXT?
     /* 0x8EF8 */ UNK_PAD unk_8EF8[0x8FD0-0x8EF8];
     /* 0x8FD0 */ uObjSprite unk_8FD0[UNK_SIZE];
-    /* 0x8FE8 */ UNK_TYPE1 unk_8FE8[0x90C0-0x8FE8];
+    /* 0x8FE8 */ UNK_PAD unk_8FE8[0x90A8-0x8FE8];
+    /* 0x90A8 */ UNK_PAD unk_90A8[0x2];
+    /* 0x90AA */ s16 unk_90AA;
+    /* 0x90AC */ UNK_PAD unk_90AC[0x2];
+    /* 0x90AE */ s16 unk_90AE;
+    /* 0x90B0 */ UNK_PAD unk_90B0[0x90B2-0x90B0];
+    /* 0x90B2 */ s16 unk_90B2;
+    /* 0x90B4 */ s16 unk_90B4;
+    /* 0x90B6 */ s16 unk_90B6;
+    /* 0x90B8 */ s16 unk_90B8;
+    /* 0x90BA */ UNK_PAD unk_90BA[0x90BC-0x90BA];
+    /* 0x90BC */ s8 unk_90BC;
+    /* 0x90BD */ s8 unk_90BD;
+    /* 0x90BE */ s8 unk_90BE;
+    /* 0x90BF */ s8 unk_90BF;
     /* 0x90C0 */ s32 unk_90C0;
     /* 0x90C4 */ UNK_TYPE1 unk_90C4[0x4];
     /* 0x90C8 */ text_t drawText[DRAWTEXT_COUNT];
@@ -385,7 +399,7 @@ typedef struct Game {
     /* 0x9C1C */ s32 unk_9C1C;
     /* 0x9C20 */ UNK_TYPE1 unk_9C20[0x4];
     /* 0x9C24 */ UNK_TYPE4 unk_9C24;
-    /* 0x9C28 */ UNK_TYPE4 unk_9C28;
+    /* 0x9C28 */ UNK_TYPE4 unk_9C28; // menu_t starts here?
     /* 0x9C2C */ s32 unk_9C2C[UNK_SIZE][4];
     /* 0x9C3C */ UNK_TYPE1 unk_9C3C[0xC];
     /* 0x9C48 */ struct_801A6DB8_usa unk_9C48[8];

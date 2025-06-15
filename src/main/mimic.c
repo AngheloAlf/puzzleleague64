@@ -44,7 +44,7 @@ INLINE void SetupMimic(void **heapP) {
         gGameStatus |= 0x40;
     }
 
-    func_80054624_usa(temp_a0);
+    func_80054624_usa();
     InitCharacter(0x385, -1);
     LoadFairySoundData(0x19, 9, 9);
 
@@ -340,7 +340,178 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/mimic", Draw2DMT);
 #endif
 
 #if VERSION_USA
+#if 0
+// ? Draw3DFrontTetrisWell(s32, ?);                        /* extern */
+// ? Draw3DBackTetrisWell(s32, ?);                        /* extern */
+// ? Draw3DTetrisNewBlock(s32, f32 *, u16, s32);          /* extern */
+// ? Draw3DCursor(s32, ?);                        /* extern */
+// ? Draw3DIcon(s32, ?);                        /* extern */
+// ? Draw3DExplosion(s32, ?, ?, ?);                  /* extern */
+// gIdent?
+extern s32 B_8021BEE8_usa; // uObjBg?
+
+// shade3d?
+extern s32 D_01024CB0_usa;
+
+void Draw3DMT(struct_gInfo_unk_00068 *dynamicp) {
+    u16 sp28;
+    UNK_TYPE *var_t4;
+    Gfx *temp_a2;
+    Gfx *temp_t2;
+    Gfx *temp_v0;
+    Gfx *temp_v0_2;
+    Gfx *temp_v1_3;
+    Gfx *temp_v1_4;
+    Gfx *temp_v1_5;
+    Gfx *temp_v1_6;
+    Gfx *temp_v1_7;
+    Mtx *temp_s0;
+    Mtx *temp_s0_2;
+    Mtx *temp_s1;
+    enum enum_gMain var_v0;
+    s32 temp_a3;
+    s32 temp_v1;
+    s32 temp_v1_2;
+    s32 var_a3;
+    s32 var_t0;
+    s32 var_t3;
+
+    gDPPipeSync(glistp++);
+    gDPSetTextureFilter(glistp++, G_TF_BILERP);
+
+    if (gSelection == 0x64) {
+        var_t4 = &D_01024CB0_usa;
+        
+
+        gDPPipeSync(glistp++);
+        gDPSetTextureLUT(glistp++, G_TT_NONE);
+        gDPSetTexturePersp(glistp++, G_TP_NONE);
+        gDPSetCycleType(glistp++, G_CYC_1CYCLE);
+        gDPSetRenderMode(glistp++, G_RM_XLU_SURF, G_RM_NOOP2);
+        gDPSetCombineMode(glistp++, G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM);
+        gDPSetPrimColor(glistp++, 0, 0, 50, 50, 50, 255);
+
+        for (var_t3 = 0; var_t3 < 0xBD; var_t3 += 0x20) {
+            var_t0 = 0xBD - var_t3;
+            if (var_t0 >= 0x21) {
+                var_t0 = 0x20;
+            }
+
+            temp_v1 = var_t0 << 7;
+            var_a3 = (temp_v1 >> 1) - 1;
+
+#if 0
+            temp_a2->words.w0 = 0xFD900000;
+            temp_a2->words.w1 = (u32) var_t4;
+            temp_a2->unk_8 = 0xF5900000;
+            temp_a2->unk_C = 0x07000000;
+            temp_a2->unk_10 = 0xE6000000;
+            temp_a2->unk_14 = 0x00000000;
+
+            temp_a2->unk_18 = 0xF3000000;
+#endif
+            if (var_a3 >= 0x800) {
+                var_a3 = 0x7FF;
+            }
+            var_t4 += temp_v1;
+            temp_v1_2 = var_t3 + var_t0;
+
+#if 0
+
+            temp_a2->unk_1C = (s32) (((var_a3 & 0xFFF) << 0xC) | 0x07000080);
+
+            gDPPipeSync(glistp++);
+
+            temp_a2->unk_28 = 0xF5882000;
+            temp_a2->unk_2C = 0x00000000;
+            temp_a2->unk_30 = 0xF2000000;
+            temp_a2->unk_34 = (s32) ((((var_t0 - 1) * 4) & 0xFFF) | 0x001FC000);
+#endif
+            gDPLoadTextureBlock(glistp++, var_t4, G_IM_FMT_I, G_IM_SIZ_16b, 128, var_t0, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+
+#if 0
+            temp_a2->unk_38 = (s32) ((((temp_v1_2 + 0x20) * 4) & 0xFFF) | 0xE425C000);
+            temp_a2->unk_3C = (s32) (((var_t3 * 4) & 0xFFF) | 0x5C000);
+            temp_a2->unk_40 = 0xB4000000;
+            temp_a2->unk_44 = 0;
+            temp_a2->unk_48 = 0xB3000000;
+            temp_a2->unk_4C = 0x04000400;
+#endif
+
+            gSPTextureRectangle(glistp++, 0x005C, (var_t3 * 4), 0x025C, ((temp_v1_2 + 0x20) * 4), G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
+        }
+    }
+
+    temp_s0 = &dynamicp->unk_10100;
+
+    gDPPipeSync(glistp++);
+    gDPSetCycleType(glistp++, G_CYC_1CYCLE);
+    gDPSetAlphaCompare(glistp++, G_AC_THRESHOLD);
+
+    gTransMtx[3][0] = -0.51f;
+    gTransMtx[3][1] = (f32) ((f64) gTheGame.tetrisWell[0].unk_4088 + 0.01);
+    guMtxF2L(gTransMtx, temp_s0);
+    temp_s1 = dynamicp + 0x10000;
+
+    gSPBgRect1Cyc(glistp++, temp_s0);
+
+    guPerspective(temp_s1, &sp28, 33.0f, 0.88f, 10.0f, 3000.0f, 1.0f);
+    temp_s0_2 = dynamicp + 0x10080;
+    guLookAt(temp_s0_2, 0.0f, 0.0f, 900.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+
+    temp_a3 = dynamicp + 0x10180;
+
+    gSPPerspNormalize(glistp++, sp28);
+    gSPMatrix(glistp++, temp_s1, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
+    gSPMatrix(glistp++, temp_s0_2, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
+    gDPSetScissor(glistp++, G_SC_NON_INTERLACE, 0, 31, 320, 221);
+
+    gDPPipeSync(glistp++);
+
+    gDPSetCombineMode(glistp++, G_CC_MODULATEIA, G_CC_MODULATEIA);
+    gDPSetRenderMode(glistp++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
+
+    gSPBgRect1Cyc(glistp++, &B_8021BEE8_usa);
+    gSPMatrix(glistp++, temp_a3, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
+
+
+    Draw3DTetrisNewBlock(dynamicp, &gTheGame.tetrisWell[0]);
+    if (anim_bg != 0) {
+        gMain = GMAIN_38E;
+    }
+    Draw3DBackTetrisWell(dynamicp, 0);
+    Draw3DFrontTetrisWell(dynamicp, 0);
+
+    var_v0 = GMAIN_TUTORIAL;
+    if (gSelection == 0x6E) {
+        var_v0 = GMAIN_MIMIC;
+    }
+    gMain = var_v0;
+
+    gDPPipeSync(glistp++);
+    gDPSetRenderMode(glistp++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+
+    Draw3DIcon(dynamicp, 0);
+
+    gDPSetScissor(glistp++, G_SC_NON_INTERLACE, 0, 7, 320, 239);
+
+    gDPPipeSync(glistp++);
+    gDPSetTexturePersp(glistp++, G_TP_NONE);
+    gDPSetCombineMode(glistp++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+    gDPSetRenderMode(glistp++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+    gDPSetAlphaCompare(glistp++, G_AC_THRESHOLD);
+
+    Draw3DExplosion(dynamicp, 0);
+
+    gDPSetTextureLUT(glistp++, G_TT_NONE);
+
+    Draw3DCursor(dynamicp);
+
+    gSPTexture(glistp++, 0, 0, 0, G_TX_RENDERTILE, G_OFF);
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/mimic", Draw3DMT);
+#endif
 #endif
 
 #if VERSION_USA

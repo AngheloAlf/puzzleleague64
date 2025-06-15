@@ -765,7 +765,7 @@ s32 func_8004FA2C_usa();                            /* extern */
 ? func_80058D68_usa(s32, s32);                      /* extern */
 ? UpdateExplosion(Game *);                     /* extern */
 ? Init2DNewRow(Game *);                     /* extern */
-? func_8006B314_usa(Game *, ?);                  /* extern */
+? Init2DTetrisBlocks(Game *, ?);                  /* extern */
 ? Init2DIcons(Game *);                     /* extern */
 ? Init2DExplosion(Game *);                     /* extern */
 ? Init2DSmallStars(?);                             /* extern */
@@ -928,7 +928,7 @@ block_39:
                         var_v1_2 = 0xBE;
 block_50:
                         if (var_v0 == var_v1_2) {
-                            func_8006B314_usa(&gTheGame, 0);
+                            Init2DTetrisBlocks(&gTheGame, 0);
                             Init2DNewRow(&gTheGame);
                         }
                     }
@@ -992,7 +992,7 @@ block_73:
                         gMain = 0x392;
                     }
                     if (gMain == 0x392) {
-                        func_8006B314_usa(&gTheGame, 0);
+                        Init2DTetrisBlocks(&gTheGame, 0);
                         Init2DNewRow(&gTheGame);
                         Init2DIcons(&gTheGame);
                         if ((gSelection >= 0x83) || (gTheGame.unk_8860[0].unk_0 != 7)) {
@@ -1472,9 +1472,9 @@ s32 func_8004FA2C_usa();                            /* extern */
 ? UpdateExplosion(Game *);                     /* extern */
 ? Init3DNewRow(Game *);                     /* extern */
 ? func_8005DBD8_usa(Game *, ?);                  /* extern */
-? func_8005DD3C_usa(Game *);                     /* extern */
-? func_8005DDB4_usa(Game *);                     /* extern */
-? func_8005DDF8_usa(Game *);                     /* extern */
+? Init3DIcons(Game *);                     /* extern */
+? Init3DAttackBlocks(Game *);                     /* extern */
+? Init3DExplosion(Game *);                     /* extern */
 ? func_8005E0E8_usa(?);                             /* extern */
 ? func_8005E108_usa(?, ?);                          /* extern */
 ? func_8005E128_usa(Game *, ?);                  /* extern */
@@ -1563,8 +1563,8 @@ void DoGameOver3D(void) {
                             break;
                     }
                     gGameStatus &= ~0x20;
-                    func_8005DD3C_usa(&gTheGame);
-                    func_8005DDF8_usa(&gTheGame);
+                    Init3DIcons(&gTheGame);
+                    Init3DExplosion(&gTheGame);
                     gTheGame.unk_9C20[4] = 0;
                     gTheGame.unk_89C8[0x6E8] = -0x280;
                     gTheGame.unk_89C8[0x6D0] = -0x280;
@@ -1663,7 +1663,7 @@ block_108:
                         goto block_108;
                     }
                     if (((gSelection == 0x8C) | (gSelection == 0xBE)) != 0) {
-                        func_8005DD3C_usa(&gTheGame);
+                        Init3DIcons(&gTheGame);
                         var_s0 = func_8003901C_usa(&gTheGame);
                         if (gWhatever == 0x55) {
                             var_a0_2 = -1;
@@ -1716,7 +1716,7 @@ block_73:
                     if (gMain == 0x392) {
                         func_8005DBD8_usa(&gTheGame, 0);
                         Init3DNewRow(&gTheGame);
-                        func_8005DD3C_usa(&gTheGame);
+                        Init3DIcons(&gTheGame);
                         if ((gSelection >= 0x83) || (gTheGame.unk_8860[0].unk_0 != 7)) {
                             if ((gSelection == 0xAA) && (gTheGame.unk_8860[0].unk_0 == 7)) {
                                 goto block_85;
@@ -1812,10 +1812,10 @@ block_115:
                     var_s0_2 = 0;
                     LoadGameOver3D();
                     InitFlic();
-                    func_8005DD3C_usa(&gTheGame);
-                    func_8005DD3C_usa((Game *) &gTheGame.tetrisWell[1]);
-                    func_8005DDF8_usa(&gTheGame);
-                    func_8005DDF8_usa((Game *) &gTheGame.tetrisWell[1]);
+                    Init3DIcons(&gTheGame);
+                    Init3DIcons((Game *) &gTheGame.tetrisWell[1]);
+                    Init3DExplosion(&gTheGame);
+                    Init3DExplosion((Game *) &gTheGame.tetrisWell[1]);
                     gTheGame.unk_9C20[4] = 0;
                     var_a0_3 = &gTheGame.tetrisWell[1];
                     var_v1_2 = &gTheGame;
@@ -1903,8 +1903,8 @@ block_115:
                         func_8005DBD8_usa((Game *) &gTheGame.tetrisWell[1], 1);
                         Init3DNewRow(&gTheGame);
                         Init3DNewRow((Game *) &gTheGame.tetrisWell[1]);
-                        func_8005DDB4_usa(&gTheGame);
-                        func_8005DDB4_usa((Game *) &gTheGame.tetrisWell[1]);
+                        Init3DAttackBlocks(&gTheGame);
+                        Init3DAttackBlocks((Game *) &gTheGame.tetrisWell[1]);
                         gTheGame.unk_43FC = 0x36;
                         gTheGame.tetrisWell[1].unk_43FC = 0x36;
                         gTheGame.unk_43EC = 0x5A;
