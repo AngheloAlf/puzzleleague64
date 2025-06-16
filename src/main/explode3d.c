@@ -29,7 +29,7 @@ void Start3DExplosion(tetWell *well, s32 num, s32 row, s32 col, s32 type) {
     }
 
     for (i = 0; i < total; i++) {
-        for (count = 0; count < TETWELL_EXPLOSION_LEN; count++) {
+        for (count = 0; count < EXPLOSION_COUNT; count++) {
             if (well->explosion[count].type == -1) {
                 explode = &well->explosion[count];
 
@@ -77,7 +77,7 @@ void Start3DExBlosion(tetWell *well, s32 num, s32 x, s32 y) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        for (count = 0; count < TETWELL_EXPLOSION_LEN; count++) {
+        for (count = 0; count < EXPLOSION_COUNT; count++) {
             if (well->explosion[count].type == -1) {
                 explode = &well->explosion[count];
 
@@ -123,7 +123,7 @@ void Start3DIconSplash(tetWell *well, s32 num, s32 row, s32 col) {
     s32 i;
 
     for (i = 0; i < 6; i++) {
-        for (count = 0; count < TETWELL_EXPLOSION_LEN; count++) {
+        for (count = 0; count < EXPLOSION_COUNT; count++) {
             if (well->explosion[count].type == -1) {
                 explode = &well->explosion[count];
 
@@ -265,7 +265,7 @@ void Update3DExplosion(tetWell *well) {
     s32 count;
     s32 temp;
 
-    for (count = 0; count < TETWELL_EXPLOSION_LEN; count++) {
+    for (count = 0; count < EXPLOSION_COUNT; count++) {
         explode = &well->explosion[count];
 
         if (explode->type == -1) {

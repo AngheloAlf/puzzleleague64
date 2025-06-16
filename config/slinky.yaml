@@ -622,25 +622,30 @@ segments:
     files:
       - { path: "asm/{version}/data/segment_101A80.o" }
 
-  - name: unk_12C1B0
+  - name: segment_12C1B0
+    fixed_vram: 0x010375E0
+    files:
+      - { path: "asm/{version}/data/segment_12C1B0.o" }
+
+  - name: unk_1336B0
     include_if_any: [[version, usa]]
     files:
-      - { path: "asm/{version}/data/unk_12C1B0.o" }
+      - { path: "asm/{version}/data/unk_1336B0.o" }
 
-  - name: unk_12C460
+  - name: unk_133960
     include_if_any: [[version, eur]]
     files:
-      - { path: "asm/{version}/data/unk_12C460.o" }
+      - { path: "asm/{version}/data/unk_133960.o" }
 
-  - name: unk_12AAC0
+  - name: unk_131FC0
     include_if_any: [[version, fra]]
     files:
-      - { path: "asm/{version}/data/unk_12AAC0.o" }
+      - { path: "asm/{version}/data/unk_131FC0.o" }
 
-  - name: unk_1201A0
+  - name: unk_1276A0
     include_if_any: [[version, ger]]
     files:
-      - { path: "asm/{version}/data/unk_1201A0.o" }
+      - { path: "asm/{version}/data/unk_1276A0.o" }
 
   - name: segment_50F3F0
     files:

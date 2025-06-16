@@ -834,8 +834,12 @@ segments:
     start: 0x0F5A70
 
   - type: databin
-    name: unk_1201A0
+    name: segment_12C1B0
     start: 0x1201A0
+
+  - type: databin
+    name: unk_1276A0
+    start: 0x1276A0
     # Unknown end
 
   - type: databin

@@ -29,7 +29,7 @@ void Start2DExplosion(tetWell *well, s32 row, s32 col, s32 type) {
     rect = &well->unk_3830[row][col];
 
     for (i = 0; i < total; i++) {
-        for (count = 0; count < TETWELL_EXPLOSION_LEN; count++) {
+        for (count = 0; count < EXPLOSION_COUNT; count++) {
             if (well->explosion[count].type == -1) {
                 explode = &well->explosion[count];
 
@@ -73,7 +73,7 @@ void Start2DExBlosion(tetWell *well, s32 row, s32 col, s32 type UNUSED) {
     explode_t *explode;
 
     for (i = 0; i < 4; i++) {
-        for (count = 0; count < TETWELL_EXPLOSION_LEN; count++) {
+        for (count = 0; count < EXPLOSION_COUNT; count++) {
             if (well->explosion[count].type == -1) {
                 explode = &well->explosion[count];
 
@@ -114,7 +114,7 @@ void Start2DIconSplash(tetWell *well, s32 x, s32 y) {
     s32 i;
 
     for (i = 0; i < 6; i++) {
-        for (count = 0; count < TETWELL_EXPLOSION_LEN; count++) {
+        for (count = 0; count < EXPLOSION_COUNT; count++) {
             if (well->explosion[count].type == -1) {
                 explode = &well->explosion[count];
                 explode->type = 0x19;
@@ -253,7 +253,7 @@ void Update2DExplosion(tetWell *well) {
     explode_t *explode;
     s32 count;
 
-    for (count = 0; count < TETWELL_EXPLOSION_LEN; count++) {
+    for (count = 0; count < EXPLOSION_COUNT; count++) {
         explode = &well->explosion[count];
         if (explode->type == -1) {
             continue;

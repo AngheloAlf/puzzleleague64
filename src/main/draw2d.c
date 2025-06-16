@@ -562,7 +562,7 @@ void Draw2DExplosion(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     gSPObjLoadTxtr(glistp++, &B_801F9CC8_usa[num]);
 
     fade = 0;
-    for (count = 0; count < TETWELL_EXPLOSION_LEN; count++) {
+    for (count = 0; count < EXPLOSION_COUNT; count++) {
         explode = &exp[count];
 
         if (explode->type == 0x19) {

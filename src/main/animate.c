@@ -9,26 +9,39 @@
 #include "main_functions.h"
 #include "main_variables.h"
 
+#include "ai.h"
 #include "animate2d.h"
 #include "animate3d.h"
 
+void CheckGameInput(tetWell *well, cursor_t *cursor, s32 num) {
+    if (gTheGame.unk_9C0C == 1) {
+        if (brainbrain[num].unk_00C == -1) {
+            Input2D(well, cursor, num);
+        } else {
+            AIMove(well, cursor, &brainbrain[num], num);
+        }
+        Update2DSwitching(well, cursor);
+    } else {
+        if (brainbrain[num].unk_00C == -1) {
+            Input3D(well, cursor, num);
+        } else {
+            AIMove(well, cursor, &brainbrain[num], num);
+        }
+        Update3DSwitching(well, cursor);
+    }
+
+    cursor->unk_24--;
+    if (cursor->unk_24 == 0) {
+// TODO: REGION_NTSC?
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/animate", CheckGameInput);
+        cursor->unk_24 = 0xF;
+#else
+        cursor->unk_24 = 0xD;
 #endif
+        cursor->unk_20 ^= 1;
+    }
+}
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/animate", CheckGameInput);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/animate", CheckGameInput);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/animate", CheckGameInput);
-#endif
-
-#if 1
 void AddNewRow(tetWell *well, cursor_t *cursor, s32 num) {
     if (gTheGame.unk_9C0C == 1) {
         Add2DNewRow(well, cursor, num);
@@ -36,7 +49,6 @@ void AddNewRow(tetWell *well, cursor_t *cursor, s32 num) {
         Add3DNewRow(well, cursor, num);
     }
 }
-#endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/animate", func_80056A7C_usa);

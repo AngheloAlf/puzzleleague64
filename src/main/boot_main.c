@@ -162,7 +162,7 @@ void pon_main(void *arg UNUSED) {
             case GMAIN_2BC:
             case GMAIN_28A:
                 gTheGame.unk_9C0C = 1;
-                gAllVertex = 0;
+                gAllVertex = NULL;
                 var_s0 = doMenuLoop(var_s0);
                 break;
 

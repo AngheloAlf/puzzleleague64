@@ -61,7 +61,7 @@
 #if REGION_NTSC
 #define ADJUST_FRAMERATE(x) (x)
 #else
-#define ADJUST_FRAMERATE(x) (x * 5 / 6)
+#define ADJUST_FRAMERATE(x) ((x) * 5 / 6)
 #endif
 
 #endif

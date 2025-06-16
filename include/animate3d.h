@@ -7,7 +7,7 @@
 struct cursor_t;
 struct tetWell;
 
-// void func_80066770_usa();
+void Input3D(struct tetWell *well, struct cursor_t *cursor, s32 num);
 s32 Move3DCursorUp(struct tetWell *well, struct cursor_t *cursor, s32 hold);
 s32 Move3DCursorDown(struct cursor_t *cursor, s32 hold);
 s32 Move3DCursorLeft(struct cursor_t *cursor, s32 hold);

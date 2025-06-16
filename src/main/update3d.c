@@ -77,7 +77,7 @@ void Update3DPosition(tetWell *well, cursor_t *cursor UNUSED, s32 flag) {
             }
         }
 
-        for (count = 0; count < TETWELL_EXPLOSION_LEN; count++) {
+        for (count = 0; count < EXPLOSION_COUNT; count++) {
             if (well->explosion[count].type != -1) {
                 explode = &well->explosion[count];
 
@@ -131,7 +131,7 @@ void Update3DPosition(tetWell *well, cursor_t *cursor UNUSED, s32 flag) {
         }
     }
 
-    for (count = 0; count < TETWELL_EXPLOSION_LEN; count++) {
+    for (count = 0; count < EXPLOSION_COUNT; count++) {
         if (well->explosion[count].type != -1) {
             explode = &well->explosion[count];
 

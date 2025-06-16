@@ -21,19 +21,19 @@
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/animate3d", func_80066770_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/animate3d", Input3D);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/animate3d", func_80066A40_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/animate3d", Input3D);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/animate3d", func_80065180_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/animate3d", Input3D);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/animate3d", func_80065330_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/animate3d", Input3D);
 #endif
 
 #if VERSION_USA

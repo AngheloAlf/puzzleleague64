@@ -173,8 +173,8 @@ s32 AnimationRandom(?);                           /* extern */
 ? Init3DIcons(s8 *);                          /* extern */
 ? Init3DAttackBlocks(s8 *);                          /* extern */
 ? Init3DExplosion(s8 *);                          /* extern */
-? func_8005DE28_usa();                              /* extern */
-? func_8005DE58_usa(s8 *, s8 *, s32);               /* extern */
+? Init3DText();                              /* extern */
+? Init3DClearLine(s8 *, s8 *, s32);               /* extern */
 ? Init2DNewRow(s8 *);                          /* extern */
 ? Init2DCursor(s8 *, s32);                     /* extern */
 ? Init2DTetrisBlocks(s8 *, s32);                     /* extern */
@@ -522,9 +522,9 @@ loop_87:
             Init3DIcons(temp_s3);
             Init3DAttackBlocks(temp_s3);
             Init3DExplosion(temp_s3);
-            func_8005DE28_usa();
+            Init3DText();
             if (((gSelection == 0xAA) | (gSelection == 0xB4)) != 0) {
-                func_8005DE58_usa(temp_s3, sp34, var_fp);
+                Init3DClearLine(temp_s3, sp34, var_fp);
             }
 block_99:
             sp44 += 0xB0;

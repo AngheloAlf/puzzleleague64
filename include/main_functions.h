@@ -122,7 +122,7 @@ void InitAI(struct tetWell *well, struct cursor_t *cursor, struct ai_t *brain);
 // void func_800812A4_usa();
 // void func_800814CC_usa();
 void UpdateAI(struct tetWell *well, struct cursor_t *cursor, struct ai_t *brain, s32 num);
-// void func_80082740_usa();
+void AIMove(struct tetWell *well, struct cursor_t *cursor, struct ai_t *brain, s32 num);
 // void func_800829BC_usa();
 // void func_80082CA0_usa();
 // void func_80082EE0_usa();

@@ -882,8 +882,13 @@ segments:
     #   - [0x12BA70, i8, assets/segment_101A80/D_12DC30.i8, 64, 29] # ci8
 
   - type: databin
-    name: unk_12C1B0
+    name: segment_12C1B0
     start: 0x12C1B0
+
+  - type: databin
+    name: unk_1336B0
+    start: 0x1336B0
+    # Unknown end
 
     # 1336B0
 

@@ -23,19 +23,19 @@
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/animate2d", func_8006FF90_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/animate2d", Input2D);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/animate2d", func_800702B0_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/animate2d", Input2D);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/animate2d", func_8006E9F0_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/animate2d", Input2D);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/animate2d", func_8006EBA0_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/animate2d", Input2D);
 #endif
 
 s32 Move2DCursorUp(tetWell *well, cursor_t *cursor, s32 hold) {

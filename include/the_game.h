@@ -48,14 +48,14 @@ typedef enum enum_tetWell_unk_4424 {
 // TODO: This count seems to be 40 in panepon gc, so maybe it should adjust by player count
 #define ATTACK_COUNT (10 * 2)
 
-#define TETWELL_EXPLOSION_LEN (50)
+#define EXPLOSION_COUNT (50)
 
 /* Original name: tetWell */
 typedef struct tetWell {
     /* 0x0000 */ block_t block[BLOCK_LEN_ROWS][BLOCK_LEN_B]; /* Original name: block */
     /* 0x2520 */ attack_t attack[ATTACK_COUNT];
     /* 0x2AC0 */ icon_t icon[ICON_COUNT];
-    /* 0x2ED0 */ explode_t explosion[TETWELL_EXPLOSION_LEN];
+    /* 0x2ED0 */ explode_t explosion[EXPLOSION_COUNT];
     /* 0x3830 */ uObjSprite unk_3830[BLOCK_LEN_ROWS][TETWELL_OBJSPRITE_LEN_B];
     /* 0x3EF0 */ uObjSprite unk_3EF0[TETWELL_UNK_3EF0_LEN_6];
     /* 0x3F80 */ uObjSprite unk_3F80;
@@ -83,7 +83,7 @@ typedef struct tetWell {
     /* 0x43F8 */ s32 unk_43F8; // possibly part of "struct state_t state; // offset 0x4AA8, size 0x38", maybe "current_raise"
     /* 0x43FC */ s32 unk_43FC;
     /* 0x4400 */ UNK_TYPE1 unk_4400[0x4];
-    /* 0x4404 */ UNK_TYPE4 unk_4404;
+    /* 0x4404 */ s32 unk_4404;
     /* 0x4408 */ UNK_TYPE1 unk_4408[0x14];
     /* 0x441C */ s32 unk_441C;
     /* 0x4420 */ s32 unk_4420; // TODO: enum?
@@ -318,7 +318,7 @@ typedef struct struct_gInfo_unk_00068 {
     /* 0x14C84 */ UNK_TYPE1 unk_14C84[0x4];
     /* 0x14C88 */ attack_t attack[GAME_BUFFER_LEN][ATTACK_COUNT];
     /* 0x157C8 */ icon_t icon[GAME_BUFFER_LEN][ICON_COUNT];
-    /* 0x15FE8 */ explode_t explosion[GAME_BUFFER_LEN][TETWELL_EXPLOSION_LEN];
+    /* 0x15FE8 */ explode_t explosion[GAME_BUFFER_LEN][EXPLOSION_COUNT];
     /* 0x172A8 */ cursor_t cursorBlock[GAME_BUFFER_LEN];
     /* 0x17408 */ uObjSprite block_rect[GAME_BUFFER_LEN][BLOCK_LEN_ROWS][TETWELL_OBJSPRITE_LEN_B];
     /* 0x18188 */ uObjSprite unk_18188[GAME_BUFFER_LEN][TETWELL_UNK_3EF0_LEN_6];
@@ -370,7 +370,7 @@ typedef struct Game {
     /* 0x90BD */ s8 unk_90BD;
     /* 0x90BE */ s8 unk_90BE;
     /* 0x90BF */ s8 unk_90BF;
-    /* 0x90C0 */ s32 unk_90C0;
+    /* 0x90C0 */ s32 unk_90C0; // currentText?
     /* 0x90C4 */ UNK_TYPE1 unk_90C4[0x4];
     /* 0x90C8 */ text_t drawText[DRAWTEXT_COUNT];
     /* 0x9988 */ uObjBg frame;

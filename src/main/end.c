@@ -1476,9 +1476,9 @@ s32 func_8004FA2C_usa();                            /* extern */
 ? Init3DIcons(Game *);                     /* extern */
 ? Init3DAttackBlocks(Game *);                     /* extern */
 ? Init3DExplosion(Game *);                     /* extern */
-? func_8005E0E8_usa(?);                             /* extern */
+? Init3DSmallStars(?);                             /* extern */
 ? func_8005E108_usa(?, ?);                          /* extern */
-? func_8005E128_usa(Game *, ?);                  /* extern */
+? Init3DGameOverSmoke(Game *, ?);                  /* extern */
 ? Update3DCursor(tetWell *, cursor_t *); /* extern */
 ? Check3DVisibleBlocks(Game *, cursor_t *); /* extern */
 extern u8 B_801C6C90_usa;
@@ -1570,7 +1570,7 @@ void DoGameOver3D(void) {
                     gTheGame.unk_89C8[0x6E8] = -0x280;
                     gTheGame.unk_89C8[0x6D0] = -0x280;
                     if (gTheGame.unk_8860[0].unk_0 == 8) {
-                        func_8005E128_usa(&gTheGame, 0);
+                        Init3DGameOverSmoke(&gTheGame, 0);
                     }
                     func_80039A54_usa(0);
                     if (gSelection == 0x8C) {
@@ -1834,10 +1834,10 @@ block_115:
                         var_v1_2 += 0x48;
                     } while (var_s0_2 < 0x14);
                     if (gTheGame.unk_8860[0].unk_0 == 8) {
-                        func_8005E128_usa(&gTheGame, 0);
+                        Init3DGameOverSmoke(&gTheGame, 0);
                     }
                     if (gTheGame.unk_8860[1] == 8) {
-                        func_8005E128_usa((Game *) &gTheGame.tetrisWell[1], 1);
+                        Init3DGameOverSmoke((Game *) &gTheGame.tetrisWell[1], 1);
                     }
                     gMain = 0x38F;
                     gWhatever = 0;
@@ -2040,7 +2040,7 @@ block_221:
                     gTheGame.unk_9988[0x18C] = 0x304;
                     var_a0_5 = 0;
                     if ((var_s4 != 0) || (var_a0_5 = 1, (var_s3 != 0))) {
-                        func_8005E0E8_usa(var_a0_5);
+                        Init3DSmallStars(var_a0_5);
                     }
                     gMain = 0x395;
                     break;

@@ -8,7 +8,7 @@
 struct tetWell;
 
 typedef struct explode_t {
-    /* 0x00 */ s32 type;
+    /* 0x00 */ s32 type; // TODO: enum?
     /* 0x04 */ s32 frame;
     /* 0x08 */ s32 pos;
     /* 0x0C */ s32 x;

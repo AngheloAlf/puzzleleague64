@@ -9,6 +9,9 @@
 #include "main_functions.h"
 #include "main_variables.h"
 
+#include "libc/assert.h"
+
+#include "001F10.h"
 #include "dlist.h"
 #include "init2d.h"
 #include "tetris.h"
@@ -121,7 +124,7 @@ void Init3DAttackBlocks(tetWell *well) {
 void Init3DExplosion(tetWell *well) {
     s32 i;
 
-    for (i = 0; i < TETWELL_EXPLOSION_LEN; i++) {
+    for (i = 0; i < EXPLOSION_COUNT; i++) {
         explode_t *explode = &well->explosion[i];
 
         explode->type = -1;
@@ -129,203 +132,237 @@ void Init3DExplosion(tetWell *well) {
     }
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init3d", func_8005DE28_usa);
-#endif
+void Init3DText(void) {
+    s32 i;
+
+    gTheGame.unk_90C0 = 0;
+
+    for (i = 0; i < DRAWTEXT_COUNT; i++) {
+        gTheGame.drawText[i].texture = -1;
+    }
+}
+
+void Init3DClearLine(tetWell *well, struct cursor_t *cursor UNUSED, s32 num) {
+    uObjSprite_t *s;
+
+    well->attack[0].unk_24 = 0;
+
+    s = &well->attack[0].rect.s;
+    if (gTheGame.unk_9C08 == 1) {
+        s->objX = 0xE1;
+    } else if (num == 0) {
+        s->objX = 0x87;
+    } else {
+        s->objX = 0x89;
+    }
+
+    s->objY = 0xC6;
+}
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init3d", func_8005DE58_usa);
-#endif
+#if 0
+void func_8005DE94_usa(s32 arg0, s32 arg1) {
+    s32 temp_v1 = (gGameStatus & 0xF00) >> 8;
 
-#if VERSION_USA
+    switch (temp_v1) {
+        case 3:
+            if (gTheGame.tetrisWell[1].unk_4404 == 0) {
+                func_80064AAC_usa(1, arg0, arg1);
+            } else {
+                func_800643A4_usa(1, arg0, arg1);
+            }
+            if (gTheGame.tetrisWell[1].unk_4404 < 2) {
+                func_80064AAC_usa(2, arg0, arg1);
+            } else {
+                func_800643A4_usa(2, arg0, arg1);
+            }
+            func_80064AAC_usa(3, arg0, arg1);
+            if (gTheGame.tetrisWell[0].unk_4404 == 0) {
+                func_80064AAC_usa(4, arg0, arg1);
+            } else {
+                func_800643A4_usa(4, arg0, arg1);
+            }
+            if (gTheGame.tetrisWell[0].unk_4404 < 2) {
+                func_80064AAC_usa(5, arg0, arg1);
+            } else {
+                func_800643A4_usa(5, arg0, arg1);
+            }
+            func_80064AAC_usa(6, arg0, arg1);
+            break;
+
+        case 2:
+            if (gTheGame.tetrisWell[1].unk_4404 == 0) {
+                func_80064AAC_usa(1, arg0, arg1);
+            } else {
+                func_800643A4_usa(1, arg0, arg1);
+            }
+            func_80064AAC_usa(2, arg0, arg1);
+            func_80064728_usa(3, arg0, arg1);
+            if (gTheGame.tetrisWell[0].unk_4404 == 0) {
+                func_80064AAC_usa(4, arg0, arg1);
+            } else {
+                func_800643A4_usa(4, arg0, arg1);
+            }
+            func_80064AAC_usa(5, arg0, arg1);
+            func_80064728_usa(6, arg0, arg1);
+            break;
+
+        case 1:
+            func_80064AAC_usa(1, arg0, arg1);
+            func_80064728_usa(2, arg0, arg1);
+            func_80064728_usa(3, arg0, arg1);
+            func_80064AAC_usa(4, arg0, arg1);
+            func_80064728_usa(5, arg0, arg1);
+            func_80064728_usa(6, arg0, arg1);
+            break;
+    }
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/init3d", func_8005DE94_usa);
 #endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init3d", func_8005E0E8_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init3d", func_8005E108_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init3d", func_8005E128_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init3d", func_8005E2DC_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/init3d", RO_800C6DA0_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/init3d", RO_800C6DC0_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/init3d", RO_800C6DE0_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init3d", func_8005E0F8_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init3d", func_8005E128_eur);
 #endif
 
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/init3d", func_8005E164_eur);
 #endif
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init3d", func_8005E3B8_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init3d", func_8005E3D8_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init3d", func_8005E128_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init3d", func_8005E5AC_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/init3d", RO_800C7050_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/init3d", RO_800C7070_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/init3d", RO_800C7090_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init3d", func_8005C838_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init3d", func_8005C868_fra);
-#endif
-
 #if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/init3d", func_8005C8A4_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init3d", func_8005CAF8_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init3d", func_8005CB18_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init3d", func_8005E128_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init3d", func_8005CCEC_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/init3d", RO_800C56B0_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/init3d", RO_800C56D0_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/init3d", RO_800C56F0_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init3d", func_8005C9E8_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init3d", func_8005CA18_ger);
 #endif
 
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/init3d", func_8005CA54_ger);
 #endif
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init3d", func_8005CCA8_ger);
+void Init3DSmallStars(s32 num) {
+    Init2DSmallStars(num);
+}
+
+#if VERSION_USA
+#if 0
+void func_8005E108_usa() {
+    func_8006C7A0_usa();
+}
+#else
+INCLUDE_ASM("asm/usa/nonmatchings/main/init3d", func_8005E108_usa);
+#endif
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/init3d", func_8005E3D8_eur);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/init3d", func_8005CB18_fra);
 #endif
 
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/init3d", func_8005CCC8_ger);
 #endif
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init3d", func_8005E128_usa);
-#endif
+void Init3DGameOverSmoke(tetWell *well, s32 num) {
+    DATA_INLINE_CONST s32 sp0[] = {
+        13, 23, 39, 59, 79, 99, 115, 125,
+    };
+    DATA_INLINE_CONST s32 sp20[] = {
+        177, 187, 203, 223, 243, 263, 279, 289,
+    };
+    DATA_INLINE_CONST s32 sp40[] = {
+        105, 115, 131, 151, 171, 191, 207, 217,
+    };
+    s32 var_t1;
+    s32 var_t2;
+    explode_t *explode;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init3d", func_8005CE9C_ger);
-#endif
+    static_assert(ARRAY_COUNT(sp0) == ARRAY_COUNT(sp20), "");
 
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/init3d", RO_800BC670_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/init3d", RO_800BC690_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/init3d", RO_800BC6B0_ger);
-#endif
-
-#if VERSION_USA
 #if 0
-// TODO: make a new segment
-extern UNK_TYPE D_10375E0;
-extern UNK_TYPE D_103EAE0;
-extern UNK_TYPE D_12C1B0;
-extern UNK_TYPE D_1336B0;
+    int left[8]; // r1+0x50
+    int right[8]; // r1+0x30
+    int centre[8]; // r1+0x10
+#endif
+
+    var_t2 = 0;
+
+    for (var_t1 = 0; var_t1 < EXPLOSION_COUNT; var_t1++) {
+        explode = &well->explosion[var_t1];
+
+        explode->type = -1;
+        explode->frame = -1;
+        explode->rect.s.imageAdrs = 0;
+
+        if (gTheGame.unk_9C08 == 1) {
+            //! @bug? shouldn't this be `< 1` instead?
+            if ((var_t1 <= 1) || (var_t1 >= ARRAY_COUNT(sp40))) {
+                explode->rect.s.objX = -(160 << 2);
+            } else {
+                explode->rect.s.objX = sp40[var_t1 - 1] << 2;
+            }
+        } else {
+            if ((var_t1 <= 1) || (var_t1 >= ARRAY_COUNT(sp0))) {
+                explode->rect.s.objX = -(160 << 2);
+            } else if (num == 0) {
+                explode->rect.s.objX = sp0[var_t1 - 1] << 2;
+            } else {
+                explode->rect.s.objX = sp20[var_t1 - 1] << 2;
+            }
+        }
+
+        explode->rect.s.objY = 15 << 2;
+
+        var_t2++;
+        // TODO: macroify
+        if (var_t2 >= 18) {
+            return;
+        }
+    }
+}
+
+INLINE void Init3DVertex(void) {
+    void *ptr;
+
+    ptr = Pon_Image_Heap;
+    // segment_12C1B0 = vertex?
+    LOAD_DATA_SEGMENT(ptr, segment_12C1B0, Pon_Image_Heap);
+    gAllVertex = ptr;
+}
 
 void Init3DMatrixBlocks(void) {
-    void *temp_s1;
-
-    temp_s1 = Pon_Image_Heap;
-    osInvalDCache(&D_10375E0, (u32)&D_103EAE0 - (u32)&D_10375E0);
-    func_80001310_usa(&D_12C1B0, temp_s1, (u32)&D_1336B0 - (u32)&D_12C1B0);
-    Pon_Image_Heap += (u32)&D_1336B0 - (u32)&D_12C1B0;
-    gAllVertex = (s32) temp_s1;
+    Init3DVertex();
     guMtxIdent(&gIdent);
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/init3d", Init3DMatrixBlocks);
-#endif
-#endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init3d", func_8005E3F4_usa);
-#endif
+s32 Return3DComboTile(s32 combo) {
+    s32 which;
+
+    if (combo < 70) {
+        which = (combo + 4) % 8;
+    } else {
+        which = -1;
+    }
+
+    switch (which) {
+        case 0:
+            return 0;
+        case 1:
+            return 1;
+        case 2:
+            return 2;
+        case 4:
+            return 4;
+        case 5:
+            return 5;
+        case 6:
+            return 6;
+        case 7:
+            return 7;
+        default:
+            return 3;
+    }
+}
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/init3d", func_8005E484_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init3d", Init3DMatrixBlocks);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init3d", func_8005E6C4_eur);
 #endif
 
 #if VERSION_EUR
@@ -333,23 +370,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/init3d", func_8005E754_eur);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init3d", Init3DMatrixBlocks);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init3d", func_8005CE04_fra);
-#endif
-
-#if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/init3d", func_8005CE94_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init3d", Init3DMatrixBlocks);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init3d", func_8005CFB4_ger);
 #endif
 
 #if VERSION_GER

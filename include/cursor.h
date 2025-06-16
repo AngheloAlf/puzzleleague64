@@ -15,7 +15,7 @@ typedef struct cursor_t {
     /* 0x14 */ s32 y;
     /* 0x18 */ s32 unk_18;
     /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ UNK_TYPE4 unk_20;
+    /* 0x20 */ s32 unk_20;
     /* 0x24 */ s32 unk_24;
     /* 0x28 */ s32 unk_28;
     /* 0x2C */ s32 unk_2C;

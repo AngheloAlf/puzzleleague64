@@ -268,7 +268,7 @@ void Update2DBuffer(struct_gInfo *info) {
 
         bcopy(&well->icon, &dynamicp->icon[var_s6], sizeof(icon_t) * ICON_COUNT);
         bcopy(&well->attack, &dynamicp->attack[var_s6], sizeof(attack_t) * ATTACK_COUNT);
-        bcopy(&well->explosion, &dynamicp->explosion[var_s6], sizeof(explode_t) * TETWELL_EXPLOSION_LEN);
+        bcopy(&well->explosion, &dynamicp->explosion[var_s6], sizeof(explode_t) * EXPLOSION_COUNT);
     }
 
     bcopy(&gTheGame.drawText, &dynamicp->drawText, sizeof(text_t) * DRAWTEXT_COUNT);
@@ -330,7 +330,7 @@ void Update3DBuffer(struct_gInfo *info) {
 
         bcopy(&well->icon, &dynamicp->icon[num], sizeof(icon_t) * ICON_COUNT);
         bcopy(&well->attack, &dynamicp->attack[num], sizeof(attack_t) * ATTACK_COUNT);
-        bcopy(&well->explosion, &dynamicp->explosion[num], sizeof(explode_t) * TETWELL_EXPLOSION_LEN);
+        bcopy(&well->explosion, &dynamicp->explosion[num], sizeof(explode_t) * EXPLOSION_COUNT);
         bcopy(&well->visible, &dynamicp->unk_18308[num], sizeof(char) * BLOCK_LEN_ROWS * BLOCK_LEN_B);
 
         if (gSelection == 0x64) {
