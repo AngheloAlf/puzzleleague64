@@ -59,11 +59,6 @@ void func_80046C2C_usa(void **heapP, s32 arg1);
 // void func_80064AAC_usa();
 // void func_80064E44_usa();
 void Draw3DTetris(struct_gInfo_unk_00068 *arg0);
-void Compact3DAttackNoWhere(struct tetWell *well);
-void Compact3DAttack(struct tetWell *well, s32 count);
-void Check3DConnectCombos(struct tetWell *well);
-// void func_8006648C_usa();
-// void func_800666F0_usa();
 
 void InitAI(struct tetWell *well, struct cursor_t *cursor, struct ai_t *brain);
 // void func_80075108_usa();

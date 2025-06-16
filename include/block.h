@@ -22,16 +22,18 @@ typedef enum BlockState {
 } BlockState;
 
 typedef enum BlockType {
-    /* 0 */ BLOCKTYPE_0,
-    /* 1 */ BLOCKTYPE_1,
-    /* 2 */ BLOCKTYPE_2,
-    /* 3 */ BLOCKTYPE_3,
-    /* 4 */ BLOCKTYPE_4,
-    /* 5 */ BLOCKTYPE_5,
-    /* 6 */ BLOCKTYPE_6,
-    /* 7 */ BLOCKTYPE_7,
-    /* 8 */ BLOCKTYPE_8,
-    /* 9 */ BLOCKTYPE_9,
+    /*  0 */ BLOCKTYPE_0,
+    /*  1 */ BLOCKTYPE_1,
+    /*  2 */ BLOCKTYPE_2,
+    /*  3 */ BLOCKTYPE_3,
+    /*  4 */ BLOCKTYPE_4,
+    /*  5 */ BLOCKTYPE_5,
+    /*  6 */ BLOCKTYPE_6,
+    /*  7 */ BLOCKTYPE_7,
+    /*  8 */ BLOCKTYPE_8,
+    /*  9 */ BLOCKTYPE_9,
+    /* 10 */ BLOCKTYPE_10,
+    /* 12 */ BLOCKTYPE_12 = 12,
 } BlockType;
 
 /* Original name: block_t. */
@@ -44,7 +46,7 @@ typedef struct block_t {
     /* 0x14 */ s32 bomb; /* Original name: bomb */
     /* 0x18 */ s32 sound; /* Original name: sound */
     /* 0x1C */ s32 currRow; /* Original name: currRow */
-    /* 0x20 */ s32 chain_flag; /* Original name: chain_flag */
+    /* 0x20 */ s32 chain_flag; /* Original name: chain_flag */ // bool?
     /* 0x24 */ s32 frame_n; /* Original name: frame_n */
     /* 0x28 */ s32 frame_d; /* Original name: frame_d */
 } block_t; // size = 0x2C

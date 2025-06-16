@@ -244,6 +244,7 @@ segments:
       - { path: "asm/{version}/main/05DCD0.o", include_if_any: [[version, ger]] }
       - { path: "asm/{version}/data/main/0BD310.rodata.o", include_if_any: [[version, ger]] }
 
+      - { path: src/main/combo3d.o }
       - { path: src/main/animate3d.o }
       - { path: src/main/update3d.o }
       - { path: src/main/attack3d.o }

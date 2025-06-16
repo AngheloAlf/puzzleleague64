@@ -198,6 +198,7 @@ segments:
       - [0x05CC40, c, main/explode]
       - [0x05CF10, c, main/init3d]
       - [0x05DB20, asm, main/05DB20]
+      - [0x065050, c, main/combo3d]
       - [0x065D80, c, main/animate3d]
       - [0x0669C0, c, main/update3d]
       - [0x0681D0, c, main/attack3d]

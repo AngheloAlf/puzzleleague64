@@ -11,6 +11,7 @@
 
 #include "attack.h"
 #include "combo2d.h"
+#include "combo3d.h"
 #include "dlist.h"
 #include "init2d.h"
 #include "sfxlimit.h"
