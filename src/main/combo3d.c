@@ -50,7 +50,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/combo3d", Compact3DAttack);
 #endif
 
 #if VERSION_USA
-#if 1
+#if 0
 void Check3DConnectCombos(tetWell *well) {
     block_t *var_a1;
     s32 temp_a2;  // type
