@@ -11,7 +11,7 @@ struct tetWell;
 
 void CheckGameInput(struct tetWell *well, struct cursor_t *cursor, s32 num);
 void AddNewRow(struct tetWell *well, struct cursor_t *cursor, s32 num);
-// void func_80056A7C_usa();
+void RaiseBlocks(struct tetWell *well, struct cursor_t *cursor);
 void AfterSwitch(struct tetWell *well, struct cursor_t *cursor, struct block_t *block1, struct block_t *block2, s32 dimen);
 void CheckShake(struct tetWell *well, struct cursor_t *cursor);
 nbool CheckFieldActive(struct tetWell *well);

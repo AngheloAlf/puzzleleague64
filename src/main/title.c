@@ -571,7 +571,7 @@ void InitTitle(void) {
         }
     }
 
-    func_80002E0C_usa(0x1E);
+    FadeOutAllSFXs(0x1E);
     func_80002D8C_usa(0x1E);
     if (gpData->unk_14 == 6) {
         PlayMIDI(BGM_INIT_TABLE, 0x3C, 0, 1);

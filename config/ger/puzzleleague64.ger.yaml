@@ -230,7 +230,7 @@ segments:
       - [0x074150, c, main/bg_screen_load/075540]
 
       - [0x074240, c, main/075630]
-      - [0x074800, asm, main/074800]
+      - [0x074800, c, main/ai]
       - [0x0827F0, c, main/mimic]
       - [0x087320, c, main/tutorial]
       - [0x0881D0, c, main/puzzle]
@@ -559,7 +559,7 @@ segments:
       - [0x0BD870, .rodata, main/071B50]
       - [0x0BD900, .rodata, main/attack2d]
       - [0x0BD948, .rodata, main/074280]
-      - [0x0BD960, rodata, main/0BD960]
+      - [0x0BD960, .rodata, main/ai]
       - [0x0BDB00, .rodata, main/mimic]
       - [0x0BDBD0, .rodata, main/tutorial]
       - [0x0BDC70, .rodata, main/puzzle]

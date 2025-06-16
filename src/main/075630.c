@@ -139,7 +139,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/075630", func_80074AEC_usa);
 #endif
 
 void func_80074D4C_usa(void) {
-    if ((gMain == GMAIN_384) && (gCounter == ((gCounter / 3) * 3))) {
+    if ((gMain == GMAIN_384) && (gCounter % 3 == 0)) {
         if (anim_sp < (gTheGame.unk_9C0C * 0x270)) {
             anim_sp += gTheGame.unk_9C0C * 0xD;
         }

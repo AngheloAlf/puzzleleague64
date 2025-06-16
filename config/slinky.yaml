@@ -277,18 +277,7 @@ segments:
 
       - { path: src/main/075630.o }
 
-      - { path: "asm/{version}/main/075BF0.o", include_if_any: [[version, usa]] }
-      - { path: "asm/{version}/data/main/0C8090.rodata.o", include_if_any: [[version, usa]] }
-
-      - { path: "asm/{version}/main/075F20.o", include_if_any: [[version, eur]] }
-      - { path: "asm/{version}/data/main/0C8340.rodata.o", include_if_any: [[version, eur]] }
-
-      - { path: "asm/{version}/main/074650.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/data/main/0C69A0.rodata.o", include_if_any: [[version, fra]] }
-
-      - { path: "asm/{version}/main/074800.o", include_if_any: [[version, ger]] }
-      - { path: "asm/{version}/data/main/0BD960.rodata.o", include_if_any: [[version, ger]] }
-
+      - { path: src/main/ai.o }
       - { path: src/main/mimic.o }
       - { path: src/main/tutorial.o }
       - { path: src/main/puzzle.o }

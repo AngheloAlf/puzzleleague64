@@ -393,7 +393,7 @@ typedef struct Game {
     /* 0x9C14 */ s32 unk_9C14;
     /* 0x9C18 */ s32 unk_9C18;
     /* 0x9C1C */ s32 unk_9C1C;
-    /* 0x9C20 */ UNK_TYPE1 unk_9C20[0x4];
+    /* 0x9C20 */ s32 unk_9C20;
     /* 0x9C24 */ UNK_TYPE4 unk_9C24;
     /* 0x9C28 */ UNK_TYPE4 unk_9C28; // menu_t starts here?
     /* 0x9C2C */ s32 unk_9C2C[UNK_SIZE][4];

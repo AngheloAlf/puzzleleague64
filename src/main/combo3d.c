@@ -9,6 +9,8 @@
 #include "main_functions.h"
 #include "main_variables.h"
 
+#include "dlist.h"
+
 #if VERSION_USA
 void Compact3DAttackNoWhere(tetWell *well) {
     s32 i;

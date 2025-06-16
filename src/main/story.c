@@ -120,7 +120,7 @@ nbool func_8002B7C8_usa(s32 arg0, s32 arg1) {
 
     temp_v0 = func_80001ED8_usa();
     if (temp_v0 >= 0) {
-        func_80002E0C_usa(0x1E);
+        FadeOutAllSFXs(0x1E);
         func_80002D8C_usa(0x1E);
         if (arg1 > 0) {
             func_80002F88_usa(arg1);

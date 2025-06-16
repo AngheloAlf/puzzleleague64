@@ -51,19 +51,19 @@ void AddNewRow(tetWell *well, cursor_t *cursor, s32 num) {
 }
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/animate", func_80056A7C_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/animate", RaiseBlocks);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/animate", func_80056D1C_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/animate", RaiseBlocks);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/animate", func_8005548C_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/animate", RaiseBlocks);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/animate", func_8005560C_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/animate", RaiseBlocks);
 #endif
 
 #if VERSION_USA

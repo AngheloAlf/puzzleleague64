@@ -44,19 +44,19 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/pause", func_80036100_ger);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/pause", func_800364BC_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/pause", DoPauseGame);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/pause", func_800364EC_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/pause", DoPauseGame);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/pause", func_8003645C_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/pause", DoPauseGame);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/pause", func_800365CC_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/pause", DoPauseGame);
 #endif
 
 #if VERSION_USA

@@ -423,7 +423,7 @@ s32 DoGameOverTryAgain(void) {
         *pos = 1;
     } else if (button & (A_BUTTON | START_BUTTON)) {
         FadeOutSong(last_song_handle, 0x5A);
-        func_80002E0C_usa(0x1E);
+        FadeOutAllSFXs(0x1E);
         if (*pos == 0) {
             PlaySE(SFX_INIT_TABLE, 5);
         } else {

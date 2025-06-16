@@ -34,7 +34,7 @@ void InitGameAudioSystem(void) {
             func_80002E34_usa(0x147);
             break;
         case 0x1:
-            func_80002E0C_usa(0);
+            FadeOutAllSFXs(0);
             func_80002E70_usa(0x147);
             func_80002E34_usa(D_FLT_800B3B14_usa * 0x7FFF);
             break;
@@ -43,7 +43,7 @@ void InitGameAudioSystem(void) {
             func_80002E34_usa(D_FLT_800B3B14_usa * 0x7FFF);
             break;
         case 0x3:
-            func_80002E0C_usa(0);
+            FadeOutAllSFXs(0);
             func_80002E70_usa(0x147);
             func_80002E34_usa(0x147);
             break;

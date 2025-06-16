@@ -795,7 +795,7 @@ void func_80002DE8_usa(void) {
     MusStop(MUSFLAG_EFFECTS, 0);
 }
 
-void func_80002E0C_usa(s16 speed) {
+void FadeOutAllSFXs(s16 speed) {
     MusStop(MUSFLAG_EFFECTS, speed);
 }
 
@@ -894,7 +894,7 @@ void SetSongCrossFadeVolume(s16 arg0, s16 arg1) {
 }
 
 #if VERSION_USA
-void func_80002FD0_usa(musHandle handle, s16 arg1, s16 arg2, struct_8018A748_usa_callback *arg3) {
+void FadeSong(musHandle handle, s16 arg1, s16 arg2, struct_8018A748_usa_callback *arg3) {
     s32 var_v0 = inlined_func1(handle);
 
     if (var_v0 < 0) {
@@ -907,15 +907,15 @@ void func_80002FD0_usa(musHandle handle, s16 arg1, s16 arg2, struct_8018A748_usa
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_80002FD0_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/sound", FadeSong);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80003094_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/sound", FadeSong);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80003094_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/sound", FadeSong);
 #endif
 
 #if VERSION_USA
