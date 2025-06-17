@@ -1225,7 +1225,7 @@ extern s32 B_80193020_usa;
 // extern UNK_TYPE B_8019CEB0_usa;
 // extern UNK_TYPE B_8019CEB1_usa;
 extern enum_gDemo gDemo; /* Original name: gDemo */
-// extern UNK_TYPE B_8019CEC8_usa;
+// extern UNK_TYPE AIrowCheck;
 // extern UNK_TYPE B_8019CECC_usa;
 // extern UNK_TYPE B_8019CED0_usa;
 // extern UNK_TYPE B_8019CED4_usa;
@@ -1261,7 +1261,7 @@ extern s32 attack_chain2[GAME_BUFFER_LEN];
 // extern UNK_TYPE B_801AB8DC_usa;
 extern u32 gGameStatus;
 // extern UNK_TYPE B_801AB8E4_usa;
-// extern UNK_TYPE B_801AB8E8_usa;
+// extern UNK_TYPE AItotCheck;
 // extern UNK_TYPE B_801AB8EC_usa;
 // extern UNK_TYPE B_801AB900_usa;
 
@@ -1318,7 +1318,7 @@ extern u16 B_801C6EF6_usa;
 
 // extern UNK_TYPE B_801C6F7C_usa;
 extern s32 giButton;
-// extern UNK_TYPE B_801C6FA8_usa;
+// extern UNK_TYPE AIcolCheck;
 // extern UNK_TYPE B_801C6FAC_usa;
 // extern UNK_TYPE B_801C6FB0_usa;
 // extern UNK_TYPE B_801C6FB4_usa;

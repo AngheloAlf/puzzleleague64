@@ -13,13 +13,6 @@
 #include "init3d.h"
 #include "sfxlimit.h"
 
-// TODO REGION_NTSC?
-#if VERSION_USA
-#define HOLD_VAL 10
-#else
-#define HOLD_VAL 8
-#endif
-
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/animate3d", Input3D);
 #endif
@@ -38,7 +31,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/animate3d", Input3D);
 
 #if VERSION_USA
 #ifdef NON_MATCHING
-s32 Move3DCursorUp(tetWell *well, cursor_t *cursor, s32 hold) {
+nbool Move3DCursorUp(tetWell *well, cursor_t *cursor, CursorHoldVal hold) {
     s32 temp;
 
     if (well->unk_43F8 == 0) {
@@ -46,8 +39,8 @@ s32 Move3DCursorUp(tetWell *well, cursor_t *cursor, s32 hold) {
             cursor->y += 1;
             temp = cursor->rect.s.objY >> 2;
             cursor->rect.s.objY = (temp << 2) - (4 << 2);
-            if ((hold == HOLD_VAL) || (hold == 0)) {
-                return -1;
+            if ((hold == CURSOR_HOLD_VAL_10) || (hold == CURSOR_HOLD_VAL_0)) {
+                return ntrue;
             }
         }
     } else {
@@ -55,12 +48,12 @@ s32 Move3DCursorUp(tetWell *well, cursor_t *cursor, s32 hold) {
             cursor->y++;
             temp = cursor->rect.s.objY >> 2;
             cursor->rect.s.objY = (temp << 2) - 0x10;
-            if ((hold == HOLD_VAL) || (hold == 0)) {
-                return -1;
+            if ((hold == CURSOR_HOLD_VAL_10) || (hold == CURSOR_HOLD_VAL_0)) {
+                return ntrue;
             }
         }
     }
-    return 0;
+    return nfalse;
 }
 #else
 INCLUDE_ASM("asm/usa/nonmatchings/main/animate3d", Move3DCursorUp);
@@ -79,37 +72,37 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/animate3d", Move3DCursorUp);
 INCLUDE_ASM("asm/ger/nonmatchings/main/animate3d", Move3DCursorUp);
 #endif
 
-s32 Move3DCursorDown(cursor_t *cursor, s32 hold) {
+nbool Move3DCursorDown(cursor_t *cursor, CursorHoldVal hold) {
     if (cursor->y > 0) {
         s32 temp = cursor->rect.s.objY;
 
         cursor->rect.s.objY = temp + 0x10;
-        cursor->y -= 1;
+        cursor->y--;
 
-        if ((hold == HOLD_VAL) || (hold == 0)) {
-            return -1;
+        if ((hold == CURSOR_HOLD_VAL_10) || (hold == CURSOR_HOLD_VAL_0)) {
+            return ntrue;
         }
     }
 
-    return 0;
+    return nfalse;
 }
 
-s32 Move3DCursorLeft(cursor_t *cursor, s32 hold UNUSED) {
+nbool Move3DCursorLeft(cursor_t *cursor, CursorHoldVal hold UNUSED) {
     if (cursor->unk_18 == 0) {
         cursor->unk_18 = 4;
-        return -1;
+        return ntrue;
     }
 
-    return 0;
+    return nfalse;
 }
 
-s32 Move3DCursorRight(cursor_t *cursor, s32 hold UNUSED) {
+nbool Move3DCursorRight(cursor_t *cursor, CursorHoldVal hold UNUSED) {
     if (cursor->unk_18 == 0) {
         cursor->unk_18 = -4;
-        return -1;
+        return ntrue;
     }
 
-    return 0;
+    return nfalse;
 }
 
 #if VERSION_USA

@@ -15,13 +15,6 @@
 #include "sfxlimit.h"
 #include "update.h"
 
-// TODO REGION_NTSC?
-#if VERSION_USA
-#define HOLD_VAL 10
-#else
-#define HOLD_VAL 8
-#endif
-
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/animate2d", Input2D);
 #endif
@@ -38,7 +31,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/animate2d", Input2D);
 INCLUDE_ASM("asm/ger/nonmatchings/main/animate2d", Input2D);
 #endif
 
-s32 Move2DCursorUp(tetWell *well, cursor_t *cursor, s32 hold) {
+nbool Move2DCursorUp(tetWell *well, cursor_t *cursor, CursorHoldVal hold) {
     s32 pixel;
 
     if (well->unk_43F8 == 0) {
@@ -47,8 +40,8 @@ s32 Move2DCursorUp(tetWell *well, cursor_t *cursor, s32 hold) {
             cursor->rect.s.objY = (pixel - 16) << 2;
             cursor->y++;
 
-            if ((hold == HOLD_VAL) || (hold == 0)) {
-                return -1;
+            if ((hold == CURSOR_HOLD_VAL_10) || (hold == CURSOR_HOLD_VAL_0)) {
+                return ntrue;
             }
         }
     } else {
@@ -57,31 +50,31 @@ s32 Move2DCursorUp(tetWell *well, cursor_t *cursor, s32 hold) {
             cursor->rect.s.objY = (pixel - 16) << 2;
             cursor->y++;
 
-            if ((hold == HOLD_VAL) || (hold == 0)) {
-                return -1;
+            if ((hold == CURSOR_HOLD_VAL_10) || (hold == CURSOR_HOLD_VAL_0)) {
+                return ntrue;
             }
         }
     }
 
-    return 0;
+    return nfalse;
 }
 
-s32 Move2DCursorDown(cursor_t *cursor, s32 hold) {
+nbool Move2DCursorDown(cursor_t *cursor, CursorHoldVal hold) {
     s32 pixel;
 
     if (cursor->y > 0) {
         pixel = cursor->rect.s.objY >> 2;
         cursor->rect.s.objY = (pixel + 16) << 2;
         cursor->y--;
-        if ((hold == HOLD_VAL) || (hold == 0)) {
-            return -1;
+        if ((hold == CURSOR_HOLD_VAL_10) || (hold == CURSOR_HOLD_VAL_0)) {
+            return ntrue;
         }
     }
 
-    return 0;
+    return nfalse;
 }
 
-s32 Move2DCursorLeft(cursor_t *cursor, s32 hold) {
+nbool Move2DCursorLeft(cursor_t *cursor, CursorHoldVal hold) {
     s32 pixel;
 
     if (cursor->x > 0) {
@@ -89,15 +82,15 @@ s32 Move2DCursorLeft(cursor_t *cursor, s32 hold) {
         cursor->rect.s.objX = (pixel - 18) << 2;
         cursor->x--;
 
-        if ((hold == HOLD_VAL) || (hold == 0)) {
-            return -1;
+        if ((hold == CURSOR_HOLD_VAL_10) || (hold == CURSOR_HOLD_VAL_0)) {
+            return ntrue;
         }
     }
 
-    return 0;
+    return nfalse;
 }
 
-s32 Move2DCursorRight(cursor_t *cursor, s32 hold) {
+nbool Move2DCursorRight(cursor_t *cursor, CursorHoldVal hold) {
     s32 pixel;
 
     // TODO: macro-ify
@@ -105,11 +98,13 @@ s32 Move2DCursorRight(cursor_t *cursor, s32 hold) {
         pixel = cursor->rect.s.objX >> 2;
         cursor->rect.s.objX = (pixel + 0x12) << 2;
         cursor->x++;
-        if ((hold == HOLD_VAL) || (hold == 0)) {
-            return -1;
+
+        if ((hold == CURSOR_HOLD_VAL_10) || (hold == CURSOR_HOLD_VAL_0)) {
+            return ntrue;
         }
     }
-    return 0;
+
+    return nfalse;
 }
 
 #if VERSION_USA

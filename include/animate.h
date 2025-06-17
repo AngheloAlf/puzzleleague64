@@ -9,6 +9,16 @@ struct block_t;
 struct cursor_t;
 struct tetWell;
 
+typedef enum CursorHoldVal {
+    /*  0 */ CURSOR_HOLD_VAL_0,
+// TODO REGION_NTSC?
+#if VERSION_USA
+    /* 10 */ CURSOR_HOLD_VAL_10 = 10,
+#else
+    /* 10 */ CURSOR_HOLD_VAL_10 = 8,
+#endif
+} CursorHoldVal;
+
 void CheckGameInput(struct tetWell *well, struct cursor_t *cursor, s32 num);
 void AddNewRow(struct tetWell *well, struct cursor_t *cursor, s32 num);
 void RaiseBlocks(struct tetWell *well, struct cursor_t *cursor);

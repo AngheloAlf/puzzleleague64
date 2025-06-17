@@ -7,7 +7,7 @@
 
 /* Original name: cursor_t */
 typedef struct cursor_t {
-    /* 0x00 */ UNK_TYPE4 unk_00;
+    /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ s32 unk_08;
     /* 0x0C */ s32 unk_0C;
