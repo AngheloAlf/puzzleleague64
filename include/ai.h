@@ -30,8 +30,8 @@ typedef struct ai_t {
     /* 0x024 */ s32 unk_024;
     /* 0x028 */ s32 unk_028;
     /* 0x02C */ s32 unk_02C;
-    /* 0x030 */ s32 unk_30;
-    /* 0x034 */ s32 unk_34;
+    /* 0x030 */ s32 unk_030;
+    /* 0x034 */ s32 unk_034;
     /* 0x038 */ s32 unk_038;
     /* 0x03C */ s32 unk_03C;
     /* 0x040 */ s32 unk_040;
@@ -91,8 +91,8 @@ void AISetCursor(struct tetWell *well, struct cursor_t *cursor, struct ai_t *bra
 void AIChangeVision(struct ai_t *brain);
 void AISetGarbage(struct tetWell *well, struct cursor_t *cursor, struct ai_t *brain);
 void AIAddCommand(struct ai_t *brain, s32 func, s32 para1, s32 para2);
-// void func_80075A1C_usa();
-// void func_80075A38_usa();
+// void AIDelCommand();
+// void AISetMove();
 void AIFinishMove(struct ai_t *brain);
 void AIClearCommand(struct ai_t *brain);
 // void AIRowPack();

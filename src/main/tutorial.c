@@ -33,20 +33,20 @@ s32 TutorialPattern(void) {
     s32 type;
     s32 *temp2;
 
-    for (count = 1; count < brainbrain->unk_30; count++) {
+    for (count = 1; count < brainbrain->unk_030; count++) {
         s32 temp = *ptr;
         ptr += (temp / 2) + 1;
     }
 
     ptr++;
-    ptr += (brainbrain->unk_34 - 1) / 2;
-    if (brainbrain->unk_34 % 2 == 0) {
+    ptr += (brainbrain->unk_034 - 1) / 2;
+    if (brainbrain->unk_034 % 2 == 0) {
         type = *ptr & 0xF;
     } else {
         type = *ptr >> 4;
     }
 
-    temp2 = &brainbrain->unk_34;
+    temp2 = &brainbrain->unk_034;
     *temp2 += 1;
 
     return type;
