@@ -30,6 +30,7 @@
 #endif
 
 #define DATA_INLINE_CONST const
+#define DATA_INLINE_CONST2
 
 // Allows having m2c to use enum variants whenever possible.
 #ifdef M2CTX

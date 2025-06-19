@@ -1225,12 +1225,7 @@ extern s32 B_80193020_usa;
 // extern UNK_TYPE B_8019CEB0_usa;
 // extern UNK_TYPE B_8019CEB1_usa;
 extern enum_gDemo gDemo; /* Original name: gDemo */
-// extern UNK_TYPE AIrowCheck;
-// extern UNK_TYPE B_8019CECC_usa;
-// extern UNK_TYPE B_8019CED0_usa;
-// extern UNK_TYPE B_8019CED4_usa;
-// extern UNK_TYPE B_8019CED8_usa;
-// extern UNK_TYPE B_8019CF40_usa;
+extern s32 AIrowCheck[AI_CHECK_COUNT][5];
 extern OSTask hvqtask;
 // extern UNK_TYPE B_8019CF98_usa;
 extern void *B_8019CF9C_usa;
@@ -1261,9 +1256,7 @@ extern s32 attack_chain2[GAME_BUFFER_LEN];
 // extern UNK_TYPE B_801AB8DC_usa;
 extern u32 gGameStatus;
 // extern UNK_TYPE B_801AB8E4_usa;
-// extern UNK_TYPE AItotCheck;
-// extern UNK_TYPE B_801AB8EC_usa;
-// extern UNK_TYPE B_801AB900_usa;
+extern s32 AItotCheck[AI_CHECK_COUNT];
 
 // extern UNK_TYPE B_801AB90C_usa;
 // extern UNK_TYPE B_801AB90D_usa;
@@ -1318,11 +1311,7 @@ extern u16 B_801C6EF6_usa;
 
 // extern UNK_TYPE B_801C6F7C_usa;
 extern s32 giButton;
-// extern UNK_TYPE AIcolCheck;
-// extern UNK_TYPE B_801C6FAC_usa;
-// extern UNK_TYPE B_801C6FB0_usa;
-// extern UNK_TYPE B_801C6FB4_usa;
-// extern UNK_TYPE B_801C6FB8_usa;
+extern s32 AIcolCheck[AI_CHECK_COUNT][5];
 extern s32 gMax;
 extern OSMesgQueue gfxFrameMsgQ;
 extern s32 B_801C7060_usa;
@@ -1333,7 +1322,7 @@ extern u8 B_801C7089_usa;
 
 extern OSTime gTime;
 extern void *Pon_Image_Heap;
-// extern UNK_TYPE B_801C70B8_usa;
+// extern UNK_TYPE AIdistance;
 // extern UNK_TYPE B_801C70D4_usa;
 extern s32 B_801C70D8_usa;
 

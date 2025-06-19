@@ -6,4 +6,7 @@
 
 #define GAME_BUFFER_LEN 2
 
+// TODO: enum?
+#define AI_CHECK_COUNT 7
+
 #endif

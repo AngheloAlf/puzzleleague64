@@ -17,15 +17,7 @@
 #include "sfxlimit.h"
 #include "sound.h"
 
-extern UNK_TYPE AIrowCheck[];
-extern UNK_TYPE AItotCheck[];
 extern UNK_TYPE B_801C70D4_usa[];
-extern UNK_TYPE AIcolCheck[];
-
-extern const UNK_TYPE RO_800C7490_usa[];
-extern const UNK_TYPE RO_800C749C_usa[];
-extern const UNK_TYPE RO_800C74AC_usa[];
-extern const UNK_TYPE RO_800C74BC_usa[];
 
 void InitAI(tetWell *well, cursor_t *cursor, ai_t *brain) {
     s32 count;
@@ -58,181 +50,213 @@ void InitAI(tetWell *well, cursor_t *cursor, ai_t *brain) {
     }
 }
 
-#if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/ai", RO_800C7490_usa);
-#endif
+INLINE void AISetEasy(ai_t *brain, s32 stage) {
+    DATA_INLINE_CONST2 u8 characteristic[] = { 0, 1, 3, 3, 3, 3, 3, 3, 7, 7, 7 };
+
+    brain->unk_014 = characteristic[stage - 1];
+    AISetCharacter(brain, stage);
+    brain->unk_00C = 35 - (stage - 1) / 2;
+    brain->unk_008 = -1;
+}
+
+INLINE void AISetNormal(ai_t *brain, s32 stage) {
+    DATA_INLINE_CONST2 u8 characteristic[] = {
+        1, 3, 3, 3, 3, 7, 7, 7, 7, 15, 15, 15, 15, 15,
+    };
+
+    brain->unk_014 = characteristic[stage - 1];
+    AISetCharacter(brain, stage);
+    brain->unk_00C = 20 - (stage - 1) / 2;
+    if (brain->unk_018 < -3) {
+        brain->unk_018 = -3;
+    }
+    brain->unk_008 = 0;
+}
+
+INLINE void AISetHard(ai_t *brain, s32 stage) {
+    DATA_INLINE_CONST2 u8 characteristic[] = {
+        0x23, 0x27, 0x27, 0x2F, 0x2F, 0xAF, 0xAF, 0xBF, 0xBF, 0xEF, 0xBF, 0xFF, 0xBF, 0xBF, 0xBF,
+    };
+
+    brain->unk_014 = characteristic[stage - 1];
+    AISetCharacter(brain, stage);
+    brain->unk_00C = 16 - (stage - 1) / 2;
+    if ((brain->unk_018 != -0x63) && (brain->unk_018 != 0)) {
+        brain->unk_018--;
+    }
+    brain->unk_008 = 0;
+}
+
+INLINE void AISetSHard(ai_t *brain, s32 stage) {
+    DATA_INLINE_CONST2 u8 characteristic[] = {
+        0x27, 0x2F, 0x2F, 0xAF, 0xAF, 0xAF, 0xEF, 0xFF, 0xAF, 0xEF, 0xFF, 0xBF, 0xBF, 0xBF, 0xBF, 0xBF,
+    };
+
+    brain->unk_014 = characteristic[stage - 1];
+    AISetCharacter(brain, stage);
 
 #if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/ai", RO_800C749C_usa);
+    if (stage < 3) {
+        brain->unk_00C = 0xB;
+    } else if (stage < 5) {
+        brain->unk_00C = 0xA;
+    } else if (stage < 7) {
+        brain->unk_00C = 9;
+    } else if (stage < 9) {
+        brain->unk_00C = 8;
+    } else {
+        brain->unk_00C = 7;
+    }
+#else
+    if (stage < 3) {
+        brain->unk_00C = 0xD;
+    } else if (stage < 5) {
+        brain->unk_00C = 0xC;
+    } else if (stage < 8) {
+        brain->unk_00C = 0xB;
+    } else if (stage < 0xB) {
+        brain->unk_00C = 0xA;
+    } else if (stage < 0xE) {
+        brain->unk_00C = 9;
+    } else {
+        brain->unk_00C = 8;
+    }
 #endif
+
+    if ((brain->unk_018 != -0x63) && (brain->unk_018 != 0)) {
+        brain->unk_018 -= 2;
+    }
+
+    if (stage < 9) {
+        brain->unk_008 = 0;
+    } else {
+        brain->unk_008 = -1;
+    }
+}
+
+INLINE void AISetUltra(ai_t *brain, s32 stage) {
+    DATA_INLINE_CONST2 u8 characteristic[] = {
+        0x27, 0x2F, 0x2F, 0xAF, 0xAF, 0xAF, 0xEF, 0xFF, 0xAF, 0xEF, 0xFF, 0xBF, 0xBF, 0xBF, 0xBF, 0xBF,
+    };
+
+    brain->unk_014 = characteristic[stage - 1];
+    AISetCharacter(brain, stage);
 
 #if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/ai", RO_800C74AC_usa);
+    if (stage < 5) {
+        brain->unk_00C = 7;
+    } else if (stage < 9) {
+        brain->unk_00C = 6;
+    } else if (stage < 0xD) {
+        brain->unk_00C = 5;
+    } else {
+        brain->unk_00C = 4;
+    }
+#else
+    if (stage < 3) {
+        brain->unk_00C = 0xB;
+    } else if (stage < 5) {
+        brain->unk_00C = 0xA;
+    } else if (stage < 7) {
+        brain->unk_00C = 9;
+    } else if (stage < 9) {
+        brain->unk_00C = 8;
+    } else {
+        brain->unk_00C = 7;
+    }
 #endif
 
-#if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/ai", RO_800C74BC_usa);
-#endif
+    brain->unk_018 = -0x63;
+    brain->unk_008 = -1;
+}
 
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/ai", RO_800C7740_eur);
-#endif
+void AISetCharacter(ai_t *brain, s32 stage) {
+    switch (stage) {
+        case 0x1:
+            brain->unk_018 = -1;
+            break;
 
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/ai", RO_800C774C_eur);
-#endif
+        case 0x2:
+            brain->unk_018 = -2;
+            break;
 
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/ai", RO_800C775C_eur);
-#endif
+        case 0x3:
+            brain->unk_018 = -3;
+            break;
 
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/ai", RO_800C776C_eur);
-#endif
+        case 0x4:
+            brain->unk_018 = -4;
+            break;
 
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/ai", RO_800C5DA0_fra);
-#endif
+        case 0x6:
+            brain->unk_018 = -5;
+            break;
 
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/ai", RO_800C5DAC_fra);
-#endif
+        case 0x7:
+            brain->unk_018 = -6;
+            break;
 
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/ai", RO_800C5DBC_fra);
-#endif
+        case 0x8:
+            brain->unk_018 = -7;
+            break;
 
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/ai", RO_800C5DCC_fra);
-#endif
+        case 0xA:
+            brain->unk_018 = -8;
+            break;
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_80075108_usa);
-#endif
+        case 0x5:
+        case 0x9:
+        case 0xB:
+            brain->unk_018 = 0;
+            break;
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_800751B4_usa);
-#endif
+        case 0xC:
+            brain->unk_018 = -9;
+            break;
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_80075278_usa);
-#endif
+        case 0xD:
+            brain->unk_018 = -10;
+            break;
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_80075354_usa);
+        case 0xE:
+        case 0xF:
+#if REGION_PAL
+        case 0x10:
+        default:
 #endif
+            brain->unk_018 = -0x63;
+            break;
+    }
+}
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_80075458_usa);
-#endif
+void AISetLevel(ai_t *brain, s32 game, s32 stage) {
+    switch (game) {
+        case 1:
+            AISetEasy(brain, stage);
+            break;
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_80075524_usa);
-#endif
+        case 2:
+            AISetNormal(brain, stage);
+            break;
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_800755B0_usa);
-#endif
+        case 3:
+            AISetHard(brain, stage);
+            break;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_80075438_eur);
-#endif
+        case 4:
+            AISetSHard(brain, stage);
+            break;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_800754E4_eur);
-#endif
+        case 5:
+        default:
+            AISetUltra(brain, stage);
+            break;
+    }
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_800755A8_eur);
+#if REGION_PAL
+    brain->unk_00C = ADJUST_FRAMERATE(brain->unk_00C);
 #endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_80075684_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_80075794_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_8007586C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_800758F8_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_80073B68_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_80073C14_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_80073CD8_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_80073DB4_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_80073EC4_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_80073F9C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_80074028_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/ai", RO_800BCD60_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/ai", RO_800BCD6C_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/ai", RO_800BCD7C_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/ai", RO_800BCD8C_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_80073D18_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_80073DC4_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_80073E88_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_80073F64_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_80074074_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_8007414C_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_800741D8_ger);
-#endif
+}
 
 void AISetCursor(tetWell *well UNUSED, cursor_t *cursor, ai_t *brain) {
     brain->cursor_x = cursor->x;
@@ -283,7 +307,7 @@ INLINE void AISetGarbage(tetWell *well, cursor_t *cursor, ai_t *brain) {
     brain->unk_024 = lowest;
 }
 
-void AIAddCommand(ai_t *brain, s32 func, s32 para1, s32 para2) {
+INLINE void AIAddCommand(ai_t *brain, s32 func, s32 para1, s32 para2) {
     command_t *command = &brain->unk_048[brain->unk_100];
 
     command->function = func;
@@ -384,15 +408,101 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIRowPack);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_80075BC0_usa);
+s32 AIVertMove(ai_t *brain, s32 row) {
+    s32 temp = row - brain->cursor_y;
+    s32 count;
+
+    if (temp == 0) {
+        return 0;
+    }
+
+    if (temp > 0) {
+        for (count = 0; count < temp; count++) {
+            AISetMove(brain, 3);
+        }
+    } else {
+        for (count = 0; count > temp; count--) {
+            AISetMove(brain, 4);
+        }
+    }
+
+    return -1;
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_80075C60_usa);
+s32 AIHoriMove(ai_t *brain, s32 column) {
+    s32 temp;
+    s32 count;
+
+    if ((column == 5) && (gTheGame.unk_9C0C != 2)) {
+        temp = 4;
+    } else {
+        temp = MAX(column, 0);
+    }
+
+    temp -= brain->cursor_x;
+    if (temp == 0) {
+        return 0;
+    }
+
+    if (temp > 0) {
+        for (count = 0; count < temp; count++) {
+            AISetMove(brain, 2);
+        }
+    } else {
+        for (count = 0; count > temp; count--) {
+            AISetMove(brain, 1);
+        }
+    }
+
+    return -1;
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_80075D2C_usa);
+s32 AIHoriMoveBlock(ai_t *brain, s32 from, s32 to) {
+    s32 var_v1;
+    s32 var_v1_2;
+    s32 var_a3;
+    s32 var_t0;
+
+    if (from < to) {
+        var_v1 = brain->cursor_x;
+        to = (to - from) - 1;
+        var_t0 = 2;
+    } else if (to < from) {
+        var_v1 = brain->cursor_x + 1;
+        to = (from - to) - 1;
+        var_t0 = 1;
+    } else {
+        return 0;
+    }
+
+    if (var_v1 < from) {
+        var_a3 = 2;
+        from = from - var_v1;
+    } else if (from < var_v1) {
+        var_a3 = 1;
+        from = var_v1 - from;
+    } else {
+        //! @bug: var_a3 not set
+        from = -1;
+    }
+
+    for (var_v1_2 = 0; var_v1_2 < from; var_v1_2++) {
+        AISetMove(brain, var_a3);
+    }
+
+    AISetMove(brain, 5);
+
+    for (var_v1_2 = 0; var_v1_2 < to; var_v1_2++) {
+        AISetMove(brain, var_t0);
+        AISetMove(brain, 5);
+    }
+
+    return -1;
+}
 #endif
 
 #if VERSION_USA
@@ -400,7 +510,27 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIHoriMoveCheckCheck);
 #endif
 
 #if VERSION_USA
+#if 0
+s32 func_80076F54_usa(ai_t * brain, s32 arg1, s32 arg2) {
+    s32 var_a1;
+    s32 var_v0;
+
+    var_a1 = brain->cursor_x - arg1;
+    if (var_a1 < 0) {
+        var_a1 = -var_a1;
+    }
+    var_v0 = brain->cursor_x - (arg2 - 1);
+    if (var_v0 < 0) {
+        var_v0 = -var_v0;
+    }
+    if (var_v0 >= var_a1) {
+        return -1;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_80076F54_usa);
+#endif
 #endif
 
 #if VERSION_USA
@@ -453,8 +583,47 @@ s32 AIShortestD(tetWell *well, ai_t *brain, s32 from, s32 to) {
 }
 #endif
 
+// 12 => BLOCK_LEN_ROWS ?
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_80077280_usa);
+INLINE void AISortRows(s32 row, s32 total, s32 array[12]) {
+    s32 index[12];
+    s32 i;
+    s32 j;
+    s32 var_t2;
+    s32 var_t4;
+    s32 var_v1;
+
+#if 0
+    int dist; // r6
+    int temp; // r1+0x8
+    int save; // r31
+#endif
+
+    for (i = 0; i < total; i++) {
+        var_t2 = 12;
+
+        for (j = 0; j < total; j++) {
+            if (array[j] != 12) {
+                var_v1 = array[j] - row;
+                if (var_v1 < 0) {
+                    var_v1 = -var_v1;
+                }
+                if (var_v1 < var_t2) {
+                    var_t2 = var_v1;
+                    var_t4 = j;
+                }
+            }
+        }
+
+        index[i] = var_t4;
+        row = array[var_t4];
+        array[var_t4] = 12;
+    }
+
+    for (i = 0; i < total; i++) {
+        array[i] = index[i];
+    }
+}
 #endif
 
 #if VERSION_USA
@@ -474,7 +643,60 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIBoundaryCheck);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIPossibleRow);
+s32 AIPossibleRow(tetWell *well, ai_t *brain, s32 row) {
+    s32 var_a2;
+    s32 var_t0;
+    s32 type;
+    s32 first;
+    s32 second;
+    s32 third;
+
+#if 0
+    int count; // r6
+    int pos; // r7
+#endif
+
+    if ((well->block[row][2].type == BLOCKTYPE_9) || (well->block[row][3].type == BLOCKTYPE_9)) {
+        return 0;
+    }
+
+    for (type = BLOCKTYPE_1; type < BLOCKTYPE_8; type++) {
+        var_t0 = 0;
+        third = -1;
+        second = -1;
+        first = -1;
+        for (var_a2 = brain->unk_030; var_a2 <= brain->unk_034; var_a2++) {
+            if ((well->block[row][var_a2].type == type) && (well->block[row][var_a2].state == 0)) {
+                var_t0++;
+                if (first < 0) {
+                    first = var_a2;
+                } else if (second < 0) {
+                    second = var_a2;
+                } else if (third < 0) {
+                    third = var_a2;
+                }
+            }
+        }
+
+        if (var_t0 >= 3) {
+            goto end;
+        }
+    }
+
+    return 0;
+
+end:
+    if (second - first == 1) {
+        AIAddCommand(brain, 3, third, second + 1);
+    } else if (third - second == 1) {
+        AIAddCommand(brain, 3, first, second - 1);
+    } else if (gCounter % 2 == 0) {
+        AIAddCommand(brain, 8, first, second);
+    } else {
+        AIAddCommand(brain, 8, second, third);
+    }
+    return -1;
+}
 #endif
 
 #if VERSION_USA
@@ -486,11 +708,85 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIComboCheck);
 #endif
 
 #if VERSION_USA
+#if 0
+s32 AICombo3a(ai_t *brain) {
+    s32 sp0[12];
+    s32 *var_v1;
+    s32 temp_a0;
+    s32 temp_t1;
+    s32 var_a2;
+
+    s32 t6 = B_801C70D4_usa[0];
+    s32 v1;
+    s32 *a0;
+
+    if (t6 == 0x12) {
+        return 0;
+    }
+
+    v1 = AItotCheck[t6] - 3;
+    a0 = AIrowCheck[t6];
+    var_v1 = &a0[v1];
+    for (var_a2 = 0; var_a2 < 3; var_a2++) {
+        sp0[var_a2] = var_v1[var_a2];
+    }
+
+    AISortRows(brain->cursor_y, 3, sp0);
+
+    temp_t1 = AIcolCheck[t6][sp0[2]];
+    for (var_a2 = 0; var_a2 < 3; var_a2++) {
+        temp_a0 = sp0[var_a2];
+        if (temp_t1 != AIcolCheck[t6][temp_a0]) {
+            AIAddCommand(brain, 1, AIrowCheck[t6][temp_a0], 0);
+            AIAddCommand(brain, 3, AIcolCheck[t6][temp_a0], temp_t1);
+        }
+    }
+
+    return -1;
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AICombo3a);
+#endif
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AICombo3b);
+s32 AICombo3b(ai_t *brain) {
+    s32 array[12];
+    s32 temp_t1;
+    s32 temp_v0;
+    s32 var_a1;
+    s32 i;
+
+#if 0
+    int row; // r1+0x8
+    int col; // r27
+    int temp; // r26
+    int type; // r4
+#endif
+
+    for (i = 0; i < AI_CHECK_COUNT; i++) {
+        if (AItotCheck[i] == 3) {
+            for (var_a1 = 0; var_a1 < 3; var_a1++) {
+                array[var_a1] = AIrowCheck[i][var_a1];
+            }
+
+            AISortRows(brain->cursor_y, 3, array);
+
+            temp_t1 = AIcolCheck[i][array[2]];
+            for (var_a1 = 0; var_a1 < 3; var_a1++) {
+                temp_v0 = array[var_a1];
+                if (temp_t1 != AIcolCheck[i][temp_v0]) {
+                    AIAddCommand(brain, 1, AIrowCheck[i][temp_v0], 0);
+                    AIAddCommand(brain, 4, AIcolCheck[i][temp_v0], temp_t1);
+                }
+            }
+
+            return -1;
+        }
+    }
+
+    return 0;
+}
 #endif
 
 #if VERSION_USA
@@ -498,7 +794,39 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AICombo45);
 #endif
 
 #if VERSION_USA
+#ifdef NON_MATCHING
+s32 AIComboX(ai_t *brain) {
+    s32 sp0[12];
+    s32 temp_t1;
+    s32 var_a1;
+    s32 t7;
+
+    if (AItotCheck[6] == 3) {
+        t7 = 6;
+
+        for (var_a1 = 0; var_a1 < 3; var_a1++) {
+            sp0[var_a1] = AIrowCheck[6][var_a1];
+        }
+
+        AISortRows(brain->cursor_y, 3, sp0);
+
+        temp_t1 = AIcolCheck[t7][sp0[2]];
+        for (var_a1 = 0; var_a1 < 3; var_a1++) {
+            s32 temp3 = sp0[var_a1];
+            if (temp_t1 != AIcolCheck[t7][temp3]) {
+                AIAddCommand(brain, 1, AIrowCheck[t7][temp3], 0);
+                AIAddCommand(brain, 4, AIcolCheck[t7][temp3], temp_t1);
+            }
+        }
+
+        return -1;
+    }
+
+    return 0;
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIComboX);
+#endif
 #endif
 
 #if VERSION_USA
@@ -518,11 +846,11 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_80079D64_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_80079DEC_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIChainVert1);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_8007A5C8_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIChainVert2);
 #endif
 
 #if VERSION_USA
@@ -530,35 +858,212 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_8007ACAC_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_8007AFF4_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIChainVert4);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_8007BF40_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIChainVert5);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_8007CE20_usa);
+#if 0
+s32 AIChainHori1(tetWell *well, ai_t *brain) {
+    s32 sp10[4];
+    s32 *temp_a0_2;
+    s32 *temp_a3_6;
+    s32 *temp_t4;
+    s32 *temp_v0_3;
+    s32 *var_a0_4;
+    s32 *var_a0_6;
+    s32 *var_a1_4;
+    s32 *var_t0;
+    s32 *var_t1_2;
+    s32 *var_v1;
+    s32 *var_v1_3;
+    s32 temp_a1;
+    s32 temp_a2;
+    s32 temp_a3;
+    s32 temp_a3_2;
+    s32 temp_a3_3;
+    s32 temp_a3_4;
+    s32 temp_a3_5;
+    s32 temp_t0;
+    s32 temp_t0_2;
+    s32 temp_t5;
+    s32 temp_v0;
+    s32 temp_v0_2;
+    s32 temp_v0_4;
+    s32 temp_v0_5;
+    s32 temp_v1_5;
+    s32 temp_v1_6;
+    s32 temp_v1_7;
+    s32 var_a0_3;
+    s32 var_a0_5;
+    s32 var_a0_7;
+    s32 var_a1;
+    s32 var_a1_2;
+    s32 var_a1_3;
+    s32 var_a1_5;
+    s32 var_a2;
+    s32 var_a2_2;
+    s32 var_a2_3;
+    s32 var_a2_4;
+    s32 var_a2_5;
+    s32 var_a3;
+    s32 var_s2;
+    s32 var_t1;
+    s32 var_t2;
+    s32 var_t2_2;
+    s32 var_v0;
+    s32 var_v1_2;
+    block_t *temp_a0;
+    block_t *temp_v1;
+    block_t *temp_v1_2;
+    block_t *temp_v1_3;
+
+    if (brain->unk_040 != 0) {
+        bzero(AIrowCheck, 0x8C);
+        bzero(AIcolCheck, 0x8C);
+        bzero(AItotCheck, 0x1C);
+        var_t2 = brain->unk_040;
+        var_a2 = brain->unk_044;
+
+        if ((var_t2 != brain->unk_030) && (var_t2 -= 1, (var_a2 == brain->unk_034))) {
+        } else {
+            var_a2 += 1;
+        }
+
+        for (var_t1 = var_t2; var_a2 >= var_t1; var_t1++) {
+            temp_a1 = brain->unk_03C;
+            temp_a3 = temp_a1 - 1;
+            temp_a0 = &well->block[temp_a3][var_t1];
+            temp_t0 = temp_a0->type;
+            if ((temp_t0 == 0) || (temp_t0 >= 8)) {
+                continue;
+            }
+            if (temp_a0->state != 0) {
+                continue;
+            }
+            temp_t5 = temp_t0 - 1;
+            temp_t4 = &AItotCheck[temp_t5];
+            if (*temp_t4 != 0) {
+                continue;
+            }
+
+            *AIrowCheck[temp_t5] = temp_a3;
+            AIcolCheck[temp_t5][*temp_t4] = var_t1;
+            temp_a3_2 = temp_a1 - 2;
+            *temp_t4 += 1;
+            if (temp_a3_2 >= 0) {
+                for (var_a1 = var_t2; var_a1 <= var_a2; var_a1++) {
+                    temp_v1 = &well->block[temp_a3_2][var_a1];
+                    if ((temp_v1->type == temp_t0) && (temp_v1->state == 0)) {
+                        AIrowCheck[temp_t5][*temp_t4] = temp_a3_2;
+                        AIcolCheck[temp_t5][*temp_t4] = var_a1;
+                        *temp_t4 += 1;
+                        break;
+                    }
+                }
+            }
+
+            temp_a3_3 = brain->unk_03C + 1;
+            for (var_a1_2 = var_t2; var_a1_2 <= var_a2; var_a1_2++) {
+                temp_v1_2 = &well->block[temp_a3_3][var_a1_2];
+                if ((temp_v1_2->type == temp_t0) && (temp_v1_2->state == 0)) {
+                    AIrowCheck[temp_t5][*temp_t4] = temp_a3_3;
+                    AIcolCheck[temp_t5][*temp_t4] = var_a1_2;
+                    *temp_t4 += 1;
+                    break;
+                }
+            }
+
+            if ((*temp_t4 < 2) || (var_a2 < var_a1_2)) {
+                continue;
+            }
+
+            temp_a3_4 = temp_a3_3 + 1;
+            for (var_a1_3 = var_t2; var_a1_3 <= var_a2; var_a1_3++) {
+                temp_v1_3 = &well->block[temp_a3_4][var_a1_3];
+                if ((temp_v1_3->type == temp_t0) && (temp_v1_3->state == 0)) {
+                    AIrowCheck[temp_t5][*temp_t4] = temp_a3_4;
+                    AIcolCheck[temp_t5][*temp_t4] = var_a1_3;
+                    *temp_t4 += 1;
+                    break;
+                }
+            }
+
+            if (*temp_t4 >= 3) {
+                for (var_a2_2 = 0; var_a2_2 < *temp_t4; var_a2_2++) {
+                    sp10[var_a2_2] = AIrowCheck[temp_t5][var_a2_2];
+                }
+
+                AISortRows(brain->cursor_y, *temp_t4, sp10);
+
+                temp_a0_2 = AIcolCheck[temp_t5];
+                temp_v1_5 = brain->unk_040;
+                var_a1_5 = temp_a0_2[sp10[*temp_t4-1]];
+                if (var_a1_5 < temp_v1_5) {
+                    var_a1_5 = temp_v1_5;
+                } else if (brain->unk_044 < var_a1_5) {
+                    var_a1_5 = brain->unk_044;
+                } else {
+                    temp_v0_5 = brain->cursor_x;
+                    temp_a2 = temp_a0_2[sp10[0]];
+                    var_a0_7 = temp_v0_5 - var_a1_5;
+                    if (var_a0_7 < 0) {
+                        var_a0_7 = -var_a0_7;
+                    }
+                    var_v0 = temp_v0_5 - (temp_a2 - 1);
+                    if (var_v0 < 0) {
+                        var_v0 = -var_v0;
+                    }
+                    if (-((var_v0 < var_a0_7) ^ 1) == 0) {
+                        var_a1_5 = temp_a2;
+                    }
+                }
+
+                for (var_a2_5 = 0; var_a2_5 < *temp_t4; var_a2_5++) {
+                    temp_a3_5 = sp10[var_a2_5];
+                    temp_a3_6 = &AIcolCheck[temp_t5][temp_a3_5];
+                    if (var_a1_5 != *temp_a3_6) {
+                        AIAddCommand(brain, 1, AIrowCheck[temp_t5][temp_a3_5], 0);
+                        AIAddCommand(brain, 4, *temp_a3_6, var_a1_5);
+                    }
+                }
+
+                AIAddCommand(brain, 0xB, 0, 0);
+                brain->unk_020 = 1;
+                return -1;
+            }
+        }
+
+    }
+    return 0;
+}
+#else
+s32 AIChainHori1(struct tetWell *well, struct ai_t *brain);
+INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIChainHori1);
+#endif
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_8007D484_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIChainHori2);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_8007E18C_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIChainHori3);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_8007EC98_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIChainHori4);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_8007F5AC_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIChainHori5);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_8007FEB4_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIClearGarbage);
 #endif
 
 #if VERSION_USA
@@ -578,7 +1083,43 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_800812A4_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIStupidMove);
+s32 AIStupidMove(tetWell *well, ai_t *brain) {
+    s32 row;
+    s32 highest;
+
+    for (row = 0; row < 0xC; row++) {
+        if (AIPossibleRow(well, brain, row) != 0) {
+            brain->unk_100 = 0;
+            brain->unk_104 = 0;
+            brain->unk_0FC = 0;
+            brain->unk_124 = 0;
+            brain->unk_128 = 0;
+            AIAddCommand(brain, 1, row, 0);
+            AIPossibleRow(well, brain, row);
+            return -1;
+        }
+    }
+
+    if (brain->unk_024 != -1) {
+        for (highest = BLOCK_LEN_ROWS - 1; highest > brain->unk_024; highest--) {
+            if (well->block[highest][2].type != 0 || (well->block[highest][3].type != 0)) {
+                break;
+            }
+        }
+
+        if (highest < BLOCK_LEN_ROWS - 1) {
+            AIAddCommand(brain, 0xC, 0, 0);
+            AIAddCommand(brain, 1, brain->cursor_y - 1, 0);
+
+            AIAddCommand(brain, 0xA, 0, 0);
+            return -1;
+        }
+    }
+
+    AIAddCommand(brain, 1, AnimationRandom(6), 0);
+    AIAddCommand(brain, 0xA, 0, 0);
+    return -1;
+}
 #endif
 
 #if VERSION_EUR
@@ -1230,7 +1771,7 @@ void UpdateAI(tetWell *well, cursor_t *cursor, ai_t *brain, s32 num) {
                     brain->unk_020 = 2;
                 } else {
                     var_v0_3 = 0x20;
-                    if ((func_8007FEB4_usa(well, &cursor->unk_00, brain) != 0) ||
+                    if ((AIClearGarbage(well, &cursor->unk_00, brain) != 0) ||
                         ((temp_ret_2 = AnimationRandom(0x7B4), (temp_ret_2 == ((temp_ret_2 / 3) * 3))) &&
                          (var_v0_3 = 0x32, (AIVolumeCheck(well, &cursor->unk_00, (cursor_t *)brain, 0) != 0)))) {
                         brain->unk_01C = var_v0_3;
@@ -1263,15 +1804,15 @@ void UpdateAI(tetWell *well, cursor_t *cursor, ai_t *brain, s32 num) {
                     if (var_s1 != 0) {
                         temp_s1 = brain->unk_038;
                         if (temp_s1 == 0xB) {
-                            if (func_80079DEC_usa(well, brain) != 0) {
+                            if (AIChainVert1(well, brain) != 0) {
                                 brain->unk_01C = temp_s1;
                             } else {
                                 var_v0_4 = 0xC;
-                                if ((func_8007A5C8_usa(well, brain) == 0) &&
+                                if ((AIChainVert2(well, brain) == 0) &&
                                     (!(brain->unk_014 & 8) ||
-                                     (var_v0_4 = 0xE, (func_8007AFF4_usa(well, brain) == 0)))) {
+                                     (var_v0_4 = 0xE, (AIChainVert4(well, brain) == 0)))) {
                                     if ((brain->unk_014 & 0x10) && (well->unk_43A8 != 0) &&
-                                        (func_8007BF40_usa(well, brain) != 0)) {
+                                        (AIChainVert5(well, brain) != 0)) {
                                         brain->unk_01C = 0xF;
                                     }
                                 } else {
@@ -1280,11 +1821,11 @@ void UpdateAI(tetWell *well, cursor_t *cursor, ai_t *brain, s32 num) {
                             }
                         } else {
                             var_v0_4 = 0x15;
-                            if ((func_8007CE20_usa(well, brain) != 0) ||
-                                (var_v0_4 = 0x16, (func_8007D484_usa(well, brain) != 0)) ||
-                                ((brain->unk_014 & 4) && (var_v0_4 = 0x17, (func_8007E18C_usa(well, brain) != 0))) ||
-                                ((brain->unk_014 & 8) && ((var_v0_4 = 0x18, (func_8007EC98_usa(well, brain) != 0)) ||
-                                                          (var_v0_4 = 0x19, (func_8007F5AC_usa(well, brain) != 0))))) {
+                            if ((AIChainHori1(well, brain) != 0) ||
+                                (var_v0_4 = 0x16, (AIChainHori2(well, brain) != 0)) ||
+                                ((brain->unk_014 & 4) && (var_v0_4 = 0x17, (AIChainHori3(well, brain) != 0))) ||
+                                ((brain->unk_014 & 8) && ((var_v0_4 = 0x18, (AIChainHori4(well, brain) != 0)) ||
+                                                          (var_v0_4 = 0x19, (AIChainHori5(well, brain) != 0))))) {
                             block_85:
                                 brain->unk_01C = var_v0_4;
                             }

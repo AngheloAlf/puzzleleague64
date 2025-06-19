@@ -184,7 +184,7 @@ s32 AnimationRandom(?);                           /* extern */
 ? func_8006B798_usa();                              /* extern */
 ? func_8006C0E0_usa(s8 *, s8 *, s32);               /* extern */
 ? InitAI(s8 *, s8 *, ? *);               /* extern */
-? func_800755B0_usa(? *, s32, s32);                 /* extern */
+? AISetLevel(? *, s32, s32);                 /* extern */
 s32 func_80088940_usa(void **, s32, s32);           /* extern */
 s32 func_80088A48_usa(void **, s32, s32);           /* extern */
 s32 Init2DPuzzle(s8 *, s8 *, void *, s32);     /* extern */
@@ -368,7 +368,7 @@ block_54:
                     goto block_54;
                 case 0x96:                          /* switch 1 */
                     if (var_fp == temp_s0) {
-                        func_800755B0_usa(&B_801ADADC_usa, gTheGame.unk_9C28, gTheGame.unk_9C2C);
+                        AISetLevel(&B_801ADADC_usa, gTheGame.unk_9C28, gTheGame.unk_9C2C);
                         InitAI(temp_s3, sp34, &B_801ADADC_usa);
                     }
                     /* fallthrough */

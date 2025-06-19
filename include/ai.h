@@ -20,11 +20,12 @@ typedef struct command_t {
 typedef struct ai_t {
     /* 0x000 */ s32 cursor_x;
     /* 0x004 */ s32 cursor_y;
-    /* 0x008 */ s32 unk_008;
-    /* 0x00C */ s32 unk_00C;
+    /* 0x008 */ s32 unk_008; // think?
+    /* 0x00C */ s32 unk_00C; // speed?
     /* 0x010 */ s32 unk_010;
-    /* 0x014 */ u32 unk_014;
-    /* 0x018 */ s32 unk_018;
+    /* 0x014 */ u8 unk_014; // character?
+    /* 0x015 */ UNK_PAD unk_015[0x3];
+    /* 0x018 */ s32 unk_018; // choice?
     /* 0x01C */ s32 unk_01C;
     /* 0x020 */ s32 unk_020; // garbage?
     /* 0x024 */ s32 unk_024;
@@ -80,13 +81,13 @@ struct ai_t {
 extern ai_t brainbrain[GAME_BUFFER_LEN];
 
 void InitAI(struct tetWell *well, struct cursor_t *cursor, struct ai_t *brain);
-// void func_80075108_usa();
-// void func_800751B4_usa();
-// void func_80075278_usa();
-// void func_80075354_usa();
-// void func_80075458_usa();
-// void func_80075524_usa();
-// void func_800755B0_usa();
+// void AISetEasy();
+// void AISetNormal();
+// void AISetHard();
+// void AISetSHard();
+// void AISetUltra();
+void AISetCharacter(struct ai_t *brain, s32 stage);
+// void AISetLevel();
 void AISetCursor(struct tetWell *well, struct cursor_t *cursor, struct ai_t *brain);
 void AIChangeVision(struct ai_t *brain);
 void AISetGarbage(struct tetWell *well, struct cursor_t *cursor, struct ai_t *brain);
@@ -96,14 +97,14 @@ void AIAddCommand(struct ai_t *brain, s32 func, s32 para1, s32 para2);
 void AIFinishMove(struct ai_t *brain);
 void AIClearCommand(struct ai_t *brain);
 // void AIRowPack();
-// void func_80075BC0_usa();
-// void func_80075C60_usa();
-// void func_80075D2C_usa();
+s32 AIVertMove(struct ai_t *brain, s32 row);
+// void AIHoriMove();
+// void AIHoriMoveBlock();
 // void AIHoriMoveCheckCheck();
 // void func_80076F54_usa();
 // void func_80076F84_usa();
 // void AIShortestD();
-// void func_80077280_usa();
+// void AISortRows();
 // void func_80077338_usa();
 // void func_8007737C_usa();
 // void func_80077670_usa();
@@ -119,17 +120,17 @@ void AIClearCommand(struct ai_t *brain);
 // void func_800794C8_usa();
 // void AIVolumeCheck();
 // void func_80079D64_usa();
-// void func_80079DEC_usa();
-// void func_8007A5C8_usa();
+// void AIChainVert1();
+// void AIChainVert2();
 // void func_8007ACAC_usa();
-// void func_8007AFF4_usa();
-// void func_8007BF40_usa();
-// void func_8007CE20_usa();
-// void func_8007D484_usa();
-// void func_8007E18C_usa();
-// void func_8007EC98_usa();
-// void func_8007F5AC_usa();
-// void func_8007FEB4_usa();
+// void AIChainVert4();
+// void AIChainVert5();
+// void AIChainHori1();
+// void AIChainHori2();
+// void AIChainHori3();
+// void AIChainHori4();
+// void AIChainHori5();
+// void AIClearGarbage();
 // void func_80080504_usa();
 // void func_80080724_usa();
 // void func_80080AF0_usa();
