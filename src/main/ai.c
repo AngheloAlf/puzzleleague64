@@ -406,7 +406,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIRowPack);
 #endif
 
 #if VERSION_USA
-s32 AIVertMove(ai_t *brain, s32 row) {
+INLINE s32 AIVertMove(ai_t *brain, s32 row) {
     s32 temp = row - brain->cursor_y;
     s32 count;
 
@@ -459,7 +459,7 @@ s32 AIHoriMove(ai_t *brain, s32 column) {
 #endif
 
 #if VERSION_USA
-s32 AIHoriMoveBlock(ai_t *brain, s32 from, s32 to) {
+INLINE s32 AIHoriMoveBlock(ai_t *brain, s32 from, s32 to) {
     s32 var_v1;
     s32 var_v1_2;
     s32 var_a3;
@@ -504,7 +504,170 @@ s32 AIHoriMoveBlock(ai_t *brain, s32 from, s32 to) {
 #endif
 
 #if VERSION_USA
+#if 0
+s32 AIHoriMoveCheckCheck(tetWell *well, ai_t *brain, s32 from, s32 to) {
+    u32 var_a0_2;
+
+    s32 temp_t0;
+
+    s32 var_t1;
+
+    s32 temp_t2;
+
+    s32 temp_t3;
+
+    s32 temp_t5;
+
+    s32 var_v1;
+    u32 var_v1_27;
+
+    temp_t2 = brain->cursor_y;
+    temp_t3 = well->block[temp_t2][from].type;
+    if ((temp_t3 == 0) || (temp_t3 >= 8)) {
+        return 0;
+    }
+
+    if (from < to) {
+        to = to - from;
+        from = from + 1;
+
+        if (temp_t2 >= 2) {
+            temp_t0 = temp_t2 - 2;
+
+            for (var_t1 = 0; var_t1 < to; var_t1++) {
+                var_v1 = from + var_t1;
+                if ((well->block[temp_t2 - 1][var_v1].type == temp_t3) && (well->block[temp_t2 - 1][var_v1].state != 8)) {
+
+                    if ((well->block[temp_t0][var_v1].type == temp_t3) && (well->block[temp_t0][var_v1].state != 8)) {
+                        AIVertMove(brain, temp_t0);
+
+                        AIHoriMoveBlock(brain, var_v1, var_v1 - 1);
+
+                        AIVertMove(brain, temp_t2 + 2);
+
+                        brain->cursor_x = var_v1 - 1;
+                        return -1;
+                    }
+                }
+
+            }
+        }
+
+        if (temp_t2 < 0xA) {
+            temp_t0 = temp_t2 + 1;
+            var_v1 = from;
+
+            for (var_t1 = 0; var_t1 < to; var_t1++) {
+                var_v1 = from + var_t1;
+                if ((well->block[temp_t0][var_v1].type == temp_t3) && (well->block[temp_t0][var_v1].state != 8)) {
+                    if ((well->block[temp_t2 + 2][var_v1].type == temp_t3) && (well->block[temp_t2 + 2][var_v1].state != 8)) {
+                        AIVertMove(brain, temp_t0);
+
+                        AIHoriMoveBlock(brain, var_v1, var_v1-1);
+
+                        AIVertMove(brain, temp_t2 - 1);
+
+                        brain->cursor_x = var_v1 - 1;
+                        return -1;
+                    }
+                }
+
+            }
+        }
+
+        var_a0_2 = temp_t2 - 1;
+        if (var_a0_2 < 0xAU) {
+            temp_t0 = temp_t2 + 1;
+
+            for (var_t1 = 0; var_t1 < to; var_t1++) {
+                var_v1 = from + var_t1;
+                if ((well->block[temp_t0][var_v1].type == temp_t3) && (well->block[temp_t0][var_v1].state != 8)) {
+                    if ((well->block[var_a0_2][var_v1].type == temp_t3) && (well->block[var_a0_2][var_v1].state != 8)) {
+                        AIVertMove(brain, temp_t0);
+
+                        AIHoriMoveBlock(brain, var_v1, var_v1-1);
+
+                        AIVertMove(brain, var_a0_2);
+
+                        brain->cursor_x = var_v1 - 1;
+                        return -1;
+                    }
+                }
+            }
+        }
+    } else if (to < from) {
+        to = from - to;
+        from = from - 1;
+
+        if (temp_t2 >= 2) {
+            temp_t5 = temp_t2 - 2;
+            temp_t0 = from;
+
+            for (var_t1 = 0; var_t1 < to; var_t1++, temp_t0--) {
+                if ((well->block[temp_t2 - 1][temp_t0].type == temp_t3) && (well->block[temp_t2 - 1][temp_t0].state != 8)) {
+                    if ((well->block[temp_t5][temp_t0].type == temp_t3) && (well->block[temp_t5][temp_t0].state != 8)) {
+                        AIVertMove(brain, temp_t5);
+
+                        AIHoriMoveBlock(brain, temp_t0, temp_t0 + 1);
+
+                        AIVertMove(brain, temp_t2 + 2);
+
+                        brain->cursor_x = temp_t0;
+                        return -1;
+                    }
+                }
+            }
+        }
+
+        if (temp_t2 < 0xA) {
+
+            temp_t5 = temp_t2 + 1;
+            temp_t0 = from;
+
+            for (var_t1 = 0; var_t1 < to; var_t1++, temp_t0--) {
+                if ((well->block[temp_t5][temp_t0].type == temp_t3) && (well->block[temp_t5][temp_t0].state != 8)) {
+                    if ((well->block[temp_t2 + 2][temp_t0].type == temp_t3) && (well->block[temp_t2 + 2][temp_t0].state != 8)) {
+                        AIVertMove(brain, temp_t5);
+
+                        AIHoriMoveBlock(brain, temp_t0, temp_t0 + 1);
+
+                        AIVertMove(brain, temp_t2 - 1);
+
+                        brain->cursor_x = temp_t0;
+                        return -1;
+                    }
+                }
+            }
+        }
+
+        var_v1_27 = temp_t2 - 1;
+        if (var_v1_27 < 0xAU) {
+            temp_t0 = temp_t2 + 1;
+
+            for (var_t1 = 0; var_t1 < to; var_t1++, from--) {
+                if ((well->block[var_v1_27][from].type == temp_t3) && (well->block[var_v1_27][from].state != 8)) {
+                    if ((well->block[temp_t0][from].type == temp_t3) && (well->block[temp_t0][from].state != 8)) {
+                        AIVertMove(brain, temp_t0);
+
+                        AIHoriMoveBlock(brain, from, from + 1);
+
+                        AIVertMove(brain, var_v1_27);
+
+                        brain->cursor_x = from;
+                        return -1;
+                    }
+                }
+            }
+        }
+
+    }
+
+    return 0;
+}
+#else
+s32 AIHoriMoveCheckCheck(struct tetWell *well, struct ai_t *brain, s32 from, s32 to);
 INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIHoriMoveCheckCheck);
+#endif
 #endif
 
 #if VERSION_USA
@@ -532,7 +695,36 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_80076F54_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_80076F84_usa);
+s32 AIMoveAcross(tetWell *well, s32 row, s32 from, s32 to) {
+    nbool flag = (row != 0) ? ntrue : nfalse;
+
+    if (from != to) {
+        s32 below = row - 1;
+        s32 col;
+
+        if (from < to) {
+            for (col = from + 1; col < to; col++) {
+                if ((well->block[row][col].type != BLOCKTYPE_0) && (well->block[row][col].state != BLOCKSTATE_0)) {
+                    return 0;
+                }
+                if (flag && (well->block[below][col].type == BLOCKTYPE_0)) {
+                    return 0;
+                }
+            }
+        } else if (to < from) {
+            for (col = from - 1; col > to; col--) {
+                if ((well->block[row][col].type != BLOCKTYPE_0) && (well->block[row][col].state != BLOCKSTATE_0)) {
+                    return 0;
+                }
+                if (flag && (well->block[below][col].type == BLOCKTYPE_0)) {
+                    return 0;
+                }
+            }
+        }
+    }
+
+    return -1;
+}
 #endif
 
 #if VERSION_USA
@@ -625,19 +817,177 @@ INLINE void AISortRows(s32 row, s32 total, s32 array[12]) {
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_80077338_usa);
+#ifdef NON_MATCHING
+s32 AIDistance(ai_t *brain, s32 row, s32 col) {
+    s32 temp_a0;
+    s32 var_a3;
+    s32 var_v1;
+
+    temp_a0 = brain->cursor_x;
+    var_v1 = brain->cursor_y - row;
+    if (var_v1 < 0) {
+        var_v1 = -var_v1;
+    }
+    var_a3 = 0;
+    if (col < temp_a0) {
+        var_a3 = temp_a0 - col;
+    } else if (temp_a0 < col) {
+        var_a3 = (col - 1) - temp_a0;
+    }
+    return var_v1 + var_a3;
+}
+#else
+// AIDistance
+s32 AIDistance(struct ai_t *brain /* r28 */, s32 row /* r29 */, s32 col /* r30 */);
+INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIDistance);
+#endif
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_8007737C_usa);
+s32 AILowerRow(tetWell *well, ai_t *brain, s32 row, s32 col) {
+    s32 temp_t4;
+    s32 var_t0;
+
+    if (AItotCheck[col] == -1) {
+        return 0;
+    }
+
+    if (row == 0) {
+        return 0;
+    }
+
+    temp_t4 = row - 1;
+
+    for (var_t0 = col - 1; var_t0 >= 0; var_t0--) {
+        if ((well->block[row][var_t0].type != 0) && (AItotCheck[var_t0] == -1)) {
+            break;
+        }
+
+        if (well->block[temp_t4][var_t0].type == 0) {
+            if (AItotCheck[var_t0] != -1) {
+                if (var_t0 == col - 1) {
+                    AIAddCommand(brain, 1, temp_t4, 0);
+                    AIAddCommand(brain, 3, col, var_t0);
+                    return -1;
+                } else {
+                    AIAddCommand(brain, 1, row, 0);
+                    AIAddCommand(brain, 3, col, var_t0);
+                    return -1;
+                }
+            }
+            break;
+        }
+    }
+
+    for (var_t0 = col + 1; var_t0 < TETWELL_OBJSPRITE_LEN_B; var_t0++) {
+        if ((well->block[row][var_t0].type != 0) && (AItotCheck[var_t0] == -1)) {
+            break;
+        }
+
+        if (well->block[temp_t4][var_t0].type == 0) {
+            if (AItotCheck[var_t0] != -1) {
+                if (var_t0 == col + 1) {
+                    AIAddCommand(brain, 1, temp_t4, 0);
+                    AIAddCommand(brain, 3, col, var_t0);
+                    return -1;
+                } else {
+                    AIAddCommand(brain, 1, row, 0);
+                    AIAddCommand(brain, 3, col, var_t0);
+                    return -1;
+                }
+            }
+            break;
+        }
+    }
+
+    return 0;
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_80077670_usa);
+void AIVisionCheck(tetWell *well, ai_t *brain) {
+    s32 i;
+
+    bzero(AIrowCheck, sizeof(AIrowCheck));
+    bzero(AIcolCheck, sizeof(AIcolCheck));
+    bzero(AItotCheck, sizeof(AItotCheck));
+
+    for (i = 0; i < ARRAY_COUNT(AIdistance); i++) {
+        // TODO: use BLOCK_LEN_B?
+        AIdistance[i] = 18;
+    }
+
+    AIBoundaryCheck(well, brain);
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIBoundaryCheck);
+void AIBoundaryCheck(tetWell *well, ai_t *brain) {
+    s32 *total;
+    s32 temp_a2;
+    BlockType type;
+    s32 var_a0;
+    s32 var_a3;
+    s32 var_t1;
+    s32 var_t3;
+    s32 var_t5;
+
+#if 0
+    int i; // r9
+    int j; // r25
+    int row; // r10
+    int col; // r11
+    int limit; // r1+0x8
+    int index; // r8
+#endif
+
+    if (brain->unk_024 != -1) {
+        var_a0 = brain->unk_024 - 1;
+    } else {
+        var_a0 = brain->unk_028;
+    }
+
+    if ((var_a0 - brain->unk_02C) < 2) {
+        return;
+    }
+
+    for (var_t5 = brain->unk_02C; var_t5 <= var_a0; var_t5++) {
+        for (var_t3 = brain->unk_030; var_t3 <= brain->unk_034; var_t3++) {
+            type = well->block[var_t5][var_t3].type;
+            if ((type == 0) || (well->block[var_t5][var_t3].state != 0)) {
+                continue;
+            }
+
+            temp_a2 = type - 1;
+            total = &AItotCheck[temp_a2];
+            if (*total >= 3) {
+                continue;
+            }
+
+            AIrowCheck[temp_a2][0] = var_t5;
+            AIcolCheck[temp_a2][0] = var_t3;
+            *total = 1;
+
+            for (var_t1 = var_t5 + 1; var_t1 <= var_a0; var_t1++) {
+                for (var_a3 = brain->unk_030; var_a3 <= brain->unk_034; var_a3++) {
+                    if ((well->block[var_t1][var_a3].type == type) && (well->block[var_t1][var_a3].state == 0)) {
+                        AIrowCheck[temp_a2][*total] = var_t1;
+                        AIcolCheck[temp_a2][*total] = var_a3;
+                        *total += 1;
+                        break;
+                    }
+                }
+
+                if ((var_a3 > brain->unk_034)) {
+                    break;
+                }
+                if (*total > 4) {
+                    break;
+                }
+            }
+        }
+    }
+}
 #endif
 
 #if VERSION_USA
@@ -832,11 +1182,130 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIComboX);
 #endif
 
 #if VERSION_USA
+#if 0
+s32 AIFlashCheck(tetWell *well, ai_t *brain) {
+    s32 var_a2;
+    s32 var_a3;
+    s32 var_t1;
+    s32 var_t3;
+
+    var_t3 = 0;
+    var_t1 = 0;
+loop_2:
+    if (var_t3 < 8) {
+
+        for (var_a3 = var_t3; var_a3 < 8; var_a3++) {
+            for (var_a2 = var_t1; var_a2 < 6; var_a2++) {
+                if (well->block[var_t3][var_a2].state == 7) {
+                    break;
+                }
+            }
+
+            var_t1 = 0;
+            if (var_a2 != 6) {
+                break;
+            }
+        }
+
+        if (var_a3 >= 8) {
+            goto block_25;
+        }
+
+        if (well->block[var_a3 + 1][var_a2].state == 7) {
+            brain->unk_040 = var_a3;
+            brain->unk_038 = 0xB;
+            brain->unk_03C = var_a2;
+            brain->unk_044 = var_a3 + 1;
+
+            for (var_a3 = var_a3 + 2; var_a3 < 0xC; var_a3++) {
+                if (well->block[var_a3][var_a2].state != 7) {
+                    break;
+                }
+                brain->unk_044 = var_a3;
+            }
+        } else {
+            if (well->block[var_a3][var_a2 + 1].state != 7) {
+                goto block_25;
+            }
+
+            brain->unk_040 = var_a2;
+
+            brain->unk_038 = 0x16;
+            brain->unk_03C = var_a3;
+            brain->unk_044 = var_a2 + 1;
+
+            for (var_a2 = var_a2 + 2; var_a2 < 6; var_a2++) {
+                if (well->block[var_a3][var_a2].state != 7) {
+                    break;
+                }
+                brain->unk_044 = var_a2;
+            }
+        }
+
+        if ((brain->unk_044 - brain->unk_040) >= 2) {
+            return -1;
+        }
+
+        if (brain->unk_038 == 0xB) {
+            var_t3 = brain->unk_044;
+            var_t1 = brain->unk_03C + 1;
+        } else if (brain->unk_038 == 0x16) {
+            var_t3 = brain->unk_03C;
+            var_t1 = brain->unk_044 + 1;
+        }
+        goto loop_2;
+    }
+
+block_25:
+    brain->unk_038 = 0;
+    return 0;
+}
+#else
+s32 AIFlashCheck(struct tetWell *well /* r27 */, struct ai_t *brain /* r28 */);
 INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIFlashCheck);
+#endif
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_800794C8_usa);
+s32 AIScrollCheck(tetWell *well, ai_t *brain, s8 array[]) {
+    s32 row;
+    s32 col;
+    s32 var_t6;
+    s32 var_t9;
+    s32 var_t2;
+    block_t *block;
+
+#if 0
+    int count; // r9
+    int total; // r31
+    int highest; // r30
+#endif
+
+    var_t6 = 0;
+    var_t9 = BLOCK_LEN_ROWS;
+    if (brain->unk_024 != -1) {
+        var_t9 = brain->unk_024;
+    }
+
+    for (col = brain->unk_030; col <= brain->unk_034; col++) {
+        var_t2 = 0;
+
+        for (row = 0; row < var_t9; row++) {
+            block = &well->block[row][col];
+
+            if (((block->type != 0) && (block->type < 8)) || ((block->type == 0) && (block->state != 0))) {
+                var_t2 += 1;
+                var_t6 += 1;
+            } else {
+                break;
+            }
+        }
+        if (array != NULL) {
+            array[col] = var_t2;
+        }
+    }
+    return var_t6;
+}
 #endif
 
 #if VERSION_USA
@@ -844,7 +1313,18 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIVolumeCheck);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_80079D64_usa);
+void AIChainFrequency(tetWell *well, ai_t *brain, s32 num) {
+    if ((brain->unk_008 > 0) && (well->unk_43A8 != 0)) {
+        brain->unk_008 = 0;
+        return;
+    }
+
+    if ((well->unk_43A8 != chain_check[num]) && (well->unk_43A8 == 0)) {
+        if ((chain_check[num] >= -2) && (brain->unk_008 == 0)) {
+            brain->unk_008 = AnimationRandom(111) + 333;
+        }
+    }
+}
 #endif
 
 #if VERSION_USA

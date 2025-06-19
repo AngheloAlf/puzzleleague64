@@ -1339,7 +1339,7 @@ extern uObjTxtr brickTxtr[GAME_BUFFER_LEN][BRICKTXTR_LEN];
 // extern UNK_TYPE B_801C7224_usa;
 // extern UNK_TYPE B_801C7228_usa;
 
-extern s32 chain_check[2];
+extern s32 chain_check[GAME_BUFFER_LEN];
 extern u8 B_801C7348_usa;
 // extern UNK_TYPE B_801C7350_usa;
 // extern UNK_TYPE B_801C7358_usa;
