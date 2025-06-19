@@ -1322,8 +1322,7 @@ extern u8 B_801C7089_usa;
 
 extern OSTime gTime;
 extern void *Pon_Image_Heap;
-// extern UNK_TYPE AIdistance;
-// extern UNK_TYPE B_801C70D4_usa;
+extern s32 AIdistance[8];
 extern s32 B_801C70D8_usa;
 
 // extern UNK_TYPE B_801C70E4_usa;

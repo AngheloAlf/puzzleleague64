@@ -2513,7 +2513,6 @@ B_801C7089_usa = 0x801C7089; //
 gTime = 0x801C70A8; // size:0x8
 Pon_Image_Heap = 0x801C70B0; //
 AIdistance = 0x801C70B8; // size:0x20
-B_801C70D4_usa = 0x801C70D4; //
 B_801C70D8_usa = 0x801C70D8; //
 
 B_801C70E4_usa = 0x801C70E4; //

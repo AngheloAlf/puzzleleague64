@@ -17,8 +17,6 @@
 #include "sfxlimit.h"
 #include "sound.h"
 
-extern UNK_TYPE B_801C70D4_usa[];
-
 void InitAI(tetWell *well, cursor_t *cursor, ai_t *brain) {
     s32 count;
 
@@ -715,8 +713,9 @@ s32 AICombo3a(ai_t *brain) {
     s32 temp_a0;
     s32 temp_t1;
     s32 var_a2;
+    s32 (*new_var)[5];
 
-    s32 t6 = B_801C70D4_usa[0];
+    s32 t6 = AIdistance[7];
     s32 v1;
     s32 *a0;
 
@@ -725,7 +724,10 @@ s32 AICombo3a(ai_t *brain) {
     }
 
     v1 = AItotCheck[t6] - 3;
-    a0 = AIrowCheck[t6];
+    //a0 = AIrowCheck[t6];
+    new_var = AIrowCheck;
+    a0 = new_var[t6];
+
     var_v1 = &a0[v1];
     for (var_a2 = 0; var_a2 < 3; var_a2++) {
         sp0[var_a2] = var_v1[var_a2];
