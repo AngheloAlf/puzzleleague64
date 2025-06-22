@@ -131,16 +131,6 @@ struct tetWell {
 };
 #endif
 
-typedef struct Game_unk_9AE0 {
-    /* 0x00 */ UNK_TYPE1 unk_00[0xA];
-    /* 0x0A */ s16 unk_0A;
-    /* 0x0C */ UNK_TYPE1 unk_0C[0x2];
-    /* 0x0E */ s16 unk_0E;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ UNK_TYPE1 unk_14[0x28-0x14];
-} Game_unk_9AE0; // size = 0x28
-
-
 typedef struct struct_801A6DB8_usa_unk_002 {
     /* 0x0 */ UNK_TYPE1 unk_0[0xE];
 } struct_801A6DB8_usa_unk_002; // size = 0xE
@@ -358,14 +348,14 @@ typedef struct Game {
     /* 0x8FE8 */ UNK_PAD unk_8FE8[0x90A8-0x8FE8];
     /* 0x90A8 */ UNK_PAD unk_90A8[0x2];
     /* 0x90AA */ s16 unk_90AA;
-    /* 0x90AC */ UNK_PAD unk_90AC[0x2];
+    /* 0x90AC */ s16 unk_90AC;
     /* 0x90AE */ s16 unk_90AE;
     /* 0x90B0 */ UNK_PAD unk_90B0[0x90B2-0x90B0];
     /* 0x90B2 */ s16 unk_90B2;
     /* 0x90B4 */ s16 unk_90B4;
     /* 0x90B6 */ s16 unk_90B6;
     /* 0x90B8 */ s16 unk_90B8;
-    /* 0x90BA */ UNK_PAD unk_90BA[0x90BC-0x90BA];
+    /* 0x90BA */ s16 unk_90BA;
     /* 0x90BC */ s8 unk_90BC;
     /* 0x90BD */ s8 unk_90BD;
     /* 0x90BE */ s8 unk_90BE;
@@ -373,21 +363,28 @@ typedef struct Game {
     /* 0x90C0 */ s32 unk_90C0; // currentText?
     /* 0x90C4 */ UNK_TYPE1 unk_90C4[0x4];
     /* 0x90C8 */ text_t drawText[DRAWTEXT_COUNT];
-    /* 0x9988 */ uObjBg frame;
+    /* 0x9988 */ uObjBg frame[UNK_SIZE];
     /* 0x99B0 */ UNK_TYPE1 unk_99B0[0x28];
-    /* 0x99D8 */ uObjTxtr unk_99D8;
+    /* 0x99D8 */ uObjTxtr unk_99D8[UNK_SIZE];
     /* 0x99F0 */ UNK_PAD unk_99F0[0x18];
     /* 0x9A08 */ uObjSprite unk_9A08[3];
     /* 0x9A50 */ uObjBg unk_9A50; // bkground?
-    /* 0x9A78 */ UNK_TYPE1 unk_9A78[0x9AE0 - 0x9A78];
-    /* 0x9AE0 */ Game_unk_9AE0 unk_9AE0;
-    /* 0x9B08 */ UNK_TYPE1 unk_9B08[0x9B48 - 0x9B08];
+    /* 0x9A78 */ UNK_TYPE1 unk_9A78[0x9A90 - 0x9A78];
+    /* 0x9A90 */ uObjBg unk_9A90[4];
+    /* 0x9B30 */ s32 unk_9B30;
+    /* 0x9B34 */ void* unk_9B34;
+    /* 0x9B38 */ s16 unk_9B38;
+    /* 0x9B3A */ s16 unk_9B3A;
+    /* 0x9B3C */ s16 unk_9B3C;
+    /* 0x9B3E */ s16 unk_9B3E;
+    /* 0x9B40 */ s32 unk_9B40;
+    /* 0x9B44 */ s32 unk_9B44;
     /* 0x9B48 */ s32 unk_9B48;
     /* 0x9B4C */ UNK_TYPE1 unk_9B4C[0x9B50 - 0x9B4C];
     /* 0x9B50 */ uObjBg unk_9B50[2]; // at least 2
     /* 0x9BA0 */ UNK_TYPE1 unk_9BA0[0x9BF0 - 0x9BA0];
     /* 0x9BF0 */ uObjTxtr unk_9BF0;
-    /* 0x9C08 */ s32 unk_9C08;
+    /* 0x9C08 */ s32 unk_9C08; // totalPlayer?
     /* 0x9C0C */ s32 unk_9C0C; // dimension?
     /* 0x9C10 */ s32 unk_9C10;
     /* 0x9C14 */ s32 unk_9C14;

@@ -393,7 +393,7 @@ DoStageClearIntro = 0x80033B40; // type:func
 func_80034140_usa = 0x80034170; // type:func
 DrawStageClearIntro = 0x8003437C; // type:func
 func_800343D0_eur = 0x800343D0; // type:func
-func_800346E8_eur = 0x800346E8; // type:func
+InitGameOver = 0x800346E8; // type:func
 func_8003490C_usa = 0x8003493C; // type:func
 LoadGameOver3D = 0x80034DE8; // type:func
 DrawPauseOver = 0x8003523C; // type:func
@@ -2719,7 +2719,7 @@ B_801AD9A0_usa = 0x801ACAA0; //
 brainbrain = 0x801ACAB0; // size:0x258
 
 B_801ADC0C_usa = 0x801ACD0C; //
-B_801ADC10_usa = 0x801ACD10; //
+endSegment = 0x801ACD10; //
 B_801C5CD8_eur = 0x801C5CD8; //
 B_801C6BDC_usa = 0x801C5CDC; //
 B_801C5CE0_eur = 0x801C5CE0; //

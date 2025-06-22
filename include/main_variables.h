@@ -1274,9 +1274,6 @@ extern STACK(gBootStack, BOOT_STACK_SIZE);
 // extern UNK_TYPE B_801ADC08_usa;
 // extern UNK_TYPE B_801ADC0C_usa;
 
-// maybe endSegment?
-extern s32 B_801ADC10_usa;
-
 // extern UNK_TYPE B_801C6BD8_usa;
 extern s32 B_801C6BDC_usa[2];
 extern s32 GarbageBlockBaseSfx_L;

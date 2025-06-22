@@ -1,0 +1,33 @@
+segments:
+  - type: group
+    start: 0x0
+    dir: sign_gameover/sign_gameover_2d_1p
+    # Same image formats as sign_gameover_3d_1p
+    subsegments:
+      - { start: auto, type: rgba32, name: stage_clear.rgba32, width: 104, height: 86 }
+      - { start: auto, type: rgba32, name: round_clear.rgba32, width: 104, height: 99 }
+      - { start: auto, type: rgba32, name: game_over.rgba32, width: 104, height: 96 }
+      - { start: auto, type: rgba32, name: time_up.rgba32, width: 104, height: 79 }
+      - { start: auto, type: rgba32, name: try_again.rgba32, width: 104, height: 20 }
+      - { start: auto, type: rgba32, name: yesno_1.rgba32, width: 104, height: 24 }
+      - { start: auto, type: rgba32, name: yesno_2.rgba32, width: 104, height: 24 }
+      - { start: auto, type: rgba32, name: yesno_3.rgba32, width: 104, height: 24 }
+      - { start: auto, type: rgba32, name: yesno_4.rgba32, width: 104, height: 24 }
+      - { start: auto, type: rgba32, name: push_any_button.rgba32, width: 104, height: 16 }
+
+  - [0x31F80]
+
+options:
+  basename: ""
+  base_path: ../../../../../
+  compiler: GCC
+  find_file_boundaries: False
+  platform: n64
+  extensions_path: tools/splat_ext
+
+  do_c_func_detection: False
+  o_as_suffix: True
+  gfx_ucode: f3dex
+  use_legacy_include_asm: False
+  create_undefined_funcs_auto: False
+  create_undefined_syms_auto: False

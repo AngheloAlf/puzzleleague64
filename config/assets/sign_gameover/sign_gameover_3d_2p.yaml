@@ -1,0 +1,29 @@
+segments:
+  - type: group
+    start: 0x0
+    dir: sign_gameover/sign_gameover_3d_2p
+    # Same image formats as sign_gameover_2d_2p
+    subsegments:
+      - { start: auto, type: rgba16, name: win_blue.rgba16,  width: 112, height: 42 }
+      - { start: auto, type: rgba16, name: win_red.rgba16,   width: 112, height: 42 }
+      - { start: auto, type: rgba16, name: lose_blue.rgba16, width: 112, height: 42 }
+      - { start: auto, type: rgba16, name: lose_red.rgba16,  width: 112, height: 42 }
+      - { start: auto, type: rgba16, name: draw_blue.rgba16, width: 112, height: 42 }
+      - { start: auto, type: rgba16, name: draw_red.rgba16,  width: 112, height: 42 }
+
+  - [0xDC80]
+
+options:
+  basename: ""
+  base_path: ../../../../../
+  compiler: GCC
+  find_file_boundaries: False
+  platform: n64
+  extensions_path: tools/splat_ext
+
+  do_c_func_detection: False
+  o_as_suffix: True
+  gfx_ucode: f3dex
+  use_legacy_include_asm: False
+  create_undefined_funcs_auto: False
+  create_undefined_syms_auto: False

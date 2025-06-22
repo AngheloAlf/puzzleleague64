@@ -121,6 +121,11 @@ DECLARE_SEGMENT(segment_bg_screen_8CE310);
 DECLARE_SEGMENT(segment_bg_screen_8E2A50);
 DECLARE_SEGMENT(segment_bg_screen_902250);
 
+DECLARE_SEGMENT(sign_gameover_2d_1p);
+DECLARE_SEGMENT(sign_gameover_2d_2p);
+DECLARE_SEGMENT(sign_gameover_3d_1p);
+DECLARE_SEGMENT(sign_gameover_3d_2p);
+
 DECLARE_SEGMENT(bin_file);
 
 DECLARE_SEGMENT(segment_17C2A80);

@@ -67,6 +67,8 @@ vram_classes:
   - { name: asset_bg_screen_A, fixed_vram: 0x01077C60 }
   - { name: asset_flic_anime_bg, fixed_vram: 0x01077C60 }
   - { name: asset_bg_screen_B, fixed_vram: 0x0108CF00 }
+  - { name: asset_sign, fixed_vram: 0x010AA150 }
+  - { name: asset_sign_ger, fixed_vram: 0x010AB1D0 }
 
 segments:
   - name: header
@@ -910,6 +912,48 @@ segments:
     include_if_any: [[version, ger]]
     files:
       - { path: "asm/{version}/data/unk_90B780.o" }
+
+  - name: sign_gameover_2d_1p
+    vram_class: asset_sign
+    include_if_any: [[version, usa], [version, eur], [version, fra]]
+    files:
+      - { path: src/assets/sign_gameover/sign_gameover_2d_1p.o }
+  - name: sign_gameover_2d_2p
+    vram_class: asset_sign
+    include_if_any: [[version, usa], [version, eur], [version, fra]]
+    files:
+      - { path: src/assets/sign_gameover/sign_gameover_2d_2p.o }
+  - name: sign_gameover_3d_1p
+    vram_class: asset_sign
+    include_if_any: [[version, usa], [version, eur], [version, fra]]
+    files:
+      - { path: src/assets/sign_gameover/sign_gameover_3d_1p.o }
+  - name: sign_gameover_3d_2p
+    vram_class: asset_sign
+    include_if_any: [[version, usa], [version, eur], [version, fra]]
+    files:
+      - { path: src/assets/sign_gameover/sign_gameover_3d_2p.o }
+
+  - name: sign_gameover_2d_1p
+    vram_class: asset_sign_ger
+    include_if_any: [[version, ger]]
+    files:
+      - { path: src/assets/sign_gameover/sign_gameover_2d_1p.o }
+  - name: sign_gameover_2d_2p
+    vram_class: asset_sign_ger
+    include_if_any: [[version, ger]]
+    files:
+      - { path: src/assets/sign_gameover/sign_gameover_2d_2p.o }
+  - name: sign_gameover_3d_1p
+    vram_class: asset_sign_ger
+    include_if_any: [[version, ger]]
+    files:
+      - { path: src/assets/sign_gameover/sign_gameover_3d_1p.o }
+  - name: sign_gameover_3d_2p
+    vram_class: asset_sign_ger
+    include_if_any: [[version, ger]]
+    files:
+      - { path: src/assets/sign_gameover/sign_gameover_3d_2p.o }
 
   - name: bin_file
     files:

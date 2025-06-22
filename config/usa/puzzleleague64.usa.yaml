@@ -1298,6 +1298,22 @@ segments:
     start: 0x917790
     # Unknown end
 
+  - name: assets_bins/sign_gameover/sign_gameover_2d_1p
+    type: databin
+    start: 0x93E340
+
+  - name: assets_bins/sign_gameover/sign_gameover_2d_2p
+    type: databin
+    start: 0x9702C0
+
+  - name: assets_bins/sign_gameover/sign_gameover_3d_1p
+    type: databin
+    start: 0x97DF40
+
+  - name: assets_bins/sign_gameover/sign_gameover_3d_2p
+    type: databin
+    start: 0x9AFEC0
+
   - name: bin_file
     type: .bin_file
     dir: bin_file

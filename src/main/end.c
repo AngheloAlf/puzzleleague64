@@ -17,6 +17,8 @@
 #include "sound.h"
 #include "update.h"
 
+#include "assets/sign_gameover.h"
+
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", GameOverSmoke);
 #endif
@@ -433,63 +435,67 @@ s32 DoGameOverTryAgain(void) {
     }
 
     if (gTheGame.unk_9C0C == 1) {
-        Game_unk_9AE0 *var_s0 = &gTheGame.unk_9AE0;
+        uObjBg *bg = &gTheGame.unk_9A90[2];
 
         if (*pos == 0) {
-            var_s0->unk_0A = 0x60;
-            var_s0->unk_0E = 0x60;
+            bg->s.imageH = SIGNEND_1P_YESNO_HEIGHT << 2;
+            bg->s.frameH = SIGNEND_1P_YESNO_HEIGHT << 2;
 
-            if ((var_s0->unk_10 != B_801ADC10_usa + 0x2B780) && (var_s0->unk_10 != (B_801ADC10_usa + 0x2DE80))) {
-                var_s0->unk_10 = B_801ADC10_usa + 0x2B780;
+            if ((bg->s.imagePtr != (void *)endSegment->texs_1p.yesno_3) &&
+                (bg->s.imagePtr != (void *)endSegment->texs_1p.yesno_4)) {
+                bg->s.imagePtr = (void *)endSegment->texs_1p.yesno_3;
             }
             if (DoFlashDrawAlways() != 0) {
-                var_s0->unk_10 = B_801ADC10_usa + 0x2B780;
+                bg->s.imagePtr = (void *)endSegment->texs_1p.yesno_3;
             } else {
-                var_s0->unk_10 = B_801ADC10_usa + 0x2DE80;
+                bg->s.imagePtr = (void *)endSegment->texs_1p.yesno_4;
             }
         } else {
-            var_s0->unk_0A = 0x60;
-            var_s0->unk_0E = 0x60;
+            bg->s.imageH = SIGNEND_1P_YESNO_HEIGHT << 2;
+            bg->s.frameH = SIGNEND_1P_YESNO_HEIGHT << 2;
 
-            if ((var_s0->unk_10 != B_801ADC10_usa + 0x26980) && (var_s0->unk_10 != (B_801ADC10_usa + 0x29080))) {
-                var_s0->unk_10 = B_801ADC10_usa + 0x26980;
+            if ((bg->s.imagePtr != (void *)endSegment->texs_1p.yesno_1) &&
+                (bg->s.imagePtr != (void *)endSegment->texs_1p.yesno_2)) {
+                bg->s.imagePtr = (void *)endSegment->texs_1p.yesno_1;
             }
             if (DoFlashDrawAlways() != 0) {
-                var_s0->unk_10 = B_801ADC10_usa + 0x26980;
+                bg->s.imagePtr = (void *)endSegment->texs_1p.yesno_1;
             } else {
-                var_s0->unk_10 = B_801ADC10_usa + 0x29080;
+                bg->s.imagePtr = (void *)endSegment->texs_1p.yesno_2;
             }
         }
-        osWritebackDCache(&gTheGame.unk_9AE0, sizeof(Game_unk_9AE0));
+        osWritebackDCache(&gTheGame.unk_9A90[2], sizeof(uObjBg));
     } else {
-        Game_unk_9AE0 *var_s0 = &gTheGame.unk_9AE0;
+        uObjBg *bg = &gTheGame.unk_9A90[2];
 
         if (*pos == 0) {
-            var_s0->unk_0A = 0x60;
-            var_s0->unk_0E = 0x60;
+            bg->s.imageH = SIGNEND_1P_YESNO_HEIGHT << 2;
+            bg->s.frameH = SIGNEND_1P_YESNO_HEIGHT << 2;
 
-            if ((var_s0->unk_10 != B_801ADC10_usa + 0x2B780) && (var_s0->unk_10 != (B_801ADC10_usa + 0x2DE80))) {
-                var_s0->unk_10 = B_801ADC10_usa + 0x2B780;
+            if ((bg->s.imagePtr != (void *)endSegment->texs_1p.yesno_3) &&
+                (bg->s.imagePtr != (void *)endSegment->texs_1p.yesno_4)) {
+                bg->s.imagePtr = (void *)endSegment->texs_1p.yesno_3;
             }
             if (DoFlashDrawAlways() != 0) {
-                var_s0->unk_10 = B_801ADC10_usa + 0x2B780;
+                bg->s.imagePtr = (void *)endSegment->texs_1p.yesno_3;
             } else {
-                var_s0->unk_10 = B_801ADC10_usa + 0x2DE80;
+                bg->s.imagePtr = (void *)endSegment->texs_1p.yesno_4;
             }
         } else {
-            var_s0->unk_0A = 0x60;
-            var_s0->unk_0E = 0x60;
+            bg->s.imageH = SIGNEND_1P_YESNO_HEIGHT << 2;
+            bg->s.frameH = SIGNEND_1P_YESNO_HEIGHT << 2;
 
-            if ((var_s0->unk_10 != B_801ADC10_usa + 0x26980) && (var_s0->unk_10 != (B_801ADC10_usa + 0x29080))) {
-                var_s0->unk_10 = B_801ADC10_usa + 0x26980;
+            if ((bg->s.imagePtr != (void *)endSegment->texs_1p.yesno_1) &&
+                (bg->s.imagePtr != (void *)endSegment->texs_1p.yesno_2)) {
+                bg->s.imagePtr = (void *)endSegment->texs_1p.yesno_1;
             }
             if (DoFlashDrawAlways() != 0) {
-                var_s0->unk_10 = B_801ADC10_usa + 0x26980;
+                bg->s.imagePtr = (void *)endSegment->texs_1p.yesno_1;
             } else {
-                var_s0->unk_10 = B_801ADC10_usa + 0x29080;
+                bg->s.imagePtr = (void *)endSegment->texs_1p.yesno_2;
             }
         }
-        osWritebackDCache(&gTheGame.unk_9AE0, sizeof(Game_unk_9AE0));
+        osWritebackDCache(&gTheGame.unk_9A90[2], sizeof(uObjBg));
     }
 
     return 0;
