@@ -583,14 +583,14 @@ void func_8004B12C_usa(void) {
 
         if (gTheGame.unk_9C0C == 1) {
             gDPPipeSync(glistp++);
-            gSPBgRect1Cyc(glistp++, &gTheGame.frame);
+            gSPBgRect1Cyc(glistp++, &gTheGame.frame[0]);
         } else {
             gDPPipeSync(glistp++);
-            guS2DEmuBgRect1Cyc(&glistp, &gTheGame.frame);
+            guS2DEmuBgRect1Cyc(&glistp, &gTheGame.frame[0]);
         }
     } else if (D_800B69C4_usa != -1) {
         D_800B69C4_usa = -1;
-        guS2DInitBg(&gTheGame.frame);
+        guS2DInitBg(&gTheGame.frame[0]);
     }
 
     gDPPipeSync(glistp++);

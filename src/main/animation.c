@@ -414,15 +414,15 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/animation", func_8004FABC_usa);
 #endif
 
 void func_80050420_usa(void) {
-    gTheGame.frame.b.imagePtr = B_8019CF9C_usa;
-    gTheGame.frame.b.imageH = 240 << 2;
-    gTheGame.frame.b.frameH = 240 << 2;
-    gTheGame.frame.b.frameY = 0;
-    gTheGame.frame.b.imageFmt = G_IM_FMT_RGBA;
-    gTheGame.frame.b.imageSiz = G_IM_SIZ_16b;
+    gTheGame.frame[0].b.imagePtr = B_8019CF9C_usa;
+    gTheGame.frame[0].b.imageH = 240 << 2;
+    gTheGame.frame[0].b.frameH = 240 << 2;
+    gTheGame.frame[0].b.frameY = 0;
+    gTheGame.frame[0].b.imageFmt = G_IM_FMT_RGBA;
+    gTheGame.frame[0].b.imageSiz = G_IM_SIZ_16b;
 
-    guS2DInitBg(&gTheGame.frame);
-    osWritebackDCache(&gTheGame.frame, sizeof(uObjBg));
+    guS2DInitBg(&gTheGame.frame[0]);
+    osWritebackDCache(&gTheGame.frame[0], sizeof(uObjBg));
 
     if (gTheGame.unk_9C08 == 1) {
         func_800512E0_usa();
