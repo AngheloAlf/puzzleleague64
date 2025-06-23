@@ -129,37 +129,22 @@ void InitCharacter(s32 left, s32 right) {
             who = sp10[right / 100][B_801C6E58_usa - 1];
         }
 
+        // TODO: enum?
         switch (who) {
             case 0x32:
-                osInvalDCache(SEGMENT_VRAM_START(segment_character_block_5337F0),
-                              SEGMENT_VRAM_SIZE(segment_character_block_5337F0));
-                func_80001310_usa(SEGMENT_ROM_START(segment_character_block_5337F0), character_block_textures,
-                                  SEGMENT_ROM_SIZE(segment_character_block_5337F0));
-                Pon_Image_Heap = (void *)((uintptr_t)Pon_Image_Heap + SEGMENT_ROM_SIZE(segment_character_block_5337F0));
+                LOAD_DATA_SEGMENT(character_block_textures, segment_character_block_5337F0, Pon_Image_Heap);
                 break;
 
             case 0x33:
-                osInvalDCache(SEGMENT_VRAM_START(segment_character_block_53A9F0),
-                              SEGMENT_VRAM_SIZE(segment_character_block_53A9F0));
-                func_80001310_usa(SEGMENT_ROM_START(segment_character_block_53A9F0), character_block_textures,
-                                  SEGMENT_ROM_SIZE(segment_character_block_53A9F0));
-                Pon_Image_Heap = (void *)((uintptr_t)Pon_Image_Heap + SEGMENT_ROM_SIZE(segment_character_block_53A9F0));
+                LOAD_DATA_SEGMENT(character_block_textures, segment_character_block_53A9F0, Pon_Image_Heap);
                 break;
 
             case 0x34:
-                osInvalDCache(SEGMENT_VRAM_START(segment_character_block_541BF0),
-                              SEGMENT_VRAM_SIZE(segment_character_block_541BF0));
-                func_80001310_usa(SEGMENT_ROM_START(segment_character_block_541BF0), character_block_textures,
-                                  SEGMENT_ROM_SIZE(segment_character_block_541BF0));
-                Pon_Image_Heap = (void *)((uintptr_t)Pon_Image_Heap + SEGMENT_ROM_SIZE(segment_character_block_541BF0));
+                LOAD_DATA_SEGMENT(character_block_textures, segment_character_block_541BF0, Pon_Image_Heap);
                 break;
 
             case 0x35:
-                osInvalDCache(SEGMENT_VRAM_START(segment_character_block_548DF0),
-                              SEGMENT_VRAM_SIZE(segment_character_block_548DF0));
-                func_80001310_usa(SEGMENT_ROM_START(segment_character_block_548DF0), character_block_textures,
-                                  SEGMENT_ROM_SIZE(segment_character_block_548DF0));
-                Pon_Image_Heap = (void *)((uintptr_t)Pon_Image_Heap + SEGMENT_ROM_SIZE(segment_character_block_548DF0));
+                LOAD_DATA_SEGMENT(character_block_textures, segment_character_block_548DF0, Pon_Image_Heap);
                 break;
 
             case 0x37:
@@ -168,59 +153,31 @@ void InitCharacter(s32 left, s32 right) {
                 } else {
                     B_801C6BDC_usa[0] = -1;
                 }
-                osInvalDCache(SEGMENT_VRAM_START(segment_character_block_54FFF0),
-                              SEGMENT_VRAM_SIZE(segment_character_block_54FFF0));
-                func_80001310_usa(SEGMENT_ROM_START(segment_character_block_54FFF0), character_block_textures,
-                                  SEGMENT_ROM_SIZE(segment_character_block_54FFF0));
-                Pon_Image_Heap = (void *)((uintptr_t)Pon_Image_Heap + SEGMENT_ROM_SIZE(segment_character_block_54FFF0));
+                LOAD_DATA_SEGMENT(character_block_textures, segment_character_block_54FFF0, Pon_Image_Heap);
                 break;
 
             case 0x38:
-                osInvalDCache(SEGMENT_VRAM_START(segment_character_block_5571F0),
-                              SEGMENT_VRAM_SIZE(segment_character_block_5571F0));
-                func_80001310_usa(SEGMENT_ROM_START(segment_character_block_5571F0), character_block_textures,
-                                  SEGMENT_ROM_SIZE(segment_character_block_5571F0));
-                Pon_Image_Heap = (void *)((uintptr_t)Pon_Image_Heap + SEGMENT_ROM_SIZE(segment_character_block_5571F0));
+                LOAD_DATA_SEGMENT(character_block_textures, segment_character_block_5571F0, Pon_Image_Heap);
                 break;
 
             case 0x39:
-                osInvalDCache(SEGMENT_VRAM_START(segment_character_block_55E3F0),
-                              SEGMENT_VRAM_SIZE(segment_character_block_55E3F0));
-                func_80001310_usa(SEGMENT_ROM_START(segment_character_block_55E3F0), character_block_textures,
-                                  SEGMENT_ROM_SIZE(segment_character_block_55E3F0));
-                Pon_Image_Heap = (void *)((uintptr_t)Pon_Image_Heap + SEGMENT_ROM_SIZE(segment_character_block_55E3F0));
+                LOAD_DATA_SEGMENT(character_block_textures, segment_character_block_55E3F0, Pon_Image_Heap);
                 break;
 
             case 0x36:
-                osInvalDCache(SEGMENT_VRAM_START(segment_character_block_5655F0),
-                              SEGMENT_VRAM_SIZE(segment_character_block_5655F0));
-                func_80001310_usa(SEGMENT_ROM_START(segment_character_block_5655F0), character_block_textures,
-                                  SEGMENT_ROM_SIZE(segment_character_block_5655F0));
-                Pon_Image_Heap = (void *)((uintptr_t)Pon_Image_Heap + SEGMENT_ROM_SIZE(segment_character_block_5655F0));
+                LOAD_DATA_SEGMENT(character_block_textures, segment_character_block_5655F0, Pon_Image_Heap);
                 break;
 
             case 0x3B:
-                osInvalDCache(SEGMENT_VRAM_START(segment_character_block_56C7F0),
-                              SEGMENT_VRAM_SIZE(segment_character_block_56C7F0));
-                func_80001310_usa(SEGMENT_ROM_START(segment_character_block_56C7F0), character_block_textures,
-                                  SEGMENT_ROM_SIZE(segment_character_block_56C7F0));
-                Pon_Image_Heap = (void *)((uintptr_t)Pon_Image_Heap + SEGMENT_ROM_SIZE(segment_character_block_56C7F0));
+                LOAD_DATA_SEGMENT(character_block_textures, segment_character_block_56C7F0, Pon_Image_Heap);
                 break;
 
             case 0x3C:
-                osInvalDCache(SEGMENT_VRAM_START(segment_character_block_57ABF0),
-                              SEGMENT_VRAM_SIZE(segment_character_block_57ABF0));
-                func_80001310_usa(SEGMENT_ROM_START(segment_character_block_57ABF0), character_block_textures,
-                                  SEGMENT_ROM_SIZE(segment_character_block_57ABF0));
-                Pon_Image_Heap = (void *)((uintptr_t)Pon_Image_Heap + SEGMENT_ROM_SIZE(segment_character_block_57ABF0));
+                LOAD_DATA_SEGMENT(character_block_textures, segment_character_block_57ABF0, Pon_Image_Heap);
                 break;
 
             case 0x3A:
-                osInvalDCache(SEGMENT_VRAM_START(segment_character_block_5739F0),
-                              SEGMENT_VRAM_SIZE(segment_character_block_5739F0));
-                func_80001310_usa(SEGMENT_ROM_START(segment_character_block_5739F0), character_block_textures,
-                                  SEGMENT_ROM_SIZE(segment_character_block_5739F0));
-                Pon_Image_Heap = (void *)((uintptr_t)Pon_Image_Heap + SEGMENT_ROM_SIZE(segment_character_block_5739F0));
+                LOAD_DATA_SEGMENT(character_block_textures, segment_character_block_5739F0, Pon_Image_Heap);
                 break;
         }
 

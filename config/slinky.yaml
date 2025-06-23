@@ -913,6 +913,18 @@ segments:
     files:
       - { path: "asm/{version}/data/unk_90B780.o" }
 
+  - name: sign_pause
+    fixed_vram: 0x010A51D0
+    include_if_any: [[version, usa], [version, eur], [version, fra]]
+    files:
+      - { path: src/assets/sign/sign_pause.o }
+
+  - name: sign_pause
+    fixed_vram: 0x010A51D0
+    include_if_any: [[version, ger]]
+    files:
+      - { path: src/assets/sign/sign_pause.o }
+
   - name: sign_gameover_2d_1p
     vram_class: asset_sign
     include_if_any: [[version, usa], [version, eur], [version, fra]]

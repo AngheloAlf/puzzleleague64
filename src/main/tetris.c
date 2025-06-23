@@ -158,7 +158,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/tetris", func_80088828_ger);
 #if 0
 ? InitGameStateVar();                               /* extern */
 ? func_800325F8_usa();                              /* extern */
-? func_800343A0_usa();                              /* extern */
+? InitPause();                              /* extern */
 ? InitGameOver();                              /* extern */
 s32 AnimationRandom(?);                           /* extern */
 ? InitMiscStuff();                              /* extern */
@@ -278,7 +278,7 @@ void InitTetrisWell(void) {
     func_800325F8_usa();
     func_800552F4_usa();
     InitMiscStuff();
-    func_800343A0_usa();
+    InitPause();
     InitGameOver();
     func_80054020_usa();
     if (gTheGame.unk_9C08 > 0) {

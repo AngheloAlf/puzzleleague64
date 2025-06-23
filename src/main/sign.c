@@ -14,69 +14,63 @@
 #include "pause.h"
 
 #include "assets/sign_gameover.h"
+#include "assets/sign_pause.h"
 
-#if VERSION_USA
-// InitPause
-#if 0
-extern UNK_TYPE1 D_10A51D0;
-extern UNK_TYPE1 D_10AA150;
-extern UNK_TYPE1 D_9393C0;
-extern UNK_TYPE1 D_93E340;
+void InitPause(void) {
+    SignPauseTextures *currSegment;
+    uObjBg *bg;
+    s32 count;
 
-void func_800343A0_usa(void) {
-    s32 temp_a0;
-    s32 var_s1;
-    s32 var_v0;
-    uObjBg *var_s0;
-    void *temp_s2;
+    currSegment = Pon_Image_Heap;
+    LOAD_DATA_SEGMENT_DW(currSegment, sign_pause, Pon_Image_Heap);
 
-    temp_s2 = Pon_Image_Heap;
-    osInvalDCache(&D_10A51D0, &D_10AA150 - &D_10A51D0);
-    func_80001310_usa((u32)&D_9393C0, temp_s2, (u32)(&D_93E340 - &D_9393C0));
-    Pon_Image_Heap += (u32)(&D_93E340 - &D_9393C0);
-
-    for (var_v0 = 0; var_v0 < 4; var_v0++) {
-        gTheGame.unk_9A90[var_v0].s.imagePtr = 0;
+    for (count = 0; count < GAME_UNK_9A90_COUNT; count++) {
+        gTheGame.unk_9A90[count].s.imagePtr = NULL;
     }
 
-    for (var_s1 = 0; var_s1 < 3; var_s1++) {
-        var_s0 = &gTheGame.unk_9A90[var_s1];
-        var_s0->s.imageLoad = 0xFFF4;
-        var_s0->s.imageFmt = 2;
-        var_s0->s.imageSiz = 1;
-        var_s0->s.imageX = 0;
-        var_s0->s.frameX = -0x280;
-        var_s0->s.imageW = 0x200;
-        var_s0->s.frameW = 0x200;
-        var_s0->s.imageY = 0;
-        var_s0->s.frameY = -0x280;
-        var_s0->s.imagePal = 0;
-        var_s0->s.imageFlip = 0;
-        if (var_s1 < 2) {
-            var_s0->s.imageW = 0x100;
-            var_s0->s.frameW = 0x100;
-            var_s0->s.imageH = 0x60;
-            var_s0->s.frameH = 0x60;
-            var_s0->s.imagePtr = (u64 *)temp_s2;
-        } else if (((gSelection == 0xBE) || (gSelection < 0x83))) {
-            var_s0->s.imageH = 0xF4;
-            var_s0->s.frameH = 0xF4;
-            var_s0->s.imagePtr = temp_s2 + 0x2F00;
+    for (count = 0; count < GAME_UNK_9A90_COUNT - 1; count++) {
+        bg = &gTheGame.unk_9A90[count];
+
+        bg->s.imageX = 0;
+        bg->s.frameX = -(160 << 2);
+        bg->s.imageW = SIGNPAUSE_POPUP_WIDTH << 2;
+        bg->s.frameW = SIGNPAUSE_POPUP_WIDTH << 2;
+        bg->s.imageY = 0;
+        bg->s.frameY = -(160 << 2);
+
+        bg->s.imageLoad = G_BGLT_LOADTILE;
+        bg->s.imageFmt = G_IM_FMT_CI;
+        bg->s.imagePal = 0;
+        bg->s.imageSiz = G_IM_SIZ_8b;
+        bg->s.imageFlip = 0;
+
+        if (count < 2) {
+            bg->s.imageW = SIGNPAUSE_PAUSE_WIDTH << 2;
+            bg->s.frameW = SIGNPAUSE_PAUSE_WIDTH << 2;
+            bg->s.imageH = SIGNPAUSE_PAUSE_HEIGHT << 2;
+            bg->s.frameH = SIGNPAUSE_PAUSE_HEIGHT << 2;
+            bg->s.imagePtr = (void *)currSegment->pause;
+        } else if ((gSelection == 0xBE) || (gSelection < 0x83)) {
+            bg->s.imageH = SIGNPAUSE_POPUP_CONTINUE_RESTART_HEIGHT << 2;
+            bg->s.frameH = SIGNPAUSE_POPUP_CONTINUE_RESTART_HEIGHT << 2;
+            bg->s.imagePtr = (void *)currSegment->popup_continue_restart;
         } else {
-            var_s0->s.imageH = 0xB8;
-            var_s0->s.frameH = 0xB8;
-            var_s0->s.imagePtr = temp_s2 + 0x1800;
+            bg->s.imageH = SIGNPAUSE_POPUP_CONTINUE_HEIGHT << 2;
+            bg->s.frameH = SIGNPAUSE_POPUP_CONTINUE_HEIGHT << 2;
+            bg->s.imagePtr = (void *)currSegment->popup_continue;
         }
-        guS2DInitBg(var_s0);
+
+        guS2DInitBg(bg);
     }
 
-    temp_a0 = gTheGame.unk_9C08;
-    if (temp_a0 == 1) {
-        gTheGame.unk_9A90[temp_a0].s.imagePtr = NULL;
+    if (gTheGame.unk_9C08 == 1) {
+        gTheGame.unk_9A90[gTheGame.unk_9C08].s.imagePtr = NULL;
     }
 
+    // uObjBg?
     gTheGame.unk_9B30 = 0x30;
-    gTheGame.unk_9B34 = temp_s2 + 0x4D80;
+    gTheGame.unk_9B34 = currSegment->popup_palette;
+    gTheGame.unk_9B38 = 0x100;
     gTheGame.unk_9B3A = 0xFF;
     gTheGame.unk_9B40 = -1;
     gTheGame.unk_90AA = 0x400;
@@ -86,7 +80,6 @@ void func_800343A0_usa(void) {
     gTheGame.unk_9B3C = 0;
     gTheGame.unk_9B3E = 0;
     gTheGame.unk_9B44 = 0;
-    gTheGame.unk_9B38 = 0x100;
     gTheGame.unk_90AC = 0x100;
     gTheGame.unk_90AE = 0;
     gTheGame.unk_90B4 = 0x100;
@@ -95,40 +88,25 @@ void func_800343A0_usa(void) {
     gTheGame.unk_90BD = 1;
     gTheGame.unk_90BE = 0;
     gTheGame.unk_90BF = 0;
-    if (temp_a0 == 1) {
-        gTheGame.unk_9A90[0].s.frameX = 0x224;
-        gTheGame.unk_9A90[0].s.frameY = 0x12C;
+
+    if (gTheGame.unk_9C08 == 1) {
+        gTheGame.unk_9A90[0].s.frameX = 137 << 2;
+        gTheGame.unk_9A90[0].s.frameY = 75 << 2;
     } else {
-        gTheGame.unk_9A90[0].s.frameX = 0xB8;
-        gTheGame.unk_9A90[0].s.frameY = 0x12C;
-        gTheGame.unk_9A90[1].s.frameX = 0x348;
-        gTheGame.unk_9A90[1].s.frameY = 0x12C;
+        gTheGame.unk_9A90[0].s.frameX = 46 << 2;
+        gTheGame.unk_9A90[0].s.frameY = 75 << 2;
+        gTheGame.unk_9A90[1].s.frameX = 210 << 2;
+        gTheGame.unk_9A90[1].s.frameY = 75 << 2;
     }
 
     if (gTheGame.unk_9C0C == 2) {
-        for (var_s1 = 0; var_s1 < 4; var_s1++) {
-            gTheGame.unk_9A90[var_s1].s.imageYorig = 0;
-            gTheGame.unk_9A90[var_s1].s.scaleW = 0x400;
-            gTheGame.unk_9A90[var_s1].s.scaleH = 0x400;
+        for (count = 0; count < GAME_UNK_9A90_COUNT; count++) {
+            gTheGame.unk_9A90[count].s.imageYorig = 0;
+            gTheGame.unk_9A90[count].s.scaleW = 1 << 10;
+            gTheGame.unk_9A90[count].s.scaleH = 1 << 10;
         }
     }
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/sign", func_800343A0_usa);
-#endif
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sign", func_800343D0_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sign", func_80034330_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sign", func_800344A0_ger);
-#endif
 
 void InitGameOver(void) {
     void *var_s1;

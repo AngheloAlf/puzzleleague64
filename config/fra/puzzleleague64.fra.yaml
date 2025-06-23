@@ -1249,6 +1249,16 @@ segments:
     start: 0x9160A0
     # Unknown end
 
+  - name: assets_bins/sign/sign_pause
+    type: group
+    start: 0x937CD0
+    dir: assets/sign/sign_pause
+    subsegments:
+      - { start: auto, type: rgba32, name: pause.rgba32, width: 64, height: 24 }
+      - { start: auto, type: ci8, name: popup_continue.ci8, width: 128, height: 46, palettes: [popup_palette] }
+      - { start: auto, type: ci8, name: popup_continue_restart.ci8, width: 128, height: 61, palettes: [popup_palette] }
+      - { start: auto, type: palette, name: popup_palette, size: 0x200 }
+
   - name: assets_bins/sign_gameover/sign_gameover_2d_1p
     type: databin
     start: 0x93CC50

@@ -177,14 +177,14 @@ void InitBonus(void) {
     var_s2 = 0;
     var_v1 = &gTheGame.unk_8B98[0];
     while (var_s2 < s8) {
-        var_v1[var_s2].unk_00 = 0x30;
-        var_v1[var_s2].unk_04 = &temp_v0[var_s3];
-        var_v1[var_s2].unk_08 = 0x100;
-        var_v1[var_s2].unk_0A = (s16)(sp20[var_s2] - 1);
-        var_v1[var_s2].unk_0C = 0;
-        var_v1[var_s2].unk_0E = 0;
-        var_v1[var_s2].unk_10 = -1;
-        var_v1[var_s2].unk_14 = 0;
+        var_v1[var_s2].tlut.type = 0x30;
+        var_v1[var_s2].tlut.image = &temp_v0[var_s3];
+        var_v1[var_s2].tlut.phead = 0x100;
+        var_v1[var_s2].tlut.pnum = (s16)(sp20[var_s2] - 1);
+        var_v1[var_s2].tlut.zero = 0;
+        var_v1[var_s2].tlut.sid = 0;
+        var_v1[var_s2].tlut.flag = -1;
+        var_v1[var_s2].tlut.mask = 0;
         var_s3 += sp20[var_s2] * 2;
         var_s2 += 1;
     }
@@ -705,9 +705,8 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/bonus", func_80032594_ger);
 void func_800325F8_usa(void) {
     void *heap = Pon_Image_Heap;
 
-    osInvalDCache(SEGMENT_VRAM_START(segment_0FB480), SEGMENT_VRAM_SIZE(segment_0FB480));
-    func_80001310_usa(SEGMENT_ROM_START(segment_0FB480), heap, SEGMENT_ROM_SIZE(segment_0FB480));
-    Pon_Image_Heap += SEGMENT_ROM_SIZE(segment_0FB480);
+    LOAD_DATA_SEGMENT(heap, segment_0FB480, Pon_Image_Heap);
+
     B_8018EA00_usa = (void *)((uintptr_t)heap + 0x0000);
     B_8018EA08_usa = (void *)((uintptr_t)heap + 0x1800);
     B_8018EA04_usa = (void *)((uintptr_t)heap + 0x3300);

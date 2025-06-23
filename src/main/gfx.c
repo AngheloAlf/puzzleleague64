@@ -35,6 +35,7 @@ extern STACK(B_8021BF30_usa, 0x2000);
 void InitGFX(void) {
     staticSegment = gBufferHeap;
     func_80001310_usa(SEGMENT_ROM_START(segment_0CA4A0), staticSegment, SEGMENT_ROM_SIZE(segment_0CA4A0));
+
     gInfo[0].unk_19020 = 2;
     gInfo[0].unk_19040 = gFramebuffers[0];
     gInfo[1].unk_19020 = 2;

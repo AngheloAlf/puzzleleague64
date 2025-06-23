@@ -331,6 +331,8 @@ typedef struct struct_gInfo {
     /* 0x19044 */ UNK_TYPE1 unk_19044[0x4];
 } struct_gInfo; // size = 0x19048
 
+#define GAME_UNK_9A90_COUNT 4
+
 /* Original name: Game */
 typedef struct Game {
     /* 0x0000 */ tetWell tetrisWell[GAME_BUFFER_LEN]; /* Original name: tetrisWell */
@@ -370,7 +372,7 @@ typedef struct Game {
     /* 0x9A08 */ uObjSprite unk_9A08[3];
     /* 0x9A50 */ uObjBg unk_9A50; // bkground?
     /* 0x9A78 */ UNK_TYPE1 unk_9A78[0x9A90 - 0x9A78];
-    /* 0x9A90 */ uObjBg unk_9A90[4];
+    /* 0x9A90 */ uObjBg unk_9A90[GAME_UNK_9A90_COUNT];
     /* 0x9B30 */ s32 unk_9B30;
     /* 0x9B34 */ void* unk_9B34;
     /* 0x9B38 */ s16 unk_9B38;

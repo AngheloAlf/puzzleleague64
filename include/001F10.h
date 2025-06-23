@@ -13,4 +13,7 @@ void func_80001310_usa(RomOffset segmentRom, void * dstAddr, size_t segmentSize)
     func_80001310_usa(SEGMENT_ROM_START(segment), (dst), SEGMENT_ROM_SIZE(segment)); \
     heap = (void *)((uintptr_t)heap + SEGMENT_ROM_SIZE(segment))
 
+#define LOAD_DATA_SEGMENT_DW(dst, segment, heap) \
+    do { LOAD_DATA_SEGMENT(dst, segment, heap); } while (0)
+
 #endif

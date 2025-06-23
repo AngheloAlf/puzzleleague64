@@ -5,7 +5,7 @@
 
 struct struct_gInfo_unk_00068;
 
-void func_800343A0_usa(void);
+void InitPause(void);
 void InitGameOver(void);
 // void func_8003490C_usa();
 // void LoadGameOver3D();
