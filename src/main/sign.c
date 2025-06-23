@@ -67,7 +67,7 @@ void InitPause(void) {
         gTheGame.unk_9A90[gTheGame.unk_9C08].s.imagePtr = NULL;
     }
 
-    // uObjBg?
+    // uObjBg? uObjTxtr? uObjSprite?
     gTheGame.unk_9B30 = 0x30;
     gTheGame.unk_9B34 = currSegment->popup_palette;
     gTheGame.unk_9B38 = 0x100;

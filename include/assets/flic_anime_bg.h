@@ -1,5 +1,5 @@
-#ifndef FLIC_ANIME_BG_H
-#define FLIC_ANIME_BG_H
+#ifndef ASSETS_FLIC_ANIME_BG_H
+#define ASSETS_FLIC_ANIME_BG_H
 
 #include "ultra64.h"
 

@@ -63,6 +63,7 @@ settings:
 
 vram_classes:
   # TODO: figure out these weird vrams. They probably follows some other segment
+  - { name: asset_background, fixed_vram: 0x0104C660 }
   - { name: asset_character_block, fixed_vram: 0x01070A60 }
   - { name: asset_bg_screen_A, fixed_vram: 0x01077C60 }
   - { name: asset_flic_anime_bg, fixed_vram: 0x01077C60 }
@@ -639,9 +640,160 @@ segments:
     files:
       - { path: "asm/{version}/data/unk_1276A0.o" }
 
-  - name: segment_50F3F0
+  - name: segment_background_184FF0
+    vram_class: asset_background
+    include_if_any: [[version, usa]]
     files:
-      - { path: "asm/{version}/data/segment_50F3F0.o" }
+      - { path: src/assets/background/184FF0.o }
+
+  - name: segment_background_1A93F0
+    vram_class: asset_background
+    include_if_any: [[version, usa]]
+    files:
+      - { path: src/assets/background/1A93F0.o }
+
+  - name: segment_background_1CD7F0
+    vram_class: asset_background
+    include_if_any: [[version, usa]]
+    files:
+      - { path: src/assets/background/1CD7F0.o }
+
+  - name: segment_background_1F1BF0
+    vram_class: asset_background
+    include_if_any: [[version, usa]]
+    files:
+      - { path: src/assets/background/1F1BF0.o }
+
+  - name: segment_background_215FF0
+    vram_class: asset_background
+    include_if_any: [[version, usa]]
+    files:
+      - { path: src/assets/background/215FF0.o }
+
+  - name: segment_background_23A3F0
+    vram_class: asset_background
+    include_if_any: [[version, usa]]
+    files:
+      - { path: src/assets/background/23A3F0.o }
+
+  - name: segment_background_25E7F0
+    vram_class: asset_background
+    include_if_any: [[version, usa]]
+    files:
+      - { path: src/assets/background/25E7F0.o }
+
+  - name: segment_background_282BF0
+    vram_class: asset_background
+    include_if_any: [[version, usa]]
+    files:
+      - { path: src/assets/background/282BF0.o }
+
+  - name: segment_background_2A6FF0
+    vram_class: asset_background
+    include_if_any: [[version, usa]]
+    files:
+      - { path: src/assets/background/2A6FF0.o }
+
+  - name: segment_background_2CB3F0
+    vram_class: asset_background
+    include_if_any: [[version, usa]]
+    files:
+      - { path: src/assets/background/2CB3F0.o }
+
+  - name: segment_background_2EF7F0
+    vram_class: asset_background
+    include_if_any: [[version, usa]]
+    files:
+      - { path: src/assets/background/2EF7F0.o }
+
+  - name: segment_background_313BF0
+    vram_class: asset_background
+    include_if_any: [[version, usa]]
+    files:
+      - { path: src/assets/background/313BF0.o }
+
+  - name: segment_background_337FF0
+    vram_class: asset_background
+    include_if_any: [[version, usa]]
+    files:
+      - { path: src/assets/background/337FF0.o }
+
+  - name: segment_background_35C3F0
+    vram_class: asset_background
+    include_if_any: [[version, usa]]
+    files:
+      - { path: src/assets/background/35C3F0.o }
+
+  - name: segment_background_3807F0
+    vram_class: asset_background
+    include_if_any: [[version, usa]]
+    files:
+      - { path: src/assets/background/3807F0.o }
+
+  - name: segment_background_3A4BF0
+    vram_class: asset_background
+    include_if_any: [[version, usa]]
+    files:
+      - { path: src/assets/background/3A4BF0.o }
+
+  - name: segment_background_3C8FF0
+    vram_class: asset_background
+    include_if_any: [[version, usa]]
+    files:
+      - { path: src/assets/background/3C8FF0.o }
+
+  - name: segment_background_3ED3F0
+    vram_class: asset_background
+    include_if_any: [[version, usa]]
+    files:
+      - { path: src/assets/background/3ED3F0.o }
+
+  - name: segment_background_4117F0
+    vram_class: asset_background
+    include_if_any: [[version, usa]]
+    files:
+      - { path: src/assets/background/4117F0.o }
+
+  - name: segment_background_435BF0
+    vram_class: asset_background
+    include_if_any: [[version, usa]]
+    files:
+      - { path: src/assets/background/435BF0.o }
+
+  - name: segment_background_459FF0
+    vram_class: asset_background
+    include_if_any: [[version, usa]]
+    files:
+      - { path: src/assets/background/459FF0.o }
+
+  - name: segment_background_47E3F0
+    vram_class: asset_background
+    include_if_any: [[version, usa]]
+    files:
+      - { path: src/assets/background/47E3F0.o }
+
+  - name: segment_background_4A27F0
+    vram_class: asset_background
+    include_if_any: [[version, usa]]
+    files:
+      - { path: src/assets/background/4A27F0.o }
+
+  - name: segment_background_4C6BF0
+    vram_class: asset_background
+    include_if_any: [[version, usa]]
+    files:
+      - { path: src/assets/background/4C6BF0.o }
+
+  - name: segment_background_4EAFF0
+    vram_class: asset_background
+    include_if_any: [[version, usa]]
+    files:
+      - { path: src/assets/background/4EAFF0.o }
+
+  - name: segment_background_50F3F0
+    vram_class: asset_background
+    files:
+      - { path: src/assets/background/50F3F0.o }
 
   - name: segment_character_block_5337F0
     vram_class: asset_character_block

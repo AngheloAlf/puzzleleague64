@@ -9,6 +9,8 @@
 #include "main_functions.h"
 #include "main_variables.h"
 
+#include "001F10.h"
+
 #include "assets_variables.h"
 
 #if VERSION_USA
@@ -268,7 +270,305 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/bkground", func_800468B0_ger);
 #endif
 
 #if VERSION_USA
+#if 0
+extern s8 B_8021BA78_usa;
+extern UNK_TYPE1 D_104C660;
+extern UNK_TYPE1 D_1070A60;
+extern UNK_TYPE1 D_184FF0;
+extern UNK_TYPE1 D_1A93F0;
+extern UNK_TYPE1 D_1CD7F0;
+extern UNK_TYPE1 D_1F1BF0;
+extern UNK_TYPE1 D_215FF0;
+extern UNK_TYPE1 D_23A3F0;
+extern UNK_TYPE1 D_25E7F0;
+extern UNK_TYPE1 D_282BF0;
+extern UNK_TYPE1 D_2A6FF0;
+extern UNK_TYPE1 D_2CB3F0;
+extern UNK_TYPE1 D_2EF7F0;
+extern UNK_TYPE1 D_313BF0;
+extern UNK_TYPE1 D_337FF0;
+extern UNK_TYPE1 D_35C3F0;
+extern UNK_TYPE1 D_3807F0;
+extern UNK_TYPE1 D_3A4BF0;
+extern UNK_TYPE1 D_3C8FF0;
+extern UNK_TYPE1 D_3ED3F0;
+extern UNK_TYPE1 D_4117F0;
+extern UNK_TYPE1 D_435BF0;
+extern UNK_TYPE1 D_459FF0;
+extern UNK_TYPE1 D_47E3F0;
+extern UNK_TYPE1 D_4A27F0;
+extern UNK_TYPE1 D_4C6BF0;
+extern UNK_TYPE1 D_4EAFF0;
+extern UNK_TYPE1 D_50F3F0;
+extern UNK_TYPE1 D_5337F0;
+
+void func_80047E64_usa(s32 who) {
+    UNK_TYPE1 *var_a0;
+    UNK_TYPE1 *var_a0_2;
+    UNK_TYPE1 *var_s0;
+    UNK_TYPE1 *var_s0_2;
+    s8 var_v0;
+    u32 temp_s0;
+    u32 temp_s0_2;
+    void *temp_s2;
+
+    temp_s2 = Pon_Image_Heap;
+    switch (gSelection) {                           /* switch 1 */
+        case 0x8C:                                  /* switch 1 */
+            osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+            var_a0 = &D_184FF0;
+            var_s0 = &D_1A93F0;
+block_57:
+            temp_s0 = var_s0 - var_a0;
+            func_80001310_usa((u32) var_a0, temp_s2, temp_s0);
+            Pon_Image_Heap += temp_s0;
+            break;
+        case 0xBE:                                  /* switch 1 */
+            osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+            var_a0 = &D_1A93F0;
+            var_s0 = &D_1CD7F0;
+            goto block_57;
+        case 0xAA:                                  /* switch 1 */
+            switch (who) {                         /* switch 2 */
+                case 0x1:                           /* switch 2 */
+                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                    var_a0 = &D_1CD7F0;
+                    var_s0 = &D_1F1BF0;
+                    goto block_57;
+                case 0x2:                           /* switch 2 */
+                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                    var_a0 = &D_1F1BF0;
+                    var_s0 = &D_215FF0;
+                    goto block_57;
+                case 0x3:                           /* switch 2 */
+                    if (gTheGame.tetrisWell[0].unk_4420 == 5) {
+                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                        var_a0 = &D_2A6FF0;
+                        var_s0 = &D_2CB3F0;
+                    } else {
+                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                        var_a0 = &D_215FF0;
+                        var_s0 = &D_23A3F0;
+                    }
+                    goto block_57;
+                case 0x4:                           /* switch 2 */
+                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                    var_a0 = &D_23A3F0;
+                    var_s0 = &D_25E7F0;
+                    goto block_57;
+                case 0x5:                           /* switch 2 */
+                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                    var_a0 = &D_25E7F0;
+                    var_s0 = &D_282BF0;
+                    goto block_57;
+                case 0x6:                           /* switch 2 */
+                    if (gTheGame.tetrisWell[0].unk_4420 == 5) {
+                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                        var_a0 = &D_2CB3F0;
+                        var_s0 = &D_2EF7F0;
+                    } else {
+                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                        var_a0 = &D_282BF0;
+                        var_s0 = &D_2A6FF0;
+                    }
+                    goto block_57;
+            }
+            break;
+        case 0x78:                                  /* switch 1 */
+        case 0x82:                                  /* switch 1 */
+            if (who != 2) {
+                if (who < 3) {
+                    var_v0 = who - 1;
+                    if (who != 1) {
+
+                    } else {
+                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                        var_a0_2 = &D_2EF7F0;
+                        var_s0_2 = &D_313BF0;
+                        goto block_25;
+                    }
+                } else {
+                    var_v0 = who - 1;
+                    if (who != 3) {
+
+                    } else {
+                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                        var_a0_2 = &D_337FF0;
+                        var_s0_2 = &D_35C3F0;
+                        goto block_25;
+                    }
+                }
+            } else {
+                osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                var_a0_2 = &D_313BF0;
+                var_s0_2 = &D_337FF0;
+block_25:
+                temp_s0_2 = var_s0_2 - var_a0_2;
+                func_80001310_usa((u32) var_a0_2, temp_s2, temp_s0_2);
+                Pon_Image_Heap += temp_s0_2;
+                var_v0 = who - 1;
+            }
+            B_8021BA78_usa = var_v0;
+            break;
+        case 0x96:                                  /* switch 1 */
+            if (gTheGame.unk_9C2C[0][0] != 0x10) {
+                switch (who) {                     /* switch 3 */
+                    case 0x0:                       /* switch 3 */
+                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                        var_a0 = &D_35C3F0;
+                        var_s0 = &D_3807F0;
+                        goto block_57;
+                    case 0x1:                       /* switch 3 */
+                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                        var_a0 = &D_3807F0;
+                        var_s0 = &D_3A4BF0;
+                        goto block_57;
+                    case 0x2:                       /* switch 3 */
+                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                        var_a0 = &D_3A4BF0;
+                        var_s0 = &D_3C8FF0;
+                        goto block_57;
+                    case 0x3:                       /* switch 3 */
+                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                        var_a0 = &D_3C8FF0;
+                        var_s0 = &D_3ED3F0;
+                        goto block_57;
+                    case 0x4:                       /* switch 3 */
+                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                        var_a0 = &D_3ED3F0;
+                        var_s0 = &D_4117F0;
+                        goto block_57;
+                    case 0x5:                       /* switch 3 */
+                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                        var_a0 = &D_4117F0;
+                        var_s0 = &D_435BF0;
+                        goto block_57;
+                    case 0x6:                       /* switch 3 */
+                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                        var_a0 = &D_435BF0;
+                        var_s0 = &D_459FF0;
+                        goto block_57;
+                    case 0x7:                       /* switch 3 */
+                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                        var_a0 = &D_459FF0;
+                        var_s0 = &D_47E3F0;
+                        goto block_57;
+                    case 0x8:                       /* switch 3 */
+                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                        var_a0 = &D_47E3F0;
+                        var_s0 = &D_4A27F0;
+                        goto block_57;
+                    case 0x9:                       /* switch 3 */
+                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                        var_a0 = &D_4A27F0;
+                        var_s0 = &D_4C6BF0;
+                        goto block_57;
+                    case 0xA:                       /* switch 3 */
+                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                        var_a0 = &D_4C6BF0;
+                        var_s0 = &D_4EAFF0;
+                        goto block_57;
+                    case 0xB:                       /* switch 3 */
+                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                        var_a0 = &D_4EAFF0;
+                        var_s0 = &D_50F3F0;
+                        goto block_57;
+                }
+            } else {
+            default:                                /* switch 4 */
+                osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                var_a0 = &D_50F3F0;
+                var_s0 = &D_5337F0;
+                goto block_57;
+            }
+            break;
+        case 0xA0:                                  /* switch 1 */
+        case 0xB4:                                  /* switch 1 */
+        case 0xC8:                                  /* switch 1 */
+            switch (who) {                         /* switch 4 */
+                case 0x0:                           /* switch 4 */
+                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                    var_a0 = &D_35C3F0;
+                    var_s0 = &D_3807F0;
+                    break;
+                case 0x1:                           /* switch 4 */
+                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                    var_a0 = &D_3807F0;
+                    var_s0 = &D_3A4BF0;
+                    break;
+                case 0x2:                           /* switch 4 */
+                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                    var_a0 = &D_3A4BF0;
+                    var_s0 = &D_3C8FF0;
+                    break;
+                case 0x3:                           /* switch 4 */
+                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                    var_a0 = &D_3C8FF0;
+                    var_s0 = &D_3ED3F0;
+                    break;
+                case 0x4:                           /* switch 4 */
+                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                    var_a0 = &D_3ED3F0;
+                    var_s0 = &D_4117F0;
+                    break;
+                case 0x5:                           /* switch 4 */
+                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                    var_a0 = &D_4117F0;
+                    var_s0 = &D_435BF0;
+                    break;
+                case 0x6:                           /* switch 4 */
+                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                    var_a0 = &D_435BF0;
+                    var_s0 = &D_459FF0;
+                    break;
+                case 0x7:                           /* switch 4 */
+                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                    var_a0 = &D_459FF0;
+                    var_s0 = &D_47E3F0;
+                    break;
+                case 0x8:                           /* switch 4 */
+                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                    var_a0 = &D_47E3F0;
+                    var_s0 = &D_4A27F0;
+                    break;
+                case 0x9:                           /* switch 4 */
+                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                    var_a0 = &D_4A27F0;
+                    var_s0 = &D_4C6BF0;
+                    break;
+                case 0xA:                           /* switch 4 */
+                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                    var_a0 = &D_4C6BF0;
+                    var_s0 = &D_4EAFF0;
+                    break;
+                case 0xB:                           /* switch 4 */
+                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
+                    var_a0 = &D_4EAFF0;
+                    var_s0 = &D_50F3F0;
+                    break;
+            }
+            goto block_57;
+    }
+
+    gTheGame.unk_9A50.b.imageX = 0;
+    gTheGame.unk_9A50.b.imageW = 0x500;
+    gTheGame.unk_9A50.b.frameW = 0x500;
+    gTheGame.unk_9A50.b.frameY = 0x1C;
+    gTheGame.unk_9A50.b.imageLoad = 0xFFF4;
+    gTheGame.unk_9A50.b.frameX = 0;
+    gTheGame.unk_9A50.b.imageY = 0;
+    gTheGame.unk_9A50.b.imageH = 0x3A0;
+    gTheGame.unk_9A50.b.frameH = 0x3A0;
+    gTheGame.unk_9A50.b.imagePtr = (u64 *) temp_s2;
+    gTheGame.unk_9A50.b.imageFmt = 0;
+    gTheGame.unk_9A50.b.imageSiz = 2;
+    gTheGame.unk_9A50.b.imagePal = 0;
+    gTheGame.unk_9A50.b.imageFlip = 0;
+    guS2DInitBg(&gTheGame.unk_9A50);
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/bkground", func_80047E64_usa);
+#endif
 #endif
 
 #if VERSION_EUR

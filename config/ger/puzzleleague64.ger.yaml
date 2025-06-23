@@ -843,9 +843,12 @@ segments:
     start: 0x1276A0
     # Unknown end
 
-  - type: databin
-    name: segment_50F3F0
+  - type: group
+    name: segment_background_50F3F0
     start: 0x5033E0
+    dir: assets/background
+    subsegments:
+      - { start: auto, type: rgba16, name: background_50F3F0.rgba16, width: 320, height: 232 }
 
   - type: databin
     name: assets_bins/character_block/5337F0

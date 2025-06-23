@@ -8,7 +8,7 @@ rom:0x031D74 symbol:segment_101A80_ROM_START reloc:MIPS_LO16
 rom:0x031D7C symbol:segment_101A80_ROM_END reloc:MIPS_HI16
 rom:0x031D80 symbol:segment_101A80_ROM_END reloc:MIPS_LO16
 
-rom:0x0322E4 symbol:segment_50F3F0_ROM_START reloc:MIPS_HI16
-rom:0x0322E8 symbol:segment_50F3F0_ROM_START reloc:MIPS_LO16
-rom:0x0322EC symbol:segment_50F3F0_ROM_END reloc:MIPS_HI16
-rom:0x0322F0 symbol:segment_50F3F0_ROM_END reloc:MIPS_LO16
+rom:0x0322E4 symbol:segment_background_50F3F0_ROM_START reloc:MIPS_HI16
+rom:0x0322E8 symbol:segment_background_50F3F0_ROM_START reloc:MIPS_LO16
+rom:0x0322EC symbol:segment_background_50F3F0_ROM_END reloc:MIPS_HI16
+rom:0x0322F0 symbol:segment_background_50F3F0_ROM_END reloc:MIPS_LO16

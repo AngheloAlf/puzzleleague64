@@ -267,8 +267,9 @@ void InitBonus(void) {
             case ENUM_GAME_UNK_0000_UNK_4424_16:
                 temp_s4 = Pon_Image_Heap;
                 osInvalDCache((void *)D_104C660, (u32)D_1070A60 - (u32)D_104C660);
-                func_80001310_usa(SEGMENT_ROM_START(segment_50F3F0), temp_s4, SEGMENT_ROM_SIZE(segment_50F3F0));
-                Pon_Image_Heap = (uintptr_t)Pon_Image_Heap + SEGMENT_ROM_SIZE(segment_50F3F0);
+                func_80001310_usa(SEGMENT_ROM_START(segment_background_50F3F0), temp_s4,
+                                  SEGMENT_ROM_SIZE(segment_background_50F3F0));
+                Pon_Image_Heap = (uintptr_t)Pon_Image_Heap + SEGMENT_ROM_SIZE(segment_background_50F3F0);
                 bcopy(&gTheGame.unk_9A50, &gTheGame.unk_8C88[6], sizeof(uObjBg));
                 gTheGame.unk_8C88[6].b.imagePtr = temp_s4;
                 guS2DInitBg(&gTheGame.unk_8C88[6]);

@@ -1,5 +1,5 @@
-#ifndef SIGN_PAUSE_H
-#define SIGN_PAUSE_H
+#ifndef ASSETS_SIGN_PAUSE_H
+#define ASSETS_SIGN_PAUSE_H
 
 #include "ultra64.h"
 

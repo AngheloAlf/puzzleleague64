@@ -1,5 +1,5 @@
-#ifndef SIGN_GAMEOVER_H
-#define SIGN_GAMEOVER_H
+#ifndef ASSETS_SIGN_GAMEOVER_H
+#define ASSETS_SIGN_GAMEOVER_H
 
 #include "ultra64.h"
 
