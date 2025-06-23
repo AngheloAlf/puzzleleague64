@@ -407,7 +407,18 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIRowPack);
 #endif
 #endif
 
-#if VERSION_USA
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/ai", AIRowPack);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/ai", AIRowPack);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/ai", AIRowPack);
+#endif
+
 INLINE s32 AIVertMove(ai_t *brain, s32 row) {
     s32 temp = row - brain->cursor_y;
     s32 count;
@@ -428,9 +439,7 @@ INLINE s32 AIVertMove(ai_t *brain, s32 row) {
 
     return -1;
 }
-#endif
 
-#if VERSION_USA
 s32 AIHoriMove(ai_t *brain, s32 column) {
     s32 temp;
     s32 count;
@@ -458,9 +467,7 @@ s32 AIHoriMove(ai_t *brain, s32 column) {
 
     return -1;
 }
-#endif
 
-#if VERSION_USA
 INLINE s32 AIHoriMoveBlock(ai_t *brain, s32 from, s32 to) {
     s32 var_v1;
     s32 var_v1_2;
@@ -503,7 +510,6 @@ INLINE s32 AIHoriMoveBlock(ai_t *brain, s32 from, s32 to) {
 
     return -1;
 }
-#endif
 
 #if VERSION_USA
 #if 0
@@ -672,6 +678,18 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIHoriMoveCheckCheck);
 #endif
 #endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/ai", AIHoriMoveCheckCheck);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/ai", AIHoriMoveCheckCheck);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/ai", AIHoriMoveCheckCheck);
+#endif
+
 #if VERSION_USA
 #if 0
 s32 func_80076F54_usa(ai_t * brain, s32 arg1, s32 arg2) {
@@ -696,7 +714,18 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_80076F54_usa);
 #endif
 #endif
 
-#if VERSION_USA
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_80076F54_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_80076F54_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_80076F54_usa);
+#endif
+
 s32 AIMoveAcross(tetWell *well, s32 row, s32 from, s32 to) {
     nbool flag = (row != 0) ? ntrue : nfalse;
 
@@ -727,9 +756,7 @@ s32 AIMoveAcross(tetWell *well, s32 row, s32 from, s32 to) {
 
     return -1;
 }
-#endif
 
-#if VERSION_USA
 s32 AIShortestD(tetWell *well, ai_t *brain, s32 from, s32 to) {
     s32 temp_t4 = brain->cursor_y;
     BlockType type = well->block[temp_t4][from].type;
@@ -773,11 +800,9 @@ s32 AIShortestD(tetWell *well, ai_t *brain, s32 from, s32 to) {
         return var_t2;
     }
 }
-#endif
 
 // 12 => BLOCK_LEN_ROWS ?
-#if VERSION_USA
-INLINE void AISortRows(s32 row, s32 total, s32 array[12]) {
+INLINE void AISortRows(s32 row, s32 total, s32 array[]) {
     s32 index[12];
     s32 i;
     s32 j;
@@ -816,7 +841,6 @@ INLINE void AISortRows(s32 row, s32 total, s32 array[12]) {
         array[i] = index[i];
     }
 }
-#endif
 
 #if VERSION_USA
 #ifdef NON_MATCHING
@@ -845,7 +869,18 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIDistance);
 #endif
 #endif
 
-#if VERSION_USA
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/ai", AIDistance);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/ai", AIDistance);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/ai", AIDistance);
+#endif
+
 s32 AILowerRow(tetWell *well, ai_t *brain, s32 row, s32 col) {
     s32 temp_t4;
     s32 var_t0;
@@ -904,9 +939,7 @@ s32 AILowerRow(tetWell *well, ai_t *brain, s32 row, s32 col) {
 
     return 0;
 }
-#endif
 
-#if VERSION_USA
 void AIVisionCheck(tetWell *well, ai_t *brain) {
     s32 i;
 
@@ -921,9 +954,7 @@ void AIVisionCheck(tetWell *well, ai_t *brain) {
 
     AIBoundaryCheck(well, brain);
 }
-#endif
 
-#if VERSION_USA
 void AIBoundaryCheck(tetWell *well, ai_t *brain) {
     s32 *total;
     s32 temp_a2;
@@ -949,7 +980,7 @@ void AIBoundaryCheck(tetWell *well, ai_t *brain) {
         var_a0 = brain->unk_028;
     }
 
-    if ((var_a0 - brain->unk_02C) < 2) {
+    if (var_a0 - brain->unk_02C < 2) {
         return;
     }
 
@@ -991,9 +1022,7 @@ void AIBoundaryCheck(tetWell *well, ai_t *brain) {
         }
     }
 }
-#endif
 
-#if VERSION_USA
 s32 AIPossibleRow(tetWell *well, ai_t *brain, s32 row) {
     s32 var_a2;
     s32 var_t0;
@@ -1048,14 +1077,37 @@ end:
     }
     return -1;
 }
-#endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIPossibleCol);
 #endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/ai", AIPossibleCol);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/ai", AIPossibleCol);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/ai", AIPossibleCol);
+#endif
+
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIComboCheck);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/ai", AIComboCheck);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/ai", AIComboCheck);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/ai", AIComboCheck);
 #endif
 
 #if VERSION_USA
@@ -1104,7 +1156,18 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AICombo3a);
 #endif
 #endif
 
-#if VERSION_USA
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/ai", AICombo3a);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/ai", AICombo3a);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/ai", AICombo3a);
+#endif
+
 s32 AICombo3b(ai_t *brain) {
     s32 array[12];
     s32 temp_t1;
@@ -1142,10 +1205,21 @@ s32 AICombo3b(ai_t *brain) {
 
     return 0;
 }
-#endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AICombo45);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/ai", AICombo45);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/ai", AICombo45);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/ai", AICombo45);
 #endif
 
 #if VERSION_USA
@@ -1182,6 +1256,18 @@ s32 AIComboX(ai_t *brain) {
 #else
 INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIComboX);
 #endif
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/ai", AIComboX);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/ai", AIComboX);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/ai", AIComboX);
 #endif
 
 #if VERSION_USA
@@ -1269,7 +1355,18 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIFlashCheck);
 #endif
 #endif
 
-#if VERSION_USA
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/ai", AIFlashCheck);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/ai", AIFlashCheck);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/ai", AIFlashCheck);
+#endif
+
 s32 AIScrollCheck(tetWell *well, ai_t *brain, s8 array[]) {
     s32 row;
     s32 col;
@@ -1309,13 +1406,23 @@ s32 AIScrollCheck(tetWell *well, ai_t *brain, s8 array[]) {
     }
     return var_t6;
 }
-#endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIVolumeCheck);
 #endif
 
-#if VERSION_USA
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/ai", AIVolumeCheck);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/ai", AIVolumeCheck);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/ai", AIVolumeCheck);
+#endif
+
 void AIChainFrequency(tetWell *well, ai_t *brain, s32 num) {
     if ((brain->unk_008 > 0) && (well->unk_43A8 != 0)) {
         brain->unk_008 = 0;
@@ -1328,26 +1435,85 @@ void AIChainFrequency(tetWell *well, ai_t *brain, s32 num) {
         }
     }
 }
-#endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIChainVert1);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/ai", AIChainVert1);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/ai", AIChainVert1);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/ai", AIChainVert1);
 #endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIChainVert2);
 #endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/ai", AIChainVert2);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/ai", AIChainVert2);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/ai", AIChainVert2);
+#endif
+
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/ai", func_8007ACAC_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_8007ACAC_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_8007ACAC_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_8007ACAC_usa);
 #endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIChainVert4);
 #endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/ai", AIChainVert4);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/ai", AIChainVert4);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/ai", AIChainVert4);
+#endif
+
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIChainVert5);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/ai", AIChainVert5);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/ai", AIChainVert5);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/ai", AIChainVert5);
 #endif
 
 #if VERSION_USA
@@ -1531,12 +1697,48 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIChainHori1);
 #endif
 #endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/ai", AIChainHori1);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/ai", AIChainHori1);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/ai", AIChainHori1);
+#endif
+
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIChainHori2);
 #endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/ai", AIChainHori2);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/ai", AIChainHori2);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/ai", AIChainHori2);
+#endif
+
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIChainHori3);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/ai", AIChainHori3);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/ai", AIChainHori3);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/ai", AIChainHori3);
 #endif
 
 #if VERSION_USA
@@ -1551,7 +1753,42 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIChainHori5);
 INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIClearGarbage);
 #endif
 
-#if VERSION_USA
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/ai", AIChainHori4);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/ai", AIChainHori5);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/ai", AIClearGarbage);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/ai", AIChainHori4);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/ai", AIChainHori5);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/ai", AIClearGarbage);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/ai", AIChainHori4);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/ai", AIChainHori5);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/ai", AIClearGarbage);
+#endif
+
 s32 AIClearPosition(tetWell *well, ai_t *brain, s32 row, s32 col) {
     s32 check;
 
@@ -1585,9 +1822,7 @@ s32 AIClearPosition(tetWell *well, ai_t *brain, s32 row, s32 col) {
 
     return 0;
 }
-#endif
 
-#if VERSION_USA
 s32 AIChainPack(tetWell *well, cursor_t *cursor UNUSED, ai_t *brain) {
     s32 row;
     s32 col;
@@ -1694,9 +1929,7 @@ s32 AIChainPack(tetWell *well, cursor_t *cursor UNUSED, ai_t *brain) {
 
     return 0;
 }
-#endif
 
-#if VERSION_USA
 s32 AIChainGarbage1(tetWell *well, cursor_t *cursor UNUSED, ai_t *brain) {
     s32 array[2];
     s32 sp4C = 0;
@@ -1859,9 +2092,7 @@ s32 AIChainGarbage1(tetWell *well, cursor_t *cursor UNUSED, ai_t *brain) {
 
     return 0;
 }
-#endif
 
-#if VERSION_USA
 s32 AIChainGarbage2(tetWell *well, ai_t *brain, BlockType below, s32 col) {
     BlockType type = well->block[brain->unk_024 + 1][col].type;
     s32 row;
@@ -1899,9 +2130,7 @@ s32 AIChainGarbage2(tetWell *well, ai_t *brain, BlockType below, s32 col) {
 
     return 0;
 }
-#endif
 
-#if VERSION_USA
 s32 AIStupidMove(tetWell *well, ai_t *brain) {
     s32 row;
     s32 highest;
@@ -1939,487 +2168,6 @@ s32 AIStupidMove(tetWell *well, ai_t *brain) {
     AIAddCommand(brain, 0xA, 0, 0);
     return -1;
 }
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_80075E08_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_80075F50_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_80075FF0_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_800760BC_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_800761D0_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_800772E4_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_80077314_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_800774A0_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_80077610_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_800776C8_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_8007770C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_80077A00_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_80077A8C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_80077CB0_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_80077E90_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_800788EC_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_80078CEC_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_80078F08_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_80079108_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_80079424_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_8007961C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_80079858_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_8007992C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_8007A0F4_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_8007A17C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_8007A958_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_8007B03C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_8007B384_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_8007C2D0_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_8007D1B0_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_8007D814_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_8007E51C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_8007F028_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_8007F93C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_80080244_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_80080894_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_80080AB4_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_80080E80_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_80081634_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", func_8008185C_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_80074538_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_80074680_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_80074720_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_800747EC_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_80074900_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_80075A14_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_80075A44_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_80075BD0_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_80075D40_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_80075DF8_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_80075E3C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_80076130_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_800761BC_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_800763E0_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_800765C0_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_8007701C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_8007741C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_80077638_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_80077838_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_80077B54_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_80077D4C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_80077F88_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_8007805C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_80078824_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_800788AC_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_80079088_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_8007976C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_80079AB4_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_8007AA00_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_8007B8E0_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_8007BF44_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_8007CC4C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_8007D758_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_8007E06C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_8007E974_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_8007EFC4_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_8007F1E4_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_8007F5B0_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_8007FD64_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", func_8007FF8C_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_800746E8_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_80074830_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_800748D0_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_8007499C_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_80074AB0_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_80075BC4_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_80075BF4_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_80075D80_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_80075EF0_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_80075FA8_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_80075FEC_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_800762E0_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_8007636C_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_80076590_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_80076770_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_800771CC_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_800775CC_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_800777E8_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_800779E8_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_80077D04_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_80077EFC_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_80078138_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_8007820C_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_800789D4_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_80078A5C_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_80079238_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_8007991C_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_80079C64_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_8007ABB0_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_8007BA90_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_8007C0F4_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_8007CDFC_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_8007D908_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_8007E21C_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_8007EB24_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_8007F174_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_8007F394_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_8007F760_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_8007FF14_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", func_8008013C_ger);
-#endif
 
 #if VERSION_USA
 #if 0
