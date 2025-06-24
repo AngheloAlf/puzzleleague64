@@ -11,6 +11,7 @@
 
 #include "001F10.h"
 
+#include "assets/background.h"
 #include "assets_variables.h"
 
 #if VERSION_USA
@@ -78,7 +79,7 @@ void func_80047340_usa(void) {
             var_s4 = Pon_Image_Heap;
 
             switch (gSelection) { /* switch 1; irregular */
-                case 0x96:        /* switch 1 */
+                case 0x96:        
                     osInvalDCache(&D_10499E0_C, &D_104C220_C - &D_10499E0_C);
                     func_80001310_usa((u32)&D_1827B0_C, var_s4, (u32)(&D_184FF0_C - &D_1827B0_C));
                     Pon_Image_Heap = Pon_Image_Heap + (u32)(&D_184FF0_C - &D_1827B0_C);
@@ -87,7 +88,7 @@ void func_80047340_usa(void) {
                     var_s1 = 0x99;
                     break;
 
-                case 0xC8: /* switch 1 */
+                case 0xC8: 
                     osInvalDCache(&D_10499E0_D, &D_104CE60_D - &D_10499E0_D);
                     func_80001310_usa((u32)&D_17F330_D, var_s4, (u32)(&D_1827B0_D - &D_17F330_D));
                     Pon_Image_Heap = Pon_Image_Heap + (u32)(&D_1827B0_D - &D_17F330_D);
@@ -96,8 +97,8 @@ void func_80047340_usa(void) {
                     var_s1 = 0xCA;
                     break;
 
-                case 0xA0: /* switch 1 */
-                case 0xB4: /* switch 1 */
+                case 0xA0: 
+                case 0xB4: 
                     osInvalDCache(&D_10499E0_E, &D_104C660_E - &D_10499E0_E);
                     func_80001310_usa((u32)&D_17C6B0_E, var_s4, (u32)(&D_17F330_E - &D_17C6B0_E));
                     Pon_Image_Heap = Pon_Image_Heap + (u32)(&D_17F330_E - &D_17C6B0_E);
@@ -269,319 +270,207 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/bkground", func_80046740_fra);
 INCLUDE_ASM("asm/ger/nonmatchings/main/bkground", func_800468B0_ger);
 #endif
 
-#if VERSION_USA
-#if 0
-extern s8 B_8021BA78_usa;
-extern UNK_TYPE1 D_104C660;
-extern UNK_TYPE1 D_1070A60;
-extern UNK_TYPE1 D_184FF0;
-extern UNK_TYPE1 D_1A93F0;
-extern UNK_TYPE1 D_1CD7F0;
-extern UNK_TYPE1 D_1F1BF0;
-extern UNK_TYPE1 D_215FF0;
-extern UNK_TYPE1 D_23A3F0;
-extern UNK_TYPE1 D_25E7F0;
-extern UNK_TYPE1 D_282BF0;
-extern UNK_TYPE1 D_2A6FF0;
-extern UNK_TYPE1 D_2CB3F0;
-extern UNK_TYPE1 D_2EF7F0;
-extern UNK_TYPE1 D_313BF0;
-extern UNK_TYPE1 D_337FF0;
-extern UNK_TYPE1 D_35C3F0;
-extern UNK_TYPE1 D_3807F0;
-extern UNK_TYPE1 D_3A4BF0;
-extern UNK_TYPE1 D_3C8FF0;
-extern UNK_TYPE1 D_3ED3F0;
-extern UNK_TYPE1 D_4117F0;
-extern UNK_TYPE1 D_435BF0;
-extern UNK_TYPE1 D_459FF0;
-extern UNK_TYPE1 D_47E3F0;
-extern UNK_TYPE1 D_4A27F0;
-extern UNK_TYPE1 D_4C6BF0;
-extern UNK_TYPE1 D_4EAFF0;
-extern UNK_TYPE1 D_50F3F0;
-extern UNK_TYPE1 D_5337F0;
+// TODO: enum for `who`?
+void InitBackground(s32 who) {
+    void *currSegment = Pon_Image_Heap;
 
-void func_80047E64_usa(s32 who) {
-    UNK_TYPE1 *var_a0;
-    UNK_TYPE1 *var_a0_2;
-    UNK_TYPE1 *var_s0;
-    UNK_TYPE1 *var_s0_2;
-    s8 var_v0;
-    u32 temp_s0;
-    u32 temp_s0_2;
-    void *temp_s2;
-
-    temp_s2 = Pon_Image_Heap;
-    switch (gSelection) {                           /* switch 1 */
-        case 0x8C:                                  /* switch 1 */
-            osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-            var_a0 = &D_184FF0;
-            var_s0 = &D_1A93F0;
-block_57:
-            temp_s0 = var_s0 - var_a0;
-            func_80001310_usa((u32) var_a0, temp_s2, temp_s0);
-            Pon_Image_Heap += temp_s0;
+    switch (gSelection) {
+        case 0x8C:
+            LOAD_DATA_SEGMENT(currSegment, segment_background_184FF0, Pon_Image_Heap);
             break;
-        case 0xBE:                                  /* switch 1 */
-            osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-            var_a0 = &D_1A93F0;
-            var_s0 = &D_1CD7F0;
-            goto block_57;
-        case 0xAA:                                  /* switch 1 */
-            switch (who) {                         /* switch 2 */
-                case 0x1:                           /* switch 2 */
-                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                    var_a0 = &D_1CD7F0;
-                    var_s0 = &D_1F1BF0;
-                    goto block_57;
-                case 0x2:                           /* switch 2 */
-                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                    var_a0 = &D_1F1BF0;
-                    var_s0 = &D_215FF0;
-                    goto block_57;
-                case 0x3:                           /* switch 2 */
+
+        case 0xBE:
+            LOAD_DATA_SEGMENT(currSegment, segment_background_1A93F0, Pon_Image_Heap);
+            break;
+
+        case 0xAA:
+            switch (who) {
+                case 0x1:
+                    LOAD_DATA_SEGMENT(currSegment, segment_background_1CD7F0, Pon_Image_Heap);
+                    break;
+
+                case 0x2:
+                    LOAD_DATA_SEGMENT(currSegment, segment_background_1F1BF0, Pon_Image_Heap);
+                    break;
+
+                case 0x3:
                     if (gTheGame.tetrisWell[0].unk_4420 == 5) {
-                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                        var_a0 = &D_2A6FF0;
-                        var_s0 = &D_2CB3F0;
+                        LOAD_DATA_SEGMENT(currSegment, segment_background_2A6FF0, Pon_Image_Heap);
                     } else {
-                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                        var_a0 = &D_215FF0;
-                        var_s0 = &D_23A3F0;
+                        LOAD_DATA_SEGMENT(currSegment, segment_background_215FF0, Pon_Image_Heap);
                     }
-                    goto block_57;
-                case 0x4:                           /* switch 2 */
-                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                    var_a0 = &D_23A3F0;
-                    var_s0 = &D_25E7F0;
-                    goto block_57;
-                case 0x5:                           /* switch 2 */
-                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                    var_a0 = &D_25E7F0;
-                    var_s0 = &D_282BF0;
-                    goto block_57;
-                case 0x6:                           /* switch 2 */
+                    break;
+
+                case 0x4:
+                    LOAD_DATA_SEGMENT(currSegment, segment_background_23A3F0, Pon_Image_Heap);
+                    break;
+
+                case 0x5:
+                    LOAD_DATA_SEGMENT(currSegment, segment_background_25E7F0, Pon_Image_Heap);
+                    break;
+
+                case 0x6:
                     if (gTheGame.tetrisWell[0].unk_4420 == 5) {
-                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                        var_a0 = &D_2CB3F0;
-                        var_s0 = &D_2EF7F0;
+                        LOAD_DATA_SEGMENT(currSegment, segment_background_2CB3F0, Pon_Image_Heap);
                     } else {
-                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                        var_a0 = &D_282BF0;
-                        var_s0 = &D_2A6FF0;
+                        LOAD_DATA_SEGMENT(currSegment, segment_background_282BF0, Pon_Image_Heap);
                     }
-                    goto block_57;
+                    break;
             }
             break;
-        case 0x78:                                  /* switch 1 */
-        case 0x82:                                  /* switch 1 */
-            if (who != 2) {
-                if (who < 3) {
-                    var_v0 = who - 1;
-                    if (who != 1) {
 
-                    } else {
-                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                        var_a0_2 = &D_2EF7F0;
-                        var_s0_2 = &D_313BF0;
-                        goto block_25;
-                    }
-                } else {
-                    var_v0 = who - 1;
-                    if (who != 3) {
+        case 0x78:
+        case 0x82:
+            switch (who) {
+                case 1:
+                    LOAD_DATA_SEGMENT(currSegment, segment_background_2EF7F0, Pon_Image_Heap);
+                    break;
 
-                    } else {
-                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                        var_a0_2 = &D_337FF0;
-                        var_s0_2 = &D_35C3F0;
-                        goto block_25;
-                    }
-                }
-            } else {
-                osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                var_a0_2 = &D_313BF0;
-                var_s0_2 = &D_337FF0;
-block_25:
-                temp_s0_2 = var_s0_2 - var_a0_2;
-                func_80001310_usa((u32) var_a0_2, temp_s2, temp_s0_2);
-                Pon_Image_Heap += temp_s0_2;
-                var_v0 = who - 1;
+                case 2:
+                    LOAD_DATA_SEGMENT(currSegment, segment_background_313BF0, Pon_Image_Heap);
+                    break;
+
+                case 3:
+                    LOAD_DATA_SEGMENT(currSegment, segment_background_337FF0, Pon_Image_Heap);
+                    break;
             }
-            B_8021BA78_usa = var_v0;
+
+            B_8021BA78_usa = who - 1;
             break;
-        case 0x96:                                  /* switch 1 */
+
+        case 0x96:
             if (gTheGame.unk_9C2C[0][0] != 0x10) {
-                switch (who) {                     /* switch 3 */
-                    case 0x0:                       /* switch 3 */
-                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                        var_a0 = &D_35C3F0;
-                        var_s0 = &D_3807F0;
-                        goto block_57;
-                    case 0x1:                       /* switch 3 */
-                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                        var_a0 = &D_3807F0;
-                        var_s0 = &D_3A4BF0;
-                        goto block_57;
-                    case 0x2:                       /* switch 3 */
-                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                        var_a0 = &D_3A4BF0;
-                        var_s0 = &D_3C8FF0;
-                        goto block_57;
-                    case 0x3:                       /* switch 3 */
-                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                        var_a0 = &D_3C8FF0;
-                        var_s0 = &D_3ED3F0;
-                        goto block_57;
-                    case 0x4:                       /* switch 3 */
-                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                        var_a0 = &D_3ED3F0;
-                        var_s0 = &D_4117F0;
-                        goto block_57;
-                    case 0x5:                       /* switch 3 */
-                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                        var_a0 = &D_4117F0;
-                        var_s0 = &D_435BF0;
-                        goto block_57;
-                    case 0x6:                       /* switch 3 */
-                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                        var_a0 = &D_435BF0;
-                        var_s0 = &D_459FF0;
-                        goto block_57;
-                    case 0x7:                       /* switch 3 */
-                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                        var_a0 = &D_459FF0;
-                        var_s0 = &D_47E3F0;
-                        goto block_57;
-                    case 0x8:                       /* switch 3 */
-                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                        var_a0 = &D_47E3F0;
-                        var_s0 = &D_4A27F0;
-                        goto block_57;
-                    case 0x9:                       /* switch 3 */
-                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                        var_a0 = &D_4A27F0;
-                        var_s0 = &D_4C6BF0;
-                        goto block_57;
-                    case 0xA:                       /* switch 3 */
-                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                        var_a0 = &D_4C6BF0;
-                        var_s0 = &D_4EAFF0;
-                        goto block_57;
-                    case 0xB:                       /* switch 3 */
-                        osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                        var_a0 = &D_4EAFF0;
-                        var_s0 = &D_50F3F0;
-                        goto block_57;
+                switch (who) {
+                    case 0x0:
+                        LOAD_DATA_SEGMENT(currSegment, segment_background_35C3F0, Pon_Image_Heap);
+                        break;
+
+                    case 0x1:
+                        LOAD_DATA_SEGMENT(currSegment, segment_background_3807F0, Pon_Image_Heap);
+                        break;
+
+                    case 0x2:
+                        LOAD_DATA_SEGMENT(currSegment, segment_background_3A4BF0, Pon_Image_Heap);
+                        break;
+
+                    case 0x3:
+                        LOAD_DATA_SEGMENT(currSegment, segment_background_3C8FF0, Pon_Image_Heap);
+                        break;
+
+                    case 0x4:
+                        LOAD_DATA_SEGMENT(currSegment, segment_background_3ED3F0, Pon_Image_Heap);
+                        break;
+
+                    case 0x5:
+                        LOAD_DATA_SEGMENT(currSegment, segment_background_4117F0, Pon_Image_Heap);
+                        break;
+
+                    case 0x6:
+                        LOAD_DATA_SEGMENT(currSegment, segment_background_435BF0, Pon_Image_Heap);
+                        break;
+
+                    case 0x7:
+                        LOAD_DATA_SEGMENT(currSegment, segment_background_459FF0, Pon_Image_Heap);
+                        break;
+
+                    case 0x8:
+                        LOAD_DATA_SEGMENT(currSegment, segment_background_47E3F0, Pon_Image_Heap);
+                        break;
+
+                    case 0x9:
+                        LOAD_DATA_SEGMENT(currSegment, segment_background_4A27F0, Pon_Image_Heap);
+                        break;
+
+                    case 0xA:
+                        LOAD_DATA_SEGMENT(currSegment, segment_background_4C6BF0, Pon_Image_Heap);
+                        break;
+
+                    case 0xB:
+                        LOAD_DATA_SEGMENT(currSegment, segment_background_4EAFF0, Pon_Image_Heap);
+                        break;
                 }
             } else {
-            default:                                /* switch 4 */
-                osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                var_a0 = &D_50F3F0;
-                var_s0 = &D_5337F0;
-                goto block_57;
+                LOAD_DATA_SEGMENT(currSegment, segment_background_50F3F0, Pon_Image_Heap);
             }
             break;
-        case 0xA0:                                  /* switch 1 */
-        case 0xB4:                                  /* switch 1 */
-        case 0xC8:                                  /* switch 1 */
-            switch (who) {                         /* switch 4 */
-                case 0x0:                           /* switch 4 */
-                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                    var_a0 = &D_35C3F0;
-                    var_s0 = &D_3807F0;
+
+        case 0xA0:
+        case 0xB4:
+        case 0xC8:
+            switch (who) {
+                case 0x0:
+                    LOAD_DATA_SEGMENT(currSegment, segment_background_35C3F0, Pon_Image_Heap);
                     break;
-                case 0x1:                           /* switch 4 */
-                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                    var_a0 = &D_3807F0;
-                    var_s0 = &D_3A4BF0;
+
+                case 0x1:
+                    LOAD_DATA_SEGMENT(currSegment, segment_background_3807F0, Pon_Image_Heap);
                     break;
-                case 0x2:                           /* switch 4 */
-                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                    var_a0 = &D_3A4BF0;
-                    var_s0 = &D_3C8FF0;
+
+                case 0x2:
+                    LOAD_DATA_SEGMENT(currSegment, segment_background_3A4BF0, Pon_Image_Heap);
                     break;
-                case 0x3:                           /* switch 4 */
-                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                    var_a0 = &D_3C8FF0;
-                    var_s0 = &D_3ED3F0;
+
+                case 0x3:
+                    LOAD_DATA_SEGMENT(currSegment, segment_background_3C8FF0, Pon_Image_Heap);
                     break;
-                case 0x4:                           /* switch 4 */
-                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                    var_a0 = &D_3ED3F0;
-                    var_s0 = &D_4117F0;
+
+                case 0x4:
+                    LOAD_DATA_SEGMENT(currSegment, segment_background_3ED3F0, Pon_Image_Heap);
                     break;
-                case 0x5:                           /* switch 4 */
-                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                    var_a0 = &D_4117F0;
-                    var_s0 = &D_435BF0;
+
+                case 0x5:
+                    LOAD_DATA_SEGMENT(currSegment, segment_background_4117F0, Pon_Image_Heap);
                     break;
-                case 0x6:                           /* switch 4 */
-                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                    var_a0 = &D_435BF0;
-                    var_s0 = &D_459FF0;
+
+                case 0x6:
+                    LOAD_DATA_SEGMENT(currSegment, segment_background_435BF0, Pon_Image_Heap);
                     break;
-                case 0x7:                           /* switch 4 */
-                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                    var_a0 = &D_459FF0;
-                    var_s0 = &D_47E3F0;
+
+                case 0x7:
+                    LOAD_DATA_SEGMENT(currSegment, segment_background_459FF0, Pon_Image_Heap);
                     break;
-                case 0x8:                           /* switch 4 */
-                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                    var_a0 = &D_47E3F0;
-                    var_s0 = &D_4A27F0;
+
+                case 0x8:
+                    LOAD_DATA_SEGMENT(currSegment, segment_background_47E3F0, Pon_Image_Heap);
                     break;
-                case 0x9:                           /* switch 4 */
-                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                    var_a0 = &D_4A27F0;
-                    var_s0 = &D_4C6BF0;
+
+                case 0x9:
+                    LOAD_DATA_SEGMENT(currSegment, segment_background_4A27F0, Pon_Image_Heap);
                     break;
-                case 0xA:                           /* switch 4 */
-                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                    var_a0 = &D_4C6BF0;
-                    var_s0 = &D_4EAFF0;
+
+                case 0xA:
+                    LOAD_DATA_SEGMENT(currSegment, segment_background_4C6BF0, Pon_Image_Heap);
                     break;
-                case 0xB:                           /* switch 4 */
-                    osInvalDCache(&D_104C660, &D_1070A60 - &D_104C660);
-                    var_a0 = &D_4EAFF0;
-                    var_s0 = &D_50F3F0;
+
+                case 0xB:
+                    LOAD_DATA_SEGMENT(currSegment, segment_background_4EAFF0, Pon_Image_Heap);
+                    break;
+
+                default:
+                    LOAD_DATA_SEGMENT(currSegment, segment_background_50F3F0, Pon_Image_Heap);
                     break;
             }
-            goto block_57;
+            break;
     }
 
     gTheGame.unk_9A50.b.imageX = 0;
-    gTheGame.unk_9A50.b.imageW = 0x500;
-    gTheGame.unk_9A50.b.frameW = 0x500;
-    gTheGame.unk_9A50.b.frameY = 0x1C;
-    gTheGame.unk_9A50.b.imageLoad = 0xFFF4;
     gTheGame.unk_9A50.b.frameX = 0;
     gTheGame.unk_9A50.b.imageY = 0;
-    gTheGame.unk_9A50.b.imageH = 0x3A0;
-    gTheGame.unk_9A50.b.frameH = 0x3A0;
-    gTheGame.unk_9A50.b.imagePtr = (u64 *) temp_s2;
-    gTheGame.unk_9A50.b.imageFmt = 0;
-    gTheGame.unk_9A50.b.imageSiz = 2;
+    gTheGame.unk_9A50.b.imageW = BACKGROUND_WIDTH << 2;
+    gTheGame.unk_9A50.b.imageH = BACKGROUND_HEIGHT << 2;
+    gTheGame.unk_9A50.b.frameW = BACKGROUND_WIDTH << 2;
+    gTheGame.unk_9A50.b.frameY = 7 << 2;
+    gTheGame.unk_9A50.b.frameH = BACKGROUND_HEIGHT << 2;
+
+    gTheGame.unk_9A50.b.imagePtr = (void *)currSegment;
+    gTheGame.unk_9A50.b.imageLoad = G_BGLT_LOADTILE;
+    gTheGame.unk_9A50.b.imageFmt = G_IM_FMT_RGBA;
+    gTheGame.unk_9A50.b.imageSiz = G_IM_SIZ_16b;
     gTheGame.unk_9A50.b.imagePal = 0;
     gTheGame.unk_9A50.b.imageFlip = 0;
+
     guS2DInitBg(&gTheGame.unk_9A50);
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/bkground", func_80047E64_usa);
-#endif
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/bkground", func_80048104_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/bkground", func_80046884_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/bkground", func_800469F4_ger);
-#endif
 
 void Draw2DBackground(void) {
     gDPPipeSync(glistp++);

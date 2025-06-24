@@ -1397,7 +1397,7 @@ extern TexturePtr B_8021BA60_usa[2];
 // extern UNK_TYPE B_8021BA68_usa;
 // extern UNK_TYPE B_8021BA70_usa;
 // extern UNK_TYPE B_8021BA74_usa;
-// extern UNK_TYPE B_8021BA78_usa;
+extern s8 B_8021BA78_usa;
 // extern UNK_TYPE B_8021BA7C_usa;
 
 extern s32 B_8021BA98_usa;

@@ -844,6 +844,181 @@ segments:
     # Unknown end
 
   - type: group
+    name: segment_background_184FF0
+    start: 0x178FE0
+    dir: assets/background
+    subsegments:
+      - { start: auto, type: rgba16, name: background_184FF0.rgba16, width: 320, height: 232 }
+
+  - type: group
+    name: segment_background_1A93F0
+    start: 0x19D3E0
+    dir: assets/background
+    subsegments:
+      - { start: auto, type: rgba16, name: background_1A93F0.rgba16, width: 320, height: 232 }
+
+  - type: group
+    name: segment_background_1CD7F0
+    start: 0x1C17E0
+    dir: assets/background
+    subsegments:
+      - { start: auto, type: rgba16, name: background_1CD7F0.rgba16, width: 320, height: 232 }
+
+  - type: group
+    name: segment_background_1F1BF0
+    start: 0x1E5BE0
+    dir: assets/background
+    subsegments:
+      - { start: auto, type: rgba16, name: background_1F1BF0.rgba16, width: 320, height: 232 }
+
+  - type: group
+    name: segment_background_215FF0
+    start: 0x209FE0
+    dir: assets/background
+    subsegments:
+      - { start: auto, type: rgba16, name: background_215FF0.rgba16, width: 320, height: 232 }
+
+  - type: group
+    name: segment_background_23A3F0
+    start: 0x22E3E0
+    dir: assets/background
+    subsegments:
+      - { start: auto, type: rgba16, name: background_23A3F0.rgba16, width: 320, height: 232 }
+
+  - type: group
+    name: segment_background_25E7F0
+    start: 0x2527E0
+    dir: assets/background
+    subsegments:
+      - { start: auto, type: rgba16, name: background_25E7F0.rgba16, width: 320, height: 232 }
+
+  - type: group
+    name: segment_background_282BF0
+    start: 0x276BE0
+    dir: assets/background
+    subsegments:
+      - { start: auto, type: rgba16, name: background_282BF0.rgba16, width: 320, height: 232 }
+
+  - type: group
+    name: segment_background_2A6FF0
+    start: 0x29AFE0
+    dir: assets/background
+    subsegments:
+      - { start: auto, type: rgba16, name: background_2A6FF0.rgba16, width: 320, height: 232 }
+
+  - type: group
+    name: segment_background_2CB3F0
+    start: 0x2BF3E0
+    dir: assets/background
+    subsegments:
+      - { start: auto, type: rgba16, name: background_2CB3F0.rgba16, width: 320, height: 232 }
+
+  - type: group
+    name: segment_background_2EF7F0
+    start: 0x2E37E0
+    dir: assets/background
+    subsegments:
+      - { start: auto, type: rgba16, name: background_2EF7F0.rgba16, width: 320, height: 232 }
+
+  - type: group
+    name: segment_background_313BF0
+    start: 0x307BE0
+    dir: assets/background
+    subsegments:
+      - { start: auto, type: rgba16, name: background_313BF0.rgba16, width: 320, height: 232 }
+
+  - type: group
+    name: segment_background_337FF0
+    start: 0x32BFE0
+    dir: assets/background
+    subsegments:
+      - { start: auto, type: rgba16, name: background_337FF0.rgba16, width: 320, height: 232 }
+
+  - type: group
+    name: segment_background_35C3F0
+    start: 0x3503E0
+    dir: assets/background
+    subsegments:
+      - { start: auto, type: rgba16, name: background_35C3F0.rgba16, width: 320, height: 232 }
+
+  - type: group
+    name: segment_background_3807F0
+    start: 0x3747E0
+    dir: assets/background
+    subsegments:
+      - { start: auto, type: rgba16, name: background_3807F0.rgba16, width: 320, height: 232 }
+
+  - type: group
+    name: segment_background_3A4BF0
+    start: 0x398BE0
+    dir: assets/background
+    subsegments:
+      - { start: auto, type: rgba16, name: background_3A4BF0.rgba16, width: 320, height: 232 }
+
+  - type: group
+    name: segment_background_3C8FF0
+    start: 0x3BCFE0
+    dir: assets/background
+    subsegments:
+      - { start: auto, type: rgba16, name: background_3C8FF0.rgba16, width: 320, height: 232 }
+
+  - type: group
+    name: segment_background_3ED3F0
+    start: 0x3E13E0
+    dir: assets/background
+    subsegments:
+      - { start: auto, type: rgba16, name: background_3ED3F0.rgba16, width: 320, height: 232 }
+
+  - type: group
+    name: segment_background_4117F0
+    start: 0x4057E0
+    dir: assets/background
+    subsegments:
+      - { start: auto, type: rgba16, name: background_4117F0.rgba16, width: 320, height: 232 }
+
+  - type: group
+    name: segment_background_435BF0
+    start: 0x429BE0
+    dir: assets/background
+    subsegments:
+      - { start: auto, type: rgba16, name: background_435BF0.rgba16, width: 320, height: 232 }
+
+  - type: group
+    name: segment_background_459FF0
+    start: 0x44DFE0
+    dir: assets/background
+    subsegments:
+      - { start: auto, type: rgba16, name: background_459FF0.rgba16, width: 320, height: 232 }
+
+  - type: group
+    name: segment_background_47E3F0
+    start: 0x4723E0
+    dir: assets/background
+    subsegments:
+      - { start: auto, type: rgba16, name: background_47E3F0.rgba16, width: 320, height: 232 }
+
+  - type: group
+    name: segment_background_4A27F0
+    start: 0x4967E0
+    dir: assets/background
+    subsegments:
+      - { start: auto, type: rgba16, name: background_4A27F0.rgba16, width: 320, height: 232 }
+
+  - type: group
+    name: segment_background_4C6BF0
+    start: 0x4BABE0
+    dir: assets/background
+    subsegments:
+      - { start: auto, type: rgba16, name: background_4C6BF0.rgba16, width: 320, height: 232 }
+
+  - type: group
+    name: segment_background_4EAFF0
+    start: 0x4DEFE0
+    dir: assets/background
+    subsegments:
+      - { start: auto, type: rgba16, name: background_4EAFF0.rgba16, width: 320, height: 232 }
+
+  - type: group
     name: segment_background_50F3F0
     start: 0x5033E0
     dir: assets/background

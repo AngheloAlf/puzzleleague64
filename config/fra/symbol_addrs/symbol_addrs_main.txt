@@ -507,7 +507,7 @@ func_80045D60_fra = 0x80045D60; // type:func
 Draw2DFrame = 0x800462B8; // type:func
 func_80046420_fra = 0x80046420; // type:func
 func_80046740_fra = 0x80046740; // type:func
-func_80046884_fra = 0x80046884; // type:func
+InitBackground = 0x80046884; // type:func
 Draw2DBackground = 0x800471BC; // type:func
 func_800472CC_fra = 0x800472CC; // type:func
 func_80048D94_usa = 0x800477B4; // type:func
@@ -2850,7 +2850,7 @@ B_801F9184_fra = 0x801F9184; //
 B_801F9188_fra = 0x801F9188; //
 B_801F9190_fra = 0x801F9190; //
 B_801F9194_fra = 0x801F9194; //
-B_801F9198_fra = 0x801F9198; // type:s8
+B_8021BA78_usa = 0x801F9198; // type:s8
 B_8021BA7C_usa = 0x801F919C; //
 
 B_801F91B8_fra = 0x801F91B8; //
