@@ -670,7 +670,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/ai", AIHoriMoveCheckCheck);
 INCLUDE_ASM("asm/ger/nonmatchings/main/ai", AIHoriMoveCheckCheck);
 #endif
 
-s32 AISearchClose(ai_t *brain, s32 pos1, s32 pos2) {
+INLINE s32 AISearchClose(ai_t *brain, s32 pos1, s32 pos2) {
     s32 left;
     s32 right;
     pos2--;
@@ -751,7 +751,7 @@ s32 AIShortestD(tetWell *well, ai_t *brain, s32 from, s32 to) {
         return var_t2;
     }
 
-    if ((to - var_t2) > (var_t5 - to)) {
+    if (to - var_t2 > var_t5 - to) {
         return var_t5;
     } else {
         return var_t2;
@@ -1078,13 +1078,12 @@ void AIComboCheck(tetWell *well, ai_t *brain) {
         temp_s3 = AIrowCheck[var_t3_2][temp_s2 - 1];
         temp_a2 = brain->cursor_y;
         var_a1 = AIrowCheck[var_t3_2][0];
+        // Should this use inlined `AIDistance` instead?
         if (temp_a2 >= temp_s3) {
             temp_v1_2 = AIcolCheck[var_t3_2][temp_s2 - 1];
             var_a0 = brain->cursor_x;
             var_a3 = temp_a2 - temp_s3;
-            if (var_a3 < 0) {
-                var_a3 = -var_a3;
-            }
+            var_a3 = abs(var_a3);
             var_a1 = 0;
             if (temp_v1_2 < var_a0) {
                 var_a1 = var_a0 - temp_v1_2;
@@ -1096,9 +1095,7 @@ void AIComboCheck(tetWell *well, ai_t *brain) {
             var_a1 = temp_a2 - var_a1;
             temp_v1_2 = AIcolCheck[var_t3_2][0];
             var_a0 = brain->cursor_x;
-            if (var_a1 < 0) {
-                var_a1 = -var_a1;
-            }
+            var_a1 = abs(var_a1);
             var_a3 = 0;
             if (temp_v1_2 < var_a0) {
                 var_a3 = var_a0 - temp_v1_2;
@@ -1111,9 +1108,7 @@ void AIComboCheck(tetWell *well, ai_t *brain) {
                 if (AIrowCheck[var_t3_2][var_s0] == temp_a2) {
                     temp_v1_2 = brain->cursor_x;
                     var_a0 = brain->cursor_y - temp_a2;
-                    if (var_a0 < 0) {
-                        var_a0 = -var_a0;
-                    }
+                    var_a0 = abs(var_a0);
                     var_a1 = 0;
                     if (temp_a2 < temp_v1_2) {
                         var_a1 = temp_v1_2 - temp_a2;
@@ -1191,7 +1186,7 @@ s32 AICombo3a(ai_t *brain) {
 
     AISortRows(brain->cursor_y, 3, sp0);
 
-    temp_t1 = AIcolCheck[t6][sp0[2]];
+    temp_t1 = AIcolCheck[t6][sp0[3-1]];
     for (var_a2 = 0; var_a2 < 3; var_a2++) {
         temp_a0 = sp0[var_a2];
         if (temp_t1 != AIcolCheck[t6][temp_a0]) {
@@ -1324,26 +1319,28 @@ s32 AICombo45(ai_t *brain, s32 combo) {
     return 0;
 }
 
-#if VERSION_USA
-#ifdef NON_MATCHING
 s32 AIComboX(ai_t *brain) {
-    s32 sp0[12];
+    s32 array[12];
     s32 temp_t1;
     s32 var_a1;
-    s32 t7;
+    s32 t7 = AI_CHECK_COUNT - 1;
 
-    if (AItotCheck[6] == 3) {
-        t7 = 6;
+#if 0
+    int row; // r1+0x8
+    int col; // r28
+    int temp; // r27
+#endif
 
+    if (AItotCheck[t7] == 3) {
         for (var_a1 = 0; var_a1 < 3; var_a1++) {
-            sp0[var_a1] = AIrowCheck[6][var_a1];
+            array[var_a1] = AIrowCheck[t7][var_a1];
         }
 
-        AISortRows(brain->cursor_y, 3, sp0);
+        AISortRows(brain->cursor_y, 3, array);
 
-        temp_t1 = AIcolCheck[t7][sp0[2]];
+        temp_t1 = AIcolCheck[t7][array[3 - 1]];
         for (var_a1 = 0; var_a1 < 3; var_a1++) {
-            s32 temp3 = sp0[var_a1];
+            s32 temp3 = array[var_a1];
             if (temp_t1 != AIcolCheck[t7][temp3]) {
                 AIAddCommand(brain, 1, AIrowCheck[t7][temp3], 0);
                 AIAddCommand(brain, 4, AIcolCheck[t7][temp3], temp_t1);
@@ -1355,22 +1352,6 @@ s32 AIComboX(ai_t *brain) {
 
     return 0;
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIComboX);
-#endif
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", AIComboX);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", AIComboX);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", AIComboX);
-#endif
 
 #if VERSION_USA
 #if 0
@@ -1379,21 +1360,31 @@ s32 AIFlashCheck(tetWell *well, ai_t *brain) {
     s32 var_a3;
     s32 var_t1;
     s32 var_t3;
+    s32 t4;
+    s32 t5;
+
+#if 0
+    int temp1; // r31
+    int temp2; // r30
+    int row; // r6
+    int col; // r29
+#endif
 
     var_t3 = 0;
     var_t1 = 0;
+    t4 = 7;
+    t5 = 6;
 loop_2:
     if (var_t3 < 8) {
-
         for (var_a3 = var_t3; var_a3 < 8; var_a3++) {
             for (var_a2 = var_t1; var_a2 < 6; var_a2++) {
-                if (well->block[var_t3][var_a2].state == 7) {
+                if (well->block[var_t3][var_a2].state == t4) {
                     break;
                 }
             }
 
             var_t1 = 0;
-            if (var_a2 != 6) {
+            if (var_a2 != t5) {
                 break;
             }
         }
@@ -1402,21 +1393,22 @@ loop_2:
             goto block_25;
         }
 
-        if (well->block[var_a3 + 1][var_a2].state == 7) {
+        if (well->block[var_a3 + 1][var_a2].state == t4) {
             brain->unk_040 = var_a3;
             brain->unk_038 = 0xB;
             brain->unk_03C = var_a2;
             brain->unk_044 = var_a3 + 1;
 
             for (var_a3 = var_a3 + 2; var_a3 < 0xC; var_a3++) {
-                if (well->block[var_a3][var_a2].state != 7) {
+                if (well->block[var_a3][var_a2].state != t4) {
                     break;
                 }
                 brain->unk_044 = var_a3;
             }
         } else {
-            if (well->block[var_a3][var_a2 + 1].state != 7) {
-                goto block_25;
+            if (well->block[var_a3][var_a2 + 1].state != t4) {
+                brain->unk_038 = 0;
+                return 0;
             }
 
             brain->unk_040 = var_a2;
@@ -1426,14 +1418,14 @@ loop_2:
             brain->unk_044 = var_a2 + 1;
 
             for (var_a2 = var_a2 + 2; var_a2 < 6; var_a2++) {
-                if (well->block[var_a3][var_a2].state != 7) {
+                if (well->block[var_a3][var_a2].state != t4) {
                     break;
                 }
                 brain->unk_044 = var_a2;
             }
         }
 
-        if ((brain->unk_044 - brain->unk_040) >= 2) {
+        if (brain->unk_044 - brain->unk_040 >= 2) {
             return -1;
         }
 
@@ -1469,7 +1461,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/ai", AIFlashCheck);
 INCLUDE_ASM("asm/ger/nonmatchings/main/ai", AIFlashCheck);
 #endif
 
-s32 AIScrollCheck(tetWell *well, ai_t *brain, s8 array[]) {
+INLINE s32 AIScrollCheck(tetWell *well, ai_t *brain, s8 array[]) {
     s32 row;
     s32 col;
     s32 var_t6;
@@ -1510,7 +1502,164 @@ s32 AIScrollCheck(tetWell *well, ai_t *brain, s8 array[]) {
 }
 
 #if VERSION_USA
+#ifdef NON_MATCHING
+// regalloc inside AISearchClose?
+s32 AIVolumeCheck(tetWell *well, cursor_t *cursor, ai_t *brain, s32 exit) {
+    s8 sp10[6];
+
+    s32 var_a2;
+
+    s32 var_s1;
+    s32 var_s2;
+    s32 var_s4;
+    s32 var_s5;
+
+    s32 var_t0_2;
+    s32 var_t5;
+
+#if 0
+    signed char column[6]; // r1+0x18
+    int row; // r28
+    int col; // r1+0x8
+    int highest; // r4
+    int count; // r1+0x8
+    int left; // r30
+    int right; // r27
+    int total; // r1+0x8
+#endif
+
+    var_t5 = AIScrollCheck(well, brain, sp10);
+
+    var_t0_2 = sp10[0];
+    for (var_s1 = 1; var_s1 < 6; var_s1++) {
+        if (var_t0_2 < sp10[var_s1]) {
+            var_t0_2 = sp10[var_s1];
+        }
+    }
+
+    if (brain->unk_014 & 2) {
+        var_s2 = var_t0_2;
+        if (brain->unk_024 == -1) {
+            if (cursor->unk_00 == 3) {
+                var_s2 = 0xC;
+            }
+
+            if ((var_t5 < 0x2A) && (var_s2 < 9)) {
+                var_s2 = var_s2 + 2;
+                var_t5 = var_t5 + 9;
+                AIAddCommand(brain, 0xC, 0, 0);
+
+                if (var_t5 < 0x2A) {
+                    for (; var_s2 < 9; var_s2 += 3) {
+                        AIAddCommand(brain, 0xC, 0, 0);
+                    }
+                }
+
+                AIAddCommand(brain, 1, AnimationRandom(4) + 2, 0);
+                AIAddCommand(brain, 0xA, 0, 0);
+
+                return -1;
+            }
+        } else {
+            for (var_a2 = 0xC - 1; var_a2 > brain->unk_024; var_a2--) {
+                if ((well->block[var_a2][2].type != 0) || (well->block[var_a2][3].type != 0)) {
+                    break;
+                }
+            }
+
+            if (cursor->unk_00 == 3) {
+                var_a2 = 0xC;
+            }
+
+            if ((var_s2 < 9) && (var_a2 < 8)) {
+                AIAddCommand(brain, 0xC, 0, 0);
+                AIAddCommand(brain, 1, brain->cursor_y - 1, 0);
+                AIAddCommand(brain, 0xA, 0, 0);
+                return -1;
+            }
+        }
+    }
+
+    if (exit != 0) {
+        return 0;
+    }
+
+    var_s4 = -1;
+
+    for (var_s1 = 0; var_s1 < 6; var_s1++) {
+        if (sp10[var_s1] == var_t0_2) {
+            var_s4 = var_s1;
+        } else if (var_s4 != -1) {
+            break;
+        }
+    }
+
+    var_s5 = -1;
+    for (var_s1 = 6 - 1; var_s1 >= 0; var_s1--) {
+        if (sp10[var_s1] == var_t0_2) {
+            var_s5 = var_s1;
+        } else if (var_s5 != -1) {
+            break;
+        }
+    }
+
+    var_s2 = var_t0_2 - 1;
+
+    var_s1 = -1;
+    var_s2 = var_s2 - (var_s2 == brain->unk_024);
+    if (AnimationRandom(0x73) % 2 == 0) {
+        if (well->block[var_s2][brain->cursor_x].type != 0) {
+            var_s1 = brain->cursor_x;
+        } else if (well->block[var_s2][brain->cursor_x + 1].type != 0) {
+            var_s1 = brain->cursor_x + 1;
+        }
+    } else {
+        if (well->block[var_s2][brain->cursor_x + 1].type != 0) {
+            var_s1 = brain->cursor_x + 1;
+        } else if (well->block[var_s2][brain->cursor_x].type != 0) {
+            var_s1 = brain->cursor_x;
+        }
+    }
+
+    if (var_s1 == -1) {
+        if (var_s4 == var_s5) {
+            var_s1 = var_s4;
+        } else if (AISearchClose(brain, var_s4, var_s5)) {
+            var_s1 = var_s4;
+        } else {
+            var_s1 = var_s5;
+        }
+    }
+
+    for (var_a2 = var_s2; var_a2 > 1; var_a2--) {
+        if (well->block[var_a2][var_s1].type != well->block[var_a2 - 1][var_s1].type) {
+            if ((var_s1 != 0) && (well->block[var_a2 - 1][var_s1 - 1].type == 0)) {
+                AIAddCommand(brain, 1, var_a2 - 1, 0);
+                AIAddCommand(brain, 3, var_s1, var_s1 - 1);
+                return -1;
+            }
+
+            if ((var_s1 != 5) && (well->block[var_a2 - 1][var_s1 + 1].type == 0)) {
+                AIAddCommand(brain, 1, var_a2 - 1, 0);
+                AIAddCommand(brain, 3, var_s1, var_s1 + 1);
+                return -1;
+            }
+
+            break;
+        }
+    }
+
+    if ((well->block[var_s2][var_s1 - 1].type != 9) && (well->block[var_s2][var_s1 + 1].type != 9)) {
+        if ((var_s2 != 0) && (AILowerRow(well, brain, var_s2, var_s1) != 0)) {
+            return -1;
+        }
+    }
+    return 0;
+}
+#else
+s32 AIVolumeCheck(struct tetWell *well, struct cursor_t *cursor, struct ai_t *brain, s32 exit);
 INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AIVolumeCheck);
+#endif
 #endif
 
 #if VERSION_EUR
