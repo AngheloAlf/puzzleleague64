@@ -101,7 +101,7 @@ s32 AIVertMove(struct ai_t *brain, s32 row);
 // void AIHoriMove();
 // void AIHoriMoveBlock();
 // void AIHoriMoveCheckCheck();
-// void func_80076F54_usa();
+// void AISearchClose();
 // void AIMoveAcross();
 // void AIShortestD();
 // void AISortRows();
