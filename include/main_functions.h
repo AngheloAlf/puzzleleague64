@@ -34,30 +34,4 @@ void func_800449C4_usa(Gfx **gfxP);
 void func_80046648_usa(s32 arg0);
 void func_80046C2C_usa(void **heapP, s32 arg1);
 
-// void func_8005E510_usa();
-// void func_8005E740_usa();
-// void func_8005E7A4_usa();
-// void Draw3DFrontTetrisWell();
-// void Draw3DBackTetrisWell();
-// void func_8005F984_usa();
-// void func_8005FA6C_usa();
-// void func_8005FB10_usa();
-// void func_8005FD38_usa();
-// void Draw3DTetrisNewBlock();
-// void Draw3DCursor();
-// void Draw3DIcon();
-// void func_80060DB4_usa();
-// void func_800615D8_usa();
-// void func_800616A4_usa();
-// void Draw3DExplosion();
-// void func_80062B20_usa();
-// void func_80062DF0_usa();
-// void func_80063110_usa();
-// void func_80063F8C_usa();
-// void func_800643A4_usa();
-// void func_80064728_usa();
-// void func_80064AAC_usa();
-// void func_80064E44_usa();
-void Draw3DTetris(struct_gInfo_unk_00068 *arg0);
-
 #endif

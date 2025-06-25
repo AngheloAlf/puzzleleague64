@@ -337,7 +337,7 @@ extern UNK_TYPE D_0101F378_usa;
 
 #if VERSION_USA
 #if 0
-void func_80053140_usa(struct_gInfo_unk_00068 *dynamicp) {
+void Draw3DMiscStuff(struct_gInfo_unk_00068 *dynamicp) {
     UNK_TYPE *var_v0;
     UNK_TYPE *var_v0_2;
     Gfx *temp_a2;
@@ -733,23 +733,23 @@ block_59:
     }
 }
 #else
-INCLUDE_ASM("asm/usa/nonmatchings/main/other", func_80053140_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/other", Draw3DMiscStuff);
 #endif
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/other", func_800533E0_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/other", Draw3DMiscStuff);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/other", func_80051B50_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/other", Draw3DMiscStuff);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/other", func_80051CD0_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/other", Draw3DMiscStuff);
 #endif
 
-void func_80053E64_usa(void) {
+void func_80053E64_usa(struct_gInfo_unk_00068 *dynamicp UNUSED) {
     if (gTheGame.unk_9C08 != 1) {
         gDPPipeSync(glistp++);
         gDPSetTexturePersp(glistp++, G_TP_NONE);

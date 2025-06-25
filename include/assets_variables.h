@@ -20,7 +20,7 @@ extern uObjTxtr D_010003F0_usa;
 // extern UNK_TYPE D_01000500_usa;
 // extern UNK_TYPE D_01000504_usa;
 extern uObjTxtr D_01000608_usa;
-// extern UNK_TYPE D_01000620_usa;
+extern u16 colorTable[];
 extern uObjTxtr colorLUT;
 // extern UNK_TYPE D_01000838_usa;
 // extern UNK_TYPE D_01000904_usa;

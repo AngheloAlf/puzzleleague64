@@ -53,13 +53,14 @@ uObjTxtr D_01000608_usa = {
     /* mask  */ 0x0,
 };
 
-u16 D_01000620_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01000620_usa.rgba16.inc"
+// TODO find CI textures
+u16 colorTable[] ALIGNED(8) = {
+#include "assets/segment_0CA4A0/colorTable.rgba16.inc"
 };
 
 uObjTxtr colorLUT = {
     /* type  */ G_OBJLT_TLUT,
-    /* image */ (u64 *)D_01000620_usa,
+    /* image */ (u64 *)colorTable,
     /* phead */ GS_PAL_HEAD(0),
     /* pnum  */ GS_PAL_NUM(256),
     /* zero  */ 0,

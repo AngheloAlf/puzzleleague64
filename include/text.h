@@ -21,6 +21,6 @@ void SetText(s32 x, s32 y, const char *str, s32 type);
 void UpdateText(void);
 void Draw2DTemplate(struct struct_gInfo_unk_00068 *dynamicp);
 void Draw2DText(struct struct_gInfo_unk_00068 *dynamicp);
-// void func_8004DF64_usa();
+void Draw3DText(struct struct_gInfo_unk_00068 *dynamicp);
 
 #endif

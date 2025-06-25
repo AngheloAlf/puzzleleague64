@@ -1270,5 +1270,5 @@ void Draw2DText(struct_gInfo_unk_00068 *dynamicp) {
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/text", func_8004DF64_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/text", Draw3DText);
 #endif

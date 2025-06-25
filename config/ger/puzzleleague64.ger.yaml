@@ -197,7 +197,7 @@ segments:
       - [0x05A080, c, main/attack]
       - [0x05CDF0, c, main/explode]
       - [0x05D0C0, c, main/init3d]
-      - [0x05DCD0, asm, main/05DCD0]
+      - [0x05DCD0, c, main/draw3d]
       - [0x065200, c, main/combo3d]
       - [0x065F30, c, main/animate3d]
       - [0x066B70, c, main/update3d]
@@ -551,7 +551,7 @@ segments:
       - [0x0BCE40, rodata, main/0BCE40]
       - [0x0BD070, .rodata, main/attack]
       - [0x0BD270, .rodata, main/init3d]
-      - [0x0BD310, rodata, main/0BD310]
+      - [0x0BD310, .rodata, main/draw3d]
       - [0x0BD470, .rodata, main/update3d]
       - [0x0BD4D0, .rodata, main/attack3d]
       - [0x0BD548, .rodata, main/init2d]
@@ -671,10 +671,10 @@ segments:
         - [0x0BE880]
         - [0x0BE898, palette, assets/segment_0CA4A0/D_01000408_usa]
         - [0x0BEA98]
-        - [0x0BEAB0, rgba16, assets/segment_0CA4A0/D_01000620_usa.rgba16, 16, 16]
+        - [0x0BEAB0, rgba16, assets/segment_0CA4A0/colorTable.rgba16, 16, 16]
         - [0x0BECB0]
-        - { start: 0x0BECC8, type: i8, name: assets/segment_0CA4A0/D_01000838_usa.i8, width: 64, height: 24, palette: assets/segment_0CA4A0/D_01000620_usa.rgba16 } # should be ci8, D_01000620_usa is the TLUT
-        - { start: 0x0BF2C8, type: i8, name: assets/segment_0CA4A0/D_01000E38_usa.i8, width: 64, height: 24, palette: assets/segment_0CA4A0/D_01000620_usa.rgba16 } # should be ci8, D_01000620_usa is the TLUT
+        - { start: 0x0BECC8, type: i8, name: assets/segment_0CA4A0/D_01000838_usa.i8, width: 64, height: 24, palette: assets/segment_0CA4A0/colorTable.rgba16 } # should be ci8, colorTable is the TLUT
+        - { start: 0x0BF2C8, type: i8, name: assets/segment_0CA4A0/D_01000E38_usa.i8, width: 64, height: 24, palette: assets/segment_0CA4A0/colorTable.rgba16 } # should be ci8, colorTable is the TLUT
         - [0x0BF8C8]
         - [0x0BF8E0]
         - [0x0BF8F8, i8, assets/segment_0CA4A0/D_01001468_usa.i8, 2048, 1] # unknown type and dimensions

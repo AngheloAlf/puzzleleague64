@@ -41,7 +41,7 @@ void InitFlic(void);
 void InitTrack(char *currSegment, nbool first, s32 color, s32 bg, s32 text, s32 sprite, s32 track);
 void InitAnimeBGTransparent(void);
 void Draw2DAnimation(struct struct_gInfo_unk_00068 *dynamicp, s32 from, s32 to);
-// void func_8004EC08_usa();
+void Draw3DAnimation(struct struct_gInfo_unk_00068 *dynamicp, s32 arg1, s32 arg2);
 void func_8004EC4C_usa(TexturePtr arg0, bool arg1, s32 main_height, s32 top_height);
 
 #endif

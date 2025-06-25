@@ -243,15 +243,15 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/bkground", func_80047A00_usa);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/bkground", func_80047CA0_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/bkground", func_80047A00_usa);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/bkground", func_80046420_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/bkground", func_80047A00_usa);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/bkground", func_80046590_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/bkground", func_80047A00_usa);
 #endif
 
 #if VERSION_USA
@@ -488,19 +488,19 @@ void Draw2DBackground(void) {
 }
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/bkground", func_800488AC_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/bkground", Draw3DBackground);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/bkground", func_80048B4C_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/bkground", Draw3DBackground);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/bkground", func_800472CC_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/bkground", Draw3DBackground);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/bkground", func_8004743C_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/bkground", Draw3DBackground);
 #endif
 
 void func_80048D94_usa(void) {

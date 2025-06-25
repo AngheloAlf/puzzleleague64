@@ -291,8 +291,7 @@ void Draw2DAnimation(struct_gInfo_unk_00068 *dynamicp UNUSED, s32 from UNUSED, s
     }
 }
 
-// Draw3DAnimation?
-void func_8004EC08_usa(void) {
+void Draw3DAnimation(struct struct_gInfo_unk_00068 *dynamicp UNUSED, s32 arg1 UNUSED, s32 arg2 UNUSED) {
     if ((gSelection == 0xAA) && (gTheGame.unk_9C28 == 5)) {
         func_80074D4C_usa();
     }

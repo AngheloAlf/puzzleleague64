@@ -13,6 +13,7 @@
 #include "bkground.h"
 #include "bonus.h"
 #include "character.h"
+#include "draw3d.h"
 #include "fade.h"
 #include "flic.h"
 #include "other.h"

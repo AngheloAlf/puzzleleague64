@@ -297,7 +297,9 @@ typedef struct struct_gInfo_unk_10224 {
 
 typedef struct struct_gInfo_unk_00068 {
     /* 0x00000 */ Gfx unk_00000[UNK_SIZE];
-    /* 0x00008 */ UNK_TYPE1 unk_00008[0x100F8];
+    /* 0x00008 */ UNK_PAD unk_00008[0x10000-0x00008];
+    /* 0x10000 */ Mtx unk_10000[GAME_BUFFER_LEN];
+    /* 0x10080 */ Mtx unk_10080[GAME_BUFFER_LEN];
     /* 0x10100 */ Mtx unk_10100[GAME_BUFFER_LEN]; // trans?
     /* 0x10180 */ Mtx unk_10180[GAME_BUFFER_LEN]; // rotate?
     /* 0x10200 */ UNK_TYPE1 unk_10200[0x8];

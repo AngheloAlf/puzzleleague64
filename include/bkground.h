@@ -8,11 +8,11 @@
 
 void func_80047340_usa(void);
 void Draw2DFrame(void);
-// void func_80047A00_usa();
+void func_80047A00_usa(void);
 // void func_80047D20_usa();
 void InitBackground(s32 who);
 void Draw2DBackground(void);
-// void func_800488AC_usa();
+void Draw3DBackground(void);
 void func_80048D94_usa(void);
 void Draw2DShadeBox(void);
 // void func_8004917C_usa();
