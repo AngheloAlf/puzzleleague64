@@ -5,7 +5,8 @@
 #include "other_types.h"
 #include "unk.h"
 
-#include "the_game.h"
+struct struct_gInfo_unk_00068;
+
 
 typedef enum enum_menuTickFairy_ePosition {
     MFP_NONE = 0,
@@ -108,7 +109,7 @@ void menuTickFairy(s32, s32, s32, s32, s32, s32, s32, s32);
 // void menuTickFairy(s32 iScreen, s32 nFrame, s32 nTagText, s32 nOffsetText, s32 nOffsetBox, enum_menuTickFairy_ePosition ePosition, s32 bArrow);
 // void func_8001AB0C_usa();
 // void func_8001ACA8_usa();
-void DrawMenu(struct_gInfo_unk_00068 *arg0);
+void DrawMenu(struct struct_gInfo_unk_00068 *arg0);
 void DoMenu();
 void InitMenu(void);
 // void func_8001BFF0_usa();

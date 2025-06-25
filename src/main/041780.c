@@ -7,6 +7,7 @@
 
 #include "screen.h"
 #include "sfxlimit.h"
+#include "the_game.h"
 
 typedef struct struct_80192F80_usa {
     /* 0x00 */ UNK_PAD unk_00[0x8];

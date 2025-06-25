@@ -12,6 +12,7 @@
 #include "ai.h"
 #include "animate2d.h"
 #include "animate3d.h"
+#include "the_game.h"
 
 void CheckGameInput(tetWell *well, cursor_t *cursor, s32 num) {
     if (gTheGame.unk_9C0C == 1) {

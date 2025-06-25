@@ -20,6 +20,7 @@
 #include "peel.h"
 #include "sound.h"
 #include "text.h"
+#include "the_game.h"
 #include "update.h"
 #include "update3d.h"
 

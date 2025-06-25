@@ -2,16 +2,20 @@
 #define MAIN_VARIABLES_H
 
 #include "ultra64.h"
+#include "PR/gs2dex.h"
 #include "unk.h"
+
 #include "unknown_structs.h"
 #include "other_types.h"
 #include "stack.h"
 #include "hasm.h"
 
-#include "the_game.h"
 #include "unknown_defines.h"
 
 struct struct_imageLoad_arg0;
+struct struct_801A6DB8_usa;
+struct struct_gInfo;
+struct struct_gInfo_unk_00068;
 
 
 // .data
@@ -1288,7 +1292,7 @@ extern s32 GarbageBlockBaseSfx_R;
 extern TexturePtr B_801C6C9C_usa[2];
 extern s16 gBox_Level;
 
-extern struct_gInfo **fb;
+extern struct struct_gInfo **fb;
 extern s32 B_801C6E58_usa;
 extern OSMesg B_801C6E5C_usa[1];
 // extern UNK_TYPE B_801C6E60_usa;
@@ -1349,7 +1353,6 @@ extern uObjTxtr B_801C7368_usa[GAME_BUFFER_LEN];
 // extern UNK_TYPE B_801C7BA0_usa;
 // extern UNK_TYPE B_801C7BAB_usa;
 // extern UNK_TYPE B_801C7BAC_usa;
-extern struct_gInfo gInfo[2];
 
 extern s16 gBlock_Level;
 extern uObjTxtr B_801F9C48_usa[GAME_BUFFER_LEN]; // TODO: original name
@@ -1379,7 +1382,7 @@ extern s32 anim_sp;
 
 // extern UNK_TYPE B_8021AD5C_usa;
 extern s32 B_8021B960_usa;
-extern struct_gInfo_unk_00068 *tut_dynamicp;
+extern struct struct_gInfo_unk_00068 *tut_dynamicp;
 
 extern OSMesg B_8021BA28_usa[1];
 
@@ -1403,7 +1406,7 @@ extern s8 B_8021BA78_usa;
 extern s32 B_8021BA98_usa;
 
 // extern UNK_TYPE B_8021BEA0_usa;
-extern struct_801A6DB8_usa *gPlayer[]; // maybe gPlayer?
+extern struct struct_801A6DB8_usa *gPlayer[]; // maybe gPlayer?
 extern Gfx *glistp;
 // extern UNK_TYPE B_8021BEB0_usa;
 // extern UNK_TYPE B_8021BEB8_usa;

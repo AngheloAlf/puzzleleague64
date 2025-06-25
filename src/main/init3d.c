@@ -15,6 +15,7 @@
 #include "dlist.h"
 #include "init2d.h"
 #include "tetris.h"
+#include "the_game.h"
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/init3d", Init3DNewRow);

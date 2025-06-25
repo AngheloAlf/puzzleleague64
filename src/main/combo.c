@@ -15,6 +15,7 @@
 #include "dlist.h"
 #include "init2d.h"
 #include "sfxlimit.h"
+#include "the_game.h"
 
 void CheckCollision(tetWell *well) {
     CheckRowCombos(well);

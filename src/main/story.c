@@ -12,11 +12,13 @@
 #include "segment_symbols.h"
 
 #include "buffers.h"
+#include "info.h"
 #include "menu.h"
 #include "peel.h"
 #include "screen.h"
 #include "sfxlimit.h"
 #include "sound.h"
+#include "the_game.h"
 
 #include "041780.h"
 

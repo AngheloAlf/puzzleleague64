@@ -9,6 +9,8 @@
 #include "main_functions.h"
 #include "main_variables.h"
 
+#include "info.h"
+
 #include "assets_variables.h"
 
 #define MAGIC_NUMBER 6

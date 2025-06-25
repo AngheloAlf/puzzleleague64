@@ -10,6 +10,7 @@
 #include "main_variables.h"
 
 #include "combo3d.h"
+#include "info.h"
 #include "the_game.h"
 
 #if VERSION_USA

@@ -9,6 +9,9 @@
 #include "main_functions.h"
 #include "main_variables.h"
 
+#include "info.h"
+#include "the_game.h"
+
 #include "assets_variables.h"
 
 #if VERSION_USA

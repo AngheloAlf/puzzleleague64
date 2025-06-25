@@ -9,11 +9,13 @@
 
 #include "assets_variables.h"
 
+#include "001F10.h"
 #include "bonus.h"
 #include "buffers.h"
 #include "dlist.h"
 #include "draw2d.h"
 #include "editor.h"
+#include "info.h"
 #include "menu.h"
 #include "mimic.h"
 #include "screen.h"
@@ -23,8 +25,6 @@
 #include "the_game.h"
 #include "title.h"
 #include "tutorial.h"
-
-#include "001F10.h"
 
 void *staticSegment = NULL;
 
@@ -36,9 +36,9 @@ void InitGFX(void) {
     staticSegment = gBufferHeap;
     func_80001310_usa(SEGMENT_ROM_START(segment_0CA4A0), staticSegment, SEGMENT_ROM_SIZE(segment_0CA4A0));
 
-    gInfo[0].unk_19020 = 2;
+    gInfo[0].msg = 2;
     gInfo[0].unk_19040 = gFramebuffers[0];
-    gInfo[1].unk_19020 = 2;
+    gInfo[1].msg = 2;
     gInfo[1].unk_19040 = gFramebuffers[1];
     osViSetSpecialFeatures(OS_VI_DITHER_FILTER_ON | OS_VI_DIVOT_ON | OS_VI_GAMMA_DITHER_OFF | OS_VI_GAMMA_OFF);
 }
@@ -192,7 +192,7 @@ void BuildTask(struct_gInfo *info) {
     scTask->flags = OS_SC_SWAPBUFFER | OS_SC_LAST_TASK | OS_SC_NEEDS_RSP | OS_SC_NEEDS_RDP;
     scTask->next = NULL;
     scTask->msgQ = &gfxFrameMsgQ;
-    scTask->msg = &info->unk_19020;
+    scTask->msg = &info->msg;
     scTask->framebuffer = info->unk_19040;
     osSendMesg(B_801AAB9C_usa, scTask, OS_MESG_BLOCK);
 }

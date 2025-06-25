@@ -4,20 +4,21 @@
 #include "ultra64.h"
 #include "unk.h"
 
-#include "the_game.h"
+struct struct_gInfo_unk_00068;
+struct tetWell;
 
 
-void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num);
-void Draw2DCursor(struct_gInfo_unk_00068 *dynamicp);
-void Draw2DIcon(struct_gInfo_unk_00068 *dynamicp, s32 num);
-void Draw2DAttackBrick(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 check);
-s32 Draw2DAttackBlock(struct_gInfo_unk_00068 *dynamicp, s32 num);
-void Draw2DExplosion(struct_gInfo_unk_00068 *dynamicp, s32 num);
-void Draw2DClearLine(struct_gInfo_unk_00068 *dynamicp, s32 num);
-void Draw2DSmoke(struct_gInfo_unk_00068 *dynamicp, s32 num);
-void Draw2DSmallStars(struct_gInfo_unk_00068 *dynamicp, s32 layer);
-void DrawTetris(struct_gInfo_unk_00068 *dynamicp);
-void OverFlow(struct_gInfo_unk_00068 *dynamicp);
-void Draw2DTetris(struct_gInfo_unk_00068 *dynamicp);
+void Draw2DTetrisWell(struct struct_gInfo_unk_00068 *dynamicp, struct tetWell *well, s32 num);
+void Draw2DCursor(struct struct_gInfo_unk_00068 *dynamicp);
+void Draw2DIcon(struct struct_gInfo_unk_00068 *dynamicp, s32 num);
+void Draw2DAttackBrick(struct struct_gInfo_unk_00068 *dynamicp, s32 num, s32 check);
+s32 Draw2DAttackBlock(struct struct_gInfo_unk_00068 *dynamicp, s32 num);
+void Draw2DExplosion(struct struct_gInfo_unk_00068 *dynamicp, s32 num);
+void Draw2DClearLine(struct struct_gInfo_unk_00068 *dynamicp, s32 num);
+void Draw2DSmoke(struct struct_gInfo_unk_00068 *dynamicp, s32 num);
+void Draw2DSmallStars(struct struct_gInfo_unk_00068 *dynamicp, s32 layer);
+void DrawTetris(struct struct_gInfo_unk_00068 *dynamicp);
+void OverFlow(struct struct_gInfo_unk_00068 *dynamicp);
+void Draw2DTetris(struct struct_gInfo_unk_00068 *dynamicp);
 
 #endif

@@ -16,9 +16,11 @@
 #include "draw3d.h"
 #include "fade.h"
 #include "flic.h"
+#include "info.h"
 #include "other.h"
 #include "sign.h"
 #include "text.h"
+#include "the_game.h"
 
 #include "assets_variables.h"
 

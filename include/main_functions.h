@@ -4,11 +4,6 @@
 #include "ultra64.h"
 #include "unk.h"
 #include "unknown_structs.h"
-#include "other_types.h"
-#include "version.h"
-#include "the_game.h"
-
-struct ai_t;
 
 void func_80042400_usa(Gfx **gfxP);
 // void func_80042428_usa();

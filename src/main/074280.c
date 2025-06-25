@@ -6,6 +6,7 @@
 
 #include "001F10.h"
 #include "flic.h"
+#include "the_game.h"
 
 void func_80073680_usa(void) {
     void *segment;

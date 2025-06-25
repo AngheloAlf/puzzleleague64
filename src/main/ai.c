@@ -17,6 +17,7 @@
 #include "pause.h"
 #include "sfxlimit.h"
 #include "sound.h"
+#include "the_game.h"
 
 s32 AIChainGarbage2(struct tetWell *well, struct ai_t *brain, BlockType below, s32 col);
 

@@ -11,6 +11,8 @@
 #include "main_variables.h"
 
 #include "bg_screen_load.h"
+#include "info.h"
+#include "the_game.h"
 
 #include "075630.h"
 

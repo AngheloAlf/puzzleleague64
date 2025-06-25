@@ -8,8 +8,10 @@
 #include "macros_defines.h"
 #include "main_functions.h"
 #include "main_variables.h"
+
 #include "sfxlimit.h"
 #include "sound.h"
+#include "tetwell.h"
 
 #if VERSION_USA
 void InitGameAudioSystem(void) {

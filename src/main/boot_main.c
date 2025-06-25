@@ -21,6 +21,7 @@
 #include "gfx.h"
 #include "hvqm2util.h"
 #include "image.h"
+#include "info.h"
 #include "menu.h"
 #include "mimic.h"
 #include "peel.h"

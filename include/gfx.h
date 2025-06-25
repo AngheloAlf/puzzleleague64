@@ -3,13 +3,13 @@
 
 #include "ultra64.h"
 #include "unk.h"
-#include "the_game.h"
 
+struct struct_gInfo;
 
 void InitGFX(void);
-s32 CreateMenuGfxTask(struct_gInfo *info);
-void CreateGameGfxTask1(struct_gInfo *info);
-s32 CreateGameGfxTask2(struct_gInfo *info);
-void BuildTask(struct_gInfo *info);
+s32 CreateMenuGfxTask(struct struct_gInfo *info);
+void CreateGameGfxTask1(struct struct_gInfo *info);
+s32 CreateGameGfxTask2(struct struct_gInfo *info);
+void BuildTask(struct struct_gInfo *info);
 
 #endif

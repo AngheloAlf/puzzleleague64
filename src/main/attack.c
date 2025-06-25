@@ -13,6 +13,7 @@
 #include "attack3d.h"
 #include "init2d.h"
 #include "sfxlimit.h"
+#include "the_game.h"
 
 #if VERSION_USA
 // Maybe?

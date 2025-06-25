@@ -2,11 +2,11 @@
 #define PUZZLE_H
 
 #include "ultra64.h"
-#include "the_game.h"
 #include "unk.h"
 
 struct cursor_t;
 struct tetWell;
+struct struct_gInfo_unk_00068;
 
 // void func_80088940_usa();
 // void func_80088A48_usa();
@@ -21,6 +21,6 @@ s32 func_8008913C_usa(s32 arg0);
 // void func_8008928C_usa();
 void InitPuzzleEditor(s32 arg0);
 void DoPuzzleEditor(void);
-void DrawPuzzleEditor(struct_gInfo_unk_00068 *arg0);
+void DrawPuzzleEditor(struct struct_gInfo_unk_00068 *arg0);
 
 #endif

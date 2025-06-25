@@ -11,6 +11,7 @@
 
 #include "animation.h"
 #include "dlist.h"
+#include "the_game.h"
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", Init2DNewRow);

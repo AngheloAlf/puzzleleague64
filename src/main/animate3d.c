@@ -12,6 +12,7 @@
 #include "animate.h"
 #include "init3d.h"
 #include "sfxlimit.h"
+#include "the_game.h"
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/animate3d", Input3D);

@@ -7,6 +7,8 @@
 
 struct tetWell;
 
+#define EXPLOSION_COUNT (50)
+
 typedef struct explode_t {
     /* 0x00 */ s32 type; // TODO: enum?
     /* 0x04 */ s32 frame;

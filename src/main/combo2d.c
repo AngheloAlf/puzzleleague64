@@ -11,6 +11,7 @@
 
 #include "dlist.h"
 #include "init2d.h"
+#include "tetwell.h"
 
 void Compact2DAttackNoWhere(tetWell *well) {
     s32 count;

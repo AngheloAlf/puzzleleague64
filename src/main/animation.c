@@ -10,6 +10,7 @@
 #include "main_variables.h"
 
 #include "sfxlimit.h"
+#include "the_game.h"
 #include "update.h"
 
 #include "074280.h"

@@ -15,8 +15,10 @@
 #include "bkground.h"
 #include "draw2d.h"
 #include "flic.h"
+#include "info.h"
 #include "init2d.h"
 #include "tetris.h"
+#include "the_game.h"
 #include "update.h"
 
 #if VERSION_USA

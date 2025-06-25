@@ -26,6 +26,7 @@
 #include "segment_symbols.h"
 #include "sfxlimit.h"
 #include "tetsound.h"
+#include "the_game.h"
 
 s32 TutorialPattern(void) {
     u8 *ptr = garbage_rebreak;
@@ -532,7 +533,7 @@ void DoTutorial(void) {
     screenTick(&sp20);
 }
 
-void func_8008885C_usa(struct_gInfo_unk_00068 *dynamicp) {
+void func_8008885C_usa(struct struct_gInfo_unk_00068 *dynamicp) {
     if (!screenFlushing()) {
         if (gTheGame.unk_9C0C == 1) {
             Draw2DMT(dynamicp);

@@ -15,6 +15,7 @@
 #include "end.h"
 #include "hvqm2util.h"
 #include "image.h"
+#include "info.h"
 #include "init2d.h"
 #include "peel.h"
 #include "screen.h"
@@ -22,6 +23,7 @@
 #include "sound.h"
 #include "tetris.h"
 #include "text.h"
+#include "the_game.h"
 #include "update.h"
 
 #include "001F10.h"

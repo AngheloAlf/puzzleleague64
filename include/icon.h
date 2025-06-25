@@ -6,6 +6,8 @@
 #include "macros_defines.h"
 #include "unk.h"
 
+#define ICON_COUNT (10)
+
 typedef enum IconType {
     // -1 ?
     /* 10 */ ICONTYPE_10 = 10,

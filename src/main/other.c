@@ -10,6 +10,7 @@
 #include "main_variables.h"
 
 #include "001F10.h"
+#include "info.h"
 #include "the_game.h"
 
 #include "assets_variables.h"

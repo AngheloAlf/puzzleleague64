@@ -9,4 +9,6 @@
 // TODO: enum?
 #define AI_CHECK_COUNT 7
 
+#define TETWELL_UNK_3EF0_LEN_6 (6)
+
 #endif

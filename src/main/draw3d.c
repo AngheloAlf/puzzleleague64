@@ -9,12 +9,14 @@
 #include "main_functions.h"
 #include "main_variables.h"
 
-#include "bonus.h"
 #include "bkground.h"
+#include "bonus.h"
 #include "flic.h"
+#include "info.h"
 #include "other.h"
 #include "sign.h"
 #include "text.h"
+#include "the_game.h"
 
 #include "assets_variables.h"
 
@@ -118,9 +120,6 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/draw3d", func_80064AAC_usa);
 INCLUDE_ASM("asm/usa/nonmatchings/main/draw3d", func_80064E44_usa);
 #endif
 
-
-
-
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/draw3d", func_8005E7E0_eur);
 #endif
@@ -220,9 +219,6 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/draw3d", func_80064D7C_eur);
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/draw3d", func_80064E44_usa);
 #endif
-
-
-
 
 #if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/draw3d", func_8005CF20_fra);
@@ -324,8 +320,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/draw3d", func_800634BC_fra);
 INCLUDE_ASM("asm/fra/nonmatchings/main/draw3d", func_80064E44_usa);
 #endif
 
-
-
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/draw3d", func_8005D0D0_ger);
 #endif
@@ -426,7 +420,6 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/draw3d", func_8006366C_ger);
 INCLUDE_ASM("asm/ger/nonmatchings/main/draw3d", func_80064E44_usa);
 #endif
 
-#if 1
 void Draw3DTetris(struct_gInfo_unk_00068 *dynamicp) {
     s32 sp28[GAME_BUFFER_LEN]; // end_attack?
     u16 perspNorm;
@@ -446,7 +439,7 @@ void Draw3DTetris(struct_gInfo_unk_00068 *dynamicp) {
         func_80053E64_usa(dynamicp);
     }
 
-    gDPSetScissor(glistp++, G_SC_NON_INTERLACE, 0, 31, SCREEN_WIDTH, SCREEN_HEIGHT-19);
+    gDPSetScissor(glistp++, G_SC_NON_INTERLACE, 0, 31, SCREEN_WIDTH, SCREEN_HEIGHT - 19);
 
     if (((gMain == GMAIN_388) || (gMain < GMAIN_384)) && ((gTheGame.unk_9C08 == 2) || (gSelection == 0x82))) {
         sp3C = nfalse;
@@ -490,7 +483,7 @@ void Draw3DTetris(struct_gInfo_unk_00068 *dynamicp) {
         }
     }
 
-    gDPSetScissor(glistp++, G_SC_NON_INTERLACE, 0, 7, SCREEN_WIDTH, SCREEN_HEIGHT-1);
+    gDPSetScissor(glistp++, G_SC_NON_INTERLACE, 0, 7, SCREEN_WIDTH, SCREEN_HEIGHT - 1);
 
     if (gMain == GMAIN_384) {
         func_80053E64_usa(dynamicp);
@@ -530,17 +523,3 @@ void Draw3DTetris(struct_gInfo_unk_00068 *dynamicp) {
 
     gSPTexture(glistp++, 0, 0, 0, G_TX_RENDERTILE, G_OFF);
 }
-//INCLUDE_ASM("asm/usa/nonmatchings/main/draw3d", Draw3DTetris);
-#endif
-
-#if 0
-INCLUDE_ASM("asm/eur/nonmatchings/main/draw3d", Draw3DTetris);
-#endif
-
-#if 0
-INCLUDE_ASM("asm/fra/nonmatchings/main/draw3d", Draw3DTetris);
-#endif
-
-#if 0
-INCLUDE_ASM("asm/ger/nonmatchings/main/draw3d", Draw3DTetris);
-#endif

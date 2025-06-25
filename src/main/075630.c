@@ -6,6 +6,7 @@
 #include "main_variables.h"
 
 #include "fade.h"
+#include "the_game.h"
 
 extern s32 D_800B6BB0_usa[];
 

@@ -4,7 +4,6 @@
 #include "ultra64.h"
 #include "unk.h"
 
-struct Game;
 struct struct_gInfo_unk_00068;
 struct tetWell;
 
@@ -15,7 +14,7 @@ void AllDeadBlocks(struct tetWell *well);
 // void func_80037900_usa();
 // void func_800379D4_usa();
 // void func_80037B0C_usa();
-s32 EndingExplosion(struct Game *the_game);
+s32 EndingExplosion(struct tetWell *well);
 // void func_80038018_usa();
 // void func_8003813C_usa();
 // void func_80038228_usa();

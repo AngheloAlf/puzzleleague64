@@ -9,7 +9,9 @@
 #include "main_functions.h"
 #include "main_variables.h"
 
+#include "cursor.h"
 #include "sfxlimit.h"
+#include "tetwell.h"
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/attack3d", Init3DAttackPosition);

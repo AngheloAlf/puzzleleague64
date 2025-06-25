@@ -11,7 +11,9 @@
 
 #include "001F10.h"
 #include "end.h"
+#include "info.h"
 #include "pause.h"
+#include "the_game.h"
 
 #include "assets/sign_gameover.h"
 #include "assets/sign_pause.h"

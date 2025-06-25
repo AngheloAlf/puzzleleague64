@@ -6,6 +6,9 @@
 #include "macros_defines.h"
 #include "unk.h"
 
+// TODO: This count seems to be 40 in panepon gc, so maybe it should adjust by player count
+#define ATTACK_COUNT (10 * 2)
+
 struct cursor_t;
 struct tetWell;
 

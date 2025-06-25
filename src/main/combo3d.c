@@ -10,6 +10,7 @@
 #include "main_variables.h"
 
 #include "dlist.h"
+#include "tetwell.h"
 
 #if VERSION_USA
 void Compact3DAttackNoWhere(tetWell *well) {

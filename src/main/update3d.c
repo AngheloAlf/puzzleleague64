@@ -9,6 +9,9 @@
 #include "main_functions.h"
 #include "main_variables.h"
 
+#include "cursor.h"
+#include "tetwell.h"
+
 void Update3DDistance(tetWell *well, cursor_t *cursor) {
     s32 temp_a3;
     attack_t *attack;

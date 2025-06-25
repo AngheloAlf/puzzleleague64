@@ -11,10 +11,12 @@
 
 #include "explode.h"
 #include "fade.h"
+#include "info.h"
 #include "init3d.h"
 #include "menu.h"
 #include "sfxlimit.h"
 #include "sound.h"
+#include "the_game.h"
 #include "update.h"
 
 #include "assets/sign_gameover.h"
@@ -131,7 +133,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_800379D4_usa);
 INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80037B0C_usa);
 #endif
 
-s32 EndingExplosion(Game *the_game) {
+s32 EndingExplosion(tetWell *well) {
     u8 sp18[][2] = {
         { 0x0B, 0x00 }, { 0x07, 0x02 }, { 0x01, 0x00 }, { 0x09, 0x04 }, { 0x03, 0x02 }, { 0x05, 0x04 },
         { 0x07, 0x00 }, { 0x0B, 0x04 }, { 0x05, 0x02 }, { 0x01, 0x04 }, { 0x09, 0x02 }, { 0x03, 0x00 },
@@ -141,7 +143,7 @@ s32 EndingExplosion(Game *the_game) {
     s32 var_s2;
 
     if (gSelection == 0x82) {
-        switch (the_game->tetrisWell[0].unk_4420) {
+        switch (well->unk_4420) {
             case 0x0:
             case 0x1:
             case 0x4:
@@ -151,9 +153,9 @@ s32 EndingExplosion(Game *the_game) {
             case 0x2:
             case 0x3:
             case 0x5:
-                if (the_game->tetrisWell[0].unk_4424 < ENUM_GAME_UNK_0000_UNK_4424_31) {
+                if (well->unk_4424 < ENUM_GAME_UNK_0000_UNK_4424_31) {
                     var_s0 = 1;
-                } else if (the_game->tetrisWell[0].unk_4424 < ENUM_GAME_UNK_0000_UNK_4424_41) {
+                } else if (well->unk_4424 < ENUM_GAME_UNK_0000_UNK_4424_41) {
                     var_s0 = 2;
                 } else {
                     var_s0 = 3;
@@ -161,9 +163,9 @@ s32 EndingExplosion(Game *the_game) {
                 break;
 
             case 0x6:
-                if (the_game->tetrisWell[0].unk_4424 < ENUM_GAME_UNK_0000_UNK_4424_31) {
+                if (well->unk_4424 < ENUM_GAME_UNK_0000_UNK_4424_31) {
                     var_s0 = 1;
-                } else if (the_game->tetrisWell[0].unk_4424 < ENUM_GAME_UNK_0000_UNK_4424_41) {
+                } else if (well->unk_4424 < ENUM_GAME_UNK_0000_UNK_4424_41) {
                     var_s0 = 2;
                 } else {
                     var_s0 = 3;
@@ -174,9 +176,9 @@ s32 EndingExplosion(Game *the_game) {
 
     if (gWhatever == 3) {
         if (gSelection == 0xAA) {
-            if (the_game->tetrisWell[0].unk_4428 < 3) {
+            if (well->unk_4428 < 3) {
                 PlaySE(SFX_INIT_TABLE, 0x12C);
-            } else if (the_game->tetrisWell[0].unk_4428 < 5) {
+            } else if (well->unk_4428 < 5) {
                 PlaySE(SFX_INIT_TABLE, 0x12D);
             } else {
                 PlaySE(SFX_INIT_TABLE, 0x12E);
@@ -213,17 +215,17 @@ s32 EndingExplosion(Game *the_game) {
             }
 
             if (gTheGame.unk_9C0C == 1) {
-                StartExplosion(&the_game->tetrisWell[0], 0, sp18[var_a1_2][0], sp18[var_a1_2][1], 0x1F);
+                StartExplosion(well, 0, sp18[var_a1_2][0], sp18[var_a1_2][1], 0x1F);
             } else {
-                StartExplosion(&the_game->tetrisWell[0], 0, sp18[var_a1_2][0], sp18[var_a1_2][1] + 2, 0x1F);
+                StartExplosion(well, 0, sp18[var_a1_2][0], sp18[var_a1_2][1] + 2, 0x1F);
             }
         }
     }
 
     if (gSelection == 0xAA) {
-        if (the_game->tetrisWell[0].unk_4428 < 3) {
+        if (well->unk_4428 < 3) {
             var_s2 = 0x82;
-        } else if (the_game->tetrisWell[0].unk_4428 < 5) {
+        } else if (well->unk_4428 < 5) {
             var_s2 = 0xAA;
         } else {
             var_s2 = 0xCD;

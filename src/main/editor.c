@@ -12,11 +12,13 @@
 #include "ai.h"
 #include "file.h"
 #include "image.h"
+#include "info.h"
 #include "peel.h"
 #include "puzzle.h"
 #include "screen.h"
 #include "sfxlimit.h"
 #include "sound.h"
+#include "the_game.h"
 
 typedef void (*struct_gaEditData_unk_4)(s32 arg0, screenTick_arg0 *arg1);
 

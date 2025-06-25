@@ -2,9 +2,10 @@
 #define TEXT_H
 
 #include "ultra64.h"
+#include "PR/gs2dex.h"
 #include "unk.h"
 
-#include "PR/gs2dex.h"
+#define DRAWTEXT_COUNT 70
 
 struct struct_gInfo_unk_00068;
 

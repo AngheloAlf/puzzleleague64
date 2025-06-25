@@ -7,6 +7,8 @@
 #include "macros_defines.h"
 #include "main_variables.h"
 
+#include "tetwell.h"
+
 void Start2DExplosion(tetWell *well, s32 row, s32 col, s32 type) {
     s32 i;
     s32 count;

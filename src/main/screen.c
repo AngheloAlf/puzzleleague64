@@ -15,6 +15,7 @@
 #include "image.h"
 #include "peel.h"
 #include "sfxlimit.h"
+#include "the_game.h"
 
 extern struct_imageLoad_arg0 *gpImageNo;
 extern struct_imageLoad_arg0 *gpImageYes;
