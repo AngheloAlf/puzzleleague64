@@ -12,3 +12,12 @@ rom:0x0323B4 symbol:segment_background_50F3F0_ROM_START reloc:MIPS_HI16
 rom:0x0323B8 symbol:segment_background_50F3F0_ROM_START reloc:MIPS_LO16
 rom:0x0323BC symbol:segment_background_50F3F0_ROM_END reloc:MIPS_HI16
 rom:0x0323C0 symbol:segment_background_50F3F0_ROM_END reloc:MIPS_LO16
+
+rom:0x051EB4 symbol:segment_other_misc_VRAM reloc:MIPS_HI16
+rom:0x051EB8 symbol:segment_other_misc_VRAM reloc:MIPS_LO16
+rom:0x051EC4 symbol:segment_other_misc_VRAM_END reloc:MIPS_HI16
+rom:0x051EC8 symbol:segment_other_misc_VRAM_END reloc:MIPS_LO16
+rom:0x051F00 symbol:segment_other_misc_ROM_START reloc:MIPS_HI16
+rom:0x051F04 symbol:segment_other_misc_ROM_START reloc:MIPS_LO16
+rom:0x051F0C symbol:segment_other_misc_ROM_END reloc:MIPS_HI16
+rom:0x051F10 symbol:segment_other_misc_ROM_END reloc:MIPS_LO16

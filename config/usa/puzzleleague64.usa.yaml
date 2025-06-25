@@ -1458,9 +1458,8 @@ segments:
   # bg_screen end
 
   - type: databin
-    name: unk_917790
+    name: segment_other_misc
     start: 0x917790
-    # Unknown end
 
   - name: assets_bins/sign/sign_pause
     type: group

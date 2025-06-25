@@ -1419,9 +1419,8 @@ segments:
   # bg_screen end
 
   - type: databin
-    name: unk_917A40
+    name: segment_other_misc
     start: 0x917A40
-    # Unknown end
 
   - name: assets_bins/sign/sign_pause
     type: group

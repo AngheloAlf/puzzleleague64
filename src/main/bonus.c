@@ -64,23 +64,27 @@ typedef struct struct_8004EC4C_usa_arg3 {
 } struct_8004EC4C_usa_arg3; // size = 0x8
 
 #if VERSION_USA
-#ifdef NON_EQUIVALENT
+//#ifdef NON_EQUIVALENT
+#if 0
 void InitBonus(void) {
-    struct_800C4490_usa sp10[] = { 0x40, 0x3E, 0x40, 0x45 };
-    s32 sp20[] = { 0xF8, 0x100 };
-    struct_800C4490_usa sp28[] = {
+    s32 var_s3 = 0;
+    s32 s5 = 1;
+    s32 s8 = 2;
+    DATA_INLINE_CONST2 struct_800C4490_usa sp10[] = { 0x40, 0x3E, 0x40, 0x45 };
+    DATA_INLINE_CONST2 s32 sp20[] = { 0xF8, 0x100 };
+    DATA_INLINE_CONST2 struct_800C4490_usa sp28[] = {
         { 0xC0, 0x2F, 0x13, 0x21 }, { 0x40, 0x1D, 0xB6, 0xBA }, { 0x40, 0x1D, 0xB6, 0xBA },
         { 0x40, 0x1D, 0xE1, 0xBA }, { 0x40, 0x1D, 0xE1, 0xBA },
     };
-    struct_800C44F0_usa sp78[] = {
+    DATA_INLINE_CONST2 struct_800C44F0_usa sp78[] = {
         { 0x00, 0x07 }, { 0x01, 0x01 }, { 0x02, 0x00 }, { 0x02, 0x02 }, { 0x05, 0x04 },
         { 0x0C, 0x02 }, { 0x02, 0x02 }, { 0x09, 0x06 }, { 0x02, 0x05 }, { 0x00, 0x00 },
         { 0x07, 0x06 }, { 0x04, 0x04 }, { 0x02, 0x03 }, { 0x05, 0x03 }, { 0x05, 0x09 },
     };
-    u8 sp98[] = {
+    DATA_INLINE_CONST2 u8 sp98[] = {
         0x1D, 0x30, 0x43, 0x56, 0x69, 0x7C,
     };
-    struct_800C4518_usa spA0[] = {
+    DATA_INLINE_CONST2 struct_800C4518_usa spA0[] = {
         { 192, 129 },                             //
         { 192, BGSCREEN_TEX_7E5010_MAIN_HEIGHT }, // ENUM_GAME_UNK_0000_UNK_4424_1
         { 192, BGSCREEN_TEX_7F5BD0_MAIN_HEIGHT }, // ENUM_GAME_UNK_0000_UNK_4424_2
@@ -98,7 +102,7 @@ void InitBonus(void) {
         { 192, BGSCREEN_TEX_8E2A50_MAIN_HEIGHT }, // ENUM_GAME_UNK_0000_UNK_4424_14
         { 192, BGSCREEN_TEX_902250_MAIN_HEIGHT }, // ENUM_GAME_UNK_0000_UNK_4424_15
     };
-    struct_800C4598_usa sp120[] = {
+    DATA_INLINE_CONST2 struct_800C4598_usa sp120[] = {
         { 65, 63 },                              //
         { 63, BGSCREEN_TEX_7E5010_TOP_HEIGHT },  // ENUM_GAME_UNK_0000_UNK_4424_1
         { 66, BGSCREEN_TEX_7F5BD0_TOP_HEIGHT },  // ENUM_GAME_UNK_0000_UNK_4424_2
@@ -116,160 +120,158 @@ void InitBonus(void) {
         { 192, BGSCREEN_TEX_8E2A50_TOP_HEIGHT }, // ENUM_GAME_UNK_0000_UNK_4424_14
         { 95, BGSCREEN_TEX_902250_TOP_HEIGHT },  // ENUM_GAME_UNK_0000_UNK_4424_15
     };
-    enum_tetWell_unk_4424 temp_s3;
     s32 var_s2;
-    s32 var_s3;
-    uObjBg *var_a0;
     uObjTxtr *var_v1;
     void *temp_v0;
     uObjBg *var_s0;
     void *temp_s4;
-    s32 s3 = 0;
-    s32 s5 = 1;
-    s32 s8 = 2;
-    s32 new_var;
-    uObjBg *temp;
+    volatile unsigned short pad;
+    s32 t1 = 5;
 
     gCounter = 0;
-    temp_v0 = &gBufferHeap[SEGMENT_ROM_SIZE(segment_0CA4A0)];
-    new_var = 5;
-    Pon_Image_Heap = temp_v0;
+    Pon_Image_Heap = &gBufferHeap[SEGMENT_ROM_SIZE(segment_0CA4A0)];
+
+    temp_s4 = Pon_Image_Heap;
+
     osInvalDCache((void *)D_1030FE0, (u32)D_105B710 - (u32)D_1030FE0);
-    func_80001310_usa(SEGMENT_ROM_START(segment_101A80), temp_v0, SEGMENT_ROM_SIZE(segment_101A80));
+    func_80001310_usa(SEGMENT_ROM_START(segment_101A80), temp_s4, SEGMENT_ROM_SIZE(segment_101A80));
     Pon_Image_Heap += SEGMENT_ROM_SIZE(segment_101A80);
+
     if ((gSelection == 0x96) && (gTheGame.cursorBlock[0].unk_00 != 7) && (gTheGame.cursorBlock[1].unk_00 != 8) &&
         (B_801C6C90_usa == 0x10)) {
         PlayMIDI(BGM_INIT_TABLE, 0x20, 0, 1);
     }
-    temp_v0 += s3;
-    gTheGame.unk_9A50.b.imagePtr = temp_v0;
+    gTheGame.unk_9A50.b.imagePtr = temp_s4 + var_s3;
+    // temp_s4 = gTheGame.unk_9A50.b.imagePtr;
 
     guS2DInitBg(&gTheGame.unk_9A50);
 
     var_s3 = 0x24400;
 
     for (var_s2 = 0; var_s2 < s5; var_s2++) {
-        var_a0 = &gTheGame.unk_8C88[var_s2 + 0];
+        var_s0 = &gTheGame.unk_8C88[var_s2];
 
-        var_a0->b.imageX = 0;
-        var_a0->b.imageW = sp10[var_s2].unk_0 << 2;
-        var_a0->b.frameX = sp10[var_s2].unk_8 << 2;
-        var_a0->b.frameW = sp10[var_s2].unk_0 << 2;
+        var_s0->b.imageX = 0;
+        var_s0->b.imageW = sp10[var_s2].unk_0 << 2;
+        var_s0->b.frameX = sp10[var_s2].unk_8 << 2;
+        var_s0->b.frameW = sp10[var_s2].unk_0 << 2;
 
-        var_a0->b.imageY = 0;
-        var_a0->b.imageH = sp10[var_s2].unk_4 << 2;
-        var_a0->b.frameY = sp10[var_s2].unk_C << 2;
-        var_a0->b.frameH = sp10[var_s2].unk_4 << 2;
+        var_s0->b.imageY = 0;
+        var_s0->b.imageH = sp10[var_s2].unk_4 << 2;
+        var_s0->b.frameY = sp10[var_s2].unk_C << 2;
+        var_s0->b.frameH = sp10[var_s2].unk_4 << 2;
 
-        var_a0->b.imagePtr = &temp_v0[var_s3];
-        var_a0->b.imageLoad = G_BGLT_LOADTILE;
-        var_a0->b.imageFmt = G_IM_FMT_RGBA;
-        var_a0->b.imageSiz = G_IM_SIZ_16b;
-        var_a0->b.imagePal = 0;
-        var_a0->b.imageFlip = 0;
+        var_s0->b.imagePtr = &temp_s4[var_s3];
+        var_s0->b.imageLoad = G_BGLT_LOADTILE;
+        var_s0->b.imageFmt = G_IM_FMT_RGBA;
+        var_s0->b.imageSiz = G_IM_SIZ_16b;
+        var_s0->b.imagePal = 0;
+        var_s0->b.imageFlip = 0;
 
-        guS2DInitBg(var_a0);
+        guS2DInitBg(var_s0);
 
         var_s3 += sp10[var_s2].unk_0 * sp10[var_s2].unk_4 * 2;
     }
 
     var_s3 = 0x26300;
     var_s2 = 0;
-    var_v1 = &gTheGame.unk_8B98[0];
     while (var_s2 < s8) {
-        var_v1[var_s2].tlut.type = 0x30;
-        var_v1[var_s2].tlut.image = &temp_v0[var_s3];
-        var_v1[var_s2].tlut.phead = 0x100;
-        var_v1[var_s2].tlut.pnum = (s16)(sp20[var_s2] - 1);
-        var_v1[var_s2].tlut.zero = 0;
-        var_v1[var_s2].tlut.sid = 0;
-        var_v1[var_s2].tlut.flag = -1;
-        var_v1[var_s2].tlut.mask = 0;
+        var_v1 = &gTheGame.unk_8B98[var_s2];
+        var_v1->tlut.type = 0x30;
+        var_v1->tlut.image = &temp_s4[var_s3];
+        var_v1->tlut.phead = 0x100;
+        var_v1->tlut.pnum = (sp20[var_s2] - 1);
+        var_v1->tlut.zero = 0;
+        var_v1->tlut.sid = 0;
+        var_v1->tlut.flag = -1;
+        var_v1->tlut.mask = 0;
         var_s3 += sp20[var_s2] * 2;
         var_s2 += 1;
     }
 
-    for (var_s2 = 0; var_s2 < new_var; var_s2++) {
-        var_s0 = &gTheGame.unk_8C88[var_s2 + 1];
+    if (t1) {
+        for (var_s2 = 0; var_s2 < 5; var_s2++, s5++) {
+            var_s0 = &gTheGame.unk_8C88[s5];
 
-        var_s0->b.imageX = 0;
-        var_s0->b.imageW = sp28[var_s2].unk_0 << 2;
-        var_s0->b.frameX = sp28[var_s2].unk_8 << 2;
-        var_s0->b.frameW = sp28[var_s2].unk_0 << 2;
+            var_s0->b.imageX = 0 << 2;
+            var_s0->b.imageW = sp28[var_s2].unk_0 << 2;
+            var_s0->b.frameX = sp28[var_s2].unk_8 << 2;
+            var_s0->b.frameW = sp28[var_s2].unk_0 << 2;
+            var_s0->b.imageY = 0 << 2;
+            var_s0->b.imageH = sp28[var_s2].unk_4 << 2;
+            var_s0->b.frameY = sp28[var_s2].unk_C << 2;
+            var_s0->b.frameH = sp28[var_s2].unk_4 << 2;
+            var_s0->b.imagePtr = &temp_s4[var_s3];
+            var_s0->b.imageLoad = G_BGLT_LOADTILE;
+            var_s0->b.imageFmt = G_IM_FMT_CI;
+            var_s0->b.imageSiz = G_IM_SIZ_8b;
+            var_s0->b.imagePal = 0;
+            var_s0->b.imageFlip = 0;
 
-        var_s0->b.imageY = 0;
-        var_s0->b.imageH = sp28[var_s2].unk_4 << 2;
-        var_s0->b.frameY = sp28[var_s2].unk_C << 2;
-        var_s0->b.frameH = sp28[var_s2].unk_4 << 2;
-
-        var_s0->b.imagePtr = &temp_v0[var_s3];
-        var_s0->b.imageLoad = G_BGLT_LOADTILE;
-        var_s0->b.imageFmt = G_IM_FMT_CI;
-        var_s0->b.imageSiz = G_IM_SIZ_8b;
-        var_s0->b.imagePal = 0;
-        var_s0->b.imageFlip = 0;
-
-        guS2DInitBg(var_s0);
-        var_s3 += sp28[var_s2].unk_0 * sp28[var_s2].unk_4;
+            guS2DInitBg(var_s0);
+            var_s3 += sp28[var_s2].unk_0 * sp28[var_s2].unk_4;
+        }
     }
 
     if (gSelection == 0x96) {
-        temp_s3 = gTheGame.tetrisWell[1].unk_4424;
-        switch (temp_s3) {
+        var_s3 = gTheGame.tetrisWell[1].unk_4424;
+        switch (var_s3) {
             case ENUM_GAME_UNK_0000_UNK_4424_1:
-                func_80073C20_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+                func_80073C20_usa(false, 0, spA0[var_s3].unk_4, sp120[var_s3].unk_4);
                 break;
 
             case ENUM_GAME_UNK_0000_UNK_4424_2:
-                func_80073D10_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+                func_80073D10_usa(false, 0, spA0[var_s3].unk_4, sp120[var_s3].unk_4);
                 break;
             case ENUM_GAME_UNK_0000_UNK_4424_3:
-                func_80073E00_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+                func_80073E00_usa(false, 0, spA0[var_s3].unk_4, sp120[var_s3].unk_4);
                 break;
             case ENUM_GAME_UNK_0000_UNK_4424_4:
-                func_80073EF0_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+                func_80073EF0_usa(false, 0, spA0[var_s3].unk_4, sp120[var_s3].unk_4);
                 break;
             case ENUM_GAME_UNK_0000_UNK_4424_5:
-                func_80073FE0_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+                func_80073FE0_usa(false, 0, spA0[var_s3].unk_4, sp120[var_s3].unk_4);
                 break;
             case ENUM_GAME_UNK_0000_UNK_4424_6:
-                func_800740D0_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+                func_800740D0_usa(false, 0, spA0[var_s3].unk_4, sp120[var_s3].unk_4);
                 break;
             case ENUM_GAME_UNK_0000_UNK_4424_7:
-                func_800741C0_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+                func_800741C0_usa(false, 0, spA0[var_s3].unk_4, sp120[var_s3].unk_4);
                 break;
             case ENUM_GAME_UNK_0000_UNK_4424_8:
-                func_800742B0_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+                func_800742B0_usa(false, 0, spA0[var_s3].unk_4, sp120[var_s3].unk_4);
                 break;
             case ENUM_GAME_UNK_0000_UNK_4424_9:
-                func_800743A0_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+                func_800743A0_usa(false, 0, spA0[var_s3].unk_4, sp120[var_s3].unk_4);
                 break;
             case ENUM_GAME_UNK_0000_UNK_4424_10:
-                func_80074490_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+                func_80074490_usa(false, 0, spA0[var_s3].unk_4, sp120[var_s3].unk_4);
                 break;
             case ENUM_GAME_UNK_0000_UNK_4424_11:
-                func_80074580_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+                func_80074580_usa(false, 0, spA0[var_s3].unk_4, sp120[var_s3].unk_4);
                 break;
             case ENUM_GAME_UNK_0000_UNK_4424_12:
-                func_80074670_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+                func_80074670_usa(false, 0, spA0[var_s3].unk_4, sp120[var_s3].unk_4);
                 break;
             case ENUM_GAME_UNK_0000_UNK_4424_13:
-                func_80074760_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+                func_80074760_usa(false, 0, spA0[var_s3].unk_4, sp120[var_s3].unk_4);
                 break;
             case ENUM_GAME_UNK_0000_UNK_4424_14:
-                func_80074850_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+                func_80074850_usa(false, 0, spA0[var_s3].unk_4, sp120[var_s3].unk_4);
                 break;
             case ENUM_GAME_UNK_0000_UNK_4424_15:
             case ENUM_GAME_UNK_0000_UNK_4424_18:
-                func_80074940_usa(false, 0, spA0[temp_s3].unk_4, sp120[temp_s3].unk_4);
+                func_80074940_usa(false, 0, spA0[var_s3].unk_4, sp120[var_s3].unk_4);
                 break;
 
             case ENUM_GAME_UNK_0000_UNK_4424_16:
                 temp_s4 = Pon_Image_Heap;
+
                 osInvalDCache((void *)D_104C660, (u32)D_1070A60 - (u32)D_104C660);
                 func_80001310_usa(SEGMENT_ROM_START(segment_background_50F3F0), temp_s4,
                                   SEGMENT_ROM_SIZE(segment_background_50F3F0));
                 Pon_Image_Heap = (uintptr_t)Pon_Image_Heap + SEGMENT_ROM_SIZE(segment_background_50F3F0);
+
                 bcopy(&gTheGame.unk_9A50, &gTheGame.unk_8C88[6], sizeof(uObjBg));
                 gTheGame.unk_8C88[6].b.imagePtr = temp_s4;
                 guS2DInitBg(&gTheGame.unk_8C88[6]);
@@ -279,24 +281,24 @@ void InitBonus(void) {
                 break;
         }
 
-        if (temp_s3 == ENUM_GAME_UNK_0000_UNK_4424_16) {
+        if (var_s3 == ENUM_GAME_UNK_0000_UNK_4424_16) {
             gTheGame.unk_8C88[6].b.frameX = -0x2C;
             gTheGame.unk_8C88[6].b.frameY = 0x44;
         } else {
-            gTheGame.unk_8C88[6].b.frameX = (0xB2 - sp78[temp_s3 - 1].unk_0) << 2;
-            gTheGame.unk_8C88[6].b.frameY = (sp120[temp_s3].unk_4 + 0x2B - sp78[temp_s3 - 1].unk_1) << 2;
+            gTheGame.unk_8C88[6].b.frameX = (0xB2 - sp78[var_s3 - 1].unk_0) << 2;
+            gTheGame.unk_8C88[6].b.frameY = (sp120[var_s3].unk_4 + 0x2B - sp78[var_s3 - 1].unk_1) << 2;
 
             for (var_s2 = 7; var_s2 < ARRAY_COUNT(gTheGame.unk_8C88); var_s2++) {
-                gTheGame.unk_8C88[var_s2].b.frameX = (0xB2 - sp78[temp_s3 - 1].unk_0) << 2;
-                gTheGame.unk_8C88[var_s2].b.frameY = (0x2B - sp78[temp_s3 - 1].unk_1) << 2;
+                gTheGame.unk_8C88[var_s2].b.frameX = (0xB2 - sp78[var_s3 - 1].unk_0) << 2;
+                gTheGame.unk_8C88[var_s2].b.frameY = (0x2B - sp78[var_s3 - 1].unk_1) << 2;
             }
         }
 
         for (var_s2 = 0; var_s2 < 6; var_s2++) {
             InitTetrisState(&gTheGame.tetrisWell[0].block[0][var_s2]);
-            gTheGame.tetrisWell[0].unk_3830[0][var_s2].s.objX = (s16)(sp98[var_s2] * 4);
-            gTheGame.tetrisWell[0].unk_3830[0][var_s2].s.objY = -0x50;
-            gTheGame.tetrisWell[0].block[0][var_s2].delay = (s32)sp98[var_s2];
+            gTheGame.tetrisWell[0].unk_3830[0][var_s2].s.objX = sp98[var_s2] << 2;
+            gTheGame.tetrisWell[0].unk_3830[0][var_s2].s.objY = -(20 << 2);
+            gTheGame.tetrisWell[0].block[0][var_s2].delay = sp98[var_s2];
         }
     }
 

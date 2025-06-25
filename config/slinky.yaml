@@ -67,6 +67,7 @@ vram_classes:
   - { name: asset_character_block, fixed_vram: 0x01070A60 }
   - { name: asset_bg_screen_A, fixed_vram: 0x01077C60 }
   - { name: asset_flic_anime_bg, fixed_vram: 0x01077C60 }
+  - { name: asset_other_misc, fixed_vram: 0x010835A0 }
   - { name: asset_bg_screen_B, fixed_vram: 0x0108CF00 }
   - { name: asset_sign, fixed_vram: 0x010AA150 }
   - { name: asset_sign_ger, fixed_vram: 0x010AB1D0 }
@@ -1020,25 +1021,10 @@ segments:
     files:
       - { path: src/assets/bg_screen/902250.o }
 
-  - name: unk_917790
-    include_if_any: [[version, usa]]
+  - name: segment_other_misc
+    vram_class: asset_other_misc
     files:
-      - { path: "asm/{version}/data/unk_917790.o" }
-
-  - name: unk_917A40
-    include_if_any: [[version, eur]]
-    files:
-      - { path: "asm/{version}/data/unk_917A40.o" }
-
-  - name: unk_9160A0
-    include_if_any: [[version, fra]]
-    files:
-      - { path: "asm/{version}/data/unk_9160A0.o" }
-
-  - name: unk_90B780
-    include_if_any: [[version, ger]]
-    files:
-      - { path: "asm/{version}/data/unk_90B780.o" }
+      - { path: "asm/{version}/data/segment_other_misc.o" }
 
   - name: sign_pause
     fixed_vram: 0x010A51D0

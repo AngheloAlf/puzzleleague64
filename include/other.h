@@ -11,7 +11,7 @@ struct tetWell;
 void InitMiscStuff(void);
 void UpdateMiscStuff(struct tetWell *well, struct cursor_t *cursor, s32 num);
 void Draw2DMiscStuff(struct struct_gInfo_unk_00068 *dynamicp);
-// void func_80053140_usa();
-// void func_80053E64_usa();
+void func_80053140_usa(struct struct_gInfo_unk_00068 *dynamicp);
+void func_80053E64_usa(void);
 
 #endif

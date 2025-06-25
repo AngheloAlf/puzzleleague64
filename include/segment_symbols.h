@@ -146,6 +146,8 @@ DECLARE_SEGMENT(segment_bg_screen_8CE310);
 DECLARE_SEGMENT(segment_bg_screen_8E2A50);
 DECLARE_SEGMENT(segment_bg_screen_902250);
 
+DECLARE_SEGMENT(segment_other_misc);
+
 DECLARE_SEGMENT(sign_pause);
 DECLARE_SEGMENT(sign_gameover_2d_1p);
 DECLARE_SEGMENT(sign_gameover_2d_2p);

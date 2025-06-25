@@ -341,7 +341,16 @@ typedef struct Game {
     /* 0x89E0 */ flic_t flic[FLIC_COUNT];
     /* 0x8B20 */ action_t action[ACTION_COUNT];
     /* 0x8B98 */ uObjTxtr unk_8B98[2 * UNK_SIZE]; // gLUT?
-    /* 0x8BC8 */ UNK_TYPE1 unk_8BC8[0xC0];
+    /* 0x8BC8 */ UNK_PAD unk_8BC8[0x18];
+    /* 0x8BE0 */ s32 unk_8BE0;
+    /* 0x8BE4 */ void *unk_8BE4;
+    /* 0x8BE8 */ s16 unk_8BE8;
+    /* 0x8BEA */ s16 unk_8BEA;
+    /* 0x8BEC */ s16 unk_8BEC;
+    /* 0x8BEE */ s16 unk_8BEE;
+    /* 0x8BF0 */ s32 unk_8BF0;
+    /* 0x8BF4 */ s32 unk_8BF4;
+    /* 0x8BF8 */ UNK_PAD unk_8BF8[0x90];
     /* 0x8C88 */ uObjBg unk_8C88[10]; // gBG?
     /* 0x8E18 */ UNK_TYPE1 unk_8E18[0xC8];
     /* 0x8EE0 */ uObjTxtr unk_8EE0[UNK_SIZE]; // gTEXT?
@@ -383,9 +392,8 @@ typedef struct Game {
     /* 0x9B44 */ s32 unk_9B44;
     /* 0x9B48 */ s32 unk_9B48;
     /* 0x9B4C */ UNK_TYPE1 unk_9B4C[0x9B50 - 0x9B4C];
-    /* 0x9B50 */ uObjBg unk_9B50[2]; // at least 2
-    /* 0x9BA0 */ UNK_TYPE1 unk_9BA0[0x9BF0 - 0x9BA0];
-    /* 0x9BF0 */ uObjTxtr unk_9BF0;
+    /* 0x9B50 */ uObjBg unk_9B50[4]; // at least 4
+    /* 0x9BF0 */ uObjTxtr unk_9BF0; // tlut
     /* 0x9C08 */ s32 unk_9C08; // totalPlayer?
     /* 0x9C0C */ s32 unk_9C0C; // dimension?
     /* 0x9C10 */ s32 unk_9C10;
