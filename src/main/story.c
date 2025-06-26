@@ -21,6 +21,9 @@
 #include "the_game.h"
 
 #include "041780.h"
+#include "043000.h"
+#include "043D10.h"
+#include "044E80.h"
 
 #define STRUCT_8018E570_USA_UNK_LEN 0x10
 
