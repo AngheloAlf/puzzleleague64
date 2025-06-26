@@ -40,7 +40,7 @@ typedef struct struct_80192FB0 {
     /* 0x0020 */ s32 unk_0020;
     /* 0x0024 */ s32 unk_0024;
     /* 0x0028 */ struct_80192FB0_unk_0028 unk_0028[STRUCT_80192FB0_UNK_0028_COUNT];
-    /* 0x1428 */ UNK_PAD unk_1428[0x4];
+    /* 0x1428 */ s32 unk_1428; // accessed indirectly
 } struct_80192FB0; // size = 0x142C
 
 extern RomOffset D_800B6950_usa[];
@@ -159,7 +159,7 @@ void func_8004441C_usa(struct_80192FB0_unk_0028 *arg0) {
 }
 
 void func_800445D8_usa(Gfx **gfxP, s32 arg1 UNUSED, s32 arg2) {
-    s32 sp18[] = {
+    DATA_INLINE_CONST2 s32 sp18[] = {
         0x3F, 0x39, 0x4C, 0x42, 0x47, 0x46, 0x51, 0x55, 0x5B, 0x51, 0x91, 0x51, 0x4C, 0x5B, 0xC0, 0x63,
     };
     struct_func_8002156C_usa_arg4 sp58;

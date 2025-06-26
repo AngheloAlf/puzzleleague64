@@ -65,7 +65,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/sfxlimit", func_80005270_usa);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", func_80005330_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", func_80005270_usa);
 #endif
 
 #if VERSION_GER

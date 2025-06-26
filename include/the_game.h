@@ -242,7 +242,8 @@ typedef struct Game {
     /* 0x9C24 */ UNK_TYPE4 unk_9C24;
     /* 0x9C28 */ UNK_TYPE4 unk_9C28; // menu_t starts here?
     /* 0x9C2C */ s32 unk_9C2C[UNK_SIZE][4];
-    /* 0x9C3C */ UNK_TYPE1 unk_9C3C[0xC];
+    /* 0x9C3C */ UNK_PAD unk_9C3C[0x8];
+    /* 0x9C44 */ s32 unk_9C44;
     /* 0x9C48 */ struct_801A6DB8_usa unk_9C48[8];
 } Game; // size >= 0xDA28
 
