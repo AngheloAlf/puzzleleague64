@@ -22,7 +22,7 @@ void UpdateNextLevel(struct tetWell * well);
 // void func_8005834C_usa();
 // void func_80058458_usa();
 // void UpdatePlayerPuzzle();
-// void func_800587CC_usa();
+s32 func_800587CC_usa(s32 arg0, s32 arg1);
 // void func_80058934_usa();
 // void UpdatePlayerStageClear();
 void UpdatePlayerStageClearTimeScore(struct cursor_t *cursor, s32 loadsave, s32 round, s32 stage);

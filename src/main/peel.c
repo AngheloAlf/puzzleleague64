@@ -32,7 +32,6 @@ extern s32 B_8018E598_usa;
 extern struct_gaTile *gaTile[0x30];
 extern RomOffset gnWaveData;
 extern void *B_8018E93C_usa;
-extern s32 B_801AB8E4_usa;
 
 extern s32 B_8018E584_usa;
 extern s32 gnAlphaPeel;
@@ -243,7 +242,7 @@ void peelSetup(void) {
         gaTile[ARRAY_COUNT(gaTile) - 1 - i] = (void *)temp_a0;
     }
 
-    B_801AB8E4_usa = temp_a0;
+    B_801AB8E4_usa = (void *)temp_a0;
     if (fileOpen(&sp10, "RIPPLE.RDF") != 0) {
         fileGetAddress(&sp10, &gnWaveData);
         fileClose(&sp10);

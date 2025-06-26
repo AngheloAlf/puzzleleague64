@@ -15,37 +15,37 @@
 
 extern s32 gnSizeWaveLast;
 
-void imageMake(struct_imageLoad_arg0 **arg0, void **arg1, u32 arg2) {
-    *arg0 = *arg1 = (void *)ALIGN4((uintptr_t)*arg1);
-    *arg1 = (void *)((uintptr_t)*arg1 + sizeof(struct_imageLoad_arg0));
+void imageMake(struct_imageLoad_arg0 **ppImage, void **heapP, u32 nCount) {
+    *ppImage = *heapP = (void *)ALIGN4((uintptr_t)*heapP);
+    *heapP = (void *)((uintptr_t)*heapP + sizeof(struct_imageLoad_arg0));
 
-    (*arg0)->unk_2C = *arg1 = (void *)ALIGN4((uintptr_t)*arg1);
-    *arg1 = (void *)((uintptr_t)*arg1 + arg2 * sizeof(struct_bitmapLoad_arg0 *));
+    (*ppImage)->unk_2C = *heapP = (void *)ALIGN4((uintptr_t)*heapP);
+    *heapP = (void *)((uintptr_t)*heapP + nCount * sizeof(struct_bitmapLoad_arg0 *));
 
-    (*arg0)->unk_24 = *arg1 = (void *)ALIGN4((uintptr_t)*arg1);
-    *arg1 = (void *)((uintptr_t)*arg1 + arg2 * sizeof(s32));
+    (*ppImage)->unk_24 = *heapP = (void *)ALIGN4((uintptr_t)*heapP);
+    *heapP = (void *)((uintptr_t)*heapP + nCount * sizeof(s32));
 
-    (*arg0)->unk_1C = *arg1 = (void *)ALIGN4((uintptr_t)*arg1);
-    *arg1 = (void *)((uintptr_t)*arg1 + arg2 * sizeof(s32));
+    (*ppImage)->unk_1C = *heapP = (void *)ALIGN4((uintptr_t)*heapP);
+    *heapP = (void *)((uintptr_t)*heapP + nCount * sizeof(s32));
 
-    (*arg0)->unk_20 = *arg1 = (void *)ALIGN4((uintptr_t)*arg1);
-    *arg1 = (void *)((uintptr_t)*arg1 + arg2 * sizeof(s32));
+    (*ppImage)->unk_20 = *heapP = (void *)ALIGN4((uintptr_t)*heapP);
+    *heapP = (void *)((uintptr_t)*heapP + nCount * sizeof(s32));
 
-    (*arg0)->unk_10 = 0;
-    (*arg0)->unk_0C = 0;
-    (*arg0)->unk_00 = 0;
-    (*arg0)->unk_04 = 0;
-    (*arg0)->unk_88 = 0x400;
-    (*arg0)->unk_8C = 0x400;
-    (*arg0)->unk_14 = 0xFF;
-    (*arg0)->unk_90 = 0;
-    (*arg0)->unk_92 = 0;
-    (*arg0)->unk_08 = 0;
-    (*arg0)->unk_28 = 0;
-    (*arg0)->unk_94 = -1;
-    (*arg0)->unk_98 = -1;
-    (*arg0)->unk_30 = NULL;
-    (*arg0)->unk_34 = NULL;
+    (*ppImage)->unk_10 = 0;
+    (*ppImage)->unk_0C = 0;
+    (*ppImage)->unk_00 = 0;
+    (*ppImage)->unk_04 = 0;
+    (*ppImage)->unk_88 = 0x400;
+    (*ppImage)->unk_8C = 0x400;
+    (*ppImage)->unk_14 = 0xFF;
+    (*ppImage)->unk_90 = 0;
+    (*ppImage)->unk_92 = 0;
+    (*ppImage)->unk_08 = 0;
+    (*ppImage)->unk_28 = 0;
+    (*ppImage)->unk_94 = -1;
+    (*ppImage)->unk_98 = -1;
+    (*ppImage)->unk_30 = NULL;
+    (*ppImage)->unk_34 = NULL;
 }
 
 #if VERSION_USA
@@ -64,7 +64,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_8001EF30_fra);
 INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_8001EFA0_ger);
 #endif
 
-s32 imageLoad(struct_imageLoad_arg0 **arg0, char *filename, void **arg2) {
+s32 imageLoad(struct_imageLoad_arg0 **ppImage, void *pNameOrFile, void **heapP) {
     File file;
     u32 magic;
     u32 sp24;
@@ -77,10 +77,24 @@ s32 imageLoad(struct_imageLoad_arg0 **arg0, char *filename, void **arg2) {
     s32 needsReend;
     s32 i;
 
-    if (fileTest((void *)filename)) {
-        bcopy(filename, &file, sizeof(File));
+#if 0
+    struct_bitmap_c_43 file; // r1+0x28
+    int iBitmap; // r26
+    int bFlip; // r29
+    int nSize; // r1+0x24
+    unsigned char nRed; // r1+0x23
+    unsigned char nGreen; // r1+0x22
+    unsigned char nBlue; // r1+0x21
+    unsigned char nAlpha; // r1+0x20
+    unsigned int nHeader; // r1+0x1C
+    unsigned int nType; // r1+0x18
+    unsigned int nBitmapCount; // r1+0x14
+#endif
+
+    if (fileTest(pNameOrFile)) {
+        bcopy(pNameOrFile, &file, sizeof(File));
     } else {
-        fileOpen(&file, filename);
+        fileOpen(&file, pNameOrFile);
     }
 
     magic = 0;
@@ -91,7 +105,7 @@ s32 imageLoad(struct_imageLoad_arg0 **arg0, char *filename, void **arg2) {
         needsReend = true;
     } else {
 #if VERSION_USA
-        char *auxName = fileTest((void *)filename) ? "<FILE>" : filename;
+        char *auxName = fileTest(pNameOrFile) ? "<FILE>" : pNameOrFile;
 
         osSyncPrintf("imageLoad: Could not load IMAGE '%s'\n", auxName);
 #endif
@@ -111,16 +125,16 @@ s32 imageLoad(struct_imageLoad_arg0 **arg0, char *filename, void **arg2) {
         sp2C = REEND_UWORD(sp2C);
     }
 
-    imageMake(arg0, arg2, sp2C);
-    (*arg0)->unk_0C = sp24;
-    (*arg0)->unk_18 = sp2C;
-    (*arg0)->unk_94 = ((sp28 << 0x18) | (sp29 << 0x10) | (sp2A << 8) | sp2B);
+    imageMake(ppImage, heapP, sp2C);
+    (*ppImage)->unk_0C = sp24;
+    (*ppImage)->unk_18 = sp2C;
+    (*ppImage)->unk_94 = ((sp28 << 0x18) | (sp29 << 0x10) | (sp2A << 8) | sp2B);
     if (sp24 & 0x10) {
         fileGet(&file, &sp28, sizeof(u8));
         fileGet(&file, &sp29, sizeof(u8));
         fileGet(&file, &sp2A, sizeof(u8));
         fileGet(&file, &sp2B, sizeof(u8));
-        (*arg0)->unk_98 = ((sp28 << 0x18) | (sp29 << 0x10) | (sp2A << 8) | sp2B);
+        (*ppImage)->unk_98 = ((sp28 << 0x18) | (sp29 << 0x10) | (sp2A << 8) | sp2B);
     }
 
     if (sp24 & 8) {
@@ -132,21 +146,21 @@ s32 imageLoad(struct_imageLoad_arg0 **arg0, char *filename, void **arg2) {
     }
 
     for (i = 0; i < sp2C; i++) {
-        fileGet(&file, &(*arg0)->unk_1C[i], sizeof(s32));
-        fileGet(&file, &(*arg0)->unk_20[i], sizeof(s32));
-        fileGet(&file, &(*arg0)->unk_24[i], sizeof(s32));
+        fileGet(&file, &(*ppImage)->unk_1C[i], sizeof(s32));
+        fileGet(&file, &(*ppImage)->unk_20[i], sizeof(s32));
+        fileGet(&file, &(*ppImage)->unk_24[i], sizeof(s32));
 
         if (needsReend) {
-            (*arg0)->unk_1C[i] = REEND_SWORD((*arg0)->unk_1C[i]);
-            (*arg0)->unk_20[i] = REEND_SWORD((*arg0)->unk_20[i]);
-            (*arg0)->unk_24[i] = REEND_SWORD((*arg0)->unk_24[i]);
+            (*ppImage)->unk_1C[i] = REEND_SWORD((*ppImage)->unk_1C[i]);
+            (*ppImage)->unk_20[i] = REEND_SWORD((*ppImage)->unk_20[i]);
+            (*ppImage)->unk_24[i] = REEND_SWORD((*ppImage)->unk_24[i]);
         }
 
-        bitmapLoad(&(*arg0)->unk_2C[i], &file, arg2, (sp24 & 0x200) ? -1 : 0);
+        bitmapLoad(&(*ppImage)->unk_2C[i], &file, heapP, (sp24 & 0x200) ? -1 : 0);
     }
 
     if (sp24 & 0x200) {
-        struct_imageLoad_arg0 *temp_a1_4 = *arg0;
+        struct_imageLoad_arg0 *temp_a1_4 = *ppImage;
         struct_bitmapLoad_arg0 *temp_v0 = temp_a1_4->unk_2C[0];
         s32 var_t0 = temp_v0->unk_04 * temp_v0->unk_10;
         s32 j;
@@ -156,20 +170,20 @@ s32 imageLoad(struct_imageLoad_arg0 **arg0, char *filename, void **arg2) {
             var_t0 = MAX(var_t0, temp_v0->unk_04 * temp_v0->unk_10);
         }
 
-        temp_a1_4->unk_30 = *arg2 = (void *)ALIGN16((uintptr_t)*arg2);
+        temp_a1_4->unk_30 = *heapP = (void *)ALIGN16((uintptr_t)*heapP);
 
         var_t0 = ALIGN16(var_t0);
 
-        temp_a1_4->unk_34 = *arg2 = (void *)ALIGN16((uintptr_t)*arg2 + var_t0);
+        temp_a1_4->unk_34 = *heapP = (void *)ALIGN16((uintptr_t)*heapP + var_t0);
 
-        *arg2 = (void *)((uintptr_t)*arg2 + var_t0);
+        *heapP = (void *)((uintptr_t)*heapP + var_t0);
     }
 
-    if (!fileTest((void *)filename)) {
+    if (!fileTest(pNameOrFile)) {
         fileClose(&file);
         return -1;
     } else {
-        bcopy(&file, filename, sizeof(File));
+        bcopy(&file, pNameOrFile, sizeof(File));
         return -1;
     }
 }
@@ -191,6 +205,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_8001FD9C_ger);
 #endif
 
 #if VERSION_USA
+// imageLoadROM?
 INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_8001FD0C_usa);
 #endif
 
@@ -206,24 +221,24 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_8001FD0C_usa);
 INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_8001FD0C_usa);
 #endif
 
-nbool imageCopy(struct_imageLoad_arg0 **arg0, struct_imageLoad_arg0 *arg1, void **heapP) {
+nbool imageCopy(struct_imageLoad_arg0 **ppImage, struct_imageLoad_arg0 *pImage, void **heapP) {
     s32 i;
 
-    imageMake(arg0, heapP, arg1->unk_18);
-    (*arg0)->unk_0C = arg1->unk_0C;
-    (*arg0)->unk_18 = arg1->unk_18;
-    (*arg0)->unk_94 = arg1->unk_94;
-    (*arg0)->unk_98 = arg1->unk_98;
+    imageMake(ppImage, heapP, pImage->unk_18);
+    (*ppImage)->unk_0C = pImage->unk_0C;
+    (*ppImage)->unk_18 = pImage->unk_18;
+    (*ppImage)->unk_94 = pImage->unk_94;
+    (*ppImage)->unk_98 = pImage->unk_98;
 
-    for (i = 0; i < arg1->unk_18; i++) {
-        (*arg0)->unk_2C[i] = arg1->unk_2C[i];
-        (*arg0)->unk_1C[i] = arg1->unk_1C[i];
-        (*arg0)->unk_20[i] = arg1->unk_20[i];
-        (*arg0)->unk_24[i] = arg1->unk_24[i];
+    for (i = 0; i < pImage->unk_18; i++) {
+        (*ppImage)->unk_2C[i] = pImage->unk_2C[i];
+        (*ppImage)->unk_1C[i] = pImage->unk_1C[i];
+        (*ppImage)->unk_20[i] = pImage->unk_20[i];
+        (*ppImage)->unk_24[i] = pImage->unk_24[i];
     }
 
-    if (arg1->unk_0C & 0x200) {
-        struct_imageLoad_arg0 *temp_t0 = *arg0;
+    if (pImage->unk_0C & 0x200) {
+        struct_imageLoad_arg0 *temp_t0 = *ppImage;
         struct_bitmapLoad_arg0 *temp_v0 = temp_t0->unk_2C[0];
         s32 size = temp_v0->unk_04 * temp_v0->unk_10;
         s32 j;
@@ -247,27 +262,27 @@ nbool imageCopy(struct_imageLoad_arg0 **arg0, struct_imageLoad_arg0 *arg1, void 
     return ntrue;
 }
 
-nbool imageMakeScan(struct_imageLoad_arg0 *arg0, void **heapP) {
+nbool imageMakeScan(struct_imageLoad_arg0 *pImage, void **heapP) {
     s32 i;
     s32 j;
     s32 count;
 
     count = 0;
-    for (i = 0; i < arg0->unk_18; i++) {
-        if (count < arg0->unk_2C[i]->unk_10) {
-            count = arg0->unk_2C[i]->unk_10;
+    for (i = 0; i < pImage->unk_18; i++) {
+        if (count < pImage->unk_2C[i]->unk_10) {
+            count = pImage->unk_2C[i]->unk_10;
         }
     }
-    arg0->unk_08 = count;
+    pImage->unk_08 = count;
 
-    arg0->unk_28 = *heapP = (void *)ALIGN(*heapP, ALIGNOF(*arg0->unk_28));
-    *heapP += count * sizeof(*arg0->unk_28);
+    pImage->unk_28 = *heapP = (void *)ALIGN(*heapP, ALIGNOF(*pImage->unk_28));
+    *heapP += count * sizeof(*pImage->unk_28);
 
     for (j = 0; j < count; j++) {
-        arg0->unk_28[j].unk_0 = 0;
-        arg0->unk_28[j].unk_4 = -1;
-        arg0->unk_28[j].unk_8 = 0;
-        arg0->unk_28[j].unk_A = 0;
+        pImage->unk_28[j].unk_0 = 0;
+        pImage->unk_28[j].unk_4 = -1;
+        pImage->unk_28[j].unk_8 = 0;
+        pImage->unk_28[j].unk_A = 0;
     }
 
     return ntrue;
@@ -290,13 +305,13 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_80020304_usa);
 #endif
 
 #if VERSION_USA
-nbool imageSetScale(struct_imageLoad_arg0 *arg0, f32 arg1, f32 arg2) {
-    if ((arg0 != NULL) && (arg1 != 0.0)) {
-        arg0->unk_88 = 1024 / arg1;
-        if (arg1 != arg2) {
-            arg0->unk_8C = 1024 / arg2;
+nbool imageSetScale(struct_imageLoad_arg0 *pImage, f32 rScaleX, f32 rScaleY) {
+    if ((pImage != NULL) && (rScaleX != 0.0)) {
+        pImage->unk_88 = 1024 / rScaleX;
+        if (rScaleX != rScaleY) {
+            pImage->unk_8C = 1024 / rScaleY;
         } else {
-            arg0->unk_8C = arg0->unk_88;
+            pImage->unk_8C = pImage->unk_88;
         }
         return ntrue;
     }

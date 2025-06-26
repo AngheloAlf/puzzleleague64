@@ -9,10 +9,13 @@
 #include "main_functions.h"
 #include "main_variables.h"
 
+#include "attack3d.h"
 #include "bkground.h"
 #include "bonus.h"
+#include "character.h"
 #include "flic.h"
 #include "info.h"
+#include "init3d.h"
 #include "other.h"
 #include "sign.h"
 #include "text.h"

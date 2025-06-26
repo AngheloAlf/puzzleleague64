@@ -1259,7 +1259,7 @@ extern TexturePtr B_801AB8A8_usa[GAME_BUFFER_LEN][B_801F9D00_USA_LEN];
 extern s32 attack_chain2[GAME_BUFFER_LEN];
 // extern UNK_TYPE B_801AB8DC_usa;
 extern u32 gGameStatus;
-// extern UNK_TYPE B_801AB8E4_usa;
+extern void *B_801AB8E4_usa;
 extern s32 AItotCheck[AI_CHECK_COUNT];
 
 // extern UNK_TYPE B_801AB90C_usa;

@@ -19,7 +19,10 @@
 #endif
 
 #ifndef ALIGNOF
-#ifdef __sgi /* IDO compiler */
+#ifdef M2CTX
+// Dummy value to avoid m2c from freaking out
+#define ALIGNOF(x) (4)
+#elif defined(__sgi) /* IDO compiler */
 #define ALIGNOF(x) __builtin_alignof(x)
 #elif (__STDC_VERSION__ >= 201112L) /* C11 */
 #define ALIGNOF(x) _Alignof(x)
@@ -31,5 +34,7 @@
 #define ALIGN_MASK(n) (~((n) - 1))
 
 #define ALIGNOF_MASK(x) ALIGN_MASK(ALIGNOF(x))
+
+#define ALIGN_TO(val, type) (void *) ((((uintptr_t)(val)) + (ALIGNOF(type) - 1)) & ALIGNOF_MASK(type))
 
 #endif
