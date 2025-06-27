@@ -273,20 +273,20 @@ void DoMT(void) {
 void MimicCheckState(tetWell *well, cursor_t *cursor) {
     s32 result;
 
-    if (well->unk_43A8 < cursor->unk_28) {
-        cursor->unk_28 = well->unk_43A8;
+    if (well->unk_43A8 < cursor->unk_28[0]) {
+        cursor->unk_28[0] = well->unk_43A8;
     }
 
     if (!CheckFieldActive(well)) {
         if ((brainbrain[0].unk_00C == -1) && (well->unk_43A8 == 0)) {
             if (brainbrain[0].unk_03C == 5) {
-                if (cursor->unk_2C == 0) {
+                if (cursor->unk_28[1] == 0) {
                     return;
                 }
-                result = (cursor->unk_2C == cursor->unk_30) ? -1 : 0;
-            } else if (cursor->unk_28 != 0) {
-                result = ((-cursor->unk_30 >= cursor->unk_28)) ? -1 : 0;
-            } else if (cursor->unk_2C != 0) {
+                result = (cursor->unk_28[1] == cursor->unk_28[2]) ? -1 : 0;
+            } else if (cursor->unk_28[0] != 0) {
+                result = ((-cursor->unk_28[2] >= cursor->unk_28[0])) ? -1 : 0;
+            } else if (cursor->unk_28[1] != 0) {
                 result = 0;
             } else {
                 return;

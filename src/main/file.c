@@ -164,8 +164,8 @@ bool fileGetAddress(File *file, RomOffset *dst) {
 /**
  * Original name: fileOpen
  */
-s32 fileOpen(File *file, char *filename) {
-    if (fileFind(file, filename) != 0) {
+s32 fileOpen(File *file, const char *filename) {
+    if (fileFind(file, (void *)filename) != 0) {
         file->inFileOffset = 0;
 
         fileBuffer(file, file->fileSize);

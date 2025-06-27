@@ -26,7 +26,7 @@ s32 fileFind(File *file, char *filename);
 s32 func_8001CA94_usa(char *filename);
 bool fileTest(File *file);
 bool fileGetAddress(File *file, RomOffset *dst);
-s32 fileOpen(File *file, char *filename);
+s32 fileOpen(File *file, const char *filename);
 s32 fileClose(File *file);
 s32 fileGet(File *file, void *dst, s32 totalSize);
 s32 fileSeek(File *file, s32 mode, s32 offset);

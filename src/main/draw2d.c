@@ -606,7 +606,7 @@ void Draw2DClearLine(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     s32 count;
     attack_t *attk;
 
-    if ((gMain < GMAIN_388) && (gTheGame.cursorBlock[num].unk_28 <= 0)) {
+    if ((gMain < GMAIN_388) && (gTheGame.cursorBlock[num].unk_28[0] <= 0)) {
         gDPPipeSync(glistp++);
         gDPSetTextureLUT(glistp++, G_TT_RGBA16);
         gSPObjLoadTxtr(glistp++, &numberLUT);

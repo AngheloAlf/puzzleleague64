@@ -3552,7 +3552,7 @@ nbool screenFind(s32 *dst, const char *arg1) {
     return nfalse;
 }
 
-s32 screenLoad(char *arg0, void **heapP) {
+s32 screenLoad(const char *arg0, void **heapP) {
     File sp10;
     s32 sp20[6] UNUSED;
     s32 sp38;

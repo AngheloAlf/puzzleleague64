@@ -686,7 +686,7 @@ void DoTetris(void) {
                 AddNewRow(well, cursor, num);
                 well->unk_43F8 = 0;
                 if ((gSelection == 0xAA) || (gSelection == 0xB4)) {
-                    cursor->unk_28 -= 1;
+                    cursor->unk_28[0] -= 1;
                 }
             }
 

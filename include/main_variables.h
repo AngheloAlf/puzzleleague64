@@ -1231,7 +1231,7 @@ extern s32 B_80193020_usa;
 extern enum_gDemo gDemo; /* Original name: gDemo */
 extern s32 AIrowCheck[AI_CHECK_COUNT][5];
 extern OSTask hvqtask;
-// extern UNK_TYPE B_8019CF98_usa;
+extern s32 B_8019CF98_usa;
 extern void *B_8019CF9C_usa;
 // extern UNK_TYPE B_8019CFA0_usa;
 // extern UNK_TYPE B_8019D150_usa;

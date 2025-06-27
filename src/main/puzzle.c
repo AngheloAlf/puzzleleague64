@@ -110,7 +110,7 @@ void DrawPuzzleEditor(struct_gInfo_unk_00068 *arg0) {
     gDPPipeSync(glistp++);
     gDPSetCycleType(glistp++, G_CYC_FILL);
     gDPSetFillColor(glistp++, (GPACK_RGBA5551(0, 0, 0, 1) << 16) | GPACK_RGBA5551(0, 0, 0, 1));
-    gDPFillRectangle(glistp++, 0, 0, 319, 6);
+    gDPFillRectangle(glistp++, 0, 0, SCREEN_WIDTH - 1, 6);
     gDPPipeSync(glistp++);
     gDPSetCycleType(glistp++, G_CYC_1CYCLE);
 
@@ -138,7 +138,7 @@ void DrawPuzzleEditor(struct_gInfo_unk_00068 *arg0) {
     gDPPipeSync(glistp++);
     gDPSetCycleType(glistp++, G_CYC_FILL);
     gDPSetFillColor(glistp++, (GPACK_RGBA5551(99, 99, 99, 1) << 16) | GPACK_RGBA5551(99, 99, 99, 1));
-    gDPFillRectangle(glistp++, 226, 26, 287, 140);
+    gDPFillRectangle(glistp++, 226, 26, SCREEN_WIDTH - 33, 140);
     gDPPipeSync(glistp++);
     gDPSetCycleType(glistp++, G_CYC_1CYCLE);
 

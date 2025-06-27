@@ -4,10 +4,13 @@
 #include "macros_defines.h"
 #include "main_variables.h"
 
+#include "libc/assert.h"
+
 #include "ai.h"
 #include "image.h"
 #include "peel.h"
 #include "screen.h"
+#include "segment_symbols.h"
 #include "sfxlimit.h"
 #include "sound.h"
 #include "the_game.h"
@@ -28,8 +31,8 @@ typedef struct struct_80192FA0 {
     /* 0x0C */ struct_80192FA0_unk_0C unk_0C;
     /* 0x0C */ struct_80192FA0_unk_0C unk_1C;
     /* 0x0C */ struct_80192FA0_unk_0C unk_2C;
-    /* 0x3C */ s32 unk_3C[3];
-    /* 0x48 */ s32 unk_48[3];
+    /* 0x3C */ s32 unk_3C[STRUCT_80192FA0_UNK_64];
+    /* 0x48 */ s32 unk_48[STRUCT_80192FA0_UNK_64];
     /* 0x54 */ s32 unk_54;
     /* 0x58 */ s32 unk_58;
     /* 0x5C */ s32 unk_5C;
@@ -39,31 +42,46 @@ typedef struct struct_80192FA0 {
     /* 0x7C */ struct_imageLoad_arg0 *unk_7C[STRUCT_80192FA0_UNK_64];
     /* 0x88 */ struct_imageLoad_arg0 *unk_88[STRUCT_80192FA0_UNK_64];
     /* 0x94 */ s32 unk_94[STRUCT_80192FA0_UNK_64];
-    /* 0xA0 */ s32 unk_A0[3];
+    /* 0xA0 */ s32 unk_A0[STRUCT_80192FA0_UNK_64];
     /* 0xAC */ s32 unk_AC;
     /* 0xB0 */ s32 unk_B0;
 } struct_80192FA0; // size = 0xB4
 
-extern struct_imageLoad_arg0 *D_800B6870_usa;
-extern s32 D_800B6940_usa[];
-
 extern struct_80192FA0 *B_80192FA0_usa;
 extern u32 B_80192FA4_usa;
 
-extern const char RO_800C581C_usa[];
-extern const char RO_STR_800C5828_usa[];
-
 void func_8004360C_usa(s32 arg0);
 
-extern s32 B_8019CF98_usa;
-extern s32 D_800B6840_usa[];
-extern char *D_800B6874_usa[];
-extern const char *RO_800C5750_usa[];
+RomOffset D_800B6840_usa[] = {
+    SEGMENT_ROM_START(segment_background_35C3F0), SEGMENT_ROM_START(segment_background_3807F0),
+    SEGMENT_ROM_START(segment_background_3A4BF0), SEGMENT_ROM_START(segment_background_3C8FF0),
+    SEGMENT_ROM_START(segment_background_3ED3F0), SEGMENT_ROM_START(segment_background_4117F0),
+    SEGMENT_ROM_START(segment_background_435BF0), SEGMENT_ROM_START(segment_background_459FF0),
+    SEGMENT_ROM_START(segment_background_47E3F0), SEGMENT_ROM_START(segment_background_4A27F0),
+    SEGMENT_ROM_START(segment_background_4C6BF0), SEGMENT_ROM_START(segment_background_4EAFF0),
+};
 
-void func_80043110_usa(s32 arg0);
-#if VERSION_USA
-#ifdef NON_MATCHING
-// TODO: split rodata
+struct_imageLoad_arg0 *D_800B6870_usa = NULL;
+
+char *D_800B6874_usa[] = {
+    "pikachu.bif",   "squirtle.bif",   "bulbasr.bif",    "nidoran.bif",   "growlith.bif",   "krabby.bif",
+    "geodude.bif",   "vulpix.bif",     "zubat.bif",      "horsea.bif",    "psyduck.bif",    "staryu.bif",
+    "raichu.bif",    "jolteon.bif",    "magneton.bif",   "tangela.bif",   "weepinbell.bif", "gloom.bif",
+    "venomoth.bif",  "voltorb.bif",    "golbat.bif",     "abra.bif",      "hypno.bif",      "alakazam.bif",
+    "arcanineb.bif", "charmeleon.bif", "magmar.bif",     "marrill.bif",   "venonat.bif",    "scyther.bif",
+    "weezing.bif",   "arbok.bif",      "golbatr.bif",    "persian.bif",   "sandslash.bif",  "nidoking.bif",
+    "sparky.bif",    "charmander.bif", "butterfree.bif", "cloyster.bif",  "polywirl.bif",   "dewgong.bif",
+    "onix.bif",      "hitmonchan.bif", "primape.bif",    "nidoqueen.bif", "arcanineg.bif",  "kingler.bif",
+    "pikachu.bif",   "squirtle.bif",   "bulbasr.bif",
+};
+
+s32 D_800B6940_usa[] = {
+    0x00000056,
+    0x00000048,
+    0x00000048,
+};
+static_assert(ARRAY_COUNT(D_800B6940_usa) == STRUCT_80192FA0_UNK_64, "");
+
 void func_80043110_usa(s32 arg0) {
     DATA_INLINE_CONST2 char *sp20[51] = {
         "pikatext.bif", "squitext.bif", "bulbtext.bif", "nidotext.bif", "growtext.bif", "krabtext.bif", "geodtext.bif",
@@ -77,7 +95,7 @@ void func_80043110_usa(s32 arg0) {
     };
     void *spF0;
     s32 var_s1;
-    s32 temp;
+    int temp;
 
     if (func_80024C14_usa() || screenFlushing()) {
         return;
@@ -90,6 +108,32 @@ void func_80043110_usa(s32 arg0) {
     for (var_s1 = 0; var_s1 < STRUCT_80192FA0_UNK_64; var_s1++) {
         imageLoad(&B_80192FA0_usa->unk_64[var_s1], D_800B6874_usa[var_s1], &spF0);
         imageLoad(&B_80192FA0_usa->unk_7C[var_s1], sp20[var_s1], &spF0);
+
+#if VERSION_FRA || VERSION_GER
+        {
+            struct_bitmapLoad_arg0 *temp_a3 = *B_80192FA0_usa->unk_7C[var_s1]->unk_2C;
+            s32 var_t1 = 0;
+            s32 var_a2_2;
+
+            for (var_a2_2 = 0; var_a2_2 < temp_a3->unk_10; var_a2_2++) {
+                s32 var_a0;
+
+                for (var_a0 = temp_a3->unk_0C - 1; var_a0 != 0; var_a0--) {
+                    u8 *temp = temp_a3->unk_08;
+
+                    if (temp[temp_a3->unk_04 * var_a2_2 + var_a0] != ((s32)(temp_a3->unk_00 & 0xFF000) >> 0xC)) {
+                        break;
+                    }
+                }
+
+                if (var_t1 < var_a0) {
+                    var_t1 = var_a0;
+                }
+            }
+            D_800B6940_usa[var_s1] = 0x90 - var_t1;
+        }
+#endif
+
         B_80192FA0_usa->unk_94[var_s1] = var_s1;
 
         imageLoad(&B_80192FA0_usa->unk_70[var_s1], D_800B6874_usa[gTheGame.menu[0].unk_4 * 3 + var_s1], &spF0);
@@ -106,22 +150,6 @@ void func_80043110_usa(s32 arg0) {
     B_80192FA0_usa->unk_3C[2] = 0x69;
     func_8004360C_usa(arg0);
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/043D10", func_80043110_usa);
-#endif
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/043D10", func_80043110_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/043D10", func_80043110_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/043D10", func_80043110_usa);
-#endif
 
 void func_80043380_usa(struct_80192FA0_unk_0C *arg0) {
     if (arg0->unk_08 == 0) {
@@ -320,13 +348,13 @@ void func_80043A60_usa(Gfx **gfxP, s32 arg1 UNUSED, s32 arg2) {
         sp18.unk_08 = 0x23;
         sp18.unk_0C = 0x23;
 
-        for (var_s7 = 0; var_s7 < 3; var_s7++) {
+        for (var_s7 = 0; var_s7 < STRUCT_80192FA0_UNK_64; var_s7++) {
             sp18.unk_00 = B_80192FA0_usa->unk_48[var_s7];
             imageDraw(B_80192FA0_usa->unk_64[var_s7], gfxP, B_80192FA0_usa->unk_0C.unk_00 + 0x6E, 0x3A + var_s7 * 0x2B,
                       &sp18);
         }
 
-        for (var_s7 = 0; var_s7 < 3; var_s7++) {
+        for (var_s7 = 0; var_s7 < STRUCT_80192FA0_UNK_64; var_s7++) {
             sp18.unk_00 = B_80192FA0_usa->unk_3C[var_s7];
             imageDraw(B_80192FA0_usa->unk_70[var_s7], gfxP, 0xAF - B_80192FA0_usa->unk_1C.unk_00, 0x3A + var_s7 * 0x2B,
                       &sp18);
@@ -368,7 +396,7 @@ void func_80043D24_usa(s32 arg0) {
     s32 temp_s0;
     s32 var_a0;
 
-    if (!screenFind(&sp10, RO_800C581C_usa)) {
+    if (!screenFind(&sp10, "1PPK-PICK")) {
         return;
     }
 
@@ -452,8 +480,8 @@ void func_8004407C_usa(void **heapP, s32 arg1 UNUSED) {
     B_80192FA0_usa = *heapP;
     *heapP += sizeof(struct_80192FA0);
 
-    if (screenLoad((char *)RO_STR_800C5828_usa, heapP) != 0) {
-        B_80192FA0_usa->unk_00 = screenSet(RO_800C581C_usa, 0xFF001);
+    if (screenLoad("POKEMON.SBF", heapP) != 0) {
+        B_80192FA0_usa->unk_00 = screenSet("1PPK-PICK", 0xFF001);
     }
 
     for (var_a0 = 0; var_a0 < STRUCT_80192FA0_UNK_64; var_a0++) {
@@ -478,7 +506,7 @@ void func_8004407C_usa(void **heapP, s32 arg1 UNUSED) {
     B_80192FA0_usa->unk_B0 = 0;
     B_80192FA0_usa->unk_08 = 0;
 
-    if (screenFind(sp10, RO_800C581C_usa) != nfalse) {
+    if (screenFind(sp10, "1PPK-PICK")) {
         func_8002A2E8_usa(sp10[0], 0x64, &sp10[1], &sp10[2]);
         func_8002A1F4_usa(sp10[0], 0x64, sp10[1], 0);
         func_8002A2E8_usa(sp10[0], 0x65, &sp10[1], &sp10[2]);

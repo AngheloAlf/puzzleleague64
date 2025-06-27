@@ -569,7 +569,7 @@ s32 ComboCount(tetWell *well, cursor_t *cursor) {
     }
 
     if ((gSelection == 0x6E) && (var_t2 != 0)) {
-        cursor->unk_2C = var_t2;
+        cursor->unk_28[1] = var_t2;
     }
 
     return var_t2;

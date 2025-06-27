@@ -227,7 +227,7 @@ nbool func_8002A4FC_usa(s32 arg0, s32 *arg1);
 nbool func_8002A574_usa(s32 arg0, s32 arg1, s32 arg2);
 nbool func_8002A638_usa(s32 arg0, s32 arg1, s32 *arg2);
 nbool screenFind(s32 *dst, const char *arg1);
-s32 screenLoad(char *arg0, void **heapP);
+s32 screenLoad(const char *arg0, void **heapP);
 void screenSetup(void);
 void func_8002B5C4_usa(void);
 

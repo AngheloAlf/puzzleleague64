@@ -246,7 +246,7 @@ void UpdateMiscStuff(tetWell *well, cursor_t *cursor, s32 num) {
                 gTheGame.unk_9B48 = -1;
             }
 
-            if (cursor->unk_2C % 2 == 0) {
+            if (cursor->unk_28[1] % 2 == 0) {
                 gTheGame.drawText[3].word.s.imageAdrs = 0;
             } else {
                 gTheGame.drawText[3].word.s.imageAdrs = 3;
@@ -311,9 +311,9 @@ void Draw2DMiscStuff(struct_gInfo_unk_00068 *dynamicp) {
         gDPSetTextureLUT(glistp++, G_TT_RGBA16);
         gSPObjLoadTxtr(glistp++, &otherLUT);
 
-        if (dynamicp->cursorBlock[0].unk_2C < 2) {
+        if (dynamicp->cursorBlock[0].unk_28[1] < 2) {
             gSPObjLoadTxtr(glistp++, &otherTexture9);
-        } else if (dynamicp->cursorBlock[0].unk_2C < 4) {
+        } else if (dynamicp->cursorBlock[0].unk_28[1] < 4) {
             gSPObjLoadTxtr(glistp++, &otherTexture10);
         } else {
             gSPObjLoadTxtr(glistp++, &otherTexture11);
@@ -630,7 +630,7 @@ block_45:
                 temp_a2->unk_34 = 0x073FC000;
                 temp_a2->unk_38 = 0xE7000000;
                 temp_a2->unk_3C = 0;
-                temp_v1_2 = dynamicp->cursorBlock[0].unk_2C;
+                temp_v1_2 = dynamicp->cursorBlock[0].unk_28[1];
                 glistp = temp_a2 + 8;
                 glistp = temp_a2 + 0x10;
                 glistp = temp_a2 + 0x18;
@@ -671,7 +671,7 @@ block_45:
                 temp_a2->unk_6C = 0;
                 temp_a2->unk_70 = 0xF2000000;
                 temp_a2->unk_74 = 0xBC05C;
-                if (!(dynamicp->cursorBlock[0].unk_2C & 1)) {
+                if (!(dynamicp->cursorBlock[0].unk_28[1] & 1)) {
                     var_a0_3 = 0xF5480C00;
                 } else {
                     var_a0_3 = 0xF5480C03;

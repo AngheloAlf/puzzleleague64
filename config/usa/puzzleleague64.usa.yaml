@@ -431,6 +431,9 @@ segments:
       - [0x0B7050, .data, main/02E800]
       - [0x0B7070, .data, main/editor]
       - [0x0B70C0, data, main/0B70C0] # bonus may start here
+      - [0x0B7400, .data, main/043000]
+      - [0x0B7440, .data, main/043D10]
+      - [0x0B7550, data, main/0B7550]
       - [0x0B80D0, data, main/0B80D0] # update? maybe wrong end
       - [0x0B8130, data, main/0B8130]
 
@@ -551,7 +554,8 @@ segments:
       - [0x0C5580, .rodata, main/end]
       - [0x0C5970, .rodata, main/hvqm2util]
       - [0x0C5C30, .rodata, main/041780]
-      - [0x0C5D80, rodata, main/0C5D80] # Not sure how to split this between 043000 and 043D10
+      - [0x0C5D80, .rodata, main/043000]
+      - [0x0C5DEC, .rodata, main/043D10]
       - [0x0C6440, .rodata, main/044E80]
       - [0x0C6600, .rodata, main/controller]
       - [0x0C6630, .rodata, main/bkground]
