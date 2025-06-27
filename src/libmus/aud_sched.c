@@ -26,7 +26,7 @@
 
 // puzzle league headers
 #if VERSION_FRA || VERSION_GER
-#include "main_functions.h"
+#include "boot_main.h"
 #endif
 
 /* internal macros */

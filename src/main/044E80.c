@@ -2,7 +2,6 @@
 
 #include "include_asm.h"
 #include "macros_defines.h"
-#include "main_functions.h"
 #include "main_variables.h"
 
 #include "hvqm2util.h"
@@ -41,7 +40,7 @@ typedef struct struct_80192FB0 {
     /* 0x0024 */ s32 unk_0024;
     /* 0x0028 */ struct_80192FB0_unk_0028 unk_0028[STRUCT_80192FB0_UNK_0028_COUNT];
     /* 0x1428 */ s32 unk_1428; // accessed indirectly
-} struct_80192FB0; // size = 0x142C
+} struct_80192FB0;             // size = 0x142C
 
 extern RomOffset D_800B6950_usa[];
 extern struct_80192FB0 *B_80192FB0_usa;
@@ -934,7 +933,7 @@ void func_80046648_usa(s32 arg0) {
         case 0x7:
             if (!screenFlushing() && !func_80024C14_usa()) {
                 if (func_80024BF4_usa(&sp10)) {
-                    if (gTheGame.unk_9C28 == 3) {
+                    if (gTheGame.menu[0].unk_0 == 3) {
                         HVQM2Util_Play((void *)"GAMEEND.HVQM", 0x1000U, sp10);
                         func_8002B85C_usa(5, 2);
                     } else {
@@ -944,7 +943,7 @@ void func_80046648_usa(s32 arg0) {
                         gTheGame.unk_9C0C = 1;
                         gSelection = 0x96;
                         gTheGame.unk_9C08 = 2;
-                        gTheGame.unk_9C2C[0][2] = 1;
+                        gTheGame.menu[0].unk_C = 1;
                     }
                 }
             }
@@ -964,7 +963,7 @@ void func_80046648_usa(s32 arg0) {
                 if (func_80024BF4_usa(&sp10)) {
                     HVQM2Util_Play((void *)"YOULOSE.HVQM", 0x1000U, sp10);
                     gTheGame.unk_9C0C = 1;
-                    gTheGame.unk_9C2C[0][0] = 0x12;
+                    gTheGame.menu[0].unk_4 = 0x12;
                     gMain = GMAIN_BONUS;
                     gReset = -1;
                 }

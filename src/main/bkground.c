@@ -6,7 +6,6 @@
 
 #include "include_asm.h"
 #include "macros_defines.h"
-#include "main_functions.h"
 #include "main_variables.h"
 
 #include "001F10.h"
@@ -295,7 +294,7 @@ void InitBackground(s32 who) {
                     break;
 
                 case 0x3:
-                    if (gTheGame.tetrisWell[0].unk_4420 == 5) {
+                    if (gTheGame.tetrisWell[0].menu.unk_0 == 5) {
                         LOAD_DATA_SEGMENT(currSegment, segment_background_2A6FF0, Pon_Image_Heap);
                     } else {
                         LOAD_DATA_SEGMENT(currSegment, segment_background_215FF0, Pon_Image_Heap);
@@ -311,7 +310,7 @@ void InitBackground(s32 who) {
                     break;
 
                 case 0x6:
-                    if (gTheGame.tetrisWell[0].unk_4420 == 5) {
+                    if (gTheGame.tetrisWell[0].menu.unk_0 == 5) {
                         LOAD_DATA_SEGMENT(currSegment, segment_background_2CB3F0, Pon_Image_Heap);
                     } else {
                         LOAD_DATA_SEGMENT(currSegment, segment_background_282BF0, Pon_Image_Heap);
@@ -340,7 +339,7 @@ void InitBackground(s32 who) {
             break;
 
         case 0x96:
-            if (gTheGame.unk_9C2C[0][0] != 0x10) {
+            if (gTheGame.menu[0].unk_4 != 0x10) {
                 switch (who) {
                     case 0x0:
                         LOAD_DATA_SEGMENT(currSegment, segment_background_35C3F0, Pon_Image_Heap);

@@ -16,6 +16,7 @@
 #include "flic.h"
 #include "gamepad.h"
 #include "icon.h"
+#include "menu_t.h"
 #include "tetwell.h"
 #include "text.h"
 
@@ -168,7 +169,6 @@ typedef struct struct_801A6DB8_usa {
     /* 0x7BA */ UNK_TYPE1 unk_7BA[0x2];
 } struct_801A6DB8_usa; // size = 0x7BC
 
-
 #define GAME_UNK_9A90_COUNT 4
 
 /* Original name: Game */
@@ -240,10 +240,7 @@ typedef struct Game {
     /* 0x9C1C */ s32 unk_9C1C;
     /* 0x9C20 */ s32 unk_9C20;
     /* 0x9C24 */ UNK_TYPE4 unk_9C24;
-    /* 0x9C28 */ UNK_TYPE4 unk_9C28; // menu_t starts here?
-    /* 0x9C2C */ s32 unk_9C2C[UNK_SIZE][4];
-    /* 0x9C3C */ UNK_PAD unk_9C3C[0x8];
-    /* 0x9C44 */ s32 unk_9C44;
+    /* 0x9C28 */ menu_t menu[GAME_BUFFER_LEN]; // menu_t?
     /* 0x9C48 */ struct_801A6DB8_usa unk_9C48[8];
 } Game; // size >= 0xDA28
 

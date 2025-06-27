@@ -2,7 +2,6 @@
 
 #include "include_asm.h"
 #include "macros_defines.h"
-#include "main_functions.h"
 #include "main_variables.h"
 
 #include "screen.h"
@@ -95,7 +94,7 @@ void func_800410A4_usa(void) {
     if (B_80192F80_usa->unk_08 != 0) {
         var_s0 = (var_s1 != 0) ? 15 : 0;
     } else {
-        var_s0 = gTheGame.unk_9C2C[var_s1][0] / 100;
+        var_s0 = gTheGame.menu[var_s1].unk_4 / 100;
     }
 
     if (var_s0 >= 16) {

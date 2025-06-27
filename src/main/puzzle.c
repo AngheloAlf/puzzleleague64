@@ -6,7 +6,6 @@
 
 #include "include_asm.h"
 #include "macros_defines.h"
-#include "main_functions.h"
 #include "main_variables.h"
 
 #include "assets_variables.h"
@@ -64,12 +63,12 @@ s32 func_8008913C_usa(s32 arg0) {
     void *temp_s0;
 
     temp_s0 = gPlayer + (((arg0 - 1) * 0x6E) + 0x121);
-    if (gTheGame.unk_9C2C[0][1] == 0) {
+    if (gTheGame.menu[0].unk_8 == 0) {
         temp_v0 = (gPlayer + arg0)->unk_792;
-        gTheGame.unk_9C2C[0][1] = (s32) temp_v0;
+        gTheGame.menu[0].unk_8 = (s32) temp_v0;
         gTheGame.tetrisWell[0].unk_4408[0x20] = (s32) temp_v0;
     }
-    Init2DTetrisBlocks(&gTheGame, 0, &gTheGame.unk_9C2C[0][1]);
+    Init2DTetrisBlocks(&gTheGame, 0, &gTheGame.menu[0].unk_8);
     var_v0 = -1;
     if (Init2DPuzzle(&gTheGame, gTheGame.unk_8860, temp_s0, 1) == 0) {
         Init2DTetrisBlocks(&gTheGame, 0);

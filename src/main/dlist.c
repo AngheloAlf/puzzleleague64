@@ -6,16 +6,51 @@
 
 #include "include_asm.h"
 #include "macros_defines.h"
-#include "main_functions.h"
 #include "main_variables.h"
 
 #include "info.h"
 #include "the_game.h"
+#include "update.h"
 
 #include "assets_variables.h"
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/dlist", InitCursor);
+void InitCursor(cursor_t *cursor) {
+    s32 var_v0;
+
+    cursor->unk_00 = 0;
+    cursor->unk_04 = 0;
+    cursor->unk_08 = 0;
+    cursor->unk_0C = 0;
+    cursor->unk_20 = 0;
+    cursor->unk_24 = 0xF;
+
+    if ((gTheGame.unk_9C0C == 2) || (gSelection < 0x8C)) {
+        cursor->x = 2;
+        cursor->y = 3;
+    } else {
+        cursor->y = 0xC;
+        cursor->x = 4;
+    }
+
+    cursor->unk_18 = -1;
+    cursor->unk_1C = -1;
+
+    if ((gSelection == 0x78) || (gSelection == 0x82)) {
+        return;
+    }
+    if ((gSelection == 0xAA) || (gSelection == 0xB4)) {
+        return;
+    }
+
+    for (var_v0 = 0; var_v0 < CURSOR_UNK_28_COUNT; var_v0++) {
+        cursor->unk_28[var_v0] = 0;
+    }
+
+    for (var_v0 = 0; var_v0 < CURSOR_UNK_84_COUNT; var_v0++) {
+        cursor->unk_84[var_v0] = 0;
+    }
+}
 #endif
 
 #if VERSION_EUR
@@ -113,7 +148,19 @@ void InitDisplayList(struct_gInfo *info) {
 }
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/dlist", func_800549A4_usa);
+// SetMenuVar?
+void func_800549A4_usa(void) {
+    s32 num;
+
+    for (num = 0; num < gTheGame.unk_9C08; num++) {
+        tetWell *well = &gTheGame.tetrisWell[num];
+
+        well->menu.unk_0 = gTheGame.menu[num].unk_0;
+        well->menu.unk_8 = gTheGame.menu[num].unk_8;
+        well->menu.unk_4 = gTheGame.menu[num].unk_4;
+        well->menu.unk_C = gTheGame.menu[num].unk_C;
+    }
+}
 #endif
 
 #if VERSION_USA

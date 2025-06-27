@@ -6,7 +6,6 @@
 
 #include "include_asm.h"
 #include "macros_defines.h"
-#include "main_functions.h"
 #include "main_variables.h"
 
 #include "sfxlimit.h"
@@ -58,7 +57,7 @@ void func_8004F5E4_usa(tetWell *well, s32 arg1, s32 arg2, s32 arg3) {
     s32 var_a2;
 
     if (gTheGame.unk_9C08 == 1) {
-        if ((gSelection == 0xAA) && (gTheGame.unk_9C28 == 5)) {
+        if ((gSelection == 0xAA) && (gTheGame.menu[0].unk_0 == 5)) {
             func_80074A58_usa(well, arg2, arg3);
         }
     } else if (arg1 == 1) {
@@ -181,13 +180,13 @@ void UpdateAnimation(tetWell *well, s32 num, s32 combo) {
                 }
             }
         } else {
-            if ((gSelection == 0xAA) && (gTheGame.unk_9C28 == 5)) {
+            if ((gSelection == 0xAA) && (gTheGame.menu[0].unk_0 == 5)) {
                 func_80074A58_usa(well, combo, var_s2);
             }
         }
     } else if (gTheGame.unk_9C08 == 1) {
 
-        if ((gSelection == 0xAA) && (gTheGame.unk_9C28 == 5)) {
+        if ((gSelection == 0xAA) && (gTheGame.menu[0].unk_0 == 5)) {
             func_80074A58_usa(well, combo, var_s2);
         }
     } else if (num == 1) {

@@ -6,7 +6,6 @@
 
 #include "include_asm.h"
 #include "macros_defines.h"
-#include "main_functions.h"
 #include "main_variables.h"
 
 #include "001F10.h"
@@ -425,7 +424,7 @@ void Draw3DMiscStuff(struct_gInfo_unk_00068 *dynamicp) {
                     temp_t0->unk_5C = 0x04000400;
                     temp_t0->unk_60 = 0xE7000000;
                     temp_t0->unk_64 = 0;
-                    temp_v1 = gTheGame.tetrisWell[0].unk_4420;
+                    temp_v1 = gTheGame.tetrisWell[0].menu.unk_0;
                     glistp = temp_t0 + 0x60;
                     glistp = temp_t0 + 0x68;
                     switch (temp_v1) {              /* switch 2; irregular */
@@ -518,7 +517,7 @@ block_21:
                     var_a1 = 0x053A01E4;
                     goto block_57;
                 case 0xAA:                          /* switch 1 */
-                    if (gTheGame.tetrisWell[0].unk_4420 != 5) {
+                    if (gTheGame.tetrisWell[0].menu.unk_0 != 5) {
                         glistp = temp_t3 + 0x48;
                         temp_t3->unk_40 = 0xFD500000;
                         temp_t3->unk_44 = &D_010194C0_usa;

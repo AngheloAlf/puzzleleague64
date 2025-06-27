@@ -5,6 +5,9 @@
 #include "PR/gs2dex.h"
 #include "unk.h"
 
+#define CURSOR_UNK_28_COUNT 23
+#define CURSOR_UNK_84_COUNT 5
+
 /* Original name: cursor_t */
 typedef struct cursor_t {
     /* 0x00 */ s32 unk_00;
@@ -17,10 +20,8 @@ typedef struct cursor_t {
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ s32 unk_24;
-    /* 0x28 */ s32 unk_28;
-    /* 0x2C */ s32 unk_2C;
-    /* 0x30 */ s32 unk_30;
-    /* 0x34 */ UNK_TYPE1 unk_34[0x98-0x34];
+    /* 0x28 */ s32 unk_28[CURSOR_UNK_28_COUNT];
+    /* 0x84 */ s32 unk_84[CURSOR_UNK_84_COUNT];
     /* 0x98 */ uObjSprite rect;
 } cursor_t; // size = 0xB0
 

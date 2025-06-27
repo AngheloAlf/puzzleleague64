@@ -2,7 +2,6 @@
 
 #include "include_asm.h"
 #include "macros_defines.h"
-#include "main_functions.h"
 #include "main_variables.h"
 
 #include "ai.h"
@@ -93,10 +92,10 @@ void func_80043110_usa(s32 arg0) {
         imageLoad(&B_80192FA0_usa->unk_7C[var_s1], sp20[var_s1], &spF0);
         B_80192FA0_usa->unk_94[var_s1] = var_s1;
 
-        imageLoad(&B_80192FA0_usa->unk_70[var_s1], D_800B6874_usa[gTheGame.unk_9C2C[0][0] * 3 + var_s1], &spF0);
+        imageLoad(&B_80192FA0_usa->unk_70[var_s1], D_800B6874_usa[gTheGame.menu[0].unk_4 * 3 + var_s1], &spF0);
         //! FAKE
-        imageLoad(&B_80192FA0_usa->unk_88[var_s1], sp20[gTheGame.unk_9C2C[0][0] * (temp = 3) + var_s1], &spF0);
-        B_80192FA0_usa->unk_A0[var_s1] = gTheGame.unk_9C2C[0][0] * 3 + var_s1;
+        imageLoad(&B_80192FA0_usa->unk_88[var_s1], sp20[gTheGame.menu[0].unk_4 * (temp = 3) + var_s1], &spF0);
+        B_80192FA0_usa->unk_A0[var_s1] = gTheGame.menu[0].unk_4 * 3 + var_s1;
     }
 
     B_80192FA0_usa->unk_48[0] = 0;
@@ -174,7 +173,7 @@ void func_80043380_usa(struct_80192FA0_unk_0C *arg0) {
         if (((B_80192FA0_usa->unk_60 + 1) * 0x14 < arg0->unk_04) && (arg0->unk_04 >= 0x2E)) {
             arg0->unk_04 = 0;
             arg0->unk_08 = 4;
-            func_80005270_usa(gTheGame.unk_9C2C[0][0], B_80192FA0_usa->unk_54, 2);
+            func_80005270_usa(gTheGame.menu[0].unk_4, B_80192FA0_usa->unk_54, 2);
         }
     } else if (arg0->unk_08 == 4) {
         arg0->unk_04++;
@@ -285,12 +284,12 @@ void func_8004360C_usa(s32 arg0) {
         func_800288D8_usa(arg0, 0x12C, B_80192FA0_usa->unk_0C.unk_00, 0x2E);
         func_800288D8_usa(arg0, 0x12D, 0xD9 - B_80192FA0_usa->unk_1C.unk_00, 0x2E);
         func_800288D8_usa(arg0, 0xC8, B_80192FA0_usa->unk_0C.unk_00, 0x32);
-        func_800288D8_usa(arg0, gTheGame.unk_9C2C[0][0] + 0xC8, 0xDD - B_80192FA0_usa->unk_1C.unk_00, 0x32);
+        func_800288D8_usa(arg0, gTheGame.menu[0].unk_4 + 0xC8, 0xDD - B_80192FA0_usa->unk_1C.unk_00, 0x32);
     } else {
         func_800288D8_usa(arg0, 0x12C, 0, 0x2E);
         func_800288D8_usa(arg0, 0x12D, 0xD9, 0x2E);
         func_800288D8_usa(arg0, 0xC8, 0, 0x32);
-        func_800288D8_usa(arg0, gTheGame.unk_9C2C[0][0] + 0xC8, 0xDD, 0x32);
+        func_800288D8_usa(arg0, gTheGame.menu[0].unk_4 + 0xC8, 0xDD, 0x32);
     }
 }
 
@@ -404,11 +403,11 @@ void func_80043D24_usa(s32 arg0) {
         gTheGame.unk_9C0C = 1;
         gTheGame.unk_9C08 = 2;
         brainbrain->unk_00C = -1;
-        gTheGame.unk_9C2C[0][2] = sp18 + 1;
+        gTheGame.menu[0].unk_C = sp18 + 1;
         gMain = GMAIN_384;
         gReset = -1;
         gSelection = 0x96;
-        gTheGame.unk_9C44 = B_80192FA0_usa->unk_54 + 1;
+        gTheGame.menu[1].unk_C = B_80192FA0_usa->unk_54 + 1;
     }
 
     for (var_a0 = 0; var_a0 < 3; var_a0++) {
@@ -424,12 +423,12 @@ void func_80043D24_usa(s32 arg0) {
         func_800288D8_usa(sp10, 0x258, 0x69, (sp18 * 0x2B) + 0x35);
         func_80005270_usa(0, sp18, 1);
 
-        B_80192FA0_usa->unk_60 = 3 - gTheGame.unk_9C28;
+        B_80192FA0_usa->unk_60 = 3 - gTheGame.menu[0].unk_0;
         if (B_80192FA0_usa->unk_60 >= 3) {
             B_80192FA0_usa->unk_60 = temp_s0;
         } else if (B_80192FA0_usa->unk_60 < 0) {
-            B_80192FA4_usa += (sp18 + gTheGame.unk_9C2C[0][1] + gTheGame.unk_9C2C[0][0] + arg0 +
-                               gTheGame.unk_9C2C[0][2] + gTheGame.unk_9C28 + 7) *
+            B_80192FA4_usa += (sp18 + gTheGame.menu[0].unk_8 + gTheGame.menu[0].unk_4 + arg0 + gTheGame.menu[0].unk_C +
+                               gTheGame.menu[0].unk_0 + 7) *
                               5;
 
             B_80192FA0_usa->unk_60 = B_80192FA4_usa % 3;
@@ -447,7 +446,7 @@ void func_8004407C_usa(void **heapP, s32 arg1 UNUSED) {
     s32 var_a0;
     s32 var_s2;
     s32 s0;
-    s32 *temp;
+    menu_t *menu;
 
     *heapP = ALIGN_TO(*heapP, struct_80192FA0);
     B_80192FA0_usa = *heapP;
@@ -479,7 +478,6 @@ void func_8004407C_usa(void **heapP, s32 arg1 UNUSED) {
     B_80192FA0_usa->unk_B0 = 0;
     B_80192FA0_usa->unk_08 = 0;
 
-    temp = gTheGame.unk_9C2C[0];
     if (screenFind(sp10, RO_800C581C_usa) != nfalse) {
         func_8002A2E8_usa(sp10[0], 0x64, &sp10[1], &sp10[2]);
         func_8002A1F4_usa(sp10[0], 0x64, sp10[1], 0);
@@ -495,7 +493,9 @@ void func_8004407C_usa(void **heapP, s32 arg1 UNUSED) {
         screenHideImage(s0, 0x259);
         screenShowImage(s0, 0xC8);
         func_80028DC0_usa(s0, 0xC8, 0);
-        screenShowImage(s0, gTheGame.unk_9C2C[0][0] + 0xC8);
-        func_80028DC0_usa(s0, temp[0] + 0xC8, 1);
+
+        menu = &gTheGame.menu[0];
+        screenShowImage(s0, menu->unk_4 + 0xC8);
+        func_80028DC0_usa(s0, menu->unk_4 + 0xC8, 1);
     }
 }

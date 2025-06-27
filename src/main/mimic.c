@@ -6,7 +6,6 @@
 
 #include "include_asm.h"
 #include "macros_defines.h"
-#include "main_functions.h"
 #include "main_variables.h"
 
 #include "segment_symbols.h"
@@ -207,7 +206,7 @@ void DoMT(void) {
         return;
     }
 
-    if ((gSelection == 0x64) && (gTheGame.unk_9C28 == 3)) {
+    if ((gSelection == 0x64) && (gTheGame.menu[0].unk_0 == 3)) {
         total = 2;
     }
 
@@ -643,7 +642,7 @@ STATIC_INLINE void inlined_function() {
     temp_s0 = gnTagTextMimic;
     geModeMimic = MM_NONE;
     B_80193014_usa = 0;
-    gnTagTextMimic = (gTheGame.unk_9C2C[0][1] * 0xA) + 0x1EA;
+    gnTagTextMimic = (gTheGame.menu[0].unk_8 * 0xA) + 0x1EA;
     if (screenGetTextType(giScreenMimic, gnTagTextMimic, &nType)) {
         screenHideText(giScreenMimic, -0x3FFFFE0C);
         screenShowText(giScreenMimic, gnTagTextMimic);
@@ -676,7 +675,7 @@ void InitMimic(void) {
     //! @bug: Modifies a `const` symbol.
     // cast const away
     temp = (char *)RO_800C76E4_usa;
-    temp[5] = gTheGame.unk_9C2C[0][1] + '0';
+    temp[5] = gTheGame.menu[0].unk_8 + '0';
 
     if (screenLoad(temp, &sp10) != 0) {
         inlined_function();

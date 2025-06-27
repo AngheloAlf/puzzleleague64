@@ -6,7 +6,6 @@
 
 #include "include_asm.h"
 #include "macros_defines.h"
-#include "main_functions.h"
 #include "main_variables.h"
 
 #include "info.h"
@@ -459,7 +458,7 @@ void UpdateText(void) {
                 gTheGame.tetrisWell[0].unk_43AC = 0xF423F;
             }
             if (gDemo == GDEMO_2C) {
-                if (gTheGame.tetrisWell[0].unk_4420 != 0) {
+                if (gTheGame.tetrisWell[0].menu.unk_0 != 0) {
                     if (*var_a2 < gTheGame.tetrisWell[0].unk_43AC) {
                         *var_a2 = gTheGame.tetrisWell[0].unk_43AC;
                     }
@@ -467,7 +466,7 @@ void UpdateText(void) {
                 }
             } else {
             block_63:
-                if (gTheGame.tetrisWell[0].unk_4420 != 0) {
+                if (gTheGame.tetrisWell[0].menu.unk_0 != 0) {
                     sprintf(&sp18, &RO_STR_800C5E58_usa, *var_a2);
                     var_s1 = gTheGame.unk_90C0;
                     var_s3_9 = 0xE8;
@@ -566,7 +565,7 @@ void UpdateText(void) {
             break;
 
         case 0xAA:
-            if (gTheGame.tetrisWell[0].unk_4420 != 5) {
+            if (gTheGame.tetrisWell[0].menu.unk_0 != 5) {
                 sprintf(&sp18, &RO_STR_800C5E68_usa, gTheGame.tetrisWell[0].unk_4424, gTheGame.tetrisWell[0].unk_4428);
                 var_s1 = gTheGame.unk_90C0;
                 var_s3_13 = 0x103;
@@ -660,7 +659,7 @@ void UpdateText(void) {
                     }
                     gTheGame.unk_90C0 = var_s1;
                 }
-                if (gTheGame.tetrisWell[0].unk_4420 != 5) {
+                if (gTheGame.tetrisWell[0].menu.unk_0 != 5) {
                     gTheGame.unk_90C8[3].unk_18 = 0;
                     sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.tetrisWell[0].unk_4424);
                     var_s1 = gTheGame.unk_90C0;
@@ -715,7 +714,7 @@ void UpdateText(void) {
             break;
 
         case 0x82:
-            if (gTheGame.tetrisWell[0].unk_4420 == 0) {
+            if (gTheGame.tetrisWell[0].menu.unk_0 == 0) {
                 sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.tetrisWell[0].unk_4424);
                 var_s1 = gTheGame.unk_90C0;
                 var_s3_19 = 0x10C;
@@ -736,8 +735,8 @@ void UpdateText(void) {
                     var_s1 += 1;
                     var_s0++;
                 }
-            } else if (gTheGame.tetrisWell[0].unk_4420 < 4) {
-                sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.tetrisWell[0].unk_4420);
+            } else if (gTheGame.tetrisWell[0].menu.unk_0 < 4) {
+                sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.tetrisWell[0].menu.unk_0);
                 var_s1 = gTheGame.unk_90C0;
                 var_s3_20 = 0x10C;
 
@@ -779,7 +778,7 @@ void UpdateText(void) {
                     var_s0++;
                 }
             } else {
-                sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.tetrisWell[0].unk_4420 - 3);
+                sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.tetrisWell[0].menu.unk_0 - 3);
                 var_s1 = gTheGame.unk_90C0;
                 var_s3_22 = 0x10C;
 
@@ -957,9 +956,9 @@ void UpdateText(void) {
 
         case 0xA0:
         case 0xB4:
-            sprintf(&sp18, &RO_STR_800C5E78_usa, gTheGame.tetrisWell[0].unk_4420);
+            sprintf(&sp18, &RO_STR_800C5E78_usa, gTheGame.tetrisWell[0].menu.unk_0);
             var_s3_30 = 0x93;
-            if (gTheGame.tetrisWell[0].unk_4420 < 0xA) {
+            if (gTheGame.tetrisWell[0].menu.unk_0 < 0xA) {
                 var_s1 = gTheGame.unk_90C0;
 
                 var_s0 = &gTheGame.unk_90C8[var_s1];

@@ -1283,7 +1283,6 @@ extern s32 B_801C6BDC_usa[2];
 extern s32 GarbageBlockBaseSfx_L;
 // extern UNK_TYPE B_801C6BE8_usa;
 // extern UNK_TYPE B_801C6BF0_usa;
-// extern UNK_TYPE B_801C6BF4_usa;
 // extern UNK_TYPE B_801C6C50_usa;
 // extern UNK_TYPE B_801C6C69_usa;
 extern u8 B_801C6C90_usa;

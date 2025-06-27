@@ -6,7 +6,6 @@
 
 #include "include_asm.h"
 #include "macros_defines.h"
-#include "main_functions.h"
 #include "main_variables.h"
 
 #include "ai.h"
@@ -101,7 +100,7 @@ void InitTutorial(void) {
     bcopy(&B_801F9C48_usa[1], &B_801F9C48_usa[0], 0x18);
 
     LoadFairySoundData(0x19, s0 / 100, s0 / 100);
-    if (gTheGame.unk_9C28 == 5) {
+    if (gTheGame.menu[0].unk_0 == 5) {
         Init3DMatrixBlocks();
     }
     InitMiscStuff();
@@ -112,8 +111,8 @@ void InitTutorial(void) {
     gWhatever = 0;
     screenLoad("HOWTO.SBF", &Pon_Image_Heap);
 
-    switch (gTheGame.unk_9C28) { /* switch 1 */
-        case 0x1:                /* switch 1 */
+    switch (gTheGame.menu[0].unk_0) { /* switch 1 */
+        case 0x1:                     /* switch 1 */
             var_s7 = screenSet("HOWTO-BASIC1", 0x401);
             break;
 
@@ -132,7 +131,7 @@ void InitTutorial(void) {
             break;
     }
 
-    if (gTheGame.unk_9C28 == 3) {
+    if (gTheGame.menu[0].unk_0 == 3) {
         menuInitFairy(MFP_LEFT_MIDDLE);
     } else {
         menuInitFairy(MFP_RIGHT);
@@ -164,7 +163,7 @@ void InitTutorial(void) {
     var_a0_3[1].s.objY = 0x7C;
     var_a0_3[1].s.objX = 0x2F0;
 
-    if (gTheGame.unk_9C28 != 3) {
+    if (gTheGame.menu[0].unk_0 != 3) {
         gTheGame.unk_9B50[1].b.frameH = 0;
     }
 
@@ -212,8 +211,8 @@ void InitTutorial(void) {
     s1 = &gTheGame.cursorBlock[0];
     s3 = &brainbrain[0];
 
-    switch (gTheGame.unk_9C28) { /* switch 2 */
-        case 0x1:                /* switch 2 */
+    switch (gTheGame.menu[0].unk_0) { /* switch 2 */
+        case 0x1:                     /* switch 2 */
             Init2DPuzzle(s2, s1, tutorial1, 1);
             s3->unk_03C = 1;
             break;
@@ -274,7 +273,7 @@ void InitTutorial(void) {
     s3->unk_040 = 0;
     s3->unk_044 = 0;
     s3->unk_028 = var_s7;
-    if (gTheGame.unk_9C28 == 3) {
+    if (gTheGame.menu[0].unk_0 == 3) {
         s3->unk_02C = 2;
     } else {
         s3->unk_02C = 4;
@@ -283,11 +282,11 @@ void InitTutorial(void) {
     s3->unk_038 = 0x64;
     s3->unk_024 = 0;
     if (gGameStatus & 0x80) {
-        if (gTheGame.unk_9C28 == 4) {
+        if (gTheGame.menu[0].unk_0 == 4) {
             tutorial_move5[0] = 0x9C;
         }
         PlaySE(SFX_INIT_TABLE, 0x7F);
-    } else if (gTheGame.unk_9C28 == 4) {
+    } else if (gTheGame.menu[0].unk_0 == 4) {
         tutorial_move5[0] = 0x9E;
     }
 
@@ -330,7 +329,7 @@ void TutorialCheckState(tetWell *well, cursor_t *cursor) {
         return;
     }
 
-    if ((gTheGame.unk_9C28 == 1) || (gTheGame.unk_9C28 == 5)) {
+    if ((gTheGame.menu[0].unk_0 == 1) || (gTheGame.menu[0].unk_0 == 5)) {
         for (col = 0; col < gMax; col++) {
             block_t *block = &well->block[BLOCK_LEN_ROWS - 1][col];
 
@@ -491,7 +490,7 @@ void DoTutorial(void) {
 
     var_a2 = -1;
     temp2 = brainbrain[0].unk_038;
-    switch (gTheGame.unk_9C28) {
+    switch (gTheGame.menu[0].unk_0) {
         case 0x1:
             // Why the `&=`?
             var_a2 &= (temp2 != 0x64) ? -1 : 0;

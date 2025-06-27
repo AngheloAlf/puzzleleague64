@@ -6,7 +6,6 @@
 
 #include "include_asm.h"
 #include "macros_defines.h"
-#include "main_functions.h"
 #include "main_variables.h"
 
 #include "explode.h"
@@ -143,7 +142,7 @@ s32 EndingExplosion(tetWell *well) {
     s32 var_s2;
 
     if (gSelection == 0x82) {
-        switch (well->unk_4420) {
+        switch (well->menu.unk_0) {
             case 0x0:
             case 0x1:
             case 0x4:
@@ -153,9 +152,9 @@ s32 EndingExplosion(tetWell *well) {
             case 0x2:
             case 0x3:
             case 0x5:
-                if (well->unk_4424 < ENUM_GAME_UNK_0000_UNK_4424_31) {
+                if (well->menu.unk_4 < ENUM_GAME_UNK_0000_UNK_4424_31) {
                     var_s0 = 1;
-                } else if (well->unk_4424 < ENUM_GAME_UNK_0000_UNK_4424_41) {
+                } else if (well->menu.unk_4 < ENUM_GAME_UNK_0000_UNK_4424_41) {
                     var_s0 = 2;
                 } else {
                     var_s0 = 3;
@@ -163,9 +162,9 @@ s32 EndingExplosion(tetWell *well) {
                 break;
 
             case 0x6:
-                if (well->unk_4424 < ENUM_GAME_UNK_0000_UNK_4424_31) {
+                if (well->menu.unk_4 < ENUM_GAME_UNK_0000_UNK_4424_31) {
                     var_s0 = 1;
-                } else if (well->unk_4424 < ENUM_GAME_UNK_0000_UNK_4424_41) {
+                } else if (well->menu.unk_4 < ENUM_GAME_UNK_0000_UNK_4424_41) {
                     var_s0 = 2;
                 } else {
                     var_s0 = 3;
@@ -176,9 +175,9 @@ s32 EndingExplosion(tetWell *well) {
 
     if (gWhatever == 3) {
         if (gSelection == 0xAA) {
-            if (well->unk_4428 < 3) {
+            if (well->menu.unk_8 < 3) {
                 PlaySE(SFX_INIT_TABLE, 0x12C);
-            } else if (well->unk_4428 < 5) {
+            } else if (well->menu.unk_8 < 5) {
                 PlaySE(SFX_INIT_TABLE, 0x12D);
             } else {
                 PlaySE(SFX_INIT_TABLE, 0x12E);
@@ -223,9 +222,9 @@ s32 EndingExplosion(tetWell *well) {
     }
 
     if (gSelection == 0xAA) {
-        if (well->unk_4428 < 3) {
+        if (well->menu.unk_8 < 3) {
             var_s2 = 0x82;
-        } else if (well->unk_4428 < 5) {
+        } else if (well->menu.unk_8 < 5) {
             var_s2 = 0xAA;
         } else {
             var_s2 = 0xCD;

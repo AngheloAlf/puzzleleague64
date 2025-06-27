@@ -87,7 +87,7 @@ void InitAI(struct tetWell *well, struct cursor_t *cursor, struct ai_t *brain);
 // void AISetSHard();
 // void AISetUltra();
 void AISetCharacter(struct ai_t *brain, s32 stage);
-// void AISetLevel();
+void AISetLevel(ai_t *brain, s32 game, s32 stage);
 void AISetCursor(struct tetWell *well, struct cursor_t *cursor, struct ai_t *brain);
 void AIChangeVision(struct ai_t *brain);
 void AISetGarbage(struct tetWell *well, struct cursor_t *cursor, struct ai_t *brain);

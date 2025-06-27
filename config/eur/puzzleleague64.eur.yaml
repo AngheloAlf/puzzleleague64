@@ -114,7 +114,6 @@ options:
     #include "ultra64.h"
     #include "include_asm.h"
     #include "macros_defines.h"
-    #include "main_functions.h"
     #include "main_variables.h"
   asm_inc_header: ""
   use_legacy_include_asm: False

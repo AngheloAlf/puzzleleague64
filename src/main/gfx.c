@@ -4,7 +4,6 @@
 
 #include "gfx.h"
 
-#include "main_functions.h"
 #include "main_variables.h"
 
 #include "assets_variables.h"

@@ -7,7 +7,6 @@
 #include "include_asm.h"
 
 #include "macros_defines.h"
-#include "main_functions.h"
 #include "main_variables.h"
 
 #include "bg_screen_load.h"
@@ -288,13 +287,13 @@ void Draw2DAnimation(struct_gInfo_unk_00068 *dynamicp UNUSED, s32 from UNUSED, s
     gDPSetRenderMode(glistp++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
     gDPSetCombineMode(glistp++, G_CC_DECALRGBA, G_CC_DECALRGBA);
 
-    if ((gSelection == 0xAA) && (gTheGame.unk_9C28 == 5)) {
+    if ((gSelection == 0xAA) && (gTheGame.menu[0].unk_0 == 5)) {
         func_80074D4C_usa();
     }
 }
 
 void Draw3DAnimation(struct struct_gInfo_unk_00068 *dynamicp UNUSED, s32 arg1 UNUSED, s32 arg2 UNUSED) {
-    if ((gSelection == 0xAA) && (gTheGame.unk_9C28 == 5)) {
+    if ((gSelection == 0xAA) && (gTheGame.menu[0].unk_0 == 5)) {
         func_80074D4C_usa();
     }
 }

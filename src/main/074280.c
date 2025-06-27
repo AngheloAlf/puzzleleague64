@@ -1,7 +1,6 @@
 #include "074280.h"
 
 #include "macros_defines.h"
-#include "main_functions.h"
 #include "main_variables.h"
 
 #include "001F10.h"
@@ -40,7 +39,7 @@ void func_800737B8_usa(ENUM_TYPE(enum_func_800737B8_usa_arg0, s32) arg0) {
             break;
 
         case ENUM_FUNC_800737B8_USA_ARG0_3:
-            if (gTheGame.tetrisWell[0].unk_4420 == 5) {
+            if (gTheGame.tetrisWell[0].menu.unk_0 == 5) {
                 LOAD_DATA_SEGMENT(segment, segment_flic_anime_bg_5F3090, Pon_Image_Heap);
             } else {
                 LOAD_DATA_SEGMENT(segment, segment_flic_anime_bg_5B6730, Pon_Image_Heap);
@@ -56,7 +55,7 @@ void func_800737B8_usa(ENUM_TYPE(enum_func_800737B8_usa_arg0, s32) arg0) {
             break;
 
         case ENUM_FUNC_800737B8_USA_ARG0_6:
-            if (gTheGame.tetrisWell[0].unk_4420 == 5) {
+            if (gTheGame.tetrisWell[0].menu.unk_0 == 5) {
                 LOAD_DATA_SEGMENT(segment, segment_flic_anime_bg_5FF430, Pon_Image_Heap);
             } else {
                 LOAD_DATA_SEGMENT(segment, segment_flic_anime_bg_5E6490, Pon_Image_Heap);

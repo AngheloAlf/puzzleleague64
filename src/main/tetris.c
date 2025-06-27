@@ -6,7 +6,6 @@
 
 #include "include_asm.h"
 #include "macros_defines.h"
-#include "main_functions.h"
 #include "main_variables.h"
 
 #include "ai.h"
@@ -369,7 +368,7 @@ block_54:
                     goto block_54;
                 case 0x96:                          /* switch 1 */
                     if (var_fp == temp_s0) {
-                        AISetLevel(&B_801ADADC_usa, gTheGame.unk_9C28, gTheGame.unk_9C2C);
+                        AISetLevel(&B_801ADADC_usa, gTheGame.menu[0].unk_0, gTheGame.unk_9C2C);
                         InitAI(temp_s3, sp34, &B_801ADADC_usa);
                     }
                     /* fallthrough */
