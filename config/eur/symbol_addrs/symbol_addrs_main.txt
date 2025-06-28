@@ -1242,10 +1242,10 @@ D_800B6698_usa = 0x800B6BB8; //
 D_800B66FC_usa = 0x800B6C1C; //
 dead1Shake = 0x800B6C54; //
 D_800B675C_usa = 0x800B6C7C; //
-D_800B6CB0_eur = 0x800B6CB0; //
+D_800B6790_usa = 0x800B6CB0; //
 D_800B6794_usa = 0x800B6CB4; //
-D_800B6CD4_eur = 0x800B6CD4; //
-D_800B6D02_eur = 0x800B6D02; //
+D_800B67B4_usa = 0x800B6CD4; // size:0x30
+D_800B67E4_usa = 0x800B6D04; // type:s16
 
 // .data
 
@@ -2751,7 +2751,7 @@ B_801C6EA0_usa = 0x801C5FA0; //
 B_801C5FC1_eur = 0x801C5FC1; //
 B_801C6EE8_usa = 0x801C5FE8; //
 gOverflow = 0x801C5FEC; //
-B_801C5FF0_eur = 0x801C5FF0; //
+B_801C6EF0_usa = 0x801C5FF0; //
 DolbyEnabled = 0x801C5FF4; //
 B_801C6EF6_usa = 0x801C5FF6; //
 

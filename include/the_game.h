@@ -40,27 +40,27 @@ typedef struct struct_801A6DB8_usa_unk_034 {
 
 
 typedef struct struct_801A6DB8_usa_unk_0B7 {
-    /* 0x0 */ UNK_TYPE1 unk_0[0x4];
+    /* 0x0 */ char unk_0[0x4];
 } struct_801A6DB8_usa_unk_0B7; // size = 0x4
 
 typedef struct struct_801A6DB8_usa_unk_0BB {
-    /* 0x0 */ UNK_TYPE1 unk_0[0x7];
+    /* 0x0 */ char unk_0[0x7];
 } struct_801A6DB8_usa_unk_0BB; // size = 0x7
 
 typedef struct struct_801A6DB8_usa_unk_0C2 {
-    /* 0x0 */ UNK_TYPE1 unk_0[0x7];
+    /* 0x0 */ char unk_0[0x7];
 } struct_801A6DB8_usa_unk_0C2; // size = 0x7
 
 typedef struct struct_801A6DB8_usa_unk_0C9 {
-    /* 0x0 */ UNK_TYPE1 unk_0[0x4];
+    /* 0x0 */ char unk_0[0x4];
 } struct_801A6DB8_usa_unk_0C9; // size = 0x4
 
 typedef struct struct_801A6DB8_usa_unk_0CD {
-    /* 0x0 */ UNK_TYPE1 unk_0[0x7];
+    /* 0x0 */ char unk_0[0x7];
 } struct_801A6DB8_usa_unk_0CD; // size = 0x7
 
 typedef struct struct_801A6DB8_usa_unk_0D4 {
-    /* 0x0 */ UNK_TYPE1 unk_0[0x7];
+    /* 0x0 */ char unk_0[0x7];
 } struct_801A6DB8_usa_unk_0D4; // size = 0x7
 
 
