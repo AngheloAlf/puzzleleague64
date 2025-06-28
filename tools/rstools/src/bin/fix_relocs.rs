@@ -531,26 +531,14 @@ fn main() {
 
                                                 //println!("{} + 0x{:X}", referenced_section.name(), computed_addend);
 
-                                                let mut referenced_sym: Option<&Elf32SymbolEntry> =
-                                                    None;
-
-                                                let mut sym_index = 0;
-                                                for aux_sym in &symtab {
-                                                    if aux_sym.sym_type()
-                                                        != Some(SymbolType::STT_SECTION)
-                                                        && aux_sym.sym.st_shndx == sym.sym.st_shndx
-                                                        && aux_sym.sym.st_value.0 == computed_addend
-                                                    {
-                                                        referenced_sym = Some(aux_sym);
-                                                        if !aux_sym.name().contains('.') {
-                                                            break;
-                                                        }
-                                                    }
-                                                    sym_index += 1;
-                                                }
-
-                                                if let Some(_refer) = referenced_sym {
-                                                    // println!("0x{:08X} {} + 0x{:X} -> {}", rel.r_offset.0, referenced_section.name(), computed_addend, refer.name());
+                                                if let Some((sym_index, _refer)) =
+                                                    find_referenced_sym_index(
+                                                        &symtab,
+                                                        sym,
+                                                        computed_addend,
+                                                    )
+                                                {
+                                                    // rintln!("0x{:08X} {} + 0x{:X} -> {} ({})", rel.r_offset.0, referenced_section.name(), computed_addend, refer.name(), sym_index);
 
                                                     rel.set_r_sym(sym_index);
 
@@ -597,4 +585,24 @@ fn main() {
     }
 
     utils::write_file_bytes(&cli.input, &elf_bytes).unwrap();
+}
+
+fn find_referenced_sym_index<'s>(
+    symtab: &'s [Elf32SymbolEntry],
+    sym: &Elf32SymbolEntry,
+    computed_addend: u32,
+) -> Option<(u32, &'s Elf32SymbolEntry)> {
+    for (sym_index, aux_sym) in symtab.iter().enumerate() {
+        if aux_sym.sym_type() != Some(SymbolType::STT_SECTION)
+            && aux_sym.sym.st_shndx == sym.sym.st_shndx
+            && aux_sym.sym.st_value.0 == computed_addend
+        {
+            // Avoid using a branch label or a .NON_MATCHING symbol
+            if !aux_sym.name().contains('.') {
+                return Some((sym_index as u32, aux_sym));
+            }
+        }
+    }
+
+    None
 }

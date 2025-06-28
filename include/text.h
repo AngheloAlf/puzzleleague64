@@ -17,8 +17,7 @@ typedef struct text_t {
 } text_t; // size = 0x20
 
 // TODO: enum or defines for `type`
-s32 InitWhichNumber(text_t *text, char number, s32 type);
-void SetText(s32 x, s32 y, const char *str, s32 type);
+void SetText(s32 x, s32 y, const char str[], s32 type);
 void UpdateText(void);
 void Draw2DTemplate(struct struct_gInfo_unk_00068 *dynamicp);
 void Draw2DText(struct struct_gInfo_unk_00068 *dynamicp);

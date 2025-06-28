@@ -23,7 +23,7 @@
 #include "assets_variables.h"
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/draw3d", func_8005E510_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/draw3d", Set3DTile);
 #endif
 
 #if VERSION_USA

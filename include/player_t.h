@@ -1,5 +1,5 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef PLAYER_T_H
+#define PLAYER_T_H
 
 #include "ultra64.h"
 #include "unk.h"

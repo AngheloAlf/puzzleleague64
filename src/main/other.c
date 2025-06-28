@@ -333,7 +333,6 @@ extern UNK_TYPE D_0101ACC0_usa;
 extern UNK_TYPE D_0101E4C0_usa;
 extern UNK_TYPE D_0101E940_usa;
 extern UNK_TYPE D_0101EDC0_usa;
-extern UNK_TYPE D_0101F378_usa;
 
 #if VERSION_USA
 #if 0
@@ -711,7 +710,7 @@ block_59:
         temp_v0_3->unk_C = 0x8000;
         glistp = temp_v0_3 + 0x18;
         temp_v0_3->unk_10 = 0xFD100000;
-        temp_v0_3->unk_14 = &D_0101F378_usa;
+        temp_v0_3->unk_14 = &numberTable;
         glistp = temp_v0_3 + 0x20;
         temp_v0_3->unk_18 = 0xE8000000;
         glistp = temp_v0_3 + 0x28;

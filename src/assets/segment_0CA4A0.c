@@ -1178,13 +1178,13 @@ uObjTxtr D_0101F360_usa = {
     /* mask  */ 0x0,
 };
 
-u16 D_0101F378_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0101F590_usa.palette.inc"
+u16 numberTable[] ALIGNED(8) = {
+#include "assets/segment_0CA4A0/w_text1.palette.inc"
 };
 
 uObjTxtr numberLUT = {
     /* type  */ G_OBJLT_TLUT,
-    /* image */ (u64 *)D_0101F378_usa,
+    /* image */ (u64 *)numberTable,
     /* phead */ GS_PAL_HEAD(0),
     /* pnum  */ GS_PAL_NUM(256),
     /* zero  */ 0,
@@ -1193,33 +1193,33 @@ uObjTxtr numberLUT = {
     /* mask  */ 0x0,
 };
 
-u8 D_0101F590_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0101F590_usa.ci8.inc"
+u8 w_text1[] ALIGNED(8) = {
+#include "assets/segment_0CA4A0/w_text1.ci8.inc"
 };
 
-u8 D_0101FD90_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0101FD90_usa.ci8.inc"
+u8 w_text2[] ALIGNED(8) = {
+#include "assets/segment_0CA4A0/w_text2.ci8.inc"
 };
 
-u8 D_01020590_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01020590_usa.ci8.inc"
+u8 w_text3[] ALIGNED(8) = {
+#include "assets/segment_0CA4A0/w_text3.ci8.inc"
 };
 
-u8 D_01020D90_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01020D90_usa.ci8.inc"
+u8 w_text4[] ALIGNED(8) = {
+#include "assets/segment_0CA4A0/w_text4.ci8.inc"
 };
 
-u8 D_01021590_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01021590_usa.ci8.inc"
+u8 w_text5[] ALIGNED(8) = {
+#include "assets/segment_0CA4A0/w_text5.ci8.inc"
 };
 
-u8 D_01021D90_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01021D90_usa.ci8.inc"
+u8 w_text6[] ALIGNED(8) = {
+#include "assets/segment_0CA4A0/w_text6.ci8.inc"
 };
 
 uObjTxtr numberTexture1 = {
     /* type  */ G_OBJLT_TXTRBLOCK,
-    /* image */ (u64 *)D_0101F590_usa,
+    /* image */ (u64 *)w_text1,
     /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
     /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
     /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
@@ -1230,7 +1230,7 @@ uObjTxtr numberTexture1 = {
 
 uObjTxtr numberTexture2 = {
     /* type  */ G_OBJLT_TXTRBLOCK,
-    /* image */ (u64 *)D_0101FD90_usa,
+    /* image */ (u64 *)w_text2,
     /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
     /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
     /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
@@ -1241,7 +1241,7 @@ uObjTxtr numberTexture2 = {
 
 uObjTxtr numberTexture3 = {
     /* type  */ G_OBJLT_TXTRBLOCK,
-    /* image */ (u64 *)D_01020590_usa,
+    /* image */ (u64 *)w_text3,
     /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
     /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
     /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
@@ -1252,7 +1252,7 @@ uObjTxtr numberTexture3 = {
 
 uObjTxtr numberTexture4 = {
     /* type  */ G_OBJLT_TXTRBLOCK,
-    /* image */ (u64 *)D_01020D90_usa,
+    /* image */ (u64 *)w_text4,
     /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
     /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
     /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
@@ -1263,7 +1263,7 @@ uObjTxtr numberTexture4 = {
 
 uObjTxtr numberTexture5 = {
     /* type  */ G_OBJLT_TXTRBLOCK,
-    /* image */ (u64 *)D_01021590_usa,
+    /* image */ (u64 *)w_text5,
     /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
     /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
     /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
@@ -1274,7 +1274,7 @@ uObjTxtr numberTexture5 = {
 
 uObjTxtr numberTexture6 = {
     /* type  */ G_OBJLT_TXTRBLOCK,
-    /* image */ (u64 *)D_01021D90_usa,
+    /* image */ (u64 *)w_text6,
     /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
     /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
     /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
@@ -1298,7 +1298,7 @@ u8 D_01022E38_usa[] ALIGNED(8) = {
 /*
 height: 32
 width: 64
-palette: D_0101F378_usa
+palette: numberTable
 */
 uObjTxtr clearTexture = {
     /* type  */ G_OBJLT_TXTRBLOCK,

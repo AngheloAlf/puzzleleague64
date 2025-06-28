@@ -65,7 +65,7 @@ $(SLINKY): | $(SLINKY_DIR)
 	tar xf slinky-cli-$(HOST_TRIPLE).tar.gz -C $(SLINKY_DIR)
 	$(RM) slinky-cli-$(HOST_TRIPLE).tar.gz
 
-$(FIRST_DIFF) $(FIX_RELOCS):
+$(FIRST_DIFF) $(FIX_RELOCS): rstools/Cargo.toml
 	cargo build --release --manifest-path rstools/Cargo.toml
 
 $(KMC_DIR):
@@ -76,3 +76,5 @@ $(IDO_53_DIR):
 
 $(SLINKY_DIR):
 	mkdir -p $@
+
+-include $(FIRST_DIFF).d $(FIX_RELOCS).d

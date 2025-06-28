@@ -183,18 +183,7 @@ segments:
       - { path: src/main/controller.o }
       - { path: src/main/bkground.o }
       - { path: src/main/character.o }
-
-      - { path: src/main/text.o, include_if_any: [[version, usa]] }
-
-      - { path: "asm/{version}/main/04CEC0.o", include_if_any: [[version, eur]] }
-      - { path: "asm/{version}/data/main/0C6C70.rodata.o", include_if_any: [[version, eur]] }
-
-      - { path: "asm/{version}/main/04B640.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/data/main/0C52D0.rodata.o", include_if_any: [[version, fra]] }
-
-      - { path: "asm/{version}/main/04B7B0.o", include_if_any: [[version, ger]] }
-      - { path: "asm/{version}/data/main/0BC290.rodata.o", include_if_any: [[version, ger]] }
-
+      - { path: src/main/text.o }
       - { path: src/main/flic.o }
       - { path: src/main/animation.o }
       - { path: src/main/other.o }

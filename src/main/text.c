@@ -8,25 +8,26 @@
 #include "macros_defines.h"
 #include "main_variables.h"
 
+#include "draw3d.h"
 #include "info.h"
+#include "the_game.h"
 
 #include "assets_variables.h"
 
 #define MAGIC_NUMBER 6
 
-#if VERSION_USA
-s32 InitWhichNumber(text_t *text, char number, s32 type) {
+nbool InitWhichNumber(text_t *text, char number, s32 type) {
     u16 *addr;
 
-    if (number == 0) {
-        return 0;
+    if (number == '\0') {
+        return nfalse;
     }
 
     addr = &text->word.s.imageAdrs;
 
     switch (type) {
         case 0x14:
-            if (number < 0x37) {
+            if (number < '7') {
                 text->texture = 0;
             } else {
                 text->texture = 2;
@@ -34,7 +35,7 @@ s32 InitWhichNumber(text_t *text, char number, s32 type) {
             break;
 
         case 0x15:
-            if (number >= 0x37) {
+            if (number >= '7') {
                 text->texture = 2;
             } else {
                 text->texture = 1;
@@ -42,7 +43,7 @@ s32 InitWhichNumber(text_t *text, char number, s32 type) {
             break;
 
         case 0x16:
-            if (number < 0x37) {
+            if (number < '7') {
                 text->texture = 3;
             } else {
                 text->texture = 5;
@@ -50,10 +51,10 @@ s32 InitWhichNumber(text_t *text, char number, s32 type) {
             break;
 
         default:
-            return 0;
+            return nfalse;
 
         case 0x17:
-            if (number < 0x37) {
+            if (number < '7') {
                 text->texture = 4;
             } else {
                 text->texture = 5;
@@ -63,7 +64,7 @@ s32 InitWhichNumber(text_t *text, char number, s32 type) {
 
     switch (number) {
         default:
-            return 0;
+            return nfalse;
 
         case ' ':
             text->texture = 0x46;
@@ -132,13 +133,31 @@ s32 InitWhichNumber(text_t *text, char number, s32 type) {
             break;
     }
 
-    return -1;
+    return ntrue;
 }
-#endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/text", SetText);
-#endif
+void SetText(s32 x, s32 y, const char str[], s32 type) {
+    s32 str_pos = 0;
+    text_t *text;
+    s32 count;
+
+    for (count = gTheGame.unk_90C0; count < DRAWTEXT_COUNT; count++) {
+        text = &gTheGame.drawText[count];
+
+        if (!InitWhichNumber(text, str[str_pos], type)) {
+            break;
+        }
+
+        text->word.s.objX = x << 2;
+        text->word.s.objY = y << 2;
+        text->word.s.imageW = 0x10 << 5;
+
+        x += 9;
+        str_pos++;
+    }
+
+    gTheGame.unk_90C0 = count;
+}
 
 #if VERSION_USA
 INCLUDE_RODATA("asm/usa/nonmatchings/main/text", RO_STR_800C5E2C_usa);
@@ -1136,30 +1155,41 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/text", UpdateText);
 #endif
 #endif
 
-#if VERSION_USA
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/text", UpdateText);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/text", UpdateText);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/text", UpdateText);
+#endif
+
 void Draw2DTemplate(struct_gInfo_unk_00068 *dynamicp) {
-    s32 var_t1 = -1;
-    s32 i;
+    s32 which = -1;
+    s32 count;
 
     gDPPipeSync(glistp++);
     gDPSetTextureLUT(glistp++, G_TT_RGBA16);
     gSPObjLoadTxtr(glistp++, &otherLUT);
 
-    for (i = 0; i < MAGIC_NUMBER; i++) {
-        s32 var_v1 = dynamicp->drawText[i].texture;
+    for (count = 0; count < MAGIC_NUMBER; count++) {
+        s32 currText = dynamicp->drawText[count].texture;
 
-        if (var_v1 == -1) {
+        if (currText == -1) {
             continue;
         }
 
-        if (var_v1 >= 0xB) {
-            var_v1 = 0x19;
+        if (currText >= 0xB) {
+            currText = 0x19;
         }
 
-        if (var_v1 != var_t1) {
-            var_t1 = var_v1;
+        if (currText != which) {
+            which = currText;
 
-            switch (var_v1) {
+            switch (currText) {
                 case 0x0:
                     gSPObjLoadTxtr(glistp++, &D_0101F240_usa);
                     break;
@@ -1202,26 +1232,24 @@ void Draw2DTemplate(struct_gInfo_unk_00068 *dynamicp) {
             }
         }
 
-        gSPObjRectangle(glistp++, &dynamicp->drawText[i].word);
+        gSPObjRectangle(glistp++, &dynamicp->drawText[count].word);
     }
 }
-#endif
 
-#if VERSION_USA
 void Draw2DText(struct_gInfo_unk_00068 *dynamicp) {
-    s8 sp10[MAGIC_NUMBER];
+    char array[MAGIC_NUMBER];
     s32 i;
-    s32 var_s1 = 0;
     s32 j;
+    s32 last = 0;
 
     Draw2DTemplate(dynamicp);
-    bzero(sp10, MAGIC_NUMBER * sizeof(s8));
+    bzero(array, MAGIC_NUMBER * sizeof(char));
 
     for (i = MAGIC_NUMBER; i < DRAWTEXT_COUNT; i++) {
-        if (dynamicp->drawText[i].texture < ARRAY_COUNTU(sp10)) {
-            sp10[dynamicp->drawText[i].texture] = true;
+        if (dynamicp->drawText[i].texture < ARRAY_COUNTU(array)) {
+            array[dynamicp->drawText[i].texture] = true;
         } else if (dynamicp->drawText[i].texture == -1) {
-            var_s1 = i;
+            last = i;
             break;
         }
     }
@@ -1231,7 +1259,7 @@ void Draw2DText(struct_gInfo_unk_00068 *dynamicp) {
     gSPObjLoadTxtr(glistp++, &numberLUT);
 
     for (j = 0; j < MAGIC_NUMBER; j++) {
-        if (!sp10[j]) {
+        if (!array[j]) {
             continue;
         }
 
@@ -1261,15 +1289,132 @@ void Draw2DText(struct_gInfo_unk_00068 *dynamicp) {
                 break;
         }
 
-        for (i = MAGIC_NUMBER; i < var_s1; i++) {
+        for (i = MAGIC_NUMBER; i < last; i++) {
             if (dynamicp->drawText[i].texture == j) {
                 gSPObjRectangle(glistp++, &dynamicp->drawText[i].word);
             }
         }
     }
 }
-#endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/text", Draw3DText);
+void Draw3DText(struct_gInfo_unk_00068 *dynamicp) {
+    char sp10[MAGIC_NUMBER];
+    s32 var_s3 = 0;
+    u8 *var_s2;
+    s32 var_s0;
+    s32 var_t0;
+    s32 var_s1;
+
+#if 0
+    int count; // r6
+    int which; // r6
+    int last; // r19
+    char array[6]; // r1+0xC
+    unsigned char * ptr; // r30
+    struct text_t * text; // r7
+#endif
+
+    bzero(sp10, MAGIC_NUMBER * sizeof(char));
+
+    for (var_t0 = 6; var_t0 < DRAWTEXT_COUNT; var_t0++) {
+        if (dynamicp->drawText[var_t0].texture < ARRAY_COUNTU(sp10)) {
+            sp10[dynamicp->drawText[var_t0].texture] = 1;
+        } else if (dynamicp->drawText[var_t0].texture == -1) {
+            var_s3 = var_t0;
+            break;
+        }
+    }
+
+    gDPPipeSync(glistp++);
+    gDPSetTextureLUT(glistp++, G_TT_RGBA16);
+    gDPLoadTLUT_pal256(glistp++, numberTable);
+    gDPSetAlphaCompare(glistp++, G_AC_THRESHOLD);
+
+    Set3DTile();
+
+    for (var_s1 = 0; var_s1 < MAGIC_NUMBER; var_s1++) {
+        if (!sp10[var_s1]) {
+            continue;
+        }
+
+        switch (var_s1) {
+            case 0x0:
+                var_s2 = w_text1;
+                break;
+            case 0x1:
+                var_s2 = w_text2;
+                break;
+            case 0x2:
+                var_s2 = w_text3;
+                break;
+            case 0x3:
+                var_s2 = w_text4;
+                break;
+            case 0x4:
+                var_s2 = w_text5;
+                break;
+            case 0x5:
+                var_s2 = w_text6;
+                break;
+            default:
+                break;
+        }
+
+        // TODO: WIDTH/HEIGHT macros
+        gDPLoadTextureBlock(glistp++, var_s2, G_IM_FMT_CI, G_IM_SIZ_8b, 64, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+
+        func_8005E740_usa();
+
+        for (var_t0 = MAGIC_NUMBER; var_t0 < var_s3; var_t0++) {
+            if (dynamicp->drawText[var_t0].texture == var_s1) {
+                text_t *text = &dynamicp->drawText[var_t0];
+
+                switch (text->word.s.imageAdrs) {
+                    case 0x0:
+                        var_s0 = 0;
+                        break;
+                    case 0x4:
+                        var_s0 = 2;
+                        break;
+                    case 0x80:
+                        var_s0 = 4;
+                        break;
+                    case 0x84:
+                        var_s0 = 6;
+                        break;
+                    case 0x86:
+                        var_s0 = 7;
+                        break;
+                    case 0x2:
+                        var_s0 = 1;
+                        break;
+                    case 0x6:
+                        var_s0 = 3;
+                        break;
+                    case 0x82:
+                        var_s0 = 5;
+                        break;
+                }
+
+                gSPTextureRectangle(glistp++, text->word.s.objX, text->word.s.objY,
+                                    ((text->word.s.objX >> 2) + 0xB) << 2, ((text->word.s.objY >> 2) + 0xF) << 2,
+                                    var_s0, 0, 0, 0x0400, 0x0400);
+            }
+        }
+    }
+}
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/text", Draw3DText);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/text", Draw3DText);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/text", Draw3DText);
 #endif

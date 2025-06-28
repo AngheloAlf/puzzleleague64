@@ -184,7 +184,7 @@ segments:
       - [0x046450, c, main/controller]
       - [0x046960, c, main/bkground]
       - [0x04A920, c, main/character]
-      - [0x04B640, asm, main/04B640]
+      - [0x04B640, c, main/text]
       - [0x04DA60, c, main/flic]
       - [0x04E3B0, c, main/animation]
       - [0x051D30, c, main/other]
@@ -558,8 +558,8 @@ segments:
       - [0x0C4DD0, .rodata, main/044E80]
       - [0x0C4F40, .rodata, main/bkground]
       - [0x0C5128, .rodata, main/character]
-      - [0x0C52D0, rodata, main/0C52D0]
-      - [0x0C52D0, .rodata, main/animation]
+      - [0x0C52D0, .rodata, main/text]
+      - [0x0C5530, .rodata, main/animation]
       - [0x0C5688, .rodata, main/other]
       - [0x0C5B50, .rodata, main/dlist]
       - [0x0C5E30, .rodata, main/animate]
@@ -813,14 +813,14 @@ segments:
         - [0x0E80F8]
         - [0x0E8110]
 
-        - [0x0E8128, palette, assets/segment_0CA4A0/D_0101F378_usa]
+        - [0x0E8128, palette, assets/segment_0CA4A0/numberTable]
         - [0x0E8328]
-        - { start: 0x0E8340, type: ci8, name: assets/segment_0CA4A0/D_0101F590_usa.ci8, width: 64, height: 32, palettes: [assets/segment_0CA4A0/D_0101F378_usa] }
-        - { start: 0x0E8B40, type: ci8, name: assets/segment_0CA4A0/D_0101FD90_usa.ci8, width: 64, height: 32, palettes: [assets/segment_0CA4A0/D_0101F378_usa] }
-        - { start: 0x0E9340, type: ci8, name: assets/segment_0CA4A0/D_01020590_usa.ci8, width: 64, height: 32, palettes: [assets/segment_0CA4A0/D_0101F378_usa] }
-        - { start: 0x0E9B40, type: ci8, name: assets/segment_0CA4A0/D_01020D90_usa.ci8, width: 64, height: 32, palettes: [assets/segment_0CA4A0/D_0101F378_usa] }
-        - { start: 0x0EA340, type: ci8, name: assets/segment_0CA4A0/D_01021590_usa.ci8, width: 64, height: 32, palettes: [assets/segment_0CA4A0/D_0101F378_usa] }
-        - { start: 0x0EAB40, type: ci8, name: assets/segment_0CA4A0/D_01021D90_usa.ci8, width: 64, height: 32, palettes: [assets/segment_0CA4A0/D_0101F378_usa] }
+        - { start: 0x0E8340, type: ci8, name: assets/segment_0CA4A0/w_text1.ci8, width: 64, height: 32, palettes: [assets/segment_0CA4A0/numberTable] }
+        - { start: 0x0E8B40, type: ci8, name: assets/segment_0CA4A0/w_text2.ci8, width: 64, height: 32, palettes: [assets/segment_0CA4A0/numberTable] }
+        - { start: 0x0E9340, type: ci8, name: assets/segment_0CA4A0/w_text3.ci8, width: 64, height: 32, palettes: [assets/segment_0CA4A0/numberTable] }
+        - { start: 0x0E9B40, type: ci8, name: assets/segment_0CA4A0/w_text4.ci8, width: 64, height: 32, palettes: [assets/segment_0CA4A0/numberTable] }
+        - { start: 0x0EA340, type: ci8, name: assets/segment_0CA4A0/w_text5.ci8, width: 64, height: 32, palettes: [assets/segment_0CA4A0/numberTable] }
+        - { start: 0x0EAB40, type: ci8, name: assets/segment_0CA4A0/w_text6.ci8, width: 64, height: 32, palettes: [assets/segment_0CA4A0/numberTable] }
         - [0x0EB340]
         - [0x0EB358]
         - [0x0EB370]
@@ -829,15 +829,15 @@ segments:
         - [0x0EB3B8]
         - [0x0EB3D0, i8, assets/segment_0CA4A0/D_01022620_usa.i8, 2048, 1] # unknown type and dimensions
         - [0x0EBBD0]
-        - { start: 0x0EBBE8, type: ci8, name: assets/segment_0CA4A0/D_01022E38_usa.ci8, width: 64, height: 32, palettes: [assets/segment_0CA4A0/D_0101F378_usa] }
+        - { start: 0x0EBBE8, type: ci8, name: assets/segment_0CA4A0/D_01022E38_usa.ci8, width: 64, height: 32, palettes: [assets/segment_0CA4A0/numberTable] }
         - [0x0EC3E8]
 
-        - { start: 0x0EC400, type: ci8, name: assets/segment_0CA4A0/D_01023650_usa.ci8, width: 64, height: 16, palettes: [assets/segment_0CA4A0/D_0101F378_usa] }
+        - { start: 0x0EC400, type: ci8, name: assets/segment_0CA4A0/D_01023650_usa.ci8, width: 64, height: 16, palettes: [assets/segment_0CA4A0/numberTable] }
         - [0x0EC800]
         - [0x0EC818, i8, assets/segment_0CA4A0/D_01023A68_usa.i8, 512, 1] # unknown type and dimensions
         - [0x0ECA18]
-        - { start: 0x0ECA30, type: ci8, name: assets/segment_0CA4A0/D_01023C80_usa.ci8, width: 64, height: 32, palettes: [assets/segment_0CA4A0/D_0101F378_usa] }
-        - { start: 0x0ED230, type: ci8, name: assets/segment_0CA4A0/D_01024480_usa.ci8, width: 64, height: 32, palettes: [assets/segment_0CA4A0/D_0101F378_usa] }
+        - { start: 0x0ECA30, type: ci8, name: assets/segment_0CA4A0/D_01023C80_usa.ci8, width: 64, height: 32, palettes: [assets/segment_0CA4A0/numberTable] }
+        - { start: 0x0ED230, type: ci8, name: assets/segment_0CA4A0/D_01024480_usa.ci8, width: 64, height: 32, palettes: [assets/segment_0CA4A0/numberTable] }
         - [0x0EDA30]
         - [0x0EDA48]
 

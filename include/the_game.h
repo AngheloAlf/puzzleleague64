@@ -17,7 +17,7 @@
 #include "gamepad.h"
 #include "icon.h"
 #include "menu_t.h"
-#include "player.h"
+#include "player_t.h"
 #include "tetwell.h"
 #include "text.h"
 

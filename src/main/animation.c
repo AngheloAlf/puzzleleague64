@@ -282,66 +282,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/animation", func_8004D90C_fra);
 #endif
 
 #if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/animation", jtbl_800C46D0_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/animation", RO_STR_800C473C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/animation", RO_STR_800C4748_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/animation", RO_800C4758_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/animation", RO_800C4760_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/animation", RO_800C4768_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/animation", RO_800C476C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/animation", RO_800C4774_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/animation", RO_STR_800C4778_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/animation", RO_800C4780_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/animation", RO_800C4788_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/animation", jtbl_800C4790_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/animation", jtbl_800C48D8_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/animation", jtbl_800C4900_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/animation", jtbl_800C4918_fra);
-#endif
-
-#if VERSION_FRA
 INCLUDE_RODATA("asm/fra/nonmatchings/main/animation", RO_800C4930_fra);
 #endif
 

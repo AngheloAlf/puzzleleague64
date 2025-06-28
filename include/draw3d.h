@@ -7,8 +7,8 @@
 struct struct_gInfo_unk_00068;
 struct tetWell;
 
-// void func_8005E510_usa();
-// void func_8005E740_usa();
+void Set3DTile(void);
+void func_8005E740_usa(void);
 // void func_8005E7A4_usa();
 void Draw3DFrontTetrisWell(struct struct_gInfo_unk_00068 *dynamicp, s32 num);
 void Draw3DBackTetrisWell(struct struct_gInfo_unk_00068 *dynamicp, s32 num);
