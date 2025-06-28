@@ -421,9 +421,11 @@ segments:
       - [0x0AC290, data, main/0AC290]
       - [0x0ACF90, .data, main/screen]
       - [0x0ACFB0, data, main/0ACFB0]
+      - [0x0AD310, .data, main/041780]
       - [0x0AD380, .data, main/043000]
       - [0x0AD3C0, .data, main/043D10]
-      - [0x0AD4D0, data, main/0AD4D0]
+      - [0x0AD4D0, .data, main/044E80]
+      - [0x0AD530, data, main/0AD530]
 
       - [0x0B4EF0, .data, libmus/player]
       - [0x0B4FB0, .data, libmus/player_fx]

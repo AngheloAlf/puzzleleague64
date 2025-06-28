@@ -175,10 +175,10 @@ segments:
       - { path: src/main/043D10.o }
       - { path: src/main/044E80.o }
 
-      - { path: "asm/{version}/data/main/0B7550.data.o", include_if_any: [[version, usa]] }
-      - { path: "asm/{version}/data/main/0B7A70.data.o", include_if_any: [[version, eur]] }
-      - { path: "asm/{version}/data/main/0B62A0.data.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/data/main/0AD4D0.data.o", include_if_any: [[version, ger]] }
+      - { path: "asm/{version}/data/main/0B75B0.data.o", include_if_any: [[version, usa]] }
+      - { path: "asm/{version}/data/main/0B7AD0.data.o", include_if_any: [[version, eur]] }
+      - { path: "asm/{version}/data/main/0B6300.data.o", include_if_any: [[version, fra]] }
+      - { path: "asm/{version}/data/main/0AD530.data.o", include_if_any: [[version, ger]] }
 
       - { path: src/main/controller.o }
       - { path: src/main/bkground.o }

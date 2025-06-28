@@ -430,9 +430,11 @@ segments:
       - [0x0B5DA0, data, main/02E800]
       - [0x0B5DC0, data, main/editor]
       - [0x0B5E10, data, main/0B5E10]
+      - [0x0B60E0, .data, main/041780]
       - [0x0B6150, .data, main/043000]
       - [0x0B6190, .data, main/043D10]
-      - [0x0B62A0, data, main/0B62A0]
+      - [0x0B62A0, .data, main/044E80]
+      - [0x0B6300, data, main/0B6300]
 
       - [0x0BDCC0, .data, libmus/player]
       - [0x0BDD80, .data, libmus/player_fx]

@@ -7,6 +7,7 @@
 #include "hvqm2util.h"
 #include "image.h"
 #include "screen.h"
+#include "segment_symbols.h"
 #include "sfxlimit.h"
 #include "sound.h"
 #include "story.h"
@@ -32,12 +33,50 @@ typedef struct struct_80192F80_usa {
 extern struct_80192F80_usa *B_80192F80_usa;
 extern s32 B_801C6EF0_usa;
 
-extern s32 D_800B5A1C_usa;
+struct_imageLoad_arg0 *D_800B6790_usa = NULL;
 
-extern struct_imageLoad_arg0 *D_800B6790_usa;
-extern u16 D_800B6794_usa[];
-extern RomOffset D_800B67B4_usa[];
-extern s16 D_800B67E4_usa[];
+u16 D_800B6794_usa[] = {
+    0x1E09, //
+    0x1709, //
+    0x1D09, //
+#if VERSION_FRA || VERSION_GER
+    0x1E09, //
+    0x1E09, //
+#else
+    0x1509, //
+    0x1C09, //
+#endif
+    0x1809, //
+#if VERSION_FRA || VERSION_GER
+    0x1E09, //
+#else
+    0x1609, //
+#endif
+    0x1C08, //
+    0x1C08, //
+    0x1C05, //
+    0x220A, //
+    0x1A09, //
+#if VERSION_FRA || VERSION_GER
+    0x1E03, //
+#else
+    0x1603, //
+#endif
+    0x2209, //
+    0x1709, //
+    0x0000, //
+};
+
+RomOffset D_800B67B4_usa[] = {
+    SEGMENT_ROM_START(segment_background_35C3F0), SEGMENT_ROM_START(segment_background_3807F0),
+    SEGMENT_ROM_START(segment_background_3A4BF0), SEGMENT_ROM_START(segment_background_3C8FF0),
+    SEGMENT_ROM_START(segment_background_3ED3F0), SEGMENT_ROM_START(segment_background_4117F0),
+    SEGMENT_ROM_START(segment_background_435BF0), SEGMENT_ROM_START(segment_background_459FF0),
+    SEGMENT_ROM_START(segment_background_47E3F0), SEGMENT_ROM_START(segment_background_4A27F0),
+    SEGMENT_ROM_START(segment_background_4C6BF0), SEGMENT_ROM_START(segment_background_4EAFF0),
+};
+
+s16 D_800B67E4_usa[] = { 0, 5, 6, 7, 1, 0xA, 2, 9, 0, 3, 4, 2, 8, 0xB };
 
 void func_80040B80_usa(Gfx **gfxP, s32 arg1 UNUSED, s32 arg2) {
     if (arg2 == 0x1F4) {
@@ -103,50 +142,51 @@ void func_80040DE4_usa(Gfx **gfxP) {
     screenDraw(gfxP, func_80040B80_usa);
 }
 
-s32 func_80040F04_usa(void) {
+nbool func_80040F04_usa(void) {
     u32 var_a1 = 0x20 | 0x10 | 0x8 | 0x4 | 0x2 | 0x1;
     s32 var_a0;
 
     // TODO: macros for counts
     for (var_a0 = 0; var_a0 < 0x1E; var_a0++) {
-        if (!((gPlayer[0]->unk_0B7.unk_0[var_a0 >> 3] >> (var_a0 & 7)) & 1)) {
+        if (!((gPlayer[0]->unk_0B7[var_a0 >> 3] >> (var_a0 & 7)) & 1)) {
             var_a1 &= ~1;
         }
     }
 
     for (var_a0 = 0; var_a0 < 0x32; var_a0++) {
-        if (!((gPlayer[0]->unk_0BB.unk_0[var_a0 >> 3] >> (var_a0 & 7)) & 1)) {
+        if (!((gPlayer[0]->unk_0BB[var_a0 >> 3] >> (var_a0 & 7)) & 1)) {
             var_a1 &= ~2;
         }
     }
 
-    var_a0 = 0;
-    while (var_a0 < 0x32) {
-        if (!(((*gPlayer)->unk_0C2.unk_0[var_a0 >> 3] >> (var_a0 & 7)) & 1)) {
+    for (var_a0 = 0; var_a0 < 0x32; var_a0++) {
+        if (!(((*gPlayer)->unk_0C2[var_a0 >> 3] >> (var_a0 & 7)) & 1)) {
             var_a1 &= ~4;
         }
-        var_a0 += 1;
     }
 
     for (var_a0 = 0; var_a0 < 0x1E; var_a0++) {
-        if (!((gPlayer[0]->unk_0C9.unk_0[var_a0 >> 3] >> (var_a0 & 7)) & 1)) {
+        if (!((gPlayer[0]->unk_0C9[var_a0 >> 3] >> (var_a0 & 7)) & 1)) {
             var_a1 &= ~8;
         }
     }
 
     for (var_a0 = 0; var_a0 < 0x32; var_a0++) {
-        if (!((gPlayer[0]->unk_0CD.unk_0[var_a0 >> 3] >> (var_a0 & 7)) & 1)) {
+        if (!((gPlayer[0]->unk_0CD[var_a0 >> 3] >> (var_a0 & 7)) & 1)) {
             var_a1 &= ~0x10;
         }
     }
 
     for (var_a0 = 0; var_a0 < 0x32; var_a0++) {
-        if (!((gPlayer[0]->unk_0D4.unk_0[(var_a0 >> 3)] >> (var_a0 & 7)) & 1)) {
+        if (!((gPlayer[0]->unk_0D4[(var_a0 >> 3)] >> (var_a0 & 7)) & 1)) {
             var_a1 &= ~0x20;
         }
     }
 
-    return ((var_a1 == (0x4 | 0x2 | 0x1)) || (var_a1 == (0x20 | 0x10 | 0x8 | 0x4 | 0x2 | 0x1))) ? -1 : 0;
+    if ((var_a1 == (0x4 | 0x2 | 0x1)) || (var_a1 == (0x20 | 0x10 | 0x8 | 0x4 | 0x2 | 0x1))) {
+        return ntrue;
+    }
+    return nfalse;
 }
 
 // ShowWinner?
@@ -174,7 +214,7 @@ void func_800410A4_usa(void) {
         var_s0 = gTheGame.menu[var_s1].unk_4 / 100;
     }
 
-    if (var_s0 >= 16) {
+    if (var_s0 >= ARRAY_COUNT(D_800B6794_usa)) {
         var_s0 = 0;
 #if VERSION_USA
         osSyncPrintf("ShowWinner: Internal error: Character out-of-range! (%d)\n", var_s0);
@@ -214,11 +254,11 @@ void func_8004123C_usa(s32 arg0) {
         return;
     }
 
-    if ((B_80192F80_usa->unk_1C == 9) && (func_80024BF4_usa(&sp10) != nfalse)) {
+    if ((B_80192F80_usa->unk_1C == 9) && func_80024BF4_usa(&sp10)) {
         HVQM2Util_Play((void *)"spaGIO.HVQM", 0x1000U, sp10);
         var_s2 = -1;
     } else if (((gSelection != 0xA0) & (gSelection != 0xB4)) && (gSelection != 0xC8)) {
-        var_s2 = (gTheGame.controller[0].touch_button & 0x1000) ? -1 : 0;
+        var_s2 = (gTheGame.controller[0].touch_button & START_BUTTON) ? -1 : 0;
     }
 
     switch (B_80192F80_usa->unk_18 + 1) {
@@ -226,7 +266,7 @@ void func_8004123C_usa(s32 arg0) {
             break;
 
         case 0x1:
-            if ((gTheGame.controller[0].touch_button & 0x8000) || (arg0 >= 0x3D)) {
+            if ((gTheGame.controller[0].touch_button & A_BUTTON) || (arg0 >= 0x3D)) {
                 var_s2 = -1;
             }
             break;
@@ -248,22 +288,22 @@ void func_8004123C_usa(s32 arg0) {
                 }
             }
             var_s0 = 0;
-            if ((func_800289C0_usa(B_80192F80_usa->unk_0C, 0x78, &sp14, &sp18) != nfalse) && (sp18 < 0)) {
+            if (func_800289C0_usa(B_80192F80_usa->unk_0C, 0x78, &sp14, &sp18) && (sp18 < 0)) {
                 var_s0 = -1;
-                sp18 += ((s32)(B_80192F80_usa->unk_00 * 5) / 2);
+                sp18 += B_80192F80_usa->unk_00 * 5 / 2;
                 if (sp18 >= 0) {
                     sp18 = 0;
                 }
                 func_800288D8_usa(B_80192F80_usa->unk_0C, 0x78, sp14, sp18);
             }
-            if ((func_800289C0_usa(B_80192F80_usa->unk_0C, 0x79, &sp14, &sp18) != nfalse) && (sp18 >= 0x99)) {
+            if (func_800289C0_usa(B_80192F80_usa->unk_0C, 0x79, &sp14, &sp18) && (sp18 >= 0x99)) {
                 var_s0 = -1;
 
-                if ((sp18 - (B_80192F80_usa->unk_00 * 5) / 2) < 0x99) {
+                if (sp18 - B_80192F80_usa->unk_00 * 5 / 2 < 0x99) {
                     PlaySE(SFX_INIT_TABLE, 0x17B);
                 }
 
-                sp18 -= (B_80192F80_usa->unk_00 * 5) / 2;
+                sp18 -= B_80192F80_usa->unk_00 * 5 / 2;
                 if (sp18 < 0x99) {
                     sp18 = 0x98;
                 }
@@ -295,7 +335,7 @@ void func_8004123C_usa(s32 arg0) {
                 }
             }
             var_s0 = 0;
-            if ((func_800289C0_usa(B_80192F80_usa->unk_0C, 0x78, &sp14, &sp18) != nfalse) && (sp18 >= -0x98)) {
+            if (func_800289C0_usa(B_80192F80_usa->unk_0C, 0x78, &sp14, &sp18) && (sp18 >= -0x98)) {
                 sp18 -= ((s32)(B_80192F80_usa->unk_00 * 5) / 2);
                 var_s0 = -1;
                 if (sp18 < -0x98) {
@@ -303,8 +343,8 @@ void func_8004123C_usa(s32 arg0) {
                 }
                 func_800288D8_usa(B_80192F80_usa->unk_0C, 0x78, sp14, sp18);
             }
-            if (((((gSelection == 0xA0) | (gSelection == 0xB4)) != 0) || (gSelection == 0xC8)) &&
-                (func_800289C0_usa(B_80192F80_usa->unk_0C, 0x79, &sp14, &sp18) != nfalse) && (sp18 < 0xDC)) {
+            if (((gSelection == 0xA0) || (gSelection == 0xB4) || (gSelection == 0xC8)) &&
+                func_800289C0_usa(B_80192F80_usa->unk_0C, 0x79, &sp14, &sp18) && (sp18 < 0xDC)) {
                 sp18 += B_80192F80_usa->unk_00;
                 var_s0 = -1;
                 if (sp18 >= 0xDC) {
@@ -337,15 +377,14 @@ void func_8004123C_usa(s32 arg0) {
                 }
             }
 
-            if ((func_800289C0_usa(B_80192F80_usa->unk_0C, 0x64, &sp14, &sp18) != nfalse) &&
-                (sp14 < B_80192F80_usa->unk_14)) {
+            if (func_800289C0_usa(B_80192F80_usa->unk_0C, 0x64, &sp14, &sp18) && (sp14 < B_80192F80_usa->unk_14)) {
                 sp14 += B_80192F80_usa->unk_00;
                 if (sp14 >= B_80192F80_usa->unk_14) {
                     sp14 = B_80192F80_usa->unk_14;
                     B_80192F80_usa->unk_00 = 0;
                 }
                 func_800288D8_usa(B_80192F80_usa->unk_0C, 0x64, sp14, sp18);
-            } else if ((func_800289C0_usa(B_80192F80_usa->unk_0C, 0x6E, &sp14, &sp18) != nfalse) && (sp14 >= 0xC3)) {
+            } else if (func_800289C0_usa(B_80192F80_usa->unk_0C, 0x6E, &sp14, &sp18) && (sp14 >= 0xC3)) {
                 sp14 -= B_80192F80_usa->unk_00;
                 if (sp14 < 0xC3) {
                     sp14 = 0xC2;
@@ -371,6 +410,7 @@ void func_8004123C_usa(s32 arg0) {
                     B_80192F80_usa->unk_00++;
                 }
             }
+
             screenShowImage(B_80192F80_usa->unk_0C, 0xD2);
             if (B_80192F80_usa->unk_30 != 0) {
 #if VERSION_GER
@@ -389,16 +429,16 @@ void func_8004123C_usa(s32 arg0) {
             }
             func_800288D8_usa(B_80192F80_usa->unk_0C, 0xD2, var_a2, 0xCA);
 
-            if ((gTheGame.controller[B_80192F80_usa->unk_34].touch_button & 0x200) && (B_80192F80_usa->unk_30 == 1)) {
+            if ((gTheGame.controller[B_80192F80_usa->unk_34].touch_button & L_JPAD) && (B_80192F80_usa->unk_30 == 1)) {
                 B_80192F80_usa->unk_30 = 0;
                 PlaySE(SFX_INIT_TABLE, 1);
             }
 
-            if ((gTheGame.controller[B_80192F80_usa->unk_34].touch_button & 0x100) && (B_80192F80_usa->unk_30 == 0)) {
+            if ((gTheGame.controller[B_80192F80_usa->unk_34].touch_button & R_JPAD) && (B_80192F80_usa->unk_30 == 0)) {
                 B_80192F80_usa->unk_30 = 1;
                 PlaySE(SFX_INIT_TABLE, 1);
             }
-            if (gTheGame.controller[B_80192F80_usa->unk_34].touch_button & 0x8000) {
+            if (gTheGame.controller[B_80192F80_usa->unk_34].touch_button & A_BUTTON) {
                 gReset = -1;
                 if (B_80192F80_usa->unk_30 == 0) {
                     var_v1 = GMAIN_2BC;
@@ -422,7 +462,7 @@ void func_8004123C_usa(s32 arg0) {
             }
             break;
         case 0x7:
-            if (gTheGame.controller[0].touch_button & 0x8000) {
+            if (gTheGame.controller[0].touch_button & A_BUTTON) {
                 var_s2 = -1;
             }
             if ((gSelection == 0x82) && (B_80192F80_usa->unk_1C >= 2) && (B_80192F80_usa->unk_1C < 8) &&
@@ -441,7 +481,7 @@ void func_8004123C_usa(s32 arg0) {
     }
 
     FadeOutAllSFXs(0x1E);
-    if ((B_80192F80_usa->unk_18 != 0) || (gTheGame.controller[0].touch_button & 0x8000)) {
+    if ((B_80192F80_usa->unk_18 != 0) || (gTheGame.controller[0].touch_button & A_BUTTON)) {
         PlaySE(SFX_INIT_TABLE, 2);
     }
 
@@ -469,7 +509,7 @@ void func_8004123C_usa(s32 arg0) {
             gReset = -1;
         }
     } else if (gSelection == 0x82) {
-        if (func_80040F04_usa() != 0) {
+        if (func_80040F04_usa()) {
             func_8002B85C_usa(5, 5);
         } else {
             gMain = GMAIN_2BC;
@@ -516,7 +556,7 @@ void func_80041F1C_usa(void **heapP, s32 arg1) {
     s32 var_v0;
     s32 var_s0;
 
-    *heapP = (void *)((s32)(*heapP + 3) & ~3);
+    *heapP = ALIGN_TO(*heapP, struct_80192F80_usa);
     B_80192F80_usa = *heapP;
     *heapP += sizeof(struct_80192F80_usa);
 
@@ -534,7 +574,7 @@ void func_80041F1C_usa(void **heapP, s32 arg1) {
         }
         B_8019CF98_usa = var_v0;
 
-        if (B_8019CF98_usa >= 0xCU) {
+        if (B_8019CF98_usa >= ARRAY_COUNTU(D_800B67B4_usa)) {
             B_8019CF98_usa = 0;
         }
         func_8001FD0C_usa(&D_800B6790_usa, D_800B67B4_usa[B_8019CF98_usa], 0, 0x800054, 0x140, 0xE8, heapP);

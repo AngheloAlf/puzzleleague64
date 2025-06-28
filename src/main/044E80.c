@@ -1,12 +1,14 @@
 #include "044E80.h"
 
-#include "include_asm.h"
 #include "macros_defines.h"
 #include "main_variables.h"
+
+#include "libc/assert.h"
 
 #include "hvqm2util.h"
 #include "image.h"
 #include "screen.h"
+#include "segment_symbols.h"
 #include "sfxlimit.h"
 #include "sound.h"
 #include "story.h"
@@ -42,9 +44,25 @@ typedef struct struct_80192FB0 {
     /* 0x1428 */ s32 unk_1428; // accessed indirectly
 } struct_80192FB0;             // size = 0x142C
 
-extern RomOffset D_800B6950_usa[];
 extern struct_80192FB0 *B_80192FB0_usa;
-extern s32 D_800B6990_usa[];
+
+RomOffset D_800B6950_usa[0x10] = {
+    SEGMENT_ROM_START(segment_bg_screen_7D39D0), SEGMENT_ROM_START(segment_bg_screen_7E5010),
+    SEGMENT_ROM_START(segment_bg_screen_7F5BD0), SEGMENT_ROM_START(segment_bg_screen_8088D0),
+    SEGMENT_ROM_START(segment_bg_screen_81A450), SEGMENT_ROM_START(segment_bg_screen_82C890),
+    SEGMENT_ROM_START(segment_bg_screen_83EB10), SEGMENT_ROM_START(segment_bg_screen_8520D0),
+    SEGMENT_ROM_START(segment_bg_screen_865D90), SEGMENT_ROM_START(segment_bg_screen_87A4D0),
+    SEGMENT_ROM_START(segment_bg_screen_88DA90), SEGMENT_ROM_START(segment_bg_screen_8A8050),
+    SEGMENT_ROM_START(segment_bg_screen_8BB610), SEGMENT_ROM_START(segment_bg_screen_8CE310),
+    SEGMENT_ROM_START(segment_bg_screen_8E2A50), SEGMENT_ROM_START(segment_bg_screen_902250),
+};
+u32 D_800B6990_usa[] = {
+    (255 << 24) | (191 << 16) | (191 << 8) | 255, (191 << 24) | (255 << 16) | (191 << 8) | 255,
+    (191 << 24) | (191 << 16) | (255 << 8) | 255, (191 << 24) | (255 << 16) | (255 << 8) | 255,
+    (255 << 24) | (191 << 16) | (255 << 8) | 255, (255 << 24) | (255 << 16) | (191 << 8) | 255,
+    (191 << 24) | (255 << 16) | (191 << 8) | 255, (255 << 24) | (191 << 16) | (255 << 8) | 255,
+};
+static_assert(ARRAY_COUNT(D_800B6990_usa) == 8, "This array is indexed using the lower 3 bits of a variable");
 
 #if VERSION_USA || VERSION_EUR
 #define UNKNOWN_VALUE 0x1F4
@@ -78,7 +96,7 @@ void func_80044280_usa(s32 arg0, struct_80192FB0_unk_0028 *arg1) {
         } else {
             var_s0->unk_0C += var_s0->unk_10;
             var_s0->unk_08 += var_s0->unk_10;
-            if (var_s0->unk_08 >= 0x3C1) {
+            if (var_s0->unk_08 > 0x3C0) {
                 var_s0->unk_04 = var_s0->unk_18;
                 var_s0->unk_08 = var_s0->unk_1C;
                 var_s0->unk_10 = var_s0->unk_20;
@@ -130,7 +148,7 @@ void func_8004441C_usa(struct_80192FB0_unk_0028 *arg0) {
             var_s0 = 0;
 
             while (var_s0 < 0x80) {
-                if (!(((s32) * (sp10 + (var_s0 >> 3)) >> (var_s0 & 7)) & 1)) {
+                if (!((sp10[var_s0 >> 3] >> (var_s0 & 7)) & 1)) {
                     break;
                 }
                 var_s0 += 1;
@@ -165,10 +183,10 @@ void func_800445D8_usa(Gfx **gfxP, s32 arg1 UNUSED, s32 arg2) {
 
     if ((arg2 == UNKNOWN_VALUE) && (B_80192FB0_usa->unk_0014 < 0xF)) {
         sp58.unk_00 = 0;
-        sp58.unk_04 = 0xC0 - sp18[B_80192FB0_usa->unk_0014 % 0x10];
+        sp58.unk_04 = 0xC0 - sp18[B_80192FB0_usa->unk_0014 % ARRAY_COUNT(sp18)];
 
         sp58.unk_08 = 0x6C;
-        sp58.unk_0C = sp18[B_80192FB0_usa->unk_0014 % 0x10];
+        sp58.unk_0C = sp18[B_80192FB0_usa->unk_0014 % ARRAY_COUNT(sp18)];
 
         imageDraw(B_80192FB0_usa->unk_0008[B_80192FB0_usa->unk_0010], gfxP, (B_80192FB0_usa->unk_0010 * 0x96) + 0x1F,
                   0x15, &sp58);
@@ -176,44 +194,24 @@ void func_800445D8_usa(Gfx **gfxP, s32 arg1 UNUSED, s32 arg2) {
         sp58.unk_00 = 0;
         sp58.unk_04 = 0;
         sp58.unk_08 = 0x6C;
-        sp58.unk_0C = 0xC0 - sp18[B_80192FB0_usa->unk_0014 % 0x10];
+        sp58.unk_0C = 0xC0 - sp18[B_80192FB0_usa->unk_0014 % ARRAY_COUNT(sp18)];
 
         imageDraw(B_80192FB0_usa->unk_0008[B_80192FB0_usa->unk_0010], gfxP, (B_80192FB0_usa->unk_0010 * 0x96) + 0x1F,
-                  sp18[B_80192FB0_usa->unk_0014 % 0x10] + 0x15, &sp58);
+                  sp18[B_80192FB0_usa->unk_0014 % ARRAY_COUNT(sp18)] + 0x15, &sp58);
     }
 }
 
-void func_800447C4_usa(Gfx **gfxP, s32 arg1, s32 arg2);
-#if VERSION_USA
-#if 0
-void func_800447C4_usa(Gfx **gfxP, s32 arg1, s32 arg2) {
-    Gfx *temp_a1;
-    Gfx *temp_a2;
-    Gfx *temp_t0;
-    Gfx *temp_t2;
-    Gfx *temp_t3;
-    Gfx *temp_t8;
-    Gfx *temp_t8_2;
-    Gfx *temp_t8_3;
-    Gfx *temp_t8_4;
-    Gfx *temp_t8_5;
-    Gfx *temp_v1;
+void func_800447C4_usa(Gfx **gfxP, s32 arg1 UNUSED, s32 arg2) {
     Gfx *gfx;
-    s32 temp_a0_2;
-    s32 temp_a1_2;
-    s32 temp_a2_2;
     s32 var_a1;
     s32 var_a2;
     s32 var_a3;
     s32 var_s1;
     struct_80192FB0_unk_0028 *var_t0;
     u32 temp_a0;
-    void *temp_t9;
-    void *var_t9;
 
     gfx = *gfxP;
     if (arg2 == 0xC8) {
-
         gDPPipeSync(gfx++);
         gDPSetCycleType(gfx++, G_CYC_1CYCLE);
         gDPSetAlphaCompare(gfx++, G_AC_NONE);
@@ -221,9 +219,8 @@ void func_800447C4_usa(Gfx **gfxP, s32 arg1, s32 arg2) {
         gDPSetCombineMode(gfx++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
         gSPClearGeometryMode(gfx++, G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_LIGHTING | G_SHADING_SMOOTH);
 
-        var_s1 = 0;
         var_t0 = B_80192FB0_usa->unk_0028;
-        while (var_s1 < 0x80) {
+        for (var_s1 = 0; var_s1 < STRUCT_80192FB0_UNK_0028_COUNT; var_s1++) {
             var_a1 = var_t0[var_s1].unk_04;
             if (var_a1 < 0) {
                 var_a1 += 0x500;
@@ -238,52 +235,20 @@ void func_800447C4_usa(Gfx **gfxP, s32 arg1, s32 arg2) {
             if (var_a3 >= 0x3C0) {
                 var_a3 -= 0x3C0;
             }
-            var_a2 = ((s32) var_t0[var_s1].unk_0C >> 3) & 7;
+            var_a2 = (var_t0[var_s1].unk_0C >> 3) & 7;
             if (var_a2 >= 4) {
                 var_a2 = 8 - var_a2;
             }
-            temp_a0 = var_t0[var_s1+1].unk_00;
+            temp_a0 = var_t0[var_s1 + 1].unk_00;
 
-            temp_a1_2 = var_a1 >> 2;
-            temp_a2_2 = var_a2 >> 1;
-#if 0
-            temp_t9 = var_t9 + 8;
-            temp_t9->unk_-4 = 0xFA000000;
-            temp_t9->unk_0 = (s32) (((temp_a0 >> 0x18) << 0x18) | (temp_a0 & 0xFF0000) | (temp_a0 & 0xFF00) | (temp_a0 & 0xFF));
-#endif
-            temp_a0_2 = var_a3 >> 2;
-#if 0
-            var_t9 = temp_t9 + 8;
-            var_t9->unk_-4 = (s32) ((((temp_a1_2 + 3) & 0x3FF) << 0xE) | ((((temp_a0_2 + temp_a2_2 + 1) & 0x3FF) * 4) | 0xF6000000));
-            var_t9->unk_0 = (s32) ((((temp_a1_2 - 2) & 0x3FF) << 0xE) | (((temp_a0_2 - temp_a2_2) & 0x3FF) * 4));
-#endif
-
-            gDPSetPrimColor(gfx++, 0, 0, temp_a0, temp_a0, temp_a0, temp_a0);
-            gDPFillRectangle(gfx++, temp_a1_2 - 2, temp_a0_2 - temp_a2_2, temp_a1_2 + 3, temp_a0_2 + temp_a2_2 + 1);
-
-
-            var_s1 += 1;
+            gDPSetPrimColor(gfx++, 0, 0, (temp_a0 >> 24) & 0xFF, (temp_a0 >> 16) & 0xFF, (temp_a0 >> 8) & 0xFF,
+                            temp_a0 & 0xFF);
+            gDPFillRectangle(gfx++, (var_a1 >> 2) - 2, (var_a3 >> 2) - (var_a2 >> 1), (var_a1 >> 2) + 3,
+                             (var_a3 >> 2) + (var_a2 >> 1) + 1);
         }
     }
-
     *gfxP = gfx;
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/044E80", func_800447C4_usa);
-#endif
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/044E80", func_800447C4_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/044E80", func_800447C4_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/044E80", func_800447C4_usa);
-#endif
 
 void func_800449C4_usa(Gfx **gfxP) {
     if (B_80192FB0_usa->unk_0004 == 0xB) {

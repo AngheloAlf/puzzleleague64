@@ -249,7 +249,7 @@ void func_800428B4_usa(s32 arg0 UNUSED) {
 void func_80042C24_usa(void **heapP, u32 arg1) {
     char sp20[0x20];
 
-    *heapP = (void *)((s32)(*heapP + 3) & ~3);
+    *heapP = ALIGN_TO(*heapP, struct_80192F90);
     B_80192F90_usa = (struct_80192F90 *)*heapP;
     *heapP += sizeof(struct_80192F90);
 

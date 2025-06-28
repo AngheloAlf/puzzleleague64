@@ -521,8 +521,8 @@ void InitTitle(void) {
     // funny alignment, current macros does not match
     sp110 = (void *)((((uintptr_t)gBufferHeap + 0xF) + SEGMENT_ROM_SIZE(segment_0CA4A0)) & ~0xF);
 
-    gPlayer[0] = gTheGame.unk_9C48;
-    gPlayer[1] = gTheGame.unk_9C48;
+    gPlayer[0] = gTheGame.player;
+    gPlayer[1] = gTheGame.player;
     gpData = sp110;
     sp110 = (void *)((uintptr_t)sp110 + sizeof(struct_gpData));
     bzero(gpData, sizeof(struct_gpData));
@@ -595,7 +595,7 @@ void titleSetup(void) {
     gPlayer[0] = NULL;
     gPlayer[1] = NULL;
 
-    for (i = 0; i < ARRAY_COUNT(gTheGame.unk_9C48); i++) {
+    for (i = 0; i < GAME_PLAYER_COUNT; i++) {
         menuInitUser(i);
     }
 

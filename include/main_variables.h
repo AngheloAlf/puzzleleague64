@@ -13,7 +13,7 @@
 #include "unknown_defines.h"
 
 struct struct_imageLoad_arg0;
-struct struct_801A6DB8_usa;
+struct player_t;
 struct struct_gInfo;
 struct struct_gInfo_unk_00068;
 
@@ -67,7 +67,7 @@ extern s16 ts_old_alert;
 // extern UNK_TYPE D_800B5A12_usa;
 // extern UNK_TYPE D_800B5A14_usa;
 // extern UNK_TYPE D_800B5A18_usa;
-// extern UNK_TYPE D_800B5A1C_usa;
+extern s32 D_800B5A1C_usa;
 // extern UNK_TYPE D_800B5A20_usa;
 // extern UNK_TYPE D_800B5A24_usa;
 // extern UNK_TYPE D_800B5A28_usa;
@@ -1405,7 +1405,7 @@ extern s8 B_8021BA78_usa;
 extern s32 B_8021BA98_usa;
 
 // extern UNK_TYPE B_8021BEA0_usa;
-extern struct struct_801A6DB8_usa *gPlayer[]; // maybe gPlayer?
+extern struct player_t *gPlayer[]; // maybe gPlayer?
 extern Gfx *glistp;
 // extern UNK_TYPE B_8021BEB0_usa;
 // extern UNK_TYPE B_8021BEB8_usa;

@@ -431,9 +431,11 @@ segments:
       - [0x0B7050, .data, main/02E800]
       - [0x0B7070, .data, main/editor]
       - [0x0B70C0, data, main/0B70C0] # bonus may start here
+      - [0x0B7390, .data, main/041780]
       - [0x0B7400, .data, main/043000]
       - [0x0B7440, .data, main/043D10]
-      - [0x0B7550, data, main/0B7550]
+      - [0x0B7550, .data, main/044E80]
+      - [0x0B75B0, data, main/0B75B0]
       - [0x0B80D0, data, main/0B80D0] # update? maybe wrong end
       - [0x0B8130, data, main/0B8130]
 
