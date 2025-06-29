@@ -131,20 +131,26 @@ extern uObjTxtr otherTexture10;
 extern uObjTxtr otherTexture11;
 extern uObjTxtr D_0101F348_usa;
 extern uObjTxtr D_0101F360_usa;
+
 extern u16 numberTable[];
 extern uObjTxtr numberLUT;
+
+#define W_TEXT_WIDTH 64
+#define W_TEXT_HEIGHT 32
 extern u8 w_text1[];
 extern u8 w_text2[];
 extern u8 w_text3[];
 extern u8 w_text4[];
 extern u8 w_text5[];
 extern u8 w_text6[];
+
 extern uObjTxtr numberTexture1;
 extern uObjTxtr numberTexture2;
 extern uObjTxtr numberTexture3;
 extern uObjTxtr numberTexture4;
 extern uObjTxtr numberTexture5;
 extern uObjTxtr numberTexture6;
+
 // extern UNK_TYPE D_01022620_usa;
 // extern UNK_TYPE D_01022E20_usa;
 // extern UNK_TYPE D_01022E38_usa;

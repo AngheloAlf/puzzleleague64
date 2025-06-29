@@ -1,6 +1,8 @@
 #include "assets_variables.h"
 
 #include "alignment.h"
+#include "libc/assert.h"
+#include "macros_defines.h"
 
 Vp D_01000000_usa = { {
     { 0x0280, 0x01E0, 0x01FF, 0x0000 },
@@ -1196,33 +1198,39 @@ uObjTxtr numberLUT = {
 u8 w_text1[] ALIGNED(8) = {
 #include "assets/segment_0CA4A0/w_text1.ci8.inc"
 };
+static_assert(ARRAY_COUNT(w_text1) == W_TEXT_WIDTH * W_TEXT_HEIGHT, "");
 
 u8 w_text2[] ALIGNED(8) = {
 #include "assets/segment_0CA4A0/w_text2.ci8.inc"
 };
+static_assert(ARRAY_COUNT(w_text2) == W_TEXT_WIDTH * W_TEXT_HEIGHT, "");
 
 u8 w_text3[] ALIGNED(8) = {
 #include "assets/segment_0CA4A0/w_text3.ci8.inc"
 };
+static_assert(ARRAY_COUNT(w_text3) == W_TEXT_WIDTH * W_TEXT_HEIGHT, "");
 
 u8 w_text4[] ALIGNED(8) = {
 #include "assets/segment_0CA4A0/w_text4.ci8.inc"
 };
+static_assert(ARRAY_COUNT(w_text4) == W_TEXT_WIDTH * W_TEXT_HEIGHT, "");
 
 u8 w_text5[] ALIGNED(8) = {
 #include "assets/segment_0CA4A0/w_text5.ci8.inc"
 };
+static_assert(ARRAY_COUNT(w_text5) == W_TEXT_WIDTH * W_TEXT_HEIGHT, "");
 
 u8 w_text6[] ALIGNED(8) = {
 #include "assets/segment_0CA4A0/w_text6.ci8.inc"
 };
+static_assert(ARRAY_COUNT(w_text6) == W_TEXT_WIDTH * W_TEXT_HEIGHT, "");
 
 uObjTxtr numberTexture1 = {
     /* type  */ G_OBJLT_TXTRBLOCK,
     /* image */ (u64 *)w_text1,
     /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
-    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
-    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(W_TEXT_WIDTH *W_TEXT_HEIGHT, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(W_TEXT_WIDTH, G_IM_SIZ_8b),
     /* sid   */ 0,
     /* flag  */ (u32)-1,
     /* mask  */ 0x0,
@@ -1232,8 +1240,8 @@ uObjTxtr numberTexture2 = {
     /* type  */ G_OBJLT_TXTRBLOCK,
     /* image */ (u64 *)w_text2,
     /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
-    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
-    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(W_TEXT_WIDTH *W_TEXT_HEIGHT, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(W_TEXT_WIDTH, G_IM_SIZ_8b),
     /* sid   */ 0,
     /* flag  */ (u32)-1,
     /* mask  */ 0x0,
@@ -1243,8 +1251,8 @@ uObjTxtr numberTexture3 = {
     /* type  */ G_OBJLT_TXTRBLOCK,
     /* image */ (u64 *)w_text3,
     /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
-    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
-    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(W_TEXT_WIDTH *W_TEXT_HEIGHT, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(W_TEXT_WIDTH, G_IM_SIZ_8b),
     /* sid   */ 0,
     /* flag  */ (u32)-1,
     /* mask  */ 0x0,
@@ -1254,8 +1262,8 @@ uObjTxtr numberTexture4 = {
     /* type  */ G_OBJLT_TXTRBLOCK,
     /* image */ (u64 *)w_text4,
     /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
-    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
-    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(W_TEXT_WIDTH *W_TEXT_HEIGHT, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(W_TEXT_WIDTH, G_IM_SIZ_8b),
     /* sid   */ 0,
     /* flag  */ (u32)-1,
     /* mask  */ 0x0,
@@ -1265,8 +1273,8 @@ uObjTxtr numberTexture5 = {
     /* type  */ G_OBJLT_TXTRBLOCK,
     /* image */ (u64 *)w_text5,
     /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
-    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
-    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(W_TEXT_WIDTH *W_TEXT_HEIGHT, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(W_TEXT_WIDTH, G_IM_SIZ_8b),
     /* sid   */ 0,
     /* flag  */ (u32)-1,
     /* mask  */ 0x0,
@@ -1276,8 +1284,8 @@ uObjTxtr numberTexture6 = {
     /* type  */ G_OBJLT_TXTRBLOCK,
     /* image */ (u64 *)w_text6,
     /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
-    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
-    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(W_TEXT_WIDTH *W_TEXT_HEIGHT, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(W_TEXT_WIDTH, G_IM_SIZ_8b),
     /* sid   */ 0,
     /* flag  */ (u32)-1,
     /* mask  */ 0x0,

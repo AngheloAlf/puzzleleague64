@@ -4,11 +4,11 @@
 
 #include "text.h"
 
-#include "include_asm.h"
 #include "macros_defines.h"
 #include "main_variables.h"
 
 #include "draw3d.h"
+#include "fade.h"
 #include "info.h"
 #include "the_game.h"
 
@@ -136,7 +136,7 @@ nbool InitWhichNumber(text_t *text, char number, s32 type) {
     return ntrue;
 }
 
-void SetText(s32 x, s32 y, const char str[], s32 type) {
+INLINE void SetText(s32 x, s32 y, const char str[], s32 type) {
     s32 str_pos = 0;
     text_t *text;
     s32 count;
@@ -159,304 +159,45 @@ void SetText(s32 x, s32 y, const char str[], s32 type) {
     gTheGame.unk_90C0 = count;
 }
 
-#if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/text", RO_STR_800C5E2C_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/text", RO_STR_800C5E38_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/text", RO_STR_800C5E48_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/text", RO_STR_800C5E50_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/text", RO_STR_800C5E58_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/text", RO_STR_800C5E5C_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/text", RO_STR_800C5E64_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/text", RO_STR_800C5E68_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/text", RO_STR_800C5E70_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/text", RO_STR_800C5E78_usa);
-#endif
-
-#if VERSION_USA
-#if 0
-extern const char RO_STR_800C5E2C_usa[];
-extern const char RO_STR_800C5E38_usa[];
-extern const char RO_STR_800C5E48_usa[];
-extern const char RO_STR_800C5E50_usa[];
-extern const char RO_STR_800C5E58_usa[];
-extern const char RO_STR_800C5E5C_usa[];
-extern const char RO_STR_800C5E64_usa[];
-extern const char RO_STR_800C5E68_usa[];
-extern const char RO_STR_800C5E70_usa[];
-extern const char RO_STR_800C5E78_usa[];
-
-// UpdateText
 void UpdateText(void) {
-    char sp18[1];
-    text_t *var_s0;
-    s16 temp_v0;
-    s16 temp_v0_10;
-    s16 temp_v0_11;
-    s16 temp_v0_12;
-    s16 temp_v0_13;
-    s16 temp_v0_14;
-    s16 temp_v0_15;
-    s16 temp_v0_16;
-    s16 temp_v0_17;
-    s16 temp_v0_18;
-    s16 temp_v0_19;
-    s16 temp_v0_20;
-    s16 temp_v0_21;
-    s16 temp_v0_22;
-    s16 temp_v0_23;
-    s16 temp_v0_24;
-    s16 temp_v0_25;
-    s16 temp_v0_26;
-    s16 temp_v0_27;
-    s16 temp_v0_28;
-    s16 temp_v0_29;
-    s16 temp_v0_2;
-    s16 temp_v0_30;
-    s16 temp_v0_31;
-    s16 temp_v0_32;
-    s16 temp_v0_33;
-    s16 temp_v0_34;
-    s16 temp_v0_35;
-    s16 temp_v0_36;
-    s16 temp_v0_37;
-    s16 temp_v0_3;
-    s16 temp_v0_4;
-    s16 temp_v0_5;
-    s16 temp_v0_6;
-    s16 temp_v0_7;
-    s16 temp_v0_8;
-    s16 temp_v0_9;
-    s32 *var_a2;
-    s32 var_s1;
-    s32 var_s3;
-    s32 var_s3_10;
-    s32 var_s3_11;
-    s32 var_s3_12;
-    s32 var_s3_13;
-    s32 var_s3_14;
-    s32 var_s3_15;
-    s32 var_s3_16;
-    s32 var_s3_17;
-    s32 var_s3_18;
-    s32 var_s3_19;
-    s32 var_s3_20;
-    s32 var_s3_21;
-    s32 var_s3_22;
-    s32 var_s3_23;
-    s32 var_s3_24;
-    s32 var_s3_25;
-    s32 var_s3_26;
-    s32 var_s3_27;
-    s32 var_s3_28;
-    s32 var_s3_29;
-    s32 var_s3_2;
-    s32 var_s3_30;
-    s32 var_s3_31;
-    s32 var_s3_32;
-    s32 var_s3_33;
-    s32 var_s3_34;
-    s32 var_s3_35;
-    s32 var_s3_36;
-    s32 var_s3_37;
-    s32 var_s3_3;
-    s32 var_s3_4;
-    s32 var_s3_5;
-    s32 var_s3_6;
-    s32 var_s3_7;
-    s32 var_s3_8;
-    s32 var_s3_9;
-    s8 *var_s2;
+    tetWell *well1 = &gTheGame.tetrisWell[0];
+    tetWell *well2 = &gTheGame.tetrisWell[1];
+    cursor_t *cursor1 = &gTheGame.cursorBlock[0];
+    char string[0x10];
+    s32 *hi_score;
 
     if (gMain >= 0x384) {
         if (gTheGame.unk_9C08 == 1) {
             if (gTheGame.unk_9C14 == 0) {
-                sprintf(&sp18, &RO_STR_800C5E2C_usa, gTheGame.unk_9C18, gTheGame.unk_9C1C);
-                var_s1 = gTheGame.unk_90C0;
-                var_s3 = 0x3C;
-                var_s0 = &gTheGame.unk_90C8[var_s1];
-                var_s2 = &sp18;
-
-                while (var_s1 < 0x46) {
-                    if (InitWhichNumber(var_s0, *var_s2, 0x14) == 0) {
-                        break;
-                    }
-                    var_s0->unk_00.s.objX = var_s3 * 4;
-                    var_s0->unk_00.s.objY = 0xA0;
-                    var_s0->unk_00.s.imageW = 0x200;
-                    var_s3 += 9;
-                    var_s2 += 1;
-                    var_s1 += 1;
-                    var_s0++;
-                }
+                sprintf(string, "%2d'%02d", gTheGame.unk_9C18, gTheGame.unk_9C1C);
+                SetText(0x3C, 0x28, string, 0x14);
             } else {
-                sprintf(&sp18, &RO_STR_800C5E38_usa, gTheGame.unk_9C14, gTheGame.unk_9C18, gTheGame.unk_9C1C);
-                var_s1 = gTheGame.unk_90C0;
-                var_s3_2 = 0x21;
-                var_s0 = &gTheGame.unk_90C8[var_s1];
-                var_s2 = &sp18;
-                while (var_s1 < 0x46) {
-                    temp_v0_2 = var_s3_2 * 4;
-                    if (InitWhichNumber(var_s0, *var_s2, 0x14) == 0) {
-                        break;
-                    }
-                    var_s3_2 += 9;
-                    var_s2 += 1;
-                    var_s0->unk_00.s.objX = temp_v0_2;
-                    var_s0->unk_00.s.objY = 0xA0;
-                    var_s0->unk_00.s.imageW = 0x200;
-                    var_s1 += 1;
-                    var_s0++;
-                }
+                sprintf(string, "%2d:%02d'%02d", gTheGame.unk_9C14, gTheGame.unk_9C18, gTheGame.unk_9C1C);
+                SetText(0x21, 0x28, string, 0x14);
             }
         } else if (gSelection == 0x96) {
             if (gTheGame.unk_9C14 > 0) {
-                sprintf(&sp18, &RO_STR_800C5E48_usa);
-                var_s1 = gTheGame.unk_90C0;
-                var_s3_3 = 0x8A;
-                var_s0 = (var_s1 << 5) + (&gTheGame.unk_9C14 - 0xB4C);
-                var_s2 = &sp18;
-                while (var_s1 < 0x46) {
-                    temp_v0_3 = var_s3_3 * 4;
-                    if (InitWhichNumber(var_s0, *var_s2, 0x14) == 0) {
-                        break;
-                    }
-                    var_s3_3 += 9;
-                    var_s2 += 1;
-                    var_s0->unk_00.s.objX = temp_v0_3;
-                    var_s0->unk_00.s.objY = 0x2B0;
-                    var_s0->unk_00.s.imageW = 0x200;
-                    var_s1 += 1;
-                    var_s0++;
-                }
+                sprintf(string, "59'59");
+                SetText(0x8A, 0xAC, string, 0x14);
             } else {
-                sprintf(&sp18, &RO_STR_800C5E50_usa, gTheGame.unk_9C18, gTheGame.unk_9C1C);
-                var_s3_4 = 0x8F;
+                sprintf(string, "%d'%02d", gTheGame.unk_9C18, gTheGame.unk_9C1C);
                 if (gTheGame.unk_9C18 < 0xA) {
-                    var_s1 = gTheGame.unk_90C0;
-                    var_s0 = (var_s1 << 5) + (&gTheGame.unk_9C14 - 0xB4C);
-                    var_s2 = &sp18;
-                    while (var_s1 < 0x46) {
-                        temp_v0_4 = var_s3_4 * 4;
-                        if (InitWhichNumber(var_s0, *var_s2, 0x14) == 0) {
-                            break;
-                        }
-                        var_s3_4 += 9;
-                        var_s2 += 1;
-                        var_s0->unk_00.s.objX = temp_v0_4;
-                        var_s0->unk_00.s.objY = 0x2B0;
-                        var_s0->unk_00.s.imageW = 0x200;
-                        var_s1 += 1;
-                        var_s0++;
-                    }
+                    SetText(0x8F, 0xAC, string, 0x14);
                 } else {
-                    var_s1 = gTheGame.unk_90C0;
-                    var_s3_5 = 0x8A;
-                    var_s0 = (var_s1 << 5) + (&gTheGame.unk_9C14 - 0xB4C);
-                    var_s2 = &sp18;
-                    while (var_s1 < 0x46) {
-                        temp_v0_5 = var_s3_5 * 4;
-                        if (InitWhichNumber(var_s0, *var_s2, 0x14) == 0) {
-                            break;
-                        }
-                        var_s3_5 += 9;
-                        var_s2 += 1;
-                        var_s0->unk_00.s.objX = temp_v0_5;
-                        var_s0->unk_00.s.objY = 0x2B0;
-                        var_s0->unk_00.s.imageW = 0x200;
-                        var_s1 += 1;
-                        var_s0++;
-                    }
+                    SetText(0x8A, 0xAC, string, 0x14);
                 }
             }
         } else if (gTheGame.unk_9C14 > 0) {
-            sprintf(&sp18, &RO_STR_800C5E48_usa);
-            var_s1 = gTheGame.unk_90C0;
-            var_s3_6 = 0x8A;
-            var_s0 = (var_s1 << 5) + (&gTheGame.unk_9C14 - 0xB4C);
-            var_s2 = &sp18;
-            while (var_s1 < 0x46) {
-                temp_v0_6 = var_s3_6 * 4;
-                if (InitWhichNumber(var_s0, *var_s2, 0x14) == 0) {
-                    break;
-                }
-                var_s3_6 += 9;
-                var_s2 += 1;
-                var_s0->unk_00.s.objX = temp_v0_6;
-                var_s0->unk_00.s.objY = 0x268;
-                var_s0->unk_00.s.imageW = 0x200;
-                var_s1 += 1;
-                var_s0++;
-            }
+            sprintf(string, "59'59");
+            SetText(0x8A, 0x9A, string, 0x14);
         } else {
-            sprintf(&sp18, &RO_STR_800C5E50_usa, gTheGame.unk_9C18, gTheGame.unk_9C1C);
-            var_s3_7 = 0x8F;
+            sprintf(string, "%d'%02d", gTheGame.unk_9C18, gTheGame.unk_9C1C);
             if (gTheGame.unk_9C18 < 0xA) {
-                var_s1 = gTheGame.unk_90C0;
-                var_s0 = (var_s1 << 5) + (&gTheGame.unk_9C14 - 0xB4C);
-                var_s2 = &sp18;
-                while (var_s1 < 0x46) {
-                loop_40:
-                    temp_v0_7 = var_s3_7 * 4;
-                    if (InitWhichNumber(var_s0, *var_s2, 0x14) == 0) {
-                        break;
-                    }
-                    var_s3_7 += 9;
-                    var_s2 += 1;
-                    var_s0->unk_00.s.objX = temp_v0_7;
-                    var_s0->unk_00.s.objY = 0x268;
-                    var_s0->unk_00.s.imageW = 0x200;
-                    var_s1 += 1;
-                    var_s0++;
-                }
+                SetText(0x8F, 0x9A, string, 0x14);
             } else {
-                var_s1 = gTheGame.unk_90C0;
-                var_s3_8 = 0x8A;
-                var_s0 = (var_s1 << 5) + (&gTheGame.unk_9C14 - 0xB4C);
-                var_s2 = &sp18;
-                while (var_s1 < 0x46) {
-
-                    temp_v0_8 = var_s3_8 * 4;
-                    if (InitWhichNumber(var_s0, *var_s2, 0x14) == 0) {
-                        break;
-                    }
-                    var_s3_8 += 9;
-                    var_s2 += 1;
-                    var_s0->unk_00.s.objX = temp_v0_8;
-                    var_s0->unk_00.s.objY = 0x268;
-                    var_s0->unk_00.s.imageW = 0x200;
-                    var_s1 += 1;
-                    var_s0++;
-                }
+                SetText(0x8A, 0x9A, string, 0x14);
             }
         }
-        gTheGame.unk_90C0 = var_s1;
     }
 
     switch (gSelection) {
@@ -464,243 +205,90 @@ void UpdateText(void) {
         case 0xBE:
             if (gSelection == 0x8C) {
                 if (gTheGame.unk_9C0C == 1) {
-                    var_a2 = gPlayer + 0x14;
+                    hi_score = &gPlayer[0]->unk_014;
                 } else {
-                    var_a2 = gPlayer + 0x18;
+                    hi_score = &gPlayer[0]->unk_018;
                 }
-            } else if (gTheGame.unk_9C0C == 1) {
-                var_a2 = gPlayer + 0x1C;
             } else {
-                var_a2 = gPlayer + 0x20;
+                if (gTheGame.unk_9C0C == 1) {
+                    hi_score = &gPlayer[0]->unk_01C;
+                } else {
+                    hi_score = &gPlayer[0]->unk_020;
+                }
             }
-            if (gTheGame.tetrisWell[0].unk_43AC > 0xF423F) {
-                gTheGame.tetrisWell[0].unk_43AC = 0xF423F;
+
+            if (well1->unk_43AC > 999999) {
+                well1->unk_43AC = 999999;
             }
+
             if (gDemo == GDEMO_2C) {
-                if (gTheGame.tetrisWell[0].menu.unk_0 != 0) {
-                    if (*var_a2 < gTheGame.tetrisWell[0].unk_43AC) {
-                        *var_a2 = gTheGame.tetrisWell[0].unk_43AC;
+                if (well1->menu.unk_0 != 0) {
+                    if (well1->unk_43AC > *hi_score) {
+                        *hi_score = well1->unk_43AC;
                     }
                     goto block_63;
                 }
             } else {
             block_63:
-                if (gTheGame.tetrisWell[0].menu.unk_0 != 0) {
-                    sprintf(&sp18, &RO_STR_800C5E58_usa, *var_a2);
-                    var_s1 = gTheGame.unk_90C0;
-                    var_s3_9 = 0xE8;
-                    var_s0 = &gTheGame.unk_90C8[var_s1];
-                    var_s2 = &sp18;
-                    while (var_s1 < 0x46) {
-                    loop_66:
-                        temp_v0_9 = var_s3_9 * 4;
-                        if (InitWhichNumber(var_s0, *var_s2, 0x16) == 0) {
-                            break;
-                        }
-                        var_s3_9 += 9;
-                        var_s2 += 1;
-                        var_s0->unk_00.s.objX = temp_v0_9;
-                        var_s0->unk_00.s.objY = 0xA8;
-                        var_s0->unk_00.s.imageW = 0x200;
-                        var_s1 += 1;
-                        var_s0++;
-                    }
-                    gTheGame.unk_90C0 = var_s1;
+                if (well1->menu.unk_0 != 0) {
+                    sprintf(string, "%6d", *hi_score);
+                    SetText(0xE8, 0x2A, string, 0x16);
                 }
             }
 
-            sprintf(&sp18, &RO_STR_800C5E58_usa, gTheGame.tetrisWell[0].unk_43AC);
-            var_s1 = gTheGame.unk_90C0;
-            var_s3_10 = 0xE8;
-            var_s0 = &gTheGame.unk_90C8[var_s1];
-            var_s2 = &sp18;
-            while (var_s1 < 0x46) {
+            sprintf(string, "%6d", well1->unk_43AC);
+            SetText(0xE8, 0x3F, string, 0x15);
 
-                temp_v0_10 = var_s3_10 * 4;
-                if (InitWhichNumber(var_s0, *var_s2, 0x15) == 0) {
-                    break;
-                }
-                var_s3_10 += 9;
-                var_s2 += 1;
-                var_s0->unk_00.s.objX = temp_v0_10;
-                var_s0->unk_00.s.objY = 0xFC;
-                var_s0->unk_00.s.imageW = 0x200;
-                var_s1 += 1;
-                var_s0++;
-            }
-            gTheGame.unk_90C0 = var_s1;
-            if (gTheGame.unk_8860[0].unk_0C > 0) {
-                sprintf(&sp18, &RO_STR_800C5E5C_usa, gTheGame.unk_8860[0].unk_0C / 60);
-                var_s1 = gTheGame.unk_90C0;
-                var_s3_11 = 0xFA;
-                var_s0 = &gTheGame.unk_90C8[var_s1];
-                var_s2 = &sp18;
-                while (var_s1 < 0x46) {
-                    temp_v0_11 = var_s3_11 * 4;
-                    if (InitWhichNumber(var_s0, *var_s2, 0x14) == 0) {
-                        break;
-                    }
-                    var_s3_11 += 9;
-                    var_s2 += 1;
-                    var_s0->unk_00.s.objX = temp_v0_11;
-                    var_s0->unk_00.s.objY = 0x16C;
-                    var_s0->unk_00.s.imageW = 0x200;
-                    var_s1 += 1;
-                    var_s0++;
-                }
-                gTheGame.unk_90C0 = var_s1;
-                gTheGame.unk_90C8[3].unk_18 = -1U;
-                gTheGame.unk_90C8[4].unk_18 = -1U;
+            if (cursor1->unk_0C > 0) {
+                // TODO: dedicated macro?
+                sprintf(string, "%02d", cursor1->unk_0C / ADJUST_FRAMERATE(60));
+                SetText(0xFA, 0x5B, string, 0x14);
+
+                gTheGame.drawText[3].texture = -1;
+                gTheGame.drawText[4].texture = -1;
             } else {
                 if (DoFlashDraw(0) != 0) {
-                    sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.tetrisWell[0].unk_43E0);
-                    var_s1 = gTheGame.unk_90C0;
-                    var_s3_12 = 0x10C;
-                    var_s0 = &gTheGame.unk_90C8[var_s1];
-                    var_s2 = &sp18;
-                    while (var_s1 < 0x46) {
-                    loop_82:
-                        temp_v0_12 = var_s3_12 * 4;
-                        if (InitWhichNumber(var_s0, *var_s2, 0x15) == 0) {
-                            break;
-                        }
-                        var_s3_12 += 9;
-                        var_s2 += 1;
-                        var_s0->unk_00.s.objX = temp_v0_12;
-                        var_s0->unk_00.s.objY = 0x16C;
-                        var_s0->unk_00.s.imageW = 0x200;
-                        var_s1 += 1;
-                        var_s0++;
-                    }
-                    gTheGame.unk_90C0 = var_s1;
+                    sprintf(string, "%2d", well1->unk_43E0);
+                    SetText(0x10C, 0x5B, string, 0x15);
                 }
-                gTheGame.unk_90C8[3].unk_18 = 0;
-                if (gTheGame.tetrisWell[0].unk_4408[0x18] < 2) {
-                    gTheGame.unk_90C8[4].unk_18 = 1;
+
+                gTheGame.drawText[3].texture = 0;
+                if (gTheGame.tetrisWell[0].menu.unk_0 < 2) {
+                    gTheGame.drawText[4].texture = 1;
                 } else {
-                    gTheGame.unk_90C8[4].unk_18 = 2;
+                    gTheGame.drawText[4].texture = 2;
                 }
             }
             break;
 
         case 0xAA:
-            if (gTheGame.tetrisWell[0].menu.unk_0 != 5) {
-                sprintf(&sp18, &RO_STR_800C5E68_usa, gTheGame.tetrisWell[0].unk_4424, gTheGame.tetrisWell[0].unk_4428);
-                var_s1 = gTheGame.unk_90C0;
-                var_s3_13 = 0x103;
-
-                var_s0 = &gTheGame.unk_90C8[var_s1];
-                var_s2 = &sp18;
-
-                while (var_s1 < 0x46) {
-                    temp_v0_13 = var_s3_13 * 4;
-                    if (InitWhichNumber(var_s0, *var_s2, 0x16) == 0) {
-                        break;
-                    }
-                    var_s3_13 += 9;
-                    var_s2 += 1;
-                    var_s0->unk_00.s.objX = temp_v0_13;
-                    var_s0->unk_00.s.objY = 0xA4;
-                    var_s0->unk_00.s.imageW = 0x200;
-                    var_s1 += 1;
-                    var_s0++;
-                }
-                gTheGame.unk_90C0 = var_s1;
+            if (well1->menu.unk_0 != 5) {
+                sprintf(string, "%1d-%1d", well1->menu.unk_4, well1->menu.unk_8);
+                SetText(0x103, 0x29, string, 0x16);
             }
-            if (gTheGame.tetrisWell[0].unk_43AC > 0xF423F) {
-                gTheGame.tetrisWell[0].unk_43AC = 0xF423F;
+
+            if (well1->unk_43AC > 999999) {
+                well1->unk_43AC = 999999;
             }
-            sprintf(&sp18, &RO_STR_800C5E58_usa, gTheGame.tetrisWell[0].unk_43AC);
-            var_s1 = gTheGame.unk_90C0;
-            var_s3_14 = 0xE8;
 
-            var_s0 = &gTheGame.unk_90C8[var_s1];
-            var_s2 = &sp18;
+            sprintf(string, "%6d", well1->unk_43AC);
+            SetText(0xE8, 0x3F, string, 0x15);
 
-            while (var_s1 < 0x46) {
-                temp_v0_14 = var_s3_14 * 4;
-                if (InitWhichNumber(var_s0, *var_s2, 0x15) == 0) {
-                    break;
-                }
-                var_s3_14 += 9;
-                var_s2 += 1;
-                var_s0->unk_00.s.objX = temp_v0_14;
-                var_s0->unk_00.s.objY = 0xFC;
-                var_s0->unk_00.s.imageW = 0x200;
-                var_s1 += 1;
-                var_s0++;
-            }
-            gTheGame.unk_90C0 = var_s1;
-            if (gTheGame.unk_8860[0].unk_0C > 0) {
-                sprintf(&sp18, &RO_STR_800C5E5C_usa, gTheGame.unk_8860[0].unk_0C / 60);
-                var_s1 = gTheGame.unk_90C0;
-                var_s3_15 = 0xFA;
+            if (cursor1->unk_0C > 0) {
+                sprintf(string, "%02d", cursor1->unk_0C / ADJUST_FRAMERATE(60));
+                SetText(0xFA, 0x5B, string, 0x14);
 
-                var_s0 = &gTheGame.unk_90C8[var_s1];
-                var_s2 = &sp18;
-
-                while (var_s1 < 0x46) {
-                    temp_v0_15 = var_s3_15 * 4;
-                    if (InitWhichNumber(var_s0, *var_s2, 0x14) == 0) {
-                        break;
-                    }
-                    var_s3_15 += 9;
-                    var_s2 += 1;
-                    var_s0->unk_00.s.objX = temp_v0_15;
-                    var_s0->unk_00.s.objY = 0x16C;
-                    var_s0->unk_00.s.imageW = 0x200;
-                    var_s1 += 1;
-                    var_s0++;
-                }
-                gTheGame.unk_90C0 = var_s1;
-                gTheGame.unk_90C8[3].unk_18 = -1U;
+                gTheGame.drawText[3].texture = -1;
             } else {
                 if (DoFlashDraw(0) != 0) {
-                    sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.tetrisWell[0].unk_43E0);
-                    var_s1 = gTheGame.unk_90C0;
-                    var_s3_16 = 0x10C;
-
-                    var_s0 = &gTheGame.unk_90C8[var_s1];
-                    var_s2 = &sp18;
-
-                    while (var_s1 < 0x46) {
-                        temp_v0_16 = var_s3_16 * 4;
-                        if (InitWhichNumber(var_s0, *var_s2, 0x15) == 0) {
-                            break;
-                        }
-                        var_s3_16 += 9;
-                        var_s2 += 1;
-                        var_s0->unk_00.s.objX = temp_v0_16;
-                        var_s0->unk_00.s.objY = 0x16C;
-                        var_s0->unk_00.s.imageW = 0x200;
-                        var_s1 += 1;
-                        var_s0++;
-                    }
-                    gTheGame.unk_90C0 = var_s1;
+                    sprintf(string, "%2d", well1->unk_43E0);
+                    SetText(0x10C, 0x5B, string, 0x15);
                 }
-                if (gTheGame.tetrisWell[0].menu.unk_0 != 5) {
-                    gTheGame.unk_90C8[3].unk_18 = 0;
-                    sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.tetrisWell[0].unk_4424);
-                    var_s1 = gTheGame.unk_90C0;
-                    var_s3_17 = 0x10C;
 
-                    var_s0 = (var_s1 << 5) + (&gTheGame.unk_90C8[3].unk_18 - 0x78);
-                    var_s2 = &sp18;
-
-                    while (var_s1 < 0x46) {
-                        temp_v0_17 = var_s3_17 * 4;
-                        if (InitWhichNumber(var_s0, *var_s2, 0x14) == 0) {
-                            break;
-                        }
-                        var_s3_17 += 9;
-                        var_s2 += 1;
-                        var_s0->unk_00.s.objX = temp_v0_17;
-                        var_s0->unk_00.s.objY = 0x1E4;
-                        var_s0->unk_00.s.imageW = 0x200;
-                        var_s1 += 1;
-                        var_s0++;
-                    }
-                    gTheGame.unk_90C0 = var_s1;
+                if (well1->menu.unk_0 != 5) {
+                    gTheGame.drawText[3].texture = 0;
+                    sprintf(string, "%2d", well1->menu.unk_4);
+                    SetText(0x10C, 0x79, string, 0x14);
                 }
             }
             break;
@@ -709,463 +297,83 @@ void UpdateText(void) {
             break;
 
         case 0x78:
-            sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.tetrisWell[0].unk_4424);
-            var_s1 = gTheGame.unk_90C0;
-            var_s3_18 = 0x10C;
-
-            var_s0 = &gTheGame.unk_90C8[var_s1];
-            var_s2 = &sp18;
-
-            while (var_s1 < 0x46) {
-                temp_v0_18 = var_s3_18 * 4;
-                if (InitWhichNumber(var_s0, *var_s2, 0x16) == 0) {
-                    break;
-                }
-                var_s3_18 += 9;
-                var_s2 += 1;
-                var_s0->unk_00.s.objX = temp_v0_18;
-                var_s0->unk_00.s.objY = 0xB0;
-                var_s0->unk_00.s.imageW = 0x200;
-                var_s1 += 1;
-                var_s0++;
-            }
-            gTheGame.unk_90C0 = var_s1;
+            sprintf(string, "%2d", well1->menu.unk_4);
+            SetText(0x10C, 0x2C, string, 0x16);
             break;
 
         case 0x82:
-            if (gTheGame.tetrisWell[0].menu.unk_0 == 0) {
-                sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.tetrisWell[0].unk_4424);
-                var_s1 = gTheGame.unk_90C0;
-                var_s3_19 = 0x10C;
+            if (well1->menu.unk_0 == 0) {
+                sprintf(string, "%2d", well1->menu.unk_4);
+                SetText(0x10C, 0x3F, string, 0x16);
+            } else if (well1->menu.unk_0 < 4) {
+                sprintf(string, "%2d", well1->menu.unk_0);
+                SetText(0x10C, 0x2A, string, 0x17);
 
-                var_s0 = &gTheGame.unk_90C8[var_s1];
-                var_s2 = &sp18;
-
-                while (var_s1 < 0x46) {
-                    temp_v0_19 = var_s3_19 * 4;
-                    if (InitWhichNumber(var_s0, *var_s2, 0x16) == 0) {
-                        break;
-                    }
-                    var_s3_19 += 9;
-                    var_s2 += 1;
-                    var_s0->unk_00.s.objX = temp_v0_19;
-                    var_s0->unk_00.s.objY = 0xFC;
-                    var_s0->unk_00.s.imageW = 0x200;
-                    var_s1 += 1;
-                    var_s0++;
-                }
-            } else if (gTheGame.tetrisWell[0].menu.unk_0 < 4) {
-                sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.tetrisWell[0].menu.unk_0);
-                var_s1 = gTheGame.unk_90C0;
-                var_s3_20 = 0x10C;
-
-                var_s0 = &gTheGame.unk_90C8[var_s1];
-                var_s2 = &sp18;
-
-                while (var_s1 < 0x46) {
-                    temp_v0_20 = var_s3_20 * 4;
-                    if (InitWhichNumber(var_s0, *var_s2, 0x17) == 0) {
-                        break;
-                    }
-                    var_s3_20 += 9;
-                    var_s2 += 1;
-                    var_s0->unk_00.s.objX = temp_v0_20;
-                    var_s0->unk_00.s.objY = 0xA8;
-                    var_s0->unk_00.s.imageW = 0x200;
-                    var_s1 += 1;
-                    var_s0++;
-                }
-                gTheGame.unk_90C0 = var_s1;
-                sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.tetrisWell[0].unk_4424);
-                var_s1 = gTheGame.unk_90C0;
-                var_s3_21 = 0x10C;
-
-                var_s0 = &gTheGame.unk_90C8[var_s1];
-                var_s2 = &sp18;
-
-                while (var_s1 < 0x46) {
-                    temp_v0_21 = var_s3_21 * 4;
-                    if (InitWhichNumber(var_s0, *var_s2, 0x15) == 0) {
-                        break;
-                    }
-                    var_s3_21 += 9;
-                    var_s2 += 1;
-                    var_s0->unk_00.s.objX = temp_v0_21;
-                    var_s0->unk_00.s.objY = 0xFC;
-                    var_s0->unk_00.s.imageW = 0x200;
-                    var_s1 += 1;
-                    var_s0++;
-                }
+                sprintf(string, "%2d", well1->menu.unk_4);
+                SetText(0x10C, 0x3F, string, 0x15);
             } else {
-                sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.tetrisWell[0].menu.unk_0 - 3);
-                var_s1 = gTheGame.unk_90C0;
-                var_s3_22 = 0x10C;
+                sprintf(string, "%2d", well1->menu.unk_0 - 3);
+                SetText(0x10C, 0x2A, string, 0x16);
 
-                var_s0 = &gTheGame.unk_90C8[var_s1];
-                var_s2 = &sp18;
-
-                while (var_s1 < 0x46) {
-                    temp_v0_22 = var_s3_22 * 4;
-                    if (InitWhichNumber(var_s0, *var_s2, 0x16) == 0) {
-                        break;
-                    }
-                    var_s3_22 += 9;
-                    var_s2 += 1;
-                    var_s0->unk_00.s.objX = temp_v0_22;
-                    var_s0->unk_00.s.objY = 0xA8;
-                    var_s0->unk_00.s.imageW = 0x200;
-                    var_s1 += 1;
-                    var_s0++;
-                }
-                gTheGame.unk_90C0 = var_s1;
-                sprintf(&sp18, &RO_STR_800C5E64_usa, gTheGame.tetrisWell[0].unk_4424);
-                var_s1 = gTheGame.unk_90C0;
-                var_s3_23 = 0x10C;
-
-                var_s0 = &gTheGame.unk_90C8[var_s1];
-                var_s2 = &sp18;
-
-                while (var_s1 < 0x46) {
-                    temp_v0_23 = var_s3_23 * 4;
-                    if (InitWhichNumber(var_s0, *var_s2, 0x14) == 0) {
-                        break;
-                    }
-                    var_s3_23 += 9;
-                    var_s2 += 1;
-                    var_s0->unk_00.s.objX = temp_v0_23;
-                    var_s0->unk_00.s.objY = 0xFC;
-                    var_s0->unk_00.s.imageW = 0x200;
-                    var_s1 += 1;
-                    var_s0++;
-                }
+                sprintf(string, "%2d", well1->menu.unk_4);
+                SetText(0x10C, 0x3F, string, 0x14);
             }
-            gTheGame.unk_90C0 = var_s1;
             break;
 
         case 0xC8:
-            sprintf(&sp18, &RO_STR_800C5E70_usa, gTheGame.tetrisWell[0].unk_43AC % 100000, gTheGame.tetrisWell[0].unk_43AC);
-            var_s1 = gTheGame.unk_90C0;
-            var_s3_24 = 0x89;
+            sprintf(string, "%05d", well1->unk_43AC % 100000, well1->unk_43AC);
+            SetText(0x89, 0x58, string, 0x15);
 
-            var_s0 = &gTheGame.unk_90C8[var_s1];
-            var_s2 = &sp18;
+            sprintf(string, "%05d", well2->unk_43AC % 100000, well2->unk_43AC);
+            SetText(0x8A, 0x79, string, 0x14);
 
-            while (var_s1 < 0x46) {
-                temp_v0_24 = var_s3_24 * 4;
-                if (InitWhichNumber(var_s0, *var_s2, 0x15) == 0) {
-                    break;
-                }
-                var_s3_24 += 9;
-                var_s2 += 1;
-                var_s0->unk_00.s.objX = temp_v0_24;
-                var_s0->unk_00.s.objY = 0x160;
-                var_s0->unk_00.s.imageW = 0x200;
-                var_s1 += 1;
-                var_s0++;
-            }
-            gTheGame.unk_90C0 = var_s1;
-            sprintf(&sp18, &RO_STR_800C5E70_usa, gTheGame.tetrisWell[1].unk_43AC % 100000, gTheGame.tetrisWell[1].unk_43AC);
-            var_s1 = gTheGame.unk_90C0;
-            var_s3_25 = 0x8A;
-
-            var_s0 = &gTheGame.unk_90C8[var_s1];
-            var_s2 = &sp18;
-
-            while (var_s1 < 0x46) {
-                temp_v0_25 = var_s3_25 * 4;
-                if (InitWhichNumber(var_s0, *var_s2, 0x14) == 0) {
-                    break;
-                }
-                var_s3_25 += 9;
-                var_s2 += 1;
-                var_s0->unk_00.s.objX = temp_v0_25;
-                var_s0->unk_00.s.objY = 0x1E4;
-                var_s0->unk_00.s.imageW = 0x200;
-                var_s1 += 1;
-                var_s0++;
-            }
-            gTheGame.unk_90C0 = var_s1;
-            sprintf(&sp18, &RO_STR_800C5E78_usa, gTheGame.tetrisWell[0].unk_4428);
-            var_s3_26 = 0x93;
-            if (gTheGame.tetrisWell[0].unk_4428 < 0xA) {
-                var_s1 = gTheGame.unk_90C0;
-
-                var_s0 = &gTheGame.unk_90C8[var_s1];
-                var_s2 = &sp18;
-
-                while (var_s1 < 0x46) {
-                    temp_v0_26 = var_s3_26 * 4;
-                    if (InitWhichNumber(var_s0, *var_s2, 0x17) == 0) {
-                        break;
-                    }
-                    var_s3_26 += 9;
-                    var_s2 += 1;
-                    var_s0->unk_00.s.objX = temp_v0_26;
-                    var_s0->unk_00.s.objY = 0xE4;
-                    var_s0->unk_00.s.imageW = 0x200;
-                    var_s1 += 1;
-                    var_s0++;
-                }
+            sprintf(string, "%d", well1->menu.unk_8);
+            if (well1->menu.unk_8 < 0xA) {
+                SetText(0x93, 0x39, string, 0x17);
             } else {
-                var_s1 = gTheGame.unk_90C0;
-                var_s3_27 = 0x8D;
-
-                var_s0 = &gTheGame.unk_90C8[var_s1];
-                var_s2 = &sp18;
-
-                while (var_s1 < 0x46) {
-                    temp_v0_27 = var_s3_27 * 4;
-                    if (InitWhichNumber(var_s0, *var_s2, 0x17) == 0) {
-                        break;
-                    }
-                    var_s3_27 += 9;
-                    var_s2 += 1;
-                    var_s0->unk_00.s.objX = temp_v0_27;
-                    var_s0->unk_00.s.objY = 0xE4;
-                    var_s0->unk_00.s.imageW = 0x200;
-                    var_s1 += 1;
-                    var_s0++;
-                }
+                SetText(0x8D, 0x39, string, 0x17);
             }
-            gTheGame.unk_90C0 = var_s1;
-            sprintf(&sp18, &RO_STR_800C5E78_usa, gTheGame.tetrisWell[1].unk_4428);
-            var_s3_28 = 0xA3;
-            if (gTheGame.tetrisWell[1].unk_4428 < 0xA) {
-                var_s1 = gTheGame.unk_90C0;
 
-                var_s0 = &gTheGame.unk_90C8[var_s1];
-                var_s2 = &sp18;
-
-                while (var_s1 < 0x46) {
-                    temp_v0_28 = var_s3_28 * 4;
-                    if (InitWhichNumber(var_s0, *var_s2, 0x16) == 0) {
-                        break;
-                    }
-                    var_s3_28 += 9;
-                    var_s2 += 1;
-                    var_s0->unk_00.s.objX = temp_v0_28;
-                    var_s0->unk_00.s.objY = 0xE4;
-                    var_s0->unk_00.s.imageW = 0x200;
-                    var_s1 += 1;
-                    var_s0++;
-                }
+            sprintf(string, "%d", well2->menu.unk_8);
+            if (well2->menu.unk_8 < 0xA) {
+                SetText(0xA3, 0x39, string, 0x16);
             } else {
-                var_s1 = gTheGame.unk_90C0;
-                var_s3_29 = 0x9D;
-
-                var_s0 = &gTheGame.unk_90C8[var_s1];
-                var_s2 = &sp18;
-
-                while (var_s1 < 0x46) {
-                    temp_v0_29 = var_s3_29 * 4;
-                    if (InitWhichNumber(var_s0, *var_s2, 0x16) == 0) {
-                        break;
-                    }
-                    var_s3_29 += 9;
-                    var_s2 += 1;
-                    var_s0->unk_00.s.objX = temp_v0_29;
-                    var_s0->unk_00.s.objY = 0xE4;
-                    var_s0->unk_00.s.imageW = 0x200;
-                    var_s1 += 1;
-                    var_s0++;
-                }
+                SetText(0x9D, 0x39, string, 0x16);
             }
-            gTheGame.unk_90C0 = var_s1;
             break;
 
         case 0xA0:
         case 0xB4:
-            sprintf(&sp18, &RO_STR_800C5E78_usa, gTheGame.tetrisWell[0].menu.unk_0);
-            var_s3_30 = 0x93;
-            if (gTheGame.tetrisWell[0].menu.unk_0 < 0xA) {
-                var_s1 = gTheGame.unk_90C0;
-
-                var_s0 = &gTheGame.unk_90C8[var_s1];
-                var_s2 = &sp18;
-
-                while (var_s1 < 0x46) {
-                    temp_v0_30 = var_s3_30 * 4;
-                    if (InitWhichNumber(var_s0, *var_s2, 0x17) == 0) {
-                        break;
-                    }
-                    var_s3_30 += 9;
-                    var_s2 += 1;
-                    var_s0->unk_00.s.objX = temp_v0_30;
-                    var_s0->unk_00.s.objY = 0x16C;
-                    var_s0->unk_00.s.imageW = 0x200;
-                    var_s1 += 1;
-                    var_s0++;
-                }
+            sprintf(string, "%d", well1->menu.unk_0);
+            if (well1->menu.unk_0 < 0xA) {
+                SetText(0x93, 0x5B, string, 0x17);
             } else {
-                var_s1 = gTheGame.unk_90C0;
-                var_s3_31 = 0x8D;
-
-                var_s0 = &gTheGame.unk_90C8[var_s1];
-                var_s2 = &sp18;
-
-                while (var_s1 < 0x46) {
-                    temp_v0_31 = var_s3_31 * 4;
-                    if (InitWhichNumber(var_s0, *var_s2, 0x17) == 0) {
-                        break;
-                    }
-                    var_s3_31 += 9;
-                    var_s2 += 1;
-                    var_s0->unk_00.s.objX = temp_v0_31;
-                    var_s0->unk_00.s.objY = 0x16C;
-                    var_s0->unk_00.s.imageW = 0x200;
-                    var_s1 += 1;
-                    var_s0++;
-                }
+                SetText(0x8D, 0x5B, string, 0x17);
             }
-            gTheGame.unk_90C0 = var_s1;
-            sprintf(&sp18, &RO_STR_800C5E78_usa, gTheGame.tetrisWell[1].unk_4420);
-            var_s3_32 = 0xA4;
-            if (gTheGame.tetrisWell[1].unk_4420 < 0xA) {
-                var_s1 = gTheGame.unk_90C0;
 
-                var_s0 = &gTheGame.unk_90C8[var_s1];
-                var_s2 = &sp18;
-
-                while (var_s1 < 0x46) {
-                    temp_v0_32 = var_s3_32 * 4;
-                    if (InitWhichNumber(var_s0, *var_s2, 0x16) == 0) {
-                        break;
-                    }
-                    var_s3_32 += 9;
-                    var_s2 += 1;
-                    var_s0->unk_00.s.objX = temp_v0_32;
-                    var_s0->unk_00.s.objY = 0x16C;
-                    var_s0->unk_00.s.imageW = 0x200;
-                    var_s1 += 1;
-                    var_s0++;
-                }
+            sprintf(string, "%d", well2->menu.unk_0);
+            if (well2->menu.unk_0 < 0xA) {
+                SetText(0xA4, 0x5B, string, 0x16);
             } else {
-                var_s1 = gTheGame.unk_90C0;
-                var_s3_33 = 0xA1;
-
-                var_s0 = &gTheGame.unk_90C8[var_s1];
-                var_s2 = &sp18;
-
-                while (var_s1 < 0x46) {
-                    temp_v0_33 = var_s3_33 * 4;
-                    if (InitWhichNumber(var_s0, *var_s2, 0x16) == 0) {
-                        break;
-                    }
-                    var_s3_33 += 9;
-                    var_s2 += 1;
-                    var_s0->unk_00.s.objX = temp_v0_33;
-                    var_s0->unk_00.s.objY = 0x16C;
-                    var_s0->unk_00.s.imageW = 0x200;
-                    var_s1 += 1;
-                    var_s0++;
-                }
+                SetText(0xA1, 0x5B, string, 0x16);
             }
-            gTheGame.unk_90C0 = var_s1;
-            sprintf(&sp18, &RO_STR_800C5E78_usa, gTheGame.tetrisWell[0].unk_4428);
-            var_s3_34 = 0x93;
-            if (gTheGame.tetrisWell[0].unk_4428 < 0xA) {
-                var_s1 = gTheGame.unk_90C0;
 
-                var_s0 = &gTheGame.unk_90C8[var_s1];
-                var_s2 = &sp18;
-
-                while (var_s1 < 0x46) {
-                    temp_v0_34 = var_s3_34 * 4;
-                    if (InitWhichNumber(var_s0, *var_s2, 0x17) == 0) {
-                        break;
-                    }
-                    var_s3_34 += 9;
-                    var_s2 += 1;
-                    var_s0->unk_00.s.objX = temp_v0_34;
-                    var_s0->unk_00.s.objY = 0x1E4;
-                    var_s0->unk_00.s.imageW = 0x200;
-                    var_s1 += 1;
-                    var_s0++;
-                }
+            sprintf(string, "%d", well1->menu.unk_8);
+            if (well1->menu.unk_8 < 0xA) {
+                SetText(0x93, 0x79, string, 0x17);
             } else {
-                var_s1 = gTheGame.unk_90C0;
-                var_s3_35 = 0x8D;
-
-                var_s0 = &gTheGame.unk_90C8[var_s1];
-                var_s2 = &sp18;
-
-                while (var_s1 < 0x46) {
-                    temp_v0_35 = var_s3_35 * 4;
-                    if (InitWhichNumber(var_s0, *var_s2, 0x17) == 0) {
-                        break;
-                    }
-                    var_s3_35 += 9;
-                    var_s2 += 1;
-                    var_s0->unk_00.s.objX = temp_v0_35;
-                    var_s0->unk_00.s.objY = 0x1E4;
-                    var_s0->unk_00.s.imageW = 0x200;
-                    var_s1 += 1;
-                    var_s0++;
-                }
+                SetText(0x8D, 0x79, string, 0x17);
             }
-            gTheGame.unk_90C0 = var_s1;
-            sprintf(&sp18, &RO_STR_800C5E78_usa, gTheGame.tetrisWell[1].unk_4428);
-            var_s3_36 = 0xA4;
-            if (gTheGame.tetrisWell[1].unk_4428 < 0xA) {
-                var_s1 = gTheGame.unk_90C0;
 
-                var_s0 = &gTheGame.unk_90C8[var_s1];
-                var_s2 = &sp18;
-
-                while (var_s1 < 0x46) {
-                    temp_v0_36 = var_s3_36 * 4;
-                    if (InitWhichNumber(var_s0, *var_s2, 0x16) == 0) {
-                        break;
-                    }
-                    var_s3_36 += 9;
-                    var_s2 += 1;
-                    var_s0->unk_00.s.objX = temp_v0_36;
-                    var_s0->unk_00.s.objY = 0x1E4;
-                    var_s0->unk_00.s.imageW = 0x200;
-                    var_s1 += 1;
-                    var_s0++;
-                }
+            sprintf(string, "%d", well2->menu.unk_8);
+            if (well2->menu.unk_8 < 0xA) {
+                SetText(0xA4, 0x79, string, 0x16);
             } else {
-                var_s1 = gTheGame.unk_90C0;
-                var_s3_37 = 0x9F;
-
-                var_s0 = &gTheGame.unk_90C8[var_s1];
-                var_s2 = &sp18;
-
-                while (var_s1 < 0x46) {
-                    temp_v0_37 = var_s3_37 * 4;
-                    if (InitWhichNumber(var_s0, *var_s2, 0x16) == 0) {
-                        break;
-                    }
-                    var_s3_37 += 9;
-                    var_s2 += 1;
-                    var_s0->unk_00.s.objX = temp_v0_37;
-                    var_s0->unk_00.s.objY = 0x1E4;
-                    var_s0->unk_00.s.imageW = 0x200;
-                    var_s1 += 1;
-                    var_s0++;
-                }
+                SetText(0x9F, 0x79, string, 0x16);
             }
-            gTheGame.unk_90C0 = var_s1;
             break;
     }
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/text", UpdateText);
-#endif
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/text", UpdateText);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/text", UpdateText);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/text", UpdateText);
-#endif
 
 void Draw2DTemplate(struct_gInfo_unk_00068 *dynamicp) {
     s32 which = -1;
@@ -1297,31 +505,20 @@ void Draw2DText(struct_gInfo_unk_00068 *dynamicp) {
     }
 }
 
-#if VERSION_USA
 void Draw3DText(struct_gInfo_unk_00068 *dynamicp) {
-    char sp10[MAGIC_NUMBER];
-    s32 var_s3 = 0;
-    u8 *var_s2;
-    s32 var_s0;
-    s32 var_t0;
-    s32 var_s1;
+    char array[MAGIC_NUMBER];
+    s32 last = 0;
+    u8 *ptr;
+    s32 count;
+    s32 which;
 
-#if 0
-    int count; // r6
-    int which; // r6
-    int last; // r19
-    char array[6]; // r1+0xC
-    unsigned char * ptr; // r30
-    struct text_t * text; // r7
-#endif
+    bzero(array, MAGIC_NUMBER * sizeof(char));
 
-    bzero(sp10, MAGIC_NUMBER * sizeof(char));
-
-    for (var_t0 = 6; var_t0 < DRAWTEXT_COUNT; var_t0++) {
-        if (dynamicp->drawText[var_t0].texture < ARRAY_COUNTU(sp10)) {
-            sp10[dynamicp->drawText[var_t0].texture] = 1;
-        } else if (dynamicp->drawText[var_t0].texture == -1) {
-            var_s3 = var_t0;
+    for (count = 6; count < DRAWTEXT_COUNT; count++) {
+        if (dynamicp->drawText[count].texture < ARRAY_COUNTU(array)) {
+            array[dynamicp->drawText[count].texture] = 1;
+        } else if (dynamicp->drawText[count].texture == -1) {
+            last = count;
             break;
         }
     }
@@ -1333,88 +530,79 @@ void Draw3DText(struct_gInfo_unk_00068 *dynamicp) {
 
     Set3DTile();
 
-    for (var_s1 = 0; var_s1 < MAGIC_NUMBER; var_s1++) {
-        if (!sp10[var_s1]) {
+    for (which = 0; which < MAGIC_NUMBER; which++) {
+        if (!array[which]) {
             continue;
         }
 
-        switch (var_s1) {
+        switch (which) {
             case 0x0:
-                var_s2 = w_text1;
+                ptr = w_text1;
                 break;
+
             case 0x1:
-                var_s2 = w_text2;
+                ptr = w_text2;
                 break;
+
             case 0x2:
-                var_s2 = w_text3;
+                ptr = w_text3;
                 break;
+
             case 0x3:
-                var_s2 = w_text4;
+                ptr = w_text4;
                 break;
+
             case 0x4:
-                var_s2 = w_text5;
+                ptr = w_text5;
                 break;
+
             case 0x5:
-                var_s2 = w_text6;
-                break;
-            default:
+                ptr = w_text6;
                 break;
         }
 
-        // TODO: WIDTH/HEIGHT macros
-        gDPLoadTextureBlock(glistp++, var_s2, G_IM_FMT_CI, G_IM_SIZ_8b, 64, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+        gDPLoadTextureBlock(glistp++, ptr, G_IM_FMT_CI, G_IM_SIZ_8b, W_TEXT_WIDTH, W_TEXT_HEIGHT, 0,
+                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
+                            G_TX_NOLOD);
 
         func_8005E740_usa();
 
-        for (var_t0 = MAGIC_NUMBER; var_t0 < var_s3; var_t0++) {
-            if (dynamicp->drawText[var_t0].texture == var_s1) {
-                text_t *text = &dynamicp->drawText[var_t0];
+        for (count = MAGIC_NUMBER; count < last; count++) {
+            if (dynamicp->drawText[count].texture == which) {
+                text_t *text = &dynamicp->drawText[count];
+                s32 tile;
 
                 switch (text->word.s.imageAdrs) {
                     case 0x0:
-                        var_s0 = 0;
+                        tile = 0;
                         break;
                     case 0x4:
-                        var_s0 = 2;
+                        tile = 2;
                         break;
                     case 0x80:
-                        var_s0 = 4;
+                        tile = 4;
                         break;
                     case 0x84:
-                        var_s0 = 6;
+                        tile = 6;
                         break;
                     case 0x86:
-                        var_s0 = 7;
+                        tile = 7;
                         break;
                     case 0x2:
-                        var_s0 = 1;
+                        tile = 1;
                         break;
                     case 0x6:
-                        var_s0 = 3;
+                        tile = 3;
                         break;
                     case 0x82:
-                        var_s0 = 5;
+                        tile = 5;
                         break;
                 }
 
                 gSPTextureRectangle(glistp++, text->word.s.objX, text->word.s.objY,
-                                    ((text->word.s.objX >> 2) + 0xB) << 2, ((text->word.s.objY >> 2) + 0xF) << 2,
-                                    var_s0, 0, 0, 0x0400, 0x0400);
+                                    ((text->word.s.objX >> 2) + 0xB) << 2, ((text->word.s.objY >> 2) + 0xF) << 2, tile,
+                                    0, 0, 0x0400, 0x0400);
             }
         }
     }
 }
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/text", Draw3DText);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/text", Draw3DText);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/text", Draw3DText);
-#endif

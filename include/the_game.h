@@ -89,9 +89,9 @@ typedef struct Game {
     /* 0x9C08 */ s32 unk_9C08; // totalPlayer?
     /* 0x9C0C */ s32 unk_9C0C; // dimension?
     /* 0x9C10 */ s32 unk_9C10;
-    /* 0x9C14 */ s32 unk_9C14;
-    /* 0x9C18 */ s32 unk_9C18;
-    /* 0x9C1C */ s32 unk_9C1C;
+    /* 0x9C14 */ s32 unk_9C14; // hour?
+    /* 0x9C18 */ s32 unk_9C18; // minute?
+    /* 0x9C1C */ s32 unk_9C1C; // second?
     /* 0x9C20 */ s32 unk_9C20;
     /* 0x9C24 */ UNK_TYPE4 unk_9C24;
     /* 0x9C28 */ menu_t menu[GAME_BUFFER_LEN];

@@ -22,13 +22,40 @@
 
 #include "assets_variables.h"
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/draw3d", Set3DTile);
-#endif
+void Set3DTile(void) {
+    gDPPipeSync(glistp++);
+    gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
+               G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+    gDPSetTileSize(glistp++, G_TX_RENDERTILE, 0, 0, 0x003C, 0x003C);
+    gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0002, 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD,
+               G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+    gDPSetTileSize(glistp++, 1, 0, 0, 0x003C, 0x003C);
+    gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0004, 2, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD,
+               G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+    gDPSetTileSize(glistp++, 2, 0, 0, 0x003C, 0x003C);
+    gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0006, 3, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD,
+               G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+    gDPSetTileSize(glistp++, 3, 0, 0, 0x003C, 0x003C);
+    gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0080, 4, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD,
+               G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+    gDPSetTileSize(glistp++, 4, 0, 0, 0x003C, 0x003C);
+    gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0082, 5, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD,
+               G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+    gDPSetTileSize(glistp++, 5, 0, 0, 0x003C, 0x003C);
+    gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0084, 6, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD,
+               G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+    gDPSetTileSize(glistp++, 6, 0, 0, 0x003C, 0x003C);
+    gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0086, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+               G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+    gDPSetTileSize(glistp++, G_TX_LOADTILE, 0, 0, 0x003C, 0x003C);
+}
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/draw3d", func_8005E740_usa);
-#endif
+void func_8005E740_usa(void) {
+    gDPPipeSync(glistp++);
+    gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0086, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+               G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+    gDPSetTileSize(glistp++, G_TX_LOADTILE, 0, 0, 0x003C, 0x003C);
+}
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/draw3d", func_8005E7A4_usa);
@@ -120,14 +147,6 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/draw3d", func_80064AAC_usa);
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/draw3d", func_80064E44_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/draw3d", func_8005E7E0_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/draw3d", func_8005EA10_eur);
 #endif
 
 #if VERSION_EUR
@@ -223,14 +242,6 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/draw3d", func_80064E44_usa);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/draw3d", func_8005CF20_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/draw3d", func_8005D150_fra);
-#endif
-
-#if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/draw3d", func_8005D1B4_fra);
 #endif
 
@@ -320,14 +331,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/draw3d", func_800634BC_fra);
 
 #if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/draw3d", func_80064E44_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/draw3d", func_8005D0D0_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/draw3d", func_8005D300_ger);
 #endif
 
 #if VERSION_GER
