@@ -286,6 +286,24 @@ void DoStory(void) {
                     case 0x5:
                         func_80046648_usa(B_8018E570_usa->unk_08);
                         break;
+
+#if 0
+                    case 0x1:
+                        storyTickPick(gnTickStory,uVar1);
+                        break;
+                    case 0x2:
+                        storyTickOpen(gnTickStory,uVar1);
+                        break;
+                    case 0x3:
+                        storyTickIsle(gnTickStory,uVar1);
+                        break;
+                    case 0x4:
+                        storyTickKeys(gnTickStory,uVar1);
+                        break;
+                    case 0x5:
+                        storyTickDone(gnTickStory,uVar1);
+                        break;
+#endif
                 }
             }
         }
@@ -339,21 +357,18 @@ void DrawStory(struct_gInfo_unk_00068 *arg0 UNUSED) {
     }
 }
 
-#if VERSION_USA
-#ifdef NON_EQUIVALENT
 void InitStory(void) {
-    void *var_a0;
-    void *temp_a2;
+    void *a2 = gBufferHeap + 3;
+    struct_8018E570_usa *var_a0;
 
-    var_a0 = gBufferHeap + 3;
-    var_a0 = (uintptr_t)(SEGMENT_ROM_SIZE(segment_0CA4A0) + (var_a0)) & ~3;
+    var_a0 = (void *)((uintptr_t)(a2 + SEGMENT_ROM_SIZE(segment_0CA4A0)) & ~3);
+    a2 = (void *)((uintptr_t)var_a0 + sizeof(struct_8018E570_usa));
     B_8018E570_usa = var_a0;
-    temp_a2 = (uintptr_t)var_a0 + sizeof(struct_8018E570_usa);
-    B_8018E570_usa->unk_0C = 0;
-    B_8018E570_usa->unk_08 = 0;
-    B_8018E570_usa->unk_00 = 0;
-    B_8018E570_usa->unk_10 = temp_a2;
-    B_8018E570_usa->unk_04 = -1;
+    var_a0->unk_0C = 0;
+    var_a0->unk_08 = 0;
+    var_a0->unk_00 = 0;
+    var_a0->unk_10 = a2;
+    var_a0->unk_04 = -1;
 
     if (gSelection != 0x96) {
         if ((gSelection == 0x8C) || (gSelection == 0xBE)) {
@@ -366,7 +381,7 @@ void InitStory(void) {
         } else if (gSelection == 0x82) {
             s32 sp10;
 
-            if (func_80008EA4_usa(&sp10, gSelection, temp_a2)) {
+            if (func_80008EA4_usa(&sp10)) {
                 func_8002B85C_usa(2, sp10);
             } else {
                 gMain = GMAIN_2BC;
@@ -400,25 +415,9 @@ void InitStory(void) {
                 func_8002B85C_usa(2, 0);
             }
         }
-        gTheGame.menu[0].unk_C += 1;
+        gTheGame.menu[0].unk_C++;
     }
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/story", InitStory);
-#endif
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/story", InitStory);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/story", InitStory);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/story", InitStory);
-#endif
 
 #if VERSION_USA
 // hack to ensure correct alignment of rodata

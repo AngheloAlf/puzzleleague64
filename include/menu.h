@@ -29,7 +29,7 @@ typedef enum enum_menuTickFairy_ePosition {
 // void func_80008818_usa();
 // void func_800088A0_usa();
 // void menuSetScreen();
-nbool func_80008EA4_usa(s32 *arg0, s32 arg1, UNK_PTR arg2);
+nbool func_80008EA4_usa(s32 *arg0);
 // void func_8000901C_usa();
 // void func_80009228_usa();
 // void func_80009440_usa();

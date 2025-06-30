@@ -303,11 +303,9 @@ extern struct_800B5DF8_usa gaMenuData[0x2D];
 extern enum_TypeMenu B_8018A850_usa[];
 
 extern s32 B_8018A81C_usa;
-extern s32 gnSkipFrame;
 extern s32 B_8018A828_usa;
 extern s32 B_8018A834_usa;
 extern s32 B_8018A838_usa;
-extern s32 gnCountMenu;
 extern s32 B_8018A854_usa;
 extern s32 B_8018A8D0_usa;
 extern s32 B_8018A8D4_usa;
@@ -536,6 +534,26 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/menu", menuSetScreen);
 INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_80008EA4_usa);
 #endif
 
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3744_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_80008EA4_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_80008EA4_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_RODATA("asm/ger/nonmatchings/main/menu", RO_STR_800B8F34_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_80008EA4_usa);
+#endif
+
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_8000901C_usa);
 #endif
@@ -574,14 +592,6 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_80009DBC_usa);
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_80009F60_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3744_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_80008EA4_usa);
 #endif
 
 #if VERSION_EUR
@@ -625,10 +635,6 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_8000A020_eur);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_80008F4C_fra);
-#endif
-
-#if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_800090C4_fra);
 #endif
 
@@ -666,14 +672,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_80009E64_fra);
 
 #if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_8000A018_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/menu", RO_STR_800B8F34_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_80008F4C_ger);
 #endif
 
 #if VERSION_GER
