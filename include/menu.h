@@ -110,7 +110,7 @@ void menuTickFairy(s32, s32, s32, s32, s32, s32, s32, s32);
 // void func_8001AB0C_usa();
 // void func_8001ACA8_usa();
 void DrawMenu(struct struct_gInfo_unk_00068 *arg0);
-void DoMenu();
+void DoMenu(void);
 void InitMenu(void);
 // void func_8001BFF0_usa();
 // void func_8001C034_usa();

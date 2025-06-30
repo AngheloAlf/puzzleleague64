@@ -26,7 +26,7 @@ nbool InitWhichNumber(text_t *text, char number, s32 type) {
     addr = &text->word.s.imageAdrs;
 
     switch (type) {
-        case 0x14:
+        case SETTEXTTYPE_14:
             if (number < '7') {
                 text->texture = 0;
             } else {
@@ -34,15 +34,15 @@ nbool InitWhichNumber(text_t *text, char number, s32 type) {
             }
             break;
 
-        case 0x15:
-            if (number >= '7') {
-                text->texture = 2;
-            } else {
+        case SETTEXTTYPE_15:
+            if (number < '7') {
                 text->texture = 1;
+            } else {
+                text->texture = 2;
             }
             break;
 
-        case 0x16:
+        case SETTEXTTYPE_16:
             if (number < '7') {
                 text->texture = 3;
             } else {
@@ -50,16 +50,16 @@ nbool InitWhichNumber(text_t *text, char number, s32 type) {
             }
             break;
 
-        default:
-            return nfalse;
-
-        case 0x17:
+        case SETTEXTTYPE_17:
             if (number < '7') {
                 text->texture = 4;
             } else {
                 text->texture = 5;
             }
             break;
+
+        default:
+            return nfalse;
     }
 
     switch (number) {
@@ -79,7 +79,7 @@ nbool InitWhichNumber(text_t *text, char number, s32 type) {
             break;
 
         case '7':
-            if ((type == 0x14) || (type == 0x16)) {
+            if ((type == SETTEXTTYPE_14) || (type == SETTEXTTYPE_16)) {
                 *addr = 0;
             } else {
                 *addr = 0x80;
@@ -91,7 +91,7 @@ nbool InitWhichNumber(text_t *text, char number, s32 type) {
             break;
 
         case '8':
-            if ((type == 0x14) || (type == 0x16)) {
+            if ((type == SETTEXTTYPE_14) || (type == SETTEXTTYPE_16)) {
                 FALLTHROUGH;
                 case '0':
                     *addr = 2;
@@ -105,7 +105,7 @@ nbool InitWhichNumber(text_t *text, char number, s32 type) {
             break;
 
         case '9':
-            if ((type == 0x14) || (type == 0x16)) {
+            if ((type == SETTEXTTYPE_14) || (type == SETTEXTTYPE_16)) {
                 FALLTHROUGH;
                 case '1':
                     *addr = 4;
@@ -119,7 +119,7 @@ nbool InitWhichNumber(text_t *text, char number, s32 type) {
             break;
 
         case ':':
-            if ((type == 0x14) || (type == 0x16)) {
+            if ((type == SETTEXTTYPE_14) || (type == SETTEXTTYPE_16)) {
                 FALLTHROUGH;
                 case '2':
                     *addr = 6;
@@ -136,13 +136,12 @@ nbool InitWhichNumber(text_t *text, char number, s32 type) {
     return ntrue;
 }
 
-INLINE void SetText(s32 x, s32 y, const char str[], s32 type) {
+INLINE void SetText(s32 x, s32 y, const char str[], SetTextType type) {
     s32 str_pos = 0;
-    text_t *text;
     s32 count;
 
     for (count = gTheGame.unk_90C0; count < DRAWTEXT_COUNT; count++) {
-        text = &gTheGame.drawText[count];
+        text_t *text = &gTheGame.drawText[count];
 
         if (!InitWhichNumber(text, str[str_pos], type)) {
             break;
@@ -166,36 +165,36 @@ void UpdateText(void) {
     char string[0x10];
     s32 *hi_score;
 
-    if (gMain >= 0x384) {
+    if (gMain >= GMAIN_384) {
         if (gTheGame.unk_9C08 == 1) {
             if (gTheGame.unk_9C14 == 0) {
                 sprintf(string, "%2d'%02d", gTheGame.unk_9C18, gTheGame.unk_9C1C);
-                SetText(0x3C, 0x28, string, 0x14);
+                SetText(0x3C, 0x28, string, SETTEXTTYPE_14);
             } else {
                 sprintf(string, "%2d:%02d'%02d", gTheGame.unk_9C14, gTheGame.unk_9C18, gTheGame.unk_9C1C);
-                SetText(0x21, 0x28, string, 0x14);
+                SetText(0x21, 0x28, string, SETTEXTTYPE_14);
             }
         } else if (gSelection == 0x96) {
             if (gTheGame.unk_9C14 > 0) {
                 sprintf(string, "59'59");
-                SetText(0x8A, 0xAC, string, 0x14);
+                SetText(0x8A, 0xAC, string, SETTEXTTYPE_14);
             } else {
                 sprintf(string, "%d'%02d", gTheGame.unk_9C18, gTheGame.unk_9C1C);
                 if (gTheGame.unk_9C18 < 0xA) {
-                    SetText(0x8F, 0xAC, string, 0x14);
+                    SetText(0x8F, 0xAC, string, SETTEXTTYPE_14);
                 } else {
-                    SetText(0x8A, 0xAC, string, 0x14);
+                    SetText(0x8A, 0xAC, string, SETTEXTTYPE_14);
                 }
             }
         } else if (gTheGame.unk_9C14 > 0) {
             sprintf(string, "59'59");
-            SetText(0x8A, 0x9A, string, 0x14);
+            SetText(0x8A, 0x9A, string, SETTEXTTYPE_14);
         } else {
             sprintf(string, "%d'%02d", gTheGame.unk_9C18, gTheGame.unk_9C1C);
             if (gTheGame.unk_9C18 < 0xA) {
-                SetText(0x8F, 0x9A, string, 0x14);
+                SetText(0x8F, 0x9A, string, SETTEXTTYPE_14);
             } else {
-                SetText(0x8A, 0x9A, string, 0x14);
+                SetText(0x8A, 0x9A, string, SETTEXTTYPE_14);
             }
         }
     }
@@ -232,24 +231,24 @@ void UpdateText(void) {
             block_63:
                 if (well1->menu.unk_0 != 0) {
                     sprintf(string, "%6d", *hi_score);
-                    SetText(0xE8, 0x2A, string, 0x16);
+                    SetText(0xE8, 0x2A, string, SETTEXTTYPE_16);
                 }
             }
 
             sprintf(string, "%6d", well1->unk_43AC);
-            SetText(0xE8, 0x3F, string, 0x15);
+            SetText(0xE8, 0x3F, string, SETTEXTTYPE_15);
 
             if (cursor1->unk_0C > 0) {
                 // TODO: dedicated macro?
                 sprintf(string, "%02d", cursor1->unk_0C / ADJUST_FRAMERATE(60));
-                SetText(0xFA, 0x5B, string, 0x14);
+                SetText(0xFA, 0x5B, string, SETTEXTTYPE_14);
 
                 gTheGame.drawText[3].texture = -1;
                 gTheGame.drawText[4].texture = -1;
             } else {
                 if (DoFlashDraw(0) != 0) {
                     sprintf(string, "%2d", well1->unk_43E0);
-                    SetText(0x10C, 0x5B, string, 0x15);
+                    SetText(0x10C, 0x5B, string, SETTEXTTYPE_15);
                 }
 
                 gTheGame.drawText[3].texture = 0;
@@ -264,7 +263,7 @@ void UpdateText(void) {
         case 0xAA:
             if (well1->menu.unk_0 != 5) {
                 sprintf(string, "%1d-%1d", well1->menu.unk_4, well1->menu.unk_8);
-                SetText(0x103, 0x29, string, 0x16);
+                SetText(0x103, 0x29, string, SETTEXTTYPE_16);
             }
 
             if (well1->unk_43AC > 999999) {
@@ -272,23 +271,23 @@ void UpdateText(void) {
             }
 
             sprintf(string, "%6d", well1->unk_43AC);
-            SetText(0xE8, 0x3F, string, 0x15);
+            SetText(0xE8, 0x3F, string, SETTEXTTYPE_15);
 
             if (cursor1->unk_0C > 0) {
                 sprintf(string, "%02d", cursor1->unk_0C / ADJUST_FRAMERATE(60));
-                SetText(0xFA, 0x5B, string, 0x14);
+                SetText(0xFA, 0x5B, string, SETTEXTTYPE_14);
 
                 gTheGame.drawText[3].texture = -1;
             } else {
                 if (DoFlashDraw(0) != 0) {
                     sprintf(string, "%2d", well1->unk_43E0);
-                    SetText(0x10C, 0x5B, string, 0x15);
+                    SetText(0x10C, 0x5B, string, SETTEXTTYPE_15);
                 }
 
                 if (well1->menu.unk_0 != 5) {
                     gTheGame.drawText[3].texture = 0;
                     sprintf(string, "%2d", well1->menu.unk_4);
-                    SetText(0x10C, 0x79, string, 0x14);
+                    SetText(0x10C, 0x79, string, SETTEXTTYPE_14);
                 }
             }
             break;
@@ -298,47 +297,47 @@ void UpdateText(void) {
 
         case 0x78:
             sprintf(string, "%2d", well1->menu.unk_4);
-            SetText(0x10C, 0x2C, string, 0x16);
+            SetText(0x10C, 0x2C, string, SETTEXTTYPE_16);
             break;
 
         case 0x82:
             if (well1->menu.unk_0 == 0) {
                 sprintf(string, "%2d", well1->menu.unk_4);
-                SetText(0x10C, 0x3F, string, 0x16);
+                SetText(0x10C, 0x3F, string, SETTEXTTYPE_16);
             } else if (well1->menu.unk_0 < 4) {
                 sprintf(string, "%2d", well1->menu.unk_0);
-                SetText(0x10C, 0x2A, string, 0x17);
+                SetText(0x10C, 0x2A, string, SETTEXTTYPE_17);
 
                 sprintf(string, "%2d", well1->menu.unk_4);
-                SetText(0x10C, 0x3F, string, 0x15);
+                SetText(0x10C, 0x3F, string, SETTEXTTYPE_15);
             } else {
                 sprintf(string, "%2d", well1->menu.unk_0 - 3);
-                SetText(0x10C, 0x2A, string, 0x16);
+                SetText(0x10C, 0x2A, string, SETTEXTTYPE_16);
 
                 sprintf(string, "%2d", well1->menu.unk_4);
-                SetText(0x10C, 0x3F, string, 0x14);
+                SetText(0x10C, 0x3F, string, SETTEXTTYPE_14);
             }
             break;
 
         case 0xC8:
             sprintf(string, "%05d", well1->unk_43AC % 100000, well1->unk_43AC);
-            SetText(0x89, 0x58, string, 0x15);
+            SetText(0x89, 0x58, string, SETTEXTTYPE_15);
 
             sprintf(string, "%05d", well2->unk_43AC % 100000, well2->unk_43AC);
-            SetText(0x8A, 0x79, string, 0x14);
+            SetText(0x8A, 0x79, string, SETTEXTTYPE_14);
 
             sprintf(string, "%d", well1->menu.unk_8);
             if (well1->menu.unk_8 < 0xA) {
-                SetText(0x93, 0x39, string, 0x17);
+                SetText(0x93, 0x39, string, SETTEXTTYPE_17);
             } else {
-                SetText(0x8D, 0x39, string, 0x17);
+                SetText(0x8D, 0x39, string, SETTEXTTYPE_17);
             }
 
             sprintf(string, "%d", well2->menu.unk_8);
             if (well2->menu.unk_8 < 0xA) {
-                SetText(0xA3, 0x39, string, 0x16);
+                SetText(0xA3, 0x39, string, SETTEXTTYPE_16);
             } else {
-                SetText(0x9D, 0x39, string, 0x16);
+                SetText(0x9D, 0x39, string, SETTEXTTYPE_16);
             }
             break;
 
@@ -346,30 +345,30 @@ void UpdateText(void) {
         case 0xB4:
             sprintf(string, "%d", well1->menu.unk_0);
             if (well1->menu.unk_0 < 0xA) {
-                SetText(0x93, 0x5B, string, 0x17);
+                SetText(0x93, 0x5B, string, SETTEXTTYPE_17);
             } else {
-                SetText(0x8D, 0x5B, string, 0x17);
+                SetText(0x8D, 0x5B, string, SETTEXTTYPE_17);
             }
 
             sprintf(string, "%d", well2->menu.unk_0);
             if (well2->menu.unk_0 < 0xA) {
-                SetText(0xA4, 0x5B, string, 0x16);
+                SetText(0xA4, 0x5B, string, SETTEXTTYPE_16);
             } else {
-                SetText(0xA1, 0x5B, string, 0x16);
+                SetText(0xA1, 0x5B, string, SETTEXTTYPE_16);
             }
 
             sprintf(string, "%d", well1->menu.unk_8);
             if (well1->menu.unk_8 < 0xA) {
-                SetText(0x93, 0x79, string, 0x17);
+                SetText(0x93, 0x79, string, SETTEXTTYPE_17);
             } else {
-                SetText(0x8D, 0x79, string, 0x17);
+                SetText(0x8D, 0x79, string, SETTEXTTYPE_17);
             }
 
             sprintf(string, "%d", well2->menu.unk_8);
             if (well2->menu.unk_8 < 0xA) {
-                SetText(0xA4, 0x79, string, 0x16);
+                SetText(0xA4, 0x79, string, SETTEXTTYPE_16);
             } else {
-                SetText(0x9F, 0x79, string, 0x16);
+                SetText(0x9F, 0x79, string, SETTEXTTYPE_16);
             }
             break;
     }
@@ -390,7 +389,7 @@ void Draw2DTemplate(struct_gInfo_unk_00068 *dynamicp) {
             continue;
         }
 
-        if (currText >= 0xB) {
+        if (currText > 0xA) {
             currText = 0x19;
         }
 
@@ -437,6 +436,44 @@ void Draw2DTemplate(struct_gInfo_unk_00068 *dynamicp) {
                 default:
                     gSPObjLoadTxtr(glistp++, &D_0101F2B8_usa);
                     break;
+#if 0
+                case 0:
+                    pon_gSPObjLoadTxtr(&glistp,&otherTexture1);
+                    break;
+                case 1:
+                    pon_gSPObjLoadTxtr(&glistp,&otherTexture2);
+                    break;
+                case 2:
+                    pon_gSPObjLoadTxtr(&glistp,&otherTexture3);
+                    *(undefined2 *)(param_1 + 0x312cc) = 0x7e0;
+                    break;
+                case 3:
+                    pon_gSPObjLoadTxtr(&glistp,&otherTexture4);
+                    break;
+                case 4:
+                    pon_gSPObjLoadTxtr(&glistp,&otherTexture5);
+                    break;
+                case 5:
+                    pon_gSPObjLoadTxtr(&glistp,&otherTexture7);
+                    break;
+                case 6:
+                    pon_gSPObjLoadTxtr(&glistp,&otherTexture8);
+                    break;
+                case 7:
+                    pon_gSPObjLoadTxtr(&glistp,&otherTexture12);
+                    break;
+                case 8:
+                    pon_gSPObjLoadTxtr(&glistp,&otherTexture13);
+                    break;
+                case 9:
+                    pon_gSPObjLoadTxtr(&glistp,&otherTexture14);
+                    break;
+                case 10:
+                    pon_gSPObjLoadTxtr(&glistp,&otherTexture15);
+                    break;
+                default:
+                    pon_gSPObjLoadTxtr(&glistp,&otherTexture6);
+#endif
             }
         }
 

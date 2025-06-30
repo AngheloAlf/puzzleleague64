@@ -571,7 +571,7 @@ void DoBonus(void) {
         }
 
         sprintf(sp10, "%02d", gTheGame.menu[0].unk_8);
-        SetText(0x103, 0x17, sp10, 0x17);
+        SetText(0x103, 0x17, sp10, SETTEXTTYPE_17);
     } else if (DoWatchMenu() != 0) {
         gReset = -1;
         gMain = GMAIN_258;

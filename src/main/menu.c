@@ -8,7 +8,12 @@
 #include "macros_defines.h"
 #include "main_variables.h"
 
+#include "buffers.h"
+#include "screen.h"
 #include "the_game.h"
+
+extern s32 gnPositionFairyX;
+extern s32 gnPositionFairyY;
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_800072A0_usa);
@@ -926,7 +931,32 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_8001A50C_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/menu", menuInitFairy);
+void menuInitFairy(enum_menuTickFairy_ePosition ePosition) {
+    switch (ePosition) {
+        case MFP_LEFT:
+            gnPositionFairyX = 0x16;
+            gnPositionFairyY = 0x5E;
+            break;
+
+        case MFP_LEFT_MIDDLE:
+            gnPositionFairyX = 0x56;
+            gnPositionFairyY = 0x56;
+            break;
+
+        case MFP_RIGHT_MIDDLE:
+            gnPositionFairyX = 0x7A;
+            gnPositionFairyY = 0x56;
+            break;
+
+        case MFP_RIGHT:
+            gnPositionFairyX = 0xBA;
+            gnPositionFairyY = 0x5E;
+            break;
+
+        default:
+            break;
+    }
+}
 #endif
 
 #if VERSION_USA
@@ -950,7 +980,165 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/menu", DoMenu);
 #endif
 
 #if VERSION_USA
+#ifdef NON_EQUIVALENT
+s32 func_80008BB8_usa(s32 arg0, s32 arg1);
+void func_8000A940_usa(s32 arg0, s32 arg1, s32 arg2);
+void func_800175F8_usa(void);
+s32 func_80018EF8_usa(void);
+void func_800194DC_usa(s32 arg0);
+
+extern s32 B_8018A81C_usa;
+extern s32 B_8018A824_usa;
+extern s32 B_8018A828_usa;
+extern s32 B_8018A834_usa;
+extern s32 B_8018A838_usa;
+extern s32 B_8018A848_usa;
+extern s32 B_8018A84C_usa[];
+extern s32 B_8018A850_usa[];
+extern s32 B_8018A854_usa;
+extern s32 B_8018A8D0_usa;
+extern s32 B_8018A8D4_usa;
+extern s32 B_8018A8F4_usa;
+extern s32 B_8018A8FC_usa;
+extern s32 B_8018A900_usa;
+extern s32 B_8018A90C_usa;
+extern s32 B_8018A910_usa;
+extern s32 B_8018A914_usa;
+extern s32 B_8018A918_usa;
+extern s32 B_8018A924_usa;
+extern void *B_8018A928_usa;
+extern OSMesgQueue B_8018A948_usa;
+extern s32 B_8018ABA8_usa;
+extern s32 B_8018ABAC_usa;
+extern s32 B_8021BEA0_usa;
+extern s32 D_800B5A14_usa;
+extern UNK_TYPE1 D_CA4A0;
+extern UNK_TYPE1 D_FB480;
+
+void InitMenu(void) {
+    u8 sp10;
+    vs32 sp14[1]; //! fake
+    void *sp18;
+    s32 var_s1;
+    s32 var_a0;
+    s32 var_a0_2;
+    s32 var_s0;
+    u32 temp_s0_2;
+    u32 temp_s0_3;
+    s32 s0;
+
+    B_8018A81C_usa = 3;
+    gTheGame.unk_9C0C = 1;
+    B_8018A838_usa = -1;
+    B_8018A834_usa = -1;
+    B_8018A828_usa = -1;
+    gnPositionFairyX = 0xBA;
+    B_8018ABA8_usa = 0;
+    B_8018ABAC_usa = 0;
+    B_8018A90C_usa = 0;
+    B_8018A910_usa = 0;
+    B_8018A824_usa = 0;
+    gnPositionFairyY = 0x5E;
+    giButton = 0;
+
+    for (var_a0 = 0; var_a0 < 0x10; var_a0++) {
+        ganButton[var_a0] = 0;
+    }
+
+    B_8018A8F4_usa = -1;
+    sp18 = &gBufferHeap[&D_FB480 - &D_CA4A0];
+
+    if (D_800B5A14_usa == 0) {
+        var_s0 = -1;
+        osCartRomInit();
+        osFlashInit();
+        osFlashReadStatus(&sp10);
+        B_8018A924_usa = -(sp10 != 0);
+        osCreateMesgQueue(&B_8018A948_usa, &B_8018A928_usa, 1);
+        B_8018A914_usa = 1;
+        B_8018A918_usa = 1;
+        B_8018A8D0_usa = 0;
+        B_8018A8D4_usa = 0;
+        B_8021BEA0_usa = 0;
+        B_8018A848_usa = 0;
+        D_800B5A14_usa = 2;
+    } else {
+        var_s0 = 0;
+    }
+
+    if (screenLoad("MENU.SBF", &sp18) != 0) {
+        if (var_s0 != 0) {
+            func_80018EF8_usa();
+        } else if (gMain == GMAIN_2BC) {
+            var_a0_2 = -1;
+            if (B_8018A848_usa > 0) {
+                if ((B_8018A84C_usa[B_8018A848_usa] == 0x20) || (B_8018A84C_usa[B_8018A848_usa] == 0x22) ||
+                    (B_8018A84C_usa[B_8018A848_usa] == 0x23) || (B_8018A84C_usa[B_8018A848_usa] == 0x24)) {
+                    var_a0_2 = 0;
+                }
+            }
+            if ((var_a0_2 != 0) && (gPlayer[0] != NULL)) {
+                menuSaveData(gPlayer[0]->unk_000);
+            }
+        }
+
+        func_800175F8_usa();
+        B_8018A8FC_usa = 0;
+        B_8018A900_usa = 0;
+        if (gMain == GMAIN_28A) {
+            temp_s0_2 = B_8018A84C_usa[B_8018A848_usa];
+            var_s1 = -1;
+            func_80008BB8_usa(temp_s0_2, 0);
+            switch (temp_s0_2) { /* irregular */
+                case 0x17:
+                    var_s1 = 5;
+                    break;
+                case 0x1F:
+                    var_s1 = 7;
+                    break;
+                case 0x1B:
+                    var_s1 = 6;
+                    break;
+                default:
+                    osSyncPrintf("kSELECT: Internal error: %d\n", temp_s0_2);
+                    break;
+            }
+            func_8000A940_usa(B_8018A8D0_usa, var_s1, 0);
+            func_8000A940_usa(B_8018A8D4_usa, var_s1, 1);
+        } else if ((gMain != GMAIN_2BC) || (B_8018A848_usa <= 0)) {
+            B_8018A848_usa = 0;
+            s0 = 3;
+            if (func_80008BB8_usa(3U, 0) != 0) {
+                B_8018A850_usa[B_8018A848_usa++] = s0;
+            }
+        } else {
+            if ((gSelection == 0xA0) || (gSelection == 0xC8) || (gSelection == 0xB4)) {
+                if (B_8019CF98_usa == 0x10) {
+                    B_8018A848_usa -= 1;
+                } else {
+                    B_8018A848_usa -= 2;
+                }
+            } else if (gSelection == 0xAA) {
+                B_8018A848_usa = 1;
+                B_8018A850_usa[0] = 3;
+                B_8018A848_usa = 2;
+                B_8018A850_usa[1] = 0xA;
+                if ((gPlayer[0]->unk_02B.unk_0 & 0x1F) || (gPlayer[0]->unk_02B.unk_1 & 0x1F) ||
+                    (gPlayer[0]->unk_02B.unk_2 & 0x1F) || (gPlayer[0]->unk_02B.unk_3 & 0x1F) ||
+                    (gPlayer[0]->unk_02B.unk_4 & 0x1F) || (gPlayer[0]->unk_02B.unk_5 & 0x1F)) {
+                    B_8018A850_usa[B_8018A848_usa++] = 0xC;
+                }
+            }
+
+            temp_s0_3 = B_8018A84C_usa[B_8018A848_usa];
+            func_800194DC_usa(temp_s0_3);
+            func_80008BB8_usa(temp_s0_3, 0);
+        }
+    }
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/menu", InitMenu);
+#endif
 #endif
 
 #if VERSION_USA
