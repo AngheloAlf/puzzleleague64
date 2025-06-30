@@ -167,7 +167,7 @@ void DrawEditor(struct_gInfo_unk_00068 *arg0) {
 
     screenDraw(&glistp, editDrawImage);
     if (!screenFlushing()) {
-        func_8002C2C0_usa(&glistp);
+        pon_DrawLoadingMessage(&glistp);
     }
 }
 #endif

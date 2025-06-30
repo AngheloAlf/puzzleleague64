@@ -21,3 +21,33 @@ rom:0x053610 symbol:segment_other_misc_ROM_START reloc:MIPS_HI16
 rom:0x053614 symbol:segment_other_misc_ROM_START reloc:MIPS_LO16
 rom:0x05361C symbol:segment_other_misc_ROM_END reloc:MIPS_HI16
 rom:0x053620 symbol:segment_other_misc_ROM_END reloc:MIPS_LO16
+
+rom:0x0B6AFC symbol:segment_background_35C3F0_ROM_START reloc:MIPS_32
+rom:0x0B6B00 symbol:segment_background_3807F0_ROM_START reloc:MIPS_32
+rom:0x0B6B04 symbol:segment_background_3A4BF0_ROM_START reloc:MIPS_32
+rom:0x0B6B08 symbol:segment_background_3C8FF0_ROM_START reloc:MIPS_32
+rom:0x0B6B0C symbol:segment_background_3ED3F0_ROM_START reloc:MIPS_32
+rom:0x0B6B10 symbol:segment_background_4117F0_ROM_START reloc:MIPS_32
+rom:0x0B6B14 symbol:segment_background_435BF0_ROM_START reloc:MIPS_32
+rom:0x0B6B18 symbol:segment_background_459FF0_ROM_START reloc:MIPS_32
+rom:0x0B6B1C symbol:segment_background_47E3F0_ROM_START reloc:MIPS_32
+rom:0x0B6B20 symbol:segment_background_4A27F0_ROM_START reloc:MIPS_32
+rom:0x0B6B24 symbol:segment_background_4C6BF0_ROM_START reloc:MIPS_32
+rom:0x0B6B28 symbol:segment_background_4EAFF0_ROM_START reloc:MIPS_32
+
+rom:0x0B7460 symbol:segment_bg_screen_62AB10_ROM_START reloc:MIPS_32
+rom:0x0B7464 symbol:segment_bg_screen_63FDB0_ROM_START reloc:MIPS_32
+rom:0x0B7468 symbol:segment_bg_screen_654B10_ROM_START reloc:MIPS_32
+rom:0x0B746C symbol:segment_bg_screen_66A050_ROM_START reloc:MIPS_32
+rom:0x0B7470 symbol:segment_bg_screen_6802B0_ROM_START reloc:MIPS_32
+rom:0x0B7474 symbol:segment_bg_screen_69B3D0_ROM_START reloc:MIPS_32
+rom:0x0B7478 symbol:segment_bg_screen_6B2890_ROM_START reloc:MIPS_32
+rom:0x0B747C symbol:segment_bg_screen_6D1B50_ROM_START reloc:MIPS_32
+rom:0x0B7480 symbol:segment_bg_screen_6E92B0_ROM_START reloc:MIPS_32
+rom:0x0B7484 symbol:segment_bg_screen_702ED0_ROM_START reloc:MIPS_32
+rom:0x0B7488 symbol:segment_bg_screen_71BB30_ROM_START reloc:MIPS_32
+rom:0x0B748C symbol:segment_bg_screen_7426B0_ROM_START reloc:MIPS_32
+rom:0x0B7490 symbol:segment_bg_screen_75ADD0_ROM_START reloc:MIPS_32
+rom:0x0B7494 symbol:segment_bg_screen_7727D0_ROM_START reloc:MIPS_32
+rom:0x0B7498 symbol:segment_bg_screen_78F870_ROM_START reloc:MIPS_32
+rom:0x0B749C symbol:segment_bg_screen_7B9870_ROM_START reloc:MIPS_32

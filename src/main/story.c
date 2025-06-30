@@ -332,7 +332,7 @@ void DrawStory(struct_gInfo_unk_00068 *arg0 UNUSED) {
         }
 
         if (!screenFlushing()) {
-            func_8002C2C0_usa(&gfx);
+            pon_DrawLoadingMessage(&gfx);
         }
 
         glistp = gfx;

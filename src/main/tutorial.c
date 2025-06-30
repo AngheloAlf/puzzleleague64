@@ -433,7 +433,7 @@ static inline void inlined_func(s32 var_a2) {
 
             B_80193020_usa = (var_a2 << 0x10) | temp_s2;
             func_80028DC0_usa(brainbrain[0].unk_028, temp_s2, var_a2);
-            func_800288D8_usa(brainbrain[0].unk_028, temp_s2, var_s1, var_s0);
+            screenSetImagePosition(brainbrain[0].unk_028, temp_s2, var_s1, var_s0);
         }
     }
 }
@@ -540,7 +540,7 @@ void func_8008885C_usa(struct struct_gInfo_unk_00068 *dynamicp) {
             Draw3DMT(dynamicp);
         }
 
-        func_8002C2C0_usa(&glistp);
+        pon_DrawLoadingMessage(&glistp);
     }
 }
 

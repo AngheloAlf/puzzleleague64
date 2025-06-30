@@ -108,7 +108,7 @@ extern s32 D_800B5A1C_usa;
 // extern UNK_TYPE D_800B5DEC_usa;
 // extern UNK_TYPE D_800B5DF0_usa;
 // extern UNK_TYPE D_800B5DF4_usa;
-// extern UNK_TYPE D_800B5DF8_usa;
+// extern UNK_TYPE gaMenuData;
 // extern UNK_TYPE D_800B5E08_usa;
 // extern UNK_TYPE D_800B6340_usa;
 // extern UNK_TYPE D_800B6380_usa;
@@ -809,7 +809,7 @@ extern u32 B_8018A808_usa;
 // extern UNK_TYPE B_8018A81C_usa;
 // extern UNK_TYPE B_8018A820_usa;
 // extern UNK_TYPE B_8018A822_usa;
-// extern UNK_TYPE B_8018A824_usa;
+// extern UNK_TYPE gnSkipFrame;
 // extern UNK_TYPE B_8018A828_usa;
 // extern UNK_TYPE B_8018A82C_usa;
 // extern UNK_TYPE B_8018A830_usa;
@@ -818,8 +818,8 @@ extern u32 B_8018A808_usa;
 // extern UNK_TYPE B_8018A83C_usa;
 // extern UNK_TYPE B_8018A840_usa;
 // extern UNK_TYPE B_8018A844_usa;
-// extern UNK_TYPE B_8018A848_usa;
-// extern UNK_TYPE B_8018A84C_usa;
+// extern UNK_TYPE gnCountMenu;
+// extern UNK_TYPE geTypeMenu;
 // extern UNK_TYPE B_8018A850_usa;
 // extern UNK_TYPE B_8018A854_usa;
 // extern UNK_TYPE B_8018A8D0_usa;
@@ -916,7 +916,7 @@ extern u32 B_8018A808_usa;
 // extern UNK_TYPE B_8018AB78_usa;
 // extern UNK_TYPE gnPositionFairyX;
 // extern UNK_TYPE gnPositionFairyY;
-// extern UNK_TYPE B_8018AB88_usa;
+// extern UNK_TYPE ganOffsetFairy;
 // extern UNK_TYPE B_8018ABA8_usa;
 // extern UNK_TYPE B_8018ABAC_usa;
 
@@ -1404,7 +1404,7 @@ extern s8 B_8021BA78_usa;
 
 extern s32 B_8021BA98_usa;
 
-// extern UNK_TYPE B_8021BEA0_usa;
+extern s32 B_8021BEA0_usa;
 extern struct player_t *gPlayer[]; // maybe gPlayer?
 extern Gfx *glistp;
 // extern UNK_TYPE B_8021BEB0_usa;

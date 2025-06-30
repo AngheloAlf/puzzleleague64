@@ -12,7 +12,7 @@
 #include "file.h"
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/peel", func_8002C2C0_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/peel", pon_DrawLoadingMessage);
 #endif
 
 typedef struct struct_gaTile_unk_000 {
@@ -258,7 +258,7 @@ void func_8002DBF0_usa(void) {
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/peel", func_8002C2C0_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/peel", pon_DrawLoadingMessage);
 #endif
 
 #if VERSION_EUR
@@ -286,7 +286,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/peel", func_8002DBF0_usa);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/peel", func_8002C2C0_usa);
+INCLUDE_ASM("asm/fra/nonmatchings/main/peel", pon_DrawLoadingMessage);
 #endif
 
 #if VERSION_FRA
@@ -314,7 +314,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/peel", func_8002DC60_fra);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/peel", func_8002C2C0_usa);
+INCLUDE_ASM("asm/ger/nonmatchings/main/peel", pon_DrawLoadingMessage);
 #endif
 
 #if VERSION_GER

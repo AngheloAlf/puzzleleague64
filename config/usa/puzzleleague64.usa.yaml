@@ -1188,7 +1188,6 @@ segments:
     name: assets_bins/flic_anime_bg/61DC70
     start: 0x61DC70
 
-  # bg_screen start
   - type: databin
     name: segment_bg_screen_62AB10
     start: 0x62AB10

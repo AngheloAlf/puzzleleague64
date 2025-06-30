@@ -294,7 +294,7 @@ void func_8004123C_usa(s32 arg0) {
                 if (sp18 >= 0) {
                     sp18 = 0;
                 }
-                func_800288D8_usa(B_80192F80_usa->unk_0C, 0x78, sp14, sp18);
+                screenSetImagePosition(B_80192F80_usa->unk_0C, 0x78, sp14, sp18);
             }
             if (func_800289C0_usa(B_80192F80_usa->unk_0C, 0x79, &sp14, &sp18) && (sp18 >= 0x99)) {
                 var_s0 = -1;
@@ -307,7 +307,7 @@ void func_8004123C_usa(s32 arg0) {
                 if (sp18 < 0x99) {
                     sp18 = 0x98;
                 }
-                func_800288D8_usa(B_80192F80_usa->unk_0C, 0x79, sp14, sp18);
+                screenSetImagePosition(B_80192F80_usa->unk_0C, 0x79, sp14, sp18);
             }
             if (var_s0 == 0) {
                 B_80192F80_usa->unk_00 = 0;
@@ -341,7 +341,7 @@ void func_8004123C_usa(s32 arg0) {
                 if (sp18 < -0x98) {
                     sp18 = -0x99;
                 }
-                func_800288D8_usa(B_80192F80_usa->unk_0C, 0x78, sp14, sp18);
+                screenSetImagePosition(B_80192F80_usa->unk_0C, 0x78, sp14, sp18);
             }
             if (((gSelection == 0xA0) || (gSelection == 0xB4) || (gSelection == 0xC8)) &&
                 func_800289C0_usa(B_80192F80_usa->unk_0C, 0x79, &sp14, &sp18) && (sp18 < 0xDC)) {
@@ -350,7 +350,7 @@ void func_8004123C_usa(s32 arg0) {
                 if (sp18 >= 0xDC) {
                     sp18 = 0xDC;
                 }
-                func_800288D8_usa(B_80192F80_usa->unk_0C, 0x79, sp14, sp18);
+                screenSetImagePosition(B_80192F80_usa->unk_0C, 0x79, sp14, sp18);
             }
             if (var_s0 == 0) {
                 B_80192F80_usa->unk_18 = 4;
@@ -383,14 +383,14 @@ void func_8004123C_usa(s32 arg0) {
                     sp14 = B_80192F80_usa->unk_14;
                     B_80192F80_usa->unk_00 = 0;
                 }
-                func_800288D8_usa(B_80192F80_usa->unk_0C, 0x64, sp14, sp18);
+                screenSetImagePosition(B_80192F80_usa->unk_0C, 0x64, sp14, sp18);
             } else if (func_800289C0_usa(B_80192F80_usa->unk_0C, 0x6E, &sp14, &sp18) && (sp14 >= 0xC3)) {
                 sp14 -= B_80192F80_usa->unk_00;
                 if (sp14 < 0xC3) {
                     sp14 = 0xC2;
                     B_80192F80_usa->unk_00 = 0;
                 }
-                func_800288D8_usa(B_80192F80_usa->unk_0C, 0x6E, sp14, sp18);
+                screenSetImagePosition(B_80192F80_usa->unk_0C, 0x6E, sp14, sp18);
             } else if ((gSelection == 0xA0) || (gSelection == 0xB4) || (gSelection == 0xC8)) {
                 B_80192F80_usa->unk_00 = 0;
                 B_80192F80_usa->unk_18 = 5;
@@ -427,7 +427,7 @@ void func_8004123C_usa(s32 arg0) {
                 var_a2 = 0x70;
 #endif
             }
-            func_800288D8_usa(B_80192F80_usa->unk_0C, 0xD2, var_a2, 0xCA);
+            screenSetImagePosition(B_80192F80_usa->unk_0C, 0xD2, var_a2, 0xCA);
 
             if ((gTheGame.controller[B_80192F80_usa->unk_34].touch_button & L_JPAD) && (B_80192F80_usa->unk_30 == 1)) {
                 B_80192F80_usa->unk_30 = 0;
@@ -624,10 +624,10 @@ void func_80041F1C_usa(void **heapP, s32 arg1) {
             screenHideImage(B_80192F80_usa->unk_0C, 0x208);
             func_800289C0_usa(B_80192F80_usa->unk_0C, 0x64, &sp40, &sp44);
             B_80192F80_usa->unk_14 = sp40;
-            func_800288D8_usa(B_80192F80_usa->unk_0C, 0x64, -0xBE, sp44);
-            func_800288D8_usa(B_80192F80_usa->unk_0C, 0x6E, 0x140, 0xB0);
-            func_800288D8_usa(B_80192F80_usa->unk_0C, 0x78, 0, -0x99);
-            func_800288D8_usa(B_80192F80_usa->unk_0C, 0x79, 0, 0xF0);
+            screenSetImagePosition(B_80192F80_usa->unk_0C, 0x64, -0xBE, sp44);
+            screenSetImagePosition(B_80192F80_usa->unk_0C, 0x6E, 0x140, 0xB0);
+            screenSetImagePosition(B_80192F80_usa->unk_0C, 0x78, 0, -0x99);
+            screenSetImagePosition(B_80192F80_usa->unk_0C, 0x79, 0, 0xF0);
             B_80192F80_usa->unk_04 = -1;
         }
     }

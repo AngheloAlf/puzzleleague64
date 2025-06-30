@@ -133,19 +133,19 @@ void func_80042660_usa(void) {
     func_80042428_usa(&B_80192F90_usa->unk_24);
 
     if ((D_800B6804_usa < 2) && ((B_80192F90_usa->unk_40 == 1) || (B_80192F90_usa->unk_04.unk_8 < 2))) {
-        func_800288D8_usa(B_80192F90_usa->unk_00, 0xC8, B_80192F90_usa->unk_04.unk_0, 0x32);
-        func_800288D8_usa(B_80192F90_usa->unk_00, 0x190, B_80192F90_usa->unk_04.unk_0, 0x2E);
+        screenSetImagePosition(B_80192F90_usa->unk_00, 0xC8, B_80192F90_usa->unk_04.unk_0, 0x32);
+        screenSetImagePosition(B_80192F90_usa->unk_00, 0x190, B_80192F90_usa->unk_04.unk_0, 0x2E);
     } else {
-        func_800288D8_usa(B_80192F90_usa->unk_00, 0xC8, 0, 0x32);
-        func_800288D8_usa(B_80192F90_usa->unk_00, 0x190, 0, 0x2E);
+        screenSetImagePosition(B_80192F90_usa->unk_00, 0xC8, 0, 0x32);
+        screenSetImagePosition(B_80192F90_usa->unk_00, 0x190, 0, 0x2E);
     }
 
     if ((B_80192F90_usa->unk_40 == 5) && (B_80192F90_usa->unk_04.unk_8 >= 3)) {
-        func_800288D8_usa(B_80192F90_usa->unk_00, 0xC9, 0xDD, 0x32);
-        func_800288D8_usa(B_80192F90_usa->unk_00, 0x191, 0xD9, 0x2E);
+        screenSetImagePosition(B_80192F90_usa->unk_00, 0xC9, 0xDD, 0x32);
+        screenSetImagePosition(B_80192F90_usa->unk_00, 0x191, 0xD9, 0x2E);
     } else {
-        func_800288D8_usa(B_80192F90_usa->unk_00, 0xC9, 0xDD - B_80192F90_usa->unk_14.unk_0, 0x32);
-        func_800288D8_usa(B_80192F90_usa->unk_00, 0x191, 0xD9 - B_80192F90_usa->unk_14.unk_0, 0x2E);
+        screenSetImagePosition(B_80192F90_usa->unk_00, 0xC9, 0xDD - B_80192F90_usa->unk_14.unk_0, 0x32);
+        screenSetImagePosition(B_80192F90_usa->unk_00, 0x191, 0xD9 - B_80192F90_usa->unk_14.unk_0, 0x2E);
     }
 }
 

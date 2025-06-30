@@ -607,11 +607,11 @@ void DrawMT(struct_gInfo_unk_00068 *dynamicp) {
         }
 
         if (!screenFlushing()) {
-            func_8002C2C0_usa(&glistp);
+            pon_DrawLoadingMessage(&glistp);
         }
     }
 
-    func_8002C2C0_usa(&glistp);
+    pon_DrawLoadingMessage(&glistp);
 }
 
 #if VERSION_USA
@@ -654,7 +654,7 @@ STATIC_INLINE void inlined_function() {
     if ((B_8019300C_usa == 0) || ((B_8019300C_usa >> 0x10) != 0)) {
         B_8019300C_usa = temp_s0_2;
         func_80028DC0_usa(giScreenMimic, temp_s0_2, 0);
-        func_800288D8_usa(giScreenMimic, temp_s0_2, 0x9E, 0x48);
+        screenSetImagePosition(giScreenMimic, temp_s0_2, 0x9E, 0x48);
     }
 }
 

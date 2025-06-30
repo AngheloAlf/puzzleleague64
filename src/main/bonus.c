@@ -965,19 +965,19 @@ void DoStageClearIntro(void) {
                     screenHideImage(giScreenClear, 0x8D);
                 }
                 screenHideText(giScreenClear, 0x32);
-                func_800288D8_usa(giScreenClear, 0x83, -B_8018EA3C_usa, 0x25);
-                func_800288D8_usa(giScreenClear, 0x8D, B_8018EA3C_usa + 0xB8, 0x7F);
+                screenSetImagePosition(giScreenClear, 0x83, -B_8018EA3C_usa, 0x25);
+                screenSetImagePosition(giScreenClear, 0x8D, B_8018EA3C_usa + 0xB8, 0x7F);
                 break;
 
             case 0x3:
                 var_s0 = 0;
                 if ((func_800289C0_usa(giScreenClear, 0x6E, &sp24, &sp28) != 0) && (sp28 >= -0x99)) {
                     var_s0 = -1;
-                    func_800288D8_usa(giScreenClear, 0x6E, sp24, sp28 - 6);
+                    screenSetImagePosition(giScreenClear, 0x6E, sp24, sp28 - 6);
                 }
                 if ((func_800289C0_usa(giScreenClear, 0x6F, &sp24, &sp28) != 0) && (sp28 < 0xF1)) {
                     var_s0 = -1;
-                    func_800288D8_usa(giScreenClear, 0x6F, sp24, sp28 + 4);
+                    screenSetImagePosition(giScreenClear, 0x6F, sp24, sp28 + 4);
                 }
                 if (var_s0 == 0) {
                     B_8018EA40_usa = 4;
@@ -1067,6 +1067,6 @@ void func_80034140_usa(Gfx **gfxP, s32 arg1 UNUSED, s32 arg2) {
 void DrawStageClearIntro(struct_gInfo_unk_00068 *arg0 UNUSED) {
     screenDraw(&glistp, func_80034140_usa);
     if (!screenFlushing()) {
-        func_8002C2C0_usa(&glistp);
+        pon_DrawLoadingMessage(&glistp);
     }
 }

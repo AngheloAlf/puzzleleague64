@@ -28,7 +28,7 @@ typedef enum enum_menuTickFairy_ePosition {
 // void func_800084E0_usa();
 // void func_80008818_usa();
 // void func_800088A0_usa();
-// void func_80008BB8_usa();
+// void menuSetScreen();
 nbool func_80008EA4_usa(s32 *arg0, s32 arg1, UNK_PTR arg2);
 // void func_8000901C_usa();
 // void func_80009228_usa();
@@ -105,7 +105,7 @@ s32 menuInitUser(u32 arg0);
 // void func_8001A330_usa();
 // void func_8001A50C_usa();
 void menuInitFairy(enum_menuTickFairy_ePosition ePosition);
-void menuTickFairy(s32, s32, s32, s32, s32, s32, s32, s32);
+void menuTickFairy(s32, s32, s32, s32, s32, s32, u32, s32);
 // void menuTickFairy(s32 iScreen, s32 nFrame, s32 nTagText, s32 nOffsetText, s32 nOffsetBox, enum_menuTickFairy_ePosition ePosition, s32 bArrow);
 // void func_8001AB0C_usa();
 // void func_8001ACA8_usa();

@@ -266,9 +266,9 @@ STATIC_INLINE
 void func_80044A1C_usa(void) {
     if (B_80192FB0_usa->unk_0014 < 0xF) {
         if (B_80192FB0_usa->unk_0010 != 0) {
-            func_800288D8_usa(B_80192FB0_usa->unk_0000, UNKNOWN_VALUE + 1, 0xB0, 0x12);
+            screenSetImagePosition(B_80192FB0_usa->unk_0000, UNKNOWN_VALUE + 1, 0xB0, 0x12);
         } else {
-            func_800288D8_usa(B_80192FB0_usa->unk_0000, UNKNOWN_VALUE + 1, 0x1A, 0x12);
+            screenSetImagePosition(B_80192FB0_usa->unk_0000, UNKNOWN_VALUE + 1, 0x1A, 0x12);
         }
     } else {
         screenHideImage(B_80192FB0_usa->unk_0000, UNKNOWN_VALUE + 1);

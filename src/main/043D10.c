@@ -255,7 +255,7 @@ void func_8004360C_usa(s32 arg0) {
         }
 
         screenShowImage(arg0, 0x259);
-        func_800288D8_usa(arg0, 0x259, 0xAA, (B_80192FA0_usa->unk_54 * 0x2B) + 0x35);
+        screenSetImagePosition(arg0, 0x259, 0xAA, (B_80192FA0_usa->unk_54 * 0x2B) + 0x35);
         if (func_8002864C_usa(arg0, 0x258, &sp10)) {
             sp10->unk_14 = 0xFF;
         }
@@ -270,8 +270,8 @@ void func_8004360C_usa(s32 arg0) {
     } else if (B_80192FA0_usa->unk_0C.unk_08 == 2) {
         B_80192FA0_usa->unk_08 = (B_80192FA0_usa->unk_08 + 1) & 0xF;
         func_8002A2E8_usa(arg0, 0x64, &sp14, &sp18);
-        func_800288D8_usa(arg0, 0x258, 0x69, sp18 * 0x2B + 0x35);
-        func_800288D8_usa(arg0, 0x259, 0xAA, B_80192FA0_usa->unk_54 * 0x2B + 0x35);
+        screenSetImagePosition(arg0, 0x258, 0x69, sp18 * 0x2B + 0x35);
+        screenSetImagePosition(arg0, 0x259, 0xAA, B_80192FA0_usa->unk_54 * 0x2B + 0x35);
 
         if (func_8002864C_usa(arg0, 0x258, &sp1C)) {
             if (B_80192FA0_usa->unk_B0 != 0) {
@@ -304,20 +304,20 @@ void func_8004360C_usa(s32 arg0) {
         }
     }
 
-    func_800288D8_usa(arg0, 0x12E, B_80192FA0_usa->unk_0C.unk_00, 0x32);
-    func_800288D8_usa(arg0, 0x12F, 0xA6 - B_80192FA0_usa->unk_1C.unk_00, 0x32);
-    func_800288D8_usa(arg0, 0x190, 0x36, B_80192FA0_usa->unk_2C.unk_00 + 0xF);
+    screenSetImagePosition(arg0, 0x12E, B_80192FA0_usa->unk_0C.unk_00, 0x32);
+    screenSetImagePosition(arg0, 0x12F, 0xA6 - B_80192FA0_usa->unk_1C.unk_00, 0x32);
+    screenSetImagePosition(arg0, 0x190, 0x36, B_80192FA0_usa->unk_2C.unk_00 + 0xF);
 
     if (B_80192FA0_usa->unk_1C.unk_08 == 5) {
-        func_800288D8_usa(arg0, 0x12C, B_80192FA0_usa->unk_0C.unk_00, 0x2E);
-        func_800288D8_usa(arg0, 0x12D, 0xD9 - B_80192FA0_usa->unk_1C.unk_00, 0x2E);
-        func_800288D8_usa(arg0, 0xC8, B_80192FA0_usa->unk_0C.unk_00, 0x32);
-        func_800288D8_usa(arg0, gTheGame.menu[0].unk_4 + 0xC8, 0xDD - B_80192FA0_usa->unk_1C.unk_00, 0x32);
+        screenSetImagePosition(arg0, 0x12C, B_80192FA0_usa->unk_0C.unk_00, 0x2E);
+        screenSetImagePosition(arg0, 0x12D, 0xD9 - B_80192FA0_usa->unk_1C.unk_00, 0x2E);
+        screenSetImagePosition(arg0, 0xC8, B_80192FA0_usa->unk_0C.unk_00, 0x32);
+        screenSetImagePosition(arg0, gTheGame.menu[0].unk_4 + 0xC8, 0xDD - B_80192FA0_usa->unk_1C.unk_00, 0x32);
     } else {
-        func_800288D8_usa(arg0, 0x12C, 0, 0x2E);
-        func_800288D8_usa(arg0, 0x12D, 0xD9, 0x2E);
-        func_800288D8_usa(arg0, 0xC8, 0, 0x32);
-        func_800288D8_usa(arg0, gTheGame.menu[0].unk_4 + 0xC8, 0xDD, 0x32);
+        screenSetImagePosition(arg0, 0x12C, 0, 0x2E);
+        screenSetImagePosition(arg0, 0x12D, 0xD9, 0x2E);
+        screenSetImagePosition(arg0, 0xC8, 0, 0x32);
+        screenSetImagePosition(arg0, gTheGame.menu[0].unk_4 + 0xC8, 0xDD, 0x32);
     }
 }
 
@@ -448,7 +448,7 @@ void func_80043D24_usa(s32 arg0) {
     temp_s0 = B_80192FA0_usa->unk_2C.unk_08;
     if ((temp_s0 == 2) && (gTheGame.controller[0].touch_button & (A_BUTTON | START_BUTTON))) {
         screenShowImage(sp10, 0x258);
-        func_800288D8_usa(sp10, 0x258, 0x69, (sp18 * 0x2B) + 0x35);
+        screenSetImagePosition(sp10, 0x258, 0x69, (sp18 * 0x2B) + 0x35);
         func_80005270_usa(0, sp18, 1);
 
         B_80192FA0_usa->unk_60 = 3 - gTheGame.menu[0].unk_0;

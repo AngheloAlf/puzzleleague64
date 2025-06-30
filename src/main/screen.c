@@ -2935,7 +2935,7 @@ nbool func_8002880C_usa(s32 arg0, s32 arg1, f32 *arg2) {
     return nfalse;
 }
 
-nbool func_800288D8_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+nbool screenSetImagePosition(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     struct_gaScreen_unk_20 *sp10;
 
     if (inlined_func2(arg0, arg1, &sp10)) {
@@ -2943,7 +2943,7 @@ nbool func_800288D8_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
         sp10->unk_04 = arg3;
 
         if (sp10->unk_20 != -1) {
-            func_800288D8_usa(arg0, sp10->unk_20, arg2, arg3);
+            screenSetImagePosition(arg0, sp10->unk_20, arg2, arg3);
         }
         return ntrue;
     }
@@ -3248,7 +3248,7 @@ nbool func_80029A44_usa(s32 arg0, s32 arg1, s32 *arg2) {
     return nfalse;
 }
 
-nbool func_80029B10_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+nbool screenSetTextPosition(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     struct_gaScreen_unk_1C *sp10;
 
     if (screenFindImage(arg0, arg1, &sp10)) {
@@ -3452,7 +3452,7 @@ nbool func_8002A488_usa(s32 arg0, s32 arg1) {
     return nfalse;
 }
 
-nbool func_8002A4FC_usa(s32 arg0, s32 *arg1) {
+nbool screenGetAreaText(s32 arg0, s32 *arg1) {
     *arg1 = -1;
 
     if ((arg0 >= 0) && (arg0 < gnScreenCount)) {
