@@ -58,6 +58,14 @@ DECLARE_SEGMENT(segment_0FB480);
 
 DECLARE_SEGMENT(segment_12C1B0);
 
+DECLARE_SEGMENT(segment_background_frame_1336B0);
+DECLARE_SEGMENT(segment_background_frame_145AB0);
+DECLARE_SEGMENT(segment_background_frame_157EB0);
+DECLARE_SEGMENT(segment_background_frame_16A2B0);
+DECLARE_SEGMENT(segment_background_frame_17C6B0);
+DECLARE_SEGMENT(segment_background_frame_17F330);
+DECLARE_SEGMENT(segment_background_frame_1827B0);
+
 DECLARE_SEGMENT(segment_101A80);
 
 DECLARE_SEGMENT(segment_character_block_5337F0);

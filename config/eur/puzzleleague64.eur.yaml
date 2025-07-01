@@ -852,11 +852,6 @@ segments:
     start: 0x0FB730
 
   - type: databin
-    name: unk_101D30
-    start: 0x101D30
-    # Unknown end
-
-  - type: databin
     name: segment_101A80
     start: 0x101D30
 
@@ -865,9 +860,32 @@ segments:
     start: 0x12C460
 
   - type: databin
+    name: assets_bins/background_frame/1336B0
     start: 0x133960
-    name: unk_133960
-    # Unknown end
+
+  - type: databin
+    name: assets_bins/background_frame/145AB0
+    start: 0x145D60
+
+  - type: databin
+    name: assets_bins/background_frame/157EB0
+    start: 0x158160
+
+  - type: databin
+    name: assets_bins/background_frame/16A2B0
+    start: 0x16A560
+
+  - type: databin
+    name: assets_bins/background_frame/17C6B0
+    start: 0x17C960
+
+  - type: databin
+    name: assets_bins/background_frame/17F330
+    start: 0x17F5E0
+
+  - type: databin
+    name: assets_bins/background_frame/1827B0
+    start: 0x182A60
 
   - type: group
     name: segment_background_184FF0

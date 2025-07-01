@@ -14,49 +14,12 @@
 #include "assets/background.h"
 #include "assets_variables.h"
 
-#if VERSION_USA
-#if 0
-extern UNK_TYPE1 D_1336B0_A;
-extern UNK_TYPE1 D_145AB0_A;
-extern UNK_TYPE1 D_10375E0_A;
-extern UNK_TYPE1 D_10499E0_A;
-
-extern UNK_TYPE1 D_145AB0_B;
-extern UNK_TYPE1 D_157EB0_B;
-extern UNK_TYPE1 D_10375E0_B;
-extern UNK_TYPE1 D_10499E0_B;
-
-extern UNK_TYPE1 D_1827B0_C;
-extern UNK_TYPE1 D_184FF0_C;
-extern UNK_TYPE1 D_10499E0_C;
-extern UNK_TYPE1 D_104C220_C;
-
-extern UNK_TYPE1 D_17F330_D;
-extern UNK_TYPE1 D_1827B0_D;
-extern UNK_TYPE1 D_10499E0_D;
-extern UNK_TYPE1 D_104CE60_D;
-
-extern UNK_TYPE1 D_17C6B0_E;
-extern UNK_TYPE1 D_17F330_E;
-extern UNK_TYPE1 D_10499E0_E;
-extern UNK_TYPE1 D_104C660_E;
-
-extern UNK_TYPE1 D_157EB0_F;
-extern UNK_TYPE1 D_16A2B0_F;
-extern UNK_TYPE1 D_10375E0_F;
-extern UNK_TYPE1 D_10499E0_F;
-
-extern UNK_TYPE1 D_16A2B0_G;
-extern UNK_TYPE1 D_17C6B0_G;
-extern UNK_TYPE1 D_10375E0_G;
-extern UNK_TYPE1 D_10499E0_G;
-
+// InitFrame?
 void func_80047340_usa(void) {
     s32 sp14;
     s32 var_a3;
     s32 var_s1;
     s32 var_s2;
-    u16 temp_s5;
     uObjBg *temp_s0_5;
     void *temp_s7;
     void *var_s4;
@@ -64,41 +27,30 @@ void func_80047340_usa(void) {
     temp_s7 = Pon_Image_Heap;
     if (gTheGame.unk_9C0C == 1) {
         if (gTheGame.unk_9C08 == 1) {
-            osInvalDCache(&D_10375E0_A, &D_10499E0_A - &D_10375E0_A);
-            func_80001310_usa((u32)&D_1336B0_A, temp_s7, (u32)(&D_145AB0_A - &D_1336B0_A));
-            Pon_Image_Heap = Pon_Image_Heap + (u32)(&D_145AB0_A - &D_1336B0_A);
-            // LOAD_DATA_SEGMENT(temp_s7, , Pon_Image_Heap);
+            LOAD_DATA_SEGMENT(temp_s7, segment_background_frame_1336B0, Pon_Image_Heap);
         } else {
-            osInvalDCache(&D_10375E0_B, &D_10499E0_B - &D_10375E0_B);
-            func_80001310_usa((u32)&D_145AB0_B, temp_s7, (u32)(&D_157EB0_B - &D_145AB0_B));
-            Pon_Image_Heap = Pon_Image_Heap + (u32)(&D_157EB0_B - &D_145AB0_B);
+            LOAD_DATA_SEGMENT(temp_s7, segment_background_frame_145AB0, Pon_Image_Heap);
 
             var_s4 = Pon_Image_Heap;
 
-            switch (gSelection) { /* switch 1; irregular */
-                case 0x96:        
-                    osInvalDCache(&D_10499E0_C, &D_104C220_C - &D_10499E0_C);
-                    func_80001310_usa((u32)&D_1827B0_C, var_s4, (u32)(&D_184FF0_C - &D_1827B0_C));
-                    Pon_Image_Heap = Pon_Image_Heap + (u32)(&D_184FF0_C - &D_1827B0_C);
+            switch (gSelection) {
+                case 0x96:
+                    LOAD_DATA_SEGMENT(var_s4, segment_background_frame_1827B0, Pon_Image_Heap);
                     sp14 = 0x86;
                     var_a3 = 0x56;
                     var_s1 = 0x99;
                     break;
 
-                case 0xC8: 
-                    osInvalDCache(&D_10499E0_D, &D_104CE60_D - &D_10499E0_D);
-                    func_80001310_usa((u32)&D_17F330_D, var_s4, (u32)(&D_1827B0_D - &D_17F330_D));
-                    Pon_Image_Heap = Pon_Image_Heap + (u32)(&D_1827B0_D - &D_17F330_D);
+                case 0xC8:
+                    LOAD_DATA_SEGMENT(var_s4, segment_background_frame_17F330, Pon_Image_Heap);
                     sp14 = 0x84;
                     var_a3 = 0x25;
                     var_s1 = 0xCA;
                     break;
 
-                case 0xA0: 
-                case 0xB4: 
-                    osInvalDCache(&D_10499E0_E, &D_104C660_E - &D_10499E0_E);
-                    func_80001310_usa((u32)&D_17C6B0_E, var_s4, (u32)(&D_17F330_E - &D_17C6B0_E));
-                    Pon_Image_Heap = Pon_Image_Heap + (u32)(&D_17F330_E - &D_17C6B0_E);
+                case 0xA0:
+                case 0xB4:
+                    LOAD_DATA_SEGMENT(var_s4, segment_background_frame_17C6B0, Pon_Image_Heap);
                     sp14 = 0x84;
                     var_a3 = 0x45;
                     var_s1 = 0xAA;
@@ -107,20 +59,14 @@ void func_80047340_usa(void) {
         }
     } else {
         if (gTheGame.unk_9C08 == 1) {
-            osInvalDCache(&D_10375E0_F, &D_10499E0_F - &D_10375E0_F);
-            func_80001310_usa((u32)&D_157EB0_F, temp_s7, (u32)(&D_16A2B0_F - &D_157EB0_F));
-            Pon_Image_Heap = Pon_Image_Heap + (u32)(&D_16A2B0_F - &D_157EB0_F);
+            LOAD_DATA_SEGMENT(temp_s7, segment_background_frame_157EB0, Pon_Image_Heap);
         } else {
-            osInvalDCache(&D_10375E0_G, &D_10499E0_G - &D_10375E0_G);
-            func_80001310_usa((u32)&D_16A2B0_G, temp_s7, (u32)(&D_17C6B0_G - &D_16A2B0_G));
-            Pon_Image_Heap = Pon_Image_Heap + (u32)(&D_17C6B0_G - &D_16A2B0_G);
+            LOAD_DATA_SEGMENT(temp_s7, segment_background_frame_16A2B0, Pon_Image_Heap);
 
             var_s4 = Pon_Image_Heap;
-            switch (gSelection) { /* irregular */
+            switch (gSelection) {
                 case 0xC8:
-                    osInvalDCache(&D_10499E0_D, &D_104CE60_D - &D_10499E0_D);
-                    func_80001310_usa((u32)&D_17F330_D, var_s4, (u32)(&D_1827B0_D - &D_17F330_D));
-                    Pon_Image_Heap = Pon_Image_Heap + (u32)(&D_1827B0_D - &D_17F330_D);
+                    LOAD_DATA_SEGMENT(var_s4, segment_background_frame_17F330, Pon_Image_Heap);
                     sp14 = 0x84;
                     var_a3 = 0x25;
                     var_s1 = 0xCA;
@@ -128,9 +74,7 @@ void func_80047340_usa(void) {
 
                 case 0xB4:
                 case 0xA0:
-                    osInvalDCache(&D_10499E0_E, &D_104C660_E - &D_10499E0_E);
-                    func_80001310_usa((u32)&D_17C6B0_E, var_s4, (u32)(&D_17F330_E - &D_17C6B0_E));
-                    Pon_Image_Heap = Pon_Image_Heap + (u32)(&D_17F330_E - &D_17C6B0_E);
+                    LOAD_DATA_SEGMENT(var_s4, segment_background_frame_17C6B0, Pon_Image_Heap);
                     sp14 = 0x84;
                     var_a3 = 0x45;
                     var_s1 = 0xAA;
@@ -143,68 +87,54 @@ void func_80047340_usa(void) {
         temp_s0_5 = &gTheGame.frame[var_s2];
         if (var_s2 == 0) {
             temp_s0_5->b.imageX = 0;
-            temp_s0_5->b.imageW = 0x500;
+            temp_s0_5->b.imageW = 320 << 2;
             temp_s0_5->b.frameX = 0;
-            temp_s0_5->b.frameW = 0x500;
+            temp_s0_5->b.frameW = 320 << 2;
             temp_s0_5->b.imageY = 0;
-            temp_s0_5->b.imageH = 0x3A0;
-            temp_s0_5->b.frameY = 0x1C;
-            temp_s0_5->b.frameH = 0x3A0;
+            temp_s0_5->b.imageH = 232 << 2;
+            temp_s0_5->b.frameY = 7 << 2;
+            temp_s0_5->b.frameH = 232 << 2;
             temp_s0_5->b.imagePtr = temp_s7;
         } else {
             temp_s0_5->b.imageX = 0;
-            temp_s0_5->b.imageW = 0x100;
+            temp_s0_5->b.imageW = 64 << 2;
             temp_s0_5->b.frameX = sp14 << 2;
-            temp_s0_5->b.frameW = 0x100;
+            temp_s0_5->b.frameW = 64 << 2;
             temp_s0_5->b.imageY = 0;
             temp_s0_5->b.imageH = var_s1 << 2;
             temp_s0_5->b.frameY = var_a3 << 2;
             temp_s0_5->b.frameH = var_s1 << 2;
             temp_s0_5->b.imagePtr = var_s4;
         }
-        temp_s0_5->b.imageLoad = 0xFFF4;
-        temp_s0_5->b.imageFmt = 2;
-        temp_s0_5->b.imageSiz = 1;
+
+        temp_s0_5->b.imageLoad = G_BGLT_LOADTILE;
+        temp_s0_5->b.imageFmt = G_IM_FMT_CI;
+        temp_s0_5->b.imageSiz = G_IM_SIZ_8b;
         temp_s0_5->b.imagePal = 0;
         temp_s0_5->b.imageFlip = 0;
         guS2DInitBg(temp_s0_5);
 
-        gTheGame.unk_99D8[var_s2].block.type = 0x30;
+        gTheGame.unk_99D8[var_s2].tlut.type = G_OBJLT_TLUT;
         if (var_s2 == 0) {
-            gTheGame.unk_99D8[var_s2].block.image = temp_s7 + 0x12200;
+            gTheGame.unk_99D8[var_s2].tlut.image = temp_s7 + 0x12200;
         } else {
-            gTheGame.unk_99D8[var_s2].block.image = var_s4 + (var_s1 << 6);
+            gTheGame.unk_99D8[var_s2].tlut.image = var_s4 + (64 * var_s1);
         }
-        gTheGame.unk_99D8[var_s2].block.tsize = 0xFF;
-        gTheGame.unk_99D8[var_s2].block.tmem = 0x100;
-        gTheGame.unk_99D8[var_s2].block.tline = 0;
-        gTheGame.unk_99D8[var_s2].block.sid = 0;
-        gTheGame.unk_99D8[var_s2].block.flag = -1;
-        gTheGame.unk_99D8[var_s2].block.mask = 0;
+        gTheGame.unk_99D8[var_s2].tlut.pnum = 0xFF;
+        gTheGame.unk_99D8[var_s2].tlut.phead = 0x100;
+        gTheGame.unk_99D8[var_s2].tlut.zero = 0;
+        gTheGame.unk_99D8[var_s2].tlut.sid = 0;
+        gTheGame.unk_99D8[var_s2].tlut.flag = (u32)-1;
+        gTheGame.unk_99D8[var_s2].tlut.mask = 0;
 
         if (gTheGame.unk_9C0C == 2) {
+            // TODO: fix s/b accesses
             temp_s0_5->s.imageYorig = 0;
             temp_s0_5->b.tmemW = 0x400;
             temp_s0_5->b.tmemH = 0x400;
         }
     }
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/bkground", func_80047340_usa);
-#endif
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/bkground", func_800475E0_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/bkground", func_80045D60_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/bkground", func_80045ED0_ger);
-#endif
 
 void Draw2DFrame(void) {
     func_8004B12C_usa();
