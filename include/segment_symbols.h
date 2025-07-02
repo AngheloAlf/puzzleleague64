@@ -58,13 +58,13 @@ DECLARE_SEGMENT(segment_0FB480);
 
 DECLARE_SEGMENT(segment_12C1B0);
 
-DECLARE_SEGMENT(segment_background_frame_1336B0);
-DECLARE_SEGMENT(segment_background_frame_145AB0);
-DECLARE_SEGMENT(segment_background_frame_157EB0);
-DECLARE_SEGMENT(segment_background_frame_16A2B0);
-DECLARE_SEGMENT(segment_background_frame_17C6B0);
-DECLARE_SEGMENT(segment_background_frame_17F330);
-DECLARE_SEGMENT(segment_background_frame_1827B0);
+DECLARE_SEGMENT(segment_background_frame_2d_1p);
+DECLARE_SEGMENT(segment_background_frame_2d_2p);
+DECLARE_SEGMENT(segment_background_frame_3d_1p);
+DECLARE_SEGMENT(segment_background_frame_3d_2p);
+DECLARE_SEGMENT(segment_background_frame_ui_display_2p_A);
+DECLARE_SEGMENT(segment_background_frame_ui_display_2p_B);
+DECLARE_SEGMENT(segment_background_frame_ui_display_2p_C);
 
 DECLARE_SEGMENT(segment_101A80);
 

@@ -6,7 +6,7 @@
 
 #include "gs2dex.h"
 
-void func_80047340_usa(void);
+void InitFrame(void);
 void Draw2DFrame(void);
 void func_80047A00_usa(void);
 // void func_80047D20_usa();

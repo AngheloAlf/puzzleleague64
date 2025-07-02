@@ -12,126 +12,125 @@
 #include "the_game.h"
 
 #include "assets/background.h"
+#include "assets/background_frame.h"
 #include "assets_variables.h"
 
-// InitFrame?
-void func_80047340_usa(void) {
-    s32 sp14;
-    s32 var_a3;
-    s32 var_s1;
-    s32 var_s2;
-    uObjBg *temp_s0_5;
-    void *temp_s7;
-    void *var_s4;
+void InitFrame(void) {
+    uObjBg *obj;
+    BackgroundFrame *bg_frame;
+    u8 *ui_display;
+    s32 x;
+    s32 y;
+    s32 height;
+    s32 i;
 
-    temp_s7 = Pon_Image_Heap;
+    bg_frame = Pon_Image_Heap;
     if (gTheGame.unk_9C0C == 1) {
         if (gTheGame.unk_9C08 == 1) {
-            LOAD_DATA_SEGMENT(temp_s7, segment_background_frame_1336B0, Pon_Image_Heap);
+            LOAD_DATA_SEGMENT(bg_frame, segment_background_frame_2d_1p, Pon_Image_Heap);
         } else {
-            LOAD_DATA_SEGMENT(temp_s7, segment_background_frame_145AB0, Pon_Image_Heap);
+            LOAD_DATA_SEGMENT(bg_frame, segment_background_frame_2d_2p, Pon_Image_Heap);
 
-            var_s4 = Pon_Image_Heap;
-
+            // 2d player display
+            ui_display = Pon_Image_Heap;
             switch (gSelection) {
                 case 0x96:
-                    LOAD_DATA_SEGMENT(var_s4, segment_background_frame_1827B0, Pon_Image_Heap);
-                    sp14 = 0x86;
-                    var_a3 = 0x56;
-                    var_s1 = 0x99;
+                    LOAD_DATA_SEGMENT(ui_display, segment_background_frame_ui_display_2p_C, Pon_Image_Heap);
+                    x = (SCREEN_WIDTH - (BACKGROUND_FRAME_UI_DISPLAY_2P_WIDTH - 12)) / 2;
+                    y = SCREEN_HEIGHT - 1 - BACKGROUND_FRAME_UI_DISPLAY_2P_C_HEIGHT;
+                    height = BACKGROUND_FRAME_UI_DISPLAY_2P_C_HEIGHT;
                     break;
 
                 case 0xC8:
-                    LOAD_DATA_SEGMENT(var_s4, segment_background_frame_17F330, Pon_Image_Heap);
-                    sp14 = 0x84;
-                    var_a3 = 0x25;
-                    var_s1 = 0xCA;
+                    LOAD_DATA_SEGMENT(ui_display, segment_background_frame_ui_display_2p_B, Pon_Image_Heap);
+                    x = (SCREEN_WIDTH - (BACKGROUND_FRAME_UI_DISPLAY_2P_WIDTH - 8)) / 2;
+                    y = SCREEN_HEIGHT - 1 - BACKGROUND_FRAME_UI_DISPLAY_2P_B_HEIGHT;
+                    height = BACKGROUND_FRAME_UI_DISPLAY_2P_B_HEIGHT;
                     break;
 
                 case 0xA0:
                 case 0xB4:
-                    LOAD_DATA_SEGMENT(var_s4, segment_background_frame_17C6B0, Pon_Image_Heap);
-                    sp14 = 0x84;
-                    var_a3 = 0x45;
-                    var_s1 = 0xAA;
+                    LOAD_DATA_SEGMENT(ui_display, segment_background_frame_ui_display_2p_A, Pon_Image_Heap);
+                    x = (SCREEN_WIDTH - (BACKGROUND_FRAME_UI_DISPLAY_2P_WIDTH - 8)) / 2;
+                    y = SCREEN_HEIGHT - 1 - BACKGROUND_FRAME_UI_DISPLAY_2P_A_HEIGHT;
+                    height = BACKGROUND_FRAME_UI_DISPLAY_2P_A_HEIGHT;
                     break;
             }
         }
     } else {
         if (gTheGame.unk_9C08 == 1) {
-            LOAD_DATA_SEGMENT(temp_s7, segment_background_frame_157EB0, Pon_Image_Heap);
+            LOAD_DATA_SEGMENT(bg_frame, segment_background_frame_3d_1p, Pon_Image_Heap);
         } else {
-            LOAD_DATA_SEGMENT(temp_s7, segment_background_frame_16A2B0, Pon_Image_Heap);
+            LOAD_DATA_SEGMENT(bg_frame, segment_background_frame_3d_2p, Pon_Image_Heap);
 
-            var_s4 = Pon_Image_Heap;
+            ui_display = Pon_Image_Heap;
             switch (gSelection) {
                 case 0xC8:
-                    LOAD_DATA_SEGMENT(var_s4, segment_background_frame_17F330, Pon_Image_Heap);
-                    sp14 = 0x84;
-                    var_a3 = 0x25;
-                    var_s1 = 0xCA;
+                    LOAD_DATA_SEGMENT(ui_display, segment_background_frame_ui_display_2p_B, Pon_Image_Heap);
+                    x = (SCREEN_WIDTH - (BACKGROUND_FRAME_UI_DISPLAY_2P_WIDTH - 8)) / 2;
+                    y = SCREEN_HEIGHT - 1 - BACKGROUND_FRAME_UI_DISPLAY_2P_B_HEIGHT;
+                    height = BACKGROUND_FRAME_UI_DISPLAY_2P_B_HEIGHT;
                     break;
 
                 case 0xB4:
                 case 0xA0:
-                    LOAD_DATA_SEGMENT(var_s4, segment_background_frame_17C6B0, Pon_Image_Heap);
-                    sp14 = 0x84;
-                    var_a3 = 0x45;
-                    var_s1 = 0xAA;
+                    LOAD_DATA_SEGMENT(ui_display, segment_background_frame_ui_display_2p_A, Pon_Image_Heap);
+                    x = (SCREEN_WIDTH - (BACKGROUND_FRAME_UI_DISPLAY_2P_WIDTH - 8)) / 2;
+                    y = SCREEN_HEIGHT - 1 - BACKGROUND_FRAME_UI_DISPLAY_2P_A_HEIGHT;
+                    height = BACKGROUND_FRAME_UI_DISPLAY_2P_A_HEIGHT;
                     break;
             }
         }
     }
 
-    for (var_s2 = 0; var_s2 < gTheGame.unk_9C08; var_s2++) {
-        temp_s0_5 = &gTheGame.frame[var_s2];
-        if (var_s2 == 0) {
-            temp_s0_5->b.imageX = 0;
-            temp_s0_5->b.imageW = 320 << 2;
-            temp_s0_5->b.frameX = 0;
-            temp_s0_5->b.frameW = 320 << 2;
-            temp_s0_5->b.imageY = 0;
-            temp_s0_5->b.imageH = 232 << 2;
-            temp_s0_5->b.frameY = 7 << 2;
-            temp_s0_5->b.frameH = 232 << 2;
-            temp_s0_5->b.imagePtr = temp_s7;
+    for (i = 0; i < gTheGame.unk_9C08; i++) {
+        obj = &gTheGame.frame[i];
+        if (i == 0) {
+            obj->s.imageX = 0;
+            obj->s.imageW = BACKGROUND_FRAME_WIDTH << 2;
+            obj->s.frameX = 0;
+            obj->s.frameW = BACKGROUND_FRAME_WIDTH << 2;
+            obj->s.imageY = 0;
+            obj->s.imageH = BACKGROUND_FRAME_HEIGHT << 2;
+            obj->s.frameY = (SCREEN_HEIGHT - BACKGROUND_FRAME_HEIGHT - 1) << 2;
+            obj->s.frameH = BACKGROUND_FRAME_HEIGHT << 2;
+            obj->s.imagePtr = (void *)bg_frame->frame;
         } else {
-            temp_s0_5->b.imageX = 0;
-            temp_s0_5->b.imageW = 64 << 2;
-            temp_s0_5->b.frameX = sp14 << 2;
-            temp_s0_5->b.frameW = 64 << 2;
-            temp_s0_5->b.imageY = 0;
-            temp_s0_5->b.imageH = var_s1 << 2;
-            temp_s0_5->b.frameY = var_a3 << 2;
-            temp_s0_5->b.frameH = var_s1 << 2;
-            temp_s0_5->b.imagePtr = var_s4;
+            obj->s.imageX = 0;
+            obj->s.imageW = BACKGROUND_FRAME_UI_DISPLAY_2P_WIDTH << 2;
+            obj->s.frameX = x << 2;
+            obj->s.frameW = BACKGROUND_FRAME_UI_DISPLAY_2P_WIDTH << 2;
+            obj->s.imageY = 0;
+            obj->s.imageH = height << 2;
+            obj->s.frameY = y << 2;
+            obj->s.frameH = height << 2;
+            obj->s.imagePtr = (void *)ui_display;
         }
 
-        temp_s0_5->b.imageLoad = G_BGLT_LOADTILE;
-        temp_s0_5->b.imageFmt = G_IM_FMT_CI;
-        temp_s0_5->b.imageSiz = G_IM_SIZ_8b;
-        temp_s0_5->b.imagePal = 0;
-        temp_s0_5->b.imageFlip = 0;
-        guS2DInitBg(temp_s0_5);
+        obj->s.imageLoad = G_BGLT_LOADTILE;
+        obj->s.imageFmt = G_IM_FMT_CI;
+        obj->s.imageSiz = G_IM_SIZ_8b;
+        obj->s.imagePal = 0;
+        obj->s.imageFlip = 0;
+        guS2DInitBg(obj);
 
-        gTheGame.unk_99D8[var_s2].tlut.type = G_OBJLT_TLUT;
-        if (var_s2 == 0) {
-            gTheGame.unk_99D8[var_s2].tlut.image = temp_s7 + 0x12200;
+        gTheGame.unk_99D8[i].tlut.type = G_OBJLT_TLUT;
+        if (i == 0) {
+            gTheGame.unk_99D8[i].tlut.image = (void *)bg_frame->tlut;
         } else {
-            gTheGame.unk_99D8[var_s2].tlut.image = var_s4 + (64 * var_s1);
+            gTheGame.unk_99D8[i].tlut.image = (void *)(ui_display + (BACKGROUND_FRAME_UI_DISPLAY_2P_WIDTH * height));
         }
-        gTheGame.unk_99D8[var_s2].tlut.pnum = 0xFF;
-        gTheGame.unk_99D8[var_s2].tlut.phead = 0x100;
-        gTheGame.unk_99D8[var_s2].tlut.zero = 0;
-        gTheGame.unk_99D8[var_s2].tlut.sid = 0;
-        gTheGame.unk_99D8[var_s2].tlut.flag = (u32)-1;
-        gTheGame.unk_99D8[var_s2].tlut.mask = 0;
+        gTheGame.unk_99D8[i].tlut.pnum = GS_PAL_NUM(BACKGROUND_FRAME_TLUT_SIZE);
+        gTheGame.unk_99D8[i].tlut.phead = GS_PAL_HEAD(0);
+        gTheGame.unk_99D8[i].tlut.zero = 0;
+        gTheGame.unk_99D8[i].tlut.sid = 0;
+        gTheGame.unk_99D8[i].tlut.flag = (u32)-1;
+        gTheGame.unk_99D8[i].tlut.mask = 0;
 
         if (gTheGame.unk_9C0C == 2) {
-            // TODO: fix s/b accesses
-            temp_s0_5->s.imageYorig = 0;
-            temp_s0_5->b.tmemW = 0x400;
-            temp_s0_5->b.tmemH = 0x400;
+            obj->s.imageYorig = 0;
+            obj->s.scaleW = 1 << 10;
+            obj->s.scaleH = 1 << 10;
         }
     }
 }

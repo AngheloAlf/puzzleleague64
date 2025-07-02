@@ -1,0 +1,23 @@
+segments:
+  - type: group
+    start: 0x0
+    dir: background_frame
+    subsegments:
+      - { start: auto, type: ci8, name: ui_display_2p_C.ci8, width: 64, height: 153, palettes: [tlut] }
+      - { start: auto, type: palette, name: tlut, size: 0x200 }
+  - [0x3480]
+
+options:
+  basename: ""
+  base_path: ../../../../../
+  compiler: GCC
+  find_file_boundaries: False
+  platform: n64
+  extensions_path: tools/splat_ext
+
+  do_c_func_detection: False
+  o_as_suffix: True
+  gfx_ucode: f3dex
+  use_legacy_include_asm: False
+  create_undefined_funcs_auto: False
+  create_undefined_syms_auto: False
