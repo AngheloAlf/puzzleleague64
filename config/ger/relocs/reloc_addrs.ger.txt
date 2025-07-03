@@ -1,13 +1,26 @@
+rom:0x007BC4 symbol:segment_0CA4A0_ROM_END reloc:MIPS_HI16
+rom:0x007BC8 symbol:segment_0CA4A0_ROM_END reloc:MIPS_LO16
+rom:0x007BCC symbol:segment_0CA4A0_ROM_START reloc:MIPS_HI16
+rom:0x007BD0 symbol:segment_0CA4A0_ROM_START reloc:MIPS_LO16
+
 rom:0x031DF4 symbol:segment_0CA4A0_ROM_END reloc:MIPS_HI16
 rom:0x031DF8 symbol:segment_0CA4A0_ROM_END reloc:MIPS_LO16
 rom:0x031DFC symbol:segment_0CA4A0_ROM_START reloc:MIPS_HI16
 rom:0x031E00 symbol:segment_0CA4A0_ROM_START reloc:MIPS_LO16
 
+rom:0x031E18 symbol:segment_101A80_VRAM reloc:MIPS_HI16
+rom:0x031E1C symbol:segment_101A80_VRAM reloc:MIPS_LO16
+rom:0x031E20 symbol:segment_101A80_VRAM_END reloc:MIPS_HI16
+rom:0x031E24 symbol:segment_101A80_VRAM_END reloc:MIPS_LO16
 rom:0x031E40 symbol:segment_101A80_ROM_START reloc:MIPS_HI16
 rom:0x031E44 symbol:segment_101A80_ROM_START reloc:MIPS_LO16
 rom:0x031E4C symbol:segment_101A80_ROM_END reloc:MIPS_HI16
 rom:0x031E50 symbol:segment_101A80_ROM_END reloc:MIPS_LO16
 
+rom:0x03239C symbol:segment_background_50F3F0_VRAM reloc:MIPS_HI16
+rom:0x0323A0 symbol:segment_background_50F3F0_VRAM reloc:MIPS_LO16
+rom:0x0323A4 symbol:segment_background_50F3F0_VRAM_END reloc:MIPS_HI16
+rom:0x0323A8 symbol:segment_background_50F3F0_VRAM_END reloc:MIPS_LO16
 rom:0x0323B4 symbol:segment_background_50F3F0_ROM_START reloc:MIPS_HI16
 rom:0x0323B8 symbol:segment_background_50F3F0_ROM_START reloc:MIPS_LO16
 rom:0x0323BC symbol:segment_background_50F3F0_ROM_END reloc:MIPS_HI16
@@ -21,6 +34,16 @@ rom:0x051F00 symbol:segment_other_misc_ROM_START reloc:MIPS_HI16
 rom:0x051F04 symbol:segment_other_misc_ROM_START reloc:MIPS_LO16
 rom:0x051F0C symbol:segment_other_misc_ROM_END reloc:MIPS_HI16
 rom:0x051F10 symbol:segment_other_misc_ROM_END reloc:MIPS_LO16
+
+rom:0x0873C4 symbol:segment_0CA4A0_ROM_END reloc:MIPS_HI16
+rom:0x0873C8 symbol:segment_0CA4A0_ROM_END reloc:MIPS_LO16
+rom:0x0873CC symbol:segment_0CA4A0_ROM_START reloc:MIPS_HI16
+rom:0x0873D0 symbol:segment_0CA4A0_ROM_START reloc:MIPS_LO16
+
+rom:0x089748 symbol:segment_0CA4A0_ROM_END reloc:MIPS_HI16
+rom:0x08974C symbol:segment_0CA4A0_ROM_END reloc:MIPS_LO16
+rom:0x089750 symbol:segment_0CA4A0_ROM_START reloc:MIPS_HI16
+rom:0x089754 symbol:segment_0CA4A0_ROM_START reloc:MIPS_LO16
 
 rom:0x0AC3DC symbol:segment_background_35C3F0_ROM_START reloc:MIPS_32
 rom:0x0AC3E0 symbol:segment_background_3807F0_ROM_START reloc:MIPS_32
@@ -51,3 +74,20 @@ rom:0x0ACEF0 symbol:segment_bg_screen_75ADD0_ROM_START reloc:MIPS_32
 rom:0x0ACEF4 symbol:segment_bg_screen_7727D0_ROM_START reloc:MIPS_32
 rom:0x0ACEF8 symbol:segment_bg_screen_78F870_ROM_START reloc:MIPS_32
 rom:0x0ACEFC symbol:segment_bg_screen_7B9870_ROM_START reloc:MIPS_32
+
+rom:0x0AD088 symbol:segment_background_1CD7F0_ROM_START reloc:MIPS_32
+rom:0x0AD08C symbol:segment_background_1F1BF0_ROM_START reloc:MIPS_32
+rom:0x0AD090 symbol:segment_background_215FF0_ROM_START reloc:MIPS_32
+rom:0x0AD094 symbol:segment_background_23A3F0_ROM_START reloc:MIPS_32
+rom:0x0AD098 symbol:segment_background_25E7F0_ROM_START reloc:MIPS_32
+rom:0x0AD09C symbol:segment_background_282BF0_ROM_START reloc:MIPS_32
+rom:0x0AD0A0 symbol:segment_background_2A6FF0_ROM_START reloc:MIPS_32
+rom:0x0AD0A4 symbol:segment_background_2CB3F0_ROM_START reloc:MIPS_32
+rom:0x0AD0A8 symbol:segment_flic_anime_bg_599F70_ROM_START reloc:MIPS_32
+rom:0x0AD0AC symbol:segment_flic_anime_bg_5A8C10_ROM_START reloc:MIPS_32
+rom:0x0AD0B0 symbol:segment_flic_anime_bg_5B6730_ROM_START reloc:MIPS_32
+rom:0x0AD0B4 symbol:segment_flic_anime_bg_5C62D0_ROM_START reloc:MIPS_32
+rom:0x0AD0B8 symbol:segment_flic_anime_bg_5D4870_ROM_START reloc:MIPS_32
+rom:0x0AD0BC symbol:segment_flic_anime_bg_5E6490_ROM_START reloc:MIPS_32
+rom:0x0AD0C0 symbol:segment_flic_anime_bg_5F3090_ROM_START reloc:MIPS_32
+rom:0x0AD0C4 symbol:segment_flic_anime_bg_5FF430_ROM_START reloc:MIPS_32

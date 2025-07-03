@@ -66,7 +66,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/dlist", InitCursor);
 #endif
 
 // TODO: maybe void InitGamePad(int num /* r1+0x0 */)?
-void func_800545E4_usa(s32 arg0) {
+void InitGamePad(s32 arg0) {
     // TODO: REGION_NTSC?
 #if VERSION_USA
     gTheGame.controller[arg0].unk_08 = 0xA;
@@ -129,10 +129,10 @@ void InitDisplayList(struct_gInfo *info) {
     gDPSetColorImage(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, info->unk_19040);
 
     if ((gMain == GMAIN_384) || ((gMain > GMAIN_388))) {
-        B_801C70D8_usa = (GPACK_RGBA5551(0, 0, 0, 1) << 16) | (GPACK_RGBA5551(0, 0, 0, 1) << 0);
+        gFrameColor = (GPACK_RGBA5551(0, 0, 0, 1) << 16) | (GPACK_RGBA5551(0, 0, 0, 1) << 0);
 
         gDPSetCycleType(glistp++, G_CYC_FILL);
-        gDPSetFillColor(glistp++, B_801C70D8_usa);
+        gDPSetFillColor(glistp++, gFrameColor);
         gDPFillRectangle(glistp++, 0, 0, SCREEN_WIDTH - 1, 6);
         gDPPipeSync(glistp++);
     }

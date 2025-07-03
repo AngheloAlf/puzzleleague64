@@ -21,7 +21,7 @@
 #include "update.h"
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/puzzle", func_80088940_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/puzzle", Match2DPuzzle);
 #endif
 
 #if VERSION_USA
@@ -147,7 +147,7 @@ void DrawPuzzleEditor(struct_gInfo_unk_00068 *arg0) {
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/puzzle", func_80088940_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/puzzle", Match2DPuzzle);
 #endif
 
 #if VERSION_EUR

@@ -9,7 +9,7 @@
 #include "main_variables.h"
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/fade", func_80054020_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/fade", InitGameFade);
 #endif
 
 #if VERSION_EUR

@@ -65,8 +65,7 @@ typedef struct struct_8004EC4C_usa_arg3 {
 } struct_8004EC4C_usa_arg3; // size = 0x8
 
 #if VERSION_USA
-//#ifdef NON_EQUIVALENT
-#if 0
+#ifdef NON_EQUIVALENT
 void InitBonus(void) {
     s32 var_s3 = 0;
     s32 s5 = 1;

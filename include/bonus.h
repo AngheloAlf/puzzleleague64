@@ -14,7 +14,7 @@ s32 DoWatchMenu(void);
 // void func_800322D0_usa();
 // void func_80032318_usa();
 // void func_80032494_usa();
-// void func_800325F8_usa();
+void func_800325F8_usa(void);
 void DoCountDown();
 void DrawCountDown(void);
 void InitStageClearIntro(void);

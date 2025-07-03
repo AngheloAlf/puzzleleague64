@@ -132,7 +132,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", Init2DExplosion);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", func_8006B798_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", Init2DText);
 #endif
 
 #if VERSION_EUR
@@ -148,7 +148,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", func_8006A358_ger);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", func_8006C0E0_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", Init2DClearLine);
 #endif
 
 #if VERSION_EUR

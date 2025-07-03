@@ -9,8 +9,8 @@
 struct tetWell;
 
 BlockType RandomBlock(struct tetWell *well);
-// void func_80089828_usa();
-// void func_8008997C_usa();
+// void InitBlockPattern();
+void InitStartingBlocks(struct tetWell *well, char *ptr, s32 total);
 s32 DemoCheck(s32 *frame);
 // void func_80089BE0_usa();
 void InitTetrisWell(void);

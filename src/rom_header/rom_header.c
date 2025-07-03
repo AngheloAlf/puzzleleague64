@@ -25,9 +25,6 @@ typedef struct RomHeader {
 
 void entrypoint(void);
 
-extern u32 ROMHEADER_CHECKSUM1;
-extern u32 ROMHEADER_CHECKSUM2;
-
 RomHeader gRomHeader = {
     // unk_00
     0x80371240,
@@ -43,9 +40,9 @@ RomHeader gRomHeader = {
     'J',
 
     // checksum1
-    (u32)&ROMHEADER_CHECKSUM1,
+    0,
     // checksum2
-    (u32)&ROMHEADER_CHECKSUM2,
+    0,
     // unk_18
     0x00000000,
     // unk_1C

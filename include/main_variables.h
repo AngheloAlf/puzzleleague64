@@ -178,8 +178,8 @@ extern char attackRow7[];
 extern char attackRow8[];
 extern char attackRow9[];
 
-// extern UNK_TYPE D_800B6AA0_usa;
-// extern UNK_TYPE D_800B6AF4_usa;
+// extern UNK_TYPE panel_data;
+// extern UNK_TYPE clearpanel_data;
 // extern UNK_TYPE D_800B6BB0_usa;
 extern s32 D_800B6CC4_usa[12];
 // extern UNK_TYPE D_800B6CF4_usa;
@@ -1323,7 +1323,7 @@ extern u8 B_801C7089_usa;
 extern OSTime gTime;
 extern void *Pon_Image_Heap;
 extern s32 AIdistance[8];
-extern s32 B_801C70D8_usa;
+extern s32 gFrameColor;
 
 // extern UNK_TYPE B_801C70E4_usa;
 // extern UNK_TYPE B_801C70E5_usa;

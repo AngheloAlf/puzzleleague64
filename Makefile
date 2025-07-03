@@ -245,7 +245,7 @@ SEGMENTS_D       := $(SEGMENTS_SCRIPTS:.ld=.d)
 SEGMENTS         := $(foreach f, $(SEGMENTS_SCRIPTS:.ld=), $(notdir $f))
 SEGMENTS_O       := $(foreach f, $(SEGMENTS), $(BUILD_DIR)/segments/$f.o)
 
-LINKER_SCRIPTS   := $(LD_SCRIPT) $(BUILD_DIR)/config/$(VERSION)/linker_scripts/undefined_syms.ld $(BUILD_DIR)/config/linker_scripts/common_undef_syms.ld
+LINKER_SCRIPTS   := $(LD_SCRIPT) $(BUILD_DIR)/config/linker_scripts/common_undef_syms.ld
 
 ASSETS_YAMLS_DIRS:= $(shell find config/assets -type d)
 ASSETS_YAMLS     := $(foreach dir,$(ASSETS_YAMLS_DIRS),$(wildcard $(dir)/*.yaml))

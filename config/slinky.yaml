@@ -63,16 +63,20 @@ settings:
 
 vram_classes:
   # TODO: figure out these weird vrams. They probably follows some other segment
-  - { name: asset_background_frame_A, fixed_vram: 0x010375E0 }
-  - { name: asset_background_frame_B, fixed_vram: 0x010499E0 }
-  - { name: asset_background, fixed_vram: 0x0104C660 }
-  - { name: asset_character_block, fixed_vram: 0x01070A60 }
-  - { name: asset_bg_screen_A, fixed_vram: 0x01077C60 }
-  - { name: asset_flic_anime_bg, fixed_vram: 0x01077C60 }
-  - { name: asset_other_misc, fixed_vram: 0x010835A0 }
-  - { name: asset_bg_screen_B, fixed_vram: 0x0108CF00 }
-  - { name: asset_sign, fixed_vram: 0x010AA150 }
-  - { name: asset_sign_ger, fixed_vram: 0x010AB1D0 }
+  - { name: asset_segment_0CA4A0, fixed_vram: 0x01000000 }
+  - { name: asset_segment_0FB480, follows_classes: [asset_segment_0CA4A0] }
+  - { name: asset_segment_101A80, follows_classes: [asset_segment_0CA4A0] }
+  - { name: asset_segment_12C1B0, follows_classes: [asset_segment_0FB480] }
+  - { name: asset_background_frame_A, follows_classes: [asset_segment_0FB480] }
+  - { name: asset_background_frame_B, follows_classes: [asset_background_frame_A] }
+  - { name: asset_background, fixed_vram: 0x0104C660 } # TODO: implement follows_segment in slinky
+  - { name: asset_character_block, follows_classes: [asset_background] }
+  - { name: asset_bg_screen_A, follows_classes: [asset_character_block] }
+  - { name: asset_flic_anime_bg, follows_classes: [asset_character_block] }
+  - { name: asset_other_misc, fixed_vram: 0x010835A0 } # TODO: implement follows_segment in slinky
+  - { name: asset_bg_screen_B, fixed_vram: 0x0108CF00 } # TODO: implement follows_segment in slinky
+  - { name: asset_sign_pause, follows_classes: [asset_other_misc] }
+  - { name: asset_sign, follows_classes: [asset_sign_pause] }
 
 segments:
   - name: header
@@ -538,20 +542,22 @@ segments:
       - { path: src/buffers/framebuffer.o }
 
   - name: segment_0CA4A0
-    fixed_vram: 0x01000000
+    vram_class: asset_segment_0CA4A0
     files:
       - { path: src/assets/segment_0CA4A0.o }
 
   - name: segment_0FB480
+    vram_class: asset_segment_0FB480
     files:
       - { path: "asm/{version}/data/segment_0FB480.o" }
 
   - name: segment_101A80
+    vram_class: asset_segment_101A80
     files:
       - { path: "asm/{version}/data/segment_101A80.o" }
 
   - name: segment_12C1B0
-    fixed_vram: 0x010375E0
+    vram_class: asset_segment_12C1B0
     files:
       - { path: "asm/{version}/data/segment_12C1B0.o" }
 
@@ -906,67 +912,83 @@ segments:
       - { path: "asm/{version}/data/segment_bg_screen_7B9870.o" }
 
   - name: segment_bg_screen_7D39D0
-    vram_class: asset_bg_screen_B
+    # vram_class: asset_bg_screen_B
+    follows_segment: segment_bg_screen_62AB10
     files:
       - { path: "asm/{version}/data/segment_bg_screen_7D39D0.o" }
   - name: segment_bg_screen_7E5010
-    vram_class: asset_bg_screen_B
+    # vram_class: asset_bg_screen_B
+    follows_segment: segment_bg_screen_62AB10
     files:
       - { path: src/assets/bg_screen/7E5010.o }
   - name: segment_bg_screen_7F5BD0
-    vram_class: asset_bg_screen_B
+    # vram_class: asset_bg_screen_B
+    follows_segment: segment_bg_screen_62AB10
     files:
       - { path: src/assets/bg_screen/7F5BD0.o }
   - name: segment_bg_screen_8088D0
-    vram_class: asset_bg_screen_B
+    # vram_class: asset_bg_screen_B
+    follows_segment: segment_bg_screen_62AB10
     files:
       - { path: src/assets/bg_screen/8088D0.o }
   - name: segment_bg_screen_81A450
-    vram_class: asset_bg_screen_B
+    # vram_class: asset_bg_screen_B
+    follows_segment: segment_bg_screen_62AB10
     files:
       - { path: src/assets/bg_screen/81A450.o }
   - name: segment_bg_screen_82C890
-    vram_class: asset_bg_screen_B
+    # vram_class: asset_bg_screen_B
+    follows_segment: segment_bg_screen_62AB10
     files:
       - { path: src/assets/bg_screen/82C890.o }
   - name: segment_bg_screen_83EB10
-    vram_class: asset_bg_screen_B
+    # vram_class: asset_bg_screen_B
+    follows_segment: segment_bg_screen_62AB10
     files:
       - { path: src/assets/bg_screen/83EB10.o }
   - name: segment_bg_screen_8520D0
-    vram_class: asset_bg_screen_B
+    # vram_class: asset_bg_screen_B
+    follows_segment: segment_bg_screen_62AB10
     files:
       - { path: src/assets/bg_screen/8520D0.o }
   - name: segment_bg_screen_865D90
-    vram_class: asset_bg_screen_B
+    # vram_class: asset_bg_screen_B
+    follows_segment: segment_bg_screen_62AB10
     files:
       - { path: src/assets/bg_screen/865D90.o }
   - name: segment_bg_screen_87A4D0
-    vram_class: asset_bg_screen_B
+    # vram_class: asset_bg_screen_B
+    follows_segment: segment_bg_screen_62AB10
     files:
       - { path: src/assets/bg_screen/87A4D0.o }
   - name: segment_bg_screen_88DA90
-    vram_class: asset_bg_screen_B
+    # vram_class: asset_bg_screen_B
+    follows_segment: segment_bg_screen_62AB10
     files:
       - { path: src/assets/bg_screen/88DA90.o }
   - name: segment_bg_screen_8A8050
-    vram_class: asset_bg_screen_B
+    # vram_class: asset_bg_screen_B
+    follows_segment: segment_bg_screen_62AB10
     files:
       - { path: src/assets/bg_screen/8A8050.o }
   - name: segment_bg_screen_8BB610
-    vram_class: asset_bg_screen_B
+    # vram_class: asset_bg_screen_B
+    follows_segment: segment_bg_screen_62AB10
     files:
       - { path: src/assets/bg_screen/8BB610.o }
   - name: segment_bg_screen_8CE310
-    vram_class: asset_bg_screen_B
+    # vram_class: asset_bg_screen_B
+    follows_segment: segment_bg_screen_62AB10
     files:
       - { path: src/assets/bg_screen/8CE310.o }
   - name: segment_bg_screen_8E2A50
-    vram_class: asset_bg_screen_B
+    # vram_class: asset_bg_screen_B
+    follows_segment: segment_bg_screen_62AB10
     files:
       - { path: src/assets/bg_screen/8E2A50.o }
   - name: segment_bg_screen_902250
-    vram_class: asset_bg_screen_B
+    # vram_class: asset_bg_screen_B
+    follows_segment: segment_bg_screen_62AB10
     files:
       - { path: src/assets/bg_screen/902250.o }
 
@@ -976,56 +998,24 @@ segments:
       - { path: "asm/{version}/data/segment_other_misc.o" }
 
   - name: sign_pause
-    fixed_vram: 0x010A51D0
-    include_if_any: [[version, usa], [version, eur], [version, fra]]
-    files:
-      - { path: src/assets/sign/sign_pause.o }
-
-  - name: sign_pause
-    fixed_vram: 0x010A51D0
-    include_if_any: [[version, ger]]
+    vram_class: asset_sign_pause
     files:
       - { path: src/assets/sign/sign_pause.o }
 
   - name: sign_gameover_2d_1p
     vram_class: asset_sign
-    include_if_any: [[version, usa], [version, eur], [version, fra]]
     files:
       - { path: src/assets/sign_gameover/sign_gameover_2d_1p.o }
   - name: sign_gameover_2d_2p
     vram_class: asset_sign
-    include_if_any: [[version, usa], [version, eur], [version, fra]]
     files:
       - { path: src/assets/sign_gameover/sign_gameover_2d_2p.o }
   - name: sign_gameover_3d_1p
     vram_class: asset_sign
-    include_if_any: [[version, usa], [version, eur], [version, fra]]
     files:
       - { path: src/assets/sign_gameover/sign_gameover_3d_1p.o }
   - name: sign_gameover_3d_2p
     vram_class: asset_sign
-    include_if_any: [[version, usa], [version, eur], [version, fra]]
-    files:
-      - { path: src/assets/sign_gameover/sign_gameover_3d_2p.o }
-
-  - name: sign_gameover_2d_1p
-    vram_class: asset_sign_ger
-    include_if_any: [[version, ger]]
-    files:
-      - { path: src/assets/sign_gameover/sign_gameover_2d_1p.o }
-  - name: sign_gameover_2d_2p
-    vram_class: asset_sign_ger
-    include_if_any: [[version, ger]]
-    files:
-      - { path: src/assets/sign_gameover/sign_gameover_2d_2p.o }
-  - name: sign_gameover_3d_1p
-    vram_class: asset_sign_ger
-    include_if_any: [[version, ger]]
-    files:
-      - { path: src/assets/sign_gameover/sign_gameover_3d_1p.o }
-  - name: sign_gameover_3d_2p
-    vram_class: asset_sign_ger
-    include_if_any: [[version, ger]]
     files:
       - { path: src/assets/sign_gameover/sign_gameover_3d_2p.o }
 

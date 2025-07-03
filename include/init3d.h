@@ -9,7 +9,7 @@ struct tetWell;
 
 void Init3DNewRow(struct tetWell *well);
 void Init3DCursor(struct cursor_t *cursor, s32 num);
-void Init3DTetrisBlocks(struct tetWell *well);
+void Init3DTetrisBlocks(struct tetWell *well, s32 num);
 void Init3DTetrisBlocksState(struct tetWell *well);
 void Init3DIcons(struct tetWell *well);
 void Init3DAttackBlocks(struct tetWell *well);

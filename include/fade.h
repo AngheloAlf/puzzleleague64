@@ -5,7 +5,7 @@
 
 #include "unk.h"
 
-// void func_80054020_usa();
+void InitGameFade(void);
 void SetGameFade(void);
 // void func_8005407C_usa();
 void DoGameFade(s32 factor);

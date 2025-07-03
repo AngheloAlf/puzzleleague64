@@ -48,7 +48,7 @@ void Init3DCursor(cursor_t *cursor, s32 num) {
     cursor->rect.s.objY = ((50 << 2) + 3) - (cursor->y * 0x10);
 }
 
-void Init3DTetrisBlocks(tetWell *well) {
+void Init3DTetrisBlocks(tetWell *well, s32 num UNUSED) {
     block_t *block;
     s32 i;
     s32 j;

@@ -128,7 +128,7 @@ typedef struct player_t {
     /* 0x109 */ player_t_unk_109 unk_109;
     /* 0x111 */ player_t_unk_111 unk_111;
     /* 0x119 */ player_t_unk_119 unk_119;
-    /* 0x121 */ player_t_unk_121 unk_121;
+    /* 0x121 */ char unk_121[0xF][0x6E];
     /* 0x793 */ UNK_PAD unk_793[0xF];
     /* 0x7A2 */ player_t_unk_7A2 unk_7A2;
     /* 0x7B4 */ player_t_unk_7B4 unk_7B4;

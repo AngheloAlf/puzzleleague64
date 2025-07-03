@@ -66,6 +66,7 @@ void InitTutorial(void) {
     tetWell *s2;
     cursor_t *s1;
     ai_t *s3;
+    ai_t *s6;
 
     var_a1 = 0;
 
@@ -153,15 +154,17 @@ void InitTutorial(void) {
         var_a0_3->s.imageFlags = 0;
     }
 
+    s6 = &brainbrain[0];
+
     var_a0_3 = gTheGame.unk_9A08;
-    var_a0_3[0].s.scaleH = 0x2A;
-    var_a0_3[1].s.scaleH = 0x2A;
     var_a0_3[0].s.objX = 0x60;
     var_a0_3[0].s.scaleW = 0x4B;
-    var_a0_3[1].s.scaleW = 0x4B;
     var_a0_3[0].s.objY = 0x7C;
-    var_a0_3[1].s.objY = 0x7C;
+    var_a0_3[0].s.scaleH = 0x2A;
     var_a0_3[1].s.objX = 0x2F0;
+    var_a0_3[1].s.scaleH = 0x2A;
+    var_a0_3[1].s.objY = 0x7C;
+    var_a0_3[1].s.scaleW = 0x4B;
 
     if (gTheGame.menu[0].unk_0 != 3) {
         gTheGame.unk_9B50[1].b.frameH = 0;
@@ -177,6 +180,7 @@ void InitTutorial(void) {
     attack_chain2[1] = 0;
     gTheGame.unk_9C08 = 2;
 
+    s3 = s6;
     for (var_s2 = 0; var_s2 < gTheGame.unk_9C08; var_s2++) {
         s2 = &gTheGame.tetrisWell[var_s2];
 
@@ -209,7 +213,6 @@ void InitTutorial(void) {
 
     s2 = &gTheGame.tetrisWell[0];
     s1 = &gTheGame.cursorBlock[0];
-    s3 = &brainbrain[0];
 
     switch (gTheGame.menu[0].unk_0) { /* switch 2 */
         case 0x1:                     /* switch 2 */
@@ -220,10 +223,10 @@ void InitTutorial(void) {
         case 0x2: /* switch 2 */
             Init2DPuzzle(s2, s1, tutorial2, 1);
             s3->unk_03C = 2;
+            gTheGame.unk_90AA = 0x400;
             gTheGame.unk_90B4 = 0x100;
             gTheGame.unk_90B8 = 8;
             gTheGame.unk_90BC = 2;
-            gTheGame.unk_90AA = 0x400;
             gTheGame.unk_90AE = 0;
             gTheGame.unk_90B2 = 0x400;
             gTheGame.unk_90B6 = 0;
@@ -254,16 +257,16 @@ void InitTutorial(void) {
             break;
     }
 
-    s1->unk_28 = 0;
-    s1->unk_2C = 0;
+    s1->unk_28[0] = 0;
+    s1->unk_28[1] = 0;
     if (gTheGame.unk_9C0C == 1) {
-        Init2DNewRow(&s2[0]);
-        Init2DNewRow(&s2[1]);
+        Init2DNewRow(s2);
+        Init2DNewRow(&gTheGame.tetrisWell[1]);
         gMax = 6;
     } else {
-        Init3DNewRow(&s2[0]);
-        Init3DNewRow(&s2[1]);
-        s2[0].new_block[0].type = BLOCKTYPE_0;
+        Init3DNewRow(s2);
+        Init3DNewRow(&gTheGame.tetrisWell[1]);
+        s2->new_block[0].type = BLOCKTYPE_0;
         gMax = 0x12;
     }
 
@@ -273,11 +276,7 @@ void InitTutorial(void) {
     s3->unk_040 = 0;
     s3->unk_044 = 0;
     s3->unk_028 = var_s7;
-    if (gTheGame.menu[0].unk_0 == 3) {
-        s3->unk_02C = 2;
-    } else {
-        s3->unk_02C = 4;
-    }
+    s3->unk_02C = (gTheGame.menu[0].unk_0 == 3) ? 2 : 4;
 
     s3->unk_038 = 0x64;
     s3->unk_024 = 0;
