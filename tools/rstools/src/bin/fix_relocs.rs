@@ -2,12 +2,15 @@
 /* SPDX-License-Identifier: MIT */
 
 #![allow(non_camel_case_types)]
+#![allow(clippy::uninlined_format_args)]
 
 /**
  * Dumb and ugly program that patches the relocs of a relocatable elf file.
  *
  * Searches for relocs that are relative to a local section of the file and
  * patches them to be relative to a symbol (if there's a symbol at that offset).
+ * This is only applied to references to .text symbols (i.e. functions), to
+ * avoid grabbing the wrong symbol due to addends.
  *
  * Why do all of this? Shouldn't the compiler emit "correct" relocs by default!?
  * Well, some compilers like the KMC compiler only emits relocations to symbols
@@ -25,7 +28,7 @@
  * and not because you need to fix something or add new features. If that's the
  * case, good luck.
  */
-use core::str;
+
 use std::{io::Cursor, path::PathBuf};
 
 use anyhow::Result;
@@ -65,6 +68,22 @@ impl DataEncoding {
             _ => panic!(),
         }
     }
+
+    pub fn to_bytes_u32(self, value: u32) -> [u8; 4] {
+        match self {
+            DataEncoding::ELFDATA2LSB => value.to_le_bytes(),
+            DataEncoding::ELFDATA2MSB => value.to_be_bytes(),
+        }
+    }
+}
+
+impl From<DataEncoding> for binrw::Endian {
+    fn from(value: DataEncoding) -> binrw::Endian {
+        match value {
+            DataEncoding::ELFDATA2LSB => binrw::Endian::Little,
+            DataEncoding::ELFDATA2MSB => binrw::Endian::Big,
+        }
+    }
 }
 
 #[binrw]
@@ -88,7 +107,7 @@ pub struct Elf32_Off(pub u32);
 pub struct Elf32_Section(pub u16);
 
 impl Elf32_Half {
-    pub fn from_bytes(data: &[u8], endian: &DataEncoding) -> Self {
+    pub fn from_bytes(data: &[u8], endian: DataEncoding) -> Self {
         match endian {
             DataEncoding::ELFDATA2LSB => Self(u16::from_le_bytes(data[..2].try_into().unwrap())),
             DataEncoding::ELFDATA2MSB => Self(u16::from_be_bytes(data[..2].try_into().unwrap())),
@@ -96,7 +115,7 @@ impl Elf32_Half {
     }
 }
 impl Elf32_Word {
-    pub fn from_bytes(data: &[u8], endian: &DataEncoding) -> Self {
+    pub fn from_bytes(data: &[u8], endian: DataEncoding) -> Self {
         match endian {
             DataEncoding::ELFDATA2LSB => Self(u32::from_le_bytes(data[..4].try_into().unwrap())),
             DataEncoding::ELFDATA2MSB => Self(u32::from_be_bytes(data[..4].try_into().unwrap())),
@@ -104,7 +123,7 @@ impl Elf32_Word {
     }
 }
 impl Elf32_Addr {
-    pub fn from_bytes(data: &[u8], endian: &DataEncoding) -> Self {
+    pub fn from_bytes(data: &[u8], endian: DataEncoding) -> Self {
         match endian {
             DataEncoding::ELFDATA2LSB => Self(u32::from_le_bytes(data[..4].try_into().unwrap())),
             DataEncoding::ELFDATA2MSB => Self(u32::from_be_bytes(data[..4].try_into().unwrap())),
@@ -112,7 +131,7 @@ impl Elf32_Addr {
     }
 }
 impl Elf32_Off {
-    pub fn from_bytes(data: &[u8], endian: &DataEncoding) -> Self {
+    pub fn from_bytes(data: &[u8], endian: DataEncoding) -> Self {
         match endian {
             DataEncoding::ELFDATA2LSB => Self(u32::from_le_bytes(data[..4].try_into().unwrap())),
             DataEncoding::ELFDATA2MSB => Self(u32::from_be_bytes(data[..4].try_into().unwrap())),
@@ -183,19 +202,19 @@ impl Elf32_Ehdr {
 
         Self {
             e_ident,
-            e_type: Elf32_Half::from_bytes(&data[0x10..], &endian),
-            e_machine: Elf32_Half::from_bytes(&data[0x12..], &endian),
-            e_version: Elf32_Word::from_bytes(&data[0x14..], &endian),
-            e_entry: Elf32_Addr::from_bytes(&data[0x18..], &endian),
-            e_phoff: Elf32_Off::from_bytes(&data[0x1C..], &endian),
-            e_shoff: Elf32_Off::from_bytes(&data[0x20..], &endian),
-            e_flags: Elf32_Word::from_bytes(&data[0x24..], &endian),
-            e_ehsize: Elf32_Half::from_bytes(&data[0x28..], &endian),
-            e_phentsize: Elf32_Half::from_bytes(&data[0x2A..], &endian),
-            e_phnum: Elf32_Half::from_bytes(&data[0x2C..], &endian),
-            e_shentsize: Elf32_Half::from_bytes(&data[0x2E..], &endian),
-            e_shnum: Elf32_Half::from_bytes(&data[0x30..], &endian),
-            e_shstrndx: Elf32_Half::from_bytes(&data[0x32..], &endian),
+            e_type: Elf32_Half::from_bytes(&data[0x10..], endian),
+            e_machine: Elf32_Half::from_bytes(&data[0x12..], endian),
+            e_version: Elf32_Word::from_bytes(&data[0x14..], endian),
+            e_entry: Elf32_Addr::from_bytes(&data[0x18..], endian),
+            e_phoff: Elf32_Off::from_bytes(&data[0x1C..], endian),
+            e_shoff: Elf32_Off::from_bytes(&data[0x20..], endian),
+            e_flags: Elf32_Word::from_bytes(&data[0x24..], endian),
+            e_ehsize: Elf32_Half::from_bytes(&data[0x28..], endian),
+            e_phentsize: Elf32_Half::from_bytes(&data[0x2A..], endian),
+            e_phnum: Elf32_Half::from_bytes(&data[0x2C..], endian),
+            e_shentsize: Elf32_Half::from_bytes(&data[0x2E..], endian),
+            e_shnum: Elf32_Half::from_bytes(&data[0x30..], endian),
+            e_shstrndx: Elf32_Half::from_bytes(&data[0x32..], endian),
         }
     }
 }
@@ -246,6 +265,20 @@ enum Elf32SectionType {
     SHT_GROUP = 17,
     SHT_SYMTAB_SHNDX = 18,
     SHT_NUM = 19,
+}
+
+#[derive(FromPrimitive, Debug, Copy, Clone, PartialEq)]
+enum Elf32SectionFlag {
+    SHF_WRITE = 0x1,
+    SHF_ALLOC = 0x2,
+    SHF_EXECINSTR = 0x4,
+    SHF_MERGE = 0x10,
+    SHF_STRINGS = 0x20,
+    SHF_INFO_LINK = 0x40,
+    SHF_LINK_ORDER = 0x80,
+    SHF_OS_NONCONFORMING = 0x100,
+    SHF_GROUP = 0x200,
+    SHF_TLS = 0x400,
 }
 
 /* Section header.  */
@@ -430,12 +463,20 @@ fn main() {
 
     let elf_header = Elf32_Ehdr::new(&elf_bytes);
 
-    let endian = match elf_header.e_ident.endian() {
-        DataEncoding::ELFDATA2LSB => binrw::Endian::Little,
-        DataEncoding::ELFDATA2MSB => binrw::Endian::Big,
-    };
+    let (section_headers, symtab) = parse_sections(&elf_header, &elf_bytes);
 
+    patch_all_relocs(&elf_header, &mut elf_bytes, &section_headers, &symtab);
+
+    utils::write_file_bytes(&cli.input, &elf_bytes).unwrap();
+}
+
+fn parse_sections(
+    elf_header: &Elf32_Ehdr,
+    elf_bytes: &[u8],
+) -> (Vec<Elf32SectionHeader>, Vec<Elf32SymbolEntry>) {
+    let endian = elf_header.e_ident.endian().into();
     let mut section_headers_temp = Vec::new();
+
     for i in 0..elf_header.e_shnum.0 {
         let offset = elf_header.e_shoff.0 as usize + (i * 0x28) as usize;
 
@@ -462,139 +503,240 @@ fn main() {
 
     let mut strtab: Option<Elf32StringTable> = None;
     for sh in &section_headers {
-        match sh.header_type() {
-            Some(Elf32SectionType::SHT_STRTAB) => {
-                if sh.name() == ".strtab" {
-                    strtab = Some(Elf32StringTable {
-                        strings: elf_bytes[sh.shdr.sh_offset.0 as usize
-                            ..sh.shdr.sh_offset.0 as usize + sh.shdr.sh_size.0 as usize]
-                            .into(),
-                    });
-                }
-            }
-            _ => {}
+        if sh.header_type() == Some(Elf32SectionType::SHT_STRTAB) && sh.name() == ".strtab" {
+            strtab = Some(Elf32StringTable {
+                strings: elf_bytes[sh.shdr.sh_offset.0 as usize
+                    ..sh.shdr.sh_offset.0 as usize + sh.shdr.sh_size.0 as usize]
+                    .into(),
+            });
+            break;
         }
     }
 
     let mut symtab = Vec::new();
     for sh in &section_headers {
-        match sh.header_type() {
-            Some(Elf32SectionType::SHT_SYMTAB) => {
-                for i in 0..sh.shdr.sh_size.0 / sh.shdr.sh_entsize.0 {
-                    let offset = sh.shdr.sh_offset.0 as usize + (i * sh.shdr.sh_entsize.0) as usize;
+        if sh.header_type() == Some(Elf32SectionType::SHT_SYMTAB) {
+            for i in 0..sh.shdr.sh_size.0 / sh.shdr.sh_entsize.0 {
+                let offset = sh.shdr.sh_offset.0 as usize + (i * sh.shdr.sh_entsize.0) as usize;
 
-                    let sym =
-                        Elf32_Sym::read_options(&mut Cursor::new(&elf_bytes[offset..]), endian, ())
-                            .unwrap();
+                let sym =
+                    Elf32_Sym::read_options(&mut Cursor::new(&elf_bytes[offset..]), endian, ())
+                        .unwrap();
 
-                    symtab.push(Elf32SymbolEntry::new(sym, &strtab));
-                }
+                symtab.push(Elf32SymbolEntry::new(sym, &strtab));
             }
-            _ => {}
+            break;
         }
     }
 
-    for sh in &section_headers {
-        match sh.header_type() {
-            Some(Elf32SectionType::SHT_REL) => {
-                for i in 0..sh.shdr.sh_size.0 / sh.shdr.sh_entsize.0 {
-                    let rel_offset =
-                        sh.shdr.sh_offset.0 as usize + (i * sh.shdr.sh_entsize.0) as usize;
+    (section_headers, symtab)
+}
 
-                    let mut rel = Elf32_Rel::read_options(
-                        &mut Cursor::new(&elf_bytes[rel_offset..]),
-                        endian,
-                        (),
-                    )
-                    .unwrap();
+fn patch_all_relocs(
+    elf_header: &Elf32_Ehdr,
+    elf_bytes: &mut Vec<u8>,
+    section_headers: &[Elf32SectionHeader],
+    symtab: &[Elf32SymbolEntry],
+) {
+    for sh in section_headers {
+        if sh.header_type() == Some(Elf32SectionType::SHT_REL) {
+            let mut prev_rel_hi16 = None;
 
-                    if let Some(sym) = symtab.get(rel.r_sym() as usize) {
-                        match sym.sym_type() {
-                            Some(SymbolType::STT_SECTION) => {
-                                match rel.mips_reloc() {
-                                    Some(MIPSRelocs::R_MIPS_26) => {
-                                        //println!("{}", sym.name());
-                                        if sym.sym_bind() == Some(SymbolBind::STB_LOCAL) {
-                                            if let Some(referenced_section) =
-                                                section_headers.get(sym.sym.st_shndx.0 as usize)
-                                            {
-                                                let instruction_offset =
-                                                    (referenced_section.shdr.sh_offset.0
-                                                        + rel.r_offset.0)
-                                                        as usize;
+            // Patch all the relocs in the .reloc section.
+            for i in 0..sh.shdr.sh_size.0 / sh.shdr.sh_entsize.0 {
+                let rel_offset = sh.shdr.sh_offset.0 as usize + (i * sh.shdr.sh_entsize.0) as usize;
 
-                                                let word = Elf32_Word::from_bytes(
-                                                    &elf_bytes[instruction_offset..],
-                                                    &elf_header.e_ident.endian(),
-                                                );
-                                                let computed_addend = (word.0 & 0x3FFFFFF) << 2;
-
-                                                //println!("{} + 0x{:X}", referenced_section.name(), computed_addend);
-
-                                                if let Some((sym_index, _refer)) =
-                                                    find_referenced_sym_index(
-                                                        &symtab,
-                                                        sym,
-                                                        computed_addend,
-                                                    )
-                                                {
-                                                    // rintln!("0x{:08X} {} + 0x{:X} -> {} ({})", rel.r_offset.0, referenced_section.name(), computed_addend, refer.name(), sym_index);
-
-                                                    rel.set_r_sym(sym_index);
-
-                                                    let cleared = word.0 & !0x3FFFFFF;
-                                                    let replacement_bytes =
-                                                        match elf_header.e_ident.endian() {
-                                                            DataEncoding::ELFDATA2LSB => {
-                                                                cleared.to_le_bytes()
-                                                            }
-                                                            DataEncoding::ELFDATA2MSB => {
-                                                                cleared.to_be_bytes()
-                                                            }
-                                                        };
-
-                                                    elf_bytes.splice(
-                                                        instruction_offset..instruction_offset + 4,
-                                                        replacement_bytes,
-                                                    );
-
-                                                    rel.write_options(
-                                                        &mut Cursor::new(
-                                                            &mut elf_bytes[rel_offset..],
-                                                        ),
-                                                        endian,
-                                                        (),
-                                                    )
-                                                    .unwrap();
-                                                } else {
-                                                    //println!("Not found: {} + 0x{:X}", referenced_section.name(), adcomputed_addenddend);
-                                                }
-                                            }
-                                        }
-                                    }
-                                    _ => {}
-                                }
-                            }
-                            _ => {}
-                        }
-                    }
-                }
+                patch_reloc(
+                    elf_header,
+                    elf_bytes,
+                    section_headers,
+                    symtab,
+                    rel_offset,
+                    &mut prev_rel_hi16,
+                );
             }
-            _ => {}
         }
     }
+}
 
-    utils::write_file_bytes(&cli.input, &elf_bytes).unwrap();
+fn patch_reloc(
+    elf_header: &Elf32_Ehdr,
+    elf_bytes: &mut Vec<u8>,
+    section_headers: &[Elf32SectionHeader],
+    symtab: &[Elf32SymbolEntry],
+    rel_offset: usize,
+    prev_rel_hi16: &mut Option<(usize, Elf32_Rel)>,
+) {
+    let rel = Elf32_Rel::read_options(
+        &mut Cursor::new(&elf_bytes[rel_offset..]),
+        elf_header.e_ident.endian().into(),
+        (),
+    )
+    .unwrap();
+
+    let Some(section_sym) = symtab.get(rel.r_sym() as usize) else {
+        return;
+    };
+
+    // We only care patching section-relative relocations
+    if section_sym.sym_type() != Some(SymbolType::STT_SECTION)
+        || section_sym.sym_bind() != Some(SymbolBind::STB_LOCAL)
+    {
+        return;
+    }
+
+    let Some(referenced_section) = section_headers.get(section_sym.sym.st_shndx.0 as usize) else {
+        return;
+    };
+
+    match rel.mips_reloc() {
+        Some(MIPSRelocs::R_MIPS_26) => {
+            patch_reloc_r_mips_26(
+                elf_header,
+                elf_bytes,
+                symtab,
+                section_sym,
+                referenced_section,
+                (rel_offset, rel),
+            );
+        }
+        Some(MIPSRelocs::R_MIPS_HI16) => {
+            *prev_rel_hi16 = Some((rel_offset, rel));
+        }
+        Some(MIPSRelocs::R_MIPS_LO16) => {
+            if let Some((rel_offset_hi, rel_hi)) = prev_rel_hi16 {
+                patch_reloc_r_mips_lo16(
+                    elf_header,
+                    elf_bytes,
+                    symtab,
+                    section_sym,
+                    referenced_section,
+                    (*rel_offset_hi, *rel_hi),
+                    (rel_offset, rel),
+                );
+            }
+        }
+        _ => {}
+    }
+}
+
+fn patch_reloc_r_mips_26(
+    elf_header: &Elf32_Ehdr,
+    elf_bytes: &mut Vec<u8>,
+    symtab: &[Elf32SymbolEntry],
+    section_sym: &Elf32SymbolEntry,
+    referenced_section: &Elf32SectionHeader,
+    (rel_offset, rel): (usize, Elf32_Rel),
+) {
+    let instruction_offset = (referenced_section.shdr.sh_offset.0 + rel.r_offset.0) as usize;
+
+    let word = Elf32_Word::from_bytes(
+        &elf_bytes[instruction_offset..],
+        elf_header.e_ident.endian(),
+    );
+    let computed_addend = (word.0 & 0x3FFFFFF) << 2;
+
+    //println!("{} + 0x{:X}", referenced_section.name(), computed_addend);
+
+    let Some((sym_index, refer)) = find_referenced_sym_index(symtab, section_sym, computed_addend)
+    else {
+        //println!("Not found: {} + 0x{:X}", referenced_section.name(), computed_addend);
+        return;
+    };
+    // println!("0x{:08X} {} + 0x{:X} -> {} ({})", rel.r_offset.0, referenced_section.name(), computed_addend, refer.name(), sym_index);
+    let _ = refer;
+
+    rewrite_reloc_bytes(
+        elf_header,
+        elf_bytes,
+        sym_index,
+        0x3FFFFFF,
+        instruction_offset,
+        rel_offset,
+        rel,
+    );
+}
+
+fn patch_reloc_r_mips_lo16(
+    elf_header: &Elf32_Ehdr,
+    elf_bytes: &mut Vec<u8>,
+    symtab: &[Elf32SymbolEntry],
+    section_sym: &Elf32SymbolEntry,
+    referenced_section: &Elf32SectionHeader,
+    (rel_offset_hi, rel_hi): (usize, Elf32_Rel),
+    (rel_offset_lo, rel_lo): (usize, Elf32_Rel),
+) {
+    if rel_hi.r_sym() != rel_lo.r_sym() {
+        // References a different section?
+        return;
+    }
+
+    // We only patch hi/lo relocs to .text sections. Other sections are ignored
+    // because references to symbols on those sections may have addends big
+    // enough to end up referencing the incorrect symbol.
+    // Since symbols from .text sections usually don't have addends, patching
+    // references to them should be safe most of the time.
+    if referenced_section.shdr.sh_flags.0 & (Elf32SectionFlag::SHF_EXECINSTR as u32) == 0 {
+        return;
+    }
+
+    let instruction_offset_hi = (referenced_section.shdr.sh_offset.0 + rel_hi.r_offset.0) as usize;
+    let word_hi = Elf32_Word::from_bytes(
+        &elf_bytes[instruction_offset_hi..],
+        elf_header.e_ident.endian(),
+    );
+
+    let instruction_offset_lo = (referenced_section.shdr.sh_offset.0 + rel_lo.r_offset.0) as usize;
+    let word_lo = Elf32_Word::from_bytes(
+        &elf_bytes[instruction_offset_lo..],
+        elf_header.e_ident.endian(),
+    );
+
+    let imm_hi = (word_hi.0 & 0xFFFF) << 16;
+    let imm_lo = (word_lo.0 & 0xFFFF) as u16 as i16;
+    if (word_lo.0 & 0x00008000) != 0 {
+        assert!(imm_lo < 0);
+    }
+    let computed_addend = imm_hi.wrapping_add_signed(imm_lo.into());
+    // println!("{} + 0x{:X}", referenced_section.name(), computed_addend);
+
+    let Some((sym_index, refer)) = find_referenced_sym_index(symtab, section_sym, computed_addend)
+    else {
+        // println!("Not found: {} + 0x{:X}", referenced_section.name(), computed_addend);
+        return;
+    };
+    // println!("0x{:08X} {} + 0x{:X} -> {} ({})", rel_hi.r_offset.0, referenced_section.name(), computed_addend, refer.name(), sym_index);
+    // println!("0x{:08X} {} + 0x{:X} -> {} ({})", rel_lo.r_offset.0, referenced_section.name(), computed_addend, refer.name(), sym_index);
+    let _ = refer;
+
+    rewrite_reloc_bytes(
+        elf_header,
+        elf_bytes,
+        sym_index,
+        0xFFFF,
+        instruction_offset_hi,
+        rel_offset_hi,
+        rel_hi,
+    );
+    rewrite_reloc_bytes(
+        elf_header,
+        elf_bytes,
+        sym_index,
+        0xFFFF,
+        instruction_offset_lo,
+        rel_offset_lo,
+        rel_lo,
+    );
 }
 
 fn find_referenced_sym_index<'s>(
     symtab: &'s [Elf32SymbolEntry],
-    sym: &Elf32SymbolEntry,
+    section_sym: &Elf32SymbolEntry,
     computed_addend: u32,
 ) -> Option<(u32, &'s Elf32SymbolEntry)> {
     for (sym_index, aux_sym) in symtab.iter().enumerate() {
         if aux_sym.sym_type() != Some(SymbolType::STT_SECTION)
-            && aux_sym.sym.st_shndx == sym.sym.st_shndx
+            && aux_sym.sym.st_shndx == section_sym.sym.st_shndx
             && aux_sym.sym.st_value.0 == computed_addend
         {
             // Avoid using a branch label or a .NON_MATCHING symbol
@@ -605,4 +747,34 @@ fn find_referenced_sym_index<'s>(
     }
 
     None
+}
+
+fn rewrite_reloc_bytes(
+    elf_header: &Elf32_Ehdr,
+    elf_bytes: &mut Vec<u8>,
+    sym_index: u32,
+    imm_bitpattern: u32,
+    instruction_offset: usize,
+    rel_offset: usize,
+    mut rel: Elf32_Rel,
+) {
+    let data_encoding = elf_header.e_ident.endian();
+
+    // Clear the addend from the instruction
+    let word = Elf32_Word::from_bytes(&elf_bytes[instruction_offset..], data_encoding);
+    let cleared = word.0 & !imm_bitpattern;
+    let replacement_bytes = data_encoding.to_bytes_u32(cleared);
+    elf_bytes.splice(
+        instruction_offset..instruction_offset + 4,
+        replacement_bytes,
+    );
+
+    // Update the reloc
+    rel.set_r_sym(sym_index);
+    rel.write_options(
+        &mut Cursor::new(&mut elf_bytes[rel_offset..]),
+        data_encoding.into(),
+        (),
+    )
+    .unwrap();
 }

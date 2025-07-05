@@ -1,6 +1,8 @@
 /* SPDX-FileCopyrightText: © 2024 AngheloAlf */
 /* SPDX-License-Identifier: MIT */
 
+#![allow(clippy::uninlined_format_args)]
+
 use std::{
     cmp::min,
     collections::HashSet,
