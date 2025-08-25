@@ -710,6 +710,7 @@ void func_800325F8_usa(void) {
 
     LOAD_DATA_SEGMENT(heap, segment_0FB480, Pon_Image_Heap);
 
+    // TODO: struct?
     B_8018EA00_usa = (void *)((uintptr_t)heap + 0x0000);
     B_8018EA08_usa = (void *)((uintptr_t)heap + 0x1800);
     B_8018EA04_usa = (void *)((uintptr_t)heap + 0x3300);

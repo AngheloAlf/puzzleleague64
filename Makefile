@@ -47,10 +47,6 @@ BASEROM              := config/$(VERSION)/baserom.$(VERSION).z64
 TARGET               := puzzleleague64
 
 
-# TODO: add to splat
-export SPIMDISASM_ASM_EMIT_SIZE_DIRECTIVE=True
-# export SPIMDISASM_ASM_REFERENCEE_SYMBOLS=True
-
 ### Output ###
 
 BUILD_DIR := build/$(VERSION)
@@ -384,7 +380,12 @@ $(BUILD_DIR)/%.ld: %.ld
 	./tools/package_bin_file.py $(BINFILE_DIR) $@
 
 $(BUILD_DIR)/%.o: %.s
+ifeq ($(MULTISTEP_BUILD), 0)
 	$(CPP) $(CPPFLAGS) $(BUILD_DEFINES) $(IINC) -I $(dir $*) -I $(BUILD_DIR)/$(dir $*) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(AS_DEFINES) $(COMP_VERBOSE_FLAG) $< | $(AS) $(ASFLAGS) $(ENDIAN) $(IINC) -I $(dir $*) $(COMP_VERBOSE_FLAG) -o $@
+else
+	$(CPP) $(CPPFLAGS) $(BUILD_DEFINES) $(IINC) -I $(dir $*) -I $(BUILD_DIR)/$(dir $*) $(COMMON_DEFINES) $(RELEASE_DEFINES) $(GBI_DEFINES) $(AS_DEFINES) $(COMP_VERBOSE_FLAG) -o $(@:.o=.s) $<
+	$(AS) $(ASFLAGS) $(ENDIAN) $(IINC) -I $(dir $*) $(COMP_VERBOSE_FLAG) -o $@ $(@:.o=.s)
+endif
 	$(OBJDUMP_CMD)
 
 $(BUILD_DIR)/%.o: %.c
