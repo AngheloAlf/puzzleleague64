@@ -70,7 +70,8 @@ tools:
   mapfile_parser:
     progress_report:
       # output: report.json # Optional
-      check_asm_paths: True
+      check_asm_paths: False
+      report_data: True
       # Change if the asm path in the build folder is deeper than two subfolders.
       # i.e.: "build/us/asm/header.o" -> `path_index: 3`.
       # i.e.: "build/us/asm/us/header.o" -> `path_index: 4`.
