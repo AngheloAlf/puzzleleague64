@@ -1036,122 +1036,122 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/ai", AIPossibleCol);
 #endif
 
 void AIComboCheck(tetWell *well, ai_t *brain) {
-    s32 array[12];
-    s32 sp7C;
+    s32 rowsCopy[12];
+    s32 shortestDist;
 
-    s32 var_a0;
-    s32 var_a1;
-    s32 var_a1_3;
-    s32 temp_a2;
-    s32 var_a3;
+    s32 cursorX;
+    s32 horizDist;
+    s32 i;
+    s32 cursorY;
+    s32 vertDist;
 
-    s32 var_s0;
-    s32 temp_s2; // total?
-    s32 temp_s3; // to?
+    s32 blockIdx;
+    s32 totalBlocks;
+    s32 lastBlockRow;
 
-    s32 temp_v0_5;
-    s32 temp_v1;
-    s32 temp_v1_2;
+    s32 sortedRowIdx;
+    s32 blockCount;
+    s32 blockCol;
 
-    s32 var_t3_2;
+    s32 colorIdx;
 
-#if 0
-    int shortest; // r14
-    int from; // r16
-    int to; // r1+0x8
-    int at; // r1+0x8
-    int count; // r4
-    int total; // r1+0x8
-    int type; // r22
-    int temp; // r3
-#endif
+    shortestDist = 0x12;
 
-    sp7C = 0x12;
-
-    for (var_t3_2 = 0; var_t3_2 < AI_CHECK_COUNT; var_t3_2++) {
-        temp_v1 = AItotCheck[var_t3_2];
-        if (temp_v1 < 3) {
+    // First loop: calculate the "distance" (cost) to combo each color
+    for (colorIdx = 0; colorIdx < AI_CHECK_COUNT; colorIdx++) {
+        blockCount = AItotCheck[colorIdx];
+        if (blockCount < 3) {
             continue;
         }
-        temp_s2 = temp_v1;
+        totalBlocks = blockCount;
 
-        temp_s3 = AIrowCheck[var_t3_2][temp_s2 - 1];
-        temp_a2 = brain->cursor_y;
-        var_a1 = AIrowCheck[var_t3_2][0];
+        lastBlockRow = AIrowCheck[colorIdx][totalBlocks - 1];
+        cursorY = brain->cursor_y;
+        horizDist = AIrowCheck[colorIdx][0];
         // Should this use inlined `AIDistance` instead?
-        if (temp_a2 >= temp_s3) {
-            temp_v1_2 = AIcolCheck[var_t3_2][temp_s2 - 1];
-            var_a0 = brain->cursor_x;
-            var_a3 = temp_a2 - temp_s3;
-            var_a3 = abs(var_a3);
-            var_a1 = 0;
-            if (temp_v1_2 < var_a0) {
-                var_a1 = var_a0 - temp_v1_2;
-            } else if (var_a0 < temp_v1_2) {
-                var_a1 = temp_v1_2 - (var_a0 + 1);
+        if (cursorY >= lastBlockRow) {
+            // Cursor is below or at the last block - calculate distance to last block
+            blockCol = AIcolCheck[colorIdx][totalBlocks - 1];
+            cursorX = brain->cursor_x;
+            vertDist = cursorY - lastBlockRow;
+            vertDist = abs(vertDist);
+            horizDist = 0;
+            if (blockCol < cursorX) {
+                horizDist = cursorX - blockCol;
+            } else if (cursorX < blockCol) {
+                horizDist = blockCol - (cursorX + 1);
             }
-            AIdistance[var_t3_2] = var_a1 + var_a3;
-        } else if (var_a1 >= temp_a2) {
-            var_a1 = temp_a2 - var_a1;
-            temp_v1_2 = AIcolCheck[var_t3_2][0];
-            var_a0 = brain->cursor_x;
-            var_a1 = abs(var_a1);
-            var_a3 = 0;
-            if (temp_v1_2 < var_a0) {
-                var_a3 = var_a0 - temp_v1_2;
-            } else if (var_a0 < temp_v1_2) {
-                var_a3 = temp_v1_2 - (var_a0 + 1);
+            AIdistance[colorIdx] = horizDist + vertDist;
+        } else if (horizDist >= cursorY) {
+            // Cursor is above the first block - calculate distance to first block
+            horizDist = cursorY - horizDist;
+            blockCol = AIcolCheck[colorIdx][0];
+            cursorX = brain->cursor_x;
+            horizDist = abs(horizDist);
+            vertDist = 0;
+            if (blockCol < cursorX) {
+                vertDist = cursorX - blockCol;
+            } else if (cursorX < blockCol) {
+                vertDist = blockCol - (cursorX + 1);
             }
-            AIdistance[var_t3_2] = var_a1 + var_a3;
+            AIdistance[colorIdx] = horizDist + vertDist;
         } else {
-            for (var_s0 = 0; var_s0 < temp_s2; var_s0++) {
-                if (AIrowCheck[var_t3_2][var_s0] == temp_a2) {
-                    temp_v1_2 = brain->cursor_x;
-                    var_a0 = brain->cursor_y - temp_a2;
-                    var_a0 = abs(var_a0);
-                    var_a1 = 0;
-                    if (temp_a2 < temp_v1_2) {
-                        var_a1 = temp_v1_2 - temp_a2;
-                    } else if (temp_v1_2 < temp_a2) {
-                        var_a1 = temp_a2 - (temp_v1_2 + 1);
+            // Cursor is somewhere in between - find the closest block
+            for (blockIdx = 0; blockIdx < totalBlocks; blockIdx++) {
+                if (AIrowCheck[colorIdx][blockIdx] == cursorY) {
+                    blockCol = brain->cursor_x;
+                    cursorX = brain->cursor_y - cursorY;
+                    cursorX = abs(cursorX);
+                    horizDist = 0;
+                    if (cursorY < blockCol) {
+                        horizDist = blockCol - cursorY;
+                    } else if (blockCol < cursorY) {
+                        horizDist = cursorY - (blockCol + 1);
                     }
-                    AIdistance[var_t3_2] = var_a0 + var_a1;
+                    AIdistance[colorIdx] = cursorX + horizDist;
                     break;
                 }
             }
         }
     }
 
-    for (var_t3_2 = 0; var_t3_2 < AI_CHECK_COUNT; var_t3_2++) {
-        if (AIdistance[var_t3_2] == 0x12) {
+    // Second loop: verify each color can actually be aligned, find the best one
+    for (colorIdx = 0; colorIdx < AI_CHECK_COUNT; colorIdx++) {
+        if (AIdistance[colorIdx] == 0x12) {
             continue;
         }
 
-        temp_s2 = AItotCheck[var_t3_2];
+        totalBlocks = AItotCheck[colorIdx];
 
-        for (var_a1_3 = 0; var_a1_3 < temp_s2; var_a1_3++) {
-            array[var_a1_3] = AIrowCheck[var_t3_2][var_a1_3];
+        // Copy the rows for this color into a local array
+        for (i = 0; i < totalBlocks; i++) {
+            rowsCopy[i] = AIrowCheck[colorIdx][i];
         }
 
-        AISortRows(brain->cursor_y, temp_s2, array);
+        // Sort rows by distance to cursor (closest first)
+        AISortRows(brain->cursor_y, totalBlocks, rowsCopy);
 
-        temp_s3 = AIcolCheck[var_t3_2][array[temp_s2 - 1]];
+        // Target column is the column of the furthest block
+        lastBlockRow = AIcolCheck[colorIdx][rowsCopy[totalBlocks - 1]];
 
-        for (var_s0 = 0; var_s0 < temp_s2; var_s0++) {
-            temp_v0_5 = array[var_s0];
+        // Check if all blocks can be moved to the target column
+        for (blockIdx = 0; blockIdx < totalBlocks; blockIdx++) {
+            sortedRowIdx = rowsCopy[blockIdx];
 
-            if (AIMoveAcross(well, AIrowCheck[var_t3_2][temp_v0_5], AIcolCheck[var_t3_2][temp_v0_5], temp_s3) == 0) {
+            if (AIMoveAcross(well, AIrowCheck[colorIdx][sortedRowIdx], AIcolCheck[colorIdx][sortedRowIdx], lastBlockRow) == 0) {
                 break;
             }
         }
 
-        if (var_s0 != temp_s2) {
-            AIdistance[var_t3_2] = 0x12;
+        // If we couldn't move all blocks, mark this color as invalid
+        if (blockIdx != totalBlocks) {
+            AIdistance[colorIdx] = 0x12;
         }
 
-        if (AIdistance[var_t3_2] < sp7C) {
-            sp7C = AIdistance[var_t3_2];
-            AIdistance[7] = var_t3_2;
+        // Track the color with the shortest distance
+        if (AIdistance[colorIdx] < shortestDist) {
+            shortestDist = AIdistance[colorIdx];
+            AIdistance[7] = colorIdx;  // Store the best color index
         }
     }
 }
@@ -1159,39 +1159,44 @@ void AIComboCheck(tetWell *well, ai_t *brain) {
 #if VERSION_USA
 s32 AICombo3a(ai_t *brain) {
     s32 sortedRows[12];
-    s32 *rowPtr;
-    s32 rowIdx;
+    s32 *rowListPtr;
+    s32 blockRow;
     s32 targetCol;
     s32 i;
-    s32 (*rowCheckTable)[5];
+    s32 (*rowCheckTablePtr)[5];
 
-    s32 distanceIdx = AIdistance[7];
-    s32 rowOffset;
-    s32 *rowCheckBase;
+    s32 colorIdx = AIdistance[7];
+    s32 startOffset;
+    s32 *colorRowList;
 
-    if (distanceIdx == 0x12) {
+    if (colorIdx == 0x12) {
         return 0;
     }
 
-    rowOffset = AItotCheck[distanceIdx] - 3;
-    rowCheckTable = AIrowCheck;
-    rowCheckBase = rowCheckTable[distanceIdx];
+    // Get pointer to the last 3 blocks of this color
+    startOffset = AItotCheck[colorIdx] - 3;
+    rowCheckTablePtr = AIrowCheck;
+    colorRowList = rowCheckTablePtr[colorIdx];
 
-    // This code is equivalent, but doesn't match in the compilation:
-    // rowPtr = &rowCheckBase[rowOffset];
-    rowPtr = (s32 *)((s32)(rowOffset << 2) + (s32)rowCheckBase);
-    for (i = 0; i < 3; i++, rowPtr++) {
-        sortedRows[i] = *rowPtr;
+    // Copy the last 3 row positions into sortedRows
+    // (equivalent to: rowListPtr = &colorRowList[startOffset])
+    rowListPtr = (s32 *)((s32)(startOffset << 2) + (s32)colorRowList);
+    for (i = 0; i < 3; i++, rowListPtr++) {
+        sortedRows[i] = *rowListPtr;
     }
 
+    // Sort by distance to cursor (closest first)
     AISortRows(brain->cursor_y, 3, sortedRows);
 
-    targetCol = AIcolCheck[distanceIdx][sortedRows[3-1]];
+    // Use the furthest block's column as the target
+    targetCol = AIcolCheck[colorIdx][sortedRows[3-1]];
+
+    // For each block, if it's not in the target column, move it there
     for (i = 0; i < 3; i++) {
-        rowIdx = sortedRows[i];
-        if (targetCol != AIcolCheck[distanceIdx][rowIdx]) {
-            AIAddCommand(brain, 1, AIrowCheck[distanceIdx][rowIdx], 0);
-            AIAddCommand(brain, 3, AIcolCheck[distanceIdx][rowIdx], targetCol);
+        blockRow = sortedRows[i];
+        if (targetCol != AIcolCheck[colorIdx][blockRow]) {
+            AIAddCommand(brain, 1, AIrowCheck[colorIdx][blockRow], 0);
+            AIAddCommand(brain, 3, AIcolCheck[colorIdx][blockRow], targetCol);
         }
     }
 
