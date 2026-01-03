@@ -1157,7 +1157,6 @@ void AIComboCheck(tetWell *well, ai_t *brain) {
 }
 
 #if VERSION_USA
-#if 0
 s32 AICombo3a(ai_t *brain) {
     s32 sp0[12];
     s32 *var_v1;
@@ -1179,9 +1178,9 @@ s32 AICombo3a(ai_t *brain) {
     new_var = AIrowCheck;
     a0 = new_var[t6];
 
-    var_v1 = &a0[v1];
-    for (var_a2 = 0; var_a2 < 3; var_a2++) {
-        sp0[var_a2] = var_v1[var_a2];
+    var_v1 = (s32 *)((s32)(v1 << 2) + (s32)a0);
+    for (var_a2 = 0; var_a2 < 3; var_a2++, var_v1++) {
+        sp0[var_a2] = *var_v1;
     }
 
     AISortRows(brain->cursor_y, 3, sp0);
@@ -1197,9 +1196,6 @@ s32 AICombo3a(ai_t *brain) {
 
     return -1;
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AICombo3a);
-#endif
 #endif
 
 #if VERSION_EUR
