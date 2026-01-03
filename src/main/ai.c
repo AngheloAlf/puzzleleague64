@@ -1158,39 +1158,38 @@ void AIComboCheck(tetWell *well, ai_t *brain) {
 
 #if VERSION_USA
 s32 AICombo3a(ai_t *brain) {
-    s32 sp0[12];
-    s32 *var_v1;
-    s32 temp_a0;
-    s32 temp_t1;
-    s32 var_a2;
-    s32 (*new_var)[5];
+    s32 sortedRows[12];
+    s32 *rowPtr;
+    s32 rowIdx;
+    s32 targetCol;
+    s32 i;
+    s32 (*rowCheckTable)[5];
 
-    s32 t6 = AIdistance[7];
-    s32 v1;
-    s32 *a0;
+    s32 distanceIdx = AIdistance[7];
+    s32 rowOffset;
+    s32 *rowCheckBase;
 
-    if (t6 == 0x12) {
+    if (distanceIdx == 0x12) {
         return 0;
     }
 
-    v1 = AItotCheck[t6] - 3;
-    //a0 = AIrowCheck[t6];
-    new_var = AIrowCheck;
-    a0 = new_var[t6];
+    rowOffset = AItotCheck[distanceIdx] - 3;
+    rowCheckTable = AIrowCheck;
+    rowCheckBase = rowCheckTable[distanceIdx];
 
-    var_v1 = (s32 *)((s32)(v1 << 2) + (s32)a0);
-    for (var_a2 = 0; var_a2 < 3; var_a2++, var_v1++) {
-        sp0[var_a2] = *var_v1;
+    rowPtr = (s32 *)((s32)(rowOffset << 2) + (s32)rowCheckBase);
+    for (i = 0; i < 3; i++, rowPtr++) {
+        sortedRows[i] = *rowPtr;
     }
 
-    AISortRows(brain->cursor_y, 3, sp0);
+    AISortRows(brain->cursor_y, 3, sortedRows);
 
-    temp_t1 = AIcolCheck[t6][sp0[3-1]];
-    for (var_a2 = 0; var_a2 < 3; var_a2++) {
-        temp_a0 = sp0[var_a2];
-        if (temp_t1 != AIcolCheck[t6][temp_a0]) {
-            AIAddCommand(brain, 1, AIrowCheck[t6][temp_a0], 0);
-            AIAddCommand(brain, 3, AIcolCheck[t6][temp_a0], temp_t1);
+    targetCol = AIcolCheck[distanceIdx][sortedRows[3-1]];
+    for (i = 0; i < 3; i++) {
+        rowIdx = sortedRows[i];
+        if (targetCol != AIcolCheck[distanceIdx][rowIdx]) {
+            AIAddCommand(brain, 1, AIrowCheck[distanceIdx][rowIdx], 0);
+            AIAddCommand(brain, 3, AIcolCheck[distanceIdx][rowIdx], targetCol);
         }
     }
 
