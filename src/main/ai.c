@@ -1177,6 +1177,8 @@ s32 AICombo3a(ai_t *brain) {
     rowCheckTable = AIrowCheck;
     rowCheckBase = rowCheckTable[distanceIdx];
 
+    // This code is equivalent, but doesn't match in the compilation:
+    // rowPtr = &rowCheckBase[rowOffset];
     rowPtr = (s32 *)((s32)(rowOffset << 2) + (s32)rowCheckBase);
     for (i = 0; i < 3; i++, rowPtr++) {
         sortedRows[i] = *rowPtr;
