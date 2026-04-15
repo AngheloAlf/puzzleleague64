@@ -33,6 +33,9 @@ jobs:
         run: |
           uv sync
 
+      - name: Setup Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
       - name: Get the dependency
         run: cp /orig/baserom.${{ matrix.version }}.z64 config/${{ matrix.version }}/baserom.${{ matrix.version }}.z64
 
