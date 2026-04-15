@@ -118,10 +118,13 @@ CPP             := $(MIPS_BINUTILS_PREFIX)cpp
 STRIP           := $(MIPS_BINUTILS_PREFIX)strip
 # ICONV           := iconv
 
-PYTHON            ?= python3
+UV                ?= uv
+PYTHON            ?= $(UV) run python
+
 SPLAT             ?= $(PYTHON) -m splat split
 SPLAT_YAML        ?= config/$(VERSION)/$(TARGET).$(VERSION).yaml
-CHECKSUMMER       ?= tools/checksummer.py
+CHECKSUMMER       ?= $(PYTHON) tools/checksummer.py
+PACKAGE_BIN_FILE  ?= $(PYTHON) ./tools/package_bin_file.py
 PIGMENT64         ?= pigment64
 RELOC_FIXER       ?= tools/rstools/target/release/fix_relocs
 
@@ -308,6 +311,7 @@ distclean: clean
 setup:
 	$(MAKE) -C tools
 	$(MAKE) $(LD_SCRIPT)
+	@echo "Setup done"
 
 extract:
 	$(RM) -r asm/$(VERSION) bin/$(VERSION)
@@ -377,7 +381,7 @@ $(BUILD_DIR)/%.ld: %.ld
 	$(CPP) $(CPPFLAGS) $(BUILD_DEFINES) $(IINC) $(COMP_VERBOSE_FLAG) $< > $@
 
 %.archive: $(BINFILE_FILES)
-	./tools/package_bin_file.py $(BINFILE_DIR) $@
+	$(PACKAGE_BIN_FILE) $(BINFILE_DIR) $@
 
 $(BUILD_DIR)/%.o: %.s
 ifeq ($(MULTISTEP_BUILD), 0)

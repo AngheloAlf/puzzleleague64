@@ -31,11 +31,14 @@ IDO_53_CC       := $(IDO_53_DIR)/cc
 SLINKY_DIR      := slinky
 SLINKY          := $(SLINKY_DIR)/slinky-cli
 
+PIGMENT64_DIR   := pigment64
+PIGMENT64       := $(PIGMENT64_DIR)/pigment64
+
 FIRST_DIFF      := rstools/target/release/first_diff
 FIX_RELOCS      := rstools/target/release/fix_relocs
 
 
-all: $(KMC_GCC) $(KMC_BINUTILS) $(IDO_53_CC) $(SLINKY) $(FIRST_DIFF) $(FIX_RELOCS)
+all: $(KMC_GCC) $(KMC_BINUTILS) $(IDO_53_CC) $(SLINKY) $(PIGMENT64) $(FIRST_DIFF) $(FIX_RELOCS)
 
 clean:
 	$(RM) -rf $(KMC_DIR) gcc_kmc $(IDO_53_DIR) ido_recomp $(SLINKY_DIR)
@@ -65,16 +68,15 @@ $(SLINKY): | $(SLINKY_DIR)
 	tar xf slinky-cli-$(HOST_TRIPLE).tar.gz -C $(SLINKY_DIR)
 	$(RM) slinky-cli-$(HOST_TRIPLE).tar.gz
 
+$(PIGMENT64): | $(PIGMENT64_DIR)
+	wget https://github.com/decompals/pigment64/releases/download/0.6.3/pigment64-$(HOST_TRIPLE).tar.gz
+	tar xf pigment64-$(HOST_TRIPLE).tar.gz -C $(PIGMENT64_DIR)
+	$(RM) pigment64-$(HOST_TRIPLE).tar.gz
+
 $(FIRST_DIFF) $(FIX_RELOCS): rstools/Cargo.toml
 	cargo build --release --manifest-path rstools/Cargo.toml
 
-$(KMC_DIR):
-	mkdir -p $@
-
-$(IDO_53_DIR):
-	mkdir -p $@
-
-$(SLINKY_DIR):
+$(KMC_DIR) $(IDO_53_DIR) $(SLINKY_DIR) $(PIGMENT64_DIR):
 	mkdir -p $@
 
 -include $(FIRST_DIFF).d $(FIX_RELOCS).d

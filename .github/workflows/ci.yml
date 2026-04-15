@@ -24,15 +24,14 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: Install package requirements
-        run: apt-get install -y make git build-essential wget clang binutils-mips-linux-gnu gcc-mips-linux-gnu python3 python3-pip clang-format-14 clang-tidy-14
-
-      - name: Install Python dependencies
-        run: pip3 install -r requirements.txt --break-system-packages
-
-      - name: Install Rust programs
+      - name: Install system requirements
         run: |
-          cargo install pigment64 --version ">=0.3.0,<1.*"
+          apt-get install -y make git build-essential clang binutils-mips-linux-gnu gcc-mips-linux-gnu python3 python3-pip clang-format-14 clang-tidy-14
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+
+      - name: Sync uv
+        run: |
+          uv sync
 
       - name: Get the dependency
         run: cp /orig/baserom.${{ matrix.version }}.z64 config/${{ matrix.version }}/baserom.${{ matrix.version }}.z64
@@ -47,7 +46,7 @@ jobs:
         run: make -j $(nproc) WERROR=1 VERSION=${{ matrix.version }}
 
       - name: Generate objdiff report
-        run: python3 -m mapfile_parser objdiff_report report.json --version ${{ matrix.version }}
+        run: uv run mapfile_parser objdiff_report report.json --version ${{ matrix.version }}
 
       - name: Upload progress report artifact
         uses: actions/upload-artifact@v7
@@ -62,7 +61,7 @@ jobs:
           path: build/${{ matrix.version }}/puzzleleague64.${{ matrix.version }}.map
 
       - name: Generate PJ64 symbols file
-        run: python3 tools/pj64_syms.py --version ${{ matrix.version }} -o puzzleleague64.${{ matrix.version }}.sym
+        run: uv run tools/pj64_syms.py --version ${{ matrix.version }} -o puzzleleague64.${{ matrix.version }}.sym
 
       - name: Upload PJ64 symbols file
         uses: actions/upload-artifact@v7

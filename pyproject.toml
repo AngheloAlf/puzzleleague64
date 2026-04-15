@@ -1,0 +1,23 @@
+[project]
+name = "puzzleleague64"
+version = "0.1.0"
+description = "Tooling for the Pokémon Puzzle League decomp project"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "mapfile-parser>=2.12.1,<3.0.0",
+    "ipl3checksum>=1.3.1,<2.0.0",
+    "splat64[mips]>=0.39.1,<1.0.0",
+
+    # for m2c
+    "pycparser",
+
+    # for diff.py
+    "colorama",
+    "watchdog",
+    "levenshtein",
+    "cxxfilt",
+]
+
+[tool.uv]
+package = false
