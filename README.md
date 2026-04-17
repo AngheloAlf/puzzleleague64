@@ -28,64 +28,51 @@ The build process has the following package requirements:
 * make
 * git
 * build-essential
+* wget
 * clang
 * binutils-mips-linux-gnu
 * gcc-mips-linux-gnu
-* python3
-* pip3
-* venv
+* Rust
 
-Under Debian / Ubuntu (which we recommend using), you can install them with the following commands:
+Under Debian / Ubuntu (which we recommend using), you can install most of them
+with the following commands:
 
 ```bash
 sudo apt update
-sudo apt install make git build-essential clang binutils-mips-linux-gnu gcc-mips-linux-gnu python3 python3-pip python3-venv
+sudo apt install make git build-essential wget clang binutils-mips-linux-gnu gcc-mips-linux-gnu
 ```
 
-### Python dependencies
+### `uv`
 
-First you'll need to create a virtual environment for the python packages:
+We use `uv` to manage Python and its dependencies.
 
-```bash
-python3 -m venv .venv
-```
+See the official `uv` docs to install it:
+<https://docs.astral.sh/uv/getting-started/installation/>
 
-To start using the virtual environment on your current terminal run:
+Then run `uv sync` to install and update Python and any dependency needed.
 
-```bash
-. .venv/bin/activate
-```
-
-Take in mind for each new terminal you'll need to **active** the Python virtual
-environment again, there's no need to create the virtual environment again.
-
-Now you can install the Python dependencies, to do so run:
-
-```bash
-python3 -m pip install -U -r requirements.txt
-```
+If you need to run any Python script directly you can use either
+`uv run ./script.py` or enable the venv in your shell.
 
 ### Rust dependencies
 
-To install Rust run the following command and follow the on-screen instructions
+To install Rust, run the following command and follow the on-screen
+instructions (same as official docs from <https://rustup.rs/>):
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
-The following Rust programs are required by the build process:
-
-* pigment64
-
-To install those programs run the following commands:
-
-```bash
-cargo install pigment64 --version ">=0.3.0,<1.*"
-```
-
 ## Building
 
-Copy your big-endian Dr Mario 64 ROM into the repository's root directory and rename it to `baserom.usa.z64`. Then run
+Copy your big-endian Pokémon Puzzle League ROM into the repository's `config/usa`
+directory and rename it to `baserom.usa.z64`. Then run the following commands to
+download the appropriate compiler versions, extract ROM data using splat, and
+build the files back into a rom.
+
+You can pass `-j N`, where `N` is the number of cores your processor has (you
+can know this value by using the `nproc` command), to speedup the build by
+parallelizing.
 
 ```bash
 make setup
@@ -93,7 +80,7 @@ make extract
 make
 ```
 
-to download the appropriate compiler versions, build libultra, extract data from the rom using splat, and build the files back into a rom. If successful, the last line of output should say
+If successful, the last line of output should say:
 
 ```bash
 build/usa/puzzleleague64.usa.z64: OK
@@ -101,14 +88,26 @@ build/usa/puzzleleague64.usa.z64: OK
 
 ### Other versions
 
-By default this repository builds the USA version of this game, but it also supports the `eur`, `fra` and `ger` versions.
+By default this repository builds the USA version of this game, but it can also
+build the `eur`, `fra` and `ger` versions.
 
-To build other version place your ROM in the root of the repo and rename it to `baserom.VER.z64` and pass `VERSION=VER` to the above make commands (Where VER is either `eur`, `fra` or `ger`).
+To build other versions, place your ROM in the `config/VER/` directory (where
+`VER` corresponds to the specific version of your ROM) of the repo and rename it
+to `baserom.VER.z64`.
+Then run all the above `make` comands, but passing the `VERSION=VER` flag to
+them to build each version respectively.
 
 ## DWARF
 
-This repository uses the DWARF debugging information contained in the `PANEPON.plf` binary from the "Nintendo Puzzle Collection" Gamecube game as a reference for naming symbols and structs.
-Even if at a first glance Panel de Pon and Puzzle League may seem like different games, they share big chunks of the same codebase.
+This repository uses the DWARF debugging information contained in the
+`PANEPON.plf` binary from the "Nintendo Puzzle Collection" Gamecube game as a
+reference for naming symbols and structs.
+
+Even if at a first glance Panel de Pon and Puzzle League may seem like
+different games, they share big chunks of the same codebase.
+
+You can access the DWARF dump in this repository:
+<https://github.com/AngheloAlf/puzzle_collection_dwarf>
 
 ## Contributing
 
