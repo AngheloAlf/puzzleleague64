@@ -125,7 +125,7 @@ SPLAT             ?= $(PYTHON) -m splat split
 SPLAT_YAML        ?= config/$(VERSION)/$(TARGET).$(VERSION).yaml
 CHECKSUMMER       ?= $(PYTHON) tools/checksummer.py
 PACKAGE_BIN_FILE  ?= $(PYTHON) ./tools/package_bin_file.py
-PIGMENT64         ?= pigment64
+PIGMENT64         ?= tools/pigment64/pigment64
 RELOC_FIXER       ?= tools/rstools/target/release/fix_relocs
 
 SPLAT_FLAGS       ?=
