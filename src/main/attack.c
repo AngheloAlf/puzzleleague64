@@ -76,11 +76,12 @@ INLINE s32 func_8005A8D0_usa(s32 arg0, s32 *arg1) {
 #endif
 
 #if VERSION_USA
-void func_8005A990_usa(attack_t *attack){
+void func_8005A990_usa(attack_t *attack) {
     switch (attack->type) {
         case ATTACKTYPE_1:
             attack->unk_28 = -0x12;
             break;
+
         case ATTACKTYPE_2:
             attack->unk_28 = -0x12;
             break;
@@ -102,11 +103,10 @@ void func_8005A990_usa(attack_t *attack){
         case ATTACKTYPE_15:
             attack->unk_28 = -0x42;
             break;
-        
+
         default:
             attack->unk_28 = -0x4C;
     }
-
 }
 #endif
 
