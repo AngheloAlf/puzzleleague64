@@ -80,7 +80,7 @@ struct attack_t {
 #endif
 
 // void func_8005A8D0_usa();
-// void func_8005A990_usa();
+void func_8005A990_usa(struct attack_t *attack);
 void func_8005A9EC_usa(struct tetWell *well, struct attack_t *attack);
 void AttackFly(struct tetWell *well, struct attack_t *attack, s32 num);
 void AttackTop(struct tetWell *well, struct cursor_t *cursor, struct attack_t *attack, s32 num, s32 actual);
