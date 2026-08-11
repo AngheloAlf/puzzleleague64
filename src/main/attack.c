@@ -76,7 +76,38 @@ INLINE s32 func_8005A8D0_usa(s32 arg0, s32 *arg1) {
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/attack", func_8005A990_usa);
+void func_8005A990_usa(attack_t *attack){
+    switch (attack->type) {
+        case ATTACKTYPE_1:
+            attack->unk_28 = -0x12;
+            break;
+        case ATTACKTYPE_2:
+            attack->unk_28 = -0x12;
+            break;
+
+        case ATTACKTYPE_3:
+            attack->unk_28 = -0x18;
+            break;
+
+        case ATTACKTYPE_4:
+        case ATTACKTYPE_9:
+        case ATTACKTYPE_10:
+        case ATTACKTYPE_11:
+        case ATTACKTYPE_12:
+            attack->unk_28 = -0x2A;
+            break;
+
+        case ATTACKTYPE_13:
+        case ATTACKTYPE_14:
+        case ATTACKTYPE_15:
+            attack->unk_28 = -0x42;
+            break;
+        
+        default:
+            attack->unk_28 = -0x4C;
+    }
+
+}
 #endif
 
 #if VERSION_USA
