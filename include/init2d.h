@@ -28,6 +28,6 @@ void Init2DTetrisTMEM(struct block_t *block, uObjSprite *rect);
 // void func_8006CBEC_usa();
 void Init2DAttackTMEM(uObjSprite *rect, s32 type, s32 lev, s32 pos);
 void Init2DBrickTMEM(struct attack_t *attack);
-// void func_8006CE14_usa();
+void Init2DFaceTMEM(struct attack_t *attack);
 
 #endif

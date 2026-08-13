@@ -37,7 +37,11 @@ typedef struct tetWell {
     /* 0x43C0 */ s32 unk_43C0;
     /* 0x43C4 */ s32 unk_43C4;
     /* 0x43C8 */ s32 unk_43C8;
-    /* 0x43CC */ UNK_TYPE1 unk_43CC[0x43E0-0x43CC];
+    /* 0x43CC */ s32 unk_43CC;
+    /* 0x43D0 */ s32 unk_43D0;
+    /* 0x43D4 */ UNK_TYPE1 unk_43D4[0x43D8-0x43D4];
+    /* 0x43D8 */ s32 unk_43D8;
+    /* 0x43DC */ UNK_TYPE1 unk_43DC[0x43E0-0x43DC];
     /* 0x43E0 */ s32 unk_43E0;
     /* 0x43E4 */ s32 unk_43E4;
     /* 0x43E8 */ UNK_PAD unk_43E8[0x4];

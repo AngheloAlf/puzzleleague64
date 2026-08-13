@@ -6,6 +6,8 @@
 #include "macros_defines.h"
 #include "unk.h"
 
+#include "block.h"
+
 // TODO: This count seems to be 40 in panepon gc, so maybe it should adjust by player count
 #define ATTACK_COUNT (10 * 2)
 
@@ -21,6 +23,7 @@ typedef enum AttackState {
     /* 5 */ ATTACKSTATE_5, // AttackFall
     /* 6 */ ATTACKSTATE_6, // AttackFall
     /* 7 */ ATTACKSTATE_7, // AttackShake
+    /* 8 */ ATTACKSTATE_8,
 } AttackState;
 
 typedef enum AttackType {
@@ -86,16 +89,16 @@ void AttackFly(struct tetWell *well, struct attack_t *attack, s32 num);
 void AttackTop(struct tetWell *well, struct cursor_t *cursor, struct attack_t *attack, s32 num, s32 actual);
 void AttackFall(struct tetWell *well, struct cursor_t *cursor, struct attack_t *attack, s32 *sound);
 void AttackShake(struct tetWell *well, struct cursor_t *cursor, struct attack_t *attack);
-// void func_8005BD24_usa();
-// void func_8005BEFC_usa();
-// void func_8005BFB4_usa();
+BlockType AttackToBlock(struct tetWell *well, s32 row, s32 col);
+void FinishGarbageBlock(struct tetWell *well);
+s32 FindEmptySpaces(struct tetWell *well, struct attack_t *attack);
 void AttackPackEmpty(struct tetWell * well, s32 num);
 s32 ReturnAttackSlot(struct tetWell * well, s32 row, s32 col);
 void Match3DPosition(s32 num, s32 row, s32 col, s32 *x, s32 *y);
 void UpdateAttack(struct tetWell *well, struct cursor_t *cursor, s32 num);
 // void func_8005C780_usa();
 void ChangeAttack(struct tetWell *well, struct cursor_t *cursor, s32 num, s32 combo);
-// void InitFlyAttack(struct tetWell *well, struct attack_t *attack, s32 posX, s32 posY, s32 type, s32 num);
+void InitFlyAttack(struct tetWell *well, struct attack_t *attack, s32 posX, s32 posY, ENUM_TYPE(AttackType, s32) type, s32 num);
 void StartAttack(struct tetWell *well, s32 num);
 
 #endif

@@ -12,21 +12,124 @@
 #include "sfxlimit.h"
 #include "tetwell.h"
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/attack3d", Init3DAttackPosition);
-#endif
+void Init3DAttackPosition(attack_t *attack, ENUM_TYPE(AttackType, s32) type, s32 num) {
+    u8 temp_v0;
+    u8 temp_v0_2;
+    u8 temp_v1;
+    uObjSprite *rect = &attack->rect;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/attack3d", Init3DAttackPosition);
-#endif
+    attack->state = ATTACKSTATE_1;
+    attack->disappear = -1;
+    attack->delay = 25;
+    attack->type = type;
+    attack->unk_14 = 1;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/attack3d", Init3DAttackPosition);
-#endif
+    // Shouldn't this be zero?
+    rect->s.paddingX = 0x14;
+    rect->s.paddingY = 0x10;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/attack3d", Init3DAttackPosition);
-#endif
+    switch (type) {
+        case ATTACKTYPE_1:
+            temp_v0 = st_AttackPosition[num];
+            st_AttackPosition[num] &= 0xFC;
+            if ((temp_v0 & 3) == 1) {
+                attack->start = 2;
+                attack->unk_1C = 5;
+                st_AttackPosition[num] |= 2;
+            } else {
+                attack->start = 5;
+                attack->unk_1C = 8;
+                st_AttackPosition[num] |= 1;
+            }
+            rect->s.paddingX = 0x18;
+            rect->s.imagePal = 7;
+            break;
+
+        case ATTACKTYPE_2:
+            temp_v1 = st_AttackPosition[num];
+            st_AttackPosition[num] &= 0xE3;
+
+            if ((temp_v1 & 0x1C) == 0x4) {
+                attack->start = 2;
+                attack->unk_1C = 6;
+                st_AttackPosition[num] |= 8;
+            } else if ((temp_v1 & 0x1C) == 0x8) {
+                attack->start = 3;
+                attack->unk_1C = 7;
+                st_AttackPosition[num] |= 0x10;
+            } else {
+                attack->start = 4;
+                attack->unk_1C = 8;
+                st_AttackPosition[num] |= 4;
+            }
+
+            rect->s.paddingX = 0x10;
+            rect->s.imagePal = 7;
+            break;
+
+        case ATTACKTYPE_3:
+            temp_v0_2 = st_AttackPosition[num];
+            st_AttackPosition[num] &= 0x9F;
+
+            if ((temp_v0_2 & 0x60) == 0x20) {
+                attack->start = 2;
+                attack->unk_1C = 7;
+                st_AttackPosition[num] |= 0x40;
+            } else {
+                attack->start = 3;
+                attack->unk_1C = 8;
+                st_AttackPosition[num] |= 0x20;
+            }
+            rect->s.paddingX = 0x18;
+            rect->s.imagePal = 7;
+            break;
+
+        case ATTACKTYPE_4:
+            attack->start = 2;
+            attack->unk_1C = 8;
+            rect->s.imagePal = 5;
+            break;
+
+        case ATTACKTYPE_9:
+            attack->start = 2;
+            attack->unk_1C = 8;
+            rect->s.imagePal = 4;
+            break;
+
+        case ATTACKTYPE_15:
+        case ATTACKTYPE_21:
+            rect->s.imagePal = 4;
+            break;
+
+        case ATTACKTYPE_10:
+        case ATTACKTYPE_16:
+            rect->s.imagePal = 5;
+            break;
+
+        case ATTACKTYPE_12:
+        case ATTACKTYPE_18:
+            rect->s.imagePal = 1;
+            break;
+
+        case ATTACKTYPE_13:
+        case ATTACKTYPE_19:
+            rect->s.imagePal = 2;
+            break;
+
+        case ATTACKTYPE_14:
+        case ATTACKTYPE_20:
+            rect->s.imagePal = 3;
+            break;
+
+        default:
+            rect->s.imagePal = 6;
+            break;
+    }
+
+    if (attack->type >= ATTACKTYPE_10) {
+        Set3DRingPosition(attack);
+    }
+}
 
 INLINE void Set3DRingPosition(attack_t *attack) {
     switch (attack->type) {

@@ -1257,7 +1257,6 @@ extern s32 ganButton[0x10];
 // extern UNK_TYPE B_801AB8A4_usa;
 extern TexturePtr B_801AB8A8_usa[GAME_BUFFER_LEN][B_801F9D00_USA_LEN];
 extern s32 attack_chain2[GAME_BUFFER_LEN];
-// extern UNK_TYPE B_801AB8DC_usa;
 extern u32 gGameStatus;
 extern void *B_801AB8E4_usa;
 extern s32 AItotCheck[AI_CHECK_COUNT];
@@ -1269,7 +1268,7 @@ extern s32 AItotCheck[AI_CHECK_COUNT];
 // extern UNK_TYPE B_801AB910_usa;
 
 // extern UNK_TYPE B_801AB980_usa;
-extern s8 st_AttackPosition[2];
+extern u8 st_AttackPosition[2];
 // extern UNK_TYPE B_801AB985_usa;
 extern OSMesgQueue gSerialMsgQ;
 extern STACK(gBootStack, BOOT_STACK_SIZE);

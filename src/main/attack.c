@@ -318,15 +318,15 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/attack", AttackShake);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/attack", func_8005BD24_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/attack", AttackToBlock);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/attack", func_8005BEFC_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/attack", FinishGarbageBlock);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/attack", func_8005BFB4_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/attack", FindEmptySpaces);
 #endif
 
 #if VERSION_EUR
@@ -358,15 +358,15 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/attack", AttackShake);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/attack", func_8005BFFC_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/attack", AttackToBlock);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/attack", func_8005C1D4_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/attack", FinishGarbageBlock);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/attack", func_8005C28C_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/attack", FindEmptySpaces);
 #endif
 
 #if VERSION_FRA
@@ -398,15 +398,15 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/attack", AttackShake);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/attack", func_8005A73C_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/attack", AttackToBlock);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/attack", func_8005A914_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/attack", FinishGarbageBlock);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/attack", func_8005A9CC_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/attack", FindEmptySpaces);
 #endif
 
 #if VERSION_GER
@@ -438,15 +438,15 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/attack", AttackShake);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/attack", func_8005A8EC_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/attack", AttackToBlock);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/attack", func_8005AAC4_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/attack", FinishGarbageBlock);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/attack", func_8005AB7C_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/attack", FindEmptySpaces);
 #endif
 
 void AttackPackEmpty(tetWell *well, s32 num) {
@@ -640,7 +640,7 @@ void ChangeAttack(tetWell *well, cursor_t *cursor, s32 num, s32 combo) {
     }
 }
 
-void InitFlyAttack(tetWell *well, attack_t *attack, s32 posX, s32 posY, s32 type, s32 num) {
+void InitFlyAttack(tetWell *well, attack_t *attack, s32 posX, s32 posY, ENUM_TYPE(AttackType, s32) type, s32 num) {
     s32 sp10;
     s32 sp14;
     s32 temp_s5;
@@ -714,11 +714,6 @@ void InitFlyAttack(tetWell *well, attack_t *attack, s32 posX, s32 posY, s32 type
 
 #if VERSION_USA
 #if 0
-// ? func_80005888_usa(s32, ?, ?);                     /* extern */
-// ? InitFlyAttack(tetWell *, void *, s32, s32, s32, s32); /* extern */
-// ? Upgrade3DBrick(tetWell *, s32, s32);           /* extern */
-extern s32 B_801AB8DC_usa;
-
 void StartAttack(tetWell *well, s32 num) {
     icon_t sp18;
 

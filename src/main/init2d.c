@@ -9,6 +9,7 @@
 #include "main_variables.h"
 
 #include "animation.h"
+#include "character.h"
 #include "dlist.h"
 #include "the_game.h"
 
@@ -344,21 +345,44 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", func_8006CBEC_usa);
 INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", func_8006CBEC_usa);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", Init2DAttackTMEM);
-#endif
+// TODO: `type` is `AttackType`?
+void Init2DAttackTMEM(uObjSprite *rect, s32 type, s32 lev, s32 pos) {
+    s32 value = ReturnAttackTexValue(NULL, type, lev, pos) % 10;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", Init2DAttackTMEM);
-#endif
+    switch (value) {
+        case 0x0:
+            rect->s.imageAdrs = 0;
+            break;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", Init2DAttackTMEM);
-#endif
+        case 0x1:
+            rect->s.imageAdrs = 2;
+            break;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", Init2DAttackTMEM);
-#endif
+        case 0x2:
+            rect->s.imageAdrs = 4;
+            break;
+
+        case 0x3:
+            rect->s.imageAdrs = 6;
+            break;
+
+        case 0x4:
+            rect->s.imageAdrs = 0x80;
+            break;
+
+        case 0x5:
+            rect->s.imageAdrs = 0x82;
+            break;
+
+        case 0x6:
+            rect->s.imageAdrs = 0x84;
+            break;
+
+        case 0x7:
+            rect->s.imageAdrs = 0x86;
+            break;
+    }
+}
 
 void Init2DBrickTMEM(attack_t *attack) {
     uObjSprite_t *s = &attack->rect.s;
@@ -418,18 +442,18 @@ void Init2DBrickTMEM(attack_t *attack) {
     }
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", func_8006CE14_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", func_8006D0E4_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", func_8006B824_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", func_8006B9D4_ger);
-#endif
+void Init2DFaceTMEM(attack_t *attack) {
+    if (attack->type < ATTACKTYPE_11) {
+        attack->unk_20 = 0x1E;
+        attack->unk_10 = -0xA;
+        attack->rect.s.imageAdrs = 0;
+    } else if (AnimationRandom(0x332) % 2 == 0) {
+        attack->unk_20 = 0x1F;
+        attack->unk_10 = -0xA;
+        attack->rect.s.imageAdrs = 2;
+    } else {
+        attack->unk_20 = 0x20;
+        attack->unk_10 = -0x96;
+        attack->rect.s.imageAdrs = 4;
+    }
+}

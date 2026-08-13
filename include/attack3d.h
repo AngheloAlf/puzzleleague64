@@ -4,11 +4,13 @@
 #include "ultra64.h"
 #include "unk.h"
 
+#include "attack.h"
+
 struct attack_t;
 struct cursor_t;
 struct tetWell;
 
-void Init3DAttackPosition(struct attack_t *attack, s32 type, s32 num);
+void Init3DAttackPosition(struct attack_t *attack, ENUM_TYPE(AttackType, s32) type, s32 num);
 void Set3DRingPosition(struct attack_t *attack);
 void Upgrade3DBrick(struct tetWell *well, s32 slot, s32 num);
 void Draw3DChain3_CrossBoundary(struct attack_t *attack, s32 * begin, s32 * end, s32 * pos);
