@@ -9,7 +9,7 @@ struct cursor_t;
 struct tetWell;
 
 void Init2DAttackPosition(struct attack_t *attack, s32 type, s32 num);
-// void func_8007194C_usa();
+void func_8007194C_usa(struct attack_t *attack);
 // void func_8007197C_usa();
 void Update2DAttack(struct tetWell *well, struct cursor_t *cursor, s32 num);
 // void func_80072198_usa();

@@ -3,6 +3,7 @@
  */
 
 #include "attack2d.h"
+#include "attack.h"
 
 #include "include_asm.h"
 #include "macros_defines.h"
@@ -13,7 +14,14 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/attack2d", Init2DAttackPosition);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/attack2d", func_8007194C_usa);
+void func_8007194C_usa(attack_t *attack) {
+    attack->rect.s.imageW = 0x200;
+    attack->rect.s.scaleW = 0x38F;
+    attack->rect.s.imageStride = 8;
+    attack->rect.s.imageFmt = 2;
+    attack->rect.s.imageSiz = 1;
+    attack->rect.s.imageAdrs = 0;
+}
 #endif
 
 #if VERSION_USA
