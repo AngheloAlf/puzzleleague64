@@ -17,8 +17,6 @@ Matching decomp of Pokémon Puzzle League
 
 [Progress graph :chart_with_upwards_trend:](https://decomp.dev/AngheloAlf/puzzleleague64?mode=history)
 
-[Legacy progress graph :chart_with_upwards_trend:](https://angheloalf.github.io/puzzleleague64/)
-
 ## Dependencies
 
 ### System packages
