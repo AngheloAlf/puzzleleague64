@@ -100,75 +100,64 @@ INLINE void Init2DAttackFace(attack_t *attack) {
     attack->rect.s.imageAdrs = 0;
 }
 
-void Update2DAttackFace(tetWell *well, attack_t *attack);
-
-#if VERSION_USA
-#ifdef NON_MATCHING
 void Update2DAttackFace(tetWell *well, attack_t *attack) {
-    s32 temp_a0;
-    s32 temp_a2;
+    s32 y;
+    s32 x;
     s32 var_v0;
+    s32 temp;
 
-    temp_a2 = well->unk_3830[0][0].s.objX >> 0x2;
+    x = well->unk_3830[0][0].s.objX >> 0x2;
 
-    temp_a0 = well->unk_3830[attack->unk_24][0].s.objY >> 0x2;
+    y = well->unk_3830[attack->unk_24][0].s.objY >> 0x2;
     if (attack->type < ATTACKTYPE_11) {
-        attack->rect.s.objY = temp_a0 << 2;
+        attack->rect.s.objY = y << 2;
     } else {
-        attack->rect.s.objX = (temp_a2 + 0x2D) << 2;
+        attack->rect.s.objX = (x + 0x2D) << 2;
     }
 
     switch (attack->type) {
         case ATTACKTYPE_1:
-            var_v0 = well->unk_3830[0][attack->start + 1].s.objX >> 2;
-            attack->rect.s.objX = var_v0 << 2;
+            temp = attack->start;
+            temp++;
+            x = well->unk_3830[0][temp].s.objX >> 2;
+            attack->rect.s.objX = x << 2;
             break;
 
         case ATTACKTYPE_2:
-            var_v0 = well->unk_3830[0][attack->start + 1].s.objX >> 2;
-            attack->rect.s.objX = (var_v0 + 9) << 2;
+            temp = attack->start;
+            temp++;
+            x = well->unk_3830[0][temp].s.objX >> 2;
+            attack->rect.s.objX = (x + 9) << 2;
             break;
 
         case ATTACKTYPE_3:
-            var_v0 = well->unk_3830[0][attack->start + 2].s.objX >> 2;
-            attack->rect.s.objX = (var_v0) << 2;
+            temp = attack->start;
+            temp += 2;
+            x = well->unk_3830[0][temp].s.objX >> 2;
+            attack->rect.s.objX = x << 2;
             break;
 
         case ATTACKTYPE_4:
         case ATTACKTYPE_10:
-            var_v0 = (temp_a2 + 0x2D);
-            temp_a2 = var_v0;
-            attack->rect.s.objX = temp_a2 << 2;
+            var_v0 = (x + 0x2D);
+            attack->rect.s.objX = var_v0 << 2;
             break;
 
         default:
-            attack->rect.s.objY = (temp_a0 - ((attack->type - ATTACKTYPE_10) * 8)) << 2;
-            if ((attack->unk_20 == 0x20) && (attack->unk_10 % 10 == 0)) {
-                if (attack->rect.s.imageAdrs == 4) {
-                    attack->rect.s.imageAdrs = 6;
-                } else {
-                    attack->rect.s.imageAdrs = 4;
+            attack->rect.s.objY = (y - ((attack->type - ATTACKTYPE_10) * 8)) << 2;
+            if (attack->unk_20 == 0x20) {
+                x = attack->unk_10 % 10;
+                if (x == 0) {
+                    if (attack->rect.s.imageAdrs == 4) {
+                        attack->rect.s.imageAdrs = 6;
+                    } else {
+                        attack->rect.s.imageAdrs = 4;
+                    }
                 }
             }
             break;
     }
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/attack2d", Update2DAttackFace);
-#endif
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/attack2d", Update2DAttackFace);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/attack2d", Update2DAttackFace);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/attack2d", Update2DAttackFace);
-#endif
 
 void Update2DAttack(tetWell *well, cursor_t *cursor, s32 num) {
     s32 count;
