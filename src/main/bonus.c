@@ -889,7 +889,7 @@ void DoStageClearIntro(void) {
     screenTick(&sp10);
 
     if (B_8018EA10_usa != NULL) {
-        if (!screenFlushing() && !func_80024C14_usa() && func_80024BF4_usa(&heap)) {
+        if (!screenFlushing() && !screenChangePending() && func_80024BF4_usa(&heap)) {
             HVQM2Util_Play((File *)B_8018EA10_usa, 0x1000U, heap);
             B_8018EA10_usa = NULL;
         }

@@ -97,7 +97,7 @@ void func_80043110_usa(s32 arg0) {
     s32 var_s1;
     int temp;
 
-    if (func_80024C14_usa() || screenFlushing()) {
+    if (screenChangePending() || screenFlushing()) {
         return;
     }
 
@@ -409,7 +409,7 @@ void func_80043D24_usa(s32 arg0) {
     }
 
     B_80192FA0_usa->unk_04 = 0;
-    if ((peelActive() == 0) && !func_80024C14_usa()) {
+    if ((peelActive() == 0) && !screenChangePending()) {
         func_8004360C_usa(sp10);
     }
 

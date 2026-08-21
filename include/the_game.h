@@ -95,7 +95,7 @@ typedef struct Game {
     /* 0x9C20 */ s32 unk_9C20;
     /* 0x9C24 */ UNK_TYPE4 unk_9C24;
     /* 0x9C28 */ menu_t menu[GAME_BUFFER_LEN];
-    /* 0x9C48 */ player_t player[GAME_PLAYER_COUNT]; // player_t player?
+    /* 0x9C48 */ player_t player[GAME_PLAYER_COUNT];
 } Game; // size >= 0xDA28
 
 #if 0

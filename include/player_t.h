@@ -5,7 +5,8 @@
 #include "unk.h"
 
 typedef struct player_t_unk_002 {
-    /* 0x0 */ UNK_PAD unk_0[0xE];
+    /* 0x0 */ UNK_TYPE2 unk_0;
+    /* 0x2 */ UNK_PAD unk_2[0xC];
 } player_t_unk_002; // size = 0xE
 
 typedef struct player_t_unk_02B {
@@ -53,7 +54,10 @@ typedef struct player_t_unk_121 {
 } player_t_unk_121; // size = 0x672
 
 typedef struct player_t_unk_7A2 {
-    /* 0x00 */ UNK_PAD unk_00[0xA];
+    /* 0x00 */ UNK_TYPE2 unk_00[UNK_SIZE];
+    /* 0x02 */ UNK_PAD unk_02[0x2];
+    /* 0x04 */ UNK_PAD unk_04[0x4];
+    /* 0x08 */ UNK_TYPE2 unk_08[UNK_SIZE];
     /* 0x0A */ u16 unk_0A;
     /* 0x0C */ u16 unk_0C;
     /* 0x0E */ u16 unk_0E;

@@ -782,6 +782,7 @@ INCLUDE_RODATA("asm/ger/nonmatchings/main/sound", RO_800B8CF8_ger);
 INCLUDE_RODATA("asm/ger/nonmatchings/main/sound", RO_800B8D10_ger);
 #endif
 
+// RENAME TODO: maybe FadeOutAllSongs?
 void func_80002D8C_usa(s16 speed) {
     if (B_800CF2A0_usa < 327.67) {
         speed = 0;

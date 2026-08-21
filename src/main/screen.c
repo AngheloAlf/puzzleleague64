@@ -950,17 +950,15 @@ nbool func_80024BF4_usa(void **heapP) {
     return ntrue;
 }
 
-//! RENAME TODO: func_80024C14_usa -> screenChangePending?
-//! RENAME TODO: B_8018E524_usa -> giScreenNext?
-nbool func_80024C14_usa(void) {
-    if (B_8018E524_usa != -1) {
+nbool screenChangePending(void) {
+    if (giScreenNext != -1) {
         return ntrue;
     }
     return nfalse;
 }
 
 nbool screenFlushing(void) {
-    if ((gnFrameSkip != 0) || (B_8018E524_usa != -1)) {
+    if ((gnFrameSkip != 0) || (giScreenNext != -1)) {
         return ntrue;
     }
     return nfalse;
@@ -994,7 +992,7 @@ void screenDraw(Gfx **gfxP, screenDraw_callback *callback) {
         return;
     }
 
-    if ((giScreen != -1) && (B_8018E524_usa == -1)) {
+    if ((giScreen != -1) && (giScreenNext == -1)) {
         gpfDraw = callback;
 
         gfx = *gfxP;
@@ -1042,7 +1040,7 @@ void screenDraw(Gfx **gfxP, screenDraw_callback *callback) {
 
         for (var_s1_3 = 0; var_s1_3 < temp_s2->unk_08; var_s1_3++) {
             temp_s0 = &temp_s2->unk_18[var_s1_3];
-            if (((temp_s0->unk_2C & 0x880) == 0x80) && (~B_8018E524_usa == 0)) {
+            if (((temp_s0->unk_2C & 0x880) == 0x80) && (~giScreenNext == 0)) {
                 if ((temp_s0->unk_0C->unk_0C & 0x24) || (((var_s1_3 != temp_s2->unk_28[0]) || (B_8018E540_usa & 8)) &&
                                                          ((var_s1_3 != temp_s2->unk_28[1]) || !(B_8018E540_usa & 8)))) {
                     if (((temp_s0->unk_2C & 3) != 2) || ((B_8018E528_usa >= 2) && ((D_800B69B0_usa & 0xE) != 0))) {
@@ -2262,7 +2260,7 @@ block_256:
                 gnAlphaFade = temp_v0_7;
                 if (temp_v0_7 <= 0) {
                     gnAlphaFade = 0;
-                    if (B_8018E524_usa != -1) {
+                    if (giScreenNext != -1) {
                         geModeFade = 1;
                     } else {
                         goto block_256;
@@ -2274,7 +2272,7 @@ block_256:
             if (gnFrameSkip == 0) {
                 var_v0_12 = gnAlphaFade + 0x10;
                 if (gnAlphaFade == 0) {
-                    if (B_8018E524_usa != -1) {
+                    if (giScreenNext != -1) {
                         var_a3_5 = -1;
                     }
                     var_v0_12 = gnAlphaFade + 0x10;
@@ -2288,8 +2286,8 @@ block_256:
             break;
     }
     if (var_a3_5 != 0) {
-        screenChange(B_8018E524_usa);
-        B_8018E524_usa = -1;
+        screenChange(giScreenNext);
+        giScreenNext = -1;
         B_8018E528_usa = B_8018E52C_usa;
     }
     if ((geModeFade != temp_s0) && (giScreen >= 0) && (giScreen < gnScreenCount)) {
@@ -2316,24 +2314,24 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/screen", screenTick);
 INCLUDE_ASM("asm/ger/nonmatchings/main/screen", screenTick);
 #endif
 
-s32 screenSet(const char *arg0, s32 arg1) {
+s32 screenSet(const char *szName, s32 nMode) {
     s32 sp10;
     s32 var_a0;
     s32 var_s0;
 
-    if ((arg1 & 0x200) && !(arg1 & 0x100) && (peelActive() != 0)) {
+    if ((nMode & 0x200) && !(nMode & 0x100) && (peelActive() != 0)) {
         return giScreen;
     }
 
-    if ((arg1 & 0x7F000) == 0x7F000) {
+    if ((nMode & 0x7F000) == 0x7F000) {
         var_s0 = -1;
-    } else if (arg1 & 0x80000) {
-        var_s0 = (arg1 & 0x7F000) >> 0xC;
+    } else if (nMode & 0x80000) {
+        var_s0 = (nMode & 0x7F000) >> 0xC;
     } else {
         var_s0 = 0;
     }
 
-    if (screenFind(&sp10, arg0)) {
+    if (screenFind(&sp10, szName)) {
         s32 temp;
 
         if ((geModeFade == 1) || (geModeFade == 3)) {
@@ -2347,7 +2345,7 @@ s32 screenSet(const char *arg0, s32 arg1) {
                 } else if (geModeFade == 3) {
                     geModeFade = 0;
                 }
-                B_8018E524_usa = -1;
+                giScreenNext = -1;
                 return sp10;
             }
 
@@ -2365,13 +2363,13 @@ s32 screenSet(const char *arg0, s32 arg1) {
             geModeFade = var_a0;
         }
 
-        B_8018E52C_usa = arg1 & 3;
-        B_8018E524_usa = sp10;
+        B_8018E52C_usa = nMode & 3;
+        giScreenNext = sp10;
 
         temp = gnFrameSkip - 4;
         gnFrameSkip = temp - B_801C7060_usa;
 
-        if (arg1 & 0x400) {
+        if (nMode & 0x400) {
             B_8018E530_usa = -1;
         } else {
             B_8018E530_usa = 0;
@@ -3506,7 +3504,7 @@ nbool func_8002A638_usa(s32 arg0, s32 arg1, s32 *arg2) {
     return nfalse;
 }
 
-nbool screenFind(s32 *dst, const char *arg1) {
+nbool screenFind(s32 *piScreen, const char *szName) {
     s32 i;
 
     for (i = 0; i < gnScreenCount; i++) {
@@ -3524,7 +3522,7 @@ nbool screenFind(s32 *dst, const char *arg1) {
             if (is_lower(var_a2)) {
                 var_a2 -= ('a' - 'A');
             }
-            var_v1 = arg1[j];
+            var_v1 = szName[j];
             if (is_lower(var_v1)) {
                 var_v1 -= ('a' - 'A');
             }
@@ -3536,7 +3534,7 @@ nbool screenFind(s32 *dst, const char *arg1) {
             j++;
         }
 
-        if (arg1[j] == '\0') {
+        if (szName[j] == '\0') {
             var_v0 = ntrue;
         } else {
             var_v0 = nfalse;
@@ -3544,7 +3542,7 @@ nbool screenFind(s32 *dst, const char *arg1) {
 
     label:
         if (var_v0) {
-            *dst = i;
+            *piScreen = i;
             return ntrue;
         }
     }
@@ -3573,7 +3571,7 @@ s32 screenLoad(const char *arg0, void **heapP) {
     struct_gaScreen_unk_1C *temp_s1_2;
 
     B_8018E528_usa = 1;
-    B_8018E524_usa = -1;
+    giScreenNext = -1;
     giScreen = -1;
     gnImageCount = 0;
     gnScreenCount = 0;
@@ -3927,7 +3925,7 @@ void screenSetup(void) {
     geModeFade = 0;
 
     gnAlphaFade = -1;
-    B_8018E524_usa = -1;
+    giScreenNext = -1;
     giScreen = -1;
 }
 

@@ -187,7 +187,7 @@ void func_800428B4_usa(s32 arg0 UNUSED) {
     }
 
     screenHideImage(B_80192F90_usa->unk_00, 0x3E8);
-    if ((peelActive() == 0) && !func_80024C14_usa()) {
+    if ((peelActive() == 0) && !screenChangePending()) {
         func_80042660_usa();
         if ((B_80192F90_usa->unk_34 < -0x14) && (B_80192F90_usa->unk_38 == 0)) {
             B_80192F90_usa->unk_38 = 1;

@@ -8,6 +8,7 @@
 #include "macros_defines.h"
 #include "main_variables.h"
 
+#include "boot_main.h"
 #include "buffers.h"
 #include "image.h"
 #include "info.h"
@@ -89,230 +90,86 @@ typedef enum enum_TypeMenu {
     MT_STAGE_CLEAR = 66,
 } enum_TypeMenu;
 
-typedef struct struct_800B5DF8_usa {
-    /* 0x00 */ UNK_PAD unk_00[0x8];
-    /* 0x08 */ screenDraw_callback *unk_08;
+typedef UNK_RET struct_gaMenuData_pfInit(s32);
+
+typedef struct struct_gaMenuData {
+    /* 0x00 */ char *szName;                     /* Original name: szName */
+    /* 0x04 */ struct_gaMenuData_pfInit *pfInit; /* Original name: pfInit */
+    /* 0x08 */ screenDraw_callback *pfDraw;      /* Original name: pfDraw */
     /* 0x0C */ UNK_PAD unk_0C[0x4];
-    /* 0x10 */ enum_TypeMenu unk_10;
+    /* 0x10 */ enum_TypeMenu eType; /* Original name: eType */
     /* 0x14 */ UNK_PAD unk_14[0x4];
-} struct_800B5DF8_usa; // size = 0x18
+} struct_gaMenuData; // size = 0x18
 
-#if 0
-typedef struct /* struct_menu_c_1974 */ {
-    // total size: 0x18
-    char * szName; // offset 0x0, size 0x4
-    void (* pfInit)(int, @enum$105menu_c); // offset 0x4, size 0x4
-    void (* pfDraw)(union {
-        struct {
-            // total size: 0x8
-            unsigned int w0; // offset 0x0, size 0x4
-            unsigned int w1; // offset 0x4, size 0x4
-        } words; // offset 0x0, size 0x8
-        struct {
-            // total size: 0x8
-            int cmd : 8; // offset 0x0, size 0x4
-            unsigned int par : 8; // offset 0x0, size 0x4
-            unsigned int len : 16; // offset 0x0, size 0x4
-            unsigned int addr; // offset 0x4, size 0x4
-        } dma; // offset 0x0, size 0x8
-        struct {
-            // total size: 0x8
-            int cmd : 8; // offset 0x0, size 0x4
-            int pad : 24; // offset 0x0, size 0x4
-            struct {
-                // total size: 0x4
-                unsigned char flag; // offset 0x0, size 0x1
-                unsigned char v[3]; // offset 0x1, size 0x3
-            } tri; // offset 0x4, size 0x4
-        } tri; // offset 0x0, size 0x8
-        struct {
-            // total size: 0x8
-            int cmd : 8; // offset 0x0, size 0x4
-            int pad : 24; // offset 0x0, size 0x4
-            struct {
-                // total size: 0x4
-                unsigned char flag; // offset 0x0, size 0x1
-                unsigned char v[3]; // offset 0x1, size 0x3
-            } line; // offset 0x4, size 0x4
-        } line; // offset 0x0, size 0x8
-        struct {
-            // total size: 0x8
-            int cmd : 8; // offset 0x0, size 0x4
-            int pad1 : 24; // offset 0x0, size 0x4
-            int pad2 : 24; // offset 0x4, size 0x4
-            unsigned int param : 8; // offset 0x4, size 0x4
-        } popmtx; // offset 0x0, size 0x8
-        struct {
-            // total size: 0x8
-            int cmd : 8; // offset 0x0, size 0x4
-            int pad0 : 8; // offset 0x0, size 0x4
-            int mw_index : 8; // offset 0x0, size 0x4
-            int number : 8; // offset 0x0, size 0x4
-            int pad1 : 8; // offset 0x4, size 0x4
-            int base : 24; // offset 0x4, size 0x4
-        } segment; // offset 0x0, size 0x8
-        struct {
-            // total size: 0x8
-            int cmd : 8; // offset 0x0, size 0x4
-            int pad0 : 8; // offset 0x0, size 0x4
-            int sft : 8; // offset 0x0, size 0x4
-            int len : 8; // offset 0x0, size 0x4
-            unsigned int data : 32; // offset 0x4, size 0x4
-        } setothermodeH; // offset 0x0, size 0x8
-        struct {
-            // total size: 0x8
-            int cmd : 8; // offset 0x0, size 0x4
-            int pad0 : 8; // offset 0x0, size 0x4
-            int sft : 8; // offset 0x0, size 0x4
-            int len : 8; // offset 0x0, size 0x4
-            unsigned int data : 32; // offset 0x4, size 0x4
-        } setothermodeL; // offset 0x0, size 0x8
-        struct {
-            // total size: 0x8
-            unsigned char cmd; // offset 0x0, size 0x1
-            unsigned char lodscale; // offset 0x1, size 0x1
-            unsigned char tile; // offset 0x2, size 0x1
-            unsigned char on; // offset 0x3, size 0x1
-            unsigned short s; // offset 0x4, size 0x2
-            unsigned short t; // offset 0x6, size 0x2
-        } texture; // offset 0x0, size 0x8
-        struct {
-            // total size: 0x8
-            int cmd : 8; // offset 0x0, size 0x4
-            int pad1 : 24; // offset 0x0, size 0x4
-            signed short pad2; // offset 0x4, size 0x2
-            signed short scale; // offset 0x6, size 0x2
-        } perspnorm; // offset 0x0, size 0x8
-        struct {
-            // total size: 0x8
-            int cmd : 8; // offset 0x0, size 0x4
-            unsigned int fmt : 3; // offset 0x0, size 0x4
-            unsigned int siz : 2; // offset 0x0, size 0x4
-            unsigned int pad : 7; // offset 0x0, size 0x4
-            unsigned int wd : 12; // offset 0x0, size 0x4
-            unsigned int dram; // offset 0x4, size 0x4
-        } setimg; // offset 0x0, size 0x8
-        struct {
-            // total size: 0x8
-            int cmd : 8; // offset 0x0, size 0x4
-            unsigned int muxs0 : 24; // offset 0x0, size 0x4
-            unsigned int muxs1 : 32; // offset 0x4, size 0x4
-        } setcombine; // offset 0x0, size 0x8
-        struct {
-            // total size: 0x8
-            int cmd : 8; // offset 0x0, size 0x4
-            unsigned char pad; // offset 0x1, size 0x1
-            unsigned char prim_min_level; // offset 0x2, size 0x1
-            unsigned char prim_level; // offset 0x3, size 0x1
-            unsigned long color; // offset 0x4, size 0x4
-        } setcolor; // offset 0x0, size 0x8
-        struct {
-            // total size: 0x8
-            int cmd : 8; // offset 0x0, size 0x4
-            int x0 : 10; // offset 0x0, size 0x4
-            int x0frac : 2; // offset 0x0, size 0x4
-            int y0 : 10; // offset 0x0, size 0x4
-            int y0frac : 2; // offset 0x0, size 0x4
-            unsigned int pad : 8; // offset 0x4, size 0x4
-            int x1 : 10; // offset 0x4, size 0x4
-            int x1frac : 2; // offset 0x4, size 0x4
-            int y1 : 10; // offset 0x4, size 0x4
-            int y1frac : 2; // offset 0x4, size 0x4
-        } fillrect; // offset 0x0, size 0x8
-        struct {
-            // total size: 0x8
-            int cmd : 8; // offset 0x0, size 0x4
-            unsigned int fmt : 3; // offset 0x0, size 0x4
-            unsigned int siz : 2; // offset 0x0, size 0x4
-            unsigned int pad0 : 1; // offset 0x0, size 0x4
-            unsigned int line : 9; // offset 0x0, size 0x4
-            unsigned int tmem : 9; // offset 0x0, size 0x4
-            unsigned int pad1 : 5; // offset 0x4, size 0x4
-            unsigned int tile : 3; // offset 0x4, size 0x4
-            unsigned int palette : 4; // offset 0x4, size 0x4
-            unsigned int ct : 1; // offset 0x4, size 0x4
-            unsigned int mt : 1; // offset 0x4, size 0x4
-            unsigned int maskt : 4; // offset 0x4, size 0x4
-            unsigned int shiftt : 4; // offset 0x4, size 0x4
-            unsigned int cs : 1; // offset 0x4, size 0x4
-            unsigned int ms : 1; // offset 0x4, size 0x4
-            unsigned int masks : 4; // offset 0x4, size 0x4
-            unsigned int shifts : 4; // offset 0x4, size 0x4
-        } settile; // offset 0x0, size 0x8
-        struct {
-            // total size: 0x8
-            int cmd : 8; // offset 0x0, size 0x4
-            unsigned int sl : 12; // offset 0x0, size 0x4
-            unsigned int tl : 12; // offset 0x0, size 0x4
-            int pad : 5; // offset 0x4, size 0x4
-            unsigned int tile : 3; // offset 0x4, size 0x4
-            unsigned int sh : 12; // offset 0x4, size 0x4
-            unsigned int th : 12; // offset 0x4, size 0x4
-        } loadtile; // offset 0x0, size 0x8
-        struct {
-            // total size: 0x8
-            int cmd : 8; // offset 0x0, size 0x4
-            unsigned int sl : 12; // offset 0x0, size 0x4
-            unsigned int tl : 12; // offset 0x0, size 0x4
-            int pad : 5; // offset 0x4, size 0x4
-            unsigned int tile : 3; // offset 0x4, size 0x4
-            unsigned int sh : 12; // offset 0x4, size 0x4
-            unsigned int th : 12; // offset 0x4, size 0x4
-        } settilesize; // offset 0x0, size 0x8
-        struct {
-            // total size: 0x8
-            int cmd : 8; // offset 0x0, size 0x4
-            unsigned int sl : 12; // offset 0x0, size 0x4
-            unsigned int tl : 12; // offset 0x0, size 0x4
-            int pad : 5; // offset 0x4, size 0x4
-            unsigned int tile : 3; // offset 0x4, size 0x4
-            unsigned int sh : 12; // offset 0x4, size 0x4
-            unsigned int th : 12; // offset 0x4, size 0x4
-        } loadtlut; // offset 0x0, size 0x8
-        long long force_structure_alignment; // offset 0x0, size 0x8
-    } * *, int, int); // offset 0x8, size 0x4
-    void (* pfTick)(int, int, int *); // offset 0xC, size 0x4
-    @enum$105menu_c eType; // offset 0x10, size 0x4
-    @enum$105menu_c eTypeNext; // offset 0x14, size 0x4
-} struct_menu_c_1974;
-#endif
+nbool menuFind(struct_gaMenuData **ppData, enum_TypeMenu eType);
 
-s32 menuSetScreen(enum_TypeMenu eType, s32 bBack);
+nbool menuSetScreen(enum_TypeMenu eType, s32 bBack);
 void func_8000A940_usa(s32 arg0, s32 arg1, s32 arg2);
 
 // menuUpdateSound?
 void func_800175F8_usa(void);
 
-// DummyLoad? menuLoadData?
-s32 func_80018EF8_usa(void);
+s32 menuLoadData(void);
 void func_800194DC_usa(enum_TypeMenu arg0);
 
 extern s32 D_800B5A14_usa;
 
+/**
+ * Original name: gnPositionFairyX
+ */
 extern s32 gnPositionFairyX;
+/**
+ * Original name: gnPositionFairyY
+ */
 extern s32 gnPositionFairyY;
 
+/**
+ * Original name: gnSkipFrame
+ */
 extern s32 gnSkipFrame;
+/**
+ * Original name: gnCountMenu
+ */
 extern s32 gnCountMenu;
 
+/**
+ * Original name: geTypeMenu
+ */
 extern enum_TypeMenu geTypeMenu;
 
-extern struct_800B5DF8_usa gaMenuData[0x2D];
+/**
+ * Original name: gaMenuData
+ */
+extern struct_gaMenuData gaMenuData[0x2D];
 
 // gaeTypeMenu?
 extern enum_TypeMenu B_8018A850_usa[];
 
 extern s32 B_8018A81C_usa;
-extern s32 B_8018A828_usa;
-extern s32 B_8018A834_usa;
-extern s32 B_8018A838_usa;
+/**
+ * Original name: gbAudioChanged
+ */
+extern s32 gbAudioChanged;
+/**
+ * Original name: giScreenMenu
+ */
+extern s32 giScreenMenu;
+/**
+ * Original name: giScreenMenuLast
+ */
+extern s32 giScreenMenuLast;
+
 extern s32 B_8018A854_usa;
 extern s32 B_8018A8D0_usa;
 extern s32 B_8018A8D4_usa;
 extern s32 B_8018A8F4_usa;
 extern s32 B_8018A8FC_usa;
 extern s32 B_8018A900_usa;
-extern s32 B_8018A90C_usa;
+
+/**
+ * Original name: gnTickMenu
+ */
+extern s32 gnTickMenu;
 extern s32 B_8018A910_usa;
 extern s32 B_8018A914_usa;
 extern s32 B_8018A918_usa;
@@ -322,9 +179,144 @@ extern OSMesgQueue B_8018A948_usa;
 extern s32 B_8018ABA8_usa;
 extern s32 B_8018ABAC_usa;
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_800072A0_usa);
+extern char B_8018A960_usa[];
+
+extern s32 B_8018A830_usa;
+extern player_t_unk_002 B_8018A8D8_usa;
+extern s16 B_8018A8E6_usa;
+extern s32 B_8018A91C_usa;
+extern OSIoMesg B_8018A930_usa;
+extern UNK_TYPE B_8018A96F_usa;
+extern s32 D_800B5A18_usa;
+extern const char RO_STR_800C3D68_usa[];
+
+extern s32 B_8018A82C_usa;
+/**
+ * Original name: gnPlayerCount
+ */
+extern s32 gnPlayerCount;
+/**
+ * Original name: ganPick
+ */
+extern s32 ganPick[2]; // static
+/**
+ * Original name: anTagBlinkLast
+ */
+extern u32 anTagBlinkLast[2]; // static
+
+typedef struct struct_800072A0_usa_arg0_unk_58 {
+    /* 0x0 */ UNK_PAD unk_C[0xC];
+} struct_800072A0_usa_arg0_unk_58; // size = 0xC
+
+typedef struct struct_800072A0_usa_arg0 {
+    /* 0x00 */ u32 unk_00; // TODO: unsure if u32 is correct
+    /* 0x04 */ UNK_TYPE unk_04;
+    /* 0x08 */ UNK_TYPE unk_08;
+    /* 0x0C */ UNK_TYPE unk_0C;
+    /* 0x10 */ UNK_TYPE unk_10;
+    /* 0x14 */ UNK_TYPE unk_14;
+    /* 0x18 */ UNK_TYPE unk_18;
+    /* 0x1C */ UNK_TYPE unk_1C; // size_t?
+    /* 0x20 */ UNK_TYPE unk_20;
+    /* 0x24 */ u16 unk_24;
+    /* 0x26 */ UNK_PAD unk_26[0x2];
+    /* 0x28 */ UNK_TYPE unk_28;
+    /* 0x2C */ UNK_TYPE unk_2C;
+    /* 0x30 */ UNK_TYPE unk_30;
+    /* 0x34 */ UNK_TYPE unk_34;
+    /* 0x38 */ UNK_TYPE unk_38[8];
+    /* 0x58 */ struct_800072A0_usa_arg0_unk_58 unk_58[GAME_PLAYER_COUNT];
+} struct_800072A0_usa_arg0; // size >= 0xB8
+
+nbool func_800072A0_usa(struct_800072A0_usa_arg0 *arg0);
+
+STATIC_INLINE void static_inlined_meminit(void *dst, size_t size, s32 var_s1) {
+#define BUFFER_SIZE 0x80
+    void *ptr = dst;
+    s32 remaining = size;
+    void *buf = ALIGN_PTR(B_8018A960_usa);
+
+#if 0
+    // References
+    // -> static unsigned char _cache$158[16384];
 #endif
+
+    if (B_8018A924_usa == 0) {
+        bzero(ptr, remaining);
+        return;
+    }
+
+    // I have no idea what's the deal with var_s1,
+    // seems pointless
+    if (var_s1 % BUFFER_SIZE != 0) {
+        return;
+    }
+
+    for (; remaining > 0; remaining -= BUFFER_SIZE, var_s1 += BUFFER_SIZE, ptr += BUFFER_SIZE) {
+        u32 page_num = var_s1 / BUFFER_SIZE;
+
+        osInvalDCache(buf, BUFFER_SIZE);
+        osFlashReadArray(&B_8018A930_usa, 0, page_num, buf, 1, &B_8018A948_usa);
+        osRecvMesg(&B_8018A948_usa, NULL, OS_MESG_BLOCK);
+        func_80000450_usa();
+        bcopy(buf, ptr, MIN(remaining, BUFFER_SIZE));
+    }
+#undef BUFFER_SIZE
+}
+
+// RENAME TODO: menuLoadUserData ?
+nbool func_800072A0_usa(struct_800072A0_usa_arg0 *arg0) {
+    struct_800072A0_usa_arg0 sp18;
+    s32 var_s4;
+    s32 var_s6;
+    s32 var_v0;
+    s32 var_s7;
+
+#if 0
+    int bFlag1; // r5
+    int bFlag2; // r6
+    struct_menu_c_1407 data0; // r1+0xC4
+    struct_menu_c_1407 data1; // r1+0xC
+#endif
+
+    var_s6 = -1;
+
+    for (var_s4 = 0; var_s4 < 8; var_s4++) {
+        static_inlined_meminit(&sp18, sizeof(struct_800072A0_usa_arg0), var_s4 << 14);
+
+#if VERSION_FRA
+#define THINGY -0x543210E0
+#elif VERSION_GER
+#define THINGY -0x543210F0
+#else
+#define THINGY -0x54321100
+#endif
+        // TODO: maybe unsigned?
+        if (sp18.unk_10 != THINGY) {
+            var_v0 = 0;
+        } else if (sp18.unk_04 != 0xB8) {
+            var_v0 = 0;
+        } else if (sp18.unk_08 != 0x7BC) {
+            var_v0 = 0;
+        } else {
+            var_v0 = -1;
+        }
+
+        if ((var_v0 != 0) && ((var_s6 == -1) || (var_s7 < sp18.unk_00))) {
+            var_s6 = var_s4;
+            var_s7 = sp18.unk_00;
+        }
+    }
+
+    if (var_s6 == -1) {
+        return nfalse;
+    }
+
+    static_inlined_meminit(arg0, sizeof(struct_800072A0_usa_arg0), var_s6 << 14);
+    return ntrue;
+}
+
+UNK_RET func_80007538_usa(struct_800072A0_usa_arg0 *, s32); /* extern */
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_80007538_usa);
@@ -368,10 +360,6 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_80008818_usa);
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_800088A0_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_80007360_eur);
 #endif
 
 #if VERSION_EUR
@@ -419,10 +407,6 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_80008960_eur);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_80007340_fra);
-#endif
-
-#if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_800075D8_fra);
 #endif
 
@@ -464,10 +448,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_800088C0_fra);
 
 #if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_80008948_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_80007340_ger);
 #endif
 
 #if VERSION_GER
@@ -514,45 +494,182 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_800088C0_ger);
 INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_80008948_ger);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/menu", menuSetScreen);
-#endif
+// TODO: change bBack to nbool?
+/**
+ * Original name: menuSetScreen
+ */
+nbool menuSetScreen(enum_TypeMenu eType, s32 bBack) {
+    nbool bFlag;
+    struct_gaMenuData *pMenuData;
+    s32 nPlayerCount;
+    s32 iScreen;
+    s32 iScreenMenu;
+    s32 nMode;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/menu", menuSetScreen);
-#endif
+    if (!menuFind(&pMenuData, eType)) {
+        return nfalse;
+    }
+    if (!screenFind(&iScreen, pMenuData->szName)) {
+        return nfalse;
+    }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/menu", menuSetScreen);
-#endif
+    if ((iScreen == giScreenMenu) && (!screenChangePending())) {
+        return nfalse;
+    }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/menu", menuSetScreen);
-#endif
+    if (eType >= MT_1P_PUZZLE_STAGE1 && eType <= MT_2P_ATTACK_NAME) {
+        nPlayerCount = 2;
+        nMode = 2;
+    } else {
+        nPlayerCount = 1;
+        nMode = 1;
+    }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_80008EA4_usa);
-#endif
+    if ((bBack != 0) && (iScreen == giScreenMenuLast) && (screenChangePending())) {
+        bFlag = ntrue;
+    } else {
+        bFlag = nfalse;
+    }
 
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3744_eur);
-#endif
+    if (bBack != 0) {
+        nMode |= 0x100;
+    }
+    if (giScreenMenu != -1) {
+        nMode |= 0x200;
+    }
+    nMode |= 0x400;
+    iScreenMenu = screenSet(pMenuData->szName, nMode);
+    if (iScreenMenu == giScreenMenu) {
+        return nfalse;
+    }
+    if (iScreenMenu != iScreen) {
+        return nfalse;
+    }
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_80008EA4_usa);
-#endif
+    gnTickMenu = 0;
+    ganPick[0] = ganPick[1] = bFlag;
+    geTypeMenu = eType;
+    giScreenMenuLast = giScreenMenu;
+    giScreenMenu = iScreenMenu;
+    gnPlayerCount = nPlayerCount;
+    anTagBlinkLast[0] = -1;
+    anTagBlinkLast[1] = -1;
+    if (bFlag == 0) {
+        if (pMenuData->pfInit != NULL) {
+            pMenuData->pfInit(iScreenMenu);
+        }
+    }
+    if (geTypeMenu == MT_MAIN) {
+        B_8018A82C_usa = 0;
+    }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_80008EA4_usa);
-#endif
+    if (gbAudioChanged != 0) {
+        gbAudioChanged = 0;
+        FadeOutAllSFXs(0x1E);
+        if ((geTypeMenu != MT_2P_ATTACK_LEVEL) || (B_8021B960_usa != 0x3F)) {
+            if ((geTypeMenu != MT_2P_CLEAR_LEVEL) && (geTypeMenu != MT_2P_CLEAR_CHARACTER)) {
+                func_80002D8C_usa(0x1E);
+            }
+        }
 
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/menu", RO_STR_800B8F34_ger);
-#endif
+        if (geTypeMenu == MT_MAIN) {
+            PlayMIDI(BGM_INIT_TABLE, 0x3D, 0, 1);
+        } else if ((geTypeMenu == MT_1P_PUZZLE_STAGE3) || (geTypeMenu == MT_1P_PUZZLE_STAGE3D) ||
+                   (geTypeMenu == MT_PRACTICE_PAGEDEMO)) {
+            PlayMIDI(BGM_INIT_TABLE, 0x3D, 0, 1);
+        } else if (geTypeMenu == MT_2P_ATTACK_LEVEL) {
+            if (B_8021B960_usa != 0x3F) {
+                PlayMIDI(BGM_INIT_TABLE, 0x3F, 0, 1);
+            }
+        } else if ((geTypeMenu == MT_2P_CLEAR_NAME) || (geTypeMenu == MT_2P_CLEAR_LEVEL) ||
+                   (geTypeMenu == MT_2P_CLEAR_CHARACTER)) {
+            if (((geTypeMenu != MT_2P_CLEAR_LEVEL) && (geTypeMenu != MT_2P_CLEAR_CHARACTER)) ||
+                (B_8021B960_usa != 0x40)) {
+                PlayMIDI(BGM_INIT_TABLE, 0x40, 0, 1);
+            }
+        } else {
+            PlayMIDI(BGM_INIT_TABLE, 0x3E, 0, 1);
+        }
+    }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_80008EA4_usa);
-#endif
+    return ntrue;
+}
+
+// RENAME TODO: menuShowDiploma ?
+nbool func_80008EA4_usa(s32 *arg0) {
+    u8 *var_a2;
+    s32 var_a1;
+    s32 var_a3;
+    s32 var_t0;
+    s32 var_t1;
+
+    // kinda cursed, but whatever
+    if ((gPlayer[0] < &gTheGame.player[0]) || (&gTheGame.player[7] < gPlayer[0])) {
+        osSyncPrintf("menuShowDiploma: INTERNAL ERROR: 'gPlayer' not valid!\n");
+        return nfalse;
+    }
+
+    for (var_t1 = 0; var_t1 < 6; var_t1++) {
+        switch (var_t1) {
+            case 0x0:
+                var_a3 = 0x1E;
+                var_t0 = ARRAY_COUNT(gPlayer[0]->unk_0B7) - 1;
+                var_a2 = (u8 *)gPlayer[0]->unk_0B7;
+                break;
+
+            case 0x1:
+                var_a3 = 0x32;
+                var_t0 = ARRAY_COUNT(gPlayer[0]->unk_0BB) - 1;
+                var_a2 = (u8 *)gPlayer[0]->unk_0BB;
+                break;
+
+            case 0x2:
+                var_a3 = 0x32;
+                var_t0 = ARRAY_COUNT(gPlayer[0]->unk_0C2) - 1;
+                var_a2 = (u8 *)gPlayer[0]->unk_0C2;
+                break;
+
+            case 0x3:
+                var_a3 = 0x1E;
+                var_t0 = ARRAY_COUNT(gPlayer[0]->unk_0C9) - 1;
+                var_a2 = (u8 *)gPlayer[0]->unk_0C9;
+                break;
+
+            case 0x4:
+                var_a3 = 0x32;
+                var_t0 = ARRAY_COUNT(gPlayer[0]->unk_0CD) - 1;
+                var_a2 = (u8 *)gPlayer[0]->unk_0CD;
+                break;
+
+            case 0x5:
+                var_a3 = 0x32;
+                var_t0 = ARRAY_COUNT(gPlayer[0]->unk_0D4) - 1;
+                var_a2 = (u8 *)gPlayer[0]->unk_0D4;
+                break;
+        }
+
+        for (var_a1 = 0; var_a1 < var_a3; var_a1++) {
+            if (((var_a2[var_a1 >> 3] >> (var_a1 & 7)) & 1) == 0) {
+                break;
+            }
+        }
+
+        if (var_a1 == var_a3) {
+            if (!(var_a2[var_t0] & 0x40)) {
+                var_a2[var_t0] |= 0x40;
+                if (arg0 != NULL) {
+                    *arg0 = var_t1 + 2;
+                }
+                return ntrue;
+            }
+        }
+    }
+
+    if (arg0 != NULL) {
+        *arg0 = 0;
+    }
+    return nfalse;
+}
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_8000901C_usa);
@@ -714,8 +831,56 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_80009E64_ger);
 INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_8000A018_ger);
 #endif
 
+extern UNK_TYPE2 D_800B5A10_usa[];
+extern const char RO_800C32E8_usa[];
+extern const char RO_800C32F0_usa[];
+extern const char RO_800C32F8_usa[];
+
 #if VERSION_USA
+#if 0
+void func_8000A940_usa(s32 arg0, s32 arg1, s32 arg2) {
+    s32 sp10;
+    u32 temp_s0;
+    const char *var_a2;
+
+    if (arg0 >= ARRAY_COUNTU(gTheGame.player)) {
+        return;
+    }
+
+    switch (arg1) {                             /* irregular */
+        case 0x5:
+            var_a2 = RO_800C32E8_usa;
+            break;
+        case 0x6:
+            var_a2 = RO_800C32F0_usa;
+            break;
+        default:
+            if (arg1 != 7) {
+                return;
+            }
+            var_a2 = RO_800C32F8_usa;
+            break;
+    }
+
+    if (((arg2 ^ 1) == 0) && (arg0 == 0)) {
+        temp_s0 = gTheGame.player[arg0].unk_7A2.unk_08[arg1];
+    } else {
+        temp_s0 = gTheGame.player[arg0].unk_7A2.unk_00[arg1];
+    }
+
+    if (screenFind(&sp10, var_a2)) {
+        func_8002A1F4_usa(sp10, (arg2 != 0) ? 0x67 : 0x65, temp_s0 & 0xF, 0);
+        func_8002A1F4_usa(sp10, (arg2 == 0) ? 0x64 : 0x68, (temp_s0 >> 4) & 0x7F, 0);
+        if (arg2 == 0) {
+            func_8002A1F4_usa(sp10, 0x66, (temp_s0 >> 0xB) & 1, 0);
+        }
+    }
+    D_800B5A10_usa[arg2] = (temp_s0 >> 0xC) & 0xF;
+
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_8000A940_usa);
+#endif
 #endif
 
 #if VERSION_EUR
@@ -3166,10 +3331,6 @@ INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_STR_800C3BC4_usa);
 INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_80017E18_usa);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_80018EAC_usa);
-#endif
-
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_80017B7C_eur);
 #endif
@@ -3192,10 +3353,6 @@ INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C40F4_eur);
 
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_80017F4C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_80018FE0_eur);
 #endif
 
 #if VERSION_FRA
@@ -3222,10 +3379,6 @@ INCLUDE_RODATA("asm/fra/nonmatchings/main/menu", RO_STR_800C27A4_fra);
 INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_80017F80_fra);
 #endif
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_80019014_fra);
-#endif
-
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_80017BFC_ger);
 #endif
@@ -3250,102 +3403,209 @@ INCLUDE_RODATA("asm/ger/nonmatchings/main/menu", RO_STR_800B9764_ger);
 INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_80017FCC_ger);
 #endif
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_80019060_ger);
-#endif
+/**
+ * Original name: menuFind
+ */
+INLINE nbool menuFind(struct_gaMenuData **ppData, enum_TypeMenu eType) {
+    s32 iMenu;
+
+    for (iMenu = 0; iMenu < ARRAY_COUNTU(gaMenuData); iMenu++) {
+        if (gaMenuData[iMenu].eType == eType) {
+            *ppData = &gaMenuData[iMenu];
+            return ntrue;
+        }
+    }
+
+    return nfalse;
+}
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_80018EF8_usa);
+#if 0
+s32 menuLoadData(void) {
+    struct_800072A0_usa_arg0 sp18;
+    s32 spD0;
+    player_t_unk_002 *var_s0;
+    s32 temp_s4;
+    s32 var_a0;
+    s32 var_a0_2;
+    s32 var_a2;
+    s32 var_s0_2;
+    s32 var_s0_3;
+    s32 var_s0_5;
+    s32 var_s1;
+    s32 var_s2_2;
+    s32 var_v1_2;
+    void *temp_s3;
+    void *var_s3;
+    void *var_s5;
+
+    B_8018A914_usa = 1;
+    B_8018A918_usa = 1;
+    B_8018A8D0_usa = 0;
+    B_8018A8D4_usa = 0;
+    for (var_s1 = 1; var_s1 < 8; var_s1++) {
+        bzero(&gTheGame.player[var_s1].unk_002, sizeof(player_t_unk_002));
+    }
+
+    D_800B5A18_usa = 1;
+    B_8018A830_usa = 0;
+    B_8018A91C_usa = 2;
+    bzero(&gTheGame.player[0].unk_002, sizeof(player_t_unk_002));
+
+    if (func_800072A0_usa(&sp18) != 0) {
+        B_8018A8E6_usa = 0;
+        for (var_s1 = 0; var_s1 < 8; var_s1++) {
+            bcopy(&sp18.unk_58[var_s1], &B_8018A8D8_usa, 0xC);
+
+            // Inlined function?
+            var_s0_2 = -1;
+            for (var_a0 = 0; var_a0 < 8; var_a0++) {
+                if (gTheGame.player[var_a0].unk_002.unk_0 == 0) {
+                    var_s0_2 = var_a0;
+                    break;
+                }
+            }
+
+            if (var_s0_2 != -1) {
+                menuInitUser((u32) var_s0_2);
+                bcopy(&B_8018A8D8_usa, (var_s0_2 * 0x7BC) + &gTheGame.player[0].unk_002, 0xE);
+            }
+        }
+
+        temp_s3 = B_801AB8E4_usa - (sp18.unk_1C + 0x400);
+        var_s2_2 = sp18.unk_0C << 0xE;
+        var_s5 = temp_s3;
+        var_s1 = sp18.unk_1C;
+        temp_s4 = (s32) &B_8018A96F_usa & ~0xF;
+        if (B_8018A924_usa == 0) {
+            bzero(temp_s3, sp18.unk_1C);
+        } else {
+            if (!(var_s2_2 & 0x7F)) {
+                while (var_s1 > 0) {
+                    var_s0_3 = var_s2_2;
+                    if (var_s2_2 < 0) {
+                        var_s0_3 = var_s2_2 + 0x7F;
+                    }
+                    osInvalDCache((void *) temp_s4, 0x80);
+                    osFlashReadArray(&B_8018A930_usa, 0, (u32) (var_s0_3 >> 7), (void *) temp_s4, 1U, &B_8018A948_usa);
+                    osRecvMesg(&B_8018A948_usa, NULL, 1);
+                    func_80000450_usa();
+                    var_a2 = var_s1;
+                    if (var_s1 > 0x80) {
+                        var_a2 = 0x80;
+                    }
+                    bcopy((void *) temp_s4, var_s5, var_a2);
+                    var_s1 -= 0x80;
+                    var_s2_2 += 0x80;
+                    var_s5 += 0x80;
+                }
+            }
+        }
+        var_s3 = temp_s3 + 0xB8;
+
+        for (var_s1 = 1; var_s1 < 8; var_s1++) {
+            bcopy(var_s3, &gTheGame.player[var_s1], 0x7BC);
+            var_s3 += 0x7BC;
+        }
+
+        B_8021BA98_usa ^= sp18.unk_18;
+        B_8018A830_usa = sp18.unk_14;
+        D_800B5A18_usa = sp18.unk_30;
+        B_8018A91C_usa = sp18.unk_34;
+        gGameStatus = (gGameStatus & 1) ^ sp18.unk_24;
+        gOverflowFlag = sp18.unk_2C;
+        B_8021BEA0_usa = sp18.unk_28;
+        return -1;
+    }
+
+    screenFind(&spD0, &RO_STR_800C3D68_usa);
+
+    for (var_s1 = 0; var_s1 < 1; var_s1++) {
+        func_80029130_usa(spD0, var_s1 + 0x64, &B_8018A8D8_usa, 7);
+        if (B_8018A8D8_usa.unk_0 != 1) {
+            var_s0_5 = -1;
+
+            for (var_a0_2 = 0; var_a0_2 < 8; var_a0_2++) {
+                if (&gTheGame.player[var_a0_2].unk_002 == 0) {
+                    var_s0_5 = var_a0_2;
+                    break;
+                }
+            }
+
+            if (var_s0_5 != -1) {
+                menuInitUser(var_s0_5);
+                bcopy(&B_8018A8D8_usa, &gTheGame.player[var_s0_5].unk_002, 0xE);
+            }
+        }
+    }
+
+    menuSaveData(1);
+    return 0;
+}
+#else
+INCLUDE_ASM("asm/usa/nonmatchings/main/menu", menuLoadData);
+#endif
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_80018EF8_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/menu", menuLoadData);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_80018EF8_usa);
+INCLUDE_ASM("asm/fra/nonmatchings/main/menu", menuLoadData);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_80018EF8_usa);
+INCLUDE_ASM("asm/ger/nonmatchings/main/menu", menuLoadData);
 #endif
 
 #if VERSION_USA
 #if 0
-s32 func_800072A0_usa(s32 *);                       /* extern */
-? func_80007538_usa(s32 *, s32);                    /* extern */
-extern s32 B_8018A830_usa;
-extern s32 B_8018A91C_usa;
-extern s32 B_8021BEA0_usa;
-extern s32 D_800B5A18_usa;
-
-void menuSaveData(s32 arg0) {
-    s32 sp10;
-    s32 sp14;
-    s32 sp18;
-    s32 sp1C;
-    s32 sp20;
-    ? sp2C;
-    s32 sp30;
-    ? *var_a0;
-    player_t_unk_002 *var_s1;
-    player_t_unk_002 *var_s1_2;
+nbool menuSaveData(s32 iPlayer) {
+    struct_800072A0_usa_arg0 sp10;
     s32 var_a1;
-    s32 var_s2;
-    s32 var_s2_2;
     s32 var_s3;
-    s32 var_s3_2;
 
-    if (func_800072A0_usa(&sp10) != 0) {
-        var_s3 = 0;
-        var_s2 = 0x58;
-        var_s1 = &gTheGame.player[0].unk_002;
-        sp10.unk_14 = (s32) (B_8018A830_usa & ~0x40);
-        sp10.unk_18 = (s32) B_8021BA98_usa;
-        sp10.unk_24 = (s16) (gGameStatus & 0xFF7F);
-        sp10.unk_30 = (s32) D_800B5A18_usa;
-        sp10.unk_34 = (s32) B_8018A91C_usa;
-        sp10.unk_2C = (s32) gOverflowFlag;
-        sp10.unk_28 = (s32) B_8021BEA0_usa;
-        do {
-            bcopy(var_s1, &sp10 + var_s2, 0xC);
-            var_s2 += 0xC;
-            var_s3 += 1;
-            var_s1 += 0x7BC;
-        } while (var_s3 < 8);
+    if (func_800072A0_usa(&sp10)) {
+        sp10.unk_14 = B_8018A830_usa & ~0x40;
+        sp10.unk_18 = B_8021BA98_usa;
+        sp10.unk_24 = gGameStatus & 0xFF7F;
+        sp10.unk_30 = D_800B5A18_usa;
+        sp10.unk_34 = B_8018A91C_usa;
+        sp10.unk_2C = gOverflowFlag;
+        sp10.unk_28 = B_8021BEA0_usa;
+
+        for (var_s3 = 0; var_s3 < GAME_PLAYER_COUNT; var_s3++) {
+            bcopy(&gTheGame.player[var_s3].unk_002, &sp10.unk_58[var_s3], 0xC);
+        }
     } else {
-        bzero(&sp10, 0xB8);
-        var_a1 = 7;
-        var_a0 = &sp2C;
-        sp1C = 7;
-        sp14 = 0xB8;
-        sp10 = 0;
-        sp20 = 0xABCDEF00;
-        sp18 = 0x7BC;
-        sp30 = 0;
-        do {
-            var_a0->unk_38 = -1;
-            var_a1 -= 1;
-            var_a0 -= 4;
-        } while (var_a1 >= 0);
-        var_s3_2 = 0;
-        var_s2_2 = 0x58;
-        var_s1_2 = &gTheGame.player[0].unk_002;
-        sp10.unk_14 = (s32) (B_8018A830_usa & ~0x40);
-        sp10.unk_18 = (s32) B_8021BA98_usa;
-        sp10.unk_24 = (s16) (gGameStatus & 0xFF7F);
-        sp10.unk_30 = (s32) D_800B5A18_usa;
-        sp10.unk_34 = (s32) B_8018A91C_usa;
-        sp10.unk_2C = (s32) gOverflowFlag;
-        sp10.unk_28 = (s32) B_8021BEA0_usa;
-        do {
-            bcopy(var_s1_2, &sp10 + var_s2_2, 0xC);
-            var_s2_2 += 0xC;
-            var_s3_2 += 1;
-            var_s1_2 += 0x7BC;
-        } while (var_s3_2 < 8);
+        bzero(&sp10, sizeof(struct_800072A0_usa_arg0));
+        sp10.unk_0C = 7;
+        sp10.unk_04 = 0xB8;
+        sp10.unk_00 = 0;
+        sp10.unk_10 = 0xABCDEF00;
+        sp10.unk_08 = 0x7BC;
+        sp10.unk_20 = 0;
+        for (var_a1 = 0; var_a1 < 8; var_a1++) {
+            sp10.unk_38[var_a1] = -1;
+        }
+
+        sp10.unk_14 = B_8018A830_usa & ~0x40;
+        sp10.unk_18 = B_8021BA98_usa;
+        sp10.unk_24 = gGameStatus & 0xFF7F;
+        sp10.unk_30 = D_800B5A18_usa;
+        sp10.unk_34 = B_8018A91C_usa;
+        sp10.unk_2C = gOverflowFlag;
+        sp10.unk_28 = B_8021BEA0_usa;
+        for (var_s3 = 0; var_s3 < GAME_PLAYER_COUNT; var_s3++) {
+            // What????
+            bcopy(&gTheGame.player[var_s3].unk_002, &sp10.unk_58[var_s3], 0xC);
+        }
     }
-    func_80007538_usa(&sp10, arg0);
+
+    func_80007538_usa(&sp10, iPlayer);
+
+    return ntrue;
 }
 #else
 INCLUDE_ASM("asm/usa/nonmatchings/main/menu", menuSaveData);
@@ -3716,8 +3976,234 @@ INCLUDE_RODATA("asm/ger/nonmatchings/main/menu", RO_STR_800B9914_ger);
 INCLUDE_RODATA("asm/ger/nonmatchings/main/menu", RO_STR_800B9920_ger);
 #endif
 
+extern s32 B_801C6EF0_usa;
+extern const char RO_800C3284_usa[];
+extern const char RO_800C3318_usa[];
+extern const char RO_STR_800C3BC4_usa[];
+extern const char RO_STR_800C3CAC_usa[];
+extern const char RO_STR_800C3CBC_usa[];
+extern const char RO_STR_800C3CC8_usa[];
+extern const char RO_STR_800C3CD4_usa[];
+extern const char RO_STR_800C3CF0_usa[];
+extern const char RO_STR_800C3D74_usa[];
+extern const char RO_STR_800C3D80_usa[];
+
 #if VERSION_USA
+#if 0
+void func_800194DC_usa(enum_TypeMenu arg0) {
+    s32 sp10;
+    s32 temp_a1;
+    s32 temp_s2;
+    s32 temp_s4;
+    s32 temp_s5;
+    s32 temp_s6;
+    s32 temp_s7;
+    s32 var_a0;
+    s32 var_a2;
+    s32 var_s0;
+    s32 var_s1;
+    s32 var_s3;
+    s32 var_s4;
+    s32 var_v0;
+    s32 var_v1;
+
+    temp_s4 = gTheGame.menu[0].unk_8;
+    temp_s7 = B_801C6EF0_usa;
+    temp_s5 = gTheGame.menu[0].unk_0;
+    temp_s2 = gTheGame.menu[0].unk_4;
+    temp_s6 = gTheGame.menu[1].unk_8;
+
+    switch (arg0) {                                 /* switch 1 */
+        case MT_2P_ATTACK_LEVEL:                    /* switch 1 */
+            B_8018A81C_usa = MT_MAIN;
+            screenFind(&sp10, &RO_STR_800C3CF0_usa);
+            func_8002A1F4_usa(sp10, 0x64, 0, temp_s5);
+            break;
+
+        case MT_HOWTO_CONTROLLER:                   /* switch 1 */
+            screenFind(&sp10, &RO_STR_800C3CAC_usa);
+            func_8002A1F4_usa(sp10, 0x64, 0, 1);
+            screenFind(&sp10, &RO_STR_800C3D74_usa);
+            func_8002A1F4_usa(sp10, 0x64, 0, temp_s5);
+            break;
+
+        case MT_2P_CLEAR_LEVEL:                     /* switch 1 */
+        case MT_2P_CLEAR_CHARACTER:                 /* switch 1 */
+            B_8018A81C_usa = MT_PLAY;
+            screenFind(&sp10, &RO_STR_800C3CD4_usa);
+            if (arg0 == MT_2P_CLEAR_LEVEL) {
+                func_8002A1F4_usa(sp10, 0x64, 0, 0);
+                screenFind(&sp10, &RO_STR_800C3CC8_usa);
+            } else {
+                func_8002A1F4_usa(sp10, 0x64, 0, 1);
+                screenFind(&sp10, &RO_STR_800C3CBC_usa);
+            }
+            func_8002A1F4_usa(sp10, 0x64, 0, temp_s4 - 1);
+            break;
+
+        case MT_2P_CLEAR_NAME:                      /* switch 1 */
+            B_8018A81C_usa = MT_PLAY;
+            screenFind(&sp10, &RO_STR_800C3CD4_usa);
+            func_8002A1F4_usa(sp10, 0x64, 0, 2);
+            break;
+
+        case MT_4P:                                 /* switch 1 */
+            B_8018A81C_usa = MT_MANY;
+            screenFind(&sp10, &RO_STR_800C3CAC_usa);
+            func_8002A1F4_usa(sp10, 0x64, 0, 1);
+            break;
+
+        case MT_1P_ENDLESS_NAME:                    /* switch 1 */
+        case MT_1P_VS_LEVEL:                        /* switch 1 */
+            if (arg0 == MT_1P_ENDLESS_NAME) {
+                B_8018A81C_usa = arg0;
+            } else {
+                B_8018A81C_usa = MT_1P;
+            }
+            screenFind(&sp10, &RO_800C3284_usa);
+            if ((gGameStatus & 1) && (geTypeMenu != MT_1P_VS_LEVEL)) {
+                var_s4 = temp_s4 - 1;
+            } else {
+                var_s4 = (temp_s4 - 1) * 2;
+            }
+            func_8002A1F4_usa(sp10, 0x64, var_s4, 0);
+            var_a2 = 2;
+            switch (temp_s5) {                      /* switch 2; irregular */
+                case 0x1:                           /* switch 2 */
+                    var_a2 = 0;
+                    break;
+                case 0x2:                           /* switch 2 */
+                    var_a2 = 1;
+                    break;
+            }
+            func_8002A1F4_usa(sp10, 0x65, var_a2, 0);
+            func_8002A1F4_usa(sp10, 0x66, temp_s7 != 1, 0);
+            break;
+
+        case MT_1P_ENDLESS_CHARACTER:               /* switch 1 */
+            B_8018A81C_usa = MT_1P_VS_NAME;
+            switch (temp_s5) {                      /* switch 3 */
+                case 0x1:                           /* switch 3 */
+                    var_s0 = 0;
+                    var_s3 = 0;
+                    break;
+                case 0x2:                           /* switch 3 */
+                    var_s0 = 1;
+                    var_s3 = 0;
+                    break;
+                case 0x3:                           /* switch 3 */
+                    var_s0 = 2;
+                    var_s3 = 0;
+                    break;
+                case 0x4:                           /* switch 3 */
+                    var_s0 = 1;
+                    var_s3 = 1;
+                    break;
+                case 0x5:                           /* switch 3 */
+                    var_s0 = 2;
+                    var_s3 = 1;
+                    break;
+            }
+            screenFind(&sp10, &RO_800C3318_usa);
+            func_8002A1F4_usa(sp10, 0x64, var_s0, var_s3);
+            break;
+
+        case MT_1P_ATTACK_NAME:                     /* switch 1 */
+        case MT_1P_ATTACK_CHARACTER:                /* switch 1 */
+        case MT_1P_CLEAR_NAME:                      /* switch 1 */
+            B_8018A81C_usa = MT_1P_ENDLESS_LEVEL;
+            break;
+
+        case MT_1P_CLEAR_XTRATALK:                  /* switch 1 */
+        case MT_1P_PUZZLE_NAME:                     /* switch 1 */
+            B_8018A81C_usa = MT_NONE;
+            screenFind(&sp10, &RO_STR_800C3BC4_usa);
+            var_s0 = (temp_s5 - 1) % 3;
+            func_8002A1F4_usa(sp10, 0x64, var_s0, 0);
+
+            if (temp_s2 < 0x1F) {
+                var_s1 = 0x65;
+            } else if (temp_s2 < 0x29) {
+                var_s1 = 0x66;
+            } else {
+                var_s1 = 0x67;
+            }
+            if (temp_s5 >= 4) {
+                var_s1 += 3;
+            }
+            func_80027618_usa(sp10, var_s1, 0U);
+
+            switch (var_s1) {                       /* switch 4 */
+                case 0x65:                          /* switch 4 */
+                    temp_a1 = temp_s2 - 1;
+                    var_v0 = temp_a1;
+                    if (temp_a1 < 0) {
+                        var_v0 = temp_s2 + 6;
+                    }
+                    var_v1 = var_v0 >> 3;
+                    var_s0 = temp_a1 - (var_v1 * 8);
+                    var_s3 = var_v1;
+                    break;
+
+                case 0x66:                          /* switch 4 */
+                    var_a0 = temp_s2 - 0x1F;
+                    var_v1 = var_a0 / 3;
+                    var_s0 = var_a0 % 3;
+                    var_s3 = var_v1;
+                    break;
+
+                case 0x68:                          /* switch 4 */
+                    temp_a1 = temp_s2 - 1;
+                    var_v0 = temp_a1;
+                    if (temp_a1 < 0) {
+                        var_v0 = temp_s2 + 6;
+                    }
+                    var_v1 = var_v0 >> 3;
+                    var_s0 = temp_a1 - (var_v1 * 8);
+                    var_s3 = var_v1;
+                    break;
+
+                case 0x69:                          /* switch 4 */
+                    var_a0 = temp_s2 - 0x1F;
+                    var_v1 = var_a0 / 3;
+                    var_s0 = var_a0 % 3;
+                    var_s3 = var_v1;
+                    break;
+
+                case 0x67:                          /* switch 4 */
+                case 0x6A:                          /* switch 4 */
+                    var_a0 = temp_s2 - 0x29;
+                    var_v1 = var_a0 / 3;
+                    var_s0 = var_a0 % 3;
+                    var_s3 = var_v1;
+                    break;
+            }
+            func_8002A1F4_usa(sp10, var_s1, var_s0, var_s3);
+            break;
+
+        case MT_1P_PUZZLE_STAGE2:                   /* switch 1 */
+        case MT_1P_PUZZLE_STAGE3:                   /* switch 1 */
+        case MT_1P_PUZZLE_STAGE3D:                  /* switch 1 */
+        case MT_1P_PUZZLE_STAGE5:                   /* switch 1 */
+        case MT_1P_PUZZLE_CUSTOM:                   /* switch 1 */
+        case MT_2P:                                 /* switch 1 */
+        case MT_2P_VS_LEVEL:                        /* switch 1 */
+        case MT_2P_VS_CHARACTER:                    /* switch 1 */
+        case MT_2P_ATTACK_NAME:                     /* switch 1 */
+            B_8018A81C_usa = MT_1P_ENDLESS_CHARACTER;
+            func_8002A1F4_usa(sp10, 0x65, temp_s4 - 1, 0);
+            func_8002A1F4_usa(sp10, 0x67, temp_s6 - 1, 0);
+            func_8002A1F4_usa(sp10, 0x66, 0, temp_s7 != 1);
+            break;
+
+        default:                                    /* switch 1 */
+            osSyncPrintf(&RO_STR_800C3D80_usa, arg0);
+            break;
+    }
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_800194DC_usa);
+#endif
 #endif
 
 #if VERSION_EUR
@@ -3745,6 +4231,9 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_80019F44_usa);
 #endif
 
 #if VERSION_USA
+/**
+ * Original name: menuInitUser
+ */
 s32 menuInitUser(u32 arg0) {
     if (arg0 < GAME_PLAYER_COUNT) {
         player_t *player = &gTheGame.player[arg0];
@@ -3895,6 +4384,9 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_8001A4EC_ger);
 INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_8001A6C8_ger);
 #endif
 
+/**
+ * Original name: menuInitFairy
+ */
 void menuInitFairy(enum_menuTickFairy_ePosition ePosition) {
     switch (ePosition) {
         case MFP_LEFT:
@@ -3922,6 +4414,9 @@ void menuInitFairy(enum_menuTickFairy_ePosition ePosition) {
     }
 }
 
+/**
+ * Original name: ganOffsetFairy
+ */
 extern s32 ganOffsetFairy[8];
 
 #if VERSION_USA
@@ -4055,18 +4550,9 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_8001ADFC_fra);
 INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_8001AE64_ger);
 #endif
 
-STATIC_INLINE nbool inlined_func_DrawMenu(struct_800B5DF8_usa **arg0, enum_TypeMenu arg1) {
-    s32 var_a0;
-
-    for (var_a0 = 0; var_a0 < ARRAY_COUNTU(gaMenuData); var_a0++) {
-        if (gaMenuData[var_a0].unk_10 == arg1) {
-            *arg0 = &gaMenuData[var_a0];
-            return ntrue;
-        }
-    }
-    return nfalse;
-}
-
+/**
+ * Original name: DrawMenu
+ */
 void DrawMenu(struct_gInfo_unk_00068 *arg0 UNUSED) {
     if (gnSkipFrame > 0) {
         gnSkipFrame--;
@@ -4074,16 +4560,16 @@ void DrawMenu(struct_gInfo_unk_00068 *arg0 UNUSED) {
     }
 
     if (gReset == 0) {
-        struct_800B5DF8_usa *pMenuData;
+        struct_gaMenuData *pMenuData;
 
         if (geTypeMenu == MT_PLAY) {
-            if (inlined_func_DrawMenu(&pMenuData, B_8018A850_usa[gnCountMenu - 2])) {
-                screenDraw(&glistp, pMenuData->unk_08);
+            if (menuFind(&pMenuData, B_8018A850_usa[gnCountMenu - 2])) {
+                screenDraw(&glistp, pMenuData->pfDraw);
             }
         }
 
-        if (inlined_func_DrawMenu(&pMenuData, geTypeMenu)) {
-            screenDraw(&glistp, pMenuData->unk_08);
+        if (menuFind(&pMenuData, geTypeMenu)) {
+            screenDraw(&glistp, pMenuData->pfDraw);
         } else {
             screenDraw(&glistp, NULL);
         }
@@ -4110,6 +4596,9 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/menu", DoMenu);
 INCLUDE_ASM("asm/ger/nonmatchings/main/menu", DoMenu);
 #endif
 
+/**
+ * Original name: InitMenu
+ */
 void InitMenu(void) {
     //! FAKE: This is likely to not be an array
     u8 sp10[0x4];
@@ -4129,13 +4618,13 @@ void InitMenu(void) {
 
     B_8018A81C_usa = 3;
     gTheGame.unk_9C0C = 1;
-    B_8018A838_usa = -1;
-    B_8018A834_usa = -1;
-    B_8018A828_usa = -1;
+    giScreenMenuLast = -1;
+    giScreenMenu = -1;
+    gbAudioChanged = -1;
     gnPositionFairyX = 0xBA;
     B_8018ABA8_usa = 0;
     B_8018ABAC_usa = 0;
-    B_8018A90C_usa = 0;
+    gnTickMenu = 0;
     B_8018A910_usa = 0;
     gnSkipFrame = 0;
     gnPositionFairyY = 0x5E;
@@ -4168,7 +4657,7 @@ void InitMenu(void) {
 
     if (screenLoad("MENU.SBF", &pHeap) != 0) {
         if (var_s0 != 0) {
-            func_80018EF8_usa();
+            menuLoadData();
         } else if (gMain == GMAIN_2BC) {
             var_a0_2 = -1;
             if (gnCountMenu > 0) {
@@ -4213,7 +4702,7 @@ void InitMenu(void) {
         } else if ((gMain != GMAIN_2BC) || (gnCountMenu <= 0)) {
             gnCountMenu = 0;
             s0 = MT_MAIN;
-            if (menuSetScreen(3, 0) != 0) {
+            if (menuSetScreen(3, 0)) {
                 B_8018A850_usa[gnCountMenu++] = s0;
             }
         } else {

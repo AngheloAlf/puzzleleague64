@@ -896,7 +896,7 @@ void func_80046648_usa(s32 arg0) {
             break;
 
         case 0x7:
-            if (!screenFlushing() && !func_80024C14_usa()) {
+            if (!screenFlushing() && !screenChangePending()) {
                 if (func_80024BF4_usa(&sp10)) {
                     if (gTheGame.menu[0].unk_0 == 3) {
                         HVQM2Util_Play((void *)"GAMEEND.HVQM", 0x1000U, sp10);
@@ -915,7 +915,7 @@ void func_80046648_usa(s32 arg0) {
             break;
 
         case 0x8:
-            if (!screenFlushing() && !func_80024C14_usa()) {
+            if (!screenFlushing() && !screenChangePending()) {
                 if (func_80024BF4_usa(&sp10)) {
                     HVQM2Util_Play((void *)"YOUWIN.HVQM", 0x1000U, sp10);
                     func_8002B85C_usa(2, 8);
@@ -924,7 +924,7 @@ void func_80046648_usa(s32 arg0) {
             break;
 
         case 0x9:
-            if (!screenFlushing() && !func_80024C14_usa()) {
+            if (!screenFlushing() && !screenChangePending()) {
                 if (func_80024BF4_usa(&sp10)) {
                     HVQM2Util_Play((void *)"YOULOSE.HVQM", 0x1000U, sp10);
                     gTheGame.unk_9C0C = 1;

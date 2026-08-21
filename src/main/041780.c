@@ -250,7 +250,7 @@ void func_8004123C_usa(s32 arg0) {
     s32 var_s2;
 
     var_s2 = 0;
-    if (func_80024C14_usa() || screenFlushing()) {
+    if (screenChangePending() || screenFlushing()) {
         return;
     }
 
