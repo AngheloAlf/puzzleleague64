@@ -57,11 +57,157 @@ INLINE void QuitMimic(void) {
 }
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/mimic", func_80083050_usa);
+// ?? void LoadMimic1(int kind /* r19 */, int level /* r20 */, int number /* r21 */, int play /* r22 */)  
+void func_80083050_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 temp_s0;
+    s32 temp_v0;
+    s32 var_v0;
+    ai_t *var_s5;
+    cursor_t *cursor;
+    tetWell *well;
+
+    #if 0
+    // Local variables
+    int base; // r1+0x8
+    int index; // r20
+    struct tetWell * well; // r27
+    struct cursor_t * cursor; // r24
+    struct ai_t * brain; // r23
+    char * pHeap; // r30
+
+    // References
+    // -> unsigned char play_data_timelag[278];
+    // -> unsigned char play_data_schain[633];
+    // -> unsigned char play_data_chain[766];
+    // -> unsigned char play_data_combo[590];
+    // -> unsigned char demo_data_timelag[311];
+    // -> unsigned char demo_data_schain[789];
+    // -> unsigned char demo_data_chain[892];
+    // -> unsigned char demo_data_combo[679];
+    #endif
+
+    gCounter = 0;
+    gMax = 6;
+    InitGameStateVar();
+    well = gTheGame.tetrisWell;
+    cursor = gTheGame.cursorBlock;
+    gTheGame.unk_9B48 = 0;
+    gTheGame.unk_9B50[0].b.frameH = 0;
+    gTheGame.unk_9B50[1].b.frameH = 0;
+    chain_check[0] = 0;
+    chain_check[1] = 0;
+    anim_bg = 0;
+    anim_sp = 0;
+    gTheGame.tetrisWell[0].unk_43B0 = 0;
+    gTheGame.tetrisWell[0].unk_43A8 = 0;
+    gTheGame.tetrisWell[0].unk_43A4 = 0;
+    gTheGame.tetrisWell[0].unk_43B4 = 0;
+    gTheGame.tetrisWell[0].unk_43B8 = 0;
+    gTheGame.tetrisWell[0].unk_43BC = 0;
+    gTheGame.tetrisWell[0].unk_43C0 = 0;
+    gTheGame.tetrisWell[0].unk_43C4 = 0;
+    gTheGame.tetrisWell[0].unk_43F4 = 0;
+    gTheGame.tetrisWell[0].unk_441C = 0xDF;
+    gTheGame.tetrisWell[0].unk_43F8 = 0;
+    gTheGame.tetrisWell[0].unk_43FC = 0;
+    gTheGame.unk_9C08 = 2;
+
+    InitCursor(cursor);
+    Init2DCursor(cursor, 0);
+    Init2DTetrisBlocks(well, 0);
+    Init2DNewRow(well);
+    Init2DIcons(well);
+    Init2DAttackBlocks(well);
+    Init2DExplosion(well);
+    var_s5 = brainbrain;
+
+    if (arg1 == 1) { 
+        var_v0 = 0;
+    } else if (arg1 == 2) {
+        var_v0 = 5;
+    } else if (arg1 == 3) {
+        var_v0 = 0xA;
+    } else {
+        var_v0 = 0xE;
+    }
+    temp_s0 = var_v0 + arg2;
+
+    if (arg3 == 0) {
+        // FAKE?
+        do {
+            switch (arg0) {
+                case 1:
+                    Init2DPuzzle(well, cursor, D_800B89D0_usa, temp_s0);
+                    temp_s0--;
+                    break;
+                case 2:
+                    Init2DPuzzle(well, cursor, D_800B8C78_usa, temp_s0);
+                    temp_s0--;
+                    break;
+                case 3:
+                    Init2DPuzzle(well, cursor, D_800B8FF4_usa, temp_s0);
+                    temp_s0--;
+                    break;
+                case 4:
+                    Init2DPuzzle(well, cursor, D_800B930C_usa, temp_s0);
+                    temp_s0--;
+                    break;
+                default:
+                    temp_s0--;
+                    break;
+            }
+        } while (0);
+    } else {
+        switch (arg0) {
+            case 1:
+                Init2DPuzzle(well, cursor, D_800B9444_usa, temp_s0);
+                temp_s0--;
+                break;
+            case 2:
+                Init2DPuzzle(well, cursor, D_800B9694_usa, temp_s0);
+                temp_s0--;
+                break;
+            case 3:
+                Init2DPuzzle(well, cursor, D_800B9994_usa, temp_s0);
+                temp_s0--;
+                break;
+            case 4:
+                Init2DPuzzle(well, cursor, D_800B9C10_usa, temp_s0);
+                temp_s0--;
+                break;
+            default:
+                temp_s0--;
+                break;
+        }
+    }
+
+    gTheGame.unk_9C08 = 1;
+    var_s5->unk_00C = 0xA;
+    InitAI(well, cursor, var_s5);
+    if (arg3 == 0) {
+        var_s5->unk_03C = arg0;
+    } else {
+        var_s5->unk_03C = arg0 + 4;
+    }
+    temp_v0 = cursor[0].unk_28[0];
+    var_s5->unk_040 = temp_s0;
+    var_s5->unk_044 = 0;
+    cursor[0].unk_28[0] = 0;
+    cursor[0].unk_28[1] = 0;
+    cursor[0].unk_28[2] = temp_v0;
+}
+
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/mimic", func_8008336C_usa);
+// Maybe inlined in DoMimic() or otherwise duplicated there?
+// ?? static void LoadMimic2(int kind /* r3 */, int level /* r4 */, int number /* r5 */, int play /* r6 */)
+static void func_8008336C_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    func_80083050_usa(arg0, arg1, arg2, arg3);
+    PlaySE(SFX_INIT_TABLE, 0x95);
+    brainbrain[0].unk_00C = -1;
+    brainbrain[0].unk_104 = 0;
+}
 #endif
 
 #if VERSION_USA
