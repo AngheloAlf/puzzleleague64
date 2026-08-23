@@ -159,7 +159,7 @@ s32 DemoCheck(s32 *frame) {
 #if VERSION_USA
         gGameStatus >>= 0x10;
 #else
-        if (B_801C607C_eur != 9) {
+        if (B_8018A7F8_usa != 9) {
             gGameStatus >>= 0x10;
         }
 #endif

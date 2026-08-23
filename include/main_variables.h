@@ -1419,6 +1419,4 @@ extern STACK(B_8021FF50_usa, 0x1000);
 
 
 
-extern s32 B_801C607C_eur;
-
 #endif

@@ -5,7 +5,7 @@
 #include "unk.h"
 
 typedef struct gamepad_t {
-    /* 0x00 */ UNK_PAD unk_00[0x4];
+    /* 0x00 */ UNK_TYPE4 unk_00;
     /* 0x04 */ u16 touch_button;
     /* 0x06 */ u16 hold_button;
     /* 0x08 */ s32 unk_08;

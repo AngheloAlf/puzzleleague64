@@ -8,7 +8,7 @@
 struct struct_imageLoad_arg0;
 
 // TODO: enum for arg2?
-typedef void (screenDraw_callback)(Gfx **gfxP, UNK_TYPE arg1, UNK_TYPE arg2);
+typedef void (screenDraw_callback)(Gfx **gfxP, s32 arg1, s32 arg2);
 
 typedef enum enum_screenFindAreaNear_arg2 {
     /* 1 */ ENUM_SCREENFINDAREANEAR_ARG2_1 = 1,

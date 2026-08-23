@@ -4,6 +4,8 @@
 #include "ultra64.h"
 #include "unk.h"
 
+#include "other_types.h"
+
 
 typedef struct struct_gpData {
     /* 0x00 */ UNK_TYPE4 unk_00;
@@ -16,9 +18,9 @@ typedef struct struct_gpData {
 
 
 // void func_80005C00_usa();
-// void func_80005EC0_usa();
+void func_80005EC0_usa(Gfx **gfxP, s32 arg1, s32 arg2);
 void DrawTitle(void);
-// void func_8000628C_usa();
+nbool func_8000628C_usa(void);
 void DoTitle(void);
 void InitTitle(void);
 void titleSetup(void);

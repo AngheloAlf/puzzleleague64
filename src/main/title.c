@@ -14,6 +14,7 @@
 #include "controller.h"
 #include "hvqm2util.h"
 #include "menu.h"
+#include "peel.h"
 #include "screen.h"
 #include "segment_symbols.h"
 #include "sfxlimit.h"
@@ -27,7 +28,6 @@ u32 D_800B5890_usa[] = {
 extern const char RO_STR_800C3128_usa[];
 extern const char RO_STR_800C3144_usa[];
 
-#if VERSION_USA
 void func_80005C00_usa(void) {
     if (B_8018A808_usa < ARRAY_COUNT(D_800B5890_usa)) {
         u32 temp_v1 = D_800B5890_usa[B_8018A808_usa];
@@ -73,19 +73,95 @@ void func_80005C00_usa(void) {
         }
     }
 }
-#endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/title", func_80005EC0_usa);
-#endif
+void func_80005EC0_usa(Gfx **gfxP, s32 arg1 UNUSED, s32 arg2) {
+    Gfx *gfx = *gfxP;
+    f32 var_fv1;
+    f32 var_ft1;
+    f32 var_ft0;
+    s32 var_t9;
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/title", DrawTitle);
-#endif
+    switch (arg2) {
+        case 0x64:
+            gDPPipeSync(gfx++);
+            gSPClearGeometryMode(gfx++, G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_LIGHTING | G_SHADING_SMOOTH);
+            gSPTexture(gfx++, 0x8000, 0x8000, 0, G_TX_RENDERTILE, G_OFF);
+            gDPSetCycleType(gfx++, G_CYC_FILL);
+            gDPSetRenderMode(gfx++, G_RM_NOOP, G_RM_NOOP2);
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/title", func_8000628C_usa);
-#endif
+            var_fv1 = B_FLT_8018A7FC_usa;
+            var_ft1 = B_FLT_8018A800_usa;
+            var_ft0 = B_FLT_8018A804_usa;
+
+            for (var_t9 = 0; var_t9 < SCREEN_HEIGHT; var_t9++) {
+                u32 color = GPACK_RGBA5551((s32)var_fv1, (s32)var_ft1, (s32)var_ft0, 1);
+
+                gDPSetFillColor(gfx++, (color << 16) | color);
+                gDPFillRectangle(gfx++, 0, var_t9, SCREEN_WIDTH-1, var_t9);
+
+                var_fv1 += 256.0 / SCREEN_HEIGHT;
+                if (var_fv1 >= 256.0) {
+                    var_fv1 = 255;
+                }
+
+                var_ft1 += 256.0 / SCREEN_HEIGHT;
+                if (var_ft1 >= 256.0) {
+                    var_ft1 = 255;
+                }
+
+                var_ft0 += 256.0 / SCREEN_HEIGHT;
+                if (var_ft0 >= 256.0) {
+                    var_ft0 = 255;
+                }
+            }
+            break;
+
+        case 0x6E:
+            gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            gSPClearGeometryMode(gfx++, G_ZBUFFER | G_CULL_BOTH | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_CLIPPING);
+            break;
+
+        case 0x78:
+            gDPPipeSync(gfx++);
+            gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            gSPClearGeometryMode(gfx++, G_ZBUFFER | G_CULL_BOTH | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_CLIPPING);
+            gSPTexture(gfx++, 0x8000, 0x8000, 0, G_TX_RENDERTILE, G_OFF);
+            gDPSetCycleType(gfx++, G_CYC_FILL);
+            gDPSetRenderMode(gfx++, G_RM_NOOP, G_RM_NOOP2);
+            gDPSetFillColor(gfx++, (GPACK_RGBA5551(255, 0, 0, 1) << 16) | GPACK_RGBA5551(255, 0, 0, 1));
+
+            //! @bug: reading from unset variable var_t9
+            gDPFillRectangle(gfx++, 0, var_t9, SCREEN_WIDTH-1, var_t9);
+            break;
+    }
+
+    *gfxP = gfx;
+}
+
+void DrawTitle(void) {
+    if (gpData->unk_14 == 7) {
+        screenDraw(&glistp, func_8001A50C_usa);
+    } else {
+        screenDraw(&glistp, func_80005EC0_usa);
+    }
+
+    if (!screenFlushing()) {
+        pon_DrawLoadingMessage(&glistp);
+    }
+}
+
+// Unused?
+nbool func_8000628C_usa(void) {
+    s32 var_v1;
+
+    for (var_v1 = 0; var_v1 < 1; var_v1++) {
+        if ((gTheGame.controller[var_v1].unk_00 != -1) && (gTheGame.controller[var_v1].touch_button != 0)) {
+            return ntrue;
+        }
+    }
+
+    return nfalse;
+}
 
 #if VERSION_USA
 INCLUDE_RODATA("asm/usa/nonmatchings/main/title", RO_STR_800C3128_usa);
@@ -140,7 +216,6 @@ s32 HVQM2Util_Play(UNK_TYPE *, UNK_TYPE, s32);                 /* extern */
 void func_80089BE0_usa(UNK_TYPE arg0, UNK_TYPE arg1);
 extern s32 B_8018A7F0_usa;
 extern struct_8018A7F4_usa *gpData;
-extern s32 B_8018A7F8_usa;
 extern s32 B_8018A808_usa;
 extern s32 B_801A1574_usa;
 extern s32 B_801A59A4_usa;
@@ -502,23 +577,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/title", DoTitle);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/title", func_80005CC0_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/title", func_80005F80_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/title", DrawTitle);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/title", func_8000634C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/title", RO_800C3658_eur);
+INCLUDE_RODATA("asm/eur/nonmatchings/main/title", RO_STR_800C3128_usa);
 #endif
 
 #if VERSION_EUR
@@ -526,7 +585,7 @@ INCLUDE_RODATA("asm/eur/nonmatchings/main/title", RO_STR_800C3664_eur);
 #endif
 
 #if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/title", RO_STR_800C3674_eur);
+INCLUDE_RODATA("asm/eur/nonmatchings/main/title", RO_STR_800C3144_usa);
 #endif
 
 #if VERSION_EUR
@@ -542,23 +601,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/title", DoTitle);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/title", func_80005CC0_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/title", func_80005F80_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/title", DrawTitle);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/title", func_8000634C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/title", RO_800C1E88_fra);
+INCLUDE_RODATA("asm/fra/nonmatchings/main/title", RO_STR_800C3128_usa);
 #endif
 
 #if VERSION_FRA
@@ -566,7 +609,7 @@ INCLUDE_RODATA("asm/fra/nonmatchings/main/title", RO_STR_800C1E94_fra);
 #endif
 
 #if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/title", RO_STR_800C1EA4_fra);
+INCLUDE_RODATA("asm/fra/nonmatchings/main/title", RO_STR_800C3144_usa);
 #endif
 
 #if VERSION_FRA
@@ -582,23 +625,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/title", DoTitle);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/title", func_80005CC0_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/title", func_80005F80_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/title", DrawTitle);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/title", func_8000634C_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/title", RO_STR_800B8E48_ger);
+INCLUDE_RODATA("asm/ger/nonmatchings/main/title", RO_STR_800C3128_usa);
 #endif
 
 #if VERSION_GER
@@ -606,7 +633,7 @@ INCLUDE_RODATA("asm/ger/nonmatchings/main/title", RO_STR_800B8E54_ger);
 #endif
 
 #if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/title", RO_STR_800B8E64_ger);
+INCLUDE_RODATA("asm/ger/nonmatchings/main/title", RO_STR_800C3144_usa);
 #endif
 
 #if VERSION_GER
@@ -622,6 +649,15 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/title", DoTitle);
 #endif
 
 #if VERSION_USA
+#define CHECK_INCORRECT_OS_TV_TYPE(x) ((x) == OS_TV_PAL)
+#elif VERSION_EUR
+#define CHECK_INCORRECT_OS_TV_TYPE(x) ((x) == OS_TV_NTSC)
+#elif VERSION_FRA || VERSION_GER
+#define CHECK_INCORRECT_OS_TV_TYPE(x) (((x) == OS_TV_NTSC) || ((x) == OS_TV_MPAL))
+#else
+#error "No region selected"
+#endif
+
 void InitTitle(void) {
     u16 sp10[0x80];
     void *sp110;
@@ -631,7 +667,7 @@ void InitTitle(void) {
     gTheGame.unk_9C0C = 2;
     giButton = 0;
 
-    for (i = ARRAY_COUNT(ganButton) - 1; i >= 0; i--) {
+    for (i = 0; i < ARRAY_COUNT(ganButton); i++) {
         ganButton[i] = 0;
     }
 
@@ -648,7 +684,7 @@ void InitTitle(void) {
 
     if (screenLoad("TITLE.SBF", &sp110) != 0) {
         if (B_8018A7F0_usa > 0) {
-            if (osTvType == 0) {
+            if (CHECK_INCORRECT_OS_TV_TYPE(osTvType)) {
                 gpData->unk_14 = 1;
                 gpData->unk_08 = screenSet("BLANK", 0xFF401);
             } else if (D_800B69B0_usa & 1) {
@@ -682,9 +718,12 @@ void InitTitle(void) {
             func_800296B0_usa(sp10, (char *)gBuildDate, ARRAY_COUNT(sp10));
             screenSetText(sp114, 0x64, sp10);
         }
+
+#if VERSION_USA || VERSION_EUR
         if (screenFind(&sp114, RO_STR_800C3144_usa)) {
             screenHideText(sp114, 0x64);
         }
+#endif
     }
 
     FadeOutAllSFXs(0x1E);
@@ -695,21 +734,7 @@ void InitTitle(void) {
     func_80002E70_usa(D_FLT_800B3B10_usa * 0x7FFF);
     func_80002E34_usa(D_FLT_800B3B14_usa * 0x7FFF);
 }
-#endif
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/title", InitTitle);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/title", InitTitle);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/title", InitTitle);
-#endif
-
-#if VERSION_USA
 void titleSetup(void) {
     s32 i;
 
@@ -730,48 +755,7 @@ void titleSetup(void) {
 
     func_80046F8C_usa();
 }
-#endif
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/title", titleSetup);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/title", RO_STR_800C36B4_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/title", RO_STR_800C36C0_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/title", RO_STR_800C36C8_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/title", RO_STR_800C36D8_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/title", titleSetup);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/title", titleSetup);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/title", RO_STR_800B8EA4_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/title", RO_STR_800B8EB0_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/title", RO_STR_800B8EB8_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/title", RO_STR_800B8EC8_ger);
+#if VERSION_EUR || VERSION_FRA || VERSION_GER
+const s64 title_force_trailing_padding = 0;
 #endif

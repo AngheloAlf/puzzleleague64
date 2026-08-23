@@ -91,42 +91,67 @@ typedef enum enum_TypeMenu {
 } enum_TypeMenu;
 
 
+void func_80009228_usa(s32 arg0, s32 arg1, s32 *arg2);
+void func_800095F8_usa(s32 arg0, s32 arg1, s32 *arg2);
 void func_80009DBC_usa(s32 arg0);
+void func_80009F60_usa(s32 arg0, s32 arg1, s32 *arg2);
+void func_8000B48C_usa(s32 arg0, s32 arg1, s32 *arg2);
 void func_8000B7E4_usa(s32 arg0);
+void func_8000BBCC_usa(s32 arg0, s32 arg1, s32 *arg2);
 void func_8000C338_usa(s32 arg0);
-void func_8000CDEC_usa(Gfx **gfxP, UNK_TYPE arg1, UNK_TYPE arg2);
+void func_8000C8C0_usa(s32 arg0, s32 arg1, s32 *arg2);
+void func_8000CDEC_usa(Gfx **gfxP, s32 arg1, s32 arg2);
+void func_8000DD28_usa(s32 arg0, s32 arg1, s32 *arg2);
+void func_8000ED60_usa(s32 arg0, s32 arg1, s32 *arg2);
+void func_8000EF04_usa(s32 arg0, s32 arg1, s32 *arg2);
+void func_8000F104_usa(s32 arg0, s32 arg1, s32 *arg2);
+void func_8000F2B4_usa(s32 arg0, s32 arg1, s32 *arg2);
 void func_8000F6CC_usa(s32 arg0);
+void func_8000F7FC_usa(s32 arg0, s32 arg1, s32 *arg2);
+void func_8000FA44_usa(s32 arg0, s32 arg1, s32 *arg2);
+void func_80010050_usa(s32 arg0, s32 arg1, s32 *arg2);
 void func_80010238_usa(s32 arg0);
+void func_80010724_usa(s32 arg0, s32 arg1, s32 *arg2);
 void func_80011F30_usa(s32 arg0);
+void func_80013100_usa(s32 arg0, s32 arg1, s32 *arg2);
 void func_80013D8C_usa(s32 arg0);
-void func_80014970_usa(Gfx **gfxP, UNK_TYPE arg1, UNK_TYPE arg2);
-void func_8001A50C_usa(Gfx **gfxP, UNK_TYPE arg1, UNK_TYPE arg2);
+void func_800142DC_usa(s32 arg0, s32 arg1, s32 *arg2);
+void func_80014970_usa(Gfx **gfxP, s32 arg1, s32 arg2);
+void func_80016690_usa(s32 arg0, s32 arg1, s32 *arg2);
+void func_80016C34_usa(s32 arg0, s32 arg1, s32 *arg2);
+void func_80017E18_usa(s32 arg0, s32 arg1, s32 *arg2);
+void func_8001A50C_usa(Gfx **gfxP, s32 arg1, s32 arg2);
 void func_8001BFF0_usa(s32 arg0);
 void func_8001C034_usa(s32 arg0);
+void func_8001C070_usa(s32 arg0, s32 arg1, s32 *arg2);
+void func_8001C0DC_usa(s32 arg0, s32 arg1, s32 *arg2);
 void func_8001C138_usa(s32 arg0);
 void func_8001C184_usa(s32 arg0);
 void func_8001C20C_usa(s32 arg0);
 void func_8001C270_usa(s32 arg0);
 void func_8001C344_usa(s32 arg0);
-void func_8001C390_usa(Gfx **gfxP, UNK_TYPE arg1, UNK_TYPE arg2);
+void func_8001C390_usa(Gfx **gfxP, s32 arg1, s32 arg2);
 void func_8001C488_usa(s32 arg0);
 void func_8001C540_usa(s32 arg0);
 void func_8001C648_usa(s32 arg0);
 void func_8001C65C_usa(s32 arg0);
 void func_8001C67C_usa(s32 arg0);
 void func_8001C744_usa(s32 arg0);
+void func_8001C79C_usa(s32 arg0, s32 arg1, s32 *arg2);
 void func_8001C804_usa(s32 arg0);
+void func_8001C828_usa(s32 arg0, s32 arg1, s32 *arg2);
 
 
 typedef void struct_gaMenuData_pfInit(s32);
+typedef void struct_gaMenuData_pfTick(s32, s32, s32 *);
 
 typedef struct struct_gaMenuData {
-    /* 0x00 */ char *szName;                     /* Original name: szName */
+    /* 0x00 */ const char *szName;                /* Original name: szName */
     /* 0x04 */ struct_gaMenuData_pfInit *pfInit; /* Original name: pfInit */
     /* 0x08 */ screenDraw_callback *pfDraw;      /* Original name: pfDraw */
-    /* 0x0C */ UNK_PAD unk_0C[0x4];
-    /* 0x10 */ enum_TypeMenu eType; /* Original name: eType */
-    /* 0x14 */ UNK_PAD unk_14[0x4];
+    /* 0x0C */ struct_gaMenuData_pfTick *pfTick; /* Original name: pfTick */
+    /* 0x10 */ enum_TypeMenu eType;              /* Original name: eType */
+    /* 0x14 */ enum_TypeMenu eTypeNext;          /* Original name: eTypeNext */
 } struct_gaMenuData; // size = 0x18
 
 nbool menuFind(struct_gaMenuData **ppData, enum_TypeMenu eType);
@@ -214,7 +239,6 @@ extern player_t_unk_002 B_8018A8D8_usa;
 extern s16 B_8018A8E6_usa;
 extern s32 B_8018A91C_usa;
 extern OSIoMesg B_8018A930_usa;
-extern UNK_TYPE B_8018A96F_usa;
 extern s32 D_800B5A18_usa;
 extern const char RO_STR_800C3D68_usa[];
 
@@ -4361,7 +4385,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_8001A080_eur);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_8001A294_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/menu", menuInitUser);
 #endif
 
 #if VERSION_FRA
@@ -4377,7 +4401,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_8001A0B4_fra);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_8001A2C8_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/menu", menuInitUser);
 #endif
 
 #if VERSION_GER
@@ -4393,7 +4417,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_8001A100_ger);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_8001A314_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/menu", menuInitUser);
 #endif
 
 #if VERSION_USA
@@ -4625,7 +4649,460 @@ void DrawMenu(struct_gInfo_unk_00068 *arg0 UNUSED) {
 }
 
 #if VERSION_USA
+#if 0
+// ? func_800077AC_usa(s32 *, s32 *);                  /* extern */
+// ? func_800088A0_usa(s32, s32, s32 *);               /* extern */
+// s32 func_80019A24_usa(u32, enum enum_TypeMenu);     /* extern */
+// ? func_80019DAC_usa();                              /* extern */
+// ? func_80019F44_usa(s32, s32, s32 *);               /* extern */
+
+void DoMenu(void) {
+    s32 sp20;
+    s32 sp24;
+    s32 sp28;
+    s32 sp2C;
+    s32 sp30;
+    s32 sp34;
+    s32 sp40;
+    s32 sp48;
+    s32 sp4C;
+    s32 sp50;
+    void *sp58;
+    enum enum_TypeMenu temp_s0;
+    s16 *var_s4;
+    s32 *var_a0;
+    s32 *var_a0_5;
+    s32 *var_s0;
+    s32 *var_s0_2;
+    s32 *var_s2_2;
+    s32 temp_a0;
+    s32 temp_a0_2;
+    s32 temp_a0_3;
+    s32 temp_v0_2;
+    s32 temp_v1;
+    s32 temp_v1_2;
+    s32 temp_v1_3;
+    s32 temp_v1_4;
+    s32 temp_v1_5;
+    s32 temp_v1_6;
+    s32 var_a0_4;
+    s32 var_a1;
+    s32 var_fp;
+    s32 var_s1;
+    s32 var_s1_2;
+    s32 var_s1_3;
+    s32 var_s1_4;
+    s32 var_s1_6;
+    s32 var_s1_7;
+    s32 var_s2;
+    s32 var_s3;
+    s32 var_s3_2;
+    s32 var_s5;
+    s32 var_v0_3;
+    s32 var_v0_4;
+    s32 var_v0_5;
+    s32 var_v0_6;
+    s32 var_v0_7;
+    s32 var_v1;
+    s32 var_v1_2;
+    s32 var_v1_3;
+    s32 var_v1_4;
+    u16 temp_v0;
+    u16 temp_v0_3;
+    u32 var_a0_2;
+    u32 var_a0_3;
+    u32 var_s1_5;
+    u32 var_v0;
+    u32 var_v0_2;
+
+    var_fp = saved_reg_fp;
+    if ((screenFlushing() == nfalse) && (geTypeMenu != MT_PLAY)) {
+        peelTick();
+    }
+    gnTickMenu += 1;
+    B_8018A910_usa += 1;
+    var_s1 = 0;
+    func_80019DAC_usa();
+
+    var_a0 = &sp20;
+    var_v1 = 0;
+    do {
+        var_a0->unk_0 = (s32) *(&gTheGame.controller[0].hold_button + var_v1);
+        temp_v0 = *(&gTheGame.controller[0].touch_button + var_v1);
+        var_s1 += 1;
+        var_v1 += 0x10;
+        var_a0->unk_8 = (s32) temp_v0;
+        var_a0 += 4;
+    } while (var_s1 < 2);
+
+    func_800077AC_usa(&sp20, &sp28);
+    if ((peelActive() != 0) || (screenFlushing() != nfalse)) {
+        sp28 = 0;
+        sp20 = 0;
+        sp2C = 0;
+        sp24 = 0;
+    } else if (screenChangePending() != nfalse) {
+        sp20 &= 0x4000;
+        sp24 &= 0x4000;
+        sp28 &= 0x4000;
+        sp2C &= 0x4000;
+    }
+    var_s1_2 = 0;
+    sp34 = 0;
+    sp30 = 0;
+    if (gnPlayerCount > 0) {
+        var_s0 = &sp20;
+        var_s3 = 0;
+        var_s4 = &gTheGame.controller[0].unk_0E;
+        var_s5 = 0;
+        do {
+            var_s0->unk_18 = 0;
+            if (*(gTheGame.controller + var_s5) != -1) {
+                var_s2 = 0;
+                var_v0 = 0U >> 0x16;
+                if (func_800276CC_usa(giScreenMenu, &sp40, var_s1_2) != nfalse) {
+                    var_s2 = func_80027914_usa(giScreenMenu, sp40);
+                    var_v0 = (u32) var_s2 >> 0x16;
+                }
+                if ((var_v0 & 1 & (var_s1_2 == 0)) || (var_v0_2 = (u32) var_s2 >> 0x18, ((((u32) var_s2 >> 0x17) & 1 & (var_s1_2 == 1)) != 0))) {
+                    var_v0_3 = 0;
+                    if (geTypeMenu == MT_1P_ENDLESS_CHARACTER) {
+                        var_v0_3 = 0;
+                        if ((screenChangePending() == nfalse) && ((func_800276CC_usa(giScreenMenu, &sp48, var_s1_2) == nfalse) || ((var_v0_3 = 0, (sp48 == 0x64)) && (func_8002A2E8_usa(giScreenMenu, 0x64, &sp4C, &sp50), var_v0_3 = 0, (sp50 == 0)) && (var_v0_3 = -1, (func_80028CBC_usa(giScreenMenu, 0x64, sp4C, 1) == nfalse))))) {
+                            var_v0_3 = 0;
+                        }
+                    }
+                    if (var_v0_3 == 0) {
+                        var_s0->unk_0 &= ~0x400;
+                        var_s0->unk_8 = (s32) (var_s0->unk_8 & ~0x400);
+                    }
+                    if (var_s0->unk_8 & 0x8000) {
+                        var_v0_2 = (u32) var_s2 >> 0x18;
+                        if (*(var_s3 + ganPick) == 0) {
+                            var_s0->unk_18 = 0x20;
+                            var_s0->unk_8 = (s32) (var_s0->unk_8 & 0xFFFF7FFF);
+                            var_s0->unk_0 |= 0x400;
+                            goto block_29;
+                        }
+                    } else {
+block_29:
+                        var_v0_2 = (u32) var_s2 >> 0x18;
+                    }
+                }
+                if ((var_v0_2 & 1 & (var_s1_2 == 0)) || (((u32) var_s2 >> 0x19) & 1 & (var_s1_2 == 1))) {
+                    temp_a0 = var_s0->unk_8;
+                    var_s0->unk_0 &= ~0x800;
+                    var_s0->unk_8 = (s32) (temp_a0 & ~0x800);
+                    if ((temp_a0 & 0x4000) && (*(var_s3 + ganPick) == 0)) {
+                        var_s0->unk_18 = 0x21;
+                        var_s0->unk_8 = (s32) (var_s0->unk_8 & ~0x4000);
+                        var_s0->unk_0 |= 0x800;
+                    }
+                }
+                temp_v1 = (u16) *var_s4 & 0xA000;
+                if ((temp_v1 == 0xA000) && ((*(&B_8018ABA8_usa + var_s3) & 0xA000) != temp_v1)) {
+                    (var_s3 + &sp20)->unk_10 = 0x23;
+                } else {
+                    temp_v1_2 = var_s0->unk_8;
+                    if (temp_v1_2 & 0x1000) {
+                        var_s0->unk_10 = 0x22;
+                    } else if ((temp_v1_2 == 0x8000) && !((u16) *var_s4 & 0x7FFF)) {
+                        var_s0->unk_10 = 0x20;
+                    } else if ((var_s0->unk_8 == 0x4000) && !((u16) *var_s4 & 0xBFFF)) {
+                        var_s0->unk_10 = 0x21;
+                    } else {
+                        temp_a0_2 = var_s0->unk_0;
+                        if ((temp_a0_2 & 0x30) == 0x30) {
+                            var_s0->unk_10 = 0x1A;
+                        } else {
+                            temp_v1_3 = var_s0->unk_8;
+                            if (temp_v1_3 & 0x20) {
+                                var_s0->unk_10 = 0x18;
+                            } else if (temp_v1_3 & 0x10) {
+                                var_s0->unk_10 = 0x19;
+                            } else {
+                                var_v0_4 = temp_a0_2 & 0x800;
+                                if ((gnPlayerCount < 2) || (var_v0_4 = temp_a0_2 & 0x800, (*(var_s3 + ganPick) == 0))) {
+                                    if (var_v0_4 != 0) {
+                                        var_s0->unk_10 = (s32) ((-(var_s0->unk_18 != 0) & 0x11) | 1);
+                                    }
+                                    if (var_s0->unk_0 & 0x400) {
+                                        var_s0->unk_10 = (s32) ((-(var_s0->unk_18 != 0) & 0x12) | 2);
+                                    }
+                                    if (var_s0->unk_0 & 0x200) {
+                                        var_s0->unk_10 = 3;
+                                    }
+                                    if (var_s0->unk_0 & 0x100) {
+                                        var_s0->unk_10 = 4;
+                                    }
+                                } else if ((var_v0_4 != 0) || (temp_a0_2 & 0x400) || (temp_a0_2 & 0x200) || (temp_a0_2 & 0x100)) {
+                                    PlaySE(SFX_INIT_TABLE, 8);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            var_s0 += 4;
+            var_s3 += 4;
+            var_s4 += 0x10;
+            var_s1_2 += 1;
+            var_s5 += 0x10;
+        } while (var_s1_2 < gnPlayerCount);
+    }
+    var_a0_2 = 0;
+    if (B_8018A8F4_usa != -1) {
+        var_s1_3 = 0;
+        if (gnPlayerCount > 0) {
+loop_70:
+            func_800088A0_usa(gnTickMenu, var_s1_3, &sp30);
+            var_s1_3 += 1;
+            if (var_s1_3 < gnPlayerCount) {
+                goto loop_70;
+            }
+        }
+    } else {
+        var_v1_2 = 0;
+loop_74:
+        var_a0_2 += 1;
+        if (*(&gaMenuData->eType + var_v1_2) != geTypeMenu) {
+            var_v1_2 += 0x18;
+            if (var_a0_2 >= 0x2DU) {
+                var_v0_5 = 0;
+            } else {
+                goto loop_74;
+            }
+        } else {
+            sp58 = var_v1_2 + gaMenuData;
+            var_v0_5 = -1;
+        }
+        if ((var_v0_5 != 0) && (sp58->unk_C != NULL)) {
+            var_s1_4 = 0;
+            if (gnPlayerCount > 0) {
+                do {
+                    sp58->unk_C(gnTickMenu, var_s1_4, &sp30);
+                    var_s1_4 += 1;
+                } while (var_s1_4 < gnPlayerCount);
+            }
+        }
+    }
+    if (gReset == 0) {
+        var_s1_5 = 0;
+        if (gnPlayerCount > 0) {
+            var_s3_2 = 0;
+            var_s2_2 = ganPick;
+            do {
+                temp_v1_4 = (sp + var_s3_2)->unk_30;
+                if (temp_v1_4 == 0x20) {
+                    if (*var_s2_2 != 0) {
+                        goto block_129;
+                    }
+                    *var_s2_2 = -1;
+                    if (((u32) (geTypeMenu - 0x14) < 2U) || ((u32) (geTypeMenu - 0x18) < 2U) || ((u32) (geTypeMenu - 0x1C) < 2U)) {
+                        func_80027618_usa(giScreenMenu, -1, var_s1_5);
+                    }
+                    if (ganPick->unk_0 != 0) {
+                        if ((ganPick[1] != 0) || (var_v0_6 = gnPlayerCount < 2, (gnPlayerCount == 1))) {
+                            var_a0_3 = 0;
+                            var_v1_3 = 0;
+loop_96:
+                            var_a0_3 += 1;
+                            if (*(&gaMenuData->eType + var_v1_3) != geTypeMenu) {
+                                var_v1_3 += 0x18;
+                                if (var_a0_3 >= 0x2DU) {
+                                    var_v0_7 = 0;
+                                } else {
+                                    goto loop_96;
+                                }
+                            } else {
+                                sp58 = var_v1_3 + gaMenuData;
+                                var_v0_7 = -1;
+                            }
+                            if (var_v0_7 != 0) {
+                                temp_s0 = sp58->unk_14;
+                                if (temp_s0 == MT_MANY) {
+                                    if (func_80019A24_usa(var_s1_5, geTypeMenu) == 0) {
+                                        *var_s2_2 = 0;
+                                    } else {
+                                        if (gnPlayerCount >= 2) {
+                                            if (geTypeMenu != MT_1P_PUZZLE_STAGE3D) {
+                                                var_a1 = 0x16A;
+                                                if (var_s1_5 == 1) {
+
+                                                } else {
+                                                    var_a1 = 0x169;
+                                                }
+                                                goto block_127;
+                                            }
+                                        } else {
+                                            var_a1 = 3;
+                                            if (geTypeMenu == MT_PLAY) {
+
+                                            } else {
+                                                goto block_126;
+                                            }
+                                            goto block_127;
+                                        }
+                                        goto block_128;
+                                    }
+                                    goto block_151;
+                                }
+                                if (temp_s0 != MT_NONE) {
+                                    if ((gnCountMenu < 0x20) && (var_a0_4 = -1, (menuSetScreen(temp_s0, 0) != nfalse))) {
+                                        temp_v1_5 = gnCountMenu * 4;
+                                        gnCountMenu += 1;
+                                        *(B_8018A850_usa + temp_v1_5) = temp_s0;
+                                    } else {
+                                        var_a0_4 = 0;
+                                    }
+                                    if (var_a0_4 == 0) {
+                                        *var_s2_2 = 0;
+                                    } else {
+                                        if (gnPlayerCount >= 2) {
+                                            if (geTypeMenu != MT_1P_PUZZLE_STAGE3D) {
+                                                var_a1 = 0x16A;
+                                                if (var_s1_5 == 1) {
+
+                                                } else {
+                                                    var_a1 = 0x169;
+                                                }
+                                                goto block_127;
+                                            }
+                                        } else {
+                                            var_a1 = 3;
+                                            if (geTypeMenu == MT_PLAY) {
+
+                                            } else {
+block_126:
+                                                var_a1 = 2;
+                                            }
+block_127:
+                                            PlaySE(SFX_INIT_TABLE, var_a1);
+                                        }
+block_128:
+                                        sp34 = 0;
+                                        sp30 = 0;
+                                    }
+                                    goto block_151;
+                                }
+block_129:
+                                PlaySE(SFX_INIT_TABLE, 8);
+                                var_s3_2 += 4;
+                            } else {
+                                goto block_151;
+                            }
+                        } else {
+                            goto block_131;
+                        }
+                    } else {
+                        var_v0_6 = gnPlayerCount < 2;
+block_131:
+                        if (var_v0_6 == 0) {
+                            if (geTypeMenu != MT_1P_PUZZLE_STAGE3D) {
+                                if (var_s1_5 == 1) {
+                                    PlaySE(SFX_INIT_TABLE, 0x16A);
+                                    var_s3_2 += 4;
+                                } else {
+                                    PlaySE(SFX_INIT_TABLE, 0x169);
+                                    var_s3_2 += 4;
+                                }
+                            } else {
+                                goto block_151;
+                            }
+                        } else if (geTypeMenu == MT_PLAY) {
+                            PlaySE(SFX_INIT_TABLE, 3);
+                            var_s3_2 += 4;
+                        } else {
+                            PlaySE(SFX_INIT_TABLE, 2);
+                            var_s3_2 += 4;
+                        }
+                    }
+                } else if (temp_v1_4 == 0x21) {
+                    if ((gnPlayerCount < 2) || (*var_s2_2 == 0)) {
+                        if (gnCountMenu == MT_MANY) {
+                            gMain = GMAIN_TITLE;
+                            gReset = -1;
+                        } else {
+                            var_fp = 0;
+                            if (gnCountMenu >= 2) {
+                                var_fp = -1;
+                                if (menuSetScreen((&gnCountMenu)[gnCountMenu], -1) != nfalse) {
+                                    gnCountMenu -= 1;
+                                } else {
+                                    var_fp = 0;
+                                }
+                            }
+                        }
+                        if (var_fp != 0) {
+                            goto block_149;
+                        }
+                        (var_s3_2 + &sp20)->unk_10 = 0;
+                        goto block_151;
+                    }
+block_149:
+                    *var_s2_2 = 0;
+                    func_800276CC_usa(giScreenMenu, &sp40, (s32) var_s1_5);
+                    func_80027618_usa(giScreenMenu, sp40, var_s1_5);
+                    PlaySE(SFX_INIT_TABLE, 6);
+                    var_s3_2 += 4;
+                } else {
+block_151:
+                    var_s3_2 += 4;
+                }
+                var_s1_5 += 1;
+                var_s2_2 += 4;
+            } while ((s32) var_s1_5 < gnPlayerCount);
+        }
+        screenTick((screenTick_arg0 *) &sp30);
+        temp_v1_6 = gnPlayerCount;
+        var_s1_6 = 0;
+        if (temp_v1_6 > 0) {
+            var_s0_2 = &sp20;
+            do {
+                temp_v0_2 = var_s0_2->unk_18;
+                if (temp_v0_2 == 0x20) {
+                    if (temp_v1_6 >= 2) {
+                        if (geTypeMenu != MT_1P_PUZZLE_STAGE3D) {
+                            if (var_s1_6 == 1) {
+                                PlaySE(SFX_INIT_TABLE, 0x16A);
+                            } else {
+                                PlaySE(SFX_INIT_TABLE, 0x169);
+                            }
+                        }
+                    } else if (geTypeMenu == MT_PLAY) {
+                        PlaySE(SFX_INIT_TABLE, 3);
+                    } else {
+                        PlaySE(SFX_INIT_TABLE, 2);
+                    }
+                } else if (temp_v0_2 == 0x21) {
+                    PlaySE(SFX_INIT_TABLE, 6);
+                } else {
+                    temp_a0_3 = var_s0_2->unk_10;
+                    if (((temp_a0_3 != 0) & (temp_a0_3 != 0x20)) && (temp_a0_3 != 0x21)) {
+                        func_80019F44_usa(giScreenMenu, var_s1_6, &sp30);
+                    }
+                }
+                var_s1_6 += 1;
+                var_s0_2 += 4;
+            } while (var_s1_6 < gnPlayerCount);
+        }
+        var_s1_7 = 0;
+        menuTickFairy(giScreenMenu, B_8018A910_usa, -1, 0, 0, 0, 4U, 0);
+        menuTickFairy(giScreenMenuLast, B_8018A910_usa, -1, 0, 0, 0, 4U, 0);
+        var_a0_5 = &B_8018ABA8_usa;
+        var_v1_4 = 0;
+        do {
+            temp_v0_3 = *(&gTheGame.controller[0].unk_0E + var_v1_4);
+            var_v1_4 += 0x10;
+            var_s1_7 += 1;
+            *var_a0_5 = (s32) temp_v0_3;
+            var_a0_5 += 4;
+        } while (var_s1_7 < 2);
+    }
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/menu", DoMenu);
+#endif
 #endif
 
 #if VERSION_EUR

@@ -247,7 +247,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/controller", func_80047124_eur);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/controller", func_80047234_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/controller", func_80046F8C_usa);
 #endif
 
 #if VERSION_EUR
@@ -267,7 +267,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/controller", func_800458A4_fra);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/controller", func_800459B4_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/controller", func_80046F8C_usa);
 #endif
 
 #if VERSION_FRA
@@ -287,7 +287,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/controller", func_80045A14_ger);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/controller", func_80045B24_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/controller", func_80046F8C_usa);
 #endif
 
 #if VERSION_GER
