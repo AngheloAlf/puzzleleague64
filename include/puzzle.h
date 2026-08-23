@@ -9,11 +9,11 @@ struct tetWell;
 struct struct_gInfo_unk_00068;
 
 // TODO: either arg1 or arg2 is `level`
-s32 Match2DPuzzle(char **ptr, s32 arg1, s32 arg2);
-s32 func_80088A48_usa(char **arg0, s32 arg1, s32 arg2);
-s32 Init2DPuzzle(struct tetWell *well, struct cursor_t *cursor, char *ptr, s32 number);
+s32 Match2DPuzzle(u8 **ptr, s32 arg1, s32 arg2);
+s32 func_80088A48_usa(u8 **arg0, s32 arg1, s32 arg2);
+s32 Init2DPuzzle(struct tetWell *well, struct cursor_t *cursor, u8 *ptr, s32 number);
 // void func_80088C08_usa();
-s32 Init3DPuzzle(struct tetWell *well, struct cursor_t *cursor, char *ptr, s32 number);
+s32 Init3DPuzzle(struct tetWell *well, struct cursor_t *cursor, u8 *ptr, s32 number);
 // void func_80088E38_usa();
 // void func_80088F94_usa();
 // void func_80089108_usa();

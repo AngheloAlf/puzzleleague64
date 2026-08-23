@@ -205,7 +205,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/tetris", func_80089BE0_usa);
 // Inline issue (InitBlockPattern)
 void InitTetrisWell(void) {
     char sp10[18];
-    char *sp28;
+    u8 *sp28;
     cursor_t *sp34;
     s32 var_fp;
     tetWell *temp_s3;
