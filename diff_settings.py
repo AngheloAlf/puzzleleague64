@@ -4,7 +4,7 @@ import argparse
 from pathlib import Path
 
 def add_custom_arguments(parser: argparse.ArgumentParser):
-    version = "us"
+    version = "usa"
 
     make_options = Path(".make_options")
     if make_options.exists():

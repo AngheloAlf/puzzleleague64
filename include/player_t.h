@@ -4,9 +4,14 @@
 #include "ultra64.h"
 #include "unk.h"
 
-typedef struct player_t_unk_002 {
+typedef struct struct_800072A0_usa_arg0_unk_58 {
     /* 0x0 */ UNK_TYPE2 unk_0;
-    /* 0x2 */ UNK_PAD unk_2[0xC];
+    /* 0x2 */ UNK_PAD unk_2[0xA];
+} struct_800072A0_usa_arg0_unk_58; // size = 0xC
+
+typedef struct player_t_unk_002 {
+    /* 0x0 */ struct_800072A0_usa_arg0_unk_58 unk_0;
+    /* 0xD */ UNK_PAD unk_D[0x2];
 } player_t_unk_002; // size = 0xE
 
 typedef struct player_t_unk_02B {

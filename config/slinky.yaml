@@ -129,6 +129,7 @@ segments:
       - { path: "asm/{version}/data/main/title.bss.o", include_if_any: [[version, usa]] }
 
       - { path: src/main/menu.o }
+      - { path: "asm/{version}/data/main/menu.data.o" }
       - { path: "asm/{version}/data/main/menu.bss.o", include_if_any: [[version, usa]] }
 
       - { path: "asm/{version}/data/main/800C9B50.bss.o", include_if_any: [[version, eur]] }
@@ -144,11 +145,6 @@ segments:
 
       - { path: src/main/bitmap.o }
       - { path: src/main/image.o }
-
-      - { path: "asm/{version}/data/main/0B64B0.data.o", include_if_any: [[version, usa]] }
-      - { path: "asm/{version}/data/main/0B5060.data.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/data/main/0B69B0.data.o", include_if_any: [[version, eur]] }
-      - { path: "asm/{version}/data/main/0AC290.data.o", include_if_any: [[version, ger]] }
 
       - { path: src/main/screen.o }
       - { path: src/main/story.o }

@@ -20,11 +20,9 @@
 #include "sound.h"
 #include "the_game.h"
 
-#if VERSION_USA
 u32 D_800B5890_usa[] = {
     0xFF000000, 0x00FF0000, 0x0000FF00, 0x00FFFF00, 0xFF00FF00, 0xFFFF0000, 0x00000000,
 };
-#endif
 
 extern const char RO_STR_800C3128_usa[];
 extern const char RO_STR_800C3144_usa[];

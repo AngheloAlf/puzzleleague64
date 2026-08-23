@@ -421,7 +421,7 @@ segments:
       - [0x0B4710, data, main/0B4710]
       - [0x0B5F30, .data, main/rom_offsets]
       - [0x0B6490, .data, main/title]
-      - [0x0B64B0, data, main/0B64B0]
+      - [0x0B64B0, data, main/menu]
       - [0x0B7010, .data, main/screen]
       - [0x0B7030, data, main/peel]
       - [0x0B7050, .data, main/02E800]

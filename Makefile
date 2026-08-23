@@ -152,6 +152,8 @@ CHECK_WARNINGS := -Wall -Wextra -Wimplicit-fallthrough -Wno-unknown-pragmas -Wno
 
 ifneq ($(WERROR), 0)
     CHECK_WARNINGS += -Werror
+else
+	CHECK_WARNINGS += -Wno-error=int-conversion
 endif
 
 # Have CC_CHECK pretend to be a MIPS compiler
