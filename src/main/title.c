@@ -29,7 +29,7 @@ typedef struct struct_gpData {
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ s32 unk_10;
     /* 0x14 */ s32 unk_14; // TODO: enum?
-} struct_gpData; // size = 0x18
+} struct_gpData;           // size = 0x18
 
 static s32 B_8018A7F0_usa;
 static struct_gpData *gpData;
@@ -38,13 +38,12 @@ static struct_gpData *gpData;
 // no longer static on other versions
 static
 #endif
-s32 B_8018A7F8_usa;
+    s32 B_8018A7F8_usa;
 
 static f32 B_FLT_8018A7FC_usa;
 static f32 B_FLT_8018A800_usa;
 static f32 B_FLT_8018A804_usa;
 static u32 B_8018A808_usa;
-
 
 u32 D_800B5890_usa[] = {
     0xFF000000, 0x00FF0000, 0x0000FF00, 0x00FFFF00, 0xFF00FF00, 0xFFFF0000, 0x00000000,
@@ -119,7 +118,7 @@ void func_80005EC0_usa(Gfx **gfxP, s32 arg1 UNUSED, s32 arg2) {
                 u32 color = GPACK_RGBA5551((s32)var_fv1, (s32)var_ft1, (s32)var_ft0, 1);
 
                 gDPSetFillColor(gfx++, (color << 16) | color);
-                gDPFillRectangle(gfx++, 0, var_t9, SCREEN_WIDTH-1, var_t9);
+                gDPFillRectangle(gfx++, 0, var_t9, SCREEN_WIDTH - 1, var_t9);
 
                 var_fv1 += 256.0 / SCREEN_HEIGHT;
                 if (var_fv1 >= 256.0) {
@@ -140,20 +139,22 @@ void func_80005EC0_usa(Gfx **gfxP, s32 arg1 UNUSED, s32 arg2) {
 
         case 0x6E:
             gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-            gSPClearGeometryMode(gfx++, G_ZBUFFER | G_CULL_BOTH | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_CLIPPING);
+            gSPClearGeometryMode(gfx++, G_ZBUFFER | G_CULL_BOTH | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR |
+                                            G_LOD | G_CLIPPING);
             break;
 
         case 0x78:
             gDPPipeSync(gfx++);
             gDPSetScissor(gfx++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-            gSPClearGeometryMode(gfx++, G_ZBUFFER | G_CULL_BOTH | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_CLIPPING);
+            gSPClearGeometryMode(gfx++, G_ZBUFFER | G_CULL_BOTH | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR |
+                                            G_LOD | G_CLIPPING);
             gSPTexture(gfx++, 0x8000, 0x8000, 0, G_TX_RENDERTILE, G_OFF);
             gDPSetCycleType(gfx++, G_CYC_FILL);
             gDPSetRenderMode(gfx++, G_RM_NOOP, G_RM_NOOP2);
             gDPSetFillColor(gfx++, (GPACK_RGBA5551(255, 0, 0, 1) << 16) | GPACK_RGBA5551(255, 0, 0, 1));
 
             //! @bug: reading from unset variable var_t9
-            gDPFillRectangle(gfx++, 0, var_t9, SCREEN_WIDTH-1, var_t9);
+            gDPFillRectangle(gfx++, 0, var_t9, SCREEN_WIDTH - 1, var_t9);
             break;
     }
 
@@ -267,18 +268,24 @@ void DoTitle(void) {
                 giButton = (giButton + 1) % ARRAY_COUNTU(ganButton);
 
                 // Cheat code: Start from level 50~99 in Marathon mode
-                if ((ganButton[(giButton - 4) % ARRAY_COUNTU(ganButton)] == B_BUTTON) && (ganButton[(giButton - 3) % ARRAY_COUNTU(ganButton)] == A_BUTTON)) {
-                    if ((ganButton[(giButton - 2) % ARRAY_COUNTU(ganButton)] == L_TRIG) && (ganButton[(giButton - 1) % ARRAY_COUNTU(ganButton)] == L_TRIG)) {
+                if ((ganButton[(giButton - 4) % ARRAY_COUNTU(ganButton)] == B_BUTTON) &&
+                    (ganButton[(giButton - 3) % ARRAY_COUNTU(ganButton)] == A_BUTTON)) {
+                    if ((ganButton[(giButton - 2) % ARRAY_COUNTU(ganButton)] == L_TRIG) &&
+                        (ganButton[(giButton - 1) % ARRAY_COUNTU(ganButton)] == L_TRIG)) {
                         gGameStatus ^= 1;
                         PlaySE(SFX_INIT_TABLE, 9);
                     }
                 }
 
                 // Cheat code: Unlock all puzzles in Puzzle University
-                if ((ganButton[(giButton - 8) % ARRAY_COUNTU(ganButton)] == A_BUTTON) && (ganButton[(giButton - 7) % ARRAY_COUNTU(ganButton)] == B_BUTTON)) {
-                    if ((ganButton[(giButton - 6) % ARRAY_COUNTU(ganButton)] == R_TRIG) && (ganButton[(giButton - 5) % ARRAY_COUNTU(ganButton)] == A_BUTTON)) {
-                        if ((ganButton[(giButton - 4) % ARRAY_COUNTU(ganButton)] == A_BUTTON) && (ganButton[(giButton - 3) % ARRAY_COUNTU(ganButton)] == B_BUTTON)) {
-                            if ((ganButton[(giButton - 2) % ARRAY_COUNTU(ganButton)] == R_TRIG) && (ganButton[(giButton - 1) % ARRAY_COUNTU(ganButton)] == A_BUTTON)) {
+                if ((ganButton[(giButton - 8) % ARRAY_COUNTU(ganButton)] == A_BUTTON) &&
+                    (ganButton[(giButton - 7) % ARRAY_COUNTU(ganButton)] == B_BUTTON)) {
+                    if ((ganButton[(giButton - 6) % ARRAY_COUNTU(ganButton)] == R_TRIG) &&
+                        (ganButton[(giButton - 5) % ARRAY_COUNTU(ganButton)] == A_BUTTON)) {
+                        if ((ganButton[(giButton - 4) % ARRAY_COUNTU(ganButton)] == A_BUTTON) &&
+                            (ganButton[(giButton - 3) % ARRAY_COUNTU(ganButton)] == B_BUTTON)) {
+                            if ((ganButton[(giButton - 2) % ARRAY_COUNTU(ganButton)] == R_TRIG) &&
+                                (ganButton[(giButton - 1) % ARRAY_COUNTU(ganButton)] == A_BUTTON)) {
                                 B_8021BA98_usa = ~B_8021BA98_usa;
                                 PlaySE(SFX_INIT_TABLE, 9);
                             }
@@ -404,7 +411,8 @@ void DoTitle(void) {
             }
         }
 
-        if ((B_8018A7F0_usa == 0) && (peelActive() == 0) && (gReset == 0) && !screenFlushing() && !screenChangePending()) {
+        if ((B_8018A7F0_usa == 0) && (peelActive() == 0) && (gReset == 0) && !screenFlushing() &&
+            !screenChangePending()) {
             if (func_8000628C_usa() && func_80024BF4_usa(&heap)) {
                 PlaySE(SFX_INIT_TABLE, 2);
                 if (func_80024BF4_usa(&heap) && (HVQM2Util_Play((void *)"INTRO.HVQM", 0x1000U, heap) != 0)) {

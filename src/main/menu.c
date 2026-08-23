@@ -90,7 +90,6 @@ typedef enum enum_TypeMenu {
     MT_STAGE_CLEAR = 66,
 } enum_TypeMenu;
 
-
 void func_80009228_usa(s32 arg0, s32 arg1, s32 *arg2);
 void func_800095F8_usa(s32 arg0, s32 arg1, s32 *arg2);
 void func_80009DBC_usa(s32 arg0);
@@ -120,7 +119,7 @@ void func_80014970_usa(Gfx **gfxP, s32 arg1, s32 arg2);
 void func_80016690_usa(s32 arg0, s32 arg1, s32 *arg2);
 void func_80016C34_usa(s32 arg0, s32 arg1, s32 *arg2);
 void func_80017E18_usa(s32 arg0, s32 arg1, s32 *arg2);
-void func_8001A50C_usa(Gfx **gfxP, s32 arg1, s32 arg2);
+
 void func_8001BFF0_usa(s32 arg0);
 void func_8001C034_usa(s32 arg0);
 void func_8001C070_usa(s32 arg0, s32 arg1, s32 *arg2);
@@ -141,18 +140,17 @@ void func_8001C79C_usa(s32 arg0, s32 arg1, s32 *arg2);
 void func_8001C804_usa(s32 arg0);
 void func_8001C828_usa(s32 arg0, s32 arg1, s32 *arg2);
 
-
 typedef void struct_gaMenuData_pfInit(s32);
 typedef void struct_gaMenuData_pfTick(s32, s32, s32 *);
 
 typedef struct struct_gaMenuData {
-    /* 0x00 */ const char *szName;                /* Original name: szName */
+    /* 0x00 */ const char *szName;               /* Original name: szName */
     /* 0x04 */ struct_gaMenuData_pfInit *pfInit; /* Original name: pfInit */
     /* 0x08 */ screenDraw_callback *pfDraw;      /* Original name: pfDraw */
     /* 0x0C */ struct_gaMenuData_pfTick *pfTick; /* Original name: pfTick */
     /* 0x10 */ enum_TypeMenu eType;              /* Original name: eType */
     /* 0x14 */ enum_TypeMenu eTypeNext;          /* Original name: eTypeNext */
-} struct_gaMenuData; // size = 0x18
+} struct_gaMenuData;                             // size = 0x18
 
 nbool menuFind(struct_gaMenuData **ppData, enum_TypeMenu eType);
 
@@ -867,9 +865,9 @@ void func_80009DBC_usa(s32 arg0) {
     B_8018AA06_usa = 0;
     B_8018AA14_usa = D_800B5A10_usa[0];
 
-    #if VERSION_FRA || VERSION_GER
+#if VERSION_FRA || VERSION_GER
     screenShowImage(giScreenMenu, 0x258);
-    #endif
+#endif
 
     screenHideImage(giScreenMenu, 0x259);
     screenHideImage(giScreenMenu, 0x1F4);
@@ -887,7 +885,7 @@ void func_80009DBC_usa(s32 arg0) {
     if (temp == 0) {
         screenHideImage(giScreenMenu, 0x1F4);
     } else {
-        if ((B_8018A830_usa & 8) || (B_8021BA98_usa != 0) ) {
+        if ((B_8018A830_usa & 8) || (B_8021BA98_usa != 0)) {
             var_v0 = 0xE;
         } else {
             var_v0 = 0xA;

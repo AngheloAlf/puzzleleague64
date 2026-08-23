@@ -96,7 +96,7 @@ void func_80009D30_usa(s32, s32);
 // void func_80017E18_usa();
 // void menuFind();
 // void menuLoadData();
-nbool menuSaveData(s32 arg0);
+nbool menuSaveData(s32 iPlayer);
 // void func_800194DC_usa();
 // void func_80019A24_usa();
 // void func_80019DAC_usa();

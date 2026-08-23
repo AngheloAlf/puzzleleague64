@@ -9,7 +9,7 @@ struct cursor_t;
 struct struct_gInfo;
 
 void InitCursor(struct cursor_t *cursor);
-void InitGamePad(s32 arg0);
+void InitGamePad(s32 num);
 void func_80054624_usa(void);
 void InitTetrisState(struct block_t *block);
 void InitDisplayList(struct struct_gInfo *info);

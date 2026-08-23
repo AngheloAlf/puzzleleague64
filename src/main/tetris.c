@@ -25,8 +25,8 @@
 #include "sign.h"
 #include "sound.h"
 #include "text.h"
-#include "title.h"
 #include "the_game.h"
+#include "title.h"
 #include "update.h"
 #include "update3d.h"
 
