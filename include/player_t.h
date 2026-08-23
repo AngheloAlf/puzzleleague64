@@ -5,7 +5,7 @@
 #include "unk.h"
 
 typedef struct struct_800072A0_usa_arg0_unk_58 {
-    /* 0x0 */ UNK_TYPE2 unk_0;
+    /* 0x0 */ UNK_TYPE2 unk_0[UNK_SIZE];
     /* 0x2 */ UNK_PAD unk_2[0xA];
 } struct_800072A0_usa_arg0_unk_58; // size = 0xC
 

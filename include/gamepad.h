@@ -10,7 +10,7 @@ typedef struct gamepad_t {
     /* 0x06 */ u16 hold_button;
     /* 0x08 */ s32 unk_08;
     /* 0x0C */ UNK_TYPE1 unk_0C[2];
-    /* 0x0E */ s16 unk_0E;
+    /* 0x0E */ u16 unk_0E;
 } gamepad_t; // size = 0x10
 
 #if 0

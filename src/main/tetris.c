@@ -25,6 +25,7 @@
 #include "sign.h"
 #include "sound.h"
 #include "text.h"
+#include "title.h"
 #include "the_game.h"
 #include "update.h"
 #include "update3d.h"
@@ -188,15 +189,15 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/tetris", func_80089BE0_usa);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", func_80089FC8_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", func_80089BE0_usa);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tetris", func_80088668_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/tetris", func_80089BE0_usa);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tetris", func_80088828_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/tetris", func_80089BE0_usa);
 #endif
 
 #if VERSION_USA

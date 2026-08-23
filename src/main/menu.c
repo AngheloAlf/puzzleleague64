@@ -784,7 +784,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_80009D68_eur);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_80009DF0_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_80009D30_usa);
 #endif
 
 #if VERSION_FRA
@@ -816,7 +816,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_80009D50_fra);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_80009DD8_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_80009D30_usa);
 #endif
 
 #if VERSION_GER
@@ -848,7 +848,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_80009D50_ger);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_80009DD8_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_80009D30_usa);
 #endif
 
 void func_8001A330_usa(s32 arg0, s32 arg1);
@@ -4607,15 +4607,15 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_8001ACA8_usa);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_8001ADE4_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_8001ACA8_usa);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_8001ADFC_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_8001ACA8_usa);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_8001AE64_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_8001ACA8_usa);
 #endif
 
 /**

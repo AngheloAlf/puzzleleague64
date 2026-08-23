@@ -796,13 +796,7 @@ extern OSThread sIdleThread;
 // extern UNK_TYPE B_8018A7C4_usa;
 extern s16 ts_song_index;
 extern s16 ts_song_buffer;
-extern s32 B_8018A7F0_usa;
-// extern UNK_TYPE gpData;
-extern s32 B_8018A7F8_usa;
-extern f32 B_FLT_8018A7FC_usa;
-extern f32 B_FLT_8018A800_usa;
-extern f32 B_FLT_8018A804_usa;
-extern u32 B_8018A808_usa;
+
 // extern UNK_TYPE B_8018A810_usa;
 // extern UNK_TYPE B_8018A814_usa;
 // extern UNK_TYPE B_8018A818_usa;

@@ -65,17 +65,16 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/dlist", InitCursor);
 INCLUDE_ASM("asm/ger/nonmatchings/main/dlist", InitCursor);
 #endif
 
-// TODO: maybe void InitGamePad(int num /* r1+0x0 */)?
-void InitGamePad(s32 arg0) {
+void InitGamePad(s32 num) {
     // TODO: REGION_NTSC?
 #if VERSION_USA
-    gTheGame.controller[arg0].unk_08 = 0xA;
+    gTheGame.controller[num].unk_08 = 0xA;
 #else
-    gTheGame.controller[arg0].unk_08 = 0x8;
+    gTheGame.controller[num].unk_08 = 0x8;
 #endif
-    gTheGame.controller[arg0].touch_button = 0;
-    gTheGame.controller[arg0].hold_button = 0;
-    gTheGame.controller[arg0].unk_0E = 0;
+    gTheGame.controller[num].touch_button = 0;
+    gTheGame.controller[num].hold_button = 0;
+    gTheGame.controller[num].unk_0E = 0;
 }
 
 void func_80054624_usa(void) {

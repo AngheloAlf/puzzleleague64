@@ -618,6 +618,8 @@ segments:
       - [0x0C8D88, .rodata, main/build]
 
       - { type: bss, vram: 0x800C81B0, name: main/800C81B0 }
+      - { type: .bss, vram: 0x80187F50, name: main/title }
+      - { type: bss, vram: 0x80187F70, name: main/80187F70 }
       - { type: .bss, vram: 0x80188310, name: main/file }
       - { type: bss, vram: 0x8018BB30, name: main/8018BB30 }
       - { type: .bss, vram: 0x8018C1B0, name: main/hvqm2util }
