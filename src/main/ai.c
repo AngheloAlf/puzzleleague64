@@ -27,7 +27,7 @@ void InitAI(tetWell *well, cursor_t *cursor, ai_t *brain) {
     brain->unk_020 = 0;
     brain->unk_024 = -1;
     brain->unk_038 = 0;
-    brain->unk_010 = brain->unk_00C;
+    brain->unk_010 = brain->speed;
     AIClearCommand(brain);
     AIFinishMove(brain);
 
@@ -56,7 +56,7 @@ INLINE void AISetEasy(ai_t *brain, s32 stage) {
 
     brain->unk_014 = characteristic[stage - 1];
     AISetCharacter(brain, stage);
-    brain->unk_00C = 35 - (stage - 1) / 2;
+    brain->speed = 35 - (stage - 1) / 2;
     brain->unk_008 = -1;
 }
 
@@ -67,7 +67,7 @@ INLINE void AISetNormal(ai_t *brain, s32 stage) {
 
     brain->unk_014 = characteristic[stage - 1];
     AISetCharacter(brain, stage);
-    brain->unk_00C = 20 - (stage - 1) / 2;
+    brain->speed = 20 - (stage - 1) / 2;
     if (brain->unk_018 < -3) {
         brain->unk_018 = -3;
     }
@@ -81,7 +81,7 @@ INLINE void AISetHard(ai_t *brain, s32 stage) {
 
     brain->unk_014 = characteristic[stage - 1];
     AISetCharacter(brain, stage);
-    brain->unk_00C = 16 - (stage - 1) / 2;
+    brain->speed = 16 - (stage - 1) / 2;
     if ((brain->unk_018 != -0x63) && (brain->unk_018 != 0)) {
         brain->unk_018--;
     }
@@ -98,29 +98,29 @@ INLINE void AISetSHard(ai_t *brain, s32 stage) {
 
 #if VERSION_USA
     if (stage < 3) {
-        brain->unk_00C = 0xB;
+        brain->speed = 11;
     } else if (stage < 5) {
-        brain->unk_00C = 0xA;
+        brain->speed = 10;
     } else if (stage < 7) {
-        brain->unk_00C = 9;
+        brain->speed = 9;
     } else if (stage < 9) {
-        brain->unk_00C = 8;
+        brain->speed = 8;
     } else {
-        brain->unk_00C = 7;
+        brain->speed = 7;
     }
 #else
     if (stage < 3) {
-        brain->unk_00C = 0xD;
+        brain->speed = 13;
     } else if (stage < 5) {
-        brain->unk_00C = 0xC;
+        brain->speed = 12;
     } else if (stage < 8) {
-        brain->unk_00C = 0xB;
+        brain->speed = 11;
     } else if (stage < 0xB) {
-        brain->unk_00C = 0xA;
-    } else if (stage < 0xE) {
-        brain->unk_00C = 9;
+        brain->speed = 10;
+    } else if (stage < 14) {
+        brain->speed = 9;
     } else {
-        brain->unk_00C = 8;
+        brain->speed = 8;
     }
 #endif
 
@@ -145,25 +145,25 @@ INLINE void AISetUltra(ai_t *brain, s32 stage) {
 
 #if VERSION_USA
     if (stage < 5) {
-        brain->unk_00C = 7;
+        brain->speed = 7;
     } else if (stage < 9) {
-        brain->unk_00C = 6;
-    } else if (stage < 0xD) {
-        brain->unk_00C = 5;
+        brain->speed = 6;
+    } else if (stage < 13) {
+        brain->speed = 5;
     } else {
-        brain->unk_00C = 4;
+        brain->speed = 4;
     }
 #else
     if (stage < 3) {
-        brain->unk_00C = 0xB;
+        brain->speed = 11;
     } else if (stage < 5) {
-        brain->unk_00C = 0xA;
+        brain->speed = 10;
     } else if (stage < 7) {
-        brain->unk_00C = 9;
+        brain->speed = 9;
     } else if (stage < 9) {
-        brain->unk_00C = 8;
+        brain->speed = 8;
     } else {
-        brain->unk_00C = 7;
+        brain->speed = 7;
     }
 #endif
 
@@ -255,7 +255,7 @@ void AISetLevel(ai_t *brain, s32 game, s32 stage) {
     }
 
 #if REGION_PAL
-    brain->unk_00C = ADJUST_FRAMERATE(brain->unk_00C);
+    brain->speed = ADJUST_FRAMERATE(brain->speed);
 #endif
 }
 
@@ -424,7 +424,7 @@ s32 AIHoriMove(ai_t *brain, s32 column) {
     s32 temp;
     s32 count;
 
-    if ((column == 5) && (gTheGame.unk_9C0C != 2)) {
+    if ((column == 5) && (gTheGame.dimension != DIMENSION_3D)) {
         temp = 4;
     } else {
         temp = MAX(column, 0);
@@ -3150,18 +3150,18 @@ void AIMove(tetWell *well, cursor_t *cursor, ai_t *brain, s32 num) {
     brain->unk_010--;
     if ((brain->unk_010 <= 0) && (brain->unk_124 != brain->unk_128)) {
         if (AnimationRandom(0x177) % 3 == 0) {
-            brain->unk_010 = brain->unk_00C + AnimationRandom(2);
+            brain->unk_010 = brain->speed + AnimationRandom(2);
         } else {
-            brain->unk_010 = brain->unk_00C - AnimationRandom(2);
+            brain->unk_010 = brain->speed - AnimationRandom(2);
         }
 
         if (well->unk_43F4 != 0) {
-            brain->unk_010 = brain->unk_00C - AnimationRandom(3);
+            brain->unk_010 = brain->speed - AnimationRandom(3);
         } else if (brain->unk_020 != 0) {
             brain->unk_010 = brain->unk_010 - AnimationRandom(3);
         }
 
-        if (gTheGame.unk_9C0C == 1) {
+        if (gTheGame.dimension == DIMENSION_2D) {
             AI2DMove(well, cursor, brain, num);
         } else {
             AI3DMove(well, cursor, brain, num);
@@ -3264,7 +3264,7 @@ void AI2DMove(tetWell *well, cursor_t *cursor, ai_t *brain, s32 num) {
     }
 
     if (sound) {
-        if (gTheGame.unk_9C08 == 1) {
+        if (gTheGame.totalPlayer == 1) {
             PlaySE(SFX_INIT_TABLE, 0x96);
         } else if (num == 0) {
             PlaySE(SFX_INIT_TABLE, 0x97);
@@ -3343,7 +3343,7 @@ void AI3DMove(tetWell *well, cursor_t *cursor, ai_t *brain, s32 num) {
     }
 
     if (sound) {
-        if (gTheGame.unk_9C08 == 1) {
+        if (gTheGame.totalPlayer == 1) {
             PlaySE(SFX_INIT_TABLE, 0x96);
         } else if (num == 0) {
             PlaySE(SFX_INIT_TABLE, 0x97);

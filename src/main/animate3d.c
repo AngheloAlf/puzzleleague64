@@ -186,7 +186,7 @@ void Add3DNewRow(tetWell *well, cursor_t *cursor, s32 num) {
     sp14->y = var_v0;
 
     if (sp24 != 0) {
-        if (gTheGame.unk_9C08 == 1) {
+        if (gTheGame.totalPlayer == 1) {
             PlaySE(&SFX_INIT_TABLE, 0x96);
         } else if (sp1C == 0) {
             PlaySE(&SFX_INIT_TABLE, 0x97);

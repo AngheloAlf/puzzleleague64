@@ -31,7 +31,7 @@ typedef struct struct_80192F80_usa {
 } struct_80192F80_usa; // size = 0x38
 
 extern struct_80192F80_usa *B_80192F80_usa;
-extern s32 B_801C6EF0_usa;
+extern Dimension B_801C6EF0_usa;
 
 struct_imageLoad_arg0 *D_800B6790_usa = NULL;
 
@@ -211,7 +211,7 @@ void func_800410A4_usa(void) {
     if (B_80192F80_usa->unk_08 != 0) {
         var_s0 = (var_s1 != 0) ? 15 : 0;
     } else {
-        var_s0 = gTheGame.menu[var_s1].unk_4 / 100;
+        var_s0 = gTheGame.menu[var_s1].stage / 100;
     }
 
     if (var_s0 >= ARRAY_COUNT(D_800B6794_usa)) {
@@ -358,7 +358,7 @@ void func_8004123C_usa(s32 arg0) {
                 if (gSelection == 0x96) {
                     if (B_80192F80_usa->unk_1C == 0) {
                         PlaySE(SFX_INIT_TABLE, 0);
-                        func_80005780_usa(gTheGame.menu[0].unk_4);
+                        func_80005780_usa(gTheGame.menu[0].stage);
                     } else if (B_80192F80_usa->unk_1C == 8) {
                         PlaySE(SFX_INIT_TABLE, 0);
                         func_80005780_usa(0x11);
@@ -451,13 +451,13 @@ void func_8004123C_usa(s32 arg0) {
                 if ((B_80192F80_usa->unk_08 != 0) && (B_80192F80_usa->unk_30 == 0)) {
                     gMain = GMAIN_384;
                     B_8019CF98_usa = 0x10;
-                    gTheGame.menu[0].unk_4 = 1;
+                    gTheGame.menu[0].stage = 1;
                     gReset = -1;
                     D_800B5A1C_usa = 0;
-                    gTheGame.menu[1].unk_4 = 0x641;
-                    gTheGame.tetrisWell[0].unk_4404 = 0;
-                    gTheGame.tetrisWell[1].unk_4404 = 0;
-                    gTheGame.unk_9C0C = B_801C6EF0_usa;
+                    gTheGame.menu[1].stage = 0x641;
+                    gTheGame.tetrisWell[0].win = 0;
+                    gTheGame.tetrisWell[1].win = 0;
+                    gTheGame.dimension = B_801C6EF0_usa;
                 }
             }
             break;
@@ -519,30 +519,30 @@ void func_8004123C_usa(s32 arg0) {
         var_s0 = -1;
 
         if (B_80192F80_usa->unk_1C == 8) {
-            if (gTheGame.menu[0].unk_0 == 4) {
+            if (gTheGame.menu[0].game == 4) {
                 func_8002B85C_usa(5, 3);
-            } else if (gTheGame.menu[0].unk_0 == 5) {
+            } else if (gTheGame.menu[0].game == 5) {
                 func_8002B85C_usa(5, 6);
             }
         } else if (B_80192F80_usa->unk_1C == 1) {
             func_8002B85C_usa(3, 0);
-        } else if (gTheGame.menu[0].unk_4 == 0xC) {
-            if (gTheGame.menu[0].unk_0 == 1) {
+        } else if (gTheGame.menu[0].stage == 0xC) {
+            if (gTheGame.menu[0].game == 1) {
                 func_8002B85C_usa(5, 0xA);
                 var_s0 = 0;
             } else {
                 func_8002B85C_usa(2, 1);
             }
-        } else if ((gTheGame.menu[0].unk_4 == 0xF) && (gTheGame.menu[0].unk_0 == 2)) {
+        } else if ((gTheGame.menu[0].stage == 0xF) && (gTheGame.menu[0].game == 2)) {
             func_8002B85C_usa(5, 0xB);
             var_s0 = 0;
-        } else if (gTheGame.menu[0].unk_4 == 0x10) {
+        } else if (gTheGame.menu[0].stage == 0x10) {
             func_8002B85C_usa(5, 7);
         } else {
             func_8002B85C_usa(3, 0);
         }
 
-        if ((gTheGame.menu[0].unk_4 >= 2) && (B_80192F80_usa->unk_1C != 1) && var_s0) {
+        if ((gTheGame.menu[0].stage >= 2) && (B_80192F80_usa->unk_1C != 1) && var_s0) {
             func_80002D8C_usa(0x1E);
             PlayMIDI(BGM_INIT_TABLE, 0x3D, 0, 1);
         }
@@ -565,10 +565,10 @@ void func_80041F1C_usa(void **heapP, s32 arg1) {
     B_80192F80_usa->unk_04 = 0;
     B_80192F80_usa->unk_08 = (B_8019CF98_usa == 0x10) ? -1 : 0;
 
-    if (((gTheGame.menu[0].unk_4 == 1) && (B_80192F80_usa->unk_18 = 0, (gTheGame.menu[0].unk_4 == 1))) ||
+    if (((gTheGame.menu[0].stage == 1) && (B_80192F80_usa->unk_18 = 0, (gTheGame.menu[0].stage == 1))) ||
         (gSelection == 0x96) || (((gSelection == 0xA0) || (gSelection == 0xB4)) != 0) || (gSelection == 0xC8)) {
-        if (gTheGame.menu[0].unk_4 < 0xF) {
-            var_v0 = D_800B67E4_usa[gTheGame.menu[0].unk_4 - 1];
+        if (gTheGame.menu[0].stage < 0xF) {
+            var_v0 = D_800B67E4_usa[gTheGame.menu[0].stage - 1];
         } else {
             var_v0 = 0;
         }
@@ -604,8 +604,8 @@ void func_80041F1C_usa(void **heapP, s32 arg1) {
             } else if (arg1 == 1) {
                 sprintf(sp20, "ELITEFOUR");
             } else {
-                var_s0 = (gTheGame.menu[0].unk_4 > 1) ? -1 : 0;
-                sprintf(sp20, "RESULT%d", gTheGame.menu[0].unk_4 - 1);
+                var_s0 = (gTheGame.menu[0].stage > 1) ? -1 : 0;
+                sprintf(sp20, "RESULT%d", gTheGame.menu[0].stage - 1);
             }
         } else if ((gSelection == 0xA0) || (gSelection == 0xB4) || (gSelection == 0xC8)) {
             sprintf(sp20, "2P-WINNER");
@@ -635,7 +635,7 @@ void func_80041F1C_usa(void **heapP, s32 arg1) {
     func_80002D8C_usa(0x1E);
 
     if (gSelection == 0x96) {
-        if ((gTheGame.menu[0].unk_4 < 2) || ((arg1 ^ 1) == 0)) {
+        if ((gTheGame.menu[0].stage < 2) || ((arg1 ^ 1) == 0)) {
             PlayMIDI(BGM_INIT_TABLE, 0x46, 0, 2);
         } else {
             PlayMIDI(BGM_INIT_TABLE, 0x41, 0, 1);

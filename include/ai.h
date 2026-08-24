@@ -21,7 +21,7 @@ typedef struct ai_t {
     /* 0x000 */ s32 cursor_x;
     /* 0x004 */ s32 cursor_y;
     /* 0x008 */ s32 unk_008; // think?
-    /* 0x00C */ s32 unk_00C; // speed?
+    /* 0x00C */ s32 speed;
     /* 0x010 */ s32 unk_010;
     /* 0x014 */ u8 unk_014; // character?
     /* 0x015 */ UNK_PAD unk_015[0x3];

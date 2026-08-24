@@ -75,7 +75,7 @@ void InitTutorial(void) {
     B_801C6E58_usa = 1;
     Pon_Image_Heap = &gBufferHeap[SEGMENT_ROM_SIZE(segment_0CA4A0)];
     gCounter = 0;
-    gTheGame.unk_9C0C = 1;
+    gTheGame.dimension = DIMENSION_2D;
     if (gGameStatus & 0x80) {
         gGameStatus <<= 0x10;
         gGameStatus |= 0x80;
@@ -101,7 +101,7 @@ void InitTutorial(void) {
     bcopy(&B_801F9C48_usa[1], &B_801F9C48_usa[0], 0x18);
 
     LoadFairySoundData(0x19, s0 / 100, s0 / 100);
-    if (gTheGame.menu[0].unk_0 == 5) {
+    if (gTheGame.menu[0].game == 5) {
         Init3DMatrixBlocks();
     }
     InitMiscStuff();
@@ -112,8 +112,8 @@ void InitTutorial(void) {
     gWhatever = 0;
     screenLoad("HOWTO.SBF", &Pon_Image_Heap);
 
-    switch (gTheGame.menu[0].unk_0) { /* switch 1 */
-        case 0x1:                     /* switch 1 */
+    switch (gTheGame.menu[0].game) { /* switch 1 */
+        case 0x1:                    /* switch 1 */
             var_s7 = screenSet("HOWTO-BASIC1", 0x401);
             break;
 
@@ -121,7 +121,7 @@ void InitTutorial(void) {
             var_s7 = screenSet("HOWTO-BASIC2", 0x401);
             break;
         case 0x5: /* switch 1 */
-            gTheGame.unk_9C0C = 2;
+            gTheGame.dimension = DIMENSION_3D;
             var_s7 = screenSet("HOWTO-3D", 0x401);
             break;
         case 0x3: /* switch 1 */
@@ -132,7 +132,7 @@ void InitTutorial(void) {
             break;
     }
 
-    if (gTheGame.menu[0].unk_0 == 3) {
+    if (gTheGame.menu[0].game == 3) {
         menuInitFairy(MFP_LEFT_MIDDLE);
     } else {
         menuInitFairy(MFP_RIGHT);
@@ -166,7 +166,7 @@ void InitTutorial(void) {
     var_a0_3[1].s.objY = 0x7C;
     var_a0_3[1].s.scaleW = 0x4B;
 
-    if (gTheGame.menu[0].unk_0 != 3) {
+    if (gTheGame.menu[0].game != 3) {
         gTheGame.unk_9B50[1].b.frameH = 0;
     }
 
@@ -178,10 +178,10 @@ void InitTutorial(void) {
     st_Attack3DTopPosition[1][0] = 1;
     attack_chain2[0] = 0;
     attack_chain2[1] = 0;
-    gTheGame.unk_9C08 = 2;
+    gTheGame.totalPlayer = 2;
 
     s3 = s6;
-    for (var_s2 = 0; var_s2 < gTheGame.unk_9C08; var_s2++) {
+    for (var_s2 = 0; var_s2 < gTheGame.totalPlayer; var_s2++) {
         s2 = &gTheGame.tetrisWell[var_s2];
 
         s2->unk_43B0 = 0;
@@ -197,7 +197,7 @@ void InitTutorial(void) {
         s2->unk_43F8 = 0;
         s2->unk_43FC = 0;
 
-        if (gTheGame.unk_9C0C == 1) {
+        if (gTheGame.dimension == DIMENSION_2D) {
             s1 = &gTheGame.cursorBlock[var_s2];
             InitCursor(s1);
             Init2DCursor(s1, var_s2);
@@ -214,8 +214,8 @@ void InitTutorial(void) {
     s2 = &gTheGame.tetrisWell[0];
     s1 = &gTheGame.cursorBlock[0];
 
-    switch (gTheGame.menu[0].unk_0) { /* switch 2 */
-        case 0x1:                     /* switch 2 */
+    switch (gTheGame.menu[0].game) { /* switch 2 */
+        case 0x1:                    /* switch 2 */
             Init2DPuzzle(s2, s1, tutorial1, 1);
             s3->unk_03C = 1;
             break;
@@ -259,7 +259,7 @@ void InitTutorial(void) {
 
     s1->unk_28[0] = 0;
     s1->unk_28[1] = 0;
-    if (gTheGame.unk_9C0C == 1) {
+    if (gTheGame.dimension == DIMENSION_2D) {
         Init2DNewRow(s2);
         Init2DNewRow(&gTheGame.tetrisWell[1]);
         gMax = 6;
@@ -270,26 +270,26 @@ void InitTutorial(void) {
         gMax = 0x12;
     }
 
-    gTheGame.unk_9C08 = 1;
-    s3->unk_00C = 0xA;
+    gTheGame.totalPlayer = 1;
+    s3->speed = 0xA;
     InitAI(s2, s1, s3);
     s3->unk_040 = 0;
     s3->unk_044 = 0;
     s3->unk_028 = var_s7;
-    s3->unk_02C = (gTheGame.menu[0].unk_0 == 3) ? 2 : 4;
+    s3->unk_02C = (gTheGame.menu[0].game == 3) ? 2 : 4;
 
     s3->unk_038 = 0x64;
     s3->unk_024 = 0;
     if (gGameStatus & 0x80) {
-        if (gTheGame.menu[0].unk_0 == 4) {
+        if (gTheGame.menu[0].game == 4) {
             tutorial_move5[0] = 0x9C;
         }
         PlaySE(SFX_INIT_TABLE, 0x7F);
-    } else if (gTheGame.menu[0].unk_0 == 4) {
+    } else if (gTheGame.menu[0].game == 4) {
         tutorial_move5[0] = 0x9E;
     }
 
-    if (gTheGame.unk_9C0C == 1) {
+    if (gTheGame.dimension == DIMENSION_2D) {
         if (B_8021B960_usa != 0x3F) {
             PlayMIDI(BGM_INIT_TABLE, 0x3F, 0, 1);
         }
@@ -315,7 +315,6 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/tutorial", InitTutorial);
 #endif
 
 void TutorialCheckState(tetWell *well, cursor_t *cursor) {
-    s32 temp_s1;
     s32 var_a2;
     s32 col;
 
@@ -328,7 +327,7 @@ void TutorialCheckState(tetWell *well, cursor_t *cursor) {
         return;
     }
 
-    if ((gTheGame.menu[0].unk_0 == 1) || (gTheGame.menu[0].unk_0 == 5)) {
+    if ((gTheGame.menu[0].game == 1) || (gTheGame.menu[0].game == 5)) {
         for (col = 0; col < gMax; col++) {
             block_t *block = &well->block[BLOCK_LEN_ROWS - 1][col];
 
@@ -346,14 +345,13 @@ void TutorialCheckState(tetWell *well, cursor_t *cursor) {
         return;
     }
 
-    temp_s1 = gTheGame.unk_9C0C;
-    if (temp_s1 == 1) {
+    if (gTheGame.dimension == 1) {
         if ((anim_bg == 0) && (anim_sp == 0)) {
             Init2DExplosion(well);
-            gTheGame.unk_9C08 = 2;
+            gTheGame.totalPlayer = 2;
             Init2DGameOverSmoke(well, 0);
             anim_bg = 0x25;
-            gTheGame.unk_9C08 = temp_s1;
+            gTheGame.totalPlayer = 1;
             anim_sp = 0;
             cursor->unk_00 = 0x34C;
             PlaySE(SFX_INIT_TABLE, 0xA0);
@@ -489,7 +487,7 @@ void DoTutorial(void) {
 
     var_a2 = -1;
     temp2 = brainbrain[0].unk_038;
-    switch (gTheGame.menu[0].unk_0) {
+    switch (gTheGame.menu[0].game) {
         case 0x1:
             // Why the `&=`?
             var_a2 &= (temp2 != 0x64) ? -1 : 0;
@@ -533,7 +531,7 @@ void DoTutorial(void) {
 
 void func_8008885C_usa(struct struct_gInfo_unk_00068 *dynamicp) {
     if (!screenFlushing()) {
-        if (gTheGame.unk_9C0C == 1) {
+        if (gTheGame.dimension == DIMENSION_2D) {
             Draw2DMT(dynamicp);
         } else {
             Draw3DMT(dynamicp);

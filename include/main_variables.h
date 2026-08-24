@@ -1392,7 +1392,7 @@ extern TexturePtr B_8021BA60_usa[2];
 extern s8 B_8021BA78_usa;
 // extern UNK_TYPE B_8021BA7C_usa;
 
-extern s32 B_8021BA98_usa;
+extern s32 gbOpenTitle;
 
 extern s32 B_8021BEA0_usa;
 extern struct player_t *gPlayer[];

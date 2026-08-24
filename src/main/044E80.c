@@ -898,17 +898,17 @@ void func_80046648_usa(s32 arg0) {
         case 0x7:
             if (!screenFlushing() && !screenChangePending()) {
                 if (func_80024BF4_usa(&sp10)) {
-                    if (gTheGame.menu[0].unk_0 == 3) {
+                    if (gTheGame.menu[0].game == 3) {
                         HVQM2Util_Play((void *)"GAMEEND.HVQM", 0x1000U, sp10);
                         func_8002B85C_usa(5, 2);
                     } else {
                         HVQM2Util_Play((void *)"MEWINTRO.HVQM", 0x1000U, sp10);
                         gMain = GMAIN_384;
                         gReset = -1;
-                        gTheGame.unk_9C0C = 1;
+                        gTheGame.dimension = DIMENSION_2D;
                         gSelection = 0x96;
-                        gTheGame.unk_9C08 = 2;
-                        gTheGame.menu[0].unk_C = 1;
+                        gTheGame.totalPlayer = 2;
+                        gTheGame.menu[0].misc = 1;
                     }
                 }
             }
@@ -927,8 +927,8 @@ void func_80046648_usa(s32 arg0) {
             if (!screenFlushing() && !screenChangePending()) {
                 if (func_80024BF4_usa(&sp10)) {
                     HVQM2Util_Play((void *)"YOULOSE.HVQM", 0x1000U, sp10);
-                    gTheGame.unk_9C0C = 1;
-                    gTheGame.menu[0].unk_4 = 0x12;
+                    gTheGame.dimension = DIMENSION_2D;
+                    gTheGame.menu[0].stage = 0x12;
                     gMain = GMAIN_BONUS;
                     gReset = -1;
                 }
@@ -978,7 +978,7 @@ void func_80046648_usa(s32 arg0) {
         func_80002D8C_usa(0x1E);
         gReset = -1;
         gMain = GMAIN_TITLE;
-        gTheGame.unk_9C0C = 1;
+        gTheGame.dimension = DIMENSION_2D;
     }
 }
 

@@ -81,7 +81,7 @@ void func_80042428_usa(struct_80192F90_unk_04 *arg0) {
             arg0->unk_4 = 0;
             arg0->unk_8 = 1;
             if ((arg0->unk_C == 1) && (B_80192F90_usa->unk_40 < 2)) {
-                func_80005608_usa(gTheGame.menu[0].unk_4, 2);
+                func_80005608_usa(gTheGame.menu[0].stage, 2);
             }
         }
     } else if (arg0->unk_8 == 1) {
@@ -100,7 +100,7 @@ void func_80042428_usa(struct_80192F90_unk_04 *arg0) {
                     if (B_80192F90_usa->unk_40 == 5) {
                         func_80005608_usa(0xF, 2);
                     } else {
-                        func_80005780_usa(gTheGame.menu[0].unk_4);
+                        func_80005780_usa(gTheGame.menu[0].stage);
                     }
                 }
             }
@@ -187,7 +187,7 @@ void func_800428B4_usa(s32 arg0 UNUSED) {
     }
 
     screenHideImage(B_80192F90_usa->unk_00, 0x3E8);
-    if ((peelActive() == 0) && !screenChangePending()) {
+    if (!peelActive() && !screenChangePending()) {
         func_80042660_usa();
         if ((B_80192F90_usa->unk_34 < -0x14) && (B_80192F90_usa->unk_38 == 0)) {
             B_80192F90_usa->unk_38 = 1;
@@ -233,13 +233,13 @@ void func_800428B4_usa(s32 arg0 UNUSED) {
         D_800B6804_usa = B_80192F90_usa->unk_40;
         if ((B_80192F90_usa->unk_40 >= 2) && (B_80192F90_usa->unk_40 != 5)) {
             func_8002B85C_usa(3, 0);
-        } else if ((gTheGame.menu[0].unk_0 >= 4) && (gTheGame.menu[0].unk_4 >= 0x10)) {
+        } else if ((gTheGame.menu[0].game >= 4) && (gTheGame.menu[0].stage >= 0x10)) {
             gMain = GMAIN_384;
             gReset = -1;
-            gTheGame.unk_9C0C = 1;
+            gTheGame.dimension = DIMENSION_2D;
             gSelection = 0x96;
-            gTheGame.unk_9C08 = 2;
-            gTheGame.menu[0].unk_C = 1;
+            gTheGame.totalPlayer = 2;
+            gTheGame.menu[0].misc = 1;
         } else {
             func_8002B85C_usa(4, 0);
         }
@@ -257,7 +257,7 @@ void func_80042C24_usa(void **heapP, u32 arg1) {
     if (arg1 == 0) {
         func_8001FD0C_usa(&D_800B6800_usa, D_800B6808_usa[B_8019CF98_usa], 0, 0x800054, 0x140, 0xE8, heapP);
         if (screenLoad("OPPONENT.SBF", heapP) != 0) {
-            sprintf(sp20, "TRANSITION%d", gTheGame.menu[0].unk_4);
+            sprintf(sp20, "TRANSITION%d", gTheGame.menu[0].stage);
             B_80192F90_usa->unk_00 = screenSet(sp20, 0xFF001);
             func_80028DC0_usa(B_80192F90_usa->unk_00, 0xC9, 1);
 
@@ -282,10 +282,10 @@ void func_80042C24_usa(void **heapP, u32 arg1) {
             0x0009, 0x0000, 0x0003, 0x0004, 0x0002, 0x0008, 0x000B,
         };
 
-        if (gTheGame.menu[0].unk_4 >= 0xF) {
+        if (gTheGame.menu[0].stage >= 0xF) {
             B_8019CF98_usa = 0;
         } else {
-            B_8019CF98_usa = sp40[gTheGame.menu[0].unk_4 - 1];
+            B_8019CF98_usa = sp40[gTheGame.menu[0].stage - 1];
         }
 
         func_8001FD0C_usa(&D_800B6800_usa, D_800B6808_usa[B_8019CF98_usa], 0, 0x800054, 0x140, 0xE8, heapP);
@@ -309,7 +309,7 @@ void func_80042C24_usa(void **heapP, u32 arg1) {
                     break;
 
                 default:
-                    sprintf(sp20, "TRANSITION%d", gTheGame.menu[0].unk_4);
+                    sprintf(sp20, "TRANSITION%d", gTheGame.menu[0].stage);
                     B_80192F90_usa->unk_00 = screenSet(sp20, 0xFF001);
                     break;
             }

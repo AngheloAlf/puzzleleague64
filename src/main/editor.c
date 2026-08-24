@@ -148,15 +148,15 @@ void DrawEditor(struct_gInfo_unk_00068 *arg0) {
             } else if (B_8018E9C0_usa == 0xB) {
                 gMain = GMAIN_384;
                 gSelection = 0x82;
-                gTheGame.unk_9C08 = 1;
-                gTheGame.unk_9C0C = 1;
-                gTheGame.menu[0].unk_0 = 0;
-                gTheGame.menu[0].unk_8 = 0;
-                gTheGame.tetrisWell[0].unk_4404 = 0;
-                gTheGame.tetrisWell[1].unk_4404 = 0;
-                brainbrain[0].unk_00C = -1;
-                brainbrain[1].unk_00C = -1;
-                gTheGame.menu[0].unk_4 = B_801AB808_usa;
+                gTheGame.totalPlayer = 1;
+                gTheGame.dimension = DIMENSION_2D;
+                gTheGame.menu[0].game = 0;
+                gTheGame.menu[0].speed = 0;
+                gTheGame.tetrisWell[0].win = 0;
+                gTheGame.tetrisWell[1].win = 0;
+                brainbrain[0].speed = -1;
+                brainbrain[1].speed = -1;
+                gTheGame.menu[0].stage = B_801AB808_usa;
             }
         }
     }
@@ -235,7 +235,7 @@ void InitEditor(void) {
     giScreenEdit = -1;
     InitPuzzleEditor(-1);
     func_8008913C_usa(B_801AB808_usa);
-    gTheGame.menu[0].unk_C = 0;
+    gTheGame.menu[0].misc = 0;
     B_8018E9DC_usa = 3;
     B_8018E9E0_usa = 1;
     B_8018E9E4_usa = 1;

@@ -25,6 +25,12 @@
 #define GAME_UNK_9A90_COUNT 4
 #define GAME_PLAYER_COUNT 8
 
+typedef enum Dimension {
+    /* 1 */ DIMENSION_2D = 1,
+    /* 2 */ DIMENSION_3D,
+} Dimension;
+
+
 /* Original name: Game */
 typedef struct Game {
     /* 0x0000 */ tetWell tetrisWell[GAME_BUFFER_LEN]; /* Original name: tetrisWell */
@@ -86,8 +92,8 @@ typedef struct Game {
     /* 0x9B4C */ UNK_TYPE1 unk_9B4C[0x9B50 - 0x9B4C];
     /* 0x9B50 */ uObjBg unk_9B50[4]; // at least 4
     /* 0x9BF0 */ uObjTxtr unk_9BF0; // tlut
-    /* 0x9C08 */ s32 unk_9C08; // totalPlayer?
-    /* 0x9C0C */ s32 unk_9C0C; // dimension?
+    /* 0x9C08 */ s32 totalPlayer;
+    /* 0x9C0C */ Dimension dimension;
     /* 0x9C10 */ s32 unk_9C10;
     /* 0x9C14 */ s32 unk_9C14; // hour?
     /* 0x9C18 */ s32 unk_9C18; // minute?

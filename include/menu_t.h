@@ -27,22 +27,10 @@ typedef enum enum_tetWell_unk_4424 {
 
 
 typedef struct menu_t {
-    /* 0x0 */ s32 unk_0; // TODO: enum?
-    /* 0x4 */ s32 unk_4; // enum_tetWell_unk_4424
-    /* 0x8 */ s32 unk_8;
-    /* 0xC */ s32 unk_C;
+    /* 0x0 */ s32 game; // TODO: enum?
+    /* 0x4 */ s32 stage; // enum_tetWell_unk_4424
+    /* 0x8 */ s32 speed;
+    /* 0xC */ s32 misc;
 } menu_t; // size = 0x10
-
-#if 0
-struct menu_t {
-    // total size: 0x18
-    int game; // offset 0x0, size 0x4
-    int stage; // offset 0x4, size 0x4
-    int speed; // offset 0x8, size 0x4
-    int misc; // offset 0xC, size 0x4
-    int ai; // offset 0x10, size 0x4
-    int player; // offset 0x14, size 0x4
-};
-#endif
 
 #endif

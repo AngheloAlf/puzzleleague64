@@ -750,7 +750,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_80009CA8_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_80009D30_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/menu", menuInitProfile);
 #endif
 
 #if VERSION_EUR
@@ -782,7 +782,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_80009D68_eur);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_80009D30_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/menu", menuInitProfile);
 #endif
 
 #if VERSION_FRA
@@ -814,7 +814,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_80009D50_fra);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_80009D30_usa);
+INCLUDE_ASM("asm/fra/nonmatchings/main/menu", menuInitProfile);
 #endif
 
 #if VERSION_GER
@@ -846,7 +846,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_80009D50_ger);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_80009D30_usa);
+INCLUDE_ASM("asm/ger/nonmatchings/main/menu", menuInitProfile);
 #endif
 
 void func_8001A330_usa(s32 arg0, s32 arg1);
@@ -885,7 +885,7 @@ void func_80009DBC_usa(s32 arg0) {
     if (temp == 0) {
         screenHideImage(giScreenMenu, 0x1F4);
     } else {
-        if ((B_8018A830_usa & 8) || (B_8021BA98_usa != 0)) {
+        if ((B_8018A830_usa & 8) || (gbOpenTitle != 0)) {
             var_v0 = 0xE;
         } else {
             var_v0 = 0xA;
@@ -3591,7 +3591,7 @@ s32 menuLoadData(void) {
             var_s3 += 0x7BC;
         }
 
-        B_8021BA98_usa ^= sp18.unk_18;
+        gbOpenTitle ^= sp18.unk_18;
         B_8018A830_usa = sp18.unk_14;
         D_800B5A18_usa = sp18.unk_30;
         B_8018A91C_usa = sp18.unk_34;
@@ -3663,7 +3663,7 @@ STATIC_INLINE void inlined_function_menuSaveData(struct_800072A0_usa_arg0 *s0, b
     }
 
     s0->unk_14 = B_8018A830_usa & ~0x40;
-    s0->unk_18 = B_8021BA98_usa;
+    s0->unk_18 = gbOpenTitle;
     s0->unk_24 = gGameStatus & 0xFF7F;
     s0->unk_30 = D_800B5A18_usa;
     s0->unk_34 = B_8018A91C_usa;
@@ -4435,19 +4435,19 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_8001A330_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_8001A50C_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/menu", menuDrawProfile);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_8001A50C_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/menu", menuDrawProfile);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_8001A50C_usa);
+INCLUDE_ASM("asm/fra/nonmatchings/main/menu", menuDrawProfile);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_8001A50C_usa);
+INCLUDE_ASM("asm/ger/nonmatchings/main/menu", menuDrawProfile);
 #endif
 
 /**
@@ -4601,19 +4601,19 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_8001ACC8_ger);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_8001ACA8_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/menu", menuFindCharacterMax);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_8001ACA8_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/menu", menuFindCharacterMax);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_8001ACA8_usa);
+INCLUDE_ASM("asm/fra/nonmatchings/main/menu", menuFindCharacterMax);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_8001ACA8_usa);
+INCLUDE_ASM("asm/ger/nonmatchings/main/menu", menuFindCharacterMax);
 #endif
 
 /**
@@ -4734,7 +4734,7 @@ void DoMenu(void) {
     } while (var_s1 < 2);
 
     func_800077AC_usa(&sp20, &sp28);
-    if ((peelActive() != 0) || (screenFlushing() != nfalse)) {
+    if (peelActive() || (screenFlushing() != nfalse)) {
         sp28 = 0;
         sp20 = 0;
         sp2C = 0;
@@ -5136,7 +5136,7 @@ void InitMenu(void) {
 #endif
 
     B_8018A81C_usa = 3;
-    gTheGame.unk_9C0C = 1;
+    gTheGame.dimension = DIMENSION_2D;
     giScreenMenuLast = -1;
     giScreenMenu = -1;
     gbAudioChanged = -1;

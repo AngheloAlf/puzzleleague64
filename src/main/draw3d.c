@@ -446,11 +446,11 @@ void Draw3DTetris(struct_gInfo_unk_00068 *dynamicp) {
 
     gDPSetScissor(glistp++, G_SC_NON_INTERLACE, 0, 31, SCREEN_WIDTH, SCREEN_HEIGHT - 19);
 
-    if (((gMain == GMAIN_388) || (gMain < GMAIN_384)) && ((gTheGame.unk_9C08 == 2) || (gSelection == 0x82))) {
+    if (((gMain == GMAIN_388) || (gMain < GMAIN_384)) && ((gTheGame.totalPlayer == 2) || (gSelection == 0x82))) {
         sp3C = nfalse;
     }
 
-    for (num = 0; num < gTheGame.unk_9C08; num++) {
+    for (num = 0; num < gTheGame.totalPlayer; num++) {
         gDPPipeSync(glistp++);
         gDPSetTextureLUT(glistp++, G_TT_RGBA16);
         gDPLoadTLUT_pal256(glistp++, colorTable);
@@ -504,14 +504,14 @@ void Draw3DTetris(struct_gInfo_unk_00068 *dynamicp) {
     Draw3DText(dynamicp);
     Draw3DMiscStuff(dynamicp);
     if ((gSelection == 0xAA) || (gSelection == 0xB4)) {
-        for (num = 0; num < gTheGame.unk_9C08; num++) {
+        for (num = 0; num < gTheGame.totalPlayer; num++) {
             Draw3DClearSign(dynamicp, num);
         }
     }
 
     Draw3DAnimation(dynamicp, -1, -1);
     if (sp3C) {
-        for (num = 0; num < gTheGame.unk_9C08; num++) {
+        for (num = 0; num < gTheGame.totalPlayer; num++) {
             Draw3DAttackBrick(dynamicp, num, sp28[num]);
             Draw3DExplosion(dynamicp, num);
         }

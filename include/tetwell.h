@@ -51,7 +51,7 @@ typedef struct tetWell {
     /* 0x43F8 */ s32 unk_43F8; // possibly part of "struct state_t state; // offset 0x4AA8, size 0x38", maybe "current_raise"
     /* 0x43FC */ s32 unk_43FC;
     /* 0x4400 */ UNK_TYPE1 unk_4400[0x4];
-    /* 0x4404 */ s32 unk_4404;
+    /* 0x4404 */ s32 win; // inside of struct extra_t extra?
     /* 0x4408 */ UNK_TYPE1 unk_4408[0x14];
     /* 0x441C */ s32 unk_441C;
     /* 0x4420 */ menu_t menu;

@@ -64,8 +64,8 @@ void InitPause(void) {
         guS2DInitBg(bg);
     }
 
-    if (gTheGame.unk_9C08 == 1) {
-        gTheGame.unk_9A90[gTheGame.unk_9C08].s.imagePtr = NULL;
+    if (gTheGame.totalPlayer == 1) {
+        gTheGame.unk_9A90[gTheGame.totalPlayer].s.imagePtr = NULL;
     }
 
     // uObjBg? uObjTxtr? uObjSprite?
@@ -90,7 +90,7 @@ void InitPause(void) {
     gTheGame.unk_90BE = 0;
     gTheGame.unk_90BF = 0;
 
-    if (gTheGame.unk_9C08 == 1) {
+    if (gTheGame.totalPlayer == 1) {
         gTheGame.unk_9A90[0].s.frameX = 137 << 2;
         gTheGame.unk_9A90[0].s.frameY = 75 << 2;
     } else {
@@ -100,7 +100,7 @@ void InitPause(void) {
         gTheGame.unk_9A90[1].s.frameY = 75 << 2;
     }
 
-    if (gTheGame.unk_9C0C == 2) {
+    if (gTheGame.dimension == DIMENSION_3D) {
         for (count = 0; count < GAME_UNK_9A90_COUNT; count++) {
             gTheGame.unk_9A90[count].s.imageYorig = 0;
             gTheGame.unk_9A90[count].s.scaleW = 1 << 10;
@@ -113,8 +113,8 @@ void InitGameOver(void) {
     void *var_s1;
 
     endSegment = Pon_Image_Heap;
-    if (gTheGame.unk_9C0C == 1) {
-        if (gTheGame.unk_9C08 == 1) {
+    if (gTheGame.dimension == DIMENSION_2D) {
+        if (gTheGame.totalPlayer == 1) {
             LOAD_DATA_SEGMENT(endSegment, sign_gameover_2d_1p, Pon_Image_Heap);
         } else {
             LOAD_DATA_SEGMENT(endSegment, sign_gameover_2d_2p, Pon_Image_Heap);
@@ -128,7 +128,7 @@ void InitGameOver(void) {
             Pon_Image_Heap = var_s1 + 0x1A00;
         }
     } else {
-        if (gTheGame.unk_9C08 == 1) {
+        if (gTheGame.totalPlayer == 1) {
             LOAD_DATA_SEGMENT(endSegment, sign_gameover_3d_1p, Pon_Image_Heap);
         } else {
             LOAD_DATA_SEGMENT(endSegment, sign_gameover_3d_2p, Pon_Image_Heap);

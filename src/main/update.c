@@ -214,7 +214,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdateMainState);
 
 #if VERSION_USA || VERSION_EUR
 void UpdateBuffer(struct_gInfo *info) {
-    if (gTheGame.unk_9C0C == 1) {
+    if (gTheGame.dimension == DIMENSION_2D) {
         Update2DBuffer(info);
     } else {
         Update3DBuffer(info);
@@ -235,7 +235,7 @@ void Update2DBuffer(struct_gInfo *info) {
         sp14 = TetrisBlockFrame;
     }
 
-    for (var_s6 = 0; var_s6 < gTheGame.unk_9C08; var_s6++) {
+    for (var_s6 = 0; var_s6 < gTheGame.totalPlayer; var_s6++) {
         tetWell *well = &gTheGame.tetrisWell[var_s6];
         cursor_t *cursor = &gTheGame.cursorBlock[var_s6];
         block_t(*var_s0)[BLOCK_LEN_B];
@@ -296,7 +296,7 @@ void Update3DBuffer(struct_gInfo *info) {
         var_s7 = TetrisBlockFrame;
     }
 
-    for (num = 0; num < gTheGame.unk_9C08; num++) {
+    for (num = 0; num < gTheGame.totalPlayer; num++) {
         well = &gTheGame.tetrisWell[num];
         cursor = &gTheGame.cursorBlock[num];
 
@@ -336,7 +336,7 @@ void Update3DBuffer(struct_gInfo *info) {
 
         if (gSelection == 0x64) {
             gTransMtx[3][0] = -0.51f;
-        } else if (gTheGame.unk_9C08 == 1) {
+        } else if (gTheGame.totalPlayer == 1) {
             gTransMtx[3][0] = 0.06f;
         } else if (num == 0) {
             gTransMtx[3][0] = -0.51f;

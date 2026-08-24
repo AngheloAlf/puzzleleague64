@@ -14,15 +14,15 @@
 #include "the_game.h"
 
 void CheckGameInput(tetWell *well, cursor_t *cursor, s32 num) {
-    if (gTheGame.unk_9C0C == 1) {
-        if (brainbrain[num].unk_00C == -1) {
+    if (gTheGame.dimension == DIMENSION_2D) {
+        if (brainbrain[num].speed == -1) {
             Input2D(well, cursor, num);
         } else {
             AIMove(well, cursor, &brainbrain[num], num);
         }
         Update2DSwitching(well, cursor);
     } else {
-        if (brainbrain[num].unk_00C == -1) {
+        if (brainbrain[num].speed == -1) {
             Input3D(well, cursor, num);
         } else {
             AIMove(well, cursor, &brainbrain[num], num);
@@ -43,7 +43,7 @@ void CheckGameInput(tetWell *well, cursor_t *cursor, s32 num) {
 }
 
 void AddNewRow(tetWell *well, cursor_t *cursor, s32 num) {
-    if (gTheGame.unk_9C0C == 1) {
+    if (gTheGame.dimension == DIMENSION_2D) {
         Add2DNewRow(well, cursor, num);
     } else {
         Add3DNewRow(well, cursor, num);

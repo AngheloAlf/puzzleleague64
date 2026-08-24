@@ -48,7 +48,7 @@ void func_80074AEC_usa(void) {
     if (anim_sp <= 0) {
         var_s0 = 0;
     } else {
-        a0 = gTheGame.unk_9C0C;
+        a0 = gTheGame.dimension;
         var_s0 = (anim_sp * 0x30) / (a0 * 0x270);
     }
 
@@ -140,8 +140,10 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/075630", func_80074AEC_usa);
 
 void func_80074D4C_usa(void) {
     if ((gMain == GMAIN_384) && (gCounter % 3 == 0)) {
-        if (anim_sp < (gTheGame.unk_9C0C * 0x270)) {
-            anim_sp += gTheGame.unk_9C0C * 0xD;
+        s32 val = gTheGame.dimension;
+
+        if (anim_sp < (val * 0x270)) {
+            anim_sp += val * 0xD;
         }
     }
 
@@ -155,7 +157,7 @@ void func_80074D4C_usa(void) {
                         G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
     gSPTextureRectangle(glistp++, 0x0060, 0x0114, 0x0080, 0x0358, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
 
-    if (gTheGame.unk_9C0C == 2) {
+    if (gTheGame.dimension == DIMENSION_3D) {
         gDPPipeSync(glistp++);
         gDPSetRenderMode(glistp++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
     }

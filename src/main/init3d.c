@@ -37,7 +37,7 @@ void Init3DCursor(cursor_t *cursor, s32 num) {
     cursor->unk_18 = 0;
     cursor->x = 4;
 
-    if (gTheGame.unk_9C08 == 1) {
+    if (gTheGame.totalPlayer == 1) {
         cursor->rect.s.objX = (35 << 2) + 2;
     } else if (num == 0) {
         cursor->rect.s.objX = (12 << 2) + 3;
@@ -148,7 +148,7 @@ void Init3DClearLine(tetWell *well, struct cursor_t *cursor UNUSED, s32 num) {
     well->attack[0].unk_24 = 0;
 
     s = &well->attack[0].rect.s;
-    if (gTheGame.unk_9C08 == 1) {
+    if (gTheGame.totalPlayer == 1) {
         s->objX = 0xE1;
     } else if (num == 0) {
         s->objX = 0x87;
@@ -291,7 +291,7 @@ void Init3DGameOverSmoke(tetWell *well, s32 num) {
         explode->frame = -1;
         explode->rect.s.imageAdrs = 0;
 
-        if (gTheGame.unk_9C08 == 1) {
+        if (gTheGame.totalPlayer == 1) {
             //! @bug? shouldn't this be `< 1` instead?
             if ((var_t1 <= 1) || (var_t1 >= ARRAY_COUNT(sp40))) {
                 explode->rect.s.objX = -(160 << 2);

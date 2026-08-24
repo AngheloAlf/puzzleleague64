@@ -364,7 +364,7 @@ void func_80050420_usa(void) {
     guS2DInitBg(&gTheGame.frame[0]);
     osWritebackDCache(&gTheGame.frame[0], sizeof(uObjBg));
 
-    if (gTheGame.unk_9C08 == 1) {
+    if (gTheGame.totalPlayer == 1) {
         func_800512E0_usa();
     }
 }

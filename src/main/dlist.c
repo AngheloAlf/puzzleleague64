@@ -25,7 +25,7 @@ void InitCursor(cursor_t *cursor) {
     cursor->unk_20 = 0;
     cursor->unk_24 = 0xF;
 
-    if ((gTheGame.unk_9C0C == 2) || (gSelection < 0x8C)) {
+    if ((gTheGame.dimension == DIMENSION_3D) || (gSelection < 0x8C)) {
         cursor->x = 2;
         cursor->y = 3;
     } else {
@@ -68,13 +68,13 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/dlist", InitCursor);
 void InitGamePad(s32 num) {
     // TODO: REGION_NTSC?
 #if VERSION_USA
-    gTheGame.controller[num].unk_08 = 0xA;
+    gTheGame.controller[num].hold = 0x8 | 0x2;
 #else
-    gTheGame.controller[num].unk_08 = 0x8;
+    gTheGame.controller[num].hold = 0x8;
 #endif
     gTheGame.controller[num].touch_button = 0;
     gTheGame.controller[num].hold_button = 0;
-    gTheGame.controller[num].unk_0E = 0;
+    gTheGame.controller[num].button = 0;
 }
 
 void func_80054624_usa(void) {
@@ -138,7 +138,7 @@ void InitDisplayList(struct_gInfo *info) {
 
     gDPSetCycleType(glistp++, G_CYC_1CYCLE);
 
-    if (gTheGame.unk_9C0C == 2) {
+    if (gTheGame.dimension == DIMENSION_3D) {
         gSPDisplayList(glistp++, init3D_dl);
         guS2DEmuSetScissor(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
     } else {
@@ -151,13 +151,13 @@ void InitDisplayList(struct_gInfo *info) {
 void func_800549A4_usa(void) {
     s32 num;
 
-    for (num = 0; num < gTheGame.unk_9C08; num++) {
+    for (num = 0; num < gTheGame.totalPlayer; num++) {
         tetWell *well = &gTheGame.tetrisWell[num];
 
-        well->menu.unk_0 = gTheGame.menu[num].unk_0;
-        well->menu.unk_8 = gTheGame.menu[num].unk_8;
-        well->menu.unk_4 = gTheGame.menu[num].unk_4;
-        well->menu.unk_C = gTheGame.menu[num].unk_C;
+        well->menu.game = gTheGame.menu[num].game;
+        well->menu.speed = gTheGame.menu[num].speed;
+        well->menu.stage = gTheGame.menu[num].stage;
+        well->menu.misc = gTheGame.menu[num].misc;
     }
 }
 #endif

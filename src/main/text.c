@@ -166,7 +166,7 @@ void UpdateText(void) {
     s32 *hi_score;
 
     if (gMain >= GMAIN_384) {
-        if (gTheGame.unk_9C08 == 1) {
+        if (gTheGame.totalPlayer == 1) {
             if (gTheGame.unk_9C14 == 0) {
                 sprintf(string, "%2d'%02d", gTheGame.unk_9C18, gTheGame.unk_9C1C);
                 SetText(0x3C, 0x28, string, SETTEXTTYPE_14);
@@ -203,13 +203,13 @@ void UpdateText(void) {
         case 0x8C:
         case 0xBE:
             if (gSelection == 0x8C) {
-                if (gTheGame.unk_9C0C == 1) {
+                if (gTheGame.dimension == DIMENSION_2D) {
                     hi_score = &gPlayer[0]->unk_014;
                 } else {
                     hi_score = &gPlayer[0]->unk_018;
                 }
             } else {
-                if (gTheGame.unk_9C0C == 1) {
+                if (gTheGame.dimension == DIMENSION_2D) {
                     hi_score = &gPlayer[0]->unk_01C;
                 } else {
                     hi_score = &gPlayer[0]->unk_020;
@@ -221,7 +221,7 @@ void UpdateText(void) {
             }
 
             if (gDemo == GDEMO_2C) {
-                if (well1->menu.unk_0 != 0) {
+                if (well1->menu.game != 0) {
                     if (well1->unk_43AC > *hi_score) {
                         *hi_score = well1->unk_43AC;
                     }
@@ -229,7 +229,7 @@ void UpdateText(void) {
                 }
             } else {
             block_63:
-                if (well1->menu.unk_0 != 0) {
+                if (well1->menu.game != 0) {
                     sprintf(string, "%6d", *hi_score);
                     SetText(0xE8, 0x2A, string, SETTEXTTYPE_16);
                 }
@@ -252,7 +252,7 @@ void UpdateText(void) {
                 }
 
                 gTheGame.drawText[3].texture = 0;
-                if (gTheGame.tetrisWell[0].menu.unk_0 < 2) {
+                if (gTheGame.tetrisWell[0].menu.game < 2) {
                     gTheGame.drawText[4].texture = 1;
                 } else {
                     gTheGame.drawText[4].texture = 2;
@@ -261,8 +261,8 @@ void UpdateText(void) {
             break;
 
         case 0xAA:
-            if (well1->menu.unk_0 != 5) {
-                sprintf(string, "%1d-%1d", well1->menu.unk_4, well1->menu.unk_8);
+            if (well1->menu.game != 5) {
+                sprintf(string, "%1d-%1d", well1->menu.stage, well1->menu.speed);
                 SetText(0x103, 0x29, string, SETTEXTTYPE_16);
             }
 
@@ -284,9 +284,9 @@ void UpdateText(void) {
                     SetText(0x10C, 0x5B, string, SETTEXTTYPE_15);
                 }
 
-                if (well1->menu.unk_0 != 5) {
+                if (well1->menu.game != 5) {
                     gTheGame.drawText[3].texture = 0;
-                    sprintf(string, "%2d", well1->menu.unk_4);
+                    sprintf(string, "%2d", well1->menu.stage);
                     SetText(0x10C, 0x79, string, SETTEXTTYPE_14);
                 }
             }
@@ -296,25 +296,25 @@ void UpdateText(void) {
             break;
 
         case 0x78:
-            sprintf(string, "%2d", well1->menu.unk_4);
+            sprintf(string, "%2d", well1->menu.stage);
             SetText(0x10C, 0x2C, string, SETTEXTTYPE_16);
             break;
 
         case 0x82:
-            if (well1->menu.unk_0 == 0) {
-                sprintf(string, "%2d", well1->menu.unk_4);
+            if (well1->menu.game == 0) {
+                sprintf(string, "%2d", well1->menu.stage);
                 SetText(0x10C, 0x3F, string, SETTEXTTYPE_16);
-            } else if (well1->menu.unk_0 < 4) {
-                sprintf(string, "%2d", well1->menu.unk_0);
+            } else if (well1->menu.game < 4) {
+                sprintf(string, "%2d", well1->menu.game);
                 SetText(0x10C, 0x2A, string, SETTEXTTYPE_17);
 
-                sprintf(string, "%2d", well1->menu.unk_4);
+                sprintf(string, "%2d", well1->menu.stage);
                 SetText(0x10C, 0x3F, string, SETTEXTTYPE_15);
             } else {
-                sprintf(string, "%2d", well1->menu.unk_0 - 3);
+                sprintf(string, "%2d", well1->menu.game - 3);
                 SetText(0x10C, 0x2A, string, SETTEXTTYPE_16);
 
-                sprintf(string, "%2d", well1->menu.unk_4);
+                sprintf(string, "%2d", well1->menu.stage);
                 SetText(0x10C, 0x3F, string, SETTEXTTYPE_14);
             }
             break;
@@ -326,15 +326,15 @@ void UpdateText(void) {
             sprintf(string, "%05d", well2->unk_43AC % 100000, well2->unk_43AC);
             SetText(0x8A, 0x79, string, SETTEXTTYPE_14);
 
-            sprintf(string, "%d", well1->menu.unk_8);
-            if (well1->menu.unk_8 < 0xA) {
+            sprintf(string, "%d", well1->menu.speed);
+            if (well1->menu.speed < 0xA) {
                 SetText(0x93, 0x39, string, SETTEXTTYPE_17);
             } else {
                 SetText(0x8D, 0x39, string, SETTEXTTYPE_17);
             }
 
-            sprintf(string, "%d", well2->menu.unk_8);
-            if (well2->menu.unk_8 < 0xA) {
+            sprintf(string, "%d", well2->menu.speed);
+            if (well2->menu.speed < 0xA) {
                 SetText(0xA3, 0x39, string, SETTEXTTYPE_16);
             } else {
                 SetText(0x9D, 0x39, string, SETTEXTTYPE_16);
@@ -343,29 +343,29 @@ void UpdateText(void) {
 
         case 0xA0:
         case 0xB4:
-            sprintf(string, "%d", well1->menu.unk_0);
-            if (well1->menu.unk_0 < 0xA) {
+            sprintf(string, "%d", well1->menu.game);
+            if (well1->menu.game < 0xA) {
                 SetText(0x93, 0x5B, string, SETTEXTTYPE_17);
             } else {
                 SetText(0x8D, 0x5B, string, SETTEXTTYPE_17);
             }
 
-            sprintf(string, "%d", well2->menu.unk_0);
-            if (well2->menu.unk_0 < 0xA) {
+            sprintf(string, "%d", well2->menu.game);
+            if (well2->menu.game < 0xA) {
                 SetText(0xA4, 0x5B, string, SETTEXTTYPE_16);
             } else {
                 SetText(0xA1, 0x5B, string, SETTEXTTYPE_16);
             }
 
-            sprintf(string, "%d", well1->menu.unk_8);
-            if (well1->menu.unk_8 < 0xA) {
+            sprintf(string, "%d", well1->menu.speed);
+            if (well1->menu.speed < 0xA) {
                 SetText(0x93, 0x79, string, SETTEXTTYPE_17);
             } else {
                 SetText(0x8D, 0x79, string, SETTEXTTYPE_17);
             }
 
-            sprintf(string, "%d", well2->menu.unk_8);
-            if (well2->menu.unk_8 < 0xA) {
+            sprintf(string, "%d", well2->menu.speed);
+            if (well2->menu.speed < 0xA) {
                 SetText(0xA4, 0x79, string, SETTEXTTYPE_16);
             } else {
                 SetText(0x9F, 0x79, string, SETTEXTTYPE_16);

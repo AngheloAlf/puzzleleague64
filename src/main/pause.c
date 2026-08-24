@@ -92,7 +92,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/pause", Draw3DPause);
 #endif
 
 void DrawPause(struct_gInfo_unk_00068 *dynamicp) {
-    if (gTheGame.unk_9C0C == 2) {
+    if (gTheGame.dimension == DIMENSION_3D) {
         Draw3DPause(dynamicp);
     } else {
         Draw2DPause(dynamicp);

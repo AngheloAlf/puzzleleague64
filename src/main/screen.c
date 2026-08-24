@@ -2319,7 +2319,7 @@ s32 screenSet(const char *szName, s32 nMode) {
     s32 var_a0;
     s32 var_s0;
 
-    if ((nMode & 0x200) && !(nMode & 0x100) && (peelActive() != 0)) {
+    if ((nMode & 0x200) && !(nMode & 0x100) && peelActive()) {
         return giScreen;
     }
 

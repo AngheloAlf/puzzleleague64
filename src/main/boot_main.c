@@ -152,7 +152,7 @@ void pon_main(void *arg UNUSED) {
     gDemo = GDEMO_2C;
     gMain = GMAIN_TITLE;
     gReset = -1;
-    gTheGame.unk_9C0C = 1;
+    gTheGame.dimension = DIMENSION_2D;
 
     while (true) {
         gTheGame.unk_9C10 = 0;
@@ -161,13 +161,13 @@ void pon_main(void *arg UNUSED) {
             case GMAIN_258:
             case GMAIN_2BC:
             case GMAIN_28A:
-                gTheGame.unk_9C0C = 1;
+                gTheGame.dimension = DIMENSION_2D;
                 gAllVertex = NULL;
                 var_s0 = doMenuLoop(var_s0);
                 break;
 
             case GMAIN_STORY:
-                gTheGame.unk_9C0C = 2;
+                gTheGame.dimension = DIMENSION_3D;
                 var_s0 = doMenuLoop(var_s0);
                 break;
 
@@ -360,7 +360,7 @@ s32 doGameLoop(s32 arg0) {
                         }
                         UpdateBuffer(&gInfo[arg0]);
 
-                        if (gTheGame.unk_9C08 == 1) {
+                        if (gTheGame.totalPlayer == 1) {
                             PlayGameSong(&gTheGame.tetrisWell[0]);
                             if (gGameStatus & 0x20) {
                                 SetSongTempo(last_song_handle, 0x6E);

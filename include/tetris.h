@@ -12,7 +12,7 @@ BlockType RandomBlock(struct tetWell *well);
 // void InitBlockPattern();
 void InitStartingBlocks(struct tetWell *well, char *ptr, s32 total);
 s32 DemoCheck(s32 *frame);
-void func_80089BE0_usa(s32 arg0, s32 arg1);
+void DemoCPU(s32 num, s32 level);
 void InitTetrisWell(void);
 void DoTetris(void);
 void HackGame(struct tetWell *well);

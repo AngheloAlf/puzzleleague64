@@ -77,11 +77,11 @@ INLINE void InitBlockPattern(tetWell *well, char ptr[18], s32 total, s32 clear) 
     bzero(ptr, 18 * sizeof(char));
 
     if (clear) {
-        if (well->menu.unk_0 == 5) {
+        if (well->menu.game == 5) {
             var_v0 = 0x1E;
         } else {
-            var_v0 = (well->menu.unk_4 - 1) * 5 - 1;
-            var_v0 += well->menu.unk_8;
+            var_v0 = (well->menu.stage - 1) * 5 - 1;
+            var_v0 += well->menu.speed;
         }
 
         which = clearpanel_data[var_v0];
@@ -160,7 +160,7 @@ s32 DemoCheck(s32 *frame) {
 #if VERSION_USA
         gGameStatus >>= 0x10;
 #else
-        if (B_8018A7F8_usa != 9) {
+        if (geDemoTitle != TD_PROFILE) {
             gGameStatus >>= 0x10;
         }
 #endif
@@ -185,19 +185,19 @@ s32 DemoCheck(s32 *frame) {
 }
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/tetris", func_80089BE0_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/tetris", DemoCPU);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", func_80089BE0_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", DemoCPU);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tetris", func_80089BE0_usa);
+INCLUDE_ASM("asm/fra/nonmatchings/main/tetris", DemoCPU);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tetris", func_80089BE0_usa);
+INCLUDE_ASM("asm/ger/nonmatchings/main/tetris", DemoCPU);
 #endif
 
 #if VERSION_USA
@@ -236,7 +236,7 @@ void InitTetrisWell(void) {
     gFrameColor = 0x00010001;
     gCounter = 0;
     gOverflow = 0;
-    if (gTheGame.unk_9C0C == 1) {
+    if (gTheGame.dimension == DIMENSION_2D) {
         gMax = 6;
     } else {
         gMax = 0x12;
@@ -256,7 +256,7 @@ void InitTetrisWell(void) {
     InitGameOver();
     InitGameFade();
 
-    for (var_fp = 0; var_fp < gTheGame.unk_9C08; var_fp++) {
+    for (var_fp = 0; var_fp < gTheGame.totalPlayer; var_fp++) {
         temp_s3 = &gTheGame.tetrisWell[var_fp];
         sp34 = &gTheGame.cursorBlock[var_fp];
 
@@ -279,7 +279,7 @@ void InitTetrisWell(void) {
         InitCursor(sp34);
         InitGamePad(var_fp);
 
-        if (gTheGame.unk_9C0C == 1) {
+        if (gTheGame.dimension == DIMENSION_2D) {
             Init2DCursor(sp34, var_fp);
             Init2DTetrisBlocks(temp_s3, var_fp);
 
@@ -290,17 +290,17 @@ void InitTetrisWell(void) {
                     break;
 
                 case 0x78: /* switch 1 */
-                    v0 = temp_s3->menu.unk_4 - 1;
+                    v0 = temp_s3->menu.stage - 1;
                     sp28 = gPlayer[0]->unk_121[v0];
                     Init2DPuzzle(temp_s3, sp34, sp28, 1);
                     break;
 
                 case 0x82: /* switch 1 */
-                    if (temp_s3->menu.unk_0 != 0) {
-                        a3 = Match2DPuzzle(&sp28, temp_s3->menu.unk_0, temp_s3->menu.unk_4);
+                    if (temp_s3->menu.game != 0) {
+                        a3 = Match2DPuzzle(&sp28, temp_s3->menu.game, temp_s3->menu.stage);
                         Init2DPuzzle(temp_s3, sp34, sp28, a3);
                     } else {
-                        v0_2 = temp_s3->menu.unk_4 - 1;
+                        v0_2 = temp_s3->menu.stage - 1;
                         sp28 = gPlayer[0]->unk_121[v0_2];
                         if (Init2DPuzzle(temp_s3, sp34, sp28, 1) == 0) {
                             gReset = -1;
@@ -312,7 +312,7 @@ void InitTetrisWell(void) {
 
                 case 0x96: /* switch 1 */
                     if (var_fp == 1) {
-                        AISetLevel(&brainbrain[1], gTheGame.menu[0].unk_0, gTheGame.menu[0].unk_4);
+                        AISetLevel(&brainbrain[1], gTheGame.menu[0].game, gTheGame.menu[0].stage);
                         InitAI(temp_s3, sp34, &brainbrain[1]);
                     }
                     FALLTHROUGH;
@@ -349,7 +349,7 @@ void InitTetrisWell(void) {
 
             switch (gSelection) { /* irregular */
                 case 0x82: {
-                    a3 = func_80088A48_usa(&sp28, temp_s3->menu.unk_0, temp_s3->menu.unk_4);
+                    a3 = func_80088A48_usa(&sp28, temp_s3->menu.game, temp_s3->menu.stage);
                     Init3DPuzzle(temp_s3, sp34, sp28, a3);
                 } break;
 
@@ -444,7 +444,7 @@ void DoTetris(void) {
         gOverflow = 0;
     }
 
-    for (num = 0; num < gTheGame.unk_9C08; num++) {
+    for (num = 0; num < gTheGame.totalPlayer; num++) {
         well = &gTheGame.tetrisWell[num];
         cursor = &gTheGame.cursorBlock[num];
 
@@ -467,6 +467,8 @@ void DoTetris(void) {
                     well->unk_43EC += well->unk_43F0;
 
                     if (well->unk_43EC >= 0x1000U) {
+                        s32 temp;
+
                         var_s2 = well->unk_43EC & 0xFFFF0000;
                         if (var_s2 < 0) {
                             var_a0 = var_s2 | 0xFFFF;
@@ -475,11 +477,13 @@ void DoTetris(void) {
                         }
                         well->unk_43EC &= 0xFFFF;
                         var_s2 = (var_a0 >> 0x10);
-                        well->unk_43FC = var_s2 * gTheGame.unk_9C0C;
+                        well->unk_43FC = var_s2 * gTheGame.dimension;
                         well->unk_43F8 += well->unk_43FC;
-                        if (gTheGame.unk_9C0C * 0x10 < well->unk_43F8) {
-                            well->unk_43FC = gTheGame.unk_9C0C * 0x10 - (well->unk_43F8 - well->unk_43FC);
-                            well->unk_43F8 = gTheGame.unk_9C0C * 0x10;
+
+                        temp = gTheGame.dimension * 0x10;
+                        if (temp < well->unk_43F8) {
+                            well->unk_43FC = gTheGame.dimension * 0x10 - (well->unk_43F8 - well->unk_43FC);
+                            well->unk_43F8 = gTheGame.dimension * 0x10;
                         }
                     }
                 }
@@ -492,7 +496,7 @@ void DoTetris(void) {
         var_s2 = 0;
         if (gMain == GMAIN_387) {
             if ((gGameStatus & 0x20) && (gCounter % 2 == 0)) {
-                if (gTheGame.unk_9C0C == 2) {
+                if (gTheGame.dimension == DIMENSION_3D) {
                     Update3DCursor(well, cursor);
                 }
             } else {
@@ -510,7 +514,7 @@ void DoTetris(void) {
                 CheckShake(well, cursor);
                 CheckIcon(well, var_s2);
                 StartAttack(well, num);
-                if (brainbrain[num].unk_00C != -1) {
+                if (brainbrain[num].speed != -1) {
                     UpdateAI(well, cursor, &brainbrain[num], num);
                 }
                 UpdateWell(well, cursor, num, var_s2);
@@ -531,7 +535,7 @@ void DoTetris(void) {
             UpdateAnimation(well, num, var_s2);
             UpdateMiscStuff(well, cursor, num);
 
-            if ((cursor->unk_00 <= 0) && (well->unk_43F8 >= (gTheGame.unk_9C0C * 0x10))) {
+            if ((cursor->unk_00 <= 0) && (well->unk_43F8 >= ((s32)gTheGame.dimension * 0x10))) {
                 well->unk_43C4 = -1;
                 AddNewRow(well, cursor, num);
                 well->unk_43F8 = 0;
@@ -540,7 +544,7 @@ void DoTetris(void) {
                 }
             }
 
-            if (gTheGame.unk_9C0C == 2) {
+            if (gTheGame.dimension == DIMENSION_3D) {
                 Check3DVisibleBlocks(well, cursor);
             }
 
@@ -561,7 +565,7 @@ void DoTetris(void) {
 void HackGame(tetWell *well) {
     s32 count;
 
-    if (gTheGame.unk_9C08 != 1) {
+    if (gTheGame.totalPlayer != 1) {
         for (count = 0; count < ATTACK_COUNT; count++) {
             if ((well->attack[count].type > ATTACKTYPE_4) && (well->attack[count].type < ATTACKTYPE_9)) {
                 well->attack[count].state = ATTACKSTATE_0;

@@ -187,7 +187,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/peel", func_8002CFE4_usa);
 #endif
 
 #if VERSION_USA
-s32 peelActive(void) {
+nbool peelActive(void) {
     if (gbFadeAlpha != 0) {
         s32 var_a0 = 0;
 
@@ -198,9 +198,10 @@ s32 peelActive(void) {
         }
         return var_a0;
     } else if (geTypePeel != -1) {
-        return -1;
+        return ntrue;
     }
-    return 0;
+
+    return nfalse;
 }
 #endif
 

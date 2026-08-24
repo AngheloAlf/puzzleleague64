@@ -213,7 +213,7 @@ INLINE void Draw2DCursor(struct_gInfo_unk_00068 *dynamicp) {
         gSPObjLoadTxtr(glistp++, &cursorSmall);
     }
 
-    for (i = 0; i < gTheGame.unk_9C08; i++) {
+    for (i = 0; i < gTheGame.totalPlayer; i++) {
         cursor_t *cursor = &dynamicp->cursorBlock[i];
 
         if (cursor->y < 0xC) {
@@ -701,7 +701,7 @@ void DrawTetris(struct_gInfo_unk_00068 *dynamicp) {
         return;
     }
 
-    if (gTheGame.unk_9C0C == 2) {
+    if (gTheGame.dimension == DIMENSION_3D) {
         Draw3DTetris(dynamicp);
     } else {
         Draw2DTetris(dynamicp);
@@ -726,7 +726,7 @@ void DrawTetris(struct_gInfo_unk_00068 *dynamicp) {
 INLINE void OverFlow(struct_gInfo_unk_00068 *dynamicp) {
     s32 size;
 
-    if ((gTheGame.unk_9C08 == 1) || (dynamicp->unk_10240 <= 0x320)) {
+    if ((gTheGame.totalPlayer == 1) || (dynamicp->unk_10240 <= 0x320)) {
         gLastOverflow = 0x320;
         return;
     }
@@ -778,7 +778,7 @@ void Draw2DTetris(struct_gInfo_unk_00068 *dynamicp) {
 
         Draw2DGameFade();
 
-        for (i = 0; i < gTheGame.unk_9C08; i++) {
+        for (i = 0; i < gTheGame.totalPlayer; i++) {
             Draw2DTetrisWell(dynamicp, &gTheGame.tetrisWell[i], i);
             end_attack[i] = Draw2DAttackBlock(dynamicp, i);
         }
@@ -791,13 +791,13 @@ void Draw2DTetris(struct_gInfo_unk_00068 *dynamicp) {
         Draw2DMiscStuff(dynamicp);
         Draw2DAnimation(dynamicp, 5, 6);
         if ((gSelection == 0xAA) || (gSelection == 0xB4)) {
-            for (i = 0; i < gTheGame.unk_9C08; i++) {
+            for (i = 0; i < gTheGame.totalPlayer; i++) {
                 Draw2DClearLine(dynamicp, i);
             }
         }
 
         if (gMain != GMAIN_388) {
-            for (i = 0; i < gTheGame.unk_9C08; i++) {
+            for (i = 0; i < gTheGame.totalPlayer; i++) {
                 Draw2DAttackBrick(dynamicp, i, end_attack[i]);
                 Draw2DExplosion(dynamicp, i);
                 Draw2DIcon(dynamicp, i);

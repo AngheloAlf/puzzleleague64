@@ -18,7 +18,7 @@ void PlayExplosionSound(s32 num, s32 sound) {
     if (type == 1) {
         which = MIN(which, 9);
 
-        if (gTheGame.unk_9C08 == 1) {
+        if (gTheGame.totalPlayer == 1) {
             PlaySE(SFX_INIT_TABLE, which + 0xAC);
         } else if (num == 0) {
             PlaySE(SFX_INIT_TABLE, which + 0xD0);
@@ -28,7 +28,7 @@ void PlayExplosionSound(s32 num, s32 sound) {
     } else if (type == 2) {
         which = MIN(which, 9);
 
-        if (gTheGame.unk_9C08 == 1) {
+        if (gTheGame.totalPlayer == 1) {
             PlaySE(SFX_INIT_TABLE, which + 0xB2);
         } else if (num == 0) {
             PlaySE(SFX_INIT_TABLE, which + 0xD6);
@@ -38,7 +38,7 @@ void PlayExplosionSound(s32 num, s32 sound) {
     } else if (type == 3) {
         which = MIN(which, 9);
 
-        if (gTheGame.unk_9C08 == 1) {
+        if (gTheGame.totalPlayer == 1) {
             PlaySE(SFX_INIT_TABLE, which + 0xBC);
         } else if (num == 0) {
             PlaySE(SFX_INIT_TABLE, which + 0xE0);
@@ -48,7 +48,7 @@ void PlayExplosionSound(s32 num, s32 sound) {
     } else if (type == 4) {
         which = MIN(which, 9);
 
-        if (gTheGame.unk_9C08 == 1) {
+        if (gTheGame.totalPlayer == 1) {
             PlaySE(SFX_INIT_TABLE, which + 0xC6);
         } else if (num == 0) {
             PlaySE(SFX_INIT_TABLE, which + 0xEA);
@@ -73,7 +73,7 @@ void PlayExplosionSound(s32 num, s32 sound) {
 }
 
 void StartExplosion(tetWell *well, s32 num, s32 row, s32 col, s32 type) {
-    if (gTheGame.unk_9C0C == 1) {
+    if (gTheGame.dimension == DIMENSION_2D) {
         Start2DExplosion(well, row, col, type);
     } else {
         Start3DExplosion(well, num, row, col, type);
@@ -81,7 +81,7 @@ void StartExplosion(tetWell *well, s32 num, s32 row, s32 col, s32 type) {
 }
 
 void UpdateExplosion(tetWell *well) {
-    if (gTheGame.unk_9C0C == 1) {
+    if (gTheGame.dimension == DIMENSION_2D) {
         Update2DExplosion(well);
     } else {
         Update3DExplosion(well);

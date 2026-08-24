@@ -147,7 +147,7 @@ void BuildTask(struct_gInfo *info) {
 
     scTask->list.t.data_ptr = (void *)v1;
     scTask->list.t.data_size = (glistp - v1) * sizeof(Gfx);
-    if (gTheGame.unk_9C0C == 2) {
+    if (gTheGame.dimension == DIMENSION_3D) {
         scTask->list.t.type = M_GFXTASK;
         scTask->list.t.flags = OS_SC_NEEDS_RSP | OS_SC_DRAM_DLIST;
 

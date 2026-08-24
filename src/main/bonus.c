@@ -450,7 +450,7 @@ void DoBonus(void) {
                 if (gTheGame.unk_9C24 == 0) {
                     char *var_s0;
 
-                    switch (gTheGame.menu[0].unk_0) {
+                    switch (gTheGame.menu[0].game) {
                         case 0x1:
                             var_s0 = &gPlayer[0]->unk_0E0;
                             break;
@@ -468,8 +468,8 @@ void DoBonus(void) {
                             break;
                     }
 
-                    if (gTheGame.menu[0].unk_8 < 0x63) {
-                        gTheGame.menu[0].unk_8++;
+                    if (gTheGame.menu[0].speed < 0x63) {
+                        gTheGame.menu[0].speed++;
                     }
 
                     if (*var_s0 < 0x63) {
@@ -484,8 +484,8 @@ void DoBonus(void) {
                 if (gTheGame.unk_9C24 == 0) {
                     gMain = GMAIN_384;
                     SaveRom();
-                    if (gTheGame.menu[0].unk_4 == 0x12) {
-                        gTheGame.menu[0].unk_4 = 0x13;
+                    if (gTheGame.menu[0].stage == 0x12) {
+                        gTheGame.menu[0].stage = 0x13;
                         gMain = GMAIN_STORY;
                     }
                 } else {
@@ -569,7 +569,7 @@ void DoBonus(void) {
             }
         }
 
-        sprintf(sp10, "%02d", gTheGame.menu[0].unk_8);
+        sprintf(sp10, "%02d", gTheGame.menu[0].speed);
         SetText(0x103, 0x17, sp10, SETTEXTTYPE_17);
     } else if (DoWatchMenu() != 0) {
         gReset = -1;
@@ -772,9 +772,9 @@ void InitStageClearIntro(void) {
             ((gPlayer[0]->unk_02B.unk_3 & 0x1F) == 0x00) && ((gPlayer[0]->unk_02B.unk_4 & 0x1F) == 0x00) &&
             ((gPlayer[0]->unk_02B.unk_5 & 0x1F) == 0x00)) {
             if (!(gPlayer[0]->unk_02B.unk_2 & 0x40)) {
-                gTheGame.menu[0].unk_0 = 5;
+                gTheGame.menu[0].game = 5;
                 gPlayer[0]->unk_02B.unk_2 |= 0x40;
-            } else if ((gTheGame.menu[0].unk_0 == 2) && (gTheGame.cursorBlock[0].unk_00 == 7)) {
+            } else if ((gTheGame.menu[0].game == 2) && (gTheGame.cursorBlock[0].unk_00 == 7)) {
                 B_8018EA10_usa = "spaTR2.HVQM";
             }
         }
@@ -785,20 +785,20 @@ void InitStageClearIntro(void) {
             if (((gPlayer[0]->unk_02B.unk_5 & 0x1F) == (gPlayer[0]->unk_02B.unk_0 & 0x1F)) &&
                 !(gPlayer[0]->unk_02B.unk_5 & 0x40)) {
                 B_8018EA10_usa = "spaTR1.HVQM";
-                gTheGame.menu[0].unk_0 = 5;
+                gTheGame.menu[0].game = 5;
                 gPlayer[0]->unk_02B.unk_5 |= 0x40;
             }
         }
     }
 
-    if (gTheGame.menu[0].unk_0 == 5) {
-        if (gTheGame.menu[0].unk_4 >= 5) {
+    if (gTheGame.menu[0].game == 5) {
+        if (gTheGame.menu[0].stage >= 5) {
             var_s0 = 7;
         } else {
             var_s0 = 6;
         }
     } else {
-        var_s0 = gTheGame.menu[0].unk_4 - 1;
+        var_s0 = gTheGame.menu[0].stage - 1;
     }
 
     B_8018EA2C_usa = D_800B64E8_usa[var_s0][0];
@@ -833,9 +833,9 @@ void InitStageClearIntro(void) {
     func_8001FD0C_usa(&B_8018EA28_usa, D_800B6528_usa[var_s0] + temp2, 0, var_a3, a4, a5, &sp78);
     func_8001FD0C_usa(&B_8018EA20_usa, D_800B6508_usa[var_s0], 0, 0x800054, 0x140, 0xE8, &sp78);
 
-    gWhatever = gTheGame.unk_9C0C = (gTheGame.menu[0].unk_4 >= 4) ? 2 : 1;
+    gWhatever = gTheGame.dimension = (gTheGame.menu[0].stage >= 4) ? DIMENSION_3D : DIMENSION_2D;
 
-    UpdatePlayerStageClearTimeScore(gTheGame.cursorBlock, -1, gTheGame.menu[0].unk_4, 1);
+    UpdatePlayerStageClearTimeScore(gTheGame.cursorBlock, -1, gTheGame.menu[0].stage, 1);
 
     gTheGame.unk_9C1C = 0;
     gTheGame.unk_9C18 = 0;
@@ -854,8 +854,8 @@ void InitStageClearIntro(void) {
         giScreenClear = screenSet("CLEAR", x | 0x400);
 
         screenSetNumber(giScreenClear, 0x32, gTheGame.tetrisWell[0].unk_43AC, -1);
-        if (gTheGame.menu[0].unk_0 == 5) {
-            if (gTheGame.menu[0].unk_4 < 5) {
+        if (gTheGame.menu[0].game == 5) {
+            if (gTheGame.menu[0].stage < 5) {
                 gnTagTextClear = -0xC8;
                 screenShowText(giScreenClear, 0x19A);
             } else {
@@ -863,8 +863,8 @@ void InitStageClearIntro(void) {
                 screenShowText(giScreenClear, 0x1A4);
             }
         } else {
-            gnTagTextClear = -(((gTheGame.menu[0].unk_4 - 1) * 0xA) + 0x64);
-            screenShowText(giScreenClear, gTheGame.menu[0].unk_4 + 0x18F);
+            gnTagTextClear = -(((gTheGame.menu[0].stage - 1) * 0xA) + 0x64);
+            screenShowText(giScreenClear, gTheGame.menu[0].stage + 0x18F);
         }
     }
 
@@ -885,7 +885,7 @@ void DoStageClearIntro(void) {
     s32 sp28;
     s32 var_s0;
 
-    gTheGame.unk_9C08 = 1;
+    gTheGame.totalPlayer = 1;
     screenTick(&sp10);
 
     if (B_8018EA10_usa != NULL) {
@@ -1003,7 +1003,7 @@ void DoStageClearIntro(void) {
             } else {
                 gReset = -1;
                 gMain = GMAIN_384;
-                gTheGame.unk_9C0C = gWhatever;
+                gTheGame.dimension = gWhatever;
                 gWhatever = 0;
                 FadeOutSong(last_song_handle, 0x5A);
             }

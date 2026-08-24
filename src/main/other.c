@@ -749,7 +749,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/other", Draw3DMiscStuff);
 #endif
 
 void func_80053E64_usa(struct_gInfo_unk_00068 *dynamicp UNUSED) {
-    if (gTheGame.unk_9C08 != 1) {
+    if (gTheGame.totalPlayer != 1) {
         gDPPipeSync(glistp++);
         gDPSetTexturePersp(glistp++, G_TP_NONE);
         gDPSetCombineMode(glistp++, G_CC_DECALRGBA, G_CC_DECALRGBA);

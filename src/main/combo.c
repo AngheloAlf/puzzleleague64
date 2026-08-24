@@ -19,7 +19,7 @@
 void CheckCollision(tetWell *well) {
     CheckRowCombos(well);
     CheckColCombos(well);
-    if (gTheGame.unk_9C0C == 2) {
+    if (gTheGame.dimension == DIMENSION_3D) {
         Check3DConnectCombos(well);
     }
 }
@@ -46,7 +46,7 @@ void CompactWell(tetWell *well, s32 num) {
                     temp_v0_2 = ReturnAttackSlot(well, row + 1, col);
                     if (temp_v0_2 != -1) {
                         if (check[temp_v0_2] == 0) {
-                            if (gTheGame.unk_9C0C == 1) {
+                            if (gTheGame.dimension == DIMENSION_2D) {
                                 Compact2DAttack(well, temp_v0_2);
                                 check[temp_v0_2] = -1;
                             } else {
@@ -127,7 +127,7 @@ void CompactWell(tetWell *well, s32 num) {
     }
 
     if (sp6C != 0) {
-        if (gTheGame.unk_9C08 == 1) {
+        if (gTheGame.totalPlayer == 1) {
             PlaySE(SFX_INIT_TABLE, 0xA9);
         } else if (num == 0) {
             PlaySE(SFX_INIT_TABLE, 0xAA);
@@ -136,14 +136,14 @@ void CompactWell(tetWell *well, s32 num) {
         }
     }
 
-    if (gTheGame.unk_9C08 != 1) {
+    if (gTheGame.totalPlayer != 1) {
         for (col = 0; col < gMax; col++) {
             if (well->block[BLOCK_LEN_ROWS - 1][col].type != BLOCKTYPE_0) {
                 break;
             }
         }
 
-        if (gTheGame.unk_9C0C == 1) {
+        if (gTheGame.dimension == DIMENSION_2D) {
             // Use TETWELL_OBJSPRITE_LEN_B instead?
             if (col == BLOCK_LEN_B / 3) {
                 Compact2DAttackNoWhere(well);
@@ -220,7 +220,7 @@ void CheckIcon(tetWell *well, s32 total) {
             icon->to_y = var_t2;
             var_t6 = ntrue;
 
-            if ((well->unk_43B4 != 0) && (gTheGame.unk_9C08 == 1) && !(gGameStatus & 0x20)) {
+            if ((well->unk_43B4 != 0) && (gTheGame.totalPlayer == 1) && !(gGameStatus & 0x20)) {
                 for (var_a3_2 = 0; var_a3_2 < ICON_COUNT; var_a3_2++) {
                     if (well->icon[var_a3_2].flag == 0) {
                         well->icon[var_a3_2].flag = -1;
@@ -261,7 +261,7 @@ void CheckIcon(tetWell *well, s32 total) {
             icon->to_y = var_t2;
             var_t5 = ntrue;
 
-            if ((well->unk_43B4 != 0) && (total != 3) && (gTheGame.unk_9C08 == 1) && !(gGameStatus & 0x20)) {
+            if ((well->unk_43B4 != 0) && (total != 3) && (gTheGame.totalPlayer == 1) && !(gGameStatus & 0x20)) {
                 for (var_a3_2 = 0; var_a3_2 < ICON_COUNT; var_a3_2++) {
                     if (well->icon[var_a3_2].flag == 0) {
                         well->icon[var_a3_2].flag = -1;

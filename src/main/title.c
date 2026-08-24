@@ -22,14 +22,38 @@
 #include "tetris.h"
 #include "the_game.h"
 
+#if 0
+typedef enum struct_gpData_eMode {
+    TM_NONE = 0,
+    TM_CARD = 1,
+    TM_LOGO = 2,
+    TM_MAIN = 3,
+    TM_CHAR = 4,
+} struct_gpData_eMode;
+#endif
+
+// The values from the original struct are shifted.
+// Try to use the original names whenever possible
+typedef enum struct_gpData_eMode {
+    /* 0 */ TM_0,
+    /* 1 */ TM_1,
+    /* 2 */ TM_2,
+    /* 3 */ TM_3,
+    /* 4 */ TM_4,
+    /* 5 */ TM_5,
+    /* 6 */ TM_LOGO, /* Original name: TM_LOGO */
+                     // TM_MAIN ??
+    /* 7 */ TM_CHAR, /* Original name: TM_CHAR */
+} struct_gpData_eMode;
+
 typedef struct struct_gpData {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 unk_08;
-    /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14; // TODO: enum?
-} struct_gpData;           // size = 0x18
+    /* 0x00 */ s32 nTick;                 /* Original name: nTick */
+    /* 0x04 */ u32 nMode;                 /* Original name: nMode */
+    /* 0x08 */ s32 iScreen;               /* Original name: iScreen */
+    /* 0x0C */ s32 nTickDemo;             /* Original name: nTickDemo */
+    /* 0x10 */ s32 iCharacter;            /* Original name: iCharacter */
+    /* 0x14 */ struct_gpData_eMode eMode; /* Original name: eMode */
+} struct_gpData;                          // size = 0x18
 
 static s32 B_8018A7F0_usa;
 static struct_gpData *gpData;
@@ -38,7 +62,7 @@ static struct_gpData *gpData;
 // no longer static on other versions
 static
 #endif
-    s32 B_8018A7F8_usa;
+    enum_geDemoTitle geDemoTitle;
 
 static f32 B_FLT_8018A7FC_usa;
 static f32 B_FLT_8018A800_usa;
@@ -50,7 +74,7 @@ u32 D_800B5890_usa[] = {
 };
 
 void func_80005C00_usa(void) {
-    if (B_8018A808_usa < ARRAY_COUNT(D_800B5890_usa)) {
+    if (B_8018A808_usa < ARRAY_COUNTU(D_800B5890_usa)) {
         u32 temp_v1 = D_800B5890_usa[B_8018A808_usa];
         f32 temp_ft2 = (temp_v1 >> 0x18) & 0xFF;
         f32 temp_ft1 = (temp_v1 >> 0x10) & 0xFF;
@@ -95,14 +119,14 @@ void func_80005C00_usa(void) {
     }
 }
 
-void func_80005EC0_usa(Gfx **gfxP, s32 arg1 UNUSED, s32 arg2) {
+void titleDrawImage(Gfx **gfxP, s32 arg1 UNUSED, s32 nTag) {
     Gfx *gfx = *gfxP;
     f32 var_fv1;
     f32 var_ft1;
     f32 var_ft0;
     s32 var_t9;
 
-    switch (arg2) {
+    switch (nTag) {
         case 0x64:
             gDPPipeSync(gfx++);
             gSPClearGeometryMode(gfx++, G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_LIGHTING | G_SHADING_SMOOTH);
@@ -162,10 +186,10 @@ void func_80005EC0_usa(Gfx **gfxP, s32 arg1 UNUSED, s32 arg2) {
 }
 
 void DrawTitle(void) {
-    if (gpData->unk_14 == 7) {
-        screenDraw(&glistp, func_8001A50C_usa);
+    if (gpData->eMode == TM_CHAR) {
+        screenDraw(&glistp, menuDrawProfile);
     } else {
-        screenDraw(&glistp, func_80005EC0_usa);
+        screenDraw(&glistp, titleDrawImage);
     }
 
     if (!screenFlushing()) {
@@ -173,12 +197,12 @@ void DrawTitle(void) {
     }
 }
 
-INLINE nbool func_8000628C_usa(void) {
-    s32 var_v1;
+INLINE nbool CheckTitleInput(void) {
+    s32 iController;
 
     // single iteration loop
-    for (var_v1 = 0; var_v1 < 1; var_v1++) {
-        if ((gTheGame.controller[var_v1].unk_00 != -1) && (gTheGame.controller[var_v1].touch_button != 0)) {
+    for (iController = 0; iController < 1; iController++) {
+        if ((gTheGame.controller[iController].position != -1) && (gTheGame.controller[iController].touch_button != 0)) {
             return ntrue;
         }
     }
@@ -187,82 +211,83 @@ INLINE nbool func_8000628C_usa(void) {
 }
 
 void DoTitle(void) {
-    screenTick_arg0 sp10;
-    s32 sp18;
     void *heap;
-    s32 temp_s0 = gpData->unk_08;
-    s32 temp_s2;
-    s32 temp_v0;
-    s32 var_s3;
+    s32 iCharacter;
+    u32 nMode;
+    s32 nTick;
+    s32 iScreen = gpData->iScreen;
+    screenTick_arg0 anCommand;
 
-    gpData->unk_00++;
-    sp10.unk_0 = 0;
-    sp10.unk_4 = 0;
-    screenTick(&sp10);
-    temp_s2 = gpData->unk_00;
+    gpData->nTick++;
+    anCommand.unk_0 = 0;
+    anCommand.unk_4 = 0;
+    screenTick(&anCommand);
+    nTick = gpData->nTick;
 
-    if (gpData->unk_14 == 0x1) {
+    if (gpData->eMode == TM_1) {
         osViBlack(1);
-    } else if (gpData->unk_14 == 0x2) {
-        screenShowText(temp_s0, 0x64);
-        screenShowImage(temp_s0, 0x64);
-    } else if (gpData->unk_14 == 0x7) {
-        if (peelActive() == 0) {
-            if (func_8000628C_usa() && (gReset == 0)) {
+    } else if (gpData->eMode == TM_2) {
+        screenShowText(iScreen, 0x64);
+        screenShowImage(iScreen, 0x64);
+    } else if (gpData->eMode == TM_CHAR) {
+        if (!peelActive()) {
+            if (CheckTitleInput() && (gReset == 0)) {
                 gReset = -1;
             }
         }
 
-        if (temp_s2 % 600 == 0) {
-            func_8001ACA8_usa(&sp18);
-            gpData->unk_10++;
-            if (sp18 < gpData->unk_10) {
+        if (nTick % 600 == 0) {
+            menuFindCharacterMax(&iCharacter);
+            gpData->iCharacter++;
+            if (iCharacter < gpData->iCharacter) {
                 gReset = -1;
                 FadeOutSong(last_song_handle, 0x3C);
             } else {
-                func_80009D30_usa(temp_s0, gpData->unk_10);
+                menuInitProfile(iScreen, gpData->iCharacter);
             }
         }
 
-        if ((temp_s2 + 2) % 600 == 0) {
+        if ((nTick + 2) % 600 == 0) {
             func_8002CFE4_usa(0xE);
         }
-    } else if (gpData->unk_14 == 0x3) {
+    } else if (gpData->eMode == TM_3) {
         func_80005C00_usa();
-        if (B_8018A808_usa == 7) {
-            gpData->unk_00 = 0;
-            gpData->unk_14 = 4;
-            gpData->unk_08 = screenSet("EYECATCH", 0x8E001);
+        if (B_8018A808_usa == ARRAY_COUNTU(D_800B5890_usa)) {
+            gpData->nTick = 0;
+            gpData->eMode = TM_4;
+            gpData->iScreen = screenSet("EYECATCH", 0x8E001);
         }
-    } else if (gpData->unk_14 == 0x4) {
+    } else if (gpData->eMode == TM_4) {
         if (!screenFlushing() && !screenChangePending() && func_80024BF4_usa(&heap)) {
             HVQM2Util_Play((void *)"EYECATCH.HVQM", 0, heap);
-            gpData->unk_14 = 5;
+            gpData->eMode = TM_5;
         }
-    } else if (gpData->unk_14 == 0x5) {
-        temp_v0 = screenSet("TITLE", 0x8E401);
-        if (temp_v0 != temp_s0) {
-            gpData->unk_00 = 0;
-            gpData->unk_14 = 6;
-            gpData->unk_08 = temp_v0;
+    } else if (gpData->eMode == TM_5) {
+        s32 temp_v0 = screenSet("TITLE", 0x8E401);
+
+        if (temp_v0 != iScreen) {
+            gpData->nTick = 0;
+            gpData->eMode = TM_LOGO;
+            gpData->iScreen = temp_v0;
             PlayMIDI(BGM_INIT_TABLE, 0x3C, 0, 0);
         }
-    } else {
-        var_s3 = gpData->unk_04;
+    } else { /* TM_0, TM_LOGO */
+        nMode = gpData->nMode;
+
         if (B_8018A7F0_usa > 0) {
             B_8018A7F0_usa--;
-            screenShowImage(temp_s0, 0x6E);
-            screenHideImage(temp_s0, 0x64);
+            screenShowImage(iScreen, 0x6E);
+            screenHideImage(iScreen, 0x64);
         } else {
-            screenHideImage(temp_s0, 0x6E);
-            if (temp_s2 & 8) {
-                screenHideImage(temp_s0, 0x64);
+            screenHideImage(iScreen, 0x6E);
+            if (nTick & 8) {
+                screenHideImage(iScreen, 0x64);
             } else {
-                screenShowImage(temp_s0, 0x64);
+                screenShowImage(iScreen, 0x64);
             }
         }
 
-        if (gTheGame.controller[0].unk_0E & Z_TRIG) {
+        if (gTheGame.controller[0].button & Z_TRIG) {
             if (gTheGame.controller[0].touch_button != 0) {
                 ganButton[giButton] = gTheGame.controller[0].touch_button;
                 giButton = (giButton + 1) % ARRAY_COUNTU(ganButton);
@@ -286,7 +311,7 @@ void DoTitle(void) {
                             (ganButton[(giButton - 3) % ARRAY_COUNTU(ganButton)] == B_BUTTON)) {
                             if ((ganButton[(giButton - 2) % ARRAY_COUNTU(ganButton)] == R_TRIG) &&
                                 (ganButton[(giButton - 1) % ARRAY_COUNTU(ganButton)] == A_BUTTON)) {
-                                B_8021BA98_usa = ~B_8021BA98_usa;
+                                gbOpenTitle = ~gbOpenTitle;
                                 PlaySE(SFX_INIT_TABLE, 9);
                             }
                         }
@@ -300,133 +325,137 @@ void DoTitle(void) {
             gTheGame.controller[1].hold_button = 0;
         }
 
-        if (var_s3 & 2) {
-            var_s3 = (D_800B69B0_usa & 1) ? 5 : 1;
-            gpData->unk_0C = 0;
-            gpData->unk_00 = 0;
+        if (nMode & 2) {
+            nMode = (D_800B69B0_usa & 1) ? 5 : 1;
+            gpData->nTickDemo = 0;
+            gpData->nTick = 0;
         }
 
-        if (var_s3 & 4) {
-            gpData->unk_0C++;
-            if ((gpData->unk_0C == 0x384) && (B_8018A7F8_usa != 8)) {
+        if (nMode & 4) {
+            gpData->nTickDemo++;
+            if ((gpData->nTickDemo == 900) && (geDemoTitle != TD_VS_3D)) {
                 FadeOutSong(last_song_handle, 0x3C);
             }
 
-            if (gpData->unk_0C >= 0x3C0) {
+            if (gpData->nTickDemo >= 960) {
                 gDemo = GDEMO_0B;
                 gReset = -1;
                 gPlayer[0] = gTheGame.player;
                 gPlayer[1] = gTheGame.player;
-                gTheGame.tetrisWell[0].unk_4404 = 0;
-                gTheGame.tetrisWell[1].unk_4404 = 0;
-                brainbrain[0].unk_00C = -1;
-                brainbrain[1].unk_00C = -1;
+                gTheGame.tetrisWell[0].win = 0;
+                gTheGame.tetrisWell[1].win = 0;
+                brainbrain[0].speed = -1;
+                brainbrain[1].speed = -1;
                 gGameStatus |= 0x80;
 
-                B_8018A7F8_usa++;
-                if (B_8018A7F8_usa == 0xA) {
-                    B_8018A7F8_usa = 1;
+                geDemoTitle++;
+                if (geDemoTitle == TD_LAST) {
+                    geDemoTitle = TD_RULES_1;
                 }
 
-                switch (B_8018A7F8_usa) {
-                    case 0x1:
+                switch (geDemoTitle) {
+                    case TD_RULES_1:
                         gMain = GMAIN_TUTORIAL;
-                        gTheGame.unk_9C08 = 1;
-                        gTheGame.unk_9C0C = 1;
+                        gTheGame.totalPlayer = 1;
+                        gTheGame.dimension = DIMENSION_2D;
                         gSelection = 0x64;
-                        gTheGame.menu[0].unk_0 = 1;
+                        gTheGame.menu[0].game = 1;
                         break;
 
-                    case 0x3:
+                    case TD_RULES_2:
                         gMain = GMAIN_TUTORIAL;
-                        gTheGame.unk_9C08 = 1;
-                        gTheGame.unk_9C0C = 1;
+                        gTheGame.totalPlayer = 1;
+                        gTheGame.dimension = DIMENSION_2D;
                         gSelection = 0x64;
-                        gTheGame.menu[0].unk_0 = 2;
+                        gTheGame.menu[0].game = 2;
                         break;
 
-                    case 0x5:
+                    case TD_RULES_VS1:
                         gMain = GMAIN_TUTORIAL;
-                        gTheGame.unk_9C08 = 1;
-                        gTheGame.unk_9C0C = 1;
+                        gTheGame.totalPlayer = 1;
+                        gTheGame.dimension = DIMENSION_2D;
                         gSelection = 0x64;
-                        gTheGame.menu[0].unk_0 = 3;
+                        gTheGame.menu[0].game = 3;
                         break;
 
-                    case 0x7:
+                    case TD_RULES_VS2:
                         gMain = GMAIN_TUTORIAL;
-                        gTheGame.unk_9C08 = 1;
-                        gTheGame.unk_9C0C = 1;
+                        gTheGame.totalPlayer = 1;
+                        gTheGame.dimension = DIMENSION_2D;
                         gSelection = 0x64;
-                        gTheGame.menu[0].unk_0 = 4;
+                        gTheGame.menu[0].game = 4;
                         break;
 
-                    case 0x2:
-                    case 0x4:
+                    case TD_ENDLESS_2D:
+                    case TD_ENDLESS_3D:
                         gMain = GMAIN_384;
-                        gTheGame.unk_9C08 = 1;
-                        gTheGame.unk_9C0C = (B_8018A7F8_usa == 2) ? 1 : 2;
+                        gTheGame.totalPlayer = 1;
+                        gTheGame.dimension = (geDemoTitle == TD_ENDLESS_2D) ? DIMENSION_2D : DIMENSION_3D;
                         gSelection = 0x8C;
-                        gTheGame.menu[0].unk_0 = 1;
-                        gTheGame.menu[0].unk_C = 0;
-                        gTheGame.menu[0].unk_8 = 1;
-                        gTheGame.menu[0].unk_4 = (osGetCount() & 0xFF) % 6;
-                        func_80089BE0_usa(0, 6);
+                        gTheGame.menu[0].game = 1;
+                        gTheGame.menu[0].misc = 0;
+                        gTheGame.menu[0].speed = 1;
+                        gTheGame.menu[0].stage = (osGetCount() & 0xFF) % 6;
+                        DemoCPU(0, 6);
                         break;
 
-                    case 0x6:
-                    case 0x8:
+                    case TD_VS_2D:
+                    case TD_VS_3D:
                         gMain = GMAIN_384;
-                        gTheGame.unk_9C08 = 2;
-                        gTheGame.unk_9C0C = (B_8018A7F8_usa == 6) ? 1 : 2;
+                        gTheGame.totalPlayer = 2;
+                        gTheGame.dimension = (geDemoTitle == TD_VS_2D) ? DIMENSION_2D : DIMENSION_3D;
                         gSelection = 0xA0;
 
-                        gTheGame.menu[0].unk_0 = 0;
-                        gTheGame.menu[0].unk_C = 0;
-                        gTheGame.menu[0].unk_8 = (B_8018A7F8_usa == 6) ? 5 : 3;
-                        gTheGame.menu[0].unk_4 = (((osGetCount() & 0xF) % 15) * 0x64) + (((osGetCount() >> 4) & 3) | 1);
+                        gTheGame.menu[0].game = 0;
+                        gTheGame.menu[0].misc = 0;
+                        gTheGame.menu[0].speed = (geDemoTitle == TD_VS_2D) ? 5 : 3;
+                        gTheGame.menu[0].stage = (((osGetCount() & 0xF) % 15) * 0x64) + (((osGetCount() >> 4) & 3) | 1);
 
-                        func_80089BE0_usa(0, (B_8018A7F8_usa == 6) ? 8 : 5);
+                        DemoCPU(0, (geDemoTitle == TD_VS_2D) ? 8 : 5);
 
-                        gTheGame.menu[1].unk_0 = 0;
-                        gTheGame.menu[1].unk_C = 0;
-                        gTheGame.menu[1].unk_8 = (B_8018A7F8_usa == 6) ? 5 : 3;
-                        gTheGame.menu[1].unk_4 = (((osGetCount() & 0xF) % 15) * 0x64) + (((osGetCount() >> 4) & 3) | 1);
+                        gTheGame.menu[1].game = 0;
+                        gTheGame.menu[1].misc = 0;
+                        gTheGame.menu[1].speed = (geDemoTitle == TD_VS_2D) ? 5 : 3;
+                        gTheGame.menu[1].stage = (((osGetCount() & 0xF) % 15) * 0x64) + (((osGetCount() >> 4) & 3) | 1);
 
-                        func_80089BE0_usa(1, (B_8018A7F8_usa == 6) ? 8 : 5);
+                        DemoCPU(1, (geDemoTitle == TD_VS_2D) ? 8 : 5);
                         break;
 
-                    case 0x9:
+                    case TD_PROFILE:
                         gDemo = GDEMO_2C;
-                        gTheGame.unk_9C0C = 2;
+                        gTheGame.dimension = DIMENSION_3D;
                         gReset = 0;
                         gGameStatus &= ~0x80;
-                        gpData->unk_00 = 0;
-                        gpData->unk_10 = 0;
-                        gpData->unk_14 = 7;
-                        gpData->unk_08 = screenSet("PROFILE", 0x8E401);
-                        func_80009D30_usa(gpData->unk_08, gpData->unk_10);
+                        gpData->nTick = 0;
+                        gpData->iCharacter = 0;
+                        gpData->eMode = TM_CHAR;
+                        gpData->iScreen = screenSet("PROFILE", 0x8E401);
+                        menuInitProfile(gpData->iScreen, gpData->iCharacter);
+                        break;
+
+                    default:
                         break;
                 }
             }
         }
 
-        if ((B_8018A7F0_usa == 0) && (peelActive() == 0) && (gReset == 0) && !screenFlushing() &&
-            !screenChangePending()) {
-            if (func_8000628C_usa() && func_80024BF4_usa(&heap)) {
-                PlaySE(SFX_INIT_TABLE, 2);
-                if (func_80024BF4_usa(&heap) && (HVQM2Util_Play((void *)"INTRO.HVQM", 0x1000U, heap) != 0)) {
+        if ((B_8018A7F0_usa == 0) && !peelActive() && (gReset == 0)) {
+            if (!screenFlushing() && !screenChangePending()) {
+                if (CheckTitleInput() && func_80024BF4_usa(&heap)) {
                     PlaySE(SFX_INIT_TABLE, 2);
-                }
+                    if (func_80024BF4_usa(&heap) && (HVQM2Util_Play((void *)"INTRO.HVQM", 0x1000U, heap) != 0)) {
+                        PlaySE(SFX_INIT_TABLE, 2);
+                    }
 
-                gMain = GMAIN_258;
-                gReset = -1;
-                gDemo = GDEMO_2C;
-                gGameStatus &= ~0x80;
+                    gMain = GMAIN_258;
+                    gReset = -1;
+                    gDemo = GDEMO_2C;
+                    gGameStatus &= ~0x80;
+                }
             }
         }
 
-        gpData->unk_04 = var_s3;
+        gpData->nMode = nMode;
     }
 
     if (!screenFlushing()) {
@@ -446,11 +475,18 @@ void DoTitle(void) {
 
 void InitTitle(void) {
     u16 sp10[0x80];
-    void *sp110;
+    void *pHeap;
     s32 sp114;
     s32 i;
 
-    gTheGame.unk_9C0C = 2;
+#if 0
+    // Local variables
+    void * pHeap; // r1+0x28
+    struct_image_c_92 * pImage; // r1+0x24
+    @enum$94peel_c ePeel; // r1+0x8
+#endif
+
+    gTheGame.dimension = DIMENSION_3D;
     giButton = 0;
 
     for (i = 0; i < ARRAY_COUNT(ganButton); i++) {
@@ -458,39 +494,41 @@ void InitTitle(void) {
     }
 
     // funny alignment, current macros does not match
-    sp110 = (void *)((((uintptr_t)gBufferHeap + 0xF) + SEGMENT_ROM_SIZE(segment_0CA4A0)) & ~0xF);
+    pHeap = (void *)((((uintptr_t)gBufferHeap + 0xF) + SEGMENT_ROM_SIZE(segment_0CA4A0)) & ~0xF);
 
     gPlayer[0] = gTheGame.player;
     gPlayer[1] = gTheGame.player;
-    gpData = sp110;
-    sp110 = (void *)((uintptr_t)sp110 + sizeof(struct_gpData));
-    bzero(gpData, sizeof(struct_gpData));
-    gpData->unk_14 = 0;
-    gpData->unk_04 = 2;
 
-    if (screenLoad("TITLE.SBF", &sp110) != 0) {
+    gpData = pHeap;
+    pHeap = (void *)((uintptr_t)pHeap + sizeof(struct_gpData));
+
+    bzero(gpData, sizeof(struct_gpData));
+    gpData->eMode = TM_0;
+    gpData->nMode = 2;
+
+    if (screenLoad("TITLE.SBF", &pHeap) != 0) {
         if (B_8018A7F0_usa > 0) {
             if (CHECK_INCORRECT_OS_TV_TYPE(osTvType)) {
-                gpData->unk_14 = 1;
-                gpData->unk_08 = screenSet("BLANK", 0xFF401);
+                gpData->eMode = TM_1;
+                gpData->iScreen = screenSet("BLANK", 0xFF401);
             } else if (D_800B69B0_usa & 1) {
-                gpData->unk_00 = 0;
-                gpData->unk_14 = 4;
-                gpData->unk_08 = screenSet("EYECATCH", 0xFF401);
+                gpData->nTick = 0;
+                gpData->eMode = TM_4;
+                gpData->iScreen = screenSet("EYECATCH", 0xFF401);
             } else {
-                gpData->unk_14 = 2;
-                gpData->unk_08 = screenSet("NO-CONTROLLER", 0xFF401);
+                gpData->eMode = TM_2;
+                gpData->iScreen = screenSet("NO-CONTROLLER", 0xFF401);
             }
         } else {
             u32 var_a1;
 
-            if ((gDemo == GDEMO_16) || (gDemo == GDEMO_21) || (B_8018A7F8_usa == 9)) {
+            if ((gDemo == GDEMO_16) || (gDemo == GDEMO_21) || (geDemoTitle == TD_PROFILE)) {
                 var_a1 = 0xE;
             } else {
                 var_a1 = -1;
             }
-            gpData->unk_14 = 6;
-            gpData->unk_08 = screenSet("TITLE", ((var_a1 << 0xC) & 0x7F000) | 0x80401);
+            gpData->eMode = TM_LOGO;
+            gpData->iScreen = screenSet("TITLE", ((var_a1 << 0xC) & 0x7F000) | 0x80401);
             gDemo = GDEMO_2C;
         }
 
@@ -514,7 +552,7 @@ void InitTitle(void) {
 
     FadeOutAllSFXs(0x1E);
     func_80002D8C_usa(0x1E);
-    if (gpData->unk_14 == 6) {
+    if (gpData->eMode == TM_LOGO) {
         PlayMIDI(BGM_INIT_TABLE, 0x3C, 0, 1);
     }
     func_80002E70_usa(D_FLT_800B3B10_usa * 0x7FFF);
@@ -529,8 +567,8 @@ void titleSetup(void) {
     B_FLT_8018A7FC_usa = 0.0f;
     B_FLT_8018A800_usa = 0.0f;
     B_FLT_8018A804_usa = 0.0f;
-    B_8021BA98_usa = 0;
-    B_8018A7F8_usa = 0;
+    gbOpenTitle = 0;
+    geDemoTitle = TD_NONE;
     gGameStatus = 0x300;
     gPlayer[0] = NULL;
     gPlayer[1] = NULL;

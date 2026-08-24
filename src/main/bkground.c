@@ -25,8 +25,8 @@ void InitFrame(void) {
     s32 i;
 
     bg_frame = Pon_Image_Heap;
-    if (gTheGame.unk_9C0C == 1) {
-        if (gTheGame.unk_9C08 == 1) {
+    if (gTheGame.dimension == DIMENSION_2D) {
+        if (gTheGame.totalPlayer == 1) {
             LOAD_DATA_SEGMENT(bg_frame, segment_background_frame_2d_1p, Pon_Image_Heap);
         } else {
             LOAD_DATA_SEGMENT(bg_frame, segment_background_frame_2d_2p, Pon_Image_Heap);
@@ -58,7 +58,7 @@ void InitFrame(void) {
             }
         }
     } else {
-        if (gTheGame.unk_9C08 == 1) {
+        if (gTheGame.totalPlayer == 1) {
             LOAD_DATA_SEGMENT(bg_frame, segment_background_frame_3d_1p, Pon_Image_Heap);
         } else {
             LOAD_DATA_SEGMENT(bg_frame, segment_background_frame_3d_2p, Pon_Image_Heap);
@@ -83,7 +83,7 @@ void InitFrame(void) {
         }
     }
 
-    for (i = 0; i < gTheGame.unk_9C08; i++) {
+    for (i = 0; i < gTheGame.totalPlayer; i++) {
         obj = &gTheGame.frame[i];
         if (i == 0) {
             obj->s.imageX = 0;
@@ -127,7 +127,7 @@ void InitFrame(void) {
         gTheGame.unk_99D8[i].tlut.flag = (u32)-1;
         gTheGame.unk_99D8[i].tlut.mask = 0;
 
-        if (gTheGame.unk_9C0C == 2) {
+        if (gTheGame.dimension == DIMENSION_3D) {
             obj->s.imageYorig = 0;
             obj->s.scaleW = 1 << 10;
             obj->s.scaleH = 1 << 10;
@@ -213,7 +213,7 @@ void InitBackground(s32 who) {
                     break;
 
                 case 0x3:
-                    if (gTheGame.tetrisWell[0].menu.unk_0 == 5) {
+                    if (gTheGame.tetrisWell[0].menu.game == 5) {
                         LOAD_DATA_SEGMENT(currSegment, segment_background_2A6FF0, Pon_Image_Heap);
                     } else {
                         LOAD_DATA_SEGMENT(currSegment, segment_background_215FF0, Pon_Image_Heap);
@@ -229,7 +229,7 @@ void InitBackground(s32 who) {
                     break;
 
                 case 0x6:
-                    if (gTheGame.tetrisWell[0].menu.unk_0 == 5) {
+                    if (gTheGame.tetrisWell[0].menu.game == 5) {
                         LOAD_DATA_SEGMENT(currSegment, segment_background_2CB3F0, Pon_Image_Heap);
                     } else {
                         LOAD_DATA_SEGMENT(currSegment, segment_background_282BF0, Pon_Image_Heap);
@@ -258,7 +258,7 @@ void InitBackground(s32 who) {
             break;
 
         case 0x96:
-            if (gTheGame.menu[0].unk_4 != 0x10) {
+            if (gTheGame.menu[0].stage != 0x10) {
                 switch (who) {
                     case 0x0:
                         LOAD_DATA_SEGMENT(currSegment, segment_background_35C3F0, Pon_Image_Heap);
@@ -430,7 +430,7 @@ void func_80048D94_usa(void) {
     s32 i;
     uObjSprite *var_v1;
 
-    if ((gTheGame.unk_9C0C == 1) && (gTheGame.unk_9C08 != 1)) {
+    if ((gTheGame.dimension == DIMENSION_2D) && (gTheGame.totalPlayer != 1)) {
         sp0[0] = 0x47;
         sp0[1] = 0x47;
     } else {
@@ -453,7 +453,7 @@ void func_80048D94_usa(void) {
         var_v1[i].s.imageFlags = 0;
     }
 
-    if (gTheGame.unk_9C08 == 1) {
+    if (gTheGame.totalPlayer == 1) {
         gTheGame.unk_9A08[0].s.objX = 0x72 << 2;
         gTheGame.unk_9A08[0].s.scaleW = 0x4B;
         gTheGame.unk_9A08[0].s.objY = 0x1F << 2;
@@ -494,7 +494,7 @@ void Draw2DShadeBox(void) {
     s32 count;
     s32 total;
 
-    if (gTheGame.unk_9C08 == 1) {
+    if (gTheGame.totalPlayer == 1) {
         total = ARRAY_COUNT(gTheGame.unk_9A08);
     } else if (gMain < GMAIN_393) {
         total = ARRAY_COUNT(gTheGame.unk_9A08) - 1;
@@ -639,7 +639,7 @@ void func_8004AE90_usa(void) {
         gDPSetRenderMode(glistp++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
         gDPSetPrimColor(glistp++, 0, 0, 255, 255, 255, ((D_800B69C0_usa * 0x32) + 0x64));
 
-        if (gTheGame.unk_9C0C == 1) {
+        if (gTheGame.dimension == DIMENSION_2D) {
             gDPPipeSync(glistp++);
             gSPBgRect1Cyc(glistp++, &gTheGame.unk_8C88[0]);
 
@@ -689,7 +689,7 @@ void func_8004B12C_usa(void) {
 
         gDPSetPrimColor(glistp++, 0, 0, 255, 255, 255, D_800B69C4_usa * 0xA);
 
-        if (gTheGame.unk_9C0C == 1) {
+        if (gTheGame.dimension == DIMENSION_2D) {
             gDPPipeSync(glistp++);
             gSPBgRect1Cyc(glistp++, &gTheGame.frame[0]);
         } else {

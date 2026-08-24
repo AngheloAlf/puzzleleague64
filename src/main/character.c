@@ -253,7 +253,7 @@ s32 ReturnAttackTexValue(attack_t *attack, s32 type, s32 lev, s32 pos) {
     s32 actual;
     s32 value;
 
-    if ((gTheGame.unk_9C0C == 2) && (type >= 0xE)) {
+    if ((gTheGame.dimension == DIMENSION_3D) && (type >= 0xE)) {
         type -= 2;
     }
 
@@ -277,7 +277,7 @@ s32 ReturnAttackTexValue(attack_t *attack, s32 type, s32 lev, s32 pos) {
             ptr = attack_chain3[0];
             break;
         case 0xB:
-            if (gTheGame.unk_9C0C == 1) {
+            if (gTheGame.dimension == DIMENSION_2D) {
                 ptr = attack_chain3[lev];
             } else {
                 ptr = ring_chain3;
@@ -320,7 +320,7 @@ s32 ReturnAttackTexValue(attack_t *attack, s32 type, s32 lev, s32 pos) {
             return 0;
     }
 
-    if ((gTheGame.unk_9C0C == 1) || (type < 0xC)) {
+    if ((gTheGame.dimension == DIMENSION_2D) || (type < 0xC)) {
         if (type >= 0xC) {
             value = ptr[lev];
             switch (value) {

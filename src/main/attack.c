@@ -151,7 +151,7 @@ void func_8005A9EC_usa(tetWell *well, attack_t *attack) {
             var_a1 = D_800B75E0_usa[var_v0];
             break;
     }
-    temp_lo = var_a1 * gTheGame.unk_9C0C;
+    temp_lo = var_a1 * gTheGame.dimension;
     well->unk_43FC += temp_lo;
     well->unk_43F8 += temp_lo;
     well->unk_441C -= temp_lo;
@@ -194,7 +194,7 @@ void AttackFly(tetWell *well, attack_t *attack, s32 num) {
             if ((attack->type == ATTACKTYPE_10) && (attack->unk_28 != -1)) {
                 attack->disappear = well->attack[attack->unk_28].disappear;
             } else {
-                if (gTheGame.unk_9C0C == 1) {
+                if (gTheGame.dimension == DIMENSION_2D) {
                     var_a0 = st_Attack2DTopPosition[num][0];
                     st_Attack2DTopPosition[num][0]++;
                 } else {
@@ -207,7 +207,7 @@ void AttackFly(tetWell *well, attack_t *attack, s32 num) {
             }
         }
 
-        if (gTheGame.unk_9C0C == 1) {
+        if (gTheGame.dimension == DIMENSION_2D) {
             temp_ft2 = st_Attack2DTopPosition[num][attack->disappear];
             temp_ft1 = (10.0 - (f32)attack->unk_24) / (temp_ft2 - attack->unk_10);
             attack->unk_10 += temp_t0 * 5;
@@ -222,7 +222,7 @@ void AttackFly(tetWell *well, attack_t *attack, s32 num) {
         }
     }
 
-    if (gTheGame.unk_9C0C == 1) {
+    if (gTheGame.dimension == DIMENSION_2D) {
         temp_a3->objX = attack->unk_10 << 2;
         temp_a3->objY = attack->unk_24 << 2;
         if (attack->unk_24 < 0xB) {
@@ -301,7 +301,7 @@ void AttackShake(tetWell *well, cursor_t *cursor, attack_t *attack) {
                 var_a1 = D_800B75E0_usa[temp_a0];
                 break;
         }
-        temp_lo = var_a1 * gTheGame.unk_9C0C;
+        temp_lo = var_a1 * gTheGame.dimension;
         well->unk_43FC += temp_lo;
         well->unk_43F8 += temp_lo;
         well->unk_441C -= temp_lo;
@@ -597,7 +597,7 @@ INLINE void Match3DPosition(s32 num, s32 row, s32 col, s32 *x, s32 *y) {
             return;
     }
 
-    if ((gTheGame.unk_9C08 == 1) && (gSelection != 0x64)) {
+    if ((gTheGame.totalPlayer == 1) && (gSelection != 0x64)) {
         *x = sp40[index - 1];
     } else if (num == 0) {
         *x = sp0[index - 1];
@@ -607,7 +607,7 @@ INLINE void Match3DPosition(s32 num, s32 row, s32 col, s32 *x, s32 *y) {
 }
 
 void UpdateAttack(tetWell *well, cursor_t *cursor, s32 num) {
-    if (gTheGame.unk_9C0C == 1) {
+    if (gTheGame.dimension == DIMENSION_2D) {
         Update2DAttack(well, cursor, num);
     } else {
         Update3DAttack(well, cursor, num);
@@ -633,7 +633,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/attack", func_8005B348_ger);
 #endif
 
 void ChangeAttack(tetWell *well, cursor_t *cursor, s32 num, s32 combo) {
-    if (gTheGame.unk_9C0C == 1) {
+    if (gTheGame.dimension == DIMENSION_2D) {
         Change2DAttack(well, cursor, num, combo);
     } else {
         Change3DAttack(well, cursor, num, combo);
@@ -661,7 +661,7 @@ void InitFlyAttack(tetWell *well, attack_t *attack, s32 posX, s32 posY, ENUM_TYP
     }
 
     temp_s5 = well->unk_441C - 0xDF;
-    if (gTheGame.unk_9C0C == 1) {
+    if (gTheGame.dimension == DIMENSION_2D) {
         sp10 = well->unk_3830[0][0].s.objX >> 0x2;
         sp14 = (well->unk_3830[0][0].s.objY >> 0x2) - temp_s5;
         Init2DAttackPosition(attack, type, num);

@@ -126,16 +126,16 @@ void UpdateMTController(tetWell *well, cursor_t *cursor, s32 num) {
     u16 h_button = gamepad->hold_button;
     s32 sound = 0;
 
-    if (gTheGame.unk_9C0C == 1) {
-        if (brainbrain[num].unk_00C == -1) {
+    if (gTheGame.dimension == DIMENSION_2D) {
+        if (brainbrain[num].speed == -1) {
             if (h_button & U_JPAD) {
-                sound = Move2DCursorUp(well, cursor, gamepad->unk_08);
+                sound = Move2DCursorUp(well, cursor, gamepad->hold);
             } else if (h_button & D_JPAD) {
-                sound = Move2DCursorDown(cursor, gamepad->unk_08);
+                sound = Move2DCursorDown(cursor, gamepad->hold);
             } else if (h_button & L_JPAD) {
-                sound = Move2DCursorLeft(cursor, gamepad->unk_08);
+                sound = Move2DCursorLeft(cursor, gamepad->hold);
             } else if (h_button & R_JPAD) {
-                sound = Move2DCursorRight(cursor, gamepad->unk_08);
+                sound = Move2DCursorRight(cursor, gamepad->hold);
             }
 
             if (t_button & (A_BUTTON | B_BUTTON)) {
@@ -147,15 +147,15 @@ void UpdateMTController(tetWell *well, cursor_t *cursor, s32 num) {
 
         Update2DSwitching(well, cursor);
     } else {
-        if (brainbrain[num].unk_00C == -1) {
+        if (brainbrain[num].speed == -1) {
             if (h_button & U_JPAD) {
-                sound = Move3DCursorUp(well, cursor, gamepad->unk_08);
+                sound = Move3DCursorUp(well, cursor, gamepad->hold);
             } else if (h_button & D_JPAD) {
-                sound = Move3DCursorDown(cursor, gamepad->unk_08);
+                sound = Move3DCursorDown(cursor, gamepad->hold);
             } else if (h_button & L_JPAD) {
-                sound = Move3DCursorLeft(cursor, gamepad->unk_08);
+                sound = Move3DCursorLeft(cursor, gamepad->hold);
             } else if (h_button & R_JPAD) {
-                sound = Move3DCursorRight(cursor, gamepad->unk_08);
+                sound = Move3DCursorRight(cursor, gamepad->hold);
             }
 
             if (t_button & (A_BUTTON | B_BUTTON)) {
@@ -206,7 +206,7 @@ void DoMT(void) {
         return;
     }
 
-    if ((gSelection == 0x64) && (gTheGame.menu[0].unk_0 == 3)) {
+    if ((gSelection == 0x64) && (gTheGame.menu[0].game == 3)) {
         total = 2;
     }
 
@@ -252,15 +252,18 @@ void DoMT(void) {
             UpdateDistance(well, cursor);
             UpdateAnimation(well, num, 0);
             UpdateMiscStuff(well, cursor, num);
-            if ((cursor->unk_00 <= 0) && (well->unk_43F8 >= (gTheGame.unk_9C0C * 0x10))) {
+            if (cursor->unk_00 <= 0) {
+                s32 temp = gTheGame.dimension;
 
-                well->unk_43C4 = -1;
+                if (well->unk_43F8 >= temp * 0x10) {
+                    well->unk_43C4 = -1;
 
-                AddNewRow(well, cursor, num);
-                well->unk_43F8 = 0;
+                    AddNewRow(well, cursor, num);
+                    well->unk_43F8 = 0;
+                }
             }
 
-            if (gTheGame.unk_9C0C == 2) {
+            if (gTheGame.dimension == DIMENSION_3D) {
                 Check3DVisibleBlocks(well, cursor);
             }
 
@@ -278,7 +281,7 @@ void MimicCheckState(tetWell *well, cursor_t *cursor) {
     }
 
     if (!CheckFieldActive(well)) {
-        if ((brainbrain[0].unk_00C == -1) && (well->unk_43A8 == 0)) {
+        if ((brainbrain[0].speed == -1) && (well->unk_43A8 == 0)) {
             if (brainbrain[0].unk_03C == 5) {
                 if (cursor->unk_28[1] == 0) {
                     return;
@@ -304,7 +307,7 @@ void MimicCheckState(tetWell *well, cursor_t *cursor) {
 
             gMain = GMAIN_2BC;
         } else if (brainbrain[0].unk_104 < 0) {
-            brainbrain[0].unk_00C = -1;
+            brainbrain[0].speed = -1;
             brainbrain[0].unk_104 = 0;
             if (well->unk_43A8 == -3) {
                 PlaySE(SFX_INIT_TABLE, 0x12C);
@@ -600,7 +603,7 @@ void DrawMT(struct_gInfo_unk_00068 *dynamicp) {
     }
 
     if ((gMain == GMAIN_MIMIC) && (geModeMimic >= MM_STAGE)) {
-        if (gTheGame.unk_9C0C == 1) {
+        if (gTheGame.dimension == DIMENSION_2D) {
             Draw2DMT(dynamicp);
         } else {
             Draw3DMT(dynamicp);
@@ -642,7 +645,7 @@ STATIC_INLINE void inlined_function() {
     temp_s0 = gnTagTextMimic;
     geModeMimic = MM_NONE;
     B_80193014_usa = 0;
-    gnTagTextMimic = (gTheGame.menu[0].unk_8 * 0xA) + 0x1EA;
+    gnTagTextMimic = (gTheGame.menu[0].speed * 0xA) + 0x1EA;
     if (screenGetTextType(giScreenMimic, gnTagTextMimic, &nType)) {
         screenHideText(giScreenMimic, -0x3FFFFE0C);
         screenShowText(giScreenMimic, gnTagTextMimic);
@@ -675,7 +678,7 @@ void InitMimic(void) {
     //! @bug: Modifies a `const` symbol.
     // cast const away
     temp = (char *)RO_800C76E4_usa;
-    temp[5] = gTheGame.menu[0].unk_8 + '0';
+    temp[5] = gTheGame.menu[0].speed + '0';
 
     if (screenLoad(temp, &sp10) != 0) {
         inlined_function();
