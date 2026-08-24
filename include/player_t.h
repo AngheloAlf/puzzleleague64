@@ -5,13 +5,13 @@
 #include "unk.h"
 
 typedef struct struct_800072A0_usa_arg0_unk_58 {
-    /* 0x0 */ UNK_TYPE2 unk_0[UNK_SIZE];
+    /* 0x0 */ u16 unk_0[UNK_SIZE];
     /* 0x2 */ UNK_PAD unk_2[0xA];
 } struct_800072A0_usa_arg0_unk_58; // size = 0xC
 
 typedef struct player_t_unk_002 {
     /* 0x0 */ struct_800072A0_usa_arg0_unk_58 unk_0;
-    /* 0xD */ UNK_PAD unk_D[0x2];
+    /* 0xC */ UNK_PAD unk_C[0x2];
 } player_t_unk_002; // size = 0xE
 
 typedef struct player_t_unk_02B {
@@ -109,11 +109,11 @@ typedef struct player_t {
     /* 0x0C9 */ char unk_0C9[STRUCT_801A6DB8_USA_UNK_0C9_COUNT];
     /* 0x0CD */ char unk_0CD[STRUCT_801A6DB8_USA_UNK_0CD_COUNT];
     /* 0x0D4 */ char unk_0D4[STRUCT_801A6DB8_USA_UNK_0D4_COUNT];
-    /* 0x0DB */ u8 unk_0DB;
-    /* 0x0DC */ u8 unk_0DC;
-    /* 0x0DD */ u8 unk_0DD;
-    /* 0x0DE */ u8 unk_0DE;
-    /* 0x0DF */ u8 unk_0DF;
+    /* 0x0DB */ char kPLAYER1V_kEASY;
+    /* 0x0DC */ char kPLAYER1V_kNORMAL;
+    /* 0x0DD */ char kPLAYER1V_kHARD;
+    /* 0x0DE */ char kPLAYER1V_kSHARD;
+    /* 0x0DF */ char kPLAYER1V_kULTRA;
     /* 0x0E0 */ char unk_0E0;
     /* 0x0E1 */ char unk_0E1;
     /* 0x0E2 */ char unk_0E2;

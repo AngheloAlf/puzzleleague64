@@ -108,7 +108,7 @@ void menuInitFairy(enum_menuTickFairy_ePosition ePosition);
 void menuTickFairy(s32, s32, s32, s32, s32, s32, u32, s32);
 // void menuTickFairy(s32 iScreen, s32 nFrame, s32 nTagText, s32 nOffsetText, s32 nOffsetBox, enum_menuTickFairy_ePosition ePosition, s32 bArrow);
 // void func_8001AB0C_usa();
-void menuFindCharacterMax(s32 *arg0);
+void menuFindCharacterMax(s32 *piCharacter);
 void DrawMenu(struct struct_gInfo_unk_00068 *arg0);
 void DoMenu(void);
 void InitMenu(void);

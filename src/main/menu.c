@@ -165,6 +165,15 @@ void func_800194DC_usa(enum_TypeMenu arg0);
 
 extern s32 D_800B5A14_usa;
 
+
+void func_8001A330_usa(s32 arg0, s32 arg1);
+extern s16 B_8018AA06_usa;
+extern s16 B_8018AA14_usa;
+extern s16 B_8018AA16_usa;
+extern s16 B_8018AA18_usa; // maybe giImageFairy?
+extern UNK_TYPE2 D_800B5A54_usa[];
+
+
 /**
  * Original name: gnPositionFairyX
  */
@@ -366,10 +375,127 @@ nbool func_800072A0_usa(struct_800072A0_usa_arg0 *arg0) {
     return ntrue;
 }
 
-UNK_RET func_80007538_usa(struct_800072A0_usa_arg0 *, s32); /* extern */
+UNK_RET func_80007538_usa(struct_800072A0_usa_arg0 *arg0, s32 arg1);
 
 #if VERSION_USA
+#if 0
+s32 func_80007538_usa(struct_800072A0_usa_arg0 *arg0, s32 arg1) {
+    s32 temp_s2;
+    s32 temp_s2_2;
+    s32 temp_s4;
+    s32 temp_s5;
+    s32 temp_s5_2;
+    s32 temp_s5_3;
+    s32 temp_v0;
+    s32 temp_v0_2;
+    s32 var_a0_2;
+    s32 var_s0_2;
+    s32 var_s1_2;
+    s32 var_s2;
+    s32 var_s2_2;
+    s32 var_s2_3;
+    s32 var_s3_2;
+    s32 var_v0_2;
+    u32 temp_s0;
+    u32 var_s3;
+    u32 var_v0;
+    void *temp_s7;
+    void *var_a0;
+    void *var_s0;
+    void *var_s4;
+
+    var_s2 = 1;
+    temp_s5 = arg0->unk_0C + 1;
+    temp_s5_2 = temp_s5 & -(temp_s5 < 8);
+    temp_s7 = B_801AB8E4_usa - 0x3ADC;
+    var_s0 = B_801AB8E4_usa - 0x3A24;
+
+    for (; var_s2 < 8; var_s2++) {
+        bcopy(&gTheGame.player[var_s2], var_s0, 0x7BC);
+        var_s0 += 0x7BC;
+    }
+
+    arg0->unk_0C = temp_s5_2;
+    arg0->unk_1C = 0x36DC;
+    arg0->unk_00 += 1;
+    bcopy(arg0, temp_s7, 0xB8);
+    var_s3 = temp_s5_2 << 0xE;
+    var_s2_2 = 0x36DC;
+
+    if (B_8018A924_usa != 0) {
+        if (var_s3 <= 0x1FFFFU) {
+loop_5:
+            var_v0 = var_s3;
+            if ((s32) var_s3 < 0) {
+                var_v0 = var_s3 + 0x7F;
+            }
+            var_s1_2 = 4;
+            temp_s4 = (s32) var_v0 >> 7;
+            temp_s0 = (temp_s4 + 1) << 0xE;
+
+            while (var_s1_2 > 0) {
+                if (osFlashSectorErase((u32) temp_s4) == 0) {
+                    temp_v0 = temp_s0 - var_s3;
+                    var_s3 = temp_s0;
+                    temp_s2 = var_s2_2 - temp_v0;
+                    var_s2_2 = temp_s2 & ((s32) ~temp_s2 >> 0x1F);
+                    break;
+                }
+                var_s1_2 -= 1;
+            }
+
+            if ((var_s1_2 != 0) && ((var_s3 <= 0x1FFFFU) & (var_s2_2 > 0))) {
+                goto loop_5;
+            }
+        }
+    }
+
+    temp_s2_2 = temp_s5_2 << 0xE;
+    var_s3_2 = 0x36DC;
+    temp_s5_3 = (s32) (B_8018A960_usa + 0xF) & ~0xF;
+    if ((B_8018A924_usa != 0) && !(temp_s2_2 & 0x7F)) {
+        var_v0_2 = 0x36DC;
+        if (var_s3_2 < 0) {
+            var_v0_2 = 0x375B;
+        }
+        temp_v0_2 = var_v0_2 & 0x7F80;
+        var_s2_3 = temp_s2_2 + temp_v0_2;
+        var_s4 = temp_s7 + temp_v0_2;
+        var_a0 = var_s4;
+
+        while (var_s3_2 > 0) {
+            bcopy(var_a0, (void *) temp_s5_3, 0x80);
+            osWritebackDCache((void *) temp_s5_3, 0x80);
+            osFlashWriteBuffer(&B_8018A930_usa, 0, (void *) temp_s5_3, &B_8018A948_usa);
+            osRecvMesg(&B_8018A948_usa, NULL, 1);
+            func_80000450_usa();
+            var_a0_2 = var_s2_3;
+            if (var_s2_3 < 0) {
+                var_a0_2 = var_s2_3 + 0x7F;
+            }
+
+            for (var_s0_2 = 4; var_s0_2 > 0; var_s0_2--) {
+                if (osFlashWriteArray((u32) (var_a0_2 >> 7)) == 0) {
+                    var_s3_2 -= 0x80;
+                    var_s2_3 -= 0x80;
+                    var_s4 -= 0x80;
+                    break;
+                }
+            }
+
+            if (var_s0_2 == 0) {
+                goto loop_22_end;
+            }
+            var_a0 = var_s4;
+        }
+        loop_22_end:;
+    }
+
+    return -1;
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_80007538_usa);
+#endif
 #endif
 
 #if VERSION_USA
@@ -725,20 +851,80 @@ nbool func_80008EA4_usa(s32 *arg0) {
 INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_8000901C_usa);
 #endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_800090DC_eur);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_800090C4_fra);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_800090C4_ger);
+#endif
+
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_80009228_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_80009228_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_80009228_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_80009228_usa);
 #endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_80009440_usa);
 #endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_80009500_eur);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_800094E8_fra);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_800094E8_ger);
+#endif
+
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_800095F8_usa);
 #endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_800095F8_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_800095F8_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_800095F8_usa);
+#endif
+
 #if VERSION_USA
 INCLUDE_RODATA("asm/usa/nonmatchings/main/menu", RO_800C3284_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_800C3284_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/menu", RO_800C3284_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_RODATA("asm/ger/nonmatchings/main/menu", RO_800C3284_usa);
 #endif
 
 #if VERSION_USA
@@ -749,60 +935,12 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_80009A78_usa);
 INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_80009CA8_usa);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/menu", menuInitProfile);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_800090DC_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_80009228_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_80009500_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_800095F8_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_800C3284_usa);
-#endif
-
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_80009B38_eur);
 #endif
 
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_80009D68_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/menu", menuInitProfile);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_800090C4_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_80009228_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_800094E8_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_800095F8_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/menu", RO_800C3284_usa);
 #endif
 
 #if VERSION_FRA
@@ -813,30 +951,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_80009B20_fra);
 INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_80009D50_fra);
 #endif
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/menu", menuInitProfile);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_800090C4_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_80009228_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_800094E8_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_800095F8_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/menu", RO_800C3284_usa);
-#endif
-
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_80009B20_ger);
 #endif
@@ -845,16 +959,19 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_80009B20_ger);
 INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_80009D50_ger);
 #endif
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/menu", menuInitProfile);
-#endif
+/**
+ * Original name: menuInitProfile
+ */
+void menuInitProfile(s32 iScreen, s32 iCharacter) {
+    B_8018AA16_usa = -1;
+    B_8018AA18_usa = 0;
 
-void func_8001A330_usa(s32 arg0, s32 arg1);
-extern s16 B_8018AA06_usa;
-extern s16 B_8018AA14_usa;
-extern s16 B_8018AA16_usa;
-extern s16 B_8018AA18_usa;
-extern UNK_TYPE2 D_800B5A54_usa[];
+    screenHideImage(iScreen, 0x87D387D0);
+    screenHideImage(iScreen, 0x8BBB8BB8);
+    screenHideText(iScreen, 0x87D387D1);
+    screenHideText(iScreen, 0x8BBB8BB9);
+    func_8001A330_usa(iScreen, iCharacter);
+}
 
 void func_80009DBC_usa(s32 arg0) {
     s32 temp;
@@ -925,35 +1042,39 @@ void func_8000A940_usa(s32 arg0, s32 arg1, s32 arg2) {
     s32 sp10;
     u32 temp_s0;
     const char *var_a2;
+    s32 temp;
+    player_t_unk_7A2 *new_var;
+    UNK_TYPE2 *new_var2;
 
     if (arg0 >= ARRAY_COUNTU(gTheGame.player)) {
         return;
     }
 
-    switch (arg1) {                             /* irregular */
+    switch (arg1) {
         case 0x5:
             var_a2 = RO_800C32E8_usa;
             break;
         case 0x6:
             var_a2 = RO_800C32F0_usa;
             break;
-        default:
-            if (arg1 != 7) {
-                return;
-            }
+        case 0x7:
             var_a2 = RO_800C32F8_usa;
             break;
+        default:
+            return;
     }
 
     if (((arg2 ^ 1) == 0) && (arg0 == 0)) {
         temp_s0 = gTheGame.player[arg0].unk_7A2.unk_08[arg1];
     } else {
-        temp_s0 = gTheGame.player[arg0].unk_7A2.unk_00[arg1];
+        new_var2 = gTheGame.player[arg0].unk_7A2.unk_00;
+        temp_s0 = new_var2[arg1];
     }
 
     if (screenFind(&sp10, var_a2)) {
         func_8002A1F4_usa(sp10, (arg2 != 0) ? 0x67 : 0x65, temp_s0 & 0xF, 0);
-        func_8002A1F4_usa(sp10, (arg2 == 0) ? 0x64 : 0x68, (temp_s0 >> 4) & 0x7F, 0);
+        temp = (temp_s0 >> 4) & 0x7F;
+        func_8002A1F4_usa(sp10, (arg2 == 0) ? 0x64 : 0x68, temp, 0);
         if (arg2 == 0) {
             func_8002A1F4_usa(sp10, 0x66, (temp_s0 >> 0xB) & 1, 0);
         }
@@ -3503,30 +3624,34 @@ INLINE nbool menuFind(struct_gaMenuData **ppData, enum_TypeMenu eType) {
 }
 
 #if VERSION_USA
-#if 0
+#ifdef NON_MATCHING
+STATIC_INLINE s32 inlined_function_menuLoadData(void) {
+    s32 var_a0;
+
+    for (var_a0 = 0; var_a0 < 8; var_a0++) {
+        if (gTheGame.player[var_a0].unk_002.unk_0.unk_0[0] == 0) {
+            return var_a0;
+        }
+    }
+
+    return -1;
+}
+
+// extra redundant instruction
 s32 menuLoadData(void) {
     struct_800072A0_usa_arg0 sp18;
     s32 spD0;
-    player_t_unk_002 *var_s0;
-    s32 temp_s4;
-    s32 var_a0;
-    s32 var_a0_2;
-    s32 var_a2;
     s32 var_s0_2;
-    s32 var_s0_3;
-    s32 var_s0_5;
     s32 var_s1;
-    s32 var_s2_2;
-    s32 var_v1_2;
     void *temp_s3;
-    void *var_s3;
-    void *var_s5;
+    size_t a1;
+    s32 temp;
 
     B_8018A914_usa = 1;
     B_8018A918_usa = 1;
     B_8018A8D0_usa = 0;
     B_8018A8D4_usa = 0;
-    for (var_s1 = 1; var_s1 < 8; var_s1++) {
+    for (var_s1 = 1; var_s1 < GAME_PLAYER_COUNT; var_s1++) {
         bzero(&gTheGame.player[var_s1].unk_002, sizeof(player_t_unk_002));
     }
 
@@ -3537,62 +3662,33 @@ s32 menuLoadData(void) {
 
     if (func_800072A0_usa(&sp18) != 0) {
         B_8018A8E6_usa = 0;
-        for (var_s1 = 0; var_s1 < 8; var_s1++) {
-            bcopy(&sp18.unk_58[var_s1], &B_8018A8D8_usa, 0xC);
+        for (var_s1 = 0; var_s1 < GAME_PLAYER_COUNT; var_s1++) {
+            bcopy(&sp18.unk_58[var_s1], &B_8018A8D8_usa.unk_0, sizeof(struct_800072A0_usa_arg0_unk_58));
 
-            // Inlined function?
-            var_s0_2 = -1;
-            for (var_a0 = 0; var_a0 < 8; var_a0++) {
-                if (gTheGame.player[var_a0].unk_002.unk_0 == 0) {
-                    var_s0_2 = var_a0;
-                    break;
-                }
-            }
-
+            var_s0_2 = inlined_function_menuLoadData();
             if (var_s0_2 != -1) {
-                menuInitUser((u32) var_s0_2);
-                bcopy(&B_8018A8D8_usa, (var_s0_2 * 0x7BC) + &gTheGame.player[0].unk_002, 0xE);
+                menuInitUser(var_s0_2);
+                bcopy(&B_8018A8D8_usa, &gTheGame.player[var_s0_2].unk_002, sizeof(player_t_unk_002));
             }
         }
 
-        temp_s3 = B_801AB8E4_usa - (sp18.unk_1C + 0x400);
-        var_s2_2 = sp18.unk_0C << 0xE;
-        var_s5 = temp_s3;
-        var_s1 = sp18.unk_1C;
-        temp_s4 = (s32) &B_8018A96F_usa & ~0xF;
-        if (B_8018A924_usa == 0) {
-            bzero(temp_s3, sp18.unk_1C);
-        } else {
-            if (!(var_s2_2 & 0x7F)) {
-                while (var_s1 > 0) {
-                    var_s0_3 = var_s2_2;
-                    if (var_s2_2 < 0) {
-                        var_s0_3 = var_s2_2 + 0x7F;
-                    }
-                    osInvalDCache((void *) temp_s4, 0x80);
-                    osFlashReadArray(&B_8018A930_usa, 0, (u32) (var_s0_3 >> 7), (void *) temp_s4, 1U, &B_8018A948_usa);
-                    osRecvMesg(&B_8018A948_usa, NULL, 1);
-                    func_80000450_usa();
-                    var_a2 = var_s1;
-                    if (var_s1 > 0x80) {
-                        var_a2 = 0x80;
-                    }
-                    bcopy((void *) temp_s4, var_s5, var_a2);
-                    var_s1 -= 0x80;
-                    var_s2_2 += 0x80;
-                    var_s5 += 0x80;
-                }
-            }
-        }
-        var_s3 = temp_s3 + 0xB8;
+        a1 = sp18.unk_1C;
+        temp = sp18.unk_0C;
+        // TODO: figure out struct for temp_s3
+        temp_s3 = B_801AB8E4_usa;
+        temp_s3 -= a1 + 0x400;
+        static_inlined_meminit(temp_s3, a1, temp << 0xE);
+        // HACK: ptr arithmetic
+        temp_s3 = temp_s3 + 0xB8;
 
-        for (var_s1 = 1; var_s1 < 8; var_s1++) {
-            bcopy(var_s3, &gTheGame.player[var_s1], 0x7BC);
-            var_s3 += 0x7BC;
+        for (var_s1 = 1; var_s1 < GAME_PLAYER_COUNT; var_s1++) {
+            bcopy(temp_s3, &gTheGame.player[var_s1], sizeof(player_t));
+            // HACK: ptr arithmetic
+            temp_s3 += sizeof(player_t);
         }
 
-        gbOpenTitle ^= sp18.unk_18;
         B_8018A830_usa = sp18.unk_14;
+        gbOpenTitle ^= sp18.unk_18;
         D_800B5A18_usa = sp18.unk_30;
         B_8018A91C_usa = sp18.unk_34;
         gGameStatus = (gGameStatus & 1) ^ sp18.unk_24;
@@ -3601,23 +3697,16 @@ s32 menuLoadData(void) {
         return -1;
     }
 
-    screenFind(&spD0, &RO_STR_800C3D68_usa);
+    screenFind(&spD0, RO_STR_800C3D68_usa);
 
     for (var_s1 = 0; var_s1 < 1; var_s1++) {
-        func_80029130_usa(spD0, var_s1 + 0x64, &B_8018A8D8_usa, 7);
-        if (B_8018A8D8_usa.unk_0 != 1) {
-            var_s0_5 = -1;
+        func_80029130_usa(spD0, var_s1 + 0x64, B_8018A8D8_usa.unk_0.unk_0, 7);
+        if (B_8018A8D8_usa.unk_0.unk_0[0] != 1) {
+            var_s0_2 = inlined_function_menuLoadData();
 
-            for (var_a0_2 = 0; var_a0_2 < 8; var_a0_2++) {
-                if (&gTheGame.player[var_a0_2].unk_002 == 0) {
-                    var_s0_5 = var_a0_2;
-                    break;
-                }
-            }
-
-            if (var_s0_5 != -1) {
-                menuInitUser(var_s0_5);
-                bcopy(&B_8018A8D8_usa, &gTheGame.player[var_s0_5].unk_002, 0xE);
+            if (var_s0_2 != -1) {
+                menuInitUser(var_s0_2);
+                bcopy(&B_8018A8D8_usa, &gTheGame.player[var_s0_2].unk_002, sizeof(player_t_unk_002));
             }
         }
     }
@@ -4326,11 +4415,11 @@ s32 menuInitUser(u32 arg0) {
         bzero(&player->unk_0C9, sizeof(char) * STRUCT_801A6DB8_USA_UNK_0C9_COUNT);
         bzero(&player->unk_0CD, sizeof(char) * STRUCT_801A6DB8_USA_UNK_0CD_COUNT);
         bzero(&player->unk_0D4, sizeof(char) * STRUCT_801A6DB8_USA_UNK_0D4_COUNT);
-        player->unk_0DB = 0;
-        player->unk_0DC = 0;
-        player->unk_0DD = 0;
-        player->unk_0DE = 0;
-        player->unk_0DF = 0;
+        player->kPLAYER1V_kEASY = 0;
+        player->kPLAYER1V_kNORMAL = 0;
+        player->kPLAYER1V_kHARD = 0;
+        player->kPLAYER1V_kSHARD = 0;
+        player->kPLAYER1V_kULTRA = 0;
         player->unk_0E0 = 0;
         player->unk_0E1 = 0;
         player->unk_0E2 = 0;
@@ -4600,21 +4689,25 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_8001AC7C_fra);
 INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_8001ACC8_ger);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/menu", menuFindCharacterMax);
-#endif
+/**
+ * Original name: menuFindCharacterMax
+ */
+void menuFindCharacterMax(s32 *piCharacter) {
+    s32 iPlayer;
+    s32 iCharacter = 8;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/menu", menuFindCharacterMax);
-#endif
+    for (iPlayer = 0; iPlayer < GAME_PLAYER_COUNT; iPlayer++) {
+        player_t *pPlayer = &gTheGame.player[iPlayer];
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/menu", menuFindCharacterMax);
-#endif
+        iCharacter = MAX(iCharacter, pPlayer->kPLAYER1V_kEASY);
+        iCharacter = MAX(iCharacter, pPlayer->kPLAYER1V_kNORMAL);
+        iCharacter = MAX(iCharacter, pPlayer->kPLAYER1V_kHARD);
+        iCharacter = MAX(iCharacter, pPlayer->kPLAYER1V_kSHARD);
+        iCharacter = MAX(iCharacter, pPlayer->kPLAYER1V_kULTRA);
+    }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/menu", menuFindCharacterMax);
-#endif
+    *piCharacter = MIN(iCharacter, 0xE);
+}
 
 /**
  * Original name: DrawMenu

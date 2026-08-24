@@ -56,8 +56,15 @@ typedef struct struct_gpData {
 } struct_gpData;                          // size = 0x18
 
 static s32 B_8018A7F0_usa;
+
+/**
+ * Original name: gpData
+ */
 static struct_gpData *gpData;
 
+/**
+ * Original name: geDemoTitle
+ */
 #if VERSION_USA
 // no longer static on other versions
 static
@@ -119,6 +126,9 @@ void func_80005C00_usa(void) {
     }
 }
 
+/**
+ * Original name: titleDrawImage
+ */
 void titleDrawImage(Gfx **gfxP, s32 arg1 UNUSED, s32 nTag) {
     Gfx *gfx = *gfxP;
     f32 var_fv1;
@@ -185,6 +195,9 @@ void titleDrawImage(Gfx **gfxP, s32 arg1 UNUSED, s32 nTag) {
     *gfxP = gfx;
 }
 
+/**
+ * Original name: DrawTitle
+ */
 void DrawTitle(void) {
     if (gpData->eMode == TM_CHAR) {
         screenDraw(&glistp, menuDrawProfile);
@@ -197,6 +210,9 @@ void DrawTitle(void) {
     }
 }
 
+/**
+ * Original name: CheckTitleInput
+ */
 INLINE nbool CheckTitleInput(void) {
     s32 iController;
 
@@ -210,6 +226,9 @@ INLINE nbool CheckTitleInput(void) {
     return nfalse;
 }
 
+/**
+ * Original name: DoTitle
+ */
 void DoTitle(void) {
     void *heap;
     s32 iCharacter;
@@ -473,6 +492,9 @@ void DoTitle(void) {
 #error "No region selected"
 #endif
 
+/**
+ * Original name: InitTitle
+ */
 void InitTitle(void) {
     u16 sp10[0x80];
     void *pHeap;
@@ -559,6 +581,9 @@ void InitTitle(void) {
     func_80002E34_usa(D_FLT_800B3B14_usa * 0x7FFF);
 }
 
+/**
+ * Original name: titleSetup
+ */
 void titleSetup(void) {
     s32 i;
 
