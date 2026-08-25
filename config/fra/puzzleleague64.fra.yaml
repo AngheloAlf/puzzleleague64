@@ -617,13 +617,30 @@ segments:
 
       - [0x0C8D88, .rodata, main/build]
 
-      - { type: bss, vram: 0x800C81B0, name: main/800C81B0 }
+      - { type: bss, vram: 0x800C81B0, name: main/boot_main }
+      - { type: bss, vram: 0x800CCA00, name: main/sound }
+      - { type: bss, vram: 0x80187F40, name: main/tetsound }
       - { type: .bss, vram: 0x80187F50, name: main/title }
-      - { type: bss, vram: 0x80187F70, name: main/80187F70 }
+      - { type: bss, vram: 0x80187F70, name: main/menu }
       - { type: .bss, vram: 0x80188310, name: main/file }
-      - { type: bss, vram: 0x8018BB30, name: main/8018BB30 }
+      - { type: bss, vram: 0x8018BB30, name: main/bitmap }
+      - { type: bss, vram: 0x8018BB40, name: main/image }
+      - { type: bss, vram: 0x8018BC50, name: main/screen }
+      - { type: bss, vram: 0x8018BCD0, name: main/story }
+      - { type: bss, vram: 0x8018BCE0, name: main/peel }
+      - { type: bss, vram: 0x8018C0A0, name: main/02E800 }
+      - { type: bss, vram: 0x8018C120, name: main/editor }
+      - { type: bss, vram: 0x8018C160, name: main/bonus }
       - { type: .bss, vram: 0x8018C1B0, name: main/hvqm2util }
-      - { type: bss, vram: 0x801906E0, name: main/801906E0 }
+      - { type: bss, vram: 0x801906E0, name: main/041780 }
+      - { type: bss, vram: 0x801906F0, name: main/043000 }
+      - { type: bss, vram: 0x80190700, name: main/043D10 }
+      - { type: bss, vram: 0x80190710, name: main/044E80 }
+      - { type: bss, vram: 0x80190720, name: main/animation }
+      - { type: bss, vram: 0x80190730, name: main/fade }
+      - { type: bss, vram: 0x80190740, name: main/draw2d }
+      - { type: bss, vram: 0x80190750, name: main/mimic }
+      - { type: bss, vram: 0x80190780, name: main/tutorial }
 
       - { type: .bss, vram: 0x80190790, name: libmus/player }
       - { type: .bss, vram: 0x80190800, name: libmus/aud_dma }
@@ -652,7 +669,7 @@ segments:
 
       - { type: bss, vram: 0x80197C20, name: libhvqm/hvqm2decSP1 }
 
-      - { type: bss, vram: 0x8019A620, name: main/8019A620 }
+      - { type: bss, vram: 0x8019A620, name: main/COMMON }
 
   - name: buffer1
     type: code

@@ -626,9 +626,24 @@ segments:
       - { type: .bss, vram: 0x8018A7F0, name: main/title }
       - { type: bss, vram: 0x8018A810, name: main/menu }
       - { type: .bss, vram: 0x8018ABB0, name: main/file }
-      - { type: bss, vram: 0x8018E3D0, name: main/8018E3D0 }
+      - { type: bss, vram: 0x8018E3D0, name: main/bitmap }
+      - { type: bss, vram: 0x8018E3E0, name: main/image }
+      - { type: bss, vram: 0x8018E4F0, name: main/screen }
+      - { type: bss, vram: 0x8018E570, name: main/story }
+      - { type: bss, vram: 0x8018E580, name: main/peel }
+      - { type: bss, vram: 0x8018E940, name: main/02E800 }
+      - { type: bss, vram: 0x8018E9C0, name: main/editor }
+      - { type: bss, vram: 0x8018EA00, name: main/bonus }
       - { type: .bss, vram: 0x8018EA50, name: main/hvqm2util }
-      - { type: bss, vram: 0x80192F80, name: main/80192F80 }
+      - { type: bss, vram: 0x80192F80, name: main/041780 }
+      - { type: bss, vram: 0x80192F90, name: main/043000 }
+      - { type: bss, vram: 0x80192FA0, name: main/043D10 }
+      - { type: bss, vram: 0x80192FB0, name: main/044E80 }
+      - { type: bss, vram: 0x80192FC0, name: main/animation }
+      - { type: bss, vram: 0x80192FD0, name: main/fade }
+      - { type: bss, vram: 0x80192FE0, name: main/draw2d }
+      - { type: bss, vram: 0x80192FF0, name: main/mimic }
+      - { type: bss, vram: 0x80193020, name: main/tutorial }
 
       - { type: .bss, vram: 0x80193030, name: libmus/player }
       - { type: .bss, vram: 0x801930A0, name: libmus/aud_dma }
@@ -657,7 +672,7 @@ segments:
 
       - { type: bss, vram: 0x8019A4C0, name: libhvqm/hvqm2decSP1 }
 
-      - { type: bss, vram: 0x8019CEC0, name: main/8019CEC0 }
+      - { type: bss, vram: 0x8019CEC0, name: main/COMMON }
 
   - name: buffer1
     type: code

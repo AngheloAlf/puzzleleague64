@@ -96,7 +96,7 @@ segments:
   - name: main
     files:
       - { path: src/main/boot_main.o }
-      - { path: "asm/{version}/data/main/boot_main.bss.o", include_if_any: [[version, usa]] }
+      - { path: "asm/{version}/data/main/boot_main.bss.o" }
 
       - { path: src/main/001F10.o }
 
@@ -112,10 +112,10 @@ segments:
 
       - { path: src/main/sound.o }
       - { path: "asm/{version}/data/main/sound.data.o", include_if_any: [[version, usa], [version, fra]] }
-      - { path: "asm/{version}/data/main/sound.bss.o", include_if_any: [[version, usa]] }
+      - { path: "asm/{version}/data/main/sound.bss.o" }
 
       - { path: src/main/tetsound.o }
-      - { path: "asm/{version}/data/main/tetsound.bss.o", include_if_any: [[version, usa]] }
+      - { path: "asm/{version}/data/main/tetsound.bss.o" }
 
       - { path: src/main/sfxlimit.o }
 
@@ -123,48 +123,43 @@ segments:
       - { path: "asm/{version}/data/main/0B32E0.data.o", include_if_any: [[version, fra]] }
       - { path: "asm/{version}/data/main/0AA4D0.data.o", include_if_any: [[version, ger]] }
 
-      - { path: "asm/{version}/data/main/800C9B50.bss.o", include_if_any: [[version, eur]] }
-      - { path: "asm/{version}/data/main/800C81B0.bss.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/data/main/800BD890.bss.o", include_if_any: [[version, ger]] }
-
       - { path: src/main/rom_offsets.o }
 
       - { path: src/main/title.o }
 
       - { path: src/main/menu.o }
       - { path: "asm/{version}/data/main/menu.data.o" }
-      - { path: "asm/{version}/data/main/menu.bss.o", include_if_any: [[version, usa]] }
-
-      - { path: "asm/{version}/data/main/80189910.bss.o", include_if_any: [[version, eur]] }
-      - { path: "asm/{version}/data/main/80187F70.bss.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/data/main/8017D650.bss.o", include_if_any: [[version, ger]] }
+      - { path: "asm/{version}/data/main/menu.bss.o" }
 
       - { path: src/main/file.o }
 
-      - { path: "asm/{version}/data/main/8018E3D0.bss.o", include_if_any: [[version, usa]] }
-      - { path: "asm/{version}/data/main/8018D4D0.bss.o", include_if_any: [[version, eur]] }
-      - { path: "asm/{version}/data/main/8018BB30.bss.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/data/main/80181210.bss.o", include_if_any: [[version, ger]] }
-
       - { path: src/main/bitmap.o }
+      - { path: "asm/{version}/data/main/bitmap.bss.o" }
       - { path: src/main/image.o }
+      - { path: "asm/{version}/data/main/image.bss.o" }
 
       - { path: src/main/screen.o }
+      - { path: "asm/{version}/data/main/screen.bss.o" }
       - { path: src/main/story.o }
+      - { path: "asm/{version}/data/main/story.bss.o" }
 
       - { path: src/main/peel.o }
       - { path: "asm/{version}/data/main/peel.data.o", include_if_any: [[version, usa]] }
+      - { path: "asm/{version}/data/main/peel.bss.o" }
 
       - { path: "asm/{version}/data/main/0B5D80.data.o", include_if_any: [[version, fra]] }
 
       - { path: src/main/02E800.o }
-
       - { path: "asm/{version}/data/main/02E800.data.o", include_if_any: [[version, fra]] }
+      - { path: "asm/{version}/data/main/02E800.bss.o" }
 
       - { path: src/main/editor.o }
       - { path: "asm/{version}/data/main/editor.data.o", include_if_any: [[version, fra]] }
+      - { path: "asm/{version}/data/main/editor.bss.o" }
 
       - { path: src/main/bonus.o }
+      - { path: "asm/{version}/data/main/bonus.bss.o" }
+
       - { path: src/main/sign.o }
       - { path: src/main/pause.o }
       - { path: src/main/end.o }
@@ -176,9 +171,13 @@ segments:
 
       - { path: src/main/hvqm2util.o }
       - { path: src/main/041780.o }
+      - { path: "asm/{version}/data/main/041780.bss.o" }
       - { path: src/main/043000.o }
+      - { path: "asm/{version}/data/main/043000.bss.o" }
       - { path: src/main/043D10.o }
+      - { path: "asm/{version}/data/main/043D10.bss.o" }
       - { path: src/main/044E80.o }
+      - { path: "asm/{version}/data/main/044E80.bss.o" }
 
       - { path: "asm/{version}/data/main/0B75B0.data.o", include_if_any: [[version, usa]] }
       - { path: "asm/{version}/data/main/0B7AD0.data.o", include_if_any: [[version, eur]] }
@@ -191,8 +190,10 @@ segments:
       - { path: src/main/text.o }
       - { path: src/main/flic.o }
       - { path: src/main/animation.o }
+      - { path: "asm/{version}/data/main/animation.bss.o" }
       - { path: src/main/other.o }
       - { path: src/main/fade.o }
+      - { path: "asm/{version}/data/main/fade.bss.o" }
       - { path: src/main/dlist.o }
       - { path: src/main/combo.o }
       - { path: src/main/animate.o }
@@ -216,6 +217,7 @@ segments:
       - { path: src/main/explode3d.o }
       - { path: src/main/init2d.o }
       - { path: src/main/draw2d.o }
+      - { path: "asm/{version}/data/main/draw2d.bss.o" }
       - { path: src/main/combo2d.o }
       - { path: src/main/animate2d.o }
       - { path: src/main/071B50.o }
@@ -244,17 +246,14 @@ segments:
 
       - { path: src/main/ai.o }
       - { path: src/main/mimic.o }
+      - { path: "asm/{version}/data/main/mimic.bss.o" }
       - { path: src/main/tutorial.o }
+      - { path: "asm/{version}/data/main/tutorial.bss.o" }
       - { path: src/main/puzzle.o }
       - { path: src/main/tetris.o }
 
       - { path: "asm/{version}/data/main/0B80D0.data.o", include_if_any: [[version, usa]] }
       - { path: "asm/{version}/data/main/0B8130.data.o", include_if_any: [[version, usa]] }
-
-      - { path: "asm/{version}/data/main/80192F80.bss.o", include_if_any: [[version, usa]] }
-      - { path: "asm/{version}/data/main/80192080.bss.o", include_if_any: [[version, eur]] }
-      - { path: "asm/{version}/data/main/801906E0.bss.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/data/main/80185DC0.bss.o", include_if_any: [[version, ger]] }
 
       # libmus
       - kind: group
@@ -521,10 +520,7 @@ segments:
           - { path: "asm/{version}/data/rsp/f3dex.o" }
           - { path: "asm/{version}/data/rsp/s2dex.o" }
 
-      - { path: "asm/{version}/data/main/8019CEC0.bss.o", include_if_any: [[version, usa]] }
-      - { path: "asm/{version}/data/main/8019BFC0.bss.o", include_if_any: [[version, eur]] }
-      - { path: "asm/{version}/data/main/8019A620.bss.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/data/main/8018FC90.bss.o", include_if_any: [[version, ger]] }
+      - { path: "asm/{version}/data/main/COMMON.bss.o" }
 
   - name: buffer1
     files:
