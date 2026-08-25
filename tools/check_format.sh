@@ -17,8 +17,14 @@ STATUSNEW=`git status --porcelain`
 
 if [ "${STATUSOLD}" != "${STATUSNEW}" ];
 then
+    PATCH=$(git diff | base64 -w 0)
+    echo 'Fixes were made for your PR. To apply these changes to your working directory, copy and run the following command:' >> $GITHUB_STEP_SUMMARY
+    echo '```' >> $GITHUB_STEP_SUMMARY
+    echo "echo -n $PATCH | base64 -d | git apply -" >> $GITHUB_STEP_SUMMARY
+    echo '```' >> $GITHUB_STEP_SUMMARY
+
     echo ""
-    echo "Misformatted files found. Run `make format` and `make tidy` and verify codegen is not impacted."
+    echo "Misformatted files found. Run \`make format\` and \`make tidy\` and verify codegen is not impacted."
     echo ""
     diff --unified=0  --label "Old git status" <(echo "${STATUSOLD}") --label "New git status" <(echo "${STATUSNEW}")
     echo ""
