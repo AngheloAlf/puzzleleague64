@@ -7,7 +7,7 @@
 struct tetWell;
 
 void InitGameAudioSystem(void);
-void SetSoundOptions(s16 arg0);
+void SetSoundOptions(s16 settings);
 s32 LoadFairySoundData(s16 arg0, s16 arg1, s16 arg2);
 s32 PlayGameSong(struct tetWell *well);
 // void func_80004848_usa();

@@ -184,21 +184,56 @@ s32 DemoCheck(s32 *frame) {
     return 0;
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/tetris", DemoCPU);
-#endif
+void DemoCPU(s32 num, s32 level) {
+    if (gGameStatus & 0x80) {
+        gGameStatus = (gGameStatus << 0x10) | 0x380;
+    }
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tetris", DemoCPU);
-#endif
+    switch (level) {
+        case 0x1:
+            AISetLevel(&brainbrain[num], 1, 1);
+            break;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tetris", DemoCPU);
-#endif
+        case 0x2:
+            AISetLevel(&brainbrain[num], 1, 9);
+            break;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tetris", DemoCPU);
-#endif
+        case 0x3:
+            AISetLevel(&brainbrain[num], 2, 3);
+            break;
+
+        case 0x4:
+            AISetLevel(&brainbrain[num], 2, 0xC);
+            break;
+
+        case 0x5:
+            AISetLevel(&brainbrain[num], 3, 6);
+            break;
+
+        case 0x6:
+            AISetLevel(&brainbrain[num], 3, 0xE);
+            break;
+
+        case 0x7:
+            AISetLevel(&brainbrain[num], 4, 3);
+            break;
+
+        case 0x8:
+            AISetLevel(&brainbrain[num], 5, 0xA);
+            break;
+
+        case 0x9:
+            AISetLevel(&brainbrain[num], 4, 0xF);
+            break;
+
+        case 0xA:
+        default:
+            AISetLevel(&brainbrain[num], 5, 0xF);
+            break;
+    }
+
+    InitAI(&gTheGame.tetrisWell[num], &gTheGame.cursorBlock[num], &brainbrain[num]);
+}
 
 #if VERSION_USA
 #ifdef NON_MATCHING

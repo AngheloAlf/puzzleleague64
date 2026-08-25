@@ -30,7 +30,7 @@ s16 func_80002694_usa(s32 arg0, s16 arg1);
 void func_800026C0_usa(s32 arg0);
 int func_8000272C_usa(musHandle handle, int speed);
 void func_8000274C_usa(void);
-void func_800027FC_usa(void);
+void InitAudio(void);
 void SetAudioSystemMixer(s16 arg0);
 struct song_t *func_800028B8_usa(s32 index);
 void func_800028D8_usa(s32 arg0);

@@ -165,14 +165,12 @@ void func_800194DC_usa(enum_TypeMenu arg0);
 
 extern s32 D_800B5A14_usa;
 
-
 void func_8001A330_usa(s32 arg0, s32 arg1);
 extern s16 B_8018AA06_usa;
 extern s16 B_8018AA14_usa;
 extern s16 B_8018AA16_usa;
 extern s16 B_8018AA18_usa; // maybe giImageFairy?
 extern UNK_TYPE2 D_800B5A54_usa[];
-
 
 /**
  * Original name: gnPositionFairyX
@@ -4523,8 +4521,71 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_8001A330_usa);
 INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_8001A330_usa);
 #endif
 
+extern s32 B_8018AB64_usa;                      // TODO: maybe giImageFairy?
+extern struct_imageLoad_arg0 *B_8018AB68_usa[]; // TODO: maybe gapImageFairy?
+extern struct_imageLoad_arg0 *B_8018AB70_usa;
+extern struct_imageLoad_arg0 *B_8018AB74_usa;
+extern struct_imageLoad_arg0 *B_8018AB78_usa;
+
 #if VERSION_USA
+#if 0
+void menuDrawProfile(Gfx **gfxP, s32 arg1, s32 arg2) {
+    struct_func_8002156C_usa_arg4 sp18;
+
+    if ((arg2 == 0x64) && (B_8018AA14_usa < 0xF)) {
+        sp18.unk_08 = 0x70;
+        sp18.unk_00 = 0;
+        sp18.unk_04 = 0;
+        sp18.unk_0C = 0x96;
+        imageDraw(B_8018AB68_usa[B_8018AB64_usa], gfxP, 0x23, 0x1B, &sp18);
+        sp18.unk_04 = 0;
+        sp18.unk_08 = 0x23;
+        sp18.unk_0C = 0x23;
+        if (B_8018AA18_usa != 0) {
+            sp18.unk_00 = 0x46;
+            imageDraw(B_8018AB70_usa, gfxP, 0x9F, 0x20, &sp18);
+            imageDraw(B_8018AB74_usa, gfxP, 0x9F, 0x52, &sp18);
+            imageDraw(B_8018AB78_usa, gfxP, 0x9F, 0x83, &sp18);
+        } else {
+            switch (B_8018AA16_usa) {
+                case 0x0:
+                    sp18.unk_00 = 0;
+                    imageDraw(B_8018AB70_usa, gfxP, 0x9F, 0x20, &sp18);
+                    sp18.unk_00 = 0x46;
+                    imageDraw(B_8018AB74_usa, gfxP, 0x9F, 0x52, &sp18);
+                    imageDraw(B_8018AB78_usa, gfxP, 0x9F, 0x83, &sp18);
+                    break;
+
+                case 0x1:
+                    sp18.unk_00 = 0x46;
+                    imageDraw(B_8018AB70_usa, gfxP, 0x9F, 0x20, &sp18);
+                    sp18.unk_00 = 0;
+                    imageDraw(B_8018AB74_usa, gfxP, 0x9F, 0x52, &sp18);
+                    sp18.unk_00 = 0x46;
+                    imageDraw(B_8018AB78_usa, gfxP, 0x9F, 0x83, &sp18);
+                    break;
+
+                case 0x2:
+                    sp18.unk_00 = 0x46;
+                    imageDraw(B_8018AB70_usa, gfxP, 0x9F, 0x20, &sp18);
+                    imageDraw(B_8018AB74_usa, gfxP, 0x9F, 0x52, &sp18);
+                    sp18.unk_00 = 0;
+                    imageDraw(B_8018AB78_usa, gfxP, 0x9F, 0x83, &sp18);
+                    break;
+
+                default:
+                    sp18.unk_00 = 0;
+                    imageDraw(B_8018AB70_usa, gfxP, 0x9F, 0x20, &sp18);
+                    imageDraw(B_8018AB74_usa, gfxP, 0x9F, 0x52, &sp18);
+                    imageDraw(B_8018AB78_usa, gfxP, 0x9F, 0x83, &sp18);
+                    break;
+            }
+        }
+    }
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/menu", menuDrawProfile);
+#endif
 #endif
 
 #if VERSION_EUR

@@ -12,37 +12,44 @@
 #include "sound.h"
 #include "tetwell.h"
 
-#if VERSION_USA
 void InitGameAudioSystem(void) {
     TenSecond = 0;
+
+#if VERSION_USA || VERSION_EUR
     DolbyEnabled = true;
+#endif
+
     DangerMusicBgmIndex = 1;
     NormalMusicBgmIndex = 0;
     crossfadeBool = 0;
     NormalMusicBgmIndex_ScoreAttack = 0x48;
     DangerMusicBgmIndex_ScoreAttack = 0x49;
+
     initgameBool = 1;
     ts_ok_start_timer = 1;
     ts_timer_counter = 0;
     ts_current_alert = 0;
     ts_old_alert = -1;
 
-    func_800027FC_usa();
+    InitAudio();
 
     switch (D_800B3B18_usa) {
         case 0x0:
             func_80002E70_usa(D_FLT_800B3B10_usa * 0x7FFF);
             func_80002E34_usa(0x147);
             break;
+
         case 0x1:
             FadeOutAllSFXs(0);
             func_80002E70_usa(0x147);
             func_80002E34_usa(D_FLT_800B3B14_usa * 0x7FFF);
             break;
+
         case 0x2:
             func_80002E70_usa(D_FLT_800B3B10_usa * 0x7FFF);
             func_80002E34_usa(D_FLT_800B3B14_usa * 0x7FFF);
             break;
+
         case 0x3:
             FadeOutAllSFXs(0);
             func_80002E70_usa(0x147);
@@ -52,29 +59,15 @@ void InitGameAudioSystem(void) {
 
     SetSoundOptions(DolbyEnabled);
 }
-#endif
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tetsound", InitGameAudioSystem);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", InitGameAudioSystem);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", InitGameAudioSystem);
-#endif
-
-#if VERSION_USA
-void SetSoundOptions(s16 arg0) {
-    if (arg0 == false) {
+void SetSoundOptions(s16 settings) {
+    if (settings == false) {
         DolbyEnabled = false;
         SetAudioSystemMixer(0);
         LoadSFXBank(1, 1);
         GarbageBlockBaseSfx_L = 0x133;
         GarbageBlockBaseSfx_R = 0x13A;
-    } else if (arg0 == true) {
+    } else if (settings == true) {
         DolbyEnabled = true;
         SetAudioSystemMixer(1);
         LoadSFXBank(1, 1);
@@ -82,19 +75,6 @@ void SetSoundOptions(s16 arg0) {
         GarbageBlockBaseSfx_R = 0x13A;
     }
 }
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tetsound", SetSoundOptions);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", SetSoundOptions);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", SetSoundOptions);
-#endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/tetsound", LoadFairySoundData);
@@ -112,7 +92,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", LoadFairySoundData);
 INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", LoadFairySoundData);
 #endif
 
-#if VERSION_USA
 s32 PlayGameSong(tetWell *well) {
     ts_current_alert = well->unk_43B8;
 
@@ -171,7 +150,6 @@ s32 PlayGameSong(tetWell *well) {
 
     return 1;
 }
-#endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/tetsound", func_80004848_usa);
@@ -199,10 +177,6 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/tetsound", func_80005018_usa);
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/tetsound", func_800050C0_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tetsound", PlayGameSong);
 #endif
 
 #if VERSION_EUR
@@ -234,10 +208,6 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/tetsound", func_800050C0_usa);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", func_80004690_fra);
-#endif
-
-#if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", func_80004900_fra);
 #endif
 
@@ -263,10 +233,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", func_800050D0_fra);
 
 #if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", func_80005178_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", func_80004690_ger);
 #endif
 
 #if VERSION_GER

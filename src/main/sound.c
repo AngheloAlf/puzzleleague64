@@ -376,7 +376,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_800022F0_fra);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_8000240C_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/sound", LoadSFXBank);
 #endif
 
 #if VERSION_GER
@@ -388,7 +388,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_800022F0_ger);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_8000240C_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/sound", LoadSFXBank);
 #endif
 
 void func_80002620_usa(s16 arg0) {
@@ -448,8 +448,7 @@ void func_8000274C_usa(void) {
 #endif
 
 #if VERSION_USA
-// InitAudio?
-void func_800027FC_usa(void) {
+void InitAudio(void) {
     s32 i;
 
     B_801C7BAC_usa = func_80002054_usa();
@@ -501,7 +500,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_8000274C_usa);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_800027FC_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/sound", InitAudio);
 #endif
 
 #if VERSION_EUR
@@ -533,11 +532,11 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002810_fra);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_800027FC_usa);
+INCLUDE_ASM("asm/fra/nonmatchings/main/sound", InitAudio);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002950_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/sound", SetAudioSystemMixer);
 #endif
 
 #if VERSION_GER
@@ -565,11 +564,11 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002810_ger);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_800027FC_usa);
+INCLUDE_ASM("asm/ger/nonmatchings/main/sound", InitAudio);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002950_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/sound", SetAudioSystemMixer);
 #endif
 
 struct song_t *func_800028B8_usa(s32 index) {
@@ -697,11 +696,11 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/sound", FadeOutTuneBuffer);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80002D40_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/sound", FadeOutTuneBuffer);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80002D40_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/sound", FadeOutTuneBuffer);
 #endif
 
 int FadeOutSong(musHandle handle, int speed) {
@@ -800,6 +799,7 @@ void FadeOutAllSFXs(s16 speed) {
 }
 
 #if VERSION_USA
+// RENAME TODO: SetMasterSongVolume?
 void func_80002E34_usa(s32 volume) {
     s32 var_s0 = volume;
 
@@ -812,6 +812,7 @@ void func_80002E34_usa(s32 volume) {
 #endif
 
 #if VERSION_USA
+// RENAME TODO: SetMasterSFXVolume?
 void func_80002E70_usa(s32 volume) {
     s32 var_s0 = volume;
 

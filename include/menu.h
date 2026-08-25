@@ -36,7 +36,7 @@ nbool func_80008EA4_usa(s32 *arg0);
 // void func_800095F8_usa();
 // void func_80009A78_usa();
 // void func_80009CA8_usa();
-void menuInitProfile(s32, s32);
+void menuInitProfile(s32 iScreen, s32 iCharacter);
 // void func_80009DBC_usa();
 // void func_80009F60_usa();
 // void func_8000A940_usa();
