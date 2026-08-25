@@ -23,6 +23,7 @@
 #include "init2d.h"
 #include "other.h"
 #include "peel.h"
+#include "puzzle.h"
 #include "screen.h"
 #include "sfxlimit.h"
 #include "sound.h"
@@ -110,7 +111,7 @@ void func_80083050_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     gTheGame.tetrisWell[0].unk_441C = 0xDF;
     gTheGame.tetrisWell[0].unk_43F8 = 0;
     gTheGame.tetrisWell[0].unk_43FC = 0;
-    gTheGame.unk_9C08 = 2;
+    gTheGame.totalPlayer = 2;
 
     InitCursor(cursor);
     Init2DCursor(cursor, 0);
@@ -181,8 +182,8 @@ void func_80083050_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
         }
     }
 
-    gTheGame.unk_9C08 = 1;
-    var_s5->unk_00C = 0xA;
+    gTheGame.totalPlayer = 1;
+    var_s5->speed = 0xA;
     InitAI(well, cursor, var_s5);
     if (arg3 == 0) {
         var_s5->unk_03C = arg0;
@@ -205,7 +206,7 @@ void func_80083050_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 void func_8008336C_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_80083050_usa(arg0, arg1, arg2, arg3);
     PlaySE(SFX_INIT_TABLE, 0x95);
-    brainbrain[0].unk_00C = -1;
+    brainbrain[0].speed = -1;
     brainbrain[0].unk_104 = 0;
 }
 #endif
