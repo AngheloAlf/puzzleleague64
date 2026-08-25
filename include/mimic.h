@@ -26,7 +26,7 @@ typedef enum MimicMode {
 extern MimicMode geModeMimic;
 
 void func_80083050_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-static void func_8008336C_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+void func_8008336C_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 // void func_800833B0_usa();
 void UpdateMT(struct tetWell *well, struct cursor_t *cursor, struct ai_t *brain);
 void UpdateMTController(struct tetWell *well, struct cursor_t *cursor, s32 num);
