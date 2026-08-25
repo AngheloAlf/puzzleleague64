@@ -1070,11 +1070,11 @@ void func_8000A940_usa(s32 arg0, s32 arg1, s32 arg2) {
     }
 
     if (screenFind(&sp10, var_a2)) {
-        func_8002A1F4_usa(sp10, (arg2 != 0) ? 0x67 : 0x65, temp_s0 & 0xF, 0);
+        screenSetCursor(sp10, (arg2 != 0) ? 0x67 : 0x65, temp_s0 & 0xF, 0);
         temp = (temp_s0 >> 4) & 0x7F;
-        func_8002A1F4_usa(sp10, (arg2 == 0) ? 0x64 : 0x68, temp, 0);
+        screenSetCursor(sp10, (arg2 == 0) ? 0x64 : 0x68, temp, 0);
         if (arg2 == 0) {
-            func_8002A1F4_usa(sp10, 0x66, (temp_s0 >> 0xB) & 1, 0);
+            screenSetCursor(sp10, 0x66, (temp_s0 >> 0xB) & 1, 0);
         }
     }
     D_800B5A10_usa[arg2] = (temp_s0 >> 0xC) & 0xF;
@@ -4170,14 +4170,14 @@ void func_800194DC_usa(enum_TypeMenu arg0) {
         case MT_2P_ATTACK_LEVEL:                    /* switch 1 */
             B_8018A81C_usa = MT_MAIN;
             screenFind(&sp10, &RO_STR_800C3CF0_usa);
-            func_8002A1F4_usa(sp10, 0x64, 0, temp_s5);
+            screenSetCursor(sp10, 0x64, 0, temp_s5);
             break;
 
         case MT_HOWTO_CONTROLLER:                   /* switch 1 */
             screenFind(&sp10, &RO_STR_800C3CAC_usa);
-            func_8002A1F4_usa(sp10, 0x64, 0, 1);
+            screenSetCursor(sp10, 0x64, 0, 1);
             screenFind(&sp10, &RO_STR_800C3D74_usa);
-            func_8002A1F4_usa(sp10, 0x64, 0, temp_s5);
+            screenSetCursor(sp10, 0x64, 0, temp_s5);
             break;
 
         case MT_2P_CLEAR_LEVEL:                     /* switch 1 */
@@ -4185,25 +4185,25 @@ void func_800194DC_usa(enum_TypeMenu arg0) {
             B_8018A81C_usa = MT_PLAY;
             screenFind(&sp10, &RO_STR_800C3CD4_usa);
             if (arg0 == MT_2P_CLEAR_LEVEL) {
-                func_8002A1F4_usa(sp10, 0x64, 0, 0);
+                screenSetCursor(sp10, 0x64, 0, 0);
                 screenFind(&sp10, &RO_STR_800C3CC8_usa);
             } else {
-                func_8002A1F4_usa(sp10, 0x64, 0, 1);
+                screenSetCursor(sp10, 0x64, 0, 1);
                 screenFind(&sp10, &RO_STR_800C3CBC_usa);
             }
-            func_8002A1F4_usa(sp10, 0x64, 0, temp_s4 - 1);
+            screenSetCursor(sp10, 0x64, 0, temp_s4 - 1);
             break;
 
         case MT_2P_CLEAR_NAME:                      /* switch 1 */
             B_8018A81C_usa = MT_PLAY;
             screenFind(&sp10, &RO_STR_800C3CD4_usa);
-            func_8002A1F4_usa(sp10, 0x64, 0, 2);
+            screenSetCursor(sp10, 0x64, 0, 2);
             break;
 
         case MT_4P:                                 /* switch 1 */
             B_8018A81C_usa = MT_MANY;
             screenFind(&sp10, &RO_STR_800C3CAC_usa);
-            func_8002A1F4_usa(sp10, 0x64, 0, 1);
+            screenSetCursor(sp10, 0x64, 0, 1);
             break;
 
         case MT_1P_ENDLESS_NAME:                    /* switch 1 */
@@ -4219,7 +4219,7 @@ void func_800194DC_usa(enum_TypeMenu arg0) {
             } else {
                 var_s4 = (temp_s4 - 1) * 2;
             }
-            func_8002A1F4_usa(sp10, 0x64, var_s4, 0);
+            screenSetCursor(sp10, 0x64, var_s4, 0);
             var_a2 = 2;
             switch (temp_s5) {                      /* switch 2; irregular */
                 case 0x1:                           /* switch 2 */
@@ -4229,8 +4229,8 @@ void func_800194DC_usa(enum_TypeMenu arg0) {
                     var_a2 = 1;
                     break;
             }
-            func_8002A1F4_usa(sp10, 0x65, var_a2, 0);
-            func_8002A1F4_usa(sp10, 0x66, temp_s7 != 1, 0);
+            screenSetCursor(sp10, 0x65, var_a2, 0);
+            screenSetCursor(sp10, 0x66, temp_s7 != 1, 0);
             break;
 
         case MT_1P_ENDLESS_CHARACTER:               /* switch 1 */
@@ -4258,7 +4258,7 @@ void func_800194DC_usa(enum_TypeMenu arg0) {
                     break;
             }
             screenFind(&sp10, &RO_800C3318_usa);
-            func_8002A1F4_usa(sp10, 0x64, var_s0, var_s3);
+            screenSetCursor(sp10, 0x64, var_s0, var_s3);
             break;
 
         case MT_1P_ATTACK_NAME:                     /* switch 1 */
@@ -4272,7 +4272,7 @@ void func_800194DC_usa(enum_TypeMenu arg0) {
             B_8018A81C_usa = MT_NONE;
             screenFind(&sp10, &RO_STR_800C3BC4_usa);
             var_s0 = (temp_s5 - 1) % 3;
-            func_8002A1F4_usa(sp10, 0x64, var_s0, 0);
+            screenSetCursor(sp10, 0x64, var_s0, 0);
 
             if (temp_s2 < 0x1F) {
                 var_s1 = 0x65;
@@ -4331,7 +4331,7 @@ void func_800194DC_usa(enum_TypeMenu arg0) {
                     var_s3 = var_v1;
                     break;
             }
-            func_8002A1F4_usa(sp10, var_s1, var_s0, var_s3);
+            screenSetCursor(sp10, var_s1, var_s0, var_s3);
             break;
 
         case MT_1P_PUZZLE_STAGE2:                   /* switch 1 */
@@ -4344,9 +4344,9 @@ void func_800194DC_usa(enum_TypeMenu arg0) {
         case MT_2P_VS_CHARACTER:                    /* switch 1 */
         case MT_2P_ATTACK_NAME:                     /* switch 1 */
             B_8018A81C_usa = MT_1P_ENDLESS_CHARACTER;
-            func_8002A1F4_usa(sp10, 0x65, temp_s4 - 1, 0);
-            func_8002A1F4_usa(sp10, 0x67, temp_s6 - 1, 0);
-            func_8002A1F4_usa(sp10, 0x66, 0, temp_s7 != 1);
+            screenSetCursor(sp10, 0x65, temp_s4 - 1, 0);
+            screenSetCursor(sp10, 0x67, temp_s6 - 1, 0);
+            screenSetCursor(sp10, 0x66, 0, temp_s7 != 1);
             break;
 
         default:                                    /* switch 1 */
@@ -4920,7 +4920,7 @@ void DoMenu(void) {
                     var_v0_3 = 0;
                     if (geTypeMenu == MT_1P_ENDLESS_CHARACTER) {
                         var_v0_3 = 0;
-                        if ((screenChangePending() == nfalse) && ((func_800276CC_usa(giScreenMenu, &sp48, var_s1_2) == nfalse) || ((var_v0_3 = 0, (sp48 == 0x64)) && (func_8002A2E8_usa(giScreenMenu, 0x64, &sp4C, &sp50), var_v0_3 = 0, (sp50 == 0)) && (var_v0_3 = -1, (func_80028CBC_usa(giScreenMenu, 0x64, sp4C, 1) == nfalse))))) {
+                        if ((screenChangePending() == nfalse) && ((func_800276CC_usa(giScreenMenu, &sp48, var_s1_2) == nfalse) || ((var_v0_3 = 0, (sp48 == 0x64)) && (screenGetCursor(giScreenMenu, 0x64, &sp4C, &sp50), var_v0_3 = 0, (sp50 == 0)) && (var_v0_3 = -1, (func_80028CBC_usa(giScreenMenu, 0x64, sp4C, 1) == nfalse))))) {
                             var_v0_3 = 0;
                         }
                     }

@@ -269,7 +269,7 @@ void func_8004360C_usa(s32 arg0) {
         screenHideImage(arg0, 0x259);
     } else if (B_80192FA0_usa->unk_0C.unk_08 == 2) {
         B_80192FA0_usa->unk_08 = (B_80192FA0_usa->unk_08 + 1) & 0xF;
-        func_8002A2E8_usa(arg0, 0x64, &sp14, &sp18);
+        screenGetCursor(arg0, 0x64, &sp14, &sp18);
         screenSetImagePosition(arg0, 0x258, 0x69, sp18 * 0x2B + 0x35);
         screenSetImagePosition(arg0, 0x259, 0xAA, B_80192FA0_usa->unk_54 * 0x2B + 0x35);
 
@@ -414,14 +414,14 @@ void func_80043D24_usa(s32 arg0) {
     }
 
     func_80027618_usa(sp10, 0x64, 0U);
-    func_8002A2E8_usa(sp10, 0x64, &sp14, &sp18);
+    screenGetCursor(sp10, 0x64, &sp14, &sp18);
 
     if (B_80192FA0_usa->unk_2C.unk_08 == 2) {
         B_80192FA0_usa->unk_AC = sp18;
     }
 
     if (B_80192FA0_usa->unk_2C.unk_08 >= 3) {
-        func_8002A1F4_usa(sp10, 0x64, sp14, B_80192FA0_usa->unk_58);
+        screenSetCursor(sp10, 0x64, sp14, B_80192FA0_usa->unk_58);
         sp18 = B_80192FA0_usa->unk_58;
     }
 
@@ -507,10 +507,10 @@ void func_8004407C_usa(void **heapP, s32 arg1 UNUSED) {
     B_80192FA0_usa->unk_08 = 0;
 
     if (screenFind(sp10, "1PPK-PICK")) {
-        func_8002A2E8_usa(sp10[0], 0x64, &sp10[1], &sp10[2]);
-        func_8002A1F4_usa(sp10[0], 0x64, sp10[1], 0);
-        func_8002A2E8_usa(sp10[0], 0x65, &sp10[1], &sp10[2]);
-        func_8002A1F4_usa(sp10[0], 0x65, sp10[1], 0);
+        screenGetCursor(sp10[0], 0x64, &sp10[1], &sp10[2]);
+        screenSetCursor(sp10[0], 0x64, sp10[1], 0);
+        screenGetCursor(sp10[0], 0x65, &sp10[1], &sp10[2]);
+        screenSetCursor(sp10[0], 0x65, sp10[1], 0);
 
         s0 = sp10[0];
         for (var_s2 = 0; var_s2 < 0x10; var_s2++) {

@@ -680,13 +680,13 @@ void screenChange(s32 arg0) {
         for (i = 0; i < temp_s3->unk_08; i++) {
             temp_s0 = &temp_s3->unk_18[i];
 
-            if (temp_s0->unk_2C & 1) {
+            if (temp_s0->nType & 1) {
                 if (var_a3 > temp_s0->unk_00) {
                     var_a2 = i;
                     var_a3 = temp_s0->unk_00;
                 }
             }
-            if (temp_s0->unk_2C & 2) {
+            if (temp_s0->nType & 2) {
                 if (var_a1 < temp_s0->unk_00) {
                     var_s1 = i;
                     var_a1 = temp_s0->unk_00;
@@ -717,7 +717,7 @@ void screenChange(s32 arg0) {
         temp_s0 = &temp_s3->unk_18[i];
         temp_a3 = &temp_s0->unk_0C;
 
-        if (temp_s0->unk_2C & 0x80) {
+        if (temp_s0->nType & 0x80) {
             void **new_var = &sp10;
 
             temp_v1_10 = temp_s0->unk_08;
@@ -731,7 +731,7 @@ void screenChange(s32 arg0) {
                 imageCopy(temp_a3, gapImage[temp_v1_10], &sp10);
             }
 
-            if (temp_s0->unk_2C & 0x4000) {
+            if (temp_s0->nType & 0x4000) {
                 imageCopy(&B_8018E550_usa, temp_s0->unk_0C, &sp10);
             }
         }
@@ -880,10 +880,10 @@ void screenTickTextData(void) {
     }
 
     temp_s3 = &gaScreen[giScreen].unk_18[gaScreen[giScreen].unk_28[0]];
-    if (temp_s3->unk_2C & 0x2000) {
+    if (temp_s3->nType & 0x2000) {
         s32 temp_v0 = temp_s3->unk_10;
         s32 temp_s2 = temp_v0 & 0xFF;
-        s32 temp_s1 = ((temp_v0 >> 8) & 0xFFF) + temp_s3->unk_40 * temp_s2;
+        s32 temp_s1 = ((temp_v0 >> 8) & 0xFFF) + temp_s3->iCursorY * temp_s2;
         u32 new_var2;
 
         if ((temp_s1 < gnTagTextBase) || (gnTagTextBase + temp_s2 - 1 < temp_s1)) {
@@ -1040,15 +1040,15 @@ void screenDraw(Gfx **gfxP, screenDraw_callback *callback) {
 
         for (var_s1_3 = 0; var_s1_3 < temp_s2->unk_08; var_s1_3++) {
             temp_s0 = &temp_s2->unk_18[var_s1_3];
-            if (((temp_s0->unk_2C & 0x880) == 0x80) && (~giScreenNext == 0)) {
+            if (((temp_s0->nType & 0x880) == 0x80) && (~giScreenNext == 0)) {
                 if ((temp_s0->unk_0C->unk_0C & 0x24) || (((var_s1_3 != temp_s2->unk_28[0]) || (B_8018E540_usa & 8)) &&
                                                          ((var_s1_3 != temp_s2->unk_28[1]) || !(B_8018E540_usa & 8)))) {
-                    if (((temp_s0->unk_2C & 3) != 2) || ((B_8018E528_usa >= 2) && ((D_800B69B0_usa & 0xE) != 0))) {
-                        if ((!(temp_s0->unk_2C & 0x100) || (var_s1_3 == temp_s2->unk_28[0]) ||
+                    if (((temp_s0->nType & 3) != 2) || ((B_8018E528_usa >= 2) && ((D_800B69B0_usa & 0xE) != 0))) {
+                        if ((!(temp_s0->nType & 0x100) || (var_s1_3 == temp_s2->unk_28[0]) ||
                              (var_s1_3 == temp_s2->unk_28[1]))) {
                             temp_s0->unk_0C->unk_00 = 0;
                             imageDraw(temp_s0->unk_0C, &gfx, temp_s0->unk_44, temp_s0->unk_48, NULL);
-                            if (temp_s0->unk_2C & 0x4000) {
+                            if (temp_s0->nType & 0x4000) {
                                 imageDraw(B_8018E550_usa, &gfx,
                                           temp_s0->unk_44 + temp_s0->unk_18 + (*B_8018E550_usa->unk_2C)->unk_0C,
                                           temp_s0->unk_48, NULL);
@@ -1062,7 +1062,7 @@ void screenDraw(Gfx **gfxP, screenDraw_callback *callback) {
         var_a3 = 0;
         for (var_s1_3 = 0; var_s1_3 < temp_s2->unk_08; var_s1_3++) {
             temp_s0 = &temp_s2->unk_18[var_s1_3];
-            if ((temp_s0->unk_2C & 0x8000) && ((temp_s0->unk_2C & 0x100800) != 0x800) &&
+            if ((temp_s0->nType & 0x8000) && ((temp_s0->nType & 0x100800) != 0x800) &&
                 (var_s1_3 != temp_s2->unk_28[0]) && (var_s1_3 != temp_s2->unk_28[1])) {
                 if (var_a3 == 0) {
                     var_a3 = -1;
@@ -1204,10 +1204,10 @@ s32 screenFindAreaNear(struct_gaScreen *arg0, struct_gaScreen_unk_18 *arg1, enum
     s32 i;
 
     for (i = 0; i < arg0->unk_08; i++) {
-        if ((arg3 & SCREENFINDAREANEAR_FLAG_20000) || !(arg0->unk_18[i].unk_2C & 0x800)) {
+        if ((arg3 & SCREENFINDAREANEAR_FLAG_20000) || !(arg0->unk_18[i].nType & 0x800)) {
             struct_gaScreen_unk_18 *temp_v1 = &arg0->unk_18[i];
 
-            if ((temp_v1 != arg1) && (temp_v1->unk_2C & var_t6)) {
+            if ((temp_v1 != arg1) && (temp_v1->nType & var_t6)) {
                 s32 var_t1 = 0;
                 s32 var_a0 = 0;
 
@@ -1299,7 +1299,7 @@ s32 screenFindAreaNear(struct_gaScreen *arg0, struct_gaScreen_unk_18 *arg1, enum
         return var_s1;
     }
 
-    if ((arg1->unk_2C & 0x200000) && !(arg3 & SCREENFINDAREANEAR_FLAG_10000)) {
+    if ((arg1->nType & 0x200000) && !(arg3 & SCREENFINDAREANEAR_FLAG_10000)) {
         if (arg2 == ENUM_SCREENFINDAREANEAR_ARG2_1) {
             i = screenFindAreaNear(arg0, arg1, ENUM_SCREENFINDAREANEAR_ARG2_3, arg3 | SCREENFINDAREANEAR_FLAG_20000);
             while (i != -1) {
@@ -1319,7 +1319,7 @@ s32 screenFindAreaNear(struct_gaScreen *arg0, struct_gaScreen_unk_18 *arg1, enum
         if (var_s1 != -1) {
             struct_gaScreen_unk_18 *temp_s0 = &arg0->unk_18[var_s1];
 
-            if (temp_s0->unk_2C & 0x800) {
+            if (temp_s0->nType & 0x800) {
                 var_s1 = -1;
             } else if (arg2 == ENUM_SCREENFINDAREANEAR_ARG2_1) {
                 screenWrapCursor(temp_s0, temp_s0->unk_34 - 1, temp_s0->unk_30 - 1, 3);
@@ -2487,13 +2487,14 @@ STATIC_INLINE nbool inlined_func(s32 arg0, s32 arg1, struct_gaScreen_unk_18 **ar
     return nfalse;
 }
 
-nbool func_8002776C_usa(s32 arg0, s32 arg1) {
-    struct_gaScreen_unk_18 *sp0;
+nbool screenHideArea(s32 iScreen, s32 nTagArea) {
+    struct_gaScreen_unk_18 *pArea;
 
-    if (inlined_func(arg0, arg1, &sp0)) {
-        sp0->unk_2C |= 0x800;
+    if (inlined_func(iScreen, nTagArea, &pArea)) {
+        pArea->nType |= 0x800;
         return ntrue;
     }
+
     return nfalse;
 }
 
@@ -2501,7 +2502,7 @@ nbool func_80027838_usa(s32 arg0, s32 arg1) {
     struct_gaScreen_unk_18 *sp10;
 
     if (inlined_func(arg0, arg1, &sp10)) {
-        sp10->unk_2C &= ~0x800;
+        sp10->nType &= ~0x800;
         screenUpdateArea(sp10);
         return ntrue;
     }
@@ -2512,7 +2513,7 @@ s32 func_80027914_usa(s32 arg0, s32 arg1) {
     struct_gaScreen_unk_18 *sp0;
 
     if (inlined_func(arg0, arg1, &sp0)) {
-        return sp0->unk_2C;
+        return sp0->nType;
     }
     return 0;
 }
@@ -2963,7 +2964,7 @@ nbool func_80028A98_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     struct_gaScreen_unk_18 *sp0;
 
     if (inlined_func(arg0, arg1, &sp0)) {
-        if (sp0->unk_2C & 0x1000) {
+        if (sp0->nType & 0x1000) {
             s32 temp_a0 = (sp0->unk_34 * arg3) + arg2;
 
             sp0->unk_38[temp_a0 >> 3] &= ~(1 << (temp_a0 & 7));
@@ -2978,7 +2979,7 @@ nbool func_80028BAC_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     struct_gaScreen_unk_18 *sp0;
 
     if (inlined_func(arg0, arg1, &sp0)) {
-        if (sp0->unk_2C & 0x1000) {
+        if (sp0->nType & 0x1000) {
             s32 temp_a0 = (sp0->unk_34 * arg3) + arg2;
 
             sp0->unk_38[temp_a0 >> 3] |= 1 << (temp_a0 & 7);
@@ -2992,7 +2993,7 @@ nbool func_80028CBC_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     struct_gaScreen_unk_18 *sp0;
 
     if (inlined_func(arg0, arg1, &sp0)) {
-        if ((sp0->unk_2C & 0x1000)) {
+        if ((sp0->nType & 0x1000)) {
             s32 temp_v1 = (sp0->unk_34 * arg3) + arg2;
 
             if (((sp0->unk_38[temp_v1 >> 3]) >> (temp_v1 & 7)) & 1) {
@@ -3302,12 +3303,12 @@ void func_80029D24_usa(s32 arg0, s32 arg1) {
     var_s3->unk_2C &= ~0x40;
     for (var_s2 = 0; var_s2 < temp_s0->unk_08; var_s2++) {
         if ((var_s3->unk_2C & 0x20) && (var_s3->unk_18 == temp_s0->unk_18[var_s2].unk_1C)) {
-            temp_s0->unk_18[var_s2].unk_2C |= 0x800;
+            temp_s0->unk_18[var_s2].nType |= 0x800;
             temp_s0->unk_28[0] = temp_s0->unk_30[0];
             temp_s0->unk_28[1] = temp_s0->unk_30[1];
             screenUpdateArea(&temp_s0->unk_18[var_s2]);
         } else {
-            temp_s0->unk_18[var_s2].unk_2C &= ~0x800;
+            temp_s0->unk_18[var_s2].nType &= ~0x800;
         }
     }
 
@@ -3351,7 +3352,7 @@ void func_80029EC4_usa(s32 arg0, s32 arg1) {
 
     for (var_s2 = 0; var_s2 < temp_s0->unk_08; var_s2++) {
         if ((var_s3->unk_2C & 0x20) && (var_s3->unk_18 == temp_s0->unk_18[var_s2].unk_1C)) {
-            temp_s0->unk_18[var_s2].unk_2C &= ~0x800;
+            temp_s0->unk_18[var_s2].nType &= ~0x800;
             temp_s0->unk_30[0] = temp_s0->unk_28[0];
             temp_s0->unk_30[1] = temp_s0->unk_28[1];
             temp_s0->unk_28[1] = var_s2;
@@ -3359,7 +3360,7 @@ void func_80029EC4_usa(s32 arg0, s32 arg1) {
             screenUpdateArea(&temp_s0->unk_18[var_s2]);
         } else {
             ;
-            temp_s0->unk_18[var_s2].unk_2C |= 0x800;
+            temp_s0->unk_18[var_s2].nType |= 0x800;
         }
     }
 
@@ -3405,26 +3406,26 @@ void screenSetNumber(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     }
 }
 
-void func_8002A1F4_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    struct_gaScreen_unk_18 *sp10;
+void screenSetCursor(s32 iScreen, s32 nTagArea, s32 iCursorX, s32 iCursorY) {
+    struct_gaScreen_unk_18 *pArea;
 
-    if ((arg2 < 0) || (arg3 < 0)) {
+    if ((iCursorX < 0) || (iCursorY < 0)) {
         return;
     }
 
-    if (inlined_func(arg0, arg1, &sp10)) {
-        if (screenWrapCursor(sp10, arg2, arg3, 0)) {
-            screenUpdateArea(sp10);
+    if (inlined_func(iScreen, nTagArea, &pArea)) {
+        if (screenWrapCursor(pArea, iCursorX, iCursorY, 0)) {
+            screenUpdateArea(pArea);
         }
     }
 }
 
-void func_8002A2E8_usa(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3) {
-    struct_gaScreen_unk_18 *sp0;
+void screenGetCursor(s32 iScreen, s32 nTagArea, s32 *piCursorX, s32 *piCursorY) {
+    struct_gaScreen_unk_18 *pArea;
 
-    if (inlined_func(arg0, arg1, &sp0)) {
-        *arg2 = sp0->unk_3C;
-        *arg3 = sp0->unk_40;
+    if (inlined_func(iScreen, nTagArea, &pArea)) {
+        *piCursorX = pArea->iCursorX;
+        *piCursorY = pArea->iCursorY;
     }
 }
 
@@ -3443,7 +3444,7 @@ nbool func_8002A488_usa(s32 arg0, s32 arg1) {
             struct_gaScreen_unk_18 *temp_a0 = &gaScreen[arg0].unk_18[gaScreen[arg0].unk_28[0]];
 
             temp_a0->unk_20 = arg1;
-            temp_a0->unk_2C |= 0x2000;
+            temp_a0->nType |= 0x2000;
             return ntrue;
         }
     }
@@ -3457,7 +3458,7 @@ nbool screenGetAreaText(s32 arg0, s32 *arg1) {
         if (gaScreen[arg0].unk_28[0] != -1) {
             struct_gaScreen_unk_18 *temp_v1_2 = &gaScreen[arg0].unk_18[gaScreen[arg0].unk_28[0]];
 
-            if (temp_v1_2->unk_2C & 0x2000) {
+            if (temp_v1_2->nType & 0x2000) {
                 *arg1 = temp_v1_2->unk_20;
                 return ntrue;
             }
@@ -3653,10 +3654,10 @@ s32 screenLoad(const char *arg0, void **heapP) {
             temp_s1->unk_20 = -1;
             temp_s1->unk_30 = 0;
             temp_s1->unk_34 = 0;
-            temp_s1->unk_3C = 0;
-            temp_s1->unk_40 = 0;
+            temp_s1->iCursorX = 0;
+            temp_s1->iCursorY = 0;
             temp_s1->unk_0C = 0;
-            fileGet(&sp10, &temp_s1->unk_2C, 4);
+            fileGet(&sp10, &temp_s1->nType, 4);
             fileGet(&sp10, &temp_s1->unk_00, 4);
             fileGet(&sp10, &temp_s1->unk_04, 4);
             fileGet(&sp10, &temp_s1->unk_1C, 4);
@@ -3672,34 +3673,34 @@ s32 screenLoad(const char *arg0, void **heapP) {
                 temp_s1->unk_5C = 0;
             }
 
-            if (temp_s1->unk_2C & 0x2000) {
+            if (temp_s1->nType & 0x2000) {
                 fileGet(&sp10, &temp_s1->unk_10, 4);
             }
 
-            if (temp_s1->unk_2C & 0x10) {
+            if (temp_s1->nType & 0x10) {
                 fileGet(&sp10, &temp_s1->unk_30, 4);
-            } else if (temp_s1->unk_2C & 0x20) {
+            } else if (temp_s1->nType & 0x20) {
                 temp_s1->unk_30 = 1;
             }
 
-            if (temp_s1->unk_2C & 0x20) {
+            if (temp_s1->nType & 0x20) {
                 fileGet(&sp10, &temp_s1->unk_34, 4);
-            } else if (temp_s1->unk_2C & 0x10) {
+            } else if (temp_s1->nType & 0x10) {
                 temp_s1->unk_34 = 1;
             }
 
-            if (temp_s1->unk_2C & 0x80) {
+            if (temp_s1->nType & 0x80) {
                 fileGet(&sp10, (&temp_s1->unk_08), 4);
             }
 
-            if (temp_s1->unk_2C & 0x40) {
+            if (temp_s1->nType & 0x40) {
                 fileGet(&sp10, &temp_s1->unk_4C, 4);
                 fileGet(&sp10, &temp_s1->unk_50, 4);
                 fileGet(&sp10, &temp_s1->unk_54, 4);
                 fileGet(&sp10, &temp_s1->unk_58, 4);
             }
 
-            if ((temp_s1->unk_2C & 0x1000)) {
+            if ((temp_s1->nType & 0x1000)) {
                 *heapP = (void *)ALIGN((uintptr_t)*heapP, 4);
                 temp_s1->unk_38 = *heapP;
                 *heapP = (void *)((uintptr_t)*heapP + (((temp_s1->unk_30 * temp_s1->unk_34) + 7) >> 3));

@@ -37,7 +37,7 @@ void MimicCheckState(struct tetWell *well, struct cursor_t *cursor);
 // void func_80084D24_usa();
 void Draw2DMT(struct struct_gInfo_unk_00068 *dynamicp);
 void Draw3DMT(struct struct_gInfo_unk_00068 *dynamicp);
-// void func_80085CC8_usa();
+// void mimicTickText();
 void DrawMT(struct struct_gInfo_unk_00068 *dynamicp);
 void DoMimic(void);
 void InitMimic(void);
