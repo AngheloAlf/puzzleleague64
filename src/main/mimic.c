@@ -58,8 +58,8 @@ INLINE void QuitMimic(void) {
 }
 
 #if VERSION_USA
-// ?? void LoadMimic1(int kind /* r19 */, int level /* r20 */, int number /* r21 */, int play /* r22 */)
-void func_80083050_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+// void LoadMimic1(int kind /* r19 */, int level /* r20 */, int number /* r21 */, int play /* r22 */)
+void LoadMimic1(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 temp_s0;
     s32 temp_v0;
     s32 var_v0;
@@ -204,7 +204,7 @@ void func_80083050_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 // Maybe inlined in DoMimic() or otherwise duplicated there?
 // ?? static void LoadMimic2(int kind /* r3 */, int level /* r4 */, int number /* r5 */, int play /* r6 */)
 void func_8008336C_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    func_80083050_usa(arg0, arg1, arg2, arg3);
+    LoadMimic1(arg0, arg1, arg2, arg3);
     PlaySE(SFX_INIT_TABLE, 0x95);
     brainbrain[0].speed = -1;
     brainbrain[0].unk_104 = 0;
