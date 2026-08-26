@@ -1228,7 +1228,6 @@ extern void *B_8019CF9C_usa;
 // extern UNK_TYPE B_8019D150_usa;
 
 extern OSMesgQueue B_8019D158_usa;
-// extern UNK_TYPE gTheGame;
 
 extern s32 B_801AAB98_usa;
 extern OSMesgQueue *B_801AAB9C_usa;

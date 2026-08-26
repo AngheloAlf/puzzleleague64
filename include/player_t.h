@@ -83,7 +83,6 @@ typedef struct player_t_unk_7B4 {
 #define STRUCT_801A6DB8_USA_UNK_0CD_COUNT 7
 #define STRUCT_801A6DB8_USA_UNK_0D4_COUNT 7
 
-// substruct of gTheGame
 typedef struct player_t {
     /* 0x000 */ char unk_000;
     /* 0x001 */ UNK_PAD unk_001[0x1];
