@@ -81,10 +81,7 @@ extern u8 D_800B3B11[];
 extern u8 D_800B3B15[];
 extern u8 D_800B3B34_usa[];
 
-#if VERSION_USA
-#ifdef NON_MATCHING
-// regalloc
-s32 LoadFairySoundData(s16 arg0, s16 arg1, s16 arg2) {
+s32 LoadFairySoundData(s16 music, s16 fairy1, s16 fairy2) {
     s32 var_s4;
     s32 var_s5;
 
@@ -101,79 +98,79 @@ s32 LoadFairySoundData(s16 arg0, s16 arg1, s16 arg2) {
     crossfadeBool = 0;
     TenSecond = 0;
 
-    if (arg0 < 0x11U) {
-        arg0 = arg0 * 2;
-    } else if (arg0 < 0x19) {
+    if ((music >= 0) && (music < 0x11)) {
+        music *= 2;
+    } else if (music < 0x19) {
         if ((gTheGame.menu[0].game == 5) && (gTheGame.menu[0].stage == 3)) {
-            arg0++;
+            music++;
         } else if (gTheGame.menu[0].stage >= 4) {
-            arg0++;
+            music++;
             if ((gTheGame.menu[0].game == 5) && (gTheGame.menu[0].stage == 6)) {
-                arg0++;
+                music++;
             }
         }
-        arg0 = arg0 * 2;
-    } else if (arg0 < 0x1B) {
-        arg0 = (arg0 * 2) + 6;
+        music *= 2;
+    } else if (music < 0x1B) {
+        music = music * 2 + 6;
 
-        if (arg0 == 0x38) {
+        if (music == 0x38) {
             B_801C7348_usa++;
             B_801C7348_usa %= 3;
             if ((gTheGame.menu[0].game == 0) && (B_801C7348_usa == 0)) {
                 B_801C7348_usa++;
             }
-            arg0 = D_800B3B34_usa[B_801C7348_usa];
+            music = D_800B3B34_usa[B_801C7348_usa];
         }
-    } else if (arg0 < 0x1E) {
-        arg2 = D_800B3B11[arg0];
-        B_801C6EE8_usa = D_800B3B15[arg0];
-        arg0 = arg0 * 2 - 4;
-        arg1 = arg2;
+    } else if (music < 0x1E) {
+        fairy2 = D_800B3B11[music];
+        B_801C6EE8_usa = D_800B3B15[music];
+        music = music * 2 - 4;
+        fairy1 = fairy2;
     } else {
-        arg0 = 0x14;
+        music = 0x14;
     }
 
     if ((gMain != GMAIN_TUTORIAL) & (gMain != GMAIN_MIMIC)) {
-        func_80003E00_usa(arg0, 0);
-        func_80003E00_usa(arg0 + 1, 1);
+        func_80003E00_usa(music, 0);
+        func_80003E00_usa(music + 1, 1);
     }
 
-    DangerMusicBgmIndex = arg0 + 1;
+    DangerMusicBgmIndex = music + 1;
     NormalMusicBgmIndex_ScoreAttack = 0x48;
     DangerMusicBgmIndex_ScoreAttack = 0x49;
-    NormalMusicBgmIndex = arg0;
+    NormalMusicBgmIndex = music;
 
     if (gSelection == 0xAA) {
-        arg1 = 0;
-        arg2 = 0xA;
+        fairy1 = 0;
+        fairy2 = 0xA;
         if (gTheGame.menu[0].game == 5) {
             if (gTheGame.menu[0].stage == 6) {
-                arg2 = 0xB;
+                fairy2 = 0xB;
             } else {
-                arg2 = 0xA;
+                fairy2 = 0xA;
             }
         }
     }
 
-    B_801C7089_usa = arg1;
-    B_801C6C90_usa = arg2;
-    if (arg1 < 0x11U) {
-        var_s4 = arg1 + 4;
+    B_801C7089_usa = fairy1;
+    B_801C6C90_usa = fairy2;
+    if ((fairy1 >= 0) && (fairy1 < 0x11)) {
+        var_s4 = fairy1 + 4;
     }
 
     LoadSFXBank(var_s4, 3U);
-    if (arg2 >= 0) {
-        if (arg2 < 0x11) {
-            var_s5 = arg2 + 0x16;
+    if (fairy2 >= 0) {
+        if (fairy2 < 0x11) {
+            var_s5 = fairy2 + 0x16;
         }
         LoadSFXBank(var_s5, 4U);
     }
 
     if ((gMain != GMAIN_MIMIC) && (gMain != GMAIN_TUTORIAL) && (gSelection != 0x82) && (gSelection != 0x78)) {
         if (gSelection == 0xAA) {
-        } else if ((gSelection == 0x96) && (arg2 == 0x10)) {
+        } else if ((gSelection == 0x96) && (fairy2 == 0x10)) {
             // These empty blocks seems required to match?
-        } else if (((gSelection == 0xA0) || (gSelection == 0xB4) || (gSelection == 0xC8)) && (arg2 == 0x10)) {
+        } else if (((gSelection == 0xA0) || (gSelection == 0xB4) || (gSelection == 0xC8)) && (fairy2 == 0x10)) {
             // ?
         } else {
             PlaySE(SFX_INIT_TABLE, 0x17A);
@@ -203,22 +200,6 @@ s32 LoadFairySoundData(s16 arg0, s16 arg1, s16 arg2) {
 
     return 1;
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/tetsound", LoadFairySoundData);
-#endif
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tetsound", LoadFairySoundData);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", LoadFairySoundData);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", LoadFairySoundData);
-#endif
 
 s32 PlayGameSong(tetWell *well) {
     ts_current_alert = well->unk_43B8;

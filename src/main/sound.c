@@ -1286,7 +1286,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80003DAC_fra);
 INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80003DAC_ger);
 #endif
 
-#if VERSION_USA || VERSION_EUR
 void func_80003E00_usa(s32 arg0, s32 arg1) {
     s32 temp_s0;
 
@@ -1300,16 +1299,3 @@ void func_80003E00_usa(s32 arg0, s32 arg1) {
         } while (temp_s0 < 0);
     }
 }
-#endif
-
-#if VERSION_EUR0
-INCLUDE_ASM("asm/eur/nonmatchings/main/sound", func_80003E00_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80003EC4_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80003EC4_ger);
-#endif
