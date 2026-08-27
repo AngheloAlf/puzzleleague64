@@ -58,8 +58,7 @@ INLINE void QuitMimic(void) {
 }
 
 #if VERSION_USA
-// void LoadMimic1(int kind /* r19 */, int level /* r20 */, int number /* r21 */, int play /* r22 */)
-void LoadMimic1(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+void LoadMimic1(s32 kind, s32 level, s32 number, s32 play) {
     s32 temp_s0;
     s32 temp_v0;
     s32 var_v0;
@@ -75,16 +74,6 @@ void LoadMimic1(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     struct cursor_t * cursor; // r24
     struct ai_t * brain; // r23
     char * pHeap; // r30
-
-    // References
-    // -> unsigned char play_data_timelag[278];
-    // -> unsigned char play_data_schain[633];
-    // -> unsigned char play_data_chain[766];
-    // -> unsigned char play_data_combo[590];
-    // -> unsigned char demo_data_timelag[311];
-    // -> unsigned char demo_data_schain[789];
-    // -> unsigned char demo_data_chain[892];
-    // -> unsigned char demo_data_combo[679];
 #endif
 
     gCounter = 0;
@@ -122,35 +111,35 @@ void LoadMimic1(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     Init2DExplosion(well);
     var_s5 = brainbrain;
 
-    if (arg1 == 1) {
+    if (level == 1) {
         var_v0 = 0;
-    } else if (arg1 == 2) {
+    } else if (level == 2) {
         var_v0 = 5;
-    } else if (arg1 == 3) {
+    } else if (level == 3) {
         var_v0 = 0xA;
     } else {
         var_v0 = 0xE;
     }
-    temp_s0 = var_v0 + arg2;
+    temp_s0 = var_v0 + number;
 
-    if (arg3 == 0) {
+    if (play == 0) { // play == demo
         // FAKE?
         do {
-            switch (arg0) {
-                case 1:
-                    Init2DPuzzle(well, cursor, D_800B89D0_usa, temp_s0);
+            switch (kind) {
+                case MIMIC_COMBO:
+                    Init2DPuzzle(well, cursor, demo_data_combo, temp_s0);
                     temp_s0--;
                     break;
-                case 2:
-                    Init2DPuzzle(well, cursor, D_800B8C78_usa, temp_s0);
+                case MIMIC_CHAIN:
+                    Init2DPuzzle(well, cursor, demo_data_chain, temp_s0);
                     temp_s0--;
                     break;
-                case 3:
-                    Init2DPuzzle(well, cursor, D_800B8FF4_usa, temp_s0);
+                case MIMIC_SKILL_CHAIN:
+                    Init2DPuzzle(well, cursor, demo_data_schain, temp_s0);
                     temp_s0--;
                     break;
-                case 4:
-                    Init2DPuzzle(well, cursor, D_800B930C_usa, temp_s0);
+                case MIMIC_TIMELAG:
+                    Init2DPuzzle(well, cursor, demo_data_timelag, temp_s0);
                     temp_s0--;
                     break;
                 default:
@@ -159,21 +148,21 @@ void LoadMimic1(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
             }
         } while (0);
     } else {
-        switch (arg0) {
-            case 1:
-                Init2DPuzzle(well, cursor, D_800B9444_usa, temp_s0);
+        switch (kind) {
+            case MIMIC_COMBO:
+                Init2DPuzzle(well, cursor, play_data_combo, temp_s0);
                 temp_s0--;
                 break;
-            case 2:
-                Init2DPuzzle(well, cursor, D_800B9694_usa, temp_s0);
+            case MIMIC_CHAIN:
+                Init2DPuzzle(well, cursor, play_data_chain, temp_s0);
                 temp_s0--;
                 break;
-            case 3:
-                Init2DPuzzle(well, cursor, D_800B9994_usa, temp_s0);
+            case MIMIC_SKILL_CHAIN:
+                Init2DPuzzle(well, cursor, play_data_schain, temp_s0);
                 temp_s0--;
                 break;
-            case 4:
-                Init2DPuzzle(well, cursor, D_800B9C10_usa, temp_s0);
+            case MIMIC_TIMELAG:
+                Init2DPuzzle(well, cursor, play_data_timelag, temp_s0);
                 temp_s0--;
                 break;
             default:
@@ -185,10 +174,10 @@ void LoadMimic1(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     gTheGame.totalPlayer = 1;
     var_s5->speed = 0xA;
     InitAI(well, cursor, var_s5);
-    if (arg3 == 0) {
-        var_s5->unk_03C = arg0;
+    if (play == 0) {
+        var_s5->unk_03C = kind;
     } else {
-        var_s5->unk_03C = arg0 + 4;
+        var_s5->unk_03C = kind + 4;
     }
     temp_v0 = cursor[0].unk_28[0];
     var_s5->unk_040 = temp_s0;
@@ -203,8 +192,8 @@ void LoadMimic1(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 #if VERSION_USA
 // Maybe inlined in DoMimic() or otherwise duplicated there?
 // ?? static void LoadMimic2(int kind /* r3 */, int level /* r4 */, int number /* r5 */, int play /* r6 */)
-void func_8008336C_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    LoadMimic1(arg0, arg1, arg2, arg3);
+void func_8008336C_usa(s32 kind, s32 level, s32 number, s32 play) {
+    LoadMimic1(kind, level, number, play);
     PlaySE(SFX_INIT_TABLE, 0x95);
     brainbrain[0].speed = -1;
     brainbrain[0].unk_104 = 0;

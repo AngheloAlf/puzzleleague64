@@ -23,10 +23,17 @@ typedef enum MimicMode {
     /* 10 */ MM_PLAYTEXT3,
 } MimicMode;
 
+typedef enum MimicKind {
+    /* 1 */ MIMIC_COMBO = 1,
+    /* 2 */ MIMIC_CHAIN,
+    /* 3 */ MIMIC_SKILL_CHAIN,
+    /* 4 */ MIMIC_TIMELAG,
+} MimicKind;
+
 extern MimicMode geModeMimic;
 
-void LoadMimic1(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-void func_8008336C_usa(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+void LoadMimic1(s32 kind, s32 level, s32 number, s32 play);
+void func_8008336C_usa(s32 kind, s32 level, s32 number, s32 play);
 // void func_800833B0_usa();
 void UpdateMT(struct tetWell *well, struct cursor_t *cursor, struct ai_t *brain);
 void UpdateMTController(struct tetWell *well, struct cursor_t *cursor, s32 num);
