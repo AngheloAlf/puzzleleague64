@@ -23,6 +23,7 @@
 #include "init2d.h"
 #include "other.h"
 #include "peel.h"
+#include "puzzle.h"
 #include "screen.h"
 #include "sfxlimit.h"
 #include "sound.h"
@@ -57,11 +58,146 @@ INLINE void QuitMimic(void) {
 }
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/mimic", func_80083050_usa);
+void LoadMimic1(s32 kind, s32 level, s32 number, s32 play) {
+    s32 temp_s0;
+    s32 temp_v0;
+    s32 var_v0;
+    ai_t *var_s5;
+    cursor_t *cursor;
+    tetWell *well;
+
+#if 0
+    // Local variables
+    int base; // r1+0x8
+    int index; // r20
+    struct tetWell * well; // r27
+    struct cursor_t * cursor; // r24
+    struct ai_t * brain; // r23
+    char * pHeap; // r30
+#endif
+
+    gCounter = 0;
+    gMax = 6;
+    InitGameStateVar();
+    well = gTheGame.tetrisWell;
+    cursor = gTheGame.cursorBlock;
+    gTheGame.unk_9B48 = 0;
+    gTheGame.unk_9B50[0].b.frameH = 0;
+    gTheGame.unk_9B50[1].b.frameH = 0;
+    chain_check[0] = 0;
+    chain_check[1] = 0;
+    anim_bg = 0;
+    anim_sp = 0;
+    gTheGame.tetrisWell[0].unk_43B0 = 0;
+    gTheGame.tetrisWell[0].unk_43A8 = 0;
+    gTheGame.tetrisWell[0].unk_43A4 = 0;
+    gTheGame.tetrisWell[0].unk_43B4 = 0;
+    gTheGame.tetrisWell[0].unk_43B8 = 0;
+    gTheGame.tetrisWell[0].unk_43BC = 0;
+    gTheGame.tetrisWell[0].unk_43C0 = 0;
+    gTheGame.tetrisWell[0].unk_43C4 = 0;
+    gTheGame.tetrisWell[0].unk_43F4 = 0;
+    gTheGame.tetrisWell[0].unk_441C = 0xDF;
+    gTheGame.tetrisWell[0].unk_43F8 = 0;
+    gTheGame.tetrisWell[0].unk_43FC = 0;
+    gTheGame.totalPlayer = 2;
+
+    InitCursor(cursor);
+    Init2DCursor(cursor, 0);
+    Init2DTetrisBlocks(well, 0);
+    Init2DNewRow(well);
+    Init2DIcons(well);
+    Init2DAttackBlocks(well);
+    Init2DExplosion(well);
+    var_s5 = brainbrain;
+
+    if (level == 1) {
+        var_v0 = 0;
+    } else if (level == 2) {
+        var_v0 = 5;
+    } else if (level == 3) {
+        var_v0 = 0xA;
+    } else {
+        var_v0 = 0xE;
+    }
+    temp_s0 = var_v0 + number;
+
+    if (play == 0) { // play == demo
+        // FAKE?
+        do {
+            switch (kind) {
+                case MIMIC_COMBO:
+                    Init2DPuzzle(well, cursor, demo_data_combo, temp_s0);
+                    temp_s0--;
+                    break;
+                case MIMIC_CHAIN:
+                    Init2DPuzzle(well, cursor, demo_data_chain, temp_s0);
+                    temp_s0--;
+                    break;
+                case MIMIC_SKILL_CHAIN:
+                    Init2DPuzzle(well, cursor, demo_data_schain, temp_s0);
+                    temp_s0--;
+                    break;
+                case MIMIC_TIMELAG:
+                    Init2DPuzzle(well, cursor, demo_data_timelag, temp_s0);
+                    temp_s0--;
+                    break;
+                default:
+                    temp_s0--;
+                    break;
+            }
+        } while (0);
+    } else {
+        switch (kind) {
+            case MIMIC_COMBO:
+                Init2DPuzzle(well, cursor, play_data_combo, temp_s0);
+                temp_s0--;
+                break;
+            case MIMIC_CHAIN:
+                Init2DPuzzle(well, cursor, play_data_chain, temp_s0);
+                temp_s0--;
+                break;
+            case MIMIC_SKILL_CHAIN:
+                Init2DPuzzle(well, cursor, play_data_schain, temp_s0);
+                temp_s0--;
+                break;
+            case MIMIC_TIMELAG:
+                Init2DPuzzle(well, cursor, play_data_timelag, temp_s0);
+                temp_s0--;
+                break;
+            default:
+                temp_s0--;
+                break;
+        }
+    }
+
+    gTheGame.totalPlayer = 1;
+    var_s5->speed = 0xA;
+    InitAI(well, cursor, var_s5);
+    if (play == 0) {
+        var_s5->unk_03C = kind;
+    } else {
+        var_s5->unk_03C = kind + 4;
+    }
+    temp_v0 = cursor[0].unk_28[0];
+    var_s5->unk_040 = temp_s0;
+    var_s5->unk_044 = 0;
+    cursor[0].unk_28[0] = 0;
+    cursor[0].unk_28[1] = 0;
+    cursor[0].unk_28[2] = temp_v0;
+}
+
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/mimic", func_8008336C_usa);
+// Maybe inlined in DoMimic() or otherwise duplicated there?
+// ?? static void LoadMimic2(int kind /* r3 */, int level /* r4 */, int number /* r5 */, int play /* r6 */)
+void func_8008336C_usa(s32 kind, s32 level, s32 number, s32 play) {
+    LoadMimic1(kind, level, number, play);
+    PlaySE(SFX_INIT_TABLE, 0x95);
+    brainbrain[0].speed = -1;
+    brainbrain[0].unk_104 = 0;
+}
 #endif
 
 #if VERSION_USA
