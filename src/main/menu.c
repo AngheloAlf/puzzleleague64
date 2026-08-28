@@ -285,8 +285,6 @@ typedef struct struct_800072A0_usa_arg0 {
     /* 0x58 */ struct_800072A0_usa_arg0_unk_58 unk_58[GAME_PLAYER_COUNT];
 } struct_800072A0_usa_arg0; // size >= 0xB8
 
-nbool func_800072A0_usa(struct_800072A0_usa_arg0 *arg0);
-
 STATIC_INLINE void static_inlined_meminit(void *dst, size_t size, s32 var_s1) {
 #define BUFFER_SIZE 0x80
     void *ptr = dst;
@@ -3621,11 +3619,10 @@ INLINE nbool menuFind(struct_gaMenuData **ppData, enum_TypeMenu eType) {
     return nfalse;
 }
 
-#if VERSION_USA
 STATIC_INLINE s32 inlined_function_menuLoadData(void) {
     s32 var_a0;
 
-    for (var_a0 = 0; var_a0 < 8; var_a0++) {
+    for (var_a0 = 0; var_a0 < GAME_PLAYER_COUNT; var_a0++) {
         if (gTheGame.player[var_a0].unk_002.unk_0.unk_0[0] == 0) {
             return var_a0;
         }
@@ -3634,6 +3631,9 @@ STATIC_INLINE s32 inlined_function_menuLoadData(void) {
     return -1;
 }
 
+/**
+ * Original name: menuLoadData
+ */
 s32 menuLoadData(void) {
     struct_800072A0_usa_arg0 sp18;
     s32 spD0;
@@ -3654,8 +3654,9 @@ s32 menuLoadData(void) {
     B_8018A91C_usa = 2;
     bzero(&gTheGame.player[0].unk_002, sizeof(player_t_unk_002));
 
-    if (func_800072A0_usa(&sp18) != 0) {
+    if (func_800072A0_usa(&sp18)) {
         B_8018A8E6_usa = 0;
+
         for (var_s1 = 0; var_s1 < GAME_PLAYER_COUNT; var_s1++) {
             bcopy(&sp18.unk_58[var_s1], &B_8018A8D8_usa.unk_0, sizeof(struct_800072A0_usa_arg0_unk_58));
 
@@ -3669,6 +3670,7 @@ s32 menuLoadData(void) {
         temp_s3 = B_801AB8E4_usa - (sp18.unk_1C + 0x400);
         static_inlined_meminit(temp_s3, sp18.unk_1C, sp18.unk_0C << 0xE);
         // HACK: ptr arithmetic
+        // TODO: sizeof(struct_800072A0_usa_arg0) ?
         temp_s3 = temp_s3 + 0xB8;
 
         for (var_s1 = 1; var_s1 < GAME_PLAYER_COUNT; var_s1++) {
@@ -3705,19 +3707,6 @@ s32 menuLoadData(void) {
     menuSaveData(1);
     return 0;
 }
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/menu", menuLoadData);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/menu", menuLoadData);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/menu", menuLoadData);
-#endif
 
 STATIC_INLINE void inlined_function_menuSaveData(struct_800072A0_usa_arg0 *s0, bool do_zero) {
     s32 var_s3;
@@ -3932,7 +3921,7 @@ INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3D60_usa);
 #endif
 
 #if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C4298_eur);
+INCLUDE_RODATA("asm/eur/nonmatchings/main/menu", RO_STR_800C3D68_usa);
 #endif
 
 #if VERSION_EUR
@@ -4020,7 +4009,7 @@ INCLUDE_RODATA("asm/fra/nonmatchings/main/menu", RO_STR_800C3D60_usa);
 #endif
 
 #if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/menu", RO_STR_800C2948_fra);
+INCLUDE_RODATA("asm/fra/nonmatchings/main/menu", RO_STR_800C3D68_usa);
 #endif
 
 #if VERSION_FRA
@@ -4108,7 +4097,7 @@ INCLUDE_RODATA("asm/ger/nonmatchings/main/menu", RO_STR_800C3D60_usa);
 #endif
 
 #if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/menu", RO_STR_800B9908_ger);
+INCLUDE_RODATA("asm/ger/nonmatchings/main/menu", RO_STR_800C3D68_usa);
 #endif
 
 #if VERSION_GER
