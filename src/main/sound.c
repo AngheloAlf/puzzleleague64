@@ -1016,7 +1016,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/sound", func_80003600_fra);
 INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80003600_ger);
 #endif
 
-
 #if VERSION_USA || VERSION_EUR
 bool func_800036D0_usa(musHandle handle) {
     return MusHandleAsk(handle) == 0;
@@ -1177,8 +1176,7 @@ void AudioUpdate(void) {
     }
 
     if (B_801C7154_usa != 0) {
-        if ((B_8018A748_usa[B_801AB7E0_usa].unk_1C != 1) &&
-            (func_80001D60_usa(B_8021B960_usa, B_801AB7E2_usa) >= 0)) {
+        if ((B_8018A748_usa[B_801AB7E0_usa].unk_1C != 1) && (func_80001D60_usa(B_8021B960_usa, B_801AB7E2_usa) >= 0)) {
             B_801C7154_usa = 0;
             if (B_8021DF48_usa == 0) {
                 D_800B3AFC_usa[B_801AB7E2_usa] = B_8018A748_usa[B_801AB7E2_usa].unk_26 = B_8021BA7C_usa[1];

@@ -3622,7 +3622,6 @@ INLINE nbool menuFind(struct_gaMenuData **ppData, enum_TypeMenu eType) {
 }
 
 #if VERSION_USA
-#ifdef NON_MATCHING
 STATIC_INLINE s32 inlined_function_menuLoadData(void) {
     s32 var_a0;
 
@@ -3635,15 +3634,12 @@ STATIC_INLINE s32 inlined_function_menuLoadData(void) {
     return -1;
 }
 
-// extra redundant instruction
 s32 menuLoadData(void) {
     struct_800072A0_usa_arg0 sp18;
     s32 spD0;
     s32 var_s0_2;
     s32 var_s1;
     void *temp_s3;
-    size_t a1;
-    s32 temp;
 
     B_8018A914_usa = 1;
     B_8018A918_usa = 1;
@@ -3670,12 +3666,8 @@ s32 menuLoadData(void) {
             }
         }
 
-        a1 = sp18.unk_1C;
-        temp = sp18.unk_0C;
-        // TODO: figure out struct for temp_s3
-        temp_s3 = B_801AB8E4_usa;
-        temp_s3 -= a1 + 0x400;
-        static_inlined_meminit(temp_s3, a1, temp << 0xE);
+        temp_s3 = B_801AB8E4_usa - (sp18.unk_1C + 0x400);
+        static_inlined_meminit(temp_s3, sp18.unk_1C, sp18.unk_0C << 0xE);
         // HACK: ptr arithmetic
         temp_s3 = temp_s3 + 0xB8;
 
@@ -3698,7 +3690,8 @@ s32 menuLoadData(void) {
     screenFind(&spD0, RO_STR_800C3D68_usa);
 
     for (var_s1 = 0; var_s1 < 1; var_s1++) {
-        func_80029130_usa(spD0, var_s1 + 0x64, B_8018A8D8_usa.unk_0.unk_0, 7);
+        //! @bug: passing s16 array to u16* parameter
+        func_80029130_usa(spD0, var_s1 + 0x64, (u16 *)B_8018A8D8_usa.unk_0.unk_0, 7);
         if (B_8018A8D8_usa.unk_0.unk_0[0] != 1) {
             var_s0_2 = inlined_function_menuLoadData();
 
@@ -3712,9 +3705,6 @@ s32 menuLoadData(void) {
     menuSaveData(1);
     return 0;
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/menu", menuLoadData);
-#endif
 #endif
 
 #if VERSION_EUR

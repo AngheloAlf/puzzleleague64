@@ -22,7 +22,7 @@ void func_80001F68_usa(void *arg0, s16 index);
 void func_80001F90_usa(RomOffset segmentRom, size_t segmentSize, s16 index);
 int func_80002054_usa(void);
 void func_8000222C_usa(void);
-void *LoadSFXBank(u16 arg0, u16 arg1);
+void *LoadSFXBank(u16 bankNum, u16 bankIndex);
 void func_80002620_usa(s16 arg0);
 bool func_80002684_usa(void);
 s16 func_80002694_usa(s32 arg0, s16 arg1);
