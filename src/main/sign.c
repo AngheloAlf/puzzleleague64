@@ -74,21 +74,26 @@ void InitPause(void) {
     gTheGame.unk_9B38 = 0x100;
     gTheGame.unk_9B3A = 0xFF;
     gTheGame.unk_9B40 = -1;
-    gTheGame.unk_90AA = 0x400;
-    gTheGame.unk_90B2 = 0x400;
-    gTheGame.unk_90B8 = 8;
-    gTheGame.unk_90BC = 2;
     gTheGame.unk_9B3C = 0;
     gTheGame.unk_9B3E = 0;
     gTheGame.unk_9B44 = 0;
-    gTheGame.unk_90AC = 0x100;
-    gTheGame.unk_90AE = 0;
-    gTheGame.unk_90B4 = 0x100;
-    gTheGame.unk_90B6 = 0;
-    gTheGame.unk_90BA = 0;
-    gTheGame.unk_90BD = 1;
-    gTheGame.unk_90BE = 0;
-    gTheGame.unk_90BF = 0;
+
+    gTheGame.gSPRITE[9].s.scaleW = 1 << 10;
+    gTheGame.gSPRITE[9].s.scaleH = 1 << 10;
+
+    gTheGame.gSPRITE[9].s.imageStride = 8;
+
+    gTheGame.gSPRITE[9].s.imageW = 8 << 5;
+    gTheGame.gSPRITE[9].s.paddingX = 0;
+    gTheGame.gSPRITE[9].s.imageH = 8 << 5;
+    gTheGame.gSPRITE[9].s.paddingY = 0;
+
+    gTheGame.gSPRITE[9].s.imageAdrs = 0;
+
+    gTheGame.gSPRITE[9].s.imageFmt = G_IM_FMT_CI;
+    gTheGame.gSPRITE[9].s.imageSiz = G_IM_SIZ_8b;
+    gTheGame.gSPRITE[9].s.imagePal = 0;
+    gTheGame.gSPRITE[9].s.imageFlags = 0;
 
     if (gTheGame.totalPlayer == 1) {
         gTheGame.unk_9A90[0].s.frameX = 137 << 2;
@@ -312,19 +317,19 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/sign", func_800354C0_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/sign", func_80035504_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/sign", AnimatePauseKey);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sign", func_80035534_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/sign", AnimatePauseKey);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sign", func_800354A4_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/sign", AnimatePauseKey);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sign", func_80035614_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/sign", AnimatePauseKey);
 #endif
 
 #if VERSION_USA

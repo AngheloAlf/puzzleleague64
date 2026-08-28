@@ -255,7 +255,7 @@ void func_80042C24_usa(void **heapP, u32 arg1) {
 
     B_80192F90_usa->unk_40 = arg1;
     if (arg1 == 0) {
-        func_8001FD0C_usa(&D_800B6800_usa, D_800B6808_usa[B_8019CF98_usa], 0, 0x800054, 0x140, 0xE8, heapP);
+        func_8001FD0C_usa(&D_800B6800_usa, D_800B6808_usa[gWorld], 0, 0x800054, 0x140, 0xE8, heapP);
         if (screenLoad("OPPONENT.SBF", heapP) != 0) {
             sprintf(sp20, "TRANSITION%d", gTheGame.menu[0].stage);
             B_80192F90_usa->unk_00 = screenSet(sp20, 0xFF001);
@@ -283,12 +283,12 @@ void func_80042C24_usa(void **heapP, u32 arg1) {
         };
 
         if (gTheGame.menu[0].stage >= 0xF) {
-            B_8019CF98_usa = 0;
+            gWorld = 0;
         } else {
-            B_8019CF98_usa = sp40[gTheGame.menu[0].stage - 1];
+            gWorld = sp40[gTheGame.menu[0].stage - 1];
         }
 
-        func_8001FD0C_usa(&D_800B6800_usa, D_800B6808_usa[B_8019CF98_usa], 0, 0x800054, 0x140, 0xE8, heapP);
+        func_8001FD0C_usa(&D_800B6800_usa, D_800B6808_usa[gWorld], 0, 0x800054, 0x140, 0xE8, heapP);
 
         if (screenLoad("OPPONENT.SBF", heapP) != 0) {
             switch (arg1) {

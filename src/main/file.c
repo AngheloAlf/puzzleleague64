@@ -6,10 +6,10 @@
 
 #include "libc/stddef.h"
 
-#include "include_asm.h"
 #include "macros_defines.h"
 #include "main_variables.h"
 #include "segment_symbols.h"
+
 #include "sound.h"
 
 // Not actually used, keept as a reference

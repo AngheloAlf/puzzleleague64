@@ -22,8 +22,8 @@ void InitCursor(cursor_t *cursor) {
     cursor->unk_04 = 0;
     cursor->unk_08 = 0;
     cursor->unk_0C = 0;
-    cursor->unk_20 = 0;
-    cursor->unk_24 = 0xF;
+    cursor->frame_n = 0;
+    cursor->frame_d = 0xF;
 
     if ((gTheGame.dimension == DIMENSION_3D) || (gSelection < 0x8C)) {
         cursor->x = 2;
@@ -44,7 +44,7 @@ void InitCursor(cursor_t *cursor) {
     }
 
     for (var_v0 = 0; var_v0 < CURSOR_UNK_28_COUNT; var_v0++) {
-        cursor->unk_28[var_v0] = 0;
+        cursor->target[var_v0] = 0;
     }
 
     for (var_v0 = 0; var_v0 < CURSOR_UNK_84_COUNT; var_v0++) {

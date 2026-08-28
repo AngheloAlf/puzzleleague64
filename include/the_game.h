@@ -31,6 +31,12 @@ typedef enum Dimension {
 } Dimension;
 
 
+/* Original name: help_t */
+typedef struct help_t {
+    /* 0x0 */ s32 selection; /* Original name: selection */
+    /* 0x4 */ s32 current_pos; /* Original name: current_pos */
+} help_t; // size = 0x8
+
 /* Original name: Game */
 typedef struct Game {
     /* 0x0000 */ tetWell tetrisWell[GAME_BUFFER_LEN]; /* Original name: tetrisWell */
@@ -53,22 +59,7 @@ typedef struct Game {
     /* 0x8E18 */ UNK_TYPE1 unk_8E18[0xC8];
     /* 0x8EE0 */ uObjTxtr unk_8EE0[UNK_SIZE]; // gTEXT?
     /* 0x8EF8 */ UNK_PAD unk_8EF8[0x8FD0-0x8EF8];
-    /* 0x8FD0 */ uObjSprite unk_8FD0[UNK_SIZE];
-    /* 0x8FE8 */ UNK_PAD unk_8FE8[0x90A8-0x8FE8];
-    /* 0x90A8 */ UNK_PAD unk_90A8[0x2];
-    /* 0x90AA */ s16 unk_90AA;
-    /* 0x90AC */ s16 unk_90AC;
-    /* 0x90AE */ s16 unk_90AE;
-    /* 0x90B0 */ UNK_PAD unk_90B0[0x90B2-0x90B0];
-    /* 0x90B2 */ s16 unk_90B2;
-    /* 0x90B4 */ s16 unk_90B4;
-    /* 0x90B6 */ s16 unk_90B6;
-    /* 0x90B8 */ s16 unk_90B8;
-    /* 0x90BA */ s16 unk_90BA;
-    /* 0x90BC */ s8 unk_90BC;
-    /* 0x90BD */ s8 unk_90BD;
-    /* 0x90BE */ s8 unk_90BE;
-    /* 0x90BF */ s8 unk_90BF;
+    /* 0x8FD0 */ uObjSprite gSPRITE[10];
     /* 0x90C0 */ s32 unk_90C0; // currentText?
     /* 0x90C4 */ UNK_TYPE1 unk_90C4[0x4];
     /* 0x90C8 */ text_t drawText[DRAWTEXT_COUNT];
@@ -90,18 +81,17 @@ typedef struct Game {
     /* 0x9B44 */ s32 unk_9B44;
     /* 0x9B48 */ s32 unk_9B48;
     /* 0x9B4C */ UNK_TYPE1 unk_9B4C[0x9B50 - 0x9B4C];
-    /* 0x9B50 */ uObjBg unk_9B50[4]; // at least 4
+    /* 0x9B50 */ uObjBg unk_9B50[4];
     /* 0x9BF0 */ uObjTxtr unk_9BF0; // tlut
-    /* 0x9C08 */ s32 totalPlayer;
-    /* 0x9C0C */ Dimension dimension;
+    /* 0x9C08 */ s32 totalPlayer; /* Original name: totalPlayer */
+    /* 0x9C0C */ Dimension dimension; /* Original name: dimension */
     /* 0x9C10 */ s32 unk_9C10;
-    /* 0x9C14 */ s32 unk_9C14; // hour?
-    /* 0x9C18 */ s32 unk_9C18; // minute?
-    /* 0x9C1C */ s32 unk_9C1C; // second?
-    /* 0x9C20 */ s32 unk_9C20;
-    /* 0x9C24 */ UNK_TYPE4 unk_9C24;
-    /* 0x9C28 */ menu_t menu[GAME_BUFFER_LEN];
-    /* 0x9C48 */ player_t player[GAME_PLAYER_COUNT];
+    /* 0x9C14 */ s32 hour; /* Original name: hour */
+    /* 0x9C18 */ s32 minute; /* Original name: minute */
+    /* 0x9C1C */ s32 second; /* Original name: second */
+    /* 0x9C20 */ help_t help; /* Original name: help */
+    /* 0x9C28 */ menu_t menu[GAME_BUFFER_LEN]; /* Original name: menu */
+    /* 0x9C48 */ player_t player[GAME_PLAYER_COUNT]; /* Original name: player */
 } Game; // size >= 0xDA28
 
 #if 0

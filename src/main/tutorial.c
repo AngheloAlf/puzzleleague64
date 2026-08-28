@@ -223,16 +223,16 @@ void InitTutorial(void) {
         case 0x2: /* switch 2 */
             Init2DPuzzle(s2, s1, tutorial2, 1);
             s3->unk_03C = 2;
-            gTheGame.unk_90AA = 0x400;
-            gTheGame.unk_90B4 = 0x100;
-            gTheGame.unk_90B8 = 8;
-            gTheGame.unk_90BC = 2;
-            gTheGame.unk_90AE = 0;
-            gTheGame.unk_90B2 = 0x400;
-            gTheGame.unk_90B6 = 0;
-            gTheGame.unk_90BD = 1;
-            gTheGame.unk_90BE = 0;
-            gTheGame.unk_90BF = 0;
+            gTheGame.gSPRITE[9].s.scaleW = 0x400;
+            gTheGame.gSPRITE[9].s.imageH = 0x100;
+            gTheGame.gSPRITE[9].s.imageStride = 8;
+            gTheGame.gSPRITE[9].s.imageFmt = 2;
+            gTheGame.gSPRITE[9].s.paddingX = 0;
+            gTheGame.gSPRITE[9].s.scaleH = 0x400;
+            gTheGame.gSPRITE[9].s.paddingY = 0;
+            gTheGame.gSPRITE[9].s.imageSiz = 1;
+            gTheGame.gSPRITE[9].s.imagePal = 0;
+            gTheGame.gSPRITE[9].s.imageFlags = 0;
             break;
 
         case 0x5: /* switch 2 */
@@ -257,8 +257,8 @@ void InitTutorial(void) {
             break;
     }
 
-    s1->unk_28[0] = 0;
-    s1->unk_28[1] = 0;
+    s1->target[0] = 0;
+    s1->target[1] = 0;
     if (gTheGame.dimension == DIMENSION_2D) {
         Init2DNewRow(s2);
         Init2DNewRow(&gTheGame.tetrisWell[1]);

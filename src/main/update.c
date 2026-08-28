@@ -189,7 +189,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058D68_usa);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_800590B8_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdateComboChainCount);
 #endif
 
 #if VERSION_EUR

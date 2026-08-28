@@ -107,28 +107,28 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/fade", func_80052E4C_fra);
 INCLUDE_ASM("asm/ger/nonmatchings/main/fade", func_80052FCC_ger);
 #endif
 
-s32 DoFlashDraw(s32 arg0) {
-    if (Flash_period[arg0] > 0) {
-        Flash_period[arg0]--;
+// TODO: enum for which?
+nbool DoFlashDraw(s32 which) {
+    if (Flash_period[which] > 0) {
+        Flash_period[which]--;
 
-        Flash_count[arg0]++;
+        Flash_count[which]++;
 
-        if (Flash_count[arg0] < 0xB) {
-            return 0;
+        if (Flash_count[which] < 0xB) {
+            return nfalse;
         }
 
-        if (Flash_count[arg0] >= 0x15) {
-            Flash_count[arg0] = 1;
-            return 0;
+        if (Flash_count[which] >= 0x15) {
+            Flash_count[which] = 1;
+            return nfalse;
         }
-        return -1;
     }
 
-    return -1;
+    return ntrue;
 }
 
-s32 DoFlashDrawAlways(void) {
-    s32 ret = DoFlashDraw(1);
+nbool DoFlashDrawAlways(void) {
+    nbool ret = DoFlashDraw(1);
 
     Flash_period[1] = 0x19;
     return ret;

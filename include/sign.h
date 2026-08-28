@@ -3,6 +3,8 @@
 
 #include "ultra64.h"
 
+#include "gs2dex.h"
+
 struct struct_gInfo_unk_00068;
 
 void InitPause(void);
@@ -18,7 +20,7 @@ void DrawPauseOver(struct struct_gInfo_unk_00068 *arg0);
 // void func_80035438_usa();
 // void func_8003547C_usa();
 // void func_800354C0_usa();
-// void func_80035504_usa();
+void AnimatePauseKey(uObjBg *bg);
 // void func_80035584_usa();
 // void func_800355EC_usa();
 

@@ -10,11 +10,12 @@
 struct song_t;
 
 typedef void (struct_8018A748_usa_callback)(musHandle, s32);
+typedef void(callback_800B3B00_usa)(UNK_TYPE arg0);
 
 void func_80001B10_usa(void);
 void DmaRomToRam(RomOffset segmentRom, void *dstAddr, size_t segmentSize);
 s16 func_80001D60_usa(s32 arg0, s16 arg1);
-s16 func_80001E98_usa(musHandle handle);
+s16 GetTuneBufferFromHandle(musHandle handle);
 s16 func_80001ED8_usa(void);
 s16 IsTuneBufferFree(s32 index);
 void func_80001F40_usa(struct song_t *arg0, s16 index);
@@ -78,23 +79,23 @@ void func_80003CE8_usa(u16 arg0);
 void func_80003E00_usa(s32 arg0, s32 arg1);
 
 
-// extern UNK_TYPE D_800B3AD0_usa;
-// extern UNK_TYPE D_800B3AD2_usa;
-// extern UNK_TYPE D_800B3AD4_usa;
+extern s16 D_800B3AD0_usa;
+extern s16 D_800B3AD2_usa;
+extern s16 D_800B3AD4_usa;
 extern musHandle last_song_handle;
 extern musHandle D_800B3ADC_usa;
-// extern UNK_TYPE D_800B3AE0_usa;
-// extern UNK_TYPE D_800B3AE4_usa;
-// extern UNK_TYPE D_800B3AE6_usa;
-// extern UNK_TYPE D_800B3AE8_usa;
-// extern UNK_TYPE D_800B3AEC_usa;
-// extern UNK_TYPE D_800B3AF0_usa;
-// extern UNK_TYPE D_800B3AF4_usa;
+extern s32 D_800B3AE0_usa;
+extern s16 D_800B3AE4_usa;
+extern s16 D_800B3AE6_usa;
+extern s32 D_800B3AE8_usa;
+extern s32 D_800B3AEC_usa;
+extern int D_800B3AF0_usa; // priority
+extern int D_800B3AF4_usa; // restartflag
 extern s16 D_800B3AF8_usa;
-// extern UNK_TYPE D_800B3AFA_usa;
-// extern UNK_TYPE D_800B3AFC_usa;
-// extern UNK_TYPE D_800B3AFE_usa;
-// extern UNK_TYPE D_800B3B00_usa;
+extern u16 D_800B3AFA_usa;
+extern s16 CROSSFADE_VOLUME[];
+extern s16 D_800B3AFE_usa;
+extern callback_800B3B00_usa *D_800B3B00_usa;
 
 
 extern u16 B_8021B968_usa;

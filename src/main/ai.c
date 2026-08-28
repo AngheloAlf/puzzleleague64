@@ -3111,10 +3111,10 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/ai", UpdateAI);
 void AIMove(tetWell *well, cursor_t *cursor, ai_t *brain, s32 num) {
     if (gMain == GMAIN_387) {
         if ((gDemo == GDEMO_0B) && (gTheGame.controller[num].touch_button & START_BUTTON)) {
-            gTheGame.cursorBlock[0].unk_20 = 0;
+            gTheGame.cursorBlock[0].frame_n = 0;
             gMain = GMAIN_388;
-            gTheGame.unk_9C20 = num;
-            gTheGame.unk_9C24 = 0;
+            gTheGame.help.selection = num;
+            gTheGame.help.current_pos = 0;
             FadeSong(last_song_handle, 0x28, 0xA, NULL);
             FadeOutAllSFXs(0xF);
             PlaySE(SFX_INIT_TABLE, 0xA5);

@@ -16,10 +16,6 @@
 #include "rom_offsets.h"
 #include "sfxlimit.h"
 
-extern s16 D_800B3AE4_usa;
-
-extern s32 D_800B3AEC_usa;
-
 typedef struct struct_8018A748_usa {
     /* 0x00 */ UNK_TYPE4 unk_00;
     /* 0x04 */ musHandle unk_04; // handle
@@ -84,20 +80,6 @@ extern s32 B_8018A7B8_usa[2][4];
 extern int B_801C7BAC_usa;
 extern u16 B_801F9CC4_usa;
 
-extern s16 D_800B3AD0_usa;
-extern s16 D_800B3AD2_usa;
-extern s16 D_800B3AD4_usa;
-
-extern s32 D_800B3AE0_usa;
-extern s16 D_800B3AE6_usa;
-extern s32 D_800B3AE8_usa;
-extern u16 D_800B3AFA_usa;
-extern s16 D_800B3AFC_usa[];
-extern s16 D_800B3AFE_usa;
-
-typedef void(callback_800B3B00_usa)(UNK_TYPE arg0);
-extern callback_800B3B00_usa *D_800B3B00_usa;
-
 void func_80001B10_usa(void) {
     D_800B3AEC_usa = -1;
 
@@ -106,7 +88,7 @@ void func_80001B10_usa(void) {
 #endif
 
     D_800B3AFA_usa = 8;
-    D_800B3AFC_usa[0] = 0x80;
+    CROSSFADE_VOLUME[0] = 0x80;
     D_800B3AFE_usa = 0x80;
     D_800B3AD0_usa = 0x1C;
     D_800B3AD2_usa = 0xC;
@@ -184,7 +166,7 @@ s16 func_80001D60_usa(s32 arg0, s16 arg1) {
     return arg1;
 }
 
-// duplicate of func_80001E98_usa, but the inlines require s32 instead of s16
+// duplicate of GetTuneBufferFromHandle, but the inlines require s32 instead of s16
 STATIC_INLINE s32 inlined_func1(musHandle handle) {
     s32 i;
 
@@ -197,7 +179,7 @@ STATIC_INLINE s32 inlined_func1(musHandle handle) {
     return -1;
 }
 
-s16 func_80001E98_usa(musHandle handle) {
+s16 GetTuneBufferFromHandle(musHandle handle) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(B_8018A748_usa); i++) {
@@ -486,8 +468,8 @@ void func_800028D8_usa(s32 arg0) {
     B_8018A748_usa[arg0].unk_28 = 0;
     B_8018A748_usa[arg0].unk_2C = 0;
     MusHandleSetVolume(B_8018A748_usa[arg0].unk_04, 0);
-    D_800B3AFC_usa[arg0] = B_8018A748_usa[arg0].unk_26;
-    func_80003054_usa(arg0, D_800B3AFC_usa[arg0], D_800B3AFA_usa, 0);
+    CROSSFADE_VOLUME[arg0] = B_8018A748_usa[arg0].unk_26;
+    func_80003054_usa(arg0, CROSSFADE_VOLUME[arg0], D_800B3AFA_usa, 0);
     B_8018A748_usa[arg0].unk_1C = 1;
     last_song_handle = B_8018A748_usa[arg0].unk_04;
 }
@@ -741,7 +723,7 @@ void func_80002F88_usa(s16 arg0) {
 
 void SetSongCrossFadeVolume(s16 arg0, s16 arg1) {
     B_8018A748_usa[arg1].unk_26 = arg0;
-    D_800B3AFC_usa[arg1] = arg0;
+    CROSSFADE_VOLUME[arg1] = arg0;
 }
 
 void FadeSong(musHandle handle, s16 arg1, s16 arg2, struct_8018A748_usa_callback *arg3) {
@@ -828,9 +810,6 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80003194_ger);
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_800031B4_ger);
 #endif
-
-extern int D_800B3AF0_usa; // priority
-extern int D_800B3AF4_usa; // restartflag
 
 INLINE musHandle PlaySFX(int number, int volume, int pan) {
     if (number > B_801F9CC4_usa) {
@@ -1179,7 +1158,7 @@ void AudioUpdate(void) {
         if ((B_8018A748_usa[B_801AB7E0_usa].unk_1C != 1) && (func_80001D60_usa(B_8021B960_usa, B_801AB7E2_usa) >= 0)) {
             B_801C7154_usa = 0;
             if (B_8021DF48_usa == 0) {
-                D_800B3AFC_usa[B_801AB7E2_usa] = B_8018A748_usa[B_801AB7E2_usa].unk_26 = B_8021BA7C_usa[1];
+                CROSSFADE_VOLUME[B_801AB7E2_usa] = B_8018A748_usa[B_801AB7E2_usa].unk_26 = B_8021BA7C_usa[1];
                 D_800B3AFA_usa = 0;
 
                 var_s0 = B_801AB7E0_usa;
@@ -1197,7 +1176,7 @@ void AudioUpdate(void) {
                     goto block_23;
                 }
             } else {
-                D_800B3AFC_usa[B_801AB7E2_usa] = B_8018A748_usa[B_801AB7E2_usa].unk_26 = B_8021BA7C_usa[1];
+                CROSSFADE_VOLUME[B_801AB7E2_usa] = B_8018A748_usa[B_801AB7E2_usa].unk_26 = B_8021BA7C_usa[1];
                 D_800B3AFA_usa = (B_8021DF48_usa == 1) ? 0x3C : 0x1E;
 
                 var_s0 = B_801AB7E0_usa;

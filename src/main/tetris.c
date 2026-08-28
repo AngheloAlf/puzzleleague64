@@ -153,9 +153,9 @@ s32 DemoCheck(s32 *frame) {
 
     if ((gTheGame.controller[0].touch_button != 0) || (gDemo == GDEMO_16)) {
         gDemo = GDEMO_16;
-        gTheGame.unk_9C1C = 0;
-        gTheGame.unk_9C18 = 0;
-        gTheGame.unk_9C14 = 0;
+        gTheGame.second = 0;
+        gTheGame.minute = 0;
+        gTheGame.hour = 0;
 
 #if VERSION_USA
         gGameStatus >>= 0x10;
@@ -171,9 +171,9 @@ s32 DemoCheck(s32 *frame) {
 
     if ((*frame > ADJUST_FRAMERATE(1800)) && (gMain == GMAIN_387)) {
         gDemo = GDEMO_21;
-        gTheGame.unk_9C1C = 0;
-        gTheGame.unk_9C18 = 0;
-        gTheGame.unk_9C14 = 0;
+        gTheGame.second = 0;
+        gTheGame.minute = 0;
+        gTheGame.hour = 0;
         gGameStatus >>= 0x10;
         FadeOutSong(last_song_handle, 60);
         return -1;
@@ -575,7 +575,7 @@ void DoTetris(void) {
                 AddNewRow(well, cursor, num);
                 well->unk_43F8 = 0;
                 if ((gSelection == 0xAA) || (gSelection == 0xB4)) {
-                    cursor->unk_28[0] -= 1;
+                    cursor->target[0] -= 1;
                 }
             }
 

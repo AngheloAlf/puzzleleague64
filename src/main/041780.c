@@ -450,7 +450,7 @@ void func_8004123C_usa(s32 arg0) {
                 PlaySE(SFX_INIT_TABLE, (gMain == GMAIN_258) ? 6 : 2);
                 if ((B_80192F80_usa->unk_08 != 0) && (B_80192F80_usa->unk_30 == 0)) {
                     gMain = GMAIN_384;
-                    B_8019CF98_usa = 0x10;
+                    gWorld = 0x10;
                     gTheGame.menu[0].stage = 1;
                     gReset = -1;
                     D_800B5A1C_usa = 0;
@@ -563,7 +563,7 @@ void func_80041F1C_usa(void **heapP, s32 arg1) {
     B_80192F80_usa->unk_1C = arg1;
     B_80192F80_usa->unk_18 = 6;
     B_80192F80_usa->unk_04 = 0;
-    B_80192F80_usa->unk_08 = (B_8019CF98_usa == 0x10) ? -1 : 0;
+    B_80192F80_usa->unk_08 = (gWorld == 0x10) ? -1 : 0;
 
     if (((gTheGame.menu[0].stage == 1) && (B_80192F80_usa->unk_18 = 0, (gTheGame.menu[0].stage == 1))) ||
         (gSelection == 0x96) || (((gSelection == 0xA0) || (gSelection == 0xB4)) != 0) || (gSelection == 0xC8)) {
@@ -572,12 +572,12 @@ void func_80041F1C_usa(void **heapP, s32 arg1) {
         } else {
             var_v0 = 0;
         }
-        B_8019CF98_usa = var_v0;
+        gWorld = var_v0;
 
-        if (B_8019CF98_usa >= ARRAY_COUNTU(D_800B67B4_usa)) {
-            B_8019CF98_usa = 0;
+        if (gWorld >= ARRAY_COUNTU(D_800B67B4_usa)) {
+            gWorld = 0;
         }
-        func_8001FD0C_usa(&D_800B6790_usa, D_800B67B4_usa[B_8019CF98_usa], 0, 0x800054, 0x140, 0xE8, heapP);
+        func_8001FD0C_usa(&D_800B6790_usa, D_800B67B4_usa[gWorld], 0, 0x800054, 0x140, 0xE8, heapP);
     }
 
     if (screenLoad("RESULT.SBF", heapP) != 0) {

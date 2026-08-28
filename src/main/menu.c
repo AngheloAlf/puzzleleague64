@@ -4377,7 +4377,7 @@ s32 menuInitUser(u32 arg0) {
         player->unk_018 = 0;
         player->unk_01C = 0;
         player->unk_020 = 0;
-        player->unk_024 = 0;
+        player->kPLAYER1C_2Dscore = 0;
         player->unk_028 = 0;
         player->unk_029 = 0;
         player->unk_02A = 0;
@@ -5359,7 +5359,7 @@ void InitMenu(void) {
             }
         } else {
             if ((gSelection == 0xA0) || (gSelection == 0xC8) || (gSelection == 0xB4)) {
-                if (B_8019CF98_usa == 0x10) {
+                if (gWorld == 0x10) {
                     gnCountMenu -= 1;
                 } else {
                     gnCountMenu -= 2;

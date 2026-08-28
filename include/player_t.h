@@ -92,7 +92,7 @@ typedef struct player_t {
     /* 0x018 */ s32 unk_018;
     /* 0x01C */ s32 unk_01C;
     /* 0x020 */ s32 unk_020;
-    /* 0x024 */ s32 unk_024;
+    /* 0x024 */ s32 kPLAYER1C_2Dscore; /* Original name: kPLAYER1C_2Dscore */
     /* 0x028 */ u8 unk_028;
     /* 0x029 */ u8 unk_029;
     /* 0x02A */ u8 unk_02A;

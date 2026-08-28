@@ -167,31 +167,31 @@ void UpdateText(void) {
 
     if (gMain >= GMAIN_384) {
         if (gTheGame.totalPlayer == 1) {
-            if (gTheGame.unk_9C14 == 0) {
-                sprintf(string, "%2d'%02d", gTheGame.unk_9C18, gTheGame.unk_9C1C);
+            if (gTheGame.hour == 0) {
+                sprintf(string, "%2d'%02d", gTheGame.minute, gTheGame.second);
                 SetText(0x3C, 0x28, string, SETTEXTTYPE_14);
             } else {
-                sprintf(string, "%2d:%02d'%02d", gTheGame.unk_9C14, gTheGame.unk_9C18, gTheGame.unk_9C1C);
+                sprintf(string, "%2d:%02d'%02d", gTheGame.hour, gTheGame.minute, gTheGame.second);
                 SetText(0x21, 0x28, string, SETTEXTTYPE_14);
             }
         } else if (gSelection == 0x96) {
-            if (gTheGame.unk_9C14 > 0) {
+            if (gTheGame.hour > 0) {
                 sprintf(string, "59'59");
                 SetText(0x8A, 0xAC, string, SETTEXTTYPE_14);
             } else {
-                sprintf(string, "%d'%02d", gTheGame.unk_9C18, gTheGame.unk_9C1C);
-                if (gTheGame.unk_9C18 < 0xA) {
+                sprintf(string, "%d'%02d", gTheGame.minute, gTheGame.second);
+                if (gTheGame.minute < 0xA) {
                     SetText(0x8F, 0xAC, string, SETTEXTTYPE_14);
                 } else {
                     SetText(0x8A, 0xAC, string, SETTEXTTYPE_14);
                 }
             }
-        } else if (gTheGame.unk_9C14 > 0) {
+        } else if (gTheGame.hour > 0) {
             sprintf(string, "59'59");
             SetText(0x8A, 0x9A, string, SETTEXTTYPE_14);
         } else {
-            sprintf(string, "%d'%02d", gTheGame.unk_9C18, gTheGame.unk_9C1C);
-            if (gTheGame.unk_9C18 < 0xA) {
+            sprintf(string, "%d'%02d", gTheGame.minute, gTheGame.second);
+            if (gTheGame.minute < 0xA) {
                 SetText(0x8F, 0x9A, string, SETTEXTTYPE_14);
             } else {
                 SetText(0x8A, 0x9A, string, SETTEXTTYPE_14);
@@ -246,7 +246,7 @@ void UpdateText(void) {
                 gTheGame.drawText[3].texture = -1;
                 gTheGame.drawText[4].texture = -1;
             } else {
-                if (DoFlashDraw(0) != 0) {
+                if (DoFlashDraw(0)) {
                     sprintf(string, "%2d", well1->unk_43E0);
                     SetText(0x10C, 0x5B, string, SETTEXTTYPE_15);
                 }
@@ -279,7 +279,7 @@ void UpdateText(void) {
 
                 gTheGame.drawText[3].texture = -1;
             } else {
-                if (DoFlashDraw(0) != 0) {
+                if (DoFlashDraw(0)) {
                     sprintf(string, "%2d", well1->unk_43E0);
                     SetText(0x10C, 0x5B, string, SETTEXTTYPE_15);
                 }

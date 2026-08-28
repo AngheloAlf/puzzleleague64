@@ -30,15 +30,15 @@ void CheckGameInput(tetWell *well, cursor_t *cursor, s32 num) {
         Update3DSwitching(well, cursor);
     }
 
-    cursor->unk_24--;
-    if (cursor->unk_24 == 0) {
+    cursor->frame_d--;
+    if (cursor->frame_d == 0) {
 // TODO: REGION_NTSC?
 #if VERSION_USA
-        cursor->unk_24 = 0xF;
+        cursor->frame_d = 0xF;
 #else
-        cursor->unk_24 = 0xD;
+        cursor->frame_d = 0xD;
 #endif
-        cursor->unk_20 ^= 1;
+        cursor->frame_n ^= 1;
     }
 }
 

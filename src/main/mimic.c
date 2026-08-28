@@ -179,12 +179,12 @@ void LoadMimic1(s32 kind, s32 level, s32 number, s32 play) {
     } else {
         var_s5->unk_03C = kind + 4;
     }
-    temp_v0 = cursor[0].unk_28[0];
+    temp_v0 = cursor[0].target[0];
     var_s5->unk_040 = temp_s0;
     var_s5->unk_044 = 0;
-    cursor[0].unk_28[0] = 0;
-    cursor[0].unk_28[1] = 0;
-    cursor[0].unk_28[2] = temp_v0;
+    cursor[0].target[0] = 0;
+    cursor[0].target[1] = 0;
+    cursor[0].target[2] = temp_v0;
 }
 
 #endif
@@ -308,15 +308,15 @@ void UpdateMTController(tetWell *well, cursor_t *cursor, s32 num) {
         PlaySE(SFX_INIT_TABLE, 0x96);
     }
 
-    cursor->unk_24--;
-    if (cursor->unk_24 == 0) {
+    cursor->frame_d--;
+    if (cursor->frame_d == 0) {
 // TODO: REGION_NTSC?
 #if VERSION_USA
-        cursor->unk_24 = 0xF;
+        cursor->frame_d = 0xF;
 #else
-        cursor->unk_24 = 0xD;
+        cursor->frame_d = 0xD;
 #endif
-        cursor->unk_20 ^= 1;
+        cursor->frame_n ^= 1;
     }
 }
 
@@ -412,20 +412,20 @@ void DoMT(void) {
 void MimicCheckState(tetWell *well, cursor_t *cursor) {
     s32 result;
 
-    if (well->unk_43A8 < cursor->unk_28[0]) {
-        cursor->unk_28[0] = well->unk_43A8;
+    if (well->unk_43A8 < cursor->target[0]) {
+        cursor->target[0] = well->unk_43A8;
     }
 
     if (!CheckFieldActive(well)) {
         if ((brainbrain[0].speed == -1) && (well->unk_43A8 == 0)) {
             if (brainbrain[0].unk_03C == 5) {
-                if (cursor->unk_28[1] == 0) {
+                if (cursor->target[1] == 0) {
                     return;
                 }
-                result = (cursor->unk_28[1] == cursor->unk_28[2]) ? -1 : 0;
-            } else if (cursor->unk_28[0] != 0) {
-                result = ((-cursor->unk_28[2] >= cursor->unk_28[0])) ? -1 : 0;
-            } else if (cursor->unk_28[1] != 0) {
+                result = (cursor->target[1] == cursor->target[2]) ? -1 : 0;
+            } else if (cursor->target[0] != 0) {
+                result = ((-cursor->target[2] >= cursor->target[0])) ? -1 : 0;
+            } else if (cursor->target[1] != 0) {
                 result = 0;
             } else {
                 return;

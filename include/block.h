@@ -36,7 +36,7 @@ typedef enum BlockType {
     /* 12 */ BLOCKTYPE_12 = 12,
 } BlockType;
 
-/* Original name: block_t. */
+/* Original name: block_t */
 typedef struct block_t {
     /* 0x00 */ ENUM_TYPE(BlockState, s32) state; /* Original name: state */
     /* 0x04 */ s32 delay; /* Original name: delay */

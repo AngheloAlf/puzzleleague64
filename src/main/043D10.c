@@ -103,7 +103,7 @@ void func_80043110_usa(s32 arg0) {
 
     func_80024BF4_usa(&spF0);
 
-    func_8001FD0C_usa(&D_800B6870_usa, D_800B6840_usa[B_8019CF98_usa], 0, 0x800054, 0x140, 0xE8, &spF0);
+    func_8001FD0C_usa(&D_800B6870_usa, D_800B6840_usa[gWorld], 0, 0x800054, 0x140, 0xE8, &spF0);
 
     for (var_s1 = 0; var_s1 < STRUCT_80192FA0_UNK_64; var_s1++) {
         imageLoad(&B_80192FA0_usa->unk_64[var_s1], D_800B6874_usa[var_s1], &spF0);

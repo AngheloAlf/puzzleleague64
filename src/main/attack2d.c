@@ -458,8 +458,8 @@ void Change2DAttack(tetWell *well, cursor_t *cursor, s32 num, s32 combo) {
     }
 
     for (sp3C = 0; sp3C < 0x17; sp3C++) {
-        if (cursor->unk_28[sp3C] != 0) {
-            temp_s1 = &well->attack[cursor->unk_28[sp3C] - 1];
+        if (cursor->target[sp3C] != 0) {
+            temp_s1 = &well->attack[cursor->target[sp3C] - 1];
             var_s4 = temp_s1->unk_14;
             if ((temp_s1->unk_24 + var_s4) >= 0xD) {
                 var_s4 = 0xC - temp_s1->unk_24;
@@ -478,8 +478,8 @@ void Change2DAttack(tetWell *well, cursor_t *cursor, s32 num, s32 combo) {
         cursor->unk_84[var_a2] = var_t2;
 
         for (sp3C = 0; sp3C < 0x17; sp3C++) {
-            if (cursor->unk_28[sp3C] != 0) {
-                temp_s1 = &well->attack[cursor->unk_28[sp3C] - 1];
+            if (cursor->target[sp3C] != 0) {
+                temp_s1 = &well->attack[cursor->target[sp3C] - 1];
                 temp_s1->delay = temp_t0;
                 temp_s1->unk_10 = temp_t0 + temp + ((combo - 1) * sp44) + 1;
                 temp_s1->disappear = var_a2;
@@ -487,7 +487,7 @@ void Change2DAttack(tetWell *well, cursor_t *cursor, s32 num, s32 combo) {
         }
 
         for (sp3C = 0; sp3C < 0x17; sp3C++) {
-            cursor->unk_28[sp3C] = 0;
+            cursor->target[sp3C] = 0;
         }
     }
 
@@ -572,7 +572,7 @@ void Change2DAttack(tetWell *well, cursor_t *cursor, s32 num, s32 combo) {
                                 }
                                 temp_s1->state = 0;
                                 temp_s1->disappear = -1;
-                                if (cursor->unk_28[0x16] == 0) {
+                                if (cursor->target[0x16] == 0) {
                                     cursor->unk_00 = 0;
                                 }
                             } else {

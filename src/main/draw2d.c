@@ -207,7 +207,7 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
 INLINE void Draw2DCursor(struct_gInfo_unk_00068 *dynamicp) {
     s32 i;
 
-    if (dynamicp->cursorBlock[0].unk_20 == 0) {
+    if (dynamicp->cursorBlock[0].frame_n == 0) {
         gSPObjLoadTxtr(glistp++, &cursorBig);
     } else {
         gSPObjLoadTxtr(glistp++, &cursorSmall);
@@ -606,7 +606,7 @@ void Draw2DClearLine(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     s32 count;
     attack_t *attk;
 
-    if ((gMain < GMAIN_388) && (gTheGame.cursorBlock[num].unk_28[0] <= 0)) {
+    if ((gMain < GMAIN_388) && (gTheGame.cursorBlock[num].target[0] <= 0)) {
         gDPPipeSync(glistp++);
         gDPSetTextureLUT(glistp++, G_TT_RGBA16);
         gSPObjLoadTxtr(glistp++, &numberLUT);

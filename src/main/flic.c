@@ -207,7 +207,7 @@ s32 InitAnimeSprite(char *currSegment, s32 offset, s32 base, s32 count) {
     offset += count * sizeof(struct_InitAnimeSprite_var);
 
     for (i = base; i < base + count; i++, infor++) {
-        uObjSprite *sp = &gTheGame.unk_8FD0[i];
+        uObjSprite *sp = &gTheGame.gSPRITE[i];
 
         sp->s.objX = infor->unk_4 << 2;
         sp->s.scaleW = 1 << 10;

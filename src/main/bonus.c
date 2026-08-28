@@ -447,7 +447,7 @@ void DoBonus(void) {
 
         if ((t0 != 0) || (gWhatever != 0)) {
             if (gWhatever == 0) {
-                if (gTheGame.unk_9C24 == 0) {
+                if (gTheGame.help.current_pos == 0) {
                     char *var_s0;
 
                     switch (gTheGame.menu[0].game) {
@@ -481,7 +481,7 @@ void DoBonus(void) {
             gWhatever++;
             if (gWhatever >= 0x14) {
                 gReset = -1;
-                if (gTheGame.unk_9C24 == 0) {
+                if (gTheGame.help.current_pos == 0) {
                     gMain = GMAIN_384;
                     SaveRom();
                     if (gTheGame.menu[0].stage == 0x12) {
@@ -837,9 +837,7 @@ void InitStageClearIntro(void) {
 
     UpdatePlayerStageClearTimeScore(gTheGame.cursorBlock, -1, gTheGame.menu[0].stage, 1);
 
-    gTheGame.unk_9C1C = 0;
-    gTheGame.unk_9C18 = 0;
-    gTheGame.unk_9C14 = 0;
+    gTheGame.hour = gTheGame.minute = gTheGame.second = 0;
     gCounter = 0;
     gTheGame.cursorBlock[0].unk_00 = 0;
     if (screenLoad("CLEAR.SBF", &sp78) != 0) {

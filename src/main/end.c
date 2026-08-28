@@ -412,7 +412,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80038B98_usa);
 
 s32 DoGameOverTryAgain(void) {
     u16 button = gTheGame.controller[0].touch_button;
-    s32 *pos = &gTheGame.unk_9C24;
+    s32 *pos = &gTheGame.help.current_pos;
 
     if (button & L_JPAD) {
         if (*pos != 0) {
@@ -446,7 +446,7 @@ s32 DoGameOverTryAgain(void) {
                 (bg->s.imagePtr != (void *)endSegment->texs_1p.yesno_4)) {
                 bg->s.imagePtr = (void *)endSegment->texs_1p.yesno_3;
             }
-            if (DoFlashDrawAlways() != 0) {
+            if (DoFlashDrawAlways()) {
                 bg->s.imagePtr = (void *)endSegment->texs_1p.yesno_3;
             } else {
                 bg->s.imagePtr = (void *)endSegment->texs_1p.yesno_4;
@@ -459,7 +459,7 @@ s32 DoGameOverTryAgain(void) {
                 (bg->s.imagePtr != (void *)endSegment->texs_1p.yesno_2)) {
                 bg->s.imagePtr = (void *)endSegment->texs_1p.yesno_1;
             }
-            if (DoFlashDrawAlways() != 0) {
+            if (DoFlashDrawAlways()) {
                 bg->s.imagePtr = (void *)endSegment->texs_1p.yesno_1;
             } else {
                 bg->s.imagePtr = (void *)endSegment->texs_1p.yesno_2;
@@ -477,7 +477,7 @@ s32 DoGameOverTryAgain(void) {
                 (bg->s.imagePtr != (void *)endSegment->texs_1p.yesno_4)) {
                 bg->s.imagePtr = (void *)endSegment->texs_1p.yesno_3;
             }
-            if (DoFlashDrawAlways() != 0) {
+            if (DoFlashDrawAlways()) {
                 bg->s.imagePtr = (void *)endSegment->texs_1p.yesno_3;
             } else {
                 bg->s.imagePtr = (void *)endSegment->texs_1p.yesno_4;
@@ -490,7 +490,7 @@ s32 DoGameOverTryAgain(void) {
                 (bg->s.imagePtr != (void *)endSegment->texs_1p.yesno_2)) {
                 bg->s.imagePtr = (void *)endSegment->texs_1p.yesno_1;
             }
-            if (DoFlashDrawAlways() != 0) {
+            if (DoFlashDrawAlways()) {
                 bg->s.imagePtr = (void *)endSegment->texs_1p.yesno_1;
             } else {
                 bg->s.imagePtr = (void *)endSegment->texs_1p.yesno_2;
@@ -840,10 +840,10 @@ void DoGameOver2D(void) {
                 case GMAIN_38E:                     /* switch 1 */
                     if (gSelection != 0x82) {
                         if (gSelection == 0xAA) {
-                            UpdatePlayerStageClear(gTheGame.unk_8860, gTheGame.unk_9C20[0xC], gTheGame.unk_9C20[0x10]);
+                            UpdatePlayerStageClear(gTheGame.unk_8860, gTheGame.help.selection[0xC], gTheGame.help.selection[0x10]);
                         }
                     } else {
-                        UpdatePlayerPuzzle(gTheGame.unk_8860, gTheGame.unk_9C20[8], gTheGame.unk_9C20[0xC]);
+                        UpdatePlayerPuzzle(gTheGame.unk_8860, gTheGame.help.selection[8], gTheGame.help.selection[0xC]);
                     }
                     func_8003490C_usa();
                     switch (gSelection) {           /* switch 3; irregular */
@@ -862,7 +862,7 @@ void DoGameOver2D(void) {
                     gGameStatus &= ~0x20;
                     Init2DIcons(&gTheGame);
                     Init2DExplosion(&gTheGame);
-                    gTheGame.unk_9C20[4] = 0;
+                    gTheGame.help.selection[4] = 0;
                     gTheGame.unk_89C8[0x6E8] = -0x280;
                     gTheGame.unk_89C8[0x6D0] = -0x280;
                     if (gTheGame.unk_8860[0].unk_0 == 8) {
@@ -894,8 +894,8 @@ block_29:
                         var_a1 = 0x174;
                         if (gSelection != 0xBE) {
                             PlaySE(&SFX_INIT_TABLE, 0xA1);
-                            if (gTheGame.unk_9C20[8] != 5) {
-                                if (gTheGame.unk_9C20[0x10] == 5) {
+                            if (gTheGame.help.selection[8] != 5) {
+                                if (gTheGame.help.selection[0x10] == 5) {
                                     var_a1 = 0x9F;
                                 } else {
                                     var_a1 = 0x9E;
@@ -944,7 +944,7 @@ block_50:
                 case 0x391:                         /* switch 1 */
                     temp_v0_2 = gWhatever;
                     if (temp_v0_2 == 0) {
-                        if ((gSelection != 0x82) || (gTheGame.unk_9C20[8] != 0)) {
+                        if ((gSelection != 0x82) || (gTheGame.help.selection[8] != 0)) {
                             SaveRom();
                         }
                     }
@@ -1017,7 +1017,7 @@ block_85:
                 case 0x392:                         /* switch 1 */
                     func_80037B0C_usa(&gTheGame, gTheGame.unk_8860);
                     if (gMain == 0x393) {
-                        gTheGame.unk_9C20[4] = 0;
+                        gTheGame.help.selection[4] = 0;
                         gTheGame.unk_43EC = 0;
                     }
                     break;
@@ -1028,7 +1028,7 @@ block_85:
                         if (((gSelection < 0x83) | (gSelection == 0xAA)) != 0) {
                             PlayMIDI(&BGM_INIT_TABLE, 0x45, 0, 1);
                             if (gSelection == 0x82) {
-                                func_80005A08_usa(gTheGame.unk_9C20[8]);
+                                func_80005A08_usa(gTheGame.help.selection[8]);
                             }
                         }
                     } else if ((gSelection != 0x8C) & (gSelection != 0xBE)) {
@@ -1037,8 +1037,8 @@ block_85:
                         }
                         PlayMIDI(&BGM_INIT_TABLE, 0x42, 0, 1);
                         if (gSelection == 0xAA) {
-                            if (gTheGame.unk_9C20[8] == 5) {
-                                if (gTheGame.unk_9C20[0xC] == 3) {
+                            if (gTheGame.help.selection[8] == 5) {
+                                if (gTheGame.help.selection[0xC] == 3) {
                                     PlaySE(&SFX_INIT_TABLE, 0x81);
                                 } else {
                                     goto block_101;
@@ -1058,7 +1058,7 @@ block_101:
                     func_8004ADD0_usa(0);
                     switch (gSelection) {           /* switch 4; irregular */
                         case 0x8C:                  /* switch 4 */
-                            if (gTheGame.unk_9C20[8] != 0) {
+                            if (gTheGame.help.selection[8] != 0) {
                                 switch (gSelection) { /* switch 5; irregular */
                                     case 0xAA:      /* switch 4 */
                                     case 0xAA:      /* switch 5 */
@@ -1113,7 +1113,7 @@ block_120:
                         }
                     }
                     if ((gSelection == 0x96) & var_s3) {
-                        func_80058D68_usa(gTheGame.unk_9C20[8], gTheGame.unk_9C20[0xC]);
+                        func_80058D68_usa(gTheGame.help.selection[8], gTheGame.help.selection[0xC]);
                     } else {
                         temp_a0 = (u32) (gGameStatus & 0xF00) >> 8;
                         if ((gTheGame.unk_4404 == temp_a0) || (gTheGame.tetrisWell[1].unk_4404 == temp_a0)) {
@@ -1129,7 +1129,7 @@ block_120:
                     Init2DExplosion((Game *) &gTheGame.tetrisWell[1]);
                     var_a0_4 = &gTheGame.tetrisWell[1];
                     var_v1_3 = &gTheGame;
-                    gTheGame.unk_9C20[4] = 0;
+                    gTheGame.help.selection[4] = 0;
                     do {
                         if (var_v1_3->unk_2520 < 4) {
                             var_v1_3->unk_2520 = 0;
@@ -1316,20 +1316,20 @@ block_267:
                     if (gSelection != 0x96) {
                         temp_a0_3 = (u32) (gGameStatus & 0xF00) >> 8;
                         if (gTheGame.tetrisWell[0].unk_43BC[0x48] == temp_a0_3) {
-                            temp_v1_3 = gTheGame.unk_9C20[8] + 1;
+                            temp_v1_3 = gTheGame.help.selection[8] + 1;
                             gTheGame.unk_4420 = (s32) (gTheGame.unk_4420 + 1);
-                            gTheGame.unk_9C20[8] = temp_v1_3;
+                            gTheGame.help.selection[8] = temp_v1_3;
                             if (temp_v1_3 >= 0x64) {
                                 gTheGame.unk_4420 = 0x63;
-                                gTheGame.unk_9C20[8] = 0x63;
+                                gTheGame.help.selection[8] = 0x63;
                             }
                         } else if (gTheGame.tetrisWell[1].unk_43BC[0x48] == temp_a0_3) {
-                            temp_v1_4 = gTheGame.unk_9C20[0x18] + 1;
+                            temp_v1_4 = gTheGame.help.selection[0x18] + 1;
                             gTheGame.tetrisWell[1].unk_4420 = (s32) (gTheGame.tetrisWell[1].unk_4420 + 1);
-                            gTheGame.unk_9C20[0x18] = temp_v1_4;
+                            gTheGame.help.selection[0x18] = temp_v1_4;
                             if (temp_v1_4 >= 0x64) {
                                 gTheGame.tetrisWell[1].unk_4420 = 0x63;
-                                gTheGame.unk_9C20[0x18] = 0x63;
+                                gTheGame.help.selection[0x18] = 0x63;
                             }
                         }
                     }
@@ -1550,10 +1550,10 @@ void DoGameOver3D(void) {
                 case GMAIN_38E:                     /* switch 1 */
                     if (gSelection != 0x82) {
                         if (gSelection == 0xAA) {
-                            UpdatePlayerStageClear(gTheGame.unk_8860, gTheGame.unk_9C20[0xC], gTheGame.unk_9C20[0x10]);
+                            UpdatePlayerStageClear(gTheGame.unk_8860, gTheGame.help.selection[0xC], gTheGame.help.selection[0x10]);
                         }
                     } else {
-                        UpdatePlayerPuzzle(gTheGame.unk_8860, gTheGame.unk_9C20[8], gTheGame.unk_9C20[0xC]);
+                        UpdatePlayerPuzzle(gTheGame.unk_8860, gTheGame.help.selection[8], gTheGame.help.selection[0xC]);
                     }
                     LoadGameOver3D();
                     InitFlic();
@@ -1573,7 +1573,7 @@ void DoGameOver3D(void) {
                     gGameStatus &= ~0x20;
                     Init3DIcons(&gTheGame);
                     Init3DExplosion(&gTheGame);
-                    gTheGame.unk_9C20[4] = 0;
+                    gTheGame.help.selection[4] = 0;
                     gTheGame.unk_89C8[0x6E8] = -0x280;
                     gTheGame.unk_89C8[0x6D0] = -0x280;
                     if (gTheGame.unk_8860[0].unk_0 == 8) {
@@ -1605,8 +1605,8 @@ block_29:
                         var_a1 = 0x174;
                         if (gSelection != 0xBE) {
                             PlaySE(&SFX_INIT_TABLE, 0xA1);
-                            if (gTheGame.unk_9C20[8] != 5) {
-                                if (gTheGame.unk_9C20[0x10] == 5) {
+                            if (gTheGame.help.selection[8] != 5) {
+                                if (gTheGame.help.selection[0x10] == 5) {
                                     var_a1 = 0x9F;
                                 } else {
                                     var_a1 = 0x9E;
@@ -1741,7 +1741,7 @@ block_85:
                     func_80037B0C_usa(&gTheGame, gTheGame.unk_8860);
                     var_a0 = &gTheGame;
                     if (gMain == 0x393) {
-                        gTheGame.unk_9C20[4] = 0;
+                        gTheGame.help.selection[4] = 0;
                         gTheGame.unk_43EC = 0;
                     }
                     break;
@@ -1752,7 +1752,7 @@ block_85:
                         if (((gSelection < 0x83) | (gSelection == 0xAA)) != 0) {
                             PlayMIDI(BGM_INIT_TABLE, 0x45, 0, 1);
                             if (gSelection == 0x82) {
-                                func_80005A08_usa(gTheGame.unk_9C20[8]);
+                                func_80005A08_usa(gTheGame.help.selection[8]);
                             }
                         }
                     } else if ((gSelection != 0x8C) & (gSelection != 0xBE)) {
@@ -1761,8 +1761,8 @@ block_85:
                         }
                         PlayMIDI(BGM_INIT_TABLE, 0x42, 0, 1);
                         if (gSelection == 0xAA) {
-                            if (gTheGame.unk_9C20[8] == 5) {
-                                if (gTheGame.unk_9C20[0xC] == 3) {
+                            if (gTheGame.help.selection[8] == 5) {
+                                if (gTheGame.help.selection[0xC] == 3) {
                                     PlaySE(&SFX_INIT_TABLE, 0x81);
                                 } else {
                                     goto block_101;
@@ -1824,7 +1824,7 @@ block_115:
                     Init3DIcons((Game *) &gTheGame.tetrisWell[1]);
                     Init3DExplosion(&gTheGame);
                     Init3DExplosion((Game *) &gTheGame.tetrisWell[1]);
-                    gTheGame.unk_9C20[4] = 0;
+                    gTheGame.help.selection[4] = 0;
                     var_a0_3 = &gTheGame.tetrisWell[1];
                     var_v1_2 = &gTheGame;
                     do {
@@ -1977,20 +1977,20 @@ block_238:
                 case 0x392:                         /* switch 2 */
                     temp_a0_5 = (u32) (gGameStatus & 0xF00) >> 8;
                     if (gTheGame.tetrisWell[0].unk_43BC[0x48] == temp_a0_5) {
-                        temp_v1_4 = gTheGame.unk_9C20[8] + 1;
+                        temp_v1_4 = gTheGame.help.selection[8] + 1;
                         gTheGame.unk_4420 = (s32) (gTheGame.unk_4420 + 1);
-                        gTheGame.unk_9C20[8] = temp_v1_4;
+                        gTheGame.help.selection[8] = temp_v1_4;
                         if (temp_v1_4 >= 0x64) {
                             gTheGame.unk_4420 = 0x63;
-                            gTheGame.unk_9C20[8] = 0x63;
+                            gTheGame.help.selection[8] = 0x63;
                         }
                     } else if (gTheGame.tetrisWell[1].unk_43BC[0x48] == temp_a0_5) {
-                        temp_v1_5 = gTheGame.unk_9C20[0x18] + 1;
+                        temp_v1_5 = gTheGame.help.selection[0x18] + 1;
                         gTheGame.tetrisWell[1].unk_4420 = (s32) (gTheGame.tetrisWell[1].unk_4420 + 1);
-                        gTheGame.unk_9C20[0x18] = temp_v1_5;
+                        gTheGame.help.selection[0x18] = temp_v1_5;
                         if (temp_v1_5 >= 0x64) {
                             gTheGame.tetrisWell[1].unk_4420 = 0x63;
-                            gTheGame.unk_9C20[0x18] = 0x63;
+                            gTheGame.help.selection[0x18] = 0x63;
                         }
                     }
                     if (var_s4 != 0) {

@@ -28,7 +28,7 @@ typedef struct tetWell {
     /* 0x4088 */ f32 translation;
     /* 0x408C */ block_t new_block[BLOCK_LEN_B];
     /* 0x43A4 */ s32 unk_43A4;
-    /* 0x43A8 */ s32 unk_43A8;
+    /* 0x43A8 */ s32 unk_43A8; // old_chain?
     /* 0x43AC */ s32 unk_43AC;
     /* 0x43B0 */ s32 unk_43B0;
     /* 0x43B4 */ s32 unk_43B4;
