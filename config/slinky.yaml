@@ -539,7 +539,7 @@ segments:
   - name: segment_0CA4A0
     vram_class: asset_segment_0CA4A0
     files:
-      - { path: src/assets/segment_0CA4A0.o }
+      - { path: src/assets/misc/segment_0CA4A0.o }
 
   - name: segment_0FB480
     vram_class: asset_segment_0FB480

@@ -10,23 +10,88 @@ Vp D_01000000_usa = { {
 } };
 
 Gfx initRDPstart[] = {
-#include "assets/segment_0CA4A0/initRDPstart.gfx.inc.c"
+    gsDPSetEnvColor(0x00, 0x00, 0x00, 0x00),
+    gsDPSetPrimColor(0, 0, 0x00, 0x00, 0x00, 0x00),
+    gsDPSetBlendColor(0x00, 0x00, 0x00, 0x00),
+    gsDPSetFogColor(0x00, 0x00, 0x00, 0x00),
+    gsDPSetFillColor(0x00000000),
+    gsDPSetPrimDepth(0, 0),
+    gsDPSetConvert(0, 0, 0, 0, 0, 0),
+    gsDPSetKeyR(0x00000000, 0x00, 0),
+    gsDPSetKeyGB(0x00000000, 0x00, 0, 0x00000000, 0x00, 0),
+    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
+    gsDPSetScissor(G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0x0000, 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD,
+                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0x0000, 2, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD,
+                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0x0000, 3, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD,
+                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0x0000, 4, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD,
+                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0x0000, 5, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD,
+                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0x0000, 6, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD,
+                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD),
+    gsDPSetTileSize(G_TX_RENDERTILE, 0, 0, 0, 0),
+    gsDPSetTileSize(1, 0, 0, 0, 0),
+    gsDPSetTileSize(2, 0, 0, 0, 0),
+    gsDPSetTileSize(3, 0, 0, 0, 0),
+    gsDPSetTileSize(4, 0, 0, 0, 0),
+    gsDPSetTileSize(5, 0, 0, 0, 0),
+    gsDPSetTileSize(6, 0, 0, 0, 0),
+    gsDPSetTileSize(G_TX_LOADTILE, 0, 0, 0, 0),
+    gsDPPipeSync(),
+    gsSPEndDisplayList(),
 };
 
 Gfx initRDP_dl[] = {
-#include "assets/segment_0CA4A0/initRDP_dl.gfx.inc.c"
+    gsDPPipeSync(),
+    gsDPPipelineMode(G_PM_NPRIMITIVE),
+    gsDPSetTextureLOD(G_TL_TILE),
+    gsDPSetTextureLUT(G_TT_NONE),
+    gsDPSetTextureDetail(G_TD_CLAMP),
+    gsDPSetTexturePersp(G_TP_NONE),
+    gsDPSetTextureFilter(G_TF_BILERP),
+    gsDPSetTextureConvert(G_TC_FILT),
+    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
+    gsDPSetCombineKey(G_CK_NONE),
+    gsDPSetAlphaCompare(G_AC_NONE),
+    gsDPSetColorDither(G_CD_DISABLE),
+    gsSPEndDisplayList(),
 };
 
 Gfx init2D_dl[] = {
-#include "assets/segment_0CA4A0/init2D_dl.gfx.inc.c"
+    gsDPPipeSync(),
+    gsDPSetTexturePersp(G_TP_NONE),
+    gsDPSetTextureLOD(G_TL_TILE),
+    gsDPSetTextureLUT(G_TT_NONE),
+    gsDPSetTextureConvert(G_TC_FILT),
+    gsDPSetAlphaCompare(G_AC_THRESHOLD),
+    gsDPSetBlendColor(0x00, 0x00, 0x00, 0x01),
+    gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
+    gsSPEndDisplayList(),
 };
 
 Gfx init3D_dl[] = {
-#include "assets/segment_0CA4A0/init3D_dl.gfx.inc.c"
+    gsDPPipeSync(),
+    gsSPViewport(&D_01000000_usa),
+    gsSPClearGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN |
+                          G_TEXTURE_GEN_LINEAR | G_SHADING_SMOOTH),
+    gsSPSetGeometryMode(G_SHADE | G_CULL_BACK | G_SHADING_SMOOTH),
+    gsDPSetRenderMode(G_RM_OPA_SURF, G_RM_OPA_SURF2),
+    gsDPSetCombineMode(G_CC_DECALRGB, G_CC_DECALRGB),
+    gsDPSetTexturePersp(G_TP_NONE),
+    gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_OFF),
+    gsSPEndDisplayList(),
 };
 
 u16 D_010001F0_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_010001F0_usa.rgba16.inc"
+#include "assets/misc/segment_0CA4A0/D_010001F0_usa.rgba16.inc"
 };
 
 uObjTxtr D_010003F0_usa = {
@@ -41,7 +106,7 @@ uObjTxtr D_010003F0_usa = {
 };
 
 u16 D_01000408_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0100D468_usa.palette.inc"
+#include "assets/misc/segment_0CA4A0/D_0100D468_usa.palette.inc"
 };
 
 uObjTxtr D_01000608_usa = {
@@ -57,7 +122,7 @@ uObjTxtr D_01000608_usa = {
 
 // TODO find CI textures
 u16 colorTable[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/colorTable.rgba16.inc"
+#include "assets/misc/segment_0CA4A0/colorTable.rgba16.inc"
 };
 
 uObjTxtr colorLUT = {
@@ -72,11 +137,11 @@ uObjTxtr colorLUT = {
 };
 
 u8 D_01000838_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01000838_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01000838_usa.i8.inc"
 };
 
 u8 D_01000E38_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01000E38_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01000E38_usa.i8.inc"
 };
 
 uObjTxtr cursorBig = {
@@ -102,209 +167,209 @@ uObjTxtr cursorSmall = {
 };
 
 u8 D_01001468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01001468_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01001468_usa.i8.inc"
 };
 
 u8 D_01001C68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01001C68_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01001C68_usa.i8.inc"
 };
 
 u8 D_01002468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01002468_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01002468_usa.i8.inc"
 };
 
 u8 D_01002C68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01002C68_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01002C68_usa.i8.inc"
 };
 
 u8 D_01003468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01003468_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01003468_usa.i8.inc"
 };
 
 u8 D_01003C68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01003C68_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01003C68_usa.i8.inc"
 };
 
 u8 D_01004468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01004468_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01004468_usa.i8.inc"
 };
 
 u8 D_01004C68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01004C68_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01004C68_usa.i8.inc"
 };
 
 u8 D_01005468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01005468_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01005468_usa.i8.inc"
 };
 
 u8 D_01005C68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01005C68_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01005C68_usa.i8.inc"
 };
 
 u8 D_01006468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01006468_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01006468_usa.i8.inc"
 };
 
 u8 D_01006C68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01006C68_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01006C68_usa.i8.inc"
 };
 
 u8 D_01007468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01007468_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01007468_usa.i8.inc"
 };
 
 u8 D_01007C68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01007C68_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01007C68_usa.i8.inc"
 };
 
 u8 D_01008468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01008468_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01008468_usa.i8.inc"
 };
 
 u8 D_01008C68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01008C68_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01008C68_usa.i8.inc"
 };
 
 u8 D_01009468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01009468_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01009468_usa.i8.inc"
 };
 
 u8 D_01009C68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01009C68_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01009C68_usa.i8.inc"
 };
 
 u8 D_0100A468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0100A468_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_0100A468_usa.i8.inc"
 };
 
 u8 D_0100AC68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0100AC68_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_0100AC68_usa.i8.inc"
 };
 
 u8 D_0100B468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0100B468_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_0100B468_usa.i8.inc"
 };
 
 u8 D_0100BC68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0100BC68_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_0100BC68_usa.i8.inc"
 };
 
 u8 D_0100C468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0100C468_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_0100C468_usa.i8.inc"
 };
 
 u8 D_0100CC68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0100CC68_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_0100CC68_usa.i8.inc"
 };
 
 /* palette: D_01000408_usa */
 u8 D_0100D468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0100D468_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_0100D468_usa.ci8.inc"
 };
 
 /* palette: D_01000408_usa */
 u8 D_0100DC68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0100DC68_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_0100DC68_usa.ci8.inc"
 };
 
 /* palette: D_01000408_usa */
 u8 D_0100E468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0100E468_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_0100E468_usa.ci8.inc"
 };
 
 /* palette: D_01000408_usa */
 u8 D_0100EC68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0100EC68_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_0100EC68_usa.ci8.inc"
 };
 
 /* palette: D_01000408_usa */
 u8 D_0100F468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0100F468_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_0100F468_usa.ci8.inc"
 };
 
 /* palette: D_01000408_usa */
 u8 D_0100FC68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0100FC68_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_0100FC68_usa.ci8.inc"
 };
 
 /* palette: D_01000408_usa */
 u8 D_01010468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01010468_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_01010468_usa.ci8.inc"
 };
 
 /* palette: D_01000408_usa */
 u8 D_01010C68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01010C68_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_01010C68_usa.ci8.inc"
 };
 
 /* palette: D_01000408_usa */
 u8 D_01011468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01011468_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_01011468_usa.ci8.inc"
 };
 
 /* palette: D_01000408_usa */
 u8 D_01011C68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01011C68_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_01011C68_usa.ci8.inc"
 };
 
 /* palette: D_01000408_usa */
 u8 D_01012468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01012468_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_01012468_usa.ci8.inc"
 };
 
 /* palette: D_01000408_usa */
 u8 D_01012C68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01012C68_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_01012C68_usa.ci8.inc"
 };
 
 /* palette: D_01000408_usa */
 u8 D_01013468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01013468_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_01013468_usa.ci8.inc"
 };
 
 /* palette: D_01000408_usa */
 u8 D_01013C68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01013C68_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_01013C68_usa.ci8.inc"
 };
 
 /* palette: D_01000408_usa */
 u8 D_01014468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01014468_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_01014468_usa.ci8.inc"
 };
 
 /* palette: D_01000408_usa */
 u8 D_01014C68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01014C68_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_01014C68_usa.ci8.inc"
 };
 
 /* palette: D_01000408_usa */
 u8 D_01015468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01015468_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_01015468_usa.ci8.inc"
 };
 
 /* palette: D_01000408_usa */
 u8 D_01015C68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01015C68_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_01015C68_usa.ci8.inc"
 };
 
 /* palette: D_01000408_usa */
 u8 D_01016468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01016468_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_01016468_usa.ci8.inc"
 };
 
 /* palette: D_01000408_usa */
 u8 D_01016C68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01016C68_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_01016C68_usa.ci8.inc"
 };
 
 /* palette: D_01000408_usa */
 u8 D_01017468_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01017468_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_01017468_usa.ci8.inc"
 };
 
 /* palette: D_01000408_usa */
 u8 D_01017C68_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01017C68_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_01017C68_usa.ci8.inc"
 };
 
 /*
@@ -660,7 +725,7 @@ uObjTxtr chain13Block = {
 };
 
 u8 D_01018678_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01018678_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01018678_usa.i8.inc"
 };
 
 u32 D_01018E78_usa[] = {
@@ -668,7 +733,7 @@ u32 D_01018E78_usa[] = {
 };
 
 u8 D_01018E90_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01018E90_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01018E90_usa.i8.inc"
 };
 
 /*
@@ -687,7 +752,7 @@ uObjTxtr deadsmoke = {
 };
 
 u16 D_010192A8_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0101E4C0_usa.palette.inc"
+#include "assets/misc/segment_0CA4A0/D_0101E4C0_usa.palette.inc"
 };
 
 uObjTxtr otherLUT = {
@@ -702,67 +767,67 @@ uObjTxtr otherLUT = {
 };
 
 u8 D_010194C0_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_010194C0_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_010194C0_usa.i8.inc"
 };
 
 u8 D_010196C0_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_010196C0_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_010196C0_usa.i8.inc"
 };
 
 u8 D_01019CC0_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01019CC0_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01019CC0_usa.i8.inc"
 };
 
 u8 D_01019EC0_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01019EC0_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01019EC0_usa.i8.inc"
 };
 
 u8 D_0101A0C0_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0101A0C0_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_0101A0C0_usa.i8.inc"
 };
 
 u8 D_0101A4C0_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0101A4C0_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_0101A4C0_usa.i8.inc"
 };
 
 u8 D_0101ACC0_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0101ACC0_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_0101ACC0_usa.i8.inc"
 };
 
 u8 D_0101B4C0_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0101B4C0_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_0101B4C0_usa.i8.inc"
 };
 
 u8 D_0101BCC0_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0101BCC0_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_0101BCC0_usa.i8.inc"
 };
 
 u8 D_0101C4C0_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0101C4C0_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_0101C4C0_usa.i8.inc"
 };
 
 u8 D_0101CCC0_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0101CCC0_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_0101CCC0_usa.i8.inc"
 };
 
 u8 D_0101D4C0_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0101D4C0_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_0101D4C0_usa.i8.inc"
 };
 
 u8 D_0101DCC0_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0101DCC0_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_0101DCC0_usa.i8.inc"
 };
 
 u8 D_0101E4C0_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0101E4C0_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_0101E4C0_usa.ci8.inc"
 };
 
 u8 D_0101E940_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0101E940_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_0101E940_usa.ci8.inc"
 };
 
 u8 D_0101EDC0_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0101EDC0_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_0101EDC0_usa.ci8.inc"
 };
 
 #if 0
@@ -1181,7 +1246,7 @@ uObjTxtr D_0101F360_usa = {
 };
 
 u16 numberTable[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/w_text1.palette.inc"
+#include "assets/misc/segment_0CA4A0/w_text1.palette.inc"
 };
 
 uObjTxtr numberLUT = {
@@ -1196,32 +1261,32 @@ uObjTxtr numberLUT = {
 };
 
 u8 w_text1[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/w_text1.ci8.inc"
+#include "assets/misc/segment_0CA4A0/w_text1.ci8.inc"
 };
 static_assert(ARRAY_COUNT(w_text1) == W_TEXT_WIDTH * W_TEXT_HEIGHT, "");
 
 u8 w_text2[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/w_text2.ci8.inc"
+#include "assets/misc/segment_0CA4A0/w_text2.ci8.inc"
 };
 static_assert(ARRAY_COUNT(w_text2) == W_TEXT_WIDTH * W_TEXT_HEIGHT, "");
 
 u8 w_text3[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/w_text3.ci8.inc"
+#include "assets/misc/segment_0CA4A0/w_text3.ci8.inc"
 };
 static_assert(ARRAY_COUNT(w_text3) == W_TEXT_WIDTH * W_TEXT_HEIGHT, "");
 
 u8 w_text4[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/w_text4.ci8.inc"
+#include "assets/misc/segment_0CA4A0/w_text4.ci8.inc"
 };
 static_assert(ARRAY_COUNT(w_text4) == W_TEXT_WIDTH * W_TEXT_HEIGHT, "");
 
 u8 w_text5[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/w_text5.ci8.inc"
+#include "assets/misc/segment_0CA4A0/w_text5.ci8.inc"
 };
 static_assert(ARRAY_COUNT(w_text5) == W_TEXT_WIDTH * W_TEXT_HEIGHT, "");
 
 u8 w_text6[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/w_text6.ci8.inc"
+#include "assets/misc/segment_0CA4A0/w_text6.ci8.inc"
 };
 static_assert(ARRAY_COUNT(w_text6) == W_TEXT_WIDTH * W_TEXT_HEIGHT, "");
 
@@ -1292,7 +1357,7 @@ uObjTxtr numberTexture6 = {
 };
 
 u8 D_01022620_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01022620_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01022620_usa.i8.inc"
 };
 
 u32 D_01022E20_usa[] = {
@@ -1300,7 +1365,7 @@ u32 D_01022E20_usa[] = {
 };
 
 u8 D_01022E38_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01022E38_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_01022E38_usa.ci8.inc"
 };
 
 /*
@@ -1320,7 +1385,7 @@ uObjTxtr clearTexture = {
 };
 
 u8 D_01023650_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01023650_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_01023650_usa.ci8.inc"
 };
 
 uObjTxtr transTexture = {
@@ -1335,7 +1400,7 @@ uObjTxtr transTexture = {
 };
 
 u8 arrow[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/arrow.ci8.inc"
+#include "assets/misc/segment_0CA4A0/arrow.ci8.inc"
 };
 static_assert(ARRAY_COUNT(arrow) == ARROW_WIDTH * ARROW_HEIGHT, "");
 
@@ -1351,11 +1416,11 @@ uObjTxtr arrowTexture = {
 };
 
 u8 D_01023C80_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01023C80_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_01023C80_usa.ci8.inc"
 };
 
 u8 D_01024480_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01024480_usa.ci8.inc"
+#include "assets/misc/segment_0CA4A0/D_01024480_usa.ci8.inc"
 };
 
 #if 0
@@ -1433,19 +1498,19 @@ uObjTxtr stars2Texture = {
 };
 
 u8 D_01024CB0_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01024CB0_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01024CB0_usa.i8.inc"
 };
 
 u8 D_0102AB30_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0102AB30_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_0102AB30_usa.i8.inc"
 };
 
 u8 D_0102CE30_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0102CE30_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_0102CE30_usa.i8.inc"
 };
 
 u8 D_0102EEB0_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0102EEB0_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_0102EEB0_usa.i8.inc"
 };
 
 u32 D_0102F0B0_usa[] = {
@@ -1453,7 +1518,7 @@ u32 D_0102F0B0_usa[] = {
 };
 
 u8 D_0102F0C8_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0102F0C8_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_0102F0C8_usa.i8.inc"
 };
 
 u32 D_0102F8C8_usa[] = {
@@ -1461,9 +1526,9 @@ u32 D_0102F8C8_usa[] = {
 };
 
 u8 D_0102F8E0_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_0102F8E0_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_0102F8E0_usa.i8.inc"
 };
 
 u8 D_01030460_usa[] ALIGNED(8) = {
-#include "assets/segment_0CA4A0/D_01030460_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01030460_usa.i8.inc"
 };

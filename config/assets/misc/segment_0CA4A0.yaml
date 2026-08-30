@@ -1,0 +1,181 @@
+segments:
+  - type: group
+    start: 0x0
+    dir: misc/segment_0CA4A0
+    vram: 0x01000000
+    subsegments:
+      - [0x00000]
+      - [0x00010]
+      - [0x000F8]
+      - [0x00160]
+      - [0x001A8]
+      - [0x001F0, rgba16, D_010001F0_usa.rgba16, 256, 1] # palette
+      - [0x003F0]
+      - [0x00408, palette, D_01000408_usa]
+      - [0x00608]
+      - [0x00620, rgba16, colorTable.rgba16, 16, 16]
+      - [0x00820]
+      - { start: 0x00838, type: i8, name: D_01000838_usa.i8, width: 64, height: 24, palette: colorTable.rgba16 } # should be ci8, colorTable is the TLUT
+      - { start: 0x00E38, type: i8, name: D_01000E38_usa.i8, width: 64, height: 24, palette: colorTable.rgba16 } # should be ci8, colorTable is the TLUT
+      - [0x01438]
+      - [0x01450]
+      - [0x01468, i8, D_01001468_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x01C68, i8, D_01001C68_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x02468, i8, D_01002468_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x02C68, i8, D_01002C68_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x03468, i8, D_01003468_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x03C68, i8, D_01003C68_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x04468, i8, D_01004468_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x04C68, i8, D_01004C68_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x05468, i8, D_01005468_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x05C68, i8, D_01005C68_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x06468, i8, D_01006468_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x06C68, i8, D_01006C68_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x07468, i8, D_01007468_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x07C68, i8, D_01007C68_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x08468, i8, D_01008468_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x08C68, i8, D_01008C68_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x09468, i8, D_01009468_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x09C68, i8, D_01009C68_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x0A468, i8, D_0100A468_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x0AC68, i8, D_0100AC68_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x0B468, i8, D_0100B468_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x0BC68, i8, D_0100BC68_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x0C468, i8, D_0100C468_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x0CC68, i8, D_0100CC68_usa.i8, 2048, 1] # unknown type and dimensions
+
+      - { start: 0x0D468, type: ci8, name: D_0100D468_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x0DC68, type: ci8, name: D_0100DC68_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x0E468, type: ci8, name: D_0100E468_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x0EC68, type: ci8, name: D_0100EC68_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x0F468, type: ci8, name: D_0100F468_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x0FC68, type: ci8, name: D_0100FC68_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x10468, type: ci8, name: D_01010468_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x10C68, type: ci8, name: D_01010C68_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x11468, type: ci8, name: D_01011468_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x11C68, type: ci8, name: D_01011C68_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x12468, type: ci8, name: D_01012468_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x12C68, type: ci8, name: D_01012C68_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x13468, type: ci8, name: D_01013468_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x13C68, type: ci8, name: D_01013C68_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x14468, type: ci8, name: D_01014468_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x14C68, type: ci8, name: D_01014C68_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x15468, type: ci8, name: D_01015468_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x15C68, type: ci8, name: D_01015C68_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x16468, type: ci8, name: D_01016468_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x16C68, type: ci8, name: D_01016C68_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x17468, type: ci8, name: D_01017468_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x17C68, type: ci8, name: D_01017C68_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+
+      - [0x18468]
+      - [0x18480]
+      - [0x18498]
+      - [0x184B0]
+      - [0x184C8]
+      - [0x184E0]
+      - [0x184F8]
+      - [0x18510]
+      - [0x18528]
+      - [0x18540]
+      - [0x18558]
+      - [0x18570]
+      - [0x18588]
+      - [0x185A0]
+      - [0x185B8]
+      - [0x185D0]
+      - [0x185E8]
+      - [0x18600]
+      - [0x18618]
+      - [0x18630]
+      - [0x18648]
+      - [0x18660]
+      - [0x18678, i8, D_01018678_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x18E78]
+      - [0x18E90, i8, D_01018E90_usa.i8, 64, 16]
+      - [0x19290]
+      - [0x192A8, palette, D_010192A8_usa]
+      - [0x194A8]
+      - [0x194C0, i8, D_010194C0_usa.i8, 512, 1] # unknown type and dimensions
+      - [0x196C0, i8, D_010196C0_usa.i8, 1536, 1] # unknown type and dimensions
+      - [0x19CC0, i8, D_01019CC0_usa.i8, 512, 1] # unknown type and dimensions
+      - [0x19EC0, i8, D_01019EC0_usa.i8, 512, 1] # unknown type and dimensions
+      - [0x1A0C0, i8, D_0101A0C0_usa.i8, 1024, 1] # unknown type and dimensions
+      - [0x1A4C0, i8, D_0101A4C0_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x1ACC0, i8, D_0101ACC0_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x1B4C0, i8, D_0101B4C0_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x1BCC0, i8, D_0101BCC0_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x1C4C0, i8, D_0101C4C0_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x1CCC0, i8, D_0101CCC0_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x1D4C0, i8, D_0101D4C0_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x1DCC0, i8, D_0101DCC0_usa.i8, 2048, 1] # unknown type and dimensions
+      - { start: 0x1E4C0, type: ci8, name: D_0101E4C0_usa.ci8, width: 48, height: 24, palettes: [D_010192A8_usa] }
+      - { start: 0x1E940, type: ci8, name: D_0101E940_usa.ci8, width: 48, height: 24, palettes: [D_010192A8_usa] }
+      - { start: 0x1EDC0, type: ci8, name: D_0101EDC0_usa.ci8, width: 48, height: 24, palettes: [D_010192A8_usa] }
+      - [0x1F240]
+      - [0x1F258]
+      - [0x1F270]
+      - [0x1F288]
+      - [0x1F2A0]
+      - [0x1F2B8]
+      - [0x1F2D0]
+      - [0x1F2E8]
+      - [0x1F300]
+      - [0x1F318]
+      - [0x1F330]
+      - [0x1F348]
+      - [0x1F360]
+
+      - [0x1F378, palette, numberTable]
+      - [0x1F578]
+      - { start: 0x1F590, type: ci8, name: w_text1.ci8, width: 64, height: 32, palettes: [numberTable] }
+      - { start: 0x1FD90, type: ci8, name: w_text2.ci8, width: 64, height: 32, palettes: [numberTable] }
+      - { start: 0x20590, type: ci8, name: w_text3.ci8, width: 64, height: 32, palettes: [numberTable] }
+      - { start: 0x20D90, type: ci8, name: w_text4.ci8, width: 64, height: 32, palettes: [numberTable] }
+      - { start: 0x21590, type: ci8, name: w_text5.ci8, width: 64, height: 32, palettes: [numberTable] }
+      - { start: 0x21D90, type: ci8, name: w_text6.ci8, width: 64, height: 32, palettes: [numberTable] }
+      - [0x22590]
+      - [0x225A8]
+      - [0x225C0]
+      - [0x225D8]
+      - [0x225F0]
+      - [0x22608]
+      - [0x22620, i8, D_01022620_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x22E20]
+      - { start: 0x22E38, type: ci8, name: D_01022E38_usa.ci8, width: 64, height: 32, palettes: [numberTable] }
+      - [0x23638]
+
+      - { start: 0x23650, type: ci8, name: D_01023650_usa.ci8, width: 64, height: 16, palettes: [numberTable] }
+      - [0x23A50]
+      - { start: 0x23A68, type: ci8, name: arrow.ci8, width: 64, height: 8, palettes: [numberTable] }
+      - [0x23C68]
+      - { start: 0x23C80, type: ci8, name: D_01023C80_usa.ci8, width: 64, height: 32, palettes: [numberTable] }
+      - { start: 0x24480, type: ci8, name: D_01024480_usa.ci8, width: 64, height: 32, palettes: [numberTable] }
+      - [0x24C80]
+      - [0x24C98]
+
+      - [0x24CB0, i8, D_01024CB0_usa.i8, 24192, 1] # unknown type and dimensions
+      - [0x2AB30, i8, D_0102AB30_usa.i8, 8960, 1] # unknown type and dimensions
+      - [0x2CE30, i8, D_0102CE30_usa.i8, 8320, 1] # unknown type and dimensions
+      - [0x2EEB0, i8, D_0102EEB0_usa.i8, 512, 1] # unknown type and dimensions
+      - [0x2F0B0]
+      - [0x2F0C8, i8, D_0102F0C8_usa.i8, 2048, 1] # unknown type and dimensions
+      - [0x2F8C8]
+      - [0x2F8E0, i8, D_0102F8E0_usa.i8, 2944, 1] # unknown type and dimensions
+      - [0x30460, i8, D_01030460_usa.i8, 2944, 1] # unknown type and dimensions
+
+  - [0x30FE0]
+
+options:
+  basename: ""
+  base_path: ../../../../../
+  compiler: GCC
+  find_file_boundaries: False
+  platform: n64
+  extensions_path: tools/splat_ext
+
+  do_c_func_detection: False
+  o_as_suffix: True
+  gfx_ucode: f3dex
+  use_legacy_include_asm: False
+  create_undefined_funcs_auto: False
+  create_undefined_syms_auto: False
