@@ -157,8 +157,12 @@ extern uObjTxtr numberTexture6;
 extern uObjTxtr clearTexture;
 // extern UNK_TYPE D_01023650_usa;
 extern uObjTxtr transTexture;
-// extern UNK_TYPE D_01023A68_usa;
-// extern UNK_TYPE D_01023C68_usa;
+
+#define ARROW_WIDTH 64
+#define ARROW_HEIGHT 8
+extern u8 arrow[];
+extern uObjTxtr arrowTexture;
+
 // extern UNK_TYPE D_01023C80_usa;
 // extern UNK_TYPE D_01024480_usa;
 extern uObjTxtr stars1Texture;

@@ -853,7 +853,7 @@ segments:
 
         - { start: 0x0EDAF0, type: ci8, name: assets/segment_0CA4A0/D_01023650_usa.ci8, width: 64, height: 16, palettes: [assets/segment_0CA4A0/numberTable] }
         - [0x0EDEF0]
-        - [0x0EDF08, i8, assets/segment_0CA4A0/D_01023A68_usa.i8, 512, 1] # unknown type and dimensions
+        - { start: 0x0EDF08, type: ci8, name: assets/segment_0CA4A0/arrow.ci8, width: 64, height: 8, palettes: [assets/segment_0CA4A0/numberTable] }
         - [0x0EE108]
         - { start: 0x0EE120, type: ci8, name: assets/segment_0CA4A0/D_01023C80_usa.ci8, width: 64, height: 32, palettes: [assets/segment_0CA4A0/numberTable] }
         - { start: 0x0EE920, type: ci8, name: assets/segment_0CA4A0/D_01024480_usa.ci8, width: 64, height: 32, palettes: [assets/segment_0CA4A0/numberTable] }
