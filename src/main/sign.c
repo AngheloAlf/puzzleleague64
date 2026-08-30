@@ -68,14 +68,14 @@ void InitPause(void) {
         gTheGame.unk_9A90[gTheGame.totalPlayer].s.imagePtr = NULL;
     }
 
-    gTheGame.unk_9B30.tlut.type = G_OBJLT_TLUT;
-    gTheGame.unk_9B30.tlut.image = (u64 *)currSegment->popup_palette;
-    gTheGame.unk_9B30.tlut.phead = GS_PAL_HEAD(0);
-    gTheGame.unk_9B30.tlut.pnum = GS_PAL_NUM(256);
-    gTheGame.unk_9B30.tlut.zero = 0;
-    gTheGame.unk_9B30.tlut.sid = 0;
-    gTheGame.unk_9B30.tlut.flag = (u32)-1;
-    gTheGame.unk_9B30.tlut.mask = 0x0;
+    gTheGame.signLUT.tlut.type = G_OBJLT_TLUT;
+    gTheGame.signLUT.tlut.image = (u64 *)currSegment->popup_palette;
+    gTheGame.signLUT.tlut.phead = GS_PAL_HEAD(0);
+    gTheGame.signLUT.tlut.pnum = GS_PAL_NUM(256);
+    gTheGame.signLUT.tlut.zero = 0;
+    gTheGame.signLUT.tlut.sid = 0;
+    gTheGame.signLUT.tlut.flag = (u32)-1;
+    gTheGame.signLUT.tlut.mask = 0x0;
 
     gTheGame.gSPRITE[9].s.scaleW = 1 << 10;
     gTheGame.gSPRITE[9].s.scaleH = 1 << 10;

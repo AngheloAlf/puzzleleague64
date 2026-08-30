@@ -5,7 +5,6 @@
 #include "pause.h"
 
 #include "assets_variables.h"
-#include "include_asm.h"
 #include "macros_defines.h"
 #include "main_variables.h"
 
@@ -327,7 +326,7 @@ void Draw2DPause(struct_gInfo_unk_00068 *dynamicp UNUSED) {
 
     gDPPipeSync(glistp++);
     gDPSetTextureLUT(glistp++, G_TT_RGBA16);
-    gSPObjLoadTxtr(glistp++, &gTheGame.unk_9B30);
+    gSPObjLoadTxtr(glistp++, &gTheGame.signLUT);
     gDPSetRenderMode(glistp++, G_RM_NOOP, G_RM_NOOP2);
     gDPSetCombineMode(glistp++, G_CC_DECALRGBA, G_CC_DECALRGBA);
     gDPSetCycleType(glistp++, G_CYC_COPY);
@@ -345,22 +344,80 @@ void Draw2DPause(struct_gInfo_unk_00068 *dynamicp UNUSED) {
     gSPObjRectangle(glistp++, &gTheGame.gSPRITE[9]);
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/pause", Draw3DPause);
-#endif
+/**
+ * Original name: Draw3DPause
+ */
+void Draw3DPause(struct_gInfo_unk_00068 *dynamicp UNUSED) {
+    s32 iPlayer;
+    s32 x;
+    s32 y;
+    s32 height;
+    s32 width;
+    s32 line_height;
+    s32 i;
+    uObjSprite *sp;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/pause", Draw3DPause);
-#endif
+    if (gTheGame.help.current_pos < 0) {
+        return;
+    }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/pause", Draw3DPause);
-#endif
+    gDPPipeSync(glistp++);
+    gDPSetTextureLUT(glistp++, G_TT_NONE);
+    gDPSetCycleType(glistp++, G_CYC_1CYCLE);
+    gDPSetCombineMode(glistp++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+    gDPSetRenderMode(glistp++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/pause", Draw3DPause);
-#endif
+    for (iPlayer = 0; iPlayer < gTheGame.totalPlayer; iPlayer++) {
+        x = gTheGame.unk_9A90[iPlayer].b.frameX >> 2;
+        y = gTheGame.unk_9A90[iPlayer].b.frameY >> 2;
+        height = gTheGame.unk_9A90[0].b.imageH >> 2;
+        width = gTheGame.unk_9A90[0].b.imageW >> 2;
+        line_height = 8;
 
+        for (i = 0; i < height; i += line_height) {
+            gDPLoadTextureBlock(glistp++, (u8 *)gTheGame.unk_9A90[iPlayer].b.imagePtr + sizeof(u32) * width * i,
+                                G_IM_FMT_RGBA, G_IM_SIZ_32b, width, line_height, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+
+            gSPTextureRectangle(glistp++, (x) << 2, (y + i) << 2, (x + width) << 2, (y + line_height + i) << 2,
+                                G_TX_RENDERTILE, 0 << 5, 0 << 5, 1 << 10, 1 << 10);
+
+            gDPPipeSync(glistp++);
+        }
+    }
+
+    gDPPipeSync(glistp++);
+    gDPSetTextureLUT(glistp++, G_TT_RGBA16);
+    gDPLoadTLUT_pal256(glistp++, gTheGame.signLUT.block.image);
+    gDPSetTexturePersp(glistp++, G_TP_NONE);
+    gDPSetCombineMode(glistp++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+    gDPSetRenderMode(glistp++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+    gDPSetCycleType(glistp++, G_CYC_1CYCLE);
+    gDPPipeSync(glistp++);
+
+    guS2DEmuBgRect1Cyc(&glistp, &gTheGame.unk_9A90[2]);
+
+    gDPPipeSync(glistp++);
+    gDPSetTextureLUT(glistp++, G_TT_RGBA16);
+    gDPLoadTLUT_pal256(glistp++, numberTable);
+
+    sp = &gTheGame.gSPRITE[9];
+    x =  sp->s.objX >> 2;
+    y =  sp->s.objY >> 2;
+    line_height = 8;
+
+    gDPLoadTextureBlock(glistp++, arrow, G_IM_FMT_CI, G_IM_SIZ_8b, ARROW_WIDTH, ARROW_HEIGHT, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+
+    gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, sp->s.imageAdrs, 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+
+    gDPSetTileSize(glistp++, 1, 0 << 2, 0 << 2, 7 << 2, 7 << 2);
+
+    gSPTextureRectangle(glistp++, x << 2, y << 2, (x + line_height) << 2, (y + line_height) << 2, 1, 0, 0, 1 << 10, 1 << 10);
+}
+
+/**
+ * Original name: DrawPause
+ */
 void DrawPause(struct_gInfo_unk_00068 *dynamicp) {
     if (gTheGame.dimension == DIMENSION_3D) {
         Draw3DPause(dynamicp);
