@@ -402,17 +402,21 @@ void Draw3DPause(struct_gInfo_unk_00068 *dynamicp UNUSED) {
     gDPLoadTLUT_pal256(glistp++, numberTable);
 
     sp = &gTheGame.gSPRITE[9];
-    x =  sp->s.objX >> 2;
-    y =  sp->s.objY >> 2;
+    x = sp->s.objX >> 2;
+    y = sp->s.objY >> 2;
     line_height = 8;
 
-    gDPLoadTextureBlock(glistp++, arrow, G_IM_FMT_CI, G_IM_SIZ_8b, ARROW_WIDTH, ARROW_HEIGHT, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadTextureBlock(glistp++, arrow, G_IM_FMT_CI, G_IM_SIZ_8b, ARROW_WIDTH, ARROW_HEIGHT, 0,
+                        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
+                        G_TX_NOLOD);
 
-    gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, sp->s.imageAdrs, 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+    gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, sp->s.imageAdrs, 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+               G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
 
     gDPSetTileSize(glistp++, 1, 0 << 2, 0 << 2, 7 << 2, 7 << 2);
 
-    gSPTextureRectangle(glistp++, x << 2, y << 2, (x + line_height) << 2, (y + line_height) << 2, 1, 0, 0, 1 << 10, 1 << 10);
+    gSPTextureRectangle(glistp++, x << 2, y << 2, (x + line_height) << 2, (y + line_height) << 2, 1, 0, 0, 1 << 10,
+                        1 << 10);
 }
 
 /**

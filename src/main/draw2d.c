@@ -125,8 +125,7 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
     }
 
     if (cursor->sy != -1) {
-        var_t3 =
-            MAX(array[cursor->sy][cursor->sx + 1].frame_n, array[cursor->sy][cursor->sx + 0].frame_n);
+        var_t3 = MAX(array[cursor->sy][cursor->sx + 1].frame_n, array[cursor->sy][cursor->sx + 0].frame_n);
         switch (var_t3) {
             case 0x6:
                 gSPObjLoadTxtr(glistp++, &tetrisBlock6);

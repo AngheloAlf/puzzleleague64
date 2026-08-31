@@ -497,8 +497,9 @@ void DoTetris(void) {
         B_801AAB98_usa += 1;
         if (!(gGameStatus & 0x20) || (gCounter % 2 != 0)) {
             if (gMain == GMAIN_387) {
-                if ((cursor->extra_wait == 0) && (cursor->unk_0C == 0) && (well->unk_43F4 == 0) && (well->unk_43B0 == 0) &&
-                    (gSelection >= 0x83) && (B_801AB61C_usa == 0) && (cursor->unk_00 <= 0) && (cursor->unk_08 == 0)) {
+                if ((cursor->extra_wait == 0) && (cursor->unk_0C == 0) && (well->unk_43F4 == 0) &&
+                    (well->unk_43B0 == 0) && (gSelection >= 0x83) && (B_801AB61C_usa == 0) && (cursor->unk_00 <= 0) &&
+                    (cursor->unk_08 == 0)) {
                     well->unk_43EC += well->unk_43F0;
 
                     if (well->unk_43EC >= 0x1000U) {

@@ -13,6 +13,9 @@
 #include "animate3d.h"
 #include "the_game.h"
 
+/**
+ * Original name: CheckGameInput
+ */
 void CheckGameInput(tetWell *well, cursor_t *cursor, s32 num) {
     if (gTheGame.dimension == DIMENSION_2D) {
         if (brainbrain[num].speed == -1) {
@@ -42,6 +45,9 @@ void CheckGameInput(tetWell *well, cursor_t *cursor, s32 num) {
     }
 }
 
+/**
+ * Original name: AddNewRow
+ */
 void AddNewRow(tetWell *well, cursor_t *cursor, s32 num) {
     if (gTheGame.dimension == DIMENSION_2D) {
         Add2DNewRow(well, cursor, num);
@@ -50,6 +56,9 @@ void AddNewRow(tetWell *well, cursor_t *cursor, s32 num) {
     }
 }
 
+/**
+ * Original name: RaiseBlocks
+ */
 void RaiseBlocks(tetWell *well, cursor_t *cursor) {
     s32 var_a0 = gTheGame.dimension;
     s32 temp_v0;
@@ -104,7 +113,8 @@ void RaiseBlocks(tetWell *well, cursor_t *cursor) {
     }
 }
 
-STATIC_INLINE void inlined_func_AfterSwitch(block_t *block2, tetWell *well, cursor_t *cursor, s32 sy, s32 col, s32 temp_t4) {
+STATIC_INLINE void inlined_func_AfterSwitch(block_t *block2, tetWell *well, cursor_t *cursor, s32 sy, s32 col,
+                                            s32 temp_t4) {
     block_t *block;
     s32 var_t1;
     s32 var_t0;
@@ -143,6 +153,9 @@ STATIC_INLINE void inlined_func_AfterSwitch(block_t *block2, tetWell *well, curs
     }
 }
 
+/**
+ * Original name: AfterSwitch
+ */
 void AfterSwitch(tetWell *well, cursor_t *cursor, block_t *block1, block_t *block2, Dimension dimen) {
     s32 temp_t4 = well->blockDropDelay;
     s32 row;
@@ -151,7 +164,7 @@ void AfterSwitch(tetWell *well, cursor_t *cursor, block_t *block1, block_t *bloc
     block_t *block;
     s32 v0;
 
-    #if 0
+#if 0
     // Local variables
     int wait; // r8
     int check; // r30
@@ -160,7 +173,7 @@ void AfterSwitch(tetWell *well, cursor_t *cursor, block_t *block1, block_t *bloc
     int temp; // r1+0x8
     int space; // r30
     struct block_t * block; // r1+0x8
-    #endif
+#endif
 
     if (block1->type != BLOCKTYPE_0) {
         if (dimen == DIMENSION_2D) {
@@ -259,6 +272,9 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/animate", CheckShake);
 INCLUDE_ASM("asm/ger/nonmatchings/main/animate", CheckShake);
 #endif
 
+/**
+ * Original name: CheckFieldActive
+ */
 nbool CheckFieldActive(tetWell *well) {
     s32 row;
     s32 col;
