@@ -95,7 +95,7 @@ void LoadMimic1(s32 kind, s32 level, s32 number, s32 play) {
     gTheGame.tetrisWell[0].unk_43B8 = 0;
     gTheGame.tetrisWell[0].unk_43BC = 0;
     gTheGame.tetrisWell[0].unk_43C0 = 0;
-    gTheGame.tetrisWell[0].unk_43C4 = 0;
+    gTheGame.tetrisWell[0].collision = 0;
     gTheGame.tetrisWell[0].unk_43F4 = 0;
     gTheGame.tetrisWell[0].unk_441C = 0xDF;
     gTheGame.tetrisWell[0].unk_43F8 = 0;
@@ -359,11 +359,11 @@ void DoMT(void) {
         }
 
         if (cursor->unk_00 != 0x34C) {
-            if (well->unk_43C4 != 0) {
+            if (well->collision != 0) {
                 CheckCollision(well);
             }
 
-            well->unk_43C4 = 0;
+            well->collision = 0;
             CheckChainCounter(well, cursor);
             count = ComboCount(well, cursor);
             well->unk_43BC = 0;
@@ -392,7 +392,7 @@ void DoMT(void) {
                 s32 temp = gTheGame.dimension;
 
                 if (well->unk_43F8 >= temp * 0x10) {
-                    well->unk_43C4 = -1;
+                    well->collision = -1;
 
                     AddNewRow(well, cursor, num);
                     well->unk_43F8 = 0;

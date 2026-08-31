@@ -35,11 +35,11 @@ typedef struct tetWell {
     /* 0x43B8 */ s32 unk_43B8;
     /* 0x43BC */ s32 unk_43BC;
     /* 0x43C0 */ s32 unk_43C0;
-    /* 0x43C4 */ s32 unk_43C4;
+    /* 0x43C4 */ s32 collision; /* Original name: collision */ // nbool?
     /* 0x43C8 */ s32 unk_43C8;
     /* 0x43CC */ s32 unk_43CC;
     /* 0x43D0 */ s32 unk_43D0;
-    /* 0x43D4 */ UNK_TYPE1 unk_43D4[0x43D8-0x43D4];
+    /* 0x43D4 */ s32 blockDropDelay; /* Original name: blockDropDelay */ // Inside `state_t state`
     /* 0x43D8 */ s32 unk_43D8;
     /* 0x43DC */ UNK_TYPE1 unk_43DC[0x43E0-0x43DC];
     /* 0x43E0 */ s32 unk_43E0;

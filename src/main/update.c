@@ -262,7 +262,7 @@ void Update2DBuffer(struct_gInfo *info) {
               sizeof(uObjSprite) * BLOCK_LEN_ROWS * TETWELL_OBJSPRITE_LEN_B);
         bcopy(&well->unk_3EF0, &dynamicp->unk_18188[var_s6], sizeof(uObjSprite) * TETWELL_UNK_3EF0_LEN_6);
 
-        if (cursor->unk_1C != -1) {
+        if (cursor->sy != -1) {
             bcopy(&well->unk_3F80, &dynamicp->unk_182A8[var_s6], sizeof(uObjSprite));
             bcopy(&well->unk_3F98, &dynamicp->unk_182D8[var_s6], sizeof(uObjSprite));
         }
@@ -348,15 +348,15 @@ void Update3DBuffer(struct_gInfo *info) {
 
         guMtxF2L(gTransMtx, &dynamicp->unk_10100[num]);
 
-        if (cursor->unk_18 > 0) {
-            var_v1 = ABS(cursor->unk_18);
+        if (cursor->sx > 0) {
+            var_v1 = ABS(cursor->sx);
 
             gRotateYMtx[0][0] = rotate_cos[var_v1];
             gRotateYMtx[2][0] = rotate_sin[var_v1];
             gRotateYMtx[0][2] = -rotate_sin[var_v1];
             gRotateYMtx[2][2] = rotate_cos[var_v1];
-        } else if (cursor->unk_18 < 0) {
-            var_v1 = ABS(cursor->unk_18);
+        } else if (cursor->sx < 0) {
+            var_v1 = ABS(cursor->sx);
 
             gRotateYMtx[0][0] = rotate_cos[var_v1];
             gRotateYMtx[2][0] = -rotate_sin[var_v1];
@@ -371,8 +371,8 @@ void Update3DBuffer(struct_gInfo *info) {
 
         guMtxF2L(gRotateYMtx, &dynamicp->unk_10180[num]);
 
-        if (cursor->unk_1C != -1) {
-            var_a2 = 3 - cursor->unk_04;
+        if (cursor->sy != -1) {
+            var_a2 = 3 - cursor->extra_wait;
 
             gRotateYMtx[0][0] = switch_cos[var_a2];
             gRotateYMtx[2][0] = switch_sin[var_a2];
@@ -381,7 +381,7 @@ void Update3DBuffer(struct_gInfo *info) {
 
             guMtxF2L(gRotateYMtx, &dynamicp->unk_184B8[num]);
 
-            var_a2 = cursor->unk_04 - 1;
+            var_a2 = cursor->extra_wait - 1;
 
             gRotateYMtx[0][0] = switch_cos[var_a2];
             gRotateYMtx[2][0] = switch_sin[var_a2];

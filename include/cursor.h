@@ -12,13 +12,13 @@
 /* Original name: cursor_t */
 typedef struct cursor_t {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 unk_04;
+    /* 0x04 */ s32 extra_wait; /* Original name: extra_wait */
     /* 0x08 */ s32 unk_08;
     /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ s32 x;  /* Original name: x */
-    /* 0x14 */ s32 y;  /* Original name: y */
-    /* 0x18 */ s32 unk_18;
-    /* 0x1C */ s32 unk_1C;
+    /* 0x10 */ s32 x; /* Original name: x */
+    /* 0x14 */ s32 y; /* Original name: y */
+    /* 0x18 */ s32 sx; /* Original name: sx */
+    /* 0x1C */ s32 sy; /* Original name: sy */
     /* 0x20 */ s32 frame_n; /* Original name: frame_n */
     /* 0x24 */ s32 frame_d; /* Original name: frame_d */
     /* 0x28 */ s32 target[CURSOR_UNK_28_COUNT]; /* Original name: target */

@@ -33,8 +33,8 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/init3d", Init3DNewRow);
 #endif
 
 void Init3DCursor(cursor_t *cursor, s32 num) {
-    cursor->unk_1C = -1;
-    cursor->unk_18 = 0;
+    cursor->sy = -1;
+    cursor->sx = 0;
     cursor->x = 4;
 
     if (gTheGame.totalPlayer == 1) {

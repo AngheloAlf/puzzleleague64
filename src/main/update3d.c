@@ -147,14 +147,14 @@ void Update3DPosition(tetWell *well, cursor_t *cursor UNUSED, s32 flag) {
 }
 
 void Update3DCursor(tetWell *well, cursor_t *cursor) {
-    if (cursor->unk_18 < 0) {
-        cursor->unk_18++;
-        if (cursor->unk_18 == 0) {
+    if (cursor->sx < 0) {
+        cursor->sx++;
+        if (cursor->sx == 0) {
             Update3DPosition(well, cursor, -1);
         }
-    } else if (cursor->unk_18 > 0) {
-        cursor->unk_18--;
-        if (cursor->unk_18 == 0) {
+    } else if (cursor->sx > 0) {
+        cursor->sx--;
+        if (cursor->sx == 0) {
             Update3DPosition(well, cursor, 0);
         }
     }

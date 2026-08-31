@@ -88,8 +88,8 @@ nbool Move3DCursorDown(cursor_t *cursor, CursorHoldVal hold) {
 }
 
 nbool Move3DCursorLeft(cursor_t *cursor, CursorHoldVal hold UNUSED) {
-    if (cursor->unk_18 == 0) {
-        cursor->unk_18 = 4;
+    if (cursor->sx == 0) {
+        cursor->sx = 4;
         return ntrue;
     }
 
@@ -97,8 +97,8 @@ nbool Move3DCursorLeft(cursor_t *cursor, CursorHoldVal hold UNUSED) {
 }
 
 nbool Move3DCursorRight(cursor_t *cursor, CursorHoldVal hold UNUSED) {
-    if (cursor->unk_18 == 0) {
-        cursor->unk_18 = -4;
+    if (cursor->sx == 0) {
+        cursor->sx = -4;
         return ntrue;
     }
 
@@ -122,10 +122,10 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/animate3d", Switch3DBlocks);
 #endif
 
 void Update3DSwitching(tetWell *well, cursor_t *cursor) {
-    if (cursor->unk_1C != -1) {
-        cursor->unk_04--;
-        if ((cursor->unk_04 == 0) || (cursor->unk_18 != 0)) {
-            AfterSwitch(well, cursor, &well->block[cursor->unk_1C][4], &well->block[cursor->unk_1C][5], 2);
+    if (cursor->sy != -1) {
+        cursor->extra_wait--;
+        if ((cursor->extra_wait == 0) || (cursor->sx != 0)) {
+            AfterSwitch(well, cursor, &well->block[cursor->sy][4], &well->block[cursor->sy][5], DIMENSION_3D);
         }
     }
 }
@@ -166,8 +166,8 @@ void Add3DNewRow(tetWell *well, cursor_t *cursor, s32 num) {
 
     Init3DNewRow(well);
 
-    if ((sp14->unk_1C != -1) && (sp14->unk_1C < 0xB)) {
-        sp14->unk_1C++;
+    if ((sp14->sy != -1) && (sp14->sy < 0xB)) {
+        sp14->sy++;
     }
 
     temp_v1 = sp14->y;

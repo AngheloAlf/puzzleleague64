@@ -19,7 +19,7 @@ void InitCursor(cursor_t *cursor) {
     s32 var_v0;
 
     cursor->unk_00 = 0;
-    cursor->unk_04 = 0;
+    cursor->extra_wait = 0;
     cursor->unk_08 = 0;
     cursor->unk_0C = 0;
     cursor->frame_n = 0;
@@ -33,8 +33,8 @@ void InitCursor(cursor_t *cursor) {
         cursor->x = 4;
     }
 
-    cursor->unk_18 = -1;
-    cursor->unk_1C = -1;
+    cursor->sx = -1;
+    cursor->sy = -1;
 
     if ((gSelection == 0x78) || (gSelection == 0x82)) {
         return;

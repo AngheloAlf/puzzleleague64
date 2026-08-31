@@ -84,7 +84,7 @@ void CompactWell(tetWell *well, s32 num) {
                                 sp6C = -1;
                             }
                         } else {
-                            well->unk_43C4 = -1;
+                            well->collision = -1;
                             sp6C = -1;
                         }
                     }
@@ -93,7 +93,7 @@ void CompactWell(tetWell *well, s32 num) {
                 if (row == 0) {
                     if ((bot_block->state == BLOCKSTATE_1) || (bot_block->state == BLOCKSTATE_6)) {
                         bot_block->state = BLOCKSTATE_0;
-                        well->unk_43C4 = -1;
+                        well->collision = -1;
                     }
                 }
 
@@ -111,7 +111,7 @@ void CompactWell(tetWell *well, s32 num) {
                                     break;
                                 default:
                                     top_block->state = BLOCKSTATE_0;
-                                    well->unk_43C4 = -1;
+                                    well->collision = -1;
                                     break;
                             }
                         }
@@ -120,7 +120,7 @@ void CompactWell(tetWell *well, s32 num) {
             } else if (row == 0) {
                 if ((bot_block->state == BLOCKSTATE_1) || (bot_block->state == BLOCKSTATE_6)) {
                     bot_block->state = BLOCKSTATE_0;
-                    well->unk_43C4 = -1;
+                    well->collision = -1;
                 }
             }
         }

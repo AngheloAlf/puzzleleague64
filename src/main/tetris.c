@@ -305,7 +305,7 @@ void InitTetrisWell(void) {
         temp_s3->unk_43B8 = 0;
         temp_s3->unk_43BC = 0;
         temp_s3->unk_43C0 = 0;
-        temp_s3->unk_43C4 = 0;
+        temp_s3->collision = 0;
         temp_s3->unk_43F4 = 0;
         temp_s3->unk_441C = 0xDF;
         temp_s3->unk_43F8 = 0;
@@ -497,7 +497,7 @@ void DoTetris(void) {
         B_801AAB98_usa += 1;
         if (!(gGameStatus & 0x20) || (gCounter % 2 != 0)) {
             if (gMain == GMAIN_387) {
-                if ((cursor->unk_04 == 0) && (cursor->unk_0C == 0) && (well->unk_43F4 == 0) && (well->unk_43B0 == 0) &&
+                if ((cursor->extra_wait == 0) && (cursor->unk_0C == 0) && (well->unk_43F4 == 0) && (well->unk_43B0 == 0) &&
                     (gSelection >= 0x83) && (B_801AB61C_usa == 0) && (cursor->unk_00 <= 0) && (cursor->unk_08 == 0)) {
                     well->unk_43EC += well->unk_43F0;
 
@@ -535,11 +535,11 @@ void DoTetris(void) {
                     Update3DCursor(well, cursor);
                 }
             } else {
-                if (well->unk_43C4 != 0) {
+                if (well->collision != 0) {
                     CheckCollision(well);
                 }
 
-                well->unk_43C4 = 0;
+                well->collision = 0;
                 CheckChainCounter(well, cursor);
                 var_s2 = ComboCount(well, cursor);
                 if (well->unk_43BC != 0) {
@@ -571,7 +571,7 @@ void DoTetris(void) {
             UpdateMiscStuff(well, cursor, num);
 
             if ((cursor->unk_00 <= 0) && (well->unk_43F8 >= ((s32)gTheGame.dimension * 0x10))) {
-                well->unk_43C4 = -1;
+                well->collision = -1;
                 AddNewRow(well, cursor, num);
                 well->unk_43F8 = 0;
                 if ((gSelection == 0xAA) || (gSelection == 0xB4)) {

@@ -124,9 +124,9 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
         }
     }
 
-    if (cursor->unk_1C != -1) {
+    if (cursor->sy != -1) {
         var_t3 =
-            MAX(array[cursor->unk_1C][cursor->unk_18 + 1].frame_n, array[cursor->unk_1C][cursor->unk_18 + 0].frame_n);
+            MAX(array[cursor->sy][cursor->sx + 1].frame_n, array[cursor->sy][cursor->sx + 0].frame_n);
         switch (var_t3) {
             case 0x6:
                 gSPObjLoadTxtr(glistp++, &tetrisBlock6);
@@ -145,11 +145,11 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
                 break;
         }
 
-        block = &array[cursor->unk_1C][cursor->unk_18 + 1];
+        block = &array[cursor->sy][cursor->sx + 1];
         if ((block->type != BLOCKTYPE_0) && (block->state == BLOCKSTATE_2 || block->state == BLOCKSTATE_3)) {
             gSPObjRectangle(glistp++, &dynamicp->unk_182A8[num]);
         }
-        block = &array[cursor->unk_1C][cursor->unk_18];
+        block = &array[cursor->sy][cursor->sx];
         if ((block->type != BLOCKTYPE_0) && (block->state == BLOCKSTATE_2 || block->state == BLOCKSTATE_3)) {
             gSPObjRectangle(glistp++, &dynamicp->unk_182D8[num]);
         }

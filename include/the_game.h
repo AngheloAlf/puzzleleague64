@@ -12,6 +12,7 @@
 #include "attack.h"
 #include "block.h"
 #include "cursor.h"
+#include "dimension.h"
 #include "explode.h"
 #include "flic.h"
 #include "gamepad.h"
@@ -24,11 +25,6 @@
 
 #define GAME_UNK_9A90_COUNT 4
 #define GAME_PLAYER_COUNT 8
-
-typedef enum Dimension {
-    /* 1 */ DIMENSION_2D = 1,
-    /* 2 */ DIMENSION_3D,
-} Dimension;
 
 
 /* Original name: help_t */

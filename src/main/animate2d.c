@@ -127,11 +127,11 @@ void Update2DSwitching(tetWell *well, cursor_t *cursor) {
     block_t *block1;
     block_t *block2;
 
-    if (cursor->unk_1C == -1) {
+    if (cursor->sy == -1) {
         return;
     }
 
-    if ((cursor->unk_04 == 2) || (cursor->unk_04 == 3)) {
+    if ((cursor->extra_wait == 2) || (cursor->extra_wait == 3)) {
         well->unk_3F98.s.objX -= 5 << 2;
         well->unk_3F80.s.objX += 5 << 2;
     } else {
@@ -139,18 +139,18 @@ void Update2DSwitching(tetWell *well, cursor_t *cursor) {
         well->unk_3F80.s.objX += 4 << 2;
     }
 
-    cursor->unk_04--;
-    if (cursor->unk_04 == 0) {
-        block1 = &well->block[cursor->unk_1C][cursor->unk_18];
-        block2 = &well->block[cursor->unk_1C][cursor->unk_18 + 1];
+    cursor->extra_wait--;
+    if (cursor->extra_wait == 0) {
+        block1 = &well->block[cursor->sy][cursor->sx];
+        block2 = &well->block[cursor->sy][cursor->sx + 1];
         if (block1->type != BLOCKTYPE_0) {
-            Init2DTetrisTMEM(block1, &well->unk_3830[cursor->unk_1C][cursor->unk_18]);
+            Init2DTetrisTMEM(block1, &well->unk_3830[cursor->sy][cursor->sx]);
         }
         if (block2->type != BLOCKTYPE_0) {
-            Init2DTetrisTMEM(block2, &well->unk_3830[cursor->unk_1C][cursor->unk_18 + 1]);
+            Init2DTetrisTMEM(block2, &well->unk_3830[cursor->sy][cursor->sx + 1]);
         }
         // TODO: Dimensions define?
-        AfterSwitch(well, cursor, block1, block2, 1);
+        AfterSwitch(well, cursor, block1, block2, DIMENSION_2D);
     }
 }
 
@@ -181,8 +181,8 @@ void Add2DNewRow(tetWell *well, cursor_t *cursor, s32 num) {
     }
 
     Init2DNewRow(well);
-    if ((cursor->unk_1C != -1) & (cursor->unk_1C < 0xB)) {
-        cursor->unk_1C++;
+    if ((cursor->sy != -1) & (cursor->sy < 0xB)) {
+        cursor->sy++;
     }
 
     if (cursor->y >= 0xA) {
