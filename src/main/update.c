@@ -8,9 +8,18 @@
 #include "macros_defines.h"
 #include "main_variables.h"
 
+#include "071B50.h"
+#include "animate.h"
+#include "animation.h"
+#include "attack.h"
+#include "combo.h"
 #include "combo3d.h"
+#include "dlist.h"
+#include "fade.h"
 #include "info.h"
+#include "sfxlimit.h"
 #include "the_game.h"
+#include "update3d.h"
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80057650_usa);

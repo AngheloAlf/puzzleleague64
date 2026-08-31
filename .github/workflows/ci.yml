@@ -9,6 +9,8 @@ jobs:
   build_repo:
     # This is a *private* build container.
     container: ghcr.io/angheloalf/puzzleleague64-build:main
+    # Prevent running outside AngheloAlf/puzzleleague64 as fetching the container would fail anyway.
+    if: ${{ github.repository == 'AngheloAlf/puzzleleague64' }}
 
     name: Build repo
     runs-on: ubuntu-latest

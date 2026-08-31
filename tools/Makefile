@@ -38,7 +38,9 @@ FIRST_DIFF      := rstools/target/release/first_diff
 FIX_RELOCS      := rstools/target/release/fix_relocs
 
 
-all: $(KMC_GCC) $(KMC_BINUTILS) $(IDO_53_CC) $(SLINKY) $(PIGMENT64) $(FIRST_DIFF) $(FIX_RELOCS)
+all: compilers $(SLINKY) $(PIGMENT64) $(FIRST_DIFF) $(FIX_RELOCS)
+
+compilers: $(KMC_GCC) $(KMC_BINUTILS) $(IDO_53_CC)
 
 clean:
 	$(RM) -rf $(KMC_DIR) gcc_kmc $(IDO_53_DIR) ido_recomp $(SLINKY_DIR)
@@ -46,7 +48,7 @@ clean:
 distclean: clean
 	cargo clean --manifest-path rstools/Cargo.toml
 
-.PHONY: all clean distclean
+.PHONY: all compilers clean distclean
 
 $(KMC_GCC): | $(KMC_DIR)
 	wget https://github.com/decompals/mips-gcc-2.7.2/releases/latest/download/gcc-2.7.2-$(DETECTED_OS).tar.gz
