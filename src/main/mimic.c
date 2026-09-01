@@ -201,7 +201,37 @@ void func_8008336C_usa(s32 kind, s32 level, s32 number, s32 play) {
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/mimic", func_800833B0_usa);
+void MTMove(ai_t *brain, unsigned char *ptr) {
+    s32 temp_v0;
+    s32 var_a0;
+    unsigned char *var_s0;
+    s32 temp_s3;
+
+#if 0
+    // Local variables
+    int count; // r4
+#endif
+
+    for (var_a0 = 0; var_a0 < brain->unk_040; var_a0++) {
+        temp_v0 = *ptr;
+        ptr += (temp_v0 * 3) + 1;
+    }
+
+    temp_v0 = *ptr;
+    if (brain->unk_044 < temp_v0) {
+        ptr += brain->unk_044 * 3;
+        var_s0 = ptr + 1;
+        for (temp_s3 = 0; true; temp_s3 += 3) {
+            AIAddCommand(brain, var_s0[temp_s3], var_s0[temp_s3 + 1], var_s0[temp_s3 + 2]);
+            brain->unk_044 += 1;
+            if (var_s0[temp_s3] != 0x14) {
+                return;
+            }
+        }
+    } else {
+        AIAddCommand(brain, 0x1F, 0, 0);
+    }
+}
 #endif
 
 #if VERSION_EUR

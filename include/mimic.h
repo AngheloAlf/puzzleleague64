@@ -34,7 +34,7 @@ extern MimicMode geModeMimic;
 
 void LoadMimic1(s32 kind, s32 level, s32 number, s32 play);
 void func_8008336C_usa(s32 kind, s32 level, s32 number, s32 play);
-// void func_800833B0_usa();
+void MTMove(struct ai_t *brain, unsigned char *ptr);
 void UpdateMT(struct tetWell *well, struct cursor_t *cursor, struct ai_t *brain);
 void UpdateMTController(struct tetWell *well, struct cursor_t *cursor, s32 num);
 void DoMT(void);
