@@ -1434,18 +1434,18 @@ void func_80025CC4_usa(struct_gaScreen *arg0) {
                                     if (((u32)(temp_t0 - 0x27) >= 2U) && ((temp_s0->unk_44 & 0x100400) == 0x100000)) {
                                         switch (temp_s0->unk_18) {
                                             case 0x1:
-                                                var_a1_2 = 0x16E;
+                                                var_a1_2 = SFX_16E;
                                                 break;
                                             case 0x2:
-                                                var_a1_2 = 0x16F;
+                                                var_a1_2 = SFX_16F;
                                                 break;
                                             case 0x3:
-                                                var_a1_2 = 0x170;
+                                                var_a1_2 = SFX_170;
                                                 break;
                                             default:
                                             case 0x0:
                                             case 0x4:
-                                                var_a1_2 = 0x16D;
+                                                var_a1_2 = SFX_16D;
                                                 break;
                                         }
                                         PlaySE(SFX_INIT_TABLE, var_a1_2);

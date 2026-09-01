@@ -906,7 +906,7 @@ void func_80046648_usa(s32 arg0) {
                         gMain = GMAIN_384;
                         gReset = -1;
                         gTheGame.dimension = DIMENSION_2D;
-                        gSelection = 0x96;
+                        gSelection = SELECTION_96;
                         gTheGame.totalPlayer = 2;
                         gTheGame.menu[0].misc = 1;
                     }
@@ -937,7 +937,7 @@ void func_80046648_usa(s32 arg0) {
 
         case 0xA:
             if (arg0 == 0xA) {
-                PlaySE(SFX_INIT_TABLE, 0x83);
+                PlaySE(SFX_INIT_TABLE, SFX_083);
             }
 
             if (arg0 > 0xF0) {
@@ -949,7 +949,7 @@ void func_80046648_usa(s32 arg0) {
 
         case 0xB:
             if (arg0 == 0xA) {
-                PlaySE(SFX_INIT_TABLE, 0x80);
+                PlaySE(SFX_INIT_TABLE, SFX_080);
             }
 
             if (arg0 > 0xF0) {

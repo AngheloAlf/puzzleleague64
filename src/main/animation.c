@@ -57,11 +57,11 @@ void func_8004F5E4_usa(tetWell *well, s32 arg1, s32 arg2, s32 arg3) {
     s32 var_a2;
 
     if (gTheGame.unk_9C08 == 1) {
-        if ((gSelection == 0xAA) && (gTheGame.menu[0].unk_0 == 5)) {
+        if ((gSelection == SELECTION_AA) && (gTheGame.menu[0].unk_0 == 5)) {
             func_80074A58_usa(well, arg2, arg3);
         }
     } else if (arg1 == 1) {
-        temp_a3 = (gSelection != 0x96) ? 6 : 2;
+        temp_a3 = (gSelection != SELECTION_96) ? 6 : 2;
 
         var_a0 = &gTheGame.drawText;
         var_a0_2 = &gTheGame.drawText;
@@ -132,11 +132,11 @@ void UpdateAnimation(tetWell *well, s32 num, s32 combo) {
             temp_s0_2 = *temp_s0;
 
             if (temp_s0_2 == -3) {
-                PlaySE(SFX_INIT_TABLE, 0x12C);
+                PlaySE(SFX_INIT_TABLE, SFX_12C);
             } else if (temp_s0_2 == -4) {
-                PlaySE(SFX_INIT_TABLE, 0x12D);
+                PlaySE(SFX_INIT_TABLE, SFX_12D);
             } else if (temp_s0_2 < -4) {
-                PlaySE(SFX_INIT_TABLE, 0x12E);
+                PlaySE(SFX_INIT_TABLE, SFX_12E);
             }
         }
 
@@ -147,14 +147,14 @@ void UpdateAnimation(tetWell *well, s32 num, s32 combo) {
         }
     }
 
-    if (gSelection < 0x6F) {
+    if (gSelection < SELECTION_6F) {
         return;
     }
 
     if (gTheGame.unk_9C0C == 1) {
         if (gTheGame.unk_9C08 != 1) {
             if (num == 1) {
-                temp_a3 = (gSelection != 0x96) ?  6 : 2;
+                temp_a3 = (gSelection != SELECTION_96) ?  6 : 2;
 
                 var_a0 = &gTheGame.drawText;
                 for (var_a2 = 0; var_a2 < temp_a3; var_a2++) {
@@ -180,17 +180,17 @@ void UpdateAnimation(tetWell *well, s32 num, s32 combo) {
                 }
             }
         } else {
-            if ((gSelection == 0xAA) && (gTheGame.menu[0].unk_0 == 5)) {
+            if ((gSelection == SELECTION_AA) && (gTheGame.menu[0].unk_0 == 5)) {
                 func_80074A58_usa(well, combo, var_s2);
             }
         }
     } else if (gTheGame.unk_9C08 == 1) {
 
-        if ((gSelection == 0xAA) && (gTheGame.menu[0].unk_0 == 5)) {
+        if ((gSelection == SELECTION_AA) && (gTheGame.menu[0].unk_0 == 5)) {
             func_80074A58_usa(well, combo, var_s2);
         }
     } else if (num == 1) {
-        temp_a3 = (gSelection != 0x96) ? 6 : 2;
+        temp_a3 = (gSelection != SELECTION_96) ? 6 : 2;
 
         var_a0 = &gTheGame.drawText;
         for (var_a2 = 0; var_a2 < temp_a3; var_a2++) {

@@ -930,7 +930,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80003548_ger);
 
 #if VERSION_USA || VERSION_EUR
 INLINE s16 func_800034B4_usa(f32 arg0, f32 arg1) {
-    f32 temp = (arg1 - arg0) * (65536.0 / arg1);
+    f32 temp = (arg1 - arg0) * (DOUBLE_LITERAL(65536.0) / arg1);
 
     return ((s32)temp >> 9);
 }
@@ -946,12 +946,12 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/sound", func_80003578_ger);
 
 #if VERSION_USA || VERSION_EUR
 INLINE s32 func_800034EC_usa(f32 arg0) {
-    if (arg0 > 180.0) {
-        arg0 = arg0 - 180.0;
+    if (arg0 > DOUBLE_LITERAL(180.0)) {
+        arg0 = arg0 - DOUBLE_LITERAL(180.0);
     } else {
-        arg0 = 180.0 - arg0;
+        arg0 = DOUBLE_LITERAL(180.0) - arg0;
     }
-    arg0 *= 64.0 / 45.0;
+    arg0 *= DOUBLE_LITERAL(64.0) / DOUBLE_LITERAL(45.0);
 
     return arg0;
 }

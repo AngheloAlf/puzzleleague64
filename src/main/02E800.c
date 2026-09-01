@@ -41,9 +41,9 @@ s32 func_8002EDFC_usa(struct_8002EDFC_usa_arg0 *arg0, Gfx **gfxP) {
 
     D_800B6468_usa++;
 
-    D_FLT_800B646C_usa += 1.0;
-    if (D_FLT_800B646C_usa >= 360.0) {
-        D_FLT_800B646C_usa = D_FLT_800B646C_usa - 360.0;
+    D_FLT_800B646C_usa += DOUBLE_LITERAL(1.0);
+    if (D_FLT_800B646C_usa >= DOUBLE_LITERAL(360.0)) {
+        D_FLT_800B646C_usa = D_FLT_800B646C_usa - DOUBLE_LITERAL(360.0);
     }
 
     if (arg0 == NULL) {

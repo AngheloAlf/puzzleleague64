@@ -28,11 +28,10 @@ s32 PlayMIDI(SongInitStruct bgmArray[], s32 songIndex, s32 songBuffer, s32 cross
     return 0;
 }
 
-// TODO: enum for sfxIndex?
-musHandle PlaySE(SfxInitStruct *sfxArray, s32 sfxIndex) {
+musHandle PlaySE(SfxInitStruct sfxArray[], Sfx sfxIndex) {
     SfxInitStruct *sfxPtr;
 
-    if (B_801C6EF6_usa <= 327.67) {
+    if (B_801C6EF6_usa <= DOUBLE_LITERAL(327.67)) {
         return 0;
     }
 
@@ -40,7 +39,7 @@ musHandle PlaySE(SfxInitStruct *sfxArray, s32 sfxIndex) {
 
     func_80002620_usa(sfxPtr->bankRef);
 
-    if (sfxIndex == 1) {
+    if (sfxIndex == SFX_001) {
         PlaySFX(sfxPtr->sfxRef, 1, 0x7F);
     }
 
@@ -162,7 +161,7 @@ void func_80005888_usa(s32 arg0, s32 arg1, s32 arg2) {
             }
         }
 
-        if ((gSelection == 0x82) || (gSelection == 0x78)) {
+        if ((gSelection == SELECTION_82) || (gSelection == SELECTION_78)) {
             if (B_801C7089_usa == 0xD) {
                 if (arg2 == 0 || arg2 == 1) {
                     arg2 += 11;

@@ -194,7 +194,7 @@ void LoadMimic1(s32 kind, s32 level, s32 number, s32 play) {
 // ?? static void LoadMimic2(int kind /* r3 */, int level /* r4 */, int number /* r5 */, int play /* r6 */)
 void func_8008336C_usa(s32 kind, s32 level, s32 number, s32 play) {
     LoadMimic1(kind, level, number, play);
-    PlaySE(SFX_INIT_TABLE, 0x95);
+    PlaySE(SFX_INIT_TABLE, SFX_095);
     brainbrain[0].speed = -1;
     brainbrain[0].unk_104 = 0;
 }
@@ -305,7 +305,7 @@ void UpdateMTController(tetWell *well, cursor_t *cursor, s32 num) {
     }
 
     if (sound != 0) {
-        PlaySE(SFX_INIT_TABLE, 0x96);
+        PlaySE(SFX_INIT_TABLE, SFX_096);
     }
 
     cursor->frame_d--;
@@ -332,7 +332,7 @@ void DoMT(void) {
     s32 total = 1;
     Padding pad UNUSED = { 0, 0 };
 
-    if (gSelection == 0x6E) {
+    if (gSelection == SELECTION_6E) {
         MimicCheckState(&gTheGame.tetrisWell[0], &gTheGame.cursorBlock[0]);
     } else {
         TutorialCheckState(&gTheGame.tetrisWell[0], &gTheGame.cursorBlock[0]);
@@ -342,7 +342,7 @@ void DoMT(void) {
         return;
     }
 
-    if ((gSelection == 0x64) && (gTheGame.menu[0].game == 3)) {
+    if ((gSelection == SELECTION_64) && (gTheGame.menu[0].game == 3)) {
         total = 2;
     }
 
@@ -368,7 +368,7 @@ void DoMT(void) {
             count = ComboCount(well, cursor);
             well->unk_43BC = 0;
 
-            if (gSelection == 0x64) {
+            if (gSelection == SELECTION_64) {
                 CheckShake(well, cursor);
             }
 
@@ -376,12 +376,12 @@ void DoMT(void) {
             StartAttack(well, num);
             UpdateWell(well, cursor, num, count);
 
-            if (gSelection == 0x64) {
+            if (gSelection == SELECTION_64) {
                 ChangeAttack(well, cursor, num, count);
             }
             UpdateCursor(well, cursor);
             UpdateIcon(well, cursor, num);
-            if (gSelection == 0x64) {
+            if (gSelection == SELECTION_64) {
                 UpdateAttack(well, cursor, num);
             }
             UpdateExplosion(well);
@@ -438,7 +438,7 @@ void MimicCheckState(tetWell *well, cursor_t *cursor) {
                 func_80005888_usa(0, 2, B_801C7348_usa + 5);
             } else {
                 cursor->unk_00 = 8;
-                PlaySE(SFX_INIT_TABLE, 0xA0);
+                PlaySE(SFX_INIT_TABLE, SFX_0A0);
             }
 
             gMain = GMAIN_2BC;
@@ -446,11 +446,11 @@ void MimicCheckState(tetWell *well, cursor_t *cursor) {
             brainbrain[0].speed = -1;
             brainbrain[0].unk_104 = 0;
             if (well->unk_43A8 == -3) {
-                PlaySE(SFX_INIT_TABLE, 0x12C);
+                PlaySE(SFX_INIT_TABLE, SFX_12C);
             } else if (well->unk_43A8 == -4) {
-                PlaySE(SFX_INIT_TABLE, 0x12D);
+                PlaySE(SFX_INIT_TABLE, SFX_12D);
             } else if (well->unk_43A8 < -4) {
-                PlaySE(SFX_INIT_TABLE, 0x12E);
+                PlaySE(SFX_INIT_TABLE, SFX_12E);
             }
 
             gMain = GMAIN_2BC;
@@ -519,7 +519,7 @@ void Draw3DMT(struct_gInfo_unk_00068 *dynamicp) {
     gDPPipeSync(glistp++);
     gDPSetTextureFilter(glistp++, G_TF_BILERP);
 
-    if (gSelection == 0x64) {
+    if (gSelection == SELECTION_64) {
         var_t4 = &D_01024CB0_usa;
         
 
@@ -623,7 +623,7 @@ void Draw3DMT(struct_gInfo_unk_00068 *dynamicp) {
     Draw3DFrontTetrisWell(dynamicp, 0);
 
     var_v0 = GMAIN_TUTORIAL;
-    if (gSelection == 0x6E) {
+    if (gSelection == SELECTION_6E) {
         var_v0 = GMAIN_MIMIC;
     }
     gMain = var_v0;
@@ -860,7 +860,7 @@ void DoMimic(void) {
             sp20 = 0x22;
         }
     } else {
-        PlaySE(SFX_INIT_TABLE, 1);
+        PlaySE(SFX_INIT_TABLE, SFX_001);
     }
     screenGetCursor(temp_s2, 0x64, &sp28, &sp2C);
     gTheGame.menu[0].stage = sp2C + 1;
@@ -999,7 +999,7 @@ block_100:
                 screenSetImagePosition(giScreenMimic, temp_s0_7, 0x90, 0x49);
             }
             if (gTheGame.controller[0].touch_button & 0x4000) {
-                PlaySE(SFX_INIT_TABLE, 6);
+                PlaySE(SFX_INIT_TABLE, SFX_006);
                 var_v0_2 = -1;
             } else {
                 DoMT();
@@ -1119,7 +1119,7 @@ block_165:
             }
             sp40 = 0xABCD;
             if (gTheGame.controller[0].touch_button & 0x4000) {
-                PlaySE(SFX_INIT_TABLE, 6);
+                PlaySE(SFX_INIT_TABLE, SFX_006);
                 var_v0_5 = -1;
             } else {
                 DoMT();
@@ -1349,7 +1349,7 @@ block_222:
             func_80083050_usa(gTheGame.menu[0].speed, gTheGame.menu[0].stage, temp_a2, -(gTheGame.menu[0].game == 3));
         } else {
             func_80083050_usa(gTheGame.menu[0].speed, gTheGame.menu[0].stage, temp_a2, -(gTheGame.menu[0].game == 3));
-            PlaySE(SFX_INIT_TABLE, 0x95);
+            PlaySE(SFX_INIT_TABLE, SFX_095);
             brainbrain->speed = -1;
             brainbrain->unk_104 = 0;
         }
@@ -1358,7 +1358,7 @@ block_222:
         gMain = GMAIN_2BC;
         gReset = -1;
         gGameStatus = (u32) gGameStatus;
-        PlaySE(SFX_INIT_TABLE, 6);
+        PlaySE(SFX_INIT_TABLE, SFX_006);
     }
     var_a0 = 0;
     if (var_s3 == MM_NONE) {

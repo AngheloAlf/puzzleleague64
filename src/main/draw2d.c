@@ -789,7 +789,7 @@ void Draw2DTetris(struct_gInfo_unk_00068 *dynamicp) {
         Draw2DText(dynamicp);
         Draw2DMiscStuff(dynamicp);
         Draw2DAnimation(dynamicp, 5, 6);
-        if ((gSelection == 0xAA) || (gSelection == 0xB4)) {
+        if ((gSelection == SELECTION_AA) || (gSelection == SELECTION_B4)) {
             for (i = 0; i < gTheGame.totalPlayer; i++) {
                 Draw2DClearLine(dynamicp, i);
             }

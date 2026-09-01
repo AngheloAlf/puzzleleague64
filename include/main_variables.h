@@ -12,6 +12,8 @@
 
 #include "unknown_defines.h"
 
+#include "selection.h"
+
 struct struct_imageLoad_arg0;
 struct player_t;
 struct struct_gInfo;
@@ -1355,8 +1357,7 @@ extern UNK_PTR gAllVertex;
 // either B_801C7368_usa or B_801F9CC8_usa should be explodeTxtr
 extern uObjTxtr B_801F9CC8_usa[GAME_BUFFER_LEN];
 
-// TODO: enum?
-extern s32 gSelection;
+extern Selection gSelection;
 
 extern u8 B_801F9CFC_usa;
 extern uObjTxtr B_801F9D00_usa[GAME_BUFFER_LEN][B_801F9D00_USA_LEN]; // TODO: original name

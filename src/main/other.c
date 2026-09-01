@@ -41,9 +41,9 @@ void InitMiscStuff(void) {
     gTheGame.unk_9B48 = 0;
 
     switch (gSelection) {
-        case 0x8C:
-        case 0xAA:
-        case 0xBE:
+        case SELECTION_8C:
+        case SELECTION_AA:
+        case SELECTION_BE:
             var_s4 = 0x43;
             var_s7 = 0x60;
             var_s6 = 0x32;
@@ -57,8 +57,8 @@ void InitMiscStuff(void) {
             gTheGame.unk_9B50[3].b.frameX = 0x398;
             break;
 
-        case 0x78:
-        case 0x82:
+        case SELECTION_78:
+        case SELECTION_82:
             var_s4 = 0x40;
             var_s7 = 0x40;
             var_s6 = 0x45;
@@ -71,10 +71,10 @@ void InitMiscStuff(void) {
             gTheGame.unk_9B50[1].b.frameX = 0x398;
             break;
 
-        case 0x96:
-        case 0xA0:
-        case 0xB4:
-        case 0xC8:
+        case SELECTION_96:
+        case SELECTION_A0:
+        case SELECTION_B4:
+        case SELECTION_C8:
             gTheGame.unk_9B48 = -1;
             if (gTheGame.unk_9C0C == 1) {
                 var_s4 = 0x6C;
@@ -99,7 +99,7 @@ void InitMiscStuff(void) {
             }
             break;
 
-        case 0x64:
+        case SELECTION_64:
             gTheGame.unk_9B48 = -1;
             var_s4 = 0x6C;
             var_s7 = 0x80;
@@ -144,7 +144,7 @@ void InitMiscStuff(void) {
     gTheGame.unk_9BF0.block.mask = 0;
     gTheGame.unk_9BF0.block.image = sp1C + var_s3;
     gTheGame.unk_9BF0.block.tsize = sp14 - 1;
-    if ((gSelection == 0x8C) || (gSelection == 0xBE)) {
+    if ((gSelection == SELECTION_8C) || (gSelection == SELECTION_BE)) {
         var_s3 = 0x21490;
 
         gTheGame.unk_8C88[3].s.imageW = 0x200;
@@ -196,9 +196,9 @@ void UpdateMiscStuff(tetWell *well, cursor_t *cursor, s32 num) {
     s32 shake;
 
     switch (gSelection) {
-        case 0x8C:
-        case 0xAA:
-        case 0xBE:
+        case SELECTION_8C:
+        case SELECTION_AA:
+        case SELECTION_BE:
             if (gGameStatus & 0x20) {
                 cursor->unk_0C = 0;
             } else if (cursor->unk_0C > 0) {
@@ -238,8 +238,8 @@ void UpdateMiscStuff(tetWell *well, cursor_t *cursor, s32 num) {
             }
             break;
 
-        case 0x78:
-        case 0x82:
+        case SELECTION_78:
+        case SELECTION_82:
             if (gTheGame.unk_9B48 > 1) {
                 gTheGame.unk_9B48--;
             } else {
@@ -253,13 +253,16 @@ void UpdateMiscStuff(tetWell *well, cursor_t *cursor, s32 num) {
             }
             break;
 
-        case 0x64:
-        case 0x96:
-        case 0xA0:
-        case 0xB4:
-        case 0xC8:
+        case SELECTION_64:
+        case SELECTION_96:
+        case SELECTION_A0:
+        case SELECTION_B4:
+        case SELECTION_C8:
             gTheGame.unk_9B48 = -1;
             gTheGame.unk_9B50[num].b.frameY = well->unk_441C * 4;
+            break;
+
+        default:
             break;
     }
 }
@@ -280,26 +283,29 @@ void Draw2DMiscStuff(struct_gInfo_unk_00068 *dynamicp) {
     gDPPipeSync(glistp++);
 
     switch (gSelection) {
-        case 0x8C:
-        case 0xAA:
-        case 0xBE:
+        case SELECTION_8C:
+        case SELECTION_AA:
+        case SELECTION_BE:
             index = gTheGame.unk_9B48 - 1;
             gSPBgRectCopy(glistp++, &gTheGame.unk_9B50[index]);
             break;
 
-        case 0x78:
-        case 0x82:
+        case SELECTION_78:
+        case SELECTION_82:
             index = (gTheGame.unk_9B48 > 1) ? 1 : 0;
             gSPBgRectCopy(glistp++, &gTheGame.unk_9B50[index]);
             break;
 
-        case 0x64:
-        case 0x96:
-        case 0xA0:
-        case 0xB4:
-        case 0xC8:
+        case SELECTION_64:
+        case SELECTION_96:
+        case SELECTION_A0:
+        case SELECTION_B4:
+        case SELECTION_C8:
             gSPBgRectCopy(glistp++, &gTheGame.unk_9B50[0]);
             gSPBgRectCopy(glistp++, &gTheGame.unk_9B50[1]);
+            break;
+
+        default:
             break;
     }
 
@@ -307,7 +313,7 @@ void Draw2DMiscStuff(struct_gInfo_unk_00068 *dynamicp) {
     gDPSetRenderMode(glistp++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
     gDPSetCycleType(glistp++, G_CYC_1CYCLE);
 
-    if ((gSelection < 0x83) && (gMain >= GMAIN_384)) {
+    if ((gSelection < SELECTION_83) && (gMain >= GMAIN_384)) {
         gDPSetTextureLUT(glistp++, G_TT_RGBA16);
         gSPObjLoadTxtr(glistp++, &otherLUT);
 
@@ -382,9 +388,9 @@ void Draw3DMiscStuff(struct_gInfo_unk_00068 *dynamicp) {
             temp_t3->unk_38 = 0xE7000000;
             temp_t3->unk_3C = 0;
             switch (gSelection) {                   /* switch 1; irregular */
-                case 0xBE:                          /* switch 1 */
+                case SELECTION_BE:                          /* switch 1 */
                     /* fallthrough */
-                case 0x8C:                          /* switch 1 */
+                case SELECTION_8C:                          /* switch 1 */
                     temp_t0 = glistp;
                     glistp = temp_t0 + 8;
                     temp_t0->words.w1 = (u32) &D_010194C0_usa;
@@ -515,7 +521,7 @@ block_21:
                     var_a2 = 0xE44A0224;
                     var_a1 = 0x053A01E4;
                     goto block_57;
-                case 0xAA:                          /* switch 1 */
+                case SELECTION_AA:                          /* switch 1 */
                     if (gTheGame.tetrisWell[0].menu.unk_0 != 5) {
                         glistp = temp_t3 + 0x48;
                         temp_t3->unk_40 = 0xFD500000;
@@ -590,26 +596,26 @@ block_21:
         temp_v0->unk_44 = 0;
         temp_v0->unk_14 = (u64 *) gTheGame.unk_9BF0.block.image;
         switch (gSelection) {                       /* irregular */
-            case 0xBE:
-            case 0xAA:
-            case 0x8C:
+            case SELECTION_BE:
+            case SELECTION_AA:
+            case SELECTION_8C:
                 var_a1_2 = ((gTheGame.unk_9B48 - 1) * 0x28) + (&gTheGame.unk_9B48 + 8);
 block_45:
                 guS2DEmuBgRect1Cyc(&glistp, var_a1_2);
                 break;
-            case 0x82:
+            case SELECTION_82:
                 var_a1_2 = (((gTheGame.unk_9B48 < 2) ^ 1) * 0x28) + (&gTheGame.unk_9C08 - 0xB8);
                 goto block_45;
-            case 0xA0:
-            case 0xB4:
-            case 0xC8:
-            case 0x96:
-            case 0x64:
+            case SELECTION_A0:
+            case SELECTION_B4:
+            case SELECTION_C8:
+            case SELECTION_96:
+            case SELECTION_64:
                 guS2DEmuBgRect1Cyc(&glistp, gTheGame.unk_9B50);
                 var_a1_2 = gTheGame.unk_9B50 + 0x28;
                 goto block_45;
         }
-        if (gSelection < 0x83) {
+        if (gSelection < SELECTION_83) {
             var_a0_2 = 0xBA000E02;
             if (gMain >= 0x384) {
                 temp_a2 = glistp;

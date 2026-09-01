@@ -137,7 +137,7 @@ void InitBonus(void) {
     func_80001310_usa(SEGMENT_ROM_START(segment_101A80), temp_s4, SEGMENT_ROM_SIZE(segment_101A80));
     Pon_Image_Heap += SEGMENT_ROM_SIZE(segment_101A80);
 
-    if ((gSelection == 0x96) && (gTheGame.cursorBlock[0].unk_00 != 7) && (gTheGame.cursorBlock[1].unk_00 != 8) &&
+    if ((gSelection == SELECTION_96) && (gTheGame.cursorBlock[0].unk_00 != 7) && (gTheGame.cursorBlock[1].unk_00 != 8) &&
         (B_801C6C90_usa == 0x10)) {
         PlayMIDI(BGM_INIT_TABLE, 0x20, 0, 1);
     }
@@ -213,8 +213,8 @@ void InitBonus(void) {
         }
     }
 
-    if (gSelection == 0x96) {
-        var_s3 = gTheGame.tetrisWell[1].unk_4424;
+    if (gSelection == SELECTION_96) {
+        var_s3 = gTheGame.tetrisWell[1].menu.stage;
         switch (var_s3) {
             case ENUM_GAME_UNK_0000_UNK_4424_1:
                 func_80073C20_usa(false, 0, spA0[var_s3].unk_4, sp120[var_s3].unk_4);
@@ -436,7 +436,7 @@ void DoBonus(void) {
 
     var_s2 = &gTheGame.tetrisWell[0];
 
-    if (gSelection == 0x96) {
+    if (gSelection == SELECTION_96) {
         s32 var_a0;
         s32 var_s3;
         s32 t0;
@@ -946,7 +946,7 @@ void DoStageClearIntro(void) {
                     if (sp20->unk_14 > 0) {
                         sp20->unk_14 -= 4;
                         if (sp20->unk_14 <= 0) {
-                            PlaySE(SFX_INIT_TABLE, 0xA4);
+                            PlaySE(SFX_INIT_TABLE, SFX_0A4);
                             B_8018EA40_usa = 2;
                             sp20->unk_14 = 0;
                         }
@@ -957,7 +957,7 @@ void DoStageClearIntro(void) {
             case 0x2:
                 B_8018EA3C_usa += 6;
                 if (B_8018EA3C_usa > 0x80) {
-                    PlaySE(SFX_INIT_TABLE, 0xA4);
+                    PlaySE(SFX_INIT_TABLE, SFX_0A4);
                     B_8018EA40_usa = 3;
                     screenHideImage(giScreenClear, 0x83);
                     screenHideImage(giScreenClear, 0x8D);
@@ -990,7 +990,7 @@ void DoStageClearIntro(void) {
 
     if (gCounter >= 0x1F) {
         if ((var_s1 != 0) || (gTheGame.controller[0].touch_button & START_BUTTON)) {
-            PlaySE(SFX_INIT_TABLE, 4);
+            PlaySE(SFX_INIT_TABLE, SFX_004);
             if (B_8018EA40_usa == 0) {
                 B_8018EA40_usa = 1;
                 gnTagTextClear = -1;
@@ -1008,7 +1008,7 @@ void DoStageClearIntro(void) {
         } else if (gTheGame.controller[0].touch_button & B_BUTTON) {
             gReset = -1;
             gMain = GMAIN_2BC;
-            PlaySE(SFX_INIT_TABLE, 6);
+            PlaySE(SFX_INIT_TABLE, SFX_006);
         }
     }
 

@@ -51,7 +51,7 @@ void InitPause(void) {
             bg->s.imageH = SIGNPAUSE_PAUSE_HEIGHT << 2;
             bg->s.frameH = SIGNPAUSE_PAUSE_HEIGHT << 2;
             bg->s.imagePtr = (void *)currSegment->pause;
-        } else if ((gSelection == 0xBE) || (gSelection < 0x83)) {
+        } else if ((gSelection == SELECTION_BE) || (gSelection < SELECTION_83)) {
             bg->s.imageH = SIGNPAUSE_POPUP_CONTINUE_RESTART_HEIGHT << 2;
             bg->s.frameH = SIGNPAUSE_POPUP_CONTINUE_RESTART_HEIGHT << 2;
             bg->s.imagePtr = (void *)currSegment->popup_continue_restart;

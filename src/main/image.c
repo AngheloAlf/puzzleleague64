@@ -305,7 +305,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_80020304_usa);
 
 #if VERSION_USA
 nbool imageSetScale(struct_imageLoad_arg0 *pImage, f32 rScaleX, f32 rScaleY) {
-    if ((pImage != NULL) && (rScaleX != 0.0)) {
+    if ((pImage != NULL) && (rScaleX != DOUBLE_LITERAL(0.0))) {
         pImage->unk_88 = 1024 / rScaleX;
         if (rScaleX != rScaleY) {
             pImage->unk_8C = 1024 / rScaleY;

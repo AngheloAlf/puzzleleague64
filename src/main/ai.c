@@ -40,7 +40,7 @@ void InitAI(tetWell *well, cursor_t *cursor, ai_t *brain) {
     AISetCursor(well, cursor, brain);
     AIChangeVision(brain);
 
-    if (gSelection == 0x96) {
+    if (gSelection == SELECTION_96) {
         if (AnimationRandom(0x13D) % 2 == 0) {
             AIAddCommand(brain, 1, 2, 0);
             AIAddCommand(brain, 0xA, 0, 0);
@@ -3117,7 +3117,7 @@ void AIMove(tetWell *well, cursor_t *cursor, ai_t *brain, s32 num) {
             gTheGame.help.current_pos = 0;
             FadeSong(last_song_handle, 0x28, 0xA, NULL);
             FadeOutAllSFXs(0xF);
-            PlaySE(SFX_INIT_TABLE, 0xA5);
+            PlaySE(SFX_INIT_TABLE, SFX_0A5);
             UpdateAnimation(well, num, 0);
             return;
         }
@@ -3265,11 +3265,11 @@ void AI2DMove(tetWell *well, cursor_t *cursor, ai_t *brain, s32 num) {
 
     if (sound) {
         if (gTheGame.totalPlayer == 1) {
-            PlaySE(SFX_INIT_TABLE, 0x96);
+            PlaySE(SFX_INIT_TABLE, SFX_096);
         } else if (num == 0) {
-            PlaySE(SFX_INIT_TABLE, 0x97);
+            PlaySE(SFX_INIT_TABLE, SFX_097);
         } else {
-            PlaySE(SFX_INIT_TABLE, 0x98);
+            PlaySE(SFX_INIT_TABLE, SFX_098);
         }
     }
 
@@ -3344,11 +3344,11 @@ void AI3DMove(tetWell *well, cursor_t *cursor, ai_t *brain, s32 num) {
 
     if (sound) {
         if (gTheGame.totalPlayer == 1) {
-            PlaySE(SFX_INIT_TABLE, 0x96);
+            PlaySE(SFX_INIT_TABLE, SFX_096);
         } else if (num == 0) {
-            PlaySE(SFX_INIT_TABLE, 0x97);
+            PlaySE(SFX_INIT_TABLE, SFX_097);
         } else {
-            PlaySE(SFX_INIT_TABLE, 0x98);
+            PlaySE(SFX_INIT_TABLE, SFX_098);
         }
     }
 

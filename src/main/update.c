@@ -26,7 +26,72 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80057650_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdateTime);
+void UpdateTime(s32 second) {
+    if (gSelection >= SELECTION_BE) {
+        gTheGame.second = gTheGame.second - second;
+        if (gTheGame.second < 0) {
+            gTheGame.second = 59;
+            gTheGame.minute--;
+        }
+        if (gTheGame.minute < 0) {
+            gTheGame.minute = 0;
+        }
+
+        if (second == 1) {
+            if (gTheGame.minute == second) {
+                if (gTheGame.second == 0) {
+                    PlaySE(SFX_INIT_TABLE, SFX_099);
+                    return;
+                }
+            }
+
+            if (gTheGame.minute == 0) {
+                switch (gTheGame.second) {
+                    case 0xF:
+                        PlaySE(SFX_INIT_TABLE, SFX_091);
+                        TenSecond = 1;
+                        break;
+
+                    case 0x3:
+                    case 0x4:
+                    case 0x5:
+                        PlaySE(SFX_INIT_TABLE, SFX_09A);
+                        break;
+
+                    case 0x2:
+                        PlaySE(SFX_INIT_TABLE, SFX_09B);
+                        break;
+
+                    case 0x1:
+                        PlaySE(SFX_INIT_TABLE, SFX_09C);
+                        break;
+
+                    case 0x0:
+                        PlaySE(SFX_INIT_TABLE, SFX_0A1);
+                        break;
+                }
+            }
+        }
+    } else {
+        gTheGame.second += second;
+
+        if (gTheGame.second >= 60) {
+            gTheGame.second = 0;
+            gTheGame.minute++;
+        }
+
+        if (gTheGame.minute >= 60) {
+            gTheGame.hour = gTheGame.hour + 1;
+            if (gTheGame.hour >= 24) {
+                gTheGame.hour = 23;
+                gTheGame.minute = 59;
+                gTheGame.second = 59;
+            } else {
+                gTheGame.minute = 0;
+            }
+        }
+    }
+}
 #endif
 
 #if VERSION_USA
@@ -343,7 +408,7 @@ void Update3DBuffer(struct_gInfo *info) {
         bcopy(&well->explosion, &dynamicp->explosion[num], sizeof(explode_t) * EXPLOSION_COUNT);
         bcopy(&well->visible, &dynamicp->unk_18308[num], sizeof(char) * BLOCK_LEN_ROWS * BLOCK_LEN_B);
 
-        if (gSelection == 0x64) {
+        if (gSelection == SELECTION_64) {
             gTransMtx[3][0] = -0.51f;
         } else if (gTheGame.totalPlayer == 1) {
             gTransMtx[3][0] = 0.06f;
@@ -353,7 +418,7 @@ void Update3DBuffer(struct_gInfo *info) {
             gTransMtx[3][0] = 0.51f;
         }
 
-        gTransMtx[3][1] = well->translation + 0.01;
+        gTransMtx[3][1] = well->translation + DOUBLE_LITERAL(0.01);
 
         guMtxF2L(gTransMtx, &dynamicp->unk_10100[num]);
 

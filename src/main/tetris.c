@@ -319,18 +319,18 @@ void InitTetrisWell(void) {
             Init2DTetrisBlocks(temp_s3, var_fp);
 
             switch (gSelection) { /* switch 1; irregular */
-                case 0xAA:        /* switch 1 */
+                case SELECTION_AA:        /* switch 1 */
                     InitBlockPattern(temp_s3, sp10, 6, 1);
                     InitStartingBlocks(temp_s3, sp10, 6);
                     break;
 
-                case 0x78: /* switch 1 */
+                case SELECTION_78: /* switch 1 */
                     v0 = temp_s3->menu.stage - 1;
                     sp28 = gPlayer[0]->unk_121[v0];
                     Init2DPuzzle(temp_s3, sp34, sp28, 1);
                     break;
 
-                case 0x82: /* switch 1 */
+                case SELECTION_82: /* switch 1 */
                     if (temp_s3->menu.game != 0) {
                         a3 = Match2DPuzzle(&sp28, temp_s3->menu.game, temp_s3->menu.stage);
                         Init2DPuzzle(temp_s3, sp34, sp28, a3);
@@ -345,7 +345,7 @@ void InitTetrisWell(void) {
                     }
                     break;
 
-                case 0x96: /* switch 1 */
+                case SELECTION_96: /* switch 1 */
                     if (var_fp == 1) {
                         AISetLevel(&brainbrain[1], gTheGame.menu[0].game, gTheGame.menu[0].stage);
                         InitAI(temp_s3, sp34, &brainbrain[1]);
@@ -373,7 +373,7 @@ void InitTetrisWell(void) {
             Init2DAttackBlocks(temp_s3);
             Init2DExplosion(temp_s3);
             Init2DText();
-            if ((gSelection == 0xAA) || (gSelection == 0xB4)) {
+            if ((gSelection == SELECTION_AA) || (gSelection == SELECTION_B4)) {
                 Init2DClearLine(temp_s3, sp34, var_fp);
             }
             Init2DTetrisBlocksTMEM(temp_s3, 0);
@@ -383,12 +383,12 @@ void InitTetrisWell(void) {
             temp_s3->translation = -0.768f;
 
             switch (gSelection) { /* irregular */
-                case 0x82: {
+                case SELECTION_82: {
                     a3 = func_80088A48_usa(&sp28, temp_s3->menu.game, temp_s3->menu.stage);
                     Init3DPuzzle(temp_s3, sp34, sp28, a3);
                 } break;
 
-                case 0xAA:
+                case SELECTION_AA:
 
                     // do {
                     InitBlockPattern(temp_s3, sp10, 18, 1);
@@ -417,7 +417,7 @@ void InitTetrisWell(void) {
             Init3DAttackBlocks(temp_s3);
             Init3DExplosion(temp_s3);
             Init3DText();
-            if ((gSelection == 0xAA) || (gSelection == 0xB4)) {
+            if ((gSelection == SELECTION_AA) || (gSelection == SELECTION_B4)) {
                 Init3DClearLine(temp_s3, sp34, var_fp);
             }
         }
@@ -498,7 +498,7 @@ void DoTetris(void) {
         if (!(gGameStatus & 0x20) || (gCounter % 2 != 0)) {
             if (gMain == GMAIN_387) {
                 if ((cursor->extra_wait == 0) && (cursor->unk_0C == 0) && (well->unk_43F4 == 0) &&
-                    (well->unk_43B0 == 0) && (gSelection >= 0x83) && (B_801AB61C_usa == 0) && (cursor->unk_00 <= 0) &&
+                    (well->unk_43B0 == 0) && (gSelection >= SELECTION_83) && (B_801AB61C_usa == 0) && (cursor->unk_00 <= 0) &&
                     (cursor->unk_08 == 0)) {
                     well->unk_43EC += well->unk_43F0;
 
@@ -554,12 +554,12 @@ void DoTetris(void) {
                     UpdateAI(well, cursor, &brainbrain[num], num);
                 }
                 UpdateWell(well, cursor, num, var_s2);
-                if ((gSelection == 0xA0) || (gSelection == 0x96)) {
+                if ((gSelection == SELECTION_A0) || (gSelection == SELECTION_96)) {
                     ChangeAttack(well, cursor, num, var_s2);
                 }
                 UpdateCursor(well, cursor);
                 UpdateIcon(well, cursor, num);
-                if ((gSelection == 0xA0) || (gSelection == 0x96)) {
+                if ((gSelection == SELECTION_A0) || (gSelection == SELECTION_96)) {
                     UpdateAttack(well, cursor, num);
                 }
 
@@ -575,7 +575,7 @@ void DoTetris(void) {
                 well->collision = -1;
                 AddNewRow(well, cursor, num);
                 well->unk_43F8 = 0;
-                if ((gSelection == 0xAA) || (gSelection == 0xB4)) {
+                if ((gSelection == SELECTION_AA) || (gSelection == SELECTION_B4)) {
                     cursor->target[0] -= 1;
                 }
             }

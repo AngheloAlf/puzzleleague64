@@ -147,7 +147,7 @@ void DrawEditor(struct_gInfo_unk_00068 *arg0) {
                 gMain = GMAIN_2BC;
             } else if (B_8018E9C0_usa == 0xB) {
                 gMain = GMAIN_384;
-                gSelection = 0x82;
+                gSelection = SELECTION_82;
                 gTheGame.totalPlayer = 1;
                 gTheGame.dimension = DIMENSION_2D;
                 gTheGame.menu[0].game = 0;
@@ -221,7 +221,7 @@ void DoEditor(void) {
 
     screenTick(&sp10);
     if (sp10.unk_0 != 0) {
-        PlaySE(SFX_INIT_TABLE, 1);
+        PlaySE(SFX_INIT_TABLE, SFX_001);
     }
 }
 #endif

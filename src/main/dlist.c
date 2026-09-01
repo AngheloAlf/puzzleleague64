@@ -25,7 +25,7 @@ void InitCursor(cursor_t *cursor) {
     cursor->frame_n = 0;
     cursor->frame_d = 0xF;
 
-    if ((gTheGame.dimension == DIMENSION_3D) || (gSelection < 0x8C)) {
+    if ((gTheGame.dimension == DIMENSION_3D) || (gSelection < SELECTION_8C)) {
         cursor->x = 2;
         cursor->y = 3;
     } else {
@@ -36,10 +36,10 @@ void InitCursor(cursor_t *cursor) {
     cursor->sx = -1;
     cursor->sy = -1;
 
-    if ((gSelection == 0x78) || (gSelection == 0x82)) {
+    if ((gSelection == SELECTION_78) || (gSelection == SELECTION_82)) {
         return;
     }
-    if ((gSelection == 0xAA) || (gSelection == 0xB4)) {
+    if ((gSelection == SELECTION_AA) || (gSelection == SELECTION_B4)) {
         return;
     }
 

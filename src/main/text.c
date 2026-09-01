@@ -174,7 +174,7 @@ void UpdateText(void) {
                 sprintf(string, "%2d:%02d'%02d", gTheGame.hour, gTheGame.minute, gTheGame.second);
                 SetText(0x21, 0x28, string, SETTEXTTYPE_14);
             }
-        } else if (gSelection == 0x96) {
+        } else if (gSelection == SELECTION_96) {
             if (gTheGame.hour > 0) {
                 sprintf(string, "59'59");
                 SetText(0x8A, 0xAC, string, SETTEXTTYPE_14);
@@ -200,9 +200,9 @@ void UpdateText(void) {
     }
 
     switch (gSelection) {
-        case 0x8C:
-        case 0xBE:
-            if (gSelection == 0x8C) {
+        case SELECTION_8C:
+        case SELECTION_BE:
+            if (gSelection == SELECTION_8C) {
                 if (gTheGame.dimension == DIMENSION_2D) {
                     hi_score = &gPlayer[0]->unk_014;
                 } else {
@@ -225,6 +225,7 @@ void UpdateText(void) {
                     if (well1->unk_43AC > *hi_score) {
                         *hi_score = well1->unk_43AC;
                     }
+                    // TODO: get rid of goto
                     goto block_63;
                 }
             } else {
@@ -260,7 +261,7 @@ void UpdateText(void) {
             }
             break;
 
-        case 0xAA:
+        case SELECTION_AA:
             if (well1->menu.game != 5) {
                 sprintf(string, "%1d-%1d", well1->menu.stage, well1->menu.speed);
                 SetText(0x103, 0x29, string, SETTEXTTYPE_16);
@@ -295,12 +296,12 @@ void UpdateText(void) {
         default:
             break;
 
-        case 0x78:
+        case SELECTION_78:
             sprintf(string, "%2d", well1->menu.stage);
             SetText(0x10C, 0x2C, string, SETTEXTTYPE_16);
             break;
 
-        case 0x82:
+        case SELECTION_82:
             if (well1->menu.game == 0) {
                 sprintf(string, "%2d", well1->menu.stage);
                 SetText(0x10C, 0x3F, string, SETTEXTTYPE_16);
@@ -319,7 +320,7 @@ void UpdateText(void) {
             }
             break;
 
-        case 0xC8:
+        case SELECTION_C8:
             sprintf(string, "%05d", well1->unk_43AC % 100000, well1->unk_43AC);
             SetText(0x89, 0x58, string, SETTEXTTYPE_15);
 
@@ -341,8 +342,8 @@ void UpdateText(void) {
             }
             break;
 
-        case 0xA0:
-        case 0xB4:
+        case SELECTION_A0:
+        case SELECTION_B4:
             sprintf(string, "%d", well1->menu.game);
             if (well1->menu.game < 0xA) {
                 SetText(0x93, 0x5B, string, SETTEXTTYPE_17);

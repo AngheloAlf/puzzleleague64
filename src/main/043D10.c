@@ -156,7 +156,7 @@ void func_80043380_usa(struct_80192FA0_unk_0C *arg0) {
         switch (arg0->unk_0C) {
             case 0x0:
                 if (arg0->unk_00 == -0x8C) {
-                    PlaySE(SFX_INIT_TABLE, 0xA4);
+                    PlaySE(SFX_INIT_TABLE, SFX_0A4);
                 }
 
                 arg0->unk_00 += 0xA;
@@ -209,7 +209,7 @@ void func_80043380_usa(struct_80192FA0_unk_0C *arg0) {
             arg0->unk_04 = 0;
             arg0->unk_08 = 5;
             if (arg0->unk_0C == 0) {
-                PlaySE(SFX_INIT_TABLE, 0xA3);
+                PlaySE(SFX_INIT_TABLE, SFX_0A3);
             }
         }
     } else if (arg0->unk_08 == 5) {
@@ -434,7 +434,7 @@ void func_80043D24_usa(s32 arg0) {
         gTheGame.menu[0].misc = sp18 + 1;
         gMain = GMAIN_384;
         gReset = -1;
-        gSelection = 0x96;
+        gSelection = SELECTION_96;
         gTheGame.menu[1].misc = B_80192FA0_usa->unk_54 + 1;
     }
 

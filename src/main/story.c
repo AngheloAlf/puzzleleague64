@@ -98,12 +98,12 @@ void func_8002B600_usa(UNK_TYPE4 arg0 UNUSED) {
 
         if (gTheGame.controller[0].touch_button & A_BUTTON) {
             inlined_func();
-            PlaySE(SFX_INIT_TABLE, 2);
+            PlaySE(SFX_INIT_TABLE, SFX_002);
         }
 
         if (temp_s1 != gTheGame.menu[0].stage) {
             gTheGame.menu[0].stage = temp_s1;
-            PlaySE(SFX_INIT_TABLE, 1);
+            PlaySE(SFX_INIT_TABLE, SFX_001);
             screenSetNumber(temp_v0_2, 0x64, gTheGame.menu[0].stage, -1);
         }
     }
@@ -236,7 +236,7 @@ void DoStory(void) {
         screenTick(&sp10);
 
         if (sp10.unk_0 != 0) {
-            PlaySE(SFX_INIT_TABLE, 1);
+            PlaySE(SFX_INIT_TABLE, SFX_001);
         }
 
         if (B_8018E570_usa->unk_00 > 0) {
@@ -259,7 +259,7 @@ void DoStory(void) {
                         B_8018E570_usa->unk_00 -= 2;
                         func_8002B85C_usa(B_8018E570_usa->unk_58[B_8018E570_usa->unk_00],
                                           B_8018E570_usa->unk_18[B_8018E570_usa->unk_00]);
-                        PlaySE(SFX_INIT_TABLE, 6);
+                        PlaySE(SFX_INIT_TABLE, SFX_006);
                     } else {
                         gMain = GMAIN_2BC;
                         gReset = -1;
@@ -370,15 +370,15 @@ void InitStory(void) {
     var_a0->unk_10 = a2;
     var_a0->unk_04 = -1;
 
-    if (gSelection != 0x96) {
-        if ((gSelection == 0x8C) || (gSelection == 0xBE)) {
+    if (gSelection != SELECTION_96) {
+        if ((gSelection == SELECTION_8C) || (gSelection == SELECTION_BE)) {
             func_8002B85C_usa(2, 0);
-        } else if (gSelection == 0xAA) {
+        } else if (gSelection == SELECTION_AA) {
             gPlayer[0]->unk_02B.unk_5 |= 0x20;
             menuSaveData(gPlayer[0]->unk_000);
 
             func_8002B85C_usa(2, 9);
-        } else if (gSelection == 0x82) {
+        } else if (gSelection == SELECTION_82) {
             s32 sp10;
 
             if (func_80008EA4_usa(&sp10)) {
@@ -387,7 +387,7 @@ void InitStory(void) {
                 gMain = GMAIN_2BC;
                 gReset = -1;
             }
-        } else if ((gSelection == 0xA0) || (gSelection == 0xB4) || (gSelection == 0xC8)) {
+        } else if ((gSelection == SELECTION_A0) || (gSelection == SELECTION_B4) || (gSelection == SELECTION_C8)) {
             func_8002B85C_usa(2, 0);
         } else {
             func_8002B85C_usa(5, 0);

@@ -141,7 +141,7 @@ s32 EndingExplosion(tetWell *well) {
     s32 var_s0;
     s32 var_s2;
 
-    if (gSelection == 0x82) {
+    if (gSelection == SELECTION_82) {
         switch (well->menu.game) {
             case 0x0:
             case 0x1:
@@ -174,30 +174,30 @@ s32 EndingExplosion(tetWell *well) {
     }
 
     if (gWhatever == 3) {
-        if (gSelection == 0xAA) {
+        if (gSelection == SELECTION_AA) {
             if (well->menu.speed < 3) {
-                PlaySE(SFX_INIT_TABLE, 0x12C);
+                PlaySE(SFX_INIT_TABLE, SFX_12C);
             } else if (well->menu.speed < 5) {
-                PlaySE(SFX_INIT_TABLE, 0x12D);
+                PlaySE(SFX_INIT_TABLE, SFX_12D);
             } else {
-                PlaySE(SFX_INIT_TABLE, 0x12E);
+                PlaySE(SFX_INIT_TABLE, SFX_12E);
             }
-        } else if (gSelection == 0x82) {
+        } else if (gSelection == SELECTION_82) {
             switch (var_s0) {
                 case 1:
-                    PlaySE(SFX_INIT_TABLE, 0x12C);
+                    PlaySE(SFX_INIT_TABLE, SFX_12C);
                     break;
 
                 case 2:
-                    PlaySE(SFX_INIT_TABLE, 0x12D);
+                    PlaySE(SFX_INIT_TABLE, SFX_12D);
                     break;
 
                 case 3:
-                    PlaySE(SFX_INIT_TABLE, 0x12E);
+                    PlaySE(SFX_INIT_TABLE, SFX_12E);
                     break;
             }
         } else {
-            PlaySE(SFX_INIT_TABLE, 0x12C);
+            PlaySE(SFX_INIT_TABLE, SFX_12C);
         }
     }
 
@@ -221,7 +221,7 @@ s32 EndingExplosion(tetWell *well) {
         }
     }
 
-    if (gSelection == 0xAA) {
+    if (gSelection == SELECTION_AA) {
         if (well->menu.speed < 3) {
             var_s2 = 0x82;
         } else if (well->menu.speed < 5) {
@@ -229,7 +229,7 @@ s32 EndingExplosion(tetWell *well) {
         } else {
             var_s2 = 0xCD;
         }
-    } else if (gSelection != 0x82) {
+    } else if (gSelection != SELECTION_82) {
         var_s2 = 0x82;
     } else {
         switch (var_s0) {
@@ -416,21 +416,21 @@ s32 DoGameOverTryAgain(void) {
 
     if (button & L_JPAD) {
         if (*pos != 0) {
-            PlaySE(SFX_INIT_TABLE, 0x167);
+            PlaySE(SFX_INIT_TABLE, SFX_167);
         }
         *pos = 0;
     } else if (button & R_JPAD) {
         if (*pos != 1) {
-            PlaySE(SFX_INIT_TABLE, 0x168);
+            PlaySE(SFX_INIT_TABLE, SFX_168);
         }
         *pos = 1;
     } else if (button & (A_BUTTON | START_BUTTON)) {
         FadeOutSong(last_song_handle, 0x5A);
         FadeOutAllSFXs(0x1E);
         if (*pos == 0) {
-            PlaySE(SFX_INIT_TABLE, 5);
+            PlaySE(SFX_INIT_TABLE, SFX_005);
         } else {
-            PlaySE(SFX_INIT_TABLE, 6);
+            PlaySE(SFX_INIT_TABLE, SFX_006);
         }
         return -1;
     }
@@ -838,8 +838,8 @@ void DoGameOver2D(void) {
         if (gTheGame.unk_9C08 == 1) {
             switch (gMain) {                        /* switch 1 */
                 case GMAIN_38E:                     /* switch 1 */
-                    if (gSelection != 0x82) {
-                        if (gSelection == 0xAA) {
+                    if (gSelection != SELECTION_82) {
+                        if (gSelection == SELECTION_AA) {
                             UpdatePlayerStageClear(gTheGame.unk_8860, gTheGame.help.selection[0xC], gTheGame.help.selection[0x10]);
                         }
                     } else {
@@ -847,15 +847,15 @@ void DoGameOver2D(void) {
                     }
                     func_8003490C_usa();
                     switch (gSelection) {           /* switch 3; irregular */
-                        case 0x8C:                  /* switch 3 */
-                        case 0xAA:                  /* switch 3 */
-                        case 0xBE:                  /* switch 3 */
+                        case SELECTION_8C:                  /* switch 3 */
+                        case SELECTION_AA:                  /* switch 3 */
+                        case SELECTION_BE:                  /* switch 3 */
                             gTheGame.unk_9988[0x1C0] = 0;
                             gTheGame.unk_8860[0].unk_C = 0;
                             break;
-                        case 0x78:                  /* switch 3 */
+                        case SELECTION_78:                  /* switch 3 */
                             /* fallthrough */
-                        case 0x82:                  /* switch 3 */
+                        case SELECTION_82:                  /* switch 3 */
                             gTheGame.unk_9988[0x1C0] = -1;
                             break;
                     }
@@ -869,13 +869,13 @@ void DoGameOver2D(void) {
                         Init2DGameOverSmoke(&gTheGame, 0);
                     }
                     func_80039A54_usa(0);
-                    if (gSelection == 0x8C) {
+                    if (gSelection == SELECTION_8C) {
                         if (gTheGame.unk_43AC < 0x2710) {
 
                         } else {
                             goto block_29;
                         }
-                    } else if ((gSelection == 0xBE) && (gTheGame.unk_8860[0].unk_0 != 8)) {
+                    } else if ((gSelection == SELECTION_BE) && (gTheGame.unk_8860[0].unk_0 != 8)) {
 block_29:
                         func_80039A54_usa(-1);
                     }
@@ -886,13 +886,13 @@ block_29:
                     gTheGame.unk_43EC = 0;
                     if (gTheGame.unk_8860[0].unk_0 == 8) {
                         PlaySE(&SFX_INIT_TABLE, 0xA0);
-                        if (gSelection >= 0x83) {
+                        if (gSelection >= SELECTION_83) {
                             var_a1 = 0x175;
                             goto block_39;
                         }
                     } else {
                         var_a1 = 0x174;
-                        if (gSelection != 0xBE) {
+                        if (gSelection != SELECTION_BE) {
                             PlaySE(&SFX_INIT_TABLE, 0xA1);
                             if (gTheGame.help.selection[8] != 5) {
                                 if (gTheGame.help.selection[0x10] == 5) {
@@ -944,12 +944,12 @@ block_50:
                 case 0x391:                         /* switch 1 */
                     temp_v0_2 = gWhatever;
                     if (temp_v0_2 == 0) {
-                        if ((gSelection != 0x82) || (gTheGame.help.selection[8] != 0)) {
+                        if ((gSelection != SELECTION_82) || (gTheGame.help.selection[8] != 0)) {
                             SaveRom();
                         }
                     }
                     gWhatever = temp_v0_2 + 1;
-                    if (((gSelection == 0x8C) | (gSelection == 0xBE)) != 0) {
+                    if (((gSelection == SELECTION_8C) | (gSelection == SELECTION_BE)) != 0) {
                         Init2DIcons(&gTheGame);
                         var_s0 = func_8003901C_usa(&gTheGame);
                         if (gWhatever == 0x55) {
@@ -965,14 +965,14 @@ block_62:
                             }
                         }
                         if (gWhatever == 0x5A) {
-                            if (gSelection == 0x8C) {
+                            if (gSelection == SELECTION_8C) {
                                 if (gTheGame.unk_43AC >= 0x2710) {
                                     PlayMIDI(&BGM_INIT_TABLE, 0x46, 0, 2);
                                     PlaySE(&SFX_INIT_TABLE, 0x7D);
                                 } else {
                                     goto block_72;
                                 }
-                            } else if (gSelection == 0xBE) {
+                            } else if (gSelection == SELECTION_BE) {
                                 if (gTheGame.unk_8860[0].unk_0 != 8) {
                                     if (gTheGame.unk_43AC >= 0x2710) {
                                         PlayMIDI(&BGM_INIT_TABLE, 0x46, 0, 2);
@@ -1003,8 +1003,8 @@ block_73:
                         Init2DTetrisBlocks(&gTheGame, 0);
                         Init2DNewRow(&gTheGame);
                         Init2DIcons(&gTheGame);
-                        if ((gSelection >= 0x83) || (gTheGame.unk_8860[0].unk_0 != 7)) {
-                            if ((gSelection == 0xAA) && (gTheGame.unk_8860[0].unk_0 == 7)) {
+                        if ((gSelection >= SELECTION_83) || (gTheGame.unk_8860[0].unk_0 != 7)) {
+                            if ((gSelection == SELECTION_AA) && (gTheGame.unk_8860[0].unk_0 == 7)) {
                                 goto block_85;
                             }
                             gTheGame.unk_43FC = 0x59;
@@ -1025,18 +1025,18 @@ block_85:
                     gTheGame.unk_9988[0x13C] = 0x26CU;
                     gTheGame.unk_9988[0x164] = 0x2D0;
                     if (gTheGame.unk_8860[0].unk_0 == 7) {
-                        if (((gSelection < 0x83) | (gSelection == 0xAA)) != 0) {
+                        if (((gSelection < SELECTION_83) | (gSelection == SELECTION_AA)) != 0) {
                             PlayMIDI(&BGM_INIT_TABLE, 0x45, 0, 1);
-                            if (gSelection == 0x82) {
+                            if (gSelection == SELECTION_82) {
                                 func_80005A08_usa(gTheGame.help.selection[8]);
                             }
                         }
-                    } else if ((gSelection != 0x8C) & (gSelection != 0xBE)) {
+                    } else if ((gSelection != SELECTION_8C) & (gSelection != SELECTION_BE)) {
                         if (func_8004FA2C_usa() != 0) {
                             func_8004ADD0_usa(-1);
                         }
                         PlayMIDI(&BGM_INIT_TABLE, 0x42, 0, 1);
-                        if (gSelection == 0xAA) {
+                        if (gSelection == SELECTION_AA) {
                             if (gTheGame.help.selection[8] == 5) {
                                 if (gTheGame.help.selection[0xC] == 3) {
                                     PlaySE(&SFX_INIT_TABLE, 0x81);
@@ -1057,13 +1057,13 @@ block_101:
                     func_80039B78_usa();
                     func_8004ADD0_usa(0);
                     switch (gSelection) {           /* switch 4; irregular */
-                        case 0x8C:                  /* switch 4 */
+                        case SELECTION_8C:                  /* switch 4 */
                             if (gTheGame.help.selection[8] != 0) {
                                 switch (gSelection) { /* switch 5; irregular */
                                     case 0xAA:      /* switch 4 */
                                     case 0xAA:      /* switch 5 */
                                         if (gTheGame.unk_8860[0].unk_0 != 7) {
-                                            if (((gSelection == 0x82) && (gTheGame.unk_8860[0].unk_0 == 7)) || (gSelection == 0x78)) {
+                                            if (((gSelection == SELECTION_82) && (gTheGame.unk_8860[0].unk_0 == 7)) || (gSelection == SELECTION_78)) {
                                                 goto block_111;
                                             }
                                         } else {
@@ -1112,7 +1112,7 @@ block_120:
                             gTheGame.tetrisWell[1].unk_4404 = (s32) (gTheGame.tetrisWell[1].unk_4404 + 1);
                         }
                     }
-                    if ((gSelection == 0x96) & var_s3) {
+                    if ((gSelection == SELECTION_96) & var_s3) {
                         func_80058D68_usa(gTheGame.help.selection[8], gTheGame.help.selection[0xC]);
                     } else {
                         temp_a0 = (u32) (gGameStatus & 0xF00) >> 8;
@@ -1161,7 +1161,7 @@ block_120:
                     if (gTheGame.unk_8860[1] == 8) {
                         gTheGame.tetrisWell[1].unk_43FC = 0x27;
                     }
-                    if (gSelection == 0x96) {
+                    if (gSelection == SELECTION_96) {
                         var_a1_4 = 0x175;
                         if (((var_s3 == var_s1) | (var_s1 != 0)) != 0) {
 
@@ -1195,7 +1195,7 @@ block_152:
                 case 0x390:                         /* switch 2 */
                     temp_v0_3 = gWhatever;
                     if (temp_v0_3 == 0) {
-                        if (gSelection != 0x96) {
+                        if (gSelection != SELECTION_96) {
                             var_a0_3 = (u32) (gGameStatus & 0xF00) >> 8;
                             if ((gTheGame.unk_4404 != var_a0_3) && (gTheGame.tetrisWell[1].unk_4404 != var_a0_3)) {
 
@@ -1301,7 +1301,7 @@ block_164:
                         }
                         gTheGame.unk_9988[0x13C] = (u16) ((((s32) (gTheGame.unk_9988[0x13C] << 0x10) >> 0x12) - var_v1_5) * 4);
                     }
-                    if ((((gSelection == 0x96) & var_s3) || (((gSelection == 0xA0) | (gSelection == 0xB4)) != 0) || (gSelection == 0xC8)) && (gTheGame.unk_43EC == 0) && (gTheGame.unk_43FC == 0x29)) {
+                    if ((((gSelection == SELECTION_96) & var_s3) || (((gSelection == SELECTION_A0) | (gSelection == SELECTION_B4)) != 0) || (gSelection == SELECTION_C8)) && (gTheGame.unk_43EC == 0) && (gTheGame.unk_43FC == 0x29)) {
                         if (B_801C6C90_usa != 0x10) {
                             PlaySE(&SFX_INIT_TABLE, 0x17A);
                         } else {
@@ -1313,7 +1313,7 @@ block_267:
                 case 0x394:                         /* switch 2 */
                     gTheGame.unk_9988[0x164] = 0x30C;
                     gTheGame.unk_9988[0x18C] = 0x30C;
-                    if (gSelection != 0x96) {
+                    if (gSelection != SELECTION_96) {
                         temp_a0_3 = (u32) (gGameStatus & 0xF00) >> 8;
                         if (gTheGame.tetrisWell[0].unk_43BC[0x48] == temp_a0_3) {
                             temp_v1_3 = gTheGame.help.selection[8] + 1;
@@ -1334,7 +1334,7 @@ block_267:
                         }
                     }
                     if (var_s3 != 0) {
-                        if (gSelection == 0x96) {
+                        if (gSelection == SELECTION_96) {
                             var_a0_5 = 0;
                             var_a1_5 = 0;
                         } else if (gTheGame.unk_4404 == 1) {
@@ -1352,7 +1352,7 @@ block_267:
                         func_80005888_usa(0, 1, 2);
                     }
                     if (var_s1 != 0) {
-                        if (gSelection == 0x96) {
+                        if (gSelection == SELECTION_96) {
                             var_a0_6 = 1;
                             var_a1_6 = 0;
                         } else {
@@ -1371,7 +1371,7 @@ block_267:
                         }
                         func_8006C7A0_usa(var_a0_6, var_a1_6);
                         func_80005888_usa(0, 2, 2);
-                        if (gSelection == 0x96) {
+                        if (gSelection == SELECTION_96) {
                             var_a1_7 = 0x42;
                             if (B_801C6C90_usa != 0x10) {
 
@@ -1423,7 +1423,7 @@ block_254:
                     func_80035584_usa(&gTheGame.unk_9988[0x158] + 0x28);
                     temp_v0_7 = gWhatever + 1;
                     gWhatever = temp_v0_7;
-                    if ((temp_v0_7 == 0xDC) && ((gSelection != 0x96) || ((var_s3 != 0) & (var_s1 == 0)))) {
+                    if ((temp_v0_7 == 0xDC) && ((gSelection != SELECTION_96) || ((var_s3 != 0) & (var_s1 == 0)))) {
                         goto block_267;
                     }
                     break;
@@ -1548,8 +1548,8 @@ void DoGameOver3D(void) {
         if (gTheGame.unk_9C08 == 1) {
             switch (gMain) {                        /* switch 1 */
                 case GMAIN_38E:                     /* switch 1 */
-                    if (gSelection != 0x82) {
-                        if (gSelection == 0xAA) {
+                    if (gSelection != SELECTION_82) {
+                        if (gSelection == SELECTION_AA) {
                             UpdatePlayerStageClear(gTheGame.unk_8860, gTheGame.help.selection[0xC], gTheGame.help.selection[0x10]);
                         }
                     } else {
@@ -1558,15 +1558,15 @@ void DoGameOver3D(void) {
                     LoadGameOver3D();
                     InitFlic();
                     switch (gSelection) {           /* switch 3; irregular */
-                        case 0x8C:                  /* switch 3 */
-                        case 0xAA:                  /* switch 3 */
-                        case 0xBE:                  /* switch 3 */
+                        case SELECTION_8C:                  /* switch 3 */
+                        case SELECTION_AA:                  /* switch 3 */
+                        case SELECTION_BE:                  /* switch 3 */
                             gTheGame.unk_9988[0x1C0] = 0;
                             gTheGame.unk_8860[0].unk_C = 0;
                             break;
-                        case 0x78:                  /* switch 3 */
+                        case SELECTION_78:                  /* switch 3 */
                             /* fallthrough */
-                        case 0x82:                  /* switch 3 */
+                        case SELECTION_82:                  /* switch 3 */
                             gTheGame.unk_9988[0x1C0] = -1;
                             break;
                     }
@@ -1580,13 +1580,13 @@ void DoGameOver3D(void) {
                         Init3DGameOverSmoke(&gTheGame, 0);
                     }
                     func_80039A54_usa(0);
-                    if (gSelection == 0x8C) {
+                    if (gSelection == SELECTION_8C) {
                         if (gTheGame.unk_43AC < 0x2710) {
 
                         } else {
                             goto block_29;
                         }
-                    } else if ((gSelection == 0xBE) && (gTheGame.unk_8860[0].unk_0 != 8)) {
+                    } else if ((gSelection == SELECTION_BE) && (gTheGame.unk_8860[0].unk_0 != 8)) {
 block_29:
                         func_80039A54_usa(-1);
                     }
@@ -1597,13 +1597,13 @@ block_29:
                     gTheGame.unk_43EC = 0;
                     if (gTheGame.unk_8860[0].unk_0 == 8) {
                         PlaySE(&SFX_INIT_TABLE, 0xA0);
-                        if (gSelection != 0x82) {
+                        if (gSelection != SELECTION_82) {
                             var_a1 = 0x175;
                             goto block_39;
                         }
                     } else {
                         var_a1 = 0x174;
-                        if (gSelection != 0xBE) {
+                        if (gSelection != SELECTION_BE) {
                             PlaySE(&SFX_INIT_TABLE, 0xA1);
                             if (gTheGame.help.selection[8] != 5) {
                                 if (gTheGame.help.selection[0x10] == 5) {
@@ -1648,7 +1648,7 @@ block_39:
                         if (temp_v0 == 0) {
                             gMain = 0x391;
                             var_a0 = &gTheGame;
-                            if (gSelection == 0xBE) {
+                            if (gSelection == SELECTION_BE) {
                                 Init3DTetrisBlocks(&gTheGame, 0);
                                 Init3DNewRow(&gTheGame);
                                 var_a0 = &gTheGame;
@@ -1670,7 +1670,7 @@ block_108:
                         gTheGame.unk_43EC = (s32) (gTheGame.unk_43EC - 1);
                         goto block_108;
                     }
-                    if (((gSelection == 0x8C) | (gSelection == 0xBE)) != 0) {
+                    if (((gSelection == SELECTION_8C) | (gSelection == SELECTION_BE)) != 0) {
                         Init3DIcons(&gTheGame);
                         var_s0 = func_8003901C_usa(&gTheGame);
                         if (gWhatever == 0x55) {
@@ -1686,14 +1686,14 @@ block_62:
                             }
                         }
                         if (gWhatever == 0x5A) {
-                            if (gSelection == 0x8C) {
+                            if (gSelection == SELECTION_8C) {
                                 if (gTheGame.unk_43AC >= 0x2710) {
                                     PlayMIDI(BGM_INIT_TABLE, 0x46, 0, 2);
                                     PlaySE(&SFX_INIT_TABLE, 0x7D);
                                 } else {
                                     goto block_72;
                                 }
-                            } else if (gSelection == 0xBE) {
+                            } else if (gSelection == SELECTION_BE) {
                                 if (gTheGame.unk_8860[0].unk_0 != 8) {
                                     if (gTheGame.unk_43AC >= 0x2710) {
                                         PlayMIDI(BGM_INIT_TABLE, 0x46, 0, 2);
@@ -1725,8 +1725,8 @@ block_73:
                         Init3DTetrisBlocks(&gTheGame, 0);
                         Init3DNewRow(&gTheGame);
                         Init3DIcons(&gTheGame);
-                        if ((gSelection >= 0x83) || (gTheGame.unk_8860[0].unk_0 != 7)) {
-                            if ((gSelection == 0xAA) && (gTheGame.unk_8860[0].unk_0 == 7)) {
+                        if ((gSelection >= SELECTION_83) || (gTheGame.unk_8860[0].unk_0 != 7)) {
+                            if ((gSelection == SELECTION_AA) && (gTheGame.unk_8860[0].unk_0 == 7)) {
                                 goto block_85;
                             }
                             gTheGame.unk_43FC = 0x59;
@@ -1749,18 +1749,18 @@ block_85:
                     gTheGame.unk_9988[0x13C] = 0x26CU;
                     gTheGame.unk_9988[0x164] = 0x2D0;
                     if (gTheGame.unk_8860[0].unk_0 == 7) {
-                        if (((gSelection < 0x83) | (gSelection == 0xAA)) != 0) {
+                        if (((gSelection < SELECTION_83) | (gSelection == SELECTION_AA)) != 0) {
                             PlayMIDI(BGM_INIT_TABLE, 0x45, 0, 1);
-                            if (gSelection == 0x82) {
+                            if (gSelection == SELECTION_82) {
                                 func_80005A08_usa(gTheGame.help.selection[8]);
                             }
                         }
-                    } else if ((gSelection != 0x8C) & (gSelection != 0xBE)) {
+                    } else if ((gSelection != SELECTION_8C) & (gSelection != SELECTION_BE)) {
                         if (func_8004FA2C_usa() != 0) {
                             func_8004ADD0_usa(-1);
                         }
                         PlayMIDI(BGM_INIT_TABLE, 0x42, 0, 1);
-                        if (gSelection == 0xAA) {
+                        if (gSelection == SELECTION_AA) {
                             if (gTheGame.help.selection[8] == 5) {
                                 if (gTheGame.help.selection[0xC] == 3) {
                                     PlaySE(&SFX_INIT_TABLE, 0x81);
@@ -1781,7 +1781,7 @@ block_101:
                     func_800352DC_usa(&gTheGame, &gTheGame.unk_9988[0x108]);
                     func_80039B78_usa();
                     func_8004ADD0_usa(0);
-                    if ((((gSelection == 0xAA) | (gSelection == 0x82)) != 0) && (gTheGame.unk_8860[0].unk_0 == 7)) {
+                    if ((((gSelection == SELECTION_AA) | (gSelection == SELECTION_82)) != 0) && (gTheGame.unk_8860[0].unk_0 == 7)) {
                         func_80035584_usa(&gTheGame.unk_9988[0x108] + 0x28);
                     }
                     gWhatever += 1;
@@ -1965,7 +1965,7 @@ block_115:
                         }
                         gTheGame.unk_9988[0x13C] = (u16) ((((s32) (gTheGame.unk_9988[0x13C] << 0x10) >> 0x12) - var_v1_4) * 4);
                     }
-                    if ((gTheGame.unk_43FC < 0) && ((gMain = 0x392, (((gSelection == 0x96) & var_s4) != 0)) || (((gSelection == 0xA0) | (gSelection == 0xB4)) != 0) || (gSelection == 0xC8))) {
+                    if ((gTheGame.unk_43FC < 0) && ((gMain = 0x392, (((gSelection == SELECTION_96) & var_s4) != 0)) || (((gSelection == SELECTION_A0) | (gSelection == SELECTION_B4)) != 0) || (gSelection == SELECTION_C8))) {
                         if (B_801C6C90_usa != 0x10) {
                             PlaySE(&SFX_INIT_TABLE, 0x17A);
                         } else {
@@ -2015,7 +2015,7 @@ block_238:
                         }
                         func_8005E108_usa(0, var_a1_6);
                         func_80005888_usa(0, 2, 2);
-                        if (gSelection == 0x96) {
+                        if (gSelection == SELECTION_96) {
                             var_a1_7 = 0x42;
                             if (B_801C6C90_usa != 0x10) {
 
@@ -2073,7 +2073,7 @@ block_221:
                     temp_v0_6 = gWhatever + 1;
                     gWhatever = temp_v0_6;
                     if (temp_v0_6 == 0xDC) {
-                        if ((gSelection != 0x96) || ((var_s4 != 0) & (var_s3 == 0))) {
+                        if ((gSelection != SELECTION_96) || ((var_s4 != 0) & (var_s3 == 0))) {
                             goto block_238;
                         }
                     }

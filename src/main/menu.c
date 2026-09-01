@@ -4967,7 +4967,7 @@ block_29:
                                         var_s0->unk_10 = 4;
                                     }
                                 } else if ((var_v0_4 != 0) || (temp_a0_2 & 0x400) || (temp_a0_2 & 0x200) || (temp_a0_2 & 0x100)) {
-                                    PlaySE(SFX_INIT_TABLE, 8);
+                                    PlaySE(SFX_INIT_TABLE, SFX_008);
                                 }
                             }
                         }
@@ -5117,7 +5117,7 @@ block_128:
                                     goto block_151;
                                 }
 block_129:
-                                PlaySE(SFX_INIT_TABLE, 8);
+                                PlaySE(SFX_INIT_TABLE, SFX_008);
                                 var_s3_2 += 4;
                             } else {
                                 goto block_151;
@@ -5131,20 +5131,20 @@ block_131:
                         if (var_v0_6 == 0) {
                             if (geTypeMenu != MT_1P_PUZZLE_STAGE3D) {
                                 if (var_s1_5 == 1) {
-                                    PlaySE(SFX_INIT_TABLE, 0x16A);
+                                    PlaySE(SFX_INIT_TABLE, SFX_16A);
                                     var_s3_2 += 4;
                                 } else {
-                                    PlaySE(SFX_INIT_TABLE, 0x169);
+                                    PlaySE(SFX_INIT_TABLE, SFX_169);
                                     var_s3_2 += 4;
                                 }
                             } else {
                                 goto block_151;
                             }
                         } else if (geTypeMenu == MT_PLAY) {
-                            PlaySE(SFX_INIT_TABLE, 3);
+                            PlaySE(SFX_INIT_TABLE, SFX_003);
                             var_s3_2 += 4;
                         } else {
-                            PlaySE(SFX_INIT_TABLE, 2);
+                            PlaySE(SFX_INIT_TABLE, SFX_002);
                             var_s3_2 += 4;
                         }
                     }
@@ -5174,7 +5174,7 @@ block_149:
                     *var_s2_2 = 0;
                     func_800276CC_usa(giScreenMenu, &sp40, (s32) var_s1_5);
                     func_80027618_usa(giScreenMenu, sp40, var_s1_5);
-                    PlaySE(SFX_INIT_TABLE, 6);
+                    PlaySE(SFX_INIT_TABLE, SFX_006);
                     var_s3_2 += 4;
                 } else {
 block_151:
@@ -5195,18 +5195,18 @@ block_151:
                     if (temp_v1_6 >= 2) {
                         if (geTypeMenu != MT_1P_PUZZLE_STAGE3D) {
                             if (var_s1_6 == 1) {
-                                PlaySE(SFX_INIT_TABLE, 0x16A);
+                                PlaySE(SFX_INIT_TABLE, SFX_16A);
                             } else {
-                                PlaySE(SFX_INIT_TABLE, 0x169);
+                                PlaySE(SFX_INIT_TABLE, SFX_169);
                             }
                         }
                     } else if (geTypeMenu == MT_PLAY) {
-                        PlaySE(SFX_INIT_TABLE, 3);
+                        PlaySE(SFX_INIT_TABLE, SFX_003);
                     } else {
-                        PlaySE(SFX_INIT_TABLE, 2);
+                        PlaySE(SFX_INIT_TABLE, SFX_002);
                     }
                 } else if (temp_v0_2 == 0x21) {
-                    PlaySE(SFX_INIT_TABLE, 6);
+                    PlaySE(SFX_INIT_TABLE, SFX_006);
                 } else {
                     temp_a0_3 = var_s0_2->unk_10;
                     if (((temp_a0_3 != 0) & (temp_a0_3 != 0x20)) && (temp_a0_3 != 0x21)) {
@@ -5358,13 +5358,13 @@ void InitMenu(void) {
                 B_8018A850_usa[gnCountMenu++] = s0;
             }
         } else {
-            if ((gSelection == 0xA0) || (gSelection == 0xC8) || (gSelection == 0xB4)) {
+            if ((gSelection == SELECTION_A0) || (gSelection == SELECTION_C8) || (gSelection == SELECTION_B4)) {
                 if (gWorld == 0x10) {
                     gnCountMenu -= 1;
                 } else {
                     gnCountMenu -= 2;
                 }
-            } else if (gSelection == 0xAA) {
+            } else if (gSelection == SELECTION_AA) {
                 gnCountMenu = 0;
                 B_8018A850_usa[gnCountMenu++] = MT_MAIN;
                 B_8018A850_usa[gnCountMenu++] = MT_1P_ATTACK_NAME;

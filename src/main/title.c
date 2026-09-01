@@ -154,18 +154,18 @@ void titleDrawImage(Gfx **gfxP, s32 arg1 UNUSED, s32 nTag) {
                 gDPSetFillColor(gfx++, (color << 16) | color);
                 gDPFillRectangle(gfx++, 0, var_t9, SCREEN_WIDTH - 1, var_t9);
 
-                var_fv1 += 256.0 / SCREEN_HEIGHT;
-                if (var_fv1 >= 256.0) {
+                var_fv1 += DOUBLE_LITERAL(256.0) / SCREEN_HEIGHT;
+                if (var_fv1 >= DOUBLE_LITERAL(256.0)) {
                     var_fv1 = 255;
                 }
 
-                var_ft1 += 256.0 / SCREEN_HEIGHT;
-                if (var_ft1 >= 256.0) {
+                var_ft1 += DOUBLE_LITERAL(256.0) / SCREEN_HEIGHT;
+                if (var_ft1 >= DOUBLE_LITERAL(256.0)) {
                     var_ft1 = 255;
                 }
 
-                var_ft0 += 256.0 / SCREEN_HEIGHT;
-                if (var_ft0 >= 256.0) {
+                var_ft0 += DOUBLE_LITERAL(256.0) / SCREEN_HEIGHT;
+                if (var_ft0 >= DOUBLE_LITERAL(256.0)) {
                     var_ft0 = 255;
                 }
             }
@@ -317,7 +317,7 @@ void DoTitle(void) {
                     if ((ganButton[(giButton - 2) % ARRAY_COUNTU(ganButton)] == L_TRIG) &&
                         (ganButton[(giButton - 1) % ARRAY_COUNTU(ganButton)] == L_TRIG)) {
                         gGameStatus ^= 1;
-                        PlaySE(SFX_INIT_TABLE, 9);
+                        PlaySE(SFX_INIT_TABLE, SFX_009);
                     }
                 }
 
@@ -331,7 +331,7 @@ void DoTitle(void) {
                             if ((ganButton[(giButton - 2) % ARRAY_COUNTU(ganButton)] == R_TRIG) &&
                                 (ganButton[(giButton - 1) % ARRAY_COUNTU(ganButton)] == A_BUTTON)) {
                                 gbOpenTitle = ~gbOpenTitle;
-                                PlaySE(SFX_INIT_TABLE, 9);
+                                PlaySE(SFX_INIT_TABLE, SFX_009);
                             }
                         }
                     }
@@ -377,7 +377,7 @@ void DoTitle(void) {
                         gMain = GMAIN_TUTORIAL;
                         gTheGame.totalPlayer = 1;
                         gTheGame.dimension = DIMENSION_2D;
-                        gSelection = 0x64;
+                        gSelection = SELECTION_64;
                         gTheGame.menu[0].game = 1;
                         break;
 
@@ -385,7 +385,7 @@ void DoTitle(void) {
                         gMain = GMAIN_TUTORIAL;
                         gTheGame.totalPlayer = 1;
                         gTheGame.dimension = DIMENSION_2D;
-                        gSelection = 0x64;
+                        gSelection = SELECTION_64;
                         gTheGame.menu[0].game = 2;
                         break;
 
@@ -393,7 +393,7 @@ void DoTitle(void) {
                         gMain = GMAIN_TUTORIAL;
                         gTheGame.totalPlayer = 1;
                         gTheGame.dimension = DIMENSION_2D;
-                        gSelection = 0x64;
+                        gSelection = SELECTION_64;
                         gTheGame.menu[0].game = 3;
                         break;
 
@@ -401,7 +401,7 @@ void DoTitle(void) {
                         gMain = GMAIN_TUTORIAL;
                         gTheGame.totalPlayer = 1;
                         gTheGame.dimension = DIMENSION_2D;
-                        gSelection = 0x64;
+                        gSelection = SELECTION_64;
                         gTheGame.menu[0].game = 4;
                         break;
 
@@ -410,7 +410,7 @@ void DoTitle(void) {
                         gMain = GMAIN_384;
                         gTheGame.totalPlayer = 1;
                         gTheGame.dimension = (geDemoTitle == TD_ENDLESS_2D) ? DIMENSION_2D : DIMENSION_3D;
-                        gSelection = 0x8C;
+                        gSelection = SELECTION_8C;
                         gTheGame.menu[0].game = 1;
                         gTheGame.menu[0].misc = 0;
                         gTheGame.menu[0].speed = 1;
@@ -423,7 +423,7 @@ void DoTitle(void) {
                         gMain = GMAIN_384;
                         gTheGame.totalPlayer = 2;
                         gTheGame.dimension = (geDemoTitle == TD_VS_2D) ? DIMENSION_2D : DIMENSION_3D;
-                        gSelection = 0xA0;
+                        gSelection = SELECTION_A0;
 
                         gTheGame.menu[0].game = 0;
                         gTheGame.menu[0].misc = 0;
@@ -461,9 +461,9 @@ void DoTitle(void) {
         if ((B_8018A7F0_usa == 0) && !peelActive() && (gReset == 0)) {
             if (!screenFlushing() && !screenChangePending()) {
                 if (CheckTitleInput() && func_80024BF4_usa(&heap)) {
-                    PlaySE(SFX_INIT_TABLE, 2);
+                    PlaySE(SFX_INIT_TABLE, SFX_002);
                     if (func_80024BF4_usa(&heap) && (HVQM2Util_Play((void *)"INTRO.HVQM", 0x1000U, heap) != 0)) {
-                        PlaySE(SFX_INIT_TABLE, 2);
+                        PlaySE(SFX_INIT_TABLE, SFX_002);
                     }
 
                     gMain = GMAIN_258;

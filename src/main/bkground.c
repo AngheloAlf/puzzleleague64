@@ -34,26 +34,29 @@ void InitFrame(void) {
             // 2d player display
             ui_display = Pon_Image_Heap;
             switch (gSelection) {
-                case 0x96:
+                case SELECTION_96:
                     LOAD_DATA_SEGMENT(ui_display, segment_background_frame_ui_display_2p_C, Pon_Image_Heap);
                     x = (SCREEN_WIDTH - (BACKGROUND_FRAME_UI_DISPLAY_2P_WIDTH - 12)) / 2;
                     y = SCREEN_HEIGHT - 1 - BACKGROUND_FRAME_UI_DISPLAY_2P_C_HEIGHT;
                     height = BACKGROUND_FRAME_UI_DISPLAY_2P_C_HEIGHT;
                     break;
 
-                case 0xC8:
+                case SELECTION_C8:
                     LOAD_DATA_SEGMENT(ui_display, segment_background_frame_ui_display_2p_B, Pon_Image_Heap);
                     x = (SCREEN_WIDTH - (BACKGROUND_FRAME_UI_DISPLAY_2P_WIDTH - 8)) / 2;
                     y = SCREEN_HEIGHT - 1 - BACKGROUND_FRAME_UI_DISPLAY_2P_B_HEIGHT;
                     height = BACKGROUND_FRAME_UI_DISPLAY_2P_B_HEIGHT;
                     break;
 
-                case 0xA0:
-                case 0xB4:
+                case SELECTION_A0:
+                case SELECTION_B4:
                     LOAD_DATA_SEGMENT(ui_display, segment_background_frame_ui_display_2p_A, Pon_Image_Heap);
                     x = (SCREEN_WIDTH - (BACKGROUND_FRAME_UI_DISPLAY_2P_WIDTH - 8)) / 2;
                     y = SCREEN_HEIGHT - 1 - BACKGROUND_FRAME_UI_DISPLAY_2P_A_HEIGHT;
                     height = BACKGROUND_FRAME_UI_DISPLAY_2P_A_HEIGHT;
+                    break;
+
+                default:
                     break;
             }
         }
@@ -65,19 +68,22 @@ void InitFrame(void) {
 
             ui_display = Pon_Image_Heap;
             switch (gSelection) {
-                case 0xC8:
+                case SELECTION_C8:
                     LOAD_DATA_SEGMENT(ui_display, segment_background_frame_ui_display_2p_B, Pon_Image_Heap);
                     x = (SCREEN_WIDTH - (BACKGROUND_FRAME_UI_DISPLAY_2P_WIDTH - 8)) / 2;
                     y = SCREEN_HEIGHT - 1 - BACKGROUND_FRAME_UI_DISPLAY_2P_B_HEIGHT;
                     height = BACKGROUND_FRAME_UI_DISPLAY_2P_B_HEIGHT;
                     break;
 
-                case 0xB4:
-                case 0xA0:
+                case SELECTION_B4:
+                case SELECTION_A0:
                     LOAD_DATA_SEGMENT(ui_display, segment_background_frame_ui_display_2p_A, Pon_Image_Heap);
                     x = (SCREEN_WIDTH - (BACKGROUND_FRAME_UI_DISPLAY_2P_WIDTH - 8)) / 2;
                     y = SCREEN_HEIGHT - 1 - BACKGROUND_FRAME_UI_DISPLAY_2P_A_HEIGHT;
                     height = BACKGROUND_FRAME_UI_DISPLAY_2P_A_HEIGHT;
+                    break;
+
+                default:
                     break;
             }
         }
@@ -144,7 +150,7 @@ void Draw2DFrame(void) {
         gDPSetRenderMode(glistp++, G_RM_NOOP, G_RM_NOOP2);
         gDPSetCycleType(glistp++, G_CYC_COPY);
 
-        if (gSelection == 0x78) {
+        if (gSelection == SELECTION_78) {
             gDPSetTextureLUT(glistp++, G_TT_RGBA16);
             gSPObjLoadTxtr(glistp++, &gTheGame.unk_99D8);
         }
@@ -194,15 +200,15 @@ void InitBackground(s32 who) {
     void *currSegment = Pon_Image_Heap;
 
     switch (gSelection) {
-        case 0x8C:
+        case SELECTION_8C:
             LOAD_DATA_SEGMENT(currSegment, segment_background_184FF0, Pon_Image_Heap);
             break;
 
-        case 0xBE:
+        case SELECTION_BE:
             LOAD_DATA_SEGMENT(currSegment, segment_background_1A93F0, Pon_Image_Heap);
             break;
 
-        case 0xAA:
+        case SELECTION_AA:
             switch (who) {
                 case 0x1:
                     LOAD_DATA_SEGMENT(currSegment, segment_background_1CD7F0, Pon_Image_Heap);
@@ -238,8 +244,8 @@ void InitBackground(s32 who) {
             }
             break;
 
-        case 0x78:
-        case 0x82:
+        case SELECTION_78:
+        case SELECTION_82:
             switch (who) {
                 case 1:
                     LOAD_DATA_SEGMENT(currSegment, segment_background_2EF7F0, Pon_Image_Heap);
@@ -257,7 +263,7 @@ void InitBackground(s32 who) {
             B_8021BA78_usa = who - 1;
             break;
 
-        case 0x96:
+        case SELECTION_96:
             if (gTheGame.menu[0].stage != 0x10) {
                 switch (who) {
                     case 0x0:
@@ -313,9 +319,9 @@ void InitBackground(s32 who) {
             }
             break;
 
-        case 0xA0:
-        case 0xB4:
-        case 0xC8:
+        case SELECTION_A0:
+        case SELECTION_B4:
+        case SELECTION_C8:
             switch (who) {
                 case 0x0:
                     LOAD_DATA_SEGMENT(currSegment, segment_background_35C3F0, Pon_Image_Heap);
@@ -369,6 +375,9 @@ void InitBackground(s32 who) {
                     LOAD_DATA_SEGMENT(currSegment, segment_background_50F3F0, Pon_Image_Heap);
                     break;
             }
+            break;
+
+        default:
             break;
     }
 
@@ -479,7 +488,7 @@ void func_80048D94_usa(void) {
         gTheGame.unk_9A08[1].s.objY = 0x1F << 2;
         gTheGame.unk_9A08[1].s.scaleH = 0x2A;
 
-        if (gSelection == 0x96) {
+        if (gSelection == SELECTION_96) {
             gTheGame.unk_9A08[2].s.objY = 0x51 << 2;
         } else {
             gTheGame.unk_9A08[2].s.objY = 0x40 << 2;
@@ -645,7 +654,7 @@ void func_8004AE90_usa(void) {
 
             gDPPipeSync(glistp++);
             gSPBgRect1Cyc(glistp++, &gTheGame.unk_8C88[1]);
-        } else if ((gSelection != 0xAA) & (gSelection != 0x82)) {
+        } else if ((gSelection != SELECTION_AA) && (gSelection != SELECTION_82)) {
             gDPPipeSync(glistp++);
             guS2DEmuBgRect1Cyc(&glistp, &gTheGame.unk_8C88[0]);
 

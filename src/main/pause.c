@@ -30,7 +30,7 @@ void Do2DPauseGame(gamepad_t *gamepad, s32 num, s32 flag) {
         return;
     }
 
-    limit = (gSelection == 0xBE) || (gSelection < 0x83) ? 3 : 2;
+    limit = (gSelection == SELECTION_BE) || (gSelection < SELECTION_83) ? 3 : 2;
     pos = &gTheGame.help.current_pos;
     sp = &gTheGame.gSPRITE[9];
 
@@ -48,19 +48,19 @@ void Do2DPauseGame(gamepad_t *gamepad, s32 num, s32 flag) {
             if (*pos < 0) {
                 *pos = 0;
             } else {
-                PlaySE(SFX_INIT_TABLE, 1);
+                PlaySE(SFX_INIT_TABLE, SFX_001);
             }
         } else if (gamepad->touch_button & D_JPAD) {
             (*pos)++;
             if (*pos >= limit) {
                 *pos = limit - 1;
             } else {
-                PlaySE(SFX_INIT_TABLE, 1);
+                PlaySE(SFX_INIT_TABLE, SFX_001);
             }
         } else if (gamepad->touch_button & B_BUTTON) {
             gTheGame.cursorBlock[0].frame_n = 0;
             gTheGame.cursorBlock[1].frame_n = 0;
-            PlaySE(SFX_INIT_TABLE, 6);
+            PlaySE(SFX_INIT_TABLE, SFX_006);
             if (flag != 0) {
                 gMain = GMAIN_387;
                 FadeSong(last_song_handle, CROSSFADE_VOLUME[GetTuneBufferFromHandle(last_song_handle)], 0xF, NULL);
@@ -77,13 +77,13 @@ void Do2DPauseGame(gamepad_t *gamepad, s32 num, s32 flag) {
                 } else {
                     gMain = GMAIN_384;
                 }
-                PlaySE(SFX_INIT_TABLE, 2);
-            } else if ((*pos == 1) && ((gSelection == 0xBE) || (gSelection < 0x83))) {
+                PlaySE(SFX_INIT_TABLE, SFX_002);
+            } else if ((*pos == 1) && ((gSelection == SELECTION_BE) || (gSelection < SELECTION_83))) {
                 gReset = -1;
                 gMain = GMAIN_384;
                 gCounter = 0;
                 gTheGame.cursorBlock[0].target[2] = gWorld;
-                PlaySE(SFX_INIT_TABLE, 2);
+                PlaySE(SFX_INIT_TABLE, SFX_002);
             } else {
                 gMain = GMAIN_387;
                 UpdateComboChainCount(0, 0, -gTheGame.tetrisWell[0].unk_43A8);
@@ -98,11 +98,11 @@ void Do2DPauseGame(gamepad_t *gamepad, s32 num, s32 flag) {
                 Init2DIcons(&gTheGame.tetrisWell[1]);
                 Init2DExplosion(&gTheGame.tetrisWell[0]);
                 Init2DExplosion(&gTheGame.tetrisWell[1]);
-                if (gSelection == 0xAA) {
+                if (gSelection == SELECTION_AA) {
                     gPlayer[0]->kPLAYER1C_2Dscore = 0;
                 }
                 gGameStatus &= ~0x20;
-                PlaySE(SFX_INIT_TABLE, 2);
+                PlaySE(SFX_INIT_TABLE, SFX_002);
             }
         }
     }
@@ -160,7 +160,7 @@ void Do3DPauseGame(gamepad_t *gamepad, s32 num, s32 flag) {
         return;
     }
 
-    limit = (gSelection == 0xBE) || (gSelection < 0x83) ? 3 : 2;
+    limit = (gSelection == SELECTION_BE) || (gSelection < SELECTION_83) ? 3 : 2;
     pos = &gTheGame.help.current_pos;
     sp = &gTheGame.gSPRITE[9];
 
@@ -178,19 +178,19 @@ void Do3DPauseGame(gamepad_t *gamepad, s32 num, s32 flag) {
             if (*pos < 0) {
                 *pos = 0;
             } else {
-                PlaySE(SFX_INIT_TABLE, 1);
+                PlaySE(SFX_INIT_TABLE, SFX_001);
             }
         } else if (gamepad->touch_button & D_JPAD) {
             (*pos)++;
             if (*pos >= limit) {
                 *pos = limit - 1;
             } else {
-                PlaySE(SFX_INIT_TABLE, 1);
+                PlaySE(SFX_INIT_TABLE, SFX_001);
             }
         } else if (gamepad->touch_button & B_BUTTON) {
             gTheGame.cursorBlock[0].frame_n = 0;
             gTheGame.cursorBlock[1].frame_n = 0;
-            PlaySE(SFX_INIT_TABLE, 6);
+            PlaySE(SFX_INIT_TABLE, SFX_006);
             if (flag != 0) {
                 gMain = GMAIN_387;
                 FadeSong(last_song_handle, CROSSFADE_VOLUME[GetTuneBufferFromHandle(last_song_handle)], 0xF, NULL);
@@ -207,12 +207,12 @@ void Do3DPauseGame(gamepad_t *gamepad, s32 num, s32 flag) {
                 } else {
                     gMain = GMAIN_384;
                 }
-                PlaySE(SFX_INIT_TABLE, 2);
-            } else if ((*pos == 1) && ((gSelection == 0xBE || (gSelection == 0x82)))) {
+                PlaySE(SFX_INIT_TABLE, SFX_002);
+            } else if ((*pos == 1) && ((gSelection == SELECTION_BE || (gSelection == SELECTION_82)))) {
                 gReset = -1;
                 gMain = GMAIN_384;
                 gCounter = 0;
-                PlaySE(SFX_INIT_TABLE, 2);
+                PlaySE(SFX_INIT_TABLE, SFX_002);
             } else {
                 gMain = GMAIN_387;
                 UpdateComboChainCount(0, 0, -gTheGame.tetrisWell[0].unk_43A8);
@@ -227,11 +227,11 @@ void Do3DPauseGame(gamepad_t *gamepad, s32 num, s32 flag) {
                 Init3DIcons(&gTheGame.tetrisWell[1]);
                 Init3DExplosion(&gTheGame.tetrisWell[0]);
                 Init3DExplosion(&gTheGame.tetrisWell[1]);
-                if (gSelection == 0xAA) {
+                if (gSelection == SELECTION_AA) {
                     gPlayer[0]->kPLAYER1C_2Dscore = 0;
                 }
                 gGameStatus &= ~0x20;
-                PlaySE(SFX_INIT_TABLE, 2);
+                PlaySE(SFX_INIT_TABLE, SFX_002);
             }
         }
     }

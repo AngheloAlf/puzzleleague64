@@ -128,11 +128,11 @@ void CompactWell(tetWell *well, s32 num) {
 
     if (sp6C != 0) {
         if (gTheGame.totalPlayer == 1) {
-            PlaySE(SFX_INIT_TABLE, 0xA9);
+            PlaySE(SFX_INIT_TABLE, SFX_0A9);
         } else if (num == 0) {
-            PlaySE(SFX_INIT_TABLE, 0xAA);
+            PlaySE(SFX_INIT_TABLE, SFX_0AA);
         } else {
-            PlaySE(SFX_INIT_TABLE, 0xAB);
+            PlaySE(SFX_INIT_TABLE, SFX_0AB);
         }
     }
 
@@ -568,7 +568,7 @@ s32 ComboCount(tetWell *well, cursor_t *cursor) {
         }
     }
 
-    if ((gSelection == 0x6E) && (var_t2 != 0)) {
+    if ((gSelection == SELECTION_6E) && (var_t2 != 0)) {
         cursor->target[1] = var_t2;
     }
 

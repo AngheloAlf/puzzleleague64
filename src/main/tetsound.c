@@ -140,7 +140,7 @@ s32 LoadFairySoundData(s16 music, s16 fairy1, s16 fairy2) {
     DangerMusicBgmIndex_ScoreAttack = 0x49;
     NormalMusicBgmIndex = music;
 
-    if (gSelection == 0xAA) {
+    if (gSelection == SELECTION_AA) {
         fairy1 = 0;
         fairy2 = 0xA;
         if (gTheGame.menu[0].game == 5) {
@@ -166,21 +166,21 @@ s32 LoadFairySoundData(s16 music, s16 fairy1, s16 fairy2) {
         LoadSFXBank(var_s5, 4U);
     }
 
-    if ((gMain != GMAIN_MIMIC) && (gMain != GMAIN_TUTORIAL) && (gSelection != 0x82) && (gSelection != 0x78)) {
-        if (gSelection == 0xAA) {
-        } else if ((gSelection == 0x96) && (fairy2 == 0x10)) {
+    if ((gMain != GMAIN_MIMIC) && (gMain != GMAIN_TUTORIAL) && (gSelection != SELECTION_82) && (gSelection != SELECTION_78)) {
+        if (gSelection == SELECTION_AA) {
+        } else if ((gSelection == SELECTION_96) && (fairy2 == 0x10)) {
             // These empty blocks seems required to match?
-        } else if (((gSelection == 0xA0) || (gSelection == 0xB4) || (gSelection == 0xC8)) && (fairy2 == 0x10)) {
+        } else if (((gSelection == SELECTION_A0) || (gSelection == SELECTION_B4) || (gSelection == SELECTION_C8)) && (fairy2 == 0x10)) {
             // ?
         } else {
-            PlaySE(SFX_INIT_TABLE, 0x17A);
+            PlaySE(SFX_INIT_TABLE, SFX_17A);
         }
     }
 
-    if (gSelection == 0xAA) {
+    if (gSelection == SELECTION_AA) {
         if (gTheGame.menu[0].game == 5) {
             if (gTheGame.menu[0].stage == 3) {
-                PlaySE(SFX_INIT_TABLE, 0x82);
+                PlaySE(SFX_INIT_TABLE, SFX_082);
             } else if (gTheGame.menu[0].stage == 6) {
                 B_801C7348_usa++;
                 B_801C7348_usa %= 2;
@@ -225,7 +225,7 @@ s32 PlayGameSong(tetWell *well) {
         }
     }
 
-    if ((TenSecond == 1) && (gSelection != 0xC8)) {
+    if ((TenSecond == 1) && (gSelection != SELECTION_C8)) {
         DangerMusicBgmIndex = DangerMusicBgmIndex_ScoreAttack;
         NormalMusicBgmIndex = NormalMusicBgmIndex_ScoreAttack;
     }
@@ -238,7 +238,7 @@ s32 PlayGameSong(tetWell *well) {
         ts_song_buffer = 0;
     }
 
-    if ((TenSecond == 1) && (gSelection != 0xC8)) {
+    if ((TenSecond == 1) && (gSelection != SELECTION_C8)) {
         SetMIDIParam(last_song_handle, BGM_INIT_TABLE, ts_song_index, ts_song_buffer);
     }
 

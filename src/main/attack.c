@@ -209,15 +209,15 @@ void AttackFly(tetWell *well, attack_t *attack, s32 num) {
 
         if (gTheGame.dimension == DIMENSION_2D) {
             temp_ft2 = st_Attack2DTopPosition[num][attack->disappear];
-            temp_ft1 = (10.0 - (f32)attack->unk_24) / (temp_ft2 - attack->unk_10);
+            temp_ft1 = (DOUBLE_LITERAL(10.0) - (f32)attack->unk_24) / (temp_ft2 - attack->unk_10);
             attack->unk_10 += temp_t0 * 5;
-            temp = (10.0 - (f64)(temp_ft1 * temp_ft2));
+            temp = (DOUBLE_LITERAL(10.0) - (temp_ft1 * temp_ft2));
             attack->unk_24 = (temp_ft1 * attack->unk_10) + temp;
         } else {
             temp_ft2 = st_Attack3DTopPosition[num][attack->disappear];
-            temp_ft1 = (10.0 - (f32)attack->unk_24) / (temp_ft2 - attack->unk_10);
+            temp_ft1 = (DOUBLE_LITERAL(10.0) - (f32)attack->unk_24) / (temp_ft2 - attack->unk_10);
             attack->unk_10 += temp_t0 * 5;
-            temp = (10.0 - (f64)(temp_ft1 * temp_ft2));
+            temp = (DOUBLE_LITERAL(10.0) - (temp_ft1 * temp_ft2));
             attack->unk_24 = (temp_ft1 * attack->unk_10) + temp;
         }
     }
@@ -597,7 +597,7 @@ INLINE void Match3DPosition(s32 num, s32 row, s32 col, s32 *x, s32 *y) {
             return;
     }
 
-    if ((gTheGame.totalPlayer == 1) && (gSelection != 0x64)) {
+    if ((gTheGame.totalPlayer == 1) && (gSelection != SELECTION_64)) {
         *x = sp40[index - 1];
     } else if (num == 0) {
         *x = sp0[index - 1];
@@ -656,7 +656,7 @@ void InitFlyAttack(tetWell *well, attack_t *attack, s32 posX, s32 posY, ENUM_TYP
     int blockHSize; // r29
 #endif
 
-    if ((gSelection != 0x64) && ((gSelection < 0x96) || (gSelection >= 0xA1))) {
+    if ((gSelection != SELECTION_64) && ((gSelection < SELECTION_96) || (gSelection >= SELECTION_A1))) {
         return;
     }
 

@@ -199,11 +199,11 @@ void Add2DNewRow(tetWell *well, cursor_t *cursor, s32 num) {
     cursor->y++;
     if (sp24 != 0) {
         if (gTheGame.totalPlayer == 1) {
-            PlaySE(SFX_INIT_TABLE, 0x96);
+            PlaySE(SFX_INIT_TABLE, SFX_096);
         } else if (num == 0) {
-            PlaySE(SFX_INIT_TABLE, 0x97);
+            PlaySE(SFX_INIT_TABLE, SFX_097);
         } else {
-            PlaySE(SFX_INIT_TABLE, 0x98);
+            PlaySE(SFX_INIT_TABLE, SFX_098);
         }
     }
 }

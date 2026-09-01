@@ -374,9 +374,9 @@ void Update2DAttack(tetWell *well, cursor_t *cursor, s32 num) {
 
     if (sound != 0) {
         if (num == 0) {
-            PlaySE(SFX_INIT_TABLE, sound + 0x11A);
+            PlaySE(SFX_INIT_TABLE, sound + SFX_11A);
         } else {
-            PlaySE(SFX_INIT_TABLE, sound + 0x11D);
+            PlaySE(SFX_INIT_TABLE, sound + SFX_11D);
         }
     }
 }

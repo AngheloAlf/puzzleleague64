@@ -19,41 +19,41 @@ void PlayExplosionSound(s32 num, s32 sound) {
         which = MIN(which, 9);
 
         if (gTheGame.totalPlayer == 1) {
-            PlaySE(SFX_INIT_TABLE, which + 0xAC);
+            PlaySE(SFX_INIT_TABLE, which + SFX_0AC);
         } else if (num == 0) {
-            PlaySE(SFX_INIT_TABLE, which + 0xD0);
+            PlaySE(SFX_INIT_TABLE, which + SFX_0D0);
         } else {
-            PlaySE(SFX_INIT_TABLE, which + 0xF4);
+            PlaySE(SFX_INIT_TABLE, which + SFX_0F4);
         }
     } else if (type == 2) {
         which = MIN(which, 9);
 
         if (gTheGame.totalPlayer == 1) {
-            PlaySE(SFX_INIT_TABLE, which + 0xB2);
+            PlaySE(SFX_INIT_TABLE, which + SFX_0B2);
         } else if (num == 0) {
-            PlaySE(SFX_INIT_TABLE, which + 0xD6);
+            PlaySE(SFX_INIT_TABLE, which + SFX_0D6);
         } else {
-            PlaySE(SFX_INIT_TABLE, which + 0xFA);
+            PlaySE(SFX_INIT_TABLE, which + SFX_0FA);
         }
     } else if (type == 3) {
         which = MIN(which, 9);
 
         if (gTheGame.totalPlayer == 1) {
-            PlaySE(SFX_INIT_TABLE, which + 0xBC);
+            PlaySE(SFX_INIT_TABLE, which + SFX_0BC);
         } else if (num == 0) {
-            PlaySE(SFX_INIT_TABLE, which + 0xE0);
+            PlaySE(SFX_INIT_TABLE, which + SFX_0E0);
         } else {
-            PlaySE(SFX_INIT_TABLE, which + 0x104);
+            PlaySE(SFX_INIT_TABLE, which + SFX_104);
         }
     } else if (type == 4) {
         which = MIN(which, 9);
 
         if (gTheGame.totalPlayer == 1) {
-            PlaySE(SFX_INIT_TABLE, which + 0xC6);
+            PlaySE(SFX_INIT_TABLE, which + SFX_0C6);
         } else if (num == 0) {
-            PlaySE(SFX_INIT_TABLE, which + 0xEA);
+            PlaySE(SFX_INIT_TABLE, which + SFX_0EA);
         } else {
-            PlaySE(SFX_INIT_TABLE, which + 0x10E);
+            PlaySE(SFX_INIT_TABLE, which + SFX_10E);
         }
     } else {
         if (which > 6) {
@@ -62,12 +62,12 @@ void PlayExplosionSound(s32 num, s32 sound) {
 
         if (DolbyEnabled != 0) {
             if (num == 0) {
-                PlaySE(SFX_INIT_TABLE, which + 0x141);
+                PlaySE(SFX_INIT_TABLE, which + SFX_141);
             } else {
-                PlaySE(SFX_INIT_TABLE, which + 0x148);
+                PlaySE(SFX_INIT_TABLE, which + SFX_148);
             }
         } else {
-            PlaySE(SFX_INIT_TABLE, which + 0x133);
+            PlaySE(SFX_INIT_TABLE, which + SFX_133);
         }
     }
 }

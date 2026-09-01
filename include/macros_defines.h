@@ -40,7 +40,9 @@
 #endif
 
 // A way to make easier finding double literals.
+#ifndef DOUBLE_LITERAL
 #define DOUBLE_LITERAL(x) (x)
+#endif
 
 #define saved_reg_s0 0
 #define saved_reg_s1 0

@@ -124,7 +124,7 @@ s32 CreateGameGfxTask2(struct_gInfo *info) {
 
     fb = &info;
 
-    if (gSelection < 0x6F) {
+    if (gSelection < SELECTION_6F) {
         DrawMT(temp_a0);
     } else {
         DrawTetris(temp_a0);

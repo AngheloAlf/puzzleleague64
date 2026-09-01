@@ -257,7 +257,7 @@ void func_8004123C_usa(s32 arg0) {
     if ((B_80192F80_usa->unk_1C == 9) && func_80024BF4_usa(&sp10)) {
         HVQM2Util_Play((void *)"spaGIO.HVQM", 0x1000U, sp10);
         var_s2 = -1;
-    } else if (((gSelection != 0xA0) & (gSelection != 0xB4)) && (gSelection != 0xC8)) {
+    } else if (((gSelection != SELECTION_A0) & (gSelection != SELECTION_B4)) && (gSelection != SELECTION_C8)) {
         var_s2 = (gTheGame.controller[0].touch_button & START_BUTTON) ? -1 : 0;
     }
 
@@ -272,7 +272,7 @@ void func_8004123C_usa(s32 arg0) {
             break;
 
         case 0x2:
-            if (gSelection == 0x82) {
+            if (gSelection == SELECTION_82) {
                 if ((B_80192F80_usa->unk_1C >= 2) && (B_80192F80_usa->unk_1C < 8)) {
                     func_80028DC0_usa(B_80192F80_usa->unk_0C, 0x8C, 0);
                 }
@@ -280,7 +280,7 @@ void func_8004123C_usa(s32 arg0) {
 
             if (!(arg0 & 7)) {
                 if (B_80192F80_usa->unk_00 == 0) {
-                    PlaySE(SFX_INIT_TABLE, 0xA3);
+                    PlaySE(SFX_INIT_TABLE, SFX_0A3);
                 }
 
                 if (B_80192F80_usa->unk_00 < 0xC) {
@@ -300,7 +300,7 @@ void func_8004123C_usa(s32 arg0) {
                 var_s0 = -1;
 
                 if (sp18 - B_80192F80_usa->unk_00 * 5 / 2 < 0x99) {
-                    PlaySE(SFX_INIT_TABLE, 0x17B);
+                    PlaySE(SFX_INIT_TABLE, SFX_17B);
                 }
 
                 sp18 -= B_80192F80_usa->unk_00 * 5 / 2;
@@ -314,14 +314,14 @@ void func_8004123C_usa(s32 arg0) {
                 B_80192F80_usa->unk_18 = 2;
                 B_80192F80_usa->unk_10 = arg0;
                 screenShowImage(B_80192F80_usa->unk_0C, 0x208);
-                if ((gSelection == 0xA0) || (gSelection == 0xB4) || (gSelection == 0xC8)) {
+                if ((gSelection == SELECTION_A0) || (gSelection == SELECTION_B4) || (gSelection == SELECTION_C8)) {
                     func_800410A4_usa();
                 }
             }
             break;
         case 0x3:
             if ((arg0 - B_80192F80_usa->unk_10) >= 0x3D) {
-                PlaySE(SFX_INIT_TABLE, 0xA4);
+                PlaySE(SFX_INIT_TABLE, SFX_0A4);
                 B_80192F80_usa->unk_18 = 3;
                 screenShowText(B_80192F80_usa->unk_0C, 0x64);
                 screenShowImage(B_80192F80_usa->unk_0C, 0x82);
@@ -343,7 +343,7 @@ void func_8004123C_usa(s32 arg0) {
                 }
                 screenSetImagePosition(B_80192F80_usa->unk_0C, 0x78, sp14, sp18);
             }
-            if (((gSelection == 0xA0) || (gSelection == 0xB4) || (gSelection == 0xC8)) &&
+            if (((gSelection == SELECTION_A0) || (gSelection == SELECTION_B4) || (gSelection == SELECTION_C8)) &&
                 func_800289C0_usa(B_80192F80_usa->unk_0C, 0x79, &sp14, &sp18) && (sp18 < 0xDC)) {
                 sp18 += B_80192F80_usa->unk_00;
                 var_s0 = -1;
@@ -355,17 +355,17 @@ void func_8004123C_usa(s32 arg0) {
             if (var_s0 == 0) {
                 B_80192F80_usa->unk_18 = 4;
                 B_80192F80_usa->unk_00 = 0;
-                if (gSelection == 0x96) {
+                if (gSelection == SELECTION_96) {
                     if (B_80192F80_usa->unk_1C == 0) {
-                        PlaySE(SFX_INIT_TABLE, 0);
+                        PlaySE(SFX_INIT_TABLE, SFX_000);
                         func_80005780_usa(gTheGame.menu[0].stage);
                     } else if (B_80192F80_usa->unk_1C == 8) {
-                        PlaySE(SFX_INIT_TABLE, 0);
+                        PlaySE(SFX_INIT_TABLE, SFX_000);
                         func_80005780_usa(0x11);
                     }
                 }
-                if ((gSelection == 0x82) && ((u32)(B_80192F80_usa->unk_1C - 2) < 6U)) {
-                    PlaySE(SFX_INIT_TABLE, 0);
+                if ((gSelection == SELECTION_82) && ((u32)(B_80192F80_usa->unk_1C - 2) < 6U)) {
+                    PlaySE(SFX_INIT_TABLE, SFX_000);
                     func_80005888_usa(0, 2, 0xA);
                 }
             }
@@ -391,7 +391,7 @@ void func_8004123C_usa(s32 arg0) {
                     B_80192F80_usa->unk_00 = 0;
                 }
                 screenSetImagePosition(B_80192F80_usa->unk_0C, 0x6E, sp14, sp18);
-            } else if ((gSelection == 0xA0) || (gSelection == 0xB4) || (gSelection == 0xC8)) {
+            } else if ((gSelection == SELECTION_A0) || (gSelection == SELECTION_B4) || (gSelection == SELECTION_C8)) {
                 B_80192F80_usa->unk_00 = 0;
                 B_80192F80_usa->unk_18 = 5;
                 if (gTheGame.cursorBlock[0].unk_00 == 8) {
@@ -431,12 +431,12 @@ void func_8004123C_usa(s32 arg0) {
 
             if ((gTheGame.controller[B_80192F80_usa->unk_34].touch_button & L_JPAD) && (B_80192F80_usa->unk_30 == 1)) {
                 B_80192F80_usa->unk_30 = 0;
-                PlaySE(SFX_INIT_TABLE, 1);
+                PlaySE(SFX_INIT_TABLE, SFX_001);
             }
 
             if ((gTheGame.controller[B_80192F80_usa->unk_34].touch_button & R_JPAD) && (B_80192F80_usa->unk_30 == 0)) {
                 B_80192F80_usa->unk_30 = 1;
-                PlaySE(SFX_INIT_TABLE, 1);
+                PlaySE(SFX_INIT_TABLE, SFX_001);
             }
             if (gTheGame.controller[B_80192F80_usa->unk_34].touch_button & A_BUTTON) {
                 gReset = -1;
@@ -447,7 +447,7 @@ void func_8004123C_usa(s32 arg0) {
                 }
                 gMain = var_v1;
 
-                PlaySE(SFX_INIT_TABLE, (gMain == GMAIN_258) ? 6 : 2);
+                PlaySE(SFX_INIT_TABLE, (gMain == GMAIN_258) ? SFX_006 : SFX_002);
                 if ((B_80192F80_usa->unk_08 != 0) && (B_80192F80_usa->unk_30 == 0)) {
                     gMain = GMAIN_384;
                     gWorld = 0x10;
@@ -465,7 +465,7 @@ void func_8004123C_usa(s32 arg0) {
             if (gTheGame.controller[0].touch_button & A_BUTTON) {
                 var_s2 = -1;
             }
-            if ((gSelection == 0x82) && (B_80192F80_usa->unk_1C >= 2) && (B_80192F80_usa->unk_1C < 8) &&
+            if ((gSelection == SELECTION_82) && (B_80192F80_usa->unk_1C >= 2) && (B_80192F80_usa->unk_1C < 8) &&
                 func_8002864C_usa(B_80192F80_usa->unk_0C, 0x8C, &sp1C)) {
                 func_80028E80_usa(B_80192F80_usa->unk_0C, 0x8C, &sp20);
                 if ((sp20 < (sp1C->unk_18 - 1)) && !(arg0 & 7)) {
@@ -482,33 +482,33 @@ void func_8004123C_usa(s32 arg0) {
 
     FadeOutAllSFXs(0x1E);
     if ((B_80192F80_usa->unk_18 != 0) || (gTheGame.controller[0].touch_button & A_BUTTON)) {
-        PlaySE(SFX_INIT_TABLE, 2);
+        PlaySE(SFX_INIT_TABLE, SFX_002);
     }
 
-    if ((gSelection == 0xA0) || (gSelection == 0xB4) || (gSelection == 0xC8)) {
+    if ((gSelection == SELECTION_A0) || (gSelection == SELECTION_B4) || (gSelection == SELECTION_C8)) {
         gReset = -1;
         gMain = GMAIN_2BC;
-    } else if (gSelection == 0x8C) {
+    } else if (gSelection == SELECTION_8C) {
         if (gTheGame.tetrisWell[0].unk_43AC > 0xC34F) {
             func_8002B85C_usa(5, 1);
         } else {
             gMain = GMAIN_2BC;
             gReset = -1;
         }
-    } else if (gSelection == 0xAA) {
+    } else if (gSelection == SELECTION_AA) {
         if (B_80192F80_usa->unk_1C == 9) {
             func_8002B85C_usa(2, 0);
         } else {
             func_8002B85C_usa(5, 4);
         }
-    } else if (gSelection == 0xBE) {
+    } else if (gSelection == SELECTION_BE) {
         if (gTheGame.tetrisWell[0].unk_43AC >= 0x7530) {
             func_8002B85C_usa(5, 0);
         } else {
             gMain = GMAIN_2BC;
             gReset = -1;
         }
-    } else if (gSelection == 0x82) {
+    } else if (gSelection == SELECTION_82) {
         if (func_80040F04_usa()) {
             func_8002B85C_usa(5, 5);
         } else {
@@ -566,7 +566,7 @@ void func_80041F1C_usa(void **heapP, s32 arg1) {
     B_80192F80_usa->unk_08 = (gWorld == 0x10) ? -1 : 0;
 
     if (((gTheGame.menu[0].stage == 1) && (B_80192F80_usa->unk_18 = 0, (gTheGame.menu[0].stage == 1))) ||
-        (gSelection == 0x96) || (((gSelection == 0xA0) || (gSelection == 0xB4)) != 0) || (gSelection == 0xC8)) {
+        (gSelection == SELECTION_96) || (((gSelection == SELECTION_A0) || (gSelection == SELECTION_B4)) != 0) || (gSelection == SELECTION_C8)) {
         if (gTheGame.menu[0].stage < 0xF) {
             var_v0 = D_800B67E4_usa[gTheGame.menu[0].stage - 1];
         } else {
@@ -583,12 +583,12 @@ void func_80041F1C_usa(void **heapP, s32 arg1) {
     if (screenLoad("RESULT.SBF", heapP) != 0) {
         var_s0 = -1;
 
-        if (gSelection == 0x8C) {
+        if (gSelection == SELECTION_8C) {
             sprintf(sp20, "REWARD-MARATHON");
-        } else if (gSelection == 0xBE) {
+        } else if (gSelection == SELECTION_BE) {
             gPlayer[0]->unk_010 |= 1;
             sprintf(sp20, "REWARD-TIMEZONE");
-        } else if (gSelection == 0xAA) {
+        } else if (gSelection == SELECTION_AA) {
             if (arg1 == 9) {
                 var_s0 = 0;
                 B_80192F80_usa->unk_18 = -1;
@@ -596,9 +596,9 @@ void func_80041F1C_usa(void **heapP, s32 arg1) {
             } else {
                 sprintf(sp20, "KEY");
             }
-        } else if (gSelection == 0x82) {
+        } else if (gSelection == SELECTION_82) {
             sprintf(sp20, "DIPLOMA-%d", arg1 - 1);
-        } else if (gSelection == 0x96) {
+        } else if (gSelection == SELECTION_96) {
             if (arg1 == 8) {
                 sprintf(sp20, "RESULT-DONE");
             } else if (arg1 == 1) {
@@ -607,7 +607,7 @@ void func_80041F1C_usa(void **heapP, s32 arg1) {
                 var_s0 = (gTheGame.menu[0].stage > 1) ? -1 : 0;
                 sprintf(sp20, "RESULT%d", gTheGame.menu[0].stage - 1);
             }
-        } else if ((gSelection == 0xA0) || (gSelection == 0xB4) || (gSelection == 0xC8)) {
+        } else if ((gSelection == SELECTION_A0) || (gSelection == SELECTION_B4) || (gSelection == SELECTION_C8)) {
             sprintf(sp20, "2P-WINNER");
             B_80192F80_usa->unk_20 = NULL;
         } else {
@@ -634,14 +634,14 @@ void func_80041F1C_usa(void **heapP, s32 arg1) {
 
     func_80002D8C_usa(0x1E);
 
-    if (gSelection == 0x96) {
+    if (gSelection == SELECTION_96) {
         if ((gTheGame.menu[0].stage < 2) || ((arg1 ^ 1) == 0)) {
             PlayMIDI(BGM_INIT_TABLE, 0x46, 0, 2);
         } else {
             PlayMIDI(BGM_INIT_TABLE, 0x41, 0, 1);
         }
     } else {
-        if ((gSelection == 0xA0) || (gSelection == 0xB4) || (gSelection == 0xC8)) {
+        if ((gSelection == SELECTION_A0) || (gSelection == SELECTION_B4) || (gSelection == SELECTION_C8)) {
             PlayMIDI(BGM_INIT_TABLE, 0x46, 0, 2);
         } else {
             PlayMIDI(BGM_INIT_TABLE, 0x41, 0, 1);

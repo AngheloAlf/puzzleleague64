@@ -56,7 +56,7 @@ void func_80042428_usa(struct_80192F90_unk_04 *arg0) {
         switch (arg0->unk_C) {
             case 0x0:
                 if (arg0->unk_0 == -0x8C) {
-                    PlaySE(SFX_INIT_TABLE, 0xA4);
+                    PlaySE(SFX_INIT_TABLE, SFX_0A4);
                 }
                 arg0->unk_0 += 0xA;
                 break;
@@ -70,7 +70,7 @@ void func_80042428_usa(struct_80192F90_unk_04 *arg0) {
             case 0x2:
                 if (B_80192F90_usa->unk_04.unk_0 >= -0x32) {
                     if (arg0->unk_0 == -0x96) {
-                        PlaySE(SFX_INIT_TABLE, 0xA4);
+                        PlaySE(SFX_INIT_TABLE, SFX_0A4);
                     }
                     arg0->unk_0 += 0xA;
                 }
@@ -111,7 +111,7 @@ void func_80042428_usa(struct_80192F90_unk_04 *arg0) {
             arg0->unk_4 = 0;
             arg0->unk_8 = 4;
             if (arg0->unk_C == 0) {
-                PlaySE(SFX_INIT_TABLE, 0xA3);
+                PlaySE(SFX_INIT_TABLE, SFX_0A3);
             }
         }
     } else if (arg0->unk_8 == 4) {
@@ -208,7 +208,7 @@ void func_800428B4_usa(s32 arg0 UNUSED) {
                 B_80192F90_usa->unk_14.unk_8 = 3;
                 B_80192F90_usa->unk_04.unk_8 = 3;
                 B_80192F90_usa->unk_38 = 3;
-                PlaySE(SFX_INIT_TABLE, 2);
+                PlaySE(SFX_INIT_TABLE, SFX_002);
             }
         } else if (temp_v1 & 0x1000) {
             if (B_80192F90_usa->unk_38 == 3) {
@@ -218,7 +218,7 @@ void func_800428B4_usa(s32 arg0 UNUSED) {
             B_80192F90_usa->unk_38 = 3;
             B_80192F90_usa->unk_14.unk_8 = 3;
             B_80192F90_usa->unk_04.unk_8 = 3;
-            PlaySE(SFX_INIT_TABLE, 2);
+            PlaySE(SFX_INIT_TABLE, SFX_002);
             screenHideText(B_80192F90_usa->unk_00, B_80192F90_usa->unk_3C + 0x64);
             screenHideText(B_80192F90_usa->unk_00, 0x384);
             screenHideText(B_80192F90_usa->unk_00, 0x385);
@@ -237,7 +237,7 @@ void func_800428B4_usa(s32 arg0 UNUSED) {
             gMain = GMAIN_384;
             gReset = -1;
             gTheGame.dimension = DIMENSION_2D;
-            gSelection = 0x96;
+            gSelection = SELECTION_96;
             gTheGame.totalPlayer = 2;
             gTheGame.menu[0].misc = 1;
         } else {

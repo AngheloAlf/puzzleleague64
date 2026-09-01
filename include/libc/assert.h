@@ -1,15 +1,11 @@
 #ifndef ASSERT_H
 #define ASSERT_H
 
-// Runtime assertions
-
-// TODO
-
 // Static/compile-time assertions
 
 // GCC implemented _Static_assert in gcc 4.6
 // https://gcc.gnu.org/wiki/C11Status
-#if (__STDC_VERSION__ >= 201112L) || (__GNUC__ >= 5) || __clang__
+#if ((__STDC_VERSION__ >= 201112L) || (__GNUC__ >= 5) || __clang__) && !defined(FORCE_OLD_STATIC_ASSERT)
 # define static_assert(cond, msg) _Static_assert(cond, msg)
 #else
 # ifndef GLUE

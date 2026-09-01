@@ -284,7 +284,7 @@ void InitTutorial(void) {
         if (gTheGame.menu[0].game == 4) {
             tutorial_move5[0] = 0x9C;
         }
-        PlaySE(SFX_INIT_TABLE, 0x7F);
+        PlaySE(SFX_INIT_TABLE, SFX_07F);
     } else if (gTheGame.menu[0].game == 4) {
         tutorial_move5[0] = 0x9E;
     }
@@ -322,7 +322,7 @@ void TutorialCheckState(tetWell *well, cursor_t *cursor) {
     if (gTheGame.controller[0].touch_button & B_BUTTON) {
         gMain = GMAIN_2BC;
         gReset = -1;
-        PlaySE(SFX_INIT_TABLE, 6);
+        PlaySE(SFX_INIT_TABLE, SFX_6);
         gGameStatus = gGameStatus >> 16;
         return;
     }
@@ -354,8 +354,8 @@ void TutorialCheckState(tetWell *well, cursor_t *cursor) {
             gTheGame.totalPlayer = 1;
             anim_sp = 0;
             cursor->unk_00 = 0x34C;
-            PlaySE(SFX_INIT_TABLE, 0xA0);
-            PlaySE(SFX_INIT_TABLE, 0x175);
+            PlaySE(SFX_INIT_TABLE, SFX_0A0);
+            PlaySE(SFX_INIT_TABLE, SFX_175);
         } else if (anim_bg != -0x34C) {
             well->unk_43FC = anim_bg;
             well->unk_43EC = anim_sp;
@@ -375,15 +375,15 @@ void TutorialCheckState(tetWell *well, cursor_t *cursor) {
         anim_bg = 0x25;
         anim_sp = 0;
         cursor->unk_00 = 0x34C;
-        PlaySE(SFX_INIT_TABLE, 0xA0);
-        PlaySE(SFX_INIT_TABLE, 0x175);
+        PlaySE(SFX_INIT_TABLE, SFX_0A0);
+        PlaySE(SFX_INIT_TABLE, SFX_175);
     } else if (anim_bg != -0x34C) {
         well->unk_43FC = anim_bg;
         well->unk_43EC = anim_sp;
         if (well->unk_43FC >= 0) {
             s32 v1 = well->unk_43FC;
 
-            well->translation += ((f32)dead1Shake[v1] / 250.0);
+            well->translation += ((f32)dead1Shake[v1] / DOUBLE_LITERAL(250.0));
             well->unk_43FC = v1 - 1;
         }
         AllDeadBlocks(well);

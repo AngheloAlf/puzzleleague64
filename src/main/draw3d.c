@@ -446,7 +446,7 @@ void Draw3DTetris(struct_gInfo_unk_00068 *dynamicp) {
 
     gDPSetScissor(glistp++, G_SC_NON_INTERLACE, 0, 31, SCREEN_WIDTH, SCREEN_HEIGHT - 19);
 
-    if (((gMain == GMAIN_388) || (gMain < GMAIN_384)) && ((gTheGame.totalPlayer == 2) || (gSelection == 0x82))) {
+    if (((gMain == GMAIN_388) || (gMain < GMAIN_384)) && ((gTheGame.totalPlayer == 2) || (gSelection == SELECTION_82))) {
         sp3C = nfalse;
     }
 
@@ -482,7 +482,7 @@ void Draw3DTetris(struct_gInfo_unk_00068 *dynamicp) {
             if (gMain < GMAIN_38E) {
                 Draw3DIcon(dynamicp, num);
             }
-            if ((gSelection == 0xAA) || (gSelection == 0xB4)) {
+            if ((gSelection == SELECTION_AA) || (gSelection == SELECTION_B4)) {
                 Draw3DClearLine(dynamicp, num);
             }
         }
@@ -503,7 +503,7 @@ void Draw3DTetris(struct_gInfo_unk_00068 *dynamicp) {
 
     Draw3DText(dynamicp);
     Draw3DMiscStuff(dynamicp);
-    if ((gSelection == 0xAA) || (gSelection == 0xB4)) {
+    if ((gSelection == SELECTION_AA) || (gSelection == SELECTION_B4)) {
         for (num = 0; num < gTheGame.totalPlayer; num++) {
             Draw3DClearSign(dynamicp, num);
         }
