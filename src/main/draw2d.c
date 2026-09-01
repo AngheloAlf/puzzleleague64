@@ -59,7 +59,7 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
     gDPPipeSync(glistp++);
     gDPSetTextureLUT(glistp++, G_TT_RGBA16);
 
-    if (gGameStatus & 0x40) {
+    if (gGameStatus & GAME_STATUS_FLAG_40) {
         gSPObjLoadTxtr(glistp++, &colorLUT);
     } else {
         gSPObjLoadTxtr(glistp++, &D_010003F0_usa);
@@ -155,7 +155,7 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
     }
 
     if (gMain >= GMAIN_38E) {
-        if (gGameStatus & 0x40) {
+        if (gGameStatus & GAME_STATUS_FLAG_40) {
             switch (well->new_block[0].frame_n) {
                 case 0x8:
                 case 0xD:
@@ -229,7 +229,7 @@ void Draw2DIcon(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     gDPSetTextureLUT(glistp++, G_TT_RGBA16);
     gSPObjLoadTxtr(glistp++, &D_01000608_usa);
 
-    if ((gGameStatus & 8) && (gMain < GMAIN_38E)) {
+    if ((gGameStatus & GAME_STATUS_FLAG_8) && (gMain < GMAIN_38E)) {
         gDPPipeSync(glistp++);
         gDPSetRenderMode(glistp++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
         gDPSetCombineMode(glistp++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
@@ -245,7 +245,7 @@ void Draw2DIcon(struct_gInfo_unk_00068 *dynamicp, s32 num) {
         if (icon->count <= 0) {
             continue;
         }
-        if ((gGameStatus & 0x10) && (gMain < GMAIN_38E) && (icon->count % 2 == 0)) {
+        if ((gGameStatus & GAME_STATUS_FLAG_10) && (gMain < GMAIN_38E) && (icon->count % 2 == 0)) {
             continue;
         }
 
@@ -311,7 +311,7 @@ void Draw2DIcon(struct_gInfo_unk_00068 *dynamicp, s32 num) {
         gSPObjRectangle(glistp++, &icon->thing.rect);
     }
 
-    if (gGameStatus & 8) {
+    if (gGameStatus & GAME_STATUS_FLAG_8) {
         gDPPipeSync(glistp++);
         gDPSetRenderMode(glistp++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
         gDPSetCombineMode(glistp++, G_CC_DECALRGBA, G_CC_DECALRGBA);
@@ -567,11 +567,11 @@ void Draw2DExplosion(struct_gInfo_unk_00068 *dynamicp, s32 num) {
         explode = &exp[count];
 
         if (explode->type == 0x19) {
-            if ((gGameStatus & 0x10) && ((explode->frame % 2) == 1)) {
+            if ((gGameStatus & GAME_STATUS_FLAG_10) && ((explode->frame % 2) == 1)) {
                 continue;
             }
 
-            if ((gGameStatus & 0x8) && (fade == 0)) {
+            if ((gGameStatus & GAME_STATUS_FLAG_8) && (fade == 0)) {
                 gDPPipeSync(glistp++);
                 gDPSetRenderMode(glistp++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
                 gDPSetCombineMode(glistp++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);

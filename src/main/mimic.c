@@ -40,10 +40,10 @@ INLINE void SetupMimic(void **heapP) {
     B_801C6E58_usa = 1;
     Pon_Image_Heap = &gBufferHeap[SEGMENT_ROM_SIZE(segment_0CA4A0)];
 
-    temp_a0 = gGameStatus & 0x40;
-    gGameStatus = gGameStatus << 0x10;
+    temp_a0 = gGameStatus & GAME_STATUS_FLAG_40;
+    GAME_STATUS_SHIFT_LEFT(gGameStatus);
     if (temp_a0 != 0) {
-        gGameStatus |= 0x40;
+        gGameStatus |= GAME_STATUS_FLAG_40;
     }
 
     func_80054624_usa();
@@ -54,7 +54,7 @@ INLINE void SetupMimic(void **heapP) {
 }
 
 INLINE void QuitMimic(void) {
-    gGameStatus = gGameStatus >> 0x10;
+    GAME_STATUS_SHIFT_RIGHT(gGameStatus);
 }
 
 #if VERSION_USA

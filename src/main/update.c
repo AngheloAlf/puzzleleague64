@@ -305,7 +305,7 @@ void Update2DBuffer(struct_gInfo *info) {
     dynamicp->unk_10240 = gOverflow;
 
     sp14 = D_800B7508_usa;
-    if (gGameStatus & 0x40) {
+    if (gGameStatus & GAME_STATUS_FLAG_40) {
         sp14 = TetrisBlockFrame;
     }
 
@@ -366,7 +366,7 @@ void Update3DBuffer(struct_gInfo *info) {
     s8 *var_s7;
 
     var_s7 = D_800B7508_usa;
-    if (gGameStatus & 0x40) {
+    if (gGameStatus & GAME_STATUS_FLAG_40) {
         var_s7 = TetrisBlockFrame;
     }
 

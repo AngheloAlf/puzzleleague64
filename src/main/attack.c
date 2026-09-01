@@ -768,7 +768,7 @@ void StartAttack(tetWell *well, s32 num) {
             }
             well->unk_43A8--;
             temp_s2->count = well->unk_43A8;
-            if ((well->unk_43A8 < -0xD) && !(gGameStatus & 2)) {
+            if ((well->unk_43A8 < -0xD) && !(gGameStatus & GAME_STATUS_FLAG_2)) {
                 temp_s2->count = -0x63;
             }
             gOverflow += well->unk_43A8 * -0x1E;
@@ -829,7 +829,7 @@ void StartAttack(tetWell *well, s32 num) {
         if ((var_s4 >= 3) && (gTheGame.unk_9C0C == 2)) {
             var_s4 = 2;
         }
-        if (((temp_s2->type == 0xC) & ((temp_s7 < 0x24) ^ 1)) && !(gGameStatus & 2)) {
+        if (((temp_s2->type == 0xC) & ((temp_s7 < 0x24) ^ 1)) && !(gGameStatus & GAME_STATUS_FLAG_2)) {
             temp_s2->type = 0xD;
         }
 
@@ -901,7 +901,7 @@ void StartAttack(tetWell *well, s32 num) {
         for (temp = 0; temp < 10; temp++) {
             if (well->icon[temp].flag == 0) {
                 sp18.flag = -1;
-                if ((sp9C < -0x23) && !(gGameStatus & 2)) {
+                if ((sp9C < -0x23) && !(gGameStatus & GAME_STATUS_FLAG_2)) {
                     sp18.type = 0xD;
                 } else {
                     sp18.type = 0xC;

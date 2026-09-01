@@ -76,16 +76,16 @@ void InitTutorial(void) {
     Pon_Image_Heap = &gBufferHeap[SEGMENT_ROM_SIZE(segment_0CA4A0)];
     gCounter = 0;
     gTheGame.dimension = DIMENSION_2D;
-    if (gGameStatus & 0x80) {
-        gGameStatus <<= 0x10;
-        gGameStatus |= 0x80;
+    if (gGameStatus & GAME_STATUS_FLAG_80) {
+        GAME_STATUS_SHIFT_LEFT(gGameStatus);
+        gGameStatus |= GAME_STATUS_FLAG_80;
     } else {
-        if (gGameStatus & 0x40) {
+        if (gGameStatus & GAME_STATUS_FLAG_40) {
             var_a1 = -1;
         }
-        gGameStatus <<= 0x10;
+        GAME_STATUS_SHIFT_LEFT(gGameStatus);
         if (var_a1 != 0) {
-            gGameStatus |= 0x40;
+            gGameStatus |= GAME_STATUS_FLAG_40;
         }
     }
 
@@ -280,7 +280,7 @@ void InitTutorial(void) {
 
     s3->unk_038 = 0x64;
     s3->unk_024 = 0;
-    if (gGameStatus & 0x80) {
+    if (gGameStatus & GAME_STATUS_FLAG_80) {
         if (gTheGame.menu[0].game == 4) {
             tutorial_move5[0] = 0x9C;
         }
@@ -323,7 +323,7 @@ void TutorialCheckState(tetWell *well, cursor_t *cursor) {
         gMain = GMAIN_2BC;
         gReset = -1;
         PlaySE(SFX_INIT_TABLE, SFX_006);
-        gGameStatus = gGameStatus >> 16;
+        GAME_STATUS_SHIFT_RIGHT(gGameStatus);
         return;
     }
 

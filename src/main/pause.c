@@ -101,7 +101,7 @@ void Do2DPauseGame(gamepad_t *gamepad, s32 num, s32 flag) {
                 if (gSelection == SELECTION_AA) {
                     gPlayer[0]->kPLAYER1C_2Dscore = 0;
                 }
-                gGameStatus &= ~0x20;
+                gGameStatus &= ~GAME_STATUS_FLAG_20;
                 PlaySE(SFX_INIT_TABLE, SFX_002);
             }
         }
@@ -230,7 +230,7 @@ void Do3DPauseGame(gamepad_t *gamepad, s32 num, s32 flag) {
                 if (gSelection == SELECTION_AA) {
                     gPlayer[0]->kPLAYER1C_2Dscore = 0;
                 }
-                gGameStatus &= ~0x20;
+                gGameStatus &= ~GAME_STATUS_FLAG_20;
                 PlaySE(SFX_INIT_TABLE, SFX_002);
             }
         }

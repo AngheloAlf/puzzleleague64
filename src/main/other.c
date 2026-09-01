@@ -199,7 +199,7 @@ void UpdateMiscStuff(tetWell *well, cursor_t *cursor, s32 num) {
         case SELECTION_8C:
         case SELECTION_AA:
         case SELECTION_BE:
-            if (gGameStatus & 0x20) {
+            if (gGameStatus & GAME_STATUS_FLAG_20) {
                 cursor->unk_0C = 0;
             } else if (cursor->unk_0C > 0) {
                 if (gTheGame.unk_9B48 == 0) {

@@ -223,7 +223,7 @@ s32 doMenuLoop(s32 arg0) {
                     UpdateMenuController();
                 }
 
-                if ((gGameStatus & 0x80) && ((gMain == GMAIN_384) || (gMain == GMAIN_TUTORIAL)) &&
+                if ((gGameStatus & GAME_STATUS_FLAG_80) && ((gMain == GMAIN_384) || (gMain == GMAIN_TUTORIAL)) &&
                     (DemoCheck(&sp14) != 0)) {
                     gMain = GMAIN_TITLE;
                     gReset = -1;
@@ -348,7 +348,7 @@ s32 doGameLoop(s32 arg0) {
                     CreateGameGfxTask1(&gInfo[arg0]);
                     osRecvMesg(&gSerialMsgQ, NULL, OS_MESG_BLOCK);
                     UpdateController();
-                    if ((gGameStatus & 0x80) && (DemoCheck(&sp14) != 0)) {
+                    if ((gGameStatus & GAME_STATUS_FLAG_80) && (DemoCheck(&sp14) != 0)) {
                         gMain = GMAIN_TITLE;
                         gReset = -1;
                         var_s2 = false;
@@ -362,7 +362,7 @@ s32 doGameLoop(s32 arg0) {
 
                         if (gTheGame.totalPlayer == 1) {
                             PlayGameSong(&gTheGame.tetrisWell[0]);
-                            if (gGameStatus & 0x20) {
+                            if (gGameStatus & GAME_STATUS_FLAG_20) {
                                 SetSongTempo(last_song_handle, 0x6E);
                             }
                         } else {

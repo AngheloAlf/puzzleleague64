@@ -78,7 +78,7 @@ void InitGamePad(s32 num) {
 }
 
 void func_80054624_usa(void) {
-    if (gGameStatus & 0x40) {
+    if (gGameStatus & GAME_STATUS_FLAG_40) {
         tetrisBlock1.block.image = (u64 *)D_01008468_usa;
         tetrisBlock2.block.image = (u64 *)D_01008C68_usa;
         tetrisBlock3.block.image = (u64 *)D_01009468_usa;

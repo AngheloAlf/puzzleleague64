@@ -158,10 +158,10 @@ s32 DemoCheck(s32 *frame) {
         gTheGame.hour = 0;
 
 #if VERSION_USA
-        gGameStatus >>= 0x10;
+        GAME_STATUS_SHIFT_RIGHT(gGameStatus);
 #else
         if (geDemoTitle != TD_PROFILE) {
-            gGameStatus >>= 0x10;
+            GAME_STATUS_SHIFT_RIGHT(gGameStatus);
         }
 #endif
 
@@ -174,7 +174,7 @@ s32 DemoCheck(s32 *frame) {
         gTheGame.second = 0;
         gTheGame.minute = 0;
         gTheGame.hour = 0;
-        gGameStatus >>= 0x10;
+        GAME_STATUS_SHIFT_RIGHT(gGameStatus);
         FadeOutSong(last_song_handle, 60);
         return -1;
     }
@@ -185,8 +185,9 @@ s32 DemoCheck(s32 *frame) {
 }
 
 void DemoCPU(s32 num, s32 level) {
-    if (gGameStatus & 0x80) {
-        gGameStatus = (gGameStatus << 0x10) | 0x380;
+    if (gGameStatus & GAME_STATUS_FLAG_80) {
+        GAME_STATUS_SHIFT_LEFT(gGameStatus);
+        gGameStatus |= GAME_STATUS_FLAG_200 | GAME_STATUS_FLAG_100 | GAME_STATUS_FLAG_80;
     }
 
     switch (level) {
@@ -495,7 +496,7 @@ void DoTetris(void) {
         }
 
         B_801AAB98_usa += 1;
-        if (!(gGameStatus & 0x20) || (gCounter % 2 != 0)) {
+        if (!(gGameStatus & GAME_STATUS_FLAG_20) || (gCounter % 2 != 0)) {
             if (gMain == GMAIN_387) {
                 if ((cursor->extra_wait == 0) && (cursor->unk_0C == 0) && (well->unk_43F4 == 0) &&
                     (well->unk_43B0 == 0) && (gSelection >= SELECTION_83) && (B_801AB61C_usa == 0) &&
@@ -531,7 +532,7 @@ void DoTetris(void) {
         CheckGameInput(well, cursor, num);
         var_s2 = 0;
         if (gMain == GMAIN_387) {
-            if ((gGameStatus & 0x20) && (gCounter % 2 == 0)) {
+            if ((gGameStatus & GAME_STATUS_FLAG_20) && (gCounter % 2 == 0)) {
                 if (gTheGame.dimension == DIMENSION_3D) {
                     Update3DCursor(well, cursor);
                 }

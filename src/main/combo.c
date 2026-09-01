@@ -220,7 +220,7 @@ void CheckIcon(tetWell *well, s32 total) {
             icon->to_y = var_t2;
             var_t6 = ntrue;
 
-            if ((well->danger != 0) && (gTheGame.totalPlayer == 1) && !(gGameStatus & 0x20)) {
+            if ((well->danger != 0) && (gTheGame.totalPlayer == 1) && !(gGameStatus & GAME_STATUS_FLAG_20)) {
                 for (var_a3_2 = 0; var_a3_2 < ICON_COUNT; var_a3_2++) {
                     if (well->icon[var_a3_2].flag == 0) {
                         well->icon[var_a3_2].flag = -1;
@@ -261,7 +261,8 @@ void CheckIcon(tetWell *well, s32 total) {
             icon->to_y = var_t2;
             var_t5 = ntrue;
 
-            if ((well->danger != 0) && (total != 3) && (gTheGame.totalPlayer == 1) && !(gGameStatus & 0x20)) {
+            if ((well->danger != 0) && (total != 3) && (gTheGame.totalPlayer == 1) &&
+                !(gGameStatus & GAME_STATUS_FLAG_20)) {
                 for (var_a3_2 = 0; var_a3_2 < ICON_COUNT; var_a3_2++) {
                     if (well->icon[var_a3_2].flag == 0) {
                         well->icon[var_a3_2].flag = -1;
@@ -535,7 +536,7 @@ s32 ComboCount(tetWell *well, cursor_t *cursor) {
     for (var_t1 = 0; var_t1 < BLOCK_LEN_ROWS; var_t1++) {
         a = well->block[var_t1];
         b = well->block[var_t1 - 1];
-        temp3 = (gGameStatus & 0x40) ? 9 : 12;
+        temp3 = (gGameStatus & GAME_STATUS_FLAG_40) ? 9 : 12;
 
         for (col = 0; col < gMax; col++) {
             if (a[col].state == 7) {

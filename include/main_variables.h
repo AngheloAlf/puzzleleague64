@@ -12,6 +12,7 @@
 
 #include "unknown_defines.h"
 
+#include "game_status.h"
 #include "selection.h"
 
 struct struct_imageLoad_arg0;

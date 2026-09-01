@@ -316,7 +316,7 @@ void DoTitle(void) {
                     (ganButton[(giButton - 3) % ARRAY_COUNTU(ganButton)] == A_BUTTON)) {
                     if ((ganButton[(giButton - 2) % ARRAY_COUNTU(ganButton)] == L_TRIG) &&
                         (ganButton[(giButton - 1) % ARRAY_COUNTU(ganButton)] == L_TRIG)) {
-                        gGameStatus ^= 1;
+                        gGameStatus ^= GAME_STATUS_FLAG_1;
                         PlaySE(SFX_INIT_TABLE, SFX_009);
                     }
                 }
@@ -365,7 +365,7 @@ void DoTitle(void) {
                 gTheGame.tetrisWell[1].win = 0;
                 brainbrain[0].speed = -1;
                 brainbrain[1].speed = -1;
-                gGameStatus |= 0x80;
+                gGameStatus |= GAME_STATUS_FLAG_80;
 
                 geDemoTitle++;
                 if (geDemoTitle == TD_LAST) {
@@ -444,7 +444,7 @@ void DoTitle(void) {
                         gDemo = GDEMO_2C;
                         gTheGame.dimension = DIMENSION_3D;
                         gReset = 0;
-                        gGameStatus &= ~0x80;
+                        gGameStatus &= ~GAME_STATUS_FLAG_80;
                         gpData->nTick = 0;
                         gpData->iCharacter = 0;
                         gpData->eMode = TM_CHAR;
@@ -469,7 +469,7 @@ void DoTitle(void) {
                     gMain = GMAIN_258;
                     gReset = -1;
                     gDemo = GDEMO_2C;
-                    gGameStatus &= ~0x80;
+                    gGameStatus &= ~GAME_STATUS_FLAG_80;
                 }
             }
         }
@@ -594,7 +594,7 @@ void titleSetup(void) {
     B_FLT_8018A804_usa = 0.0f;
     gbOpenTitle = 0;
     geDemoTitle = TD_NONE;
-    gGameStatus = 0x300;
+    gGameStatus = GAME_STATUS_FLAG_200 | GAME_STATUS_FLAG_100;
     gPlayer[0] = NULL;
     gPlayer[1] = NULL;
 

@@ -3683,7 +3683,7 @@ s32 menuLoadData(void) {
         gbOpenTitle ^= sp18.unk_18;
         D_800B5A18_usa = sp18.unk_30;
         B_8018A91C_usa = sp18.unk_34;
-        gGameStatus = (gGameStatus & 1) ^ sp18.unk_24;
+        gGameStatus = (gGameStatus & GAME_STATUS_FLAG_1) ^ sp18.unk_24;
         gOverflowFlag = sp18.unk_2C;
         B_8021BEA0_usa = sp18.unk_28;
         return -1;
@@ -3730,14 +3730,14 @@ STATIC_INLINE void inlined_function_menuSaveData(struct_800072A0_usa_arg0 *s0, b
 
     s0->unk_14 = B_8018A830_usa & ~0x40;
     s0->unk_18 = gbOpenTitle;
-    s0->unk_24 = gGameStatus & 0xFF7F;
+    s0->unk_24 = gGameStatus & ~GAME_STATUS_FLAG_80;
     s0->unk_30 = D_800B5A18_usa;
     s0->unk_34 = B_8018A91C_usa;
     s0->unk_2C = gOverflowFlag;
     s0->unk_28 = B_8021BEA0_usa;
 
     for (var_s3 = 0; var_s3 < GAME_PLAYER_COUNT; var_s3++) {
-        // What????
+        // TODO: What????
         bcopy(&gTheGame.player[var_s3].unk_002.unk_0, &s0->unk_58[var_s3], sizeof(struct_800072A0_usa_arg0_unk_58));
     }
 }
@@ -4193,7 +4193,7 @@ void func_800194DC_usa(enum_TypeMenu arg0) {
                 B_8018A81C_usa = MT_1P;
             }
             screenFind(&sp10, &RO_800C3284_usa);
-            if ((gGameStatus & 1) && (geTypeMenu != MT_1P_VS_LEVEL)) {
+            if ((gGameStatus & GAME_STATUS_FLAG_1) && (geTypeMenu != MT_1P_VS_LEVEL)) {
                 var_s4 = temp_s4 - 1;
             } else {
                 var_s4 = (temp_s4 - 1) * 2;
