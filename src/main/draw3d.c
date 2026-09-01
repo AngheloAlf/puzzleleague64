@@ -455,7 +455,7 @@ void Draw3DTetris(struct_gInfo_unk_00068 *dynamicp) {
         gDPPipeSync(glistp++);
         gDPSetTextureLUT(glistp++, G_TT_RGBA16);
         gDPLoadTLUT_pal256(glistp++, colorTable);
-        gSPMatrix(glistp++, &dynamicp->unk_10100[num], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+        gSPMatrix(glistp++, &dynamicp->trans[num], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
 
         guPerspective(&dynamicp->unk_10000[num], &perspNorm, 33.0f, 0.88f, 10.0f, 3000.0f, 1.0f);
         guLookAt(&dynamicp->unk_10080[num], 0.0f, 0.0f, 900.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
@@ -467,7 +467,7 @@ void Draw3DTetris(struct_gInfo_unk_00068 *dynamicp) {
         gDPSetCombineMode(glistp++, G_CC_MODULATEIA, G_CC_MODULATEIA);
         gDPSetRenderMode(glistp++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
         gSPMatrix(glistp++, &gIdent, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        gSPMatrix(glistp++, &dynamicp->unk_10180[num], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
+        gSPMatrix(glistp++, &dynamicp->rotate[num], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
 
         if (sp3C) {
             Draw3DTetrisNewBlock(dynamicp, &gTheGame.tetrisWell[num]);

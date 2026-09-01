@@ -28,7 +28,7 @@ void Start2DExplosion(tetWell *well, s32 row, s32 col, s32 type) {
         total = 8;
     }
 
-    rect = &well->unk_3830[row][col];
+    rect = &well->block_rect[row][col];
 
     for (i = 0; i < total; i++) {
         for (count = 0; count < EXPLOSION_COUNT; count++) {

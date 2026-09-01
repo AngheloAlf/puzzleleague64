@@ -296,8 +296,8 @@ void InitBonus(void) {
 
         for (var_s2 = 0; var_s2 < 6; var_s2++) {
             InitTetrisState(&gTheGame.tetrisWell[0].block[0][var_s2]);
-            gTheGame.tetrisWell[0].unk_3830[0][var_s2].s.objX = sp98[var_s2] << 2;
-            gTheGame.tetrisWell[0].unk_3830[0][var_s2].s.objY = -(20 << 2);
+            gTheGame.tetrisWell[0].block_rect[0][var_s2].s.objX = sp98[var_s2] << 2;
+            gTheGame.tetrisWell[0].block_rect[0][var_s2].s.objY = -(20 << 2);
             gTheGame.tetrisWell[0].block[0][var_s2].delay = sp98[var_s2];
         }
     }
@@ -510,11 +510,11 @@ void DoBonus(void) {
 
                 if (temp_ret == ((temp_ret / 21) * 0x15)) {
                     var_s2->block[0][var_s3].type = RandomBlock(var_s2);
-                    Init2DTetrisTMEM(&var_s2->block[0][var_s3], &var_s2->unk_3830[0][var_s3]);
-                    var_s2->unk_3830[0][var_s3].s.objX = var_s2->block[0][var_s3].delay * 4;
+                    Init2DTetrisTMEM(&var_s2->block[0][var_s3], &var_s2->block_rect[0][var_s3]);
+                    var_s2->block_rect[0][var_s3].s.objX = var_s2->block[0][var_s3].delay * 4;
                 }
             } else {
-                var_a0 = var_s2->unk_3830[0][var_s3].s.objY >> 2;
+                var_a0 = var_s2->block_rect[0][var_s3].s.objY >> 2;
                 if (var_a0 < 0x28) {
                     var_a0 = var_a0 + 4;
                 } else if (var_a0 < 0x32) {
@@ -557,7 +557,7 @@ void DoBonus(void) {
                             if (var_s2->block[0][3].disappear >= 2) {
                                 t0 = temp_v1_2 - 1;
 
-                                var_s2->unk_3830[0][3].s.objX = (sp18[t0].unk_0 + 0x5A) << 2;
+                                var_s2->block_rect[0][3].s.objX = (sp18[t0].unk_0 + 0x5A) << 2;
 
                                 var_a0 = (sp18[temp_v1_2 - 1].unk_4 - 0x35);
                             }
@@ -565,7 +565,7 @@ void DoBonus(void) {
                         break;
                 }
 
-                var_s2->unk_3830[0][var_s3].s.objY = var_a0 << 2;
+                var_s2->block_rect[0][var_s3].s.objY = var_a0 << 2;
             }
         }
 

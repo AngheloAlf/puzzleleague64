@@ -106,9 +106,9 @@ void Update2DAttackFace(tetWell *well, attack_t *attack) {
     s32 var_v0;
     s32 temp;
 
-    x = well->unk_3830[0][0].s.objX >> 0x2;
+    x = well->block_rect[0][0].s.objX >> 0x2;
 
-    y = well->unk_3830[attack->currRow][0].s.objY >> 0x2;
+    y = well->block_rect[attack->currRow][0].s.objY >> 0x2;
     if (attack->type < ATTACKTYPE_11) {
         attack->rect.s.objY = y << 2;
     } else {
@@ -119,21 +119,21 @@ void Update2DAttackFace(tetWell *well, attack_t *attack) {
         case ATTACKTYPE_1:
             temp = attack->start;
             temp++;
-            x = well->unk_3830[0][temp].s.objX >> 2;
+            x = well->block_rect[0][temp].s.objX >> 2;
             attack->rect.s.objX = x << 2;
             break;
 
         case ATTACKTYPE_2:
             temp = attack->start;
             temp++;
-            x = well->unk_3830[0][temp].s.objX >> 2;
+            x = well->block_rect[0][temp].s.objX >> 2;
             attack->rect.s.objX = (x + 9) << 2;
             break;
 
         case ATTACKTYPE_3:
             temp = attack->start;
             temp += 2;
-            x = well->unk_3830[0][temp].s.objX >> 2;
+            x = well->block_rect[0][temp].s.objX >> 2;
             attack->rect.s.objX = x << 2;
             break;
 
@@ -331,7 +331,7 @@ void Update2DAttack(tetWell *well, cursor_t *cursor, s32 num) {
 
                     for (col = attack->start; col < attack->unk_1C; pos++, col++) {
                         block = &well->block[row][col];
-                        rect = &well->unk_3830[row][col];
+                        rect = &well->block_rect[row][col];
 
                         if ((attack->delay > 0) || (attack->unk_10 > 0)) {
                             if (attack->delay % 2 != 0) {
@@ -555,7 +555,7 @@ void Change2DAttack(tetWell *well, cursor_t *cursor, s32 num, s32 combo) {
                             temp_s2->state = BLOCKSTATE_9;
                             temp_s2->chain_flag = -1;
                             temp_s2->delay = (temp_s5 * sp44) + sp4C;
-                            rect = &well->unk_3830[var_s4][var_s0];
+                            rect = &well->block_rect[var_s4][var_s0];
                             Init2DTetrisTMEM(temp_s2, rect);
                         } else {
                             temp_s2->drop = 1;

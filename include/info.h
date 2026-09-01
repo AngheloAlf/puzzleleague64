@@ -23,25 +23,25 @@ typedef struct struct_gInfo_unk_00068 {
     /* 0x00008 */ UNK_PAD unk_00008[0x10000-0x00008];
     /* 0x10000 */ Mtx unk_10000[GAME_BUFFER_LEN];
     /* 0x10080 */ Mtx unk_10080[GAME_BUFFER_LEN];
-    /* 0x10100 */ Mtx unk_10100[GAME_BUFFER_LEN]; // trans?
-    /* 0x10180 */ Mtx unk_10180[GAME_BUFFER_LEN]; // rotate?
+    /* 0x10100 */ Mtx trans[GAME_BUFFER_LEN]; /* Original name: trans */
+    /* 0x10180 */ Mtx rotate[GAME_BUFFER_LEN]; /* Original name: rotate */
     /* 0x10200 */ UNK_TYPE1 unk_10200[0x8];
-    /* 0x10208 */ char unk_10208[GAME_BUFFER_LEN][STRUCT_GINFO_UNK_00068_UNK_10208_LEN];
-    /* 0x10224 */ s8 unk_10224[GAME_BUFFER_LEN][0xE];
-    /* 0x10240 */ UNK_TYPE unk_10240;
+    /* 0x10208 */ char frontTexture[GAME_BUFFER_LEN][STRUCT_GINFO_UNK_00068_UNK_10208_LEN]; /* Original name: frontTexture */
+    /* 0x10224 */ char backTexture[GAME_BUFFER_LEN][0xE]; /* Original name: backTexture */
+    /* 0x10240 */ s32 overflow; /* Original name: overflow */
     /* 0x10244 */ block_t block[GAME_BUFFER_LEN][BLOCK_LEN_ROWS][BLOCK_LEN_B];
     /* 0x14C84 */ UNK_TYPE1 unk_14C84[0x4];
     /* 0x14C88 */ attack_t attack[GAME_BUFFER_LEN][ATTACK_COUNT];
     /* 0x157C8 */ icon_t icon[GAME_BUFFER_LEN][ICON_COUNT];
     /* 0x15FE8 */ explode_t explosion[GAME_BUFFER_LEN][EXPLOSION_COUNT];
     /* 0x172A8 */ cursor_t cursorBlock[GAME_BUFFER_LEN];
-    /* 0x17408 */ uObjSprite block_rect[GAME_BUFFER_LEN][BLOCK_LEN_ROWS][TETWELL_OBJSPRITE_LEN_B];
-    /* 0x18188 */ uObjSprite unk_18188[GAME_BUFFER_LEN][TETWELL_UNK_3EF0_LEN_6];
-    /* 0x182A8 */ uObjSprite unk_182A8[GAME_BUFFER_LEN];
-    /* 0x182D8 */ uObjSprite unk_182D8[GAME_BUFFER_LEN];
-    /* 0x18308 */ char unk_18308[GAME_BUFFER_LEN][BLOCK_LEN_ROWS][BLOCK_LEN_B];
-    /* 0x184B8 */ Mtx unk_184B8[GAME_BUFFER_LEN];
-    /* 0x18538 */ Mtx unk_18538[GAME_BUFFER_LEN];
+    /* 0x17408 */ uObjSprite block_rect[GAME_BUFFER_LEN][BLOCK_LEN_ROWS][TETWELL_OBJSPRITE_LEN_B];  /* Original name: block_rect */
+    /* 0x18188 */ uObjSprite new_block_rect[GAME_BUFFER_LEN][TETWELL_UNK_3EF0_LEN_6];  /* Original name: new_block_rect */
+    /* 0x182A8 */ uObjSprite left2D[GAME_BUFFER_LEN]; /* Original name: left2D */
+    /* 0x182D8 */ uObjSprite right2D[GAME_BUFFER_LEN]; /* Original name: right2D */
+    /* 0x18308 */ char visible[GAME_BUFFER_LEN][BLOCK_LEN_ROWS][BLOCK_LEN_B]; /* Original name: visible */
+    /* 0x184B8 */ Mtx left3D[GAME_BUFFER_LEN]; /* Original name: left3D */
+    /* 0x18538 */ Mtx right3D[GAME_BUFFER_LEN]; /* Original name: right3D */
     /* 0x185B8 */ UNK_TYPE1 unk_185B8[0x140];
     /* 0x186F8 */ text_t drawText[DRAWTEXT_COUNT];
 } struct_gInfo_unk_00068; // size = 0x18FB8
@@ -340,7 +340,7 @@ typedef struct /* struct_pon_gc_draw_c_2466 */ {
 
 typedef struct struct_gInfo {
     /* 0x00000 */ OSScTask scTask;
-    /* 0x00068 */ struct_gInfo_unk_00068 unk_00068; //dp?
+    /* 0x00068 */ struct_gInfo_unk_00068 dp; /* Original name: dp */
     /* 0x19020 */ s16 msg;
     /* 0x19022 */ UNK_PAD unk_19022[0x2];
     /* 0x19024 */ UNK_PAD unk_19024[0x1C];

@@ -662,8 +662,8 @@ void InitFlyAttack(tetWell *well, attack_t *attack, s32 posX, s32 posY, ENUM_TYP
 
     temp_s5 = well->unk_441C - 0xDF;
     if (gTheGame.dimension == DIMENSION_2D) {
-        sp10 = well->unk_3830[0][0].s.objX >> 0x2;
-        sp14 = (well->unk_3830[0][0].s.objY >> 0x2) - temp_s5;
+        sp10 = well->block_rect[0][0].s.objX >> 0x2;
+        sp14 = (well->block_rect[0][0].s.objY >> 0x2) - temp_s5;
         Init2DAttackPosition(attack, type, num);
         attack->unk_10 = sp10 + (posX * 0x10);
         attack->currRow = sp14 - (posY * 0x10);

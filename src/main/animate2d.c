@@ -132,11 +132,11 @@ void Update2DSwitching(tetWell *well, cursor_t *cursor) {
     }
 
     if ((cursor->extra_wait == 2) || (cursor->extra_wait == 3)) {
-        well->unk_3F98.s.objX -= 5 << 2;
-        well->unk_3F80.s.objX += 5 << 2;
+        well->right2D.s.objX -= 5 << 2;
+        well->left2D.s.objX += 5 << 2;
     } else {
-        well->unk_3F98.s.objX -= 4 << 2;
-        well->unk_3F80.s.objX += 4 << 2;
+        well->right2D.s.objX -= 4 << 2;
+        well->left2D.s.objX += 4 << 2;
     }
 
     cursor->extra_wait--;
@@ -144,10 +144,10 @@ void Update2DSwitching(tetWell *well, cursor_t *cursor) {
         block1 = &well->block[cursor->sy][cursor->sx];
         block2 = &well->block[cursor->sy][cursor->sx + 1];
         if (block1->type != BLOCKTYPE_0) {
-            Init2DTetrisTMEM(block1, &well->unk_3830[cursor->sy][cursor->sx]);
+            Init2DTetrisTMEM(block1, &well->block_rect[cursor->sy][cursor->sx]);
         }
         if (block2->type != BLOCKTYPE_0) {
-            Init2DTetrisTMEM(block2, &well->unk_3830[cursor->sy][cursor->sx + 1]);
+            Init2DTetrisTMEM(block2, &well->block_rect[cursor->sy][cursor->sx + 1]);
         }
         // TODO: Dimensions define?
         AfterSwitch(well, cursor, block1, block2, DIMENSION_2D);
@@ -167,11 +167,11 @@ void Add2DNewRow(tetWell *well, cursor_t *cursor, s32 num) {
         for (var_s1 = 0xB; var_s1 >= 1; var_s1--) {
             bcopy(&well->block[var_s1 - 1][var_a0], &well->block[var_s1][var_a0], 0x2C);
             well->block[var_s1][var_a0].currRow = var_s1;
-            bcopy(&well->unk_3830[var_s1 - 1][var_a0], &well->unk_3830[var_s1][var_a0], 0x18);
+            bcopy(&well->block_rect[var_s1 - 1][var_a0], &well->block_rect[var_s1][var_a0], 0x18);
         }
 
         bcopy(&well->new_block[var_a0], &well->block[0][var_a0], 0x2C);
-        bcopy(&well->unk_3EF0[var_a0], &well->unk_3830[0][var_a0], 0x18);
+        bcopy(&well->new_block_rect[var_a0], &well->block_rect[0][var_a0], 0x18);
     }
 
     for (var_a0 = 0; var_a0 < 0x14; var_a0++) {

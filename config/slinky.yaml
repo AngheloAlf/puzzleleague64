@@ -197,15 +197,7 @@ segments:
       - { path: src/main/dlist.o }
       - { path: src/main/combo.o }
       - { path: src/main/animate.o }
-
-      - { path: src/main/update.o, include_if_any: [[version, usa], [version, eur]] }
-
-      - { path: "asm/{version}/main/056C60.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/data/main/0C5E80.rodata.o", include_if_any: [[version, fra]] }
-
-      - { path: "asm/{version}/main/056DE0.o", include_if_any: [[version, ger]] }
-      - { path: "asm/{version}/data/main/0BCE40.rodata.o", include_if_any: [[version, ger]] }
-
+      - { path: src/main/update.o }
       - { path: src/main/attack.o }
       - { path: src/main/explode.o }
       - { path: src/main/init3d.o }

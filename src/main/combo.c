@@ -68,7 +68,7 @@ void CompactWell(tetWell *well, s32 num) {
                         }
 
                         bcopy(top_block, bot_block, sizeof(block_t));
-                        Init2DTetrisTMEM(bot_block, &well->unk_3830[row][col]);
+                        Init2DTetrisTMEM(bot_block, &well->block_rect[row][col]);
                         InitTetrisState(top_block);
 
                         if (row != 0) {

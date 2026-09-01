@@ -188,7 +188,7 @@ segments:
       - [0x053B10, c, main/dlist]
       - [0x054E30, c, main/combo]
       - [0x055F20, c, main/animate]
-      - [0x056C60, asm, main/056C60] # update.c is around here
+      - [0x056C60, c, main/update]
       - [0x059ED0, c, main/attack]
       - [0x05CC40, c, main/explode]
       - [0x05CF10, c, main/init3d]
@@ -560,7 +560,7 @@ segments:
       - [0x0C5688, .rodata, main/other]
       - [0x0C5B50, .rodata, main/dlist]
       - [0x0C5E30, .rodata, main/animate]
-      - [0x0C5E80, rodata, main/0C5E80]
+      - [0x0C5E80, .rodata, main/update]
       - [0x0C60B0, .rodata, main/attack]
       - [0x0C62B0, .rodata, main/init3d]
       - [0x0C6350, .rodata, main/draw3d]

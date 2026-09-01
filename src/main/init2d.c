@@ -76,7 +76,7 @@ void Init2DTetrisBlocksTMEM(tetWell *well, s32 clear) {
                     InitTetrisState(block);
                 }
                 block->type = type;
-                Init2DTetrisTMEM(block, &well->unk_3830[row][col]);
+                Init2DTetrisTMEM(block, &well->block_rect[row][col]);
             } else {
                 InitTetrisState(block);
             }
@@ -206,7 +206,7 @@ void Init2DSmallStars(s32 num) {
     for (i = 0; i < BLOCK_LEN_ROWS; i++) {
         for (j = 0; j < TETWELL_OBJSPRITE_LEN_B; j++) {
             block = &tetWell->block[i][j];
-            s = &tetWell->unk_3830[i][j].s;
+            s = &tetWell->block_rect[i][j].s;
 
             if (num == 0) {
                 s->objX = (stars_POS[var_s3][num] + 0x16) << 2;

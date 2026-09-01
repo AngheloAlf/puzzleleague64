@@ -17,16 +17,16 @@
 /* Original name: tetWell */
 typedef struct tetWell {
     /* 0x0000 */ block_t block[BLOCK_LEN_ROWS][BLOCK_LEN_B]; /* Original name: block */
-    /* 0x2520 */ attack_t attack[ATTACK_COUNT];
-    /* 0x2AC0 */ icon_t icon[ICON_COUNT];
-    /* 0x2ED0 */ explode_t explosion[EXPLOSION_COUNT];
-    /* 0x3830 */ uObjSprite unk_3830[BLOCK_LEN_ROWS][TETWELL_OBJSPRITE_LEN_B];
-    /* 0x3EF0 */ uObjSprite unk_3EF0[TETWELL_UNK_3EF0_LEN_6];
-    /* 0x3F80 */ uObjSprite unk_3F80;
-    /* 0x3F98 */ uObjSprite unk_3F98;
-    /* 0x3FB0 */ char visible[BLOCK_LEN_ROWS][BLOCK_LEN_B];
-    /* 0x4088 */ f32 translation;
-    /* 0x408C */ block_t new_block[BLOCK_LEN_B];
+    /* 0x2520 */ attack_t attack[ATTACK_COUNT]; /* Original name: attack */
+    /* 0x2AC0 */ icon_t icon[ICON_COUNT]; /* Original name: icon */
+    /* 0x2ED0 */ explode_t explosion[EXPLOSION_COUNT]; /* Original name: explosion */
+    /* 0x3830 */ uObjSprite block_rect[BLOCK_LEN_ROWS][TETWELL_OBJSPRITE_LEN_B]; /* Original name: block_rect */
+    /* 0x3EF0 */ uObjSprite new_block_rect[TETWELL_UNK_3EF0_LEN_6]; /* Original name: new_block_rect */
+    /* 0x3F80 */ uObjSprite left2D; /* Original name: left2D */
+    /* 0x3F98 */ uObjSprite right2D; /* Original name: right2D */
+    /* 0x3FB0 */ char visible[BLOCK_LEN_ROWS][BLOCK_LEN_B]; /* Original name: visible */
+    /* 0x4088 */ f32 translation; /* Original name: translation */
+    /* 0x408C */ block_t new_block[BLOCK_LEN_B]; /* Original name: new_block */
     /* 0x43A4 */ s32 unk_43A4;
     /* 0x43A8 */ s32 unk_43A8; // old_chain?
     /* 0x43AC */ s32 unk_43AC;

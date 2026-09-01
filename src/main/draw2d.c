@@ -66,7 +66,7 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
     }
 
     for (var_t3 = 1; var_t3 <= var_t8; var_t3++) {
-        if (dynamicp->unk_10208[num][var_t3] == 0) {
+        if (dynamicp->frontTexture[num][var_t3] == 0) {
             continue;
         }
 
@@ -146,11 +146,11 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
 
         block = &array[cursor->sy][cursor->sx + 1];
         if ((block->type != BLOCKTYPE_0) && (block->state == BLOCKSTATE_2 || block->state == BLOCKSTATE_3)) {
-            gSPObjRectangle(glistp++, &dynamicp->unk_182A8[num]);
+            gSPObjRectangle(glistp++, &dynamicp->left2D[num]);
         }
         block = &array[cursor->sy][cursor->sx];
         if ((block->type != BLOCKTYPE_0) && (block->state == BLOCKSTATE_2 || block->state == BLOCKSTATE_3)) {
-            gSPObjRectangle(glistp++, &dynamicp->unk_182D8[num]);
+            gSPObjRectangle(glistp++, &dynamicp->right2D[num]);
         }
     }
 
@@ -199,7 +199,7 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
     }
 
     for (var_a1 = 0; var_a1 < TETWELL_UNK_3EF0_LEN_6; var_a1++) {
-        gSPObjRectangle(glistp++, &dynamicp->unk_18188[num][var_a1]);
+        gSPObjRectangle(glistp++, &dynamicp->new_block_rect[num][var_a1]);
     }
 }
 
@@ -725,17 +725,17 @@ void DrawTetris(struct_gInfo_unk_00068 *dynamicp) {
 INLINE void OverFlow(struct_gInfo_unk_00068 *dynamicp) {
     s32 size;
 
-    if ((gTheGame.totalPlayer == 1) || (dynamicp->unk_10240 <= 0x320)) {
+    if ((gTheGame.totalPlayer == 1) || (dynamicp->overflow <= 0x320)) {
         gLastOverflow = 0x320;
         return;
     }
 
-    if (dynamicp->unk_10240 >= gLastOverflow + 0x6E) {
+    if (dynamicp->overflow >= gLastOverflow + 0x6E) {
         gLastOverflow = gLastOverflow + 0x6E;
-    } else if (gLastOverflow - 0x50 >= dynamicp->unk_10240) {
+    } else if (gLastOverflow - 0x50 >= dynamicp->overflow) {
         gLastOverflow = gLastOverflow - 0x50;
     } else {
-        gLastOverflow = dynamicp->unk_10240;
+        gLastOverflow = dynamicp->overflow;
     }
 
     size = (gLastOverflow - 0x320);
