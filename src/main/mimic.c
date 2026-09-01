@@ -204,7 +204,6 @@ void func_8008336C_usa(s32 kind, s32 level, s32 number, s32 play) {
 void MTMove(ai_t *brain, u8 *ptr) {
     s32 temp_v0;
     s32 var_a0;
-    unsigned char *var_s0;
     s32 temp_s3;
 
 #if 0
@@ -220,13 +219,15 @@ void MTMove(ai_t *brain, u8 *ptr) {
     temp_v0 = *ptr;
     if (brain->unk_044 < temp_v0) {
         ptr += brain->unk_044 * 3;
-        var_s0 = ptr + 1;
-        for (temp_s3 = 0; true; temp_s3 += 3) {
-            AIAddCommand(brain, var_s0[temp_s3], var_s0[temp_s3 + 1], var_s0[temp_s3 + 2]);
+        ptr = ptr + 1;
+        temp_s3 = 0;
+        while (1) {
+            AIAddCommand(brain, ptr[temp_s3], ptr[temp_s3 + 1], ptr[temp_s3 + 2]);
             brain->unk_044 += 1;
-            if (var_s0[temp_s3] != 0x14) {
+            if (ptr[temp_s3] != 0x14) {
                 return;
             }
+            temp_s3 += 3;
         }
     } else {
         AIAddCommand(brain, 0x1F, 0, 0);
