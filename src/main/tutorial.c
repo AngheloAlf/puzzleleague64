@@ -322,7 +322,7 @@ void TutorialCheckState(tetWell *well, cursor_t *cursor) {
     if (gTheGame.controller[0].touch_button & B_BUTTON) {
         gMain = GMAIN_2BC;
         gReset = -1;
-        PlaySE(SFX_INIT_TABLE, SFX_6);
+        PlaySE(SFX_INIT_TABLE, SFX_006);
         gGameStatus = gGameStatus >> 16;
         return;
     }
