@@ -166,11 +166,13 @@ s32 LoadFairySoundData(s16 music, s16 fairy1, s16 fairy2) {
         LoadSFXBank(var_s5, 4U);
     }
 
-    if ((gMain != GMAIN_MIMIC) && (gMain != GMAIN_TUTORIAL) && (gSelection != SELECTION_82) && (gSelection != SELECTION_78)) {
+    if ((gMain != GMAIN_MIMIC) && (gMain != GMAIN_TUTORIAL) && (gSelection != SELECTION_82) &&
+        (gSelection != SELECTION_78)) {
         if (gSelection == SELECTION_AA) {
         } else if ((gSelection == SELECTION_96) && (fairy2 == 0x10)) {
             // These empty blocks seems required to match?
-        } else if (((gSelection == SELECTION_A0) || (gSelection == SELECTION_B4) || (gSelection == SELECTION_C8)) && (fairy2 == 0x10)) {
+        } else if (((gSelection == SELECTION_A0) || (gSelection == SELECTION_B4) || (gSelection == SELECTION_C8)) &&
+                   (fairy2 == 0x10)) {
             // ?
         } else {
             PlaySE(SFX_INIT_TABLE, SFX_17A);

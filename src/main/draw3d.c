@@ -446,7 +446,8 @@ void Draw3DTetris(struct_gInfo_unk_00068 *dynamicp) {
 
     gDPSetScissor(glistp++, G_SC_NON_INTERLACE, 0, 31, SCREEN_WIDTH, SCREEN_HEIGHT - 19);
 
-    if (((gMain == GMAIN_388) || (gMain < GMAIN_384)) && ((gTheGame.totalPlayer == 2) || (gSelection == SELECTION_82))) {
+    if (((gMain == GMAIN_388) || (gMain < GMAIN_384)) &&
+        ((gTheGame.totalPlayer == 2) || (gSelection == SELECTION_82))) {
         sp3C = nfalse;
     }
 

@@ -137,8 +137,8 @@ void InitBonus(void) {
     func_80001310_usa(SEGMENT_ROM_START(segment_101A80), temp_s4, SEGMENT_ROM_SIZE(segment_101A80));
     Pon_Image_Heap += SEGMENT_ROM_SIZE(segment_101A80);
 
-    if ((gSelection == SELECTION_96) && (gTheGame.cursorBlock[0].unk_00 != 7) && (gTheGame.cursorBlock[1].unk_00 != 8) &&
-        (B_801C6C90_usa == 0x10)) {
+    if ((gSelection == SELECTION_96) && (gTheGame.cursorBlock[0].unk_00 != 7) &&
+        (gTheGame.cursorBlock[1].unk_00 != 8) && (B_801C6C90_usa == 0x10)) {
         PlayMIDI(BGM_INIT_TABLE, 0x20, 0, 1);
     }
     gTheGame.unk_9A50.b.imagePtr = temp_s4 + var_s3;

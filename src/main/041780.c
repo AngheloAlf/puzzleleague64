@@ -566,7 +566,8 @@ void func_80041F1C_usa(void **heapP, s32 arg1) {
     B_80192F80_usa->unk_08 = (gWorld == 0x10) ? -1 : 0;
 
     if (((gTheGame.menu[0].stage == 1) && (B_80192F80_usa->unk_18 = 0, (gTheGame.menu[0].stage == 1))) ||
-        (gSelection == SELECTION_96) || (((gSelection == SELECTION_A0) || (gSelection == SELECTION_B4)) != 0) || (gSelection == SELECTION_C8)) {
+        (gSelection == SELECTION_96) || (((gSelection == SELECTION_A0) || (gSelection == SELECTION_B4)) != 0) ||
+        (gSelection == SELECTION_C8)) {
         if (gTheGame.menu[0].stage < 0xF) {
             var_v0 = D_800B67E4_usa[gTheGame.menu[0].stage - 1];
         } else {

@@ -318,8 +318,8 @@ void InitTetrisWell(void) {
             Init2DCursor(sp34, var_fp);
             Init2DTetrisBlocks(temp_s3, var_fp);
 
-            switch (gSelection) { /* switch 1; irregular */
-                case SELECTION_AA:        /* switch 1 */
+            switch (gSelection) {  /* switch 1; irregular */
+                case SELECTION_AA: /* switch 1 */
                     InitBlockPattern(temp_s3, sp10, 6, 1);
                     InitStartingBlocks(temp_s3, sp10, 6);
                     break;
@@ -498,8 +498,8 @@ void DoTetris(void) {
         if (!(gGameStatus & 0x20) || (gCounter % 2 != 0)) {
             if (gMain == GMAIN_387) {
                 if ((cursor->extra_wait == 0) && (cursor->unk_0C == 0) && (well->unk_43F4 == 0) &&
-                    (well->unk_43B0 == 0) && (gSelection >= SELECTION_83) && (B_801AB61C_usa == 0) && (cursor->unk_00 <= 0) &&
-                    (cursor->unk_08 == 0)) {
+                    (well->unk_43B0 == 0) && (gSelection >= SELECTION_83) && (B_801AB61C_usa == 0) &&
+                    (cursor->unk_00 <= 0) && (cursor->unk_08 == 0)) {
                     well->unk_43EC += well->unk_43F0;
 
                     if (well->unk_43EC >= 0x1000U) {
