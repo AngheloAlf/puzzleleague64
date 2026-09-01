@@ -116,7 +116,7 @@ void Init3DAttackBlocks(tetWell *well) {
         attack->disappear = -1;
         attack->delay = 0;
         attack->unk_10 = 0;
-        attack->unk_24 = -1;
+        attack->currRow = -1;
         attack->unk_28 = -1;
     }
 }
@@ -145,7 +145,7 @@ void Init3DText(void) {
 void Init3DClearLine(tetWell *well, struct cursor_t *cursor UNUSED, s32 num) {
     uObjSprite_t *s;
 
-    well->attack[0].unk_24 = 0;
+    well->attack[0].currRow = 0;
 
     s = &well->attack[0].rect.s;
     if (gTheGame.totalPlayer == 1) {

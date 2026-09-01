@@ -187,8 +187,8 @@ void InitTutorial(void) {
         s2->unk_43B0 = 0;
         s2->unk_43A8 = 0;
         s2->unk_43A4 = 0;
-        s2->unk_43B4 = 0;
-        s2->unk_43B8 = 0;
+        s2->danger = 0;
+        s2->alert = 0;
         s2->unk_43BC = 0;
         s2->unk_43C0 = 0;
         s2->collision = 0;

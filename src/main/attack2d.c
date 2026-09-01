@@ -24,7 +24,7 @@ void Init2DAttackPosition(attack_t *attack, ENUM_TYPE(AttackType, s32) type, s32
     attack->type = type;
     attack->unk_20 = 0;
     attack->delay = 40;
-    attack->unk_14 = 1;
+    attack->level = 1;
 
     attack->rect.s.imageW = 16 << 5;
     attack->rect.s.scaleW = 32 << 5;
@@ -85,7 +85,7 @@ void Init2DAttackPosition(attack_t *attack, ENUM_TYPE(AttackType, s32) type, s32
             attack->start = 0;
             // TODO: fix weird condition
             if (((type == ATTACKTYPE_4) || (type == ATTACKTYPE_9)) == 0) {
-                attack->unk_14 = type - ATTACKTYPE_9;
+                attack->level = type - ATTACKTYPE_9;
             }
             break;
     }
@@ -108,7 +108,7 @@ void Update2DAttackFace(tetWell *well, attack_t *attack) {
 
     x = well->unk_3830[0][0].s.objX >> 0x2;
 
-    y = well->unk_3830[attack->unk_24][0].s.objY >> 0x2;
+    y = well->unk_3830[attack->currRow][0].s.objY >> 0x2;
     if (attack->type < ATTACKTYPE_11) {
         attack->rect.s.objY = y << 2;
     } else {
@@ -268,7 +268,7 @@ void Update2DAttack(tetWell *well, cursor_t *cursor, s32 num) {
             case ATTACKSTATE_5:
             case ATTACKSTATE_6:
                 if ((attack->type == ATTACKTYPE_4) || (attack->type >= ATTACKTYPE_9)) {
-                    gOverflow += attack->unk_14 * 0xA;
+                    gOverflow += attack->level * 0xA;
                 }
                 AttackFall(well, cursor, attack, &sound);
                 attack->unk_20 = 0;
@@ -279,9 +279,9 @@ void Update2DAttack(tetWell *well, cursor_t *cursor, s32 num) {
                 FALLTHROUGH;
 
             case ATTACKSTATE_8:
-                row = attack->unk_14;
-                if ((attack->unk_24 + row) > BLOCK_LEN_ROWS) {
-                    row = BLOCK_LEN_ROWS - attack->unk_24;
+                row = attack->level;
+                if ((attack->currRow + row) > BLOCK_LEN_ROWS) {
+                    row = BLOCK_LEN_ROWS - attack->currRow;
                 }
 
                 gOverflow = gOverflow + ((attack->unk_1C - attack->start) * row * 5) + ((row - 1) * 0xA);
@@ -289,7 +289,7 @@ void Update2DAttack(tetWell *well, cursor_t *cursor, s32 num) {
                     if (attack->unk_10 < 0) {
                         attack->unk_10++;
                         if (attack->unk_10 != 0) {
-                            if ((attack->unk_24 < BLOCK_LEN_ROWS) && (attack->unk_20 != 0)) {
+                            if ((attack->currRow < BLOCK_LEN_ROWS) && (attack->unk_20 != 0)) {
                                 Update2DAttackFace(well, attack);
                             }
                         }
@@ -310,11 +310,11 @@ void Update2DAttack(tetWell *well, cursor_t *cursor, s32 num) {
                         }
 #endif
                     } else if (B_801C6BDC_usa[num] != 0) {
-                        if (attack->unk_24 < BLOCK_LEN_ROWS) {
+                        if (attack->currRow < BLOCK_LEN_ROWS) {
                             Init2DFaceTMEM(attack);
                             Update2DAttackFace(well, attack);
                         }
-                    } else if ((attack->unk_24 < BLOCK_LEN_ROWS) && (AnimationRandom(0x64) % 3 == 0)) {
+                    } else if ((attack->currRow < BLOCK_LEN_ROWS) && (AnimationRandom(0x64) % 3 == 0)) {
                         Init2DFaceTMEM(attack);
                         Update2DAttackFace(well, attack);
                     } else {
@@ -322,8 +322,8 @@ void Update2DAttack(tetWell *well, cursor_t *cursor, s32 num) {
                     }
                 }
 
-                for (lev = 0; lev < attack->unk_14; lev++) {
-                    row = attack->unk_24 + lev;
+                for (lev = 0; lev < attack->level; lev++) {
+                    row = attack->currRow + lev;
                     pos = 0;
                     if (row >= BLOCK_LEN_ROWS) {
                         break;
@@ -460,9 +460,9 @@ void Change2DAttack(tetWell *well, cursor_t *cursor, s32 num, s32 combo) {
     for (sp3C = 0; sp3C < 0x17; sp3C++) {
         if (cursor->target[sp3C] != 0) {
             temp_s1 = &well->attack[cursor->target[sp3C] - 1];
-            var_s4 = temp_s1->unk_14;
-            if ((temp_s1->unk_24 + var_s4) >= 0xD) {
-                var_s4 = 0xC - temp_s1->unk_24;
+            var_s4 = temp_s1->level;
+            if ((temp_s1->currRow + var_s4) >= 0xD) {
+                var_s4 = 0xC - temp_s1->currRow;
             }
             var_t2 += (temp_s1->unk_1C - temp_s1->start) * var_s4;
         }
@@ -524,8 +524,8 @@ void Change2DAttack(tetWell *well, cursor_t *cursor, s32 num, s32 combo) {
             continue;
         }
 
-        for (var_s3 = 0; var_s3 < temp_s1->unk_14; var_s3++) {
-            var_s4 = temp_s1->unk_24 + var_s3;
+        for (var_s3 = 0; var_s3 < temp_s1->level; var_s3++) {
+            var_s4 = temp_s1->currRow + var_s3;
 
             if (var_s4 < 0xC) {
                 for (var_s0 = temp_s1->unk_1C - 1; var_s0 >= temp_s1->start; var_s0--) {
@@ -562,7 +562,7 @@ void Change2DAttack(tetWell *well, cursor_t *cursor, s32 num, s32 combo) {
                         }
 
                         if ((var_s0 == temp_s1->start) & (var_s3 == 0)) {
-                            if (temp_s1->unk_14 == 1) {
+                            if (temp_s1->level == 1) {
                                 if (temp_s1->type == 0xA) {
                                     temp_s1->type = 4;
                                 }
@@ -579,14 +579,14 @@ void Change2DAttack(tetWell *well, cursor_t *cursor, s32 num, s32 combo) {
                                 temp_s1->type += 0x15;
                             }
                         } else if (var_s0 == temp_s1->start) {
-                            if (var_s3 == (temp_s1->unk_14 - 1)) {
-                                temp_s1->unk_24++;
-                                temp_s1->unk_14--;
+                            if (var_s3 == (temp_s1->level - 1)) {
+                                temp_s1->currRow++;
+                                temp_s1->level--;
                                 temp_s1->disappear = -1;
                                 temp_s1->type -= 0x16;
 
-                                for (var_s3 = 0; var_s3 < temp_s1->unk_14; var_s3++) {
-                                    var_s4 = temp_s1->unk_24 + var_s3;
+                                for (var_s3 = 0; var_s3 < temp_s1->level; var_s3++) {
+                                    var_s4 = temp_s1->currRow + var_s3;
                                     for (var_s0 = temp_s1->start; var_s0 < temp_s1->unk_1C; var_s0++) {
                                         well->block[var_s4][var_s0].drop = 0;
                                     }
@@ -602,18 +602,18 @@ void Change2DAttack(tetWell *well, cursor_t *cursor, s32 num, s32 combo) {
                         }
                     }
                     var_s0 = temp_s1->start;
-                    var_s3 = temp_s1->unk_14;
+                    var_s3 = temp_s1->level;
                 }
 
             } else {
-                temp_s1->unk_24++;
-                temp_s1->unk_14--;
+                temp_s1->currRow++;
+                temp_s1->level--;
                 temp_s1->disappear = -1;
                 temp_s1->type -= 0x16;
 
                 // var_s3 is reused here?
-                for (var_s3 = 0; var_s3 < temp_s1->unk_14; var_s3++) {
-                    var_s4 = temp_s1->unk_24 + var_s3;
+                for (var_s3 = 0; var_s3 < temp_s1->level; var_s3++) {
+                    var_s4 = temp_s1->currRow + var_s3;
                     if (var_s4 < 0xC) {
                         for (var_s0 = temp_s1->start; var_s0 < temp_s1->unk_1C; var_s0++) {
                             well->block[var_s4][var_s0].drop = 0;

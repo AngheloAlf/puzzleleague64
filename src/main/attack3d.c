@@ -22,7 +22,7 @@ void Init3DAttackPosition(attack_t *attack, ENUM_TYPE(AttackType, s32) type, s32
     attack->disappear = -1;
     attack->delay = 25;
     attack->type = type;
-    attack->unk_14 = 1;
+    attack->level = 1;
 
     // Shouldn't this be zero?
     rect->s.paddingX = 0x14;
@@ -148,13 +148,13 @@ INLINE void Set3DRingPosition(attack_t *attack) {
     }
 
     if (attack->type > 0xB) {
-        attack->unk_14 = attack->type - 0xB;
+        attack->level = attack->type - ATTACKTYPE_11;
     } else {
-        attack->unk_14 = 1;
+        attack->level = 1;
     }
 
-    if (attack->unk_14 > 0xA) {
-        attack->unk_14 = 0xA;
+    if (attack->level > 0xA) {
+        attack->level = 0xA;
     }
 }
 

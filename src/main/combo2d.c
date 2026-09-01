@@ -16,7 +16,7 @@ void Compact2DAttackNoWhere(tetWell *well) {
     s32 count;
 
     for (count = 0; count < ATTACK_COUNT; count++) {
-        if ((well->attack[count].state >= ATTACKSTATE_7) && (well->attack[count].unk_24 == 0xC)) {
+        if ((well->attack[count].state >= ATTACKSTATE_7) && (well->attack[count].currRow == 0xC)) {
             Compact2DAttack(well, count);
         }
     }
@@ -50,7 +50,7 @@ void Compact2DAttack(tetWell *well, s32 count) {
 #endif
 
     temp_s3 = &well->attack[count];
-    temp_a1 = temp_s3->unk_24;
+    temp_a1 = temp_s3->currRow;
     var_a2 = 0;
     if (temp_a1 < BLOCK_LEN_ROWS) {
         for (var_s1 = temp_s3->start; var_s1 < temp_s3->unk_1C; var_s1++) {
@@ -66,11 +66,11 @@ void Compact2DAttack(tetWell *well, s32 count) {
         return;
     }
 
-    if (temp_s3->unk_24 < 1) {
+    if (temp_s3->currRow < 1) {
         return;
     }
 
-    temp_a1 = temp_s3->unk_24 - 1;
+    temp_a1 = temp_s3->currRow - 1;
     for (var_s1 = temp_s3->start; var_s1 < temp_s3->unk_1C; var_s1++) {
         temp_a0 = &well->block[temp_a1][var_s1];
         if ((temp_a0->type != BLOCKTYPE_0) || (temp_a0->state == BLOCKSTATE_2) || (temp_a0->state == BLOCKSTATE_3)) {
@@ -82,21 +82,21 @@ void Compact2DAttack(tetWell *well, s32 count) {
         return;
     }
 
-    for (var_s6 = 0; var_s6 < temp_s3->unk_14; var_s6++) {
+    for (var_s6 = 0; var_s6 < temp_s3->level; var_s6++) {
         var_s5 = 0;
 
-        if (temp_s3->unk_24 + var_s6 < BLOCK_LEN_ROWS) {
-            temp_a1 = temp_s3->unk_24 + var_s6 - 1;
+        if (temp_s3->currRow + var_s6 < BLOCK_LEN_ROWS) {
+            temp_a1 = temp_s3->currRow + var_s6 - 1;
             for (var_s1 = temp_s3->start; var_s1 < temp_s3->unk_1C; var_s1++) {
                 temp_a1_4 = &well->block[temp_a1][var_s1];
-                temp_s0 = &well->block[temp_s3->unk_24 + var_s6][var_s1];
+                temp_s0 = &well->block[temp_s3->currRow + var_s6][var_s1];
 
                 bcopy(temp_s0, temp_a1_4, sizeof(block_t));
                 Init2DAttackTMEM(&well->unk_3830[temp_a1][var_s1], temp_s3->type, var_s6, var_s5);
                 var_s5++;
                 InitTetrisState(temp_s0);
             }
-        } else if (temp_s3->unk_24 + var_s6 == BLOCK_LEN_ROWS) {
+        } else if (temp_s3->currRow + var_s6 == BLOCK_LEN_ROWS) {
             temp_a1 = BLOCK_LEN_ROWS - 1;
             for (var_s1 = temp_s3->start; var_s1 < temp_s3->unk_1C; var_s1++) {
                 well->block[temp_a1][var_s1].type = BLOCKTYPE_9;
@@ -104,12 +104,12 @@ void Compact2DAttack(tetWell *well, s32 count) {
                 Init2DAttackTMEM(&well->unk_3830[temp_a1][var_s1], temp_s3->type, var_s6, var_s5);
                 var_s5++;
             }
-        } else if (temp_s3->unk_24 + var_s6 > BLOCK_LEN_ROWS) {
+        } else if (temp_s3->currRow + var_s6 > BLOCK_LEN_ROWS) {
             break;
         }
     }
 
-    temp_s3->unk_24--;
+    temp_s3->currRow--;
     if (temp_s3->state != ATTACKSTATE_5) {
         temp_s3->state = ATTACKSTATE_6;
     }

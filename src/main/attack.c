@@ -184,11 +184,11 @@ void AttackFly(tetWell *well, attack_t *attack, s32 num) {
     temp_t0 = (num == 0) ? -1 : 1;
     if (attack->delay >= -5) {
         attack->unk_10 -= temp_t0 * 2;
-        attack->unk_24 += 2;
+        attack->currRow += 2;
     } else if (attack->delay >= -0x18) {
         var_a0 = -attack->delay - 6;
         attack->unk_10 += D_800B762C_usa[var_a0] * temp_t0;
-        attack->unk_24 += D_800B7640_usa[var_a0];
+        attack->currRow += D_800B7640_usa[var_a0];
     } else {
         if (attack->disappear == -1) {
             if ((attack->type == ATTACKTYPE_10) && (attack->unk_28 != -1)) {
@@ -209,23 +209,23 @@ void AttackFly(tetWell *well, attack_t *attack, s32 num) {
 
         if (gTheGame.dimension == DIMENSION_2D) {
             temp_ft2 = st_Attack2DTopPosition[num][attack->disappear];
-            temp_ft1 = (DOUBLE_LITERAL(10.0) - (f32)attack->unk_24) / (temp_ft2 - attack->unk_10);
+            temp_ft1 = (DOUBLE_LITERAL(10.0) - (f32)attack->currRow) / (temp_ft2 - attack->unk_10);
             attack->unk_10 += temp_t0 * 5;
             temp = (DOUBLE_LITERAL(10.0) - (temp_ft1 * temp_ft2));
-            attack->unk_24 = (temp_ft1 * attack->unk_10) + temp;
+            attack->currRow = (temp_ft1 * attack->unk_10) + temp;
         } else {
             temp_ft2 = st_Attack3DTopPosition[num][attack->disappear];
-            temp_ft1 = (DOUBLE_LITERAL(10.0) - (f32)attack->unk_24) / (temp_ft2 - attack->unk_10);
+            temp_ft1 = (DOUBLE_LITERAL(10.0) - (f32)attack->currRow) / (temp_ft2 - attack->unk_10);
             attack->unk_10 += temp_t0 * 5;
             temp = (DOUBLE_LITERAL(10.0) - (temp_ft1 * temp_ft2));
-            attack->unk_24 = (temp_ft1 * attack->unk_10) + temp;
+            attack->currRow = (temp_ft1 * attack->unk_10) + temp;
         }
     }
 
     if (gTheGame.dimension == DIMENSION_2D) {
         temp_a3->objX = attack->unk_10 << 2;
-        temp_a3->objY = attack->unk_24 << 2;
-        if (attack->unk_24 < 0xB) {
+        temp_a3->objY = attack->currRow << 2;
+        if (attack->currRow < 0xB) {
             attack->delay = 0x3C;
             temp_a3->objX = st_Attack2DTopPosition[num][attack->disappear] << 2;
             temp_a3->objY = 10 << 2;
@@ -234,8 +234,8 @@ void AttackFly(tetWell *well, attack_t *attack, s32 num) {
         }
     } else {
         temp_a3->scaleW = attack->unk_10;
-        temp_a3->scaleH = attack->unk_24;
-        if (attack->unk_24 < 0xB) {
+        temp_a3->scaleH = attack->currRow;
+        if (attack->currRow < 0xB) {
             attack->delay = 0x3C;
             temp_a3->objX = st_Attack3DTopPosition[num][attack->disappear];
             temp_a3->objY = (2 << 2) + 2;
@@ -521,7 +521,7 @@ s32 ReturnAttackSlot(tetWell *well, s32 row, s32 col) {
             continue;
         }
 
-        if ((row < attack->unk_24) || (row >= attack->unk_24 + attack->unk_14)) {
+        if ((row < attack->currRow) || (row >= attack->currRow + attack->level)) {
             continue;
         }
 
@@ -666,7 +666,7 @@ void InitFlyAttack(tetWell *well, attack_t *attack, s32 posX, s32 posY, ENUM_TYP
         sp14 = (well->unk_3830[0][0].s.objY >> 0x2) - temp_s5;
         Init2DAttackPosition(attack, type, num);
         attack->unk_10 = sp10 + (posX * 0x10);
-        attack->unk_24 = sp14 - (posY * 0x10);
+        attack->currRow = sp14 - (posY * 0x10);
         return;
     }
 
@@ -675,7 +675,7 @@ void InitFlyAttack(tetWell *well, attack_t *attack, s32 posX, s32 posY, ENUM_TYP
     if (sp10 > 0) {
         Init3DAttackPosition(attack, type, num);
         attack->unk_10 = sp10;
-        attack->unk_24 = sp14 - temp_s5;
+        attack->currRow = sp14 - temp_s5;
         return;
     }
 

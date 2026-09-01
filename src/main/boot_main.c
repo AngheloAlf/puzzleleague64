@@ -368,7 +368,7 @@ s32 doGameLoop(s32 arg0) {
                         } else {
                             tetWell *temp;
 
-                            if (gTheGame.tetrisWell[0].unk_43B8 != 0) {
+                            if (gTheGame.tetrisWell[0].alert != 0) {
                                 temp = &gTheGame.tetrisWell[0];
                             } else {
                                 temp = &gTheGame.tetrisWell[1];

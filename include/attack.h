@@ -46,17 +46,18 @@ typedef enum AttackType {
     /* 21 */ ATTACKTYPE_21,
 } AttackType;
 
+ /* Original name: attack_t */
 typedef struct attack_t {
-    /* 0x00 */ ENUM_TYPE(AttackState, s32) state;
-    /* 0x04 */ ENUM_TYPE(AttackType, s32) type;
-    /* 0x08 */ s32 disappear;
-    /* 0x0C */ s32 delay;
+    /* 0x00 */ ENUM_TYPE(AttackState, s32) state; /* Original name: state */
+    /* 0x04 */ ENUM_TYPE(AttackType, s32) type; /* Original name: type */
+    /* 0x08 */ s32 disappear; /* Original name: disappear */
+    /* 0x0C */ s32 delay; /* Original name: delay */
     /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
-    /* 0x18 */ s32 start;
+    /* 0x14 */ s32 level; /* Original name: level */
+    /* 0x18 */ s32 start; /* Original name: start */
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 unk_20;
-    /* 0x24 */ s32 unk_24;
+    /* 0x24 */ s32 currRow; /* Original name: currRow */
     /* 0x28 */ s32 unk_28;
     /* 0x2C */ UNK_PAD unk_2C[0x30-0x2C]; // alignment padding?
     /* 0x30 */ uObjSprite rect;

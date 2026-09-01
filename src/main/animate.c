@@ -256,21 +256,159 @@ void AfterSwitch(tetWell *well, cursor_t *cursor, block_t *block1, block_t *bloc
     gOverflow += 0xF0;
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/animate", CheckShake);
+/**
+ * Original name: CheckShake
+ */
+void CheckShake(tetWell *well, cursor_t *cursor) {
+    s32 var_a3_2;
+    s32 col;
+    s32 var_t0;
+    s32 var_t1;
+    s32 var_t2;
+    s32 var_t9;
+    s32 var_t4;
+    attack_t *attack;
+    block_t *block;
+
+#if 0
+    // Local variables
+    int row; // r28
+    int col; // r9
+    int top; // r8
+    int temp; // r1+0x8
+    int which; // r9
+    int frame; // r9
+    int delay; // r10
 #endif
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/animate", CheckShake);
-#endif
+    var_t9 = 0;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/animate", CheckShake);
-#endif
+    if ((gSelection >= SELECTION_6E) && (gSelection < SELECTION_83)) {
+        return;
+    }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/animate", CheckShake);
-#endif
+    well->danger = 0;
+    well->alert = 0;
+
+    if ((gSelection == SELECTION_96) || (gSelection == SELECTION_A0)) {
+        for (var_t0 = 0; var_t0 < ATTACK_COUNT; var_t0++) {
+            attack = &well->attack[var_t0];
+
+            if (attack->state >= ATTACKSTATE_6) {
+                if (attack->currRow + attack->level >= 0xA) {
+                    well->alert = -1;
+                }
+                if (attack->currRow + attack->level >= 0xB) {
+                    well->danger = -1;
+                }
+            }
+        }
+    }
+
+    if (well->danger == 0) {
+        for (col = 0; col < gMax; col++) {
+            if ((well->block[9][col].type != BLOCKTYPE_0)) {
+                if (well->block[9][col].type != BLOCKTYPE_9) {
+                    well->alert = -1;
+                }
+            }
+
+            if (well->block[0xB][col].type != BLOCKTYPE_0) {
+                if (well->block[0xB][col].type != BLOCKTYPE_9) {
+                    well->danger = -1;
+                    var_t9 = -1;
+                    break;
+                }
+            } else {
+                if (well->block[0xA][col].type != BLOCKTYPE_0) {
+                    if (well->block[0xA][col].type != BLOCKTYPE_9) {
+                        well->danger = -1;
+                    }
+                }
+            }
+        }
+    }
+
+    if (well->alert == 0) {
+        if (well->danger == 0) {
+            return;
+        }
+        well->alert = -1;
+    }
+
+    var_t2 = 0;
+    var_t4 = 0;
+
+    for (col = 0; col < gMax; col++) {
+        block = &well->block[0xA][col];
+
+        if ((cursor->unk_00 >= 2) && (cursor->unk_00 <= 4)) {
+            var_t0 = 0;
+        } else if (well->block[0xB][col].type != BLOCKTYPE_0) {
+            var_t0 = 1;
+        } else if ((var_t9 != 0) || (block->type == BLOCKTYPE_0) ||
+                   ((block->state >= BLOCKSTATE_3) && (block->state <= BLOCKSTATE_6))) {
+            var_t0 = 0;
+        } else if (cursor->unk_0C <= 0) {
+            var_t0 = 2;
+
+            for (var_a3_2 = 0; var_a3_2 < gMax; var_a3_2++) {
+                if (well->block[0xB][var_a3_2].type != BLOCKTYPE_0) {
+                    var_t0 = 0;
+                    break;
+                }
+            }
+        } else {
+            var_t0 = 1;
+        }
+
+        if ((var_t2 == 0) && (var_t0 == 2)) {
+            for (var_a3_2 = 0; var_a3_2 < BLOCK_LEN_ROWS; var_a3_2++) {
+                block = &well->block[var_a3_2][col];
+
+                if ((block->type >= BLOCKTYPE_1) && (block->type <= BLOCKTYPE_7)) {
+                    if (block->state == BLOCKSTATE_0) {
+                        var_t2 = block->frame_n;
+                        var_t4 = block->frame_d;
+                        if ((var_t2 == 0) || (var_t4 < 0)) {
+                            var_t2 = 1;
+                            var_t4 = 5;
+                        }
+
+                        break;
+                    }
+                }
+            }
+        }
+        if ((var_t2 == 0) && (var_t0 == 2)) {
+            continue;
+        }
+
+        for (var_t1 = 0; var_t1 < BLOCK_LEN_ROWS; var_t1++) {
+            block = &well->block[var_t1][col];
+
+            if ((block->type != BLOCKTYPE_0) && (block->type < BLOCKTYPE_8) && (block->delay == 0) &&
+                (block->frame_n < 7)) {
+                switch (var_t0) {
+                    case 0x0:
+                        block->frame_n = 0;
+                        block->frame_d = 0;
+                        break;
+
+                    case 0x1:
+                        block->frame_n = 1;
+                        block->frame_d = 0;
+                        break;
+
+                    default:
+                        block->frame_n = var_t2;
+                        block->frame_d = var_t4;
+                        break;
+                }
+            }
+        }
+    }
+}
 
 /**
  * Original name: CheckFieldActive

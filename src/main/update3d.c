@@ -25,8 +25,8 @@ void Update3DDistance(tetWell *well, cursor_t *cursor) {
     if (((gSelection == SELECTION_AA) || (gSelection == SELECTION_B4)) && (cursor->target[0] <= 0)) {
         attack = &well->attack[0];
 
-        attack->unk_24++;
-        if (attack->unk_24 != ((attack->unk_24 / 12) * 12)) {
+        attack->currRow++;
+        if (attack->currRow % 12 != 0) {
             attack->rect.s.objY -= temp_a3;
         }
     }

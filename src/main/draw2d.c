@@ -425,8 +425,8 @@ s32 Draw2DAttackBlock(struct_gInfo_unk_00068 *dynamicp, s32 num) {
             }
 
             var_s6 = 0;
-            for (var_s2 = 0; var_s2 < attack->unk_14; var_s2++) {
-                temp_a1 = attack->unk_24 + var_s2;
+            for (var_s2 = 0; var_s2 < attack->level; var_s2++) {
+                temp_a1 = attack->currRow + var_s2;
                 if (temp_a1 < BLOCK_LEN_ROWS) {
                     for (var_s0 = attack->start; var_s0 < attack->unk_1C; var_s0++) {
                         if (array[temp_a1][var_s0].type == BLOCKTYPE_9) {
@@ -457,8 +457,8 @@ s32 Draw2DAttackBlock(struct_gInfo_unk_00068 *dynamicp, s32 num) {
                 for (var_s5 = var_v0_2; var_s5 < var_fp; var_s5++) {
                     gSPObjLoadTxtr(glistp++, &B_801F9D00_usa[num][var_s5]);
 
-                    for (var_s2 = 1; var_s2 < attack->unk_14; var_s2++) {
-                        temp_a1 = attack->unk_24 + var_s2;
+                    for (var_s2 = 1; var_s2 < attack->level; var_s2++) {
+                        temp_a1 = attack->currRow + var_s2;
                         if (temp_a1 < BLOCK_LEN_ROWS) {
                             for (var_s0 = attack->start; var_s0 < attack->unk_1C; var_s0++) {
                                 v0 = ReturnAttackTexValue(NULL, var_s6, var_s2 - 1, var_s0);
@@ -472,8 +472,8 @@ s32 Draw2DAttackBlock(struct_gInfo_unk_00068 *dynamicp, s32 num) {
                 }
             }
         } else if (attack->type < ATTACKTYPE_12) {
-            for (var_s2 = 0; var_s2 < attack->unk_14; var_s2++) {
-                temp_a1 = attack->unk_24 + var_s2;
+            for (var_s2 = 0; var_s2 < attack->level; var_s2++) {
+                temp_a1 = attack->currRow + var_s2;
                 if (temp_a1 < BLOCK_LEN_ROWS) {
                     switch (attack->type) {
                         case ATTACKTYPE_1:
@@ -513,8 +513,8 @@ s32 Draw2DAttackBlock(struct_gInfo_unk_00068 *dynamicp, s32 num) {
             for (var_s5 = 3; var_s5 < ARRAY_COUNT(B_801F9D00_usa[0]); var_s5++) {
                 gSPObjLoadTxtr(glistp++, &B_801F9D00_usa[num][var_s5]);
 
-                for (var_s2 = 0; var_s2 < attack->unk_14; var_s2++) {
-                    temp_a1 = attack->unk_24 + var_s2;
+                for (var_s2 = 0; var_s2 < attack->level; var_s2++) {
+                    temp_a1 = attack->currRow + var_s2;
                     if (temp_a1 < BLOCK_LEN_ROWS) {
                         for (var_s0 = attack->start; var_s0 < attack->unk_1C; var_s0++) {
                             v0 = ReturnAttackTexValue(NULL, attack->type, var_s2, var_s0);

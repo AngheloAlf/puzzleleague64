@@ -12,7 +12,7 @@
 /* Original name: cursor_t */
 typedef struct cursor_t {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 extra_wait; /* Original name: extra_wait */
+    /* 0x04 */ s32 extra_wait; /* Original name: extra_wait */ // TODO: maybe misnamed?
     /* 0x08 */ s32 unk_08;
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ s32 x; /* Original name: x */

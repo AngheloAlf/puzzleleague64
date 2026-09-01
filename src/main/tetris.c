@@ -301,8 +301,8 @@ void InitTetrisWell(void) {
         temp_s3->unk_43B0 = 0;
         temp_s3->unk_43A8 = 0;
         temp_s3->unk_43A4 = 0;
-        temp_s3->unk_43B4 = 0;
-        temp_s3->unk_43B8 = 0;
+        temp_s3->danger = 0;
+        temp_s3->alert = 0;
         temp_s3->unk_43BC = 0;
         temp_s3->unk_43C0 = 0;
         temp_s3->collision = 0;
@@ -609,7 +609,7 @@ void HackGame(tetWell *well) {
                 well->attack[count].disappear = -1;
                 well->attack[count].delay = 0;
                 well->attack[count].unk_10 = 0;
-                well->attack[count].unk_24 = -1;
+                well->attack[count].currRow = -1;
                 well->attack[count].unk_28 = -1;
             }
         }

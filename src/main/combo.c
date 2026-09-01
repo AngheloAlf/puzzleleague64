@@ -220,7 +220,7 @@ void CheckIcon(tetWell *well, s32 total) {
             icon->to_y = var_t2;
             var_t6 = ntrue;
 
-            if ((well->unk_43B4 != 0) && (gTheGame.totalPlayer == 1) && !(gGameStatus & 0x20)) {
+            if ((well->danger != 0) && (gTheGame.totalPlayer == 1) && !(gGameStatus & 0x20)) {
                 for (var_a3_2 = 0; var_a3_2 < ICON_COUNT; var_a3_2++) {
                     if (well->icon[var_a3_2].flag == 0) {
                         well->icon[var_a3_2].flag = -1;
@@ -261,7 +261,7 @@ void CheckIcon(tetWell *well, s32 total) {
             icon->to_y = var_t2;
             var_t5 = ntrue;
 
-            if ((well->unk_43B4 != 0) && (total != 3) && (gTheGame.totalPlayer == 1) && !(gGameStatus & 0x20)) {
+            if ((well->danger != 0) && (total != 3) && (gTheGame.totalPlayer == 1) && !(gGameStatus & 0x20)) {
                 for (var_a3_2 = 0; var_a3_2 < ICON_COUNT; var_a3_2++) {
                     if (well->icon[var_a3_2].flag == 0) {
                         well->icon[var_a3_2].flag = -1;

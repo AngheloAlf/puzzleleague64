@@ -16,7 +16,7 @@ void Compact3DAttackNoWhere(tetWell *well) {
     s32 i;
 
     for (i = 0; i < ATTACK_COUNT; i++) {
-        if ((well->attack[i].state >= ATTACKSTATE_7) && (well->attack[i].unk_24 == 0xC)) {
+        if ((well->attack[i].state >= ATTACKSTATE_7) && (well->attack[i].currRow == 0xC)) {
             Compact3DAttack(well, i);
         }
     }

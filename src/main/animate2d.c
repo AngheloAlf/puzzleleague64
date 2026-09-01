@@ -176,7 +176,7 @@ void Add2DNewRow(tetWell *well, cursor_t *cursor, s32 num) {
 
     for (var_a0 = 0; var_a0 < 0x14; var_a0++) {
         if (well->attack[var_a0].state >= ATTACKSTATE_7) {
-            well->attack[var_a0].unk_24 += 1;
+            well->attack[var_a0].currRow++;
         }
     }
 

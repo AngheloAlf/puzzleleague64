@@ -31,8 +31,8 @@ typedef struct tetWell {
     /* 0x43A8 */ s32 unk_43A8; // old_chain?
     /* 0x43AC */ s32 unk_43AC;
     /* 0x43B0 */ s32 unk_43B0;
-    /* 0x43B4 */ s32 unk_43B4;
-    /* 0x43B8 */ s32 unk_43B8;
+    /* 0x43B4 */ s32 danger; /* Original name: danger */ // TODO: nbool?
+    /* 0x43B8 */ s32 alert; /* Original name: alert */ // TODO: nbool?
     /* 0x43BC */ s32 unk_43BC;
     /* 0x43C0 */ s32 unk_43C0;
     /* 0x43C4 */ s32 collision; /* Original name: collision */ // nbool?

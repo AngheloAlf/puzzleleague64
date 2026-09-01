@@ -204,7 +204,7 @@ s32 LoadFairySoundData(s16 music, s16 fairy1, s16 fairy2) {
 }
 
 s32 PlayGameSong(tetWell *well) {
-    ts_current_alert = well->unk_43B8;
+    ts_current_alert = well->alert;
 
     if (initgameBool) {
         initgameBool = false;
