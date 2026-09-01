@@ -201,7 +201,7 @@ void func_8008336C_usa(s32 kind, s32 level, s32 number, s32 play) {
 #endif
 
 #if VERSION_USA
-void MTMove(ai_t *brain, unsigned char *ptr) {
+void MTMove(ai_t *brain, u8 *ptr) {
     s32 temp_v0;
     s32 var_a0;
     unsigned char *var_s0;
