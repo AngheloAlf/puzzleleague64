@@ -220,14 +220,12 @@ void MTMove(ai_t *brain, u8 *ptr) {
     if (brain->unk_044 < temp_v0) {
         ptr += brain->unk_044 * 3;
         ptr = ptr + 1;
-        temp_s3 = 0;
-        while (1) {
+        for (temp_s3 = 0; true; temp_s3 += 3) {
             AIAddCommand(brain, ptr[temp_s3], ptr[temp_s3 + 1], ptr[temp_s3 + 2]);
             brain->unk_044 += 1;
             if (ptr[temp_s3] != 0x14) {
-                return;
+                break;
             }
-            temp_s3 += 3;
         }
     } else {
         AIAddCommand(brain, 0x1F, 0, 0);
