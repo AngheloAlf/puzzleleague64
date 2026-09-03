@@ -212,7 +212,7 @@ segments:
       - { path: "asm/{version}/data/main/draw2d.bss.o" }
       - { path: src/main/combo2d.o }
       - { path: src/main/animate2d.o }
-      - { path: src/main/071B50.o }
+      - { path: src/main/update2d.o }
       - { path: src/main/attack2d.o }
       - { path: src/main/explode2d.o }
       - { path: src/main/074280.o }
