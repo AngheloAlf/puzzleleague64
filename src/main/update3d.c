@@ -161,19 +161,19 @@ void Update3DCursor(tetWell *well, cursor_t *cursor) {
 }
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update3d", func_80067860_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/update3d", Update3DIcon);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update3d", func_80067B30_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/update3d", Update3DIcon);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update3d", func_80066270_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/update3d", Update3DIcon);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update3d", func_80066420_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/update3d", Update3DIcon);
 #endif
 
 #if VERSION_USA

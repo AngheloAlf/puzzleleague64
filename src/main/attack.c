@@ -265,8 +265,8 @@ void AttackShake(tetWell *well, cursor_t *cursor, attack_t *attack) {
     s32 var_a1;
 
     if (attack->unk_28 < 0) {
-        if (cursor->unk_00 != 2) {
-            cursor->unk_00 = 4;
+        if (cursor->state != 2) {
+            cursor->state = 4;
         }
         var_v0 = attack->unk_28;
         attack->unk_28 = var_v0 + 1;
@@ -308,8 +308,8 @@ void AttackShake(tetWell *well, cursor_t *cursor, attack_t *attack) {
         return;
     }
     attack->state = 8;
-    if (cursor->unk_00 == 4) {
-        cursor->unk_00 = 0;
+    if (cursor->state == 4) {
+        cursor->state = 0;
     }
 }
 #else

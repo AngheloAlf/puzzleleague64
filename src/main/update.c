@@ -8,7 +8,6 @@
 #include "macros_defines.h"
 #include "main_variables.h"
 
-#include "071B50.h"
 #include "animate.h"
 #include "animation.h"
 #include "attack.h"
@@ -19,6 +18,7 @@
 #include "info.h"
 #include "sfxlimit.h"
 #include "the_game.h"
+#include "update2d.h"
 #include "update3d.h"
 
 #if VERSION_USA
@@ -37,6 +37,9 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/update", func_80056060_fra);
 INCLUDE_ASM("asm/ger/nonmatchings/main/update", func_800561E0_ger);
 #endif
 
+/**
+ * Original name: UpdateTime
+ */
 void UpdateTime(s32 second) {
     if (gSelection >= SELECTION_BE) {
         gTheGame.second = gTheGame.second - second;
@@ -408,70 +411,237 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/update", UpdateWell);
 INCLUDE_ASM("asm/ger/nonmatchings/main/update", UpdateWell);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdateCursor);
+/**
+ * Original name: UpdateCursor
+ */
+void UpdateCursor(tetWell *well, cursor_t *cursor) {
+    if (cursor->state != 2) {
+        if (cursor->waiting > 0) {
+            cursor->waiting--;
+        }
+    }
+
+    if (gTheGame.dimension == DIMENSION_3D) {
+        Update3DCursor(well, cursor);
+    }
+}
+
+/**
+ * Original name: UpdateIcon
+ */
+void UpdateIcon(tetWell *well, cursor_t *cursor, s32 num) {
+    if (gTheGame.dimension == DIMENSION_2D) {
+        Update2DIcon(well, cursor, num);
+    } else {
+        Update3DIcon(well, cursor, num);
+    }
+}
+
+/**
+ * Original name: UpdateDistance
+ */
+void UpdateDistance(tetWell *well, cursor_t *cursor) {
+    if (gTheGame.dimension == DIMENSION_2D) {
+        Update2DDistance(well, cursor);
+    } else {
+        Update3DDistance(well, cursor);
+    }
+}
+
+/**
+ * Original name: UpdateMainState
+ */
+void UpdateMainState(void) {
+    s32 num;
+    s32 row;
+    s32 col;
+    s32 score1;
+    s32 score2;
+    s32 var_a1_3; // DrawRankingFlag?
+    tetWell *well;
+    cursor_t *cursor;
+    s32 temp;
+    s32 temp2;
+
+#if 0
+    // Local variables
+    int num; // r21
+    int row; // r7
+    int col; // r1+0x8
+    int score1; // r1+0x8
+    int score2; // r1+0x8
+    int result; // r17
+    struct tetWell * well; // r24
+    struct cursor_t * cursor; // r31
+    int DrawRankingFlag; // r20
+    int i; // r7
+    int Timer[4]; // r1+0x4C
+    int SortTimer[4]; // r1+0x3C
+    int Score[4]; // r1+0x2C
+    int SortScore[4]; // r1+0x1C
 #endif
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdateCursor);
-#endif
+    if (gMain != GMAIN_387) {
+        return;
+    }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update", UpdateCursor);
-#endif
+    for (num = 0; num < gTheGame.totalPlayer; num++) {
+        well = &gTheGame.tetrisWell[num];
+        cursor = &gTheGame.cursorBlock[num];
+        var_a1_3 = CheckGameOver(well, cursor);
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update", UpdateCursor);
-#endif
+        if (gGameStatus & GAME_STATUS_FLAG_80) {
+            if (var_a1_3 != 0) {
+                gDemo = GDEMO_16;
+            }
+            var_a1_3 = 0;
+        }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdateIcon);
-#endif
+        if ((var_a1_3 != 0) && (gSelection >= SELECTION_83)) {
+            gMain = GMAIN_38E;
+            cursor->state = 8;
+            continue;
+        }
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdateIcon);
-#endif
+        switch (gSelection) {
+            case SELECTION_BE:
+                if ((gTheGame.minute <= 0) && (gTheGame.second == 0)) {
+                    gMain = GMAIN_38E;
+                    cursor->state = 7;
+                }
+                break;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update", UpdateIcon);
-#endif
+            case SELECTION_78:
+            case SELECTION_82:
+                if (!CheckFieldActive(well)) {
+                    if (cursor->target[1] == 0) {
+                        var_a1_3 = -1;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update", UpdateIcon);
-#endif
+                        for (row = 0; row < BLOCK_LEN_ROWS; row++) {
+                            for (col = 0; col < gMax; col++) {
+                                var_a1_3 &= (well->block[row][col].type == BLOCKTYPE_0) ? -1 : 0;
+                            }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdateDistance);
-#endif
+                            if (var_a1_3 == 0) {
+                                break;
+                            }
+                        }
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdateDistance);
-#endif
+                        gMain = GMAIN_38E;
+                        if (var_a1_3 != 0) {
+                            cursor->state = 7;
+                        } else {
+                            cursor->state = 8;
+                        }
+                    } else {
+                        temp2 = 0;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update", UpdateDistance);
-#endif
+                        for (row = 0; row < BLOCK_LEN_ROWS; row++) {
+                            for (col = 0; col < gMax; col++) {
+                                temp2 += (well->block[row][col].type != BLOCKTYPE_0);
+                            }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update", UpdateDistance);
-#endif
+                            if (temp2 != 0) {
+                                break;
+                            }
+                        }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdateMainState);
-#endif
+                        if (temp2 == 0) {
+                            gMain = GMAIN_38E;
+                            cursor->state = 7;
+                        }
+                    }
+                }
+                break;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdateMainState);
-#endif
+            case SELECTION_C8:
+                if ((gTheGame.minute <= 0) && (gTheGame.second == 0)) {
+                    score1 = gTheGame.tetrisWell[0].score;
+                    score2 = gTheGame.tetrisWell[1].score;
+                    gMain = GMAIN_38E;
+                    if (score2 < score1) {
+                        gTheGame.cursorBlock[0].state = 7;
+                        gTheGame.cursorBlock[1].state = 8;
+                    } else if (score1 < score2) {
+                        gTheGame.cursorBlock[0].state = 8;
+                        gTheGame.cursorBlock[1].state = 7;
+                    } else {
+                        gTheGame.cursorBlock[0].state = 7;
+                        gTheGame.cursorBlock[1].state = 7;
+                    }
+                }
+                break;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update", UpdateMainState);
-#endif
+            case SELECTION_AA:
+                if ((gTheGame.menu[0].game == 5) && (anim_sp <= 0)) {
+                    gMain = GMAIN_38E;
+                    cursor->state = 7;
+                    break;
+                }
+                FALLTHROUGH;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update", UpdateMainState);
-#endif
+            case SELECTION_B4:
+                if (cursor->target[0] <= 0) {
+                    temp = cursor->target[0];
+                    if (temp <= -1) {
+                        row = -temp;
+                    } else {
+                        row = temp;
+                    }
 
+                    var_a1_3 = -1;
+                    for (; row < BLOCK_LEN_ROWS; row++) {
+                        for (col = 0; col < gMax; col++) {
+                            var_a1_3 &= (well->block[row][col].type == BLOCKTYPE_0) ? -1 : 0;
+                        }
+                        if (var_a1_3 == 0) {
+                            break;
+                        }
+                    }
+
+                    if ((var_a1_3 != 0) && !CheckFieldActive(well)) {
+                        gMain = GMAIN_38E;
+                        cursor->state = 7;
+                        if (gSelection == SELECTION_B4) {
+                            if (num == 0) {
+                                gTheGame.cursorBlock[1].state = 8;
+                            } else {
+                                gTheGame.cursorBlock[0].state = 8;
+                            }
+                        }
+                    }
+                }
+
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    if (gMain == GMAIN_38E) {
+        gTheGame.cursorBlock[0].unk_0C = 0;
+        gTheGame.cursorBlock[1].unk_0C = 0;
+
+        gMain = GMAIN_387;
+        UpdateComboChainCount(0, 0, -gTheGame.tetrisWell[0].unk_43A8);
+        UpdateComboChainCount(1, 0, -gTheGame.tetrisWell[1].unk_43A8);
+        gMain = GMAIN_38E;
+
+        if ((gTheGame.totalPlayer == 1) && (gSelection >= SELECTION_83)) {
+            gTheGame.miscToggle = 0;
+        }
+
+        CheckChainCounter(&gTheGame.tetrisWell[0], &gTheGame.cursorBlock[0]);
+        UpdateAnimation(&gTheGame.tetrisWell[0], 0, 0);
+        CheckChainCounter(&gTheGame.tetrisWell[1], &gTheGame.cursorBlock[1]);
+        UpdateAnimation(&gTheGame.tetrisWell[1], 1, 0);
+    }
+}
+
+/**
+ * Original name: UpdateBuffer
+ */
 void UpdateBuffer(struct_gInfo *info) {
     if (gTheGame.dimension == DIMENSION_2D) {
         Update2DBuffer(info);
@@ -480,6 +650,9 @@ void UpdateBuffer(struct_gInfo *info) {
     }
 }
 
+/**
+ * Original name: Update2DBuffer
+ */
 void Update2DBuffer(struct_gInfo *info) {
     struct_gInfo_unk_00068 *dynamicp = &info->dp;
     char *sp14;
@@ -534,6 +707,9 @@ void Update2DBuffer(struct_gInfo *info) {
 
 #define ABS(x) (((x) < 0) ? -(x) : (x))
 
+/**
+ * Original name: Update3DBuffer
+ */
 void Update3DBuffer(struct_gInfo *info) {
     struct_gInfo_unk_00068 *dynamicp = &info->dp;
     tetWell *well;

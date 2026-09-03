@@ -9,11 +9,18 @@
 #define CURSOR_UNK_28_COUNT 23
 #define CURSOR_UNK_84_COUNT 5
 
+#if 0
+typedef enum CursorState {
+
+} CursorState;
+#endif
+
+
 /* Original name: cursor_t */
 typedef struct cursor_t {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ s32 state; /* Original name: state */
     /* 0x04 */ s32 extra_wait; /* Original name: extra_wait */ // TODO: maybe misnamed?
-    /* 0x08 */ s32 unk_08;
+    /* 0x08 */ s32 waiting; /* Original name: waiting */
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ s32 x; /* Original name: x */
     /* 0x14 */ s32 y; /* Original name: y */

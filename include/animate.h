@@ -27,6 +27,6 @@ void RaiseBlocks(struct tetWell *well, struct cursor_t *cursor);
 void AfterSwitch(struct tetWell *well, struct cursor_t *cursor, struct block_t *block1, struct block_t *block2, Dimension dimen);
 void CheckShake(struct tetWell *well, struct cursor_t *cursor);
 nbool CheckFieldActive(struct tetWell *well);
-// void func_8005731C_usa();
+s32 CheckGameOver(struct tetWell *well, struct cursor_t *cursor);
 
 #endif

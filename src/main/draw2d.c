@@ -634,7 +634,7 @@ void Draw2DSmoke(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     s32 var_t6;
     s32 new_var;
 
-    if (dynamicp->cursorBlock[num].unk_00 == 8) {
+    if (dynamicp->cursorBlock[num].state == 8) {
         gDPPipeSync(glistp++);
         gDPSetTextureLUT(glistp++, G_TT_NONE);
         gSPObjLoadTxtr(glistp++, &deadsmoke);

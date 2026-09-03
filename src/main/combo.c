@@ -251,7 +251,7 @@ void CheckIcon(tetWell *well, s32 total) {
                 if (var_a3_2 >= ARRAY_COUNT(D_800B6CC4_usa)) {
                     var_a3_2 = ARRAY_COUNT(D_800B6CC4_usa) - 1;
                 }
-                well->unk_43AC += D_800B6CC4_usa[var_a3_2];
+                well->score += D_800B6CC4_usa[var_a3_2];
             }
         }
 

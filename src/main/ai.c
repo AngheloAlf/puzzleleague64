@@ -287,7 +287,7 @@ INLINE void AIChangeVision(ai_t *brain) {
 INLINE void AISetGarbage(tetWell *well, cursor_t *cursor, ai_t *brain) {
     s32 lowest;
 
-    if (cursor->unk_00 == 2 || cursor->unk_00 == 3) {
+    if (cursor->state == 2 || cursor->state == 3) {
         return;
     }
 
@@ -1540,7 +1540,7 @@ s32 AIVolumeCheck(tetWell *well, cursor_t *cursor, ai_t *brain, s32 exit) {
     if (brain->unk_014 & 2) {
         var_s2 = var_t0_2;
         if (brain->unk_024 == -1) {
-            if (cursor->unk_00 == 3) {
+            if (cursor->state == 3) {
                 var_s2 = 0xC;
             }
 
@@ -1567,7 +1567,7 @@ s32 AIVolumeCheck(tetWell *well, cursor_t *cursor, ai_t *brain, s32 exit) {
                 }
             }
 
-            if (cursor->unk_00 == 3) {
+            if (cursor->state == 3) {
                 var_a2 = 0xC;
             }
 

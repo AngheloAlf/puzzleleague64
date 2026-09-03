@@ -68,7 +68,7 @@ typedef struct Game {
     /* 0x9A78 */ UNK_TYPE1 unk_9A78[0x9A90 - 0x9A78];
     /* 0x9A90 */ uObjBg unk_9A90[GAME_UNK_9A90_COUNT]; // sign?
     /* 0x9B30 */ uObjTxtr signLUT; /* Original name: signLUT */
-    /* 0x9B48 */ s32 unk_9B48;
+    /* 0x9B48 */ s32 miscToggle; /* Original name: miscToggle */ // TODO: enum?
     /* 0x9B4C */ UNK_TYPE1 unk_9B4C[0x9B50 - 0x9B4C];
     /* 0x9B50 */ uObjBg unk_9B50[4];
     /* 0x9BF0 */ uObjTxtr unk_9BF0; // tlut

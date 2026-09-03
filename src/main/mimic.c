@@ -81,7 +81,7 @@ void LoadMimic1(s32 kind, s32 level, s32 number, s32 play) {
     InitGameStateVar();
     well = gTheGame.tetrisWell;
     cursor = gTheGame.cursorBlock;
-    gTheGame.unk_9B48 = 0;
+    gTheGame.miscToggle = 0;
     gTheGame.unk_9B50[0].b.frameH = 0;
     gTheGame.unk_9B50[1].b.frameH = 0;
     chain_check[0] = 0;
@@ -379,7 +379,7 @@ void DoMT(void) {
         well = &gTheGame.tetrisWell[num];
         cursor = &gTheGame.cursorBlock[num];
 
-        if (cursor->unk_00 != 0x34C) {
+        if (cursor->state != 0x34C) {
             CompactWell(well, num);
         }
 
@@ -387,7 +387,7 @@ void DoMT(void) {
             UpdateMTController(well, cursor, num);
         }
 
-        if (cursor->unk_00 != 0x34C) {
+        if (cursor->state != 0x34C) {
             if (well->collision != 0) {
                 CheckCollision(well);
             }
@@ -417,7 +417,7 @@ void DoMT(void) {
             UpdateDistance(well, cursor);
             UpdateAnimation(well, num, 0);
             UpdateMiscStuff(well, cursor, num);
-            if (cursor->unk_00 <= 0) {
+            if (cursor->state <= 0) {
                 s32 temp = gTheGame.dimension;
 
                 if (well->unk_43F8 >= temp * 0x10) {
@@ -461,12 +461,12 @@ void MimicCheckState(tetWell *well, cursor_t *cursor) {
             }
 
             if (result != 0) {
-                cursor->unk_00 = 7;
+                cursor->state = 7;
                 B_801C7348_usa++;
                 B_801C7348_usa %= 5;
                 func_80005888_usa(0, 2, B_801C7348_usa + 5);
             } else {
-                cursor->unk_00 = 8;
+                cursor->state = 8;
                 PlaySE(SFX_INIT_TABLE, SFX_0A0);
             }
 

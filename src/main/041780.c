@@ -195,15 +195,15 @@ void func_800410A4_usa(void) {
     s32 var_s1;
     u32 var_s0;
 
-    if (gTheGame.cursorBlock[1].unk_00 == 8) {
+    if (gTheGame.cursorBlock[1].state == 8) {
         var_s1 = 0;
-    } else if (gTheGame.cursorBlock[0].unk_00 == 8) {
+    } else if (gTheGame.cursorBlock[0].state == 8) {
         var_s1 = 1;
     } else {
         var_s1 = 0;
 #if VERSION_USA
-        osSyncPrintf("ShowWinner: Internal error: No clear winner? (%d,%d)\n", gTheGame.cursorBlock[0].unk_00,
-                     gTheGame.cursorBlock[1].unk_00);
+        osSyncPrintf("ShowWinner: Internal error: No clear winner? (%d,%d)\n", gTheGame.cursorBlock[0].state,
+                     gTheGame.cursorBlock[1].state);
 #endif
     }
 
@@ -394,7 +394,7 @@ void func_8004123C_usa(s32 arg0) {
             } else if ((gSelection == SELECTION_A0) || (gSelection == SELECTION_B4) || (gSelection == SELECTION_C8)) {
                 B_80192F80_usa->unk_00 = 0;
                 B_80192F80_usa->unk_18 = 5;
-                if (gTheGame.cursorBlock[0].unk_00 == 8) {
+                if (gTheGame.cursorBlock[0].state == 8) {
                     var_a1 = 2;
                 } else {
                     var_a1 = 1;
@@ -489,7 +489,7 @@ void func_8004123C_usa(s32 arg0) {
         gReset = -1;
         gMain = GMAIN_2BC;
     } else if (gSelection == SELECTION_8C) {
-        if (gTheGame.tetrisWell[0].unk_43AC > 0xC34F) {
+        if (gTheGame.tetrisWell[0].score > 49999) {
             func_8002B85C_usa(5, 1);
         } else {
             gMain = GMAIN_2BC;
@@ -502,7 +502,7 @@ void func_8004123C_usa(s32 arg0) {
             func_8002B85C_usa(5, 4);
         }
     } else if (gSelection == SELECTION_BE) {
-        if (gTheGame.tetrisWell[0].unk_43AC >= 0x7530) {
+        if (gTheGame.tetrisWell[0].score >= 30000) {
             func_8002B85C_usa(5, 0);
         } else {
             gMain = GMAIN_2BC;

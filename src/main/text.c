@@ -216,27 +216,24 @@ void UpdateText(void) {
                 }
             }
 
-            if (well1->unk_43AC > 999999) {
-                well1->unk_43AC = 999999;
+            if (well1->score > 999999) {
+                well1->score = 999999;
             }
 
             if (gDemo == GDEMO_2C) {
                 if (well1->menu.game != 0) {
-                    if (well1->unk_43AC > *hi_score) {
-                        *hi_score = well1->unk_43AC;
+                    if (well1->score > *hi_score) {
+                        *hi_score = well1->score;
                     }
-                    // TODO: get rid of goto
-                    goto block_63;
-                }
-            } else {
-            block_63:
-                if (well1->menu.game != 0) {
-                    sprintf(string, "%6d", *hi_score);
-                    SetText(0xE8, 0x2A, string, SETTEXTTYPE_16);
                 }
             }
 
-            sprintf(string, "%6d", well1->unk_43AC);
+            if (well1->menu.game != 0) {
+                sprintf(string, "%6d", *hi_score);
+                SetText(0xE8, 0x2A, string, SETTEXTTYPE_16);
+            }
+
+            sprintf(string, "%6d", well1->score);
             SetText(0xE8, 0x3F, string, SETTEXTTYPE_15);
 
             if (cursor1->unk_0C > 0) {
@@ -267,11 +264,11 @@ void UpdateText(void) {
                 SetText(0x103, 0x29, string, SETTEXTTYPE_16);
             }
 
-            if (well1->unk_43AC > 999999) {
-                well1->unk_43AC = 999999;
+            if (well1->score > 999999) {
+                well1->score = 999999;
             }
 
-            sprintf(string, "%6d", well1->unk_43AC);
+            sprintf(string, "%6d", well1->score);
             SetText(0xE8, 0x3F, string, SETTEXTTYPE_15);
 
             if (cursor1->unk_0C > 0) {
@@ -321,10 +318,10 @@ void UpdateText(void) {
             break;
 
         case SELECTION_C8:
-            sprintf(string, "%05d", well1->unk_43AC % 100000, well1->unk_43AC);
+            sprintf(string, "%05d", well1->score % 100000, well1->score);
             SetText(0x89, 0x58, string, SETTEXTTYPE_15);
 
-            sprintf(string, "%05d", well2->unk_43AC % 100000, well2->unk_43AC);
+            sprintf(string, "%05d", well2->score % 100000, well2->score);
             SetText(0x8A, 0x79, string, SETTEXTTYPE_14);
 
             sprintf(string, "%d", well1->menu.speed);

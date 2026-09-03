@@ -396,7 +396,7 @@ void InitStory(void) {
         gTheGame.menu[0].stage = 0xF;
         func_8002B85C_usa(3, 5);
     } else if (gTheGame.menu[0].stage == 0x11) {
-        if ((gTheGame.cursorBlock[0].unk_00 == 7) || (gTheGame.cursorBlock[1].unk_00 == 8)) {
+        if ((gTheGame.cursorBlock[0].state == 7) || (gTheGame.cursorBlock[1].state == 8)) {
             func_8002B85C_usa(5, 8);
         } else {
             func_8002B85C_usa(5, 9);

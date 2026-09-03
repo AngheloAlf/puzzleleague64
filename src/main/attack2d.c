@@ -498,7 +498,7 @@ void Change2DAttack(tetWell *well, cursor_t *cursor, s32 num, s32 combo) {
             continue;
         }
 
-        cursor->unk_00 = 2;
+        cursor->state = 2;
         if ((temp_s1->delay > 0) || (temp_s1->unk_10 > 0)) {
             if (temp_s1->delay > 0) {
                 temp_s1->delay--;
@@ -567,13 +567,13 @@ void Change2DAttack(tetWell *well, cursor_t *cursor, s32 num, s32 combo) {
                                     temp_s1->type = 4;
                                 }
                                 temp_a1_2 = (FindEmptySpaces(well, temp_s1) + 1);
-                                if (cursor->unk_08 < sp4C + temp_a1_2) {
-                                    cursor->unk_08 = sp4C + temp_a1_2;
+                                if (cursor->waiting < sp4C + temp_a1_2) {
+                                    cursor->waiting = sp4C + temp_a1_2;
                                 }
                                 temp_s1->state = 0;
                                 temp_s1->disappear = -1;
                                 if (cursor->target[0x16] == 0) {
-                                    cursor->unk_00 = 0;
+                                    cursor->state = 0;
                                 }
                             } else {
                                 temp_s1->type += 0x15;
@@ -592,11 +592,11 @@ void Change2DAttack(tetWell *well, cursor_t *cursor, s32 num, s32 combo) {
                                     }
                                 }
                                 temp_a1_2 = (FindEmptySpaces(well, temp_s1) + 1);
-                                if (cursor->unk_08 < sp4C + temp_a1_2) {
-                                    cursor->unk_08 = sp4C + temp_a1_2;
+                                if (cursor->waiting < sp4C + temp_a1_2) {
+                                    cursor->waiting = sp4C + temp_a1_2;
                                 }
                                 if (cursor->unk_84[temp_s1->disappear] == 0) {
-                                    cursor->unk_00 = 0;
+                                    cursor->state = 0;
                                 }
                             }
                         }
@@ -622,10 +622,10 @@ void Change2DAttack(tetWell *well, cursor_t *cursor, s32 num, s32 combo) {
                 }
 
                 temp_a1_2 = FindEmptySpaces(well, temp_s1);
-                if (cursor->unk_08 < sp4C + temp_a1_2) {
-                    cursor->unk_08 = sp4C + temp_a1_2;
+                if (cursor->waiting < sp4C + temp_a1_2) {
+                    cursor->waiting = sp4C + temp_a1_2;
                 }
-                cursor->unk_00 = 0;
+                cursor->state = 0;
             }
         }
     }

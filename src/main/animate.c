@@ -69,11 +69,11 @@ void RaiseBlocks(tetWell *well, cursor_t *cursor) {
     int blockHSize; // r7
 #endif
 
-    if (cursor->unk_00 != 0) {
+    if (cursor->state != 0) {
         well->unk_43B0 = 0;
         return;
     }
-    if (cursor->unk_08 > 0) {
+    if (cursor->waiting > 0) {
         well->unk_43B0 = 0;
         return;
     }
@@ -99,13 +99,13 @@ void RaiseBlocks(tetWell *well, cursor_t *cursor) {
     temp_v0 = gTheGame.dimension * 0x10;
     if (well->unk_43F8 == temp_v0) {
         if (well->unk_43B0 == 1) {
-            well->unk_43AC += 1;
+            well->score++;
         }
         well->unk_43B0 = -4;
         return;
     } else if (temp_v0 < well->unk_43F8) {
         if (well->unk_43B0 == 1) {
-            well->unk_43AC += 1;
+            well->score++;
         }
         well->unk_43B0 = -4;
         well->unk_43FC = (gTheGame.dimension * 0x10) - (well->unk_43F8 - well->unk_43FC);
@@ -141,8 +141,8 @@ STATIC_INLINE void inlined_func_AfterSwitch(block_t *block2, tetWell *well, curs
                 }
             }
 
-            if (cursor->unk_08 < temp_t4 + var_t1) {
-                cursor->unk_08 = temp_t4 + var_t1;
+            if (cursor->waiting < temp_t4 + var_t1) {
+                cursor->waiting = temp_t4 + var_t1;
             }
         } else if (block->state == BLOCKSTATE_6) {
             block2->state = BLOCKSTATE_5;
@@ -342,7 +342,7 @@ void CheckShake(tetWell *well, cursor_t *cursor) {
     for (col = 0; col < gMax; col++) {
         block = &well->block[0xA][col];
 
-        if ((cursor->unk_00 >= 2) && (cursor->unk_00 <= 4)) {
+        if ((cursor->state >= 2) && (cursor->state <= 4)) {
             var_t0 = 0;
         } else if (well->block[0xB][col].type != BLOCKTYPE_0) {
             var_t0 = 1;
@@ -429,17 +429,17 @@ nbool CheckFieldActive(tetWell *well) {
 }
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/animate", func_8005731C_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/animate", CheckGameOver);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/animate", func_800575BC_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/animate", CheckGameOver);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/animate", func_80055D2C_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/animate", CheckGameOver);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/animate", func_80055EAC_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/animate", CheckGameOver);
 #endif

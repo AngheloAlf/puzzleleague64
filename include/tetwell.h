@@ -29,7 +29,7 @@ typedef struct tetWell {
     /* 0x408C */ block_t new_block[BLOCK_LEN_B]; /* Original name: new_block */
     /* 0x43A4 */ s32 unk_43A4;
     /* 0x43A8 */ s32 unk_43A8; // old_chain?
-    /* 0x43AC */ s32 unk_43AC;
+    /* 0x43AC */ s32 score; /* Original name: score */
     /* 0x43B0 */ s32 unk_43B0;
     /* 0x43B4 */ s32 danger; /* Original name: danger */ // TODO: nbool?
     /* 0x43B8 */ s32 alert; /* Original name: alert */ // TODO: nbool?

@@ -202,8 +202,8 @@ void UpdateMiscStuff(tetWell *well, cursor_t *cursor, s32 num) {
             if (gGameStatus & GAME_STATUS_FLAG_20) {
                 cursor->unk_0C = 0;
             } else if (cursor->unk_0C > 0) {
-                if (gTheGame.unk_9B48 == 0) {
-                    gTheGame.unk_9B48 = 1;
+                if (gTheGame.miscToggle == 0) {
+                    gTheGame.miscToggle = 1;
                 }
 
                 if (cursor->unk_0C > ADJUST_FRAMERATE(600)) {
@@ -218,32 +218,32 @@ void UpdateMiscStuff(tetWell *well, cursor_t *cursor, s32 num) {
 
                 if (gCounter % shake == 0) {
                     if (shake >= 0xF) {
-                        if (gTheGame.unk_9B48 == 1) {
-                            gTheGame.unk_9B48 = 2;
+                        if (gTheGame.miscToggle == 1) {
+                            gTheGame.miscToggle = 2;
                         } else {
-                            gTheGame.unk_9B48 = 1;
+                            gTheGame.miscToggle = 1;
                         }
-                    } else if (gTheGame.unk_9B48 == 1) {
-                        gTheGame.unk_9B48 = 4;
-                    } else if (gTheGame.unk_9B48 == 2) {
-                        gTheGame.unk_9B48 = 3;
-                    } else if (gTheGame.unk_9B48 == 3) {
-                        gTheGame.unk_9B48 = 4;
+                    } else if (gTheGame.miscToggle == 1) {
+                        gTheGame.miscToggle = 4;
+                    } else if (gTheGame.miscToggle == 2) {
+                        gTheGame.miscToggle = 3;
+                    } else if (gTheGame.miscToggle == 3) {
+                        gTheGame.miscToggle = 4;
                     } else {
-                        gTheGame.unk_9B48 = 3;
+                        gTheGame.miscToggle = 3;
                     }
                 }
             } else {
-                gTheGame.unk_9B48 = 0;
+                gTheGame.miscToggle = 0;
             }
             break;
 
         case SELECTION_78:
         case SELECTION_82:
-            if (gTheGame.unk_9B48 > 1) {
-                gTheGame.unk_9B48--;
+            if (gTheGame.miscToggle > 1) {
+                gTheGame.miscToggle--;
             } else {
-                gTheGame.unk_9B48 = -1;
+                gTheGame.miscToggle = -1;
             }
 
             if (cursor->target[1] % 2 == 0) {
@@ -258,7 +258,7 @@ void UpdateMiscStuff(tetWell *well, cursor_t *cursor, s32 num) {
         case SELECTION_A0:
         case SELECTION_B4:
         case SELECTION_C8:
-            gTheGame.unk_9B48 = -1;
+            gTheGame.miscToggle = -1;
             gTheGame.unk_9B50[num].b.frameY = well->unk_441C * 4;
             break;
 
@@ -270,7 +270,7 @@ void UpdateMiscStuff(tetWell *well, cursor_t *cursor, s32 num) {
 void Draw2DMiscStuff(struct_gInfo_unk_00068 *dynamicp) {
     s32 index;
 
-    if (gTheGame.unk_9B48 == 0) {
+    if (gTheGame.miscToggle == 0) {
         return;
     }
 
@@ -286,13 +286,13 @@ void Draw2DMiscStuff(struct_gInfo_unk_00068 *dynamicp) {
         case SELECTION_8C:
         case SELECTION_AA:
         case SELECTION_BE:
-            index = gTheGame.unk_9B48 - 1;
+            index = gTheGame.miscToggle - 1;
             gSPBgRectCopy(glistp++, &gTheGame.unk_9B50[index]);
             break;
 
         case SELECTION_78:
         case SELECTION_82:
-            index = (gTheGame.unk_9B48 > 1) ? 1 : 0;
+            index = (gTheGame.miscToggle > 1) ? 1 : 0;
             gSPBgRectCopy(glistp++, &gTheGame.unk_9B50[index]);
             break;
 

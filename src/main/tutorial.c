@@ -353,7 +353,7 @@ void TutorialCheckState(tetWell *well, cursor_t *cursor) {
             anim_bg = 0x25;
             gTheGame.totalPlayer = 1;
             anim_sp = 0;
-            cursor->unk_00 = 0x34C;
+            cursor->state = 0x34C;
             PlaySE(SFX_INIT_TABLE, SFX_0A0);
             PlaySE(SFX_INIT_TABLE, SFX_175);
         } else if (anim_bg != -0x34C) {
@@ -374,7 +374,7 @@ void TutorialCheckState(tetWell *well, cursor_t *cursor) {
     } else if ((anim_bg == 0) && (anim_sp == 0)) {
         anim_bg = 0x25;
         anim_sp = 0;
-        cursor->unk_00 = 0x34C;
+        cursor->state = 0x34C;
         PlaySE(SFX_INIT_TABLE, SFX_0A0);
         PlaySE(SFX_INIT_TABLE, SFX_175);
     } else if (anim_bg != -0x34C) {

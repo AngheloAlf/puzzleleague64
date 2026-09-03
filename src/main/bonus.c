@@ -137,8 +137,8 @@ void InitBonus(void) {
     func_80001310_usa(SEGMENT_ROM_START(segment_101A80), temp_s4, SEGMENT_ROM_SIZE(segment_101A80));
     Pon_Image_Heap += SEGMENT_ROM_SIZE(segment_101A80);
 
-    if ((gSelection == SELECTION_96) && (gTheGame.cursorBlock[0].unk_00 != 7) &&
-        (gTheGame.cursorBlock[1].unk_00 != 8) && (B_801C6C90_usa == 0x10)) {
+    if ((gSelection == SELECTION_96) && (gTheGame.cursorBlock[0].state != 7) && (gTheGame.cursorBlock[1].state != 8) &&
+        (B_801C6C90_usa == 0x10)) {
         PlayMIDI(BGM_INIT_TABLE, 0x20, 0, 1);
     }
     gTheGame.unk_9A50.b.imagePtr = temp_s4 + var_s3;
@@ -774,7 +774,7 @@ void InitStageClearIntro(void) {
             if (!(gPlayer[0]->unk_02B.unk_2 & 0x40)) {
                 gTheGame.menu[0].game = 5;
                 gPlayer[0]->unk_02B.unk_2 |= 0x40;
-            } else if ((gTheGame.menu[0].game == 2) && (gTheGame.cursorBlock[0].unk_00 == 7)) {
+            } else if ((gTheGame.menu[0].game == 2) && (gTheGame.cursorBlock[0].state == 7)) {
                 B_8018EA10_usa = "spaTR2.HVQM";
             }
         }
@@ -839,7 +839,7 @@ void InitStageClearIntro(void) {
 
     gTheGame.hour = gTheGame.minute = gTheGame.second = 0;
     gCounter = 0;
-    gTheGame.cursorBlock[0].unk_00 = 0;
+    gTheGame.cursorBlock[0].state = 0;
     if (screenLoad("CLEAR.SBF", &sp78) != 0) {
         u32 x;
 
@@ -851,7 +851,7 @@ void InitStageClearIntro(void) {
         }
         giScreenClear = screenSet("CLEAR", x | 0x400);
 
-        screenSetNumber(giScreenClear, 0x32, gTheGame.tetrisWell[0].unk_43AC, -1);
+        screenSetNumber(giScreenClear, 0x32, gTheGame.tetrisWell[0].score, -1);
         if (gTheGame.menu[0].game == 5) {
             if (gTheGame.menu[0].stage < 5) {
                 gnTagTextClear = -0xC8;
