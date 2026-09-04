@@ -768,8 +768,10 @@ void InitStageClearIntro(void) {
     sp78 = &gBufferHeap[SEGMENT_ROM_SIZE(segment_0CA4A0)];
     B_8018EA10_usa = NULL;
     if ((gPlayer[0]->kPLAYER1C_2Dround[0] & 0x1F) == 0x1F) {
-        if (((gPlayer[0]->kPLAYER1C_2Dround[1] & 0x1F) == 0x1F) && ((gPlayer[0]->kPLAYER1C_2Dround[2] & 0x1F) == 0x1F) &&
-            ((gPlayer[0]->kPLAYER1C_2Dround[3] & 0x1F) == 0x00) && ((gPlayer[0]->kPLAYER1C_2Dround[4] & 0x1F) == 0x00) &&
+        if (((gPlayer[0]->kPLAYER1C_2Dround[1] & 0x1F) == 0x1F) &&
+            ((gPlayer[0]->kPLAYER1C_2Dround[2] & 0x1F) == 0x1F) &&
+            ((gPlayer[0]->kPLAYER1C_2Dround[3] & 0x1F) == 0x00) &&
+            ((gPlayer[0]->kPLAYER1C_2Dround[4] & 0x1F) == 0x00) &&
             ((gPlayer[0]->kPLAYER1C_2Dround[5] & 0x1F) == 0x00)) {
             if (!(gPlayer[0]->kPLAYER1C_2Dround[2] & 0x40)) {
                 gTheGame.menu[0].game = 5;
@@ -779,8 +781,10 @@ void InitStageClearIntro(void) {
             }
         }
 
-        if (((gPlayer[0]->kPLAYER1C_2Dround[0] & 0x1F) == 0x1F) && ((gPlayer[0]->kPLAYER1C_2Dround[1] & 0x1F) == 0x1F) &&
-            ((gPlayer[0]->kPLAYER1C_2Dround[2] & 0x1F) == 0x1F) && ((gPlayer[0]->kPLAYER1C_2Dround[3] & 0x1F) == 0x1F) &&
+        if (((gPlayer[0]->kPLAYER1C_2Dround[0] & 0x1F) == 0x1F) &&
+            ((gPlayer[0]->kPLAYER1C_2Dround[1] & 0x1F) == 0x1F) &&
+            ((gPlayer[0]->kPLAYER1C_2Dround[2] & 0x1F) == 0x1F) &&
+            ((gPlayer[0]->kPLAYER1C_2Dround[3] & 0x1F) == 0x1F) &&
             ((gPlayer[0]->kPLAYER1C_2Dround[4] & 0x1F) == 0x1F)) {
             if (((gPlayer[0]->kPLAYER1C_2Dround[5] & 0x1F) == (gPlayer[0]->kPLAYER1C_2Dround[0] & 0x1F)) &&
                 !(gPlayer[0]->kPLAYER1C_2Dround[5] & 0x40)) {

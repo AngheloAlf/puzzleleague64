@@ -484,7 +484,6 @@ extern u16 st_Chain1[];
 void UpdateComboChainCount(s32 num, s32 combo, s32 total) {
     s32 var_a2;
     s8 temp_a0;
-    s8 temp_a0_2;
     s8 *var_t0;
     s8 *var_t1;
 
@@ -510,37 +509,43 @@ void UpdateComboChainCount(s32 num, s32 combo, s32 total) {
         return;
     }
 
+    // TODO: Remove (void *) cast and fix types
     switch (gSelection) {
         case SELECTION_96:
-            var_t1 = &gPlayer[num]->unk_0EF;
-            var_t0 = &gPlayer[num]->unk_0F0;
+            var_t1 = (void *)&gPlayer[num]->unk_0EF;
+            var_t0 = (void *)&gPlayer[num]->unk_0F0;
             break;
+
         case SELECTION_AA:
-            var_t1 = &gPlayer[num]->unk_0ED;
-            var_t0 = &gPlayer[num]->unk_0EE;
+            var_t1 = (void *)&gPlayer[num]->unk_0ED;
+            var_t0 = (void *)&gPlayer[num]->unk_0EE;
             break;
+
         case SELECTION_8C:
             if (gTheGame.dimension == DIMENSION_2D) {
-                var_t1 = &gPlayer[num]->unk_0E5;
-                var_t0 = &gPlayer[num]->unk_0E6;
+                var_t1 = (void *)&gPlayer[num]->unk_0E5;
+                var_t0 = (void *)&gPlayer[num]->unk_0E6;
             } else {
-                var_t1 = &gPlayer[num]->unk_0E7;
-                var_t0 = &gPlayer[num]->unk_0E8;
+                var_t1 = (void *)&gPlayer[num]->unk_0E7;
+                var_t0 = (void *)&gPlayer[num]->unk_0E8;
             }
             break;
+
         case SELECTION_BE:
             if (gTheGame.dimension == DIMENSION_2D) {
-                var_t1 = &gPlayer[num]->unk_0E9;
-                var_t0 = &gPlayer[num]->unk_0EA;
+                var_t1 = (void *)&gPlayer[num]->unk_0E9;
+                var_t0 = (void *)&gPlayer[num]->unk_0EA;
             } else {
-                var_t1 = &gPlayer[num]->unk_0EB;
-                var_t0 = &gPlayer[num]->unk_0EC;
+                var_t1 = (void *)&gPlayer[num]->unk_0EB;
+                var_t0 = (void *)&gPlayer[num]->unk_0EC;
             }
+            break;
+
+        default:
             break;
     }
 
     if (combo != 0) {
-        temp_a0_2 = total;
         if (*var_t1 < temp_a0) {
             *var_t1 = temp_a0;
         }
