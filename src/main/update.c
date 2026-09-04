@@ -331,24 +331,118 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/update", func_80058934_usa);
 INCLUDE_ASM("asm/ger/nonmatchings/main/update", func_80058934_usa);
 #endif
 
+void UpdatePlayerStageClear(cursor_t *cursor, s32 round, s32 stage) {
+    char bit;
+    char index;
+    char *ptr;
+
+    if (gDemo != GDEMO_2C) {
+        return;
+    }
+
+    UpdatePlayerStageClearTimeScore(cursor, 0, round, stage);
+
+    if (gMain == GMAIN_388) {
+        return;
+    }
+
+    if (gTheGame.menu[0].game == 5) {
+        if (round != 3) {
+            return;
+        }
+        index = 2;
+        bit = 5;
+    } else {
+        if (cursor->state == 8) {
+            return;
+        }
+        index = round - 1;
+        bit = stage - 1;
+    }
+
+    ptr = &gPlayer[0]->kPLAYER1C_2Dround[index];
+    *ptr |= 1 << bit;
+}
+
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdatePlayerStageClear);
-#endif
+#ifdef NON_EQUIVALENT
+void UpdatePlayerStageClearTimeScore(cursor_t *cursor, s32 loadsave, s32 round, s32 stage) {
+    s32 *temp_v1_2;
+    s32 *temp_v1_3;
+    s32 temp_v1;
+    s32 temp_v1_4;
+    s32 var_a3;
+    s32 var_t1;
+    s32 var_v0;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdatePlayerStageClear);
-#endif
+    if (gTheGame.menu[0].game == 5) {
+        var_a3 = (round != 3) ? 0x1F : 0xF;
+    } else {
+        temp_v1 = round - 1;
+        if (round < 4) {
+            var_v0 = (temp_v1 * 5) - 1;
+        } else {
+            var_v0 = temp_v1 * 5;
+        }
+        var_a3 = var_v0 + stage;
+    }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update", UpdatePlayerStageClear);
-#endif
+    if (loadsave != 0) {
+        if (var_a3 != 0) {
+            if (gDemo != GDEMO_2C) {
+                return;
+            }
+        } else {
+            if (gPlayer[0]->unk_034[0] == 0) {
+                gTheGame.second = 0;
+                gTheGame.minute = 0;
+                gTheGame.hour = 0;
+                gTheGame.tetrisWell[0].score = 0;
+                return;
+            }
+        }
+    }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update", UpdatePlayerStageClear);
-#endif
+    if (loadsave != 0) {
+        gTheGame.tetrisWell[0].score = gPlayer[0]->kPLAYER1C_2Dscore;
 
-#if VERSION_USA
+        temp_v1_2 = &gPlayer[0]->unk_034[var_a3 - ((gPlayer[0]->unk_034[var_a3] == 0) ? 1 : 0)];
+        gTheGame.hour = (s8)((temp_v1_2[0] >> 16) & 0xFF);
+        gTheGame.minute = (s8)((temp_v1_2[0] >> 8) & 0xFF);
+        gTheGame.second = (s8)((temp_v1_2[0] >> 0) & 0xFF);
+        return;
+    }
+
+    if (var_a3 == 0x1F) {
+        var_t1 = gTheGame.second + (gTheGame.minute * 0x3C) + (gTheGame.hour * 0xE10);
+    }
+    temp_v1_3 = &gPlayer[0]->unk_034[var_a3];
+    *temp_v1_3 = gTheGame.hour << 0x10;
+    *temp_v1_3 |= gTheGame.minute << 8;
+    *temp_v1_3 |= gTheGame.second;
+    if ((cursor->state == 7) || ((var_a3 == 0xF) && (cursor->state == 8))) {
+        if (var_a3 < 0x1F) {
+            gPlayer[0]->kPLAYER1C_2Dscore = gTheGame.tetrisWell[0].score;
+            return;
+        }
+
+        if (var_a3 != 0x1F) {
+            return;
+        }
+
+        temp_v1_4 = gPlayer[0]->unk_02A + (gPlayer[0]->unk_029 * 0x3C) + (gPlayer[0]->unk_028 * 0xE10);
+        if ((temp_v1_4 == 0) || (var_t1 < temp_v1_4)) {
+            gPlayer[0]->unk_028 = gTheGame.hour;
+            gPlayer[0]->unk_029 = gTheGame.minute;
+            gPlayer[0]->unk_02A = gTheGame.second;
+        }
+    }
+
+    gPlayer[0]->kPLAYER1C_2Dscore = 0;
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdatePlayerStageClearTimeScore);
+#endif
 #endif
 
 #if VERSION_EUR
@@ -380,7 +474,108 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/update", func_80058D68_usa);
 #endif
 
 #if VERSION_USA
+extern u16 st_Combo1[];
+extern u8 st_Chain2[];
+extern u8 st_Combo2[];
+extern u16 st_Chain1[];
+
+#ifdef NON_MATCHING
+// extra instruction
+void UpdateComboChainCount(s32 num, s32 combo, s32 total) {
+    s32 var_a2;
+    s8 temp_a0;
+    s8 temp_a0_2;
+    s8 *var_t0;
+    s8 *var_t1;
+
+    if (gDemo != GDEMO_2C) {
+        return;
+    }
+    if (total == 0) {
+        return;
+    }
+    if ((combo != 0) && (total == 3)) {
+        return;
+    }
+    if (gSelection < SELECTION_83) {
+        return;
+    }
+    if ((gSelection == SELECTION_A0) || (gSelection == SELECTION_C8)) {
+        return;
+    }
+    if (gSelection == SELECTION_B4) {
+        return;
+    }
+    if (gMain != GMAIN_387) {
+        return;
+    }
+
+    switch (gSelection) {
+        case SELECTION_96:
+            var_t1 = &gPlayer[num]->unk_0EF;
+            var_t0 = &gPlayer[num]->unk_0F0;
+            break;
+        case SELECTION_AA:
+            var_t1 = &gPlayer[num]->unk_0ED;
+            var_t0 = &gPlayer[num]->unk_0EE;
+            break;
+        case SELECTION_8C:
+            if (gTheGame.dimension == DIMENSION_2D) {
+                var_t1 = &gPlayer[num]->unk_0E5;
+                var_t0 = &gPlayer[num]->unk_0E6;
+            } else {
+                var_t1 = &gPlayer[num]->unk_0E7;
+                var_t0 = &gPlayer[num]->unk_0E8;
+            }
+            break;
+        case SELECTION_BE:
+            if (gTheGame.dimension == DIMENSION_2D) {
+                var_t1 = &gPlayer[num]->unk_0E9;
+                var_t0 = &gPlayer[num]->unk_0EA;
+            } else {
+                var_t1 = &gPlayer[num]->unk_0EB;
+                var_t0 = &gPlayer[num]->unk_0EC;
+            }
+            break;
+    }
+
+    if (combo != 0) {
+        temp_a0_2 = total;
+        if (*var_t1 < temp_a0) {
+            *var_t1 = temp_a0;
+        }
+        if (total < 0xB) {
+            var_a2 = total - 4;
+            st_Combo1[var_a2]++;
+        } else {
+            var_a2 = total - 0xB;
+            if (total >= 0x46) {
+                var_a2 = 0x46 - 0xB;
+            }
+
+            st_Combo2[var_a2]++;
+        }
+    } else {
+        temp_a0 = total + 1;
+        if (*var_t0 < temp_a0) {
+            *var_t0 = temp_a0;
+        }
+
+        if (total < 0xA) {
+            var_a2 = total - 1;
+            st_Chain1[var_a2]++;
+        } else {
+            var_a2 = total - 0xA;
+            if (total >= 0x63) {
+                var_a2 = 0x63 - 0xA;
+            }
+            st_Chain2[var_a2]++;
+        }
+    }
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdateComboChainCount);
+#endif
 #endif
 
 #if VERSION_EUR

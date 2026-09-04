@@ -14,20 +14,6 @@ typedef struct player_t_unk_002 {
     /* 0xC */ UNK_PAD unk_C[0x2];
 } player_t_unk_002; // size = 0xE
 
-typedef struct player_t_unk_02B {
-    /* 0x0 */ UNK_PAD unk_0;
-    /* 0x1 */ UNK_PAD unk_1;
-    /* 0x2 */ UNK_PAD unk_2;
-    /* 0x3 */ UNK_PAD unk_3;
-    /* 0x4 */ UNK_PAD unk_4;
-    /* 0x5 */ u8 unk_5;
-} player_t_unk_02B; // size = 0x6
-
-typedef struct player_t_unk_034 {
-    /* 0x00 */ UNK_PAD unk_00[0x80];
-} player_t_unk_034; // size = 0x80
-
-
 
 typedef struct player_t_unk_0F1 {
     /* 0x0 */ UNK_PAD unk_0[0x8];
@@ -93,12 +79,12 @@ typedef struct player_t {
     /* 0x01C */ s32 unk_01C;
     /* 0x020 */ s32 unk_020;
     /* 0x024 */ s32 kPLAYER1C_2Dscore; /* Original name: kPLAYER1C_2Dscore */
-    /* 0x028 */ u8 unk_028;
-    /* 0x029 */ u8 unk_029;
-    /* 0x02A */ u8 unk_02A;
-    /* 0x02B */ player_t_unk_02B unk_02B;
+    /* 0x028 */ s8 unk_028;
+    /* 0x029 */ s8 unk_029;
+    /* 0x02A */ s8 unk_02A;
+    /* 0x02B */ char kPLAYER1C_2Dround[6]; /* Original name: kPLAYER1C_2Dround */ // bitflag. TODO: add macros or something
     /* 0x031 */ UNK_PAD unk_031[0x3]; // maybe struct padding?
-    /* 0x034 */ player_t_unk_034 unk_034;
+    /* 0x034 */ s32 unk_034[0x20];
     /* 0x0B4 */ u8 unk_0B4;
     /* 0x0B5 */ u8 unk_0B5;
     /* 0x0B6 */ u8 unk_0B6;

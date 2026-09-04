@@ -148,7 +148,7 @@ IINC       += -I lib/ultralib/include -I lib/ultralib/include/PR -I lib/ultralib
 IINC       += -I include -I bin/$(VERSION) -I $(BUILD_DIR)/bin/$(VERSION) -I .
 
 # Check code syntax with host compiler
-CHECK_WARNINGS := -Wall -Wextra -Wimplicit-fallthrough -Wno-unknown-pragmas -Wno-missing-braces -Wno-sign-compare -Wno-uninitialized
+CHECK_WARNINGS := -Wall -Wextra -Wimplicit-fallthrough -Wno-unknown-pragmas -Wno-missing-braces -Wno-sign-compare -Wno-uninitialized -Wno-char-subscripts
 CHECK_WARNINGS += -Wdouble-promotion -D "DOUBLE_LITERAL(x)=((f32)(x))"
 
 ifneq ($(WERROR), 0)

@@ -24,7 +24,7 @@ void UpdateNextLevel(struct tetWell * well);
 // void UpdatePlayerPuzzle();
 s32 func_800587CC_usa(s32 arg0, s32 arg1);
 // void func_80058934_usa();
-// void UpdatePlayerStageClear();
+void UpdatePlayerStageClear(struct cursor_t *cursor, s32 round, s32 stage);
 void UpdatePlayerStageClearTimeScore(struct cursor_t *cursor, s32 loadsave, s32 round, s32 stage);
 // void func_80058D68_usa();
 void UpdateComboChainCount(s32 num, s32 combo, s32 total);

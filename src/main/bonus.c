@@ -767,26 +767,26 @@ void InitStageClearIntro(void) {
 
     sp78 = &gBufferHeap[SEGMENT_ROM_SIZE(segment_0CA4A0)];
     B_8018EA10_usa = NULL;
-    if ((gPlayer[0]->unk_02B.unk_0 & 0x1F) == 0x1F) {
-        if (((gPlayer[0]->unk_02B.unk_1 & 0x1F) == 0x1F) && ((gPlayer[0]->unk_02B.unk_2 & 0x1F) == 0x1F) &&
-            ((gPlayer[0]->unk_02B.unk_3 & 0x1F) == 0x00) && ((gPlayer[0]->unk_02B.unk_4 & 0x1F) == 0x00) &&
-            ((gPlayer[0]->unk_02B.unk_5 & 0x1F) == 0x00)) {
-            if (!(gPlayer[0]->unk_02B.unk_2 & 0x40)) {
+    if ((gPlayer[0]->kPLAYER1C_2Dround[0] & 0x1F) == 0x1F) {
+        if (((gPlayer[0]->kPLAYER1C_2Dround[1] & 0x1F) == 0x1F) && ((gPlayer[0]->kPLAYER1C_2Dround[2] & 0x1F) == 0x1F) &&
+            ((gPlayer[0]->kPLAYER1C_2Dround[3] & 0x1F) == 0x00) && ((gPlayer[0]->kPLAYER1C_2Dround[4] & 0x1F) == 0x00) &&
+            ((gPlayer[0]->kPLAYER1C_2Dround[5] & 0x1F) == 0x00)) {
+            if (!(gPlayer[0]->kPLAYER1C_2Dround[2] & 0x40)) {
                 gTheGame.menu[0].game = 5;
-                gPlayer[0]->unk_02B.unk_2 |= 0x40;
+                gPlayer[0]->kPLAYER1C_2Dround[2] |= 0x40;
             } else if ((gTheGame.menu[0].game == 2) && (gTheGame.cursorBlock[0].state == 7)) {
                 B_8018EA10_usa = "spaTR2.HVQM";
             }
         }
 
-        if (((gPlayer[0]->unk_02B.unk_0 & 0x1F) == 0x1F) && ((gPlayer[0]->unk_02B.unk_1 & 0x1F) == 0x1F) &&
-            ((gPlayer[0]->unk_02B.unk_2 & 0x1F) == 0x1F) && ((gPlayer[0]->unk_02B.unk_3 & 0x1F) == 0x1F) &&
-            ((gPlayer[0]->unk_02B.unk_4 & 0x1F) == 0x1F)) {
-            if (((gPlayer[0]->unk_02B.unk_5 & 0x1F) == (gPlayer[0]->unk_02B.unk_0 & 0x1F)) &&
-                !(gPlayer[0]->unk_02B.unk_5 & 0x40)) {
+        if (((gPlayer[0]->kPLAYER1C_2Dround[0] & 0x1F) == 0x1F) && ((gPlayer[0]->kPLAYER1C_2Dround[1] & 0x1F) == 0x1F) &&
+            ((gPlayer[0]->kPLAYER1C_2Dround[2] & 0x1F) == 0x1F) && ((gPlayer[0]->kPLAYER1C_2Dround[3] & 0x1F) == 0x1F) &&
+            ((gPlayer[0]->kPLAYER1C_2Dround[4] & 0x1F) == 0x1F)) {
+            if (((gPlayer[0]->kPLAYER1C_2Dround[5] & 0x1F) == (gPlayer[0]->kPLAYER1C_2Dround[0] & 0x1F)) &&
+                !(gPlayer[0]->kPLAYER1C_2Dround[5] & 0x40)) {
                 B_8018EA10_usa = "spaTR1.HVQM";
                 gTheGame.menu[0].game = 5;
-                gPlayer[0]->unk_02B.unk_5 |= 0x40;
+                gPlayer[0]->kPLAYER1C_2Dround[5] |= 0x40;
             }
         }
     }

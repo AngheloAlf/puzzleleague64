@@ -4381,8 +4381,8 @@ s32 menuInitUser(u32 arg0) {
         player->unk_028 = 0;
         player->unk_029 = 0;
         player->unk_02A = 0;
-        bzero(&player->unk_02B, 6);
-        bzero(&player->unk_034, 0x80);
+        bzero(&player->kPLAYER1C_2Dround, sizeof(player->kPLAYER1C_2Dround));
+        bzero(&player->unk_034, sizeof(player->unk_034));
         player->unk_0B4 = 0;
         player->unk_0B5 = 0;
         player->unk_0B6 = 0;
@@ -5369,9 +5369,9 @@ void InitMenu(void) {
                 B_8018A850_usa[gnCountMenu++] = MT_MAIN;
                 B_8018A850_usa[gnCountMenu++] = MT_1P_ATTACK_NAME;
 
-                if ((gPlayer[0]->unk_02B.unk_0 & 0x1F) || (gPlayer[0]->unk_02B.unk_1 & 0x1F) ||
-                    (gPlayer[0]->unk_02B.unk_2 & 0x1F) || (gPlayer[0]->unk_02B.unk_3 & 0x1F) ||
-                    (gPlayer[0]->unk_02B.unk_4 & 0x1F) || (gPlayer[0]->unk_02B.unk_5 & 0x1F)) {
+                if ((gPlayer[0]->kPLAYER1C_2Dround[0] & 0x1F) || (gPlayer[0]->kPLAYER1C_2Dround[1] & 0x1F) ||
+                    (gPlayer[0]->kPLAYER1C_2Dround[2] & 0x1F) || (gPlayer[0]->kPLAYER1C_2Dround[3] & 0x1F) ||
+                    (gPlayer[0]->kPLAYER1C_2Dround[4] & 0x1F) || (gPlayer[0]->kPLAYER1C_2Dround[5] & 0x1F)) {
                     B_8018A850_usa[gnCountMenu++] = MT_1P_ATTACK_CHARACTER;
                 }
             }

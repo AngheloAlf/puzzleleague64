@@ -374,7 +374,7 @@ void InitStory(void) {
         if ((gSelection == SELECTION_8C) || (gSelection == SELECTION_BE)) {
             func_8002B85C_usa(2, 0);
         } else if (gSelection == SELECTION_AA) {
-            gPlayer[0]->unk_02B.unk_5 |= 0x20;
+            gPlayer[0]->kPLAYER1C_2Dround[ARRAY_COUNT(gPlayer[0]->kPLAYER1C_2Dround) - 1] |= 0x20;
             menuSaveData(gPlayer[0]->unk_000);
 
             func_8002B85C_usa(2, 9);
