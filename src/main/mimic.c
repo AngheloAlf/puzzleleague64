@@ -274,7 +274,6 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", func_80082020_ger);
 #if VERSION_USA
 void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
     command_t *command;
-    s32 temp_lo;
     s32 var_v1;
 
 #if 0
@@ -460,19 +459,18 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
                 case 0x18:
                     brain->unk_010--;
                     if (brain->unk_010 <= 0) {
-                        temp_lo = command->para1 * gTheGame.dimension;
-                        well->unk_43FC = temp_lo;
-                        well->unk_43F8 += temp_lo;
+                        well->unk_43FC = command->para1 * gTheGame.dimension;
+                        well->unk_43F8 += well->unk_43FC;
                         break;
                     }
                     return;
                 case 0x19:
-                    for (var_v1 = 0; var_v1 < 0x14; var_v1++) {
-                        if (gTheGame.tetrisWell[command->para2].attack[var_v1].state == 0) {
+                    for (var_v1 = 0; var_v1 < ATTACK_COUNT; var_v1++) {
+                        if (gTheGame.tetrisWell[command->para2].attack[var_v1].state == ATTACKSTATE_0) {
                             Init2DAttackPosition(&gTheGame.tetrisWell[command->para2].attack[var_v1], command->para1,
                                                  command->para2);
                             Init2DAttackFace(&gTheGame.tetrisWell[command->para2].attack[var_v1]);
-                            gTheGame.tetrisWell[command->para2].attack[var_v1].state = 4;
+                            gTheGame.tetrisWell[command->para2].attack[var_v1].state = ATTACKSTATE_4;
                             gTheGame.tetrisWell[command->para2].attack[var_v1].delay = -1;
                             break;
                         }
@@ -492,9 +490,9 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
                     break;
                 case 0x1D:
                     gTheGame.gSPRITE[9].s.imageAdrs = 6;
-                    gTheGame.gSPRITE[9].s.imageW = 0x200;
-                    gTheGame.gSPRITE[9].s.objX = command->para1 * 4;
-                    gTheGame.gSPRITE[9].s.objY = command->para2 * 4;
+                    gTheGame.gSPRITE[9].s.imageW = 16 << 5;
+                    gTheGame.gSPRITE[9].s.objX = command->para1 << 2;
+                    gTheGame.gSPRITE[9].s.objY = command->para2 << 2;
                     anim_bg = 0x34C;
                     break;
                 case 0x1E:
@@ -502,11 +500,11 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
                     break;
                 case 0x1F:
                     brain->unk_104 = 0;
-                    if (gGameStatus & 0x80) {
+                    if (gGameStatus & GAME_STATUS_FLAG_80) {
                         gMain = GMAIN_TITLE;
                         gReset = -1;
                         gDemo = GDEMO_21;
-                        gGameStatus = gGameStatus >> 0x10;
+                        GAME_STATUS_SHIFT_RIGHT(gGameStatus);
                         FadeOutSong(last_song_handle, 0x3C);
                         return;
                     }
