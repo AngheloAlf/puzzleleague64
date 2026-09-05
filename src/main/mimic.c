@@ -270,9 +270,16 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", func_80082020_ger);
 #endif
 
 void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
-    command_t *temp_s0; // &brain->unk_048[brain->unk_0FC]
-    s32 temp_lo; // temp_s0->para1 * gTheGame.dimension
-    s32 var_v1; // iterator. attack[var_v1]
+    command_t *command;
+    s32 temp_lo;
+    s32 var_v1;
+
+#if 0
+    // Local variables
+    int count; // r4
+    int num; // r29
+    struct command_t * command; // r1+0x8
+#endif
 
     if (cursor->extra_wait != 0) {
         return;
@@ -291,33 +298,33 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
             AIClearCommand(brain);
             if (gSelection == SELECTION_6E) {
                 if (brain->unk_03C == 1) {
-                    MTMove(brain, &D_800B9D28_usa);
+                    MTMove(brain, demo_mimic_combo);
                 } else if (brain->unk_03C == 2) {
-                    MTMove(brain, &D_800B9DDC_usa);
+                    MTMove(brain, demo_mimic_chain);
                 } else if (brain->unk_03C == 3) {
-                    MTMove(brain, &D_800B9E80_usa);
+                    MTMove(brain, demo_mimic_schain);
                 } else if (brain->unk_03C == 4) {
-                    MTMove(brain, &D_800BA108_usa);
+                    MTMove(brain, demo_mimic_timelag);
                 } else if (brain->unk_03C == 5) {
-                    MTMove(brain, &D_800BA144_usa);
+                    MTMove(brain, play_mimic_combo);
                 } else if (brain->unk_03C == 6) {
-                    MTMove(brain, &D_800BA47C_usa);
+                    MTMove(brain, play_mimic_chain);
                 } else if (brain->unk_03C == 7) {
-                    MTMove(brain, &D_800BA658_usa);
+                    MTMove(brain, play_mimic_schain);
                 } else if (brain->unk_03C == 8) {
-                    MTMove(brain, &D_800BA8E0_usa);
+                    MTMove(brain, play_mimic_timelag);
                 }
             } else {
                 if (brain->unk_03C == 1) {
-                    MTMove(brain, &D_800BAD64_usa);
+                    MTMove(brain, tutorial_move1);
                 } else if (brain->unk_03C == 2) {
-                    MTMove(brain, &D_800BAF60_usa);
+                    MTMove(brain, tutorial_move2);
                 } else if (brain->unk_03C == 5) {
-                    MTMove(brain, &D_800BB204_usa);
+                    MTMove(brain, tutorial_move3);
                 } else if (brain->unk_03C == 3) {
-                    MTMove(brain, &D_800BB438_usa);
+                    MTMove(brain, tutorial_move4);
                 } else if (brain->unk_03C == 4) {
-                    MTMove(brain, &tutorial_move5);
+                    MTMove(brain, tutorial_move5);
                 }
             }
         }
@@ -326,16 +333,16 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
     if (brain->unk_104 > 0) {
         AIFinishMove(brain);
         do {
-            temp_s0 = &brain->unk_048[brain->unk_0FC];
-            switch (temp_s0->function) {
+            command = &brain->unk_048[brain->unk_0FC];
+            switch (command->function) {
                 case 0x1: 
-                    AIVertMove(brain, temp_s0->para1);
+                    AIVertMove(brain, command->para1);
                     break;
                 case 0x2: 
-                    AIHoriMove(brain, temp_s0->para1);
+                    AIHoriMove(brain, command->para1);
                     break;
                 case 0x5: 
-                    AIHoriMoveBlock(brain, temp_s0->para1, temp_s0->para2);
+                    AIHoriMoveBlock(brain, command->para1, command->para2);
                     if (brain->unk_128 != 0) {
                         brain->move[brain->unk_128 - 1] = 6;
                     }
@@ -347,7 +354,7 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
                     AISetMove(brain, 7);
                     break;
                 case 0x14:
-                    brain->unk_010 = temp_s0->para1 * temp_s0->para2;
+                    brain->unk_010 = command->para1 * command->para2;
                     break;
                 case 0x15:
                     if (gGameStatus & 0x80) {
@@ -396,16 +403,16 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
                         Init2DCursor(cursor, 0);
                         switch (brain->unk_03C) {
                             case 0x1:
-                                Init2DPuzzle(well, cursor, tutorial1, temp_s0->para1);
+                                Init2DPuzzle(well, cursor, tutorial1, command->para1);
                                 break;
                             case 0x2:
-                                Init2DPuzzle(well, cursor, tutorial2, temp_s0->para1);
+                                Init2DPuzzle(well, cursor, tutorial2, command->para1);
                                 break;
                             case 0x3:
-                                Init2DPuzzle(well, cursor, tutorial4, temp_s0->para1);
+                                Init2DPuzzle(well, cursor, tutorial4, command->para1);
                                 break;
                             case 0x4:
-                                Init2DPuzzle(well, cursor, tutorial5, temp_s0->para1);
+                                Init2DPuzzle(well, cursor, tutorial5, command->para1);
                                 break;
                         }
                         Init2DTetrisBlocksTMEM(well, -1);
@@ -428,9 +435,9 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
                     } else {
                         InitCursor(cursor);
                         Init3DCursor(cursor, 0);
-                        Init3DPuzzle(well, cursor, tutorial3, temp_s0->para1);
+                        Init3DPuzzle(well, cursor, tutorial3, command->para1);
                         Init3DNewRow(well);
-                        if ((temp_s0->para1 % 2) == 1) {
+                        if ((command->para1 % 2) == 1) {
                             well->new_block[0].type = BLOCKTYPE_0;
                         }
                         Init3DIcons(well);
@@ -452,7 +459,7 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
                 case 0x18:
                     brain->unk_010--;
                     if (brain->unk_010 <= 0) {
-                        temp_lo = temp_s0->para1 * gTheGame.dimension;
+                        temp_lo = command->para1 * gTheGame.dimension;
                         well->unk_43FC = temp_lo;
                         well->unk_43F8 += temp_lo;
                         break;
@@ -460,32 +467,32 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
                     return;
                 case 0x19:
                     for (var_v1 = 0; var_v1 < 0x14; var_v1++) {
-                        if (gTheGame.tetrisWell[temp_s0->para2].attack[var_v1].state == 0) {
-                            Init2DAttackPosition(&gTheGame.tetrisWell[temp_s0->para2].attack[var_v1], temp_s0->para1, temp_s0->para2);
-                            Init2DAttackFace(&gTheGame.tetrisWell[temp_s0->para2].attack[var_v1]);
-                            gTheGame.tetrisWell[temp_s0->para2].attack[var_v1].state = 4;
-                            gTheGame.tetrisWell[temp_s0->para2].attack[var_v1].delay = -1;
+                        if (gTheGame.tetrisWell[command->para2].attack[var_v1].state == 0) {
+                            Init2DAttackPosition(&gTheGame.tetrisWell[command->para2].attack[var_v1], command->para1, command->para2);
+                            Init2DAttackFace(&gTheGame.tetrisWell[command->para2].attack[var_v1]);
+                            gTheGame.tetrisWell[command->para2].attack[var_v1].state = 4;
+                            gTheGame.tetrisWell[command->para2].attack[var_v1].delay = -1;
                             break;
                         }
                     }
                     break;
                 case 0x1A:
-                    brain->unk_030 = temp_s0->para1;
+                    brain->unk_030 = command->para1;
                     brain->unk_034 = 1;
                     break;
                 case 0x1B:
-                    screenHideText(brain->unk_028, temp_s0->para1 - 1);
-                    screenShowText(brain->unk_028, temp_s0->para1);
-                    brain->unk_038 = temp_s0->para1;
+                    screenHideText(brain->unk_028, command->para1 - 1);
+                    screenShowText(brain->unk_028, command->para1);
+                    brain->unk_038 = command->para1;
                     break;
                 case 0x1C:
-                    brain->unk_02C = temp_s0->para1;
+                    brain->unk_02C = command->para1;
                     break;
                 case 0x1D:
                     gTheGame.gSPRITE[9].s.imageAdrs = 6;
                     gTheGame.gSPRITE[9].s.imageW = 0x200;
-                    gTheGame.gSPRITE[9].s.objX = temp_s0->para1 * 4;
-                    gTheGame.gSPRITE[9].s.objY = temp_s0->para2 * 4;
+                    gTheGame.gSPRITE[9].s.objX = command->para1 * 4;
+                    gTheGame.gSPRITE[9].s.objY = command->para2 * 4;
                     anim_bg = 0x34C;
                     break;
                 case 0x1E:
