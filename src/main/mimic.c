@@ -537,6 +537,18 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
     }
 }
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", UpdateMT);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/mimic", UpdateMT);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", UpdateMT);
+#endif
+
 void UpdateMTController(tetWell *well, cursor_t *cursor, s32 num) {
     gamepad_t *gamepad = &gTheGame.controller[num];
     u16 t_button = gamepad->touch_button;
