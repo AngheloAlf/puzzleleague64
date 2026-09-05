@@ -271,6 +271,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", func_80081FDC_ger);
 INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", func_80082020_ger);
 #endif
 
+#if VERSION_USA
 void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
     command_t *command;
     s32 temp_lo;
@@ -536,6 +537,7 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
         }
     }
 }
+#endif
 
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", UpdateMT);
