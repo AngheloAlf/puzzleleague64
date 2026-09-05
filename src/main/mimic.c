@@ -15,12 +15,14 @@
 #include "animate2d.h"
 #include "animate3d.h"
 #include "animation.h"
+#include "attack2d.h"
 #include "buffers.h"
 #include "character.h"
 #include "combo.h"
 #include "dlist.h"
 #include "info.h"
 #include "init2d.h"
+#include "init3d.h"
 #include "other.h"
 #include "peel.h"
 #include "puzzle.h"
@@ -201,7 +203,7 @@ void func_8008336C_usa(s32 kind, s32 level, s32 number, s32 play) {
 #endif
 
 #if VERSION_USA
-void MTMove(ai_t *brain, u8 *ptr) {
+INLINE void MTMove(ai_t *brain, u8 *ptr) {
     s32 temp_v0;
     s32 var_a0;
     s32 temp_s3;
@@ -270,7 +272,269 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", func_80082020_ger);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/mimic", UpdateMT);
+void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
+    command_t *command;
+    s32 var_v1;
+
+#if 0
+    // Local variables
+    int count; // r4
+    int num; // r29
+    struct command_t * command; // r1+0x8
+#endif
+
+    if (cursor->extra_wait != 0) {
+        return;
+    }
+
+    if (well->unk_43B0 > 0) {
+        RaiseBlocks(well, cursor);
+        return;
+    }
+    if (well->unk_43B0 < 0) {
+        well->unk_43B0++;
+    }
+    AISetCursor(well, cursor, brain);
+    if (brain->unk_124 == brain->unk_128) {
+        if (brain->unk_104 == 0) {
+            AIClearCommand(brain);
+            if (gSelection == SELECTION_6E) {
+                if (brain->unk_03C == 1) {
+                    MTMove(brain, demo_mimic_combo);
+                } else if (brain->unk_03C == 2) {
+                    MTMove(brain, demo_mimic_chain);
+                } else if (brain->unk_03C == 3) {
+                    MTMove(brain, demo_mimic_schain);
+                } else if (brain->unk_03C == 4) {
+                    MTMove(brain, demo_mimic_timelag);
+                } else if (brain->unk_03C == 5) {
+                    MTMove(brain, play_mimic_combo);
+                } else if (brain->unk_03C == 6) {
+                    MTMove(brain, play_mimic_chain);
+                } else if (brain->unk_03C == 7) {
+                    MTMove(brain, play_mimic_schain);
+                } else if (brain->unk_03C == 8) {
+                    MTMove(brain, play_mimic_timelag);
+                }
+            } else {
+                if (brain->unk_03C == 1) {
+                    MTMove(brain, tutorial_move1);
+                } else if (brain->unk_03C == 2) {
+                    MTMove(brain, tutorial_move2);
+                } else if (brain->unk_03C == 5) {
+                    MTMove(brain, tutorial_move3);
+                } else if (brain->unk_03C == 3) {
+                    MTMove(brain, tutorial_move4);
+                } else if (brain->unk_03C == 4) {
+                    MTMove(brain, tutorial_move5);
+                }
+            }
+        }
+    }
+
+    if (brain->unk_104 > 0) {
+        AIFinishMove(brain);
+        do {
+            command = &brain->unk_048[brain->unk_0FC];
+            switch (command->function) {
+                case 0x1:
+                    AIVertMove(brain, command->para1);
+                    break;
+                case 0x2:
+                    AIHoriMove(brain, command->para1);
+                    break;
+                case 0x5:
+                    AIHoriMoveBlock(brain, command->para1, command->para2);
+                    if (brain->unk_128 != 0) {
+                        brain->move[brain->unk_128 - 1] = 6;
+                    }
+                    break;
+                case 0x9:
+                    AISetMove(brain, 5);
+                    break;
+                case 0xC:
+                    AISetMove(brain, 7);
+                    break;
+                case 0x14:
+                    brain->unk_010 = command->para1 * command->para2;
+                    break;
+                case 0x15:
+                    if (gGameStatus & 0x80) {
+                        if (!screenTextDone(brain->unk_028, brain->unk_038)) {
+                            brain->unk_010 = 1;
+                            return;
+                        }
+                        gWhatever++;
+                        if (gWhatever % 120 != 0 || ((cursor->state == 0) | (cursor->state == 0x34C)) == 0 ||
+                            !(anim_bg == 0x34C || !CheckFieldActive(well))) {
+                            brain->unk_010 = 1;
+                            return;
+                        }
+
+                        cursor->state = 0;
+                        break;
+                    }
+                    if (gTheGame.controller[0].touch_button & 0x8000) {
+                        if ((((cursor->state == 0) | (cursor->state == 0x34C)) != 0) &&
+                            ((anim_bg == 0x34C) || (!CheckFieldActive(well)))) {
+                            if (!screenTextDone(brain->unk_028, brain->unk_038)) {
+                                func_80028034_usa(brain->unk_028, brain->unk_038);
+                                brain->unk_024 = -1;
+                                brain->unk_010 = 1;
+                                return;
+                            } else {
+                                cursor->state = 0;
+                                brain->unk_024 = 0;
+                                PlaySE(SFX_INIT_TABLE, SFX_096);
+                            }
+                            break;
+                        }
+                    }
+
+                    if (anim_bg == 0x34C || !CheckFieldActive(well)) {
+                        brain->unk_024 = -1;
+                    }
+                    brain->unk_010 = 1;
+                    return;
+                case 0x16:
+                    gTheGame.totalPlayer = 2;
+                    if (gTheGame.dimension == DIMENSION_2D) {
+                        InitCursor(cursor);
+                        Init2DCursor(cursor, 0);
+                        switch (brain->unk_03C) {
+                            case 0x1:
+                                Init2DPuzzle(well, cursor, tutorial1, command->para1);
+                                break;
+                            case 0x2:
+                                Init2DPuzzle(well, cursor, tutorial2, command->para1);
+                                break;
+                            case 0x3:
+                                Init2DPuzzle(well, cursor, tutorial4, command->para1);
+                                break;
+                            case 0x4:
+                                Init2DPuzzle(well, cursor, tutorial5, command->para1);
+                                break;
+                        }
+                        Init2DTetrisBlocksTMEM(well, -1);
+                        Init2DNewRow(well);
+                        Init2DIcons(well);
+                        Init2DAttackBlocks(well);
+                        Init2DExplosion(well);
+                        if (gTheGame.menu[0].game == 3) {
+                            Init2DTetrisBlocks(&gTheGame.tetrisWell[1], 1);
+                            Init2DAttackBlocks(&gTheGame.tetrisWell[1]);
+                            gTheGame.tetrisWell[1].unk_441C = 0xDF;
+                            gTheGame.tetrisWell[1].unk_43F8 = 0;
+                            gTheGame.tetrisWell[1].unk_43FC = 0;
+                        }
+                        gTheGame.unk_9B50[0].b.frameH = 0x78;
+                        gTheGame.unk_9B50[1].b.frameH = 0x78;
+                        if (gTheGame.menu[0].game != 3) {
+                            gTheGame.unk_9B50[1].b.frameH = 0;
+                        }
+                    } else {
+                        InitCursor(cursor);
+                        Init3DCursor(cursor, 0);
+                        Init3DPuzzle(well, cursor, tutorial3, command->para1);
+                        Init3DNewRow(well);
+                        if ((command->para1 % 2) == 1) {
+                            well->new_block[0].type = BLOCKTYPE_0;
+                        }
+                        Init3DIcons(well);
+                        Init3DAttackBlocks(well);
+                        Init3DExplosion(well);
+                    }
+                    well->unk_441C = 0xDF;
+                    well->unk_43F8 = 0;
+                    well->unk_43FC = 0;
+                    chain_check[0] = 0;
+                    chain_check[1] = 0;
+                    anim_bg = 0;
+                    anim_sp = 0;
+                    gTheGame.totalPlayer = 1;
+                    break;
+                case 0x17:
+                    cursor->state = 0x34C;
+                    break;
+                case 0x18:
+                    brain->unk_010--;
+                    if (brain->unk_010 <= 0) {
+                        well->unk_43FC = command->para1 * gTheGame.dimension;
+                        well->unk_43F8 += well->unk_43FC;
+                        break;
+                    }
+                    return;
+                case 0x19:
+                    for (var_v1 = 0; var_v1 < ATTACK_COUNT; var_v1++) {
+                        if (gTheGame.tetrisWell[command->para2].attack[var_v1].state == ATTACKSTATE_0) {
+                            Init2DAttackPosition(&gTheGame.tetrisWell[command->para2].attack[var_v1], command->para1,
+                                                 command->para2);
+                            Init2DAttackFace(&gTheGame.tetrisWell[command->para2].attack[var_v1]);
+                            gTheGame.tetrisWell[command->para2].attack[var_v1].state = ATTACKSTATE_4;
+                            gTheGame.tetrisWell[command->para2].attack[var_v1].delay = -1;
+                            break;
+                        }
+                    }
+                    break;
+                case 0x1A:
+                    brain->unk_030 = command->para1;
+                    brain->unk_034 = 1;
+                    break;
+                case 0x1B:
+                    screenHideText(brain->unk_028, command->para1 - 1);
+                    screenShowText(brain->unk_028, command->para1);
+                    brain->unk_038 = command->para1;
+                    break;
+                case 0x1C:
+                    brain->unk_02C = command->para1;
+                    break;
+                case 0x1D:
+                    gTheGame.gSPRITE[9].s.imageAdrs = 6;
+                    gTheGame.gSPRITE[9].s.imageW = 16 << 5;
+                    gTheGame.gSPRITE[9].s.objX = command->para1 << 2;
+                    gTheGame.gSPRITE[9].s.objY = command->para2 << 2;
+                    anim_bg = 0x34C;
+                    break;
+                case 0x1E:
+                    anim_bg = 0;
+                    break;
+                case 0x1F:
+                    brain->unk_104 = 0;
+                    if (gGameStatus & GAME_STATUS_FLAG_80) {
+                        gMain = GMAIN_TITLE;
+                        gReset = -1;
+                        gDemo = GDEMO_21;
+                        GAME_STATUS_SHIFT_RIGHT(gGameStatus);
+                        FadeOutSong(last_song_handle, 0x3C);
+                        return;
+                    }
+                    if (gSelection == SELECTION_64) {
+                        gMain = GMAIN_2BC;
+                        gReset = -1;
+                        GAME_STATUS_SHIFT_RIGHT(gGameStatus);
+                        return;
+                    }
+                    break;
+            }
+
+            brain->unk_104--;
+            brain->unk_0FC++;
+            if (brain->unk_104 <= 0) {
+                break;
+            }
+        } while (brain->unk_124 == brain->unk_128);
+    }
+
+    brain->unk_010--;
+    if ((brain->unk_010 <= 0) && (brain->unk_124 != brain->unk_128)) {
+        brain->unk_010 = brain->speed;
+        if (gTheGame.dimension == DIMENSION_2D) {
+            AI2DMove(well, cursor, brain, 0);
+        } else {
+            AI3DMove(well, cursor, brain, 0);
+        }
+    }
+}
 #endif
 
 #if VERSION_EUR
