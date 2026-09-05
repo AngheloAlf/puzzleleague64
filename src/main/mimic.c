@@ -284,7 +284,7 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
     if (cursor->extra_wait != 0) {
         return;
     }
-    
+
     if (well->unk_43B0 > 0) {
         RaiseBlocks(well, cursor);
         return;
@@ -329,28 +329,28 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
             }
         }
     }
-    
+
     if (brain->unk_104 > 0) {
         AIFinishMove(brain);
         do {
             command = &brain->unk_048[brain->unk_0FC];
             switch (command->function) {
-                case 0x1: 
+                case 0x1:
                     AIVertMove(brain, command->para1);
                     break;
-                case 0x2: 
+                case 0x2:
                     AIHoriMove(brain, command->para1);
                     break;
-                case 0x5: 
+                case 0x5:
                     AIHoriMoveBlock(brain, command->para1, command->para2);
                     if (brain->unk_128 != 0) {
                         brain->move[brain->unk_128 - 1] = 6;
                     }
                     break;
-                case 0x9: 
+                case 0x9:
                     AISetMove(brain, 5);
                     break;
-                case 0xC: 
+                case 0xC:
                     AISetMove(brain, 7);
                     break;
                 case 0x14:
@@ -363,26 +363,24 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
                             return;
                         }
                         gWhatever++;
-                        if (gWhatever % 120 != 0 || 
-                           ((cursor->state == 0) | (cursor->state == 0x34C)) == 0 ||
-                           !(anim_bg == 0x34C ||
-                           !CheckFieldActive(well))) {
-                                brain->unk_010 = 1;
-                                return;
+                        if (gWhatever % 120 != 0 || ((cursor->state == 0) | (cursor->state == 0x34C)) == 0 ||
+                            !(anim_bg == 0x34C || !CheckFieldActive(well))) {
+                            brain->unk_010 = 1;
+                            return;
                         }
-                        
+
                         cursor->state = 0;
                         break;
                     }
                     if (gTheGame.controller[0].touch_button & 0x8000) {
-                        if ((((cursor->state == 0) | (cursor->state == 0x34C)) != 0) 
-                            && ((anim_bg == 0x34C) || (!CheckFieldActive(well)))) {
+                        if ((((cursor->state == 0) | (cursor->state == 0x34C)) != 0) &&
+                            ((anim_bg == 0x34C) || (!CheckFieldActive(well)))) {
                             if (!screenTextDone(brain->unk_028, brain->unk_038)) {
                                 func_80028034_usa(brain->unk_028, brain->unk_038);
                                 brain->unk_024 = -1;
                                 brain->unk_010 = 1;
                                 return;
-                            }  else {
+                            } else {
                                 cursor->state = 0;
                                 brain->unk_024 = 0;
                                 PlaySE(SFX_INIT_TABLE, SFX_096);
@@ -390,7 +388,7 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
                             break;
                         }
                     }
-                    
+
                     if (anim_bg == 0x34C || !CheckFieldActive(well)) {
                         brain->unk_024 = -1;
                     }
@@ -468,7 +466,8 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
                 case 0x19:
                     for (var_v1 = 0; var_v1 < 0x14; var_v1++) {
                         if (gTheGame.tetrisWell[command->para2].attack[var_v1].state == 0) {
-                            Init2DAttackPosition(&gTheGame.tetrisWell[command->para2].attack[var_v1], command->para1, command->para2);
+                            Init2DAttackPosition(&gTheGame.tetrisWell[command->para2].attack[var_v1], command->para1,
+                                                 command->para2);
                             Init2DAttackFace(&gTheGame.tetrisWell[command->para2].attack[var_v1]);
                             gTheGame.tetrisWell[command->para2].attack[var_v1].state = 4;
                             gTheGame.tetrisWell[command->para2].attack[var_v1].delay = -1;
@@ -515,7 +514,6 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
                         return;
                     }
                     break;
-                    
             }
 
             brain->unk_104--;
@@ -525,7 +523,7 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
             }
         } while (brain->unk_124 == brain->unk_128);
     }
-    
+
     brain->unk_010--;
     if ((brain->unk_010 <= 0) && (brain->unk_124 != brain->unk_128)) {
         brain->unk_010 = brain->speed;
