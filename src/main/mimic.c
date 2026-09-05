@@ -513,7 +513,7 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
                     if (gSelection == SELECTION_64) {
                         gMain = GMAIN_2BC;
                         gReset = -1;
-                        gGameStatus = gGameStatus >> 0x10;
+                        GAME_STATUS_SHIFT_RIGHT(gGameStatus);
                         return;
                     }
                     break;
