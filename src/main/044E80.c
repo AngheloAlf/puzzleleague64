@@ -802,9 +802,9 @@ void func_80046648_usa(s32 arg0) {
                     if (arg0 - B_80192FB0_usa->unk_0024 > 0xF0) {
 // TODO: REGION_PAL ?
 #if VERSION_EUR || VERSION_FRA || VERSION_GER
-                        if (func_800587CC_usa(4, 1) && func_800587CC_usa(5, 1) && func_800587CC_usa(5, 0x1F) &&
-                            func_800587CC_usa(5, 0x29) && func_800587CC_usa(6, 1) && func_800587CC_usa(6, 0x1F) &&
-                            func_800587CC_usa(6, 0x29)) {
+                        if (CheckPlayerPuzzleRound(4, 1) && CheckPlayerPuzzleRound(5, 1) && CheckPlayerPuzzleRound(5, 0x1F) &&
+                            CheckPlayerPuzzleRound(5, 0x29) && CheckPlayerPuzzleRound(6, 1) && CheckPlayerPuzzleRound(6, 0x1F) &&
+                            CheckPlayerPuzzleRound(6, 0x29)) {
                             var_s2 = -1;
                             break;
                         }

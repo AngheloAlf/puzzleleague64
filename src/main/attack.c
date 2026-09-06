@@ -617,7 +617,7 @@ void UpdateAttack(tetWell *well, cursor_t *cursor, s32 num) {
 }
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/attack", func_8005C780_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/attack", CheckSameAttack);
 #endif
 
 #if VERSION_EUR

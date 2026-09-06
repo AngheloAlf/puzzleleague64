@@ -62,12 +62,12 @@ typedef struct player_t_unk_7B4 {
 } player_t_unk_7B4; // size = 0x6
 
 
-#define STRUCT_801A6DB8_USA_UNK_0B7_COUNT 4
-#define STRUCT_801A6DB8_USA_UNK_0BB_COUNT 7
-#define STRUCT_801A6DB8_USA_UNK_0C2_COUNT 7
-#define STRUCT_801A6DB8_USA_UNK_0C9_COUNT 4
-#define STRUCT_801A6DB8_USA_UNK_0CD_COUNT 7
-#define STRUCT_801A6DB8_USA_UNK_0D4_COUNT 7
+#define KPLAYER1P_EASY1_COUNT 4
+#define KPLAYER1P_EASY2_COUNT 7
+#define KPLAYER1P_HARD1_COUNT 7
+#define KPLAYER1P_HARD2_COUNT 4
+#define KPLAYER1P_SPECIAL1_COUNT 7
+#define KPLAYER1P_SPECIAL2_COUNT 7
 
 typedef struct player_t {
     /* 0x000 */ char unk_000;
@@ -88,17 +88,17 @@ typedef struct player_t {
     /* 0x0B4 */ u8 unk_0B4;
     /* 0x0B5 */ u8 unk_0B5;
     /* 0x0B6 */ u8 unk_0B6;
-    /* 0x0B7 */ char unk_0B7[STRUCT_801A6DB8_USA_UNK_0B7_COUNT];
-    /* 0x0BB */ char unk_0BB[STRUCT_801A6DB8_USA_UNK_0BB_COUNT];
-    /* 0x0C2 */ char unk_0C2[STRUCT_801A6DB8_USA_UNK_0C2_COUNT];
-    /* 0x0C9 */ char unk_0C9[STRUCT_801A6DB8_USA_UNK_0C9_COUNT];
-    /* 0x0CD */ char unk_0CD[STRUCT_801A6DB8_USA_UNK_0CD_COUNT];
-    /* 0x0D4 */ char unk_0D4[STRUCT_801A6DB8_USA_UNK_0D4_COUNT];
-    /* 0x0DB */ char kPLAYER1V_kEASY;
-    /* 0x0DC */ char kPLAYER1V_kNORMAL;
-    /* 0x0DD */ char kPLAYER1V_kHARD;
-    /* 0x0DE */ char kPLAYER1V_kSHARD;
-    /* 0x0DF */ char kPLAYER1V_kULTRA;
+    /* 0x0B7 */ char kPLAYER1P_easy1[KPLAYER1P_EASY1_COUNT]; /* Original name: kPLAYER1P_easy1 */
+    /* 0x0BB */ char kPLAYER1P_easy2[KPLAYER1P_EASY2_COUNT]; /* Original name: kPLAYER1P_easy2 */
+    /* 0x0C2 */ char kPLAYER1P_hard1[KPLAYER1P_HARD1_COUNT]; /* Original name: kPLAYER1P_hard1 */
+    /* 0x0C9 */ char kPLAYER1P_hard2[KPLAYER1P_HARD2_COUNT]; /* Original name: kPLAYER1P_hard2 */
+    /* 0x0CD */ char kPLAYER1P_special1[KPLAYER1P_SPECIAL1_COUNT]; /* Original name: kPLAYER1P_special */
+    /* 0x0D4 */ char kPLAYER1P_special2[KPLAYER1P_SPECIAL2_COUNT]; /* Original name: kPLAYER1P_special */
+    /* 0x0DB */ char kPLAYER1V_kEASY; /* Original name: kPLAYER1V_kEASY */
+    /* 0x0DC */ char kPLAYER1V_kNORMAL; /* Original name: kPLAYER1V_kNORMAL */
+    /* 0x0DD */ char kPLAYER1V_kHARD; /* Original name: kPLAYER1V_kHARD */
+    /* 0x0DE */ char kPLAYER1V_kSHARD; /* Original name: kPLAYER1V_kSHARD */
+    /* 0x0DF */ char kPLAYER1V_kULTRA; /* Original name: kPLAYER1V_kULTRA */
     /* 0x0E0 */ char unk_0E0;
     /* 0x0E1 */ char unk_0E1;
     /* 0x0E2 */ char unk_0E2;

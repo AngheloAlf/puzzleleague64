@@ -10,6 +10,6 @@ void Compact3DAttackNoWhere(struct tetWell *well);
 void Compact3DAttack(struct tetWell *well, s32 count);
 void Check3DConnectCombos(struct tetWell *well);
 void Set3DRowConnectState(struct tetWell *well, s32 row, s32 left, s32 right);
-// void func_800666F0_usa();
+s32 UpdateWell3DRowConnect(struct tetWell *well, s32 row, s32 *col);
 
 #endif

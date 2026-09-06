@@ -18,7 +18,8 @@ typedef enum BlockState {
     /* 5 */ BLOCKSTATE_5,
     /* 6 */ BLOCKSTATE_6,
     /* 7 */ BLOCKSTATE_7,
-    /* 9 */ BLOCKSTATE_9 = 9,
+    /* 8 */ BLOCKSTATE_8,
+    /* 9 */ BLOCKSTATE_9,
 } BlockState;
 
 typedef enum BlockType {

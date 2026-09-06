@@ -785,38 +785,38 @@ nbool func_80008EA4_usa(s32 *arg0) {
         switch (var_t1) {
             case 0x0:
                 var_a3 = 0x1E;
-                var_t0 = ARRAY_COUNT(gPlayer[0]->unk_0B7) - 1;
-                var_a2 = (u8 *)gPlayer[0]->unk_0B7;
+                var_t0 = ARRAY_COUNT(gPlayer[0]->kPLAYER1P_easy1) - 1;
+                var_a2 = (u8 *)gPlayer[0]->kPLAYER1P_easy1;
                 break;
 
             case 0x1:
                 var_a3 = 0x32;
-                var_t0 = ARRAY_COUNT(gPlayer[0]->unk_0BB) - 1;
-                var_a2 = (u8 *)gPlayer[0]->unk_0BB;
+                var_t0 = ARRAY_COUNT(gPlayer[0]->kPLAYER1P_easy2) - 1;
+                var_a2 = (u8 *)gPlayer[0]->kPLAYER1P_easy2;
                 break;
 
             case 0x2:
                 var_a3 = 0x32;
-                var_t0 = ARRAY_COUNT(gPlayer[0]->unk_0C2) - 1;
-                var_a2 = (u8 *)gPlayer[0]->unk_0C2;
+                var_t0 = ARRAY_COUNT(gPlayer[0]->kPLAYER1P_hard1) - 1;
+                var_a2 = (u8 *)gPlayer[0]->kPLAYER1P_hard1;
                 break;
 
             case 0x3:
                 var_a3 = 0x1E;
-                var_t0 = ARRAY_COUNT(gPlayer[0]->unk_0C9) - 1;
-                var_a2 = (u8 *)gPlayer[0]->unk_0C9;
+                var_t0 = ARRAY_COUNT(gPlayer[0]->kPLAYER1P_hard2) - 1;
+                var_a2 = (u8 *)gPlayer[0]->kPLAYER1P_hard2;
                 break;
 
             case 0x4:
                 var_a3 = 0x32;
-                var_t0 = ARRAY_COUNT(gPlayer[0]->unk_0CD) - 1;
-                var_a2 = (u8 *)gPlayer[0]->unk_0CD;
+                var_t0 = ARRAY_COUNT(gPlayer[0]->kPLAYER1P_special1) - 1;
+                var_a2 = (u8 *)gPlayer[0]->kPLAYER1P_special1;
                 break;
 
             case 0x5:
                 var_a3 = 0x32;
-                var_t0 = ARRAY_COUNT(gPlayer[0]->unk_0D4) - 1;
-                var_a2 = (u8 *)gPlayer[0]->unk_0D4;
+                var_t0 = ARRAY_COUNT(gPlayer[0]->kPLAYER1P_special2) - 1;
+                var_a2 = (u8 *)gPlayer[0]->kPLAYER1P_special2;
                 break;
         }
 
@@ -4386,12 +4386,12 @@ s32 menuInitUser(u32 arg0) {
         player->unk_0B4 = 0;
         player->unk_0B5 = 0;
         player->unk_0B6 = 0;
-        bzero(&player->unk_0B7, sizeof(char) * STRUCT_801A6DB8_USA_UNK_0B7_COUNT);
-        bzero(&player->unk_0BB, sizeof(char) * STRUCT_801A6DB8_USA_UNK_0BB_COUNT);
-        bzero(&player->unk_0C2, sizeof(char) * STRUCT_801A6DB8_USA_UNK_0C2_COUNT);
-        bzero(&player->unk_0C9, sizeof(char) * STRUCT_801A6DB8_USA_UNK_0C9_COUNT);
-        bzero(&player->unk_0CD, sizeof(char) * STRUCT_801A6DB8_USA_UNK_0CD_COUNT);
-        bzero(&player->unk_0D4, sizeof(char) * STRUCT_801A6DB8_USA_UNK_0D4_COUNT);
+        bzero(&player->kPLAYER1P_easy1, sizeof(char) * KPLAYER1P_EASY1_COUNT);
+        bzero(&player->kPLAYER1P_easy2, sizeof(char) * KPLAYER1P_EASY2_COUNT);
+        bzero(&player->kPLAYER1P_hard1, sizeof(char) * KPLAYER1P_HARD1_COUNT);
+        bzero(&player->kPLAYER1P_hard2, sizeof(char) * KPLAYER1P_HARD2_COUNT);
+        bzero(&player->kPLAYER1P_special1, sizeof(char) * KPLAYER1P_SPECIAL1_COUNT);
+        bzero(&player->kPLAYER1P_special2, sizeof(char) * KPLAYER1P_SPECIAL2_COUNT);
         player->kPLAYER1V_kEASY = 0;
         player->kPLAYER1V_kNORMAL = 0;
         player->kPLAYER1V_kHARD = 0;

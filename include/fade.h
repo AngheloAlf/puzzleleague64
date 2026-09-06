@@ -11,7 +11,7 @@ void SetGameFade(void);
 void DoGameFade(s32 factor);
 void Draw2DGameFade(void);
 // void func_80054320_usa();
-// void func_8005443C_usa();
+void StartFlash(s32 frame);
 nbool DoFlashDraw(s32 which);
 nbool DoFlashDrawAlways(void);
 

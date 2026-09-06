@@ -92,19 +92,19 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/fade", func_80052EB0_ger);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/fade", func_8005443C_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/fade", StartFlash);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/fade", func_800546DC_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/fade", StartFlash);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/fade", func_80052E4C_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/fade", StartFlash);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/fade", func_80052FCC_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/fade", StartFlash);
 #endif
 
 // TODO: enum for which?

@@ -96,7 +96,7 @@ void LoadMimic1(s32 kind, s32 level, s32 number, s32 play) {
     gTheGame.tetrisWell[0].danger = 0;
     gTheGame.tetrisWell[0].alert = 0;
     gTheGame.tetrisWell[0].unk_43BC = 0;
-    gTheGame.tetrisWell[0].unk_43C0 = 0;
+    gTheGame.tetrisWell[0].chain_garbage = 0;
     gTheGame.tetrisWell[0].collision = 0;
     gTheGame.tetrisWell[0].unk_43F4 = 0;
     gTheGame.tetrisWell[0].unk_441C = 0xDF;

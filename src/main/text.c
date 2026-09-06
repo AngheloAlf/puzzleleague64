@@ -245,7 +245,7 @@ void UpdateText(void) {
                 gTheGame.drawText[4].texture = -1;
             } else {
                 if (DoFlashDraw(0)) {
-                    sprintf(string, "%2d", well1->unk_43E0);
+                    sprintf(string, "%2d", well1->currLevel);
                     SetText(0x10C, 0x5B, string, SETTEXTTYPE_15);
                 }
 
@@ -278,7 +278,7 @@ void UpdateText(void) {
                 gTheGame.drawText[3].texture = -1;
             } else {
                 if (DoFlashDraw(0)) {
-                    sprintf(string, "%2d", well1->unk_43E0);
+                    sprintf(string, "%2d", well1->currLevel);
                     SetText(0x10C, 0x5B, string, SETTEXTTYPE_15);
                 }
 

@@ -441,8 +441,8 @@ void Change2DAttack(tetWell *well, cursor_t *cursor, s32 num, s32 combo) {
     sp54 = 0;
     var_t2 = 0;
     temp_t0 = well->unk_43C8;
-    temp = well->unk_43CC;
-    sp44 = well->unk_43D0;
+    temp = well->comboFace;
+    sp44 = well->comboExplode;
 
     sp4C = well->unk_43D8;
 

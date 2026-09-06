@@ -4,14 +4,16 @@
 #include "ultra64.h"
 #include "unk.h"
 
+#include "other_types.h"
+
 struct cursor_t;
 struct tetWell;
 struct struct_gInfo;
 
-// void func_80057650_usa();
+// void UpdateBlockFrame();
 void UpdateTime(s32 second);
-void UpdateNextLevel(struct tetWell * well);
-// void func_80057D1C_usa();
+void UpdateNextLevel(struct tetWell *well);
+void UpdateRaiseTimer(struct tetWell *well);
 // void func_80057D68_usa();
 // void func_80057E10_usa();
 // void func_80057EB8_usa();
@@ -22,11 +24,11 @@ void UpdateNextLevel(struct tetWell * well);
 // void func_8005834C_usa();
 // void func_80058458_usa();
 // void UpdatePlayerPuzzle();
-s32 func_800587CC_usa(s32 arg0, s32 arg1);
-// void func_80058934_usa();
+nbool CheckPlayerPuzzleRound(s32 game, s32 stage);
+nbool PlayPlayerPuzzleEnding(s32 game, s32 stage);
 void UpdatePlayerStageClear(struct cursor_t *cursor, s32 round, s32 stage);
 void UpdatePlayerStageClearTimeScore(struct cursor_t *cursor, s32 loadsave, s32 round, s32 stage);
-// void func_80058D68_usa();
+void UpdatePlayerCPU(s32 game, s32 stage);
 void UpdateComboChainCount(s32 num, s32 combo, s32 total);
 void UpdateWell(struct tetWell *well, struct cursor_t *cursor, s32 num, s32 total);
 void UpdateCursor(struct tetWell *well, struct cursor_t *cursor);

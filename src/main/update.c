@@ -21,21 +21,78 @@
 #include "update2d.h"
 #include "update3d.h"
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80057650_usa);
-#endif
+/**
+ * Original name: UpdateBlockFrame
+ */
+void UpdateBlockFrame(block_t *block) {
+    s32 temp_a1 = (gGameStatus & GAME_STATUS_FLAG_40) ? 3 : 0;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_800578F0_eur);
-#endif
+    if (block->frame_n == 0) {
+        return;
+    }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update", func_80056060_fra);
-#endif
+    block->frame_d--;
+    if (block->frame_d != 0) {
+        return;
+    }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update", func_800561E0_ger);
-#endif
+    block->frame_n++;
+    if (block->frame_n >= (0xC - temp_a1)) {
+        if (block->frame_n >= (0x10 - temp_a1)) {
+            block->frame_n = 0;
+            return;
+        }
+    } else {
+        if (block->frame_n >= 7) {
+            block->frame_n = 0;
+            return;
+        }
+    }
+
+    if (gGameStatus & GAME_STATUS_FLAG_40) {
+        switch (block->frame_n) {
+            case 0x1:
+            case 0x4:
+                block->frame_d = 4;
+                break;
+
+            case 0x2:
+            case 0x3:
+            case 0x5:
+            case 0x6:
+            case 0x9:
+            case 0xA:
+            case 0xB:
+                block->frame_d = 2;
+                break;
+
+            case 0xC:
+                block->frame_d = 1;
+                break;
+        }
+    } else {
+        switch (block->frame_n) {
+            case 0x1:
+            case 0x4:
+                block->frame_d = 4;
+                break;
+
+            case 0x2:
+            case 0x3:
+            case 0x5:
+            case 0x6:
+            case 0xC:
+            case 0xD:
+            case 0xE:
+                block->frame_d = 2;
+                break;
+
+            case 0xF:
+                block->frame_d = 1;
+                break;
+        }
+    }
+}
 
 /**
  * Original name: UpdateTime
@@ -107,37 +164,148 @@ void UpdateTime(s32 second) {
     }
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdateNextLevel);
-#endif
+/**
+ * Original name: UpdateNextLevel
+ */
+void UpdateNextLevel(tetWell *well) {
+    s32 next = well->nextLevel;
+    s32 level = well->currLevel;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdateNextLevel);
-#endif
+    switch (gSelection) {
+        case SELECTION_8C:
+            if (gGameStatus & GAME_STATUS_FLAG_20) {
+                break;
+            }
+            FALLTHROUGH;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update", UpdateNextLevel);
-#endif
+        case SELECTION_BE:
+            if ((level == 1) & (next >= 9)) {
+                level += 1;
+                next -= 9;
+            } else if ((level >= 2) && (level <= 6) && (next >= 0xC)) {
+                level += 1;
+                next -= 0xC;
+            } else if ((level >= 7) && (level <= 8) && (next >= 0xE)) {
+                level += 1;
+                next -= 0xE;
+            } else if (((level >= 9) && (level <= 10) && (next >= 0x10))) {
+                level += 1;
+                next -= 0x10;
+            } else if ((level >= 0xB) && (level <= 0xF) && (next >= 0x18)) {
+                level += 1;
+                next -= 0x18;
+            } else if ((level == 0x10) & (next >= 0x16)) {
+                level += 1;
+                next -= 0x16;
+            } else if ((level == 0x11) & (next >= 0x14)) {
+                level += 1;
+                next -= 0x14;
+            } else if ((level == 0x12) & (next >= 0x12)) {
+                level += 1;
+                next -= 0x12;
+            } else if ((level >= 0x13) && (level <= 0x14) && (next >= 0x10)) {
+                level += 1;
+                next -= 0x10;
+            } else if ((level >= 0x15) && (level <= 0x1E) && (next >= 0x24)) {
+                level += 1;
+                next -= 0x24;
+            } else if ((level >= 0x1F) && (level <= 0x28) && (next >= 0x27)) {
+                level += 1;
+                next -= 0x27;
+            } else if ((level >= 0x29) && (level <= 0x62) && (next >= 0x2D)) {
+                level += 1;
+                next -= 0x2D;
+            }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update", UpdateNextLevel);
-#endif
+            if (level != well->currLevel) {
+                if (((gGameStatus ^ GAME_STATUS_FLAG_1) & GAME_STATUS_FLAG_1) && (level > 0x32)) {
+                    level = 0x32;
+                } else {
+                    StartFlash(0x78);
+                }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80057D1C_usa);
-#endif
+                well->nextLevel = next;
+                well->currLevel = level;
+                UpdateRaiseTimer(well);
+            }
+            break;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80057FBC_eur);
-#endif
+        case SELECTION_AA:
+            next--;
+            if (next <= 0) {
+                level++;
+                if (level > 0x63) {
+                    level = 0x63;
+                } else {
+                    StartFlash(0x78);
+                }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update", func_8005672C_fra);
-#endif
+                next = level - st_kClearStage[well->level][0];
+                if ((next >= 1) && (next <= 3)) {
+                    well->nextLevel = 0x384;
+                } else if ((next >= 4) && (next <= 0x13)) {
+                    well->nextLevel = 0x258;
+                } else {
+                    well->nextLevel = 0x12C;
+                }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update", func_800568AC_ger);
-#endif
+                well->currLevel = level;
+                UpdateRaiseTimer(well);
+            } else {
+                well->nextLevel = next;
+            }
+            break;
+
+        case SELECTION_96:
+        case SELECTION_A0:
+        case SELECTION_B4:
+        case SELECTION_C8:
+            next--;
+            if (next <= 0) {
+                level++;
+                if (level > 0x63) {
+                    level = 0x63;
+                }
+                next = level - st_Player2State[well->level][5];
+                if (next > 0x27) {
+                    next = 0x27;
+                }
+                well->nextLevel = st_AdvanceLevel[next];
+                well->currLevel = level;
+                UpdateRaiseTimer(well);
+            } else {
+                well->nextLevel = next;
+            }
+            break;
+
+        default:
+            break;
+    }
+
+    if ((gSelection == SELECTION_96) || (gSelection == SELECTION_A0)) {
+        if (well->clearGarbage <= 0) {
+            if (well->maxGarbage-- <= 0) {
+                return;
+            }
+
+            well->queueGarbage++;
+            well->clearGarbage += st_Player2State[well->level][8];
+        }
+    }
+}
+
+/**
+ * Original name: UpdateRaiseTimer
+ */
+void UpdateRaiseTimer(tetWell *well) {
+    s32 level = well->currLevel - 1;
+
+    if (level > 0x62) {
+        level = 0x62;
+    }
+
+    well->speed = ADJUST_FRAMERATE_INV(0x01000000 / st_RaiseTimer[level]);
+}
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80057D68_usa);
@@ -284,7 +452,61 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/update", func_80058458_usa);
 #endif
 
 #if VERSION_USA
+#ifdef NON_MATCHING
+// regalloc
+void UpdatePlayerPuzzle(s32 *arg0, s32 arg1, s32 arg2) {
+    s8 temp_v0;
+    char *var_a3;
+
+    if (arg1 == 0) {
+        return;
+    }
+
+    gPlayer[0]->unk_0B4 = gTheGame.hour;
+    gPlayer[0]->unk_0B5 = gTheGame.minute;
+    gPlayer[0]->unk_0B6 = gTheGame.second;
+
+    if (gDemo != GDEMO_2C) {
+        return;
+    }
+    if (gMain == GMAIN_388) {
+        return;
+    }
+
+    if (*arg0 == 8) {
+        return;
+    }
+
+    arg2--;
+    temp_v0 = arg2 / 8 ;
+    arg2 -= arg2 / 8 * 8;
+
+    switch (arg1) {
+        case 0x1:
+            var_a3 = &gPlayer[0]->kPLAYER1P_easy1[temp_v0];
+            break;
+        case 0x2:
+            var_a3 = &gPlayer[0]->kPLAYER1P_easy2[temp_v0];
+            break;
+        case 0x3:
+            var_a3 = &gPlayer[0]->kPLAYER1P_hard1[temp_v0];
+            break;
+        case 0x4:
+            var_a3 = &gPlayer[0]->kPLAYER1P_hard2[temp_v0];
+            break;
+        case 0x5:
+            var_a3 = &gPlayer[0]->kPLAYER1P_special1[temp_v0];
+            break;
+        case 0x6:
+            var_a3 = &gPlayer[0]->kPLAYER1P_special2[temp_v0];
+            break;
+    }
+
+    *var_a3 |= 1 << arg2;
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdatePlayerPuzzle);
+#endif
 #endif
 
 #if VERSION_EUR
@@ -299,38 +521,127 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/update", UpdatePlayerPuzzle);
 INCLUDE_ASM("asm/ger/nonmatchings/main/update", UpdatePlayerPuzzle);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_800587CC_usa);
-#endif
+/**
+ * Original name: CheckPlayerPuzzleRound
+ */
+nbool CheckPlayerPuzzleRound(s32 game, s32 stage) {
+    char *ptr;
+    s32 group; // enum?
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_800587CC_usa);
-#endif
+    if (game == 0) {
+        return nfalse;
+    }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update", func_800587CC_usa);
-#endif
+    if (stage < 0x1F) {
+        group = 1;
+    } else if (stage < 0x29) {
+        group = 2;
+    } else {
+        group = 3;
+    }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update", func_800587CC_usa);
-#endif
+    switch (game) {
+        case 0x1:
+            ptr = gPlayer[0]->kPLAYER1P_easy1;
+            break;
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80058934_usa);
-#endif
+        case 0x2:
+            ptr = gPlayer[0]->kPLAYER1P_easy2;
+            break;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058934_usa);
-#endif
+        case 0x3:
+            ptr = gPlayer[0]->kPLAYER1P_hard1;
+            break;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update", func_80058934_usa);
-#endif
+        case 0x4:
+            ptr = gPlayer[0]->kPLAYER1P_hard2;
+            break;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update", func_80058934_usa);
-#endif
+        case 0x5:
+            ptr = gPlayer[0]->kPLAYER1P_special1;
+            break;
 
+        case 0x6:
+            ptr = gPlayer[0]->kPLAYER1P_special2;
+            break;
+    }
+
+    switch (group) {
+        case 1:
+            if (CHECK_FLAG_ALL(ptr[0], 0xFF) && CHECK_FLAG_ALL(ptr[1], 0xFF) && CHECK_FLAG_ALL(ptr[2], 0xFF) && CHECK_FLAG_ALL(ptr[3], 0x3F)) {
+                return ntrue;
+            }
+            break;
+
+        case 2:
+            if (CHECK_FLAG_ALL(ptr[3], 0xC0) && CHECK_FLAG_ALL(ptr[4], 0xFF)) {
+                return ntrue;
+            }
+            break;
+
+        case 3:
+            if (CHECK_FLAG_ALL(ptr[5], 0xFF) && CHECK_FLAG_ALL(ptr[6], 3)) {
+                return ntrue;
+            }
+            break;
+    }
+
+    return nfalse;
+}
+
+/**
+ * Original name: PlayPlayerPuzzleEnding
+ */
+nbool PlayPlayerPuzzleEnding(s32 game, s32 stage) {
+    char *ptr;
+
+    switch (game) {
+        case 0x1:
+            ptr = &gPlayer[0]->kPLAYER1P_easy1[ARRAY_COUNT(gPlayer[0]->kPLAYER1P_easy1) - 1];
+            break;
+
+        case 0x2:
+            ptr = &gPlayer[0]->kPLAYER1P_easy2[ARRAY_COUNT(gPlayer[0]->kPLAYER1P_easy2) - 1];
+            break;
+
+        case 0x3:
+            ptr = &gPlayer[0]->kPLAYER1P_hard1[ARRAY_COUNT(gPlayer[0]->kPLAYER1P_hard1) - 1];
+            break;
+
+        case 0x4:
+            ptr = &gPlayer[0]->kPLAYER1P_hard2[ARRAY_COUNT(gPlayer[0]->kPLAYER1P_hard2) - 1];
+            break;
+
+        case 0x5:
+            ptr = &gPlayer[0]->kPLAYER1P_special1[ARRAY_COUNT(gPlayer[0]->kPLAYER1P_special1) - 1];
+            break;
+
+        case 0x6:
+            ptr = &gPlayer[0]->kPLAYER1P_special2[ARRAY_COUNT(gPlayer[0]->kPLAYER1P_special2) - 1];
+            break;
+    }
+
+    if (!(*ptr & 0x80)) {
+        *ptr |= 0x80;
+        return ntrue;
+    }
+
+    if (((game == 1) || (game == 4))) {
+        if (stage == 0x1E) {
+            return ntrue;
+        }
+    } else {
+        if (stage == 0x32) {
+            return ntrue;
+        }
+    }
+
+    return nfalse;
+}
+
+/**
+ * Original name: UpdatePlayerStageClear
+ */
 void UpdatePlayerStageClear(cursor_t *cursor, s32 round, s32 stage) {
     char bit;
     char index;
@@ -457,21 +768,36 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/update", UpdatePlayerStageClearTimeScore)
 INCLUDE_ASM("asm/ger/nonmatchings/main/update", UpdatePlayerStageClearTimeScore);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80058D68_usa);
-#endif
+/**
+ * Original name: UpdatePlayerCPU
+ */
+void UpdatePlayerCPU(s32 game, s32 stage) {
+    if (gDemo != GDEMO_2C) {
+        return;
+    }
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058D68_usa);
-#endif
+    switch (game) {
+        case 0x1:
+            gPlayer[0]->kPLAYER1V_kEASY = stage;
+            break;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update", func_80058D68_usa);
-#endif
+        case 0x2:
+            gPlayer[0]->kPLAYER1V_kNORMAL = stage;
+            break;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update", func_80058D68_usa);
-#endif
+        case 0x3:
+            gPlayer[0]->kPLAYER1V_kHARD = stage;
+            break;
+
+        case 0x4:
+            gPlayer[0]->kPLAYER1V_kSHARD = stage;
+            break;
+
+        case 0x5:
+            gPlayer[0]->kPLAYER1V_kULTRA = stage;
+            break;
+    }
+}
 
 #if VERSION_USA
 extern u16 st_Combo1[];
@@ -596,7 +922,362 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/update", UpdateComboChainCount);
 #endif
 
 #if VERSION_USA
+#ifdef NON_MATCHING
+// branch likelies issues
+void UpdateWell(tetWell *well, cursor_t *cursor, s32 num, s32 total) {
+    s32 var_s2; // row
+    s32 sp18; // col
+    BlockType var_s7; // type
+    s32 sp34;
+    s32 sp3C;
+    s32 sp44; // explode?
+    s32 sp4C;
+    s32 sp54;
+    s32 sp5C;
+    s32 sp64;
+    s32 sp6C;
+    s32 temp_a2;
+    s32 temp_v0_3;
+    s32 var_a0;
+    s32 var_a1_6;
+    s32 var_a2;
+    s32 var_a2_2;
+    s32 var_s5;
+    s32 var_s6;
+    block_t *temp_s0; // block
+    block_t *temp_v1_2; // blk
+
+    #if 0
+    // Local variables
+    int row; // r28
+    int col; // r1+0x18
+    int type; // r23
+    int accum; // r21
+    int explode; // r1+0x8
+    int wait; // r1+0x28
+    int up; // r4
+    int down; // r5
+    int count; // r1+0x8
+    int try; // r20
+    int space; // r17
+    int check1; // r1+0x24
+    int check2; // r1+0x20
+    int sound; // r22
+    int connect; // r25
+    int temp; // r4
+    struct block_t * block; // r31
+    struct block_t * blk; // r1+0x8
+    #endif
+
+    var_s6 = 0;
+    sp54 = 0;
+    sp5C = 0;
+    sp64 = 0;
+    sp6C = 0;
+
+    sp3C = well->comboFace;
+    sp44 = well->comboExplode;
+    sp34 = (gGameStatus & GAME_STATUS_FLAG_40) ? 3 : 0;
+    sp4C = well->blockDropDelay;
+
+    for (var_s2 = BLOCK_LEN_ROWS - 1; var_s2 >= 0; var_s2--) {
+        var_s5 = 0;
+
+        for (sp18 = 0; sp18 < gMax; sp18++) {
+            temp_s0 = &well->block[var_s2][sp18];
+            var_s7 = temp_s0->type;
+
+            if (var_s7 != BLOCKTYPE_0) {
+                if (temp_s0->state == BLOCKSTATE_7) {
+                    if ((sp18 == 0) && (gMax == BLOCK_LEN_B)) {
+                        var_s5 = UpdateWell3DRowConnect(well, var_s2, &sp18);
+                        if (var_s5 != 0) {
+                            if (sp18 != 0) {
+                                continue;
+                            }
+                            var_s5 = 0;
+                        }
+                    }
+
+                    temp_s0->state = BLOCKSTATE_8;
+                    temp_s0->disappear = sp3C;
+                    sp3C += sp44;
+                    temp_s0->drop = well->comboFace + (total - 1) * sp44 + 1;
+                    if ((total >= 6) && (temp_s0->bomb == 0x1E)) {
+                        temp_s0->bomb = 0x1F;
+                    }
+                    temp_s0->sound += sp6C;
+                    sp6C += 1;
+
+                    temp_a2 = var_s2 + 1;
+                    if (temp_a2 < BLOCK_LEN_ROWS) {
+                        if (well->block[temp_a2][sp18].type == BLOCKTYPE_9) {
+                            temp_v0_3 = ReturnAttackSlot(well, temp_a2, sp18);
+
+                            if (temp_v0_3 != -1) {
+                                var_s6 = -1;
+
+                                for (var_a0 = 0; var_a0 < CURSOR_UNK_28_COUNT; var_a0++) {
+                                    if (cursor->target[var_a0] == 0) {
+                                        cursor->target[var_a0] = temp_v0_3 + 1;
+                                        break;
+                                    }
+                                }
+
+                                CheckSameAttack(well, cursor, temp_v0_3, temp_s0->bomb);
+                                if (temp_s0->chain_flag != 0) {
+                                    well->chain_garbage = -1;
+                                }
+                            }
+                        }
+                    }
+
+                    var_a2 = sp18 - 1;
+                    if (((gMax == 6) && (var_a2 < 0)) == 0) {
+                        if (var_a2 < 0) {
+                            var_a2 = BLOCK_LEN_B - 1;
+                        }
+
+                        if (well->block[var_s2][var_a2].type == BLOCKTYPE_9) {
+                            temp_v0_3 = ReturnAttackSlot(well, var_s2, var_a2);
+
+                            if (temp_v0_3 != -1) {
+                                var_s6 = -1;
+
+                                for (var_a0 = 0; var_a0 < CURSOR_UNK_28_COUNT; var_a0++) {
+                                    if (cursor->target[var_a0] == 0) {
+                                        cursor->target[var_a0] = temp_v0_3 + 1;
+                                        break;
+                                    }
+                                }
+
+                                CheckSameAttack(well, cursor, temp_v0_3, temp_s0->bomb);
+                                if (temp_s0->chain_flag != 0) {
+                                    well->chain_garbage = -1;
+                                }
+                            }
+                        }
+                    }
+
+                    temp_a2 = sp18 + 1;
+                    if (((gMax == 6) && (temp_a2 >= 6)) == 0) {
+                        temp_a2 = (temp_a2 == BLOCK_LEN_B) ? 0 : temp_a2;
+
+                        if (well->block[var_s2][temp_a2].type == BLOCKTYPE_9) {
+                            temp_v0_3 = ReturnAttackSlot(well, var_s2, temp_a2);
+
+                            if (temp_v0_3 != -1) {
+                                var_s6 = -1;
+
+                                for (var_a0 = 0; var_a0 < CURSOR_UNK_28_COUNT; var_a0++) {
+                                    if (cursor->target[var_a0] == 0) {
+                                        cursor->target[var_a0] = temp_v0_3 + 1;
+                                        break;
+                                    }
+                                }
+
+                                CheckSameAttack(well, cursor, temp_v0_3, temp_s0->bomb);
+                                if (temp_s0->chain_flag != 0) {
+                                    well->chain_garbage = -1;
+                                }
+                            }
+                        }
+                    }
+
+                    temp_a2 = var_s2 - 1;
+                    if (temp_a2 >= 0) {
+                        if (well->block[temp_a2][sp18].type == BLOCKTYPE_9) {
+                            temp_v0_3 = ReturnAttackSlot(well, temp_a2, sp18);
+                            if (temp_v0_3 != -1) {
+                                var_s6 = -1;
+
+                                for (var_a0 = 0; var_a0 < CURSOR_UNK_28_COUNT; var_a0++) {
+                                    if (cursor->target[var_a0] == 0) {
+                                        cursor->target[var_a0] = temp_v0_3 + 1;
+                                        break;
+                                    }
+                                }
+
+                                CheckSameAttack(well, cursor, temp_v0_3, temp_s0->bomb);
+                                if (temp_s0->chain_flag != 0) {
+                                    well->chain_garbage = -1;
+                                }
+                            }
+                        }
+                    }
+
+                    if (var_s6 != 0) {
+                        if (num == 0) {
+                            func_80005888_usa(B_801C6EE8_usa, 1, 3);
+                        } else {
+                            func_80005888_usa(B_801C6E58_usa, 2, 3);
+                        }
+                    }
+                }
+
+                if (temp_s0->state == BLOCKSTATE_8) {
+                    if (temp_s0->delay > 0) {
+                        gOverflow += 0x23;
+                    } else if (temp_s0->delay == 0) {
+                        temp_s0->delay = -1;
+                    } else if (temp_s0->drop != 0) {
+                        if (temp_s0->disappear > 0) {
+                            temp_s0->disappear--;
+                        } else {
+                            var_s7 = BLOCKTYPE_0;
+                            if (temp_s0->delay == -1) {
+                                temp_s0->delay = -2;
+                                well->score += 10;
+
+                                PlayExplosionSound(num, temp_s0->sound);
+                                if (temp_s0->type == BLOCKTYPE_7) {
+                                    well->wellGarbage--;
+                                }
+                                StartExplosion(well, num, var_s2, sp18, temp_s0->bomb);
+
+                                switch (gSelection) {
+                                    case SELECTION_BE:
+                                    case SELECTION_8C:
+                                        well->nextLevel++;
+                                        break;
+
+                                    case SELECTION_96:
+                                    case SELECTION_A0:
+                                        well->clearGarbage--;
+                                        break;
+
+                                    default:
+                                        break;
+                                }
+                            }
+                        }
+
+                        temp_s0->drop--;
+                        if (temp_s0->drop == 0) {
+                            temp_s0->delay = 0;
+                        }
+                    }
+
+                    if (temp_s0->delay == 0) {
+                        InitTetrisState(temp_s0);
+                        var_s7 = BLOCKTYPE_0;
+
+                        var_a2_2 = 2;
+                        if (var_s2 + 1 < BLOCK_LEN_ROWS) {
+                            if (well->block[var_s2 + 1][sp18].type != 0) {
+                                sp64 = -1;
+                                for (var_a1_6 = var_s2 - 1; var_a1_6 >= 0; var_a1_6--) {
+                                    if ((well->block[var_a1_6][sp18].type != BLOCKTYPE_0) && (well->block[var_a1_6][sp18].delay < 0)) {
+                                        var_a2_2++;
+                                    } else {
+                                        var_a1_6 = 0;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (sp54 < var_a2_2) {
+                            sp54 = var_a2_2;
+                        }
+
+                        for (var_a1_6 = var_s2 + 1; var_a1_6 < BLOCK_LEN_ROWS; var_a1_6++) {
+                            temp_v1_2 = &well->block[var_a1_6][sp18];
+
+                            // can't get to match these cheks
+                            if (temp_v1_2->type != BLOCKTYPE_9) {
+                                if (temp_v1_2->type != BLOCKTYPE_0) {
+                                    if (temp_v1_2->state == BLOCKSTATE_4) {
+                                        temp_v1_2->chain_flag = -1;
+                                    } else if (temp_v1_2->state == BLOCKSTATE_0) {
+                                        temp_v1_2->delay = sp4C - 1;
+                                        temp_v1_2->state = BLOCKSTATE_5;
+                                        temp_v1_2->chain_flag = -1;
+                                    }
+                                }
+                            } else {
+                                var_a1_6 = BLOCK_LEN_ROWS;
+                            }
+                        }
+                    } else {
+                        sp5C = -1;
+                    }
+                }
+
+                if (var_s7 != BLOCKTYPE_0) {
+                    UpdateBlockFrame(temp_s0);
+                    if ((temp_s0->currRow != var_s2) && (temp_s0->state != BLOCKSTATE_1)) {
+                        temp_s0->frame_n = 0xC - sp34;
+                        temp_s0->frame_d = 2;
+                        temp_s0->currRow = var_s2;
+                    }
+
+                    if (temp_s0->delay == -1) {
+                        if (gGameStatus & GAME_STATUS_FLAG_40) {
+                            temp_s0->frame_n = 8;
+                        } else {
+                            switch (temp_s0->disappear) {
+                                case 0x4:
+                                case 0x5:
+                                case 0x6:
+                                    temp_s0->frame_n = 9;
+                                    break;
+
+                                case 0x2:
+                                case 0x3:
+                                    temp_s0->frame_n = 0xA;
+                                    break;
+
+                                case 0x0:
+                                case 0x1:
+                                    temp_s0->frame_n = 0xB;
+                                    break;
+
+                                default: 
+                                    temp_s0->frame_n = 8;
+                                    break;
+                            }
+                        }
+                    } else if ((temp_s0->type != BLOCKTYPE_9) && (temp_s0->state == BLOCKSTATE_8)) {
+                        if (temp_s0->delay % 2 != 0) {
+                            temp_s0->frame_n = 7;
+                        } else {
+                            temp_s0->frame_n = 0;
+                        }
+                    }
+                }
+            }
+
+            if ((var_s5 != 0) && (sp18 == BLOCK_LEN_B - 1)) {
+                sp18 = -1;
+            }
+
+        }
+    }
+
+    if (sp5C != 0) {
+        if (cursor->state < 2) {
+            cursor->state = 1;
+        }
+    } else {
+        if (cursor->state < 2) {
+            cursor->state = 0;
+        }
+        if (cursor->unk_0C != 0) {
+            cursor->unk_0C--;
+        }
+    }
+
+    sp4C += sp54;
+    if (sp64 != 0) {
+        if (cursor->waiting < sp4C) {
+            cursor->waiting = sp4C;
+        }
+        gOverflow += 0x3C;
+    }
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdateWell);
+#endif
 #endif
 
 #if VERSION_EUR

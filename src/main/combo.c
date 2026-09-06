@@ -495,7 +495,7 @@ void CheckChainCounter(tetWell *well, cursor_t *cursor UNUSED) {
     s32 row;
     s32 col;
 
-    if ((well->unk_43C0 != 0) || (well->unk_43A8 == 0)) {
+    if ((well->chain_garbage != 0) || (well->unk_43A8 == 0)) {
         return;
     }
 

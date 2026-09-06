@@ -197,7 +197,7 @@ void Set3DRowConnectState(tetWell *well, s32 row, s32 left, s32 right) {
 }
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/combo3d", func_800666F0_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/combo3d", UpdateWell3DRowConnect);
 #endif
 
 #if VERSION_EUR

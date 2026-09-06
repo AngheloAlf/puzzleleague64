@@ -148,37 +148,37 @@ nbool func_80040F04_usa(void) {
 
     // TODO: macros for counts
     for (var_a0 = 0; var_a0 < 0x1E; var_a0++) {
-        if (!((gPlayer[0]->unk_0B7[var_a0 >> 3] >> (var_a0 & 7)) & 1)) {
+        if (!((gPlayer[0]->kPLAYER1P_easy1[var_a0 >> 3] >> (var_a0 & 7)) & 1)) {
             var_a1 &= ~1;
         }
     }
 
     for (var_a0 = 0; var_a0 < 0x32; var_a0++) {
-        if (!((gPlayer[0]->unk_0BB[var_a0 >> 3] >> (var_a0 & 7)) & 1)) {
+        if (!((gPlayer[0]->kPLAYER1P_easy2[var_a0 >> 3] >> (var_a0 & 7)) & 1)) {
             var_a1 &= ~2;
         }
     }
 
     for (var_a0 = 0; var_a0 < 0x32; var_a0++) {
-        if (!(((*gPlayer)->unk_0C2[var_a0 >> 3] >> (var_a0 & 7)) & 1)) {
+        if (!(((*gPlayer)->kPLAYER1P_hard1[var_a0 >> 3] >> (var_a0 & 7)) & 1)) {
             var_a1 &= ~4;
         }
     }
 
     for (var_a0 = 0; var_a0 < 0x1E; var_a0++) {
-        if (!((gPlayer[0]->unk_0C9[var_a0 >> 3] >> (var_a0 & 7)) & 1)) {
+        if (!((gPlayer[0]->kPLAYER1P_hard2[var_a0 >> 3] >> (var_a0 & 7)) & 1)) {
             var_a1 &= ~8;
         }
     }
 
     for (var_a0 = 0; var_a0 < 0x32; var_a0++) {
-        if (!((gPlayer[0]->unk_0CD[var_a0 >> 3] >> (var_a0 & 7)) & 1)) {
+        if (!((gPlayer[0]->kPLAYER1P_special1[var_a0 >> 3] >> (var_a0 & 7)) & 1)) {
             var_a1 &= ~0x10;
         }
     }
 
     for (var_a0 = 0; var_a0 < 0x32; var_a0++) {
-        if (!((gPlayer[0]->unk_0D4[(var_a0 >> 3)] >> (var_a0 & 7)) & 1)) {
+        if (!((gPlayer[0]->kPLAYER1P_special2[(var_a0 >> 3)] >> (var_a0 & 7)) & 1)) {
             var_a1 &= ~0x20;
         }
     }

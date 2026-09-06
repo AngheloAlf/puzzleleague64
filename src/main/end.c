@@ -770,7 +770,7 @@ s32 func_8004FA2C_usa();                            /* extern */
 ? func_80058458_usa(s32, s32);                      /* extern */
 ? UpdatePlayerPuzzle(cursor_t *, s32, s32);  /* extern */
 ? UpdatePlayerStageClear(cursor_t *, s32, s32);  /* extern */
-? func_80058D68_usa(s32, s32);                      /* extern */
+? UpdatePlayerCPU(s32, s32);                      /* extern */
 ? UpdateExplosion(Game *);                     /* extern */
 ? Init2DNewRow(Game *);                     /* extern */
 ? Init2DTetrisBlocks(Game *, ?);                  /* extern */
@@ -1113,7 +1113,7 @@ block_120:
                         }
                     }
                     if ((gSelection == SELECTION_96) & var_s3) {
-                        func_80058D68_usa(gTheGame.help.selection[8], gTheGame.help.selection[0xC]);
+                        UpdatePlayerCPU(gTheGame.help.selection[8], gTheGame.help.selection[0xC]);
                     } else {
                         temp_a0 = (u32) (gGameStatus & 0xF00) >> 8;
                         if ((gTheGame.unk_4404 == temp_a0) || (gTheGame.tetrisWell[1].unk_4404 == temp_a0)) {

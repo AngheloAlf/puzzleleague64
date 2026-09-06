@@ -34,25 +34,29 @@ typedef struct tetWell {
     /* 0x43B4 */ s32 danger; /* Original name: danger */ // TODO: nbool?
     /* 0x43B8 */ s32 alert; /* Original name: alert */ // TODO: nbool?
     /* 0x43BC */ s32 unk_43BC;
-    /* 0x43C0 */ s32 unk_43C0;
+    /* 0x43C0 */ s32 chain_garbage; /* Original name: chain_garbage */
     /* 0x43C4 */ s32 collision; /* Original name: collision */ // nbool?
     /* 0x43C8 */ s32 unk_43C8;
-    /* 0x43CC */ s32 unk_43CC;
-    /* 0x43D0 */ s32 unk_43D0;
+    /* 0x43CC */ s32 comboFace; /* Original name: comboFace */ // Inside `state_t state`
+    /* 0x43D0 */ s32 comboExplode; /* Original name: comboExplode */ // Inside `state_t state`
     /* 0x43D4 */ s32 blockDropDelay; /* Original name: blockDropDelay */ // Inside `state_t state`
     /* 0x43D8 */ s32 unk_43D8;
-    /* 0x43DC */ UNK_TYPE1 unk_43DC[0x43E0-0x43DC];
-    /* 0x43E0 */ s32 unk_43E0;
+    /* 0x43DC */ s32 nextLevel; /* Original name: nextLevel */ // Inside `state_t state`
+    /* 0x43E0 */ s32 currLevel; /* Original name: currLevel */ // Inside `state_t state`
     /* 0x43E4 */ s32 unk_43E4;
     /* 0x43E8 */ UNK_PAD unk_43E8[0x4];
     /* 0x43EC */ UNK_TYPE4 unk_43EC;
-    /* 0x43F0 */ s32 unk_43F0;
+    /* 0x43F0 */ u32 speed; /* Original name: speed */ // Inside `state_t state`
     /* 0x43F4 */ s32 unk_43F4;
     /* 0x43F8 */ s32 unk_43F8; // possibly part of "struct state_t state; // offset 0x4AA8, size 0x38", maybe "current_raise"
     /* 0x43FC */ s32 unk_43FC;
-    /* 0x4400 */ UNK_TYPE1 unk_4400[0x4];
-    /* 0x4404 */ s32 win; // inside of struct extra_t extra?
-    /* 0x4408 */ UNK_TYPE1 unk_4408[0x14];
+    /* 0x4400 */ s32 level; /* Original name: level */ // Inside `extra_t extra`
+    /* 0x4404 */ s32 win; /* Original name: win */ // Inside `extra_t extra`
+    /* 0x4408 */ s32 maxGarbage; /* Original name: maxGarbage */ // Inside `extra_t extra`
+    /* 0x440C */ s32 clearGarbage; /* Original name: clearGarbage */ // Inside `extra_t extra`
+    /* 0x4410 */ UNK_TYPE1 unk_4410[0x4];
+    /* 0x4414 */ s32 queueGarbage; /* Original name: queueGarbage */ // Inside `extra_t extra`
+    /* 0x4418 */ s32 wellGarbage; /* Original name: wellGarbage */ // Inside `extra_t extra`
     /* 0x441C */ s32 unk_441C;
     /* 0x4420 */ menu_t menu;
 } tetWell; // size = 0x4430

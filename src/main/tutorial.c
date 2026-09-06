@@ -190,7 +190,7 @@ void InitTutorial(void) {
         s2->danger = 0;
         s2->alert = 0;
         s2->unk_43BC = 0;
-        s2->unk_43C0 = 0;
+        s2->chain_garbage = 0;
         s2->collision = 0;
         s2->unk_43F4 = 0;
         s2->unk_441C = 0xDF;

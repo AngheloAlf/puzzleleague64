@@ -90,7 +90,7 @@ void RaiseBlocks(tetWell *well, cursor_t *cursor) {
         well->unk_43B0 = 2;
     }
     cursor->unk_0C = 0;
-    if (well->unk_43F0 < 0 || well->unk_43F0 > 0x10000) {
+    if (well->speed < 0 || well->speed > 0x10000) {
         var_a0 *= 2;
     }
     well->unk_43FC += var_a0;

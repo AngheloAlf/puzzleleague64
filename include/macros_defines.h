@@ -68,6 +68,12 @@
 #endif
 
 #if REGION_NTSC
+#define ADJUST_FRAMERATE_INV(x) (x)
+#else
+#define ADJUST_FRAMERATE_INV(x) ((x) * 6 / 5)
+#endif
+
+#if REGION_NTSC
 #define ADJUST_COUNTER(x) (x)
 #else
 #define ADJUST_COUNTER(x) (MAX(((x) - 20), 0))

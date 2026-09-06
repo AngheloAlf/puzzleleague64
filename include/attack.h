@@ -97,7 +97,7 @@ void AttackPackEmpty(struct tetWell * well, s32 num);
 s32 ReturnAttackSlot(struct tetWell * well, s32 row, s32 col);
 void Match3DPosition(s32 num, s32 row, s32 col, s32 *x, s32 *y);
 void UpdateAttack(struct tetWell *well, struct cursor_t *cursor, s32 num);
-// void func_8005C780_usa();
+void CheckSameAttack(struct tetWell *well, struct cursor_t *cursor, s32 slot, s32 bomb);
 void ChangeAttack(struct tetWell *well, struct cursor_t *cursor, s32 num, s32 combo);
 void InitFlyAttack(struct tetWell *well, struct attack_t *attack, s32 posX, s32 posY, ENUM_TYPE(AttackType, s32) type, s32 num);
 void StartAttack(struct tetWell *well, s32 num);
