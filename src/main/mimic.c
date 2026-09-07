@@ -365,37 +365,35 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
                             return;
                         }
                         gWhatever++;
-                        if (gWhatever % 120 != 0 || ((cursor->state == 0) | (cursor->state == 0x34C)) == 0 ||
+                        if (gWhatever % 120 != 0 || (cursor->state == 0 || cursor->state == 0x34C) == 0 ||
                             !(anim_bg == 0x34C || !CheckFieldActive(well))) {
                             brain->unk_010 = 1;
                             return;
                         }
 
                         cursor->state = 0;
-                        break;
-                    }
-                    if (gTheGame.controller[0].touch_button & 0x8000) {
-                        if ((((cursor->state == 0) | (cursor->state == 0x34C)) != 0) &&
-                            ((anim_bg == 0x34C) || (!CheckFieldActive(well)))) {
-                            if (!screenTextDone(brain->unk_028, brain->unk_038)) {
-                                func_80028034_usa(brain->unk_028, brain->unk_038);
-                                brain->unk_024 = -1;
-                                brain->unk_010 = 1;
-                                return;
-                            } else {
-                                cursor->state = 0;
-                                brain->unk_024 = 0;
-                                PlaySE(SFX_INIT_TABLE, SFX_096);
-                            }
-                            break;
+                    } else if (gTheGame.controller[0].touch_button & 0x8000 &&
+                               (cursor->state == 0 || cursor->state == 0x34C) &&
+                               (anim_bg == 0x34C || !CheckFieldActive(well))) {
+                        if (!screenTextDone(brain->unk_028, brain->unk_038)) {
+                            func_80028034_usa(brain->unk_028, brain->unk_038);
+                            brain->unk_024 = -1;
+                            brain->unk_010 = 1;
+                            return;
+                        } else {
+                            cursor->state = 0;
+                            brain->unk_024 = 0;
+                            PlaySE(SFX_INIT_TABLE, SFX_096);
                         }
+                    } else {
+                        if (anim_bg == 0x34C || !CheckFieldActive(well)) {
+                            brain->unk_024 = -1;
+                        }
+                        brain->unk_010 = 1;
+                        return;
                     }
 
-                    if (anim_bg == 0x34C || !CheckFieldActive(well)) {
-                        brain->unk_024 = -1;
-                    }
-                    brain->unk_010 = 1;
-                    return;
+                    break;
                 case 0x16:
                     gTheGame.totalPlayer = 2;
                     if (gTheGame.dimension == DIMENSION_2D) {
