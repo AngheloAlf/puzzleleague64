@@ -11,7 +11,7 @@ struct cursor_t;
 struct tetWell;
 
 void Init2DAttackPosition(struct attack_t *attack, ENUM_TYPE(AttackType, s32) type, s32 num);
-// void Init2DAttackFace();
+void Init2DAttackFace(struct attack_t *attack);
 // void Update2DAttackFace();
 void Update2DAttack(struct tetWell *well, struct cursor_t *cursor, s32 num);
 // void func_80072198_usa();
