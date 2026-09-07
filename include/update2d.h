@@ -7,7 +7,7 @@ struct cursor_t;
 struct tetWell;
 
 void Update2DDistance(struct tetWell *well, struct cursor_t *cursor);
-// void func_800710CC_usa();
+void Update2DClearLine(struct tetWell *well, struct cursor_t *cursor, s32 distance);
 void Update2DIcon(struct tetWell *well, struct cursor_t *cursor, s32 num);
 
 #endif

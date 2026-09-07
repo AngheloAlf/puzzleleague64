@@ -195,7 +195,7 @@ void InitTutorial(void) {
         s2->unk_43F4 = 0;
         s2->unk_441C = 0xDF;
         s2->unk_43F8 = 0;
-        s2->unk_43FC = 0;
+        s2->raise = 0;
 
         if (gTheGame.dimension == DIMENSION_2D) {
             s1 = &gTheGame.cursorBlock[var_s2];
@@ -357,14 +357,14 @@ void TutorialCheckState(tetWell *well, cursor_t *cursor) {
             PlaySE(SFX_INIT_TABLE, SFX_0A0);
             PlaySE(SFX_INIT_TABLE, SFX_175);
         } else if (anim_bg != -0x34C) {
-            well->unk_43FC = anim_bg;
+            well->raise = anim_bg;
             well->unk_43EC = anim_sp;
             GameOverSmoke(well);
             DeadBlocksShakeOne2D(well);
             AllDeadBlocks(well);
-            anim_bg = well->unk_43FC;
+            anim_bg = well->raise;
             anim_sp = well->unk_43EC;
-            well->unk_43FC = 0;
+            well->raise = 0;
             well->unk_43EC = 0;
             if (gMain == GMAIN_390) {
                 anim_bg = -0x34C;
@@ -378,18 +378,18 @@ void TutorialCheckState(tetWell *well, cursor_t *cursor) {
         PlaySE(SFX_INIT_TABLE, SFX_0A0);
         PlaySE(SFX_INIT_TABLE, SFX_175);
     } else if (anim_bg != -0x34C) {
-        well->unk_43FC = anim_bg;
+        well->raise = anim_bg;
         well->unk_43EC = anim_sp;
-        if (well->unk_43FC >= 0) {
-            s32 v1 = well->unk_43FC;
+        if (well->raise >= 0) {
+            s32 v1 = well->raise;
 
             well->translation += ((f32)dead1Shake[v1] / DOUBLE_LITERAL(250.0));
-            well->unk_43FC = v1 - 1;
+            well->raise = v1 - 1;
         }
         AllDeadBlocks(well);
-        anim_bg = well->unk_43FC;
+        anim_bg = well->raise;
         anim_sp = well->unk_43EC;
-        well->unk_43FC = 0;
+        well->raise = 0;
         well->unk_43EC = 0;
         if (gMain == GMAIN_390) {
             anim_bg = -0x34C;

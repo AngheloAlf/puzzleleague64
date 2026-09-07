@@ -423,8 +423,8 @@ segments:
       - [0x0B5060, .data, main/title]
       - [0x0B5080, data, main/menu]
       - [0x0B5D60, .data, main/screen]
-      - [0x0B5D80, data, main/0B5D80]
-      - [0x0B5DA0, data, main/02E800]
+      - [0x0B5D80, data, main/peel]
+      - [0x0B5DA0, .data, main/02E800]
       - [0x0B5DC0, data, main/editor]
       - [0x0B5E10, data, main/0B5E10]
       - [0x0B60E0, .data, main/041780]
@@ -432,6 +432,8 @@ segments:
       - [0x0B6190, .data, main/043D10]
       - [0x0B62A0, .data, main/044E80]
       - [0x0B6300, data, main/0B6300]
+      - [0x0B6E20, .data, main/update]
+      - [0x0B6E80, data, main/0B6E80]
 
       - [0x0BDCC0, .data, libmus/player]
       - [0x0BDD80, .data, libmus/player_fx]
@@ -628,7 +630,7 @@ segments:
       - { type: bss, vram: 0x8018BC50, name: main/screen }
       - { type: bss, vram: 0x8018BCD0, name: main/story }
       - { type: bss, vram: 0x8018BCE0, name: main/peel }
-      - { type: bss, vram: 0x8018C0A0, name: main/02E800 }
+      - { type: .bss, vram: 0x8018C0A0, name: main/02E800 }
       - { type: bss, vram: 0x8018C120, name: main/editor }
       - { type: bss, vram: 0x8018C160, name: main/bonus }
       - { type: .bss, vram: 0x8018C1B0, name: main/hvqm2util }

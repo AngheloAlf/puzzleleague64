@@ -303,7 +303,7 @@ void InitBonus(void) {
     }
 
     gTheGame.tetrisWell[0].unk_43EC = 0;
-    gTheGame.tetrisWell[0].unk_43FC = 0;
+    gTheGame.tetrisWell[0].raise = 0;
     gWhatever = 0;
 }
 #else
@@ -494,11 +494,11 @@ void DoBonus(void) {
             }
         }
 
-        if (var_s2->unk_43FC >= 0) {
-            var_s5 = gameoverBounce[var_s2->unk_43FC];
-            var_s2->unk_43FC--;
+        if (var_s2->raise >= 0) {
+            var_s5 = gameoverBounce[var_s2->raise];
+            var_s2->raise--;
         } else {
-            var_s2->unk_43FC = 0x27;
+            var_s2->raise = 0x27;
         }
 
         var_a0 = gTheGame.unk_8C88[1].b.frameY >> 0x2;

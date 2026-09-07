@@ -22,7 +22,7 @@ void Init2DAttackPosition(attack_t *attack, ENUM_TYPE(AttackType, s32) type, s32
     attack->state = ATTACKSTATE_1;
     attack->disappear = -1;
     attack->type = type;
-    attack->unk_20 = 0;
+    attack->expression = 0;
     attack->delay = 40;
     attack->level = 1;
 
@@ -145,7 +145,7 @@ void Update2DAttackFace(tetWell *well, attack_t *attack) {
 
         default:
             attack->rect.s.objY = (y - ((attack->type - ATTACKTYPE_10) * 8)) << 2;
-            if (attack->unk_20 == 0x20) {
+            if (attack->expression == 0x20) {
                 x = attack->unk_10 % 10;
                 if (x == 0) {
                     if (attack->rect.s.imageAdrs == 4) {
@@ -271,7 +271,7 @@ void Update2DAttack(tetWell *well, cursor_t *cursor, s32 num) {
                     gOverflow += attack->level * 0xA;
                 }
                 AttackFall(well, cursor, attack, &sound);
-                attack->unk_20 = 0;
+                attack->expression = 0;
                 break;
 
             case ATTACKSTATE_7:
@@ -289,7 +289,7 @@ void Update2DAttack(tetWell *well, cursor_t *cursor, s32 num) {
                     if (attack->unk_10 < 0) {
                         attack->unk_10++;
                         if (attack->unk_10 != 0) {
-                            if ((attack->currRow < BLOCK_LEN_ROWS) && (attack->unk_20 != 0)) {
+                            if ((attack->currRow < BLOCK_LEN_ROWS) && (attack->expression != 0)) {
                                 Update2DAttackFace(well, attack);
                             }
                         }
@@ -301,8 +301,8 @@ void Update2DAttack(tetWell *well, cursor_t *cursor, s32 num) {
                             }
                         }
 #endif
-                    } else if (attack->unk_20 != 0) {
-                        attack->unk_20 = 0;
+                    } else if (attack->expression != 0) {
+                        attack->expression = 0;
                         attack->unk_10 = -0x3C;
 #if !VERSION_EUR
                         if (B_801C6BDC_usa[num] != 0) {

@@ -15,12 +15,12 @@ void Update3DDistance(tetWell *well, cursor_t *cursor) {
     s32 temp_a3;
     attack_t *attack;
 
-    if (well->unk_43FC == 0) {
+    if (well->raise == 0) {
         return;
     }
 
-    temp_a3 = well->unk_43FC / 2;
-    well->translation += (f32)well->unk_43FC / DOUBLE_LITERAL(250.0);
+    temp_a3 = well->raise / 2;
+    well->translation += (f32)well->raise / DOUBLE_LITERAL(250.0);
     cursor->rect.s.objY -= temp_a3;
     if (((gSelection == SELECTION_AA) || (gSelection == SELECTION_B4)) && (cursor->target[0] <= 0)) {
         attack = &well->attack[0];

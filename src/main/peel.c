@@ -15,6 +15,18 @@
 INCLUDE_ASM("asm/usa/nonmatchings/main/peel", pon_DrawLoadingMessage);
 #endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/peel", pon_DrawLoadingMessage);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/peel", pon_DrawLoadingMessage);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/peel", pon_DrawLoadingMessage);
+#endif
+
 typedef struct struct_gaTile_unk_000 {
     /* 0x00 */ u16 unk_00[0x28];
 } struct_gaTile_unk_000; // size = 0x50
@@ -175,24 +187,51 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/peel", peelTick);
 #endif
 #endif
 
-#if VERSION_USA
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/peel", peelTick);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/peel", peelTick);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/peel", peelTick);
+#endif
+
 void peelStop(void) {
     geTypePeel = -1;
     gnAlphaPeel = 0;
 }
-#endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/peel", func_8002CFE4_usa);
 #endif
 
-#if VERSION_USA
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/peel", func_8002CFE4_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/peel", func_8002CFE4_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/peel", func_8002CFE4_usa);
+#endif
+
+#if VERSION_GER
+#define ALPHA_PEEL_VAL 0x40
+#else
+#define ALPHA_PEEL_VAL 0x80
+#endif
+
 nbool peelActive(void) {
     if (gbFadeAlpha != 0) {
         s32 var_a0 = 0;
 
         if (geTypePeel != -1) {
-            if (gnAlphaPeel >= 0x81) {
+            if (gnAlphaPeel > ALPHA_PEEL_VAL) {
                 var_a0 = -1;
             }
         }
@@ -203,17 +242,22 @@ nbool peelActive(void) {
 
     return nfalse;
 }
+
+extern RomOffset B_8018C098_fra;
+
+#if VERSION_FRA
+// bugged?
+#define ALIGN_REV(x) ( ( ( (uintptr_t)(x) ) - 0xF ) & ~0xF)
+#else
+#define ALIGN_REV(x) (((uintptr_t)(x)) & ~0xF)
 #endif
 
-#if VERSION_USA
-#ifdef NON_MATCHING
-// rodata alignment issues
 void peelSetup(void) {
     File sp10;
     u32 *var_a0;
     uintptr_t temp_a0;
     s32 i;
-    u32 value = 0x00010001;
+    u32 value = (GPACK_RGBA5551(0, 0, 0, 1)<< 16) | GPACK_RGBA5551(0, 0, 0, 1);
 
     gbFadeAlpha = 0;
     geTypePeel = -1;
@@ -228,116 +272,33 @@ void peelSetup(void) {
         *var_a0++ = value;
     }
 
-    temp_a0 = (uintptr_t)&D_803B0500 & ~0xF;
+    // TODO: raw offsets?
+    temp_a0 = ALIGN_REV(D_803B0500);
     gapVtxPeel[0] = (void *)temp_a0;
 
-    temp_a0 = (temp_a0 - 0x4B00) & ~0xF;
+    temp_a0 = ALIGN_REV(temp_a0 - 0x4B00);
     gapVtxPeel[1] = (void *)temp_a0;
 
-    temp_a0 = (temp_a0 - 0x33A) & ~0xF;
+    temp_a0 = ALIGN_REV(temp_a0 - 0x33A);
     B_8018E93C_usa = (void *)temp_a0;
 
     for (i = 0; i < ARRAY_COUNT(gaTile); i++) {
-        temp_a0 = (temp_a0 - 0xC80) & ~0xF;
+        temp_a0 = ALIGN_REV(temp_a0 - 0xC80);
         gaTile[ARRAY_COUNT(gaTile) - 1 - i] = (void *)temp_a0;
     }
 
     B_801AB8E4_usa = (void *)temp_a0;
+
+    #if VERSION_FRA
+    (void)sp10;
+    fileGetAddress((void *)"RIPPLE.RDF", &B_8018C098_fra);
+    #else
     if (fileOpen(&sp10, "RIPPLE.RDF") != 0) {
         fileGetAddress(&sp10, &gnWaveData);
         fileClose(&sp10);
     }
+    #endif
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/peel", peelSetup);
-#endif
-#endif
 
-#if VERSION_USA
 void func_8002DBF0_usa(void) {
 }
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/peel", pon_DrawLoadingMessage);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/peel", peelTick);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/peel", peelStop);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/peel", func_8002CFE4_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/peel", peelActive);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/peel", peelSetup);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/peel", func_8002DBF0_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/peel", pon_DrawLoadingMessage);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/peel", peelTick);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/peel", peelStop);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/peel", func_8002CFE4_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/peel", peelActive);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/peel", peelSetup);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/peel", func_8002DC60_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/peel", pon_DrawLoadingMessage);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/peel", peelTick);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/peel", peelStop);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/peel", func_8002CFE4_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/peel", peelActive);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/peel", peelSetup);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/peel", func_8002DDD0_ger);
-#endif

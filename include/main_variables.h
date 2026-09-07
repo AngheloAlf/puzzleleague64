@@ -268,12 +268,7 @@ extern uObjTxtr D_800B74A0_usa;
 // extern UNK_TYPE D_800B74A4_usa;
 extern uObjTxtr tetrisBlockNew;
 // extern UNK_TYPE D_800B74BC_usa;
-extern f32 rotate_cos[];
-extern f32 rotate_sin[];
-extern f32 switch_cos[];
-extern f32 switch_sin[];
-extern char D_800B7508_usa[];
-extern char TetrisBlockFrame[];
+
 extern s8 D_800B7530_usa[];
 extern s8 D_800B7544_usa[];
 extern s8 D_800B7558_usa[];
@@ -929,7 +924,7 @@ extern s16 ts_song_buffer;
 // extern UNK_TYPE B_8018E934_usa;
 // extern UNK_TYPE gnWaveData;
 // extern UNK_TYPE B_8018E93C_usa;
-// extern UNK_TYPE B_8018E940_usa;
+
 // extern UNK_TYPE B_8018E9C0_usa;
 // extern UNK_TYPE B_8018E9C4_usa;
 // extern UNK_TYPE gnTickCount;

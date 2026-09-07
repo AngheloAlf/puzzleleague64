@@ -310,7 +310,7 @@ void InitTetrisWell(void) {
         temp_s3->unk_43F4 = 0;
         temp_s3->unk_441C = 0xDF;
         temp_s3->unk_43F8 = 0;
-        temp_s3->unk_43FC = 0;
+        temp_s3->raise = 0;
 
         InitCursor(sp34);
         InitGamePad(var_fp);
@@ -514,12 +514,12 @@ void DoTetris(void) {
                         }
                         well->unk_43EC &= 0xFFFF;
                         var_s2 = (var_a0 >> 0x10);
-                        well->unk_43FC = var_s2 * gTheGame.dimension;
-                        well->unk_43F8 += well->unk_43FC;
+                        well->raise = var_s2 * gTheGame.dimension;
+                        well->unk_43F8 += well->raise;
 
                         temp = gTheGame.dimension * 0x10;
                         if (temp < well->unk_43F8) {
-                            well->unk_43FC = gTheGame.dimension * 0x10 - (well->unk_43F8 - well->unk_43FC);
+                            well->raise = gTheGame.dimension * 0x10 - (well->unk_43F8 - well->raise);
                             well->unk_43F8 = gTheGame.dimension * 0x10;
                         }
                     }
@@ -586,7 +586,7 @@ void DoTetris(void) {
             }
 
             HackGame(well);
-            well->unk_43FC = 0;
+            well->raise = 0;
             well->unk_43A4 = 0;
         }
     }

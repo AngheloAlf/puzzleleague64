@@ -314,35 +314,35 @@ void Init2DTetrisTMEM(block_t *block, uObjSprite *rect) {
 }
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", func_8006CB30_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", Init2DComboTMEM);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", func_8006CB30_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", Init2DComboTMEM);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", func_8006CB30_usa);
+INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", Init2DComboTMEM);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", func_8006CB30_usa);
+INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", Init2DComboTMEM);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", func_8006CBEC_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", Init2DChainTMEM);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", func_8006CBEC_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", Init2DChainTMEM);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", func_8006CBEC_usa);
+INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", Init2DChainTMEM);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", func_8006CBEC_usa);
+INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", Init2DChainTMEM);
 #endif
 
 // TODO: `type` is `AttackType`?
@@ -444,15 +444,15 @@ void Init2DBrickTMEM(attack_t *attack) {
 
 void Init2DFaceTMEM(attack_t *attack) {
     if (attack->type < ATTACKTYPE_11) {
-        attack->unk_20 = 0x1E;
+        attack->expression = 0x1E;
         attack->unk_10 = -0xA;
         attack->rect.s.imageAdrs = 0;
     } else if (AnimationRandom(0x332) % 2 == 0) {
-        attack->unk_20 = 0x1F;
+        attack->expression = 0x1F;
         attack->unk_10 = -0xA;
         attack->rect.s.imageAdrs = 2;
     } else {
-        attack->unk_20 = 0x20;
+        attack->expression = 0x20;
         attack->unk_10 = -0x96;
         attack->rect.s.imageAdrs = 4;
     }

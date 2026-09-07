@@ -93,7 +93,7 @@ void RaiseBlocks(tetWell *well, cursor_t *cursor) {
     if (well->speed < 0 || well->speed > 0x10000) {
         var_a0 *= 2;
     }
-    well->unk_43FC += var_a0;
+    well->raise += var_a0;
     well->unk_43F8 = well->unk_43F8 + var_a0;
 
     temp_v0 = gTheGame.dimension * 0x10;
@@ -108,7 +108,7 @@ void RaiseBlocks(tetWell *well, cursor_t *cursor) {
             well->score++;
         }
         well->unk_43B0 = -4;
-        well->unk_43FC = (gTheGame.dimension * 0x10) - (well->unk_43F8 - well->unk_43FC);
+        well->raise = (gTheGame.dimension * 0x10) - (well->unk_43F8 - well->raise);
         well->unk_43F8 = gTheGame.dimension * 0x10;
     }
 }

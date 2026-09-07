@@ -4,11 +4,36 @@
 #include "macros_defines.h"
 #include "main_variables.h"
 
+#include "bitmap.h"
+#include "image.h"
+
+static Mtx B_8018E940_usa[2];
+
+Lights1 D_800B6450_usa = {
+    { { { 0x40, 0x40, 0x40 }, 0, { 0x40, 0x40, 0x40 }, 0 } },
+    { { { { 0xE0, 0xE0, 0xE0 }, 0, { 0xE0, 0xE0, 0xE0 }, 0, { 0, -1, 0 }, 0 } } },
+};
+
+s32 D_800B6468_usa = 0;
+
+f32 D_FLT_800B646C_usa = 0.0f;
+
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/02E800", func_8002DC00_usa);
 #endif
 
-#if VERSION_USA
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/02E800", func_8002DD20_eur);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/02E800", func_8002DC70_fra);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/02E800", func_8002DDE0_ger);
+#endif
+
 s32 func_8002EDF0_usa(s32 arg0) {
     if (arg0 != 0) {
         return -1;
@@ -16,26 +41,13 @@ s32 func_8002EDF0_usa(s32 arg0) {
 
     return 0;
 }
-#endif
-
-#if VERSION_USA
-Lights1 D_800B6450_usa = {
-    { { { 0x40, 0x40, 0x40 }, 0, { 0x40, 0x40, 0x40 }, 0 } },
-    { { { { 0xE0, 0xE0, 0xE0 }, 0, { 0xE0, 0xE0, 0xE0 }, 0, { 0, -1, 0 }, 0 } } },
-};
-s32 D_800B6468_usa = 0;
-f32 D_FLT_800B646C_usa = 0.0f;
-#endif
-
-extern Mtx B_8018E940_usa[2];
 
 typedef struct struct_8002EDFC_usa_arg0 {
-    /* 0x0 */ UNK_TYPE1 unk_0[0x4];
+    /* 0x0 */ UNK_PAD unk_0[0x4];
     /* 0x4 */ Gfx ***unk_4;
     /* 0x8 */ UNK_TYPE4 unk_8;
 } struct_8002EDFC_usa_arg0; // size >= 0xC
 
-#if VERSION_USA
 s32 func_8002EDFC_usa(struct_8002EDFC_usa_arg0 *arg0, Gfx **gfxP) {
     Gfx *gfx;
 
@@ -76,93 +88,51 @@ s32 func_8002EDFC_usa(struct_8002EDFC_usa_arg0 *arg0, Gfx **gfxP) {
 
     return -1;
 }
-#endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/02E800", func_8002F194_usa);
-#endif
+// likely to be the same struct as struct_8002EDFC_usa_arg0
+typedef struct struct_8002F194_usa_arg0 {
+    /* 0x0 */ u32 unk_0;
+    /* 0x4 */ Gfx ***unk_4;
+    /* 0x8 */ s32 unk_8;
+} struct_8002F194_usa_arg0; // size >= 0xC
 
-#if VERSION_USA
+s32 func_8002F194_usa(struct_8002F194_usa_arg0 *arg0, s32 arg1, Gfx **gfxP) {
+    Gfx *gfx;
+    Gfx **temp;
+
+    if (arg0 == NULL) {
+        return 0;
+    }
+
+    if ((arg1 < 0) || (arg1 >= arg0->unk_8)) {
+        return 0;
+    }
+
+    gfx = *gfxP;
+    temp = arg0->unk_4[arg1];
+
+    gDPPipeSync(gfx++);
+    gDPSetCycleType(gfx++, G_CYC_1CYCLE);
+    gSPClearGeometryMode(gfx++, G_ZBUFFER | G_CULL_BOTH);
+    gSPSetGeometryMode(gfx++, G_SHADE | G_CULL_BACK | G_SHADING_SMOOTH);
+
+    if (arg0->unk_0 & 1) {
+        gSPSetGeometryMode(gfx++, G_CULL_BACK);
+    }
+
+    gDPSetTextureLOD(gfx++, G_TL_TILE);
+    gDPSetTextureLUT(gfx++, G_TT_NONE);
+    gDPSetTexturePersp(gfx++, G_TP_PERSP);
+    gDPSetTextureFilter(gfx++, G_TF_BILERP);
+    gSPDisplayList(gfx++, *temp);
+
+    *gfxP = gfx;
+
+    return -1;
+}
+
 void func_8002F2E0_usa(void) {
 }
-#endif
 
-#if VERSION_USA
 void func_8002F2E8_usa(void) {
 }
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/02E800", func_8002DD20_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/02E800", func_8002EE1C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/02E800", func_8002EE28_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/02E800", func_8002F1C0_eur);
-#endif
-
-#if VERSION_EUR
-void func_8002F30C_eur(void) {
-}
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/02E800", func_8002F314_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/02E800", func_8002DC70_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/02E800", func_8002ED6C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/02E800", func_8002ED78_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/02E800", func_8002F110_fra);
-#endif
-
-#if VERSION_FRA
-void func_8002F25C_fra(void) {
-}
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/02E800", func_8002F264_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/02E800", func_8002DDE0_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/02E800", func_8002EEDC_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/02E800", func_8002EEE8_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/02E800", func_8002F280_ger);
-#endif
-
-#if VERSION_GER
-void func_8002F3CC_ger(void) {
-}
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/02E800", func_8002F3D4_ger);
-#endif

@@ -56,7 +56,7 @@ typedef struct attack_t {
     /* 0x14 */ s32 level; /* Original name: level */
     /* 0x18 */ s32 start; /* Original name: start */
     /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ s32 unk_20;
+    /* 0x20 */ s32 expression; /* Original name: expression */
     /* 0x24 */ s32 currRow; /* Original name: currRow */
     /* 0x28 */ s32 unk_28;
     /* 0x2C */ UNK_PAD unk_2C[0x30-0x2C]; // alignment padding?

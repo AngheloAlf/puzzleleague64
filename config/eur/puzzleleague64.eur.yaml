@@ -422,12 +422,16 @@ segments:
       - [0x0B69B0, .data, main/title]
       - [0x0B69D0, data, main/menu]
       - [0x0B7530, .data, main/screen]
-      - [0x0B7550, data, main/0B7550]
+      - [0x0B7550, data, main/peel]
+      - [0x0B7570, .data, main/02E800]
+      - [0x0B7590, data, main/0B7590]
       - [0x0B78B0, .data, main/041780]
       - [0x0B7920, .data, main/043000]
       - [0x0B7960, .data, main/043D10]
       - [0x0B7A70, .data, main/044E80]
       - [0x0B7AD0, data, main/0B7AD0]
+      - [0x0B85F0, .data, main/update]
+      - [0x0B8650, data, main/0B8650]
 
       - [0x0BF490, .data, libmus/player]
       - [0x0BF550, .data, libmus/player_fx]
@@ -624,7 +628,7 @@ segments:
       - { type: bss, vram: 0x8018D5F0, name: main/screen }
       - { type: bss, vram: 0x8018D670, name: main/story }
       - { type: bss, vram: 0x8018D680, name: main/peel }
-      - { type: bss, vram: 0x8018DA40, name: main/02E800 }
+      - { type: .bss, vram: 0x8018DA40, name: main/02E800 }
       - { type: bss, vram: 0x8018DAC0, name: main/editor }
       - { type: bss, vram: 0x8018DB00, name: main/bonus }
       - { type: .bss, vram: 0x8018DB50, name: main/hvqm2util }

@@ -144,14 +144,10 @@ segments:
       - { path: "asm/{version}/data/main/story.bss.o" }
 
       - { path: src/main/peel.o }
-      - { path: "asm/{version}/data/main/peel.data.o", include_if_any: [[version, usa]] }
+      - { path: "asm/{version}/data/main/peel.data.o" }
       - { path: "asm/{version}/data/main/peel.bss.o" }
 
-      - { path: "asm/{version}/data/main/0B5D80.data.o", include_if_any: [[version, fra]] }
-
       - { path: src/main/02E800.o }
-      - { path: "asm/{version}/data/main/02E800.data.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/data/main/02E800.bss.o" }
 
       - { path: src/main/editor.o }
       - { path: "asm/{version}/data/main/editor.data.o", include_if_any: [[version, fra]] }
@@ -165,9 +161,9 @@ segments:
       - { path: src/main/end.o }
 
       - { path: "asm/{version}/data/main/0B70C0.data.o", include_if_any: [[version, usa]] }
-      - { path: "asm/{version}/data/main/0B7550.data.o", include_if_any: [[version, eur]] }
+      - { path: "asm/{version}/data/main/0B7590.data.o", include_if_any: [[version, eur]] }
       - { path: "asm/{version}/data/main/0B5E10.data.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/data/main/0ACFB0.data.o", include_if_any: [[version, ger]] }
+      - { path: "asm/{version}/data/main/0ACFF0.data.o", include_if_any: [[version, ger]] }
 
       - { path: src/main/hvqm2util.o }
       - { path: src/main/041780.o }
@@ -244,8 +240,10 @@ segments:
       - { path: src/main/puzzle.o }
       - { path: src/main/tetris.o }
 
-      - { path: "asm/{version}/data/main/0B80D0.data.o", include_if_any: [[version, usa]] }
       - { path: "asm/{version}/data/main/0B8130.data.o", include_if_any: [[version, usa]] }
+      - { path: "asm/{version}/data/main/0B8650.data.o", include_if_any: [[version, eur]] }
+      - { path: "asm/{version}/data/main/0B6E80.data.o", include_if_any: [[version, fra]] }
+      - { path: "asm/{version}/data/main/0AE0B0.data.o", include_if_any: [[version, ger]] }
 
       # libmus
       - kind: group

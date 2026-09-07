@@ -8,6 +8,8 @@
 #include "macros_defines.h"
 #include "main_variables.h"
 
+#include "libc/assert.h"
+
 #include "animate.h"
 #include "animation.h"
 #include "attack.h"
@@ -20,6 +22,57 @@
 #include "the_game.h"
 #include "update2d.h"
 #include "update3d.h"
+
+/**
+ * Original name: rotate_cos
+ */
+f32 rotate_cos[4] = {
+    0.939693f,
+    0.965926f,
+    0.984808f,
+    0.996195f,
+};
+
+/**
+ * Original name: rotate_sin
+ */
+f32 rotate_sin[4] = {
+    0.34202f,
+    0.258819f,
+    0.173648f,
+    0.087156f,
+};
+
+/**
+ * Original name: switch_cos
+ */
+f32 switch_cos[3] = {
+    0.087156f,
+    0.0f,
+    -0.087156f,
+};
+
+/**
+ * Original name: switch_sin
+ */
+f32 switch_sin[3] = {
+    0.996195f,
+    1.0f,
+    0.996195f,
+};
+
+char D_800B7508_usa[] = {
+    3, 4, 3, 2, 1, 2, 3, 5, 6, 7, 8, 9, 4, 2, 1, 2, 10, 11, 12, 13,
+};
+
+/**
+ * Original name: TetrisBlockFrame
+ */
+char TetrisBlockFrame[] = {
+    3, 4, 3, 2, 1, 2, 3, 5, 6, 4, 2, 1, 2, 6, 7, 8, 9, 0, 0, 0,
+};
+
+static_assert(ARRAY_COUNT(D_800B7508_usa) == ARRAY_COUNT(TetrisBlockFrame), "");
 
 /**
  * Original name: UpdateBlockFrame
@@ -308,7 +361,7 @@ void UpdateRaiseTimer(tetWell *well) {
 }
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80057D68_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdateComboScore);
 #endif
 
 #if VERSION_EUR
@@ -324,7 +377,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/update", func_80056920_ger);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80057E10_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdateChainScore);
 #endif
 
 #if VERSION_EUR

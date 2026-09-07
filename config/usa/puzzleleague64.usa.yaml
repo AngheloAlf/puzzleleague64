@@ -416,7 +416,7 @@ segments:
 
       - [0x0B4690, data, main/0B4690]
       - [0x0B46B0, .data, main/gfx]
-      - [0x0B46C0, .data, main/0AA4D0]
+      - [0x0B46C0, .data, main/0025C0]
       - [0x0B46D0, data, main/sound]
       - [0x0B4710, data, main/0B4710]
       - [0x0B5F30, .data, main/rom_offsets]
@@ -432,7 +432,7 @@ segments:
       - [0x0B7440, .data, main/043D10]
       - [0x0B7550, .data, main/044E80]
       - [0x0B75B0, data, main/0B75B0]
-      - [0x0B80D0, data, main/0B80D0] # update? maybe wrong end
+      - [0x0B80D0, .data, main/update]
       - [0x0B8130, data, main/0B8130]
 
       - [0x0BEF60, .data, libmus/player]
@@ -631,7 +631,7 @@ segments:
       - { type: bss, vram: 0x8018E4F0, name: main/screen }
       - { type: bss, vram: 0x8018E570, name: main/story }
       - { type: bss, vram: 0x8018E580, name: main/peel }
-      - { type: bss, vram: 0x8018E940, name: main/02E800 }
+      - { type: .bss, vram: 0x8018E940, name: main/02E800 }
       - { type: bss, vram: 0x8018E9C0, name: main/editor }
       - { type: bss, vram: 0x8018EA00, name: main/bonus }
       - { type: .bss, vram: 0x8018EA50, name: main/hvqm2util }

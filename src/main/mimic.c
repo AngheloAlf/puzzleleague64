@@ -101,7 +101,7 @@ void LoadMimic1(s32 kind, s32 level, s32 number, s32 play) {
     gTheGame.tetrisWell[0].unk_43F4 = 0;
     gTheGame.tetrisWell[0].unk_441C = 0xDF;
     gTheGame.tetrisWell[0].unk_43F8 = 0;
-    gTheGame.tetrisWell[0].unk_43FC = 0;
+    gTheGame.tetrisWell[0].raise = 0;
     gTheGame.totalPlayer = 2;
 
     InitCursor(cursor);
@@ -423,7 +423,7 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
                             Init2DAttackBlocks(&gTheGame.tetrisWell[1]);
                             gTheGame.tetrisWell[1].unk_441C = 0xDF;
                             gTheGame.tetrisWell[1].unk_43F8 = 0;
-                            gTheGame.tetrisWell[1].unk_43FC = 0;
+                            gTheGame.tetrisWell[1].raise = 0;
                         }
                         gTheGame.unk_9B50[0].b.frameH = 0x78;
                         gTheGame.unk_9B50[1].b.frameH = 0x78;
@@ -444,7 +444,7 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
                     }
                     well->unk_441C = 0xDF;
                     well->unk_43F8 = 0;
-                    well->unk_43FC = 0;
+                    well->raise = 0;
                     chain_check[0] = 0;
                     chain_check[1] = 0;
                     anim_bg = 0;
@@ -457,8 +457,8 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
                 case 0x18:
                     brain->unk_010--;
                     if (brain->unk_010 <= 0) {
-                        well->unk_43FC = command->para1 * gTheGame.dimension;
-                        well->unk_43F8 += well->unk_43FC;
+                        well->raise = command->para1 * gTheGame.dimension;
+                        well->unk_43F8 += well->raise;
                         break;
                     }
                     return;
@@ -694,7 +694,7 @@ void DoMT(void) {
                 Check3DVisibleBlocks(well, cursor);
             }
 
-            well->unk_43FC = 0;
+            well->raise = 0;
             well->unk_43A4 = 0;
         }
     }

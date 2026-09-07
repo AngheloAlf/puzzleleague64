@@ -49,7 +49,7 @@ typedef struct tetWell {
     /* 0x43F0 */ u32 speed; /* Original name: speed */ // Inside `state_t state`
     /* 0x43F4 */ s32 unk_43F4;
     /* 0x43F8 */ s32 unk_43F8; // possibly part of "struct state_t state; // offset 0x4AA8, size 0x38", maybe "current_raise"
-    /* 0x43FC */ s32 unk_43FC;
+    /* 0x43FC */ s32 raise; /* Original name: raise */ // Inside `state_t state`
     /* 0x4400 */ s32 level; /* Original name: level */ // Inside `extra_t extra`
     /* 0x4404 */ s32 win; /* Original name: win */ // Inside `extra_t extra`
     /* 0x4408 */ s32 maxGarbage; /* Original name: maxGarbage */ // Inside `extra_t extra`
