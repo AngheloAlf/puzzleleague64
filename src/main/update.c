@@ -531,7 +531,7 @@ void UpdatePlayerPuzzle(s32 *arg0, s32 arg1, s32 arg2) {
     }
 
     arg2--;
-    temp_v0 = arg2 / 8 ;
+    temp_v0 = arg2 / 8;
     arg2 -= arg2 / 8 * 8;
 
     switch (arg1) {
@@ -621,7 +621,8 @@ nbool CheckPlayerPuzzleRound(s32 game, s32 stage) {
 
     switch (group) {
         case 1:
-            if (CHECK_FLAG_ALL(ptr[0], 0xFF) && CHECK_FLAG_ALL(ptr[1], 0xFF) && CHECK_FLAG_ALL(ptr[2], 0xFF) && CHECK_FLAG_ALL(ptr[3], 0x3F)) {
+            if (CHECK_FLAG_ALL(ptr[0], 0xFF) && CHECK_FLAG_ALL(ptr[1], 0xFF) && CHECK_FLAG_ALL(ptr[2], 0xFF) &&
+                CHECK_FLAG_ALL(ptr[3], 0x3F)) {
                 return ntrue;
             }
             break;
@@ -978,8 +979,8 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/update", UpdateComboChainCount);
 #ifdef NON_MATCHING
 // branch likelies issues
 void UpdateWell(tetWell *well, cursor_t *cursor, s32 num, s32 total) {
-    s32 var_s2; // row
-    s32 sp18; // col
+    s32 var_s2;       // row
+    s32 sp18;         // col
     BlockType var_s7; // type
     s32 sp34;
     s32 sp3C;
@@ -997,10 +998,10 @@ void UpdateWell(tetWell *well, cursor_t *cursor, s32 num, s32 total) {
     s32 var_a2_2;
     s32 var_s5;
     s32 var_s6;
-    block_t *temp_s0; // block
+    block_t *temp_s0;   // block
     block_t *temp_v1_2; // blk
 
-    #if 0
+#if 0
     // Local variables
     int row; // r28
     int col; // r1+0x18
@@ -1020,7 +1021,7 @@ void UpdateWell(tetWell *well, cursor_t *cursor, s32 num, s32 total) {
     int temp; // r4
     struct block_t * block; // r31
     struct block_t * blk; // r1+0x8
-    #endif
+#endif
 
     var_s6 = 0;
     sp54 = 0;
@@ -1220,7 +1221,8 @@ void UpdateWell(tetWell *well, cursor_t *cursor, s32 num, s32 total) {
                             if (well->block[var_s2 + 1][sp18].type != 0) {
                                 sp64 = -1;
                                 for (var_a1_6 = var_s2 - 1; var_a1_6 >= 0; var_a1_6--) {
-                                    if ((well->block[var_a1_6][sp18].type != BLOCKTYPE_0) && (well->block[var_a1_6][sp18].delay < 0)) {
+                                    if ((well->block[var_a1_6][sp18].type != BLOCKTYPE_0) &&
+                                        (well->block[var_a1_6][sp18].delay < 0)) {
                                         var_a2_2++;
                                     } else {
                                         var_a1_6 = 0;
@@ -1285,7 +1287,7 @@ void UpdateWell(tetWell *well, cursor_t *cursor, s32 num, s32 total) {
                                     temp_s0->frame_n = 0xB;
                                     break;
 
-                                default: 
+                                default:
                                     temp_s0->frame_n = 8;
                                     break;
                             }
@@ -1303,7 +1305,6 @@ void UpdateWell(tetWell *well, cursor_t *cursor, s32 num, s32 total) {
             if ((var_s5 != 0) && (sp18 == BLOCK_LEN_B - 1)) {
                 sp18 = -1;
             }
-
         }
     }
 

@@ -247,7 +247,7 @@ extern RomOffset B_8018C098_fra;
 
 #if VERSION_FRA
 // bugged?
-#define ALIGN_REV(x) ( ( ( (uintptr_t)(x) ) - 0xF ) & ~0xF)
+#define ALIGN_REV(x) ((((uintptr_t)(x)) - 0xF) & ~0xF)
 #else
 #define ALIGN_REV(x) (((uintptr_t)(x)) & ~0xF)
 #endif
@@ -257,7 +257,7 @@ void peelSetup(void) {
     u32 *var_a0;
     uintptr_t temp_a0;
     s32 i;
-    u32 value = (GPACK_RGBA5551(0, 0, 0, 1)<< 16) | GPACK_RGBA5551(0, 0, 0, 1);
+    u32 value = (GPACK_RGBA5551(0, 0, 0, 1) << 16) | GPACK_RGBA5551(0, 0, 0, 1);
 
     gbFadeAlpha = 0;
     geTypePeel = -1;
@@ -289,15 +289,15 @@ void peelSetup(void) {
 
     B_801AB8E4_usa = (void *)temp_a0;
 
-    #if VERSION_FRA
+#if VERSION_FRA
     (void)sp10;
     fileGetAddress((void *)"RIPPLE.RDF", &B_8018C098_fra);
-    #else
+#else
     if (fileOpen(&sp10, "RIPPLE.RDF") != 0) {
         fileGetAddress(&sp10, &gnWaveData);
         fileClose(&sp10);
     }
-    #endif
+#endif
 }
 
 void func_8002DBF0_usa(void) {
