@@ -308,8 +308,8 @@ void InitTetrisWell(void) {
         temp_s3->chain_garbage = 0;
         temp_s3->collision = 0;
         temp_s3->unk_43F4 = 0;
-        temp_s3->unk_441C = 0xDF;
-        temp_s3->unk_43F8 = 0;
+        temp_s3->bot_height = 0xDF;
+        temp_s3->current_raise = 0;
         temp_s3->raise = 0;
 
         InitCursor(sp34);
@@ -515,12 +515,12 @@ void DoTetris(void) {
                         well->unk_43EC &= 0xFFFF;
                         var_s2 = (var_a0 >> 0x10);
                         well->raise = var_s2 * gTheGame.dimension;
-                        well->unk_43F8 += well->raise;
+                        well->current_raise += well->raise;
 
                         temp = gTheGame.dimension * 0x10;
-                        if (temp < well->unk_43F8) {
-                            well->raise = gTheGame.dimension * 0x10 - (well->unk_43F8 - well->raise);
-                            well->unk_43F8 = gTheGame.dimension * 0x10;
+                        if (temp < well->current_raise) {
+                            well->raise = gTheGame.dimension * 0x10 - (well->current_raise - well->raise);
+                            well->current_raise = gTheGame.dimension * 0x10;
                         }
                     }
                 }
@@ -572,10 +572,10 @@ void DoTetris(void) {
             UpdateAnimation(well, num, var_s2);
             UpdateMiscStuff(well, cursor, num);
 
-            if ((cursor->state <= 0) && (well->unk_43F8 >= ((s32)gTheGame.dimension * 0x10))) {
+            if ((cursor->state <= 0) && (well->current_raise >= ((s32)gTheGame.dimension * 0x10))) {
                 well->collision = -1;
                 AddNewRow(well, cursor, num);
-                well->unk_43F8 = 0;
+                well->current_raise = 0;
                 if ((gSelection == SELECTION_AA) || (gSelection == SELECTION_B4)) {
                     cursor->target[0] -= 1;
                 }

@@ -260,7 +260,7 @@ INLINE void Update3DIconSplash(explode_t *explode, s32 distance) {
 }
 
 void Update3DExplosion(tetWell *well) {
-    s32 distance = well->unk_43F8 / 2;
+    s32 distance = well->current_raise / 2;
     explode_t *explode;
     s32 count;
     s32 temp;

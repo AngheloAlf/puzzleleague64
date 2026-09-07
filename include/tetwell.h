@@ -30,7 +30,7 @@ typedef struct tetWell {
     /* 0x43A4 */ s32 unk_43A4;
     /* 0x43A8 */ s32 unk_43A8; // old_chain?
     /* 0x43AC */ s32 score; /* Original name: score */
-    /* 0x43B0 */ s32 unk_43B0;
+    /* 0x43B0 */ s32 unk_43B0; /* Original name: raise */
     /* 0x43B4 */ s32 danger; /* Original name: danger */ // TODO: nbool?
     /* 0x43B8 */ s32 alert; /* Original name: alert */ // TODO: nbool?
     /* 0x43BC */ s32 unk_43BC;
@@ -48,7 +48,7 @@ typedef struct tetWell {
     /* 0x43EC */ UNK_TYPE4 unk_43EC;
     /* 0x43F0 */ u32 speed; /* Original name: speed */ // Inside `state_t state`
     /* 0x43F4 */ s32 unk_43F4;
-    /* 0x43F8 */ s32 unk_43F8; // possibly part of "struct state_t state; // offset 0x4AA8, size 0x38", maybe "current_raise"
+    /* 0x43F8 */ s32 current_raise; /* Original name: current_raise */ // Inside `state_t state`
     /* 0x43FC */ s32 raise; /* Original name: raise */ // Inside `state_t state`
     /* 0x4400 */ s32 level; /* Original name: level */ // Inside `extra_t extra`
     /* 0x4404 */ s32 win; /* Original name: win */ // Inside `extra_t extra`
@@ -57,7 +57,7 @@ typedef struct tetWell {
     /* 0x4410 */ UNK_TYPE1 unk_4410[0x4];
     /* 0x4414 */ s32 queueGarbage; /* Original name: queueGarbage */ // Inside `extra_t extra`
     /* 0x4418 */ s32 wellGarbage; /* Original name: wellGarbage */ // Inside `extra_t extra`
-    /* 0x441C */ s32 unk_441C;
+    /* 0x441C */ s32 bot_height;
     /* 0x4420 */ menu_t menu;
 } tetWell; // size = 0x4430
 

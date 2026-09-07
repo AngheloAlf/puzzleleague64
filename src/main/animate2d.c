@@ -34,7 +34,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/animate2d", Input2D);
 nbool Move2DCursorUp(tetWell *well, cursor_t *cursor, CursorHoldVal hold) {
     s32 pixel;
 
-    if (well->unk_43F8 == 0) {
+    if (well->current_raise == 0) {
         if (cursor->y < 11) {
             pixel = cursor->rect.s.objY >> 2;
             cursor->rect.s.objY = (pixel - 16) << 2;

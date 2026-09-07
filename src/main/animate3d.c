@@ -34,7 +34,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/animate3d", Input3D);
 nbool Move3DCursorUp(tetWell *well, cursor_t *cursor, CursorHoldVal hold) {
     s32 temp;
 
-    if (well->unk_43F8 == 0) {
+    if (well->current_raise == 0) {
         if (cursor->y < 0xB) {
             cursor->y += 1;
             temp = cursor->rect.s.objY >> 2;

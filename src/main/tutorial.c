@@ -184,7 +184,7 @@ void InitTutorial(void) {
     for (var_s2 = 0; var_s2 < gTheGame.totalPlayer; var_s2++) {
         s2 = &gTheGame.tetrisWell[var_s2];
 
-        s2->unk_43B0 = 0;
+        s2->raise = 0;
         s2->unk_43A8 = 0;
         s2->unk_43A4 = 0;
         s2->danger = 0;
@@ -193,8 +193,8 @@ void InitTutorial(void) {
         s2->chain_garbage = 0;
         s2->collision = 0;
         s2->unk_43F4 = 0;
-        s2->unk_441C = 0xDF;
-        s2->unk_43F8 = 0;
+        s2->bot_height = 0xDF;
+        s2->current_raise = 0;
         s2->raise = 0;
 
         if (gTheGame.dimension == DIMENSION_2D) {
@@ -217,12 +217,12 @@ void InitTutorial(void) {
     switch (gTheGame.menu[0].game) { /* switch 2 */
         case 0x1:                    /* switch 2 */
             Init2DPuzzle(s2, s1, tutorial1, 1);
-            s3->unk_03C = 1;
+            s3->where = 1;
             break;
 
         case 0x2: /* switch 2 */
             Init2DPuzzle(s2, s1, tutorial2, 1);
-            s3->unk_03C = 2;
+            s3->where = 2;
             gTheGame.gSPRITE[9].s.scaleW = 0x400;
             gTheGame.gSPRITE[9].s.imageH = 0x100;
             gTheGame.gSPRITE[9].s.imageStride = 8;
@@ -239,7 +239,7 @@ void InitTutorial(void) {
             InitCursor(s1);
             Init3DCursor(s1, 0);
             Init3DPuzzle(s2, s1, tutorial3, 1);
-            s3->unk_03C = 5;
+            s3->where = 5;
             s2->translation = 0.0f;
             Init3DIcons(s2);
             Init3DAttackBlocks(s2);
@@ -248,12 +248,12 @@ void InitTutorial(void) {
 
         case 0x3: /* switch 2 */
             Init2DPuzzle(s2, s1, tutorial4, 1);
-            s3->unk_03C = 3;
+            s3->where = 3;
             break;
 
         case 0x4: /* switch 2 */
             Init2DPuzzle(s2, s1, tutorial5, 1);
-            s3->unk_03C = 4;
+            s3->where = 4;
             break;
     }
 
@@ -275,10 +275,10 @@ void InitTutorial(void) {
     InitAI(s2, s1, s3);
     s3->unk_040 = 0;
     s3->unk_044 = 0;
-    s3->unk_028 = var_s7;
+    s3->t = var_s7;
     s3->unk_02C = (gTheGame.menu[0].game == 3) ? 2 : 4;
 
-    s3->unk_038 = 0x64;
+    s3->direction = 0x64;
     s3->unk_024 = 0;
     if (gGameStatus & GAME_STATUS_FLAG_80) {
         if (gTheGame.menu[0].game == 4) {
@@ -429,8 +429,8 @@ static inline void inlined_func(s32 var_a2) {
             }
 
             B_80193020_usa = (var_a2 << 0x10) | temp_s2;
-            func_80028DC0_usa(brainbrain[0].unk_028, temp_s2, var_a2);
-            screenSetImagePosition(brainbrain[0].unk_028, temp_s2, var_s1, var_s0);
+            func_80028DC0_usa(brainbrain[0].t, temp_s2, var_a2);
+            screenSetImagePosition(brainbrain[0].t, temp_s2, var_s1, var_s0);
         }
     }
 }
@@ -448,7 +448,7 @@ static inline void inlined_func2(u16 temp) {
         return;
     }
 
-    if (func_8002864C_usa(brainbrain[0].unk_028, temp2, &sp28)) {
+    if (func_8002864C_usa(brainbrain[0].t, temp2, &sp28)) {
         if (sp28->unk_14 < 0xFF) {
             sp28->unk_14 += 8;
             if (sp28->unk_14 > 0xFF) {
@@ -457,7 +457,7 @@ static inline void inlined_func2(u16 temp) {
         }
     }
 
-    if (func_8002864C_usa(brainbrain[0].unk_028, var_s0_2, &sp28)) {
+    if (func_8002864C_usa(brainbrain[0].t, var_s0_2, &sp28)) {
         if (sp28->unk_14 > 0) {
             sp28->unk_14 -= 8;
             if (sp28->unk_14 < 0) {
@@ -481,12 +481,12 @@ void DoTutorial(void) {
 
     screenSetBackLayers(0);
 
-    menuTickFairy(brainbrain[0].unk_028, gCounter, brainbrain[0].unk_038, 0x4FFFC, -0x3F0018, 0x520002,
+    menuTickFairy(brainbrain[0].t, gCounter, brainbrain[0].direction, 0x4FFFC, -0x3F0018, 0x520002,
                   brainbrain[0].unk_02C, brainbrain[0].unk_024);
     DoMT();
 
     var_a2 = -1;
-    temp2 = brainbrain[0].unk_038;
+    temp2 = brainbrain[0].direction;
     switch (gTheGame.menu[0].game) {
         case 0x1:
             // Why the `&=`?

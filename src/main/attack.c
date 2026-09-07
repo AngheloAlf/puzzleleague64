@@ -153,8 +153,8 @@ void func_8005A9EC_usa(tetWell *well, attack_t *attack) {
     }
     temp_lo = var_a1 * gTheGame.dimension;
     well->raise += temp_lo;
-    well->unk_43F8 += temp_lo;
-    well->unk_441C -= temp_lo;
+    well->current_raise += temp_lo;
+    well->bot_height -= temp_lo;
 }
 #else
 INCLUDE_ASM("asm/usa/nonmatchings/main/attack", func_8005A9EC_usa);
@@ -303,8 +303,8 @@ void AttackShake(tetWell *well, cursor_t *cursor, attack_t *attack) {
         }
         temp_lo = var_a1 * gTheGame.dimension;
         well->raise += temp_lo;
-        well->unk_43F8 += temp_lo;
-        well->unk_441C -= temp_lo;
+        well->current_raise += temp_lo;
+        well->bot_height -= temp_lo;
         return;
     }
     attack->state = 8;
@@ -660,7 +660,7 @@ void InitFlyAttack(tetWell *well, attack_t *attack, s32 posX, s32 posY, ENUM_TYP
         return;
     }
 
-    temp_s5 = well->unk_441C - 0xDF;
+    temp_s5 = well->bot_height - 0xDF;
     if (gTheGame.dimension == DIMENSION_2D) {
         sp10 = well->block_rect[0][0].s.objX >> 0x2;
         sp14 = (well->block_rect[0][0].s.objY >> 0x2) - temp_s5;

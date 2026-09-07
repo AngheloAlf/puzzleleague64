@@ -11,40 +11,42 @@ struct tetWell;
 
 #define AI_MOVE_COUNT 25
 
+/* Original name: command_t */
 typedef struct command_t {
     /* 0x0 */ s32 function;
     /* 0x4 */ s32 para1;
     /* 0x8 */ s32 para2;
 } command_t; // size = 0xC
 
+/* Original name: ai_t */
 typedef struct ai_t {
     /* 0x000 */ s32 cursor_x;
     /* 0x004 */ s32 cursor_y;
     /* 0x008 */ s32 unk_008; // think?
     /* 0x00C */ s32 speed;
-    /* 0x010 */ s32 unk_010;
+    /* 0x010 */ s32 delay; /* Original name: delay */
     /* 0x014 */ u8 unk_014; // character?
     /* 0x015 */ UNK_PAD unk_015[0x3];
     /* 0x018 */ s32 unk_018; // choice?
     /* 0x01C */ s32 unk_01C;
     /* 0x020 */ s32 unk_020; // garbage?
     /* 0x024 */ s32 unk_024;
-    /* 0x028 */ s32 unk_028;
+    /* 0x028 */ s32 t; /* Original name: t */
     /* 0x02C */ s32 unk_02C;
     /* 0x030 */ s32 unk_030;
     /* 0x034 */ s32 unk_034;
-    /* 0x038 */ s32 unk_038;
-    /* 0x03C */ s32 unk_03C;
+    /* 0x038 */ s32 direction; /* Original name: direction */
+    /* 0x03C */ s32 where; /* Original name: where */ // TODO: enum?
     /* 0x040 */ s32 unk_040;
     /* 0x044 */ s32 unk_044;
-    /* 0x048 */ command_t unk_048[UNK_SIZE]; // command[15]?
+    /* 0x048 */ command_t command[UNK_SIZE]; // command[15]?
     /* 0x054 */ UNK_PAD unk_054[0x0FC-0x054];
-    /* 0x0FC */ s32 unk_0FC;
-    /* 0x100 */ s32 unk_100; // com_tail?
-    /* 0x104 */ s32 unk_104; // total_command?
-    /* 0x108 */ char move[AI_MOVE_COUNT]; // TODO: make an enum?
-    /* 0x124 */ s32 unk_124; // move_head?
-    /* 0x128 */ s32 unk_128; // move_tail?
+    /* 0x0FC */ s32 com_head; /* Original name: com_head */
+    /* 0x100 */ s32 com_tail; /* Original name: com_tail */
+    /* 0x104 */ s32 total_command; /* Original name: total_command */
+    /* 0x108 */ char move[AI_MOVE_COUNT]; /* Original name: move */ // TODO: make an enum?
+    /* 0x124 */ s32 move_head; /* Original name: move_head */
+    /* 0x128 */ s32 move_tail; /* Original name: move_tail */
 } ai_t; // size = 0x12C
 
 #if 0

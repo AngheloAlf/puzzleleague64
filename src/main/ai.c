@@ -26,8 +26,8 @@ void InitAI(tetWell *well, cursor_t *cursor, ai_t *brain) {
     brain->unk_01C = 1;
     brain->unk_020 = 0;
     brain->unk_024 = -1;
-    brain->unk_038 = 0;
-    brain->unk_010 = brain->speed;
+    brain->direction = 0;
+    brain->delay = brain->speed;
     AIClearCommand(brain);
     AIFinishMove(brain);
 
@@ -271,9 +271,9 @@ INLINE void AIChangeVision(ai_t *brain) {
     brain->unk_034 = 5;
     temp = brain->cursor_y + 2;
     if (temp > 0xB) {
-        brain->unk_028 = 0xB;
+        brain->t = 0xB;
     } else {
-        brain->unk_028 = temp;
+        brain->t = temp;
     }
 
     temp = brain->cursor_y - 2;
@@ -309,36 +309,36 @@ INLINE void AISetGarbage(tetWell *well, cursor_t *cursor, ai_t *brain) {
 }
 
 INLINE void AIAddCommand(ai_t *brain, s32 func, s32 para1, s32 para2) {
-    command_t *command = &brain->unk_048[brain->unk_100];
+    command_t *command = &brain->command[brain->com_tail];
 
     command->function = func;
     command->para1 = para1;
     command->para2 = para2;
-    brain->unk_104++;
-    brain->unk_100++;
+    brain->total_command++;
+    brain->com_tail++;
 }
 
 void AIDelCommand(ai_t *brain, s32 total) {
-    brain->unk_104 -= total;
-    brain->unk_100 -= total;
+    brain->total_command -= total;
+    brain->com_tail -= total;
 }
 
 INLINE void AISetMove(ai_t *brain, s32 move) {
-    brain->move[brain->unk_128] = move;
-    brain->unk_128++;
+    brain->move[brain->move_tail] = move;
+    brain->move_tail++;
 }
 
 void AIFinishMove(ai_t *brain) {
-    brain->unk_124 = 0;
-    brain->unk_128 = 0;
+    brain->move_head = 0;
+    brain->move_tail = 0;
 }
 
 void AIClearCommand(ai_t *brain) {
-    brain->unk_104 = 0;
-    brain->unk_0FC = 0;
-    brain->unk_100 = 0;
-    brain->unk_124 = 0;
-    brain->unk_128 = 0;
+    brain->total_command = 0;
+    brain->com_head = 0;
+    brain->com_tail = 0;
+    brain->move_head = 0;
+    brain->move_tail = 0;
 }
 
 s32 AIRowPack(ai_t *brain, s32 pos1, s32 pos2) {
@@ -918,7 +918,7 @@ void AIBoundaryCheck(tetWell *well, ai_t *brain) {
     if (brain->unk_024 != -1) {
         var_a0 = brain->unk_024 - 1;
     } else {
-        var_a0 = brain->unk_028;
+        var_a0 = brain->t;
     }
 
     if (var_a0 - brain->unk_02C < 2) {
@@ -2388,11 +2388,11 @@ s32 AIStupidMove(tetWell *well, ai_t *brain) {
 
     for (row = 0; row < BLOCK_LEN_ROWS; row++) {
         if (AIPossibleRow(well, brain, row) != 0) {
-            brain->unk_100 = 0;
-            brain->unk_104 = 0;
-            brain->unk_0FC = 0;
-            brain->unk_124 = 0;
-            brain->unk_128 = 0;
+            brain->com_tail = 0;
+            brain->total_command = 0;
+            brain->com_head = 0;
+            brain->move_head = 0;
+            brain->move_tail = 0;
             AIAddCommand(brain, 1, row, 0);
             AIPossibleRow(well, brain, row);
             return -1;
@@ -3137,28 +3137,28 @@ void AIMove(tetWell *well, cursor_t *cursor, ai_t *brain, s32 num) {
         if (well->unk_43B0 > 0) {
             RaiseBlocks(well, cursor);
             if (well->unk_43B0 == 0) {
-                brain->unk_104 = 0;
-                brain->unk_0FC = 0;
-                brain->unk_100 = 0;
-                brain->unk_124 = 0;
-                brain->unk_128 = 0;
+                brain->total_command = 0;
+                brain->com_head = 0;
+                brain->com_tail = 0;
+                brain->move_head = 0;
+                brain->move_tail = 0;
             }
             return;
         }
     }
 
-    brain->unk_010--;
-    if ((brain->unk_010 <= 0) && (brain->unk_124 != brain->unk_128)) {
+    brain->delay--;
+    if ((brain->delay <= 0) && (brain->move_head != brain->move_tail)) {
         if (AnimationRandom(0x177) % 3 == 0) {
-            brain->unk_010 = brain->speed + AnimationRandom(2);
+            brain->delay = brain->speed + AnimationRandom(2);
         } else {
-            brain->unk_010 = brain->speed - AnimationRandom(2);
+            brain->delay = brain->speed - AnimationRandom(2);
         }
 
         if (well->unk_43F4 != 0) {
-            brain->unk_010 = brain->speed - AnimationRandom(3);
+            brain->delay = brain->speed - AnimationRandom(3);
         } else if (brain->unk_020 != 0) {
-            brain->unk_010 = brain->unk_010 - AnimationRandom(3);
+            brain->delay = brain->delay - AnimationRandom(3);
         }
 
         if (gTheGame.dimension == DIMENSION_2D) {
@@ -3174,7 +3174,7 @@ void AI2DMove(tetWell *well, cursor_t *cursor, ai_t *brain, s32 num) {
     nbool flag = ntrue;
 
     // TODO: enum for move?
-    switch (brain->move[brain->unk_124]) {
+    switch (brain->move[brain->move_head]) {
         case 1:
             sound = Move2DCursorLeft(cursor, CURSOR_HOLD_VAL_10);
             break;
@@ -3194,11 +3194,11 @@ void AI2DMove(tetWell *well, cursor_t *cursor, ai_t *brain, s32 num) {
         case 5:
             flag = Switch2DBlocks(well, cursor, num);
             if (!flag) {
-                brain->unk_104 = 0;
-                brain->unk_0FC = 0;
-                brain->unk_100 = 0;
-                brain->unk_124 = 0;
-                brain->unk_128 = 0;
+                brain->total_command = 0;
+                brain->com_head = 0;
+                brain->com_tail = 0;
+                brain->move_head = 0;
+                brain->move_tail = 0;
                 return;
             }
             break;
@@ -3211,7 +3211,7 @@ void AI2DMove(tetWell *well, cursor_t *cursor, ai_t *brain, s32 num) {
                 }
             }
 
-            brain->unk_010 = 1;
+            brain->delay = 1;
             break;
 
         case 7:
@@ -3228,35 +3228,35 @@ void AI2DMove(tetWell *well, cursor_t *cursor, ai_t *brain, s32 num) {
 
         case 11:
             sound = Move2DCursorLeft(cursor, CURSOR_HOLD_VAL_10);
-            brain->unk_010 = 1;
+            brain->delay = 1;
             break;
 
         case 12:
             sound = Move2DCursorRight(cursor, CURSOR_HOLD_VAL_10);
-            brain->unk_010 = 1;
+            brain->delay = 1;
             break;
 
         case 13:
             sound = Move2DCursorUp(well, cursor, CURSOR_HOLD_VAL_10);
-            brain->unk_010 = 1;
+            brain->delay = 1;
             break;
 
         case 14:
             sound = Move2DCursorDown(cursor, CURSOR_HOLD_VAL_10);
-            brain->unk_010 = 1;
+            brain->delay = 1;
             break;
 
         case 15:
             flag = Switch2DBlocks(well, cursor, num);
             if (!flag) {
-                brain->unk_104 = 0;
-                brain->unk_0FC = 0;
-                brain->unk_100 = 0;
-                brain->unk_124 = 0;
-                brain->unk_128 = 0;
+                brain->total_command = 0;
+                brain->com_head = 0;
+                brain->com_tail = 0;
+                brain->move_head = 0;
+                brain->move_tail = 0;
                 return;
             }
-            brain->unk_010 = 1;
+            brain->delay = 1;
             break;
 
         default:
@@ -3274,7 +3274,7 @@ void AI2DMove(tetWell *well, cursor_t *cursor, ai_t *brain, s32 num) {
     }
 
     if (flag) {
-        brain->unk_124++;
+        brain->move_head++;
     }
 }
 
@@ -3282,7 +3282,7 @@ void AI3DMove(tetWell *well, cursor_t *cursor, ai_t *brain, s32 num) {
     nbool sound = nfalse;
     nbool flag = ntrue;
 
-    switch (brain->move[brain->unk_124]) {
+    switch (brain->move[brain->move_head]) {
         case 1:
         case 11:
             sound = Move3DCursorLeft(cursor, CURSOR_HOLD_VAL_10);
@@ -3307,11 +3307,11 @@ void AI3DMove(tetWell *well, cursor_t *cursor, ai_t *brain, s32 num) {
         case 15:
             flag = Switch3DBlocks(well, cursor, num);
             if (!flag) {
-                brain->unk_104 = 0;
-                brain->unk_0FC = 0;
-                brain->unk_100 = 0;
-                brain->unk_124 = 0;
-                brain->unk_128 = 0;
+                brain->total_command = 0;
+                brain->com_head = 0;
+                brain->com_tail = 0;
+                brain->move_head = 0;
+                brain->move_tail = 0;
                 return;
             }
             break;
@@ -3334,7 +3334,7 @@ void AI3DMove(tetWell *well, cursor_t *cursor, ai_t *brain, s32 num) {
             break;
 
         case 8:
-            brain->move[brain->unk_124] = AnimationRandom(5) + 1;
+            brain->move[brain->move_head] = AnimationRandom(5) + 1;
             flag = nfalse;
             break;
 
@@ -3353,14 +3353,14 @@ void AI3DMove(tetWell *well, cursor_t *cursor, ai_t *brain, s32 num) {
     }
 
     if (flag) {
-        brain->unk_124++;
+        brain->move_head++;
     }
 }
 
 void AISpeedUpMove(ai_t *brain) {
     s32 count;
 
-    for (count = brain->unk_124; count < brain->unk_128; count++) {
+    for (count = brain->move_head; count < brain->move_tail; count++) {
         char *move = &brain->move[count];
 
         switch (*move) {

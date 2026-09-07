@@ -94,22 +94,22 @@ void RaiseBlocks(tetWell *well, cursor_t *cursor) {
         var_a0 *= 2;
     }
     well->raise += var_a0;
-    well->unk_43F8 = well->unk_43F8 + var_a0;
+    well->current_raise += var_a0;
 
     temp_v0 = gTheGame.dimension * 0x10;
-    if (well->unk_43F8 == temp_v0) {
+    if (well->current_raise == temp_v0) {
         if (well->unk_43B0 == 1) {
             well->score++;
         }
         well->unk_43B0 = -4;
         return;
-    } else if (temp_v0 < well->unk_43F8) {
+    } else if (temp_v0 < well->current_raise) {
         if (well->unk_43B0 == 1) {
             well->score++;
         }
         well->unk_43B0 = -4;
-        well->raise = (gTheGame.dimension * 0x10) - (well->unk_43F8 - well->raise);
-        well->unk_43F8 = gTheGame.dimension * 0x10;
+        well->raise = (gTheGame.dimension * 0x10) - (well->current_raise - well->raise);
+        well->current_raise = gTheGame.dimension * 0x10;
     }
 }
 

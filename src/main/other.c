@@ -259,7 +259,7 @@ void UpdateMiscStuff(tetWell *well, cursor_t *cursor, s32 num) {
         case SELECTION_B4:
         case SELECTION_C8:
             gTheGame.miscToggle = -1;
-            gTheGame.unk_9B50[num].b.frameY = well->unk_441C * 4;
+            gTheGame.unk_9B50[num].b.frameY = well->bot_height * 4;
             break;
 
         default:
