@@ -19,9 +19,9 @@ void InitCursor(cursor_t *cursor) {
     s32 var_v0;
 
     cursor->state = 0;
-    cursor->extra_wait = 0;
+    cursor->delay = 0;
     cursor->waiting = 0;
-    cursor->unk_0C = 0;
+    cursor->extra_wait = 0;
     cursor->frame_n = 0;
     cursor->frame_d = 0xF;
 

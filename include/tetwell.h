@@ -47,14 +47,14 @@ typedef struct tetWell {
     /* 0x43E8 */ UNK_PAD unk_43E8[0x4];
     /* 0x43EC */ UNK_TYPE4 unk_43EC;
     /* 0x43F0 */ u32 speed; /* Original name: speed */ // Inside `state_t state`
-    /* 0x43F4 */ s32 unk_43F4;
+    /* 0x43F4 */ s32 death; /* Original name: death */ // Inside `state_t state`
     /* 0x43F8 */ s32 current_raise; /* Original name: current_raise */ // Inside `state_t state`
     /* 0x43FC */ s32 raise; /* Original name: raise */ // Inside `state_t state`
     /* 0x4400 */ s32 level; /* Original name: level */ // Inside `extra_t extra`
     /* 0x4404 */ s32 win; /* Original name: win */ // Inside `extra_t extra`
     /* 0x4408 */ s32 maxGarbage; /* Original name: maxGarbage */ // Inside `extra_t extra`
     /* 0x440C */ s32 clearGarbage; /* Original name: clearGarbage */ // Inside `extra_t extra`
-    /* 0x4410 */ UNK_TYPE1 unk_4410[0x4];
+    /* 0x4410 */ UNK_PAD unk_4410[0x4];
     /* 0x4414 */ s32 queueGarbage; /* Original name: queueGarbage */ // Inside `extra_t extra`
     /* 0x4418 */ s32 wellGarbage; /* Original name: wellGarbage */ // Inside `extra_t extra`
     /* 0x441C */ s32 bot_height;

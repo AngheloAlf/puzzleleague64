@@ -307,7 +307,7 @@ void InitTetrisWell(void) {
         temp_s3->unk_43BC = 0;
         temp_s3->chain_garbage = 0;
         temp_s3->collision = 0;
-        temp_s3->unk_43F4 = 0;
+        temp_s3->death = 0;
         temp_s3->bot_height = 0xDF;
         temp_s3->current_raise = 0;
         temp_s3->raise = 0;
@@ -498,9 +498,9 @@ void DoTetris(void) {
         B_801AAB98_usa += 1;
         if (!(gGameStatus & GAME_STATUS_FLAG_20) || (gCounter % 2 != 0)) {
             if (gMain == GMAIN_387) {
-                if ((cursor->extra_wait == 0) && (cursor->unk_0C == 0) && (well->unk_43F4 == 0) &&
-                    (well->unk_43B0 == 0) && (gSelection >= SELECTION_83) && (B_801AB61C_usa == 0) &&
-                    (cursor->state <= 0) && (cursor->waiting == 0)) {
+                if ((cursor->delay == 0) && (cursor->extra_wait == 0) && (well->death == 0) && (well->unk_43B0 == 0) &&
+                    (gSelection >= SELECTION_83) && (B_801AB61C_usa == 0) && (cursor->state <= 0) &&
+                    (cursor->waiting == 0)) {
                     well->unk_43EC += well->speed;
 
                     if (well->unk_43EC >= 0x1000U) {

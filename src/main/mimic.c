@@ -98,7 +98,7 @@ void LoadMimic1(s32 kind, s32 level, s32 number, s32 play) {
     gTheGame.tetrisWell[0].unk_43BC = 0;
     gTheGame.tetrisWell[0].chain_garbage = 0;
     gTheGame.tetrisWell[0].collision = 0;
-    gTheGame.tetrisWell[0].unk_43F4 = 0;
+    gTheGame.tetrisWell[0].death = 0;
     gTheGame.tetrisWell[0].bot_height = 0xDF;
     gTheGame.tetrisWell[0].current_raise = 0;
     gTheGame.tetrisWell[0].raise = 0;
@@ -283,7 +283,7 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
     struct command_t * command; // r1+0x8
 #endif
 
-    if (cursor->extra_wait != 0) {
+    if (cursor->delay != 0) {
         return;
     }
 

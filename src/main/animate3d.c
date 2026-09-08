@@ -123,8 +123,8 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/animate3d", Switch3DBlocks);
 
 void Update3DSwitching(tetWell *well, cursor_t *cursor) {
     if (cursor->sy != -1) {
-        cursor->extra_wait--;
-        if ((cursor->extra_wait == 0) || (cursor->sx != 0)) {
+        cursor->delay--;
+        if ((cursor->delay == 0) || (cursor->sx != 0)) {
             AfterSwitch(well, cursor, &well->block[cursor->sy][4], &well->block[cursor->sy][5], DIMENSION_3D);
         }
     }

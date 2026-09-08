@@ -3155,7 +3155,7 @@ void AIMove(tetWell *well, cursor_t *cursor, ai_t *brain, s32 num) {
             brain->delay = brain->speed - AnimationRandom(2);
         }
 
-        if (well->unk_43F4 != 0) {
+        if (well->death != 0) {
             brain->delay = brain->speed - AnimationRandom(3);
         } else if (brain->unk_020 != 0) {
             brain->delay = brain->delay - AnimationRandom(3);

@@ -236,9 +236,9 @@ void UpdateText(void) {
             sprintf(string, "%6d", well1->score);
             SetText(0xE8, 0x3F, string, SETTEXTTYPE_15);
 
-            if (cursor1->unk_0C > 0) {
+            if (cursor1->extra_wait > 0) {
                 // TODO: dedicated macro?
-                sprintf(string, "%02d", cursor1->unk_0C / ADJUST_FRAMERATE(60));
+                sprintf(string, "%02d", cursor1->extra_wait / ADJUST_FRAMERATE(60));
                 SetText(0xFA, 0x5B, string, SETTEXTTYPE_14);
 
                 gTheGame.drawText[3].texture = -1;
@@ -271,8 +271,8 @@ void UpdateText(void) {
             sprintf(string, "%6d", well1->score);
             SetText(0xE8, 0x3F, string, SETTEXTTYPE_15);
 
-            if (cursor1->unk_0C > 0) {
-                sprintf(string, "%02d", cursor1->unk_0C / ADJUST_FRAMERATE(60));
+            if (cursor1->extra_wait > 0) {
+                sprintf(string, "%02d", cursor1->extra_wait / ADJUST_FRAMERATE(60));
                 SetText(0xFA, 0x5B, string, SETTEXTTYPE_14);
 
                 gTheGame.drawText[3].texture = -1;

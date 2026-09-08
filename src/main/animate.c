@@ -4,7 +4,6 @@
 
 #include "animate.h"
 
-#include "include_asm.h"
 #include "macros_defines.h"
 #include "main_variables.h"
 
@@ -77,19 +76,19 @@ void RaiseBlocks(tetWell *well, cursor_t *cursor) {
         well->unk_43B0 = 0;
         return;
     }
-    if (cursor->extra_wait != 0) {
+    if (cursor->delay != 0) {
         well->unk_43B0 = 0;
         return;
     }
-    if (well->unk_43F4 != 0) {
-        cursor->unk_0C = 0;
+    if (well->death != 0) {
+        cursor->extra_wait = 0;
         return;
     }
 
-    if ((well->unk_43B0 == 1) && (cursor->unk_0C > 0)) {
+    if ((well->unk_43B0 == 1) && (cursor->extra_wait > 0)) {
         well->unk_43B0 = 2;
     }
-    cursor->unk_0C = 0;
+    cursor->extra_wait = 0;
     if (well->speed < 0 || well->speed > 0x10000) {
         var_a0 *= 2;
     }
@@ -251,7 +250,7 @@ void AfterSwitch(tetWell *well, cursor_t *cursor, block_t *block1, block_t *bloc
     }
 
     well->collision = -1;
-    cursor->extra_wait = 0;
+    cursor->delay = 0;
     cursor->sy = -1;
     gOverflow += 0xF0;
 }
@@ -349,7 +348,7 @@ void CheckShake(tetWell *well, cursor_t *cursor) {
         } else if ((var_t9 != 0) || (block->type == BLOCKTYPE_0) ||
                    ((block->state >= BLOCKSTATE_3) && (block->state <= BLOCKSTATE_6))) {
             var_t0 = 0;
-        } else if (cursor->unk_0C <= 0) {
+        } else if (cursor->extra_wait <= 0) {
             var_t0 = 2;
 
             for (var_a3_2 = 0; var_a3_2 < gMax; var_a3_2++) {
@@ -413,7 +412,7 @@ void CheckShake(tetWell *well, cursor_t *cursor) {
 /**
  * Original name: CheckFieldActive
  */
-nbool CheckFieldActive(tetWell *well) {
+INLINE nbool CheckFieldActive(tetWell *well) {
     s32 row;
     s32 col;
 
@@ -428,18 +427,70 @@ nbool CheckFieldActive(tetWell *well) {
     return nfalse;
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/animate", CheckGameOver);
-#endif
+nbool CheckGameOver(tetWell *well, cursor_t *cursor) {
+    s32 col;
+    s32 value;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/animate", CheckGameOver);
-#endif
+    for (col = 0; col < gMax; col++) {
+        block_t *block = &well->block[BLOCK_LEN_ROWS - 1][col];
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/animate", CheckGameOver);
-#endif
+        if (block->type != BLOCKTYPE_0) {
+            break;
+        }
+    }
+    if (col == gMax) {
+        well->death = 0;
+        return nfalse;
+    }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/animate", CheckGameOver);
-#endif
+    if (cursor->extra_wait > 0) {
+        return nfalse;
+    }
+
+    if (cursor->state != 0) {
+        return nfalse;
+    }
+
+    if (CheckFieldActive(well)) {
+        return nfalse;
+    }
+
+    if (well->unk_43B0 <= 0) {
+        well->death++;
+
+        if (gTheGame.totalPlayer == 1) {
+            if (well->death < 2) {
+                return nfalse;
+            }
+        } else {
+            if (gSelection == SELECTION_B4) {
+                if (well->death < 2) {
+                    return nfalse;
+                }
+            } else if ((gSelection == SELECTION_C8) && (st_Player2State[well->level][6] >= well->death)) {
+                return nfalse;
+            }
+
+            if (gTheGame.hour != 0) {
+                value = ((f32)st_Player2State[well->level][6] * DOUBLE_LITERAL(0.125));
+            } else if (gTheGame.minute < 10) {
+                value = ((DOUBLE_LITERAL(1.0) - ((f32)gTheGame.minute * DOUBLE_LITERAL(0.05))) *
+                         (f32)st_Player2State[well->level][6]);
+            } else if (gTheGame.minute < 20) {
+                value = ((DOUBLE_LITERAL(1.0) - ((f32)(gTheGame.minute - 10) * DOUBLE_LITERAL(0.05))) *
+                         ((f32)st_Player2State[well->level][6] * DOUBLE_LITERAL(0.5)));
+            } else if (gTheGame.minute < 30) {
+                value = ((DOUBLE_LITERAL(1.0) - ((f32)(gTheGame.minute - 20) * DOUBLE_LITERAL(0.05))) *
+                         ((f32)st_Player2State[well->level][6] * DOUBLE_LITERAL(0.25)));
+            } else {
+                value = (((f32)st_Player2State[well->level][6]) * DOUBLE_LITERAL(0.125));
+            }
+
+            if (well->death <= value) {
+                return nfalse;
+            }
+        }
+    }
+
+    return ntrue;
+}

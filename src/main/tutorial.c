@@ -192,7 +192,7 @@ void InitTutorial(void) {
         s2->unk_43BC = 0;
         s2->chain_garbage = 0;
         s2->collision = 0;
-        s2->unk_43F4 = 0;
+        s2->death = 0;
         s2->bot_height = 0xDF;
         s2->current_raise = 0;
         s2->raise = 0;

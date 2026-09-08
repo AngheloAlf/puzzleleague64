@@ -131,7 +131,7 @@ void Update2DSwitching(tetWell *well, cursor_t *cursor) {
         return;
     }
 
-    if ((cursor->extra_wait == 2) || (cursor->extra_wait == 3)) {
+    if ((cursor->delay == 2) || (cursor->delay == 3)) {
         well->right2D.s.objX -= 5 << 2;
         well->left2D.s.objX += 5 << 2;
     } else {
@@ -139,8 +139,8 @@ void Update2DSwitching(tetWell *well, cursor_t *cursor) {
         well->left2D.s.objX += 4 << 2;
     }
 
-    cursor->extra_wait--;
-    if (cursor->extra_wait == 0) {
+    cursor->delay--;
+    if (cursor->delay == 0) {
         block1 = &well->block[cursor->sy][cursor->sx];
         block2 = &well->block[cursor->sy][cursor->sx + 1];
         if (block1->type != BLOCKTYPE_0) {

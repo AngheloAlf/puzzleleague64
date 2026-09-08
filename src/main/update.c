@@ -1316,8 +1316,8 @@ void UpdateWell(tetWell *well, cursor_t *cursor, s32 num, s32 total) {
         if (cursor->state < 2) {
             cursor->state = 0;
         }
-        if (cursor->unk_0C != 0) {
-            cursor->unk_0C--;
+        if (cursor->extra_wait != 0) {
+            cursor->extra_wait--;
         }
     }
 
@@ -1392,7 +1392,7 @@ void UpdateMainState(void) {
     s32 col;
     s32 score1;
     s32 score2;
-    s32 var_a1_3; // DrawRankingFlag?
+    nbool var_a1_3; // DrawRankingFlag?
     tetWell *well;
     cursor_t *cursor;
     s32 temp;
@@ -1426,13 +1426,13 @@ void UpdateMainState(void) {
         var_a1_3 = CheckGameOver(well, cursor);
 
         if (gGameStatus & GAME_STATUS_FLAG_80) {
-            if (var_a1_3 != 0) {
+            if (var_a1_3) {
                 gDemo = GDEMO_16;
             }
-            var_a1_3 = 0;
+            var_a1_3 = nfalse;
         }
 
-        if ((var_a1_3 != 0) && (gSelection >= SELECTION_83)) {
+        if (var_a1_3 && (gSelection >= SELECTION_83)) {
             gMain = GMAIN_38E;
             cursor->state = 8;
             continue;
@@ -1450,20 +1450,20 @@ void UpdateMainState(void) {
             case SELECTION_82:
                 if (!CheckFieldActive(well)) {
                     if (cursor->target[1] == 0) {
-                        var_a1_3 = -1;
+                        var_a1_3 = ntrue;
 
                         for (row = 0; row < BLOCK_LEN_ROWS; row++) {
                             for (col = 0; col < gMax; col++) {
                                 var_a1_3 &= (well->block[row][col].type == BLOCKTYPE_0) ? -1 : 0;
                             }
 
-                            if (var_a1_3 == 0) {
+                            if (!var_a1_3) {
                                 break;
                             }
                         }
 
                         gMain = GMAIN_38E;
-                        if (var_a1_3 != 0) {
+                        if (var_a1_3) {
                             cursor->state = 7;
                         } else {
                             cursor->state = 8;
@@ -1524,17 +1524,17 @@ void UpdateMainState(void) {
                         row = temp;
                     }
 
-                    var_a1_3 = -1;
+                    var_a1_3 = ntrue;
                     for (; row < BLOCK_LEN_ROWS; row++) {
                         for (col = 0; col < gMax; col++) {
                             var_a1_3 &= (well->block[row][col].type == BLOCKTYPE_0) ? -1 : 0;
                         }
-                        if (var_a1_3 == 0) {
+                        if (!var_a1_3) {
                             break;
                         }
                     }
 
-                    if ((var_a1_3 != 0) && !CheckFieldActive(well)) {
+                    if (var_a1_3 && !CheckFieldActive(well)) {
                         gMain = GMAIN_38E;
                         cursor->state = 7;
                         if (gSelection == SELECTION_B4) {
@@ -1555,8 +1555,8 @@ void UpdateMainState(void) {
     }
 
     if (gMain == GMAIN_38E) {
-        gTheGame.cursorBlock[0].unk_0C = 0;
-        gTheGame.cursorBlock[1].unk_0C = 0;
+        gTheGame.cursorBlock[0].extra_wait = 0;
+        gTheGame.cursorBlock[1].extra_wait = 0;
 
         gMain = GMAIN_387;
         UpdateComboChainCount(0, 0, -gTheGame.tetrisWell[0].unk_43A8);
@@ -1738,7 +1738,7 @@ void Update3DBuffer(struct_gInfo *info) {
         guMtxF2L(gRotateYMtx, &dynamicp->rotate[num]);
 
         if (cursor->sy != -1) {
-            var_a2 = 3 - cursor->extra_wait;
+            var_a2 = 3 - cursor->delay;
 
             gRotateYMtx[0][0] = switch_cos[var_a2];
             gRotateYMtx[2][0] = switch_sin[var_a2];
@@ -1747,7 +1747,7 @@ void Update3DBuffer(struct_gInfo *info) {
 
             guMtxF2L(gRotateYMtx, &dynamicp->left3D[num]);
 
-            var_a2 = cursor->extra_wait - 1;
+            var_a2 = cursor->delay - 1;
 
             gRotateYMtx[0][0] = switch_cos[var_a2];
             gRotateYMtx[2][0] = switch_sin[var_a2];

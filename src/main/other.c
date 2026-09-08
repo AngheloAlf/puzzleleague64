@@ -200,17 +200,17 @@ void UpdateMiscStuff(tetWell *well, cursor_t *cursor, s32 num) {
         case SELECTION_AA:
         case SELECTION_BE:
             if (gGameStatus & GAME_STATUS_FLAG_20) {
-                cursor->unk_0C = 0;
-            } else if (cursor->unk_0C > 0) {
+                cursor->extra_wait = 0;
+            } else if (cursor->extra_wait > 0) {
                 if (gTheGame.miscToggle == 0) {
                     gTheGame.miscToggle = 1;
                 }
 
-                if (cursor->unk_0C > ADJUST_FRAMERATE(600)) {
+                if (cursor->extra_wait > ADJUST_FRAMERATE(600)) {
                     shake = 0x32;
-                } else if (cursor->unk_0C > ADJUST_FRAMERATE(360)) {
+                } else if (cursor->extra_wait > ADJUST_FRAMERATE(360)) {
                     shake = 0x1E;
-                } else if (cursor->unk_0C > ADJUST_FRAMERATE(120)) {
+                } else if (cursor->extra_wait > ADJUST_FRAMERATE(120)) {
                     shake = 0xF;
                 } else {
                     shake = 5;

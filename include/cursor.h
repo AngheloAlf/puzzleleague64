@@ -19,9 +19,9 @@ typedef enum CursorState {
 /* Original name: cursor_t */
 typedef struct cursor_t {
     /* 0x00 */ s32 state; /* Original name: state */
-    /* 0x04 */ s32 extra_wait; /* Original name: extra_wait */ // TODO: maybe misnamed?
+    /* 0x04 */ s32 delay; /* Original name: delay */
     /* 0x08 */ s32 waiting; /* Original name: waiting */
-    /* 0x0C */ s32 unk_0C;
+    /* 0x0C */ s32 extra_wait; /* Original name: extra_wait */
     /* 0x10 */ s32 x; /* Original name: x */
     /* 0x14 */ s32 y; /* Original name: y */
     /* 0x18 */ s32 sx; /* Original name: sx */
