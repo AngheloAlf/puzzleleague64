@@ -2756,8 +2756,7 @@ B_801B9FD8_ger = 0x801B9FD8; //
 B_801B9FDC_ger = 0x801B9FDC; //
 B_801C7228_usa = 0x801B9FE0; // type:u16
 
-chain_check = 0x801BA0F8; //
-B_801BA0FC_ger = 0x801BA0FC; //
+chain_check = 0x801BA0F8; // size:0x8
 B_801C7348_usa = 0x801BA100; //
 B_801BA108_ger = 0x801BA108; //
 B_801BA110_ger = 0x801BA110; //
