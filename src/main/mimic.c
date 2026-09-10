@@ -332,7 +332,7 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
                     brain->delay = command->para1 * command->para2;
 #else
                     brain->delay = (command->para1 * command->para2 * 5) / 6;
-#endif                    
+#endif
                     break;
 
                 case 0x15:
