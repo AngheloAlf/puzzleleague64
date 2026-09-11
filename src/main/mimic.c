@@ -173,12 +173,7 @@ void LoadMimic1(s32 kind, s32 level, s32 number, s32 play) {
     }
 
     gTheGame.totalPlayer = 1;
-// TODO: REGION_NTSC?
-#if VERSION_USA
-    var_s5->speed = 10;
-#else
-    var_s5->speed = 8;
-#endif
+    var_s5->speed = ADJUST_FRAMERATE(10);
     InitAI(well, cursor, var_s5);
     if (play == 0) {
         var_s5->where = kind;
@@ -327,12 +322,7 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
                     break;
 
                 case 0x14:
-// TODO: REGION_NTSC?
-#if VERSION_USA
-                    brain->delay = command->para1 * command->para2;
-#else
-                    brain->delay = (command->para1 * command->para2 * 5) / 6;
-#endif
+                    brain->delay = ADJUST_FRAMERATE(command->para1 * command->para2);
                     break;
 
                 case 0x15:
