@@ -59,7 +59,6 @@ INLINE void QuitMimic(void) {
     GAME_STATUS_SHIFT_RIGHT(gGameStatus);
 }
 
-#if VERSION_USA
 void LoadMimic1(s32 kind, s32 level, s32 number, s32 play) {
     s32 temp_s0;
     s32 temp_v0;
@@ -174,7 +173,7 @@ void LoadMimic1(s32 kind, s32 level, s32 number, s32 play) {
     }
 
     gTheGame.totalPlayer = 1;
-    var_s5->speed = 0xA;
+    var_s5->speed = ADJUST_FRAMERATE(10);
     InitAI(well, cursor, var_s5);
     if (play == 0) {
         var_s5->where = kind;
@@ -189,9 +188,6 @@ void LoadMimic1(s32 kind, s32 level, s32 number, s32 play) {
     cursor[0].target[2] = temp_v0;
 }
 
-#endif
-
-#if VERSION_USA
 // Maybe inlined in DoMimic() or otherwise duplicated there?
 // ?? static void LoadMimic2(int kind /* r3 */, int level /* r4 */, int number /* r5 */, int play /* r6 */)
 void func_8008336C_usa(s32 kind, s32 level, s32 number, s32 play) {
@@ -200,9 +196,7 @@ void func_8008336C_usa(s32 kind, s32 level, s32 number, s32 play) {
     brainbrain[0].speed = -1;
     brainbrain[0].total_command = 0;
 }
-#endif
 
-#if VERSION_USA
 INLINE void MTMove(ai_t *brain, u8 *ptr) {
     s32 temp_v0;
     s32 var_a0;
@@ -233,45 +227,7 @@ INLINE void MTMove(ai_t *brain, u8 *ptr) {
         AIAddCommand(brain, 0x1F, 0, 0);
     }
 }
-#endif
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", func_800833E0_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", func_800836FC_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", func_80083740_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/mimic", func_80081B00_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/mimic", func_80081E1C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/mimic", func_80081E60_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", func_80081CC0_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", func_80081FDC_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", func_80082020_ger);
-#endif
-
-#if VERSION_USA
 void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
     command_t *command;
     s32 var_v1;
@@ -366,7 +322,7 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
                     break;
 
                 case 0x14:
-                    brain->delay = command->para1 * command->para2;
+                    brain->delay = ADJUST_FRAMERATE(command->para1 * command->para2);
                     break;
 
                 case 0x15:
@@ -561,19 +517,6 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
         }
     }
 }
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", UpdateMT);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/mimic", UpdateMT);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", UpdateMT);
-#endif
 
 void UpdateMTController(tetWell *well, cursor_t *cursor, s32 num) {
     gamepad_t *gamepad = &gTheGame.controller[num];
