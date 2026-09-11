@@ -248,10 +248,10 @@ void CheckIcon(tetWell *well, s32 total) {
             var_a3_2 = ~well->unk_43A8;
             if (well->unk_43A8 < 0) {
                 var_t9 = nfalse;
-                if (var_a3_2 >= ARRAY_COUNT(D_800B6CC4_usa)) {
-                    var_a3_2 = ARRAY_COUNT(D_800B6CC4_usa) - 1;
+                if (var_a3_2 >= ARRAY_COUNT(st_ChainScore)) {
+                    var_a3_2 = ARRAY_COUNT(st_ChainScore) - 1;
                 }
-                well->score += D_800B6CC4_usa[var_a3_2];
+                well->score += st_ChainScore[var_a3_2];
             }
         }
 

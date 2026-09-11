@@ -99,7 +99,7 @@ void Init3DIcons(tetWell *well) {
         icon->flag = 0;
         icon->type = -1;
         icon->count = 0;
-        icon->unk_20 = 0;
+        icon->distance = 0;
         icon->to_x = 0;
         guMtxIdent(&icon->thing.move);
     }

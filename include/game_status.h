@@ -6,7 +6,7 @@
 // Uncomment each flag when they are actually used
 #define GAME_STATUS_FLAG_1               (1 << 0)
 #define GAME_STATUS_FLAG_2               (1 << 1)
-// #define GAME_STATUS_FLAG_4               (1 << 2)
+#define GAME_STATUS_FLAG_4               (1 << 2)
 #define GAME_STATUS_FLAG_8               (1 << 3)
 #define GAME_STATUS_FLAG_10              (1 << 4)
 #define GAME_STATUS_FLAG_20              (1 << 5)

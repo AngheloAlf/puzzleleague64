@@ -353,139 +353,312 @@ void UpdateNextLevel(tetWell *well) {
 void UpdateRaiseTimer(tetWell *well) {
     s32 level = well->currLevel - 1;
 
-    if (level > 0x62) {
-        level = 0x62;
-    }
-
+    // TODO: Hardcoded number
+    level = MIN(level, 0x62);
     well->speed = ADJUST_FRAMERATE_INV(0x01000000 / st_RaiseTimer[level]);
 }
 
+/**
+ * Original name: UpdateComboScore
+ */
+void UpdateComboScore(tetWell *well, cursor_t *cursor, s32 combo) {
+    if (gSelection == SELECTION_AA) {
+        UpdateClearComboDelay(well, cursor, combo);
+    } else if (gTheGame.totalPlayer == 1) {
+        UpdateComboDelay1(well, cursor, combo);
+    } else {
+        UpdateComboDelay2(well, cursor, combo);
+    }
+
+    // TODO: Hardcoded numbers
+    combo = MIN(combo, 0x48);
+    combo -= 4;
+    well->score += st_ComboScore[combo];
+}
+
+/**
+ * Original name: UpdateChainScore
+ */
+void UpdateChainScore(tetWell *well, cursor_t *cursor, s32 chain) {
+    if (gSelection == SELECTION_AA) {
+        UpdateClearChainDelay(well, cursor, chain);
+    } else if (gTheGame.totalPlayer == 1) {
+        UpdateChainDelay1(well, cursor, chain);
+    } else {
+        UpdateChainDelay2(well, cursor, chain);
+    }
+
+    // TODO: Hardcoded number
+    chain = MIN(chain, 0xC);
+    chain--;
+    well->score += st_ChainScore[chain];
+}
+
+void UpdateComboDelay1(tetWell *well, cursor_t *cursor, s32 combo) {
+    s32 index = well->menu.game;
+    s32 delay;
+
+    // TODO: Hardcoded number
+    combo = MIN(combo, 0x1E);
+
+    if (well->danger != 0) {
+        if (combo < 9) {
+            delay = st_DangerComboDelay1_combo4[index];
+        } else if (combo < 0xB) {
+            delay = st_DangerComboDelay1_combo9[index];
+        } else if (combo < 0x10) {
+            delay = st_DangerComboDelay1_combo11[index];
+        } else {
+            delay = st_DangerComboDelay1_combo16[index];
+        }
+    } else {
+        delay = st_NormalComboDelay1[index] + (combo - 4) * 0x1E;
+    }
+
+    if (cursor->extra_wait < delay) {
+        cursor->extra_wait = delay;
+    }
+}
+
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdateComboScore);
+void UpdateChainDelay1(tetWell *well, cursor_t *cursor, s32 chain) {
+    s32 index = well->menu.game;
+    s32 delay;
+
+    if (well->danger != 0) {
+        switch (chain) {
+            case 0x1:
+                delay = st_DangerChainDelay1_chain2[index];
+                break;
+
+            case 0x2:
+                delay = st_DangerChainDelay1_chain3[index];
+                break;
+
+            case 0x3:
+                delay = st_DangerChainDelay1_chain4[index];
+                break;
+
+            default:
+                delay = st_DangerChainDelay1_chain5[index];
+                break;
+        }
+    } else {
+        // TODO: Hardcoded number
+        chain++;
+        chain = MIN(chain, 0xD);
+        delay = st_NormalChainDelay1[index] + ((chain - 2) * 0x3C);
+    }
+
+    if (cursor->extra_wait < delay) {
+        cursor->extra_wait = delay;
+    }
+}
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058030_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdateChainDelay1);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update", func_800567A0_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/update", UpdateChainDelay1);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update", func_80056920_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/update", UpdateChainDelay1);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdateChainScore);
+void UpdateComboDelay2(tetWell *well, cursor_t *cursor, s32 combo) {
+    s32 index = well->level;
+    s32 delay;
+
+    // TODO: Hardcoded number
+    combo = MIN(combo, 0x1E);
+
+    if (well->danger != 0) {
+        if (combo < 9) {
+            delay = st_DangerComboDelay2B[index] * 0;
+        } else if (combo < 0xB) {
+            delay = st_DangerComboDelay2B[index] * 1;
+        } else if (combo < 0xD) {
+            delay = st_DangerComboDelay2B[index] * 2;
+        } else if (combo < 0xF) {
+            delay = st_DangerComboDelay2B[index] * 3;
+        } else {
+            delay = st_DangerComboDelay2B[index] * 4;
+        }
+        delay += st_DangerComboDelay2A[index];
+    } else {
+        delay = st_NormalComboDelay2A[index] + st_NormalComboDelay2B[index] * (combo - 4);
+    }
+
+    if (cursor->extra_wait < delay) {
+        cursor->extra_wait = delay;
+    }
+}
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_800580D8_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdateComboDelay2);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update", func_80056848_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/update", UpdateComboDelay2);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update", func_800569C8_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/update", UpdateComboDelay2);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80057EB8_usa);
+void UpdateChainDelay2(tetWell *well, cursor_t *cursor, s32 chain) {
+    s32 index = well->level;
+    s32 delay;
+
+    if (well->danger != 0) {
+        switch (chain) {
+            case 1:
+                delay = st_DangerChainDelay2B[index] * 0;
+                break;
+
+            case 2:
+                delay = st_DangerChainDelay2B[index] * 1;
+                break;
+
+            case 3:
+                delay = st_DangerChainDelay2B[index] * 2;
+                break;
+
+            default:
+                delay = st_DangerChainDelay2B[index] * 4;
+                break;
+        }
+
+        delay += st_DangerChainDelay2A[index];
+    } else {
+        chain++;
+        // TODO: Hardcoded number
+        chain = MIN(chain, 0xD);
+        delay = st_NormalChainDelay2A[index] + st_NormalChainDelay2B[index] * (chain - 2);
+    }
+
+    if (cursor->extra_wait < delay) {
+        cursor->extra_wait = delay;
+    }
+}
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058180_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdateChainDelay2);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update", func_800568F0_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/update", UpdateChainDelay2);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update", func_80056A70_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/update", UpdateChainDelay2);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80057F84_usa);
+void UpdateClearComboDelay(tetWell *well, cursor_t *cursor, s32 combo) {
+    s32 index;
+    s32 delay;
+
+    if (well->menu.game == 5) {
+        index = 6;
+    } else {
+        index = well->menu.stage - 1;
+    }
+
+    // TODO: Hardcoded number
+    combo = MIN(combo, 0x1E);
+    if (well->danger != 0) {
+        if (combo < 9) {
+            delay = st_ClearDangerComboDelay_combo4[index];
+        } else if (combo < 0xB) {
+            delay = st_ClearDangerComboDelay_combo9[index];
+        } else if (combo < 0x10) {
+            delay = st_ClearDangerComboDelay_combo11[index];
+        } else {
+            delay = st_ClearDangerComboDelay_combo16[index];
+        }
+    } else {
+        delay = st_ClearNormalComboA[index] + st_ClearNormalComboB[index] * (combo - 4);
+    }
+
+    if (cursor->extra_wait < delay) {
+        cursor->extra_wait = delay;
+    }
+}
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_8005824C_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdateClearComboDelay);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update", func_800569BC_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/update", UpdateClearComboDelay);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update", func_80056B3C_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/update", UpdateClearComboDelay);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_8005806C_usa);
+void UpdateClearChainDelay(tetWell *well, cursor_t *cursor, s32 chain) {
+    s32 index;
+    s32 delay;
+
+    if (well->menu.game == 5) {
+        index = 6;
+    } else {
+        index = well->menu.stage - 1;
+    }
+
+    chain++;
+    // TODO: Hardcoded number
+    chain = MIN(chain, 0xD);
+
+    if (well->danger != 0) {
+        switch (chain) {
+            case 0x1:
+                delay = st_ClearDangerChainDelay_chain2[index];
+                break;
+
+            case 0x2:
+                delay = st_ClearDangerChainDelay_chain3[index];
+                break;
+
+            case 0x3:
+                delay = st_ClearDangerChainDelay_chain4[index];
+                break;
+
+            default:
+                delay = st_ClearDangerChainDelay_chain5[index];
+                break;
+        }
+    } else {
+        delay = st_ClearNormalChainA[index] + (st_ClearNormalChainB[index] * (chain - 2));
+    }
+
+    if (cursor->extra_wait < delay) {
+        cursor->extra_wait = delay;
+    }
+}
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058334_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdateClearChainDelay);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update", func_80056AA4_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/update", UpdateClearChainDelay);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update", func_80056C24_ger);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80058168_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058430_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update", func_80056BA0_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update", func_80056D20_ger);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_8005825C_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058524_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update", func_80056C94_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update", func_80056E14_ger);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_8005834C_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058614_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update", func_80056D84_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update", func_80056F04_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/update", UpdateClearChainDelay);
 #endif
 
 #if VERSION_USA

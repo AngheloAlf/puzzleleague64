@@ -7,12 +7,6 @@
 #include "fade.h"
 #include "the_game.h"
 
-extern s32 D_800B6BB0_usa[];
-
-#define D_800B80B0_usa_WIDTH (8)
-#define D_800B80B0_usa_HEIGHT (145)
-extern u16 D_800B80B0_usa[];
-
 void func_80074A30_usa(tetWell *well UNUSED) {
     anim_sp = 0;
     func_80074AEC_usa();
@@ -21,10 +15,10 @@ void func_80074A30_usa(tetWell *well UNUSED) {
 void func_80074A58_usa(tetWell *well UNUSED, s32 arg1, s32 arg2) {
     if (arg2 < 0) {
         arg2 = MIN(-arg2, 0xC) - 1;
-        anim_sp -= D_800B6CC4_usa[arg2];
+        anim_sp -= st_ChainScore[arg2];
     } else if (arg1 >= 4) {
         arg1 = MIN(arg1, 0x48) - 4;
-        anim_sp -= D_800B6BB0_usa[arg1];
+        anim_sp -= st_ComboScore[arg1];
     }
 
     func_80074AEC_usa();
