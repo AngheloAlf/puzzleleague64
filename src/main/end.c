@@ -8,15 +8,20 @@
 #include "macros_defines.h"
 #include "main_variables.h"
 
+#include "animation.h"
+#include "bkground.h"
 #include "explode.h"
 #include "fade.h"
 #include "info.h"
+#include "init2d.h"
 #include "init3d.h"
 #include "menu.h"
 #include "sfxlimit.h"
+#include "sign.h"
 #include "sound.h"
 #include "the_game.h"
 #include "update.h"
+#include "update3d.h"
 
 #include "assets/sign_gameover.h"
 
@@ -203,21 +208,73 @@ void AllDeadBlocks(tetWell *well) {
     }
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80037724_usa);
-#endif
+/**
+ * Original name: AllDeadFaces
+ */
+void AllDeadFaces(tetWell *well) {
+    s32 row;
+    s32 col;
+    block_t *block;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80037724_usa);
-#endif
+    if (gGameStatus & GAME_STATUS_FLAG_40) {
+        if (well->timer != 0) {
+            well->timer--;
+            if ((well->new_block[0].frame_n == 8) && (well->timer == 0)) {
+                gMain = GMAIN_390;
+            }
+            return;
+        }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80037724_usa);
-#endif
+        for (row = 0; row < BLOCK_LEN_ROWS; row++) {
+            for (col = 0; col < gMax; col++) {
+                block = &well->block[row][col];
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80037724_usa);
-#endif
+                if ((block->type != BLOCKTYPE_0) && (block->frame_n < 0xD)) {
+                    block->frame_n = 8;
+                }
+            }
+        }
+
+        for (col = 0; col < gMax; col++) {
+            block = &well->new_block[col];
+            if (block->frame_n < 0xD) {
+                block->frame_n = 8;
+            }
+        }
+
+        if (block->frame_n == 8) {
+            well->timer = 60;
+        }
+    } else {
+        if (well->timer != 0) {
+            well->timer--;
+            if ((well->new_block[0].frame_n == 0x10) && (well->timer == 0)) {
+                gMain = GMAIN_390;
+            }
+            return;
+        }
+
+        for (row = 0; row < BLOCK_LEN_ROWS; row++) {
+            for (col = 0; col < gMax; col++) {
+                block = &well->block[row][col];
+                if ((block->type != BLOCKTYPE_0) && (block->frame_n < 0x10)) {
+                    block->frame_n = 0x10;
+                }
+            }
+        }
+
+        for (col = 0; col < gMax; col++) {
+            block = &well->new_block[col];
+            if (block->frame_n < 0x10) {
+                block->frame_n = 0x10;
+            }
+        }
+
+        if (block->frame_n == 0x10) {
+            well->timer = 60;
+        }
+    }
+}
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80037900_usa);
@@ -236,35 +293,35 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80037900_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_800379D4_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/end", KillRow3D);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_800379D4_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", KillRow3D);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_800379D4_usa);
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", KillRow3D);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_800379D4_usa);
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", KillRow3D);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80037B0C_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/end", GameOverSign);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80037B0C_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", GameOverSign);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80037B0C_usa);
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", GameOverSign);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80037B0C_usa);
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", GameOverSign);
 #endif
 
 /**
@@ -405,22 +462,23 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80038018_usa);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_8003813C_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/end", ChangeDeadFace);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003813C_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", ChangeDeadFace);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003813C_usa);
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", ChangeDeadFace);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003813C_usa);
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", ChangeDeadFace);
 #endif
 
 #if VERSION_USA
+// DropRow3D?
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80038228_usa);
 #endif
 
@@ -468,85 +526,100 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003853C_usa);
 INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003853C_usa);
 #endif
 
+INLINE void func_800386D4_usa(tetWell *well, s32 arg1) {
+    s32 temp;
+    s32 temp2;
+    s32 temp3;
+    s32 temp4;
+
+    if (well->timer != 0) {
+        well->timer--;
+        return;
+    }
+
+    // TODO: hardcoded number
+    if (well->raise == 0x36) {
+        PlaySE(SFX_INIT_TABLE, SFX_0A4);
+    }
+
+    temp3 = wallsdownShake[well->raise];
+    well->raise--;
+
+    temp4 = (gTheGame.dimension == DIMENSION_3D) ? 1 : 0;
+    temp2 = temp3 - temp4;
+    temp = gTheGame.unk_9B50[arg1].b.frameY >> 2;
+    gTheGame.unk_9B50[arg1].b.frameY = (temp - temp2) << 2;
+
+    if (well->raise < 0) {
+        gMain = GMAIN_394;
+    }
+}
+
+INLINE void func_800387AC_usa(tetWell *well, s32 arg1) {
+    s32 var_a0;
+
+    // TODO: hardcoded number
+    if (well->raise >= 0x32) {
+        return;
+    }
+
+    var_a0 = wallsdownShake[well->raise];
+    if (var_a0 == -0x10) {
+        var_a0 = -0x1C;
+    }
+    gTheGame.unk_9A90[arg1].b.frameY = ((gTheGame.unk_9A90[arg1].b.frameY >> 2) - var_a0) << 2;
+}
+
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_800386D4_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/end", SmallStars);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_800386D4_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", SmallStars);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_800386D4_usa);
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", SmallStars);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_800386D4_usa);
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", SmallStars);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_800387AC_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/end", CircleStars);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_800387AC_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", CircleStars);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_800387AC_usa);
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", CircleStars);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_800387AC_usa);
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", CircleStars);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_8003880C_usa);
-#endif
+nbool func_80038B98_usa(s32 arg0) {
+    s32 i;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003880C_usa);
-#endif
+    for (i = 0; i < arg0; i++) {
+        if (gTheGame.controller[i].touch_button != 0) {
+            if ((gSelection != SELECTION_96) || (gTheGame.cursorBlock[0].state == gTheGame.cursorBlock[1].state) ||
+                (gTheGame.cursorBlock[0].state == 7) || (gTheGame.cursorBlock[1].state == 8)) {
+                FadeOutSong(last_song_handle, 0x5A);
+                FadeOutAllSFXs(0x1E);
+            }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003880C_usa);
-#endif
+            PlaySE(SFX_INIT_TABLE, SFX_002);
+            return ntrue;
+        }
+    }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003880C_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80038944_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80038944_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80038944_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80038944_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80038B98_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80038B98_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80038B98_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80038B98_usa);
-#endif
+    return nfalse;
+}
 
 /**
  * Original name: DoGameOverTryAgain
@@ -643,9 +716,33 @@ s32 DoGameOverTryAgain(void) {
     return 0;
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80038F84_usa);
-#endif
+void func_80038F84_usa(void) {
+    s32 var_a0;
+    s32 temp;
+
+    if (gGameStatus & GAME_STATUS_FLAG_2) {
+        return;
+    }
+
+    var_a0 = 0;
+    for (temp = 0x19; temp < 0x3C; temp++) {
+        if (st_Combo2[temp] != 0) {
+            var_a0 += st_Combo2[temp];
+            st_Combo2[temp] = 0;
+        }
+    }
+    st_Combo2[0x19] = var_a0;
+
+    var_a0 = 0;
+    for (temp = 4; temp < 0x5A; temp++) {
+        if (st_Chain2[temp] != 0) {
+            var_a0 += st_Chain2[temp];
+            st_Chain2[temp] = 0;
+        }
+    }
+
+    st_Chain2[0x4] = var_a0;
+}
 
 #if VERSION_USA
 INCLUDE_RODATA("asm/usa/nonmatchings/main/end", RO_800C49D0_usa);
@@ -657,10 +754,6 @@ INCLUDE_RODATA("asm/usa/nonmatchings/main/end", RO_800C49E0_usa);
 
 #if VERSION_USA
 INCLUDE_RODATA("asm/usa/nonmatchings/main/end", RO_800C4A70_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80038F84_usa);
 #endif
 
 #if VERSION_EUR
@@ -676,10 +769,6 @@ INCLUDE_RODATA("asm/eur/nonmatchings/main/end", RO_800C4DC0_eur);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80038F84_usa);
-#endif
-
-#if VERSION_FRA
 INCLUDE_RODATA("asm/fra/nonmatchings/main/end", RO_800C33D0_fra);
 #endif
 
@@ -689,10 +778,6 @@ INCLUDE_RODATA("asm/fra/nonmatchings/main/end", RO_800C33E0_fra);
 
 #if VERSION_FRA
 INCLUDE_RODATA("asm/fra/nonmatchings/main/end", RO_800C3470_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80038F84_usa);
 #endif
 
 #if VERSION_GER
@@ -708,6 +793,7 @@ INCLUDE_RODATA("asm/ger/nonmatchings/main/end", RO_800BA430_ger);
 #endif
 
 #if VERSION_USA
+// DoGameOverStat?
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_8003901C_usa);
 #endif
 
@@ -796,6 +882,7 @@ INCLUDE_RODATA("asm/usa/nonmatchings/main/end", RO_800C4B24_usa);
 #endif
 
 #if VERSION_USA
+// DoGameOverInput??
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_8003A0B8_usa);
 #endif
 
@@ -888,20 +975,20 @@ void DrawGameOver(struct_gInfo_unk_00068 *arg0) {
 ? func_8003536C_usa(Game *, s8 *);               /* extern */
 ? func_800353F4_usa(Game *, s8 *);               /* extern */
 ? func_8003547C_usa(Game *, s8 *);               /* extern */
-? func_80035584_usa(s8 *);                          /* extern */
+? AnimatePushKey(s8 *);                          /* extern */
 ? GameOverSmoke(Game *);                     /* extern */
 ? DeadBlocksShakeOne2D(Game *);                     /* extern */
 ? AllDeadBlocks(Game *);                     /* extern */
-? func_80037724_usa(Game *);                     /* extern */
+? AllDeadFaces(Game *);                     /* extern */
 ? func_80037900_usa(Game *);                     /* extern */
-? func_80037B0C_usa(Game *, cursor_t *); /* extern */
+? GameOverSign(Game *, cursor_t *); /* extern */
 s32 EndingExplosion(Game *);                   /* extern */
 ? func_80038018_usa(Game *, ?);                  /* extern */
-? func_8003813C_usa(Game *);                     /* extern */
+? ChangeDeadFace(Game *);                     /* extern */
 ? func_8003837C_usa(Game *, ?);                  /* extern */
 ? func_8003853C_usa(Game *, ?);                  /* extern */
-? func_8003880C_usa();                              /* extern */
-s32 func_80038944_usa(u32);                         /* extern */
+? SmallStars();                              /* extern */
+s32 CircleStars();                         /* extern */
 s32 func_8003901C_usa(Game *);                   /* extern */
 ? func_80039A54_usa(?);                             /* extern */
 ? func_80039B78_usa();                              /* extern */
@@ -921,13 +1008,13 @@ s32 func_8004FA2C_usa();                            /* extern */
 ? Init2DIcons(Game *);                     /* extern */
 ? Init2DExplosion(Game *);                     /* extern */
 ? Init2DSmallStars(?);                             /* extern */
-? func_8006C7A0_usa(?, ?);                          /* extern */
+? Init2DCircleStars(?, ?);                          /* extern */
 ? Init2DGameOverSmoke(Game *, ?);                  /* extern */
 extern u8 B_801C6C90_usa;
 extern s32 gWhatever;
 extern ? SFX_INIT_TABLE;
 extern s32 D_800B65B0_usa;
-extern ? D_800B66FC_usa;
+extern ? wallsdownShake;
 
 void DoGameOver2D(void) {
     ? var_a0;
@@ -1059,7 +1146,7 @@ block_39:
                         DeadBlocksShakeOne2D(&gTheGame);
                         AllDeadBlocks(&gTheGame);
                     } else {
-                        func_80037724_usa(&gTheGame);
+                        AllDeadFaces(&gTheGame);
                     }
                     if (gMain == 0x390) {
                         gTheGame.unk_43EC = 0x28;
@@ -1076,7 +1163,7 @@ block_39:
                     gTheGame.unk_43EC = temp_v0;
                     if (temp_v0 == 0) {
                         var_v0 = gSelection;
-                        gMain = 0x391;
+                        gMain = GMAIN_391;
                         var_v1_2 = 0xBE;
 block_50:
                         if (var_v0 == var_v1_2) {
@@ -1141,9 +1228,9 @@ block_73:
                         }
                     }
                     if ((var_s0 == 0) && (gWhatever >= 0x5B)) {
-                        gMain = 0x392;
+                        gMain = GMAIN_392;
                     }
-                    if (gMain == 0x392) {
+                    if (gMain == GMAIN_392) {
                         Init2DTetrisBlocks(&gTheGame, 0);
                         Init2DNewRow(&gTheGame);
                         Init2DIcons(&gTheGame);
@@ -1159,7 +1246,7 @@ block_85:
                     }
                     break;
                 case 0x392:                         /* switch 1 */
-                    func_80037B0C_usa(&gTheGame, gTheGame.unk_8860);
+                    GameOverSign(&gTheGame, gTheGame.unk_8860);
                     if (gMain == 0x393) {
                         gTheGame.help.selection[4] = 0;
                         gTheGame.unk_43EC = 0;
@@ -1219,7 +1306,7 @@ block_101:
                             case 0x78:              /* switch 4 */
                             case 0x78:              /* switch 5 */
 block_111:
-                                func_80035584_usa(&gTheGame.unk_9988[0x130]);
+                                AnimatePushKey(&gTheGame.unk_9988[0x130]);
                             }
                             break;
                     }
@@ -1328,12 +1415,12 @@ block_152:
                     if (var_s3 == 0) {
                         GameOverSmoke(&gTheGame);
                         func_80038018_usa(&gTheGame, 0);
-                        func_8003813C_usa(&gTheGame);
+                        ChangeDeadFace(&gTheGame);
                     }
                     if (var_s1 == 0) {
                         GameOverSmoke((Game *) &gTheGame.tetrisWell[1]);
                         func_80038018_usa((Game *) &gTheGame.tetrisWell[1], 1);
-                        func_8003813C_usa((Game *) &gTheGame.tetrisWell[1]);
+                        ChangeDeadFace((Game *) &gTheGame.tetrisWell[1]);
                     }
                     break;
                 case 0x390:                         /* switch 2 */
@@ -1359,7 +1446,7 @@ block_164:
                         if (temp_v0_4 != 0) {
                             gTheGame.tetrisWell[1].unk_43EC = (s32) (temp_v0_4 - 1);
                         } else {
-                            gMain = 0x391;
+                            gMain = GMAIN_391;
                             if (var_s3 != 0) {
                                 gTheGame.unk_43FC = 0x32;
                             }
@@ -1371,7 +1458,7 @@ block_164:
                     break;
                 case 0x391:                         /* switch 2 */
                     if ((var_s3 == 0) & (var_s1 == 0)) {
-                        gMain = 0x392;
+                        gMain = GMAIN_392;
                     }
                     if (var_s3 != 0) {
                         func_8003837C_usa(&gTheGame, 0);
@@ -1379,7 +1466,7 @@ block_164:
                     if (var_s1 != 0) {
                         func_8003837C_usa((Game *) &gTheGame.tetrisWell[1], 1);
                     }
-                    if (gMain == 0x392) {
+                    if (gMain == GMAIN_392) {
                         if (var_s3 == 0) {
                             gTheGame.unk_43FC = 0x60;
                         }
@@ -1409,11 +1496,11 @@ block_164:
                         if (gTheGame.unk_43FC == 0x36) {
                             PlaySE(&SFX_INIT_TABLE, 0xA4);
                         }
-                        temp_a0_2 = *(&D_800B66FC_usa + gTheGame.unk_43FC);
+                        temp_a0_2 = *(&wallsdownShake + gTheGame.unk_43FC);
                         gTheGame.unk_43FC = (s32) (gTheGame.unk_43FC - 1);
                         gTheGame.unk_9988[0x1D4] = (u16) ((((s32) (gTheGame.unk_9988[0x1D4] << 0x10) >> 0x12) - (temp_a0_2 - (gTheGame.unk_9C0C == 2))) * 4);
                         if (gTheGame.unk_43FC < 0) {
-                            gMain = 0x394;
+                            gMain = GMAIN_394;
                         }
                     }
                     temp_v0_5 = gTheGame.tetrisWell[1].unk_43EC;
@@ -1425,13 +1512,13 @@ block_164:
                         }
                         temp_v0_6 = gTheGame.tetrisWell[1].unk_43FC;
                         gTheGame.tetrisWell[1].unk_43FC = (s32) (temp_v0_6 - 1);
-                        gTheGame.unk_9988[0x1FC] = (u16) ((((s32) (gTheGame.unk_9988[0x1FC] << 0x10) >> 0x12) - (*(&D_800B66FC_usa + temp_v0_6) - (gTheGame.unk_9C0C == 2))) * 4);
+                        gTheGame.unk_9988[0x1FC] = (u16) ((((s32) (gTheGame.unk_9988[0x1FC] << 0x10) >> 0x12) - (*(&wallsdownShake + temp_v0_6) - (gTheGame.unk_9C0C == 2))) * 4);
                         if (gTheGame.tetrisWell[1].unk_43FC < 0) {
-                            gMain = 0x394;
+                            gMain = GMAIN_394;
                         }
                     }
                     if (gTheGame.unk_43FC < 0x32) {
-                        var_v1_4 = *(&D_800B66FC_usa + gTheGame.unk_43FC);
+                        var_v1_4 = *(&wallsdownShake + gTheGame.unk_43FC);
                         if (var_v1_4 == -0x10) {
                             var_v1_4 = -0x1C;
                         }
@@ -1439,7 +1526,7 @@ block_164:
                     }
                     temp_v1_2 = gTheGame.tetrisWell[1].unk_43FC;
                     if (temp_v1_2 < 0x32) {
-                        var_v1_5 = *(&D_800B66FC_usa + temp_v1_2);
+                        var_v1_5 = *(&wallsdownShake + temp_v1_2);
                         if (var_v1_5 == -0x10) {
                             var_v1_5 = -0x1C;
                         }
@@ -1492,7 +1579,7 @@ block_267:
                                 var_a1_5 = 2;
                             }
                         }
-                        func_8006C7A0_usa(var_a0_5, var_a1_5);
+                        Init2DCircleStars(var_a0_5, var_a1_5);
                         func_80005888_usa(0, 1, 2);
                     }
                     if (var_s1 != 0) {
@@ -1513,7 +1600,7 @@ block_267:
                                 }
                             }
                         }
-                        func_8006C7A0_usa(var_a0_6, var_a1_6);
+                        Init2DCircleStars(var_a0_6, var_a1_6);
                         func_80005888_usa(0, 2, 2);
                         if (gSelection == SELECTION_96) {
                             var_a1_7 = 0x42;
@@ -1542,7 +1629,7 @@ block_254:
                     }
                     break;
                 case 0x395:                         /* switch 2 */
-                    if (func_80038944_usa(var_a0_3) != 0) {
+                    if (CircleStars() != 0) {
                         goto block_254;
                     }
                     break;
@@ -1561,10 +1648,10 @@ block_254:
                         } else {
                             func_800353F4_usa((Game *) &gTheGame.tetrisWell[1], &gTheGame.unk_9988[0x130]);
                         }
-                        func_8003880C_usa();
+                        SmallStars();
                     }
-                    func_80035584_usa(&gTheGame.unk_9988[0x158]);
-                    func_80035584_usa(&gTheGame.unk_9988[0x158] + 0x28);
+                    AnimatePushKey(&gTheGame.unk_9988[0x158]);
+                    AnimatePushKey(&gTheGame.unk_9988[0x158] + 0x28);
                     temp_v0_7 = gWhatever + 1;
                     gWhatever = temp_v0_7;
                     if ((temp_v0_7 == 0xDC) && ((gSelection != SELECTION_96) || ((var_s3 != 0) & (var_s1 == 0)))) {
@@ -1599,667 +1686,563 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/end", DoGameOver2D);
 INCLUDE_ASM("asm/ger/nonmatchings/main/end", DoGameOver2D);
 #endif
 
-#if VERSION_USA
-#if 0
-? PlaySE(? *, ?);                        /* extern */
-? func_80005888_usa(?, ?, ?);                       /* extern */
-? func_80005A08_usa(s32);                           /* extern */
-? LoadGameOver3D();                              /* extern */
-? func_800352DC_usa(Game *, s8 *);               /* extern */
-? func_800353B0_usa(Game *, s8 *);               /* extern */
-? func_80035438_usa(Game *, s8 *);               /* extern */
-? func_800354C0_usa(Game *, s8 *);               /* extern */
-? func_80035584_usa(s8 *);                          /* extern */
-? GameOverSmoke(Game *);                     /* extern */
-? AllDeadBlocks(Game *);                     /* extern */
-? func_80037724_usa(Game *);                     /* extern */
-? func_800379D4_usa(Game *, cursor_t *); /* extern */
-? func_80037B0C_usa(Game *, cursor_t *); /* extern */
-s32 EndingExplosion(Game *);                   /* extern */
-? func_8003813C_usa(Game *);                     /* extern */
-? func_80038228_usa(Game *, cursor_t *, ?); /* extern */
-? func_8003880C_usa();                              /* extern */
-s32 func_80038944_usa(s32);                         /* extern */
-s32 func_8003901C_usa(Game *);                   /* extern */
-? func_80039A54_usa(?);                             /* extern */
-? func_80039B78_usa();                              /* extern */
-s32 func_8003A0B8_usa();                            /* extern */
-? SaveRom(u32);                           /* extern */
-? func_8004ADD0_usa(?);                             /* extern */
-? UpdateText(s32);                           /* extern */
-? InitFlic();                              /* extern */
-s32 func_8004FA2C_usa();                            /* extern */
-? func_800521A4_usa(?);                             /* extern */
-? UpdateRecord2(s32, s32);                      /* extern */
-? UpdatePlayerPuzzle(cursor_t *, s32, s32);  /* extern */
-? UpdatePlayerStageClear(cursor_t *, s32, s32);  /* extern */
-? UpdateExplosion(Game *);                     /* extern */
-? Init3DNewRow(Game *);                     /* extern */
-? Init3DTetrisBlocks(Game *, ?);                  /* extern */
-? Init3DIcons(Game *);                     /* extern */
-? Init3DAttackBlocks(Game *);                     /* extern */
-? Init3DExplosion(Game *);                     /* extern */
-? Init3DSmallStars(?);                             /* extern */
-? func_8005E108_usa(?, ?);                          /* extern */
-? Init3DGameOverSmoke(Game *, ?);                  /* extern */
-? Update3DCursor(tetWell *, cursor_t *); /* extern */
-? Check3DVisibleBlocks(Game *, cursor_t *); /* extern */
-extern u8 B_801C6C90_usa;
-extern s32 gWhatever;
-extern ? SFX_INIT_TABLE;
-extern s32 D_800B65B0_usa;
-extern ? D_800B66FC_usa;
-extern ? dead1Shake;
-extern ? D_800B675C_usa;
-
+/**
+ * Original name: DoGameOver3D
+ */
 void DoGameOver3D(void) {
-    ? var_a0_2;
-    ? var_a0_5;
-    ? var_a1;
-    ? var_a1_4;
-    ? var_a1_5;
-    ? var_a1_6;
-    Game *var_a0;
-    Game *var_v1_2;
-    tetWell *var_a0_3;
-    cursor_t *var_a1_3;
-    f64 temp_fv0;
-    s32 temp_a0;
-    s32 temp_v0;
-    s32 temp_v0_2;
-    s32 temp_v0_3;
-    s32 temp_v0_4;
-    s32 temp_v0_5;
-    s32 temp_v0_6;
-    s32 temp_v1;
-    s32 temp_v1_2;
-    s32 temp_v1_3;
-    s32 temp_v1_4;
-    s32 temp_v1_5;
-    s32 temp_v1_6;
-    s32 var_a0_4;
-    s32 var_a1_2;
-    s32 var_a1_7;
-    s32 var_s0;
-    s32 var_s0_2;
-    s32 var_s3;
-    s32 var_s4;
-    s32 var_v1;
-    s8 temp_a0_4;
-    s8 var_v1_3;
-    s8 var_v1_4;
-    u32 temp_a0_2;
-    u32 temp_a0_3;
-    u32 temp_a0_5;
+    s32 count;
+    s32 temp;
+    nbool win1;
+    nbool win2;
+    tetWell *well1;
+    tetWell *well2;
+    cursor_t *cursor1;
+    cursor_t *cursor2;
 
-    var_v1 = 0xC0;
-    gTheGame.unk_89C8[0x6F8] = 6;
-    do {
-        (&gTheGame.unk_90C8.unk_000[0x18])[var_v1] = -1;
-        var_v1 += 0x20;
-    } while (var_v1 < 0x8C0);
-    UpdateText(-1);
-    if ((gMain < 0x395) || (gWhatever < 6) || (func_8003A0B8_usa() == 0)) {
-        var_s4 = 0;
-        if (gTheGame.unk_9C08 == 1) {
-            switch (gMain) {                        /* switch 1 */
-                case GMAIN_38E:                     /* switch 1 */
-                    if (gSelection != SELECTION_82) {
-                        if (gSelection == SELECTION_AA) {
-                            UpdatePlayerStageClear(gTheGame.unk_8860, gTheGame.help.selection[0xC], gTheGame.help.selection[0x10]);
-                        }
-                    } else {
-                        UpdatePlayerPuzzle(gTheGame.unk_8860, gTheGame.help.selection[8], gTheGame.help.selection[0xC]);
-                    }
-                    LoadGameOver3D();
-                    InitFlic();
-                    switch (gSelection) {           /* switch 3; irregular */
-                        case SELECTION_8C:                  /* switch 3 */
-                        case SELECTION_AA:                  /* switch 3 */
-                        case SELECTION_BE:                  /* switch 3 */
-                            gTheGame.unk_9988[0x1C0] = 0;
-                            gTheGame.unk_8860[0].unk_C = 0;
-                            break;
-                        case SELECTION_78:                  /* switch 3 */
-                            /* fallthrough */
-                        case SELECTION_82:                  /* switch 3 */
-                            gTheGame.unk_9988[0x1C0] = -1;
-                            break;
-                    }
-                    gGameStatus &= ~0x20;
-                    Init3DIcons(&gTheGame);
-                    Init3DExplosion(&gTheGame);
-                    gTheGame.help.selection[4] = 0;
-                    gTheGame.unk_89C8[0x6E8] = -0x280;
-                    gTheGame.unk_89C8[0x6D0] = -0x280;
-                    if (gTheGame.unk_8860[0].unk_0 == 8) {
-                        Init3DGameOverSmoke(&gTheGame, 0);
-                    }
-                    func_80039A54_usa(0);
-                    if (gSelection == SELECTION_8C) {
-                        if (gTheGame.unk_43AC < 0x2710) {
+    gTheGame.currentText = 6;
+    for (count = gTheGame.currentText; count < DRAWTEXT_COUNT; count++) {
+        gTheGame.drawText[count].texture = -1;
+    }
 
-                        } else {
-                            goto block_29;
-                        }
-                    } else if ((gSelection == SELECTION_BE) && (gTheGame.unk_8860[0].unk_0 != 8)) {
-block_29:
+    UpdateText();
+
+    well1 = &gTheGame.tetrisWell[0];
+    well2 = &gTheGame.tetrisWell[1];
+    cursor1 = &gTheGame.cursorBlock[0];
+    cursor2 = &gTheGame.cursorBlock[1];
+
+    if ((gMain >= GMAIN_395) && (gWhatever >= 6) && (func_8003A0B8_usa() != 0)) {
+        return;
+    }
+
+    if (gTheGame.totalPlayer == 1) {
+        switch (gMain) {
+            case GMAIN_38E:
+                switch (gSelection) {
+                    case SELECTION_AA:
+                        UpdatePlayerStageClear(cursor1, gTheGame.menu[0].stage, gTheGame.menu[0].speed);
+                        break;
+
+                    case SELECTION_82:
+                        UpdatePlayerPuzzle(cursor1, gTheGame.menu[0].game, gTheGame.menu[0].stage);
+                        break;
+
+                    default:
+                        break;
+                }
+
+                LoadGameOver3D();
+                InitFlic();
+
+                switch (gSelection) {
+                    case SELECTION_8C:
+                    case SELECTION_AA:
+                    case SELECTION_BE:
+                        gTheGame.miscToggle = 0;
+                        cursor1->extra_wait = 0;
+                        break;
+
+                    case SELECTION_78:
+                    case SELECTION_82:
+                        gTheGame.miscToggle = -1;
+                        break;
+
+                    default:
+                        break;
+                }
+
+                gGameStatus &= ~GAME_STATUS_FLAG_20;
+                Init3DIcons(well1);
+                Init3DExplosion(well1);
+                gTheGame.help.current_pos = 0;
+                gTheGame.gSPRITE[9].s.objY = -(160 << 2);
+                gTheGame.gSPRITE[8].s.objY = -(160 << 2);
+                if (cursor1->state == 8) {
+                    Init3DGameOverSmoke(well1, 0);
+                }
+
+                func_80039A54_usa(0);
+                if (gSelection == SELECTION_8C) {
+                    if (well1->score >= 10000) {
                         func_80039A54_usa(-1);
                     }
-                    gMain = 0x38F;
-                    gTheGame.unk_43FC = 0x25;
-                    gWhatever = 0;
-                    D_800B65B0_usa = 0;
-                    gTheGame.unk_43EC = 0;
-                    if (gTheGame.unk_8860[0].unk_0 == 8) {
-                        PlaySE(&SFX_INIT_TABLE, 0xA0);
-                        if (gSelection != SELECTION_82) {
-                            var_a1 = 0x175;
-                            goto block_39;
-                        }
-                    } else {
-                        var_a1 = 0x174;
-                        if (gSelection != SELECTION_BE) {
-                            PlaySE(&SFX_INIT_TABLE, 0xA1);
-                            if (gTheGame.help.selection[8] != 5) {
-                                if (gTheGame.help.selection[0x10] == 5) {
-                                    var_a1 = 0x9F;
-                                } else {
-                                    var_a1 = 0x9E;
-                                }
-                                goto block_39;
-                            }
+                } else if (gSelection == SELECTION_BE) {
+                    if (cursor1->state != 8) {
+                        func_80039A54_usa(-1);
+                    }
+                }
+
+                gMain = GMAIN_38F;
+                well1->raise = 0x25;
+                gWhatever = 0;
+                D_800B65B0_usa = 0;
+                well1->timer = 0;
+                if (cursor1->state == 8) {
+                    PlaySE(SFX_INIT_TABLE, SFX_0A0);
+                    if (gSelection != SELECTION_82) {
+                        PlaySE(SFX_INIT_TABLE, SFX_175);
+                    }
+                } else if (gSelection != SELECTION_BE) {
+                    PlaySE(SFX_INIT_TABLE, SFX_0A1);
+                    if (gTheGame.menu[0].game != 5) {
+                        if (gTheGame.menu[0].speed == 5) {
+                            PlaySE(SFX_INIT_TABLE, SFX_09F);
                         } else {
-block_39:
-                            PlaySE(&SFX_INIT_TABLE, var_a1);
+                            PlaySE(SFX_INIT_TABLE, SFX_09E);
                         }
-                    }
-                    FadeOutSong(last_song_handle, 0x3C);
-                    var_a0 = &gTheGame;
-                    break;
-                case 0x38F:                         /* switch 1 */
-                    if (gTheGame.unk_8860[0].unk_0 == 8) {
-                        GameOverSmoke(&gTheGame);
-                        if (gTheGame.unk_43FC >= 0) {
-                            temp_fv0 = (f64) gTheGame.tetrisWell[0].unk_4088 + ((f64) (f32) *(&dead1Shake + gTheGame.unk_43FC) / 250.0);
-                            gTheGame.unk_43FC = (s32) (gTheGame.unk_43FC - 1);
-                            gTheGame.tetrisWell[0].unk_4088 = (f32) temp_fv0;
-                        }
-                        AllDeadBlocks(&gTheGame);
-                    } else {
-                        func_80037724_usa(&gTheGame);
-                    }
-                    var_a0 = &gTheGame;
-                    if (gMain == 0x390) {
-                        gTheGame.unk_43EC = 0x28;
-                    }
-                    break;
-                case 0x390:                         /* switch 1 */
-                    if (gTheGame.unk_8860[0].unk_0 == 8) {
-                        func_800379D4_usa(&gTheGame, gTheGame.unk_8860);
-                        var_a0 = &gTheGame;
-                    } else {
-                        temp_v0 = gTheGame.unk_43EC - 1;
-                        gTheGame.unk_43EC = temp_v0;
-                        if (temp_v0 == 0) {
-                            gMain = 0x391;
-                            var_a0 = &gTheGame;
-                            if (gSelection == SELECTION_BE) {
-                                Init3DTetrisBlocks(&gTheGame, 0);
-                                Init3DNewRow(&gTheGame);
-                                var_a0 = &gTheGame;
-                            }
-                        } else {
-                        default:                    /* switch 1 */
-block_108:
-                            var_a0 = &gTheGame;
-                        }
-                    }
-                    break;
-                case 0x391:                         /* switch 1 */
-                    temp_v0_2 = gWhatever;
-                    if (temp_v0_2 == 0) {
-                        SaveRom();
-                    }
-                    gWhatever = temp_v0_2 + 1;
-                    if (gTheGame.unk_43EC != 0) {
-                        gTheGame.unk_43EC = (s32) (gTheGame.unk_43EC - 1);
-                        goto block_108;
-                    }
-                    if (((gSelection == SELECTION_8C) | (gSelection == SELECTION_BE)) != 0) {
-                        Init3DIcons(&gTheGame);
-                        var_s0 = func_8003901C_usa(&gTheGame);
-                        if (gWhatever == 0x55) {
-                            var_a0_2 = -1;
-                            if (func_8004FA2C_usa() != 0) {
-                                goto block_62;
-                            }
-                        } else {
-                            var_a0_2 = 0;
-                            if (gWhatever >= 0x56) {
-block_62:
-                                func_8004ADD0_usa(var_a0_2);
-                            }
-                        }
-                        if (gWhatever == 0x5A) {
-                            if (gSelection == SELECTION_8C) {
-                                if (gTheGame.unk_43AC >= 0x2710) {
-                                    PlayMIDI(BGM_INIT_TABLE, 0x46, 0, 2);
-                                    PlaySE(&SFX_INIT_TABLE, 0x7D);
-                                } else {
-                                    goto block_72;
-                                }
-                            } else if (gSelection == SELECTION_BE) {
-                                if (gTheGame.unk_8860[0].unk_0 != 8) {
-                                    if (gTheGame.unk_43AC >= 0x2710) {
-                                        PlayMIDI(BGM_INIT_TABLE, 0x46, 0, 2);
-                                        PlaySE(&SFX_INIT_TABLE, 0x80);
-                                    } else {
-                                        var_a1_2 = 0x45;
-                                        goto block_73;
-                                    }
-                                } else {
-block_72:
-                                    var_a1_2 = 0x42;
-block_73:
-                                    PlayMIDI(BGM_INIT_TABLE, var_a1_2, 0, 1);
-                                }
-                            }
-                        }
-                    } else {
-                        var_s0 = 0;
-                        if (gTheGame.unk_8860[0].unk_0 == 7) {
-                            var_s0 = EndingExplosion(&gTheGame);
-                            UpdateExplosion(&gTheGame);
-                        }
-                    }
-                    if ((var_s0 == 0) && (gWhatever >= 0x5B)) {
-                        gMain = 0x392;
-                    }
-                    var_a0 = &gTheGame;
-                    if (gMain == 0x392) {
-                        Init3DTetrisBlocks(&gTheGame, 0);
-                        Init3DNewRow(&gTheGame);
-                        Init3DIcons(&gTheGame);
-                        if ((gSelection >= SELECTION_83) || (gTheGame.unk_8860[0].unk_0 != 7)) {
-                            if ((gSelection == SELECTION_AA) && (gTheGame.unk_8860[0].unk_0 == 7)) {
-                                goto block_85;
-                            }
-                            gTheGame.unk_43FC = 0x59;
-                        } else {
-block_85:
-                            gTheGame.unk_43FC = 0x50;
-                        }
-                        goto block_108;
-                    }
-                    break;
-                case 0x392:                         /* switch 1 */
-                    func_80037B0C_usa(&gTheGame, gTheGame.unk_8860);
-                    var_a0 = &gTheGame;
-                    if (gMain == 0x393) {
-                        gTheGame.help.selection[4] = 0;
-                        gTheGame.unk_43EC = 0;
-                    }
-                    break;
-                case 0x393:                         /* switch 1 */
-                    gTheGame.unk_9988[0x13C] = 0x26CU;
-                    gTheGame.unk_9988[0x164] = 0x2D0;
-                    if (gTheGame.unk_8860[0].unk_0 == 7) {
-                        if (((gSelection < SELECTION_83) | (gSelection == SELECTION_AA)) != 0) {
-                            PlayMIDI(BGM_INIT_TABLE, 0x45, 0, 1);
-                            if (gSelection == SELECTION_82) {
-                                func_80005A08_usa(gTheGame.help.selection[8]);
-                            }
-                        }
-                    } else if ((gSelection != SELECTION_8C) & (gSelection != SELECTION_BE)) {
-                        if (func_8004FA2C_usa() != 0) {
-                            func_8004ADD0_usa(-1);
-                        }
-                        PlayMIDI(BGM_INIT_TABLE, 0x42, 0, 1);
-                        if (gSelection == SELECTION_AA) {
-                            if (gTheGame.help.selection[8] == 5) {
-                                if (gTheGame.help.selection[0xC] == 3) {
-                                    PlaySE(&SFX_INIT_TABLE, 0x81);
-                                } else {
-                                    goto block_101;
-                                }
-                            } else {
-block_101:
-                                func_80005888_usa(0, 2, 2);
-                            }
-                        }
-                    }
-                    gWhatever = 0;
-                    gMain = 0x395;
-                    var_a0 = &gTheGame;
-                    break;
-                case 0x395:                         /* switch 1 */
-                    func_800352DC_usa(&gTheGame, &gTheGame.unk_9988[0x108]);
-                    func_80039B78_usa();
-                    func_8004ADD0_usa(0);
-                    if ((((gSelection == SELECTION_AA) | (gSelection == SELECTION_82)) != 0) && (gTheGame.unk_8860[0].unk_0 == 7)) {
-                        func_80035584_usa(&gTheGame.unk_9988[0x108] + 0x28);
-                    }
-                    gWhatever += 1;
-                    goto block_108;
-            }
-            var_a1_3 = gTheGame.unk_8860;
-        } else {
-            temp_v1 = gTheGame.unk_8860[0].unk_0;
-            temp_a0 = gTheGame.unk_8860[1];
-            var_s3 = 0;
-            if (temp_v1 != temp_a0) {
-                if (temp_v1 != 8) {
-                    if (temp_a0 != 7) {
-                        var_s4 = -1;
-                    } else {
-                        goto block_115;
                     }
                 } else {
-block_115:
-                    var_s3 = -1;
+                    PlaySE(SFX_INIT_TABLE, SFX_174);
                 }
-            }
-            switch (gMain) {                        /* switch 2 */
-                case GMAIN_38E:                     /* switch 2 */
-                    if (var_s4 != var_s3) {
-                        if (var_s4 != 0) {
-                            gTheGame.unk_4404 = (s32) (gTheGame.unk_4404 + 1);
-                        } else if (var_s3 != 0) {
-                            gTheGame.tetrisWell[1].unk_4404 = (s32) (gTheGame.tetrisWell[1].unk_4404 + 1);
+
+                FadeOutSong(last_song_handle, 0x3C);
+                break;
+
+            case GMAIN_38F:
+                if (cursor1->state == 8) {
+                    GameOverSmoke(well1);
+                    if (well1->raise >= 0) {
+                        count = dead1Shake[well1->raise];
+                        well1->raise--;
+                        well1->translation += (f32)count / DOUBLE_LITERAL(250.0);
+                    }
+                    AllDeadBlocks(well1);
+                } else {
+                    AllDeadFaces(well1);
+                }
+
+                if (gMain == GMAIN_390) {
+                    well1->timer = 40;
+                }
+                break;
+
+            case GMAIN_390:
+                if (cursor1->state == 8) {
+                    KillRow3D(well1, cursor1);
+                } else {
+                    well1->timer--;
+                    if (well1->timer == 0) {
+                        gMain = GMAIN_391;
+                        if (gSelection == SELECTION_BE) {
+                            Init3DTetrisBlocks(well1, 0);
+                            Init3DNewRow(well1);
                         }
                     }
-                    temp_a0_2 = (u32) (gGameStatus & 0xF00) >> 8;
-                    if ((gTheGame.unk_4404 == temp_a0_2) || (gTheGame.tetrisWell[1].unk_4404 == temp_a0_2)) {
-                        UpdateRecord2(var_s4, var_s3);
-                    }
-                    var_s0_2 = 0;
-                    LoadGameOver3D();
-                    InitFlic();
-                    Init3DIcons(&gTheGame);
-                    Init3DIcons((Game *) &gTheGame.tetrisWell[1]);
-                    Init3DExplosion(&gTheGame);
-                    Init3DExplosion((Game *) &gTheGame.tetrisWell[1]);
-                    gTheGame.help.selection[4] = 0;
-                    var_a0_3 = &gTheGame.tetrisWell[1];
-                    var_v1_2 = &gTheGame;
-                    do {
-                        if (var_v1_2->unk_2520 < 4) {
-                            var_v1_2->unk_2520 = 0;
-                        }
-                        if (var_a0_3->unk_2520 < 4) {
-                            var_a0_3->unk_2520 = 0;
-                        }
-                        var_v1_2->unk_2540 = 0;
-                        var_a0_3->unk_2540 = 0;
-                        var_a0_3 += 0x48;
-                        var_s0_2 += 1;
-                        var_v1_2 += 0x48;
-                    } while (var_s0_2 < 0x14);
-                    if (gTheGame.unk_8860[0].unk_0 == 8) {
-                        Init3DGameOverSmoke(&gTheGame, 0);
-                    }
-                    if (gTheGame.unk_8860[1] == 8) {
-                        Init3DGameOverSmoke((Game *) &gTheGame.tetrisWell[1], 1);
-                    }
-                    gMain = 0x38F;
-                    gWhatever = 0;
-                    gTheGame.unk_43EC = 0;
-                    gTheGame.tetrisWell[1].unk_43EC = 0;
-                    if (gTheGame.unk_8860[0].unk_0 == 8) {
-                        gTheGame.unk_43FC = 0x27;
-                    }
-                    if (gTheGame.unk_8860[1] == 8) {
-                        gTheGame.tetrisWell[1].unk_43FC = 0x27;
-                    }
-                    gTheGame.unk_9988[0x1D4] = 0x37CU;
-                    gTheGame.unk_9988[0x1FC] = 0x37CU;
-                    if (var_s4 != var_s3) {
-                        var_a1_4 = 0x174;
-                    } else {
-                        var_a1_4 = 0x175;
-                    }
-                    PlaySE(&SFX_INIT_TABLE, var_a1_4);
-                    FadeOutSong(last_song_handle, 0x3C);
-                    break;
-                case 0x38F:                         /* switch 2 */
-                    if (var_s4 == 0) {
-                        GameOverSmoke(&gTheGame);
-                        if (gTheGame.unk_43FC >= 0) {
-                            gTheGame.tetrisWell[0].unk_4088 = (f32) ((f64) gTheGame.tetrisWell[0].unk_4088 + ((f64) (f32) *(&D_800B675C_usa + gTheGame.unk_43FC) / 250.0));
-                            func_8003813C_usa(&gTheGame);
-                        }
-                    }
-                    if (var_s3 == 0) {
-                        GameOverSmoke((Game *) &gTheGame.tetrisWell[1]);
-                        temp_v0_3 = gTheGame.tetrisWell[1].unk_43FC;
-                        if (temp_v0_3 >= 0) {
-                            gTheGame.tetrisWell[1].unk_4088 = (f32) ((f64) gTheGame.tetrisWell[1].unk_4088 + ((f64) (f32) *(&D_800B675C_usa + temp_v0_3) / 250.0));
-                            func_8003813C_usa((Game *) &gTheGame.tetrisWell[1]);
-                        }
-                    }
-                    temp_v1_2 = gTheGame.tetrisWell[1].unk_43FC - 1;
-                    gTheGame.unk_43FC = (s32) (gTheGame.unk_43FC - 1);
-                    gTheGame.tetrisWell[1].unk_43FC = temp_v1_2;
-                    if ((gWhatever == 0) && (gTheGame.unk_43FC < -0x3C) && (temp_v1_2 < -0x3C)) {
-                        temp_a0_3 = (u32) (gGameStatus & 0xF00) >> 8;
-                        if ((gTheGame.unk_4404 == temp_a0_3) || (gTheGame.tetrisWell[1].unk_4404 == temp_a0_3)) {
-                            SaveRom(temp_a0_3);
-                        }
-                        gWhatever += 1;
-                    }
-                    if ((gTheGame.unk_43FC < -0x5A) && (gTheGame.tetrisWell[1].unk_43FC < -0x5A)) {
-                        gMain = 0x390;
-                        gTheGame.unk_43EC = 0;
-                        gTheGame.tetrisWell[1].unk_43EC = 0;
-                    }
-                    break;
-                case 0x390:                         /* switch 2 */
-                    func_80038228_usa(&gTheGame, gTheGame.unk_8860, 0);
-                    func_80038228_usa((Game *) &gTheGame.tetrisWell[1], &gTheGame.unk_8860[1], 1);
-                    var_a0_4 = 0;
-                    if (((f64) gTheGame.tetrisWell[0].unk_4088 > 1.8) && ((f64) gTheGame.tetrisWell[1].unk_4088 > 1.8)) {
-                        var_a0_4 = -1;
-                    }
-                    if (var_a0_4 != 0) {
-                        gMain = 0x391;
-                        Init3DTetrisBlocks(&gTheGame, 0);
-                        Init3DTetrisBlocks((Game *) &gTheGame.tetrisWell[1], 1);
-                        Init3DNewRow(&gTheGame);
-                        Init3DNewRow((Game *) &gTheGame.tetrisWell[1]);
-                        Init3DAttackBlocks(&gTheGame);
-                        Init3DAttackBlocks((Game *) &gTheGame.tetrisWell[1]);
-                        gTheGame.unk_43FC = 0x36;
-                        gTheGame.tetrisWell[1].unk_43FC = 0x36;
-                        gTheGame.unk_43EC = 0x5A;
-                        gTheGame.tetrisWell[1].unk_43EC = 0x5A;
-                        func_800521A4_usa(5);
-                    } else {
-                    default:                        /* switch 2 */
-                    }
-                    break;
-                case 0x391:                         /* switch 2 */
-                    if (gTheGame.unk_43EC != 0) {
-                        gTheGame.unk_43EC = (s32) (gTheGame.unk_43EC - 1);
-                    } else {
-                        if (gTheGame.unk_43FC == 0x36) {
-                            PlaySE(&SFX_INIT_TABLE, 0xA4);
-                        }
-                        temp_a0_4 = *(&D_800B66FC_usa + gTheGame.unk_43FC);
-                        gTheGame.unk_43FC = (s32) (gTheGame.unk_43FC - 1);
-                        gTheGame.unk_9988[0x1D4] = (u16) ((((s32) (gTheGame.unk_9988[0x1D4] << 0x10) >> 0x12) - (temp_a0_4 - (gTheGame.unk_9C0C == 2))) * 4);
-                        if (gTheGame.unk_43FC < 0) {
-                            gMain = 0x394;
-                        }
-                    }
-                    temp_v0_4 = gTheGame.tetrisWell[1].unk_43EC;
-                    if (temp_v0_4 != 0) {
-                        gTheGame.tetrisWell[1].unk_43EC = (s32) (temp_v0_4 - 1);
-                    } else {
-                        if (gTheGame.tetrisWell[1].unk_43FC == 0x36) {
-                            PlaySE(&SFX_INIT_TABLE, 0xA4);
-                        }
-                        temp_v0_5 = gTheGame.tetrisWell[1].unk_43FC;
-                        gTheGame.tetrisWell[1].unk_43FC = (s32) (temp_v0_5 - 1);
-                        gTheGame.unk_9988[0x1FC] = (u16) ((((s32) (gTheGame.unk_9988[0x1FC] << 0x10) >> 0x12) - (*(&D_800B66FC_usa + temp_v0_5) - (gTheGame.unk_9C0C == 2))) * 4);
-                        if (gTheGame.tetrisWell[1].unk_43FC < 0) {
-                            gMain = 0x394;
-                        }
-                    }
-                    if (gTheGame.unk_43FC < 0x32) {
-                        var_v1_3 = *(&D_800B66FC_usa + gTheGame.unk_43FC);
-                        if (var_v1_3 == -0x10) {
-                            var_v1_3 = -0x1C;
-                        }
-                        gTheGame.unk_9988[0x114] = (u16) ((((s32) (gTheGame.unk_9988[0x114] << 0x10) >> 0x12) - var_v1_3) * 4);
-                    }
-                    temp_v1_3 = gTheGame.tetrisWell[1].unk_43FC;
-                    if (temp_v1_3 < 0x32) {
-                        var_v1_4 = *(&D_800B66FC_usa + temp_v1_3);
-                        if (var_v1_4 == -0x10) {
-                            var_v1_4 = -0x1C;
-                        }
-                        gTheGame.unk_9988[0x13C] = (u16) ((((s32) (gTheGame.unk_9988[0x13C] << 0x10) >> 0x12) - var_v1_4) * 4);
-                    }
-                    if ((gTheGame.unk_43FC < 0) && ((gMain = 0x392, (((gSelection == SELECTION_96) & var_s4) != 0)) || (((gSelection == SELECTION_A0) | (gSelection == SELECTION_B4)) != 0) || (gSelection == SELECTION_C8))) {
-                        if (B_801C6C90_usa != 0x10) {
-                            PlaySE(&SFX_INIT_TABLE, 0x17A);
+                }
+                break;
+
+            case GMAIN_391:
+                if (gWhatever == 0) {
+                    SaveRom();
+                }
+
+                gWhatever++;
+                if (well1->timer != 0) {
+                    well1->timer--;
+                } else {
+                    if ((gSelection == SELECTION_8C) || (gSelection == SELECTION_BE)) {
+                        Init3DIcons(well1);
+                        count = func_8003901C_usa(well1);
+
+                        if (gWhatever == 0x55) {
+                            if (func_8004FA2C_usa() != 0) {
+                                func_8004ADD0_usa(-1);
+                            }
                         } else {
-block_238:
+                            if (gWhatever >= 0x56) {
+                                func_8004ADD0_usa(0);
+                            }
+                        }
+
+                        if (gWhatever == 0x5A) {
+                            if (gSelection == SELECTION_8C) {
+                                if (well1->score >= 10000) {
+                                    PlayMIDI(BGM_INIT_TABLE, 0x46, 0, 2);
+                                    PlaySE(SFX_INIT_TABLE, SFX_07D);
+                                } else {
+                                    PlayMIDI(BGM_INIT_TABLE, 0x42, 0, 1);
+                                }
+                            } else if (gSelection == SELECTION_BE) {
+                                if (cursor1->state != 8) {
+                                    if (well1->score >= 0x2710) {
+                                        PlayMIDI(BGM_INIT_TABLE, 0x46, 0, 2);
+                                        PlaySE(SFX_INIT_TABLE, SFX_080);
+                                    } else {
+                                        PlayMIDI(BGM_INIT_TABLE, 0x45, 0, 1);
+                                    }
+                                } else {
+                                    PlayMIDI(BGM_INIT_TABLE, 0x42, 0, 1);
+                                }
+                            }
+                        }
+                    } else if (cursor1->state == 7) {
+                        count = EndingExplosion(well1);
+                        UpdateExplosion(well1);
+                    } else {
+                        count = 0;
+                    }
+
+                    if ((count == 0) && (gWhatever >= 0x5B)) {
+                        gMain = GMAIN_392;
+                    }
+
+                    if (gMain == GMAIN_392) {
+                        Init3DTetrisBlocks(well1, 0);
+                        Init3DNewRow(well1);
+                        Init3DIcons(well1);
+
+                        if (((gSelection < 0x83) && (cursor1->state == 7))) {
+                            well1->raise = 0x50;
+                        } else if ((gSelection == SELECTION_AA) && (cursor1->state == 7)) {
+                            well1->raise = 0x50;
+                        } else {
+                            well1->raise = 0x59;
+                        }
+                    }
+                }
+                break;
+
+            case GMAIN_392:
+                GameOverSign(well1, cursor1);
+
+                if (gMain == GMAIN_393) {
+                    gTheGame.help.current_pos = 0;
+                    well1->timer = 0;
+                }
+                break;
+
+            case GMAIN_393:
+                gTheGame.unk_9A90[1].b.frameY = 155 << 2;
+                gTheGame.unk_9A90[2].b.frameY = 180 << 2;
+
+                if (cursor1->state == 7) {
+                    if ((gSelection < SELECTION_83) || (gSelection == SELECTION_AA)) {
+                        PlayMIDI(BGM_INIT_TABLE, 0x45, 0, 1);
+                        if (gSelection == SELECTION_82) {
+                            func_80005A08_usa(gTheGame.menu[0].game);
+                        }
+                    }
+                } else if ((gSelection != SELECTION_8C) && (gSelection != SELECTION_BE)) {
+                    if (func_8004FA2C_usa() != 0) {
+                        func_8004ADD0_usa(-1);
+                    }
+
+                    PlayMIDI(BGM_INIT_TABLE, 0x42, 0, 1);
+                    if (gSelection == SELECTION_AA) {
+                        if (gTheGame.menu[0].game == 5) {
+                            if (gTheGame.menu[0].stage == 3) {
+                                PlaySE(SFX_INIT_TABLE, SFX_081);
+                            } else {
+                                func_80005888_usa(0, 2, 2);
+                            }
+                        } else {
+                            func_80005888_usa(0, 2, 2);
+                        }
+                    }
+                }
+
+                gWhatever = 0;
+                gMain = GMAIN_395;
+                break;
+
+            case GMAIN_395:
+                AnimateGameOver3D(well1, &gTheGame.unk_9A90[0]);
+                func_80039B78_usa();
+                func_8004ADD0_usa(0);
+                if ((gSelection == SELECTION_AA) || (gSelection == SELECTION_82)) {
+                    if (cursor1->state == 7) {
+                        AnimatePushKey(&gTheGame.unk_9A90[1]);
+                    }
+                }
+                gWhatever++;
+                break;
+
+            default:
+                break;
+        }
+
+        Check3DVisibleBlocks(well1, cursor1);
+    } else {
+        win1 = nfalse;
+        win2 = nfalse;
+        if (cursor1->state != cursor2->state) {
+            if ((cursor1->state == 8) || (cursor2->state == 7)) {
+                win2 = ntrue;
+            } else {
+                win1 = ntrue;
+            }
+        }
+
+        switch (gMain) {
+            case GMAIN_38E:
+                if (win1 != win2) {
+                    if (win1) {
+                        well1->win++;
+                    } else if (win2) {
+                        well2->win++;
+                    }
+                }
+
+                temp = GAME_STATUS_GET_WIN_RECORD(gGameStatus);
+                if ((well1->win == temp) || (well2->win == temp)) {
+                    UpdateRecord2(win1, win2);
+                }
+
+                LoadGameOver3D();
+                InitFlic();
+                Init3DIcons(well1);
+                Init3DIcons(well2);
+                Init3DExplosion(well1);
+                Init3DExplosion(well2);
+                gTheGame.help.current_pos = 0;
+
+                for (count = 0; count < ATTACK_COUNT; count++) {
+                    if (well1->attack[count].state < ATTACKSTATE_4) {
+                        well1->attack[count].state = ATTACKSTATE_0;
+                    }
+                    if (well2->attack[count].state < ATTACKSTATE_4) {
+                        well2->attack[count].state = ATTACKSTATE_0;
+                    }
+
+                    well1->attack[count].expression = 0;
+                    well2->attack[count].expression = 0;
+                }
+
+                if (cursor1->state == 8) {
+                    Init3DGameOverSmoke(well1, 0);
+                }
+                if (cursor2->state == 8) {
+                    Init3DGameOverSmoke(well2, 1);
+                }
+
+                gMain = GMAIN_38F;
+                gWhatever = 0;
+                well1->timer = 0;
+                well2->timer = 0;
+                if (cursor1->state == 8) {
+                    well1->raise = 0x27;
+                }
+                if (cursor2->state == 8) {
+                    well2->raise = 0x27;
+                }
+                gTheGame.unk_9B50[0].b.frameY = 0x37C;
+                gTheGame.unk_9B50[1].b.frameY = 0x37C;
+
+                if (win1 == win2) {
+                    PlaySE(SFX_INIT_TABLE, SFX_175);
+                } else {
+                    PlaySE(SFX_INIT_TABLE, SFX_174);
+                }
+
+                FadeOutSong(last_song_handle, 0x3C);
+                break;
+
+            case GMAIN_38F:
+                if (!win1) {
+                    GameOverSmoke(well1);
+                    if (well1->raise >= 0) {
+                        count = dead2Shake[well1->raise];
+                        well1->translation += (f32)count / DOUBLE_LITERAL(250.0);
+                        ChangeDeadFace(well1);
+                    }
+                }
+
+                if (!win2) {
+                    GameOverSmoke(well2);
+                    if (well2->raise >= 0) {
+                        count = dead2Shake[well2->raise];
+                        well2->translation += (f32)count / DOUBLE_LITERAL(250.0);
+                        ChangeDeadFace(well2);
+                    }
+                }
+
+                well1->raise -= 1;
+                well2->raise--;
+                if ((gWhatever == 0) && (well1->raise < -0x3C) && (well2->raise < -0x3C)) {
+                    temp = GAME_STATUS_GET_WIN_RECORD(gGameStatus);
+                    if ((well1->win == temp) || (well2->win == temp)) {
+                        SaveRom();
+                    }
+                    gWhatever++;
+                }
+
+                if ((well1->raise < -0x5A) && (well2->raise < -0x5A)) {
+                    gMain = GMAIN_390;
+                    well1->timer = 0;
+                    well2->timer = 0;
+                }
+                break;
+
+            case GMAIN_390:
+                func_80038228_usa(well1, cursor1, 0);
+                func_80038228_usa(well2, cursor2, 1);
+
+                if ((well1->translation > DOUBLE_LITERAL(1.8)) && (well2->translation > DOUBLE_LITERAL(1.8))) {
+                    temp = ntrue;
+                } else {
+                    temp = nfalse;
+                }
+
+                if (temp) {
+                    gMain = GMAIN_391;
+
+                    Init3DTetrisBlocks(well1, 0);
+                    Init3DTetrisBlocks(well2, 1);
+                    Init3DNewRow(well1);
+                    Init3DNewRow(well2);
+                    Init3DAttackBlocks(well1);
+                    Init3DAttackBlocks(well2);
+
+                    well1->raise = 0x36;
+                    well2->raise = 0x36;
+                    well1->timer = 90;
+                    well2->timer = 90;
+
+                    func_800521A4_usa(5);
+                }
+                break;
+
+            case GMAIN_391:
+                func_800386D4_usa(well1, 0);
+                func_800386D4_usa(well2, 1);
+
+                func_800387AC_usa(well1, 0);
+                func_800387AC_usa(well2, 1);
+
+                if (well1->raise < 0) {
+                    gMain = GMAIN_392;
+
+                    if (((gSelection == SELECTION_96) && win1) || (gSelection == SELECTION_A0) ||
+                        (gSelection == SELECTION_B4) || (gSelection == SELECTION_C8)) {
+                        if (B_801C6C90_usa != 0x10) {
+                            PlaySE(SFX_INIT_TABLE, SFX_17A);
+                        } else {
                             PlayMIDI(BGM_INIT_TABLE, 0x45, 0, 1);
                         }
                     }
-                    break;
-                case 0x392:                         /* switch 2 */
-                    temp_a0_5 = (u32) (gGameStatus & 0xF00) >> 8;
-                    if (gTheGame.tetrisWell[0].unk_43BC[0x48] == temp_a0_5) {
-                        temp_v1_4 = gTheGame.help.selection[8] + 1;
-                        gTheGame.unk_4420 = (s32) (gTheGame.unk_4420 + 1);
-                        gTheGame.help.selection[8] = temp_v1_4;
-                        if (temp_v1_4 >= 0x64) {
-                            gTheGame.unk_4420 = 0x63;
-                            gTheGame.help.selection[8] = 0x63;
-                        }
-                    } else if (gTheGame.tetrisWell[1].unk_43BC[0x48] == temp_a0_5) {
-                        temp_v1_5 = gTheGame.help.selection[0x18] + 1;
-                        gTheGame.tetrisWell[1].unk_4420 = (s32) (gTheGame.tetrisWell[1].unk_4420 + 1);
-                        gTheGame.help.selection[0x18] = temp_v1_5;
-                        if (temp_v1_5 >= 0x64) {
-                            gTheGame.tetrisWell[1].unk_4420 = 0x63;
-                            gTheGame.help.selection[0x18] = 0x63;
-                        }
-                    }
-                    if (var_s4 != 0) {
-                        if (gTheGame.unk_4404 == 1) {
-                            var_a1_5 = 0;
-                        } else if (gTheGame.unk_4404 == 2) {
-                            var_a1_5 = 1;
-                        } else {
-                            var_a1_5 = 2;
-                        }
-                        func_8005E108_usa(1, var_a1_5);
-                        func_80005888_usa(0, 1, 2);
-                    }
-                    if (var_s3 != 0) {
-                        temp_v1_6 = gTheGame.tetrisWell[1].unk_4404;
-                        if (temp_v1_6 == 1) {
-                            var_a1_6 = 0;
-                        } else if (temp_v1_6 == 2) {
-                            var_a1_6 = 1;
-                        } else {
-                            var_a1_6 = 2;
-                        }
-                        func_8005E108_usa(0, var_a1_6);
-                        func_80005888_usa(0, 2, 2);
-                        if (gSelection == SELECTION_96) {
-                            var_a1_7 = 0x42;
-                            if (B_801C6C90_usa != 0x10) {
+                }
+                break;
 
-                            } else {
-                                var_a1_7 = 0x20;
-                            }
-                            PlayMIDI(BGM_INIT_TABLE, var_a1_7, 0, 1);
-                        }
+            case GMAIN_392:
+                temp = GAME_STATUS_GET_WIN_RECORD(gGameStatus);
+                if (gTheGame.tetrisWell[0].win == temp) {
+                    well1->menu.game++;
+                    gTheGame.menu[0].game++;
+                    if (gTheGame.menu[0].game > 99) {
+                        well1->menu.game = 99;
+                        gTheGame.menu[0].game = 99;
                     }
-                    gTheGame.unk_43FC = -1;
-                    gTheGame.tetrisWell[1].unk_43FC = -1;
-                    gTheGame.unk_43EC = 0;
-                    gTheGame.tetrisWell[1].unk_43EC = 0;
-                    gWhatever = 0;
-                    if (var_s4 != var_s3) {
-                        gMain = 0x393;
+                } else if (gTheGame.tetrisWell[1].win == temp) {
+                    well2->menu.game++;
+                    gTheGame.menu[1].game++;
+                    if (gTheGame.menu[1].game > 99) {
+                        well2->menu.game = 99;
+                        gTheGame.menu[1].game = 99;
+                    }
+                }
+
+                if (win1) {
+                    if (well1->win == 1) {
+                        Init3DCircleStars(1, 0);
+                    } else if (well1->win == 2) {
+                        Init3DCircleStars(1, 1);
                     } else {
-block_221:
-                        gMain = 0x394;
+                        Init3DCircleStars(1, 2);
                     }
-                    break;
-                case 0x393:                         /* switch 2 */
-                    if (func_80038944_usa(temp_a0) != 0) {
-                        goto block_221;
-                    }
-                    break;
-                case 0x394:                         /* switch 2 */
-                    gTheGame.unk_9988[0x164] = 0x304;
-                    gTheGame.unk_9988[0x18C] = 0x304;
-                    var_a0_5 = 0;
-                    if ((var_s4 != 0) || (var_a0_5 = 1, (var_s3 != 0))) {
-                        Init3DSmallStars(var_a0_5);
-                    }
-                    gMain = 0x395;
-                    break;
-                case 0x395:                         /* switch 2 */
-                    if (var_s4 == var_s3) {
-                        func_800354C0_usa(&gTheGame, &gTheGame.unk_9988[0x108]);
-                        func_800354C0_usa((Game *) &gTheGame.tetrisWell[1], &gTheGame.unk_9988[0x108] + 0x28);
+
+                    func_80005888_usa(0, 1, 2);
+                }
+
+                if (win2) {
+                    if (well2->win == 1) {
+                        Init3DCircleStars(0, 0);
+                    } else if (well2->win == 2) {
+                        Init3DCircleStars(0, 1);
                     } else {
-                        if (var_s4 != 0) {
-                            func_800353B0_usa(&gTheGame, &gTheGame.unk_9988[0x108]);
-                        } else {
-                            func_80035438_usa(&gTheGame, &gTheGame.unk_9988[0x108]);
-                        }
-                        if (var_s3 != 0) {
-                            func_800353B0_usa((Game *) &gTheGame.tetrisWell[1], &gTheGame.unk_9988[0x130]);
-                        } else {
-                            func_80035438_usa((Game *) &gTheGame.tetrisWell[1], &gTheGame.unk_9988[0x130]);
-                        }
-                        func_8003880C_usa();
+                        Init3DCircleStars(0, 2);
                     }
-                    func_80035584_usa(&gTheGame.unk_9988[0x158]);
-                    func_80035584_usa(&gTheGame.unk_9988[0x158] + 0x28);
-                    temp_v0_6 = gWhatever + 1;
-                    gWhatever = temp_v0_6;
-                    if (temp_v0_6 == 0xDC) {
-                        if ((gSelection != SELECTION_96) || ((var_s4 != 0) & (var_s3 == 0))) {
-                            goto block_238;
+
+                    func_80005888_usa(0, 2, 2);
+                    if (gSelection == SELECTION_96) {
+                        if (B_801C6C90_usa != 0x10) {
+                            PlayMIDI(BGM_INIT_TABLE, 0x42, 0, 1);
+                        } else {
+                            PlayMIDI(BGM_INIT_TABLE, 0x20, 0, 1);
                         }
                     }
-                    break;
-            }
-            Update3DCursor(gTheGame.tetrisWell, gTheGame.unk_8860);
-            Update3DCursor(&gTheGame.tetrisWell[1], &gTheGame.unk_8860[1]);
-            Check3DVisibleBlocks(&gTheGame, gTheGame.unk_8860);
-            var_a0 = (Game *) &gTheGame.tetrisWell[1];
-            var_a1_3 = &gTheGame.unk_8860[1];
+                }
+
+                well1->raise = -1;
+                well2->raise = -1;
+                well1->timer = 0;
+                well2->timer = 0;
+
+                gWhatever = 0;
+                if (win1 != win2) {
+                    gMain = GMAIN_393;
+                } else {
+                    gMain = GMAIN_394;
+                }
+                break;
+
+            case GMAIN_393:
+                if (CircleStars() != 0) {
+                    gMain = GMAIN_394;
+                }
+                break;
+
+            case GMAIN_394:
+                gTheGame.unk_9A90[2].b.frameY = 193 << 2;
+                gTheGame.unk_9A90[3].b.frameY = 193 << 2;
+                if (win1) {
+                    Init3DSmallStars(0);
+                } else if (win2) {
+                    Init3DSmallStars(1);
+                }
+
+                gMain = GMAIN_395;
+                break;
+
+            case GMAIN_395:
+                if (win1 == win2) {
+                    AnimateDraw3D(well1, &gTheGame.unk_9A90[0]);
+                    AnimateDraw3D(well2, &gTheGame.unk_9A90[1]);
+                } else {
+                    if (win1) {
+                        AnimateLose3D(well1, &gTheGame.unk_9A90[0]);
+                    } else {
+                        AnimateWin3D(well1, &gTheGame.unk_9A90[0]);
+                    }
+                    if (win2) {
+                        AnimateLose3D(well2, &gTheGame.unk_9A90[1]);
+                    } else {
+                        AnimateWin3D(well2, &gTheGame.unk_9A90[1]);
+                    }
+
+                    SmallStars();
+                }
+
+                AnimatePushKey(&gTheGame.unk_9A90[2]);
+                AnimatePushKey(&gTheGame.unk_9A90[3]);
+
+                gWhatever++;
+                if (gWhatever == 0xDC) {
+                    if ((gSelection != SELECTION_96) || (win1 && !win2)) {
+                        PlayMIDI(BGM_INIT_TABLE, 0x45, 0, 1);
+                    }
+                }
+                break;
+
+            default:
+                break;
         }
-        Check3DVisibleBlocks(var_a0, var_a1_3);
+
+        Update3DCursor(well1, cursor1);
+        Update3DCursor(well2, cursor2);
+        Check3DVisibleBlocks(well1, cursor1);
+        Check3DVisibleBlocks(well2, cursor2);
     }
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", DoGameOver3D);
-#endif
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", DoGameOver3D);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", DoGameOver3D);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", DoGameOver3D);
-#endif
 
 /**
  * Original name: DoGameOver

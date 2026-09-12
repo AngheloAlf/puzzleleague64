@@ -17,6 +17,9 @@
 #include "assets/sign_gameover.h"
 #include "assets/sign_pause.h"
 
+/**
+ * Original name: InitPause
+ */
 void InitPause(void) {
     SignPauseTextures *currSegment;
     uObjBg *bg;
@@ -113,6 +116,9 @@ void InitPause(void) {
     }
 }
 
+/**
+ * Original name: InitGameOver
+ */
 void InitGameOver(void) {
     void *var_s1;
 
@@ -179,6 +185,9 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/sign", LoadGameOver3D);
 INCLUDE_ASM("asm/ger/nonmatchings/main/sign", LoadGameOver3D);
 #endif
 
+/**
+ * Original name: DrawPauseOver
+ */
 void DrawPauseOver(struct_gInfo_unk_00068 *arg0) {
     if (gMain == GMAIN_388) {
         DrawPause(arg0);
@@ -203,21 +212,32 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/sign", func_8003524C_usa);
 INCLUDE_ASM("asm/ger/nonmatchings/main/sign", func_8003524C_usa);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/sign", func_800352DC_usa);
-#endif
+/**
+ * Original name: AnimateGameOver3D
+ */
+void AnimateGameOver3D(tetWell *well, uObjBg *bg) {
+    s32 temp_v1;
+    s32 var_a3;
+    s32 temp;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sign", func_800352DC_usa);
-#endif
+    var_a3 = 0;
+    if (well->timer >= 130) {
+        well->timer = 0;
+    }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sign", func_800352DC_usa);
-#endif
+    temp_v1 = well->timer;
+    if (temp_v1 % 10 == 0) {
+        temp_v1 /= 10;
+        if (temp_v1 < 0xA) {
+            var_a3 = D_800B659C_usa[temp_v1];
+        }
+    }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sign", func_800352DC_usa);
-#endif
+    well->timer++;
+
+    temp = bg->b.frameY >> 2;
+    bg->b.frameY = (temp - var_a3) << 2;
+}
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/sign", func_8003536C_usa);
@@ -235,21 +255,31 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/sign", func_8003536C_usa);
 INCLUDE_ASM("asm/ger/nonmatchings/main/sign", func_8003536C_usa);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/sign", func_800353B0_usa);
+/**
+ * Original name: AnimateLose3D
+ */
+void AnimateLose3D(tetWell *well, uObjBg *bg) {
+    s32 var_v0;
+    s32 var_v1;
+    s32 temp;
+
+#if 0
+    // Local variables
+    int diff; // r8
 #endif
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sign", func_800353B0_usa);
-#endif
+    if (well->raise >= 0) {
+        var_v1 = losewordShake[well->raise];
+        var_v0 = well->raise - 1;
+    } else {
+        var_v1 = 0;
+        var_v0 = 0x27;
+    }
+    well->raise = var_v0;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sign", func_800353B0_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sign", func_800353B0_usa);
-#endif
+    temp = bg->b.frameY >> 2;
+    bg->b.frameY = (temp - var_v1) << 2;
+}
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/sign", func_800353F4_usa);
@@ -267,21 +297,26 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/sign", func_800353F4_usa);
 INCLUDE_ASM("asm/ger/nonmatchings/main/sign", func_800353F4_usa);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/sign", func_80035438_usa);
-#endif
+/**
+ * Original name: AnimateWin3D
+ */
+void AnimateWin3D(tetWell *well, uObjBg *bg) {
+    s32 var_v0;
+    s32 var_v1;
+    s32 temp;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sign", func_80035438_usa);
-#endif
+    if (well->raise >= 0) {
+        var_v1 = winwordShake[well->raise];
+        var_v0 = well->raise - 1;
+    } else {
+        var_v1 = 0;
+        var_v0 = 2;
+    }
+    well->raise = var_v0;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sign", func_80035438_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sign", func_80035438_usa);
-#endif
+    temp = bg->b.frameY >> 2;
+    bg->b.frameY = (temp - var_v1) << 2;
+}
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/sign", func_8003547C_usa);
@@ -299,53 +334,58 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/sign", func_8003547C_usa);
 INCLUDE_ASM("asm/ger/nonmatchings/main/sign", func_8003547C_usa);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/sign", func_800354C0_usa);
-#endif
+/**
+ * Original name: AnimateDraw3D
+ */
+void AnimateDraw3D(tetWell *well, uObjBg *bg) {
+    s32 var_v0;
+    s32 var_v1;
+    s32 temp;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sign", func_800354C0_usa);
-#endif
+    if (well->raise >= 0) {
+        var_v1 = winwordShake[well->raise];
+        var_v0 = well->raise - 1;
+    } else {
+        var_v1 = 0;
+        var_v0 = 2;
+    }
+    well->raise = var_v0;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sign", func_800354C0_usa);
-#endif
+    temp = bg->b.frameY >> 2;
+    bg->b.frameY = (temp - var_v1) << 2;
+}
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sign", func_800354C0_usa);
-#endif
+/**
+ * Original name: AnimatePauseKey
+ */
+void AnimatePauseKey(uObjBg *bg) {
+    s32 temp;
+    s32 temp2;
+    s32 temp3;
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/sign", AnimatePauseKey);
-#endif
+    if (gTheGame.cursorBlock[0].frame_n == 0) {
+        bg->b.frameY = 0x4B << 2;
+    }
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sign", AnimatePauseKey);
-#endif
+    temp3 = gTheGame.cursorBlock[0].frame_n % 30;
+    temp2 = pushkeyShake[temp3];
+    temp = bg->b.frameY >> 2;
+    bg->b.frameY = (temp - temp2) << 2;
+}
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sign", AnimatePauseKey);
-#endif
+/**
+ * Original name: AnimatePushKey
+ */
+void AnimatePushKey(uObjBg *bg) {
+    s32 temp;
+    s32 temp2;
+    s32 temp3;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sign", AnimatePauseKey);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/sign", func_80035584_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sign", func_80035584_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sign", func_80035584_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sign", func_80035584_usa);
-#endif
+    temp3 = gWhatever % 30;
+    temp2 = pushkeyShake[temp3];
+    temp = bg->b.frameY >> 2;
+    bg->b.frameY = (temp - temp2) << 2;
+}
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/sign", func_800355EC_usa);

@@ -594,7 +594,7 @@ void titleSetup(void) {
     B_FLT_8018A804_usa = 0.0f;
     gbOpenTitle = 0;
     geDemoTitle = TD_NONE;
-    gGameStatus = GAME_STATUS_FLAG_200 | GAME_STATUS_FLAG_100;
+    gGameStatus = GAME_STATUS_SET_WIN_RECORD(3);
     gPlayer[0] = NULL;
     gPlayer[1] = NULL;
 

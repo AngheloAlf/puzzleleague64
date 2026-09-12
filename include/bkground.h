@@ -21,7 +21,7 @@ void Draw2DShadeBox(void);
 // void func_8004A26C_usa();
 void Draw2DBigScreen(uObjTxtr *lut, uObjBg *ptr);
 // void func_8004AA48_usa();
-// void func_8004ADD0_usa();
+void func_8004ADD0_usa(s32 arg0);
 void func_8004AE90_usa(void);
 // void func_8004B0D8_usa();
 void func_8004B12C_usa(void);

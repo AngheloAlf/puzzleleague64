@@ -35,10 +35,10 @@ typedef struct help_t {
 /* Original name: Game */
 typedef struct Game {
     /* 0x0000 */ tetWell tetrisWell[GAME_BUFFER_LEN]; /* Original name: tetrisWell */
-    /* 0x8860 */ cursor_t cursorBlock[GAME_BUFFER_LEN];
-    /* 0x89C0 */ gamepad_t controller[GAME_BUFFER_LEN];
-    /* 0x89E0 */ flic_t flic[FLIC_COUNT];
-    /* 0x8B20 */ action_t action[ACTION_COUNT];
+    /* 0x8860 */ cursor_t cursorBlock[GAME_BUFFER_LEN]; /* Original name: cursorBlock */
+    /* 0x89C0 */ gamepad_t controller[GAME_BUFFER_LEN]; /* Original name: controller */
+    /* 0x89E0 */ flic_t flic[FLIC_COUNT]; /* Original name: flic */
+    /* 0x8B20 */ action_t action[ACTION_COUNT]; /* Original name: action */
     /* 0x8B98 */ uObjTxtr unk_8B98[2 * UNK_SIZE]; // gLUT?
     /* 0x8BC8 */ UNK_PAD unk_8BC8[0x18];
     /* 0x8BE0 */ s32 unk_8BE0;
@@ -55,10 +55,9 @@ typedef struct Game {
     /* 0x8EE0 */ uObjTxtr unk_8EE0[UNK_SIZE]; // gTEXT?
     /* 0x8EF8 */ UNK_PAD unk_8EF8[0x8FD0-0x8EF8];
     /* 0x8FD0 */ uObjSprite gSPRITE[10];
-    /* 0x90C0 */ s32 unk_90C0; // currentText?
-    /* 0x90C4 */ UNK_TYPE1 unk_90C4[0x4];
-    /* 0x90C8 */ text_t drawText[DRAWTEXT_COUNT];
-    /* 0x9988 */ uObjBg frame[UNK_SIZE];
+    /* 0x90C0 */ s32 currentText; /* Original name: currentText */
+    /* 0x90C8 */ text_t drawText[DRAWTEXT_COUNT]; /* Original name: drawText */
+    /* 0x9988 */ uObjBg frame[UNK_SIZE]; /* Original name: frame */
     /* 0x99B0 */ UNK_TYPE1 unk_99B0[0x28];
     /* 0x99D8 */ uObjTxtr unk_99D8[UNK_SIZE];
     /* 0x99F0 */ UNK_PAD unk_99F0[0x18];

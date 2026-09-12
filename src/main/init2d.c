@@ -243,19 +243,19 @@ void Init2DSmallStars(s32 num) {
 }
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", func_8006C7A0_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", Init2DCircleStars);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", func_8006CA70_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", Init2DCircleStars);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", func_8006B1B0_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", Init2DCircleStars);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", func_8006B360_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", Init2DCircleStars);
 #endif
 
 #if VERSION_USA

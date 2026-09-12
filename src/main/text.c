@@ -136,11 +136,14 @@ nbool InitWhichNumber(text_t *text, char number, s32 type) {
     return ntrue;
 }
 
+/**
+ * Original name: SetText
+ */
 INLINE void SetText(s32 x, s32 y, const char str[], SetTextType type) {
     s32 str_pos = 0;
     s32 count;
 
-    for (count = gTheGame.unk_90C0; count < DRAWTEXT_COUNT; count++) {
+    for (count = gTheGame.currentText; count < DRAWTEXT_COUNT; count++) {
         text_t *text = &gTheGame.drawText[count];
 
         if (!InitWhichNumber(text, str[str_pos], type)) {
@@ -155,7 +158,7 @@ INLINE void SetText(s32 x, s32 y, const char str[], SetTextType type) {
         str_pos++;
     }
 
-    gTheGame.unk_90C0 = count;
+    gTheGame.currentText = count;
 }
 
 void UpdateText(void) {

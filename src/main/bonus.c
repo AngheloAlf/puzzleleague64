@@ -405,6 +405,9 @@ typedef struct struct_800C48A8_usa {
     /* 0x2 */ u16 unk_2;
 } struct_800C48A8_usa; // size = 0x4
 
+/**
+ * Original name: DoBonus
+ */
 void DoBonus(void) {
     s32 var_s5 = 0;
     char sp10[8];
@@ -428,10 +431,9 @@ void DoBonus(void) {
     tetWell *var_s2;
     s32 i;
 
-    gTheGame.unk_90C0 = 6;
-
-    for (i = ARRAY_COUNT(gTheGame.drawText) - 1; i >= 0; i--) {
-        gTheGame.drawText[i].texture = (u32)-1;
+    gTheGame.currentText = 6;
+    for (i = 0; i < ARRAY_COUNT(gTheGame.drawText); i++) {
+        gTheGame.drawText[i].texture = -1;
     }
 
     var_s2 = &gTheGame.tetrisWell[0];

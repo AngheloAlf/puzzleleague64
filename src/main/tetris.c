@@ -187,7 +187,8 @@ s32 DemoCheck(s32 *frame) {
 void DemoCPU(s32 num, s32 level) {
     if (gGameStatus & GAME_STATUS_FLAG_80) {
         GAME_STATUS_SHIFT_LEFT(gGameStatus);
-        gGameStatus |= GAME_STATUS_FLAG_200 | GAME_STATUS_FLAG_100 | GAME_STATUS_FLAG_80;
+        gGameStatus |= GAME_STATUS_SET_WIN_RECORD(3);
+        gGameStatus |= GAME_STATUS_FLAG_80;
     }
 
     switch (level) {
@@ -441,6 +442,9 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/tetris", InitTetrisWell);
 INCLUDE_ASM("asm/ger/nonmatchings/main/tetris", InitTetrisWell);
 #endif
 
+/**
+ * Original name: DoTetris
+ */
 void DoTetris(void) {
     typedef struct Padding {
         s32 unk_0;
@@ -463,8 +467,8 @@ void DoTetris(void) {
     Padding pad UNUSED = { 0, 0 };
     s32 pad2[4] UNUSED;
 
-    gTheGame.unk_90C0 = 6;
-    for (count = 6; count < DRAWTEXT_COUNT; count++) {
+    gTheGame.currentText = 6;
+    for (count = gTheGame.currentText; count < DRAWTEXT_COUNT; count++) {
         gTheGame.drawText[count].texture = -1;
     }
 

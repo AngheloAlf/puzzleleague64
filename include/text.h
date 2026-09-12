@@ -13,7 +13,6 @@ struct struct_gInfo_unk_00068;
 typedef struct text_t {
     /* 0x00 */ uObjSprite word; /* Original name: word */
     /* 0x18 */ s32 texture; /* Original name: texture */
-    // /* 0x1C */ UNK_TYPE1 unk_1C[0x4]; // Probably alignment padding
 } text_t; // size = 0x20
 
 typedef enum SetTextType {

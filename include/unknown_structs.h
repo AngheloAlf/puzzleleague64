@@ -27,8 +27,11 @@ typedef enum enum_gMain {
     /* 0x38E */ GMAIN_38E = 0x38E,
     /* 0x38F */ GMAIN_38F,
     /* 0x390 */ GMAIN_390,
-    /* 0x393 */ GMAIN_393 = 0x393,
-    /* 0x395 */ GMAIN_395 = 0x395,
+    /* 0x391 */ GMAIN_391,
+    /* 0x392 */ GMAIN_392,
+    /* 0x393 */ GMAIN_393,
+    /* 0x394 */ GMAIN_394,
+    /* 0x395 */ GMAIN_395,
 } enum_gMain;
 
 typedef enum enum_gDemo {

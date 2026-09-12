@@ -18,7 +18,7 @@ void Init3DText(void);
 void Init3DClearLine(struct tetWell* well, struct cursor_t *cursor, s32 num);
 // void func_8005DE94_usa();
 void Init3DSmallStars(s32 num);
-// void func_8005E108_usa();
+void Init3DCircleStars(s32 num, s32 pos);
 void Init3DGameOverSmoke(struct tetWell* well, s32 num);
 void Init3DMatrixBlocks(void);
 s32 Return3DComboTile(s32 combo);

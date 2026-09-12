@@ -7,6 +7,8 @@
 #include "include_asm.h"
 #include "macros_defines.h"
 #include "main_variables.h"
+
+#include "player_t.h"
 #include "sound.h"
 
 extern s32 B_801AB7E0_usa;
@@ -14,6 +16,9 @@ extern s32 B_801C7154_usa;
 extern SongInitStruct *B_8021BA7C_usa;
 extern s32 B_8021DF48_usa;
 
+/**
+ * Original name: PlayMIDI
+ */
 s32 PlayMIDI(SongInitStruct bgmArray[], s32 songIndex, s32 songBuffer, s32 crossfade) {
     if (songIndex < 0) {
         B_801C7154_usa = 0;
@@ -28,6 +33,9 @@ s32 PlayMIDI(SongInitStruct bgmArray[], s32 songIndex, s32 songBuffer, s32 cross
     return 0;
 }
 
+/**
+ * Original name: PlaySE
+ */
 musHandle PlaySE(SfxInitStruct sfxArray[], Sfx sfxIndex) {
     SfxInitStruct *sfxPtr;
 
@@ -175,22 +183,74 @@ void func_80005888_usa(s32 arg0, s32 arg1, s32 arg2) {
     func_80002620_usa(0);
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/sfxlimit", func_80005A08_usa);
-#endif
+void func_80005A08_usa(s32 arg0) {
+    s32 var_a0;
+    s32 var_a2;
+    s32 var_v1;
+    char *var_a1;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/sfxlimit", func_80005A08_usa);
-#endif
+    switch (arg0 - 1) {
+        default:
+        case 0x0:
+            var_a2 = 0x1E;
+            var_v1 = 3;
+            var_a1 = gPlayer[0]->kPLAYER1P_easy1;
+            break;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/sfxlimit", func_80005A08_usa);
-#endif
+        case 0x1:
+            var_a2 = 0x32;
+            var_v1 = 6;
+            var_a1 = gPlayer[0]->kPLAYER1P_easy2;
+            break;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/sfxlimit", func_80005A08_usa);
-#endif
+        case 0x2:
+            var_a2 = 0x32;
+            var_v1 = 6;
+            var_a1 = gPlayer[0]->kPLAYER1P_hard1;
+            break;
 
+        case 0x3:
+            var_a2 = 0x1E;
+            var_v1 = 3;
+            var_a1 = gPlayer[0]->kPLAYER1P_hard2;
+            break;
+
+        case 0x4:
+            var_a2 = 0x32;
+            var_v1 = 6;
+            var_a1 = gPlayer[0]->kPLAYER1P_special1;
+            break;
+
+        case 0x5:
+            var_a2 = 0x32;
+            var_v1 = 6;
+            var_a1 = gPlayer[0]->kPLAYER1P_special2;
+            break;
+    }
+
+    for (var_a0 = 0; var_a0 < var_a2; var_a0++) {
+        if (!((var_a1[var_a0 >> 3] >> (var_a0 & 7)) & 1)) {
+            break;
+        }
+
+        if (var_a0 == var_a2) {
+            //! @bug: unreachable code
+            if (!(var_a1[var_v1] & 0x40)) {
+                func_80005888_usa(0, 2, 0xA);
+                return;
+            }
+        }
+    }
+
+    B_801C7348_usa++;
+    B_801C7348_usa %= 5;
+
+    func_80005888_usa(0, 2, B_801C7348_usa + 5);
+}
+
+/**
+ * Original name: SetMIDIParam
+ */
 void SetMIDIParam(musHandle handle, SongInitStruct bgmArray[], s32 songIndex, s32 songBuffer) {
     SongInitStruct *bgmPtr = &bgmArray[songIndex];
 

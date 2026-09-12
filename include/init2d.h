@@ -22,7 +22,7 @@ void Init2DText(void);
 void Init2DClearLine(struct tetWell *well, struct cursor_t *cursor, s32 num);
 // void func_8006C204_usa();
 void Init2DSmallStars(s32 num);
-// void func_8006C7A0_usa();
+void Init2DCircleStars(s32 num, s32 pos);
 void Init2DGameOverSmoke(struct tetWell *well, s32 num);
 void Init2DTetrisTMEM(struct block_t *block, uObjSprite *rect);
 void Init2DComboTMEM(struct icon_t *icon);

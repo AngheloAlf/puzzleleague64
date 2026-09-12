@@ -132,12 +132,14 @@ void Init3DExplosion(tetWell *well) {
     }
 }
 
+/**
+ * Original name: Init3DText
+ */
 void Init3DText(void) {
     s32 i;
 
-    gTheGame.unk_90C0 = 0;
-
-    for (i = 0; i < DRAWTEXT_COUNT; i++) {
+    gTheGame.currentText = 0;
+    for (i = gTheGame.currentText; i < DRAWTEXT_COUNT; i++) {
         gTheGame.drawText[i].texture = -1;
     }
 }
@@ -234,32 +236,23 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/init3d", func_8005C8A4_fra);
 INCLUDE_ASM("asm/ger/nonmatchings/main/init3d", func_8005CA54_ger);
 #endif
 
+/**
+ * Original name: Init3DSmallStars
+ */
 void Init3DSmallStars(s32 num) {
     Init2DSmallStars(num);
 }
 
-#if VERSION_USA
-#if 0
-void func_8005E108_usa() {
-    func_8006C7A0_usa();
+/**
+ * Original name: Init3DCircleStars
+ */
+void Init3DCircleStars(s32 num, s32 pos) {
+    Init2DCircleStars(num, pos);
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/init3d", func_8005E108_usa);
-#endif
-#endif
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init3d", func_8005E3D8_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init3d", func_8005CB18_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init3d", func_8005CCC8_ger);
-#endif
-
+/**
+ * Original name: Init3DGameOverSmoke
+ */
 void Init3DGameOverSmoke(tetWell *well, s32 num) {
     DATA_INLINE_CONST s32 sp0[] = {
         13, 23, 39, 59, 79, 99, 115, 125,
@@ -318,6 +311,9 @@ void Init3DGameOverSmoke(tetWell *well, s32 num) {
     }
 }
 
+/**
+ * Original name: Init3DVertex
+ */
 INLINE void Init3DVertex(void) {
     void *ptr;
 
@@ -327,11 +323,17 @@ INLINE void Init3DVertex(void) {
     gAllVertex = ptr;
 }
 
+/**
+ * Original name: Init3DMatrixBlocks
+ */
 void Init3DMatrixBlocks(void) {
     Init3DVertex();
     guMtxIdent(&gIdent);
 }
 
+/**
+ * Original name: Return3DComboTile
+ */
 s32 Return3DComboTile(s32 combo) {
     s32 which;
 
