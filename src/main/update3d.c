@@ -15,6 +15,9 @@
 #include "the_game.h"
 #include "update.h"
 
+/**
+ * Original name: Update3DDistance
+ */
 void Update3DDistance(tetWell *well, cursor_t *cursor) {
     s32 temp_a3;
     attack_t *attack;
@@ -36,6 +39,9 @@ void Update3DDistance(tetWell *well, cursor_t *cursor) {
     }
 }
 
+/**
+ * Original name: Update3DPosition
+ */
 void Update3DPosition(tetWell *well, cursor_t *cursor UNUSED, s32 flag) {
     block_t last[BLOCK_LEN_ROWS];
     explode_t *explode;
@@ -150,6 +156,9 @@ void Update3DPosition(tetWell *well, cursor_t *cursor UNUSED, s32 flag) {
     }
 }
 
+/**
+ * Original name: Update3DCursor
+ */
 void Update3DCursor(tetWell *well, cursor_t *cursor) {
     if (cursor->sx < 0) {
         cursor->sx++;
@@ -164,6 +173,9 @@ void Update3DCursor(tetWell *well, cursor_t *cursor) {
     }
 }
 
+/**
+ * Original name: Update3DIcon
+ */
 void Update3DIcon(tetWell *well, cursor_t *cursor, s32 num) {
     s32 i;
     nbool sp14;

@@ -302,7 +302,7 @@ void InitBonus(void) {
         }
     }
 
-    gTheGame.tetrisWell[0].unk_43EC = 0;
+    gTheGame.tetrisWell[0].timer = 0;
     gTheGame.tetrisWell[0].raise = 0;
     gWhatever = 0;
 }

@@ -501,18 +501,18 @@ void DoTetris(void) {
                 if ((cursor->delay == 0) && (cursor->extra_wait == 0) && (well->death == 0) && (well->unk_43B0 == 0) &&
                     (gSelection >= SELECTION_83) && (B_801AB61C_usa == 0) && (cursor->state <= 0) &&
                     (cursor->waiting == 0)) {
-                    well->unk_43EC += well->speed;
+                    well->timer += well->speed;
 
-                    if (well->unk_43EC >= 0x1000U) {
+                    if (well->timer >= 0x1000) {
                         s32 temp;
 
-                        var_s2 = well->unk_43EC & 0xFFFF0000;
+                        var_s2 = well->timer & 0xFFFF0000;
                         if (var_s2 < 0) {
                             var_a0 = var_s2 | 0xFFFF;
                         } else {
                             var_a0 = var_s2;
                         }
-                        well->unk_43EC &= 0xFFFF;
+                        well->timer &= 0xFFFF;
                         var_s2 = (var_a0 >> 0x10);
                         well->raise = var_s2 * gTheGame.dimension;
                         well->current_raise += well->raise;

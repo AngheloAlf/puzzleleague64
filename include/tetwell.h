@@ -45,7 +45,7 @@ typedef struct tetWell {
     /* 0x43E0 */ s32 currLevel; /* Original name: currLevel */ // Inside `state_t state`
     /* 0x43E4 */ s32 unk_43E4;
     /* 0x43E8 */ UNK_PAD unk_43E8[0x4];
-    /* 0x43EC */ UNK_TYPE4 unk_43EC;
+    /* 0x43EC */ u32 timer; /* Original name: timer */ // Inside `state_t state`
     /* 0x43F0 */ u32 speed; /* Original name: speed */ // Inside `state_t state`
     /* 0x43F4 */ s32 death; /* Original name: death */ // Inside `state_t state`
     /* 0x43F8 */ s32 current_raise; /* Original name: current_raise */ // Inside `state_t state`

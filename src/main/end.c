@@ -20,28 +20,235 @@
 
 #include "assets/sign_gameover.h"
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", GameOverSmoke);
-#endif
+/**
+ * Original name: GameOverSmoke
+ */
+void GameOverSmoke(tetWell *well) {
+    s32 col;
+    explode_t *explode;
+    block_t *block;
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", DeadBlocksShakeOne2D);
-#endif
+    for (col = 0; col < gMax; col++) {
+        block = &well->block[BLOCK_LEN_ROWS - 1][col];
+        explode = &well->explosion[col];
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", AllDeadBlocks);
-#endif
+        if (block->type == BLOCKTYPE_0) {
+            continue;
+        }
+
+        explode->frame--;
+        if (explode->frame >= -4) {
+            explode->rect.s.imageAdrs = 6;
+        } else if (explode->frame >= -10) {
+            explode->rect.s.imageAdrs = 4;
+        } else if (explode->frame >= -15) {
+            explode->rect.s.imageAdrs = 2;
+        } else {
+            explode->rect.s.imageAdrs = 0;
+        }
+
+        if (explode->frame % 3 == 0) {
+            explode->rect.s.objY = ((explode->rect.s.objY >> 2) - 1) << 2;
+        }
+    }
+}
+
+/**
+ * Original name: DeadBlocksShakeOne2D
+ */
+void DeadBlocksShakeOne2D(tetWell *well) {
+    uObjSprite_t *s;
+    s32 col;
+    s32 row;
+    s32 diff;
+    s32 temp;
+
+    if (well->raise < 0) {
+        return;
+    }
+
+    diff = dead1Shake[well->raise];
+    well->raise--;
+    for (row = 0; row < BLOCK_LEN_ROWS; row++) {
+        for (col = 0; col < TETWELL_OBJSPRITE_LEN_B; col++) {
+            s = &well->block_rect[row][col].s;
+
+            temp = s->objY >> 2;
+            s->objY = (temp - diff) << 2;
+        }
+    }
+
+    if (gSelection >= SELECTION_83) {
+        for (col = 0; col < TETWELL_UNK_3EF0_LEN_6; col++) {
+            s = &well->new_block_rect[col].s;
+
+            temp = s->objY >> 2;
+            s->objY = (temp - diff) << 2;
+        }
+
+        temp = well->left2D.s.objY >> 2;
+        well->left2D.s.objY = (temp - diff) << 2;
+
+        temp = well->right2D.s.objY >> 2;
+        well->right2D.s.objY = (temp - diff) << 2;
+    }
+}
+
+/**
+ * Original name: AllDeadBlocks
+ */
+void AllDeadBlocks(tetWell *well) {
+    s32 row;
+    s32 col;
+    block_t *block;
+
+    if (gGameStatus & GAME_STATUS_FLAG_40) {
+        if (well->timer != 0) {
+            well->timer--;
+            if ((well->new_block[0].frame_n == 0x10) && (well->timer == 0)) {
+                gMain = GMAIN_390;
+            }
+            return;
+        }
+
+        for (row = 0; row < BLOCK_LEN_ROWS; row++) {
+            for (col = 0; col < gMax; col++) {
+                block = &well->block[row][col];
+                if (block->type == BLOCKTYPE_0) {
+                    continue;
+                }
+
+                if (block->frame_n <= BLOCK_LEN_ROWS) {
+                    block->frame_n = 0xD;
+                } else if (block->frame_n == 0xD) {
+                    block->frame_n = 0xE;
+                } else if (block->frame_n == 0xE) {
+                    block->frame_n = 0xF;
+                } else if (block->frame_n == 0xF) {
+                    block->frame_n = 0x10;
+                }
+
+                block->frame_d = 0;
+            }
+        }
+
+        for (col = 0; col < gMax; col++) {
+            block = &well->new_block[col];
+
+            if (block->frame_n <= BLOCK_LEN_ROWS) {
+                block->frame_n = 0xD;
+            } else if (block->frame_n == 0xD) {
+                block->frame_n = 0xE;
+            } else if (block->frame_n == 0xE) {
+                block->frame_n = 0xF;
+            } else if (block->frame_n == 0xF) {
+                block->frame_n = 0x10;
+            }
+        }
+
+        if (block->frame_n == 0xD) {
+            well->timer = 40;
+        } else {
+            well->timer = 5;
+        }
+    } else {
+        if (well->timer != 0) {
+            well->timer--;
+            if ((well->new_block[0].frame_n == 0x13) && (well->timer == 0)) {
+                gMain = GMAIN_390;
+            }
+            return;
+        }
+
+        for (row = 0; row < BLOCK_LEN_ROWS; row++) {
+            for (col = 0; col < gMax; col++) {
+                block = &well->block[row][col];
+                if (block->type == BLOCKTYPE_0) {
+                    continue;
+                }
+
+                if (block->frame_n <= 0xF) {
+                    block->frame_n = 0x10;
+                } else if (block->frame_n == 0x10) {
+                    block->frame_n = 0x11;
+                } else if (block->frame_n == 0x11) {
+                    block->frame_n = 0x12;
+                } else if (block->frame_n == 0x12) {
+                    block->frame_n = 0x13;
+                }
+
+                block->frame_d = 0;
+            }
+        }
+
+        for (col = 0; col < gMax; col++) {
+            block = &well->new_block[col];
+
+            if (block->frame_n <= 0xF) {
+                block->frame_n = 0x10;
+            } else if (block->frame_n == 0x10) {
+                block->frame_n = 0x11;
+            } else if (block->frame_n == 0x11) {
+                block->frame_n = 0x12;
+            } else if (block->frame_n == 0x12) {
+                block->frame_n = 0x13;
+            }
+        }
+
+        if (block->frame_n == 0x10) {
+            well->timer = 40;
+        } else {
+            well->timer = 5;
+        }
+    }
+}
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80037724_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80037724_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80037724_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80037724_usa);
 #endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80037900_usa);
 #endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80037900_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80037900_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80037900_usa);
+#endif
+
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_800379D4_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_800379D4_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_800379D4_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_800379D4_usa);
 #endif
 
 #if VERSION_USA
@@ -49,55 +256,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80037B0C_usa);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", GameOverSmoke);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", DeadBlocksShakeOne2D);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", AllDeadBlocks);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80037724_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80037900_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_800379D4_usa);
-#endif
-
-#if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80037B0C_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", GameOverSmoke);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", DeadBlocksShakeOne2D);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", AllDeadBlocks);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80037724_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80037900_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_800379D4_usa);
 #endif
 
 #if VERSION_FRA
@@ -105,33 +264,12 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80037B0C_usa);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", GameOverSmoke);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", DeadBlocksShakeOne2D);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", AllDeadBlocks);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80037724_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80037900_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_800379D4_usa);
-#endif
-
-#if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80037B0C_usa);
 #endif
 
+/**
+ * Original name: EndingExplosion
+ */
 s32 EndingExplosion(tetWell *well) {
     u8 sp18[][2] = {
         { 0x0B, 0x00 }, { 0x07, 0x02 }, { 0x01, 0x00 }, { 0x09, 0x04 }, { 0x03, 0x02 }, { 0x05, 0x04 },
@@ -254,36 +392,144 @@ s32 EndingExplosion(tetWell *well) {
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80038018_usa);
 #endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80038018_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80038018_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80038018_usa);
+#endif
+
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_8003813C_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003813C_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003813C_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003813C_usa);
 #endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80038228_usa);
 #endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80038228_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80038228_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80038228_usa);
+#endif
+
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_8003837C_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003837C_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003837C_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003837C_usa);
 #endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_8003853C_usa);
 #endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003853C_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003853C_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003853C_usa);
+#endif
+
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_800386D4_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_800386D4_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_800386D4_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_800386D4_usa);
 #endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_800387AC_usa);
 #endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_800387AC_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_800387AC_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_800387AC_usa);
+#endif
+
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_8003880C_usa);
 #endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003880C_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003880C_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003880C_usa);
+#endif
+
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80038944_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80038944_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80038944_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80038944_usa);
 #endif
 
 #if VERSION_USA
@@ -291,79 +537,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80038B98_usa);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80038018_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003813C_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80038228_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003837C_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003853C_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_800386D4_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_800387AC_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003880C_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80038944_usa);
-#endif
-
-#if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80038B98_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80038018_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003813C_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80038228_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003837C_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003853C_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_800386D4_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_800387AC_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003880C_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80038944_usa);
 #endif
 
 #if VERSION_FRA
@@ -371,45 +545,12 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80038B98_usa);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80038018_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003813C_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80038228_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003837C_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003853C_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_800386D4_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_800387AC_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003880C_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80038944_usa);
-#endif
-
-#if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80038B98_usa);
 #endif
 
+/**
+ * Original name: DoGameOverTryAgain
+ */
 s32 DoGameOverTryAgain(void) {
     u16 button = gTheGame.controller[0].touch_button;
     s32 *pos = &gTheGame.help.current_pos;
@@ -518,38 +659,6 @@ INCLUDE_RODATA("asm/usa/nonmatchings/main/end", RO_800C49E0_usa);
 INCLUDE_RODATA("asm/usa/nonmatchings/main/end", RO_800C4A70_usa);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_8003901C_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_8003991C_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80039A54_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80039B78_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80039DB0_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/end", RO_800C4B14_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/end", RO_800C4B24_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_8003A0B8_usa);
-#endif
-
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80038F84_usa);
 #endif
@@ -564,38 +673,6 @@ INCLUDE_RODATA("asm/eur/nonmatchings/main/end", RO_800C4D30_eur);
 
 #if VERSION_EUR
 INCLUDE_RODATA("asm/eur/nonmatchings/main/end", RO_800C4DC0_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003901C_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003991C_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80039A54_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80039B78_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80039DB0_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/end", RO_800C4E64_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/end", RO_800C4E74_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003A0B8_usa);
 #endif
 
 #if VERSION_FRA
@@ -614,38 +691,6 @@ INCLUDE_RODATA("asm/fra/nonmatchings/main/end", RO_800C33E0_fra);
 INCLUDE_RODATA("asm/fra/nonmatchings/main/end", RO_800C3470_fra);
 #endif
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003901C_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003991C_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80039A54_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80039B78_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80039DB0_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/end", RO_800C3514_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/end", RO_800C3524_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003A0B8_usa);
-#endif
-
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80038F84_usa);
 #endif
@@ -662,24 +707,120 @@ INCLUDE_RODATA("asm/ger/nonmatchings/main/end", RO_800BA3A0_ger);
 INCLUDE_RODATA("asm/ger/nonmatchings/main/end", RO_800BA430_ger);
 #endif
 
+#if VERSION_USA
+INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_8003901C_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003901C_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003901C_usa);
+#endif
+
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003901C_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_8003991C_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003991C_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003991C_usa);
 #endif
 
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003991C_usa);
 #endif
 
+#if VERSION_USA
+INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80039A54_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80039A54_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80039A54_usa);
+#endif
+
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80039A54_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80039B78_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80039B78_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80039B78_usa);
 #endif
 
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80039B78_usa);
 #endif
 
+#if VERSION_USA
+INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80039DB0_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80039DB0_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80039DB0_usa);
+#endif
+
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80039DB0_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/end", RO_800C4B14_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_RODATA("asm/usa/nonmatchings/main/end", RO_800C4B24_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_8003A0B8_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/end", RO_800C4E64_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_RODATA("asm/eur/nonmatchings/main/end", RO_800C4E74_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003A0B8_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/end", RO_800C3514_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_RODATA("asm/fra/nonmatchings/main/end", RO_800C3524_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003A0B8_usa);
 #endif
 
 #if VERSION_GER
@@ -726,6 +867,9 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/end", Draw3DGameOver);
 INCLUDE_ASM("asm/ger/nonmatchings/main/end", Draw3DGameOver);
 #endif
 
+/**
+ * Original name: DrawGameOver
+ */
 void DrawGameOver(struct_gInfo_unk_00068 *arg0) {
     if (gTheGame.dimension == DIMENSION_3D) {
         Draw3DGameOver(arg0);
@@ -1443,6 +1587,18 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/end", DoGameOver2D);
 #endif
 #endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", DoGameOver2D);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", DoGameOver2D);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/end", DoGameOver2D);
+#endif
+
 #if VERSION_USA
 #if 0
 ? PlaySE(? *, ?);                        /* extern */
@@ -2094,15 +2250,7 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/end", DoGameOver3D);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", DoGameOver2D);
-#endif
-
-#if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/end", DoGameOver3D);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", DoGameOver2D);
 #endif
 
 #if VERSION_FRA
@@ -2110,13 +2258,12 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/end", DoGameOver3D);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", DoGameOver2D);
-#endif
-
-#if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/end", DoGameOver3D);
 #endif
 
+/**
+ * Original name: DoGameOver
+ */
 void DoGameOver(void) {
     SetGameFade();
 
@@ -2127,6 +2274,9 @@ void DoGameOver(void) {
     }
 }
 
+/**
+ * Original name: SaveRom
+ */
 void SaveRom(void) {
     menuSaveData(1);
 }

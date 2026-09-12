@@ -358,14 +358,14 @@ void TutorialCheckState(tetWell *well, cursor_t *cursor) {
             PlaySE(SFX_INIT_TABLE, SFX_175);
         } else if (anim_bg != -0x34C) {
             well->raise = anim_bg;
-            well->unk_43EC = anim_sp;
+            well->timer = anim_sp;
             GameOverSmoke(well);
             DeadBlocksShakeOne2D(well);
             AllDeadBlocks(well);
             anim_bg = well->raise;
-            anim_sp = well->unk_43EC;
+            anim_sp = well->timer;
             well->raise = 0;
-            well->unk_43EC = 0;
+            well->timer = 0;
             if (gMain == GMAIN_390) {
                 anim_bg = -0x34C;
                 anim_sp = -0x34C;
@@ -379,7 +379,7 @@ void TutorialCheckState(tetWell *well, cursor_t *cursor) {
         PlaySE(SFX_INIT_TABLE, SFX_175);
     } else if (anim_bg != -0x34C) {
         well->raise = anim_bg;
-        well->unk_43EC = anim_sp;
+        well->timer = anim_sp;
         if (well->raise >= 0) {
             s32 v1 = well->raise;
 
@@ -388,9 +388,9 @@ void TutorialCheckState(tetWell *well, cursor_t *cursor) {
         }
         AllDeadBlocks(well);
         anim_bg = well->raise;
-        anim_sp = well->unk_43EC;
+        anim_sp = well->timer;
         well->raise = 0;
-        well->unk_43EC = 0;
+        well->timer = 0;
         if (gMain == GMAIN_390) {
             anim_bg = -0x34C;
             anim_sp = -0x34C;
