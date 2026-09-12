@@ -101,7 +101,7 @@ nbool menuSaveData(s32 iPlayer);
 // void func_80019A24_usa();
 // void func_80019DAC_usa();
 // void func_80019F44_usa();
-s32 menuInitUser(u32 arg0);
+nbool menuInitUser(s32 iUser);
 // void func_8001A330_usa();
 void menuDrawProfile(Gfx **gfxP, s32 arg1, s32 arg2);
 void menuInitFairy(enum_menuTickFairy_ePosition ePosition);

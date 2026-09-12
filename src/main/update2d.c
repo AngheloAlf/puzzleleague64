@@ -198,7 +198,7 @@ void Update2DIcon(tetWell *well, cursor_t *cursor, s32 num) {
                 temp_s0->thing.rect.s.imageAdrs = 0x84;
                 temp_s0->thing.rect.s.imageW = 0x400;
                 var_v0 = (temp_s0->from_x * 0x12) + 0x15;
-block_29:
+            block_29:
                 temp_s0->thing.rect.s.objX = (temp_s3 + var_v0) << 2;
                 temp_s0->distance = temp_s2 - (temp_s0->to_y * 0x10);
                 temp_s0->thing.rect.s.objY = temp_s0->distance << 2;

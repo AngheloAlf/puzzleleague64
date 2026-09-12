@@ -22,8 +22,8 @@ void UpdateComboDelay2(struct tetWell *well, struct cursor_t *cursor, s32 combo)
 void UpdateChainDelay2(struct tetWell *well, struct cursor_t *cursor, s32 chain);
 void UpdateClearComboDelay(struct tetWell *well, struct cursor_t *cursor, s32 combo);
 void UpdateClearChainDelay(struct tetWell *well, struct cursor_t *cursor, s32 chain);
-// void func_80058458_usa();
-// void UpdatePlayerPuzzle();
+void UpdateRecord2(s32 left, s32 right);
+void UpdatePlayerPuzzle(struct cursor_t *cursor, s32 game, s32 stage);
 nbool CheckPlayerPuzzleRound(s32 game, s32 stage);
 nbool PlayPlayerPuzzleEnding(s32 game, s32 stage);
 void UpdatePlayerStageClear(struct cursor_t *cursor, s32 round, s32 stage);

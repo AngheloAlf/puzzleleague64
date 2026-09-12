@@ -394,6 +394,9 @@ void UpdateChainScore(tetWell *well, cursor_t *cursor, s32 chain) {
     well->score += st_ChainScore[chain];
 }
 
+/**
+ * Original name: UpdateComboDelay1
+ */
 void UpdateComboDelay1(tetWell *well, cursor_t *cursor, s32 combo) {
     s32 index = well->menu.game;
     s32 delay;
@@ -420,7 +423,9 @@ void UpdateComboDelay1(tetWell *well, cursor_t *cursor, s32 combo) {
     }
 }
 
-#if VERSION_USA
+/**
+ * Original name: UpdateChainDelay1
+ */
 void UpdateChainDelay1(tetWell *well, cursor_t *cursor, s32 chain) {
     s32 index = well->menu.game;
     s32 delay;
@@ -454,21 +459,10 @@ void UpdateChainDelay1(tetWell *well, cursor_t *cursor, s32 chain) {
         cursor->extra_wait = delay;
     }
 }
-#endif
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdateChainDelay1);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update", UpdateChainDelay1);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update", UpdateChainDelay1);
-#endif
-
-#if VERSION_USA
+/**
+ * Original name: UpdateComboDelay2
+ */
 void UpdateComboDelay2(tetWell *well, cursor_t *cursor, s32 combo) {
     s32 index = well->level;
     s32 delay;
@@ -497,21 +491,10 @@ void UpdateComboDelay2(tetWell *well, cursor_t *cursor, s32 combo) {
         cursor->extra_wait = delay;
     }
 }
-#endif
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdateComboDelay2);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update", UpdateComboDelay2);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update", UpdateComboDelay2);
-#endif
-
-#if VERSION_USA
+/**
+ * Original name: UpdateChainDelay2
+ */
 void UpdateChainDelay2(tetWell *well, cursor_t *cursor, s32 chain) {
     s32 index = well->level;
     s32 delay;
@@ -547,21 +530,10 @@ void UpdateChainDelay2(tetWell *well, cursor_t *cursor, s32 chain) {
         cursor->extra_wait = delay;
     }
 }
-#endif
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdateChainDelay2);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update", UpdateChainDelay2);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update", UpdateChainDelay2);
-#endif
-
-#if VERSION_USA
+/**
+ * Original name: UpdateClearComboDelay
+ */
 void UpdateClearComboDelay(tetWell *well, cursor_t *cursor, s32 combo) {
     s32 index;
     s32 delay;
@@ -592,21 +564,10 @@ void UpdateClearComboDelay(tetWell *well, cursor_t *cursor, s32 combo) {
         cursor->extra_wait = delay;
     }
 }
-#endif
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdateClearComboDelay);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update", UpdateClearComboDelay);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update", UpdateClearComboDelay);
-#endif
-
-#if VERSION_USA
+/**
+ * Original name: UpdateClearChainDelay
+ */
 void UpdateClearChainDelay(tetWell *well, cursor_t *cursor, s32 chain) {
     s32 index;
     s32 delay;
@@ -647,50 +608,116 @@ void UpdateClearChainDelay(tetWell *well, cursor_t *cursor, s32 chain) {
         cursor->extra_wait = delay;
     }
 }
-#endif
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdateClearChainDelay);
-#endif
+/**
+ * Original name: UpdateRecord2
+ */
+void UpdateRecord2(s32 left, s32 right) {
+    char *p2 = NULL;
+    char *p1 = NULL;
+    char id1 = gPlayer[0]->id;
+    char id2 = gPlayer[1]->id;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update", UpdateClearChainDelay);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update", UpdateClearChainDelay);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", func_80058458_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", func_80058458_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update", func_80058458_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update", func_80058458_usa);
-#endif
-
-#if VERSION_USA
-#ifdef NON_MATCHING
-// regalloc
-void UpdatePlayerPuzzle(s32 *arg0, s32 arg1, s32 arg2) {
-    s8 temp_v0;
-    char *var_a3;
-
-    if (arg1 == 0) {
+    if (gDemo != GDEMO_2C) {
+        return;
+    }
+    if ((id1 == 0) || (id2 == 0)) {
         return;
     }
 
-    gPlayer[0]->unk_0B4 = gTheGame.hour;
-    gPlayer[0]->unk_0B5 = gTheGame.minute;
-    gPlayer[0]->unk_0B6 = gTheGame.second;
+    // p1 is indexed by id2
+    // p2 is indexed by id1
+    // idk if this is a bug or it is inteded
+
+    if (gTheGame.dimension == DIMENSION_2D) {
+        switch (gSelection) {
+            case SELECTION_A0:
+                if (left != 0) {
+                    p1 = &gPlayer[0]->kPLAYER2V_2Dwin[id2];
+                }
+                if (right != 0) {
+                    p2 = &gPlayer[1]->kPLAYER2V_2Dwin[id1];
+                }
+                break;
+
+            case SELECTION_C8:
+                if (left != 0) {
+                    p1 = &gPlayer[0]->kPLAYER2T_2Dwin[id2];
+                }
+                if (right != 0) {
+                    p2 = &gPlayer[1]->kPLAYER2T_2Dwin[id1];
+                }
+                break;
+
+            case SELECTION_B4:
+                if (left != 0) {
+                    p1 = &gPlayer[0]->kPLAYER2L_2Dwin[id2];
+                }
+                if (right != 0) {
+                    p2 = &gPlayer[1]->kPLAYER2L_2Dwin[id1];
+                }
+                break;
+
+            default:
+                return;
+        }
+    } else {
+        switch (gSelection) {
+            case SELECTION_A0:
+                if (left != 0) {
+                    p1 = &gPlayer[0]->kPLAYER2V_3Dwin[id2];
+                }
+                if (right != 0) {
+                    p2 = &gPlayer[1]->kPLAYER2V_3Dwin[id1];
+                }
+                break;
+
+            case SELECTION_C8:
+                if (left != 0) {
+                    p1 = &gPlayer[0]->kPLAYER2T_3Dwin[id2];
+                }
+                if (right != 0) {
+                    p2 = &gPlayer[1]->kPLAYER2T_3Dwin[id1];
+                }
+                break;
+
+            case SELECTION_B4:
+                if (left != 0) {
+                    p1 = &gPlayer[0]->kPLAYER2L_3Dwin[id2];
+                }
+                if (right != 0) {
+                    p2 = &gPlayer[1]->kPLAYER2L_3Dwin[id1];
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    if (p1 != NULL) {
+        *p1 += 1;
+    }
+    if (p2 != NULL) {
+        *p2 += 1;
+    }
+}
+
+/**
+ * Original name: UpdatePlayerPuzzle
+ */
+void UpdatePlayerPuzzle(cursor_t *cursor, s32 game, s32 stage) {
+    char *ptr;
+    char index;
+    char bit;
+
+    if (game == 0) {
+        return;
+    }
+
+    gPlayer[0]->kPLAYER1P_hour = gTheGame.hour;
+    gPlayer[0]->kPLAYER1P_minute = gTheGame.minute;
+    gPlayer[0]->kPLAYER1P_second = gTheGame.second;
 
     if (gDemo != GDEMO_2C) {
         return;
@@ -699,53 +726,42 @@ void UpdatePlayerPuzzle(s32 *arg0, s32 arg1, s32 arg2) {
         return;
     }
 
-    if (*arg0 == 8) {
+    if (cursor->state == 8) {
         return;
     }
 
-    arg2--;
-    temp_v0 = arg2 / 8;
-    arg2 -= arg2 / 8 * 8;
+    stage--;
+    index = stage / 8;
+    bit = stage - stage / 8 * 8;
 
-    switch (arg1) {
+    switch (game) {
         case 0x1:
-            var_a3 = &gPlayer[0]->kPLAYER1P_easy1[temp_v0];
+            ptr = &gPlayer[0]->kPLAYER1P_easy1[index];
             break;
+
         case 0x2:
-            var_a3 = &gPlayer[0]->kPLAYER1P_easy2[temp_v0];
+            ptr = &gPlayer[0]->kPLAYER1P_easy2[index];
             break;
+
         case 0x3:
-            var_a3 = &gPlayer[0]->kPLAYER1P_hard1[temp_v0];
+            ptr = &gPlayer[0]->kPLAYER1P_hard1[index];
             break;
+
         case 0x4:
-            var_a3 = &gPlayer[0]->kPLAYER1P_hard2[temp_v0];
+            ptr = &gPlayer[0]->kPLAYER1P_hard2[index];
             break;
+
         case 0x5:
-            var_a3 = &gPlayer[0]->kPLAYER1P_special1[temp_v0];
+            ptr = &gPlayer[0]->kPLAYER1P_special1[index];
             break;
+
         case 0x6:
-            var_a3 = &gPlayer[0]->kPLAYER1P_special2[temp_v0];
+            ptr = &gPlayer[0]->kPLAYER1P_special2[index];
             break;
     }
 
-    *var_a3 |= 1 << arg2;
+    *ptr |= 1 << bit;
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdatePlayerPuzzle);
-#endif
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdatePlayerPuzzle);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update", UpdatePlayerPuzzle);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update", UpdatePlayerPuzzle);
-#endif
 
 /**
  * Original name: CheckPlayerPuzzleRound
@@ -1026,19 +1042,12 @@ void UpdatePlayerCPU(s32 game, s32 stage) {
     }
 }
 
-#if VERSION_USA
-extern u16 st_Combo1[];
-extern u8 st_Chain2[];
-extern u8 st_Combo2[];
-extern u16 st_Chain1[];
-
-#ifdef NON_MATCHING
-// extra instruction
+/**
+ * Original name: UpdateComboChainCount
+ */
 void UpdateComboChainCount(s32 num, s32 combo, s32 total) {
-    s32 var_a2;
-    s8 temp_a0;
-    s8 *var_t0;
-    s8 *var_t1;
+    char *chain_count;
+    char *combo_count;
 
     if (gDemo != GDEMO_2C) {
         return;
@@ -1052,45 +1061,41 @@ void UpdateComboChainCount(s32 num, s32 combo, s32 total) {
     if (gSelection < SELECTION_83) {
         return;
     }
-    if ((gSelection == SELECTION_A0) || (gSelection == SELECTION_C8)) {
-        return;
-    }
-    if (gSelection == SELECTION_B4) {
+    if ((gSelection == SELECTION_A0) || (gSelection == SELECTION_C8) || (gSelection == SELECTION_B4)) {
         return;
     }
     if (gMain != GMAIN_387) {
         return;
     }
 
-    // TODO: Remove (void *) cast and fix types
     switch (gSelection) {
         case SELECTION_96:
-            var_t1 = (void *)&gPlayer[num]->unk_0EF;
-            var_t0 = (void *)&gPlayer[num]->unk_0F0;
+            combo_count = &gPlayer[num]->unk_0EF;
+            chain_count = &gPlayer[num]->unk_0F0;
             break;
 
         case SELECTION_AA:
-            var_t1 = (void *)&gPlayer[num]->unk_0ED;
-            var_t0 = (void *)&gPlayer[num]->unk_0EE;
+            combo_count = &gPlayer[num]->unk_0ED;
+            chain_count = &gPlayer[num]->unk_0EE;
             break;
 
         case SELECTION_8C:
             if (gTheGame.dimension == DIMENSION_2D) {
-                var_t1 = (void *)&gPlayer[num]->unk_0E5;
-                var_t0 = (void *)&gPlayer[num]->unk_0E6;
+                combo_count = &gPlayer[num]->unk_0E5;
+                chain_count = &gPlayer[num]->unk_0E6;
             } else {
-                var_t1 = (void *)&gPlayer[num]->unk_0E7;
-                var_t0 = (void *)&gPlayer[num]->unk_0E8;
+                combo_count = &gPlayer[num]->unk_0E7;
+                chain_count = &gPlayer[num]->unk_0E8;
             }
             break;
 
         case SELECTION_BE:
             if (gTheGame.dimension == DIMENSION_2D) {
-                var_t1 = (void *)&gPlayer[num]->unk_0E9;
-                var_t0 = (void *)&gPlayer[num]->unk_0EA;
+                combo_count = &gPlayer[num]->unk_0E9;
+                chain_count = &gPlayer[num]->unk_0EA;
             } else {
-                var_t1 = (void *)&gPlayer[num]->unk_0EB;
-                var_t0 = (void *)&gPlayer[num]->unk_0EC;
+                combo_count = &gPlayer[num]->unk_0EB;
+                chain_count = &gPlayer[num]->unk_0EC;
             }
             break;
 
@@ -1099,54 +1104,41 @@ void UpdateComboChainCount(s32 num, s32 combo, s32 total) {
     }
 
     if (combo != 0) {
-        if (*var_t1 < temp_a0) {
-            *var_t1 = temp_a0;
+        if (*combo_count < (char)total) {
+            *combo_count = total;
         }
+
         if (total < 0xB) {
-            var_a2 = total - 4;
-            st_Combo1[var_a2]++;
+            total -= 4;
+            st_Combo1[total]++;
         } else {
-            var_a2 = total - 0xB;
             if (total >= 0x46) {
-                var_a2 = 0x46 - 0xB;
+                total = 0x46 - 0xB;
+            } else {
+                total = total - 0xB;
             }
 
-            st_Combo2[var_a2]++;
+            st_Combo2[total]++;
         }
     } else {
-        temp_a0 = total + 1;
-        if (*var_t0 < temp_a0) {
-            *var_t0 = temp_a0;
+        if (*chain_count < (char)(total + 1)) {
+            *chain_count = total + 1;
         }
 
         if (total < 0xA) {
-            var_a2 = total - 1;
-            st_Chain1[var_a2]++;
+            total--;
+            st_Chain1[total]++;
         } else {
-            var_a2 = total - 0xA;
-            if (total >= 0x63) {
-                var_a2 = 0x63 - 0xA;
+            if (total < 0x63) {
+                total = total - 0xA;
+            } else {
+                total = 0x63 - 0xA;
             }
-            st_Chain2[var_a2]++;
+
+            st_Chain2[total]++;
         }
     }
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/update", UpdateComboChainCount);
-#endif
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/update", UpdateComboChainCount);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/update", UpdateComboChainCount);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/update", UpdateComboChainCount);
-#endif
 
 #if VERSION_USA
 #ifdef NON_MATCHING

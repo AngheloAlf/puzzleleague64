@@ -4,6 +4,8 @@
 #include "ultra64.h"
 #include "unk.h"
 
+#include "unknown_defines.h"
+
 typedef struct struct_800072A0_usa_arg0_unk_58 {
     /* 0x0 */ s16 unk_0[UNK_SIZE];
     /* 0x2 */ UNK_PAD unk_2[0xA];
@@ -13,31 +15,6 @@ typedef struct player_t_unk_002 {
     /* 0x0 */ struct_800072A0_usa_arg0_unk_58 unk_0;
     /* 0xC */ UNK_PAD unk_C[0x2];
 } player_t_unk_002; // size = 0xE
-
-
-typedef struct player_t_unk_0F1 {
-    /* 0x0 */ UNK_PAD unk_0[0x8];
-} player_t_unk_0F1; // size = 0x8
-
-typedef struct player_t_unk_0F9 {
-    /* 0x0 */ UNK_PAD unk_0[0x8];
-} player_t_unk_0F9; // size = 0x8
-
-typedef struct player_t_unk_101 {
-    /* 0x0 */ UNK_PAD unk_0[0x8];
-} player_t_unk_101; // size = 0x8
-
-typedef struct player_t_unk_109 {
-    /* 0x0 */ UNK_PAD unk_0[0x8];
-} player_t_unk_109; // size = 0x8
-
-typedef struct player_t_unk_111 {
-    /* 0x0 */ UNK_PAD unk_0[0x8];
-} player_t_unk_111; // size = 0x8
-
-typedef struct player_t_unk_119 {
-    /* 0x0 */ UNK_PAD unk_0[0x8];
-} player_t_unk_119; // size = 0x8
 
 
 typedef struct player_t_unk_121 {
@@ -69,8 +46,9 @@ typedef struct player_t_unk_7B4 {
 #define KPLAYER1P_SPECIAL1_COUNT 7
 #define KPLAYER1P_SPECIAL2_COUNT 7
 
+/* Original name: player_t */
 typedef struct player_t {
-    /* 0x000 */ char unk_000;
+    /* 0x000 */ char id; /* Original name: id */
     /* 0x001 */ UNK_PAD unk_001[0x1];
     /* 0x002 */ player_t_unk_002 unk_002;
     /* 0x010 */ u8 unk_010;
@@ -85,9 +63,9 @@ typedef struct player_t {
     /* 0x02B */ char kPLAYER1C_2Dround[6]; /* Original name: kPLAYER1C_2Dround */ // bitflag. TODO: add macros or something
     /* 0x031 */ UNK_PAD unk_031[0x3]; // maybe struct padding?
     /* 0x034 */ s32 unk_034[0x20];
-    /* 0x0B4 */ u8 unk_0B4;
-    /* 0x0B5 */ u8 unk_0B5;
-    /* 0x0B6 */ u8 unk_0B6;
+    /* 0x0B4 */ char kPLAYER1P_hour; /* Original name: kPLAYER1P_hour */
+    /* 0x0B5 */ char kPLAYER1P_minute; /* Original name: kPLAYER1P_minute */
+    /* 0x0B6 */ char kPLAYER1P_second; /* Original name: kPLAYER1P_second */
     /* 0x0B7 */ char kPLAYER1P_easy1[KPLAYER1P_EASY1_COUNT]; /* Original name: kPLAYER1P_easy1 */
     /* 0x0BB */ char kPLAYER1P_easy2[KPLAYER1P_EASY2_COUNT]; /* Original name: kPLAYER1P_easy2 */
     /* 0x0C2 */ char kPLAYER1P_hard1[KPLAYER1P_HARD1_COUNT]; /* Original name: kPLAYER1P_hard1 */
@@ -104,24 +82,24 @@ typedef struct player_t {
     /* 0x0E2 */ char unk_0E2;
     /* 0x0E3 */ char unk_0E3;
     /* 0x0E4 */ char unk_0E4;
-    /* 0x0E5 */ u8 unk_0E5;
-    /* 0x0E6 */ u8 unk_0E6;
-    /* 0x0E7 */ u8 unk_0E7;
-    /* 0x0E8 */ u8 unk_0E8;
-    /* 0x0E9 */ u8 unk_0E9;
-    /* 0x0EA */ u8 unk_0EA;
-    /* 0x0EB */ u8 unk_0EB;
-    /* 0x0EC */ u8 unk_0EC;
-    /* 0x0ED */ u8 unk_0ED;
-    /* 0x0EE */ u8 unk_0EE;
-    /* 0x0EF */ u8 unk_0EF;
-    /* 0x0F0 */ u8 unk_0F0;
-    /* 0x0F1 */ player_t_unk_0F1 unk_0F1;
-    /* 0x0F9 */ player_t_unk_0F9 unk_0F9;
-    /* 0x101 */ player_t_unk_101 unk_101;
-    /* 0x109 */ player_t_unk_109 unk_109;
-    /* 0x111 */ player_t_unk_111 unk_111;
-    /* 0x119 */ player_t_unk_119 unk_119;
+    /* 0x0E5 */ char unk_0E5;
+    /* 0x0E6 */ char unk_0E6;
+    /* 0x0E7 */ char unk_0E7;
+    /* 0x0E8 */ char unk_0E8;
+    /* 0x0E9 */ char unk_0E9;
+    /* 0x0EA */ char unk_0EA;
+    /* 0x0EB */ char unk_0EB;
+    /* 0x0EC */ char unk_0EC;
+    /* 0x0ED */ char unk_0ED;
+    /* 0x0EE */ char unk_0EE;
+    /* 0x0EF */ char unk_0EF;
+    /* 0x0F0 */ char unk_0F0;
+    /* 0x0F1 */ char kPLAYER2V_2Dwin[GAME_PLAYER_COUNT]; /* Original name: kPLAYER2V_2Dwin */
+    /* 0x0F9 */ char kPLAYER2V_3Dwin[GAME_PLAYER_COUNT]; /* Original name: kPLAYER2V_3Dwin */
+    /* 0x101 */ char kPLAYER2T_2Dwin[GAME_PLAYER_COUNT]; /* Original name: kPLAYER2T_2Dwin */
+    /* 0x109 */ char kPLAYER2T_3Dwin[GAME_PLAYER_COUNT]; /* Original name: kPLAYER2T_3Dwin */
+    /* 0x111 */ char kPLAYER2L_2Dwin[GAME_PLAYER_COUNT]; /* Original name: kPLAYER2L_2Dwin */
+    /* 0x119 */ char kPLAYER2L_3Dwin[GAME_PLAYER_COUNT]; /* Original name: kPLAYER2L_3Dwin */
     /* 0x121 */ u8 unk_121[0xF][0x6E]; /* kPLAYER1PE_editor? */
     /* 0x793 */ UNK_PAD unk_793[0xF];
     /* 0x7A2 */ player_t_unk_7A2 unk_7A2;

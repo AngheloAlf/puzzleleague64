@@ -11,4 +11,6 @@
 
 #define TETWELL_UNK_3EF0_LEN_6 (6)
 
+#define GAME_PLAYER_COUNT 8
+
 #endif

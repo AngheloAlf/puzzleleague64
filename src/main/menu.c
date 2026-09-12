@@ -4366,11 +4366,11 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_80019F44_usa);
 /**
  * Original name: menuInitUser
  */
-s32 menuInitUser(u32 arg0) {
-    if (arg0 < GAME_PLAYER_COUNT) {
-        player_t *player = &gTheGame.player[arg0];
+nbool menuInitUser(s32 iUser) {
+    if (iUser < ARRAY_COUNTU(gTheGame.player)) {
+        player_t *player = &gTheGame.player[iUser];
 
-        player->unk_000 = arg0;
+        player->id = iUser;
         player->unk_010 = 0;
         bzero(&player->unk_002, 0xE);
         player->unk_014 = 0;
@@ -4383,9 +4383,9 @@ s32 menuInitUser(u32 arg0) {
         player->unk_02A = 0;
         bzero(&player->kPLAYER1C_2Dround, sizeof(player->kPLAYER1C_2Dround));
         bzero(&player->unk_034, sizeof(player->unk_034));
-        player->unk_0B4 = 0;
-        player->unk_0B5 = 0;
-        player->unk_0B6 = 0;
+        player->kPLAYER1P_hour = 0;
+        player->kPLAYER1P_minute = 0;
+        player->kPLAYER1P_second = 0;
         bzero(&player->kPLAYER1P_easy1, sizeof(char) * KPLAYER1P_EASY1_COUNT);
         bzero(&player->kPLAYER1P_easy2, sizeof(char) * KPLAYER1P_EASY2_COUNT);
         bzero(&player->kPLAYER1P_hard1, sizeof(char) * KPLAYER1P_HARD1_COUNT);
@@ -4414,25 +4414,26 @@ s32 menuInitUser(u32 arg0) {
         player->unk_0EC = 0;
         player->unk_0E9 = 0;
         player->unk_0EB = 0;
-        bzero(&player->unk_0F1, 8);
-        bzero(&player->unk_0F9, 8);
-        bzero(&player->unk_101, 8);
-        bzero(&player->unk_109, 8);
-        bzero(&player->unk_111, 8);
-        bzero(&player->unk_119, 8);
-        bzero(&player->unk_121, 0x672);
-        bzero(&player->unk_7A2, 0x12);
-        bzero(&player->unk_7B4, 6);
+        bzero(&player->kPLAYER2V_2Dwin, sizeof(player->kPLAYER2V_2Dwin));
+        bzero(&player->kPLAYER2V_3Dwin, sizeof(player->kPLAYER2V_3Dwin));
+        bzero(&player->kPLAYER2T_2Dwin, sizeof(player->kPLAYER2T_2Dwin));
+        bzero(&player->kPLAYER2T_3Dwin, sizeof(player->kPLAYER2T_3Dwin));
+        bzero(&player->kPLAYER2L_2Dwin, sizeof(player->kPLAYER2L_2Dwin));
+        bzero(&player->kPLAYER2L_3Dwin, sizeof(player->kPLAYER2L_3Dwin));
+        bzero(&player->unk_121, sizeof(player->unk_121));
+        bzero(&player->unk_7A2, sizeof(player->unk_7A2));
+        bzero(&player->unk_7B4, sizeof(player->unk_7B4));
         player->unk_7B4.unk_0 = 3;
         player->unk_7A2.unk_0A = 3;
         player->unk_7B4.unk_2 = 3;
         player->unk_7A2.unk_0C = 3;
         player->unk_7B4.unk_4 = 3;
         player->unk_7A2.unk_0E = 3;
-        return -1;
+
+        return ntrue;
     }
 
-    return 0;
+    return nfalse;
 }
 #endif
 
@@ -5320,7 +5321,7 @@ void InitMenu(void) {
                 }
             }
             if ((var_a0_2 != 0) && (gPlayer[0] != NULL)) {
-                menuSaveData(gPlayer[0]->unk_000);
+                menuSaveData(gPlayer[0]->id);
             }
         }
 

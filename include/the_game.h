@@ -24,7 +24,6 @@
 
 
 #define GAME_UNK_9A90_COUNT 4
-#define GAME_PLAYER_COUNT 8
 
 
 /* Original name: help_t */

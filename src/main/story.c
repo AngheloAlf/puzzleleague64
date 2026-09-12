@@ -202,12 +202,12 @@ void DoStory(void) {
 
         if (s0 != 0) {
             if (gPlayer[0] != NULL) {
-                menuSaveData(gPlayer[0]->unk_000);
+                menuSaveData(gPlayer[0]->id);
             }
 
 #if VERSION_USA || VERSION_EUR
             if (gPlayer[1] != NULL) {
-                menuSaveData(gPlayer[1]->unk_000);
+                menuSaveData(gPlayer[1]->id);
             }
 #endif
         }
@@ -375,7 +375,7 @@ void InitStory(void) {
             func_8002B85C_usa(2, 0);
         } else if (gSelection == SELECTION_AA) {
             gPlayer[0]->kPLAYER1C_2Dround[ARRAY_COUNT(gPlayer[0]->kPLAYER1C_2Dround) - 1] |= 0x20;
-            menuSaveData(gPlayer[0]->unk_000);
+            menuSaveData(gPlayer[0]->id);
 
             func_8002B85C_usa(2, 9);
         } else if (gSelection == SELECTION_82) {

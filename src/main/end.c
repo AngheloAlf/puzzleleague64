@@ -767,7 +767,7 @@ s32 func_8003A0B8_usa();                            /* extern */
 ? UpdateText(s32);                           /* extern */
 ? UpdateAnimation(Game *, ?, ?);               /* extern */
 s32 func_8004FA2C_usa();                            /* extern */
-? func_80058458_usa(s32, s32);                      /* extern */
+? UpdateRecord2(s32, s32);                      /* extern */
 ? UpdatePlayerPuzzle(cursor_t *, s32, s32);  /* extern */
 ? UpdatePlayerStageClear(cursor_t *, s32, s32);  /* extern */
 ? UpdatePlayerCPU(s32, s32);                      /* extern */
@@ -1117,7 +1117,7 @@ block_120:
                     } else {
                         temp_a0 = (u32) (gGameStatus & 0xF00) >> 8;
                         if ((gTheGame.unk_4404 == temp_a0) || (gTheGame.tetrisWell[1].unk_4404 == temp_a0)) {
-                            func_80058458_usa(var_s3, var_s1);
+                            UpdateRecord2(var_s3, var_s1);
                         }
                     }
                     var_s0_2 = 0;
@@ -1474,7 +1474,7 @@ s32 func_8003A0B8_usa();                            /* extern */
 ? InitFlic();                              /* extern */
 s32 func_8004FA2C_usa();                            /* extern */
 ? func_800521A4_usa(?);                             /* extern */
-? func_80058458_usa(s32, s32);                      /* extern */
+? UpdateRecord2(s32, s32);                      /* extern */
 ? UpdatePlayerPuzzle(cursor_t *, s32, s32);  /* extern */
 ? UpdatePlayerStageClear(cursor_t *, s32, s32);  /* extern */
 ? UpdateExplosion(Game *);                     /* extern */
@@ -1815,7 +1815,7 @@ block_115:
                     }
                     temp_a0_2 = (u32) (gGameStatus & 0xF00) >> 8;
                     if ((gTheGame.unk_4404 == temp_a0_2) || (gTheGame.tetrisWell[1].unk_4404 == temp_a0_2)) {
-                        func_80058458_usa(var_s4, var_s3);
+                        UpdateRecord2(var_s4, var_s3);
                     }
                     var_s0_2 = 0;
                     LoadGameOver3D();
