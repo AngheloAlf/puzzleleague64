@@ -11,10 +11,96 @@
 #include "animation.h"
 #include "character.h"
 #include "dlist.h"
+#include "tetris.h"
 #include "the_game.h"
 
 #if VERSION_USA
+#if 0
+void Init2DNewRow(tetWell *well) {
+    s32 sp14;
+    s32 sp1C;
+    uObjSprite *sp24;
+    block_t *sp2C;
+    block_t *temp_s6;
+    enum BlockType var_s4;
+    s32 temp_s2;
+    s32 var_a2;
+    s32 var_s7;
+
+    sp14 = -1;
+    sp1C = 0;
+    var_a2 = 0;
+    if ((well->extra.wellGarbage <= 4) && (well->extra.queueGarbage >= 2)) {
+        well->extra.queueGarbage -= 2;
+        well->extra.wellGarbage += 2;
+        sp1C = 3;
+        var_a2 = -1;
+    } else if ((well->extra.wellGarbage <= 8) && (well->extra.queueGarbage >= 1)) {
+        well->extra.queueGarbage--;
+        well->extra.wellGarbage++;
+        sp1C = 2;
+        var_a2 = -1;
+    } else if (well->state.newBlock < 2) {
+        sp1C = 1;
+        var_a2 = -1;
+    }
+
+    if (var_a2 != 0) {
+        temp_s2 = well->state.rand;
+        well->state.rand = -1;
+        do {
+            sp14 = RandomBlock(well) - 1;
+        } while ((well->block[0][sp14].type == BLOCKTYPE_7) || (well->block[0][sp14 + 1].type == BLOCKTYPE_7));
+        well->state.rand = temp_s2;
+    }
+
+    if (well->state.newBlock == 1) {
+        well->state.newBlock = 2;
+    } else if (well->state.newBlock == 2) {
+        well->state.newBlock = 1;
+    }
+
+    for (var_s7 = 5; var_s7 >= 0; var_s7--) {
+        temp_s6 = &well->new_block[var_s7];
+        sp24 = &well->new_block_rect[var_s7];
+
+        InitTetrisState(temp_s6);
+        temp_s6->currRow = 0;
+        if (var_s7 == sp14) {
+            switch (sp1C) {                         /* irregular */
+                case 0x1:
+                    var_s4 = well->new_block[var_s7 + 1].type;
+                    if (var_s4 == well->block[0][var_s7].type) {
+                        var_s7 += 2;
+                        continue;
+                    }
+                    break;
+
+                case 0x2:
+                    var_s4 = BLOCKTYPE_7;
+                    break;
+
+                case 0x3:
+                    var_s4 = BLOCKTYPE_7;
+                    well->new_block[var_s7 + 1].type = 7;
+                    Init2DTetrisTMEM(&well->new_block[var_s7 + 1], &well->new_block_rect[var_s7 + 1]);
+                    break;
+            }
+        } else {
+            do {
+                var_s4 = RandomBlock(well);
+            } while ((var_s4 == well->new_block[var_s7 + 1].type) || (var_s4 == well->block[0][var_s7].type));
+        }
+
+        sp24->s.objY = 0x37C;
+        temp_s6->type = var_s4;
+        Init2DTetrisTMEM(temp_s6, sp24);
+
+    }
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", Init2DNewRow);
+#endif
 #endif
 
 #if VERSION_EUR

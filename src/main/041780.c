@@ -455,8 +455,8 @@ void func_8004123C_usa(s32 arg0) {
                     gReset = -1;
                     D_800B5A1C_usa = 0;
                     gTheGame.menu[1].stage = 0x641;
-                    gTheGame.tetrisWell[0].win = 0;
-                    gTheGame.tetrisWell[1].win = 0;
+                    gTheGame.tetrisWell[0].extra.win = 0;
+                    gTheGame.tetrisWell[1].extra.win = 0;
                     gTheGame.dimension = B_801C6EF0_usa;
                 }
             }

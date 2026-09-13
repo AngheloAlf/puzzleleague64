@@ -72,12 +72,12 @@ void DeadBlocksShakeOne2D(tetWell *well) {
     s32 diff;
     s32 temp;
 
-    if (well->raise < 0) {
+    if (well->state.raise < 0) {
         return;
     }
 
-    diff = dead1Shake[well->raise];
-    well->raise--;
+    diff = dead1Shake[well->state.raise];
+    well->state.raise--;
     for (row = 0; row < BLOCK_LEN_ROWS; row++) {
         for (col = 0; col < TETWELL_OBJSPRITE_LEN_B; col++) {
             s = &well->block_rect[row][col].s;
@@ -112,9 +112,9 @@ void AllDeadBlocks(tetWell *well) {
     block_t *block;
 
     if (gGameStatus & GAME_STATUS_FLAG_40) {
-        if (well->timer != 0) {
-            well->timer--;
-            if ((well->new_block[0].frame_n == 0x10) && (well->timer == 0)) {
+        if (well->state.timer != 0) {
+            well->state.timer--;
+            if ((well->new_block[0].frame_n == 0x10) && (well->state.timer == 0)) {
                 gMain = GMAIN_390;
             }
             return;
@@ -156,14 +156,14 @@ void AllDeadBlocks(tetWell *well) {
         }
 
         if (block->frame_n == 0xD) {
-            well->timer = 40;
+            well->state.timer = 40;
         } else {
-            well->timer = 5;
+            well->state.timer = 5;
         }
     } else {
-        if (well->timer != 0) {
-            well->timer--;
-            if ((well->new_block[0].frame_n == 0x13) && (well->timer == 0)) {
+        if (well->state.timer != 0) {
+            well->state.timer--;
+            if ((well->new_block[0].frame_n == 0x13) && (well->state.timer == 0)) {
                 gMain = GMAIN_390;
             }
             return;
@@ -205,9 +205,9 @@ void AllDeadBlocks(tetWell *well) {
         }
 
         if (block->frame_n == 0x10) {
-            well->timer = 40;
+            well->state.timer = 40;
         } else {
-            well->timer = 5;
+            well->state.timer = 5;
         }
     }
 }
@@ -221,9 +221,9 @@ void AllDeadFaces(tetWell *well) {
     block_t *block;
 
     if (gGameStatus & GAME_STATUS_FLAG_40) {
-        if (well->timer != 0) {
-            well->timer--;
-            if ((well->new_block[0].frame_n == 8) && (well->timer == 0)) {
+        if (well->state.timer != 0) {
+            well->state.timer--;
+            if ((well->new_block[0].frame_n == 8) && (well->state.timer == 0)) {
                 gMain = GMAIN_390;
             }
             return;
@@ -247,12 +247,12 @@ void AllDeadFaces(tetWell *well) {
         }
 
         if (block->frame_n == 8) {
-            well->timer = 60;
+            well->state.timer = 60;
         }
     } else {
-        if (well->timer != 0) {
-            well->timer--;
-            if ((well->new_block[0].frame_n == 0x10) && (well->timer == 0)) {
+        if (well->state.timer != 0) {
+            well->state.timer--;
+            if ((well->new_block[0].frame_n == 0x10) && (well->state.timer == 0)) {
                 gMain = GMAIN_390;
             }
             return;
@@ -275,7 +275,7 @@ void AllDeadFaces(tetWell *well) {
         }
 
         if (block->frame_n == 0x10) {
-            well->timer = 60;
+            well->state.timer = 60;
         }
     }
 }
@@ -307,12 +307,12 @@ void KillRow3D(tetWell *well, cursor_t *cursor UNUSED) {
     s32 done;
 
     done = -1;
-    well->timer++;
-    if (well->timer < 30) {
+    well->state.timer++;
+    if (well->state.timer < 30) {
         return;
     }
 
-    if (well->timer % 2 == 1) {
+    if (well->state.timer % 2 == 1) {
         return;
     }
 
@@ -335,7 +335,7 @@ void KillRow3D(tetWell *well, cursor_t *cursor UNUSED) {
         }
 
         gMain = GMAIN_391;
-        well->timer = 20;
+        well->state.timer = 20;
     }
 }
 
@@ -346,11 +346,11 @@ void GameOverSign(tetWell *well, cursor_t *cursor) {
     s32 var_s1;
     s32 temp;
 
-    if (well->raise >= 0) {
+    if (well->state.raise >= 0) {
         switch (gSelection) {
             case SELECTION_8C:
-                var_s1 = gameoverShake[well->raise];
-                if (well->raise == 0x50) {
+                var_s1 = gameoverShake[well->state.raise];
+                if (well->state.raise == 0x50) {
                     PlaySE(SFX_INIT_TABLE, SFX_0A4);
                 }
                 break;
@@ -358,27 +358,27 @@ void GameOverSign(tetWell *well, cursor_t *cursor) {
             case SELECTION_BE:
                 if (cursor->state == 7) {
                     gTheGame.unk_9A90[0].b.frameY = 50 << 2;
-                    well->raise = 0;
+                    well->state.raise = 0;
                     gMain = GMAIN_393;
                     return;
                 }
-                var_s1 = gameoverShake[well->raise];
+                var_s1 = gameoverShake[well->state.raise];
                 break;
 
             case SELECTION_78:
             case SELECTION_82:
             case SELECTION_AA:
                 if (cursor->state == 7) {
-                    var_s1 = clearroundShake[well->raise];
-                    if (well->raise == 0x48) {
+                    var_s1 = clearroundShake[well->state.raise];
+                    if (well->state.raise == 0x48) {
                         if ((gSelection == SELECTION_AA) && (gTheGame.menu[0].speed == 5)) {
                             func_80005888_usa(0, 0, 2);
                         }
                         PlaySE(SFX_INIT_TABLE, SFX_0A4);
                     }
                 } else {
-                    var_s1 = gameoverShake[well->raise];
-                    if (well->raise == 0x50) {
+                    var_s1 = gameoverShake[well->state.raise];
+                    if (well->state.raise == 0x50) {
                         PlaySE(SFX_INIT_TABLE, SFX_0A4);
                     }
                 }
@@ -388,7 +388,7 @@ void GameOverSign(tetWell *well, cursor_t *cursor) {
                 break;
         }
 
-        well->raise--;
+        well->state.raise--;
     } else {
         gMain = GMAIN_393;
         return;
@@ -547,8 +547,8 @@ void ChangeDeadFace(tetWell *well) {
 
     flag = nfalse;
     temp_t5 = (gGameStatus & 0x40) ? 3 : 0;
-    if (well->timer != 0) {
-        well->timer--;
+    if (well->state.timer != 0) {
+        well->state.timer--;
         return;
     }
 
@@ -565,7 +565,7 @@ void ChangeDeadFace(tetWell *well) {
         }
 
         if (flag) {
-            well->timer = 2;
+            well->state.timer = 2;
             return;
         }
     }
@@ -585,18 +585,18 @@ void DropRow3D(tetWell *well, cursor_t *cursor, s32 num) {
     s32 row;
     s32 var_v1_2;
 
-    well->timer++;
-    if (well->timer < 5) {
+    well->state.timer++;
+    if (well->state.timer < 5) {
         return;
     }
 
-    if (well->timer == 5) {
+    if (well->state.timer == 5) {
         PlaySE(SFX_INIT_TABLE, SFX_0A3);
     }
 
     well->translation += DOUBLE_LITERAL(0.048);
-    if (well->timer % 10 == 0) {
-        row = BLOCK_LEN_ROWS - 1 - well->timer / 10;
+    if (well->state.timer % 10 == 0) {
+        row = BLOCK_LEN_ROWS - 1 - well->state.timer / 10;
 
         for (col = 0; col < BLOCK_LEN_B; col++) {
             if (well->block[row][col].type != BLOCKTYPE_9) {
@@ -652,25 +652,25 @@ INLINE void func_800386D4_usa(tetWell *well, s32 arg1) {
     s32 temp3;
     s32 temp4;
 
-    if (well->timer != 0) {
-        well->timer--;
+    if (well->state.timer != 0) {
+        well->state.timer--;
         return;
     }
 
     // TODO: hardcoded number
-    if (well->raise == 0x36) {
+    if (well->state.raise == 0x36) {
         PlaySE(SFX_INIT_TABLE, SFX_0A4);
     }
 
-    temp3 = wallsdownShake[well->raise];
-    well->raise--;
+    temp3 = wallsdownShake[well->state.raise];
+    well->state.raise--;
 
     temp4 = (gTheGame.dimension == DIMENSION_3D) ? 1 : 0;
     temp2 = temp3 - temp4;
     temp = gTheGame.unk_9B50[arg1].b.frameY >> 2;
     gTheGame.unk_9B50[arg1].b.frameY = (temp - temp2) << 2;
 
-    if (well->raise < 0) {
+    if (well->state.raise < 0) {
         gMain = GMAIN_394;
     }
 }
@@ -679,11 +679,11 @@ INLINE void func_800387AC_usa(tetWell *well, s32 arg1) {
     s32 var_a0;
 
     // TODO: hardcoded number
-    if (well->raise >= 0x32) {
+    if (well->state.raise >= 0x32) {
         return;
     }
 
-    var_a0 = wallsdownShake[well->raise];
+    var_a0 = wallsdownShake[well->state.raise];
     if (var_a0 == -0x10) {
         var_a0 = -0x1C;
     }
@@ -1946,10 +1946,10 @@ void DoGameOver3D(void) {
                 }
 
                 gMain = GMAIN_38F;
-                well1->raise = 0x25;
+                well1->state.raise = 0x25;
                 gWhatever = 0;
                 D_800B65B0_usa = 0;
-                well1->timer = 0;
+                well1->state.timer = 0;
                 if (cursor1->state == 8) {
                     PlaySE(SFX_INIT_TABLE, SFX_0A0);
                     if (gSelection != SELECTION_82) {
@@ -1974,9 +1974,9 @@ void DoGameOver3D(void) {
             case GMAIN_38F:
                 if (cursor1->state == 8) {
                     GameOverSmoke(well1);
-                    if (well1->raise >= 0) {
-                        count = dead1Shake[well1->raise];
-                        well1->raise--;
+                    if (well1->state.raise >= 0) {
+                        count = dead1Shake[well1->state.raise];
+                        well1->state.raise--;
                         well1->translation += (f32)count / DOUBLE_LITERAL(250.0);
                     }
                     AllDeadBlocks(well1);
@@ -1985,7 +1985,7 @@ void DoGameOver3D(void) {
                 }
 
                 if (gMain == GMAIN_390) {
-                    well1->timer = 40;
+                    well1->state.timer = 40;
                 }
                 break;
 
@@ -1993,8 +1993,8 @@ void DoGameOver3D(void) {
                 if (cursor1->state == 8) {
                     KillRow3D(well1, cursor1);
                 } else {
-                    well1->timer--;
-                    if (well1->timer == 0) {
+                    well1->state.timer--;
+                    if (well1->state.timer == 0) {
                         gMain = GMAIN_391;
                         if (gSelection == SELECTION_BE) {
                             Init3DTetrisBlocks(well1, 0);
@@ -2010,8 +2010,8 @@ void DoGameOver3D(void) {
                 }
 
                 gWhatever++;
-                if (well1->timer != 0) {
-                    well1->timer--;
+                if (well1->state.timer != 0) {
+                    well1->state.timer--;
                 } else {
                     if ((gSelection == SELECTION_8C) || (gSelection == SELECTION_BE)) {
                         Init3DIcons(well1);
@@ -2065,11 +2065,11 @@ void DoGameOver3D(void) {
                         Init3DIcons(well1);
 
                         if (((gSelection < 0x83) && (cursor1->state == 7))) {
-                            well1->raise = 0x50;
+                            well1->state.raise = 0x50;
                         } else if ((gSelection == SELECTION_AA) && (cursor1->state == 7)) {
-                            well1->raise = 0x50;
+                            well1->state.raise = 0x50;
                         } else {
-                            well1->raise = 0x59;
+                            well1->state.raise = 0x59;
                         }
                     }
                 }
@@ -2080,7 +2080,7 @@ void DoGameOver3D(void) {
 
                 if (gMain == GMAIN_393) {
                     gTheGame.help.current_pos = 0;
-                    well1->timer = 0;
+                    well1->state.timer = 0;
                 }
                 break;
 
@@ -2150,14 +2150,14 @@ void DoGameOver3D(void) {
             case GMAIN_38E:
                 if (win1 != win2) {
                     if (win1) {
-                        well1->win++;
+                        well1->extra.win++;
                     } else if (win2) {
-                        well2->win++;
+                        well2->extra.win++;
                     }
                 }
 
                 temp = GAME_STATUS_GET_WIN_RECORD(gGameStatus);
-                if ((well1->win == temp) || (well2->win == temp)) {
+                if ((well1->extra.win == temp) || (well2->extra.win == temp)) {
                     UpdateRecord2(win1, win2);
                 }
 
@@ -2190,13 +2190,13 @@ void DoGameOver3D(void) {
 
                 gMain = GMAIN_38F;
                 gWhatever = 0;
-                well1->timer = 0;
-                well2->timer = 0;
+                well1->state.timer = 0;
+                well2->state.timer = 0;
                 if (cursor1->state == 8) {
-                    well1->raise = 0x27;
+                    well1->state.raise = 0x27;
                 }
                 if (cursor2->state == 8) {
-                    well2->raise = 0x27;
+                    well2->state.raise = 0x27;
                 }
                 gTheGame.unk_9B50[0].b.frameY = 0x37C;
                 gTheGame.unk_9B50[1].b.frameY = 0x37C;
@@ -2213,8 +2213,8 @@ void DoGameOver3D(void) {
             case GMAIN_38F:
                 if (!win1) {
                     GameOverSmoke(well1);
-                    if (well1->raise >= 0) {
-                        count = dead2Shake[well1->raise];
+                    if (well1->state.raise >= 0) {
+                        count = dead2Shake[well1->state.raise];
                         well1->translation += (f32)count / DOUBLE_LITERAL(250.0);
                         ChangeDeadFace(well1);
                     }
@@ -2222,27 +2222,27 @@ void DoGameOver3D(void) {
 
                 if (!win2) {
                     GameOverSmoke(well2);
-                    if (well2->raise >= 0) {
-                        count = dead2Shake[well2->raise];
+                    if (well2->state.raise >= 0) {
+                        count = dead2Shake[well2->state.raise];
                         well2->translation += (f32)count / DOUBLE_LITERAL(250.0);
                         ChangeDeadFace(well2);
                     }
                 }
 
-                well1->raise -= 1;
-                well2->raise--;
-                if ((gWhatever == 0) && (well1->raise < -0x3C) && (well2->raise < -0x3C)) {
+                well1->state.raise -= 1;
+                well2->state.raise--;
+                if ((gWhatever == 0) && (well1->state.raise < -0x3C) && (well2->state.raise < -0x3C)) {
                     temp = GAME_STATUS_GET_WIN_RECORD(gGameStatus);
-                    if ((well1->win == temp) || (well2->win == temp)) {
+                    if ((well1->extra.win == temp) || (well2->extra.win == temp)) {
                         SaveRom();
                     }
                     gWhatever++;
                 }
 
-                if ((well1->raise < -0x5A) && (well2->raise < -0x5A)) {
+                if ((well1->state.raise < -0x5A) && (well2->state.raise < -0x5A)) {
                     gMain = GMAIN_390;
-                    well1->timer = 0;
-                    well2->timer = 0;
+                    well1->state.timer = 0;
+                    well2->state.timer = 0;
                 }
                 break;
 
@@ -2266,10 +2266,10 @@ void DoGameOver3D(void) {
                     Init3DAttackBlocks(well1);
                     Init3DAttackBlocks(well2);
 
-                    well1->raise = 0x36;
-                    well2->raise = 0x36;
-                    well1->timer = 90;
-                    well2->timer = 90;
+                    well1->state.raise = 0x36;
+                    well2->state.raise = 0x36;
+                    well1->state.timer = 90;
+                    well2->state.timer = 90;
 
                     func_800521A4_usa(5);
                 }
@@ -2282,7 +2282,7 @@ void DoGameOver3D(void) {
                 func_800387AC_usa(well1, 0);
                 func_800387AC_usa(well2, 1);
 
-                if (well1->raise < 0) {
+                if (well1->state.raise < 0) {
                     gMain = GMAIN_392;
 
                     if (((gSelection == SELECTION_96) && win1) || (gSelection == SELECTION_A0) ||
@@ -2298,14 +2298,14 @@ void DoGameOver3D(void) {
 
             case GMAIN_392:
                 temp = GAME_STATUS_GET_WIN_RECORD(gGameStatus);
-                if (gTheGame.tetrisWell[0].win == temp) {
+                if (gTheGame.tetrisWell[0].extra.win == temp) {
                     well1->menu.game++;
                     gTheGame.menu[0].game++;
                     if (gTheGame.menu[0].game > 99) {
                         well1->menu.game = 99;
                         gTheGame.menu[0].game = 99;
                     }
-                } else if (gTheGame.tetrisWell[1].win == temp) {
+                } else if (gTheGame.tetrisWell[1].extra.win == temp) {
                     well2->menu.game++;
                     gTheGame.menu[1].game++;
                     if (gTheGame.menu[1].game > 99) {
@@ -2315,9 +2315,9 @@ void DoGameOver3D(void) {
                 }
 
                 if (win1) {
-                    if (well1->win == 1) {
+                    if (well1->extra.win == 1) {
                         Init3DCircleStars(1, 0);
-                    } else if (well1->win == 2) {
+                    } else if (well1->extra.win == 2) {
                         Init3DCircleStars(1, 1);
                     } else {
                         Init3DCircleStars(1, 2);
@@ -2327,9 +2327,9 @@ void DoGameOver3D(void) {
                 }
 
                 if (win2) {
-                    if (well2->win == 1) {
+                    if (well2->extra.win == 1) {
                         Init3DCircleStars(0, 0);
-                    } else if (well2->win == 2) {
+                    } else if (well2->extra.win == 2) {
                         Init3DCircleStars(0, 1);
                     } else {
                         Init3DCircleStars(0, 2);
@@ -2345,10 +2345,10 @@ void DoGameOver3D(void) {
                     }
                 }
 
-                well1->raise = -1;
-                well2->raise = -1;
-                well1->timer = 0;
-                well2->timer = 0;
+                well1->state.raise = -1;
+                well2->state.raise = -1;
+                well1->state.timer = 0;
+                well2->state.timer = 0;
 
                 gWhatever = 0;
                 if (win1 != win2) {

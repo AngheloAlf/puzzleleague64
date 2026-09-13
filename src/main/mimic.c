@@ -97,10 +97,10 @@ void LoadMimic1(s32 kind, s32 level, s32 number, s32 play) {
     gTheGame.tetrisWell[0].unk_43BC = 0;
     gTheGame.tetrisWell[0].chain_garbage = 0;
     gTheGame.tetrisWell[0].collision = 0;
-    gTheGame.tetrisWell[0].death = 0;
+    gTheGame.tetrisWell[0].state.death = 0;
     gTheGame.tetrisWell[0].bot_height = 0xDF;
-    gTheGame.tetrisWell[0].current_raise = 0;
-    gTheGame.tetrisWell[0].raise = 0;
+    gTheGame.tetrisWell[0].state.current_raise = 0;
+    gTheGame.tetrisWell[0].state.raise = 0;
     gTheGame.totalPlayer = 2;
 
     InitCursor(cursor);
@@ -394,8 +394,8 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
                             Init2DTetrisBlocks(&gTheGame.tetrisWell[1], 1);
                             Init2DAttackBlocks(&gTheGame.tetrisWell[1]);
                             gTheGame.tetrisWell[1].bot_height = 0xDF;
-                            gTheGame.tetrisWell[1].current_raise = 0;
-                            gTheGame.tetrisWell[1].raise = 0;
+                            gTheGame.tetrisWell[1].state.current_raise = 0;
+                            gTheGame.tetrisWell[1].state.raise = 0;
                         }
 
                         gTheGame.unk_9B50[0].b.frameH = 30 << 2;
@@ -417,8 +417,8 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
                     }
 
                     well->bot_height = 0xDF;
-                    well->current_raise = 0;
-                    well->raise = 0;
+                    well->state.current_raise = 0;
+                    well->state.raise = 0;
                     chain_check[0] = 0;
                     chain_check[1] = 0;
                     anim_bg = 0;
@@ -436,8 +436,8 @@ void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
                         return;
                     }
 
-                    well->raise = command->para1 * gTheGame.dimension;
-                    well->current_raise += well->raise;
+                    well->state.raise = command->para1 * gTheGame.dimension;
+                    well->state.current_raise += well->state.raise;
                     break;
 
                 case 0x19:
@@ -653,11 +653,11 @@ void DoMT(void) {
             if (cursor->state <= 0) {
                 s32 temp = gTheGame.dimension;
 
-                if (well->current_raise >= temp * 0x10) {
+                if (well->state.current_raise >= temp * 0x10) {
                     well->collision = -1;
 
                     AddNewRow(well, cursor, num);
-                    well->current_raise = 0;
+                    well->state.current_raise = 0;
                 }
             }
 
@@ -665,7 +665,7 @@ void DoMT(void) {
                 Check3DVisibleBlocks(well, cursor);
             }
 
-            well->raise = 0;
+            well->state.raise = 0;
             well->unk_43A4 = 0;
         }
     }

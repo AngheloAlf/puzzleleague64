@@ -184,7 +184,7 @@ void InitTutorial(void) {
     for (var_s2 = 0; var_s2 < gTheGame.totalPlayer; var_s2++) {
         s2 = &gTheGame.tetrisWell[var_s2];
 
-        s2->raise = 0;
+        s2->state.raise = 0;
         s2->unk_43A8 = 0;
         s2->unk_43A4 = 0;
         s2->danger = 0;
@@ -192,10 +192,10 @@ void InitTutorial(void) {
         s2->unk_43BC = 0;
         s2->chain_garbage = 0;
         s2->collision = 0;
-        s2->death = 0;
+        s2->state.death = 0;
         s2->bot_height = 0xDF;
-        s2->current_raise = 0;
-        s2->raise = 0;
+        s2->state.current_raise = 0;
+        s2->state.raise = 0;
 
         if (gTheGame.dimension == DIMENSION_2D) {
             s1 = &gTheGame.cursorBlock[var_s2];
@@ -357,15 +357,15 @@ void TutorialCheckState(tetWell *well, cursor_t *cursor) {
             PlaySE(SFX_INIT_TABLE, SFX_0A0);
             PlaySE(SFX_INIT_TABLE, SFX_175);
         } else if (anim_bg != -0x34C) {
-            well->raise = anim_bg;
-            well->timer = anim_sp;
+            well->state.raise = anim_bg;
+            well->state.timer = anim_sp;
             GameOverSmoke(well);
             DeadBlocksShakeOne2D(well);
             AllDeadBlocks(well);
-            anim_bg = well->raise;
-            anim_sp = well->timer;
-            well->raise = 0;
-            well->timer = 0;
+            anim_bg = well->state.raise;
+            anim_sp = well->state.timer;
+            well->state.raise = 0;
+            well->state.timer = 0;
             if (gMain == GMAIN_390) {
                 anim_bg = -0x34C;
                 anim_sp = -0x34C;
@@ -378,19 +378,19 @@ void TutorialCheckState(tetWell *well, cursor_t *cursor) {
         PlaySE(SFX_INIT_TABLE, SFX_0A0);
         PlaySE(SFX_INIT_TABLE, SFX_175);
     } else if (anim_bg != -0x34C) {
-        well->raise = anim_bg;
-        well->timer = anim_sp;
-        if (well->raise >= 0) {
-            s32 v1 = well->raise;
+        well->state.raise = anim_bg;
+        well->state.timer = anim_sp;
+        if (well->state.raise >= 0) {
+            s32 v1 = well->state.raise;
 
             well->translation += ((f32)dead1Shake[v1] / DOUBLE_LITERAL(250.0));
-            well->raise = v1 - 1;
+            well->state.raise = v1 - 1;
         }
         AllDeadBlocks(well);
-        anim_bg = well->raise;
-        anim_sp = well->timer;
-        well->raise = 0;
-        well->timer = 0;
+        anim_bg = well->state.raise;
+        anim_sp = well->state.timer;
+        well->state.raise = 0;
+        well->state.timer = 0;
         if (gMain == GMAIN_390) {
             anim_bg = -0x34C;
             anim_sp = -0x34C;

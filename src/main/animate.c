@@ -80,7 +80,7 @@ void RaiseBlocks(tetWell *well, cursor_t *cursor) {
         well->unk_43B0 = 0;
         return;
     }
-    if (well->death != 0) {
+    if (well->state.death != 0) {
         cursor->extra_wait = 0;
         return;
     }
@@ -89,26 +89,26 @@ void RaiseBlocks(tetWell *well, cursor_t *cursor) {
         well->unk_43B0 = 2;
     }
     cursor->extra_wait = 0;
-    if (well->speed < 0 || well->speed > 0x10000) {
+    if (well->state.speed < 0 || well->state.speed > 0x10000) {
         var_a0 *= 2;
     }
-    well->raise += var_a0;
-    well->current_raise += var_a0;
+    well->state.raise += var_a0;
+    well->state.current_raise += var_a0;
 
     temp_v0 = gTheGame.dimension * 0x10;
-    if (well->current_raise == temp_v0) {
+    if (well->state.current_raise == temp_v0) {
         if (well->unk_43B0 == 1) {
             well->score++;
         }
         well->unk_43B0 = -4;
         return;
-    } else if (temp_v0 < well->current_raise) {
+    } else if (temp_v0 < well->state.current_raise) {
         if (well->unk_43B0 == 1) {
             well->score++;
         }
         well->unk_43B0 = -4;
-        well->raise = (gTheGame.dimension * 0x10) - (well->current_raise - well->raise);
-        well->current_raise = gTheGame.dimension * 0x10;
+        well->state.raise = (gTheGame.dimension * 0x10) - (well->state.current_raise - well->state.raise);
+        well->state.current_raise = gTheGame.dimension * 0x10;
     }
 }
 
@@ -156,7 +156,7 @@ STATIC_INLINE void inlined_func_AfterSwitch(block_t *block2, tetWell *well, curs
  * Original name: AfterSwitch
  */
 void AfterSwitch(tetWell *well, cursor_t *cursor, block_t *block1, block_t *block2, Dimension dimen) {
-    s32 temp_t4 = well->blockDropDelay;
+    s32 temp_t4 = well->state.blockDropDelay;
     s32 row;
     s32 col;
     s32 var_t2;
@@ -439,7 +439,7 @@ nbool CheckGameOver(tetWell *well, cursor_t *cursor) {
         }
     }
     if (col == gMax) {
-        well->death = 0;
+        well->state.death = 0;
         return nfalse;
     }
 
@@ -456,37 +456,37 @@ nbool CheckGameOver(tetWell *well, cursor_t *cursor) {
     }
 
     if (well->unk_43B0 <= 0) {
-        well->death++;
+        well->state.death++;
 
         if (gTheGame.totalPlayer == 1) {
-            if (well->death < 2) {
+            if (well->state.death < 2) {
                 return nfalse;
             }
         } else {
             if (gSelection == SELECTION_B4) {
-                if (well->death < 2) {
+                if (well->state.death < 2) {
                     return nfalse;
                 }
-            } else if ((gSelection == SELECTION_C8) && (st_Player2State[well->level][6] >= well->death)) {
+            } else if ((gSelection == SELECTION_C8) && (st_Player2State[well->extra.level][6] >= well->state.death)) {
                 return nfalse;
             }
 
             if (gTheGame.hour != 0) {
-                value = ((f32)st_Player2State[well->level][6] * DOUBLE_LITERAL(0.125));
+                value = ((f32)st_Player2State[well->extra.level][6] * DOUBLE_LITERAL(0.125));
             } else if (gTheGame.minute < 10) {
                 value = ((DOUBLE_LITERAL(1.0) - ((f32)gTheGame.minute * DOUBLE_LITERAL(0.05))) *
-                         (f32)st_Player2State[well->level][6]);
+                         (f32)st_Player2State[well->extra.level][6]);
             } else if (gTheGame.minute < 20) {
                 value = ((DOUBLE_LITERAL(1.0) - ((f32)(gTheGame.minute - 10) * DOUBLE_LITERAL(0.05))) *
-                         ((f32)st_Player2State[well->level][6] * DOUBLE_LITERAL(0.5)));
+                         ((f32)st_Player2State[well->extra.level][6] * DOUBLE_LITERAL(0.5)));
             } else if (gTheGame.minute < 30) {
                 value = ((DOUBLE_LITERAL(1.0) - ((f32)(gTheGame.minute - 20) * DOUBLE_LITERAL(0.05))) *
-                         ((f32)st_Player2State[well->level][6] * DOUBLE_LITERAL(0.25)));
+                         ((f32)st_Player2State[well->extra.level][6] * DOUBLE_LITERAL(0.25)));
             } else {
-                value = (((f32)st_Player2State[well->level][6]) * DOUBLE_LITERAL(0.125));
+                value = (((f32)st_Player2State[well->extra.level][6]) * DOUBLE_LITERAL(0.125));
             }
 
-            if (well->death <= value) {
+            if (well->state.death <= value) {
                 return nfalse;
             }
         }

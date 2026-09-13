@@ -152,8 +152,8 @@ void DrawEditor(struct_gInfo_unk_00068 *arg0) {
                 gTheGame.dimension = DIMENSION_2D;
                 gTheGame.menu[0].game = 0;
                 gTheGame.menu[0].speed = 0;
-                gTheGame.tetrisWell[0].win = 0;
-                gTheGame.tetrisWell[1].win = 0;
+                gTheGame.tetrisWell[0].extra.win = 0;
+                gTheGame.tetrisWell[1].extra.win = 0;
                 brainbrain[0].speed = -1;
                 brainbrain[1].speed = -1;
                 gTheGame.menu[0].stage = B_801AB808_usa;

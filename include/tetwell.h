@@ -14,6 +14,35 @@
 #include "menu_t.h"
 
 
+/* Original name: state_t */
+typedef struct state_t {
+    /* 0x00 */ s32 comboFlash; /* Original name: comboFlash */
+    /* 0x04 */ s32 comboFace; /* Original name: comboFace */
+    /* 0x08 */ s32 comboExplode; /* Original name: comboExplode */
+    /* 0x0C */ s32 blockDropDelay; /* Original name: blockDropDelay */
+    /* 0x10 */ s32 unk_43D8;
+    /* 0x14 */ s32 nextLevel; /* Original name: nextLevel */
+    /* 0x18 */ s32 currLevel; /* Original name: currLevel */
+    /* 0x1C */ s32 rand; /* Original name: rand */ // nbool?
+    /* 0x20 */ s32 newBlock; /* Original name: newBlock */
+    /* 0x24 */ u32 timer; /* Original name: timer */
+    /* 0x28 */ u32 speed; /* Original name: speed */
+    /* 0x2C */ s32 death; /* Original name: death */
+    /* 0x30 */ s32 current_raise; /* Original name: current_raise */
+    /* 0x34 */ s32 raise; /* Original name: raise */
+} state_t; // size = 0x38
+
+/* Original name: extra_t */
+typedef struct extra_t {
+    /* 0x00 */ s32 level; /* Original name: level */
+    /* 0x04 */ s32 win; /* Original name: win */
+    /* 0x08 */ s32 maxGarbage; /* Original name: maxGarbage */
+    /* 0x0C */ s32 clearGarbage; /* Original name: clearGarbage */
+    /* 0x10 */ UNK_PAD unk_4410[0x4];
+    /* 0x14 */ s32 queueGarbage; /* Original name: queueGarbage */
+    /* 0x18 */ s32 wellGarbage; /* Original name: wellGarbage */
+} extra_t; // size = 0x1C
+
 /* Original name: tetWell */
 typedef struct tetWell {
     /* 0x0000 */ block_t block[BLOCK_LEN_ROWS][BLOCK_LEN_B]; /* Original name: block */
@@ -36,27 +65,8 @@ typedef struct tetWell {
     /* 0x43BC */ s32 unk_43BC;
     /* 0x43C0 */ s32 chain_garbage; /* Original name: chain_garbage */
     /* 0x43C4 */ s32 collision; /* Original name: collision */ // nbool?
-    /* 0x43C8 */ s32 unk_43C8;
-    /* 0x43CC */ s32 comboFace; /* Original name: comboFace */ // Inside `state_t state`
-    /* 0x43D0 */ s32 comboExplode; /* Original name: comboExplode */ // Inside `state_t state`
-    /* 0x43D4 */ s32 blockDropDelay; /* Original name: blockDropDelay */ // Inside `state_t state`
-    /* 0x43D8 */ s32 unk_43D8;
-    /* 0x43DC */ s32 nextLevel; /* Original name: nextLevel */ // Inside `state_t state`
-    /* 0x43E0 */ s32 currLevel; /* Original name: currLevel */ // Inside `state_t state`
-    /* 0x43E4 */ s32 unk_43E4;
-    /* 0x43E8 */ UNK_PAD unk_43E8[0x4];
-    /* 0x43EC */ u32 timer; /* Original name: timer */ // Inside `state_t state`
-    /* 0x43F0 */ u32 speed; /* Original name: speed */ // Inside `state_t state`
-    /* 0x43F4 */ s32 death; /* Original name: death */ // Inside `state_t state`
-    /* 0x43F8 */ s32 current_raise; /* Original name: current_raise */ // Inside `state_t state`
-    /* 0x43FC */ s32 raise; /* Original name: raise */ // Inside `state_t state`
-    /* 0x4400 */ s32 level; /* Original name: level */ // Inside `extra_t extra`
-    /* 0x4404 */ s32 win; /* Original name: win */ // Inside `extra_t extra`
-    /* 0x4408 */ s32 maxGarbage; /* Original name: maxGarbage */ // Inside `extra_t extra`
-    /* 0x440C */ s32 clearGarbage; /* Original name: clearGarbage */ // Inside `extra_t extra`
-    /* 0x4410 */ UNK_PAD unk_4410[0x4];
-    /* 0x4414 */ s32 queueGarbage; /* Original name: queueGarbage */ // Inside `extra_t extra`
-    /* 0x4418 */ s32 wellGarbage; /* Original name: wellGarbage */ // Inside `extra_t extra`
+    /* 0x43C8 */ state_t state; /* Original name: state */
+    /* 0x4400 */ extra_t extra; /* Original name: extra */
     /* 0x441C */ s32 bot_height;
     /* 0x4420 */ menu_t menu;
 } tetWell; // size = 0x4430

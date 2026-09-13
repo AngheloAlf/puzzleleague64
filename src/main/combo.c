@@ -532,7 +532,7 @@ s32 ComboCount(tetWell *well, cursor_t *cursor) {
     s32 col;
 
     var_t2 = 0;
-    temp2 = well->unk_43C8;
+    temp2 = well->state.comboFlash;
     for (var_t1 = 0; var_t1 < BLOCK_LEN_ROWS; var_t1++) {
         a = well->block[var_t1];
         b = well->block[var_t1 - 1];

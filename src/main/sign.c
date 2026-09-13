@@ -221,11 +221,11 @@ void AnimateGameOver3D(tetWell *well, uObjBg *bg) {
     s32 temp;
 
     var_a3 = 0;
-    if (well->timer >= 130) {
-        well->timer = 0;
+    if (well->state.timer >= 130) {
+        well->state.timer = 0;
     }
 
-    temp_v1 = well->timer;
+    temp_v1 = well->state.timer;
     if (temp_v1 % 10 == 0) {
         temp_v1 /= 10;
         if (temp_v1 < 0xA) {
@@ -233,7 +233,7 @@ void AnimateGameOver3D(tetWell *well, uObjBg *bg) {
         }
     }
 
-    well->timer++;
+    well->state.timer++;
 
     temp = bg->b.frameY >> 2;
     bg->b.frameY = (temp - var_a3) << 2;
@@ -268,14 +268,14 @@ void AnimateLose3D(tetWell *well, uObjBg *bg) {
     int diff; // r8
 #endif
 
-    if (well->raise >= 0) {
-        var_v1 = losewordShake[well->raise];
-        var_v0 = well->raise - 1;
+    if (well->state.raise >= 0) {
+        var_v1 = losewordShake[well->state.raise];
+        var_v0 = well->state.raise - 1;
     } else {
         var_v1 = 0;
         var_v0 = 0x27;
     }
-    well->raise = var_v0;
+    well->state.raise = var_v0;
 
     temp = bg->b.frameY >> 2;
     bg->b.frameY = (temp - var_v1) << 2;
@@ -305,14 +305,14 @@ void AnimateWin3D(tetWell *well, uObjBg *bg) {
     s32 var_v1;
     s32 temp;
 
-    if (well->raise >= 0) {
-        var_v1 = winwordShake[well->raise];
-        var_v0 = well->raise - 1;
+    if (well->state.raise >= 0) {
+        var_v1 = winwordShake[well->state.raise];
+        var_v0 = well->state.raise - 1;
     } else {
         var_v1 = 0;
         var_v0 = 2;
     }
-    well->raise = var_v0;
+    well->state.raise = var_v0;
 
     temp = bg->b.frameY >> 2;
     bg->b.frameY = (temp - var_v1) << 2;
@@ -342,14 +342,14 @@ void AnimateDraw3D(tetWell *well, uObjBg *bg) {
     s32 var_v1;
     s32 temp;
 
-    if (well->raise >= 0) {
-        var_v1 = winwordShake[well->raise];
-        var_v0 = well->raise - 1;
+    if (well->state.raise >= 0) {
+        var_v1 = winwordShake[well->state.raise];
+        var_v0 = well->state.raise - 1;
     } else {
         var_v1 = 0;
         var_v0 = 2;
     }
-    well->raise = var_v0;
+    well->state.raise = var_v0;
 
     temp = bg->b.frameY >> 2;
     bg->b.frameY = (temp - var_v1) << 2;

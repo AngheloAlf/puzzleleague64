@@ -45,7 +45,7 @@ INLINE BlockType RandomBlock(tetWell *well) {
     int max; // r6
 #endif
 
-    if (well->unk_43E4 != 0) {
+    if (well->state.rand != 0) {
         var_t0 = 5;
     }
 
@@ -308,10 +308,10 @@ void InitTetrisWell(void) {
         temp_s3->unk_43BC = 0;
         temp_s3->chain_garbage = 0;
         temp_s3->collision = 0;
-        temp_s3->death = 0;
+        temp_s3->state.death = 0;
         temp_s3->bot_height = 0xDF;
-        temp_s3->current_raise = 0;
-        temp_s3->raise = 0;
+        temp_s3->state.current_raise = 0;
+        temp_s3->state.raise = 0;
 
         InitCursor(sp34);
         InitGamePad(var_fp);
@@ -359,7 +359,7 @@ void InitTetrisWell(void) {
 
                         InitBlockPattern(temp_s3, sp10, 6, 0);
                         InitStartingBlocks(temp_s3, sp10, 6);
-                    } else if (gTheGame.tetrisWell[0].unk_43E4 != temp_s3->unk_43E4) {
+                    } else if (gTheGame.tetrisWell[0].state.rand != temp_s3->state.rand) {
 
                         InitBlockPattern(temp_s3, sp10, 6, 0);
                         InitStartingBlocks(temp_s3, sp10, 6);
@@ -403,7 +403,7 @@ void InitTetrisWell(void) {
 
                         InitBlockPattern(temp_s3, sp10, 18, 0);
                         InitStartingBlocks(temp_s3, sp10, 0x12);
-                    } else if (gTheGame.tetrisWell[0].unk_43E4 != temp_s3->unk_43E4) {
+                    } else if (gTheGame.tetrisWell[0].state.rand != temp_s3->state.rand) {
 
                         InitBlockPattern(temp_s3, sp10, 18, 0);
                         InitStartingBlocks(temp_s3, sp10, 0x12);
@@ -502,29 +502,29 @@ void DoTetris(void) {
         B_801AAB98_usa += 1;
         if (!(gGameStatus & GAME_STATUS_FLAG_20) || (gCounter % 2 != 0)) {
             if (gMain == GMAIN_387) {
-                if ((cursor->delay == 0) && (cursor->extra_wait == 0) && (well->death == 0) && (well->unk_43B0 == 0) &&
+                if ((cursor->delay == 0) && (cursor->extra_wait == 0) && (well->state.death == 0) && (well->unk_43B0 == 0) &&
                     (gSelection >= SELECTION_83) && (B_801AB61C_usa == 0) && (cursor->state <= 0) &&
                     (cursor->waiting == 0)) {
-                    well->timer += well->speed;
+                    well->state.timer += well->state.speed;
 
-                    if (well->timer >= 0x1000) {
+                    if (well->state.timer >= 0x1000) {
                         s32 temp;
 
-                        var_s2 = well->timer & 0xFFFF0000;
+                        var_s2 = well->state.timer & 0xFFFF0000;
                         if (var_s2 < 0) {
                             var_a0 = var_s2 | 0xFFFF;
                         } else {
                             var_a0 = var_s2;
                         }
-                        well->timer &= 0xFFFF;
+                        well->state.timer &= 0xFFFF;
                         var_s2 = (var_a0 >> 0x10);
-                        well->raise = var_s2 * gTheGame.dimension;
-                        well->current_raise += well->raise;
+                        well->state.raise = var_s2 * gTheGame.dimension;
+                        well->state.current_raise += well->state.raise;
 
                         temp = gTheGame.dimension * 0x10;
-                        if (temp < well->current_raise) {
-                            well->raise = gTheGame.dimension * 0x10 - (well->current_raise - well->raise);
-                            well->current_raise = gTheGame.dimension * 0x10;
+                        if (temp < well->state.current_raise) {
+                            well->state.raise = gTheGame.dimension * 0x10 - (well->state.current_raise - well->state.raise);
+                            well->state.current_raise = gTheGame.dimension * 0x10;
                         }
                     }
                 }
@@ -576,10 +576,10 @@ void DoTetris(void) {
             UpdateAnimation(well, num, var_s2);
             UpdateMiscStuff(well, cursor, num);
 
-            if ((cursor->state <= 0) && (well->current_raise >= ((s32)gTheGame.dimension * 0x10))) {
+            if ((cursor->state <= 0) && (well->state.current_raise >= ((s32)gTheGame.dimension * 0x10))) {
                 well->collision = -1;
                 AddNewRow(well, cursor, num);
-                well->current_raise = 0;
+                well->state.current_raise = 0;
                 if ((gSelection == SELECTION_AA) || (gSelection == SELECTION_B4)) {
                     cursor->target[0] -= 1;
                 }
@@ -590,7 +590,7 @@ void DoTetris(void) {
             }
 
             HackGame(well);
-            well->raise = 0;
+            well->state.raise = 0;
             well->unk_43A4 = 0;
         }
     }

@@ -361,8 +361,8 @@ void DoTitle(void) {
                 gReset = -1;
                 gPlayer[0] = gTheGame.player;
                 gPlayer[1] = gTheGame.player;
-                gTheGame.tetrisWell[0].win = 0;
-                gTheGame.tetrisWell[1].win = 0;
+                gTheGame.tetrisWell[0].extra.win = 0;
+                gTheGame.tetrisWell[1].extra.win = 0;
                 brainbrain[0].speed = -1;
                 brainbrain[1].speed = -1;
                 gGameStatus |= GAME_STATUS_FLAG_80;

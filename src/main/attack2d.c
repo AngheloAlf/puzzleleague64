@@ -440,11 +440,11 @@ void Change2DAttack(tetWell *well, cursor_t *cursor, s32 num, s32 combo) {
 
     sp54 = 0;
     var_t2 = 0;
-    temp_t0 = well->unk_43C8;
-    temp = well->comboFace;
-    sp44 = well->comboExplode;
+    temp_t0 = well->state.comboFlash;
+    temp = well->state.comboFace;
+    sp44 = well->state.comboExplode;
 
-    sp4C = well->unk_43D8;
+    sp4C = well->state.unk_43D8;
 
     for (var_a2 = 0; var_a2 < 5; var_a2++) {
         sp18[var_a2] = -1;

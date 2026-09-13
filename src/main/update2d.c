@@ -24,7 +24,7 @@ void Update2DDistance(tetWell *well, cursor_t *cursor) {
     attack_t *attack;
     uObjSprite *s;
 
-    distance = well->raise;
+    distance = well->state.raise;
 
     if (distance == 0) {
         return;

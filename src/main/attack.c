@@ -152,8 +152,8 @@ void func_8005A9EC_usa(tetWell *well, attack_t *attack) {
             break;
     }
     temp_lo = var_a1 * gTheGame.dimension;
-    well->raise += temp_lo;
-    well->current_raise += temp_lo;
+    well->state.raise += temp_lo;
+    well->state.current_raise += temp_lo;
     well->bot_height -= temp_lo;
 }
 #else
@@ -302,8 +302,8 @@ void AttackShake(tetWell *well, cursor_t *cursor, attack_t *attack) {
                 break;
         }
         temp_lo = var_a1 * gTheGame.dimension;
-        well->raise += temp_lo;
-        well->current_raise += temp_lo;
+        well->state.raise += temp_lo;
+        well->state.current_raise += temp_lo;
         well->bot_height -= temp_lo;
         return;
     }

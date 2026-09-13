@@ -496,11 +496,11 @@ void DoBonus(void) {
             }
         }
 
-        if (var_s2->raise >= 0) {
-            var_s5 = gameoverBounce[var_s2->raise];
-            var_s2->raise--;
+        if (var_s2->state.raise >= 0) {
+            var_s5 = gameoverBounce[var_s2->state.raise];
+            var_s2->state.raise--;
         } else {
-            var_s2->raise = 0x27;
+            var_s2->state.raise = 0x27;
         }
 
         var_a0 = gTheGame.unk_8C88[1].b.frameY >> 0x2;

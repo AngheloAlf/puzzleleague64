@@ -221,8 +221,8 @@ void UpdateTime(s32 second) {
  * Original name: UpdateNextLevel
  */
 void UpdateNextLevel(tetWell *well) {
-    s32 next = well->nextLevel;
-    s32 level = well->currLevel;
+    s32 next = well->state.nextLevel;
+    s32 level = well->state.currLevel;
 
     switch (gSelection) {
         case SELECTION_8C:
@@ -270,15 +270,15 @@ void UpdateNextLevel(tetWell *well) {
                 next -= 0x2D;
             }
 
-            if (level != well->currLevel) {
+            if (level != well->state.currLevel) {
                 if (((gGameStatus ^ GAME_STATUS_FLAG_1) & GAME_STATUS_FLAG_1) && (level > 0x32)) {
                     level = 0x32;
                 } else {
                     StartFlash(0x78);
                 }
 
-                well->nextLevel = next;
-                well->currLevel = level;
+                well->state.nextLevel = next;
+                well->state.currLevel = level;
                 UpdateRaiseTimer(well);
             }
             break;
@@ -293,19 +293,19 @@ void UpdateNextLevel(tetWell *well) {
                     StartFlash(0x78);
                 }
 
-                next = level - st_kClearStage[well->level][0];
+                next = level - st_kClearStage[well->extra.level][0];
                 if ((next >= 1) && (next <= 3)) {
-                    well->nextLevel = 0x384;
+                    well->state.nextLevel = 0x384;
                 } else if ((next >= 4) && (next <= 0x13)) {
-                    well->nextLevel = 0x258;
+                    well->state.nextLevel = 0x258;
                 } else {
-                    well->nextLevel = 0x12C;
+                    well->state.nextLevel = 0x12C;
                 }
 
-                well->currLevel = level;
+                well->state.currLevel = level;
                 UpdateRaiseTimer(well);
             } else {
-                well->nextLevel = next;
+                well->state.nextLevel = next;
             }
             break;
 
@@ -319,15 +319,15 @@ void UpdateNextLevel(tetWell *well) {
                 if (level > 0x63) {
                     level = 0x63;
                 }
-                next = level - st_Player2State[well->level][5];
+                next = level - st_Player2State[well->extra.level][5];
                 if (next > 0x27) {
                     next = 0x27;
                 }
-                well->nextLevel = st_AdvanceLevel[next];
-                well->currLevel = level;
+                well->state.nextLevel = st_AdvanceLevel[next];
+                well->state.currLevel = level;
                 UpdateRaiseTimer(well);
             } else {
-                well->nextLevel = next;
+                well->state.nextLevel = next;
             }
             break;
 
@@ -336,13 +336,13 @@ void UpdateNextLevel(tetWell *well) {
     }
 
     if ((gSelection == SELECTION_96) || (gSelection == SELECTION_A0)) {
-        if (well->clearGarbage <= 0) {
-            if (well->maxGarbage-- <= 0) {
+        if (well->extra.clearGarbage <= 0) {
+            if (well->extra.maxGarbage-- <= 0) {
                 return;
             }
 
-            well->queueGarbage++;
-            well->clearGarbage += st_Player2State[well->level][8];
+            well->extra.queueGarbage++;
+            well->extra.clearGarbage += st_Player2State[well->extra.level][8];
         }
     }
 }
@@ -351,11 +351,11 @@ void UpdateNextLevel(tetWell *well) {
  * Original name: UpdateRaiseTimer
  */
 void UpdateRaiseTimer(tetWell *well) {
-    s32 level = well->currLevel - 1;
+    s32 level = well->state.currLevel - 1;
 
     // TODO: Hardcoded number
     level = MIN(level, 0x62);
-    well->speed = ADJUST_FRAMERATE_INV(0x01000000 / st_RaiseTimer[level]);
+    well->state.speed = ADJUST_FRAMERATE_INV(0x01000000 / st_RaiseTimer[level]);
 }
 
 /**
@@ -464,7 +464,7 @@ void UpdateChainDelay1(tetWell *well, cursor_t *cursor, s32 chain) {
  * Original name: UpdateComboDelay2
  */
 void UpdateComboDelay2(tetWell *well, cursor_t *cursor, s32 combo) {
-    s32 index = well->level;
+    s32 index = well->extra.level;
     s32 delay;
 
     // TODO: Hardcoded number
@@ -496,7 +496,7 @@ void UpdateComboDelay2(tetWell *well, cursor_t *cursor, s32 combo) {
  * Original name: UpdateChainDelay2
  */
 void UpdateChainDelay2(tetWell *well, cursor_t *cursor, s32 chain) {
-    s32 index = well->level;
+    s32 index = well->extra.level;
     s32 delay;
 
     if (well->danger != 0) {
@@ -1194,10 +1194,10 @@ void UpdateWell(tetWell *well, cursor_t *cursor, s32 num, s32 total) {
     sp64 = 0;
     sp6C = 0;
 
-    sp3C = well->comboFace;
-    sp44 = well->comboExplode;
+    sp3C = well->state.comboFace;
+    sp44 = well->state.comboExplode;
     sp34 = (gGameStatus & GAME_STATUS_FLAG_40) ? 3 : 0;
-    sp4C = well->blockDropDelay;
+    sp4C = well->state.blockDropDelay;
 
     for (var_s2 = BLOCK_LEN_ROWS - 1; var_s2 >= 0; var_s2--) {
         var_s5 = 0;
@@ -1221,7 +1221,7 @@ void UpdateWell(tetWell *well, cursor_t *cursor, s32 num, s32 total) {
                     temp_s0->state = BLOCKSTATE_8;
                     temp_s0->disappear = sp3C;
                     sp3C += sp44;
-                    temp_s0->drop = well->comboFace + (total - 1) * sp44 + 1;
+                    temp_s0->drop = well->state.comboFace + (total - 1) * sp44 + 1;
                     if ((total >= 6) && (temp_s0->bomb == 0x1E)) {
                         temp_s0->bomb = 0x1F;
                     }
@@ -1350,19 +1350,19 @@ void UpdateWell(tetWell *well, cursor_t *cursor, s32 num, s32 total) {
 
                                 PlayExplosionSound(num, temp_s0->sound);
                                 if (temp_s0->type == BLOCKTYPE_7) {
-                                    well->wellGarbage--;
+                                    well->extra.wellGarbage--;
                                 }
                                 StartExplosion(well, num, var_s2, sp18, temp_s0->bomb);
 
                                 switch (gSelection) {
                                     case SELECTION_BE:
                                     case SELECTION_8C:
-                                        well->nextLevel++;
+                                        well->state.nextLevel++;
                                         break;
 
                                     case SELECTION_96:
                                     case SELECTION_A0:
-                                        well->clearGarbage--;
+                                        well->extra.clearGarbage--;
                                         break;
 
                                     default:
