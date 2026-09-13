@@ -8,8 +8,12 @@
 #include "macros_defines.h"
 #include "main_variables.h"
 
+#include "libc/assert.h"
+
+#include "animate3d.h"
 #include "animation.h"
 #include "bkground.h"
+#include "dlist.h"
 #include "explode.h"
 #include "fade.h"
 #include "info.h"
@@ -292,37 +296,107 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80037900_usa);
 INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80037900_usa);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", KillRow3D);
-#endif
+/**
+ * Original name: KillRow3D
+ */
+void KillRow3D(tetWell *well, cursor_t *cursor UNUSED) {
+    block_t *top_block;
+    block_t *bot_block;
+    s32 col;
+    s32 row;
+    s32 done;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", KillRow3D);
-#endif
+    done = -1;
+    well->timer++;
+    if (well->timer < 30) {
+        return;
+    }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", KillRow3D);
-#endif
+    if (well->timer % 2 == 1) {
+        return;
+    }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", KillRow3D);
-#endif
+    for (row = 0; row < BLOCK_LEN_ROWS - 1; row++) {
+        for (col = 0; col < BLOCK_LEN_B; col++) {
+            bot_block = &well->block[row][col];
+            top_block = &well->block[row + 1][col];
+            bcopy_chk(top_block, bot_block);
+            InitTetrisState(top_block);
+        }
+    }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", GameOverSign);
-#endif
+    for (col = 0; col < BLOCK_LEN_B; col++) {
+        done &= well->block[0][col].type == BLOCKTYPE_0 ? -1 : 0;
+    }
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", GameOverSign);
-#endif
+    if (done) {
+        for (col = 0; col < BLOCK_LEN_B; col++) {
+            InitTetrisState(&well->new_block[col]);
+        }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", GameOverSign);
-#endif
+        gMain = GMAIN_391;
+        well->timer = 20;
+    }
+}
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", GameOverSign);
-#endif
+/**
+ * Original name: GameOverSign
+ */
+void GameOverSign(tetWell *well, cursor_t *cursor) {
+    s32 var_s1;
+    s32 temp;
+
+    if (well->raise >= 0) {
+        switch (gSelection) {
+            case SELECTION_8C:
+                var_s1 = gameoverShake[well->raise];
+                if (well->raise == 0x50) {
+                    PlaySE(SFX_INIT_TABLE, SFX_0A4);
+                }
+                break;
+
+            case SELECTION_BE:
+                if (cursor->state == 7) {
+                    gTheGame.unk_9A90[0].b.frameY = 50 << 2;
+                    well->raise = 0;
+                    gMain = GMAIN_393;
+                    return;
+                }
+                var_s1 = gameoverShake[well->raise];
+                break;
+
+            case SELECTION_78:
+            case SELECTION_82:
+            case SELECTION_AA:
+                if (cursor->state == 7) {
+                    var_s1 = clearroundShake[well->raise];
+                    if (well->raise == 0x48) {
+                        if ((gSelection == SELECTION_AA) && (gTheGame.menu[0].speed == 5)) {
+                            func_80005888_usa(0, 0, 2);
+                        }
+                        PlaySE(SFX_INIT_TABLE, SFX_0A4);
+                    }
+                } else {
+                    var_s1 = gameoverShake[well->raise];
+                    if (well->raise == 0x50) {
+                        PlaySE(SFX_INIT_TABLE, SFX_0A4);
+                    }
+                }
+                break;
+
+            default:
+                break;
+        }
+
+        well->raise--;
+    } else {
+        gMain = GMAIN_393;
+        return;
+    }
+
+    temp = gTheGame.unk_9A90[0].b.frameY >> 2;
+    gTheGame.unk_9A90[0].b.frameY = (temp - var_s1) << 2;
+}
 
 /**
  * Original name: EndingExplosion
@@ -461,38 +535,84 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80038018_usa);
 INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80038018_usa);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", ChangeDeadFace);
-#endif
+/**
+ * Original name: ChangeDeadFace
+ */
+void ChangeDeadFace(tetWell *well) {
+    block_t *block;
+    s32 temp_t5;
+    s32 row;
+    s32 col;
+    nbool flag;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", ChangeDeadFace);
-#endif
+    flag = nfalse;
+    temp_t5 = (gGameStatus & 0x40) ? 3 : 0;
+    if (well->timer != 0) {
+        well->timer--;
+        return;
+    }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", ChangeDeadFace);
-#endif
+    for (row = BLOCK_LEN_ROWS - 1; row >= 0; row--) {
+        for (col = 0; col < gMax; col++) {
+            block = &well->block[row][col];
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", ChangeDeadFace);
-#endif
+            if (block->type != BLOCKTYPE_0) {
+                if (block->frame_n != 0x10 - temp_t5) {
+                    block->frame_n = 0x10 - temp_t5;
+                    flag = ntrue;
+                }
+            }
+        }
 
-#if VERSION_USA
-// DropRow3D?
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80038228_usa);
-#endif
+        if (flag) {
+            well->timer = 2;
+            return;
+        }
+    }
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80038228_usa);
-#endif
+    for (col = 0; col < gMax; col++) {
+        block = &well->new_block[col];
+        block->frame_n = 0x10 - temp_t5;
+    }
+    return;
+}
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80038228_usa);
-#endif
+/**
+ * Original name: DropRow3D
+ */
+void DropRow3D(tetWell *well, cursor_t *cursor, s32 num) {
+    s32 col;
+    s32 row;
+    s32 var_v1_2;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80038228_usa);
-#endif
+    well->timer++;
+    if (well->timer < 5) {
+        return;
+    }
+
+    if (well->timer == 5) {
+        PlaySE(SFX_INIT_TABLE, SFX_0A3);
+    }
+
+    well->translation += DOUBLE_LITERAL(0.048);
+    if (well->timer % 10 == 0) {
+        row = BLOCK_LEN_ROWS - 1 - well->timer / 10;
+
+        for (col = 0; col < BLOCK_LEN_B; col++) {
+            if (well->block[row][col].type != BLOCKTYPE_9) {
+                well->block[row][col].type = BLOCKTYPE_0;
+            }
+        }
+    }
+
+    if (cursor->sx == 0) {
+        Move3DCursorRight(cursor, CURSOR_HOLD_VAL_0);
+    }
+
+    var_v1_2 = (gTheGame.unk_9B50[num].b.frameY >> 2) - 6;
+    var_v1_2 = MAX(var_v1_2, 0x19);
+    gTheGame.unk_9B50[num].b.frameY = var_v1_2 << 2;
+}
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_8003837C_usa);
@@ -570,37 +690,138 @@ INLINE void func_800387AC_usa(tetWell *well, s32 arg1) {
     gTheGame.unk_9A90[arg1].b.frameY = ((gTheGame.unk_9A90[arg1].b.frameY >> 2) - var_a0) << 2;
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", SmallStars);
-#endif
+/**
+ * Original name: SmallStars
+ */
+void SmallStars(void) {
+    tetWell *well = &gTheGame.tetrisWell[0];
+    s32 total = 0;
+    s32 row;
+    s32 col;
+    s32 y;
+    block_t *block;
+    uObjSprite_t *s;
+    DATA_INLINE_CONST u8 stars_TMEM[4][4] = {
+        { 0x00, 0x02, 0x04, 0x06 },
+        { 0x80, 0x82, 0x84, 0x86 },
+        { 0x00, 0x02, 0x04, 0x06 },
+        { 0x80, 0x82, 0x84, 0x86 },
+    };
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", SmallStars);
-#endif
+    for (row = 0; row < BLOCK_LEN_ROWS; row++) {
+        for (col = 0; col < MIN(BLOCK_LEN_B, TETWELL_OBJSPRITE_LEN_B); col++) {
+            block = &well->block[row][col];
+            s = &well->block_rect[row][col].s;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", SmallStars);
-#endif
+            y = s->objY >> 2;
+            y += block->drop;
+            if (total % 2 == 0) {
+                if (y >= 0xD7) {
+                    y = 0;
+                }
+            } else {
+                if (y >= 0xF0) {
+                    y = 0;
+                }
+            }
+            s->objY = y << 2;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", SmallStars);
-#endif
+            block->frame_d++;
+            if (block->frame_d >= 3) {
+                block->frame_d = 0;
+                block->frame_n++;
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", CircleStars);
-#endif
+                if (block->frame_n >= ARRAY_COUNT(stars_TMEM[0])) {
+                    block->frame_n = 0;
+                }
+            }
+            total++;
+            s->imageAdrs = stars_TMEM[block->currRow][block->frame_n];
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", CircleStars);
-#endif
+            if (total >= 0x15) {
+                return;
+            }
+        }
+    }
+}
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", CircleStars);
-#endif
+/**
+ * Original name: CircleStars
+ */
+nbool CircleStars(void) {
+    s32 total = 0;
+    s32 row;
+    s32 col;
+    s32 temp;
+    s32 temp3;
+    block_t *block;
+    uObjSprite_t *s;
+    DATA_INLINE_CONST u8 stars_TMEM[4][4] = {
+        { 0x00, 0x02, 0x04, 0x06 },
+        { 0x80, 0x82, 0x84, 0x86 },
+        { 0x00, 0x02, 0x04, 0x06 },
+        { 0x80, 0x82, 0x84, 0x86 },
+    };
+    DATA_INLINE_CONST f32 gSinTable[36] = {
+        0.0f,      0.173648f,  0.34202f,   0.5f,       0.642787f,  0.766044f,  0.866025f,  0.939692f,  0.984808f,
+        1.0f,      0.984808f,  0.939693f,  0.866026f,  0.766046f,  0.642789f,  0.500002f,  0.342022f,  0.173651f,
+        0.000003f, -0.173645f, -0.342017f, -0.499997f, -0.642785f, -0.766042f, -0.866024f, -0.939691f, -0.984807f,
+        -1.0f,     -0.984809f, -0.939694f, -0.866028f, -0.766047f, -0.642791f, -0.500004f, -0.342025f, -0.173653f,
+    };
+    DATA_INLINE_CONST f32 gCosTable[36] = {
+        1.0f,       0.984808f,  0.939693f,  0.866026f,  0.766045f,  0.642788f,  0.500001f,  0.342021f,  0.173649f,
+        0.000001f,  -0.173647f, -0.342019f, -0.499998f, -0.642786f, -0.766043f, -0.866024f, -0.939692f, -0.984807f,
+        -1.0f,      -0.984808f, -0.939694f, -0.866027f, -0.766046f, -0.64279f,  -0.500003f, -0.342024f, -0.173652f,
+        -0.000004f, 0.173644f,  0.342016f,  0.499996f,  0.642784f,  0.766041f,  0.866023f,  0.939691f,  0.984807f,
+    };
+    tetWell *well = &gTheGame.tetrisWell[1];
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", CircleStars);
+    // the usage of block_t on this function doesn't make much sense
+
+    for (row = 0; row < BLOCK_LEN_ROWS; row++) {
+        for (col = 0; col < MIN(BLOCK_LEN_B, TETWELL_OBJSPRITE_LEN_B); col++) {
+            block = &well->block[row][col];
+            s = &well->block_rect[row][col].s;
+
+            block->state++;
+            if ((block->sound < 0x25) && (block->state > BLOCKSTATE_0)) {
+                block->state = BLOCKSTATE_0;
+                block->sound += 2;
+            }
+
+            temp = block->sound * gCosTable[block->chain_flag / 10];
+            temp3 = block->sound * gSinTable[block->chain_flag / 10];
+
+            s->objX = (temp + block->drop) << 2;
+            s->objY = (temp3 + block->delay) << 2;
+
+            block->frame_d++;
+            if (block->frame_d >= 3) {
+                block->frame_d = 0;
+                block->frame_n++;
+                if (block->frame_n >= ARRAY_COUNT(stars_TMEM[0])) {
+                    block->frame_n = 0;
+                }
+            }
+
+            s->imageAdrs = stars_TMEM[block->currRow][block->frame_n];
+
+            total++;
+            if (total >= 0xC) {
+                if ((block->sound < 0x25) || (block->state < 0x21)) {
+                    return nfalse;
+                }
+                return ntrue;
+            }
+        }
+    }
+
+#if PRESERVE_UB
+    // Not really a bug, since the early return inside the loop will always
+    // trigger before finishing the loop
+    return nfalse;
 #endif
+}
 
 nbool func_80038B98_usa(s32 arg0) {
     s32 i;
@@ -743,54 +964,6 @@ void func_80038F84_usa(void) {
 
     st_Chain2[0x4] = var_a0;
 }
-
-#if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/end", RO_800C49D0_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/end", RO_800C49E0_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/end", RO_800C4A70_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/end", RO_800C4D20_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/end", RO_800C4D30_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/end", RO_800C4DC0_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/end", RO_800C33D0_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/end", RO_800C33E0_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/end", RO_800C3470_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/end", RO_800BA390_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/end", RO_800BA3A0_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/end", RO_800BA430_ger);
-#endif
 
 #if VERSION_USA
 // DoGameOverStat?
@@ -2074,8 +2247,8 @@ void DoGameOver3D(void) {
                 break;
 
             case GMAIN_390:
-                func_80038228_usa(well1, cursor1, 0);
-                func_80038228_usa(well2, cursor2, 1);
+                DropRow3D(well1, cursor1, 0);
+                DropRow3D(well2, cursor2, 1);
 
                 if ((well1->translation > DOUBLE_LITERAL(1.8)) && (well2->translation > DOUBLE_LITERAL(1.8))) {
                     temp = ntrue;
@@ -2186,7 +2359,7 @@ void DoGameOver3D(void) {
                 break;
 
             case GMAIN_393:
-                if (CircleStars() != 0) {
+                if (CircleStars()) {
                     gMain = GMAIN_394;
                 }
                 break;

@@ -23,7 +23,7 @@ typedef enum BlockState {
 } BlockState;
 
 typedef enum BlockType {
-    /*  0 */ BLOCKTYPE_0,
+    /*  0 */ BLOCKTYPE_0, // None?
     /*  1 */ BLOCKTYPE_1,
     /*  2 */ BLOCKTYPE_2,
     /*  3 */ BLOCKTYPE_3,

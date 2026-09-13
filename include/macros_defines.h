@@ -79,4 +79,22 @@
 #define ADJUST_COUNTER(x) (MAX(((x) - 20), 0))
 #endif
 
+#if __IS_OLD_COMP__ || PERMUTER
+#define bcopy_chk(src, dst)            \
+    ({                                 \
+        bcopy(src, dst, sizeof(*src)); \
+        dst;                           \
+    })
+#else
+#define bcopy_chk(src, dst)                                                               \
+    ({                                                                                    \
+        __auto_type _src = (src);                                                         \
+        __auto_type _dst = (dst);                                                         \
+        static_assert(__builtin_types_compatible_p(__typeof__(*_src), __typeof__(*_dst)), \
+                      "bcopy_chk: incompatible types");                           \
+        bcopy(_src, _dst, sizeof(*_src));                                                 \
+        _dst;                                                                             \
+    })
+#endif
+
 #endif

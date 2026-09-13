@@ -29,13 +29,14 @@ CPP_FLAGS = [
     # "-D_FINALROM",
     "-D_MIPS_SZLONG=32",
     "-D__USE_ISOC99",
-    "-DSCRIPT(test...)={}"
+    "-DSCRIPT(test...)={}",
     "-D__attribute__(test...)=",
     "-D__asm__(test...)=",
 
     "-DM2CTX",
     "-DNON_MATCHING",
     "-D_OS_HOST_H_",
+    "-D__IS_KMC__=1",
 
     "-ffreestanding",
     "-std=gnu89",
