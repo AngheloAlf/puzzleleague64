@@ -14,44 +14,42 @@
 #include "tetris.h"
 #include "the_game.h"
 
-#if VERSION_USA
-#if 0
+/**
+ * Original name: Init2DNewRow
+ */
 void Init2DNewRow(tetWell *well) {
-    s32 sp14;
-    s32 sp1C;
-    uObjSprite *sp24;
-    block_t *sp2C;
-    block_t *temp_s6;
-    enum BlockType var_s4;
-    s32 temp_s2;
-    s32 var_a2;
-    s32 var_s7;
+    s32 col;
+    s32 old;
+    s32 target = -1;
+    s32 check = 0;
+    s32 flag = nfalse;
+    BlockType type;
+    block_t *block;
+    extra_t *extra = &well->extra;
+    uObjSprite *rect;
 
-    sp14 = -1;
-    sp1C = 0;
-    var_a2 = 0;
-    if ((well->extra.wellGarbage <= 4) && (well->extra.queueGarbage >= 2)) {
-        well->extra.queueGarbage -= 2;
-        well->extra.wellGarbage += 2;
-        sp1C = 3;
-        var_a2 = -1;
-    } else if ((well->extra.wellGarbage <= 8) && (well->extra.queueGarbage >= 1)) {
-        well->extra.queueGarbage--;
-        well->extra.wellGarbage++;
-        sp1C = 2;
-        var_a2 = -1;
+    if ((extra->wellGarbage <= 4) && (extra->queueGarbage >= 2)) {
+        extra->queueGarbage -= 2;
+        extra->wellGarbage += 2;
+        check = 3;
+        flag = ntrue;
+    } else if ((extra->wellGarbage <= 8) && (extra->queueGarbage >= 1)) {
+        extra->queueGarbage--;
+        extra->wellGarbage++;
+        check = 2;
+        flag = ntrue;
     } else if (well->state.newBlock < 2) {
-        sp1C = 1;
-        var_a2 = -1;
+        check = 1;
+        flag = ntrue;
     }
 
-    if (var_a2 != 0) {
-        temp_s2 = well->state.rand;
+    if (flag) {
+        old = well->state.rand;
         well->state.rand = -1;
         do {
-            sp14 = RandomBlock(well) - 1;
-        } while ((well->block[0][sp14].type == BLOCKTYPE_7) || (well->block[0][sp14 + 1].type == BLOCKTYPE_7));
-        well->state.rand = temp_s2;
+            target = RandomBlock(well) - 1;
+        } while ((well->block[0][target].type == BLOCKTYPE_7) || (well->block[0][target + 1].type == BLOCKTYPE_7));
+        well->state.rand = old;
     }
 
     if (well->state.newBlock == 1) {
@@ -60,79 +58,154 @@ void Init2DNewRow(tetWell *well) {
         well->state.newBlock = 1;
     }
 
-    for (var_s7 = 5; var_s7 >= 0; var_s7--) {
-        temp_s6 = &well->new_block[var_s7];
-        sp24 = &well->new_block_rect[var_s7];
+    for (col = 5; col >= 0; col--) {
+        block = &well->new_block[col];
+        rect = &well->new_block_rect[col];
 
-        InitTetrisState(temp_s6);
-        temp_s6->currRow = 0;
-        if (var_s7 == sp14) {
-            switch (sp1C) {                         /* irregular */
+        InitTetrisState(block);
+        block->currRow = 0;
+        if (col == target) {
+            switch (check) {
                 case 0x1:
-                    var_s4 = well->new_block[var_s7 + 1].type;
-                    if (var_s4 == well->block[0][var_s7].type) {
-                        var_s7 += 2;
+                    type = well->new_block[col + 1].type;
+                    if (type == well->block[0][col].type) {
+                        col += 2;
                         continue;
                     }
                     break;
 
                 case 0x2:
-                    var_s4 = BLOCKTYPE_7;
+                    type = BLOCKTYPE_7;
                     break;
 
                 case 0x3:
-                    var_s4 = BLOCKTYPE_7;
-                    well->new_block[var_s7 + 1].type = 7;
-                    Init2DTetrisTMEM(&well->new_block[var_s7 + 1], &well->new_block_rect[var_s7 + 1]);
+                    type = BLOCKTYPE_7;
+                    well->new_block[col + 1].type = BLOCKTYPE_7;
+                    Init2DTetrisTMEM(&well->new_block[col + 1], &well->new_block_rect[col + 1]);
                     break;
             }
         } else {
             do {
-                var_s4 = RandomBlock(well);
-            } while ((var_s4 == well->new_block[var_s7 + 1].type) || (var_s4 == well->block[0][var_s7].type));
+                type = RandomBlock(well);
+            } while ((type == well->new_block[col + 1].type) || (type == well->block[0][col].type));
         }
 
-        sp24->s.objY = 0x37C;
-        temp_s6->type = var_s4;
-        Init2DTetrisTMEM(temp_s6, sp24);
+        rect->s.objY = 223 << 2;
+        block->type = type;
+        Init2DTetrisTMEM(block, rect);
+    }
+}
 
+/**
+ * Original name: Init2DCursor
+ */
+void Init2DCursor(cursor_t *cursor, s32 num) {
+    uObjSprite_t *s = &cursor->rect.s;
+
+    if (gTheGame.totalPlayer == 1) {
+        s->objX = (cursor->x * 18 + 110) << 2;
+    } else if (num == 0) {
+        s->objX = (cursor->x * 18 + 20) << 2;
+    } else {
+        s->objX = (cursor->x * 18 + 184) << 2;
+    }
+
+    s->scaleW = 1 << 10;
+    s->imageW = 44 << 5;
+    s->paddingX = 0;
+
+    s->objY = (203 - cursor->y * 16) << 2;
+    s->scaleH = 1 << 10;
+    s->imageH = 24 << 5;
+    s->paddingY = 0;
+
+    s->imageStride = 8;
+    s->imageAdrs = 0;
+    s->imageFmt = G_IM_FMT_CI;
+    s->imageSiz = G_IM_SIZ_8b;
+    s->imagePal = 0;
+    s->imageFlags = 0;
+}
+
+#if VERSION_USA
+#ifdef NON_EQUIVALENT
+void Init2DTetrisBlocks(tetWell *well, s32 num) {
+    s32 var_a2;
+    s32 var_s4;
+    s32 var_s6;
+    block_t *var_s1;
+    uObjSprite_t *var_s0;
+
+    for (var_s6 = 0; var_s6 < 0xC; var_s6++) {
+        for (var_s4 = 0; var_s4 < 6; var_s4++) {
+            var_s1 = &well->block[var_s6][var_s4];
+            var_s0 = &well->block_rect[var_s6][var_s4];
+            var_a2 = (0xCF - var_s6 * 0x10) << 2;
+
+            InitTetrisState(var_s1);
+            var_s1->currRow = var_s6;
+
+            if (gTheGame.totalPlayer == 1) {
+                var_s0->objX = var_s4 * 0x48 + 0x1C8;
+            } else if (num == 0) {
+                var_s0->objX = var_s4 * 0x48 + 0x60;
+            } else {
+                var_s0->objX = var_s4 * 0x48 + 0x2F0;
+            }
+
+            var_s0->scaleW = 0x38F;
+            var_s0->imageW = 0x200;
+            var_s0->paddingX = 0;
+
+            var_s0->objY = var_a2;
+            var_s0->scaleH = 0x400;
+            var_s0->imageH = 0x200;
+            var_s0->paddingY = 0;
+
+            var_s0->imageStride = 8;
+            var_s0->imageAdrs = 0;
+            var_s0->imageFmt = 2;
+            var_s0->imageSiz = 1;
+            var_s0->imagePal = 0;
+            var_s0->imageFlags = 0;
+        }
+    }
+
+    for (var_s4 = 0; var_s4 < 6; var_s4++) {
+        var_s1 = &well->new_block[var_s4];
+
+        InitTetrisState(var_s1);
+        var_s1->currRow = 0;
+
+        var_s0 = &well->new_block_rect[var_s4];
+        if (gTheGame.totalPlayer == 1) {
+            var_s0->objX = var_s4 * 0x48 + 0x1C8;
+        } else if (num == 0) {
+            var_s0->objX = var_s4 * 0x48 + 0x60;
+        } else {
+            var_s0->objX = var_s4 * 0x48 + 0x2F0;
+        }
+
+        var_s0->scaleW = 0x38F;
+        var_s0->imageW = 0x200;
+        var_s0->paddingX = 0;
+
+        var_s0->objY = 0x37C;
+        var_s0->scaleH = 0x400;
+        var_s0->imageH = 0x200;
+        var_s0->paddingY = 0;
+
+        var_s0->imageStride = 8;
+        var_s0->imageAdrs = 0;
+        var_s0->imageFmt = 2;
+        var_s0->imageSiz = 1;
+        var_s0->imagePal = 0;
+        var_s0->imageFlags = 0;
     }
 }
 #else
-INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", Init2DNewRow);
-#endif
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", Init2DNewRow);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", Init2DNewRow);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", Init2DNewRow);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", Init2DCursor);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", Init2DCursor);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", Init2DCursor);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", Init2DCursor);
-#endif
-
-#if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", Init2DTetrisBlocks);
+#endif
 #endif
 
 #if VERSION_EUR
