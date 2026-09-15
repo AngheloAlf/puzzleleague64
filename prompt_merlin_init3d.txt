@@ -1,0 +1,106 @@
+Actúa como un experto en descompilación de Nintendo 64 (MIPS III, GCC 2.7.2 con optimización -O2).
+Queremos reconstruir la función C para lograr un 100% de matching binario contra el archivo original.
+
+Archivo destino: src/main/puzzle.c
+Función: Init3DPuzzle
+
+Prototipo exacto:
+s32 Init3DPuzzle(struct tetWell *well, struct cursor_t *cursor, u8 *ptr, s32 number);
+
+Estructuras y tipos confirmados del proyecto:
+- En include/cursor.h:
+  cursor->target[0] (offset 0x28)
+  cursor->target[1] (offset 0x2C)
+- En include/tetwell.h y include/block.h:
+  well->block[BLOCK_LEN_ROWS][BLOCK_LEN_B] donde sizeof(block_t) es 0x2C (44 bytes)
+  stride por fila: 18 * 44 = 792 (0x318)
+  campo en offset 0x10: well->block[x][y].type
+- Función externa llamada al inicio:
+  Init3DTetrisBlocks(well, 0);
+
+Observaciones clave del ensamblador MIPS:
+1. $s1 es decrecido: addiu $s1, $s1, -1. Si number <= 0 salta el primer bucle (blez).
+2. Primer bucle (.L80088D70): lee un byte u8, avanza ptr += (byte << 1) + 2.
+3. Si el siguiente byte leído es 0: asigna cursor->target[0] = 0 y retorna 0 (no toca target[1]).
+4. Si no es 0: asigna cursor->target[0] y cursor->target[1] con *ptr.
+5. Segundo bucle (.L80088DBC): itera count veces. Lee dos bytes: packed y row.
+   El desplazamiento para extraer el tipo es lógico (srl a1, a0, 4), por lo que packed debe tratarse como entero sin signo (u8 / u32) para no generar 'sra'.
+   Escribe: well->block[packed & 0xF][row].type = packed >> 4;
+6. Al terminar el segundo bucle, retorna -1 incondicionalmente.
+
+Ensamblador MIPS III original:
+nonmatching Init3DPuzzle, 0x104
+
+glabel Init3DPuzzle
+    /* 089934 80088D34 27BDFFC8 */  addiu       $sp, $sp, -0x38
+    /* 089938 80088D38 AFB3002C */  sw          $s3, 0x2C($sp)
+    /* 08993C 80088D3C 00809821 */  addu        $s3, $a0, $zero
+    /* 089940 80088D40 AFB20028 */  sw          $s2, 0x28($sp)
+    /* 089944 80088D44 00A09021 */  addu        $s2, $a1, $zero
+    /* 089948 80088D48 AFB00020 */  sw          $s0, 0x20($sp)
+    /* 08994C 80088D4C 00C08021 */  addu        $s0, $a2, $zero
+    /* 089950 80088D50 AFB10024 */  sw          $s1, 0x24($sp)
+    /* 089954 80088D54 00E08821 */  addu        $s1, $a3, $zero
+    /* 089958 80088D58 AFBF0030 */  sw          $ra, 0x30($sp)
+    /* 08995C 80088D5C 0C0176F6 */  jal         Init3DTetrisBlocks
+    /* 089960 80088D60 00002821 */   addu       $a1, $zero, $zero
+    /* 089964 80088D64 2631FFFF */  addiu       $s1, $s1, -0x1
+    /* 089968 80088D68 1A200009 */  blez        $s1, .L80088D90
+    /* 08996C 80088D6C 00003021 */   addu       $a2, $zero, $zero
+  .L80088D70:
+    /* 089970 80088D70 92070000 */  lbu         $a3, 0x0($s0)
+    /* 089974 80088D74 24C60001 */  addiu       $a2, $a2, 0x1
+    /* 089978 80088D78 00071040 */  sll         $v0, $a3, 1
+    /* 08997C 80088D7C 24420002 */  addiu       $v0, $v0, 0x2
+    /* 089980 80088D80 02028021 */  addu        $s0, $s0, $v0
+    /* 089984 80088D84 00D1102A */  slt         $v0, $a2, $s1
+    /* 089988 80088D88 1440FFF9 */  bnez        $v0, .L80088D70
+    /* 08998C 80088D8C 00000000 */   nop
+  .L80088D90:
+    /* 089990 80088D90 92070000 */  lbu         $a3, 0x0($s0)
+    /* 089994 80088D94 14E00004 */  bnez        $a3, .L80088DA8
+    /* 089998 80088D98 26100001 */   addiu      $s0, $s0, 0x1
+    /* 08999C 80088D9C AE400028 */  sw          $zero, 0x28($s2)
+    /* 0899A0 80088DA0 08022386 */  j           .L80088E18
+    /* 0899A4 80088DA4 00001021 */   addu       $v0, $zero, $zero
+  .L80088DA8:
+    /* 0899A8 80088DA8 92020000 */  lbu         $v0, 0x0($s0)
+    /* 0899AC 80088DAC 00003021 */  addu        $a2, $zero, $zero
+    /* 0899B0 80088DB0 AE420028 */  sw          $v0, 0x28($s2)
+    /* 0899B4 80088DB4 10E00017 */  beqz        $a3, .L80088E14
+    /* 0899B8 80088DB8 AE42002C */   sw         $v0, 0x2C($s2)
+  .L80088DBC:
+    /* 0899BC 80088DBC 26100001 */  addiu       $s0, $s0, 0x1
+    /* 0899C0 80088DC0 92040000 */  lbu         $a0, 0x0($s0)
+    /* 0899C4 80088DC4 26100001 */  addiu       $s0, $s0, 0x1
+    /* 0899C8 80088DC8 24C60001 */  addiu       $a2, $a2, 0x1
+    /* 0899CC 80088DCC 92020000 */  lbu         $v0, 0x0($s0)
+    /* 0899D0 80088DD0 00042902 */  srl         $a1, $a0, 4
+    /* 0899D4 80088DD4 3084000F */  andi        $a0, $a0, 0xF
+    /* 0899D8 80088DD8 00021840 */  sll         $v1, $v0, 1
+    /* 0899DC 80088DDC 00621821 */  addu        $v1, $v1, $v0
+    /* 0899E0 80088DE0 00031880 */  sll         $v1, $v1, 2
+    /* 0899E4 80088DE4 00621823 */  subu        $v1, $v1, $v0
+    /* 0899E8 80088DE8 00031880 */  sll         $v1, $v1, 2
+    /* 0899EC 80088DEC 00041040 */  sll         $v0, $a0, 1
+    /* 0899F0 80088DF0 00441021 */  addu        $v0, $v0, $a0
+    /* 0899F4 80088DF4 00022140 */  sll         $a0, $v0, 5
+    /* 0899F8 80088DF8 00441021 */  addu        $v0, $v0, $a0
+    /* 0899FC 80088DFC 000210C0 */  sll         $v0, $v0, 3
+    /* 089A00 80088E00 00621821 */  addu        $v1, $v1, $v0
+    /* 089A04 80088E04 02631821 */  addu        $v1, $s3, $v1
+    /* 089A08 80088E08 00C7102A */  slt         $v0, $a2, $a3
+    /* 089A0C 80088E0C 1440FFEB */  bnez        $v0, .L80088DBC
+    /* 089A10 80088E10 AC650010 */   sw         $a1, 0x10($v1)
+  .L80088E14:
+    /* 089A14 80088E14 2402FFFF */  addiu       $v0, $zero, -0x1
+  .L80088E18:
+    /* 089A18 80088E18 8FBF0030 */  lw          $ra, 0x30($sp)
+    /* 089A1C 80088E1C 8FB3002C */  lw          $s3, 0x2C($sp)
+    /* 089A20 80088E20 8FB20028 */  lw          $s2, 0x28($sp)
+    /* 089A24 80088E24 8FB10024 */  lw          $s1, 0x24($sp)
+    /* 089A28 80088E28 8FB00020 */  lw          $s0, 0x20($sp)
+    /* 089A2C 80088E2C 27BD0038 */  addiu       $sp, $sp, 0x38
+    /* 089A30 80088E30 03E00008 */  jr          $ra
+    /* 089A34 80088E34 00000000 */   nop
+endlabel Init3DPuzzle

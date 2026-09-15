@@ -1,0 +1,48 @@
+Actúa como un experto en descompilación de Nintendo 64 (MIPS III, GCC 2.7.2 con -O2).
+Estamos ajustando `Init3DPuzzle` en `src/main/puzzle.c`. Faltan solo 2 discrepancias menores de scheduling de registros.
+
+Prototipo:
+s32 Init3DPuzzle(struct tetWell *well, struct cursor_t *cursor, u8 *ptr, s32 number);
+
+Código C actual:
+s32 Init3DPuzzle(struct tetWell *well, struct cursor_t *cursor, u8 *ptr, s32 number) {
+    s32 i;
+    s32 count;
+    u32 packed;
+
+    Init3DTetrisBlocks(well, 0);
+    number--;
+    for (i = 0; i < number; i++) {
+        count = *ptr;
+        ptr += (count << 1) + 2;
+    }
+
+    count = *ptr++;
+    if (count == 0) {
+        cursor->target[0] = 0;
+        return 0;
+    }
+
+    cursor->target[0] = *ptr;
+    cursor->target[1] = *ptr;
+
+    for (i = 0; i < count; i++) {
+        ptr++;
+        packed = *ptr++;
+        well->block[packed & 0xF][*ptr].type = packed >> 4;
+    }
+
+    return -1;
+}
+
+Discrepancias identificadas en el diff:
+1. En la asignación de cursor->target:
+   El binario original lee *ptr una sola vez en $v0 y reutiliza ese registro para target[0] y target[1].
+   Actualmente GCC emite dos instrucciones 'lbu v0, 0(s0)' consecutivas.
+2. En el segundo bucle:
+   El original carga el byte en $a0, avanza el puntero, incrementa el contador de iteración 'a2', lee el siguiente byte en $v0, e inmediatamente ejecuta:
+     srl $a1, $a0, 4
+     andi $a0, $a0, 0xF
+   Actualmente el código C retrasa el 'srl' y el 'andi' al final del cálculo de índices de well->block.
+
+Proporciona únicamente el código C ajustado para que GCC 2.7.2 produzca el ensamblador idéntico.

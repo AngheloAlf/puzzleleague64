@@ -1,0 +1,1026 @@
+make: 'build/usa/puzzleleague64.usa.z64' is up to date.
+TARGET                                                   CURRENT (15)                               
+89934:    addiu   sp,sp,-0x38                            89934:    addiu   sp,sp,-0x38              
+89938:    sw      s3,0x2c(sp)                            89938:    sw      s3,0x2c(sp)              
+8993c:    move    s3,a0                                  8993c:    move    s3,a0                    
+89940:    sw      s2,0x28(sp)                            89940:    sw      s2,0x28(sp)              
+89944:    move    s2,a1                                  89944:    move    s2,a1                    
+89948:    sw      s0,0x20(sp)                            89948:    sw      s0,0x20(sp)              
+8994c:    move    s0,a2                                  8994c:    move    s0,a2                    
+89950:    sw      s1,0x24(sp)                            89950:    sw      s1,0x24(sp)              
+89954:    move    s1,a3                                  89954:    move    s1,a3                    
+89958:    sw      ra,0x30(sp)                            89958:    sw      ra,0x30(sp)              
+8995c:    jal     5dbd8                                  8995c:    jal     5dbd8                    
+89960:    move    a1,zero                                89960:    move    a1,zero                  
+89964:    addiu   s1,s1,-1                               89964:    addiu   s1,s1,-1                 
+89968:    blez    s1,89990 [35m~>[39m                            89968:    blez    s1,89990 [35m~>[39m              
+8996c:    move    a2,zero                                8996c:    move    a2,zero                  
+89970: [36m~>[39m lbu     a3,0(s0)                               89970: [36m~>[39m lbu     a3,0(s0)                 
+89974:    addiu   a2,a2,1                                89974:    addiu   a2,a2,1                  
+89978:    sll     v0,a3,0x1                              89978:    sll     v0,a3,0x1                
+8997c:    addiu   v0,v0,2                                8997c:    addiu   v0,v0,2                  
+89980:    addu    s0,s0,v0                               89980:    addu    s0,s0,v0                 
+89984:    slt     v0,a2,s1                               89984:    slt     v0,a2,s1                 
+89988:    bnez    v0,89970 [36m~>[39m                            89988:    bnez    v0,89970 [36m~>[39m              
+8998c:    nop                                            8998c:    nop                              
+89990: [35m~>[39m lbu     a3,0(s0)                               89990: [35m~>[39m lbu     a3,0(s0)                 
+89994:    bnez    a3,899a8 [32m~>[39m                            89994:    bnez    a3,899a8 [32m~>[39m              
+89998:    addiu   s0,s0,1                                89998:    addiu   s0,s0,1                  
+8999c:    sw      zero,0x28(s2)                          8999c:    sw      zero,0x28(s2)            
+899a0:    j       88e18                                  899a0:    j       88e18                    
+899a4:    move    v0,zero                                899a4:    move    v0,zero                  
+[33m899a8:[39m [32m~>[39m lbu     [35mv0[39m,0(s0)                        [33mr[39m      [33m899a8:[39m [32m~>[39m lbu     [35ma0[39m,0(s0)                 
+899ac:    move    a2,zero                                899ac:    move    a2,zero                  
+[33m899b0:[39m    sw      [35mv0[39m,0x28(s2)                     [33mr[39m      [33m899b0:[39m    sw      [35ma0[39m,0x28(s2)              
+899b4:    beqz    a3,89a14 [31m~>[39m                            899b4:    beqz    a3,89a14 [31m~>[39m              
+[33m899b8:[39m    sw      [35mv0[39m,0x2c(s2)                     [33mr[39m      [33m899b8:[39m    sw      [35ma0[39m,0x2c(s2)              
+899bc: [93m~>[39m addiu   s0,s0,1                                899bc: [93m~>[39m addiu   s0,s0,1                  
+899c0:    lbu     a0,0(s0)                               899c0:    lbu     a0,0(s0)                 
+899c4:    addiu   s0,s0,1                                899c4:    addiu   s0,s0,1                  
+899c8:    addiu   a2,a2,1                                899c8:    addiu   a2,a2,1                  
+899cc:    lbu     v0,0(s0)                               899cc:    lbu     v0,0(s0)                 
+899d0:    srl     a1,a0,0x4                              899d0:    srl     a1,a0,0x4                
+899d4:    andi    a0,a0,0xf                              899d4:    andi    a0,a0,0xf                
+899d8:    sll     v1,v0,0x1                              899d8:    sll     v1,v0,0x1                
+899dc:    addu    v1,v1,v0                               899dc:    addu    v1,v1,v0                 
+899e0:    sll     v1,v1,0x2                              899e0:    sll     v1,v1,0x2                
+899e4:    subu    v1,v1,v0                               899e4:    subu    v1,v1,v0                 
+899e8:    sll     v1,v1,0x2                              899e8:    sll     v1,v1,0x2                
+899ec:    sll     v0,a0,0x1                              899ec:    sll     v0,a0,0x1                
+899f0:    addu    v0,v0,a0                               899f0:    addu    v0,v0,a0                 
+899f4:    sll     a0,v0,0x5                              899f4:    sll     a0,v0,0x5                
+899f8:    addu    v0,v0,a0                               899f8:    addu    v0,v0,a0                 
+899fc:    sll     v0,v0,0x3                              899fc:    sll     v0,v0,0x3                
+89a00:    addu    v1,v1,v0                               89a00:    addu    v1,v1,v0                 
+89a04:    addu    v1,s3,v1                               89a04:    addu    v1,s3,v1                 
+89a08:    slt     v0,a2,a3                               89a08:    slt     v0,a2,a3                 
+89a0c:    bnez    v0,899bc [93m~>[39m                            89a0c:    bnez    v0,899bc [93m~>[39m              
+89a10:    sw      a1,0x10(v1)                            89a10:    sw      a1,0x10(v1)              
+89a14: [31m~>[39m li      v0,-1                                  89a14: [31m~>[39m li      v0,-1                    
+89a18:    lw      ra,0x30(sp)                            89a18:    lw      ra,0x30(sp)              
+89a1c:    lw      s3,0x2c(sp)                            89a1c:    lw      s3,0x2c(sp)              
+89a20:    lw      s2,0x28(sp)                            89a20:    lw      s2,0x28(sp)              
+89a24:    lw      s1,0x24(sp)                            89a24:    lw      s1,0x24(sp)              
+89a28:    lw      s0,0x20(sp)                            89a28:    lw      s0,0x20(sp)              
+89a2c:    addiu   sp,sp,0x38                             89a2c:    addiu   sp,sp,0x38               
+89a30:    jr      ra                                     89a30:    jr      ra                       
+89a34:    nop                                            89a34:    nop                              
+89a38:    move    a3,a0                                  89a38:    move    a3,a0                    
+89a3c:    slti    v0,a2,8                                89a3c:    slti    v0,a2,8                  
+89a40:    beqz    v0,89b8c [95m~>[39m                            89a40:    beqz    v0,89b8c [95m~>[39m              
+89a44:    move    t6,a1                                  89a44:    move    t6,a1                    
+89a48:    move    t5,zero                                89a48:    move    t5,zero                  
+89a4c:    sll     v1,a2,0x1                              89a4c:    sll     v1,a2,0x1                
+89a50:    addu    v1,v1,a2                               89a50:    addu    v1,v1,a2                 
+89a54:    addiu   a0,v1,2                                89a54:    addiu   a0,v1,2                  
+89a58:    sll     v0,a0,0x1                              89a58:    sll     v0,a0,0x1                
+89a5c:    addu    v0,v0,a0                               89a5c:    addu    v0,v0,a0                 
+89a60:    sll     v0,v0,0x2                              89a60:    sll     v0,v0,0x2                
+89a64:    subu    v0,v0,a0                               89a64:    subu    v0,v0,a0                 
+89a68:    sll     t4,v0,0x2                              89a68:    sll     t4,v0,0x2                
+89a6c:    addiu   v1,v1,1                                89a6c:    addiu   v1,v1,1                  
+89a70:    sll     v0,v1,0x1                              89a70:    sll     v0,v1,0x1                
+89a74:    addu    v0,v0,v1                               89a74:    addu    v0,v0,v1                 
+89a78:    sll     v0,v0,0x2                              89a78:    sll     v0,v0,0x2                
+89a7c:    subu    v0,v0,v1                               89a7c:    subu    v0,v0,v1                 
+89a80:    sll     t3,v0,0x2                              89a80:    sll     t3,v0,0x2                
+89a84:    sll     v0,a2,0x5                              89a84:    sll     v0,a2,0x5                
+89a88:    addu    v0,v0,a2                               89a88:    addu    v0,v0,a2                 
+89a8c:    sll     t2,v0,0x2                              89a8c:    sll     t2,v0,0x2                
+89a90:    move    t1,a3                                  89a90:    move    t1,a3                    
+89a94: [96m~>[39m lw      t0,0x10(t1)                            89a94: [96m~>[39m lw      t0,0x10(t1)              
+89a98:    sll     a2,t0,0x1c                             89a98:    sll     a2,t0,0x1c               
+89a9c:    lw      t0,0x3c(t1)                            89a9c:    lw      t0,0x3c(t1)              
+89aa0:    sll     v1,t0,0x18                             89aa0:    sll     v1,t0,0x18               
+89aa4:    lw      t0,0x68(t1)                            89aa4:    lw      t0,0x68(t1)              
+89aa8:    sll     v0,t0,0x14                             89aa8:    sll     v0,t0,0x14               
+89aac:    lw      t0,0x94(t1)                            89aac:    lw      t0,0x94(t1)              
+89ab0:    sll     a1,t0,0x10                             89ab0:    sll     a1,t0,0x10               
+89ab4:    lw      t0,0xc0(t1)                            89ab4:    lw      t0,0xc0(t1)              
+89ab8:    or      a2,a2,v1                               89ab8:    or      a2,a2,v1                 
+89abc:    sll     a0,t0,0xc                              89abc:    sll     a0,t0,0xc                
+89ac0:    lw      t0,0xec(t1)                            89ac0:    lw      t0,0xec(t1)              
+89ac4:    or      a2,a2,v0                               89ac4:    or      a2,a2,v0                 
+89ac8:    or      a2,a2,a1                               89ac8:    or      a2,a2,a1                 
+89acc:    sll     v1,t0,0x8                              89acc:    sll     v1,t0,0x8                
+89ad0:    lw      t0,0x118(t1)                           89ad0:    lw      t0,0x118(t1)             
+89ad4:    or      a2,a2,a0                               89ad4:    or      a2,a2,a0                 
+89ad8:    or      a2,a2,v1                               89ad8:    or      a2,a2,v1                 
+89adc:    sll     v0,t0,0x4                              89adc:    sll     v0,t0,0x4                
+89ae0:    lw      t0,0x144(t1)                           89ae0:    lw      t0,0x144(t1)             
+89ae4:    or      a2,a2,v0                               89ae4:    or      a2,a2,v0                 
+89ae8:    addu    v0,t6,t2                               89ae8:    addu    v0,t6,t2                 
+89aec:    or      a2,a2,t0                               89aec:    or      a2,a2,t0                 
+89af0:    sw      a2,0x10(v0)                            89af0:    sw      a2,0x10(v0)              
+89af4:    lw      t0,0x170(t1)                           89af4:    lw      t0,0x170(t1)             
+89af8:    sll     a2,t0,0x1c                             89af8:    sll     a2,t0,0x1c               
+89afc:    lw      t0,0x19c(t1)                           89afc:    lw      t0,0x19c(t1)             
+89b00:    sll     a0,t0,0x18                             89b00:    sll     a0,t0,0x18               
+89b04:    lw      t0,0x1c8(t1)                           89b04:    lw      t0,0x1c8(t1)             
+89b08:    sll     v1,t0,0x14                             89b08:    sll     v1,t0,0x14               
+89b0c:    lw      t0,0x1f4(t1)                           89b0c:    lw      t0,0x1f4(t1)             
+89b10:    addu    a3,t6,t4                               89b10:    addu    a3,t6,t4                 
+89b14:    sll     a1,t0,0x10                             89b14:    sll     a1,t0,0x10               
+89b18:    lw      t0,0x220(t1)                           89b18:    lw      t0,0x220(t1)             
+89b1c:    addiu   t4,t4,0x318                            89b1c:    addiu   t4,t4,0x318              
+89b20:    or      a2,a2,a0                               89b20:    or      a2,a2,a0                 
+89b24:    sll     v0,t0,0xc                              89b24:    sll     v0,t0,0xc                
+89b28:    lw      t0,0x24c(t1)                           89b28:    lw      t0,0x24c(t1)             
+89b2c:    or      a2,a2,v1                               89b2c:    or      a2,a2,v1                 
+89b30:    or      a2,a2,a1                               89b30:    or      a2,a2,a1                 
+89b34:    sll     v1,t0,0x8                              89b34:    sll     v1,t0,0x8                
+89b38:    lw      t0,0x278(t1)                           89b38:    lw      t0,0x278(t1)             
+89b3c:    or      a2,a2,v0                               89b3c:    or      a2,a2,v0                 
+89b40:    or      a2,a2,v1                               89b40:    or      a2,a2,v1                 
+89b44:    sll     v0,t0,0x4                              89b44:    sll     v0,t0,0x4                
+89b48:    lw      t0,0x2a4(t1)                           89b48:    lw      t0,0x2a4(t1)             
+89b4c:    or      a2,a2,v0                               89b4c:    or      a2,a2,v0                 
+89b50:    addu    v0,t6,t3                               89b50:    addu    v0,t6,t3                 
+89b54:    or      a2,a2,t0                               89b54:    or      a2,a2,t0                 
+89b58:    sw      a2,0x10(v0)                            89b58:    sw      a2,0x10(v0)              
+89b5c:    lw      t0,0x2d0(t1)                           89b5c:    lw      t0,0x2d0(t1)             
+89b60:    addiu   t5,t5,1                                89b60:    addiu   t5,t5,1                  
+89b64:    addiu   t2,t2,0x318                            89b64:    addiu   t2,t2,0x318              
+89b68:    sll     v1,t0,0x1c                             89b68:    sll     v1,t0,0x1c               
+89b6c:    lw      t0,0x2fc(t1)                           89b6c:    lw      t0,0x2fc(t1)             
+89b70:    addiu   t3,t3,0x318                            89b70:    addiu   t3,t3,0x318              
+89b74:    addiu   t1,t1,0x318                            89b74:    addiu   t1,t1,0x318              
+89b78:    sll     v0,t0,0x18                             89b78:    sll     v0,t0,0x18               
+89b7c:    or      a2,v1,v0                               89b7c:    or      a2,v1,v0                 
+89b80:    slti    v0,t5,0xc                              89b80:    slti    v0,t5,0xc                
+89b84:    bnez    v0,89a94 [96m~>[39m                            89b84:    bnez    v0,89a94 [96m~>[39m              
+89b88:    sw      a2,0x10(a3)                            89b88:    sw      a2,0x10(a3)              
+89b8c: [95m~>[39m jr      ra                                     89b8c: [95m~>[39m jr      ra                       
+89b90:    nop                                            89b90:    nop                              
+89b94:    slti    v0,a2,8                                89b94:    slti    v0,a2,8                  
+89b98:    beqz    v0,89d00 [92m~>[39m                            89b98:    beqz    v0,89d00 [92m~>[39m              
+89b9c:    move    a3,a0                                  89b9c:    move    a3,a0                    
+89ba0:    move    t2,zero                                89ba0:    move    t2,zero                  
+89ba4:    lui     t4,0xf000                              89ba4:    lui     t4,0xf000                
+89ba8:    lui     t3,0xf00                               89ba8:    lui     t3,0xf00                 
+89bac:    lui     t6,0xf0                                89bac:    lui     t6,0xf0                  
+89bb0:    lui     t5,0xf                                 89bb0:    lui     t5,0xf                   
+89bb4:    sll     v1,a2,0x1                              89bb4:    sll     v1,a2,0x1                
+89bb8:    addu    v1,v1,a2                               89bb8:    addu    v1,v1,a2                 
+89bbc:    addiu   a0,v1,2                                89bbc:    addiu   a0,v1,2                  
+89bc0:    sll     v0,a0,0x1                              89bc0:    sll     v0,a0,0x1                
+89bc4:    addu    v0,v0,a0                               89bc4:    addu    v0,v0,a0                 
+89bc8:    sll     v0,v0,0x2                              89bc8:    sll     v0,v0,0x2                
+89bcc:    subu    v0,v0,a0                               89bcc:    subu    v0,v0,a0                 
+89bd0:    sll     t1,v0,0x2                              89bd0:    sll     t1,v0,0x2                
+89bd4:    addiu   v1,v1,1                                89bd4:    addiu   v1,v1,1                  
+89bd8:    sll     v0,v1,0x1                              89bd8:    sll     v0,v1,0x1                
+89bdc:    addu    v0,v0,v1                               89bdc:    addu    v0,v0,v1                 
+89be0:    sll     v0,v0,0x2                              89be0:    sll     v0,v0,0x2                
+89be4:    subu    v0,v0,v1                               89be4:    subu    v0,v0,v1                 
+89be8:    sll     t0,v0,0x2                              89be8:    sll     t0,v0,0x2                
+89bec:    move    a0,a3                                  89bec:    move    a0,a3                    
+89bf0:    sll     v0,a2,0x5                              89bf0:    sll     v0,a2,0x5                
+89bf4:    addu    v0,v0,a2                               89bf4:    addu    v0,v0,a2                 
+89bf8:    sll     a3,v0,0x2                              89bf8:    sll     a3,v0,0x2                
+89bfc: [90m~>[39m addu    v0,a1,a3                               89bfc: [90m~>[39m addu    v0,a1,a3                 
+89c00:    lw      a2,0x10(v0)                            89c00:    lw      a2,0x10(v0)              
+89c04:    addu    v1,a1,t1                               89c04:    addu    v1,a1,t1                 
+89c08:    and     v0,a2,t4                               89c08:    and     v0,a2,t4                 
+89c0c:    srl     v0,v0,0x1c                             89c0c:    srl     v0,v0,0x1c               
+89c10:    sw      v0,0x10(a0)                            89c10:    sw      v0,0x10(a0)              
+89c14:    and     v0,a2,t3                               89c14:    and     v0,a2,t3                 
+89c18:    sra     v0,v0,0x18                             89c18:    sra     v0,v0,0x18               
+89c1c:    sw      v0,0x3c(a0)                            89c1c:    sw      v0,0x3c(a0)              
+89c20:    and     v0,a2,t6                               89c20:    and     v0,a2,t6                 
+89c24:    sra     v0,v0,0x14                             89c24:    sra     v0,v0,0x14               
+89c28:    sw      v0,0x68(a0)                            89c28:    sw      v0,0x68(a0)              
+89c2c:    and     v0,a2,t5                               89c2c:    and     v0,a2,t5                 
+89c30:    sra     v0,v0,0x10                             89c30:    sra     v0,v0,0x10               
+89c34:    sw      v0,0x94(a0)                            89c34:    sw      v0,0x94(a0)              
+89c38:    andi    v0,a2,0xf000                           89c38:    andi    v0,a2,0xf000             
+89c3c:    sra     v0,v0,0xc                              89c3c:    sra     v0,v0,0xc                
+89c40:    sw      v0,0xc0(a0)                            89c40:    sw      v0,0xc0(a0)              
+89c44:    andi    v0,a2,0xf00                            89c44:    andi    v0,a2,0xf00              
+89c48:    sra     v0,v0,0x8                              89c48:    sra     v0,v0,0x8                
+89c4c:    sw      v0,0xec(a0)                            89c4c:    sw      v0,0xec(a0)              
+89c50:    andi    v0,a2,0xf0                             89c50:    andi    v0,a2,0xf0               
+89c54:    sra     v0,v0,0x4                              89c54:    sra     v0,v0,0x4                
+89c58:    sw      v0,0x118(a0)                           89c58:    sw      v0,0x118(a0)             
+89c5c:    andi    v0,a2,0xf                              89c5c:    andi    v0,a2,0xf                
+89c60:    sw      v0,0x144(a0)                           89c60:    sw      v0,0x144(a0)             
+89c64:    addu    v0,a1,t0                               89c64:    addu    v0,a1,t0                 
+89c68:    lw      a2,0x10(v0)                            89c68:    lw      a2,0x10(v0)              
+89c6c:    addiu   t1,t1,0x318                            89c6c:    addiu   t1,t1,0x318              
+89c70:    addiu   a3,a3,0x318                            89c70:    addiu   a3,a3,0x318              
+89c74:    and     v0,a2,t4                               89c74:    and     v0,a2,t4                 
+89c78:    srl     v0,v0,0x1c                             89c78:    srl     v0,v0,0x1c               
+89c7c:    sw      v0,0x170(a0)                           89c7c:    sw      v0,0x170(a0)             
+89c80:    and     v0,a2,t3                               89c80:    and     v0,a2,t3                 
+89c84:    sra     v0,v0,0x18                             89c84:    sra     v0,v0,0x18               
+89c88:    sw      v0,0x19c(a0)                           89c88:    sw      v0,0x19c(a0)             
+89c8c:    and     v0,a2,t6                               89c8c:    and     v0,a2,t6                 
+89c90:    sra     v0,v0,0x14                             89c90:    sra     v0,v0,0x14               
+89c94:    sw      v0,0x1c8(a0)                           89c94:    sw      v0,0x1c8(a0)             
+89c98:    and     v0,a2,t5                               89c98:    and     v0,a2,t5                 
+89c9c:    sra     v0,v0,0x10                             89c9c:    sra     v0,v0,0x10               
+89ca0:    sw      v0,0x1f4(a0)                           89ca0:    sw      v0,0x1f4(a0)             
+89ca4:    andi    v0,a2,0xf000                           89ca4:    andi    v0,a2,0xf000             
+89ca8:    sra     v0,v0,0xc                              89ca8:    sra     v0,v0,0xc                
+89cac:    sw      v0,0x220(a0)                           89cac:    sw      v0,0x220(a0)             
+89cb0:    andi    v0,a2,0xf00                            89cb0:    andi    v0,a2,0xf00              
+89cb4:    sra     v0,v0,0x8                              89cb4:    sra     v0,v0,0x8                
+89cb8:    sw      v0,0x24c(a0)                           89cb8:    sw      v0,0x24c(a0)             
+89cbc:    andi    v0,a2,0xf0                             89cbc:    andi    v0,a2,0xf0               
+89cc0:    sra     v0,v0,0x4                              89cc0:    sra     v0,v0,0x4                
+89cc4:    sw      v0,0x278(a0)                           89cc4:    sw      v0,0x278(a0)             
+89cc8:    andi    v0,a2,0xf                              89cc8:    andi    v0,a2,0xf                
+89ccc:    sw      v0,0x2a4(a0)                           89ccc:    sw      v0,0x2a4(a0)             
+89cd0:    lw      a2,0x10(v1)                            89cd0:    lw      a2,0x10(v1)              
+89cd4:    addiu   t2,t2,1                                89cd4:    addiu   t2,t2,1                  
+89cd8:    addiu   t0,t0,0x318                            89cd8:    addiu   t0,t0,0x318              
+89cdc:    and     v0,a2,t4                               89cdc:    and     v0,a2,t4                 
+89ce0:    srl     v0,v0,0x1c                             89ce0:    srl     v0,v0,0x1c               
+89ce4:    sw      v0,0x2d0(a0)                           89ce4:    sw      v0,0x2d0(a0)             
+89ce8:    and     v0,a2,t3                               89ce8:    and     v0,a2,t3                 
+89cec:    sra     v0,v0,0x18                             89cec:    sra     v0,v0,0x18               
+89cf0:    sw      v0,0x2fc(a0)                           89cf0:    sw      v0,0x2fc(a0)             
+89cf4:    slti    v0,t2,0xc                              89cf4:    slti    v0,t2,0xc                
+89cf8:    bnez    v0,89bfc [90m~>[39m                            89cf8:    bnez    v0,89bfc [90m~>[39m              
+89cfc:    addiu   a0,a0,0x318                            89cfc:    addiu   a0,a0,0x318              
+89d00: [92m~>[39m jr      ra                                     89d00: [92m~>[39m jr      ra                       
+89d04:    nop                                            89d04:    nop                              
+89d08:    addiu   a0,a0,-1                               89d08:    addiu   a0,a0,-1                 
+89d0c:    sll     v0,a0,0x3                              89d0c:    sll     v0,a0,0x3                
+89d10:    subu    v0,v0,a0                               89d10:    subu    v0,v0,a0                 
+89d14:    sll     v0,v0,0x3                              89d14:    sll     v0,v0,0x3                
+89d18:    lui     v1,0x8022                              89d18:    lui     v1,0x8022                
+89d1c:    lw      v1,-0x415c(v1)                         89d1c:    lw      v1,-0x415c(v1)           
+89d20:    subu    v0,v0,a0                               89d20:    subu    v0,v0,a0                 
+89d24:    sll     v0,v0,0x1                              89d24:    sll     v0,v0,0x1                
+89d28:    addu    v0,v0,v1                               89d28:    addu    v0,v0,v1                 
+89d2c:    lbu     v0,0x121(v0)                           89d2c:    lbu     v0,0x121(v0)             
+89d30:    sltu    v0,zero,v0                             89d30:    sltu    v0,zero,v0               
+89d34:    jr      ra                                     89d34:    jr      ra                       
+89d38:    negu    v0,v0                                  89d38:    negu    v0,v0                    
+89d3c:    addiu   sp,sp,-0x20                            89d3c:    addiu   sp,sp,-0x20              
+89d40:    move    a1,a0                                  89d40:    move    a1,a0                    
+89d44:    sw      s1,0x14(sp)                            89d44:    sw      s1,0x14(sp)              
+89d48:    lui     s1,0x801a                              89d48:    lui     s1,0x801a                
+89d4c:    addiu   s1,s1,-0x2e90                          89d4c:    addiu   s1,s1,-0x2e90            
+89d50:    addiu   v1,a1,-1                               89d50:    addiu   v1,a1,-1                 
+89d54:    sll     v0,v1,0x3                              89d54:    sll     v0,v1,0x3                
+89d58:    subu    v0,v0,v1                               89d58:    subu    v0,v0,v1                 
+89d5c:    sll     v0,v0,0x3                              89d5c:    sll     v0,v0,0x3                
+89d60:    subu    v0,v0,v1                               89d60:    subu    v0,v0,v1                 
+89d64:    lui     a0,0x8022                              89d64:    lui     a0,0x8022                
+89d68:    lw      a0,-0x415c(a0)                         89d68:    lw      a0,-0x415c(a0)           
+89d6c:    sll     v0,v0,0x1                              89d6c:    sll     v0,v0,0x1                
+89d70:    lui     a2,0x801a                              89d70:    lui     a2,0x801a                
+89d74:    addiu   a2,a2,0x6da0                           89d74:    addiu   a2,a2,0x6da0             
+89d78:    sw      ra,0x18(sp)                            89d78:    sw      ra,0x18(sp)              
+89d7c:    sw      s0,0x10(sp)                            89d7c:    sw      s0,0x10(sp)              
+89d80:    lw      v1,0(a2)                               89d80:    lw      v1,0(a2)                 
+89d84:    addiu   v0,v0,0x121                            89d84:    addiu   v0,v0,0x121              
+89d88:    bnez    v1,89dac [35m~>[39m                            89d88:    bnez    v1,89dac [35m~>[39m              
+89d8c:    addu    s0,a0,v0                               89d8c:    addu    s0,a0,v0                 
+89d90:    lui     v0,0x8022                              89d90:    lui     v0,0x8022                
+89d94:    lw      v0,-0x415c(v0)                         89d94:    lw      v0,-0x415c(v0)           
+89d98:    addu    v0,v0,a1                               89d98:    addu    v0,v0,a1                 
+89d9c:    lbu     v0,0x792(v0)                           89d9c:    lbu     v0,0x792(v0)             
+89da0:    sw      v0,0(a2)                               89da0:    sw      v0,0(a2)                 
+89da4:    lui     at,0x801a                              89da4:    lui     at,0x801a                
+89da8:    sw      v0,0x1598(at)                          89da8:    sw      v0,0x1598(at)            
+89dac: [35m~>[39m move    a0,s1                                  89dac: [35m~>[39m move    a0,s1                    
+89db0:    jal     6b314                                  89db0:    jal     6b314                    
+89db4:    move    a1,zero                                89db4:    move    a1,zero                  
+89db8:    move    a0,s1                                  89db8:    move    a0,s1                    
+89dbc:    lui     a1,0x801a                              89dbc:    lui     a1,0x801a                
+89dc0:    addiu   a1,a1,0x59d0                           89dc0:    addiu   a1,a1,0x59d0             
+89dc4:    move    a2,s0                                  89dc4:    move    a2,s0                    
+89dc8:    jal     88ab4                                  89dc8:    jal     88ab4                    
+89dcc:    li      a3,1                                   89dcc:    li      a3,1                     
+89dd0:    bnez    v0,89de8 [36m~>[39m                            89dd0:    bnez    v0,89de8 [36m~>[39m              
+89dd4:    li      v0,-1                                  89dd4:    li      v0,-1                    
+89dd8:    move    a0,s1                                  89dd8:    move    a0,s1                    
+89ddc:    jal     6b314                                  89ddc:    jal     6b314                    
+89de0:    move    a1,zero                                89de0:    move    a1,zero                  
+89de4:    move    v0,zero                                89de4:    move    v0,zero                  
+89de8: [36m~>[39m lw      ra,0x18(sp)                            89de8: [36m~>[39m lw      ra,0x18(sp)              
+89dec:    lw      s1,0x14(sp)                            89dec:    lw      s1,0x14(sp)              
+89df0:    lw      s0,0x10(sp)                            89df0:    lw      s0,0x10(sp)              
+89df4:    addiu   sp,sp,0x20                             89df4:    addiu   sp,sp,0x20               
+89df8:    jr      ra                                     89df8:    jr      ra                       
+89dfc:    nop                                            89dfc:    nop                              
+89e00:    lui     v0,0x801a                              89e00:    lui     v0,0x801a                
+89e04:    lw      v0,0x59f8(v0)                          89e04:    lw      v0,0x59f8(v0)            
+89e08:    addiu   sp,sp,-0x18                            89e08:    addiu   sp,sp,-0x18              
+89e0c:    addiu   v0,v0,-1                               89e0c:    addiu   v0,v0,-1                 
+89e10:    sltiu   v0,v0,5                                89e10:    sltiu   v0,v0,5                  
+89e14:    beqz    v0,89e78 [32m~>[39m                            89e14:    beqz    v0,89e78 [32m~>[39m              
+89e18:    sw      ra,0x10(sp)                            89e18:    sw      ra,0x10(sp)              
+89e1c:    lui     a3,0x8022                              89e1c:    lui     a3,0x8022                
+89e20:    lw      a3,-0x415c(a3)                         89e20:    lw      a3,-0x415c(a3)           
+89e24:    lui     v0,0x8022                              89e24:    lui     v0,0x8022                
+89e28:    lw      v0,-0x415c(v0)                         89e28:    lw      v0,-0x415c(v0)           
+89e2c:    lui     v1,0x801a                              89e2c:    lui     v1,0x801a                
+89e30:    lw      v1,0x6da0(v1)                          89e30:    lw      v1,0x6da0(v1)            
+89e34:    lui     a1,0x801a                              89e34:    lui     a1,0x801a                
+89e38:    addiu   a1,a1,0x59d0                           89e38:    addiu   a1,a1,0x59d0             
+89e3c:    addu    v0,v0,a0                               89e3c:    addu    v0,v0,a0                 
+89e40:    sb      v1,0x792(v0)                           89e40:    sb      v1,0x792(v0)             
+89e44:    addiu   v0,a0,-1                               89e44:    addiu   v0,a0,-1                 
+89e48:    sll     a2,v0,0x3                              89e48:    sll     a2,v0,0x3                
+89e4c:    subu    a2,a2,v0                               89e4c:    subu    a2,a2,v0                 
+89e50:    sll     a2,a2,0x3                              89e50:    sll     a2,a2,0x3                
+89e54:    subu    a2,a2,v0                               89e54:    subu    a2,a2,v0                 
+89e58:    sll     a2,a2,0x1                              89e58:    sll     a2,a2,0x1                
+89e5c:    addiu   a2,a2,0x121                            89e5c:    addiu   a2,a2,0x121              
+89e60:    lui     a0,0x801a                              89e60:    lui     a0,0x801a                
+89e64:    addiu   a0,a0,-0x2e90                          89e64:    addiu   a0,a0,-0x2e90            
+89e68:    jal     88c08                                  89e68:    jal     88c08                    
+89e6c:    addu    a2,a3,a2                               89e6c:    addu    a2,a3,a2                 
+89e70:    j       8927c                                  89e70:    j       8927c                    
+89e74:    nop                                            89e74:    nop                              
+89e78: [32m~>[39m move    v0,zero                                89e78: [32m~>[39m move    v0,zero                  
+89e7c:    lw      ra,0x10(sp)                            89e7c:    lw      ra,0x10(sp)              
+89e80:    addiu   sp,sp,0x18                             89e80:    addiu   sp,sp,0x18               
+89e84:    jr      ra                                     89e84:    jr      ra                       
+89e88:    nop                                            89e88:    nop                              
+89e8c:    addiu   sp,sp,-0x20                            89e8c:    addiu   sp,sp,-0x20              
+89e90:    sw      s0,0x10(sp)                            89e90:    sw      s0,0x10(sp)              
+89e94:    move    s0,a0                                  89e94:    move    s0,a0                    
+89e98:    sw      s1,0x14(sp)                            89e98:    sw      s1,0x14(sp)              
+89e9c:    lui     s1,0x801a                              89e9c:    lui     s1,0x801a                
+89ea0:    addiu   s1,s1,-0x2e90                          89ea0:    addiu   s1,s1,-0x2e90            
+89ea4:    move    a0,s1                                  89ea4:    move    a0,s1                    
+89ea8:    sw      ra,0x18(sp)                            89ea8:    sw      ra,0x18(sp)              
+89eac:    jal     6b314                                  89eac:    jal     6b314                    
+89eb0:    move    a1,zero                                89eb0:    move    a1,zero                  
+89eb4:    move    a0,s1                                  89eb4:    move    a0,s1                    
+89eb8:    lui     v0,0x8022                              89eb8:    lui     v0,0x8022                
+89ebc:    lw      v0,-0x415c(v0)                         89ebc:    lw      v0,-0x415c(v0)           
+89ec0:    lui     v1,0x8022                              89ec0:    lui     v1,0x8022                
+89ec4:    lw      v1,-0x415c(v1)                         89ec4:    lw      v1,-0x415c(v1)           
+89ec8:    lui     a1,0x801a                              89ec8:    lui     a1,0x801a                
+89ecc:    addiu   a1,a1,0x59d0                           89ecc:    addiu   a1,a1,0x59d0             
+89ed0:    addu    v0,v0,s0                               89ed0:    addu    v0,v0,s0                 
+89ed4:    addiu   s0,s0,-1                               89ed4:    addiu   s0,s0,-1                 
+89ed8:    sll     a2,s0,0x3                              89ed8:    sll     a2,s0,0x3                
+89edc:    subu    a2,a2,s0                               89edc:    subu    a2,a2,s0                 
+89ee0:    sll     a2,a2,0x3                              89ee0:    sll     a2,a2,0x3                
+89ee4:    subu    a2,a2,s0                               89ee4:    subu    a2,a2,s0                 
+89ee8:    sll     a2,a2,0x1                              89ee8:    sll     a2,a2,0x1                
+89eec:    addiu   a2,a2,0x121                            89eec:    addiu   a2,a2,0x121              
+89ef0:    addu    a2,v1,a2                               89ef0:    addu    a2,v1,a2                 
+89ef4:    jal     88c08                                  89ef4:    jal     88c08                    
+89ef8:    sb      zero,0x792(v0)                         89ef8:    sb      zero,0x792(v0)           
+89efc:    li      v0,-1                                  89efc:    li      v0,-1                    
+89f00:    lw      ra,0x18(sp)                            89f00:    lw      ra,0x18(sp)              
+89f04:    lw      s1,0x14(sp)                            89f04:    lw      s1,0x14(sp)              
+89f08:    lw      s0,0x10(sp)                            89f08:    lw      s0,0x10(sp)              
+89f0c:    addiu   sp,sp,0x20                             89f0c:    addiu   sp,sp,0x20               
+89f10:    jr      ra                                     89f10:    jr      ra                       
+89f14:    nop                                            89f14:    nop                              
+89f18:    addiu   sp,sp,-0x18                            89f18:    addiu   sp,sp,-0x18              
+89f1c:    sw      ra,0x10(sp)                            89f1c:    sw      ra,0x10(sp)              
+89f20:    jal     89e6c                                  89f20:    jal     89e6c                    
+89f24:    nop                                            89f24:    nop                              
+89f28:    lw      ra,0x10(sp)                            89f28:    lw      ra,0x10(sp)              
+89f2c:    addiu   sp,sp,0x18                             89f2c:    addiu   sp,sp,0x18               
+89f30:    jr      ra                                     89f30:    jr      ra                       
+89f34:    nop                                            89f34:    nop                              
+89f38:    addiu   sp,sp,-0x18                            89f38:    addiu   sp,sp,-0x18              
+89f3c:    sw      s0,0x10(sp)                            89f3c:    sw      s0,0x10(sp)              
+89f40:    lui     s0,0x801a                              89f40:    lui     s0,0x801a                
+89f44:    addiu   s0,s0,-0x2e90                          89f44:    addiu   s0,s0,-0x2e90            
+89f48:    move    a0,s0                                  89f48:    move    a0,s0                    
+89f4c:    sw      ra,0x14(sp)                            89f4c:    sw      ra,0x14(sp)              
+89f50:    jal     6b544                                  89f50:    jal     6b544                    
+89f54:    li      a1,-1                                  89f54:    li      a1,-1                    
+89f58:    move    a0,s0                                  89f58:    move    a0,s0                    
+89f5c:    move    a1,zero                                89f5c:    move    a1,zero                  
+89f60:    jal     4f70c                                  89f60:    jal     4f70c                    
+89f64:    move    a2,zero                                89f64:    move    a2,zero                  
+89f68:    lw      ra,0x14(sp)                            89f68:    lw      ra,0x14(sp)              
+89f6c:    lw      s0,0x10(sp)                            89f6c:    lw      s0,0x10(sp)              
+89f70:    addiu   sp,sp,0x18                             89f70:    addiu   sp,sp,0x18               
+89f74:    jr      ra                                     89f74:    jr      ra                       
+89f78:    nop                                            89f78:    nop                              
+89f7c:    lui     v0,0x801c                              89f7c:    lui     v0,0x801c                
+89f80:    lw      v0,0x6e54(v0)                          89f80:    lw      v0,0x6e54(v0)            
+89f84:    addiu   sp,sp,-0x30                            89f84:    addiu   sp,sp,-0x30              
+89f88:    sw      s1,0x14(sp)                            89f88:    sw      s1,0x14(sp)              
+89f8c:    move    s1,a0                                  89f8c:    move    s1,a0                    
+89f90:    sw      s5,0x24(sp)                            89f90:    sw      s5,0x24(sp)              
+89f94:    lui     s5,0x50                                89f94:    lui     s5,0x50                  
+89f98:    ori     s5,s5,0x3bc                            89f98:    ori     s5,s5,0x3bc              
+89f9c:    sw      ra,0x28(sp)                            89f9c:    sw      ra,0x28(sp)              
+89fa0:    sw      s4,0x20(sp)                            89fa0:    sw      s4,0x20(sp)              
+89fa4:    sw      s3,0x1c(sp)                            89fa4:    sw      s3,0x1c(sp)              
+89fa8:    sw      s2,0x18(sp)                            89fa8:    sw      s2,0x18(sp)              
+89fac:    sw      s0,0x10(sp)                            89fac:    sw      s0,0x10(sp)              
+89fb0:    lw      a0,0(v0)                               89fb0:    lw      a0,0(v0)                 
+89fb4:    lui     s2,0xba00                              89fb4:    lui     s2,0xba00                
+89fb8:    jal     59fc4                                  89fb8:    jal     59fc4                    
+89fbc:    ori     s2,s2,0x1402                           89fbc:    ori     s2,s2,0x1402             
+89fc0:    lui     a0,0x1                                 89fc0:    lui     a0,0x1                   
+89fc4:    ori     a0,a0,0x1                              89fc4:    ori     a0,a0,0x1                
+89fc8:    lui     v0,0x8022                              89fc8:    lui     v0,0x8022                
+89fcc:    lw      v0,-0x4154(v0)                         89fcc:    lw      v0,-0x4154(v0)           
+89fd0:    lui     a1,0xf64f                              89fd0:    lui     a1,0xf64f                
+89fd4:    ori     a1,a1,0xc018                           89fd4:    ori     a1,a1,0xc018             
+89fd8:    lui     s0,0xe700                              89fd8:    lui     s0,0xe700                
+89fdc:    lui     s4,0x30                                89fdc:    lui     s4,0x30                  
+89fe0:    lui     s3,0xf700                              89fe0:    lui     s3,0xf700                
+89fe4:    addiu   v1,v0,8                                89fe4:    addiu   v1,v0,8                  
+89fe8:    lui     at,0x8022                              89fe8:    lui     at,0x8022                
+89fec:    sw      v1,-0x4154(at)                         89fec:    sw      v1,-0x4154(at)           
+89ff0:    lui     v1,0xed00                              89ff0:    lui     v1,0xed00                
+89ff4:    sw      v1,0(v0)                               89ff4:    sw      v1,0(v0)                 
+89ff8:    addiu   v1,v0,0x10                             89ff8:    addiu   v1,v0,0x10               
+89ffc:    lui     at,0x8022                              89ffc:    lui     at,0x8022                
+8a000:    sw      v1,-0x4154(at)                         8a000:    sw      v1,-0x4154(at)           
+8a004:    addiu   v1,v0,0x18                             8a004:    addiu   v1,v0,0x18               
+8a008:    lui     at,0x8022                              8a008:    lui     at,0x8022                
+8a00c:    sw      v1,-0x4154(at)                         8a00c:    sw      v1,-0x4154(at)           
+8a010:    addiu   v1,v0,0x20                             8a010:    addiu   v1,v0,0x20               
+8a014:    lui     at,0x8022                              8a014:    lui     at,0x8022                
+8a018:    sw      v1,-0x4154(at)                         8a018:    sw      v1,-0x4154(at)           
+8a01c:    addiu   v1,v0,0x28                             8a01c:    addiu   v1,v0,0x28               
+8a020:    lui     at,0x8022                              8a020:    lui     at,0x8022                
+8a024:    sw      v1,-0x4154(at)                         8a024:    sw      v1,-0x4154(at)           
+8a028:    addiu   v1,v0,0x30                             8a028:    addiu   v1,v0,0x30               
+8a02c:    lui     at,0x8022                              8a02c:    lui     at,0x8022                
+8a030:    sw      v1,-0x4154(at)                         8a030:    sw      v1,-0x4154(at)           
+8a034:    addiu   v1,v0,0x38                             8a034:    addiu   v1,v0,0x38               
+8a038:    sw      s5,4(v0)                               8a038:    sw      s5,4(v0)                 
+8a03c:    sw      s0,8(v0)                               8a03c:    sw      s0,8(v0)                 
+8a040:    sw      zero,0xc(v0)                           8a040:    sw      zero,0xc(v0)             
+8a044:    sw      s2,0x10(v0)                            8a044:    sw      s2,0x10(v0)              
+8a048:    sw      s4,0x14(v0)                            8a048:    sw      s4,0x14(v0)              
+8a04c:    sw      s3,0x18(v0)                            8a04c:    sw      s3,0x18(v0)              
+8a050:    sw      a0,0x1c(v0)                            8a050:    sw      a0,0x1c(v0)              
+8a054:    sw      a1,0x20(v0)                            8a054:    sw      a1,0x20(v0)              
+8a058:    sw      zero,0x24(v0)                          8a058:    sw      zero,0x24(v0)            
+8a05c:    sw      s0,0x28(v0)                            8a05c:    sw      s0,0x28(v0)              
+8a060:    sw      zero,0x2c(v0)                          8a060:    sw      zero,0x2c(v0)            
+8a064:    lui     at,0x8022                              8a064:    lui     at,0x8022                
+8a068:    sw      v1,-0x4154(at)                         8a068:    sw      v1,-0x4154(at)           
+8a06c:    sw      s2,0x30(v0)                            8a06c:    sw      s2,0x30(v0)              
+8a070:    jal     4879c                                  8a070:    jal     4879c                    
+8a074:    sw      zero,0x34(v0)                          8a074:    sw      zero,0x34(v0)            
+8a078:    move    a0,s1                                  8a078:    move    a0,s1                    
+8a07c:    li      a1,1                                   8a07c:    li      a1,1                     
+8a080:    jal     4eb5c                                  8a080:    jal     4eb5c                    
+8a084:    li      a2,3                                   8a084:    li      a2,3                     
+8a088:    li      v0,0x8c                                8a088:    li      v0,0x8c                  
+8a08c:    lui     at,0x801c                              8a08c:    lui     at,0x801c                
+8a090:    sh      v0,0x6ca4(at)                          8a090:    sh      v0,0x6ca4(at)            
+8a094:    jal     49010                                  8a094:    jal     49010                    
+8a098:    nop                                            8a098:    nop                              
+8a09c:    lui     t0,0xed00                              8a09c:    lui     t0,0xed00                
+8a0a0:    ori     t0,t0,0x7c                             8a0a0:    ori     t0,t0,0x7c               
+8a0a4:    lui     a3,0x50                                8a0a4:    lui     a3,0x50                  
+8a0a8:    ori     a3,a3,0x37c                            8a0a8:    ori     a3,a3,0x37c              
+8a0ac:    lui     t1,0xba00                              8a0ac:    lui     t1,0xba00                
+8a0b0:    ori     t1,t1,0xe02                            8a0b0:    ori     t1,t1,0xe02              
+8a0b4:    lui     t2,0xc100                              8a0b4:    lui     t2,0xc100                
+8a0b8:    ori     t2,t2,0x17                             8a0b8:    ori     t2,t2,0x17               
+8a0bc:    lui     t5,0xb900                              8a0bc:    lui     t5,0xb900                
+8a0c0:    ori     t5,t5,0x31d                            8a0c0:    ori     t5,t5,0x31d              
+8a0c4:    lui     t3,0xf0a                               8a0c4:    lui     t3,0xf0a                 
+8a0c8:    ori     t3,t3,0x4000                           8a0c8:    ori     t3,t3,0x4000             
+8a0cc:    lui     t6,0xfcff                              8a0cc:    lui     t6,0xfcff                
+8a0d0:    ori     t6,t6,0xffff                           8a0d0:    ori     t6,t6,0xffff             
+8a0d4:    lui     t4,0xfffc                              8a0d4:    lui     t4,0xfffc                
+8a0d8:    ori     t4,t4,0xf279                           8a0d8:    ori     t4,t4,0xf279             
+8a0dc:    move    a0,s1                                  8a0dc:    move    a0,s1                    
+8a0e0:    lui     v0,0x8022                              8a0e0:    lui     v0,0x8022                
+8a0e4:    lw      v0,-0x4154(v0)                         8a0e4:    lw      v0,-0x4154(v0)           
+8a0e8:    lui     a1,0x801a                              8a0e8:    lui     a1,0x801a                
+8a0ec:    addiu   a1,a1,-0x2e90                          8a0ec:    addiu   a1,a1,-0x2e90            
+8a0f0:    move    a2,zero                                8a0f0:    move    a2,zero                  
+8a0f4:    addiu   v1,v0,8                                8a0f4:    addiu   v1,v0,8                  
+8a0f8:    lui     at,0x8022                              8a0f8:    lui     at,0x8022                
+8a0fc:    sw      v1,-0x4154(at)                         8a0fc:    sw      v1,-0x4154(at)           
+8a100:    addiu   v1,v0,0x10                             8a100:    addiu   v1,v0,0x10               
+8a104:    lui     at,0x8022                              8a104:    lui     at,0x8022                
+8a108:    sw      v1,-0x4154(at)                         8a108:    sw      v1,-0x4154(at)           
+8a10c:    addiu   v1,v0,0x18                             8a10c:    addiu   v1,v0,0x18               
+8a110:    lui     at,0x8022                              8a110:    lui     at,0x8022                
+8a114:    sw      v1,-0x4154(at)                         8a114:    sw      v1,-0x4154(at)           
+8a118:    li      v1,0x8000                              8a118:    li      v1,0x8000                
+8a11c:    sw      v1,0x14(v0)                            8a11c:    sw      v1,0x14(v0)              
+8a120:    addiu   v1,v0,0x20                             8a120:    addiu   v1,v0,0x20               
+8a124:    lui     at,0x8022                              8a124:    lui     at,0x8022                
+8a128:    sw      v1,-0x4154(at)                         8a128:    sw      v1,-0x4154(at)           
+8a12c:    lui     v1,0x100                               8a12c:    lui     v1,0x100                 
+8a130:    addiu   v1,v1,0x820                            8a130:    addiu   v1,v1,0x820              
+8a134:    sw      v1,0x1c(v0)                            8a134:    sw      v1,0x1c(v0)              
+8a138:    addiu   v1,v0,0x28                             8a138:    addiu   v1,v0,0x28               
+8a13c:    lui     at,0x8022                              8a13c:    lui     at,0x8022                
+8a140:    sw      v1,-0x4154(at)                         8a140:    sw      v1,-0x4154(at)           
+8a144:    addiu   v1,v0,0x30                             8a144:    addiu   v1,v0,0x30               
+8a148:    lui     at,0x8022                              8a148:    lui     at,0x8022                
+8a14c:    sw      v1,-0x4154(at)                         8a14c:    sw      v1,-0x4154(at)           
+8a150:    addiu   v1,v0,0x38                             8a150:    addiu   v1,v0,0x38               
+8a154:    lui     at,0x8022                              8a154:    lui     at,0x8022                
+8a158:    sw      v1,-0x4154(at)                         8a158:    sw      v1,-0x4154(at)           
+8a15c:    addiu   v1,v0,0x40                             8a15c:    addiu   v1,v0,0x40               
+8a160:    lui     at,0x8022                              8a160:    lui     at,0x8022                
+8a164:    sw      v1,-0x4154(at)                         8a164:    sw      v1,-0x4154(at)           
+8a168:    lui     v1,0xfa00                              8a168:    lui     v1,0xfa00                
+8a16c:    sw      v1,0x38(v0)                            8a16c:    sw      v1,0x38(v0)              
+8a170:    li      v1,-1                                  8a170:    li      v1,-1                    
+8a174:    sw      t0,0(v0)                               8a174:    sw      t0,0(v0)                 
+8a178:    sw      a3,4(v0)                               8a178:    sw      a3,4(v0)                 
+8a17c:    sw      s0,8(v0)                               8a17c:    sw      s0,8(v0)                 
+8a180:    sw      zero,0xc(v0)                           8a180:    sw      zero,0xc(v0)             
+8a184:    sw      t1,0x10(v0)                            8a184:    sw      t1,0x10(v0)              
+8a188:    sw      t2,0x18(v0)                            8a188:    sw      t2,0x18(v0)              
+8a18c:    sw      s0,0x20(v0)                            8a18c:    sw      s0,0x20(v0)              
+8a190:    sw      zero,0x24(v0)                          8a190:    sw      zero,0x24(v0)            
+8a194:    sw      t5,0x28(v0)                            8a194:    sw      t5,0x28(v0)              
+8a198:    sw      t3,0x2c(v0)                            8a198:    sw      t3,0x2c(v0)              
+8a19c:    sw      t6,0x30(v0)                            8a19c:    sw      t6,0x30(v0)              
+8a1a0:    sw      t4,0x34(v0)                            8a1a0:    sw      t4,0x34(v0)              
+8a1a4:    jal     6cea0                                  8a1a4:    jal     6cea0                    
+8a1a8:    sw      v1,0x3c(v0)                            8a1a8:    sw      v1,0x3c(v0)              
+8a1ac:    lui     v1,0x8022                              8a1ac:    lui     v1,0x8022                
+8a1b0:    lw      v1,-0x4154(v1)                         8a1b0:    lw      v1,-0x4154(v1)           
+8a1b4:    lui     a0,0xed00                              8a1b4:    lui     a0,0xed00                
+8a1b8:    ori     a0,a0,0x1c                             8a1b8:    ori     a0,a0,0x1c               
+8a1bc:    addiu   v0,v1,8                                8a1bc:    addiu   v0,v1,8                  
+8a1c0:    lui     at,0x8022                              8a1c0:    lui     at,0x8022                
+8a1c4:    sw      v0,-0x4154(at)                         8a1c4:    sw      v0,-0x4154(at)           
+8a1c8:    sw      a0,0(v1)                               8a1c8:    sw      a0,0(v1)                 
+8a1cc:    jal     47898                                  8a1cc:    jal     47898                    
+8a1d0:    sw      s5,4(v1)                               8a1d0:    sw      s5,4(v1)                 
+8a1d4:    move    a0,s1                                  8a1d4:    move    a0,s1                    
+8a1d8:    li      a1,4                                   8a1d8:    li      a1,4                     
+8a1dc:    jal     4eb5c                                  8a1dc:    jal     4eb5c                    
+8a1e0:    li      a2,4                                   8a1e0:    li      a2,4                     
+8a1e4:    lui     a3,0x6319                              8a1e4:    lui     a3,0x6319                
+8a1e8:    ori     a3,a3,0x6319                           8a1e8:    ori     a3,a3,0x6319             
+8a1ec:    lui     t1,0xf647                              8a1ec:    lui     t1,0xf647                
+8a1f0:    ori     t1,t1,0xc230                           8a1f0:    ori     t1,t1,0xc230             
+8a1f4:    lui     t0,0x38                                8a1f4:    lui     t0,0x38                  
+8a1f8:    ori     t0,t0,0x8068                           8a1f8:    ori     t0,t0,0x8068             
+8a1fc:    move    a0,s1                                  8a1fc:    move    a0,s1                    
+8a200:    lui     v0,0x8022                              8a200:    lui     v0,0x8022                
+8a204:    lw      v0,-0x4154(v0)                         8a204:    lw      v0,-0x4154(v0)           
+8a208:    li      a1,5                                   8a208:    li      a1,5                     
+8a20c:    li      a2,6                                   8a20c:    li      a2,6                     
+8a210:    addiu   v1,v0,8                                8a210:    addiu   v1,v0,8                  
+8a214:    lui     at,0x8022                              8a214:    lui     at,0x8022                
+8a218:    sw      v1,-0x4154(at)                         8a218:    sw      v1,-0x4154(at)           
+8a21c:    addiu   v1,v0,0x10                             8a21c:    addiu   v1,v0,0x10               
+8a220:    lui     at,0x8022                              8a220:    lui     at,0x8022                
+8a224:    sw      v1,-0x4154(at)                         8a224:    sw      v1,-0x4154(at)           
+8a228:    addiu   v1,v0,0x18                             8a228:    addiu   v1,v0,0x18               
+8a22c:    lui     at,0x8022                              8a22c:    lui     at,0x8022                
+8a230:    sw      v1,-0x4154(at)                         8a230:    sw      v1,-0x4154(at)           
+8a234:    addiu   v1,v0,0x20                             8a234:    addiu   v1,v0,0x20               
+8a238:    lui     at,0x8022                              8a238:    lui     at,0x8022                
+8a23c:    sw      v1,-0x4154(at)                         8a23c:    sw      v1,-0x4154(at)           
+8a240:    addiu   v1,v0,0x28                             8a240:    addiu   v1,v0,0x28               
+8a244:    lui     at,0x8022                              8a244:    lui     at,0x8022                
+8a248:    sw      v1,-0x4154(at)                         8a248:    sw      v1,-0x4154(at)           
+8a24c:    addiu   v1,v0,0x30                             8a24c:    addiu   v1,v0,0x30               
+8a250:    sw      s0,0(v0)                               8a250:    sw      s0,0(v0)                 
+8a254:    sw      zero,4(v0)                             8a254:    sw      zero,4(v0)               
+8a258:    sw      s2,8(v0)                               8a258:    sw      s2,8(v0)                 
+8a25c:    sw      s4,0xc(v0)                             8a25c:    sw      s4,0xc(v0)               
+8a260:    sw      s3,0x10(v0)                            8a260:    sw      s3,0x10(v0)              
+8a264:    sw      a3,0x14(v0)                            8a264:    sw      a3,0x14(v0)              
+8a268:    sw      t1,0x18(v0)                            8a268:    sw      t1,0x18(v0)              
+8a26c:    sw      t0,0x1c(v0)                            8a26c:    sw      t0,0x1c(v0)              
+8a270:    sw      s0,0x20(v0)                            8a270:    sw      s0,0x20(v0)              
+8a274:    sw      zero,0x24(v0)                          8a274:    sw      zero,0x24(v0)            
+8a278:    lui     at,0x8022                              8a278:    lui     at,0x8022                
+8a27c:    sw      v1,-0x4154(at)                         8a27c:    sw      v1,-0x4154(at)           
+8a280:    sw      s2,0x28(v0)                            8a280:    sw      s2,0x28(v0)              
+8a284:    jal     4eb5c                                  8a284:    jal     4eb5c                    
+8a288:    sw      zero,0x2c(v0)                          8a288:    sw      zero,0x2c(v0)            
+8a28c:    lw      ra,0x28(sp)                            8a28c:    lw      ra,0x28(sp)              
+8a290:    lw      s5,0x24(sp)                            8a290:    lw      s5,0x24(sp)              
+8a294:    lw      s4,0x20(sp)                            8a294:    lw      s4,0x20(sp)              
+8a298:    lw      s3,0x1c(sp)                            8a298:    lw      s3,0x1c(sp)              
+8a29c:    lw      s2,0x18(sp)                            8a29c:    lw      s2,0x18(sp)              
+8a2a0:    lw      s1,0x14(sp)                            8a2a0:    lw      s1,0x14(sp)              
+8a2a4:    lw      s0,0x10(sp)                            8a2a4:    lw      s0,0x10(sp)              
+8a2a8:    addiu   sp,sp,0x30                             8a2a8:    addiu   sp,sp,0x30               
+8a2ac:    jr      ra                                     8a2ac:    jr      ra                       
+8a2b0:    nop                                            8a2b0:    nop                              
+8a2b4:    nop                                            8a2b4:    nop                              
+8a2b8:    nop                                            8a2b8:    nop                              
+8a2bc:    nop                                            8a2bc:    nop                              
+8a2c0:    lw      v0,0x43e4(a0)                          8a2c0:    lw      v0,0x43e4(a0)            
+8a2c4:    li      t0,6                                   8a2c4:    li      t0,6                     
+8a2c8:    beqz    v0,8a2d4 [31m~>[39m                            8a2c8:    beqz    v0,8a2d4 [31m~>[39m              
+8a2cc:    li      t1,1                                   8a2cc:    li      t1,1                     
+8a2d0:    li      t0,5                                   8a2d0:    li      t0,5                     
+8a2d4: [31m~>[39m lui     a1,0x29                                8a2d4: [31m~>[39m lui     a1,0x29                  
+8a2d8:    ori     a1,a1,0xa74e                           8a2d8:    ori     a1,a1,0xa74e             
+8a2dc:    lui     a3,0x801a                              8a2dc:    lui     a3,0x801a                
+8a2e0:    addiu   a3,a3,0x6d80                           8a2e0:    addiu   a3,a3,0x6d80             
+8a2e4:    lw      a0,0(a3)                               8a2e4:    lw      a0,0(a3)                 
+8a2e8:    lui     a2,0x7fff                              8a2e8:    lui     a2,0x7fff                
+8a2ec:    ori     a2,a2,0xffff                           8a2ec:    ori     a2,a2,0xffff             
+8a2f0:    lui     at,0x4f00                              8a2f0:    lui     at,0x4f00                
+8a2f4:    mtc1    at,fv1                                 8a2f4:    mtc1    at,fv1                   
+8a2f8:    nop                                            8a2f8:    nop                              
+8a2fc:    addu    a1,a0,a1                               8a2fc:    addu    a1,a0,a1                 
+8a300:    sll     v1,a0,0x7                              8a300:    sll     v1,a0,0x7                
+8a304:    addu    v1,v1,a0                               8a304:    addu    v1,v1,a0                 
+8a308:    sll     v1,v1,0x3                              8a308:    sll     v1,v1,0x3                
+8a30c:    addu    v1,v1,a0                               8a30c:    addu    v1,v1,a0                 
+8a310:    sll     v0,v1,0x2                              8a310:    sll     v0,v1,0x2                
+8a314:    subu    v0,v0,v1                               8a314:    subu    v0,v0,v1                 
+8a318:    sll     v1,v0,0x5                              8a318:    sll     v1,v0,0x5                
+8a31c:    addu    v0,v0,v1                               8a31c:    addu    v0,v0,v1                 
+8a320:    sll     v0,v0,0x2                              8a320:    sll     v0,v0,0x2                
+8a324:    addu    v0,v0,a0                               8a324:    addu    v0,v0,a0                 
+8a328:    sll     v0,v0,0x3                              8a328:    sll     v0,v0,0x3                
+8a32c:    addu    a1,a1,v0                               8a32c:    addu    a1,a1,v0                 
+8a330:    and     a2,a1,a2                               8a330:    and     a2,a1,a2                 
+8a334:    mtc1    a2,fv0                                 8a334:    mtc1    a2,fv0                   
+8a338:    nop                                            8a338:    nop                              
+8a33c:    cvt.s.w fv0,fv0                                8a33c:    cvt.s.w fv0,fv0                  
+8a340:    div.s   fv1,fv0,fv1                            8a340:    div.s   fv1,fv0,fv1              
+8a344:    mtc1    t0,fv0                                 8a344:    mtc1    t0,fv0                   
+8a348:    nop                                            8a348:    nop                              
+8a34c:    cvt.s.w fv0,fv0                                8a34c:    cvt.s.w fv0,fv0                  
+8a350:    mul.s   fv0,fv1,fv0                            8a350:    mul.s   fv0,fv1,fv0              
+8a354:    mtc1    t1,fv1                                 8a354:    mtc1    t1,fv1                   
+8a358:    nop                                            8a358:    nop                              
+8a35c:    cvt.s.w fv1,fv1                                8a35c:    cvt.s.w fv1,fv1                  
+8a360:    add.s   fv1,fv0,fv1                            8a360:    add.s   fv1,fv0,fv1              
+8a364:    trunc.w.s fv0,fv1                              8a364:    trunc.w.s fv0,fv1                
+8a368:    mfc1    v0,fv0                                 8a368:    mfc1    v0,fv0                   
+8a36c:    nop                                            8a36c:    nop                              
+8a370:    jr      ra                                     8a370:    jr      ra                       
+8a374:    sw      a1,0(a3)                               8a374:    sw      a1,0(a3)                 
+8a378:    addiu   sp,sp,-0x20                            8a378:    addiu   sp,sp,-0x20              
+8a37c:    sw      s0,0x10(sp)                            8a37c:    sw      s0,0x10(sp)              
+8a380:    move    s0,a0                                  8a380:    move    s0,a0                    
+8a384:    sw      ra,0x1c(sp)                            8a384:    sw      ra,0x1c(sp)              
+8a388:    sw      s3,0x18(sp)                            8a388:    sw      s3,0x18(sp)              
+8a38c:    jal     a0210                                  8a38c:    jal     a0210                    
+8a390:    sw      s2,0x14(sp)                            8a390:    sw      s2,0x14(sp)              
+8a394:    lui     a0,0x801c                              8a394:    lui     a0,0x801c                
+8a398:    lw      a0,0x70a8(a0)                          8a398:    lw      a0,0x70a8(a0)            
+8a39c:    lui     a1,0x801c                              8a39c:    lui     a1,0x801c                
+8a3a0:    lw      a1,0x70ac(a1)                          8a3a0:    lw      a1,0x70ac(a1)            
+8a3a4:    li      a2,0                                   8a3a4:    li      a2,0                     
+8a3a8:    li      a3,0xbb8                               8a3a8:    li      a3,0xbb8                 
+8a3ac:    move    s2,v0                                  8a3ac:    move    s2,v0                    
+8a3b0:    move    s3,v1                                  8a3b0:    move    s3,v1                    
+8a3b4:    sltu    v0,s3,a1                               8a3b4:    sltu    v0,s3,a1                 
+8a3b8:    subu    a1,s3,a1                               8a3b8:    subu    a1,s3,a1                 
+8a3bc:    subu    a0,s2,a0                               8a3bc:    subu    a0,s2,a0                 
+8a3c0:    subu    a0,a0,v0                               8a3c0:    subu    a0,a0,v0                 
+8a3c4:    sll     a0,a0,0x6                              8a3c4:    sll     a0,a0,0x6                
+8a3c8:    srl     v0,a1,0x1a                             8a3c8:    srl     v0,a1,0x1a               
+8a3cc:    or      a0,a0,v0                               8a3cc:    or      a0,a0,v0                 
+8a3d0:    jal     af960                                  8a3d0:    jal     af960                    
+8a3d4:    sll     a1,a1,0x6                              8a3d4:    sll     a1,a1,0x6                
+8a3d8:    move    a0,v0                                  8a3d8:    move    a0,v0                    
+8a3dc:    li      a2,0                                   8a3dc:    li      a2,0                     
+8a3e0:    lui     a3,0xf                                 8a3e0:    lui     a3,0xf                   
+8a3e4:    ori     a3,a3,0x4240                           8a3e4:    ori     a3,a3,0x4240             
+8a3e8:    jal     af960                                  8a3e8:    jal     af960                    
+8a3ec:    move    a1,v1                                  8a3ec:    move    a1,v1                    
+8a3f0:    li      a0,1                                   8a3f0:    li      a0,1                     
+8a3f4:    bne     v1,a0,8a40c [93m~>[39m                         8a3f4:    bne     v1,a0,8a40c [93m~>[39m           
+8a3f8:    sw      v1,0(s0)                               8a3f8:    sw      v1,0(s0)                 
+8a3fc:    lui     at,0x801c                              8a3fc:    lui     at,0x801c                
+8a400:    sw      s2,0x70a8(at)                          8a400:    sw      s2,0x70a8(at)            
+8a404:    lui     at,0x801c                              8a404:    lui     at,0x801c                
+8a408:    sw      s3,0x70ac(at)                          8a408:    sw      s3,0x70ac(at)            
+8a40c: [93m~>[39m lw      ra,0x1c(sp)                            8a40c: [93m~>[39m lw      ra,0x1c(sp)              
+8a410:    lw      s3,0x18(sp)                            8a410:    lw      s3,0x18(sp)              
+8a414:    lw      s2,0x14(sp)                            8a414:    lw      s2,0x14(sp)              
+8a418:    lw      s0,0x10(sp)                            8a418:    lw      s0,0x10(sp)              
+8a41c:    addiu   sp,sp,0x20                             8a41c:    addiu   sp,sp,0x20               
+8a420:    jr      ra                                     8a420:    jr      ra                       
+8a424:    nop                                            8a424:    nop                              
+8a428:    addiu   sp,sp,-0x38                            8a428:    addiu   sp,sp,-0x38              
+8a42c:    sw      s1,0x14(sp)                            8a42c:    sw      s1,0x14(sp)              
+8a430:    move    s1,a0                                  8a430:    move    s1,a0                    
+8a434:    sw      s4,0x20(sp)                            8a434:    sw      s4,0x20(sp)              
+8a438:    move    s4,a1                                  8a438:    move    s4,a1                    
+8a43c:    sw      s3,0x1c(sp)                            8a43c:    sw      s3,0x1c(sp)              
+8a440:    move    s3,a2                                  8a440:    move    s3,a2                    
+8a444:    sw      s0,0x10(sp)                            8a444:    sw      s0,0x10(sp)              
+8a448:    move    s0,a3                                  8a448:    move    s0,a3                    
+8a44c:    move    a0,s4                                  8a44c:    move    a0,s4                    
+8a450:    li      a1,0x12                                8a450:    li      a1,0x12                  
+8a454:    sw      ra,0x30(sp)                            8a454:    sw      ra,0x30(sp)              
+8a458:    sw      s7,0x2c(sp)                            8a458:    sw      s7,0x2c(sp)              
+8a45c:    sw      s6,0x28(sp)                            8a45c:    sw      s6,0x28(sp)              
+8a460:    sw      s5,0x24(sp)                            8a460:    sw      s5,0x24(sp)              
+8a464:    jal     9d400                                  8a464:    jal     9d400                    
+8a468:    sw      s2,0x18(sp)                            8a468:    sw      s2,0x18(sp)              
+8a46c:    beqz    s0,8a4b8 [95m~>[39m                            8a46c:    beqz    s0,8a4b8 [95m~>[39m              
+8a470:    nop                                            8a470:    nop                              
+8a474:    lw      v1,0x4420(s1)                          8a474:    lw      v1,0x4420(s1)            
+8a478:    li      v0,5                                   8a478:    li      v0,5                     
+8a47c:    beq     v1,v0,8a4a0 [96m~>[39m                         8a47c:    beq     v1,v0,8a4a0 [96m~>[39m           
+8a480:    li      v1,0x1e                                8a480:    li      v1,0x1e                  
+8a484:    lw      v0,0x4424(s1)                          8a484:    lw      v0,0x4424(s1)            
+8a488:    lw      a0,0x4428(s1)                          8a488:    lw      a0,0x4428(s1)            
+8a48c:    addiu   v0,v0,-1                               8a48c:    addiu   v0,v0,-1                 
+8a490:    sll     v1,v0,0x2                              8a490:    sll     v1,v0,0x2                
+8a494:    addu    v1,v1,v0                               8a494:    addu    v1,v1,v0                 
+8a498:    addiu   v1,v1,-1                               8a498:    addiu   v1,v1,-1                 
+8a49c:    addu    v1,v1,a0                               8a49c:    addu    v1,v1,a0                 
+8a4a0: [96m~>[39m sll     v0,v1,0x1                              8a4a0: [96m~>[39m sll     v0,v1,0x1                
+8a4a4:    addu    v0,v0,v1                               8a4a4:    addu    v0,v0,v1                 
+8a4a8:    lui     v1,0x800b                              8a4a8:    lui     v1,0x800b                
+8a4ac:    addiu   v1,v1,0x6af4                           8a4ac:    addiu   v1,v1,0x6af4             
+8a4b0:    j       898d4                                  8a4b0:    j       898d4                    
+8a4b4:    sll     v0,v0,0x1                              8a4b4:    sll     v0,v0,0x1                
+8a4b8: [95m~>[39m jal     4eda0                                  8a4b8: [95m~>[39m jal     4eda0                    
+8a4bc:    li      a0,0xe                                 8a4bc:    li      a0,0xe                   
+8a4c0:    sll     v1,v0,0x1                              8a4c0:    sll     v1,v0,0x1                
+8a4c4:    addu    v1,v1,v0                               8a4c4:    addu    v1,v1,v0                 
+8a4c8:    sll     v1,v1,0x1                              8a4c8:    sll     v1,v1,0x1                
+8a4cc:    lui     v0,0x800b                              8a4cc:    lui     v0,0x800b                
+8a4d0:    addiu   v0,v0,0x6aa0                           8a4d0:    addiu   v0,v0,0x6aa0             
+8a4d4:    blez    s3,8a54c [92m~>[39m                            8a4d4:    blez    s3,8a54c [92m~>[39m              
+8a4d8:    addu    v0,v1,v0                               8a4d8:    addu    v0,v1,v0                 
+8a4dc:    move    s0,v0                                  8a4dc:    move    s0,v0                    
+8a4e0:    addiu   s7,s0,0xc                              8a4e0:    addiu   s7,s0,0xc                
+8a4e4:    addiu   s6,s0,6                                8a4e4:    addiu   s6,s0,6                  
+8a4e8:    addu    s5,s3,s0                               8a4e8:    addu    s5,s3,s0                 
+8a4ec:    slt     s1,s0,s7                               8a4ec:    slt     s1,s0,s7                 
+8a4f0: [32m~>[39m slt     s2,s0,s6                               8a4f0: [32m~>[39m slt     s2,s0,s6                 
+8a4f4: [90m~>[39m jal     4eda0                                  8a4f4: [90m~>[39m jal     4eda0                    
+8a4f8:    move    a0,s3                                  8a4f8:    move    a0,s3                    
+8a4fc:    addu    v1,s4,v0                               8a4fc:    addu    v1,s4,v0                 
+8a500:    lb      v0,0(v1)                               8a500:    lb      v0,0(v1)                 
+8a504:    bnez    v0,8a4f4 [90m~>[39m                            8a504:    bnez    v0,8a4f4 [90m~>[39m              
+8a508:    nop                                            8a508:    nop                              
+8a50c:    bnez    s1,8a520 [35m~>[39m                            8a50c:    bnez    s1,8a520 [35m~>[39m              
+8a510:    nop                                            8a510:    nop                              
+8a514:    lbu     v0,-0xc(s0)                            8a514:    lbu     v0,-0xc(s0)              
+8a518:    j       8993c                                  8a518:    j       8993c                    
+8a51c:    sb      v0,0(v1)                               8a51c:    sb      v0,0(v1)                 
+8a520: [35m~>[39m bnez    s2,8a534 [36m~>[39m                            8a520: [35m~>[39m bnez    s2,8a534 [36m~>[39m              
+8a524:    nop                                            8a524:    nop                              
+8a528:    lbu     v0,-6(s0)                              8a528:    lbu     v0,-6(s0)                
+8a52c:    j       8993c                                  8a52c:    j       8993c                    
+8a530:    sb      v0,0(v1)                               8a530:    sb      v0,0(v1)                 
+8a534: [36m~>[39m lbu     v0,0(s0)                               8a534: [36m~>[39m lbu     v0,0(s0)                 
+8a538:    sb      v0,0(v1)                               8a538:    sb      v0,0(v1)                 
+8a53c:    addiu   s0,s0,1                                8a53c:    addiu   s0,s0,1                  
+8a540:    slt     v0,s0,s5                               8a540:    slt     v0,s0,s5                 
+8a544:    bnez    v0,8a4f0 [32m~>[39m                            8a544:    bnez    v0,8a4f0 [32m~>[39m              
+8a548:    slt     s1,s0,s7                               8a548:    slt     s1,s0,s7                 
+8a54c: [92m~>[39m lw      ra,0x30(sp)                            8a54c: [92m~>[39m lw      ra,0x30(sp)              
+8a550:    lw      s7,0x2c(sp)                            8a550:    lw      s7,0x2c(sp)              
+8a554:    lw      s6,0x28(sp)                            8a554:    lw      s6,0x28(sp)              
+8a558:    lw      s5,0x24(sp)                            8a558:    lw      s5,0x24(sp)              
+8a55c:    lw      s4,0x20(sp)                            8a55c:    lw      s4,0x20(sp)              
+8a560:    lw      s3,0x1c(sp)                            8a560:    lw      s3,0x1c(sp)              
+8a564:    lw      s2,0x18(sp)                            8a564:    lw      s2,0x18(sp)              
+8a568:    lw      s1,0x14(sp)                            8a568:    lw      s1,0x14(sp)              
+8a56c:    lw      s0,0x10(sp)                            8a56c:    lw      s0,0x10(sp)              
+8a570:    addiu   sp,sp,0x38                             8a570:    addiu   sp,sp,0x38               
+8a574:    jr      ra                                     8a574:    jr      ra                       
+8a578:    nop                                            8a578:    nop                              
+8a57c:    addiu   sp,sp,-0x18                            8a57c:    addiu   sp,sp,-0x18              
+8a580:    move    t4,a0                                  8a580:    move    t4,a0                    
+8a584:    sw      s1,0x14(sp)                            8a584:    sw      s1,0x14(sp)              
+8a588:    move    s1,a2                                  8a588:    move    s1,a2                    
+8a58c:    move    t8,zero                                8a58c:    move    t8,zero                  
+8a590:    blez    s1,8a6d8 [31m~>[39m                            8a590:    blez    s1,8a6d8 [31m~>[39m              
+8a594:    sw      s0,0x10(sp)                            8a594:    sw      s0,0x10(sp)              
+8a598:    lui     s0,0x29                                8a598:    lui     s0,0x29                  
+8a59c:    ori     s0,s0,0xa74e                           8a59c:    ori     s0,s0,0xa74e             
+8a5a0:    lui     a2,0x7fff                              8a5a0:    lui     a2,0x7fff                
+8a5a4:    ori     a2,a2,0xffff                           8a5a4:    ori     a2,a2,0xffff             
+8a5a8:    lui     at,0x4f00                              8a5a8:    lui     at,0x4f00                
+8a5ac:    mtc1    at,ft1                                 8a5ac:    mtc1    at,ft1                   
+8a5b0:    nop                                            8a5b0:    nop                              
+8a5b4:    lui     at,0x3f80                              8a5b4:    lui     at,0x3f80                
+8a5b8:    mtc1    at,ft0                                 8a5b8:    mtc1    at,ft0                   
+8a5bc:    nop                                            8a5bc:    nop                              
+8a5c0:    move    t6,a1                                  8a5c0:    move    t6,a1                    
+8a5c4:    move    t5,zero                                8a5c4:    move    t5,zero                  
+8a5c8: [90m~>[39m lb      v0,0(t6)                               8a5c8: [90m~>[39m lb      v0,0(t6)                 
+8a5cc:    blez    v0,8a6c4 [93m~>[39m                            8a5cc:    blez    v0,8a6c4 [93m~>[39m              
+8a5d0:    move    t1,zero                                8a5d0:    move    t1,zero                  
+8a5d4:    addiu   t3,t8,-1                               8a5d4:    addiu   t3,t8,-1                 
+8a5d8:    move    t0,zero                                8a5d8:    move    t0,zero                  
+8a5dc:    li      t2,-0x318                              8a5dc:    li      t2,-0x318                
+8a5e0: [92m~>[39m sll     v0,t3,0x1                              8a5e0: [92m~>[39m sll     v0,t3,0x1                
+8a5e4:    addu    v0,v0,t3                               8a5e4:    addu    v0,v0,t3                 
+8a5e8:    sll     v0,v0,0x2                              8a5e8:    sll     v0,v0,0x2                
+8a5ec:    subu    v0,v0,t3                               8a5ec:    subu    v0,v0,t3                 
+8a5f0:    sll     v0,v0,0x2                              8a5f0:    sll     v0,v0,0x2                
+8a5f4:    addu    v0,v0,t0                               8a5f4:    addu    v0,v0,t0                 
+8a5f8:    addu    t9,t4,v0                               8a5f8:    addu    t9,t4,v0                 
+8a5fc:    addu    v0,t5,t2                               8a5fc:    addu    v0,t5,t2                 
+8a600:    addu    t7,t4,v0                               8a600:    addu    t7,t4,v0                 
+8a604: [96m~>[39m lw      v0,0x43e4(t4)                          8a604: [96m~>[39m lw      v0,0x43e4(t4)            
+8a608:    beqz    v0,8a614 [95m~>[39m                            8a608:    beqz    v0,8a614 [95m~>[39m              
+8a60c:    li      a3,6                                   8a60c:    li      a3,6                     
+8a610:    li      a3,5                                   8a610:    li      a3,5                     
+8a614: [95m~>[39m lui     a0,0x801a                              8a614: [95m~>[39m lui     a0,0x801a                
+8a618:    lw      a0,0x6d80(a0)                          8a618:    lw      a0,0x6d80(a0)            
+8a61c:    addu    a1,a0,s0                               8a61c:    addu    a1,a0,s0                 
+8a620:    sll     v1,a0,0x7                              8a620:    sll     v1,a0,0x7                
+8a624:    addu    v1,v1,a0                               8a624:    addu    v1,v1,a0                 
+8a628:    sll     v1,v1,0x3                              8a628:    sll     v1,v1,0x3                
+8a62c:    addu    v1,v1,a0                               8a62c:    addu    v1,v1,a0                 
+8a630:    sll     v0,v1,0x2                              8a630:    sll     v0,v1,0x2                
+8a634:    subu    v0,v0,v1                               8a634:    subu    v0,v0,v1                 
+8a638:    sll     v1,v0,0x5                              8a638:    sll     v1,v0,0x5                
+8a63c:    addu    v0,v0,v1                               8a63c:    addu    v0,v0,v1                 
+8a640:    sll     v0,v0,0x2                              8a640:    sll     v0,v0,0x2                
+8a644:    addu    v0,v0,a0                               8a644:    addu    v0,v0,a0                 
+8a648:    sll     v0,v0,0x3                              8a648:    sll     v0,v0,0x3                
+8a64c:    addu    a1,a1,v0                               8a64c:    addu    a1,a1,v0                 
+8a650:    and     v0,a1,a2                               8a650:    and     v0,a1,a2                 
+8a654:    mtc1    v0,fv0                                 8a654:    mtc1    v0,fv0                   
+8a658:    nop                                            8a658:    nop                              
+8a65c:    cvt.s.w fv0,fv0                                8a65c:    cvt.s.w fv0,fv0                  
+8a660:    div.s   fv1,fv0,ft1                            8a660:    div.s   fv1,fv0,ft1              
+8a664:    mtc1    a3,fv0                                 8a664:    mtc1    a3,fv0                   
+8a668:    nop                                            8a668:    nop                              
+8a66c:    cvt.s.w fv0,fv0                                8a66c:    cvt.s.w fv0,fv0                  
+8a670:    mul.s   fv0,fv1,fv0                            8a670:    mul.s   fv0,fv1,fv0              
+8a674:    add.s   fv1,fv0,ft0                            8a674:    add.s   fv1,fv0,ft0              
+8a678:    lui     at,0x801a                              8a678:    lui     at,0x801a                
+8a67c:    sw      a1,0x6d80(at)                          8a67c:    sw      a1,0x6d80(at)            
+8a680:    lw      v0,0x10(t9)                            8a680:    lw      v0,0x10(t9)              
+8a684:    trunc.w.s fv0,fv1                              8a684:    trunc.w.s fv0,fv1                
+8a688:    mfc1    a0,fv0                                 8a688:    mfc1    a0,fv0                   
+8a68c:    nop                                            8a68c:    nop                              
+8a690:    beq     a0,v0,8a604 [96m~>[39m                         8a690:    beq     a0,v0,8a604 [96m~>[39m           
+8a694:    nop                                            8a694:    nop                              
+8a698:    lw      v0,0x10(t7)                            8a698:    lw      v0,0x10(t7)              
+8a69c:    beq     a0,v0,8a604 [96m~>[39m                         8a69c:    beq     a0,v0,8a604 [96m~>[39m           
+8a6a0:    addu    v0,t5,t0                               8a6a0:    addu    v0,t5,t0                 
+8a6a4:    addiu   t0,t0,0x318                            8a6a4:    addiu   t0,t0,0x318              
+8a6a8:    addu    v0,t4,v0                               8a6a8:    addu    v0,t4,v0                 
+8a6ac:    sw      a0,0x10(v0)                            8a6ac:    sw      a0,0x10(v0)              
+8a6b0:    lb      v0,0(t6)                               8a6b0:    lb      v0,0(t6)                 
+8a6b4:    addiu   t1,t1,1                                8a6b4:    addiu   t1,t1,1                  
+8a6b8:    slt     v0,t1,v0                               8a6b8:    slt     v0,t1,v0                 
+8a6bc:    bnez    v0,8a5e0 [92m~>[39m                            8a6bc:    bnez    v0,8a5e0 [92m~>[39m              
+8a6c0:    addiu   t2,t2,0x318                            8a6c0:    addiu   t2,t2,0x318              
+8a6c4: [93m~>[39m addiu   t6,t6,1                                8a6c4: [93m~>[39m addiu   t6,t6,1                  
+8a6c8:    addiu   t8,t8,1                                8a6c8:    addiu   t8,t8,1                  
+8a6cc:    slt     v0,t8,s1                               8a6cc:    slt     v0,t8,s1                 
+8a6d0:    bnez    v0,8a5c8 [90m~>[39m                            8a6d0:    bnez    v0,8a5c8 [90m~>[39m              
+8a6d4:    addiu   t5,t5,0x2c                             8a6d4:    addiu   t5,t5,0x2c               
+8a6d8: [31m~>[39m lw      s1,0x14(sp)                            8a6d8: [31m~>[39m lw      s1,0x14(sp)              
+8a6dc:    lw      s0,0x10(sp)                            8a6dc:    lw      s0,0x10(sp)              
+8a6e0:    addiu   sp,sp,0x18                             8a6e0:    addiu   sp,sp,0x18               
+8a6e4:    jr      ra                                     8a6e4:    jr      ra                       
+8a6e8:    nop                                            8a6e8:    nop                              
+8a6ec:    addiu   sp,sp,-0x18                            8a6ec:    addiu   sp,sp,-0x18              
+8a6f0:    sw      s0,0x10(sp)                            8a6f0:    sw      s0,0x10(sp)              
+8a6f4:    move    s0,a0                                  8a6f4:    move    s0,a0                    
+8a6f8:    sw      ra,0x14(sp)                            8a6f8:    sw      ra,0x14(sp)              
+8a6fc:    jal     545e4                                  8a6fc:    jal     545e4                    
+8a700:    li      a0,1                                   8a700:    li      a0,1                     
+8a704:    lui     v0,0x801a                              8a704:    lui     v0,0x801a                
+8a708:    lhu     v0,0x5b34(v0)                          8a708:    lhu     v0,0x5b34(v0)            
+8a70c:    bnez    v0,8a728 [35m~>[39m                            8a70c:    bnez    v0,8a728 [35m~>[39m              
+8a710:    nop                                            8a710:    nop                              
+8a714:    lui     v1,0x801a                              8a714:    lui     v1,0x801a                
+8a718:    lw      v1,-0x3140(v1)                         8a718:    lw      v1,-0x3140(v1)           
+8a71c:    li      v0,0x16                                8a71c:    li      v0,0x16                  
+8a720:    bne     v1,v0,8a744 [36m~>[39m                         8a720:    bne     v1,v0,8a744 [36m~>[39m           
+8a724:    nop                                            8a724:    nop                              
+8a728: [35m~>[39m lui     a0,0x800b                              8a728: [35m~>[39m lui     a0,0x800b                
+8a72c:    lw      a0,0x3ad8(a0)                          8a72c:    lw      a0,0x3ad8(a0)            
+8a730:    lui     v1,0x801b                              8a730:    lui     v1,0x801b                
+8a734:    lhu     v1,-0x4720(v1)                         8a734:    lhu     v1,-0x4720(v1)           
+8a738:    li      a1,0x3c                                8a738:    li      a1,0x3c                  
+8a73c:    j       89b78                                  8a73c:    j       89b78                    
+8a740:    li      v0,0x16                                8a740:    li      v0,0x16                  
+8a744: [36m~>[39m lw      v0,0(s0)                               8a744: [36m~>[39m lw      v0,0(s0)                 
+8a748:    slti    v0,v0,0x709                            8a748:    slti    v0,v0,0x709              
+8a74c:    bnez    v0,8a7b0 [32m~>[39m                            8a74c:    bnez    v0,8a7b0 [32m~>[39m              
+8a750:    li      v0,0x387                               8a750:    li      v0,0x387                 
+8a754:    lui     v1,0x800c                              8a754:    lui     v1,0x800c                
+8a758:    lw      v1,-0x1cb8(v1)                         8a758:    lw      v1,-0x1cb8(v1)           
+8a75c:    bne     v1,v0,8a7b0 [32m~>[39m                         8a75c:    bne     v1,v0,8a7b0 [32m~>[39m           
+8a760:    li      a1,0x3c                                8a760:    li      a1,0x3c                  
+8a764:    lui     a0,0x800b                              8a764:    lui     a0,0x800b                
+8a768:    lw      a0,0x3ad8(a0)                          8a768:    lw      a0,0x3ad8(a0)            
+8a76c:    lui     v1,0x801b                              8a76c:    lui     v1,0x801b                
+8a770:    lhu     v1,-0x4720(v1)                         8a770:    lhu     v1,-0x4720(v1)           
+8a774:    li      v0,0x21                                8a774:    li      v0,0x21                  
+8a778:    lui     at,0x801a                              8a778:    lui     at,0x801a                
+8a77c:    sw      v0,-0x3140(at)                         8a77c:    sw      v0,-0x3140(at)           
+8a780:    lui     at,0x801a                              8a780:    lui     at,0x801a                
+8a784:    sw      zero,0x6d8c(at)                        8a784:    sw      zero,0x6d8c(at)          
+8a788:    lui     at,0x801a                              8a788:    lui     at,0x801a                
+8a78c:    sw      zero,0x6d88(at)                        8a78c:    sw      zero,0x6d88(at)          
+8a790:    lui     at,0x801a                              8a790:    lui     at,0x801a                
+8a794:    sw      zero,0x6d84(at)                        8a794:    sw      zero,0x6d84(at)          
+8a798:    lui     at,0x801b                              8a798:    lui     at,0x801b                
+8a79c:    sw      v1,-0x4720(at)                         8a79c:    sw      v1,-0x4720(at)           
+8a7a0:    jal     2cb4                                   8a7a0:    jal     2cb4                     
+8a7a4:    nop                                            8a7a4:    nop                              
+8a7a8:    j       89bcc                                  8a7a8:    j       89bcc                    
+8a7ac:    li      v0,-1                                  8a7ac:    li      v0,-1                    
+8a7b0: [32m~>[39m lw      v1,0(s0)                               8a7b0: [32m~>[39m lw      v1,0(s0)                 
+8a7b4:    move    v0,zero                                8a7b4:    move    v0,zero                  
+8a7b8:    addiu   v1,v1,1                                8a7b8:    addiu   v1,v1,1                  
+8a7bc:    sw      v1,0(s0)                               8a7bc:    sw      v1,0(s0)                 
+8a7c0:    li      v1,0xb                                 8a7c0:    li      v1,0xb                   
+8a7c4:    lui     at,0x801a                              8a7c4:    lui     at,0x801a                
+8a7c8:    sw      v1,-0x3140(at)                         8a7c8:    sw      v1,-0x3140(at)           
+8a7cc:    lw      ra,0x14(sp)                            8a7cc:    lw      ra,0x14(sp)              
+8a7d0:    lw      s0,0x10(sp)                            8a7d0:    lw      s0,0x10(sp)              
+8a7d4:    addiu   sp,sp,0x18                             8a7d4:    addiu   sp,sp,0x18               
+8a7d8:    jr      ra                                     8a7d8:    jr      ra                       
+8a7dc:    nop                                            8a7dc:    nop                              
+8a7e0:    lui     v1,0x801b                              8a7e0:    lui     v1,0x801b                
+8a7e4:    lw      v1,-0x4720(v1)                         8a7e4:    lw      v1,-0x4720(v1)           
+8a7e8:    addiu   sp,sp,-0x18                            8a7e8:    addiu   sp,sp,-0x18              
+8a7ec:    sw      s0,0x10(sp)                            8a7ec:    sw      s0,0x10(sp)              
+8a7f0:    move    s0,a0                                  8a7f0:    move    s0,a0                    
+8a7f4:    andi    v0,v1,0x80                             8a7f4:    andi    v0,v1,0x80               
+8a7f8:    beqz    v0,8a810 [31m~>[39m                            8a7f8:    beqz    v0,8a810 [31m~>[39m              
+8a7fc:    sw      ra,0x14(sp)                            8a7fc:    sw      ra,0x14(sp)              
+8a800:    sll     v0,v1,0x10                             8a800:    sll     v0,v1,0x10               
+8a804:    ori     v0,v0,0x380                            8a804:    ori     v0,v0,0x380              
+8a808:    lui     at,0x801b                              8a808:    lui     at,0x801b                
+8a80c:    sw      v0,-0x4720(at)                         8a80c:    sw      v0,-0x4720(at)           
+8a810: [31m~>[39m addiu   a1,a1,-1                               8a810: [31m~>[39m addiu   a1,a1,-1                 
+8a814:    sltiu   v0,a1,0xa                              8a814:    sltiu   v0,a1,0xa                
+8a818:    beqz    v0,8a9bc [93m~>[39m                            8a818:    beqz    v0,8a9bc [93m~>[39m              
+8a81c:    sll     v0,a1,0x2                              8a81c:    sll     v0,a1,0x2                
+8a820:    lui     at,0x800c                              8a820:    lui     at,0x800c                
+8a824:    addu    at,at,v0                               8a824:    addu    at,at,v0                 
+8a828:    lw      v0,0x77d0(at)                          8a828:    lw      v0,0x77d0(at)            
+8a82c:    jr      v0                                     8a82c:    jr      v0                       
+8a830:    nop                                            8a830:    nop                              
+8a834:    sll     v0,s0,0x2                              8a834:    sll     v0,s0,0x2                
+8a838:    addu    v0,v0,s0                               8a838:    addu    v0,v0,s0                 
+8a83c:    sll     a0,v0,0x4                              8a83c:    sll     a0,v0,0x4                
+8a840:    subu    a0,a0,v0                               8a840:    subu    a0,a0,v0                 
+8a844:    sll     a0,a0,0x2                              8a844:    sll     a0,a0,0x2                
+8a848:    lui     v0,0x801b                              8a848:    lui     v0,0x801b                
+8a84c:    addiu   v0,v0,-0x2650                          8a84c:    addiu   v0,v0,-0x2650            
+8a850:    addu    a0,a0,v0                               8a850:    addu    a0,a0,v0                 
+8a854:    li      a1,1                                   8a854:    li      a1,1                     
+8a858:    j       89de4                                  8a858:    j       89de4                    
+8a85c:    li      a2,1                                   8a85c:    li      a2,1                     
+8a860:    sll     v0,s0,0x2                              8a860:    sll     v0,s0,0x2                
+8a864:    addu    v0,v0,s0                               8a864:    addu    v0,v0,s0                 
+8a868:    sll     a0,v0,0x4                              8a868:    sll     a0,v0,0x4                
+8a86c:    subu    a0,a0,v0                               8a86c:    subu    a0,a0,v0                 
+8a870:    sll     a0,a0,0x2                              8a870:    sll     a0,a0,0x2                
+8a874:    lui     v0,0x801b                              8a874:    lui     v0,0x801b                
+8a878:    addiu   v0,v0,-0x2650                          8a878:    addiu   v0,v0,-0x2650            
+8a87c:    addu    a0,a0,v0                               8a87c:    addu    a0,a0,v0                 
+8a880:    li      a1,1                                   8a880:    li      a1,1                     
+8a884:    j       89de4                                  8a884:    j       89de4                    
+8a888:    li      a2,9                                   8a888:    li      a2,9                     
+8a88c:    sll     v0,s0,0x2                              8a88c:    sll     v0,s0,0x2                
+8a890:    addu    v0,v0,s0                               8a890:    addu    v0,v0,s0                 
+8a894:    sll     a0,v0,0x4                              8a894:    sll     a0,v0,0x4                
+8a898:    subu    a0,a0,v0                               8a898:    subu    a0,a0,v0                 
+8a89c:    sll     a0,a0,0x2                              8a89c:    sll     a0,a0,0x2                
+8a8a0:    lui     v0,0x801b                              8a8a0:    lui     v0,0x801b                
+8a8a4:    addiu   v0,v0,-0x2650                          8a8a4:    addiu   v0,v0,-0x2650            
+8a8a8:    addu    a0,a0,v0                               8a8a8:    addu    a0,a0,v0                 
+8a8ac:    li      a1,2                                   8a8ac:    li      a1,2                     
+8a8b0:    j       89de4                                  8a8b0:    j       89de4                    
+8a8b4:    li      a2,3                                   8a8b4:    li      a2,3                     
+8a8b8:    sll     v0,s0,0x2                              8a8b8:    sll     v0,s0,0x2                
+8a8bc:    addu    v0,v0,s0                               8a8bc:    addu    v0,v0,s0                 
+8a8c0:    sll     a0,v0,0x4                              8a8c0:    sll     a0,v0,0x4                
+8a8c4:    subu    a0,a0,v0                               8a8c4:    subu    a0,a0,v0                 
+8a8c8:    sll     a0,a0,0x2                              8a8c8:    sll     a0,a0,0x2                
+8a8cc:    lui     v0,0x801b                              8a8cc:    lui     v0,0x801b                
+8a8d0:    addiu   v0,v0,-0x2650                          8a8d0:    addiu   v0,v0,-0x2650            
+8a8d4:    addu    a0,a0,v0                               8a8d4:    addu    a0,a0,v0                 
+8a8d8:    li      a1,2                                   8a8d8:    li      a1,2                     
+8a8dc:    j       89de4                                  8a8dc:    j       89de4                    
+8a8e0:    li      a2,0xc                                 8a8e0:    li      a2,0xc                   
+8a8e4:    sll     v0,s0,0x2                              8a8e4:    sll     v0,s0,0x2                
+8a8e8:    addu    v0,v0,s0                               8a8e8:    addu    v0,v0,s0                 
+8a8ec:    sll     a0,v0,0x4                              8a8ec:    sll     a0,v0,0x4                
+8a8f0:    subu    a0,a0,v0                               8a8f0:    subu    a0,a0,v0                 
+8a8f4:    sll     a0,a0,0x2                              8a8f4:    sll     a0,a0,0x2                
+8a8f8:    lui     v0,0x801b                              8a8f8:    lui     v0,0x801b                
+8a8fc:    addiu   v0,v0,-0x2650                          8a8fc:    addiu   v0,v0,-0x2650            
+8a900:    addu    a0,a0,v0                               8a900:    addu    a0,a0,v0                 
+8a904:    li      a1,3                                   8a904:    li      a1,3                     
+8a908:    j       89de4                                  8a908:    j       89de4                    
+8a90c:    li      a2,6                                   8a90c:    li      a2,6                     
+8a910:    sll     v0,s0,0x2                              8a910:    sll     v0,s0,0x2                
+8a914:    addu    v0,v0,s0                               8a914:    addu    v0,v0,s0                 
+8a918:    sll     a0,v0,0x4                              8a918:    sll     a0,v0,0x4                
+8a91c:    subu    a0,a0,v0                               8a91c:    subu    a0,a0,v0                 
+8a920:    sll     a0,a0,0x2                              8a920:    sll     a0,a0,0x2                
+8a924:    lui     v0,0x801b                              8a924:    lui     v0,0x801b                
+8a928:    addiu   v0,v0,-0x2650                          8a928:    addiu   v0,v0,-0x2650            
+8a92c:    addu    a0,a0,v0                               8a92c:    addu    a0,a0,v0                 
+8a930:    li      a1,3                                   8a930:    li      a1,3                     
