@@ -401,13 +401,17 @@ void func_80064AAC_usa(enum_func_800643A4_usa_arg0 arg0, const u16 arg1[], s32 a
     gDPPipeSync(glistp++);
     gDPSetTextureLUT(glistp++, G_TT_RGBA16);
     gDPLoadTLUT_pal256(glistp++, D_010192A8_usa);
-    gDPLoadTextureBlock(glistp++, D_0101CCC0_usa, G_IM_FMT_CI, G_IM_SIZ_8b, D_0101CCC0_USA_WIDTH, D_0101CCC0_USA_HEIGHT, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadTextureBlock(glistp++, D_0101CCC0_usa, G_IM_FMT_CI, G_IM_SIZ_8b, D_0101CCC0_USA_WIDTH, D_0101CCC0_USA_HEIGHT,
+                        0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
+                        G_TX_NOLOD);
     gDPPipeSync(glistp++);
 
     if ((s32)arg0 <= ENUM_FUNC_800643A4_USA_ARG0_3) {
-        gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0002, 6, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+        gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0002, 6, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                   G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
     } else {
-        gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0082, 6, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+        gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0082, 6, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                   G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
     }
 
     gDPSetTileSize(glistp++, 6, 0, 0, 0x003C, 0x003C);
@@ -446,7 +450,8 @@ void func_80064AAC_usa(enum_func_800643A4_usa_arg0 arg0, const u16 arg1[], s32 a
 
     var_t6 += arg2;
 
-    gSPTextureRectangle(glistp++, var_t7 << 2, var_t6 << 2, (var_t7 + 0x10) << 2, (var_t6 + 0x10) << 2, 6, 0, 0, 0x0400, 0x0400);
+    gSPTextureRectangle(glistp++, var_t7 << 2, var_t6 << 2, (var_t7 + 0x10) << 2, (var_t6 + 0x10) << 2, 6, 0, 0, 0x0400,
+                        0x0400);
     gDPPipeSync(glistp++);
     gDPSetColorImage(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, (*fb)->unk_19040);
 }

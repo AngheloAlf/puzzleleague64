@@ -237,9 +237,9 @@ void Update3DAttack(tetWell *well, cursor_t *cursor, s32 num) {
     for (count = 0; count < ATTACK_COUNT; count++) {
         attack = &well->attack[count];
 
-        if ((attack->type == 0xA) && (attack->unk_28 != -1)) {
+        if ((attack->type == 0xA) && (attack->slot != -1)) {
             if (((attack->state == ATTACKSTATE_1) || (attack->state == ATTACKSTATE_2)) && (attack->disappear != -1)) {
-                var_fp = well->attack[attack->unk_28].disappear;
+                var_fp = well->attack[attack->slot].disappear;
             }
         } else if ((attack->state >= ATTACKSTATE_1) && (attack->state <= ATTACKSTATE_3) && (attack->disappear != -1)) {
             if (attack->disappear < ARRAY_COUNT(position)) {

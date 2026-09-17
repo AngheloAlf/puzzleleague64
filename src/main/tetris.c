@@ -502,9 +502,9 @@ void DoTetris(void) {
         B_801AAB98_usa += 1;
         if (!(gGameStatus & GAME_STATUS_FLAG_20) || (gCounter % 2 != 0)) {
             if (gMain == GMAIN_387) {
-                if ((cursor->delay == 0) && (cursor->extra_wait == 0) && (well->state.death == 0) && (well->unk_43B0 == 0) &&
-                    (gSelection >= SELECTION_83) && (B_801AB61C_usa == 0) && (cursor->state <= 0) &&
-                    (cursor->waiting == 0)) {
+                if ((cursor->delay == 0) && (cursor->extra_wait == 0) && (well->state.death == 0) &&
+                    (well->unk_43B0 == 0) && (gSelection >= SELECTION_83) && (B_801AB61C_usa == 0) &&
+                    (cursor->state <= 0) && (cursor->waiting == 0)) {
                     well->state.timer += well->state.speed;
 
                     if (well->state.timer >= 0x1000) {
@@ -523,7 +523,8 @@ void DoTetris(void) {
 
                         temp = gTheGame.dimension * 0x10;
                         if (temp < well->state.current_raise) {
-                            well->state.raise = gTheGame.dimension * 0x10 - (well->state.current_raise - well->state.raise);
+                            well->state.raise =
+                                gTheGame.dimension * 0x10 - (well->state.current_raise - well->state.raise);
                             well->state.current_raise = gTheGame.dimension * 0x10;
                         }
                     }
@@ -613,9 +614,9 @@ void HackGame(tetWell *well) {
                 well->attack[count].type = 0;
                 well->attack[count].disappear = -1;
                 well->attack[count].delay = 0;
-                well->attack[count].unk_10 = 0;
+                well->attack[count].counter = 0;
                 well->attack[count].currRow = -1;
-                well->attack[count].unk_28 = -1;
+                well->attack[count].slot = -1;
             }
         }
     }

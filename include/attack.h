@@ -52,13 +52,13 @@ typedef struct attack_t {
     /* 0x04 */ ENUM_TYPE(AttackType, s32) type; /* Original name: type */
     /* 0x08 */ s32 disappear; /* Original name: disappear */
     /* 0x0C */ s32 delay; /* Original name: delay */
-    /* 0x10 */ s32 unk_10;
+    /* 0x10 */ s32 counter; /* Original name: counter */
     /* 0x14 */ s32 level; /* Original name: level */
     /* 0x18 */ s32 start; /* Original name: start */
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 expression; /* Original name: expression */
     /* 0x24 */ s32 currRow; /* Original name: currRow */
-    /* 0x28 */ s32 unk_28;
+    /* 0x28 */ s32 slot; /* Original name: slot */
     /* 0x2C */ UNK_PAD unk_2C[0x30-0x2C]; // alignment padding?
     /* 0x30 */ uObjSprite rect;
 } attack_t; // size = 0x48

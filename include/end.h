@@ -31,7 +31,7 @@ s32 DoGameOverTryAgain(void);
 // void func_80038F84_usa();
 s32 func_8003901C_usa(struct tetWell *well);
 // void func_8003991C_usa();
-void func_80039A54_usa(s32 arg0);
+void func_80039A54_usa(s32 chain_flag);
 void func_80039B78_usa(void);
 // void func_80039DB0_usa();
 s32 func_8003A0B8_usa(void);

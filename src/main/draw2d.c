@@ -538,7 +538,7 @@ s32 Draw2DAttackBlock(struct_gInfo_unk_00068 *dynamicp, s32 num) {
         }
 
         if ((attack->state >= ATTACKSTATE_7) && (attack->expression != 0) && (attack->disappear == -1) &&
-            (attack->unk_10 < 0)) {
+            (attack->counter < 0)) {
             if (var_t2 != 0) {
                 var_t2 = 0;
                 gSPObjLoadTxtr(glistp++, &B_801F9C48_usa[num]);

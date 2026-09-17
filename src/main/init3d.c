@@ -86,7 +86,8 @@ void Init3DNewRow(tetWell *well) {
             if (col == 0) {
                 do {
                     type = RandomBlock(well);
-                } while ((type == well->new_block[BLOCK_LEN_B - 1].type) || (type == well->new_block[col + 1].type) || (type == well->block[0][col].type));
+                } while ((type == well->new_block[BLOCK_LEN_B - 1].type) || (type == well->new_block[col + 1].type) ||
+                         (type == well->block[0][col].type));
             } else {
                 do {
                     type = RandomBlock(well);
@@ -196,9 +197,9 @@ void Init3DAttackBlocks(tetWell *well) {
         attack->type = ATTACKTYPE_0;
         attack->disappear = -1;
         attack->delay = 0;
-        attack->unk_10 = 0;
+        attack->counter = 0;
         attack->currRow = -1;
-        attack->unk_28 = -1;
+        attack->slot = -1;
     }
 }
 

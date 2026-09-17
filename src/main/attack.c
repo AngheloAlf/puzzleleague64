@@ -79,15 +79,15 @@ INLINE s32 func_8005A8D0_usa(s32 arg0, s32 *arg1) {
 void func_8005A990_usa(attack_t *attack) {
     switch (attack->type) {
         case ATTACKTYPE_1:
-            attack->unk_28 = -0x12;
+            attack->slot = -0x12;
             break;
 
         case ATTACKTYPE_2:
-            attack->unk_28 = -0x12;
+            attack->slot = -0x12;
             break;
 
         case ATTACKTYPE_3:
-            attack->unk_28 = -0x18;
+            attack->slot = -0x18;
             break;
 
         case ATTACKTYPE_4:
@@ -95,17 +95,17 @@ void func_8005A990_usa(attack_t *attack) {
         case ATTACKTYPE_10:
         case ATTACKTYPE_11:
         case ATTACKTYPE_12:
-            attack->unk_28 = -0x2A;
+            attack->slot = -0x2A;
             break;
 
         case ATTACKTYPE_13:
         case ATTACKTYPE_14:
         case ATTACKTYPE_15:
-            attack->unk_28 = -0x42;
+            attack->slot = -0x42;
             break;
 
         default:
-            attack->unk_28 = -0x4C;
+            attack->slot = -0x4C;
     }
 }
 #endif
@@ -118,8 +118,8 @@ void func_8005A9EC_usa(tetWell *well, attack_t *attack) {
     s32 var_v0;
     s32 var_a1;
 
-    var_v0 = attack->unk_28;
-    attack->unk_28++;
+    var_v0 = attack->slot;
+    attack->slot++;
     temp_v1 = attack->type;
     if (var_v0 < 0) {
         var_v0 = -var_v0;
@@ -183,16 +183,16 @@ void AttackFly(tetWell *well, attack_t *attack, s32 num) {
     temp_a3 = &attack->rect.s;
     temp_t0 = (num == 0) ? -1 : 1;
     if (attack->delay >= -5) {
-        attack->unk_10 -= temp_t0 * 2;
+        attack->counter -= temp_t0 * 2;
         attack->currRow += 2;
     } else if (attack->delay >= -0x18) {
         var_a0 = -attack->delay - 6;
-        attack->unk_10 += D_800B762C_usa[var_a0] * temp_t0;
+        attack->counter += D_800B762C_usa[var_a0] * temp_t0;
         attack->currRow += D_800B7640_usa[var_a0];
     } else {
         if (attack->disappear == -1) {
-            if ((attack->type == ATTACKTYPE_10) && (attack->unk_28 != -1)) {
-                attack->disappear = well->attack[attack->unk_28].disappear;
+            if ((attack->type == ATTACKTYPE_10) && (attack->slot != -1)) {
+                attack->disappear = well->attack[attack->slot].disappear;
             } else {
                 if (gTheGame.dimension == DIMENSION_2D) {
                     var_a0 = st_Attack2DTopPosition[num][0];
@@ -209,21 +209,21 @@ void AttackFly(tetWell *well, attack_t *attack, s32 num) {
 
         if (gTheGame.dimension == DIMENSION_2D) {
             temp_ft2 = st_Attack2DTopPosition[num][attack->disappear];
-            temp_ft1 = (DOUBLE_LITERAL(10.0) - (f32)attack->currRow) / (temp_ft2 - attack->unk_10);
-            attack->unk_10 += temp_t0 * 5;
+            temp_ft1 = (DOUBLE_LITERAL(10.0) - (f32)attack->currRow) / (temp_ft2 - attack->counter);
+            attack->counter += temp_t0 * 5;
             temp = (DOUBLE_LITERAL(10.0) - (temp_ft1 * temp_ft2));
-            attack->currRow = (temp_ft1 * attack->unk_10) + temp;
+            attack->currRow = (temp_ft1 * attack->counter) + temp;
         } else {
             temp_ft2 = st_Attack3DTopPosition[num][attack->disappear];
-            temp_ft1 = (DOUBLE_LITERAL(10.0) - (f32)attack->currRow) / (temp_ft2 - attack->unk_10);
-            attack->unk_10 += temp_t0 * 5;
+            temp_ft1 = (DOUBLE_LITERAL(10.0) - (f32)attack->currRow) / (temp_ft2 - attack->counter);
+            attack->counter += temp_t0 * 5;
             temp = (DOUBLE_LITERAL(10.0) - (temp_ft1 * temp_ft2));
-            attack->currRow = (temp_ft1 * attack->unk_10) + temp;
+            attack->currRow = (temp_ft1 * attack->counter) + temp;
         }
     }
 
     if (gTheGame.dimension == DIMENSION_2D) {
-        temp_a3->objX = attack->unk_10 << 2;
+        temp_a3->objX = attack->counter << 2;
         temp_a3->objY = attack->currRow << 2;
         if (attack->currRow < 0xB) {
             attack->delay = 0x3C;
@@ -233,7 +233,7 @@ void AttackFly(tetWell *well, attack_t *attack, s32 num) {
             attack->state = ATTACKSTATE_2;
         }
     } else {
-        temp_a3->scaleW = attack->unk_10;
+        temp_a3->scaleW = attack->counter;
         temp_a3->scaleH = attack->currRow;
         if (attack->currRow < 0xB) {
             attack->delay = 0x3C;
@@ -264,12 +264,12 @@ void AttackShake(tetWell *well, cursor_t *cursor, attack_t *attack) {
     s32 var_v0;
     s32 var_a1;
 
-    if (attack->unk_28 < 0) {
+    if (attack->slot < 0) {
         if (cursor->state != 2) {
             cursor->state = 4;
         }
-        var_v0 = attack->unk_28;
-        attack->unk_28 = var_v0 + 1;
+        var_v0 = attack->slot;
+        attack->slot = var_v0 + 1;
 
         if (var_v0 < 0) {
             var_v0 = -var_v0;
@@ -479,15 +479,15 @@ void AttackPackEmpty(tetWell *well, s32 num) {
 
                     bcopy(attack1, &well->attack[var_s2], sizeof(attack_t));
                     if ((attack1->state >= ATTACKSTATE_1) && (attack1->state <= ATTACKSTATE_3)) {
-                        if ((attack1->type >= ATTACKTYPE_10) && (attack1->unk_28 == -1)) {
+                        if ((attack1->type >= ATTACKTYPE_10) && (attack1->slot == -1)) {
                             attack_chain2[num] = var_s2;
 
                             for (var_a0_2 = 0; var_a0_2 < ATTACK_COUNT; var_a0_2++) {
                                 if (var_a0_2 != var_s1) {
                                     attack2 = &well->attack[var_a0_2];
-                                    if ((attack2->type == ATTACKTYPE_10) && (attack2->unk_28 == var_s1) &&
+                                    if ((attack2->type == ATTACKTYPE_10) && (attack2->slot == var_s1) &&
                                         ((attack2->state == ATTACKSTATE_1) || (attack2->state == ATTACKSTATE_2))) {
-                                        attack2->unk_28 = var_s2;
+                                        attack2->slot = var_s2;
                                     }
                                 }
                             }
@@ -496,7 +496,7 @@ void AttackPackEmpty(tetWell *well, s32 num) {
 
                     attack1->state = ATTACKSTATE_0;
                     attack1->delay = 0;
-                    attack1->unk_10 = 0;
+                    attack1->counter = 0;
                     attack1->disappear = -1;
                     break;
                 }
@@ -665,7 +665,7 @@ void InitFlyAttack(tetWell *well, attack_t *attack, s32 posX, s32 posY, ENUM_TYP
         sp10 = well->block_rect[0][0].s.objX >> 0x2;
         sp14 = (well->block_rect[0][0].s.objY >> 0x2) - temp_s5;
         Init2DAttackPosition(attack, type, num);
-        attack->unk_10 = sp10 + (posX * 0x10);
+        attack->counter = sp10 + (posX * 0x10);
         attack->currRow = sp14 - (posY * 0x10);
         return;
     }
@@ -674,28 +674,28 @@ void InitFlyAttack(tetWell *well, attack_t *attack, s32 posX, s32 posY, ENUM_TYP
 
     if (sp10 > 0) {
         Init3DAttackPosition(attack, type, num);
-        attack->unk_10 = sp10;
+        attack->counter = sp10;
         attack->currRow = sp14 - temp_s5;
         return;
     }
 
     Init3DAttackPosition(attack, type, num);
     temp = (num == 0) ? 1 : 0;
-    if ((attack->type == ATTACKTYPE_10) && (attack->unk_28 != -1)) {
-        if (well->attack[attack->unk_28].type < 0xA) {
+    if ((attack->type == ATTACKTYPE_10) && (attack->slot != -1)) {
+        if (well->attack[attack->slot].type < 0xA) {
             attack->state = ATTACKSTATE_0;
             return;
         }
 
-        attack->disappear = well->attack[attack->unk_28].disappear;
-        if (well->attack[attack->unk_28].state == ATTACKSTATE_1) {
-            well->attack[attack->unk_28].type++;
+        attack->disappear = well->attack[attack->slot].disappear;
+        if (well->attack[attack->slot].state == ATTACKSTATE_1) {
+            well->attack[attack->slot].type++;
             // TODO: enum value for AttackType?
-            if (well->attack[attack->unk_28].type > 0x16) {
-                well->attack[attack->unk_28].type = 0x16;
+            if (well->attack[attack->slot].type > 0x16) {
+                well->attack[attack->slot].type = 0x16;
             }
 
-            Init3DAttackPosition(&well->attack[attack->unk_28], well->attack[attack->unk_28].type, num);
+            Init3DAttackPosition(&well->attack[attack->slot], well->attack[attack->slot].type, num);
             attack->state = ATTACKSTATE_0;
             return;
         }

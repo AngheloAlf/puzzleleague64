@@ -220,6 +220,9 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", Init2DTetrisBlocks);
 INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", Init2DTetrisBlocks);
 #endif
 
+/**
+ * Original name: Init2DTetrisBlocksTMEM
+ */
 void Init2DTetrisBlocksTMEM(tetWell *well, s32 clear) {
     s32 row;
     s32 col;
@@ -243,100 +246,562 @@ void Init2DTetrisBlocksTMEM(tetWell *well, s32 clear) {
     }
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", Init2DIcons);
-#endif
+/**
+ * Original name: Init2DIcons
+ */
+void Init2DIcons(tetWell *well) {
+    s32 i;
+    icon_t *icon;
+    uObjSprite_t *s;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", Init2DIcons);
-#endif
+    for (i = 0; i < ICON_COUNT; i++) {
+        icon = &well->icon[i];
+        s = &icon->thing.rect.s;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", Init2DIcons);
-#endif
+        icon->flag = 0;
+        icon->type = -1;
+        icon->count = 0;
+        icon->distance = 0;
 
+        // ??
+        s->scaleW = (0 << 10) + 0x38F;
+        s->imageW = 16 << 5;
+        s->paddingX = 0;
+
+        s->scaleH = 1 << 10;
+        s->imageH = 16 << 5;
+        s->paddingY = 0;
+
+        s->imageStride = 8;
+        s->imageAdrs = 0;
+        s->imageFmt = G_IM_FMT_CI;
+        s->imageSiz = G_IM_SIZ_8b;
+        s->imagePal = 0;
+        s->imageFlags = 0;
+    }
+}
+
+/**
+ * Original name: Init2DAttackBlocks
+ */
+void Init2DAttackBlocks(tetWell *well) {
+    s32 i;
+    attack_t *attack;
+    uObjSprite_t *s;
+
+    for (i = 0; i < ATTACK_COUNT; i++) {
+        attack = &well->attack[i];
+        s = &attack->rect.s;
+
+        attack->state = ATTACKSTATE_0;
+        attack->type = ATTACKTYPE_0;
+        attack->disappear = -1;
+        attack->delay = 0;
+        attack->counter = 0;
+        attack->expression = 0;
+        attack->currRow = -1;
+        attack->slot = -1;
+
+        s->scaleW = 1 << 10;
+        s->imageW = 32 << 5;
+        s->paddingX = 0;
+
+        s->scaleH = 1 << 10;
+        s->imageH = 16 << 5;
+        s->paddingY = 0;
+
+        s->imageStride = 0;
+        s->imageAdrs = 0;
+        s->imageFmt = G_IM_FMT_CI;
+        s->imageSiz = G_IM_SIZ_8b;
+        s->imagePal = 0;
+        s->imageFlags = 0;
+    }
+}
+
+/**
+ * Original name: Init2DExplosion
+ */
+void Init2DExplosion(tetWell *well) {
+    s32 i;
+    explode_t *explode;
+    uObjSprite_t *s;
+
+    for (i = 0; i < EXPLOSION_COUNT; i++) {
+        explode = &well->explosion[i];
+        s = &explode->rect.s;
+
+        explode->type = -1;
+        explode->frame = -1;
+
+        s->scaleW = 1 << 10;
+        s->paddingX = 0;
+        s->scaleH = 1 << 10;
+        s->paddingY = 0;
+
+        s->imageStride = 8;
+        s->imageAdrs = 0;
+        s->imageFmt = G_IM_FMT_CI;
+        s->imageSiz = G_IM_SIZ_8b;
+        s->imagePal = 0;
+        s->imageFlags = 0;
+    }
+}
+
+/**
+ * Original name: Init2DText
+ */
+void Init2DText(void) {
+    s32 i;
+    s32 temp;
+    uObjSprite_t *s;
+
+    gTheGame.currentText = 6;
+
+    for (i = 0; i < DRAWTEXT_COUNT; i++) {
+        gTheGame.drawText[i].texture = -1;
+        s = &gTheGame.drawText[i].word.s;
+        s->scaleW = 1 << 10;
+        s->imageW = 16 << 5;
+        s->paddingX = 0;
+
+        s->scaleH = 1 << 10;
+        s->imageH = 16 << 5;
+        s->paddingY = 0;
+
+        s->imageStride = 8;
+        s->imageAdrs = 0;
+        s->imageFmt = G_IM_FMT_CI;
+        s->imageSiz = G_IM_SIZ_8b;
+        s->imagePal = 0;
+        s->imageFlags = 0;
+    }
+
+    switch (gSelection) {
+        case SELECTION_8C:
+        case SELECTION_BE:
+            if (gTheGame.tetrisWell[0].menu.game != 0) {
+                s = &gTheGame.drawText[0].word.s;
+
+                gTheGame.drawText[0].texture = 0;
+                s->objX = 228 << 2;
+                s->objY = 33 << 2;
+                s->imageW = 64 << 5;
+                s->imageH = 8 << 5;
+                s->imageAdrs = 0;
+            }
+
+            s = &gTheGame.drawText[1].word.s;
+            gTheGame.drawText[1].texture = 0;
+            s->objX = 228 << 2;
+            s->objY = 54 << 2;
+            s->imageW = 64 << 5;
+            s->imageH = 8 << 5;
+            s->imageAdrs = 0x40;
+
+            s = &gTheGame.drawText[2].word.s;
+            gTheGame.drawText[2].texture = 0;
+            s->objX = 228 << 2;
+            s->objY = 82 << 2;
+            s->imageW = 64 << 5;
+            s->imageH = 8 << 5;
+            s->imageAdrs = 0x80;
+
+            s = &gTheGame.drawText[3].word.s;
+            gTheGame.drawText[3].texture = 0;
+            s->objX = 228 << 2;
+            s->objY = 111 << 2;
+            s->imageW = 64 << 5;
+            s->imageH = 8 << 5;
+            s->imageAdrs = 0xC0;
+
+            s = &gTheGame.drawText[4].word.s;
+            s->objX = 232 << 2;
+            s->objY = 121 << 2;
+            s->imageW = 64 << 5;
+            s->imageH = 16 << 5;
+
+            switch (gTheGame.tetrisWell[0].menu.game) {
+                case 0x0:
+                    gTheGame.drawText[4].texture = 1;
+                    s->imageAdrs = 0;
+                    break;
+
+                case 0x1:
+                    gTheGame.drawText[4].texture = 1;
+                    s->imageAdrs = 0x80;
+                    break;
+
+                case 0x2:
+                    gTheGame.drawText[4].texture = 2;
+                    s->imageAdrs = 0;
+                    break;
+
+                case 0x3:
+                    gTheGame.drawText[4].texture = 2;
+                    s->imageAdrs = 0x80;
+                    break;
+            }
+            break;
+
+        case SELECTION_AA:
+            gTheGame.drawText[0].texture = 4;
+            s = &gTheGame.drawText[0].word.s;
+            s->objX = 228 << 2;
+            s->objY = 31 << 2;
+            s->imageW = 64 << 5;
+            s->imageH = 8 << 5;
+            s->imageAdrs = 0x80;
+
+            if (gTheGame.tetrisWell[0].menu.game == 5) {
+                gTheGame.drawText[4].texture = 7;
+                s = &gTheGame.drawText[4].word.s;
+                s->objX = 232 << 2;
+                s->objY = 40 << 2;
+                s->imageW = 64 << 5;
+                s->imageH = 16 << 5;
+                if (gTheGame.tetrisWell[0].menu.stage == 3) {
+                    s->imageAdrs = 0;
+                } else {
+                    s->imageAdrs = 0x80;
+                }
+            }
+
+            gTheGame.drawText[1].texture = 0;
+            s = &gTheGame.drawText[1].word.s;
+            s->objX = 228 << 2;
+            s->objY = 54 << 2;
+            s->imageW = 64 << 5;
+            s->imageH = 8 << 5;
+            s->imageAdrs = 0x40;
+
+            gTheGame.drawText[2].texture = 0;
+            s = &gTheGame.drawText[2].word.s;
+            s->objX = 228 << 2;
+            s->objY = 82 << 2;
+            s->imageW = 64 << 5;
+            s->imageH = 8 << 5;
+            s->imageAdrs = 0x80;
+
+            if (gTheGame.tetrisWell[0].menu.game != 5) {
+                gTheGame.drawText[3].texture = 0;
+                s = &gTheGame.drawText[3].word.s;
+                s->objX = 228 << 2;
+                s->objY = 111 << 2;
+                s->imageW = 64 << 5;
+                s->imageH = 8 << 5;
+                s->imageAdrs = 0xC0;
+            }
+            break;
+
+        case SELECTION_82:
+            if (gTheGame.tetrisWell[0].menu.game != 0) {
+                gTheGame.drawText[0].texture = 4;
+                s = &gTheGame.drawText[0].word.s;
+                s->objX = 228 << 2;
+                s->objY = 33 << 2;
+                s->imageW = 64 << 5;
+                s->imageH = 8 << 5;
+                if (gTheGame.tetrisWell[0].menu.game < 4) {
+                    s->imageAdrs = 0;
+                } else {
+                    s->imageAdrs = 0x40;
+                }
+            }
+
+            gTheGame.drawText[1].texture = 4;
+            s = &gTheGame.drawText[1].word.s;
+            s->objX = 228 << 2;
+            s->objY = 55 << 2;
+            s->imageW = 64 << 5;
+            s->imageH = 8 << 5;
+            s->imageAdrs = 0x80;
+
+            if (gTheGame.tetrisWell[0].menu.game == 0) {
+                gTheGame.drawText[2].texture = 8;
+                s = &gTheGame.drawText[2].word.s;
+                s->objX = 230 << 2;
+                s->objY = 33 << 2;
+                s->imageW = 64 << 5;
+                s->imageH = 16 << 5;
+                s->imageAdrs = 0;
+            }
+
+            s = &gTheGame.drawText[3].word.s;
+            gTheGame.drawText[3].word.s.imageStride = 6;
+            s->objX = 245 << 2;
+            s->objY = 80 << 2;
+            s->imageW = 24 << 5;
+            s->imageH = 24 << 5;
+            break;
+
+        case SELECTION_96:
+            gTheGame.drawText[0].texture = -1;
+            s = &gTheGame.drawText[0].word.s;
+            s->objX = 141 << 2;
+            s->objY = 195 << 2;
+            s->imageW = 16 << 5;
+            s->imageH = 16 << 5;
+            s->imageAdrs = 0;
+
+            gTheGame.drawText[1].texture = -1;
+            s = &gTheGame.drawText[1].word.s;
+            s->objX = 163 << 2;
+            s->objY = 195 << 2;
+            s->imageW = 16 << 5;
+            s->imageH = 16 << 5;
+            s->imageAdrs = 0x80;
+
+            gTheGame.drawText[2].texture = 5;
+            s = &gTheGame.drawText[2].word.s;
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", Init2DIcons);
+            s->objX = 138 << 2;
+#else
+            s->objX = 140 << 2;
 #endif
+            s->objY = 93 << 2;
+            s->imageW = 41 << 5;
+            s->imageH = 16 << 5;
+            s->imageAdrs = 0;
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", Init2DAttackBlocks);
-#endif
+            temp = gTheGame.menu[0].stage;
+            if (temp < 5) {
+                gTheGame.drawText[3].texture = 5;
+                s = &gTheGame.drawText[3].word.s;
+                s->imageW = 16 << 5;
+                s->imageH = 16 << 5;
+                s->objX = 150 << 2;
+                s->objY = 107 << 2;
+                temp = (temp - 1) * 0x10;
+                s->imageAdrs = ((temp + 0x400)) >> 3;
+            } else if (temp < 13) {
+                gTheGame.drawText[3].texture = 6;
+                s = &gTheGame.drawText[3].word.s;
+                s->imageW = 16 << 5;
+                s->imageH = 16 << 5;
+                if (temp < 0xA) {
+                    s->objX = 150 << 2;
+                } else {
+                    s->objX = 154 << 2;
+                }
+                s->objY = 107 << 2;
+                if (temp < 9) {
+                    temp = (temp - 5) * 0x10;
+                    s->imageAdrs = (temp) >> 3;
+                } else {
+                    temp = (temp - 9) * 0x10;
+                    s->imageAdrs = (temp + 0x400) >> 3;
+                }
+            } else if (temp < 15) {
+                gTheGame.drawText[3].texture = 5;
+                s = &gTheGame.drawText[3].word.s;
+                s->imageW = 16 << 5;
+                s->imageH = 16 << 5;
+                s->objX = 154 << 2;
+                s->objY = 107 << 2;
+                s->imageAdrs = 6;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", Init2DAttackBlocks);
-#endif
+                gTheGame.drawText[4].texture = 5;
+                s = &gTheGame.drawText[4].word.s;
+                s->imageW = 16 << 5;
+                s->imageH = 16 << 5;
+                s->objX = 154 << 2;
+                s->objY = 107 << 2;
+                if (temp == 0xD) {
+                    s->imageAdrs = 0x84;
+                } else {
+                    s->imageAdrs = 0x86;
+                }
+            } else if (temp < 19) {
+                gTheGame.drawText[3].texture = 5;
+                s = &gTheGame.drawText[3].word.s;
+                s->imageW = 16 << 5;
+                s->imageH = 16 << 5;
+                s->objX = 154 << 2;
+                s->objY = 107 << 2;
+                s->imageAdrs = 6;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", Init2DAttackBlocks);
-#endif
+                gTheGame.drawText[4].texture = 6;
+                s = &gTheGame.drawText[4].word.s;
+                s->imageW = 16 << 5;
+                s->imageH = 16 << 5;
+                s->objX = 154 << 2;
+                s->objY = 107 << 2;
+                temp = (temp - 0xF) * 0x10;
+                s->imageAdrs = temp >> 3;
+            }
 
+            s = &gTheGame.drawText[5].word.s;
+            s->imageW = 64 << 5;
+            s->imageH = 16 << 5;
+            s->objY = 141 << 2;
+
+            switch (gTheGame.tetrisWell[0].menu.game) {
+                case 0x1:
+                    gTheGame.drawText[5].texture = 1;
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", Init2DAttackBlocks);
+                    s->objX = 126 << 2;
+#else
+                    s->objX = 125 << 2;
 #endif
+                    s->imageAdrs = 0x80;
+                    break;
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", Init2DExplosion);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", Init2DExplosion);
-#endif
-
+                case 0x2:
+                    gTheGame.drawText[5].texture = 2;
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", Init2DExplosion);
+                    s->objX = 132 << 2;
+#elif VERSION_GER
+                    s->objX = 130 << 2;
+#else
+                    s->objX = 133 << 2;
 #endif
+                    s->imageAdrs = 0;
+                    break;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", Init2DExplosion);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", Init2DText);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", func_8006BA68_eur);
-#endif
-
+                case 0x3:
+                    gTheGame.drawText[5].texture = 2;
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", func_8006A1A8_fra);
+                    s->objX = 121 << 2;
+#elif VERSION_GER
+                    s->objX = 126 << 2;
+#else
+                    s->objX = 125 << 2;
 #endif
+                    s->imageAdrs = 0x80;
+                    break;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", func_8006A358_ger);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", Init2DClearLine);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", func_8006C3B0_eur);
-#endif
-
+                case 0x4:
+                    gTheGame.drawText[5].texture = 3;
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", func_8006AAF0_fra);
+                    s->objX = 126 << 2;
+#elif VERSION_GER
+                    s->objX = 132 << 2;
+#else
+                    s->objX = 133 << 2;
 #endif
+                    s->imageAdrs = 0x80;
+                    break;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", func_8006ACA0_ger);
+                case 0x5:
+                    gTheGame.drawText[5].texture = 3;
+#if VERSION_FRA
+                    s->objX = 127 << 2;
+#else
+                    s->objX = 132 << 2;
 #endif
+                    s->imageAdrs = 0;
+                    break;
+            }
+            break;
+
+        case SELECTION_A0:
+        case SELECTION_B4:
+        case SELECTION_C8:
+            func_8006C204_usa();
+
+            s = &gTheGame.drawText[0].word.s;
+            s->objX = 141 << 2;
+            s->objY = 177 << 2;
+            s->imageW = 16 << 5;
+            s->imageH = 16 << 5;
+
+            s = &gTheGame.drawText[1].word.s;
+            s->objX = 141 << 2;
+            s->objY = 194 << 2;
+            s->imageW = 16 << 5;
+            s->imageH = 16 << 5;
+
+            s = &gTheGame.drawText[2].word.s;
+            s->objX = 141 << 2;
+            s->objY = 211 << 2;
+            s->imageW = 16 << 5;
+            s->imageH = 16 << 5;
+
+            s = &gTheGame.drawText[3].word.s;
+            s->objX = 163 << 2;
+            s->objY = 177 << 2;
+            s->imageW = 16 << 5;
+            s->imageH = 16 << 5;
+
+            s = &gTheGame.drawText[4].word.s;
+            s->objX = 163 << 2;
+            s->objY = 194 << 2;
+            s->imageW = 16 << 5;
+            s->imageH = 16 << 5;
+
+            s = &gTheGame.drawText[5].word.s;
+            s->objX = 163 << 2;
+            s->objY = 211 << 2;
+            s->imageW = 16 << 5;
+            s->imageH = 16 << 5;
+            break;
+
+        default:
+            break;
+    }
+}
+
+/**
+ * Original name: Init2DClearLine
+ */
+void Init2DClearLine(tetWell *well, cursor_t *cursor UNUSED, s32 num) {
+    s32 count;
+    uObjSprite_t *s;
+
+    for (count = 0; count < 6; count++) {
+        s = &well->attack[count].rect.s;
+        if (gTheGame.totalPlayer == 1) {
+            s->objX = 0x1C8 + count * 0x48;
+        } else if (num == 0) {
+            s->objX = 0x60 + count * 0x48;
+        } else {
+            s->objX = 0x2F0 + count * 0x48;
+        }
+        s->objY = 0x340;
+
+        s->scaleW = 0x38F;
+        s->scaleH = 0x400;
+
+        s->imageW = 0x200;
+        s->imageH = 0x200;
+
+        s->imageStride = 8;
+        s->imageAdrs = 0;
+    }
+
+    s = &well->attack[count].rect.s;
+    if (gTheGame.totalPlayer == 1) {
+        s->objX = 0x378;
+        s->imageAdrs = 2;
+    } else if (num == 0) {
+        s->objX = 0x210;
+        s->imageAdrs = 2;
+    } else {
+        s->objX = 0x230;
+        s->imageAdrs = 0x82;
+    }
+
+    s->objY = 0x340;
+    s->imageW = 0x600;
+    s->imageH = 0x200;
+    s->imageStride = 8;
+}
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", func_8006C204_usa);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", func_8006C4D4_eur);
+INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", func_8006C204_usa);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", func_8006AC14_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", func_8006C204_usa);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", func_8006ADC4_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", func_8006C204_usa);
 #endif
 
 void Init2DSmallStars(s32 num) {
@@ -604,15 +1069,15 @@ void Init2DBrickTMEM(attack_t *attack) {
 void Init2DFaceTMEM(attack_t *attack) {
     if (attack->type < ATTACKTYPE_11) {
         attack->expression = 0x1E;
-        attack->unk_10 = -0xA;
+        attack->counter = -0xA;
         attack->rect.s.imageAdrs = 0;
     } else if (AnimationRandom(0x332) % 2 == 0) {
         attack->expression = 0x1F;
-        attack->unk_10 = -0xA;
+        attack->counter = -0xA;
         attack->rect.s.imageAdrs = 2;
     } else {
         attack->expression = 0x20;
-        attack->unk_10 = -0x96;
+        attack->counter = -0x96;
         attack->rect.s.imageAdrs = 4;
     }
 }

@@ -937,7 +937,7 @@ s32 DoGameOverTryAgain(void) {
     return 0;
 }
 
-void func_80038F84_usa(void) {
+INLINE void func_80038F84_usa(void) {
     s32 var_a0;
     s32 temp;
 
@@ -967,7 +967,305 @@ void func_80038F84_usa(void) {
 
 #if VERSION_USA
 // DoGameOverStat?
+#if 0
+s32 func_8003901C_usa(tetWell *well) {
+    char sp10[5];
+    s32 sp24;
+    s32 sp2C;
+    s32 sp34;
+    s32 sp3C;
+    u16 sp46;
+    u16 sp4E;
+    icon_t *temp_s0;
+    s32 var_fp;
+    s32 var_s1;
+    s32 var_s2;
+    s32 var_s3;
+    s32 var_s5;
+    s32 var_s7;
+    uObjSprite *temp_v1_4;
+    text_t *temp_v1_2;
+
+    var_s7 = 0;
+    var_fp = 0;
+    sp24 = 0;
+    sp2C = 0;
+
+    func_80038F84_usa();
+
+    sp46 = gTheGame.controller[0].hold_button;
+    sp4E = gTheGame.controller[0].touch_button;
+
+    var_s1 = 0;
+    var_s5 = 0;
+    var_s2 = 0x43;
+
+    for (var_s3 = 0; var_s3 < 7; var_s3++) {
+        if (st_Combo1[var_s3] == 0) {
+            continue;
+        }
+
+        if (var_s7 == 0) {
+            if (var_s1 >= gTheGame.help.current_pos) {
+                if ((var_s1 < (gTheGame.help.current_pos + 7)) && (sp24 == 0)) {
+                    sp34 = var_s2;
+                    var_s2 += 0x14;
+                    sp24 = -1;
+                }
+                if (var_s7 == 0) {
+                    var_s7 = -1;
+                    var_s1 += 1;
+                }
+            } else {
+                var_s7 = -1;
+                var_s1 += 1;
+            }
+        }
+
+        if ((var_s1 >= gTheGame.help.current_pos) && (var_s1 < gTheGame.help.current_pos + 7)) {
+            temp_s0 = &well->icon[var_s5++];
+            temp_s0->flag = -1;
+            temp_s0->type = ICONTYPE_12;
+            temp_s0->total = var_s3 + 4;
+            temp_s0->thing.rect.s.objX = 0x88 * 4;
+            temp_s0->thing.rect.s.objY = var_s2 * 4;
+            temp_s0->thing.rect.s.imageW = 0x200;
+            temp_s0->count = st_Combo1[var_s3];
+            Init2DComboTMEM(temp_s0);
+            sprintf(sp10, "%3d", temp_s0->count);
+            SetText(0xAD, var_s2 + 1, sp10, SETTEXTTYPE_15);
+            var_s2 += 0x14;
+        }
+        var_s1 += 1;
+    }
+
+    for (var_s3 = 0; var_s3 < 0x3C; var_s3++) {
+        if (st_Combo2[var_s3] == 0) {
+            continue;
+        }
+
+        if (var_s7 == 0) {
+            if (var_s1 >= gTheGame.help.current_pos) {
+                if ((var_s1 < (gTheGame.help.current_pos + 7)) && (sp24 == 0)) {
+                    sp34 = var_s2;
+                    var_s2 += 0x14;
+                    sp24 = -1;
+                }
+                if (var_s7 == 0) {
+                    var_s7 = -1;
+                    var_s1 += 1;
+                }
+            } else {
+                var_s7 = -1;
+                var_s1 += 1;
+            }
+        }
+
+        if ((var_s1 >= gTheGame.help.current_pos) && (var_s1 < (gTheGame.help.current_pos + 7))) {
+            temp_s0 = &well->icon[var_s5++];
+            temp_s0->flag = -1;
+            temp_s0->type = ICONTYPE_12;
+            temp_s0->total = var_s3 + 0xB;
+            temp_s0->thing.rect.s.objX = 0x88 * 4;
+            temp_s0->thing.rect.s.objY = var_s2 * 4;
+            temp_s0->thing.rect.s.imageW = 0x200;
+            temp_s0->count = st_Combo2[var_s3];
+            Init2DComboTMEM(temp_s0);
+            if (!(gGameStatus & 2)) {
+                if (temp_s0->total >= 0x24) {
+                    temp_s0->type = ICONTYPE_13;
+                    temp_s0->thing.rect.s.imageW = 0x400;
+                    temp_s0->thing.rect.s.imageAdrs = 0x80;
+                }
+            }
+            sprintf(sp10, "%3d", temp_s0->count);
+            SetText(0xAD, var_s2 + 1, sp10, SETTEXTTYPE_15);
+            var_s2 += 0x14;
+        }
+        var_s1 += 1;
+    }
+
+    for (var_s3 = 0; var_s3 < 9; var_s3++) {
+        if (st_Chain1[var_s3] == 0) {
+            continue;
+        }
+
+        if (var_fp == 0) {
+            if (var_s1 >= gTheGame.help.current_pos) {
+                if ((var_s1 < (gTheGame.help.current_pos + 7)) && (sp2C == 0)) {
+                    sp3C = var_s2;
+                    var_s2 += 0x14;
+                    sp2C = -1;
+                }
+                if (var_fp == 0) {
+                    var_fp = -1;
+                    var_s1 += 1;
+                }
+            } else {
+                var_fp = -1;
+                var_s1 += 1;
+            }
+        }
+
+        if ((var_s1 >= gTheGame.help.current_pos) && (var_s1 < (gTheGame.help.current_pos + 7))) {
+            temp_s0 = &well->icon[var_s5++];
+            temp_s0->flag = -1;
+            temp_s0->type = ICONTYPE_10;
+            temp_s0->total = var_s3 + 1;
+            temp_s0->thing.rect.s.objX = 0x88 * 4;
+            temp_s0->thing.rect.s.objY = var_s2 * 4;
+            temp_s0->thing.rect.s.imageW = 0x200;
+            temp_s0->count = st_Chain1[var_s3];
+            Init2DChainTMEM(temp_s0);
+            sprintf(sp10, "%3d", temp_s0->count);
+            SetText(0xAD, var_s2 + 1, sp10, SETTEXTTYPE_15);
+            var_s2 += 0x14;
+        }
+        var_s1 += 1;
+    }
+
+    for (var_s3 = 0; var_s3 < 0x5A; var_s3++) {
+        if (st_Chain2[var_s3] == 0) {
+            continue;
+        }
+
+        if (var_fp == 0) {
+            if (var_s1 >= gTheGame.help.current_pos) {
+                if ((var_s1 < (gTheGame.help.current_pos + 7)) && (sp2C == 0)) {
+                    sp3C = var_s2;
+                    var_s2 += 0x14;
+                    sp2C = -1;
+                }
+                if (var_fp == 0) {
+                    var_fp = -1;
+                    var_s1 += 1;
+                }
+            } else {
+                var_fp = -1;
+                var_s1 += 1;
+            }
+        }
+
+        if ((var_s1 >= gTheGame.help.current_pos) && (var_s1 < (gTheGame.help.current_pos + 7))) {
+            temp_s0 = &well->icon[var_s5++];
+            temp_s0->flag = -1;
+            temp_s0->type = ICONTYPE_10;
+            temp_s0->total = var_s3 + 0xA;
+            if (!(gGameStatus & 2)) {
+                if (temp_s0->total >= 0xE) {
+                    temp_s0->total = 0x63;
+                }
+            }
+            temp_s0->thing.rect.s.objX = 0x88 * 4;
+            temp_s0->thing.rect.s.objY = var_s2 * 4;
+            temp_s0->thing.rect.s.imageW = 0x200;
+            temp_s0->count = st_Chain2[var_s3];
+            Init2DChainTMEM(temp_s0);
+            sprintf(sp10, "%3d", temp_s0->count);
+            SetText(0xAD, var_s2 + 1, sp10, SETTEXTTYPE_15);
+            var_s2 += 0x14;
+        }
+        var_s1 += 1;
+    }
+
+    if (sp24 != 0) {
+        temp_v1_2 = &gTheGame.drawText[gTheGame.currentText];
+        temp_v1_2->texture = 0xC;
+        temp_v1_2->word.s.imageAdrs = 0x80;
+        temp_v1_2->word.s.imageW = 0x600;
+        temp_v1_2->word.s.objX = 0x76 * 4;
+        temp_v1_2->word.s.objY = sp34 * 4;
+        gTheGame.currentText += 1;
+    }
+
+    if (sp2C != 0) {
+        temp_v1_2 = &gTheGame.drawText[gTheGame.currentText];
+        temp_v1_2->texture = 0xA;
+        temp_v1_2->word.s.imageW = 0x600;
+        temp_v1_2->word.s.imageAdrs = 0;
+        temp_v1_2->word.s.objX = 0x76 * 4;
+        temp_v1_2->word.s.objY = sp3C * 4;
+        gTheGame.currentText += 1;
+    }
+
+    for (var_s3 = 0; var_s3 < 2; var_s3++) {
+        temp_v1_4 = &gTheGame.gSPRITE[ARRAY_COUNT(gTheGame.gSPRITE) - 1 - var_s3];
+        temp_v1_4->s.imageW = 0x100;
+        temp_v1_4->s.scaleW = 0x400;
+        temp_v1_4->s.paddingX = 0;
+        temp_v1_4->s.imageH = 0x100;
+        temp_v1_4->s.scaleH = 0x400;
+        temp_v1_4->s.paddingY = 0;
+        temp_v1_4->s.imageStride = 8;
+        if (var_s3 == 0) {
+            temp_v1_4->s.objX = 0x294;
+            if (gTheGame.dimension == DIMENSION_2D) {
+                temp_v1_4->s.objY = 0x84;
+            } else {
+                temp_v1_4->s.objY = 0x8C;
+            }
+        } else {
+            temp_v1_4->s.objX = 0x294;
+            if (gTheGame.dimension == DIMENSION_2D) {
+                temp_v1_4->s.objY = 0x35C;
+            } else {
+                temp_v1_4->s.objY = 0x34C;
+            }
+        }
+        temp_v1_4->s.imageFmt = 2;
+        temp_v1_4->s.imageSiz = 1;
+        temp_v1_4->s.imagePal = 0;
+        temp_v1_4->s.imageFlags = 0;
+    }
+
+    if (DoFlashDrawAlways()) {
+        gTheGame.gSPRITE[9].s.imageAdrs = 4;
+        gTheGame.gSPRITE[8].s.imageAdrs = 2;
+    } else {
+        gTheGame.gSPRITE[9].s.imageAdrs = 5;
+        gTheGame.gSPRITE[8].s.imageAdrs = 3;
+    }
+
+    if (gTheGame.help.current_pos <= 0) {
+        gTheGame.gSPRITE[9].s.objY = -0x280;
+    }
+
+    if (gTheGame.help.current_pos + 7 >= var_s1) {
+        gTheGame.gSPRITE[8].s.objY = -0x280;
+    }
+    if (var_s1 != 0) {
+        D_800B65B0_usa = -1;
+    }
+
+    if (sp46 & 0x800) {
+        if (gTheGame.help.current_pos > 0) {
+            PlaySE(SFX_INIT_TABLE, SFX_001);
+            gTheGame.help.current_pos -= 1;
+            return var_s1;
+        }
+        return var_s1;
+    }
+
+    if (sp46 & 0x400) {
+        if ((gTheGame.help.current_pos + 7) < var_s1) {
+            PlaySE(SFX_INIT_TABLE, SFX_001);
+            gTheGame.help.current_pos += 1;
+            return var_s1;
+        }
+
+        return var_s1;
+    }
+
+    if (sp4E & 0xD000) {
+        PlaySE(SFX_INIT_TABLE, SFX_002);
+        return 0;
+    }
+
+    return var_s1;
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_8003901C_usa);
+#endif
 #endif
 
 #if VERSION_EUR
@@ -998,37 +1296,111 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003991C_usa);
 INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003991C_usa);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80039A54_usa);
-#endif
+void func_80039A54_usa(s32 chain_flag) {
+    tetWell *well = &gTheGame.tetrisWell[1];
+    block_t *block;
+    s32 row;
+    s32 col;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80039A54_usa);
-#endif
+    for (row = 0; row < BLOCK_LEN_ROWS; row++) {
+        for (col = 0; col < MIN(BLOCK_LEN_B, TETWELL_OBJSPRITE_LEN_B); col++) {
+            block = &well->block[row][col];
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80039A54_usa);
-#endif
+            block->bomb = AnimationRandom(0x140) + 1;
+            block->sound = -AnimationRandom(0x10);
+            block->delay = AnimationRandom(0xA) + 1;
+            block->drop = AnimationRandom(3) + 2;
+            block->disappear = 0;
+            if (AnimationRandom(0x38F) % 2 == 0) {
+                block->frame_n = -1;
+            } else {
+                block->frame_n = 0;
+            }
+            block->frame_d = AnimationRandom(5);
+            block->chain_flag = chain_flag;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80039A54_usa);
-#endif
+            // bug? missing `<< 2`?
+            well->block_rect[row][col].s.objX = block->bomb;
+            well->block_rect[row][col].s.objY = block->sound;
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80039B78_usa);
-#endif
+            block->currRow = block->delay;
+        }
+    }
+}
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80039B78_usa);
-#endif
+void func_80039B78_usa(void) {
+    tetWell *well = &gTheGame.tetrisWell[1];
+    block_t *first = &well->block[0][0];
+    block_t *block;
+    s32 *disappear;
+    s32 row;
+    s32 col;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80039B78_usa);
-#endif
+    if (first->chain_flag == 0) {
+        return;
+    }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80039B78_usa);
-#endif
+    disappear = &first->disappear;
+    if (gCounter % 8 == 0) {
+        if (osGetCount() & 1) {
+            if (osGetCount() & 4) {
+                if (first->disappear < 8) {
+                    first->disappear++;
+                }
+            } else {
+                if (first->disappear >= -7) {
+                    first->disappear--;
+                }
+            }
+        }
+    }
+
+    for (row = 0; row < BLOCK_LEN_ROWS; row++) {
+        for (col = 0; col < MIN(BLOCK_LEN_B, TETWELL_OBJSPRITE_LEN_B); col++) {
+            block = &well->block[row][col];
+
+            if (block->currRow != 0) {
+                block->currRow--;
+            } else {
+                block->currRow = block->delay;
+
+                if (block->frame_n != 0) {
+                    block->frame_n = 0;
+                } else {
+                    block->frame_n = -1;
+                }
+
+                if (gCounter % 4 == 0) {
+                    well->block_rect[row][col].s.objX += *disappear;
+                }
+
+                well->block_rect[row][col].s.objY += block->drop;
+
+                if (well->block_rect[row][col].s.objY >= 0xF0) {
+                    block->delay = AnimationRandom(0xA) + 1;
+                    block->drop = AnimationRandom(3) + 2;
+                    well->block_rect[row][col].s.objX = block->bomb;
+                    well->block_rect[row][col].s.objY = block->sound;
+                    block->currRow = block->delay;
+                }
+
+                if (gCounter % 8 == 0) {
+                    if (osGetCount() & 1) {
+                        if (osGetCount() & 2) {
+                            if (block->drop < 8) {
+                                block->drop++;
+                            }
+                        } else {
+                            if (block->drop >= 2) {
+                                block->drop--;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80039DB0_usa);
@@ -1054,21 +1426,12 @@ INCLUDE_RODATA("asm/usa/nonmatchings/main/end", RO_800C4B14_usa);
 INCLUDE_RODATA("asm/usa/nonmatchings/main/end", RO_800C4B24_usa);
 #endif
 
-#if VERSION_USA
-// DoGameOverInput??
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_8003A0B8_usa);
-#endif
-
 #if VERSION_EUR
 INCLUDE_RODATA("asm/eur/nonmatchings/main/end", RO_800C4E64_eur);
 #endif
 
 #if VERSION_EUR
 INCLUDE_RODATA("asm/eur/nonmatchings/main/end", RO_800C4E74_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003A0B8_usa);
 #endif
 
 #if VERSION_FRA
@@ -1079,16 +1442,481 @@ INCLUDE_RODATA("asm/fra/nonmatchings/main/end", RO_800C3514_fra);
 INCLUDE_RODATA("asm/fra/nonmatchings/main/end", RO_800C3524_fra);
 #endif
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003A0B8_usa);
-#endif
-
 #if VERSION_GER
 INCLUDE_RODATA("asm/ger/nonmatchings/main/end", RO_800BA4D4_ger);
 #endif
 
 #if VERSION_GER
 INCLUDE_RODATA("asm/ger/nonmatchings/main/end", RO_800BA4E4_ger);
+#endif
+
+#if VERSION_USA
+// DoGameOverInput??
+#if 0
+s32 func_80089108_usa(s32);                         /* extern */
+
+s32 func_8003A0B8_usa(void) {
+    enum enum_gMain var_v0_2;
+    s32 temp_v0;
+    s32 var_a0;
+    s32 var_a1;
+    s32 var_s0;
+    s32 var_s0_2;
+    s32 var_s0_3;
+    s32 var_s0_4;
+    s32 var_s0_5;
+    s32 var_s0_6;
+    s32 var_s0_7;
+    s32 var_s0_8;
+    s32 var_s0_9;
+    s32 var_s1;
+    s32 var_v0;
+    s32 var_v1;
+    s32 var_v1_2;
+    s32 var_v1_3;
+    s32 var_v1_4;
+    s32 var_v1_5;
+    s32 var_v1_6;
+    s32 var_v1_7;
+    s32 var_v1_8;
+    u32 temp_s0;
+    u32 var_v1_9;
+
+    var_s1 = 0;
+    switch (gSelection) {                           /* switch 1 */
+        case SELECTION_8C:                          /* switch 1 */
+            if ((gTheGame.tetrisWell[0].score >= 0x7530) && (gTheGame.menu[0].game != 0)) {
+                var_v1 = 0;
+loop_5:
+                if (*(&gTheGame.controller[0].touch_button + var_v1) == 0) {
+                    var_v1 += 0x10;
+                    if (var_v1 >= 0x10) {
+                        var_s0 = 0;
+                    } else {
+                        goto loop_5;
+                    }
+                } else {
+                    if ((gSelection != SELECTION_96) || (gTheGame.cursorBlock[0].state == gTheGame.cursorBlock[1].state) || (gTheGame.cursorBlock[0].state == 7) || (gTheGame.cursorBlock[1].state == 8)) {
+                        FadeOutSong(last_song_handle, 0x5A);
+                        FadeOutAllSFXs(0x1E);
+                    }
+                    PlaySE(SFX_INIT_TABLE, SFX_002);
+                    var_s0 = -1;
+                }
+                if (var_s0 != 0) {
+                    var_s1 = 7;
+                }
+            } else {
+block_53:
+                if (DoGameOverTryAgain() != 0) {
+                    var_s1 = 1;
+                    if (gTheGame.help.current_pos == 0) {
+                        var_s1 = 2;
+                    }
+                }
+            }
+            break;
+        case SELECTION_96:                          /* switch 1 */
+            var_v1_2 = 0;
+loop_19:
+            if (*(&gTheGame.controller[0].touch_button + var_v1_2) == 0) {
+                var_v1_2 += 0x10;
+                var_s0_2 = 0;
+                if (var_v1_2 < 0x10) {
+                    goto loop_19;
+                }
+            } else {
+                if ((gSelection != SELECTION_96) || (gTheGame.cursorBlock[0].state == gTheGame.cursorBlock[1].state) || (gTheGame.cursorBlock[0].state == 7) || (gTheGame.cursorBlock[1].state == 8)) {
+                    FadeOutSong(last_song_handle, 0x5A);
+                    FadeOutAllSFXs(0x1E);
+                }
+                PlaySE(SFX_INIT_TABLE, SFX_002);
+                var_s0_2 = -1;
+            }
+            if (var_s0_2 != 0) {
+                if (gTheGame.cursorBlock[0].state == gTheGame.cursorBlock[1].state) {
+                    var_s1 = 3;
+                } else if ((gTheGame.cursorBlock[0].state == 7) || (gTheGame.cursorBlock[1].state == 8)) {
+                    var_s1 = 7;
+block_97:
+                    gTheGame.menu[0].stage += 1;
+                } else {
+                    var_s1 = 5;
+                    if (gTheGame.menu[0].stage == 0x10) {
+                        gTheGame.menu[0].stage = 0x11;
+                        var_s1 = 7;
+                    }
+                }
+            }
+            break;
+        case SELECTION_BE:                          /* switch 1 */
+            if ((gTheGame.tetrisWell[0].score >= 0x2710) && (gTheGame.cursorBlock[0].state == 7)) {
+                var_v1_3 = 0;
+loop_40:
+                if (*(&gTheGame.controller[0].touch_button + var_v1_3) == 0) {
+                    var_v1_3 += 0x10;
+                    if (var_v1_3 >= 0x10) {
+                        var_s0_3 = 0;
+                    } else {
+                        goto loop_40;
+                    }
+                } else {
+                    if ((gSelection != SELECTION_96) || (gTheGame.cursorBlock[0].state == gTheGame.cursorBlock[1].state) || (gTheGame.cursorBlock[0].state == 7) || (gTheGame.cursorBlock[1].state == 8)) {
+                        FadeOutSong(last_song_handle, 0x5A);
+                        FadeOutAllSFXs(0x1E);
+                    }
+                    PlaySE(SFX_INIT_TABLE, SFX_002);
+                    var_s0_3 = -1;
+                }
+                if (var_s0_3 != 0) {
+                    var_s1 = 7;
+                }
+            } else {
+                goto block_53;
+            }
+            break;
+        case SELECTION_AA:                          /* switch 1 */
+            if (gTheGame.cursorBlock[0].state == 8) {
+                if ((gTheGame.menu[0].game == 5) && (gTheGame.menu[0].stage == 3)) {
+                    var_v1_4 = 0;
+loop_60:
+                    if (*(&gTheGame.controller[0].touch_button + var_v1_4) == 0) {
+                        var_v1_4 += 0x10;
+                        if (var_v1_4 >= 0x10) {
+                            var_s0_4 = 0;
+                        } else {
+                            goto loop_60;
+                        }
+                    } else {
+                        if ((gSelection != SELECTION_96) || (gTheGame.cursorBlock[0].state == gTheGame.cursorBlock[1].state) || (gTheGame.cursorBlock[0].state == 7) || (gTheGame.cursorBlock[1].state == 8)) {
+                            FadeOutSong(last_song_handle, 0x5A);
+                            FadeOutAllSFXs(0x1E);
+                        }
+                        PlaySE(SFX_INIT_TABLE, SFX_002);
+                        var_s0_4 = -1;
+                    }
+                    if (var_s0_4 != 0) {
+                        var_s1 = 2;
+                        gTheGame.menu[0].game = 2;
+                        gTheGame.menu[0].speed = 1;
+                        gTheGame.menu[0].stage += 1;
+                    }
+                } else if (DoGameOverTryAgain() != 0) {
+                    var_s1 = (-(gTheGame.help.current_pos == 0) & 3) | 1;
+                }
+            } else {
+                var_v1_5 = 0;
+loop_76:
+                if (*(&gTheGame.controller[0].touch_button + var_v1_5) == 0) {
+                    var_v1_5 += 0x10;
+                    var_s0_5 = 0;
+                    if (var_v1_5 < 0x10) {
+                        goto loop_76;
+                    }
+                } else {
+                    if ((gSelection != SELECTION_96) || (gTheGame.cursorBlock[0].state == gTheGame.cursorBlock[1].state) || (gTheGame.cursorBlock[0].state == 7) || (gTheGame.cursorBlock[1].state == 8)) {
+                        FadeOutSong(last_song_handle, 0x5A);
+                        FadeOutAllSFXs(0x1E);
+                    }
+                    PlaySE(SFX_INIT_TABLE, SFX_002);
+                    var_s0_5 = -1;
+                }
+                if (var_s0_5 != 0) {
+                    gTheGame.second = 0;
+                    gTheGame.minute = 0;
+                    gTheGame.hour = 0;
+                    temp_v0 = gTheGame.menu[0].speed + 1;
+                    gTheGame.menu[0].speed = temp_v0;
+                    var_s1 = 3;
+                    if (temp_v0 >= 6) {
+                        if (gTheGame.menu[0].game == 2) {
+                            if (gTheGame.menu[0].stage == 3) {
+                                if ((u8) gPlayer[0]->kPLAYER1C_2Dround[2] & 0x20) {
+                                    gTheGame.menu[0].stage = 4;
+                                    gTheGame.menu[0].game = gTheGame.menu[0].game;
+                                    gTheGame.menu[0].speed = 1;
+                                    var_s1 = 9;
+                                } else {
+                                    goto block_93;
+                                }
+                            } else if (gTheGame.menu[0].stage == 6) {
+block_93:
+                                gTheGame.menu[0].game = 5;
+                                var_s1 = 9;
+                            } else {
+                                goto block_94;
+                            }
+                        } else {
+block_94:
+                            if ((gTheGame.menu[0].game != 5) || (var_s1 = 7, (gTheGame.menu[0].stage != 6))) {
+                                var_s1 = 9;
+                                gTheGame.menu[0].game = 2;
+                                gTheGame.menu[0].speed = 1;
+                                goto block_97;
+                            }
+                        }
+                    }
+                }
+            }
+            break;
+        case SELECTION_78:                          /* switch 1 */
+            var_v1_6 = 0;
+loop_99:
+            if (*(&gTheGame.controller[0].touch_button + var_v1_6) == 0) {
+                var_v1_6 += 0x10;
+                var_s0_6 = 0;
+                if (var_v1_6 < 0x10) {
+                    goto loop_99;
+                }
+            } else {
+                if ((gSelection != SELECTION_96) || (gTheGame.cursorBlock[0].state == gTheGame.cursorBlock[1].state) || (gTheGame.cursorBlock[0].state == 7) || (gTheGame.cursorBlock[1].state == 8)) {
+                    FadeOutSong(last_song_handle, 0x5A);
+                    FadeOutAllSFXs(0x1E);
+                }
+                PlaySE(SFX_INIT_TABLE, SFX_002);
+                var_s0_6 = -1;
+            }
+            if (var_s0_6 != 0) {
+                var_s1 = 6;
+            }
+            break;
+        case SELECTION_82:                          /* switch 1 */
+            if (gTheGame.cursorBlock[0].state == 8) {
+                if (DoGameOverTryAgain() != 0) {
+                    var_s1 = 1;
+                    if (gTheGame.help.current_pos == 0) {
+                        var_s1 = 3;
+                        gTheGame.cursorBlock[0].target[2] = gWorld;
+                    } else {
+                        gTheGame.cursorBlock[0].target[2] = -1;
+                    }
+                }
+            } else {
+                var_v1_7 = 0;
+loop_119:
+                if (*(&gTheGame.controller[0].touch_button + var_v1_7) == 0) {
+                    var_v1_7 += 0x10;
+                    var_s0_7 = 0;
+                    if (var_v1_7 < 0x10) {
+                        goto loop_119;
+                    }
+                } else {
+                    if ((gSelection != SELECTION_96) || (gTheGame.cursorBlock[0].state == gTheGame.cursorBlock[1].state) || (gTheGame.cursorBlock[0].state == 7) || (gTheGame.cursorBlock[1].state == 8)) {
+                        FadeOutSong(last_song_handle, 0x5A);
+                        FadeOutAllSFXs(0x1E);
+                    }
+                    PlaySE(SFX_INIT_TABLE, SFX_002);
+                    var_s0_7 = -1;
+                }
+                if (var_s0_7 != 0) {
+                    gTheGame.cursorBlock[0].target[2] = -1;
+                    if (CheckPlayerPuzzleRound(gTheGame.menu[0].game, gTheGame.menu[0].stage) != nfalse) {
+                        var_s1 = 2;
+                    } else if (gTheGame.menu[0].game == 0) {
+                        if (gTheGame.menu[0].stage == 0xF) {
+                            var_s1 = 2;
+                        } else {
+                            var_s1 = 3;
+                            if (func_80089108_usa(gTheGame.menu[0].stage + 1) != 0) {
+                                gTheGame.menu[0].stage += 1;
+                            } else {
+                                goto block_141;
+                            }
+                        }
+                    } else {
+                        var_s1 = 2;
+                        if (((gTheGame.menu[0].stage == 0x1E) | (gTheGame.menu[0].stage == 0x28)) == 0) {
+                            if (gTheGame.menu[0].stage == 0x32) {
+block_141:
+                                var_s1 = 2;
+                            } else {
+                                gTheGame.menu[0].stage += 1;
+                                var_s1 = 3;
+                            }
+                        }
+                    }
+                    var_s0_8 = 0;
+                    switch (gTheGame.menu[0].game) { /* switch 2 */
+                        case 0x1:                   /* switch 2 */
+                            var_a0 = 1;
+                            var_a1 = 1;
+block_159:
+                            if (CheckPlayerPuzzleRound(var_a0, var_a1) != nfalse) {
+                                var_s0_8 = -1;
+                            }
+                            break;
+                        case 0x2:                   /* switch 2 */
+                            if (CheckPlayerPuzzleRound(2, 1) != nfalse) {
+                                var_a0 = 2;
+                                if (CheckPlayerPuzzleRound(2, 0x1F) != nfalse) {
+                                    var_a1 = 0x29;
+                                    goto block_159;
+                                }
+                            }
+                            break;
+                        case 0x3:                   /* switch 2 */
+                            if (CheckPlayerPuzzleRound(3, 1) != nfalse) {
+                                var_a0 = 3;
+                                if (CheckPlayerPuzzleRound(3, 0x1F) != nfalse) {
+                                    var_a1 = 0x29;
+                                    goto block_159;
+                                }
+                            }
+                            break;
+                        case 0x4:                   /* switch 2 */
+                            var_a0 = 4;
+                            var_a1 = 1;
+                            goto block_159;
+                        case 0x5:                   /* switch 2 */
+                            if (CheckPlayerPuzzleRound(5, 1) != nfalse) {
+                                var_a0 = 5;
+                                if (CheckPlayerPuzzleRound(5, 0x1F) != nfalse) {
+                                    var_a1 = 0x29;
+                                    goto block_159;
+                                }
+                            }
+                            break;
+                        case 0x6:                   /* switch 2 */
+                            if (CheckPlayerPuzzleRound(6, 1) != nfalse) {
+                                var_a0 = 6;
+                                if (CheckPlayerPuzzleRound(6, 0x1F) != nfalse) {
+                                    var_a1 = 0x29;
+                                    goto block_159;
+                                }
+                            }
+                            break;
+                    }
+                    if ((var_s0_8 != 0) && (PlayPlayerPuzzleEnding(gTheGame.menu[0].game, gTheGame.tetrisWell[0].menu.stage) != nfalse)) {
+                        var_s1 = 7;
+                    }
+                }
+            }
+            break;
+        case SELECTION_A0:                          /* switch 1 */
+        case SELECTION_B4:                          /* switch 1 */
+        case SELECTION_C8:                          /* switch 1 */
+            var_v1_8 = 0;
+loop_165:
+            if (*(&gTheGame.controller[0].touch_button + var_v1_8) == 0) {
+                var_v1_8 += 0x10;
+                var_s0_9 = 0;
+                if (var_v1_8 < 0x20) {
+                    goto loop_165;
+                }
+            } else {
+                if ((gSelection != SELECTION_96) || (gTheGame.cursorBlock[0].state == gTheGame.cursorBlock[1].state) || (gTheGame.cursorBlock[0].state == 7) || (gTheGame.cursorBlock[1].state == 8)) {
+                    FadeOutSong(last_song_handle, 0x5A);
+                    FadeOutAllSFXs(0x1E);
+                }
+                PlaySE(SFX_INIT_TABLE, SFX_002);
+                var_s0_9 = -1;
+            }
+            if (var_s0_9 != 0) {
+                if (gTheGame.cursorBlock[0].state == gTheGame.cursorBlock[1].state) {
+                    var_s1 = 3;
+                } else {
+                    var_s1 = 8;
+                    if (gWorld == 0x10) {
+                        var_s1 = 3;
+                    }
+                    if (gTheGame.cursorBlock[0].state == 8) {
+                        switch (B_801C6EE8_usa) {   /* switch 3; irregular */
+                            case 0x1:               /* switch 3 */
+                                var_v0 = D_800B5A1C_usa | 1;
+                                goto block_199;
+                            case 0x2:               /* switch 3 */
+                                var_v0 = D_800B5A1C_usa | 2;
+                                goto block_199;
+                            case 0x3:               /* switch 3 */
+                                var_v0 = D_800B5A1C_usa | 4;
+                                goto block_199;
+                        }
+                    } else {
+                        switch (B_801C6E58_usa) {   /* switch 4; irregular */
+                            case 0x1:               /* switch 4 */
+                                var_v0 = D_800B5A1C_usa | 0x10;
+block_199:
+                                D_800B5A1C_usa = var_v0;
+                                break;
+                            case 0x2:               /* switch 4 */
+                                var_v0 = D_800B5A1C_usa | 0x20;
+                                goto block_199;
+                            case 0x3:               /* switch 4 */
+                                var_v0 = D_800B5A1C_usa | 0x40;
+                                goto block_199;
+                        }
+                    }
+                }
+                temp_s0 = (u32) (gGameStatus & 0xF00) >> 8;
+                if ((gTheGame.tetrisWell[0].win == temp_s0) || (gTheGame.tetrisWell[1].win == temp_s0)) {
+                    var_s1 = 7;
+                }
+            }
+            break;
+    }
+
+    if (var_s1 != 0) {
+        if ((var_s1 != 3) || (gSelection != SELECTION_AA)) {
+            gTheGame.second = 0;
+            gTheGame.minute = 0;
+            gTheGame.hour = 0;
+        }
+        var_v1_9 = var_s1 - 1;
+        if (var_s1 == 3) {
+            if (gTheGame.dimension == DIMENSION_3D) {
+                var_s1 = 4;
+            }
+            var_v1_9 = var_s1 - 1;
+        }
+        switch (var_v1_9) {                         /* switch 5 */
+            case 0x1:                               /* switch 5 */
+                var_v0_2 = GMAIN_2BC;
+block_222:
+                gMain = var_v0_2;
+                break;
+            case 0x2:                               /* switch 5 */
+                gMain = GMAIN_384;
+                gTheGame.dimension = DIMENSION_2D;
+                break;
+            case 0x3:                               /* switch 5 */
+                gMain = GMAIN_384;
+                gTheGame.dimension = DIMENSION_3D;
+                break;
+            case 0x4:                               /* switch 5 */
+                var_v0_2 = GMAIN_BONUS;
+                goto block_222;
+            case 0x5:                               /* switch 5 */
+                var_v0_2 = GMAIN_EDITOR;
+                goto block_222;
+            case 0x6:                               /* switch 5 */
+                var_v0_2 = GMAIN_STORY;
+                goto block_222;
+            case 0x7:                               /* switch 5 */
+                var_v0_2 = GMAIN_28A;
+                goto block_222;
+            case 0x8:                               /* switch 5 */
+                var_v0_2 = GMAIN_STAGE_CLEAR_INTRO;
+                goto block_222;
+            default:                                /* switch 5 */
+                var_v0_2 = GMAIN_258;
+                goto block_222;
+        }
+        gReset = -1;
+        return -1;
+    }
+    return 0;
+}
+#else
+INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_8003A0B8_usa);
+#endif
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_8003A0B8_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003A0B8_usa);
 #endif
 
 #if VERSION_GER

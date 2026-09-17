@@ -1019,9 +1019,9 @@ uObjTxtr D_0101F2A0_usa = {
 uObjTxtr D_0101F2B8_usa = {
     /* type  */ G_OBJLT_TXTRBLOCK,
     /* image */ (u64 *)D_0101CCC0_usa,
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_8b),
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
     /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
-    /* tline */ GS_TB_TLINE(64,      G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
     /* sid   */ 0,
     /* flag  */ (u32)-1,
     /* mask  */ 0x0,

@@ -146,7 +146,7 @@ void Update2DAttackFace(tetWell *well, attack_t *attack) {
         default:
             attack->rect.s.objY = (y - ((attack->type - ATTACKTYPE_10) * 8)) << 2;
             if (attack->expression == 0x20) {
-                x = attack->unk_10 % 10;
+                x = attack->counter % 10;
                 if (x == 0) {
                     if (attack->rect.s.imageAdrs == 4) {
                         attack->rect.s.imageAdrs = 6;
@@ -205,10 +205,10 @@ void Update2DAttack(tetWell *well, cursor_t *cursor, s32 num) {
     for (count = 0; count < ATTACK_COUNT; count++) {
         attack = &well->attack[count];
 
-        if ((attack->type == ATTACKTYPE_10) && (attack->unk_28 != -1)) {
+        if ((attack->type == ATTACKTYPE_10) && (attack->slot != -1)) {
             if ((attack->state == ATTACKSTATE_1) || (attack->state == ATTACKSTATE_2)) {
                 if (attack->disappear != -1) {
-                    sp3C = well->attack[attack->unk_28].disappear;
+                    sp3C = well->attack[attack->slot].disappear;
                 }
             }
         } else if ((attack->state >= ATTACKSTATE_1) && (attack->state <= ATTACKSTATE_3)) {
@@ -286,15 +286,15 @@ void Update2DAttack(tetWell *well, cursor_t *cursor, s32 num) {
 
                 gOverflow = gOverflow + ((attack->unk_1C - attack->start) * row * 5) + ((row - 1) * 0xA);
                 if ((attack->disappear == -1) && (attack->type != ATTACKTYPE_9)) {
-                    if (attack->unk_10 < 0) {
-                        attack->unk_10++;
-                        if (attack->unk_10 != 0) {
+                    if (attack->counter < 0) {
+                        attack->counter++;
+                        if (attack->counter != 0) {
                             if ((attack->currRow < BLOCK_LEN_ROWS) && (attack->expression != 0)) {
                                 Update2DAttackFace(well, attack);
                             }
                         }
 #if VERSION_EUR
-                        if (attack->unk_10 == 0) {
+                        if (attack->counter == 0) {
                             if (B_801C6BDC_usa[num] != 0) {
                                 Init2DFaceTMEM(attack);
                                 Update2DAttackFace(well, attack);
@@ -303,10 +303,10 @@ void Update2DAttack(tetWell *well, cursor_t *cursor, s32 num) {
 #endif
                     } else if (attack->expression != 0) {
                         attack->expression = 0;
-                        attack->unk_10 = -0x3C;
+                        attack->counter = -0x3C;
 #if !VERSION_EUR
                         if (B_801C6BDC_usa[num] != 0) {
-                            attack->unk_10 = -0xA;
+                            attack->counter = -0xA;
                         }
 #endif
                     } else if (B_801C6BDC_usa[num] != 0) {
@@ -318,7 +318,7 @@ void Update2DAttack(tetWell *well, cursor_t *cursor, s32 num) {
                         Init2DFaceTMEM(attack);
                         Update2DAttackFace(well, attack);
                     } else {
-                        attack->unk_10 = -0x1E;
+                        attack->counter = -0x1E;
                     }
                 }
 
@@ -333,7 +333,7 @@ void Update2DAttack(tetWell *well, cursor_t *cursor, s32 num) {
                         block = &well->block[row][col];
                         rect = &well->block_rect[row][col];
 
-                        if ((attack->delay > 0) || (attack->unk_10 > 0)) {
+                        if ((attack->delay > 0) || (attack->counter > 0)) {
                             if (attack->delay % 2 != 0) {
                                 rect->s.imageAdrs = 0x86;
                             } else {
@@ -481,7 +481,7 @@ void Change2DAttack(tetWell *well, cursor_t *cursor, s32 num, s32 combo) {
             if (cursor->target[sp3C] != 0) {
                 temp_s1 = &well->attack[cursor->target[sp3C] - 1];
                 temp_s1->delay = temp_t0;
-                temp_s1->unk_10 = temp_t0 + temp + ((combo - 1) * sp44) + 1;
+                temp_s1->counter = temp_t0 + temp + ((combo - 1) * sp44) + 1;
                 temp_s1->disappear = var_a2;
             }
         }
@@ -499,11 +499,11 @@ void Change2DAttack(tetWell *well, cursor_t *cursor, s32 num, s32 combo) {
         }
 
         cursor->state = 2;
-        if ((temp_s1->delay > 0) || (temp_s1->unk_10 > 0)) {
+        if ((temp_s1->delay > 0) || (temp_s1->counter > 0)) {
             if (temp_s1->delay > 0) {
                 temp_s1->delay--;
-                if (temp_s1->unk_10 > 0) {
-                    temp_s1->unk_10--;
+                if (temp_s1->counter > 0) {
+                    temp_s1->counter--;
                     if ((sp54 == 0) && (temp_s1->delay <= 0)) {
                         sp54 = -1;
                         gOverflow += 0x5A;
