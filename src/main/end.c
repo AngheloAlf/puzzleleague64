@@ -1029,7 +1029,7 @@ s32 func_8003901C_usa(tetWell *well) {
             temp_s0->total = var_s3 + 4;
             temp_s0->thing.rect.s.objX = 0x88 * 4;
             temp_s0->thing.rect.s.objY = var_s2 * 4;
-            temp_s0->thing.rect.s.imageW = 0x200;
+            temp_s0->thing.rect.s.imageW = 16 << 5;
             temp_s0->count = st_Combo1[var_s3];
             Init2DComboTMEM(temp_s0);
             sprintf(sp10, "%3d", temp_s0->count);
@@ -1068,13 +1068,13 @@ s32 func_8003901C_usa(tetWell *well) {
             temp_s0->total = var_s3 + 0xB;
             temp_s0->thing.rect.s.objX = 0x88 * 4;
             temp_s0->thing.rect.s.objY = var_s2 * 4;
-            temp_s0->thing.rect.s.imageW = 0x200;
+            temp_s0->thing.rect.s.imageW = 16 << 5;
             temp_s0->count = st_Combo2[var_s3];
             Init2DComboTMEM(temp_s0);
             if (!(gGameStatus & 2)) {
                 if (temp_s0->total >= 0x24) {
                     temp_s0->type = ICONTYPE_13;
-                    temp_s0->thing.rect.s.imageW = 0x400;
+                    temp_s0->thing.rect.s.imageW = 32 << 5;
                     temp_s0->thing.rect.s.imageAdrs = 0x80;
                 }
             }
@@ -1114,7 +1114,7 @@ s32 func_8003901C_usa(tetWell *well) {
             temp_s0->total = var_s3 + 1;
             temp_s0->thing.rect.s.objX = 0x88 * 4;
             temp_s0->thing.rect.s.objY = var_s2 * 4;
-            temp_s0->thing.rect.s.imageW = 0x200;
+            temp_s0->thing.rect.s.imageW = 16 << 5;
             temp_s0->count = st_Chain1[var_s3];
             Init2DChainTMEM(temp_s0);
             sprintf(sp10, "%3d", temp_s0->count);
@@ -1158,7 +1158,7 @@ s32 func_8003901C_usa(tetWell *well) {
             }
             temp_s0->thing.rect.s.objX = 0x88 * 4;
             temp_s0->thing.rect.s.objY = var_s2 * 4;
-            temp_s0->thing.rect.s.imageW = 0x200;
+            temp_s0->thing.rect.s.imageW = 16 << 5;
             temp_s0->count = st_Chain2[var_s3];
             Init2DChainTMEM(temp_s0);
             sprintf(sp10, "%3d", temp_s0->count);
@@ -1172,7 +1172,7 @@ s32 func_8003901C_usa(tetWell *well) {
         temp_v1_2 = &gTheGame.drawText[gTheGame.currentText];
         temp_v1_2->texture = 0xC;
         temp_v1_2->word.s.imageAdrs = 0x80;
-        temp_v1_2->word.s.imageW = 0x600;
+        temp_v1_2->word.s.imageW = 48 << 5;
         temp_v1_2->word.s.objX = 0x76 * 4;
         temp_v1_2->word.s.objY = sp34 * 4;
         gTheGame.currentText += 1;
@@ -1181,7 +1181,7 @@ s32 func_8003901C_usa(tetWell *well) {
     if (sp2C != 0) {
         temp_v1_2 = &gTheGame.drawText[gTheGame.currentText];
         temp_v1_2->texture = 0xA;
-        temp_v1_2->word.s.imageW = 0x600;
+        temp_v1_2->word.s.imageW = 48 << 5;
         temp_v1_2->word.s.imageAdrs = 0;
         temp_v1_2->word.s.objX = 0x76 * 4;
         temp_v1_2->word.s.objY = sp3C * 4;
@@ -1190,30 +1190,30 @@ s32 func_8003901C_usa(tetWell *well) {
 
     for (var_s3 = 0; var_s3 < 2; var_s3++) {
         temp_v1_4 = &gTheGame.gSPRITE[ARRAY_COUNT(gTheGame.gSPRITE) - 1 - var_s3];
-        temp_v1_4->s.imageW = 0x100;
-        temp_v1_4->s.scaleW = 0x400;
+        temp_v1_4->s.imageW = 8 << 5;
+        temp_v1_4->s.scaleW = 1 << 10;
         temp_v1_4->s.paddingX = 0;
-        temp_v1_4->s.imageH = 0x100;
-        temp_v1_4->s.scaleH = 0x400;
+        temp_v1_4->s.imageH = 8 << 5;
+        temp_v1_4->s.scaleH = 1 << 10;
         temp_v1_4->s.paddingY = 0;
         temp_v1_4->s.imageStride = 8;
         if (var_s3 == 0) {
-            temp_v1_4->s.objX = 0x294;
+            temp_v1_4->s.objX = 165 << 2;
             if (gTheGame.dimension == DIMENSION_2D) {
-                temp_v1_4->s.objY = 0x84;
+                temp_v1_4->s.objY = 33 << 2;
             } else {
-                temp_v1_4->s.objY = 0x8C;
+                temp_v1_4->s.objY = 35 << 2;
             }
         } else {
-            temp_v1_4->s.objX = 0x294;
+            temp_v1_4->s.objX = 165 << 2;
             if (gTheGame.dimension == DIMENSION_2D) {
-                temp_v1_4->s.objY = 0x35C;
+                temp_v1_4->s.objY = 215 << 2;
             } else {
-                temp_v1_4->s.objY = 0x34C;
+                temp_v1_4->s.objY = 211 << 2;
             }
         }
-        temp_v1_4->s.imageFmt = 2;
-        temp_v1_4->s.imageSiz = 1;
+        temp_v1_4->s.imageFmt = G_IM_FMT_CI;
+        temp_v1_4->s.imageSiz = G_IM_SIZ_8b;
         temp_v1_4->s.imagePal = 0;
         temp_v1_4->s.imageFlags = 0;
     }
@@ -1227,11 +1227,11 @@ s32 func_8003901C_usa(tetWell *well) {
     }
 
     if (gTheGame.help.current_pos <= 0) {
-        gTheGame.gSPRITE[9].s.objY = -0x280;
+        gTheGame.gSPRITE[9].s.objY = -(160 << 2);
     }
 
     if (gTheGame.help.current_pos + 7 >= var_s1) {
-        gTheGame.gSPRITE[8].s.objY = -0x280;
+        gTheGame.gSPRITE[8].s.objY = -(160 << 2);
     }
     if (var_s1 != 0) {
         D_800B65B0_usa = -1;

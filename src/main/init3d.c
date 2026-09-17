@@ -239,14 +239,14 @@ void Init3DClearLine(tetWell *well, struct cursor_t *cursor UNUSED, s32 num) {
 
     s = &well->attack[0].rect.s;
     if (gTheGame.totalPlayer == 1) {
-        s->objX = 0xE1;
+        s->objX = (56 << 2) + 1;
     } else if (num == 0) {
-        s->objX = 0x87;
+        s->objX = (33 << 2) + 3;
     } else {
-        s->objX = 0x89;
+        s->objX = (34 << 2) + 1;
     }
 
-    s->objY = 0xC6;
+    s->objY = (49 << 2) + 2;
 }
 
 void func_8005DE94_usa(const u16 arg0[], s32 arg1) {

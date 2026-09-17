@@ -219,8 +219,8 @@ void Update2DExplode2(explode_t *explode) {
                 break;
         }
     } else {
-        explode->rect.s.objX = -0x280;
-        explode->rect.s.objY = -0x280;
+        explode->rect.s.objX = -(160 << 2);
+        explode->rect.s.objY = -(160 << 2);
     }
 
     explode->frame++;

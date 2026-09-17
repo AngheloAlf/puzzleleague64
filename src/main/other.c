@@ -122,16 +122,16 @@ void InitMiscStuff(void) {
         gTheGame.unk_9B50[var_s1].s.frameY = var_s2 << 2;
         gTheGame.unk_9B50[var_s1].s.frameH = var_s6 << 2;
         gTheGame.unk_9B50[var_s1].s.imagePtr = sp1C + var_s3;
-        gTheGame.unk_9B50[var_s1].s.imageFmt = 2;
+        gTheGame.unk_9B50[var_s1].s.imageFmt = G_IM_FMT_CI;
         gTheGame.unk_9B50[var_s1].s.imagePal = 0;
         gTheGame.unk_9B50[var_s1].s.imageFlip = 0;
         gTheGame.unk_9B50[var_s1].s.imageLoad = 0xFFF4;
-        gTheGame.unk_9B50[var_s1].s.imageSiz = 1;
+        gTheGame.unk_9B50[var_s1].s.imageSiz = G_IM_SIZ_8b;
         guS2DInitBg(&gTheGame.unk_9B50[var_s1]);
         if (gTheGame.unk_9C0C == 2) {
             gTheGame.unk_9B50[var_s1].s.imageYorig = 0;
-            gTheGame.unk_9B50[var_s1].s.scaleW = 0x400;
-            gTheGame.unk_9B50[var_s1].s.scaleH = 0x400;
+            gTheGame.unk_9B50[var_s1].s.scaleW = 1 << 10;
+            gTheGame.unk_9B50[var_s1].s.scaleH = 1 << 10;
         }
         var_s3 += var_s7 * var_s6;
     }
@@ -147,18 +147,18 @@ void InitMiscStuff(void) {
     if ((gSelection == SELECTION_8C) || (gSelection == SELECTION_BE)) {
         var_s3 = 0x21490;
 
-        gTheGame.unk_8C88[3].s.imageW = 0x200;
+        gTheGame.unk_8C88[3].s.imageW = 16 << 5;
         gTheGame.unk_8C88[3].s.frameW = 0x200;
         gTheGame.unk_8C88[3].s.frameX = 0x1D8;
         gTheGame.unk_8C88[3].s.frameY = 0xB4;
         gTheGame.unk_8C88[3].s.imageLoad = 0x33;
-        gTheGame.unk_8C88[3].s.imageFmt = 2;
-        gTheGame.unk_8C88[3].s.imageSiz = 1;
-        gTheGame.unk_8C88[3].s.scaleW = 0x400;
-        gTheGame.unk_8C88[3].s.scaleH = 0x400;
+        gTheGame.unk_8C88[3].s.imageFmt = G_IM_FMT_CI;
+        gTheGame.unk_8C88[3].s.imageSiz = G_IM_SIZ_8b;
+        gTheGame.unk_8C88[3].s.scaleW = 1 << 10;
+        gTheGame.unk_8C88[3].s.scaleH = 1 << 10;
         gTheGame.unk_8C88[3].s.imageX = 0;
         gTheGame.unk_8C88[3].s.imageY = 0;
-        gTheGame.unk_8C88[3].s.imageH = 0x3C;
+        gTheGame.unk_8C88[3].s.imageH = (1 << 5) + 28;
         gTheGame.unk_8C88[3].s.frameH = 0x3C;
         gTheGame.unk_8C88[3].s.imagePal = 0;
         gTheGame.unk_8C88[3].s.imageFlip = 0;

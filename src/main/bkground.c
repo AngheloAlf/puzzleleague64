@@ -464,29 +464,29 @@ void func_80048D94_usa(void) {
 
     if (gTheGame.totalPlayer == 1) {
         gTheGame.unk_9A08[0].s.objX = 0x72 << 2;
-        gTheGame.unk_9A08[0].s.scaleW = 0x4B;
+        gTheGame.unk_9A08[0].s.scaleW = 75;
         gTheGame.unk_9A08[0].s.objY = 0x1F << 2;
-        gTheGame.unk_9A08[0].s.scaleH = 0x2A;
+        gTheGame.unk_9A08[0].s.scaleH = 42;
 
         gTheGame.unk_9A08[1].s.objX = 0x1F << 2;
-        gTheGame.unk_9A08[1].s.scaleW = 0x66;
+        gTheGame.unk_9A08[1].s.scaleW = 102;
         gTheGame.unk_9A08[1].s.objY = 0x19 << 2;
-        gTheGame.unk_9A08[1].s.scaleH = 0x108;
+        gTheGame.unk_9A08[1].s.scaleH = 264;
 
         gTheGame.unk_9A08[2].s.objX = 0xE2 << 2;
-        gTheGame.unk_9A08[2].s.scaleW = 0x86;
+        gTheGame.unk_9A08[2].s.scaleW = 134;
         gTheGame.unk_9A08[2].s.objY = 0x19 << 2;
-        gTheGame.unk_9A08[2].s.scaleH = 0x46;
+        gTheGame.unk_9A08[2].s.scaleH = 70;
     } else {
         gTheGame.unk_9A08[0].s.objX = 0x18 << 2;
-        gTheGame.unk_9A08[0].s.scaleW = 0x4B;
+        gTheGame.unk_9A08[0].s.scaleW = 75;
         gTheGame.unk_9A08[0].s.objY = 0x1F << 2;
-        gTheGame.unk_9A08[0].s.scaleH = 0x2A;
+        gTheGame.unk_9A08[0].s.scaleH = 42;
 
         gTheGame.unk_9A08[1].s.objX = 0xBC << 2;
-        gTheGame.unk_9A08[1].s.scaleW = 0x4B;
+        gTheGame.unk_9A08[1].s.scaleW = 75;
         gTheGame.unk_9A08[1].s.objY = 0x1F << 2;
-        gTheGame.unk_9A08[1].s.scaleH = 0x2A;
+        gTheGame.unk_9A08[1].s.scaleH = 42;
 
         if (gSelection == SELECTION_96) {
             gTheGame.unk_9A08[2].s.objY = 0x51 << 2;
@@ -494,8 +494,8 @@ void func_80048D94_usa(void) {
             gTheGame.unk_9A08[2].s.objY = 0x40 << 2;
         }
         gTheGame.unk_9A08[2].s.objX = 0x86 << 2;
-        gTheGame.unk_9A08[2].s.scaleW = 0x9D;
-        gTheGame.unk_9A08[2].s.scaleH = 0x51;
+        gTheGame.unk_9A08[2].s.scaleW = 157;
+        gTheGame.unk_9A08[2].s.scaleH = 81;
     }
 }
 

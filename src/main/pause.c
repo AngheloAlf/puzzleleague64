@@ -260,12 +260,12 @@ void Do3DPauseGame(gamepad_t *gamepad, s32 num, s32 flag) {
         if (gTheGame.help.selection == 0) {
             gTheGame.unk_9A90[2].b.frameX = 27 << 2;
             gTheGame.unk_9A90[2].b.frameY = 103 << 2;
-            sp->s.objX = 0x80;
+            sp->s.objX = 32 << 2;
             sp->s.objY = (*pos * 0x11 + 0x70) << 2;
         } else {
             gTheGame.unk_9A90[2].b.frameX = 191 << 2;
             gTheGame.unk_9A90[2].b.frameY = 103 << 2;
-            sp->s.objX = 0x310;
+            sp->s.objX = 196 << 2;
             sp->s.objY = (*pos * 0x11 + 0x70) << 2;
         }
     }

@@ -151,7 +151,7 @@ void Update2DIcon(tetWell *well, cursor_t *cursor, s32 num) {
 
                 Start2DIconSplash(well, var_a1, var_a2);
                 Init2DComboTMEM(temp_s0);
-                temp_s0->thing.rect.s.imageW = 0x200;
+                temp_s0->thing.rect.s.imageW = 16 << 5;
                 var_v0 = temp_s0->from_x * 0x12;
                 goto block_29;
             } else if (temp_s0->type == ICONTYPE_10) {
@@ -163,7 +163,7 @@ void Update2DIcon(tetWell *well, cursor_t *cursor, s32 num) {
                 }
 
                 Init2DChainTMEM(temp_s0);
-                temp_s0->thing.rect.s.imageW = 0x200;
+                temp_s0->thing.rect.s.imageW = 16 << 5;
                 temp_s0->thing.rect.s.objX = (temp_s3 + (temp_s0->from_x * 0x12)) << 2;
                 var_a1 = temp_s3 + ((temp_s0->from_x * 0x12) + 5);
                 if (sp1C == 0) {
@@ -190,13 +190,13 @@ void Update2DIcon(tetWell *well, cursor_t *cursor, s32 num) {
                 var_a2 = temp_s2 - ((temp_s0->to_y * 0x10) + 6);
                 Start2DIconSplash(well, var_a1, var_a2);
                 temp_s0->thing.rect.s.imageAdrs = 0x80;
-                temp_s0->thing.rect.s.imageW = 0x400;
+                temp_s0->thing.rect.s.imageW = 32 << 5;
                 var_v0 = temp_s0->from_x * 0x12;
                 goto block_29;
             } else {
                 sp24 = -1;
                 temp_s0->thing.rect.s.imageAdrs = 0x84;
-                temp_s0->thing.rect.s.imageW = 0x400;
+                temp_s0->thing.rect.s.imageW = 32 << 5;
                 var_v0 = (temp_s0->from_x * 0x12) + 0x15;
             block_29:
                 temp_s0->thing.rect.s.objX = (temp_s3 + var_v0) << 2;

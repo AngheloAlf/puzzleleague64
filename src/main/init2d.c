@@ -153,19 +153,19 @@ void Init2DTetrisBlocks(tetWell *well, s32 num) {
                 var_s0->objX = var_s4 * 0x48 + 0x2F0;
             }
 
-            var_s0->scaleW = 0x38F;
-            var_s0->imageW = 0x200;
+            var_s0->scaleW = 911;
+            var_s0->imageW = 16 << 5;
             var_s0->paddingX = 0;
 
             var_s0->objY = var_a2;
-            var_s0->scaleH = 0x400;
-            var_s0->imageH = 0x200;
+            var_s0->scaleH = 1 << 10;
+            var_s0->imageH = 16 << 5;
             var_s0->paddingY = 0;
 
             var_s0->imageStride = 8;
             var_s0->imageAdrs = 0;
-            var_s0->imageFmt = 2;
-            var_s0->imageSiz = 1;
+            var_s0->imageFmt = G_IM_FMT_CI;
+            var_s0->imageSiz = G_IM_SIZ_8b;
             var_s0->imagePal = 0;
             var_s0->imageFlags = 0;
         }
@@ -186,19 +186,19 @@ void Init2DTetrisBlocks(tetWell *well, s32 num) {
             var_s0->objX = var_s4 * 0x48 + 0x2F0;
         }
 
-        var_s0->scaleW = 0x38F;
-        var_s0->imageW = 0x200;
+        var_s0->scaleW = 911;
+        var_s0->imageW = 16 << 5;
         var_s0->paddingX = 0;
 
-        var_s0->objY = 0x37C;
-        var_s0->scaleH = 0x400;
-        var_s0->imageH = 0x200;
+        var_s0->objY = 223 << 2;
+        var_s0->scaleH = 1 << 10;
+        var_s0->imageH = 16 << 5;
         var_s0->paddingY = 0;
 
         var_s0->imageStride = 8;
         var_s0->imageAdrs = 0;
-        var_s0->imageFmt = 2;
-        var_s0->imageSiz = 1;
+        var_s0->imageFmt = G_IM_FMT_CI;
+        var_s0->imageSiz = G_IM_SIZ_8b;
         var_s0->imagePal = 0;
         var_s0->imageFlags = 0;
     }
@@ -758,13 +758,13 @@ void Init2DClearLine(tetWell *well, cursor_t *cursor UNUSED, s32 num) {
         } else {
             s->objX = 0x2F0 + count * 0x48;
         }
-        s->objY = 0x340;
+        s->objY = 208 << 2;
 
-        s->scaleW = 0x38F;
-        s->scaleH = 0x400;
+        s->scaleW = 911;
+        s->scaleH = 1 << 10;
 
-        s->imageW = 0x200;
-        s->imageH = 0x200;
+        s->imageW = 16 << 5;
+        s->imageH = 16 << 5;
 
         s->imageStride = 8;
         s->imageAdrs = 0;
@@ -772,19 +772,19 @@ void Init2DClearLine(tetWell *well, cursor_t *cursor UNUSED, s32 num) {
 
     s = &well->attack[count].rect.s;
     if (gTheGame.totalPlayer == 1) {
-        s->objX = 0x378;
+        s->objX = 222 << 2;
         s->imageAdrs = 2;
     } else if (num == 0) {
-        s->objX = 0x210;
+        s->objX = 132 << 2;
         s->imageAdrs = 2;
     } else {
-        s->objX = 0x230;
+        s->objX = 140 << 2;
         s->imageAdrs = 0x82;
     }
 
-    s->objY = 0x340;
-    s->imageW = 0x600;
-    s->imageH = 0x200;
+    s->objY = 208 << 2;
+    s->imageW = 48 << 5;
+    s->imageH = 16 << 5;
     s->imageStride = 8;
 }
 

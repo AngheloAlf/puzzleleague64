@@ -148,7 +148,7 @@ void Update3DPosition(tetWell *well, cursor_t *cursor UNUSED, s32 flag) {
             explode = &well->explosion[count];
 
             if (explode->rect.s.scaleW == 0) {
-                explode->rect.s.scaleW = 0x11;
+                explode->rect.s.scaleW = 17;
             } else {
                 explode->rect.s.scaleW--;
             }

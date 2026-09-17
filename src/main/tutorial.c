@@ -142,14 +142,14 @@ void InitTutorial(void) {
     gTheGame.unk_9B50[1].b.frameH = 0x78;
     for (var_a1_2 = 0; var_a1_2 < 2; var_a1_2++) {
         var_a0_3 = &gTheGame.unk_9A08[var_a1_2];
-        var_a0_3->s.imageW = 0x100;
-        var_a0_3->s.imageH = 0x100;
+        var_a0_3->s.imageW = 8 << 5;
+        var_a0_3->s.imageH = 8 << 5;
         var_a0_3->s.paddingX = 0;
         var_a0_3->s.paddingY = 0;
         var_a0_3->s.imageStride = 8;
         var_a0_3->s.imageAdrs = 0;
-        var_a0_3->s.imageFmt = 2;
-        var_a0_3->s.imageSiz = 1;
+        var_a0_3->s.imageFmt = G_IM_FMT_CI;
+        var_a0_3->s.imageSiz = G_IM_SIZ_8b;
         var_a0_3->s.imagePal = 0;
         var_a0_3->s.imageFlags = 0;
     }
@@ -157,14 +157,14 @@ void InitTutorial(void) {
     s6 = &brainbrain[0];
 
     var_a0_3 = gTheGame.unk_9A08;
-    var_a0_3[0].s.objX = 0x60;
-    var_a0_3[0].s.scaleW = 0x4B;
-    var_a0_3[0].s.objY = 0x7C;
-    var_a0_3[0].s.scaleH = 0x2A;
-    var_a0_3[1].s.objX = 0x2F0;
-    var_a0_3[1].s.scaleH = 0x2A;
-    var_a0_3[1].s.objY = 0x7C;
-    var_a0_3[1].s.scaleW = 0x4B;
+    var_a0_3[0].s.objX = 24 << 2;
+    var_a0_3[0].s.scaleW = 75;
+    var_a0_3[0].s.objY = 31 << 2;
+    var_a0_3[0].s.scaleH = 42;
+    var_a0_3[1].s.objX = 188 << 2;
+    var_a0_3[1].s.scaleH = 42;
+    var_a0_3[1].s.objY = 31 << 2;
+    var_a0_3[1].s.scaleW = 75;
 
     if (gTheGame.menu[0].game != 3) {
         gTheGame.unk_9B50[1].b.frameH = 0;
@@ -223,14 +223,14 @@ void InitTutorial(void) {
         case 0x2: /* switch 2 */
             Init2DPuzzle(s2, s1, tutorial2, 1);
             s3->where = 2;
-            gTheGame.gSPRITE[9].s.scaleW = 0x400;
-            gTheGame.gSPRITE[9].s.imageH = 0x100;
+            gTheGame.gSPRITE[9].s.scaleW = 1 << 10;
+            gTheGame.gSPRITE[9].s.imageH = 8 << 5;
             gTheGame.gSPRITE[9].s.imageStride = 8;
-            gTheGame.gSPRITE[9].s.imageFmt = 2;
+            gTheGame.gSPRITE[9].s.imageFmt = G_IM_FMT_CI;
             gTheGame.gSPRITE[9].s.paddingX = 0;
-            gTheGame.gSPRITE[9].s.scaleH = 0x400;
+            gTheGame.gSPRITE[9].s.scaleH = 1 << 10;
             gTheGame.gSPRITE[9].s.paddingY = 0;
-            gTheGame.gSPRITE[9].s.imageSiz = 1;
+            gTheGame.gSPRITE[9].s.imageSiz = G_IM_SIZ_8b;
             gTheGame.gSPRITE[9].s.imagePal = 0;
             gTheGame.gSPRITE[9].s.imageFlags = 0;
             break;
