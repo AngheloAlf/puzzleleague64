@@ -332,7 +332,6 @@ void Draw2DMiscStuff(struct_gInfo_unk_00068 *dynamicp) {
     gDPSetTextureLUT(glistp++, G_TT_NONE);
 }
 
-extern UNK_TYPE D_010192A8_usa;
 extern UNK_TYPE D_010194C0_usa;
 extern UNK_TYPE D_0101A4C0_usa;
 extern UNK_TYPE D_0101ACC0_usa;

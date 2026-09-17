@@ -1339,7 +1339,7 @@ extern uObjTxtr B_801F9C48_usa[GAME_BUFFER_LEN]; // TODO: original name
 // extern UNK_TYPE __osBaseTimer;
 // extern UNK_TYPE B_801F9CA4_usa;
 // extern UNK_TYPE B_801F9CA8_usa;
-extern UNK_PTR gAllVertex;
+extern Vtx *gAllVertex;
 
 // extern UNK_TYPE B_801F9CC4_usa;
 

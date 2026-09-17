@@ -807,8 +807,9 @@ u8 D_0101C4C0_usa[] ALIGNED(8) = {
 };
 
 u8 D_0101CCC0_usa[] ALIGNED(8) = {
-#include "assets/misc/segment_0CA4A0/D_0101CCC0_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_0101CCC0_usa.ci8.inc"
 };
+static_assert(sizeof(D_0101CCC0_usa) == D_0101CCC0_USA_WIDTH * D_0101CCC0_USA_HEIGHT * sizeof(char), "");
 
 u8 D_0101D4C0_usa[] ALIGNED(8) = {
 #include "assets/misc/segment_0CA4A0/D_0101D4C0_usa.i8.inc"
@@ -1015,38 +1016,12 @@ uObjTxtr D_0101F2A0_usa = {
     /* mask  */ 0x0,
 };
 
-#if 0
-height: 32
-
-Possible widths:
-    128 (G_IM_SIZ_4b)
-    64 (G_IM_SIZ_8b)
-    32 (G_IM_SIZ_16b)
-    16 (G_IM_SIZ_32b)
-
-Possible combinations:
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_4b),
-    /* tsize */ GS_TB_TSIZE(128 * 32, G_IM_SIZ_4b),
-    /* tline */ GS_TB_TLINE(128,      G_IM_SIZ_4b),
-
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_8b),
-    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
-    /* tline */ GS_TB_TLINE(64,      G_IM_SIZ_8b),
-
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_16b),
-    /* tsize */ GS_TB_TSIZE(32 * 32, G_IM_SIZ_16b),
-    /* tline */ GS_TB_TLINE(32,      G_IM_SIZ_16b),
-
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_32b),
-    /* tsize */ GS_TB_TSIZE(16 * 32, G_IM_SIZ_32b),
-    /* tline */ GS_TB_TLINE(16,      G_IM_SIZ_32b),
-#endif
 uObjTxtr D_0101F2B8_usa = {
     /* type  */ G_OBJLT_TXTRBLOCK,
     /* image */ (u64 *)D_0101CCC0_usa,
-    /* tmem  */ 0,
-    /* tsize */ 255,
-    /* tline */ 256,
+    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(64,      G_IM_SIZ_8b),
     /* sid   */ 0,
     /* flag  */ (u32)-1,
     /* mask  */ 0x0,

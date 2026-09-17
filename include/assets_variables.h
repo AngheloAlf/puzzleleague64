@@ -100,7 +100,7 @@ extern uObjTxtr chain13Block;
 // extern UNK_TYPE D_01018678_usa;
 // extern UNK_TYPE D_01018E90_usa;
 extern uObjTxtr deadsmoke;
-// extern UNK_TYPE D_010192A8_usa;
+extern u16 D_010192A8_usa[];
 extern uObjTxtr otherLUT;
 // extern UNK_TYPE D_010194C0_usa;
 // extern UNK_TYPE D_010196C0_usa;
@@ -112,7 +112,11 @@ extern uObjTxtr otherLUT;
 // extern UNK_TYPE D_0101B4C0_usa;
 // extern UNK_TYPE D_0101BCC0_usa;
 // extern UNK_TYPE D_0101C4C0_usa;
-// extern UNK_TYPE D_0101CCC0_usa;
+
+#define D_0101CCC0_USA_WIDTH 64
+#define D_0101CCC0_USA_HEIGHT 32
+extern u8 D_0101CCC0_usa[];
+
 // extern UNK_TYPE D_0101D4C0_usa;
 // extern UNK_TYPE D_0101DCC0_usa;
 // extern UNK_TYPE D_0101E4C0_usa;

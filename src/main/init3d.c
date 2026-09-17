@@ -4,7 +4,6 @@
 
 #include "init3d.h"
 
-#include "include_asm.h"
 #include "macros_defines.h"
 #include "main_variables.h"
 
@@ -12,26 +11,96 @@
 
 #include "001F10.h"
 #include "dlist.h"
+#include "draw3d.h"
 #include "init2d.h"
 #include "tetris.h"
 #include "the_game.h"
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init3d", Init3DNewRow);
-#endif
+/**
+ * Original name: Init3DNewRow
+ */
+void Init3DNewRow(tetWell *well) {
+    s32 col;
+    s32 old;
+    s32 target = -1;
+    s32 check = 0;
+    nbool flag = nfalse;
+    BlockType type;
+    block_t *block;
+    extra_t *extra = &well->extra;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init3d", Init3DNewRow);
-#endif
+    if ((extra->wellGarbage <= 4) && (extra->queueGarbage >= 2)) {
+        extra->queueGarbage -= 2;
+        extra->wellGarbage += 2;
+        check = 3;
+        flag = ntrue;
+    } else if ((extra->wellGarbage <= 8) && (extra->queueGarbage >= 1)) {
+        extra->queueGarbage--;
+        extra->wellGarbage++;
+        check = 2;
+        flag = ntrue;
+    } else if (well->state.newBlock < 2) {
+        check = 1;
+        flag = ntrue;
+    }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init3d", Init3DNewRow);
-#endif
+    if (flag) {
+        old = well->state.rand;
+        well->state.rand = -1;
+        target = RandomBlock(well);
+        well->state.rand = old;
+    }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init3d", Init3DNewRow);
-#endif
+    if (well->state.newBlock == 1) {
+        well->state.newBlock = 2;
+    } else if (well->state.newBlock == 2) {
+        well->state.newBlock = 1;
+    }
 
+    for (col = BLOCK_LEN_B - 1; col >= 0; col--) {
+        block = &well->new_block[col];
+
+        InitTetrisState(block);
+
+        block->currRow = 0;
+        if (col == target) {
+            switch (check) {
+                case 1:
+                    type = well->new_block[col + 1].type;
+                    if (type == well->block[0][col].type) {
+                        col += 2;
+                        continue;
+                    }
+                    break;
+
+                case 2:
+                    type = BLOCKTYPE_7;
+                    break;
+
+                case 3:
+                    type = BLOCKTYPE_7;
+                    well->new_block[col + 1].type = BLOCKTYPE_7;
+                    break;
+            }
+        } else {
+            if (col == 0) {
+                do {
+                    type = RandomBlock(well);
+                } while ((type == well->new_block[BLOCK_LEN_B - 1].type) || (type == well->new_block[col + 1].type) || (type == well->block[0][col].type));
+            } else {
+                do {
+                    type = RandomBlock(well);
+                } while ((type == well->new_block[col + 1].type) || (type == well->block[0][col].type));
+            }
+        }
+
+        block->type = type;
+    }
+}
+
+/**
+ * Original name: Init3DCursor
+ */
 void Init3DCursor(cursor_t *cursor, s32 num) {
     cursor->sy = -1;
     cursor->sx = 0;
@@ -48,6 +117,9 @@ void Init3DCursor(cursor_t *cursor, s32 num) {
     cursor->rect.s.objY = ((50 << 2) + 3) - (cursor->y * 0x10);
 }
 
+/**
+ * Original name: Init3DTetrisBlocks
+ */
 void Init3DTetrisBlocks(tetWell *well, s32 num UNUSED) {
     block_t *block;
     s32 i;
@@ -71,6 +143,9 @@ void Init3DTetrisBlocks(tetWell *well, s32 num UNUSED) {
     }
 }
 
+/**
+ * Original name: Init3DTetrisBlocksState
+ */
 void Init3DTetrisBlocksState(tetWell *well) {
     s32 i;
     s32 j;
@@ -90,6 +165,9 @@ void Init3DTetrisBlocksState(tetWell *well) {
     }
 }
 
+/**
+ * Original name: Init3DIcons
+ */
 void Init3DIcons(tetWell *well) {
     s32 i;
 
@@ -105,6 +183,9 @@ void Init3DIcons(tetWell *well) {
     }
 }
 
+/**
+ * Original name: Init3DAttackBlocks
+ */
 void Init3DAttackBlocks(tetWell *well) {
     s32 i;
 
@@ -121,6 +202,9 @@ void Init3DAttackBlocks(tetWell *well) {
     }
 }
 
+/**
+ * Original name: Init3DExplosion
+ */
 void Init3DExplosion(tetWell *well) {
     s32 i;
 
@@ -144,6 +228,9 @@ void Init3DText(void) {
     }
 }
 
+/**
+ * Original name: Init3DClearLine
+ */
 void Init3DClearLine(tetWell *well, struct cursor_t *cursor UNUSED, s32 num) {
     uObjSprite_t *s;
 
@@ -161,80 +248,70 @@ void Init3DClearLine(tetWell *well, struct cursor_t *cursor UNUSED, s32 num) {
     s->objY = 0xC6;
 }
 
-#if VERSION_USA
-#if 0
-void func_8005DE94_usa(s32 arg0, s32 arg1) {
-    s32 temp_v1 = (gGameStatus & 0xF00) >> 8;
+void func_8005DE94_usa(const u16 arg0[], s32 arg1) {
+    s32 win = GAME_STATUS_GET_WIN_RECORD(gGameStatus);
 
-    switch (temp_v1) {
+    switch (win) {
         case 3:
-            if (gTheGame.tetrisWell[1].unk_4404 == 0) {
-                func_80064AAC_usa(1, arg0, arg1);
+            if (gTheGame.tetrisWell[1].extra.win == 0) {
+                func_80064AAC_usa(ENUM_FUNC_800643A4_USA_ARG0_1, arg0, arg1);
             } else {
-                func_800643A4_usa(1, arg0, arg1);
+                func_800643A4_usa(ENUM_FUNC_800643A4_USA_ARG0_1, arg0, arg1);
             }
-            if (gTheGame.tetrisWell[1].unk_4404 < 2) {
-                func_80064AAC_usa(2, arg0, arg1);
+
+            if (gTheGame.tetrisWell[1].extra.win < 2) {
+                func_80064AAC_usa(ENUM_FUNC_800643A4_USA_ARG0_2, arg0, arg1);
             } else {
-                func_800643A4_usa(2, arg0, arg1);
+                func_800643A4_usa(ENUM_FUNC_800643A4_USA_ARG0_2, arg0, arg1);
             }
-            func_80064AAC_usa(3, arg0, arg1);
-            if (gTheGame.tetrisWell[0].unk_4404 == 0) {
-                func_80064AAC_usa(4, arg0, arg1);
+
+            func_80064AAC_usa(ENUM_FUNC_800643A4_USA_ARG0_3, arg0, arg1);
+
+            if (gTheGame.tetrisWell[0].extra.win == 0) {
+                func_80064AAC_usa(ENUM_FUNC_800643A4_USA_ARG0_4, arg0, arg1);
             } else {
-                func_800643A4_usa(4, arg0, arg1);
+                func_800643A4_usa(ENUM_FUNC_800643A4_USA_ARG0_4, arg0, arg1);
             }
-            if (gTheGame.tetrisWell[0].unk_4404 < 2) {
-                func_80064AAC_usa(5, arg0, arg1);
+
+            if (gTheGame.tetrisWell[0].extra.win < 2) {
+                func_80064AAC_usa(ENUM_FUNC_800643A4_USA_ARG0_5, arg0, arg1);
             } else {
-                func_800643A4_usa(5, arg0, arg1);
+                func_800643A4_usa(ENUM_FUNC_800643A4_USA_ARG0_5, arg0, arg1);
             }
-            func_80064AAC_usa(6, arg0, arg1);
+
+            func_80064AAC_usa(ENUM_FUNC_800643A4_USA_ARG0_6, arg0, arg1);
             break;
 
         case 2:
-            if (gTheGame.tetrisWell[1].unk_4404 == 0) {
-                func_80064AAC_usa(1, arg0, arg1);
+            if (gTheGame.tetrisWell[1].extra.win == 0) {
+                func_80064AAC_usa(ENUM_FUNC_800643A4_USA_ARG0_1, arg0, arg1);
             } else {
-                func_800643A4_usa(1, arg0, arg1);
+                func_800643A4_usa(ENUM_FUNC_800643A4_USA_ARG0_1, arg0, arg1);
             }
-            func_80064AAC_usa(2, arg0, arg1);
-            func_80064728_usa(3, arg0, arg1);
-            if (gTheGame.tetrisWell[0].unk_4404 == 0) {
-                func_80064AAC_usa(4, arg0, arg1);
+
+            func_80064AAC_usa(ENUM_FUNC_800643A4_USA_ARG0_2, arg0, arg1);
+            func_80064728_usa(ENUM_FUNC_800643A4_USA_ARG0_3, arg0, arg1);
+
+            if (gTheGame.tetrisWell[0].extra.win == 0) {
+                func_80064AAC_usa(ENUM_FUNC_800643A4_USA_ARG0_4, arg0, arg1);
             } else {
-                func_800643A4_usa(4, arg0, arg1);
+                func_800643A4_usa(ENUM_FUNC_800643A4_USA_ARG0_4, arg0, arg1);
             }
-            func_80064AAC_usa(5, arg0, arg1);
-            func_80064728_usa(6, arg0, arg1);
+
+            func_80064AAC_usa(ENUM_FUNC_800643A4_USA_ARG0_5, arg0, arg1);
+            func_80064728_usa(ENUM_FUNC_800643A4_USA_ARG0_6, arg0, arg1);
             break;
 
         case 1:
-            func_80064AAC_usa(1, arg0, arg1);
-            func_80064728_usa(2, arg0, arg1);
-            func_80064728_usa(3, arg0, arg1);
-            func_80064AAC_usa(4, arg0, arg1);
-            func_80064728_usa(5, arg0, arg1);
-            func_80064728_usa(6, arg0, arg1);
+            func_80064AAC_usa(ENUM_FUNC_800643A4_USA_ARG0_1, arg0, arg1);
+            func_80064728_usa(ENUM_FUNC_800643A4_USA_ARG0_2, arg0, arg1);
+            func_80064728_usa(ENUM_FUNC_800643A4_USA_ARG0_3, arg0, arg1);
+            func_80064AAC_usa(ENUM_FUNC_800643A4_USA_ARG0_4, arg0, arg1);
+            func_80064728_usa(ENUM_FUNC_800643A4_USA_ARG0_5, arg0, arg1);
+            func_80064728_usa(ENUM_FUNC_800643A4_USA_ARG0_6, arg0, arg1);
             break;
     }
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/init3d", func_8005DE94_usa);
-#endif
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init3d", func_8005E164_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init3d", func_8005C8A4_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init3d", func_8005CA54_ger);
-#endif
 
 /**
  * Original name: Init3DSmallStars
@@ -363,18 +440,36 @@ s32 Return3DComboTile(s32 combo) {
     }
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init3d", func_8005E484_usa);
-#endif
+/**
+ * Original name: Return3DChainTile
+ */
+s32 Return3DChainTile(s32 chain) {
+    s32 which;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init3d", func_8005E754_eur);
-#endif
+    if (chain < 0x63) {
+        which = chain % 8;
+    } else {
+        return 3;
+    }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init3d", func_8005CE94_fra);
-#endif
+    switch (which) {
+        case 1:
+            return 0;
+        case 2:
+            return 1;
+        case 3:
+            return 2;
+        case 4:
+            return 3;
+        case 5:
+            return 4;
+        case 6:
+            return 5;
+        case 7:
+            return 6;
+        case 0:
+            return 7;
+    }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init3d", func_8005D044_ger);
-#endif
+    return 7;
+}

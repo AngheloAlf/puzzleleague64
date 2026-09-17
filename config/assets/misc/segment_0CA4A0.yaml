@@ -105,7 +105,7 @@ segments:
       - [0x1B4C0, i8, D_0101B4C0_usa.i8, 2048, 1] # unknown type and dimensions
       - [0x1BCC0, i8, D_0101BCC0_usa.i8, 2048, 1] # unknown type and dimensions
       - [0x1C4C0, i8, D_0101C4C0_usa.i8, 2048, 1] # unknown type and dimensions
-      - [0x1CCC0, i8, D_0101CCC0_usa.i8, 2048, 1] # unknown type and dimensions
+      - { start: 0x1CCC0, type: ci8, name: D_0101CCC0_usa.ci8, width: 64, height: 32, palettes: [D_010192A8_usa] }
       - [0x1D4C0, i8, D_0101D4C0_usa.i8, 2048, 1] # unknown type and dimensions
       - [0x1DCC0, i8, D_0101DCC0_usa.i8, 2048, 1] # unknown type and dimensions
       - { start: 0x1E4C0, type: ci8, name: D_0101E4C0_usa.ci8, width: 48, height: 24, palettes: [D_010192A8_usa] }

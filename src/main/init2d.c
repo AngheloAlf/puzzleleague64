@@ -58,7 +58,7 @@ void Init2DNewRow(tetWell *well) {
         well->state.newBlock = 1;
     }
 
-    for (col = 5; col >= 0; col--) {
+    for (col = TETWELL_UNK_3EF0_LEN_6 - 1; col >= 0; col--) {
         block = &well->new_block[col];
         rect = &well->new_block_rect[col];
 
