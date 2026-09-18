@@ -12,7 +12,7 @@ extern Gfx initRDPstart[];
 extern Gfx initRDP_dl[];
 extern Gfx init2D_dl[];
 extern Gfx init3D_dl[];
-// extern UNK_TYPE D_010001F0_usa;
+extern u16 D_010001F0_usa[];
 // extern UNK_TYPE D_01000200_usa;
 extern uObjTxtr D_010003F0_usa;
 // extern UNK_TYPE D_01000400_usa;
@@ -33,15 +33,22 @@ extern u8 D_01001C68_usa[];
 extern u8 D_01002468_usa[];
 extern u8 D_01002C68_usa[];
 extern u8 D_01003468_usa[];
-extern u8 D_01003C68_usa[];
-extern u8 D_01004468_usa[];
-extern u8 D_01004C68_usa[];
-extern u8 D_01005468_usa[];
+
+#define BLOCK_TEX_WIDTH 64
+#define BLOCK_TEX_HEIGHT 32
+
+extern u8 block6[];
+extern u8 block7[];
+extern u8 block8[];
+extern u8 block9[];
+
 extern u8 D_01005C68_usa[];
 extern u8 D_01006468_usa[];
 extern u8 D_01006C68_usa[];
 extern u8 D_01007468_usa[];
-extern u8 D_01007C68_usa[];
+
+extern u8 blockn[];
+
 extern u8 D_01008468_usa[];
 extern u8 D_01008C68_usa[];
 extern u8 D_01009468_usa[];
@@ -176,7 +183,13 @@ extern uObjTxtr stars2Texture;
 // extern UNK_TYPE D_0102CE30_usa;
 // extern UNK_TYPE D_0102EEB0_usa;
 // extern UNK_TYPE D_0102F0C8_usa;
-// extern UNK_TYPE D_0102F8E0_usa;
-// extern UNK_TYPE D_01030460_usa;
+
+#define CURSOR_TEX_WIDTH 64
+#define CURSOR_TEX_HEIGHT 23
+
+#define CURSOR_TEX_REAL_WIDTH 56
+
+extern u16 big_c[];
+extern u16 small_c[];
 
 #endif

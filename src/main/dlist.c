@@ -99,15 +99,15 @@ void func_80054624_usa(void) {
         tetrisBlock3.block.image = (u64 *)D_01002468_usa;
         tetrisBlock4.block.image = (u64 *)D_01002C68_usa;
         tetrisBlock5.block.image = (u64 *)D_01003468_usa;
-        tetrisBlock6.block.image = (u64 *)D_01003C68_usa;
-        tetrisBlock7.block.image = (u64 *)D_01004468_usa;
-        tetrisBlock8.block.image = (u64 *)D_01004C68_usa;
-        tetrisBlock9.block.image = (u64 *)D_01005468_usa;
+        tetrisBlock6.block.image = (u64 *)block6;
+        tetrisBlock7.block.image = (u64 *)block7;
+        tetrisBlock8.block.image = (u64 *)block8;
+        tetrisBlock9.block.image = (u64 *)block9;
         D_800B7458_usa.block.image = (u64 *)D_01005C68_usa;
         D_800B7470_usa.block.image = (u64 *)D_01006468_usa;
         D_800B7488_usa.block.image = (u64 *)D_01006C68_usa;
         D_800B74A0_usa.block.image = (u64 *)D_01007468_usa;
-        tetrisBlockNew.block.image = (u64 *)D_01007C68_usa;
+        tetrisBlockNew.block.image = (u64 *)blockn;
     }
 }
 

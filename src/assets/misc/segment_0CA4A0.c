@@ -91,7 +91,7 @@ Gfx init3D_dl[] = {
 };
 
 u16 D_010001F0_usa[] ALIGNED(8) = {
-#include "assets/misc/segment_0CA4A0/D_010001F0_usa.rgba16.inc"
+#include "assets/misc/segment_0CA4A0/blockn.palette.inc"
 };
 
 uObjTxtr D_010003F0_usa = {
@@ -186,21 +186,25 @@ u8 D_01003468_usa[] ALIGNED(8) = {
 #include "assets/misc/segment_0CA4A0/D_01003468_usa.i8.inc"
 };
 
-u8 D_01003C68_usa[] ALIGNED(8) = {
-#include "assets/misc/segment_0CA4A0/D_01003C68_usa.i8.inc"
+u8 block6[] ALIGNED(8) = {
+#include "assets/misc/segment_0CA4A0/block6.ci8.inc"
 };
+static_assert(sizeof(block6) == BLOCK_TEX_WIDTH * BLOCK_TEX_HEIGHT * sizeof(u8), "");
 
-u8 D_01004468_usa[] ALIGNED(8) = {
-#include "assets/misc/segment_0CA4A0/D_01004468_usa.i8.inc"
+u8 block7[] ALIGNED(8) = {
+#include "assets/misc/segment_0CA4A0/block7.ci8.inc"
 };
+static_assert(sizeof(block7) == BLOCK_TEX_WIDTH * BLOCK_TEX_HEIGHT * sizeof(u8), "");
 
-u8 D_01004C68_usa[] ALIGNED(8) = {
-#include "assets/misc/segment_0CA4A0/D_01004C68_usa.i8.inc"
+u8 block8[] ALIGNED(8) = {
+#include "assets/misc/segment_0CA4A0/block8.ci8.inc"
 };
+static_assert(sizeof(block8) == BLOCK_TEX_WIDTH * BLOCK_TEX_HEIGHT * sizeof(u8), "");
 
-u8 D_01005468_usa[] ALIGNED(8) = {
-#include "assets/misc/segment_0CA4A0/D_01005468_usa.i8.inc"
+u8 block9[] ALIGNED(8) = {
+#include "assets/misc/segment_0CA4A0/block9.ci8.inc"
 };
+static_assert(sizeof(block9) == BLOCK_TEX_WIDTH * BLOCK_TEX_HEIGHT * sizeof(u8), "");
 
 u8 D_01005C68_usa[] ALIGNED(8) = {
 #include "assets/misc/segment_0CA4A0/D_01005C68_usa.i8.inc"
@@ -218,9 +222,10 @@ u8 D_01007468_usa[] ALIGNED(8) = {
 #include "assets/misc/segment_0CA4A0/D_01007468_usa.i8.inc"
 };
 
-u8 D_01007C68_usa[] ALIGNED(8) = {
-#include "assets/misc/segment_0CA4A0/D_01007C68_usa.i8.inc"
+u8 blockn[] ALIGNED(8) = {
+#include "assets/misc/segment_0CA4A0/blockn.ci8.inc"
 };
+static_assert(sizeof(blockn) == BLOCK_TEX_WIDTH * BLOCK_TEX_HEIGHT * sizeof(u8), "");
 
 u8 D_01008468_usa[] ALIGNED(8) = {
 #include "assets/misc/segment_0CA4A0/D_01008468_usa.i8.inc"
@@ -809,7 +814,7 @@ u8 D_0101C4C0_usa[] ALIGNED(8) = {
 u8 D_0101CCC0_usa[] ALIGNED(8) = {
 #include "assets/misc/segment_0CA4A0/D_0101CCC0_usa.ci8.inc"
 };
-static_assert(sizeof(D_0101CCC0_usa) == D_0101CCC0_USA_WIDTH * D_0101CCC0_USA_HEIGHT * sizeof(char), "");
+static_assert(sizeof(D_0101CCC0_usa) == D_0101CCC0_USA_WIDTH * D_0101CCC0_USA_HEIGHT * sizeof(u8), "");
 
 u8 D_0101D4C0_usa[] ALIGNED(8) = {
 #include "assets/misc/segment_0CA4A0/D_0101D4C0_usa.i8.inc"
@@ -1500,10 +1505,15 @@ u32 D_0102F8C8_usa[] = {
     0x00001033, (u32)D_0102F0C8_usa, 0x000000FF, 0x01000000, 0xFFFFFFFF, 0x00000000,
 };
 
-u8 D_0102F8E0_usa[] ALIGNED(8) = {
-#include "assets/misc/segment_0CA4A0/D_0102F8E0_usa.i8.inc"
+u16 big_c[] ALIGNED(8) = {
+#include "assets/misc/segment_0CA4A0/big_c.rgba16.inc"
 };
+static_assert(sizeof(big_c) == CURSOR_TEX_WIDTH * CURSOR_TEX_HEIGHT * sizeof(u16), "");
 
-u8 D_01030460_usa[] ALIGNED(8) = {
-#include "assets/misc/segment_0CA4A0/D_01030460_usa.i8.inc"
+u16 small_c[] ALIGNED(8) = {
+#include "assets/misc/segment_0CA4A0/small_c.rgba16.inc"
 };
+static_assert(sizeof(small_c) == CURSOR_TEX_WIDTH * CURSOR_TEX_HEIGHT * sizeof(u16), "");
+
+static_assert(CURSOR_TEX_REAL_WIDTH <= CURSOR_TEX_WIDTH, "");
+

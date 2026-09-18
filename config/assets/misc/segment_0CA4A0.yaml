@@ -9,7 +9,7 @@ segments:
       - [0x000F8]
       - [0x00160]
       - [0x001A8]
-      - [0x001F0, rgba16, D_010001F0_usa.rgba16, 256, 1] # palette
+      - [0x001F0, palette, D_010001F0_usa]
       - [0x003F0]
       - [0x00408, palette, D_01000408_usa]
       - [0x00608]
@@ -24,15 +24,19 @@ segments:
       - [0x02468, i8, D_01002468_usa.i8, 2048, 1] # unknown type and dimensions
       - [0x02C68, i8, D_01002C68_usa.i8, 2048, 1] # unknown type and dimensions
       - [0x03468, i8, D_01003468_usa.i8, 2048, 1] # unknown type and dimensions
-      - [0x03C68, i8, D_01003C68_usa.i8, 2048, 1] # unknown type and dimensions
-      - [0x04468, i8, D_01004468_usa.i8, 2048, 1] # unknown type and dimensions
-      - [0x04C68, i8, D_01004C68_usa.i8, 2048, 1] # unknown type and dimensions
-      - [0x05468, i8, D_01005468_usa.i8, 2048, 1] # unknown type and dimensions
+
+      - { start: 0x03C68, type: ci8, name: block6.ci8, width: 64, height: 32, palettes: [D_010001F0_usa] }
+      - { start: 0x04468, type: ci8, name: block7.ci8, width: 64, height: 32, palettes: [D_010001F0_usa] }
+      - { start: 0x04C68, type: ci8, name: block8.ci8, width: 64, height: 32, palettes: [D_010001F0_usa] }
+      - { start: 0x05468, type: ci8, name: block9.ci8, width: 64, height: 32, palettes: [D_010001F0_usa] }
+
       - [0x05C68, i8, D_01005C68_usa.i8, 2048, 1] # unknown type and dimensions
       - [0x06468, i8, D_01006468_usa.i8, 2048, 1] # unknown type and dimensions
       - [0x06C68, i8, D_01006C68_usa.i8, 2048, 1] # unknown type and dimensions
       - [0x07468, i8, D_01007468_usa.i8, 2048, 1] # unknown type and dimensions
-      - [0x07C68, i8, D_01007C68_usa.i8, 2048, 1] # unknown type and dimensions
+
+      - { start: 0x07C68, type: ci8, name: blockn.ci8, width: 64, height: 32, palettes: [D_010001F0_usa] }
+
       - [0x08468, i8, D_01008468_usa.i8, 2048, 1] # unknown type and dimensions
       - [0x08C68, i8, D_01008C68_usa.i8, 2048, 1] # unknown type and dimensions
       - [0x09468, i8, D_01009468_usa.i8, 2048, 1] # unknown type and dimensions
@@ -160,8 +164,8 @@ segments:
       - [0x2F0B0]
       - [0x2F0C8, i8, D_0102F0C8_usa.i8, 2048, 1] # unknown type and dimensions
       - [0x2F8C8]
-      - [0x2F8E0, i8, D_0102F8E0_usa.i8, 2944, 1] # unknown type and dimensions
-      - [0x30460, i8, D_01030460_usa.i8, 2944, 1] # unknown type and dimensions
+      - [0x2F8E0, rgba16, big_c.rgba16, 64, 23] # unknown type and dimensions
+      - [0x30460, rgba16, small_c.rgba16, 64, 23] # unknown type and dimensions
 
   - [0x30FE0]
 

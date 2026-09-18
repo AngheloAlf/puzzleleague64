@@ -189,37 +189,124 @@ void func_8005FD38_usa(struct_gInfo_unk_00068 *arg0, s32 arg1, block_t *arg2, bl
     }
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/draw3d", Draw3DTetrisNewBlock);
-#endif
+/**
+ * Original nanme: Draw3DTetrisNewBlock
+ */
+void Draw3DTetrisNewBlock(struct_gInfo_unk_00068 *dynamicp UNUSED, tetWell *well) {
+    s32 col;
+    Texture *tex;
+    block_t *block;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/draw3d", Draw3DTetrisNewBlock);
-#endif
+    if (well->new_block[0].type == BLOCKTYPE_0) {
+        return;
+    }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/draw3d", Draw3DTetrisNewBlock);
-#endif
+    gDPPipeSync(glistp++);
+    gDPSetTextureLUT(glistp++, G_TT_RGBA16);
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/draw3d", Draw3DTetrisNewBlock);
-#endif
+    if (gGameStatus & GAME_STATUS_FLAG_40) {
+        gDPLoadTLUT_pal256(glistp++, colorTable);
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/draw3d", Draw3DCursor);
-#endif
+        if (gMain >= GMAIN_38E) {
+            switch (well->new_block[0].frame_n) {
+                case 0x8:
+                case 0xD:
+                    tex = tetrisBlock6.block.image;
+                    break;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/draw3d", Draw3DCursor);
-#endif
+                case 0xE:
+                    tex = tetrisBlock7.block.image;
+                    break;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/draw3d", Draw3DCursor);
-#endif
+                case 0xF:
+                    tex = tetrisBlock8.block.image;
+                    break;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/draw3d", Draw3DCursor);
-#endif
+                case 0x10:
+                    tex = tetrisBlock9.block.image;
+                    break;
+
+                default:
+                    tex = tetrisBlockNew.block.image;
+                    break;
+            }
+        } else {
+            tex = tetrisBlockNew.block.image;
+        }
+    } else {
+        gDPLoadTLUT_pal256(glistp++, D_010001F0_usa);
+
+        if (gMain >= GMAIN_38E) {
+            switch (well->new_block[0].frame_n) {
+                case 0x8:
+                case 0x10:
+                    tex = block6;
+                    break;
+
+                case 0x11:
+                    tex = block7;
+                    break;
+
+                case 0x12:
+                    tex = block8;
+                    break;
+
+                case 0x13:
+                    tex = block9;
+                    break;
+
+                default:
+                    tex = blockn;
+                    break;
+            }
+        } else {
+            tex = blockn;
+        }
+    }
+
+    gDPLoadTextureBlock(glistp++, tex, G_IM_FMT_CI, G_IM_SIZ_8b, BLOCK_TEX_WIDTH, BLOCK_TEX_HEIGHT, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+
+    Set3DTile();
+
+    for (col = 1; col < 9; col++) {
+        block = &well->new_block[col];
+
+        gSPTexture(glistp++, 0x8000, 0x8000, 0, block->type - 1, G_ON);
+        gSPVertex(glistp++, &gAllVertex[0x6C0 + col * 0x8], 8, 0);
+        gSP1Quadrangle(glistp++, 0, 1, 2, 3, 0);
+    }
+}
+
+/**
+ * Original nanme: Draw3DCursor
+ */
+void Draw3DCursor(struct_gInfo_unk_00068 *dynamicp) {
+    cursor_t *cursor;
+    u16 *tex;
+    s32 num;
+    s32 x;
+    s32 y;
+
+    gDPPipeSync(glistp++);
+    gDPSetTextureLUT(glistp++, G_TT_NONE);
+
+    if (dynamicp->cursorBlock[0].frame_n == 0) {
+        tex = big_c;
+    } else {
+        tex = small_c;
+    }
+    gDPLoadTextureBlock(glistp++, tex, G_IM_FMT_RGBA, G_IM_SIZ_16b, CURSOR_TEX_WIDTH, CURSOR_TEX_HEIGHT, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+
+    for (num = 0; num < gTheGame.totalPlayer; num++) {
+        cursor = &dynamicp->cursorBlock[num];
+
+        x = cursor->rect.s.objX;
+        y = cursor->rect.s.objY;
+
+        gSPTextureRectangle(glistp++, x << 2, y << 2, (x + CURSOR_TEX_REAL_WIDTH) << 2, (y + CURSOR_TEX_HEIGHT) << 2, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
+        gDPPipeSync(glistp++);
+    }
+}
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/draw3d", Draw3DIcon);
