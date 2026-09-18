@@ -788,22 +788,105 @@ void Init2DClearLine(tetWell *well, cursor_t *cursor UNUSED, s32 num) {
     s->imageStride = 8;
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", func_8006C204_usa);
-#endif
+void func_8006C204_usa(void) {
+    s32 temp_v1 = GAME_STATUS_GET_WIN_RECORD(gGameStatus);
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", func_8006C204_usa);
-#endif
+    switch (temp_v1) {
+        case 0x3:
+            if (gTheGame.tetrisWell[1].extra.win == 0) {
+                gTheGame.drawText[0].texture = 0xC8;
+                gTheGame.drawText[0].word.s.imageAdrs = 0;
+            } else {
+                gTheGame.drawText[0].texture = 8;
+                gTheGame.drawText[0].word.s.imageAdrs = 0x80;
+            }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", func_8006C204_usa);
-#endif
+            if (gTheGame.tetrisWell[1].extra.win < 2) {
+                gTheGame.drawText[1].texture = 0xC8;
+                gTheGame.drawText[1].word.s.imageAdrs = 0;
+            } else {
+                gTheGame.drawText[1].texture = 8;
+                gTheGame.drawText[1].word.s.imageAdrs = 0x80;
+            }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", func_8006C204_usa);
-#endif
+            gTheGame.drawText[2].texture = 0xC8;
+            gTheGame.drawText[2].word.s.imageAdrs = 0;
 
+            if (gTheGame.tetrisWell[0].extra.win == 0) {
+                gTheGame.drawText[3].texture = 0xC8;
+                gTheGame.drawText[3].word.s.imageAdrs = 0x80;
+            } else {
+                gTheGame.drawText[3].texture = 8;
+                gTheGame.drawText[3].word.s.imageAdrs = 0x82;
+            }
+
+            if (gTheGame.tetrisWell[0].extra.win < 2) {
+                gTheGame.drawText[4].texture = 0xC8;
+                gTheGame.drawText[4].word.s.imageAdrs = 0x80;
+            } else {
+                gTheGame.drawText[4].texture = 8;
+                gTheGame.drawText[4].word.s.imageAdrs = 0x82;
+            }
+
+            gTheGame.drawText[5].texture = 0xC8;
+            gTheGame.drawText[5].word.s.imageAdrs = 0x80;
+            break;
+
+        case 0x2:
+            if (gTheGame.tetrisWell[1].extra.win == 0) {
+                gTheGame.drawText[0].texture = 0xC8;
+                gTheGame.drawText[0].word.s.imageAdrs = 0;
+            } else {
+                gTheGame.drawText[0].texture = 8;
+                gTheGame.drawText[0].word.s.imageAdrs = 0x80;
+            }
+
+            gTheGame.drawText[1].texture = 0xC8;
+            gTheGame.drawText[1].word.s.imageAdrs = 0;
+
+            gTheGame.drawText[2].texture = 8;
+            gTheGame.drawText[2].word.s.imageAdrs = 0x84;
+
+            if (gTheGame.tetrisWell[0].extra.win == 0) {
+                gTheGame.drawText[3].texture = 0xC8;
+                gTheGame.drawText[3].word.s.imageAdrs = 0x80;
+            } else {
+                gTheGame.drawText[3].texture = 8;
+                gTheGame.drawText[3].word.s.imageAdrs = 0x82;
+            }
+
+            gTheGame.drawText[4].texture = 0xC8;
+            gTheGame.drawText[4].word.s.imageAdrs = 0x80;
+
+            gTheGame.drawText[5].texture = 8;
+            gTheGame.drawText[5].word.s.imageAdrs = 0x86;
+            break;
+
+        case 0x1:
+            gTheGame.drawText[0].texture = 0xC8;
+            gTheGame.drawText[0].word.s.imageAdrs = 0;
+
+            gTheGame.drawText[1].texture = 8;
+            gTheGame.drawText[1].word.s.imageAdrs = 0x84;
+
+            gTheGame.drawText[2].texture = 8;
+            gTheGame.drawText[2].word.s.imageAdrs = 0x84;
+
+            gTheGame.drawText[3].word.s.imageAdrs = 0x80;
+            gTheGame.drawText[3].texture = 0xC8;
+
+            gTheGame.drawText[4].texture = 8;
+            gTheGame.drawText[4].word.s.imageAdrs = 0x86;
+
+            gTheGame.drawText[5].texture = 8;
+            gTheGame.drawText[5].word.s.imageAdrs = 0x86;
+            break;
+    }
+}
+
+/**
+ * Original name: Init2DSmallStars
+ */
 void Init2DSmallStars(s32 num) {
     s32 var_s3 = 0;
     u8 stars_POS[21][3] = {
@@ -866,21 +949,84 @@ void Init2DSmallStars(s32 num) {
     }
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", Init2DCircleStars);
-#endif
+/**
+ * Original name: Init2DCircleStars
+ */
+void Init2DCircleStars(s32 num, s32 pos) {
+    tetWell *well = &gTheGame.tetrisWell[1];
+    uObjSprite_t *s;
+    block_t *block;
+    s32 row;
+    s32 col;
+    s32 var_a0;
+    s32 total = 0;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", Init2DCircleStars);
-#endif
+    for (row = 0; row < BLOCK_LEN_ROWS; row++) {
+        for (col = 0; col < TETWELL_OBJSPRITE_LEN_B; col++) {
+            block = &well->block[row][col];
+            s = &well->block_rect[row][col].s;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", Init2DCircleStars);
-#endif
+            if (gSelection == SELECTION_96) {
+                if (num == 0) {
+                    block->drop = 0x91;
+                    gTheGame.drawText[0].texture = 0xC8;
+                } else {
+                    block->drop = 0xA7;
+                    gTheGame.drawText[1].texture = 0xC8;
+                }
+                block->delay = 0xC7;
+            } else {
+                var_a0 = pos;
+                if (num == 1) {
+                    var_a0 += 3;
+                }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", Init2DCircleStars);
-#endif
+                if (num == 0) {
+                    block->drop = 0x91;
+                } else {
+                    block->drop = 0xA7;
+                }
+
+                if (pos == 0) {
+                    block->delay = 0xB4;
+                } else if (pos == 1) {
+                    block->delay = 0xC5;
+                } else {
+                    block->delay = 0xD6;
+                }
+
+                gTheGame.drawText[var_a0].texture = 8;
+                if (num == 0) {
+                    gTheGame.drawText[var_a0].word.s.imageAdrs = 0x80;
+                } else {
+                    gTheGame.drawText[var_a0].word.s.imageAdrs = 0x82;
+                }
+            }
+
+            s->objX = block->drop << 2;
+            s->objY = block->delay << 2;
+            block->currRow = 0;
+            block->frame_n = AnimationRandom(4);
+            block->chain_flag = total * 0x1E;
+            block->bomb = 2;
+            block->frame_d = 0;
+            block->sound = 0;
+            block->state = BLOCKSTATE_0;
+
+            s->scaleW = 1 << 10;
+            s->imageW = 16 << 5;
+            s->scaleH = 1 << 10;
+            s->imageH = 16 << 5;
+            s->imageStride = 8;
+            s->imageAdrs = 0;
+
+            total += 1;
+            if (total >= 0xC) {
+                return;
+            }
+        }
+    }
+}
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", Init2DGameOverSmoke);
@@ -898,6 +1044,9 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", Init2DGameOverSmoke);
 INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", Init2DGameOverSmoke);
 #endif
 
+/**
+ * Original name: Init2DTetrisTMEM
+ */
 void Init2DTetrisTMEM(block_t *block, uObjSprite *rect) {
     switch (block->type) {
         case BLOCKTYPE_1:
