@@ -32,12 +32,13 @@ The build process requires the following packages:
 - build-essential
 - python3
 - binutils-mips-linux-gnu (libultra* only)
+- wget
 
-Under Debian / Ubunutu you can install them with the following commands:
+Under Debian / Ubuntu you can install them with the following commands:
 
 ```bash
 sudo apt update
-sudo apt install build-essential python3
+sudo apt install build-essential python3 wget
 ```
 
 If building any libultra you can install binutils-mips-linux-gnu with:
@@ -49,7 +50,7 @@ sudo apt install binutils-mips-linux-gnu
 ## Building
 
 Run make setup with the proper flags set followed by make with optional jobs.
-For example, if building the 2.0L PC archive you'd do the following: 
+For example, if building the 2.0L PC archive you'd do the following:
 
 - `make VERSION=L TARGET=libgultra_rom setup`
 - `make VERSION=L TARGET=libgultra_rom`
@@ -64,9 +65,15 @@ If building without an target archive, than you can use `COMPARE=0` like the the
 note that running setup without `COMPARE=0` and no archive will result in an error,
 and only needs to be run once instead of per target flag combination
 
-If building for use with modern linkers, than you can use `FIXUPS=1` like the the following:
+If building for use with modern linkers, than you can use `MODERN_LD=1` like the following:
 
-- `make VERSION=L TARGET=libgultra_rom FIXUPS=1 setup`
-- `make VERSION=L TARGET=libgultra_rom FIXUPS=1`
+- `make VERSION=L TARGET=libgultra_rom MODERN_LD=1 setup`
+- `make VERSION=L TARGET=libgultra_rom MODERN_LD=1`
 
-note that running with `FIXUPS=1` will automatically set `COMPARE=0`.
+note that running with `MODERN_LD=1` will automatically set `COMPARE=0`.
+
+It is also possible to build archives using modern gcc by using `MODERN_GCC=1` like the following:
+
+- `make VERSION=L TARGET=libgultra_rom MODERN_GCC=1`
+
+note that running with `MODERN_GCC=1` will automatically set `COMPARE=0` and `MODERN_LD=0`.
