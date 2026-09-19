@@ -4,7 +4,6 @@
 
 #include "draw2d.h"
 
-#include "include_asm.h"
 #include "macros_defines.h"
 #include "main_variables.h"
 
@@ -29,6 +28,9 @@
 #define COUNTER_VALUE (80)
 #endif
 
+/**
+ * Original name: Draw2DTetrisWell
+ */
 void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) {
     block_t *block;
     cursor_t *cursor;
@@ -203,6 +205,9 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
     }
 }
 
+/**
+ * Original name: Draw2DCursor
+ */
 INLINE void Draw2DCursor(struct_gInfo_unk_00068 *dynamicp) {
     s32 i;
 
@@ -221,6 +226,9 @@ INLINE void Draw2DCursor(struct_gInfo_unk_00068 *dynamicp) {
     }
 }
 
+/**
+ * Original name: Draw2DIcon
+ */
 void Draw2DIcon(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     s32 i;
     icon_t *icn = dynamicp->icon[num];
@@ -319,6 +327,9 @@ void Draw2DIcon(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     }
 }
 
+/**
+ * Original name: Draw2DAttackBrick
+ */
 void Draw2DAttackBrick(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 check) {
     attack_t *attk = dynamicp->attack[num];
     attack_t *attack;
@@ -371,6 +382,9 @@ void Draw2DAttackBrick(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 check) {
     gDPSetPrimColor(glistp++, 0, 0, 255, 255, 255, 255);
 }
 
+/**
+ * Original name: Draw2DAttackBlock
+ */
 s32 Draw2DAttackBlock(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     // TODO: name the remaining local variables
     /*
@@ -550,6 +564,9 @@ s32 Draw2DAttackBlock(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     return ATTACK_COUNT - 1;
 }
 
+/**
+ * Original name: Draw2DExplosion
+ */
 void Draw2DExplosion(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     explode_t *exp = dynamicp->explosion[num];
     explode_t *explode;
@@ -601,6 +618,9 @@ void Draw2DExplosion(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     gDPSetPrimColor(glistp++, 0, 0, 255, 255, 255, 255);
 }
 
+/**
+ * Original name: Draw2DClearLine
+ */
 void Draw2DClearLine(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     s32 count;
     attack_t *attk;
@@ -630,6 +650,9 @@ void Draw2DClearLine(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     }
 }
 
+/**
+ * Original name: Draw2DSmoke
+ */
 void Draw2DSmoke(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     s32 var_t6;
     s32 new_var;
@@ -659,6 +682,9 @@ void Draw2DSmoke(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     }
 }
 
+/**
+ * Original name: Draw2DSmallStars
+ */
 void Draw2DSmallStars(struct_gInfo_unk_00068 *dynamicp, s32 layer) {
     s32 num = gMain == GMAIN_395 ? 1 : 0;
     s32 total = 0;
@@ -695,6 +721,9 @@ void Draw2DSmallStars(struct_gInfo_unk_00068 *dynamicp, s32 layer) {
     }
 }
 
+/**
+ * Original name: DrawTetris
+ */
 void DrawTetris(struct_gInfo_unk_00068 *dynamicp) {
     if (gCounter < 2) {
         return;
@@ -722,6 +751,9 @@ void DrawTetris(struct_gInfo_unk_00068 *dynamicp) {
     }
 }
 
+/**
+ * Original name: OverFlow
+ */
 INLINE void OverFlow(struct_gInfo_unk_00068 *dynamicp) {
     s32 size;
 
@@ -754,6 +786,9 @@ INLINE void OverFlow(struct_gInfo_unk_00068 *dynamicp) {
     gTheGame.unk_9A50.b.frameH = 0xE8 << 2;
 }
 
+/**
+ * Original name: OverFlow
+ */
 void Draw2DTetris(struct_gInfo_unk_00068 *dynamicp) {
     s32 end_attack[GAME_BUFFER_LEN];
     s32 i;

@@ -808,8 +808,9 @@ u8 D_0101BCC0_usa[] ALIGNED(8) = {
 };
 
 u8 D_0101C4C0_usa[] ALIGNED(8) = {
-#include "assets/misc/segment_0CA4A0/D_0101C4C0_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_0101C4C0_usa.ci8.inc"
 };
+static_assert(sizeof(D_0101C4C0_usa) == D_0101C4C0_USA_WIDTH * D_0101C4C0_USA_HEIGHT * sizeof(u8), "");
 
 u8 D_0101CCC0_usa[] ALIGNED(8) = {
 #include "assets/misc/segment_0CA4A0/D_0101CCC0_usa.ci8.inc"
@@ -1344,9 +1345,10 @@ u32 D_01022E20_usa[] = {
     0x00001033, (u32)D_01022620_usa, 0x000000FF, 0x01000000, 0xFFFFFFFF, 0x00000000,
 };
 
-u8 D_01022E38_usa[] ALIGNED(8) = {
-#include "assets/misc/segment_0CA4A0/D_01022E38_usa.ci8.inc"
+u8 clear[] ALIGNED(8) = {
+#include "assets/misc/segment_0CA4A0/clear.ci8.inc"
 };
+static_assert(ARRAY_COUNT(clear) == CLEAR_TEX_WIDTH * CLEAR_TEX_HEIGHT * sizeof(u8), "");
 
 /*
 height: 32
@@ -1355,10 +1357,10 @@ palette: numberTable
 */
 uObjTxtr clearTexture = {
     /* type  */ G_OBJLT_TXTRBLOCK,
-    /* image */ (u64 *)D_01022E38_usa,
+    /* image */ (u64 *)clear,
     /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
-    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
-    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(CLEAR_TEX_WIDTH *CLEAR_TEX_HEIGHT, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(CLEAR_TEX_WIDTH, G_IM_SIZ_8b),
     /* sid   */ 0,
     /* flag  */ (u32)-1,
     /* mask  */ 0x0,
@@ -1382,7 +1384,7 @@ uObjTxtr transTexture = {
 u8 arrow[] ALIGNED(8) = {
 #include "assets/misc/segment_0CA4A0/arrow.ci8.inc"
 };
-static_assert(ARRAY_COUNT(arrow) == ARROW_WIDTH * ARROW_HEIGHT, "");
+static_assert(ARRAY_COUNT(arrow) == ARROW_WIDTH * ARROW_HEIGHT * sizeof(u8), "");
 
 uObjTxtr arrowTexture = {
     /* type  */ G_OBJLT_TXTRBLOCK,
@@ -1516,4 +1518,3 @@ u16 small_c[] ALIGNED(8) = {
 static_assert(sizeof(small_c) == CURSOR_TEX_WIDTH * CURSOR_TEX_HEIGHT * sizeof(u16), "");
 
 static_assert(CURSOR_TEX_REAL_WIDTH <= CURSOR_TEX_WIDTH, "");
-

@@ -21,7 +21,7 @@ typedef enum enum_func_800643A4_usa_arg0 {
 
 void Set3DTile(void);
 void func_8005E740_usa(void);
-// void func_8005E7A4_usa();
+void Set3DExplodeTile(void);
 void Draw3DFrontTetrisWell(struct struct_gInfo_unk_00068 *dynamicp, s32 num);
 void Draw3DBackTetrisWell(struct struct_gInfo_unk_00068 *dynamicp, s32 num);
 // void func_8005F984_usa();
@@ -39,8 +39,8 @@ void Draw3DClearLine(struct struct_gInfo_unk_00068 *dynamicp, s32 num);
 void Draw3DClearSign(struct struct_gInfo_unk_00068 *dynamicp, s32 num);
 // void func_80063110_usa();
 // void func_80063F8C_usa();
-UNK_RET func_800643A4_usa(enum_func_800643A4_usa_arg0 arg0, const u16 arg1[], s32 arg2);
-UNK_RET func_80064728_usa(enum_func_800643A4_usa_arg0 arg0, const u16 arg1[], s32 arg2);
+void func_800643A4_usa(enum_func_800643A4_usa_arg0 arg0, const u16 arg1[], s32 arg2);
+void func_80064728_usa(enum_func_800643A4_usa_arg0 arg0, const u16 arg1[], s32 arg2);
 void func_80064AAC_usa(enum_func_800643A4_usa_arg0 arg0, const u16 arg1[], s32 arg2);
 // void func_80064E44_usa();
 void Draw3DTetris(struct struct_gInfo_unk_00068 *dynamicp);

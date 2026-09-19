@@ -1374,7 +1374,7 @@ extern OSMesg B_8021BA28_usa[1];
 // TODO: enum?
 extern s32 gWhatever;
 
-extern TexturePtr B_8021BA60_usa[2];
+extern TexturePtr B_8021BA60_usa[2]; // explosionA? explosionB?
 // extern UNK_TYPE B_8021BA68_usa;
 // extern UNK_TYPE B_8021BA70_usa;
 // extern UNK_TYPE B_8021BA74_usa;

@@ -751,12 +751,13 @@ void Init2DClearLine(tetWell *well, cursor_t *cursor UNUSED, s32 num) {
 
     for (count = 0; count < 6; count++) {
         s = &well->attack[count].rect.s;
+
         if (gTheGame.totalPlayer == 1) {
-            s->objX = 0x1C8 + count * 0x48;
+            s->objX = (count * 18 + 114) << 2;
         } else if (num == 0) {
-            s->objX = 0x60 + count * 0x48;
+            s->objX = (count * 18 + 24) << 2;
         } else {
-            s->objX = 0x2F0 + count * 0x48;
+            s->objX = (count * 18 + 188) << 2;
         }
         s->objY = 208 << 2;
 
@@ -1029,7 +1030,55 @@ void Init2DCircleStars(s32 num, s32 pos) {
 }
 
 #if VERSION_USA
+#ifdef NON_EQUIVALENT
+void Init2DGameOverSmoke(tetWell *well, s32 num) {
+    s32 var_t3;
+    s32 var_t4;
+    explode_t *temp_a2;
+    uObjSprite_t *temp_v1;
+
+    var_t4 = 0;
+
+    for (var_t3 = 0; var_t3 < 0x32; var_t3++) {
+        temp_a2 = &well->explosion[var_t3];
+
+        temp_a2->type = -1;
+        temp_a2->frame = -1;
+
+        temp_v1 = &temp_a2->rect.s;
+
+        if (gTheGame.totalPlayer == 1) {
+            temp_v1->objX = 0x1C8 + var_t3 * 0x48;
+        } else if (num == 0) {
+            temp_v1->objX = 0x60 + var_t3 * 0x48;
+        } else {
+            temp_v1->objX = 0x2F0 + var_t3 * 0x48;
+        }
+
+        temp_v1->objY = 15 << 2;
+        temp_v1->scaleW = 911;
+        temp_v1->imageW = 16 << 5;
+        temp_v1->paddingX = 0;
+        temp_v1->scaleH = 1 << 10;
+        temp_v1->imageH = 16 << 5;
+        temp_v1->paddingY = 0;
+
+        temp_v1->imageStride = 8;
+        temp_v1->imageAdrs = 6;
+        temp_v1->imageFmt = G_IM_FMT_I;
+        temp_v1->imageSiz = G_IM_SIZ_8b;
+        temp_v1->imagePal = 0;
+        temp_v1->imageFlags = 0;
+
+        var_t4 += 1;
+        if (var_t4 >= 6) {
+            return;
+        }
+    }
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", Init2DGameOverSmoke);
+#endif
 #endif
 
 #if VERSION_EUR
@@ -1086,39 +1135,116 @@ void Init2DTetrisTMEM(block_t *block, uObjSprite *rect) {
     }
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", Init2DComboTMEM);
-#endif
+/**
+ * Original name: Init2DComboTMEM
+ */
+void Init2DComboTMEM(icon_t *icon) {
+    s32 which;
+    u16 *addr;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", Init2DComboTMEM);
-#endif
+    if (icon->total < 0x46) { // DRAWTEXT_COUNT?
+        which = (icon->total + 4) % 8;
+    } else {
+        which = -1;
+    }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", Init2DComboTMEM);
-#endif
+    addr = &icon->thing.rect.s.imageAdrs;
+    switch (which) {
+        case 0x0:
+            *addr = 0;
+            break;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", Init2DComboTMEM);
-#endif
+        case 0x1:
+            *addr = 2;
+            break;
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/init2d", Init2DChainTMEM);
-#endif
+        case 0x2:
+            *addr = 4;
+            break;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/init2d", Init2DChainTMEM);
-#endif
+        case 0x3:
+            *addr = 6;
+            break;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/init2d", Init2DChainTMEM);
-#endif
+        case 0x4:
+            *addr = 0x80;
+            break;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/init2d", Init2DChainTMEM);
-#endif
+        case 0x5:
+            *addr = 0x82;
+            break;
+
+        case 0x6:
+            *addr = 0x84;
+            break;
+
+        case 0x7:
+            *addr = 0x86;
+            break;
+
+        default:
+            *addr = 6;
+            break;
+    }
+}
+
+/**
+ * Original name: Init2DChainTMEM
+ */
+void Init2DChainTMEM(icon_t *icon) {
+    s32 which;
+    u16 *addr;
+
+    if (icon->total < 0x63) {
+        which = icon->total % 8;
+    } else {
+        which = -1;
+    }
+
+    addr = &icon->thing.rect.s.imageAdrs;
+    switch (which) {
+        case 0x1:
+            *addr = 0;
+            break;
+
+        case 0x2:
+            *addr = 2;
+            break;
+
+        case 0x3:
+            *addr = 4;
+            break;
+
+        case 0x4:
+            *addr = 6;
+            break;
+
+        case 0x5:
+            *addr = 0x80;
+            break;
+
+        case 0x6:
+            *addr = 0x82;
+            break;
+
+        case 0x7:
+            *addr = 0x84;
+            break;
+
+        case 0x0:
+            *addr = 0x86;
+            break;
+
+        default:
+            *addr = 6;
+            break;
+    }
+}
 
 // TODO: `type` is `AttackType`?
+/**
+ * Original name: Init2DAttackTMEM
+ */
 void Init2DAttackTMEM(uObjSprite *rect, s32 type, s32 lev, s32 pos) {
     s32 value = ReturnAttackTexValue(NULL, type, lev, pos) % 10;
 
@@ -1157,6 +1283,9 @@ void Init2DAttackTMEM(uObjSprite *rect, s32 type, s32 lev, s32 pos) {
     }
 }
 
+/**
+ * Original name: Init2DBrickTMEM
+ */
 void Init2DBrickTMEM(attack_t *attack) {
     uObjSprite_t *s = &attack->rect.s;
 
@@ -1215,6 +1344,9 @@ void Init2DBrickTMEM(attack_t *attack) {
     }
 }
 
+/**
+ * Original name: Init2DFaceTMEM
+ */
 void Init2DFaceTMEM(attack_t *attack) {
     if (attack->type < ATTACKTYPE_11) {
         attack->expression = 0x1E;

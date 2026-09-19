@@ -118,7 +118,10 @@ extern uObjTxtr otherLUT;
 // extern UNK_TYPE D_0101ACC0_usa;
 // extern UNK_TYPE D_0101B4C0_usa;
 // extern UNK_TYPE D_0101BCC0_usa;
-// extern UNK_TYPE D_0101C4C0_usa;
+
+#define D_0101C4C0_USA_WIDTH 64
+#define D_0101C4C0_USA_HEIGHT 32
+extern u8 D_0101C4C0_usa[];
 
 #define D_0101CCC0_USA_WIDTH 64
 #define D_0101CCC0_USA_HEIGHT 32
@@ -164,7 +167,11 @@ extern uObjTxtr numberTexture6;
 
 // extern UNK_TYPE D_01022620_usa;
 // extern UNK_TYPE D_01022E20_usa;
-// extern UNK_TYPE D_01022E38_usa;
+
+#define CLEAR_TEX_WIDTH 64
+#define CLEAR_TEX_HEIGHT 32
+extern u8 clear[];
+
 extern uObjTxtr clearTexture;
 // extern UNK_TYPE D_01023650_usa;
 extern uObjTxtr transTexture;
