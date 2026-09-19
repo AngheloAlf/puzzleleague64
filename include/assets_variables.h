@@ -16,7 +16,9 @@ extern u16 D_010001F0_usa[];
 // extern UNK_TYPE D_01000200_usa;
 extern uObjTxtr D_010003F0_usa;
 // extern UNK_TYPE D_01000400_usa;
-// extern UNK_TYPE D_01000408_usa;
+
+extern u16 D_01000408_usa[];
+
 // extern UNK_TYPE D_01000500_usa;
 // extern UNK_TYPE D_01000504_usa;
 extern uObjTxtr D_01000608_usa;
@@ -59,29 +61,34 @@ extern u8 D_0100B468_usa[];
 extern u8 D_0100BC68_usa[];
 extern u8 D_0100C468_usa[];
 extern u8 D_0100CC68_usa[];
-// extern UNK_TYPE D_0100D468_usa;
-// extern UNK_TYPE D_0100DC68_usa;
-// extern UNK_TYPE D_0100E468_usa;
-// extern UNK_TYPE D_0100EC68_usa;
-// extern UNK_TYPE D_0100F468_usa;
-// extern UNK_TYPE D_0100FC68_usa;
-// extern UNK_TYPE D_01010468_usa;
-// extern UNK_TYPE D_01010C68_usa;
-// extern UNK_TYPE D_01011468_usa;
-// extern UNK_TYPE D_01011C68_usa;
-// extern UNK_TYPE D_01012468_usa;
-// extern UNK_TYPE D_01012C68_usa;
-// extern UNK_TYPE D_01013468_usa;
-// extern UNK_TYPE D_01013C68_usa;
-// extern UNK_TYPE D_01014468_usa;
-// extern UNK_TYPE D_01014C68_usa;
-// extern UNK_TYPE D_01015468_usa;
-// extern UNK_TYPE D_010159FC_usa;
-// extern UNK_TYPE D_01015C68_usa;
-// extern UNK_TYPE D_01016468_usa;
-// extern UNK_TYPE D_01016C68_usa;
-// extern UNK_TYPE D_01017468_usa;
-// extern UNK_TYPE D_01017C68_usa;
+
+#define COMBO_CHAIN_TEX_WIDTH 64
+#define COMBO_CHAIN_TEX_HEIGHT 32
+
+extern u8 combo01[];
+extern u8 combo02[];
+extern u8 combo03[];
+extern u8 combo04[];
+extern u8 combo05[];
+extern u8 combo06[];
+extern u8 combo07[];
+extern u8 combo08[];
+extern u8 combo09[];
+
+extern u8 chain01[];
+extern u8 chain02[];
+extern u8 chain03[];
+extern u8 chain04[];
+extern u8 chain05[];
+extern u8 chain06[];
+extern u8 chain07[];
+extern u8 chain08[];
+extern u8 chain09[];
+extern u8 chain010[];
+extern u8 chain011[];
+extern u8 chain012[];
+extern u8 chain013[];
+
 extern uObjTxtr combo1Block;
 extern uObjTxtr combo2Block;
 extern uObjTxtr combo3Block;

@@ -336,21 +336,180 @@ void Draw3DCursor(struct_gInfo_unk_00068 *dynamicp) {
     }
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/draw3d", Draw3DIcon);
+/**
+ * Original nanme: Draw3DIcon
+ */
+void Draw3DIcon(struct_gInfo_unk_00068 *dynamicp, s32 num) {
+    s32 var_a3; // i?
+    s32 temp_a1;
+    s32 var_s2;
+    s32 var_s3;
+    s32 a2;
+    s32 tile;
+    s32 var_s5; // index?
+
+    u8 *old_tex;
+    u8 *tex;
+    icon_t *icon;
+    icon_t *icn = dynamicp->icon[num];
+
+#if 0
+    // Local variables
+    int i; // r1+0x38
+    int pos; // r1+0x8
+    int count; // r5
+    int total; // r1+0x34
+    int index; // r1+0x8
+    unsigned char * old_tex; // r1+0x30
+    unsigned char * tex; // r29
+    struct icon_t * icon; // r1+0x8
+    struct icon_t (* icn)[10]; // r5
 #endif
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/draw3d", Draw3DIcon);
-#endif
+    gDPPipeSync(glistp++);
+    gDPSetTextureLUT(glistp++, G_TT_RGBA16);
+    gDPLoadTLUT_pal256(glistp++, D_01000408_usa);
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/draw3d", Draw3DIcon);
-#endif
+    Set3DTile();
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/draw3d", Draw3DIcon);
-#endif
+    if (gGameStatus & GAME_STATUS_FLAG_8) {
+        gDPPipeSync(glistp++);
+        gDPSetCombineMode(glistp++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
+        gDPSetRenderMode(glistp++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
+        gDPSetPrimColor(glistp++, 0, 0, 255, 255, 255, 100);
+    }
+
+    old_tex = NULL;
+    for (var_s5 = 0; var_s5 < ICON_COUNT; var_s5++) {
+        icon = &icn[var_s5];
+
+        if (icon->flag != -1) {
+            continue;
+        }
+
+        if (icon->count <= 0) {
+            continue;
+        }
+
+        if (icon->from_x < 2 || icon->from_x > 7) {
+            continue;
+        }
+        if ((gGameStatus & GAME_STATUS_FLAG_10) && (gMain < GMAIN_38E) && (icon->count % 2 == 0)) {
+            continue;
+        }
+
+        switch (icon->type) {
+            case ICONTYPE_12:
+                var_s3 = 1;
+                if (icon->total < 0xC) {
+                    tex = combo01;
+                } else if (icon->total < 0x14) {
+                    tex = combo02;
+                } else if (icon->total < 0x1C) {
+                    tex = combo03;
+                } else if (icon->total < 0x24) {
+                    tex = combo04;
+                } else if (icon->total < 0x2C) {
+                    tex = combo05;
+                } else if (icon->total < 0x34) {
+                    tex = combo06;
+                } else if (icon->total < 0x3C) {
+                    tex = combo07;
+                } else if (icon->total < 0x44) {
+                    tex = combo08;
+                } else {
+                    tex = combo09;
+                }
+                var_s2 = Return3DComboTile(icon->total);
+                break;
+
+            case ICONTYPE_10:
+                var_s3 = 1;
+                if (icon->total < 9) {
+                    tex = chain01;
+                } else if (icon->total < 0x11) {
+                    tex = chain02;
+                } else if (icon->total < 0x19) {
+                    tex = chain03;
+                } else if (icon->total < 0x21) {
+                    tex = chain04;
+                } else if (icon->total < 0x29) {
+                    tex = chain05;
+                } else if (icon->total < 0x31) {
+                    tex = chain06;
+                } else if (icon->total < 0x39) {
+                    tex = chain07;
+                } else if (icon->total < 0x41) {
+                    tex = chain08;
+                } else if (icon->total < 0x49) {
+                    tex = chain09;
+                } else if (icon->total < 0x51) {
+                    tex = chain010;
+                } else if (icon->total < 0x59) {
+                    tex = chain011;
+                } else if (icon->total < 0x61) {
+                    tex = chain012;
+                } else {
+                    tex = chain013;
+                }
+                var_s2 = Return3DChainTile(icon->total);
+                break;
+
+            case ICONTYPE_13:
+                var_s3 = 2;
+                tex = combo09;
+                var_s2 = 4;
+                break;
+
+            case ICONTYPE_11:
+                var_s3 = 2;
+                tex = combo09;
+                var_s2 = 6;
+                break;
+        }
+
+        if (old_tex != tex) {
+            gDPLoadTextureBlock(glistp++, tex, G_IM_FMT_CI, G_IM_SIZ_8b, COMBO_CHAIN_TEX_WIDTH, COMBO_CHAIN_TEX_HEIGHT,
+                                0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
+                                G_TX_NOLOD, G_TX_NOLOD);
+
+            old_tex = tex;
+        }
+
+        if (var_s2 == 7) {
+            gDPPipeSync(glistp++);
+            gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0086, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                       G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+            gDPSetTileSize(glistp++, G_TX_LOADTILE, 0, 0, 0x003C, 0x003C);
+        }
+
+        if (var_s3 == 2) {
+            gDPPipeSync(glistp++);
+            gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0086, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                       G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+            gDPSetTileSize(glistp++, G_TX_LOADTILE, 0, 0, 0x003C, 0x003C);
+        }
+
+        for (var_a3 = 0; var_a3 < var_s3; var_a3++) {
+            temp_a1 = icon->from_x + var_a3;
+            a2 = icon->to_y;
+            tile = var_s2 + var_a3;
+
+            gSPMatrix(glistp++, &icon->thing.move, G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gSPVertex(glistp++, &gAllVertex[a2 * 0x90 + temp_a1 * 8], 8, 0);
+            gSPTexture(glistp++, 0x8000, 0x8000, 0, tile, G_ON);
+            gSP1Quadrangle(glistp++, 0, 1, 2, 3, 0);
+            gDPPipeSync(glistp++);
+            gSPPopMatrix(glistp++, G_MTX_MODELVIEW);
+        }
+    }
+
+    if (gGameStatus & GAME_STATUS_FLAG_8) {
+        gDPPipeSync(glistp++);
+        gDPSetCombineMode(glistp++, G_CC_MODULATEIA, G_CC_MODULATEIA);
+        gDPSetRenderMode(glistp++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+    }
+}
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/draw3d", Draw3DAttackBrick);

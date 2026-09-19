@@ -48,28 +48,29 @@ segments:
       - [0x0C468, i8, D_0100C468_usa.i8, 2048, 1] # unknown type and dimensions
       - [0x0CC68, i8, D_0100CC68_usa.i8, 2048, 1] # unknown type and dimensions
 
-      - { start: 0x0D468, type: ci8, name: D_0100D468_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
-      - { start: 0x0DC68, type: ci8, name: D_0100DC68_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
-      - { start: 0x0E468, type: ci8, name: D_0100E468_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
-      - { start: 0x0EC68, type: ci8, name: D_0100EC68_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
-      - { start: 0x0F468, type: ci8, name: D_0100F468_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
-      - { start: 0x0FC68, type: ci8, name: D_0100FC68_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
-      - { start: 0x10468, type: ci8, name: D_01010468_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
-      - { start: 0x10C68, type: ci8, name: D_01010C68_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
-      - { start: 0x11468, type: ci8, name: D_01011468_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
-      - { start: 0x11C68, type: ci8, name: D_01011C68_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
-      - { start: 0x12468, type: ci8, name: D_01012468_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
-      - { start: 0x12C68, type: ci8, name: D_01012C68_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
-      - { start: 0x13468, type: ci8, name: D_01013468_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
-      - { start: 0x13C68, type: ci8, name: D_01013C68_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
-      - { start: 0x14468, type: ci8, name: D_01014468_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
-      - { start: 0x14C68, type: ci8, name: D_01014C68_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
-      - { start: 0x15468, type: ci8, name: D_01015468_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
-      - { start: 0x15C68, type: ci8, name: D_01015C68_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
-      - { start: 0x16468, type: ci8, name: D_01016468_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
-      - { start: 0x16C68, type: ci8, name: D_01016C68_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
-      - { start: 0x17468, type: ci8, name: D_01017468_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
-      - { start: 0x17C68, type: ci8, name: D_01017C68_usa.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x0D468, type: ci8, name: combo01.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x0DC68, type: ci8, name: combo02.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x0E468, type: ci8, name: combo03.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x0EC68, type: ci8, name: combo04.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x0F468, type: ci8, name: combo05.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x0FC68, type: ci8, name: combo06.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x10468, type: ci8, name: combo07.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x10C68, type: ci8, name: combo08.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x11468, type: ci8, name: combo09.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+
+      - { start: 0x11C68, type: ci8, name: chain01.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x12468, type: ci8, name: chain02.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x12C68, type: ci8, name: chain03.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x13468, type: ci8, name: chain04.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x13C68, type: ci8, name: chain05.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x14468, type: ci8, name: chain06.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x14C68, type: ci8, name: chain07.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x15468, type: ci8, name: chain08.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x15C68, type: ci8, name: chain09.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x16468, type: ci8, name: chain010.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x16C68, type: ci8, name: chain011.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x17468, type: ci8, name: chain012.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
+      - { start: 0x17C68, type: ci8, name: chain013.ci8, width: 64, height: 32, palettes: [D_01000408_usa] }
 
       - [0x18468]
       - [0x18480]
