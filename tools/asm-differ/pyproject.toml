@@ -8,13 +8,14 @@ readme = "README.md"
 packages = [{ include = "diff.py" }]
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.9"
 colorama = "^0.4.6"
-ansiwrap = "^0.8.4"
-watchdog = "^2.2.0"
-levenshtein = "^0.20.9"
+watchdog = "^6.0.0"
+levenshtein = "^0.27.1"
 cxxfilt = "^0.3.0"
 
+[tool.poetry.scripts]
+asm-differ = "diff:main"
 
 [build-system]
 requires = ["poetry-core"]

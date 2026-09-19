@@ -1,13 +1,17 @@
 # asm-differ
 
-Nice differ for assembly code. Currently supports MIPS, PPC, AArch64, and ARM32; should be easy to hack to support other instruction sets.
+Diff viewer for assembly code, primarily for use in matching decompilation projects.
+This is currently the default viewer used by [decomp.me](https://decomp.me/). 
+Supports MIPS, PPC, AArch64, ARM32, SH2, SH4, m68k and (to limited extent) x86; should be easy to hack to support other instruction sets.
+
+For a modern alternative, see also [objdiff](https://github.com/encounter/objdiff).
 
 ![](screenshot.png)
 
 ## Dependencies
 
 - Python >= 3.6
-- `python3 -m pip install --user colorama watchdog levenshtein cxxfilt` (also `dataclasses` if on 3.6)
+- `python3 -m pip install --user colorama watchdog levenshtein cxxfilt`
 
 ## Usage
 
@@ -18,6 +22,12 @@ Create a file `diff_settings.py` in some directory (see the one in this repo for
 ```
 
 Recommended flags are `-mwo` (automatically run `make` on source file changes, and include symbols in diff). See `--help` for more details.
+
+`diff.py` can be added as a project dependency either using git submodules, by copying diff.py directly into your repo, or via pip:
+```
+pip install 'asm-differ @ git+https://github.com/simonlindholm/asm-differ.git'
+```
+In the last mentioned case, run `asm-differ` instead of diff.py.
 
 ### Tab completion
 
@@ -49,8 +59,9 @@ pip install pre-commit black
 pre-commit install
 ```
 
-Type annotations are used for all Python code. `mypy` should pass without any errors.
+Type annotations are used for all Python code. `mypy` should pass without any errors. (This is all checked in CI.)
 
-PRs that skip the above are still welcome, however.
+There are a handful of unit tests (test.py), however a comparison-based regression test suite is still missing.
+There are loose plans on adding one using scratches from decomp.me as a corpus. Help on this front appreciated!
 
-The targeted Python version is 3.6. There are currently no tests.
+The targeted Python version is 3.7.
