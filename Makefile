@@ -144,7 +144,7 @@ endif
 export SPIMDISASM_PANIC_RANGE_CHECK="True"
 
 
-IINC       += -I lib/ultralib/include -I lib/ultralib/include/PR -I lib/ultralib/include/gcc -I lib/libhvqm/include
+IINC       += -I lib/ultralib/include -I lib/ultralib/include/PR -I lib/ultralib/include/compiler/gcc -I lib/libhvqm/include
 IINC       += -I include -I bin/$(VERSION) -I $(BUILD_DIR)/bin/$(VERSION) -I .
 
 # Check code syntax with host compiler

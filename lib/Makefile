@@ -50,7 +50,7 @@ COMPILER_DIR    := ../tools/gcc_kmc/$(DETECTED_OS)/2.7.2
 CC              := COMPILER_PATH=$(WORKING_DIR)/$(COMPILER_DIR) $(WORKING_DIR)/$(COMPILER_DIR)/gcc
 
 
-IINC            := -I $(WORKING_DIR)/ultralib/include -I $(WORKING_DIR)/ultralib/include/gcc -I $(WORKING_DIR)/ultralib/include/PR -I $(WORKING_DIR)/ultralib/src
+IINC            := -I $(WORKING_DIR)/ultralib/include -I $(WORKING_DIR)/ultralib/include/compiler/gcc -I $(WORKING_DIR)/ultralib/include/PR -I $(WORKING_DIR)/ultralib/src
 
 CFLAGS          := -nostdinc -fno-PIC -G 0 -mgp32 -mfp32 -mabi=32
 CFLAGS          += -funsigned-char

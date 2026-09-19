@@ -9,7 +9,7 @@
 #define va_arg(__AP, __type) 0
 #define va_end(__AP)
 #elif __IS_OLD_COMP__
-#include "gcc/stdarg.h"
+#include "stdarg.h"
 #else
 #define va_list __builtin_va_list
 #define va_start __builtin_va_start
