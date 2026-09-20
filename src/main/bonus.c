@@ -302,8 +302,8 @@ void InitBonus(void) {
         }
     }
 
-    gTheGame.tetrisWell[0].timer = 0;
-    gTheGame.tetrisWell[0].raise = 0;
+    gTheGame.tetrisWell[0].state.timer = 0;
+    gTheGame.tetrisWell[0].state.raise = 0;
     gWhatever = 0;
 }
 #else
@@ -506,7 +506,7 @@ void DoBonus(void) {
         var_a0 = gTheGame.unk_8C88[1].b.frameY >> 0x2;
         gTheGame.unk_8C88[1].b.frameY = (var_a0 - var_s5) << 2;
 
-        for (var_s3 = 0; var_s3 < BLOCK_LEN_B / 3; var_s3++) {
+        for (var_s3 = 0; var_s3 < BLOCK_COLS_2D; var_s3++) {
             if (var_s2->block[0][var_s3].type == BLOCKTYPE_0) {
                 s32 temp_ret = AnimationRandom(500);
 

@@ -51,19 +51,19 @@ void Update3DPosition(tetWell *well, cursor_t *cursor UNUSED, s32 flag) {
 
     if (flag == 0) {
         for (row = 0; row < BLOCK_LEN_ROWS; row++) {
-            bcopy(&well->block[row][BLOCK_LEN_B - 1], &last[row], sizeof(block_t));
+            bcopy(&well->block[row][BLOCK_COLS_3D - 1], &last[row], sizeof(block_t));
         }
 
         for (row = 0; row < BLOCK_LEN_ROWS; row++) {
-            bcopy(&well->block[row][0], &well->block[row][1], sizeof(block_t) * (BLOCK_LEN_B - 1));
+            bcopy(&well->block[row][0], &well->block[row][1], sizeof(block_t) * (BLOCK_COLS_3D - 1));
         }
 
         for (row = 0; row < BLOCK_LEN_ROWS; row++) {
             bcopy(&last[row], &well->block[row][0], sizeof(block_t));
         }
 
-        bcopy(&well->new_block[BLOCK_LEN_B - 1], &last, sizeof(block_t));
-        bcopy(well->new_block, &well->new_block[1], sizeof(block_t) * (BLOCK_LEN_B - 1));
+        bcopy(&well->new_block[BLOCK_COLS_3D - 1], &last, sizeof(block_t));
+        bcopy(well->new_block, &well->new_block[1], sizeof(block_t) * (BLOCK_COLS_3D - 1));
         bcopy(&last[0], &well->new_block[0], sizeof(block_t));
 
         for (count = 0; count < ICON_COUNT; count++) {
@@ -109,7 +109,7 @@ void Update3DPosition(tetWell *well, cursor_t *cursor UNUSED, s32 flag) {
     }
 
     for (row = 0; row < BLOCK_LEN_ROWS; row++) {
-        bcopy(&well->block[row][1], &well->block[row][0], sizeof(block_t) * (BLOCK_LEN_B - 1));
+        bcopy(&well->block[row][1], &well->block[row][0], sizeof(block_t) * (BLOCK_COLS_3D - 1));
     }
 
     for (row = 0; row < BLOCK_LEN_ROWS; row++) {
@@ -117,7 +117,7 @@ void Update3DPosition(tetWell *well, cursor_t *cursor UNUSED, s32 flag) {
     }
 
     bcopy(&well->new_block[0], &last[0], sizeof(block_t));
-    bcopy(&well->new_block[1], &well->new_block[0], sizeof(block_t) * (BLOCK_LEN_B - 1));
+    bcopy(&well->new_block[1], &well->new_block[0], sizeof(block_t) * (BLOCK_COLS_3D - 1));
     bcopy(&last[0], &well->new_block[0x11], sizeof(block_t));
 
     for (count = 0; count < ICON_COUNT; count++) {

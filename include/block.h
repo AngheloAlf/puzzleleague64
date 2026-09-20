@@ -4,11 +4,6 @@
 #include "ultra64.h"
 #include "macros_defines.h"
 
-#define BLOCK_LEN_ROWS (12)
-#define BLOCK_LEN_B (18)
-
-#define TETWELL_OBJSPRITE_LEN_B (BLOCK_LEN_B / 3)
-
 typedef enum BlockState {
     /* 0 */ BLOCKSTATE_0,
     /* 1 */ BLOCKSTATE_1,

@@ -5,6 +5,11 @@
 #include "unk.h"
 
 #include "other_types.h"
+#include "unknown_defines.h"
+
+#define VTX3D_VERTICES_PER_BLOCK (8)
+#define GET_VTX3D_INDEX(row, col) ((row) * BLOCK_COLS_3D * VTX3D_VERTICES_PER_BLOCK + (col) * VTX3D_VERTICES_PER_BLOCK)
+
 
 struct struct_gInfo_unk_00068;
 struct tetWell;
@@ -24,10 +29,10 @@ void func_8005E740_usa(void);
 void Set3DExplodeTile(void);
 void Draw3DFrontTetrisWell(struct struct_gInfo_unk_00068 *dynamicp, s32 num);
 void Draw3DBackTetrisWell(struct struct_gInfo_unk_00068 *dynamicp, s32 num);
-// void func_8005F984_usa();
-// void func_8005FA6C_usa();
-// void func_8005FB10_usa();
-// void func_8005FD38_usa();
+// void Draw3DTetrisBlock1();
+// void Draw3DTetrisBlock2();
+// void Draw3DTetrisBlockSide();
+// void Draw3DTetrisSwitch();
 void Draw3DTetrisNewBlock(struct struct_gInfo_unk_00068 *dynamicp, struct tetWell *well);
 void Draw3DCursor(struct struct_gInfo_unk_00068 *dynamicp);
 void Draw3DIcon(struct struct_gInfo_unk_00068 *dynamicp, s32 num);

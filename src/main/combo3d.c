@@ -129,13 +129,13 @@ void Set3DRowConnectState(tetWell *well, s32 row, s32 left, s32 right) {
     }
 
     right++;
-    for (i = right; i < BLOCK_LEN_B; i++) {
+    for (i = right; i < BLOCK_COLS_3D; i++) {
         if (well->block[row][i].chain_flag != 0) {
             kind = BLOCKTYPE_10;
         }
     }
 
-    count = left - (right - BLOCK_LEN_B);
+    count = left - (right - BLOCK_COLS_3D);
     if (count >= 6) {
         bomb = 0x1F;
     }
@@ -172,7 +172,7 @@ void Set3DRowConnectState(tetWell *well, s32 row, s32 left, s32 right) {
         }
     }
 
-    for (i = right; i < BLOCK_LEN_B; i++) {
+    for (i = right; i < BLOCK_COLS_3D; i++) {
         block = &well->block[row][i];
         block->state = 7;
         block->bomb = bomb;

@@ -144,11 +144,10 @@ void CompactWell(tetWell *well, s32 num) {
         }
 
         if (gTheGame.dimension == DIMENSION_2D) {
-            // Use TETWELL_OBJSPRITE_LEN_B instead?
-            if (col == BLOCK_LEN_B / 3) {
+            if (col == BLOCK_COLS_2D) {
                 Compact2DAttackNoWhere(well);
             }
-        } else if (col == BLOCK_LEN_B) {
+        } else if (col == BLOCK_COLS_3D) {
             Compact3DAttackNoWhere(well);
         }
     }

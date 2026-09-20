@@ -57,7 +57,7 @@ void Init3DNewRow(tetWell *well) {
         well->state.newBlock = 1;
     }
 
-    for (col = BLOCK_LEN_B - 1; col >= 0; col--) {
+    for (col = BLOCK_COLS_3D - 1; col >= 0; col--) {
         block = &well->new_block[col];
 
         InitTetrisState(block);
@@ -86,7 +86,7 @@ void Init3DNewRow(tetWell *well) {
             if (col == 0) {
                 do {
                     type = RandomBlock(well);
-                } while ((type == well->new_block[BLOCK_LEN_B - 1].type) || (type == well->new_block[col + 1].type) ||
+                } while ((type == well->new_block[BLOCK_COLS_3D - 1].type) || (type == well->new_block[col + 1].type) ||
                          (type == well->block[0][col].type));
             } else {
                 do {
@@ -129,7 +129,7 @@ void Init3DTetrisBlocks(tetWell *well, s32 num UNUSED) {
     well->translation = 0.0f;
 
     for (i = 0; i < BLOCK_LEN_ROWS; i++) {
-        for (j = 0; j < BLOCK_LEN_B; j++) {
+        for (j = 0; j < BLOCK_COLS_3D; j++) {
             block = &well->block[i][j];
             InitTetrisState(block);
             block->currRow = i;
@@ -137,7 +137,7 @@ void Init3DTetrisBlocks(tetWell *well, s32 num UNUSED) {
         }
     }
 
-    for (j = 0; j < BLOCK_LEN_B; j++) {
+    for (j = 0; j < BLOCK_COLS_3D; j++) {
         block = &well->new_block[j];
         InitTetrisState(block);
         block->currRow = 0;
@@ -152,7 +152,7 @@ void Init3DTetrisBlocksState(tetWell *well) {
     s32 j;
 
     for (i = 0; i < BLOCK_LEN_ROWS; i++) {
-        for (j = 0; j < BLOCK_LEN_B; j++) {
+        for (j = 0; j < BLOCK_COLS_3D; j++) {
             block_t *block = &well->block[i][j];
             BlockType temp_s1 = block->type;
 

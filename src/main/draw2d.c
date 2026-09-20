@@ -116,7 +116,7 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
         }
 
         for (var_t1 = BLOCK_LEN_ROWS - 1; var_t1 >= 0; var_t1--) {
-            for (var_a1 = 0; var_a1 < MIN(BLOCK_LEN_B, TETWELL_OBJSPRITE_LEN_B); var_a1++) {
+            for (var_a1 = 0; var_a1 < BLOCK_COLS_2D; var_a1++) {
                 block = &array[var_t1][var_a1];
                 if ((block->delay != -2) && (block->type != BLOCKTYPE_9) && (block->state != BLOCKSTATE_2) &&
                     (block->state != BLOCKSTATE_3) && (block->type != BLOCKTYPE_0) && (block->frame_n == var_t3)) {
@@ -696,7 +696,7 @@ void Draw2DSmallStars(struct_gInfo_unk_00068 *dynamicp, s32 layer) {
     gSPObjLoadTxtr(glistp++, &numberLUT);
 
     for (i = 0; i < BLOCK_LEN_ROWS; i++) {
-        for (j = 0; j < MIN(BLOCK_LEN_B, TETWELL_OBJSPRITE_LEN_B); j++) {
+        for (j = 0; j < BLOCK_COLS_2D; j++) {
             if (dynamicp->block[num][i][j].bomb == layer) {
                 switch (dynamicp->block[num][i][j].currRow) {
                     case 0:

@@ -317,7 +317,7 @@ void KillRow3D(tetWell *well, cursor_t *cursor UNUSED) {
     }
 
     for (row = 0; row < BLOCK_LEN_ROWS - 1; row++) {
-        for (col = 0; col < BLOCK_LEN_B; col++) {
+        for (col = 0; col < BLOCK_COLS_3D; col++) {
             bot_block = &well->block[row][col];
             top_block = &well->block[row + 1][col];
             bcopy_chk(top_block, bot_block);
@@ -325,12 +325,12 @@ void KillRow3D(tetWell *well, cursor_t *cursor UNUSED) {
         }
     }
 
-    for (col = 0; col < BLOCK_LEN_B; col++) {
+    for (col = 0; col < BLOCK_COLS_3D; col++) {
         done &= well->block[0][col].type == BLOCKTYPE_0 ? -1 : 0;
     }
 
     if (done) {
-        for (col = 0; col < BLOCK_LEN_B; col++) {
+        for (col = 0; col < BLOCK_COLS_3D; col++) {
             InitTetrisState(&well->new_block[col]);
         }
 
@@ -598,7 +598,7 @@ void DropRow3D(tetWell *well, cursor_t *cursor, s32 num) {
     if (well->state.timer % 10 == 0) {
         row = BLOCK_LEN_ROWS - 1 - well->state.timer / 10;
 
-        for (col = 0; col < BLOCK_LEN_B; col++) {
+        for (col = 0; col < BLOCK_COLS_3D; col++) {
             if (well->block[row][col].type != BLOCKTYPE_9) {
                 well->block[row][col].type = BLOCKTYPE_0;
             }

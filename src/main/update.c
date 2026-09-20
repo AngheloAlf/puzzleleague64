@@ -1208,7 +1208,7 @@ void UpdateWell(tetWell *well, cursor_t *cursor, s32 num, s32 total) {
 
             if (var_s7 != BLOCKTYPE_0) {
                 if (temp_s0->state == BLOCKSTATE_7) {
-                    if ((sp18 == 0) && (gMax == BLOCK_LEN_B)) {
+                    if ((sp18 == 0) && (gMax == BLOCK_COLS_3D)) {
                         var_s5 = UpdateWell3DRowConnect(well, var_s2, &sp18);
                         if (var_s5 != 0) {
                             if (sp18 != 0) {
@@ -1254,7 +1254,7 @@ void UpdateWell(tetWell *well, cursor_t *cursor, s32 num, s32 total) {
                     var_a2 = sp18 - 1;
                     if (((gMax == 6) && (var_a2 < 0)) == 0) {
                         if (var_a2 < 0) {
-                            var_a2 = BLOCK_LEN_B - 1;
+                            var_a2 = BLOCK_COLS_3D - 1;
                         }
 
                         if (well->block[var_s2][var_a2].type == BLOCKTYPE_9) {
@@ -1280,7 +1280,7 @@ void UpdateWell(tetWell *well, cursor_t *cursor, s32 num, s32 total) {
 
                     temp_a2 = sp18 + 1;
                     if (((gMax == 6) && (temp_a2 >= 6)) == 0) {
-                        temp_a2 = (temp_a2 == BLOCK_LEN_B) ? 0 : temp_a2;
+                        temp_a2 = (temp_a2 == BLOCK_COLS_3D) ? 0 : temp_a2;
 
                         if (well->block[var_s2][temp_a2].type == BLOCKTYPE_9) {
                             temp_v0_3 = ReturnAttackSlot(well, var_s2, temp_a2);
@@ -1467,7 +1467,7 @@ void UpdateWell(tetWell *well, cursor_t *cursor, s32 num, s32 total) {
                 }
             }
 
-            if ((var_s5 != 0) && (sp18 == BLOCK_LEN_B - 1)) {
+            if ((var_s5 != 0) && (sp18 == BLOCK_COLS_3D - 1)) {
                 sp18 = -1;
             }
         }
@@ -1780,7 +1780,7 @@ void Update2DBuffer(struct_gInfo *info) {
         for (var_a1 = 0; var_a1 < BLOCK_LEN_ROWS; var_a1++) {
             s32 var_a0;
 
-            for (var_a0 = 0; var_a0 < BLOCK_LEN_B / 3; var_a0++) {
+            for (var_a0 = 0; var_a0 < BLOCK_COLS_2D; var_a0++) {
                 block_t *var = &var_s0[var_a1][var_a0];
 
                 var->frame_n = sp14[var->frame_n];
@@ -1843,13 +1843,13 @@ void Update3DBuffer(struct_gInfo *info) {
         for (var_v1 = 0; var_v1 < BLOCK_LEN_ROWS; var_v1++) {
             block_t *something = var_s0[var_v1];
 
-            for (var_a2 = 1; var_a2 < BLOCK_LEN_B / 2; var_a2++) {
+            for (var_a2 = 1; var_a2 < BLOCK_COLS_3D / 2; var_a2++) {
                 frame = var_s7[something[var_a2].frame_n];
                 something[var_a2].frame_n = frame;
                 dynamicp->frontTexture[num][frame] = 1;
             }
 
-            for (var_a2 = BLOCK_LEN_B / 2; var_a2 < BLOCK_LEN_B; var_a2++) {
+            for (var_a2 = BLOCK_COLS_3D / 2; var_a2 < BLOCK_COLS_3D; var_a2++) {
                 frame = var_s7[something[var_a2].frame_n];
                 something[var_a2].frame_n = frame;
                 dynamicp->backTexture[num][frame] = 1;
