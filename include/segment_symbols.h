@@ -56,7 +56,7 @@ DECLARE_SEGMENT(framebuffer);
 DECLARE_SEGMENT(segment_0CA4A0);
 DECLARE_SEGMENT(segment_0FB480);
 
-DECLARE_SEGMENT(segment_12C1B0);
+DECLARE_SEGMENT(segment_vertex);
 
 DECLARE_SEGMENT(segment_background_frame_2d_1p);
 DECLARE_SEGMENT(segment_background_frame_2d_2p);

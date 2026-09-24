@@ -713,7 +713,8 @@ segments:
     start: 0x101D30
 
   - type: databin
-    name: segment_12C1B0
+    name: segment_vertex
+    dir: assets_bins/vertex/
     start: 0x12C460
 
   - type: databin

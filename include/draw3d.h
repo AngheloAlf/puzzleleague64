@@ -5,10 +5,6 @@
 #include "unk.h"
 
 #include "other_types.h"
-#include "unknown_defines.h"
-
-#define VTX3D_VERTICES_PER_BLOCK (8)
-#define GET_VTX3D_INDEX(row, col) ((row) * BLOCK_COLS_3D * VTX3D_VERTICES_PER_BLOCK + (col) * VTX3D_VERTICES_PER_BLOCK)
 
 
 struct struct_gInfo_unk_00068;

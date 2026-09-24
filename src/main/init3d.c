@@ -396,8 +396,8 @@ INLINE void Init3DVertex(void) {
     void *ptr;
 
     ptr = Pon_Image_Heap;
-    // segment_12C1B0 = vertex?
-    LOAD_DATA_SEGMENT(ptr, segment_12C1B0, Pon_Image_Heap);
+    // Original name likely to be just "vertex"
+    LOAD_DATA_SEGMENT(ptr, segment_vertex, Pon_Image_Heap);
     gAllVertex = ptr;
 }
 

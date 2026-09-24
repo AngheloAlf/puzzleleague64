@@ -731,7 +731,8 @@ segments:
     #   - [0x12BA70, i8, assets/segment_101A80/D_12DC30.i8, 64, 29] # ci8
 
   - type: databin
-    name: segment_12C1B0
+    name: segment_vertex
+    dir: assets_bins/vertex/
     start: 0x12C1B0
 
   - type: databin

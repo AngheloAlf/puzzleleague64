@@ -20,6 +20,7 @@
 #include "text.h"
 #include "the_game.h"
 
+#include "assets/vertex_cylinder_3d.h"
 #include "assets_variables.h"
 
 /**
@@ -809,7 +810,6 @@ void Draw3DTetrisBlockSide(s32 row, s32 col, BlockType type, s32 flag) {
         default:
             gDPSetPrimColor(glistp++, 0, 0, 68, 68, 68, 255);
             break;
-
     }
 
     if (!(flag & 1)) {
@@ -1461,10 +1461,10 @@ s32 Draw3DAttack(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 front) {
     s32 sp14;
     s32 sp18;
     s32 sp24;
-    block_t (*sp2C)[18];
-    char (*sp34)[18];
+    block_t(*sp2C)[18];
+    char(*sp34)[18];
     void **sp3C;
-    void * (*sp4C)[6];
+    void *(*sp4C)[6];
     attack_t *temp_s1;
     attack_t *var_t8;
     s32 temp_s7;
@@ -1510,7 +1510,7 @@ s32 Draw3DAttack(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 front) {
     sp2C = dynamicp->block[num];
     sp34 = dynamicp->visible[num];
 
-    #if 0
+#if 0
     temp_t1 = glistp;
 
     temp_t1->words.w0 = 0xE7000000;
@@ -1547,7 +1547,7 @@ s32 Draw3DAttack(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 front) {
     glistp = temp_t1 + 0x30;
     glistp = temp_t1 + 0x38;
     glistp = temp_t1 + 0x40;
-    #endif
+#endif
 
     gDPPipeSync(glistp++);
     gDPSetTextureLUT(glistp++, G_TT_RGBA16);
@@ -1558,7 +1558,6 @@ s32 Draw3DAttack(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 front) {
         var_a1 = B_801C6C9C_usa[0];
     }
     gDPLoadTLUT_pal256(glistp++, var_a1);
-
 
     var_t3 = NULL;
     sp3C = &B_801C7360_usa[num];
@@ -1584,7 +1583,7 @@ s32 Draw3DAttack(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 front) {
                 sp14 = temp_a0;
                 var_t7 = 0x12 - temp_a1;
                 if (var_t8->type == ATTACKTYPE_11) {
-                    if ((u32) (temp_a1 - 6) < 3U) {
+                    if ((u32)(temp_a1 - 6) < 3U) {
                         sp14 = 0x12;
                     }
                 }
@@ -1634,7 +1633,7 @@ s32 Draw3DAttack(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 front) {
             if (var_t3 != var_t2) {
                 var_t3 = var_t2;
 
-                #if 0
+#if 0
                 temp_v1_3 = glistp;
 
                 temp_v1_3->words.w0 = 0xFD500000;
@@ -1672,12 +1671,14 @@ s32 Draw3DAttack(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 front) {
                 glistp = temp_v1_3 + 0x40;
                 glistp = temp_v1_3 + 0x48;
                 glistp = temp_v1_3 + 0x50;
-                #endif
+#endif
 
-                gDPLoadTextureBlock(glistp++, var_t3, G_IM_FMT_CI, G_IM_SIZ_8b, 64, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+                gDPLoadTextureBlock(glistp++, var_t3, G_IM_FMT_CI, G_IM_SIZ_8b, 64, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                                    G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
                 gDPPipeSync(glistp++);
-                gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0086, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+                gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0086, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                           G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
                 gDPSetTileSize(glistp++, G_TX_LOADTILE, 0, 0, 0x003C, 0x003C);
             }
 
@@ -1709,7 +1710,7 @@ s32 Draw3DAttack(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 front) {
                     }
 
                     if ((var_t0 != -1) && (sp34[temp_t1_2][var_s6] != 0)) {
-                        #if 0
+#if 0
                         temp_a2 = glistp;
 
                         temp_a2->words.w0 = ((var_t0 & 7) << 8) | 0xBB000001;
@@ -1727,16 +1728,16 @@ s32 Draw3DAttack(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 front) {
                         glistp = temp_a2 + 8;
                         glistp = temp_a2 + 0x10;
                         glistp = temp_a2 + 0x18;
-                        #endif
+#endif
 
                         gSPTexture(glistp++, 0x8000, 0x8000, 0, var_t0, G_ON);
-                        gSPVertex(glistp++, &gAllVertex[GET_VTX3D_INDEX(temp_t1_2, var_s6)], VTX3D_VERTICES_PER_BLOCK, 0);
+                        gSPVertex(glistp++, &gAllVertex[GET_VTX3D_INDEX(temp_t1_2, var_s6)], VTX3D_VERTICES_PER_BLOCK,
+                                  0);
                         if (var_t9 == 0) {
                             gSP2Triangles(glistp++, 4, 5, 6, 0, 4, 7, 5, 0);
                         } else {
                             gSP1Quadrangle(glistp++, 0, 1, 2, 3, 0);
                         }
-
                     }
                 }
 
@@ -1763,9 +1764,9 @@ s32 Draw3DAttack(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 front) {
                 for (; var_s2 >= var_t6; var_s2--) {
                     temp_t2 = (*sp4C)[var_s2];
                     if (var_t3 != temp_t2) {
-                        var_t3 = (void *) temp_t2;
+                        var_t3 = (void *)temp_t2;
 
-                        #if 0
+#if 0
                         temp_v0_3 = glistp;
 
                         temp_v0_3->words.w0 = 0xFD500000;
@@ -1803,10 +1804,14 @@ s32 Draw3DAttack(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 front) {
                         glistp = temp_v0_3 + 0x40;
                         glistp = temp_v0_3 + 0x48;
                         glistp = temp_v0_3 + 0x50;
-                        #endif
-                        gDPLoadTextureBlock(glistp++, var_t3, G_IM_FMT_CI, G_IM_SIZ_8b, 64, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+#endif
+                        gDPLoadTextureBlock(glistp++, var_t3, G_IM_FMT_CI, G_IM_SIZ_8b, 64, 32, 0,
+                                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                                            G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
                         gDPPipeSync(glistp++);
-                        gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0086, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+                        gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0086, G_TX_LOADTILE, 0,
+                                   G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP,
+                                   G_TX_NOMASK, G_TX_NOLOD);
                         gDPSetTileSize(glistp++, G_TX_LOADTILE, 0, 0, 0x003C, 0x003C);
                     }
 
@@ -1821,8 +1826,9 @@ s32 Draw3DAttack(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 front) {
                         for (; var_s6 < sp14; var_s6++) {
                             temp_ret = ReturnAttackTexValue(temp_s1, temp_s7, var_s0_2 - 1, sp18);
 
-                            if (((temp_ret / 10) == var_s2) && (sp2C[temp_t1_3][var_s6].drop == 1) && (sp34[temp_t1_3][var_s6] != 0)) {
-                                #if 0
+                            if (((temp_ret / 10) == var_s2) && (sp2C[temp_t1_3][var_s6].drop == 1) &&
+                                (sp34[temp_t1_3][var_s6] != 0)) {
+#if 0
                                 temp_a2_2 = glistp;
 
                                 temp_a2_2->words.w0 = (((temp_ret - temp_fp) & 7) << 8) | 0xBB000001;
@@ -1840,10 +1846,11 @@ s32 Draw3DAttack(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 front) {
                                 glistp = temp_a2_2 + 8;
                                 glistp = temp_a2_2 + 0x10;
                                 glistp = temp_a2_2 + 0x18;
-                                #endif
+#endif
 
                                 gSPTexture(glistp++, 0x8000, 0x8000, 0, temp_ret - temp_fp, G_ON);
-                                gSPVertex(glistp++, &gAllVertex[GET_VTX3D_INDEX(temp_t1_3, var_s6)], VTX3D_VERTICES_PER_BLOCK, 0);
+                                gSPVertex(glistp++, &gAllVertex[GET_VTX3D_INDEX(temp_t1_3, var_s6)],
+                                          VTX3D_VERTICES_PER_BLOCK, 0);
                                 if (var_t9 == 0) {
                                     gSP2Triangles(glistp++, 4, 5, 6, 0, 4, 7, 5, 0);
                                 } else {
@@ -1885,7 +1892,7 @@ s32 Draw3DAttack(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 front) {
                     if (var_t3 != var_t2) {
                         var_t3 = var_t2;
 
-                        #if 0
+#if 0
                         temp_v0_5 = glistp;
 
                         temp_v0_5->words.w0 = 0xFD500000;
@@ -1923,11 +1930,15 @@ s32 Draw3DAttack(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 front) {
                         glistp = temp_v0_5 + 0x40;
                         glistp = temp_v0_5 + 0x48;
                         glistp = temp_v0_5 + 0x50;
-                        #endif
+#endif
 
-                        gDPLoadTextureBlock(glistp++, var_t3, G_IM_FMT_CI, G_IM_SIZ_8b, 64, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+                        gDPLoadTextureBlock(glistp++, var_t3, G_IM_FMT_CI, G_IM_SIZ_8b, 64, 32, 0,
+                                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                                            G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
                         gDPPipeSync(glistp++);
-                        gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0086, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+                        gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0086, G_TX_LOADTILE, 0,
+                                   G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP,
+                                   G_TX_NOMASK, G_TX_NOLOD);
                         gDPSetTileSize(glistp++, G_TX_LOADTILE, 0, 0, 0x003C, 0x003C);
                     }
 
@@ -1939,7 +1950,7 @@ s32 Draw3DAttack(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 front) {
 
                         temp_t0 = ReturnAttackTexValue(temp_s1, temp_s1->type, var_s0_3, sp18) % 10;
                         if (sp34[temp_t1_4][var_s6] != 0) {
-                            #if 0
+#if 0
                             temp_a2_3 = glistp;
 
                             temp_a2_3->words.w0 = ((temp_t0 & 7) << 8) | 0xBB000001;
@@ -1957,10 +1968,11 @@ s32 Draw3DAttack(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 front) {
                             glistp = temp_a2_3 + 8;
                             glistp = temp_a2_3 + 0x10;
                             glistp = temp_a2_3 + 0x18;
-                            #endif
+#endif
 
                             gSPTexture(glistp++, 0x8000, 0x8000, 0, G_TX_RENDERTILE, G_ON);
-                            gSPVertex(glistp++, &gAllVertex[GET_VTX3D_INDEX(temp_t1_4, var_s6)], VTX3D_VERTICES_PER_BLOCK, 0);
+                            gSPVertex(glistp++, &gAllVertex[GET_VTX3D_INDEX(temp_t1_4, var_s6)],
+                                      VTX3D_VERTICES_PER_BLOCK, 0);
                             gSP2Triangles(glistp++, 4, 5, 6, 0, 4, 7, 5, 0);
                             gSP1Quadrangle(glistp++, 0, 1, 2, 3, 0);
                         }
@@ -1978,7 +1990,7 @@ s32 Draw3DAttack(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 front) {
                     if (var_t3 != temp_t2_2) {
                         var_t3 = temp_t2_2;
 
-                        #if 0
+#if 0
                         temp_v0_7 = glistp;
 
                         temp_v0_7->words.w0 = 0xFD500000;
@@ -2016,11 +2028,15 @@ s32 Draw3DAttack(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 front) {
                         glistp = temp_v0_7 + 0x40;
                         glistp = temp_v0_7 + 0x48;
                         glistp = temp_v0_7 + 0x50;
-                        #endif
+#endif
 
-                        gDPLoadTextureBlock(glistp++, var_t3, G_IM_FMT_CI, G_IM_SIZ_8b, 64, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+                        gDPLoadTextureBlock(glistp++, var_t3, G_IM_FMT_CI, G_IM_SIZ_8b, 64, 32, 0,
+                                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                                            G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
                         gDPPipeSync(glistp++);
-                        gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0086, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+                        gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0086, G_TX_LOADTILE, 0,
+                                   G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP,
+                                   G_TX_NOMASK, G_TX_NOLOD);
                         gDPSetTileSize(glistp++, G_TX_LOADTILE, 0, 0, 0x003C, 0x003C);
                     }
 
@@ -2035,7 +2051,7 @@ s32 Draw3DAttack(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 front) {
                             temp_ret_2 = ReturnAttackTexValue(temp_s1, temp_s1->type, var_s0_4, sp18);
 
                             if (((temp_ret_2 / 10) == var_s2_2) && (sp34[temp_t1_5][var_s6] != 0)) {
-                                #if 0
+#if 0
                                 temp_a2_4 = glistp;
 
                                 temp_a2_4->words.w0 = (((temp_ret_2 - var_fp) & 7) << 8) | 0xBB000001;
@@ -2053,10 +2069,11 @@ s32 Draw3DAttack(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 front) {
                                 glistp = temp_a2_4 + 8;
                                 glistp = temp_a2_4 + 0x10;
                                 glistp = temp_a2_4 + 0x18;
-                                #endif
+#endif
 
                                 gSPTexture(glistp++, 0x8000, 0x8000, 0, temp_ret_2 - 10 * var_s2_2, G_ON);
-                                gSPVertex(glistp++, &gAllVertex[GET_VTX3D_INDEX(temp_t1_5, var_s6)], VTX3D_VERTICES_PER_BLOCK, 0);
+                                gSPVertex(glistp++, &gAllVertex[GET_VTX3D_INDEX(temp_t1_5, var_s6)],
+                                          VTX3D_VERTICES_PER_BLOCK, 0);
                                 gSP2Triangles(glistp++, 4, 5, 6, 0, 4, 7, 5, 0);
                                 gSP1Quadrangle(glistp++, 0, 1, 2, 3, 0);
                             }
@@ -2064,7 +2081,6 @@ s32 Draw3DAttack(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 front) {
                             sp18 += 1;
                         }
                     }
-
                 }
             }
         }

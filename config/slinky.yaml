@@ -66,7 +66,7 @@ vram_classes:
   - { name: asset_segment_0CA4A0, fixed_vram: 0x01000000 }
   - { name: asset_segment_0FB480, follows_classes: [asset_segment_0CA4A0] }
   - { name: asset_segment_101A80, follows_classes: [asset_segment_0CA4A0] }
-  - { name: asset_segment_12C1B0, follows_classes: [asset_segment_0FB480] }
+  - { name: asset_segment_vertex, follows_classes: [asset_segment_0FB480] }
   - { name: asset_background_frame_A, follows_classes: [asset_segment_0FB480] }
   - { name: asset_background_frame_B, follows_classes: [asset_background_frame_A] }
   - { name: asset_background, fixed_vram: 0x0104C660 } # TODO: implement follows_segment in slinky
@@ -541,10 +541,10 @@ segments:
     files:
       - { path: "asm/{version}/data/segment_101A80.o" }
 
-  - name: segment_12C1B0
-    vram_class: asset_segment_12C1B0
+  - name: segment_vertex
+    vram_class: asset_segment_vertex
     files:
-      - { path: "asm/{version}/data/segment_12C1B0.o" }
+      - { path: src/assets/vertex/cylinder_3d.o }
 
   - name: segment_background_frame_2d_1p
     vram_class: asset_background_frame_A
