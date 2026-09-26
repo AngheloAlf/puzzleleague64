@@ -96,7 +96,7 @@ segments:
       - [0x18660]
       - [0x18678, i8, D_01018678_usa.i8, 2048, 1] # unknown type and dimensions
       - [0x18E78]
-      - [0x18E90, i8, D_01018E90_usa.i8, 64, 16]
+      - [0x18E90, i8, smokesmoke.i8, 64, 16]
       - [0x19290]
       - [0x192A8, palette, D_010192A8_usa]
       - [0x194A8]
@@ -153,8 +153,8 @@ segments:
       - [0x23A50]
       - { start: 0x23A68, type: ci8, name: arrow.ci8, width: 64, height: 8, palettes: [numberTable] }
       - [0x23C68]
-      - { start: 0x23C80, type: ci8, name: D_01023C80_usa.ci8, width: 64, height: 32, palettes: [numberTable] }
-      - { start: 0x24480, type: ci8, name: D_01024480_usa.ci8, width: 64, height: 32, palettes: [numberTable] }
+      - { start: 0x23C80, type: ci8, name: stars1.ci8, width: 64, height: 32, palettes: [numberTable] }
+      - { start: 0x24480, type: ci8, name: stars2.ci8, width: 64, height: 32, palettes: [numberTable] }
       - [0x24C80]
       - [0x24C98]
 

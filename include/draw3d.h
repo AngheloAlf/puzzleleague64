@@ -10,14 +10,14 @@
 struct struct_gInfo_unk_00068;
 struct tetWell;
 
-typedef enum enum_func_800643A4_usa_arg0 {
-    /* 1 */ ENUM_FUNC_800643A4_USA_ARG0_1 = 1,
-    /* 2 */ ENUM_FUNC_800643A4_USA_ARG0_2,
-    /* 3 */ ENUM_FUNC_800643A4_USA_ARG0_3,
-    /* 4 */ ENUM_FUNC_800643A4_USA_ARG0_4,
-    /* 5 */ ENUM_FUNC_800643A4_USA_ARG0_5,
-    /* 6 */ ENUM_FUNC_800643A4_USA_ARG0_6,
-} enum_func_800643A4_usa_arg0;
+typedef enum enum_Draw3DGameStar_arg0 {
+    /* 1 */ ENUM_DRAW3DGAMESTAR_ARG0_1 = 1,
+    /* 2 */ ENUM_DRAW3DGAMESTAR_ARG0_2,
+    /* 3 */ ENUM_DRAW3DGAMESTAR_ARG0_3,
+    /* 4 */ ENUM_DRAW3DGAMESTAR_ARG0_4,
+    /* 5 */ ENUM_DRAW3DGAMESTAR_ARG0_5,
+    /* 6 */ ENUM_DRAW3DGAMESTAR_ARG0_6,
+} enum_Draw3DGameStar_arg0;
 
 
 void Set3DTile(void);
@@ -38,12 +38,12 @@ s32 Draw3DAttack(struct struct_gInfo_unk_00068 *dynamicp, s32 num, s32 front);
 void Draw3DExplosion(struct struct_gInfo_unk_00068 *dynamicp, s32 num);
 void Draw3DClearLine(struct struct_gInfo_unk_00068 *dynamicp, s32 num);
 void Draw3DClearSign(struct struct_gInfo_unk_00068 *dynamicp, s32 num);
-// void func_80063110_usa();
-// void func_80063F8C_usa();
-void func_800643A4_usa(enum_func_800643A4_usa_arg0 arg0, const u16 arg1[], s32 arg2);
-void func_80064728_usa(enum_func_800643A4_usa_arg0 arg0, const u16 arg1[], s32 arg2);
-void func_80064AAC_usa(enum_func_800643A4_usa_arg0 arg0, const u16 arg1[], s32 arg2);
-// void func_80064E44_usa();
+void Draw3DGameOverStat(struct struct_gInfo_unk_00068 *dynamicp);
+void Draw3DSmoke(struct struct_gInfo_unk_00068 *dynamicp, s32 num);
+void Draw3DGameStar(enum_Draw3DGameStar_arg0 which, const u16 arg1[], s32 arg2);
+void func_80064728_usa(enum_Draw3DGameStar_arg0 arg0, const u16 arg1[], s32 arg2);
+void func_80064AAC_usa(enum_Draw3DGameStar_arg0 arg0, const u16 arg1[], s32 arg2);
+void Draw3DSmallStars(s32 layer);
 void Draw3DTetris(struct struct_gInfo_unk_00068 *dynamicp);
 
 #endif

@@ -24,7 +24,7 @@
 #include "assets_variables.h"
 
 /**
- * Original nanme: Set3DTile
+ * Original name: Set3DTile
  */
 void Set3DTile(void) {
     gDPPipeSync(glistp++);
@@ -62,7 +62,7 @@ void func_8005E740_usa(void) {
 }
 
 /**
- * Original nanme: Set3DExplodeTile
+ * Original name: Set3DExplodeTile
  */
 void Set3DExplodeTile(void) {
     gDPPipeSync(glistp++);
@@ -735,7 +735,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/draw3d", Draw3DBackTetrisWell);
 #endif
 
 /**
- * Original nanme: Draw3DTetrisBlock1
+ * Original name: Draw3DTetrisBlock1
  */
 void Draw3DTetrisBlock1(s32 row, s32 col, BlockType type) {
     if (type == BLOCKTYPE_9) {
@@ -753,7 +753,7 @@ void Draw3DTetrisBlock1(s32 row, s32 col, BlockType type) {
 }
 
 /**
- * Original nanme: Draw3DTetrisBlock2
+ * Original name: Draw3DTetrisBlock2
  */
 void Draw3DTetrisBlock2(s32 col, BlockType type) {
     if (type == BLOCKTYPE_9) {
@@ -769,7 +769,7 @@ void Draw3DTetrisBlock2(s32 col, BlockType type) {
 }
 
 /**
- * Original nanme: Draw3DTetrisBlockSide
+ * Original name: Draw3DTetrisBlockSide
  */
 void Draw3DTetrisBlockSide(s32 row, s32 col, BlockType type, s32 flag) {
     gSPVertex(glistp++, &gAllVertex[GET_VTX3D_INDEX(row, col)], VTX3D_VERTICES_PER_BLOCK, 0);
@@ -824,7 +824,7 @@ void Draw3DTetrisBlockSide(s32 row, s32 col, BlockType type, s32 flag) {
 }
 
 /**
- * Original nanme: Draw3DTetrisSwitch
+ * Original name: Draw3DTetrisSwitch
  */
 void Draw3DTetrisSwitch(struct_gInfo_unk_00068 *dynamicp, s32 num, block_t *left, block_t *right) {
     s32 index = GET_VTX3D_INDEX(dynamicp->cursorBlock[num].sy, 0);
@@ -847,7 +847,7 @@ void Draw3DTetrisSwitch(struct_gInfo_unk_00068 *dynamicp, s32 num, block_t *left
 }
 
 /**
- * Original nanme: Draw3DTetrisNewBlock
+ * Original name: Draw3DTetrisNewBlock
  */
 void Draw3DTetrisNewBlock(struct_gInfo_unk_00068 *dynamicp UNUSED, tetWell *well) {
     s32 col;
@@ -937,7 +937,7 @@ void Draw3DTetrisNewBlock(struct_gInfo_unk_00068 *dynamicp UNUSED, tetWell *well
 }
 
 /**
- * Original nanme: Draw3DCursor
+ * Original name: Draw3DCursor
  */
 void Draw3DCursor(struct_gInfo_unk_00068 *dynamicp) {
     cursor_t *cursor;
@@ -971,7 +971,7 @@ void Draw3DCursor(struct_gInfo_unk_00068 *dynamicp) {
 }
 
 /**
- * Original nanme: Draw3DIcon
+ * Original name: Draw3DIcon
  */
 void Draw3DIcon(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     s32 var_a3; // i?
@@ -2106,7 +2106,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/draw3d", Draw3DAttack);
 #endif
 
 /**
- * Original nanme: Draw3DExplosion
+ * Original name: Draw3DExplosion
  */
 void Draw3DExplosion(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     explode_t *exp = dynamicp->explosion[num];
@@ -2145,7 +2145,7 @@ void Draw3DExplosion(struct_gInfo_unk_00068 *dynamicp, s32 num) {
 }
 
 /**
- * Original nanme: Draw3DClearLine
+ * Original name: Draw3DClearLine
  */
 void Draw3DClearLine(struct_gInfo_unk_00068 *dynamicp UNUSED, s32 num) {
     s32 var_v0;
@@ -2191,7 +2191,7 @@ void Draw3DClearLine(struct_gInfo_unk_00068 *dynamicp UNUSED, s32 num) {
 }
 
 /**
- * Original nanme: Draw3DClearSign
+ * Original name: Draw3DClearSign
  */
 void Draw3DClearSign(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     s32 tmem;
@@ -2240,7 +2240,7 @@ void Draw3DClearSign(struct_gInfo_unk_00068 *dynamicp, s32 num) {
 #if 0
 extern ? D_01022620_usa;
 
-void func_80063110_usa(s32 arg0) {
+void Draw3DGameOverStat(s32 arg0) {
     s32 sp14;
     s32 sp18;
     s32 sp1C;
@@ -2680,158 +2680,153 @@ loop_1:
     } while (var_s2_3 < 3);
 }
 #else
-INCLUDE_ASM("asm/usa/nonmatchings/main/draw3d", func_80063110_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/draw3d", Draw3DGameOverStat);
 #endif
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/draw3d", func_80063110_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/draw3d", Draw3DGameOverStat);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/draw3d", func_80063110_usa);
+INCLUDE_ASM("asm/fra/nonmatchings/main/draw3d", Draw3DGameOverStat);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/draw3d", func_80063110_usa);
+INCLUDE_ASM("asm/ger/nonmatchings/main/draw3d", Draw3DGameOverStat);
 #endif
 
-#if VERSION_USA
-#if 0
-extern ? D_01018E90_usa;
+/**
+ * Original name: Draw3DSmoke
+ */
+void Draw3DSmoke(struct_gInfo_unk_00068 *dynamicp, s32 num) {
+    s32 last_row = BLOCK_LEN_ROWS - 1;
+    uObjSprite_t *s;
+    s32 tile;
+    s32 col;
 
-void func_80063F8C_usa(s32 arg0, s32 arg1) {
-    Gfx *temp_a1;
-    Gfx *temp_v0;
-    Gfx *temp_v0_3;
-    Gfx *temp_v1_2;
-    s32 temp_v1;
-    s32 var_s2;
-    s32 var_t0;
-    s32 var_t1;
-    s32 var_t2;
-    s32 var_t3;
-    u16 temp_v1_3;
-    void *temp_a3;
-    void *temp_v0_2;
-
-    var_s2 = saved_reg_s2;
-    if ((arg0 + (arg1 * 0xB0))->unk_172A8 == 8) {
-        temp_v0 = glistp;
-        glistp = temp_v0 + 8;
-        glistp = temp_v0 + 0x10;
-        glistp = temp_v0 + 0x18;
-        temp_v0->unk_10 = 0xFD900000;
-        temp_v0->unk_14 = &D_01018E90_usa;
-        glistp = temp_v0 + 0x20;
-        temp_v0->unk_18 = 0xF5900000;
-        temp_v0->unk_1C = 0x07000000;
-        glistp = temp_v0 + 0x28;
-        temp_v0->unk_20 = 0xE6000000;
-        glistp = temp_v0 + 0x30;
-        temp_v0->unk_28 = 0xF3000000;
-        glistp = temp_v0 + 0x38;
-        glistp = temp_v0 + 0x40;
-        glistp = temp_v0 + 0x48;
-        temp_v0->words.w0 = 0xE7000000;
-        temp_v0->words.w1 = 0;
-        temp_v0->unk_8 = 0xBA000E02;
-        temp_v0->unk_C = 0;
-        temp_v0->unk_24 = 0;
-        temp_v0->unk_2C = 0x071FF100;
-        temp_v0->unk_30 = 0xE7000000;
-        temp_v0->unk_34 = 0;
-        temp_v0->unk_38 = 0xF5881000;
-        temp_v0->unk_3C = 0;
-        temp_v0->unk_40 = 0xF2000000;
-        temp_v0->unk_44 = 0xFC03C;
-        Set3DTile();
-        var_t0 = 0;
-        temp_v1 = arg1 * 0x960;
-        var_t3 = temp_v1;
-        temp_v1_2 = glistp;
-        var_t2 = 0;
-        var_t1 = 0x2208;
-        glistp = temp_v1_2 + 8;
-        glistp = temp_v1_2 + 0x10;
-        glistp = temp_v1_2 + 0x18;
-        temp_v1_2->unk_14 = -0xC07;
-        glistp = temp_v1_2 + 0x20;
-        temp_v1_2->unk_18 = 0xFA000000;
-        temp_v1_2->words.w0 = 0xE7000000;
-        temp_v1_2->words.w1 = 0;
-        temp_v1_2->unk_8 = 0xB900031D;
-        temp_v1_2->unk_C = 0x504240;
-        temp_v1_2->unk_10 = 0xFC11FE23;
-        temp_v1_2->unk_1C = -1;
-        do {
-            if (((u32) (var_t0 - 2) < 6U) && ((arg0 + (var_t1 + (arg1 * 0x2520)))->unk_10254 != 0) && ((arg0 + var_t3)->unk_15FEC >= -0x13)) {
-                temp_v0_2 = arg0 + (temp_v1 + 0x15FE8) + var_t2;
-                temp_v1_3 = temp_v0_2->unk_2A;
-                temp_a3 = temp_v0_2 + 0x18;
-                switch (temp_v1_3) {                /* irregular */
-                    case 0x0:
-                        var_s2 = 0;
-                        break;
-                    case 0x6:
-                        var_s2 = 3;
-                        break;
-                    case 0x2:
-                        var_s2 = 1;
-                        break;
-                    case 0x4:
-                        var_s2 = 2;
-                        break;
-                }
-                temp_a1 = glistp;
-                temp_a1->words.w0 = ((((((s32) (temp_v0_2->unk_18 << 0x10) >> 0x12) + 0x18) * 4) & 0xFFF) << 0xC) | ((((((s32) (temp_a3->unk_8 << 0x10) >> 0x12) + 0x10) * 4) & 0xFFF) | 0xE4000000);
-                glistp = temp_a1 + 8;
-                glistp = temp_a1 + 0x10;
-                temp_a1->unk_8 = 0xB4000000;
-                glistp = temp_a1 + 0x18;
-                temp_a1->unk_10 = 0xB3000000;
-                glistp = temp_a1 + 0x20;
-                temp_a1->unk_18 = 0xE7000000;
-                temp_a1->unk_C = 0;
-                temp_a1->unk_14 = 0x02AE0400;
-                temp_a1->unk_1C = 0;
-                temp_a1->words.w1 = ((var_s2 & 7) << 0x18) | ((temp_v0_2->unk_18 & 0xFFF) << 0xC) | (temp_a3->unk_8 & 0xFFF);
-            }
-            var_t3 += 0x30;
-            var_t2 += 0x30;
-            var_t0 += 1;
-            var_t1 += 0x2C;
-        } while (var_t0 < 0x12);
-        temp_v0_3 = glistp;
-        glistp = temp_v0_3 + 8;
-        temp_v0_3->words.w0 = 0xE7000000;
-        glistp = temp_v0_3 + 0x10;
-        temp_v0_3->words.w1 = 0;
-        temp_v0_3->unk_8 = 0xFCFFFFFF;
-        temp_v0_3->unk_C = 0xFFFCF279;
-        glistp = temp_v0_3 + 0x18;
-        temp_v0_3->unk_10 = 0xB900031D;
-        temp_v0_3->unk_14 = 0x0F0A7008;
+    if (dynamicp->cursorBlock[num].state != 8) {
+        return;
     }
+
+    gDPPipeSync(glistp++);
+    gDPSetTextureLUT(glistp++, G_TT_NONE);
+    gDPLoadTextureBlock(glistp++, smokesmoke, G_IM_FMT_I, G_IM_SIZ_8b, SMOKESMOKE_TEX_WIDTH, SMOKESMOKE_TEX_HEIGHT, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+
+    Set3DTile();
+
+    gDPPipeSync(glistp++);
+    gDPSetRenderMode(glistp++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
+    gDPSetCombineMode(glistp++, G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM);
+    gDPSetPrimColor(glistp++, 0, 0, 255, 255, 255, 255);
+
+    for (col = 0; col < BLOCK_COLS_3D; col++) {
+        if ((col < 2 || col > 7)) {
+            continue;
+        }
+        if (dynamicp->block[num][last_row][col].type == 0) {
+            continue;
+        }
+        if (dynamicp->explosion[num][col].frame < -0x13) {
+            continue;
+        }
+
+        s = &dynamicp->explosion[num][col].rect.s;
+
+        switch (s->imageAdrs) {
+            case 0x0:
+                tile = 0;
+                break;
+
+            case 0x2:
+                tile = 1;
+                break;
+
+            case 0x4:
+                tile = 2;
+                break;
+
+            case 0x6:
+                tile = 3;
+                break;
+        }
+
+        gSPTextureRectangle(glistp++, s->objX, s->objY, ((s->objX >> 2) + 24) << 2, ((s->objY >> 2) + 16) << 2, tile, 0, 0, 0x02AE, 0x0400);
+
+        gDPPipeSync(glistp++);
+    }
+
+    gDPPipeSync(glistp++);
+    gDPSetCombineMode(glistp++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+    gDPSetRenderMode(glistp++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/draw3d", func_80063F8C_usa);
-#endif
-#endif
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/draw3d", func_80063F8C_usa);
-#endif
+/**
+ * Original name: Draw3DGameStar
+ */
+void Draw3DGameStar(enum_Draw3DGameStar_arg0 which, const u16 arg1[], s32 arg2) {
+    s32 y;
+    s32 x;
+    s32 tile;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/draw3d", func_80063F8C_usa);
-#endif
+    gDPPipeSync(glistp++);
+    gDPSetColorImage(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, arg1);
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/draw3d", func_80063F8C_usa);
-#endif
+    gDPPipeSync(glistp++);
+    gDPSetTextureLUT(glistp++, G_TT_RGBA16);
+    gDPLoadTLUT_pal256(glistp++, D_010192A8_usa);
+    gDPLoadTextureBlock(glistp++, D_0101C4C0_usa, G_IM_FMT_CI, G_IM_SIZ_8b, D_0101C4C0_USA_WIDTH, D_0101C4C0_USA_HEIGHT,
+                        0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
+                        G_TX_NOLOD);
 
-void func_800643A4_usa(enum_func_800643A4_usa_arg0 arg0, const u16 arg1[], s32 arg2) {
+    Set3DTile();
+
+    switch (which) {
+        case ENUM_DRAW3DGAMESTAR_ARG0_1:
+            x = 141;
+            y = 170;
+            tile = 4;
+            break;
+
+        case ENUM_DRAW3DGAMESTAR_ARG0_2:
+            x = 141;
+            y = 187;
+            tile = 4;
+            break;
+
+        case ENUM_DRAW3DGAMESTAR_ARG0_3:
+            x = 141;
+            y = 204;
+            tile = 4;
+            break;
+
+        case ENUM_DRAW3DGAMESTAR_ARG0_4:
+            x = 163;
+            y = 170;
+            tile = 5;
+            break;
+
+        case ENUM_DRAW3DGAMESTAR_ARG0_5:
+            x = 163;
+            y = 187;
+            tile = 5;
+            break;
+
+        case ENUM_DRAW3DGAMESTAR_ARG0_6:
+            x = 163;
+            y = 204;
+            tile = 5;
+            break;
+    }
+
+    y += arg2;
+    gSPTextureRectangle(glistp++, x << 2, y << 2, (x + 0x10) << 2, (y + 0x10) << 2, tile, 0, 0, 0x0400, 0x0400);
+
+    gDPPipeSync(glistp++);
+    gDPSetColorImage(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, (*fb)->unk_19040);
+}
+
+void func_80064728_usa(enum_Draw3DGameStar_arg0 arg0, const u16 arg1[], s32 arg2) {
     s32 y;
     s32 x;
     s32 tile;
@@ -2849,99 +2844,37 @@ void func_800643A4_usa(enum_func_800643A4_usa_arg0 arg0, const u16 arg1[], s32 a
     Set3DTile();
 
     switch (arg0) {
-        case ENUM_FUNC_800643A4_USA_ARG0_1:
-            x = 141;
-            y = 170;
-            tile = 4;
-            break;
-
-        case ENUM_FUNC_800643A4_USA_ARG0_2:
-            x = 141;
-            y = 187;
-            tile = 4;
-            break;
-
-        case ENUM_FUNC_800643A4_USA_ARG0_3:
-            x = 141;
-            y = 204;
-            tile = 4;
-            break;
-
-        case ENUM_FUNC_800643A4_USA_ARG0_4:
-            x = 163;
-            y = 170;
-            tile = 5;
-            break;
-
-        case ENUM_FUNC_800643A4_USA_ARG0_5:
-            x = 163;
-            y = 187;
-            tile = 5;
-            break;
-
-        case ENUM_FUNC_800643A4_USA_ARG0_6:
-            x = 163;
-            y = 204;
-            tile = 5;
-            break;
-    }
-
-    y += arg2;
-    gSPTextureRectangle(glistp++, x << 2, y << 2, (x + 0x10) << 2, (y + 0x10) << 2, tile, 0, 0, 0x0400, 0x0400);
-
-    gDPPipeSync(glistp++);
-    gDPSetColorImage(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, (*fb)->unk_19040);
-}
-
-void func_80064728_usa(enum_func_800643A4_usa_arg0 arg0, const u16 arg1[], s32 arg2) {
-    s32 y;
-    s32 x;
-    s32 tile;
-
-    gDPPipeSync(glistp++);
-    gDPSetColorImage(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, arg1);
-
-    gDPPipeSync(glistp++);
-    gDPSetTextureLUT(glistp++, G_TT_RGBA16);
-    gDPLoadTLUT_pal256(glistp++, D_010192A8_usa);
-    gDPLoadTextureBlock(glistp++, D_0101C4C0_usa, G_IM_FMT_CI, G_IM_SIZ_8b, D_0101C4C0_USA_WIDTH, D_0101C4C0_USA_HEIGHT,
-                        0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
-                        G_TX_NOLOD);
-
-    Set3DTile();
-
-    switch (arg0) {
-        case ENUM_FUNC_800643A4_USA_ARG0_1:
+        case ENUM_DRAW3DGAMESTAR_ARG0_1:
             x = 141;
             y = 170;
             tile = 6;
             break;
 
-        case ENUM_FUNC_800643A4_USA_ARG0_2:
+        case ENUM_DRAW3DGAMESTAR_ARG0_2:
             x = 141;
             y = 187;
             tile = 6;
             break;
 
-        case ENUM_FUNC_800643A4_USA_ARG0_3:
+        case ENUM_DRAW3DGAMESTAR_ARG0_3:
             x = 141;
             y = 204;
             tile = 6;
             break;
 
-        case ENUM_FUNC_800643A4_USA_ARG0_4:
+        case ENUM_DRAW3DGAMESTAR_ARG0_4:
             x = 163;
             y = 170;
             tile = 7;
             break;
 
-        case ENUM_FUNC_800643A4_USA_ARG0_5:
+        case ENUM_DRAW3DGAMESTAR_ARG0_5:
             x = 163;
             y = 187;
             tile = 7;
             break;
 
-        case ENUM_FUNC_800643A4_USA_ARG0_6:
+        case ENUM_DRAW3DGAMESTAR_ARG0_6:
             x = 163;
             y = 204;
             tile = 7;
@@ -2955,7 +2888,7 @@ void func_80064728_usa(enum_func_800643A4_usa_arg0 arg0, const u16 arg1[], s32 a
     gDPSetColorImage(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, (*fb)->unk_19040);
 }
 
-void func_80064AAC_usa(enum_func_800643A4_usa_arg0 arg0, const u16 arg1[], s32 arg2) {
+void func_80064AAC_usa(enum_Draw3DGameStar_arg0 arg0, const u16 arg1[], s32 arg2) {
     s32 y;
     s32 x;
 
@@ -2971,7 +2904,7 @@ void func_80064AAC_usa(enum_func_800643A4_usa_arg0 arg0, const u16 arg1[], s32 a
 
     gDPPipeSync(glistp++);
 
-    if ((s32)arg0 <= ENUM_FUNC_800643A4_USA_ARG0_3) {
+    if ((s32)arg0 <= ENUM_DRAW3DGAMESTAR_ARG0_3) {
         gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0002, 6, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
                    G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
     } else {
@@ -2982,32 +2915,32 @@ void func_80064AAC_usa(enum_func_800643A4_usa_arg0 arg0, const u16 arg1[], s32 a
     gDPSetTileSize(glistp++, 6, 0, 0, 0x003C, 0x003C);
 
     switch (arg0) {
-        case ENUM_FUNC_800643A4_USA_ARG0_1:
+        case ENUM_DRAW3DGAMESTAR_ARG0_1:
             x = 0x8D;
             y = 0xAA;
             break;
 
-        case ENUM_FUNC_800643A4_USA_ARG0_2:
+        case ENUM_DRAW3DGAMESTAR_ARG0_2:
             x = 0x8D;
             y = 0xBB;
             break;
 
-        case ENUM_FUNC_800643A4_USA_ARG0_3:
+        case ENUM_DRAW3DGAMESTAR_ARG0_3:
             x = 0x8D;
             y = 0xCC;
             break;
 
-        case ENUM_FUNC_800643A4_USA_ARG0_4:
+        case ENUM_DRAW3DGAMESTAR_ARG0_4:
             x = 0xA3;
             y = 0xAA;
             break;
 
-        case ENUM_FUNC_800643A4_USA_ARG0_5:
+        case ENUM_DRAW3DGAMESTAR_ARG0_5:
             x = 0xA3;
             y = 0xBB;
             break;
 
-        case ENUM_FUNC_800643A4_USA_ARG0_6:
+        case ENUM_DRAW3DGAMESTAR_ARG0_6:
             x = 0xA3;
             y = 0xCC;
             break;
@@ -3020,200 +2953,98 @@ void func_80064AAC_usa(enum_func_800643A4_usa_arg0 arg0, const u16 arg1[], s32 a
     gDPSetColorImage(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, (*fb)->unk_19040);
 }
 
-#if VERSION_USA
-#if 0
-extern ? D_01023C80_usa;
-extern ? D_01024480_usa;
+/**
+ * Original name: Draw3DSmallStars
+ */
+void Draw3DSmallStars(s32 layer) {
+    s32 num = gMain == GMAIN_393 ? 1 : 0;
+    s32 total = 0;
+    s32 row;
+    s32 col;
+    s32 y;
+    s32 x;
+    s32 tile;
 
-void func_80064E44_usa(s32 arg0) {
-    s32 sp14;
-    s32 sp1C;
-    s32 sp20;
-    s32 sp24;
-    ? *var_v0;
-    Gfx *temp_a1;
-    Gfx *temp_v1;
-    Gfx *var_v1;
-    s32 temp_a0;
-    s32 temp_s1;
-    s32 temp_s4;
-    s32 temp_s5;
-    s32 temp_v1_2;
-    s32 temp_v1_3;
-    s32 var_fp;
-    s32 var_s0;
-    s32 var_s2;
-    s32 var_s3;
-    s32 var_s6;
-    s32 var_s7;
-    s32 var_t0;
-    s32 var_t1;
-    u16 temp_v1_4;
+    gDPPipeSync(glistp++);
+    gDPSetTextureLUT(glistp++, G_TT_RGBA16);
+    gDPLoadTLUT_pal256(glistp++, numberTable);
 
-    var_s0 = saved_reg_s0;
-    var_s6 = 0;
-    temp_v1 = glistp;
-    var_t0 = 0;
-    var_s7 = 0;
-    var_fp = 0;
-    sp14 = arg0;
-    var_t1 = gMain == GMAIN_393;
-    sp1C = var_t1 * 0x444;
-    glistp = temp_v1 + 8;
-    glistp = temp_v1 + 0x10;
-    temp_v1->unk_C = 0x8000;
-    glistp = temp_v1 + 0x18;
-    temp_v1->unk_10 = 0xFD100000;
-    temp_v1->unk_14 = numberTable;
-    glistp = temp_v1 + 0x20;
-    temp_v1->unk_18 = 0xE8000000;
-    glistp = temp_v1 + 0x28;
-    temp_v1->unk_24 = 0x07000000;
-    glistp = temp_v1 + 0x30;
-    temp_v1->unk_28 = 0xE6000000;
-    glistp = temp_v1 + 0x38;
-    temp_v1->words.w0 = 0xE7000000;
-    temp_v1->words.w1 = 0;
-    temp_v1->unk_8 = 0xBA000E02;
-    temp_v1->unk_1C = 0;
-    temp_v1->unk_20 = 0xF5000100;
-    temp_v1->unk_2C = 0;
-    temp_v1->unk_30 = 0xF0000000;
-    temp_v1->unk_34 = 0x073FC000;
-    glistp = temp_v1 + 0x40;
-    temp_v1->unk_38 = 0xE7000000;
-    temp_v1->unk_3C = 0;
-loop_1:
-    var_s3 = var_fp;
-    var_s2 = 0;
-    temp_s5 = (sp1C - var_t1) * 0x10;
-loop_2:
-    temp_a0 = var_s2 + var_s7 + temp_s5;
-    if (*(&gTheGame.tetrisWell[0].block[0][0].bomb + temp_a0) == sp14) {
-        temp_v1_2 = var_s3 + temp_s5;
-        temp_s4 = (s32) (*(gTheGame.tetrisWell[0].block_rect[0] + temp_v1_2) << 0x10) >> 0x12;
-        temp_s1 = (s32) (*(&gTheGame.tetrisWell[0].block_rect[0][0].s.objY + temp_v1_2) << 0x10) >> 0x12;
-        if ((gMain < 0x395) || ((u32) (temp_s1 - 0x24) < 0xAEU)) {
-            temp_v1_3 = *(&gTheGame.tetrisWell[0].block[0][0].currRow + temp_a0);
-            if (temp_v1_3 >= 0) {
-                if (temp_v1_3 < 2) {
-                    var_v1 = glistp;
-                    glistp = var_v1 + 8;
-                    var_v1->words.w0 = 0xFD500000;
-                    var_v0 = &D_01023C80_usa;
-                    goto block_10;
+    for (row = 0; row < BLOCK_LEN_ROWS; row++) {
+        for (col = 0; col < MIN(TETWELL_OBJSPRITE_LEN_B, BLOCK_LEN_B); col++) {
+            if (gTheGame.tetrisWell[num].block[row][col].bomb == layer) {
+                x = gTheGame.tetrisWell[num].block_rect[row][col].s.objX >> 2;
+                y = gTheGame.tetrisWell[num].block_rect[row][col].s.objY >> 2;
+
+                if (gMain >= GMAIN_395) {
+                    if (y < 36 || y >= 210) {
+                        continue;
+                    }
                 }
-                if (temp_v1_3 < 4) {
-                    var_v1 = glistp;
-                    glistp = var_v1 + 8;
-                    var_v1->words.w0 = 0xFD500000;
-                    var_v0 = &D_01024480_usa;
-block_10:
-                    var_v1->words.w1 = (u32) var_v0;
-                    glistp = var_v1 + 0x10;
-                    var_v1->unk_8 = 0xF5500000;
-                    var_v1->unk_C = 0x07000000;
-                    glistp = var_v1 + 0x18;
-                    var_v1->unk_10 = 0xE6000000;
-                    glistp = var_v1 + 0x20;
-                    var_v1->unk_18 = 0xF3000000;
-                    glistp = var_v1 + 0x28;
-                    var_v1->unk_20 = 0xE7000000;
-                    glistp = var_v1 + 0x30;
-                    glistp = var_v1 + 0x38;
-                    var_v1->unk_14 = 0;
-                    var_v1->unk_1C = 0x073FF100;
-                    var_v1->unk_24 = 0;
-                    var_v1->unk_28 = 0xF5481000;
-                    var_v1->unk_2C = 0;
-                    var_v1->unk_30 = 0xF2000000;
-                    var_v1->unk_34 = 0xFC07C;
+
+                switch (gTheGame.tetrisWell[num].block[row][col].currRow) {
+                    case 0:
+                    case 1:
+                        gDPLoadTextureBlock(glistp++, stars1, G_IM_FMT_CI, G_IM_SIZ_8b, STARS1_TEX_WIDTH, STARS1_TEX_HEIGHT, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+                        break;
+
+                    case 2:
+                    case 3:
+                        gDPLoadTextureBlock(glistp++, stars2, G_IM_FMT_CI, G_IM_SIZ_8b, STARS2_TEX_WIDTH, STARS2_TEX_HEIGHT, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+                        break;
+
                 }
+
+                Set3DTile();
+
+                switch (gTheGame.tetrisWell[num].block_rect[row][col].s.imageAdrs) {
+                    case 0x0:
+                        tile = 0;
+                        break;
+
+                    case 0x4:
+                        tile = 2;
+                        break;
+
+                    case 0x80:
+                        tile = 4;
+                        break;
+
+                    case 0x86:
+                        tile = 7;
+                        break;
+
+                    case 0x2:
+                        tile = 1;
+                        break;
+
+                    case 0x6:
+                        tile = 3;
+                        break;
+
+                    case 0x82:
+                        tile = 5;
+                        break;
+
+                    case 0x84:
+                        tile = 6;
+                        break;
+                }
+
+                gSPTextureRectangle(glistp++, x << 2, y << 2, (x + 16) << 2, (y + 16) << 2, tile, 0, 0, 0x0400, 0x0400);
+                gDPPipeSync(glistp++);
+
             }
-            sp20 = var_t0;
-            sp24 = var_t1;
-            Set3DTile();
-            temp_v1_4 = *(&gTheGame.tetrisWell[0].block_rect[0][0].s.imageAdrs + (var_s3 + temp_s5));
-            switch (temp_v1_4) {                    /* irregular */
-                case 0x0:
-                    var_s0 = 0;
-                    break;
-                case 0x4:
-                    var_s0 = 2;
-                    break;
-                case 0x80:
-                    var_s0 = 4;
-                    break;
-                case 0x86:
-                    var_s0 = 7;
-                    break;
-                case 0x2:
-                    var_s0 = 1;
-                    break;
-                case 0x6:
-                    var_s0 = 3;
-                    break;
-                case 0x82:
-                    var_s0 = 5;
-                    break;
-                case 0x84:
-                    var_s0 = 6;
-                    break;
-            }
-            temp_a1 = glistp;
-            glistp = temp_a1 + 8;
-            temp_a1->words.w0 = ((((temp_s4 + 0x10) * 4) & 0xFFF) << 0xC) | ((((temp_s1 + 0x10) * 4) & 0xFFF) | 0xE4000000);
-            glistp = temp_a1 + 0x10;
-            temp_a1->unk_8 = 0xB4000000;
-            glistp = temp_a1 + 0x18;
-            temp_a1->unk_10 = 0xB3000000;
-            glistp = temp_a1 + 0x20;
-            temp_a1->words.w1 = ((var_s0 & 7) << 0x18) | (((temp_s4 * 4) & 0xFFF) << 0xC) | ((temp_s1 * 4) & 0xFFF);
-            temp_a1->unk_C = 0;
-            temp_a1->unk_14 = 0x04000400;
-            temp_a1->unk_18 = 0xE7000000;
-            temp_a1->unk_1C = 0;
-            goto block_41;
-        }
-        goto block_44;
-    }
-block_41:
-    var_s6 += 1;
-    if (var_s6 < 0x15) {
-block_44:
-        var_s2 += 0x2C;
-        var_s3 += 0x18;
-        if (var_s2 >= 0x108) {
-            var_s7 += 0x318;
-            var_t0 += 1;
-            var_fp += 0x90;
-            if (var_t0 >= 0xC) {
+
+            total += 1;
+            if (total >= 0x15) {
                 return;
             }
-            goto loop_1;
         }
-        goto loop_2;
     }
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/draw3d", func_80064E44_usa);
-#endif
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/draw3d", func_80064E44_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/draw3d", func_80064E44_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/draw3d", func_80064E44_usa);
-#endif
 
 /**
- * Original nanme: Draw3DTetris
+ * Original name: Draw3DTetris
  */
 void Draw3DTetris(struct_gInfo_unk_00068 *dynamicp) {
     s32 sp28[GAME_BUFFER_LEN]; // end_attack?

@@ -14,6 +14,7 @@
 #include "animation.h"
 #include "bkground.h"
 #include "dlist.h"
+#include "draw3d.h"
 #include "explode.h"
 #include "fade.h"
 #include "info.h"
@@ -1402,6 +1403,7 @@ void func_80039B78_usa(void) {
     }
 }
 
+// TODO: Maybe DrawNextStage or DrawSaveYesNo?
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80039DB0_usa);
 #endif
@@ -1940,7 +1942,329 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/end", Draw2DGameOver);
 #endif
 
 #if VERSION_USA
+#if 0
+// ? func_80039DB0_usa(struct_gInfo_unk_00068 *, s32, ?, u32); /* extern */
+// ? Draw3DGameOverStat(struct_gInfo_unk_00068 *, ?);   /* extern */
+// ? Draw3DSmoke(struct_gInfo_unk_00068 *, s32); /* extern */
+// ? Draw3DSmallStars(?);                             /* extern */
+
+void Draw3DGameOver(struct_gInfo_unk_00068 *dynamicp) {
+    UNK_TYPE var_a2;
+    Gfx *temp_a0_2;
+    Gfx *temp_a0_3;
+    Gfx *temp_a1_4;
+    Gfx *temp_a2;
+    Gfx *temp_v0;
+    Gfx *temp_v0_2;
+    enum enum_Draw3DGameStar_arg0 var_a0;
+    s32 temp_a0;
+    s32 temp_a1;
+    s32 temp_a1_2;
+    s32 temp_a1_3;
+    s32 temp_a1_5;
+    s32 temp_t3;
+    s32 temp_t3_2;
+    s32 temp_t4;
+    s32 temp_t6;
+    s32 temp_v1;
+    s32 var_a0_2;
+    s32 var_a1_2;
+    s32 var_a2_2;
+    s32 var_s0;
+    s32 var_s0_2;
+    s32 var_s0_3;
+    s32 var_t0;
+    s32 var_t0_2;
+    s32 var_t2;
+    s32 var_t4;
+    s32 var_v0;
+    s32 var_v0_2;
+    s32 var_v0_3;
+    s32 var_v1;
+    s32 var_v1_2;
+    s32 var_v1_3;
+    u32 temp_a3;
+    u32 temp_t1;
+    u32 temp_t5;
+    u32 temp_t5_2;
+    u32 var_a1;
+    u32 var_a3;
+
+    if (gMain == GMAIN_38F) {
+        var_s0 = 0;
+        if (gTheGame.totalPlayer > 0) {
+            do {
+                Draw3DSmoke(dynamicp, var_s0);
+                var_s0 += 1;
+            } while (var_s0 < gTheGame.totalPlayer);
+        }
+    }
+
+    if (gTheGame.totalPlayer == 1) {
+        if ((gMain == GMAIN_391) && (D_800B65B0_usa != 0)) {
+            Draw3DGameOverStat(dynamicp, 1);
+            return;
+        }
+        var_v0 = gMain < 0x392;
+        goto block_27;
+    }
+    if (gMain != GMAIN_392) {
+        var_v0 = gMain < 0x391;
+block_27:
+        if (var_v0 == 0) {
+            goto block_28;
+        }
+    } else {
+        temp_v1 = dynamicp->cursorBlock[0].state;
+        temp_a0 = dynamicp->cursorBlock[1].state;
+        if (temp_v1 != temp_a0) {
+            if ((temp_v1 == 8) || (temp_a0 == 7)) {
+                if (gTheGame.tetrisWell[1].extra.win == 1) {
+                    var_a0 = ENUM_DRAW3DGAMESTAR_ARG0_1;
+                } else {
+                    var_a0 = ENUM_DRAW3DGAMESTAR_ARG0_2;
+                    if (gTheGame.tetrisWell[1].extra.win == 2) {
+
+                    } else {
+                        var_a0 = ENUM_DRAW3DGAMESTAR_ARG0_3;
+                    }
+                }
+            } else if (gTheGame.tetrisWell[0].extra.win == 1) {
+                var_a0 = ENUM_DRAW3DGAMESTAR_ARG0_4;
+            } else {
+                var_a0 = ENUM_DRAW3DGAMESTAR_ARG0_6;
+                if (gTheGame.tetrisWell[0].extra.win == 2) {
+                    var_a0 = ENUM_DRAW3DGAMESTAR_ARG0_5;
+                }
+            }
+            Draw3DGameStar(var_a0, (u16 *) gTheGame.unk_9A50.b.imagePtr, 0);
+        }
+block_28:
+        if (gMain >= 0x395) {
+            var_v1 = 0;
+            if (gTheGame.totalPlayer == 2) {
+                Draw3DSmallStars(1);
+                goto block_31;
+            }
+        } else {
+block_31:
+            var_v1 = 0;
+            if (gTheGame.totalPlayer == 2) {
+                #if 0
+                var_s0_2 = 0;
+                temp_v0 = glistp;
+                var_t4 = 0;
+                glistp = temp_v0 + 8;
+                temp_v0->words.w0 = 0xE7000000;
+                glistp = temp_v0 + 0x10;
+                glistp = temp_v0 + 0x18;
+                glistp = temp_v0 + 0x20;
+                glistp = temp_v0 + 0x28;
+                glistp = temp_v0 + 0x30;
+                glistp = temp_v0 + 0x38;
+                temp_v0->words.w1 = 0;
+                temp_v0->unk_8 = 0xBA000E02;
+                temp_v0->unk_C = 0;
+                temp_v0->unk_10 = 0xBA001301;
+                temp_v0->unk_14 = 0;
+                temp_v0->unk_18 = 0xFCFFFFFF;
+                temp_v0->unk_1C = 0xFFFCF279;
+                temp_v0->unk_20 = 0xB900031D;
+                temp_v0->unk_24 = 0x0F0A7008;
+                temp_v0->unk_28 = 0xBA001402;
+                temp_v0->unk_2C = 0;
+                temp_v0->unk_30 = 0xB9000002;
+                temp_v0->unk_34 = 1;
+                #endif
+                do {
+                    glistp->words.w0 = 0xE7000000;
+                    glistp->words.w1 = 0;
+                    glistp += 8;
+                    if (*(&gTheGame.unk_9A90[0].b.imagePtr + var_t4) != 0) {
+                        var_t0 = 0;
+                        temp_a1 = (s32) (*(&gTheGame.unk_9A90[0].b.frameX + var_t4) << 0x10) >> 0x12;
+                        temp_t3 = (s32) (*(&gTheGame.unk_9A90[0].b.frameY + var_t4) << 0x10) >> 0x12;
+                        temp_t5 = (u16) *(&gTheGame.unk_9A90[0].b.frameH + var_t4) >> 2;
+                        temp_a3 = (u16) *(&gTheGame.unk_9A90[0].b.frameW + var_t4) >> 2;
+                        if (temp_t5 != 0) {
+                            do {
+                                #if 0
+                                temp_a2 = glistp;
+                                var_a1 = temp_a3;
+                                temp_a2->words.w0 = 0xFD100000;
+                                glistp = temp_a2 + 8;
+                                glistp = temp_a2 + 0x10;
+                                glistp = temp_a2 + 0x18;
+                                temp_a2->unk_10 = 0xE6000000;
+                                glistp = temp_a2 + 0x20;
+                                temp_a2->unk_8 = 0xF5100000;
+                                temp_a2->unk_C = 0x07000000;
+                                temp_a2->unk_14 = 0;
+                                temp_a2->unk_18 = 0xF3000000;
+                                temp_a2->words.w1 = *(&gTheGame.unk_9A90[0].b.imagePtr + var_t4) + (temp_a3 * (var_t0 * 2));
+                                if ((s32) temp_a3 < 0) {
+                                    var_a1 = temp_a3 + 3;
+                                }
+                                temp_a1_2 = (s32) var_a1 >> 2;
+                                var_v1_2 = 0x800;
+                                if (temp_a1_2 > 0) {
+                                    var_v1_2 = temp_a1_2 + 0x7FF;
+                                }
+                                var_a0_2 = temp_a3 - 1;
+                                if (var_a0_2 >= 0x800) {
+                                    var_a0_2 = 0x7FF;
+                                }
+                                if (temp_a1_2 > 0) {
+                                    var_v0_2 = (var_v1_2 / temp_a1_2) & 0xFFF;
+                                } else {
+                                    var_v0_2 = var_v1_2 & 0xFFF;
+                                }
+                                temp_a2->unk_1C = (s32) (((var_a0_2 & 0xFFF) << 0xC) | 0x07000000 | var_v0_2);
+                                temp_a0_2 = glistp;
+                                temp_a1_3 = temp_t3 + var_t0;
+                                var_t0 += 1;
+                                glistp = temp_a0_2 + 8;
+                                glistp = temp_a0_2 + 0x10;
+                                glistp = temp_a0_2 + 0x18;
+                                temp_a0_2->unk_10 = 0xF2000000;
+                                glistp = temp_a0_2 + 0x20;
+                                temp_a0_2->unk_18 = (s32) (((((temp_a1 + temp_a3) * 4) & 0xFFF) << 0xC) | ((((temp_t3 + var_t0) * 4) & 0xFFF) | 0xE4000000));
+                                glistp = temp_a0_2 + 0x28;
+                                temp_a0_2->unk_20 = 0xB4000000;
+                                glistp = temp_a0_2 + 0x30;
+                                temp_a0_2->unk_28 = 0xB3000000;
+                                glistp = temp_a0_2 + 0x38;
+                                temp_a0_2->words.w0 = 0xE7000000;
+                                temp_a0_2->words.w1 = 0;
+                                temp_a0_2->unk_8 = (s32) (((((s32) ((temp_a3 * 2) + 7) >> 3) & 0x1FF) << 9) | 0xF5100000);
+                                temp_a0_2->unk_C = 0;
+                                temp_a0_2->unk_14 = (s32) ((((temp_a3 - 1) * 4) & 0xFFF) << 0xC);
+                                temp_a0_2->unk_1C = (s32) ((((temp_a1 * 4) & 0xFFF) << 0xC) | ((temp_a1_3 * 4) & 0xFFF));
+                                temp_a0_2->unk_24 = 0;
+                                temp_a0_2->unk_2C = 0x04000400;
+                                temp_a0_2->unk_30 = 0xE7000000;
+                                temp_a0_2->unk_34 = 0;
+                                #endif
+                            } while (var_t0 < (s32) temp_t5);
+                        }
+                    }
+                    var_s0_2 += 1;
+                    var_t4 += 0x28;
+                } while (var_s0_2 < 2);
+                var_v1 = 2;
+            }
+        }
+        #if 0
+        var_a1_2 = 0xBA001402;
+        var_a2 = 0xFFFCF279;
+        temp_v0_2 = glistp;
+        var_a3 = 0x504240;
+        var_s0_3 = var_v1;
+        glistp = temp_v0_2 + 8;
+        temp_v0_2->words.w0 = 0xE7000000;
+        glistp = temp_v0_2 + 0x10;
+        glistp = temp_v0_2 + 0x18;
+        glistp = temp_v0_2 + 0x20;
+        temp_v0_2->words.w1 = 0;
+        temp_v0_2->unk_8 = 0xBA000E02;
+        temp_v0_2->unk_C = 0;
+        temp_v0_2->unk_10 = 0xBA001402;
+        temp_v0_2->unk_14 = 0;
+        temp_v0_2->unk_18 = 0xFCFFFFFF;
+        temp_v0_2->unk_1C = 0xFFFCF279;
+        temp_v0_2->unk_20 = 0xB900031D;
+        temp_v0_2->unk_24 = 0x504240;
+        glistp = temp_v0_2 + 0x28;
+        #endif
+        if (var_s0_3 < 4) {
+            var_t2 = var_s0_3 * 0x28;
+            do {
+                glistp->words.w0 = 0xE7000000;
+                glistp->words.w1 = 0;
+                glistp += 8;
+                if (*(&gTheGame.unk_9A90[0].b.imagePtr + var_t2) != 0) {
+                    var_t0_2 = 0;
+                    var_a1_2 = (s32) (*(&gTheGame.unk_9A90[0].b.frameX + var_t2) << 0x10) >> 0x12;
+                    temp_t3_2 = (s32) (*(&gTheGame.unk_9A90[0].b.frameY + var_t2) << 0x10) >> 0x12;
+                    temp_t5_2 = (u16) *(&gTheGame.unk_9A90[0].b.frameH + var_t2) >> 2;
+                    var_a3 = (u16) *(&gTheGame.unk_9A90[0].b.frameW + var_t2) >> 2;
+                    if (temp_t5_2 != 0) {
+                        temp_t1 = var_a3 >> 1;
+                        temp_t6 = (((var_a1_2 + var_a3) * 4) & 0xFFF) << 0xC;
+                        temp_t4 = ((var_a1_2 * 4) & 0xFFF) << 0xC;
+                        do {
+                            #if 0
+                            temp_a1_4 = glistp;
+                            var_a2_2 = 0x800;
+                            temp_a1_4->words.w0 = 0xFD180000;
+                            glistp = temp_a1_4 + 8;
+                            glistp = temp_a1_4 + 0x10;
+                            glistp = temp_a1_4 + 0x18;
+                            temp_a1_4->unk_10 = 0xE6000000;
+                            glistp = temp_a1_4 + 0x20;
+                            temp_a1_4->unk_8 = 0xF5180000;
+                            temp_a1_4->unk_C = 0x07000000;
+                            temp_a1_4->unk_14 = 0;
+                            temp_a1_4->unk_18 = 0xF3000000;
+                            temp_a1_4->words.w1 = *(&gTheGame.unk_9A90[0].b.imagePtr + var_t2) + (var_a3 * (var_t0_2 * 4));
+                            if ((s32) temp_t1 > 0) {
+                                var_a2_2 = temp_t1 + 0x7FF;
+                            }
+                            var_v1_3 = var_a3 - 1;
+                            if (var_v1_3 >= 0x800) {
+                                var_v1_3 = 0x7FF;
+                            }
+                            if ((s32) temp_t1 > 0) {
+                                var_v0_3 = (var_a2_2 / (s32) temp_t1) & 0xFFF;
+                            } else {
+                                var_v0_3 = var_a2_2 & 0xFFF;
+                            }
+                            temp_a1_4->unk_1C = (s32) (((var_v1_3 & 0xFFF) << 0xC) | 0x07000000 | var_v0_3);
+                            var_a2 = 0x04000400;
+                            temp_a0_3 = glistp;
+                            temp_a1_5 = temp_t3_2 + var_t0_2;
+                            var_t0_2 += 1;
+                            var_a1_2 = temp_t4 | ((temp_a1_5 * 4) & 0xFFF);
+                            glistp = temp_a0_3 + 8;
+                            glistp = temp_a0_3 + 0x10;
+                            glistp = temp_a0_3 + 0x18;
+                            temp_a0_3->unk_10 = 0xF2000000;
+                            glistp = temp_a0_3 + 0x20;
+                            temp_a0_3->unk_18 = (s32) (temp_t6 | ((((temp_t3_2 + var_t0_2) * 4) & 0xFFF) | 0xE4000000));
+                            glistp = temp_a0_3 + 0x28;
+                            temp_a0_3->unk_20 = 0xB4000000;
+                            glistp = temp_a0_3 + 0x30;
+                            temp_a0_3->unk_28 = 0xB3000000;
+                            glistp = temp_a0_3 + 0x38;
+                            temp_a0_3->words.w0 = 0xE7000000;
+                            temp_a0_3->words.w1 = 0;
+                            temp_a0_3->unk_8 = (s32) (((((s32) ((var_a3 * 2) + 7) >> 3) & 0x1FF) << 9) | 0xF5180000);
+                            temp_a0_3->unk_C = 0;
+                            temp_a0_3->unk_14 = (s32) ((((var_a3 - 1) * 4) & 0xFFF) << 0xC);
+                            temp_a0_3->unk_1C = var_a1_2;
+                            temp_a0_3->unk_24 = 0;
+                            temp_a0_3->unk_2C = 0x04000400;
+                            temp_a0_3->unk_30 = 0xE7000000;
+                            temp_a0_3->unk_34 = 0;
+                            #endif
+                        } while (var_t0_2 < (s32) temp_t5_2);
+                    }
+                }
+                var_s0_3 += 1;
+                var_t2 += 0x28;
+            } while (var_s0_3 < 4);
+        }
+        if (gTheGame.totalPlayer == 1) {
+            func_80039DB0_usa(dynamicp, var_a1_2, var_a2, var_a3);
+        }
+        if ((gMain >= 0x393) && (gTheGame.totalPlayer == 2)) {
+            Draw3DSmallStars(2);
+        }
+    }
+}
+#else
 INCLUDE_ASM("asm/usa/nonmatchings/main/end", Draw3DGameOver);
+#endif
 #endif
 
 #if VERSION_EUR
@@ -1958,11 +2282,11 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/end", Draw3DGameOver);
 /**
  * Original name: DrawGameOver
  */
-void DrawGameOver(struct_gInfo_unk_00068 *arg0) {
+void DrawGameOver(struct_gInfo_unk_00068 *dynamicp) {
     if (gTheGame.dimension == DIMENSION_3D) {
-        Draw3DGameOver(arg0);
+        Draw3DGameOver(dynamicp);
     } else {
-        Draw2DGameOver(arg0);
+        Draw2DGameOver(dynamicp);
     }
 }
 

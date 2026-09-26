@@ -112,8 +112,12 @@ extern uObjTxtr chain11Block;
 extern uObjTxtr chain12Block;
 extern uObjTxtr chain13Block;
 // extern UNK_TYPE D_01018678_usa;
-// extern UNK_TYPE D_01018E90_usa;
+
+#define SMOKESMOKE_TEX_WIDTH 64
+#define SMOKESMOKE_TEX_HEIGHT 16
+extern u8 smokesmoke[];
 extern uObjTxtr deadsmoke;
+
 extern u16 D_010192A8_usa[];
 extern uObjTxtr otherLUT;
 // extern UNK_TYPE D_010194C0_usa;
@@ -188,8 +192,14 @@ extern uObjTxtr transTexture;
 extern u8 arrow[];
 extern uObjTxtr arrowTexture;
 
-// extern UNK_TYPE D_01023C80_usa;
-// extern UNK_TYPE D_01024480_usa;
+#define STARS1_TEX_WIDTH 64
+#define STARS1_TEX_HEIGHT 32
+extern u8 stars1[];
+
+#define STARS2_TEX_WIDTH 64
+#define STARS2_TEX_HEIGHT 32
+extern u8 stars2[];
+
 extern uObjTxtr stars1Texture;
 extern uObjTxtr stars2Texture;
 // extern UNK_TYPE D_01024CB0_usa;

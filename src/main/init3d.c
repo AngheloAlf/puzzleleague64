@@ -255,61 +255,61 @@ void func_8005DE94_usa(const u16 arg0[], s32 arg1) {
     switch (win) {
         case 3:
             if (gTheGame.tetrisWell[1].extra.win == 0) {
-                func_80064AAC_usa(ENUM_FUNC_800643A4_USA_ARG0_1, arg0, arg1);
+                func_80064AAC_usa(ENUM_DRAW3DGAMESTAR_ARG0_1, arg0, arg1);
             } else {
-                func_800643A4_usa(ENUM_FUNC_800643A4_USA_ARG0_1, arg0, arg1);
+                Draw3DGameStar(ENUM_DRAW3DGAMESTAR_ARG0_1, arg0, arg1);
             }
 
             if (gTheGame.tetrisWell[1].extra.win < 2) {
-                func_80064AAC_usa(ENUM_FUNC_800643A4_USA_ARG0_2, arg0, arg1);
+                func_80064AAC_usa(ENUM_DRAW3DGAMESTAR_ARG0_2, arg0, arg1);
             } else {
-                func_800643A4_usa(ENUM_FUNC_800643A4_USA_ARG0_2, arg0, arg1);
+                Draw3DGameStar(ENUM_DRAW3DGAMESTAR_ARG0_2, arg0, arg1);
             }
 
-            func_80064AAC_usa(ENUM_FUNC_800643A4_USA_ARG0_3, arg0, arg1);
+            func_80064AAC_usa(ENUM_DRAW3DGAMESTAR_ARG0_3, arg0, arg1);
 
             if (gTheGame.tetrisWell[0].extra.win == 0) {
-                func_80064AAC_usa(ENUM_FUNC_800643A4_USA_ARG0_4, arg0, arg1);
+                func_80064AAC_usa(ENUM_DRAW3DGAMESTAR_ARG0_4, arg0, arg1);
             } else {
-                func_800643A4_usa(ENUM_FUNC_800643A4_USA_ARG0_4, arg0, arg1);
+                Draw3DGameStar(ENUM_DRAW3DGAMESTAR_ARG0_4, arg0, arg1);
             }
 
             if (gTheGame.tetrisWell[0].extra.win < 2) {
-                func_80064AAC_usa(ENUM_FUNC_800643A4_USA_ARG0_5, arg0, arg1);
+                func_80064AAC_usa(ENUM_DRAW3DGAMESTAR_ARG0_5, arg0, arg1);
             } else {
-                func_800643A4_usa(ENUM_FUNC_800643A4_USA_ARG0_5, arg0, arg1);
+                Draw3DGameStar(ENUM_DRAW3DGAMESTAR_ARG0_5, arg0, arg1);
             }
 
-            func_80064AAC_usa(ENUM_FUNC_800643A4_USA_ARG0_6, arg0, arg1);
+            func_80064AAC_usa(ENUM_DRAW3DGAMESTAR_ARG0_6, arg0, arg1);
             break;
 
         case 2:
             if (gTheGame.tetrisWell[1].extra.win == 0) {
-                func_80064AAC_usa(ENUM_FUNC_800643A4_USA_ARG0_1, arg0, arg1);
+                func_80064AAC_usa(ENUM_DRAW3DGAMESTAR_ARG0_1, arg0, arg1);
             } else {
-                func_800643A4_usa(ENUM_FUNC_800643A4_USA_ARG0_1, arg0, arg1);
+                Draw3DGameStar(ENUM_DRAW3DGAMESTAR_ARG0_1, arg0, arg1);
             }
 
-            func_80064AAC_usa(ENUM_FUNC_800643A4_USA_ARG0_2, arg0, arg1);
-            func_80064728_usa(ENUM_FUNC_800643A4_USA_ARG0_3, arg0, arg1);
+            func_80064AAC_usa(ENUM_DRAW3DGAMESTAR_ARG0_2, arg0, arg1);
+            func_80064728_usa(ENUM_DRAW3DGAMESTAR_ARG0_3, arg0, arg1);
 
             if (gTheGame.tetrisWell[0].extra.win == 0) {
-                func_80064AAC_usa(ENUM_FUNC_800643A4_USA_ARG0_4, arg0, arg1);
+                func_80064AAC_usa(ENUM_DRAW3DGAMESTAR_ARG0_4, arg0, arg1);
             } else {
-                func_800643A4_usa(ENUM_FUNC_800643A4_USA_ARG0_4, arg0, arg1);
+                Draw3DGameStar(ENUM_DRAW3DGAMESTAR_ARG0_4, arg0, arg1);
             }
 
-            func_80064AAC_usa(ENUM_FUNC_800643A4_USA_ARG0_5, arg0, arg1);
-            func_80064728_usa(ENUM_FUNC_800643A4_USA_ARG0_6, arg0, arg1);
+            func_80064AAC_usa(ENUM_DRAW3DGAMESTAR_ARG0_5, arg0, arg1);
+            func_80064728_usa(ENUM_DRAW3DGAMESTAR_ARG0_6, arg0, arg1);
             break;
 
         case 1:
-            func_80064AAC_usa(ENUM_FUNC_800643A4_USA_ARG0_1, arg0, arg1);
-            func_80064728_usa(ENUM_FUNC_800643A4_USA_ARG0_2, arg0, arg1);
-            func_80064728_usa(ENUM_FUNC_800643A4_USA_ARG0_3, arg0, arg1);
-            func_80064AAC_usa(ENUM_FUNC_800643A4_USA_ARG0_4, arg0, arg1);
-            func_80064728_usa(ENUM_FUNC_800643A4_USA_ARG0_5, arg0, arg1);
-            func_80064728_usa(ENUM_FUNC_800643A4_USA_ARG0_6, arg0, arg1);
+            func_80064AAC_usa(ENUM_DRAW3DGAMESTAR_ARG0_1, arg0, arg1);
+            func_80064728_usa(ENUM_DRAW3DGAMESTAR_ARG0_2, arg0, arg1);
+            func_80064728_usa(ENUM_DRAW3DGAMESTAR_ARG0_3, arg0, arg1);
+            func_80064AAC_usa(ENUM_DRAW3DGAMESTAR_ARG0_4, arg0, arg1);
+            func_80064728_usa(ENUM_DRAW3DGAMESTAR_ARG0_5, arg0, arg1);
+            func_80064728_usa(ENUM_DRAW3DGAMESTAR_ARG0_6, arg0, arg1);
             break;
     }
 }

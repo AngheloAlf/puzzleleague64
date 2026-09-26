@@ -759,9 +759,10 @@ u32 D_01018E78_usa[] = {
     0x00001033, (u32)D_01018678_usa, 0x000000FF, 0x01000000, 0xFFFFFFFF, 0x00000000,
 };
 
-u8 D_01018E90_usa[] ALIGNED(8) = {
-#include "assets/misc/segment_0CA4A0/D_01018E90_usa.i8.inc"
+u8 smokesmoke[] ALIGNED(8) = {
+#include "assets/misc/segment_0CA4A0/smokesmoke.i8.inc"
 };
+static_assert(sizeof(smokesmoke) == SMOKESMOKE_TEX_WIDTH * SMOKESMOKE_TEX_HEIGHT * sizeof(u8), "");
 
 /*
 height: 16
@@ -769,10 +770,10 @@ widht: 64
 */
 uObjTxtr deadsmoke = {
     /* type  */ G_OBJLT_TXTRBLOCK,
-    /* image */ (u64 *)D_01018E90_usa,
+    /* image */ (u64 *)smokesmoke,
     /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
-    /* tsize */ GS_TB_TSIZE(64 * 16, G_IM_SIZ_8b),
-    /* tline */ GS_TB_TLINE(64, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(SMOKESMOKE_TEX_WIDTH * SMOKESMOKE_TEX_HEIGHT, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(SMOKESMOKE_TEX_WIDTH, G_IM_SIZ_8b),
     /* sid   */ 0,
     /* flag  */ (u32)-1,
     /* mask  */ 0x0,
@@ -1419,83 +1420,44 @@ uObjTxtr arrowTexture = {
     /* mask  */ 0x0,
 };
 
-u8 D_01023C80_usa[] ALIGNED(8) = {
-#include "assets/misc/segment_0CA4A0/D_01023C80_usa.ci8.inc"
+u8 stars1[] ALIGNED(8) = {
+#include "assets/misc/segment_0CA4A0/stars1.ci8.inc"
 };
+static_assert(sizeof(stars1) == STARS1_TEX_WIDTH * STARS1_TEX_HEIGHT * sizeof(u8), "");
 
-u8 D_01024480_usa[] ALIGNED(8) = {
-#include "assets/misc/segment_0CA4A0/D_01024480_usa.ci8.inc"
+
+u8 stars2[] ALIGNED(8) = {
+#include "assets/misc/segment_0CA4A0/stars2.ci8.inc"
 };
+static_assert(sizeof(stars2) == STARS2_TEX_WIDTH * STARS2_TEX_HEIGHT * sizeof(u8), "");
 
-#if 0
+/*
 height: 32
-
-Possible widths:
-    128 (G_IM_SIZ_4b)
-    64 (G_IM_SIZ_8b)
-    32 (G_IM_SIZ_16b)
-    16 (G_IM_SIZ_32b)
-
-Possible combinations:
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_4b),
-    /* tsize */ GS_TB_TSIZE(128 * 32, G_IM_SIZ_4b),
-    /* tline */ GS_TB_TLINE(128,      G_IM_SIZ_4b),
-
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_8b),
-    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
-    /* tline */ GS_TB_TLINE(64,      G_IM_SIZ_8b),
-
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_16b),
-    /* tsize */ GS_TB_TSIZE(32 * 32, G_IM_SIZ_16b),
-    /* tline */ GS_TB_TLINE(32,      G_IM_SIZ_16b),
-
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_32b),
-    /* tsize */ GS_TB_TSIZE(16 * 32, G_IM_SIZ_32b),
-    /* tline */ GS_TB_TLINE(16,      G_IM_SIZ_32b),
-#endif
+width: 64
+palette: numberTable
+*/
 uObjTxtr stars1Texture = {
     /* type  */ G_OBJLT_TXTRBLOCK,
-    /* image */ (u64 *)D_01023C80_usa,
-    /* tmem  */ 0,
-    /* tsize */ 255,
-    /* tline */ 256,
+    /* image */ (u64 *)stars1,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(STARS1_TEX_WIDTH * 32, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(STARS1_TEX_WIDTH, G_IM_SIZ_8b),
     /* sid   */ 0,
     /* flag  */ (u32)-1,
     /* mask  */ 0x0,
 };
 
-#if 0
+/*
 height: 32
-
-Possible widths:
-    128 (G_IM_SIZ_4b)
-    64 (G_IM_SIZ_8b)
-    32 (G_IM_SIZ_16b)
-    16 (G_IM_SIZ_32b)
-
-Possible combinations:
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_4b),
-    /* tsize */ GS_TB_TSIZE(128 * 32, G_IM_SIZ_4b),
-    /* tline */ GS_TB_TLINE(128,      G_IM_SIZ_4b),
-
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_8b),
-    /* tsize */ GS_TB_TSIZE(64 * 32, G_IM_SIZ_8b),
-    /* tline */ GS_TB_TLINE(64,      G_IM_SIZ_8b),
-
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_16b),
-    /* tsize */ GS_TB_TSIZE(32 * 32, G_IM_SIZ_16b),
-    /* tline */ GS_TB_TLINE(32,      G_IM_SIZ_16b),
-
-    /* tmem  */ GS_PIX2TMEM(0,       G_IM_SIZ_32b),
-    /* tsize */ GS_TB_TSIZE(16 * 32, G_IM_SIZ_32b),
-    /* tline */ GS_TB_TLINE(16,      G_IM_SIZ_32b),
-#endif
+width: 64
+palette: numberTable
+*/
 uObjTxtr stars2Texture = {
     /* type  */ G_OBJLT_TXTRBLOCK,
-    /* image */ (u64 *)D_01024480_usa,
-    /* tmem  */ 0,
-    /* tsize */ 255,
-    /* tline */ 256,
+    /* image */ (u64 *)stars2,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(STARS2_TEX_WIDTH * STARS2_TEX_HEIGHT, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(STARS2_TEX_WIDTH, G_IM_SIZ_8b),
     /* sid   */ 0,
     /* flag  */ (u32)-1,
     /* mask  */ 0x0,
