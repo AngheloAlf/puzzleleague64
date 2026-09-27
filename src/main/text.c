@@ -603,7 +603,7 @@ void Draw3DText(struct_gInfo_unk_00068 *dynamicp) {
                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                             G_TX_NOLOD);
 
-        func_8005E740_usa();
+        Set3DTile7();
 
         for (count = MAGIC_NUMBER; count < last; count++) {
             if (dynamicp->drawText[count].texture == which) {

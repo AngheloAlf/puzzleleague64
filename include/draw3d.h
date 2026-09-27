@@ -6,9 +6,9 @@
 
 #include "other_types.h"
 
-
 struct struct_gInfo_unk_00068;
 struct tetWell;
+struct block_t;
 
 typedef enum enum_Draw3DGameStar_arg0 {
     /* 1 */ ENUM_DRAW3DGAMESTAR_ARG0_1 = 1,
@@ -21,14 +21,14 @@ typedef enum enum_Draw3DGameStar_arg0 {
 
 
 void Set3DTile(void);
-void func_8005E740_usa(void);
+void Set3DTile7(void);
 void Set3DExplodeTile(void);
 void Draw3DFrontTetrisWell(struct struct_gInfo_unk_00068 *dynamicp, s32 num);
 void Draw3DBackTetrisWell(struct struct_gInfo_unk_00068 *dynamicp, s32 num);
 // void Draw3DTetrisBlock1();
 // void Draw3DTetrisBlock2();
 // void Draw3DTetrisBlockSide();
-// void Draw3DTetrisSwitch();
+void Draw3DTetrisSwitch(struct struct_gInfo_unk_00068 *dynamicp, s32 num, struct block_t *left, struct block_t *right);
 void Draw3DTetrisNewBlock(struct struct_gInfo_unk_00068 *dynamicp, struct tetWell *well);
 void Draw3DCursor(struct struct_gInfo_unk_00068 *dynamicp);
 void Draw3DIcon(struct struct_gInfo_unk_00068 *dynamicp, s32 num);
