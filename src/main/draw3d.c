@@ -107,24 +107,9 @@ void Set3DExplodeTile(void) {
     gDPSetTileSize(glistp++, G_TX_LOADTILE, 0, 0, 0x001C, 0x001C);
 }
 
-#if VERSION_USA
-INCLUDE_RODATA("asm/usa/nonmatchings/main/draw3d", RO_800C6E40_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_RODATA("asm/eur/nonmatchings/main/draw3d", RO_800C6E40_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_RODATA("asm/fra/nonmatchings/main/draw3d", RO_800C6E40_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_RODATA("asm/ger/nonmatchings/main/draw3d", RO_800C6E40_usa);
-#endif
-
-#if VERSION_USA
-#ifdef NON_MATCHING
+/**
+ * Original name: Draw3DFrontTetrisWell
+ */
 void Draw3DFrontTetrisWell(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     s32 sp34 = 9;
     u8 sp10[] = { 0, 3, 1, 2, 4, 5, 6, 7, 8, 9, 0xA, 0xB, 0xC, 0xD, };
@@ -307,25 +292,10 @@ void Draw3DFrontTetrisWell(struct_gInfo_unk_00068 *dynamicp, s32 num) {
         }
     }
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/draw3d", Draw3DFrontTetrisWell);
-#endif
-#endif
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/draw3d", Draw3DFrontTetrisWell);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/draw3d", Draw3DFrontTetrisWell);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/draw3d", Draw3DFrontTetrisWell);
-#endif
-
-#if VERSION_USA
-#ifdef NON_MATCHING
+/**
+ * Original name: Draw3DBackTetrisWell
+ */
 void Draw3DBackTetrisWell(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     s32 sp34 = 9;
     u8 sp10[] = { 0, 3, 1, 2, 4, 5, 6, 7, 8, 9, 0xA, 0xB, 0xC, 0xD, };
@@ -337,7 +307,6 @@ void Draw3DBackTetrisWell(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     char *var_s4;
     const Texture *var_s5;
     block_t *var_s7;
-    s32 yada;
 
     s32 iiiiii;
 
@@ -347,10 +316,10 @@ void Draw3DBackTetrisWell(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     gDPPipeSync(glistp++);
     gDPSetTextureLUT(glistp++, G_TT_RGBA16);
 
-    if (gGameStatus & 0x40) {
+    if (gGameStatus & GAME_STATUS_FLAG_40) {
         gDPLoadTLUT_pal256(glistp++, colorTable);
 
-        if (gMain >= 0x38E) {
+        if (gMain >= GMAIN_38E) {
             sp34 = 9;
         } else {
             sp34 = 6;
@@ -358,7 +327,7 @@ void Draw3DBackTetrisWell(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     } else {
         gDPLoadTLUT_pal256(glistp++, D_010001F0_usa);
 
-        if (gMain >= 0x38E) {
+        if (gMain >= GMAIN_38E) {
             sp34 = 0xD;
         }
     }
@@ -437,13 +406,10 @@ void Draw3DBackTetrisWell(struct_gInfo_unk_00068 *dynamicp, s32 num) {
         gDPSetTileSize(glistp++, G_TX_LOADTILE, 0, 0, 0x003C, 0x003C);
         // Set3DTile7();
 
-        yada = 0;
-        var_s3 = 0;
-        sp5C = 0;
-        while (var_s3 < 0xC) {
-            var_s4 = sp3C[yada];
-            var_s7 = sp44[var_s3];
-
+        //! FAKE MATCH
+        var_s4 = sp3C[0];
+        for (var_s3 = 0, sp5C = 0; var_s3 < BLOCK_LEN_ROWS; var_s4 += BLOCK_LEN_B, sp5C++, var_s3++) {
+            var_s7 = sp44[sp5C];
             for (var_s0 = 0xD; var_s0 >= 9; var_s0--) {
                 if (var_s4[var_s0] == 0) {
                     continue;
@@ -461,7 +427,7 @@ void Draw3DBackTetrisWell(struct_gInfo_unk_00068 *dynamicp, s32 num) {
                 }
             }
 
-            for (var_s0 = 0xE; var_s0 < 0x12; var_s0++) {
+            for (var_s0 = 14; var_s0 < BLOCK_COLS_3D; var_s0++) {
                 if (var_s4[var_s0] != 0) {
                     if ((iiiiii == 1) && (var_s4[var_s0] >= 2)) {
                         Draw3DTetrisBlockSide(var_s3, var_s0, sp44[var_s3][var_s0].type, var_s4[var_s0]);
@@ -479,39 +445,19 @@ void Draw3DBackTetrisWell(struct_gInfo_unk_00068 *dynamicp, s32 num) {
             var_s7 = sp44[sp5C];
             if (var_s4[0] != 0) {
                 if ((iiiiii == 1) && (var_s4[0] >= 2)) {
-                    Draw3DTetrisBlockSide(var_s3, 0, var_s7[0].type, var_s4[0]);
-                    if ((var_s7[0].frame_n == sp10[iiiiii]) && (var_s4[0] < 4)) {
-                        Draw3DTetrisBlock2(0, var_s7[0].type);
+                    Draw3DTetrisBlockSide(var_s3, 0, var_s7->type, var_s4[0]);
+                    if ((var_s7->frame_n == sp10[iiiiii]) && (var_s4[0] < 4)) {
+                        Draw3DTetrisBlock2(0, var_s7->type);
                     }
                 } else {
-                    if ((var_s7[0].frame_n == sp10[iiiiii]) && (var_s4[0] < 4)) {
-                        Draw3DTetrisBlock1(var_s3, 0, var_s7[0].type);
+                    if ((var_s7->frame_n == sp10[iiiiii]) && (var_s4[0] < 4)) {
+                        Draw3DTetrisBlock1(var_s3, 0, var_s7->type);
                     }
                 }
             }
-
-            yada++;
-            sp5C++;
-            var_s3++;
         }
     }
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/draw3d", Draw3DBackTetrisWell);
-#endif
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/draw3d", Draw3DBackTetrisWell);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/draw3d", Draw3DBackTetrisWell);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/draw3d", Draw3DBackTetrisWell);
-#endif
 
 /**
  * Original name: Draw3DTetrisBlock1
