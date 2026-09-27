@@ -94,11 +94,11 @@ void func_80054624_usa(void) {
         D_800B74A0_usa.block.image = NULL;
         tetrisBlockNew.block.image = (u64 *)D_0100CC68_usa;
     } else {
-        tetrisBlock1.block.image = (u64 *)D_01001468_usa;
-        tetrisBlock2.block.image = (u64 *)D_01001C68_usa;
-        tetrisBlock3.block.image = (u64 *)D_01002468_usa;
-        tetrisBlock4.block.image = (u64 *)D_01002C68_usa;
-        tetrisBlock5.block.image = (u64 *)D_01003468_usa;
+        tetrisBlock1.block.image = (u64 *)block1;
+        tetrisBlock2.block.image = (u64 *)block2;
+        tetrisBlock3.block.image = (u64 *)block3;
+        tetrisBlock4.block.image = (u64 *)block4;
+        tetrisBlock5.block.image = (u64 *)block5;
         tetrisBlock6.block.image = (u64 *)block6;
         tetrisBlock7.block.image = (u64 *)block7;
         tetrisBlock8.block.image = (u64 *)block8;

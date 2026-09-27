@@ -39,18 +39,15 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
     // TODO:
     /*
     int which; // r26
-    int total; // r19
-    int row; // r27
-    int col; // r30
     */
-    s32 var_a1;
-    s32 var_t1;
+    s32 col;
+    s32 row;
     s32 var_t3;
-    s32 var_t8;
+    s32 total;
 
-    var_t8 = STRUCT_GINFO_UNK_00068_UNK_10208_LEN - 5;
+    total = FRONTBACKTEXINDEX_MAX - 5;
     if (gMain >= GMAIN_38E) {
-        var_t8 = STRUCT_GINFO_UNK_00068_UNK_10208_LEN - 1;
+        total = FRONTBACKTEXINDEX_MAX - 1;
         gLastOverflow = 800;
     }
 
@@ -67,60 +64,71 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
         gSPObjLoadTxtr(glistp++, &D_010003F0_usa);
     }
 
-    for (var_t3 = 1; var_t3 <= var_t8; var_t3++) {
+    for (var_t3 = FRONTBACKTEXINDEX_1; var_t3 <= total; var_t3++) {
         if (dynamicp->frontTexture[num][var_t3] == 0) {
             continue;
         }
 
-        // 0xA to 0xD do not exist in gc version
         switch (var_t3) {
-            case 0x1:
+            case FRONTBACKTEXINDEX_1:
                 gSPObjLoadTxtr(glistp++, &tetrisBlock1);
                 break;
-            case 0x2:
+
+            case FRONTBACKTEXINDEX_2:
                 gSPObjLoadTxtr(glistp++, &tetrisBlock2);
                 break;
-            case 0x3:
+
+            case FRONTBACKTEXINDEX_3:
                 gSPObjLoadTxtr(glistp++, &tetrisBlock3);
                 break;
-            case 0x4:
+
+            case FRONTBACKTEXINDEX_4:
                 gSPObjLoadTxtr(glistp++, &tetrisBlock4);
                 break;
-            case 0x5:
+
+            case FRONTBACKTEXINDEX_5:
                 gSPObjLoadTxtr(glistp++, &tetrisBlock5);
                 break;
-            case 0x6:
+
+            case FRONTBACKTEXINDEX_6:
                 gSPObjLoadTxtr(glistp++, &tetrisBlock6);
                 break;
-            case 0x7:
+
+            case FRONTBACKTEXINDEX_7:
                 gSPObjLoadTxtr(glistp++, &tetrisBlock7);
                 break;
-            case 0x8:
+
+            case FRONTBACKTEXINDEX_8:
                 gSPObjLoadTxtr(glistp++, &tetrisBlock8);
                 break;
-            case 0x9:
+
+            case FRONTBACKTEXINDEX_9:
                 gSPObjLoadTxtr(glistp++, &tetrisBlock9);
                 break;
-            case 0xA:
+
+            case FRONTBACKTEXINDEX_10:
                 gSPObjLoadTxtr(glistp++, &D_800B7458_usa);
                 break;
-            case 0xB:
+
+            case FRONTBACKTEXINDEX_11:
                 gSPObjLoadTxtr(glistp++, &D_800B7470_usa);
                 break;
-            case 0xC:
+
+            case FRONTBACKTEXINDEX_12:
                 gSPObjLoadTxtr(glistp++, &D_800B7488_usa);
                 break;
-            case 0xD:
+
+            case FRONTBACKTEXINDEX_13:
                 gSPObjLoadTxtr(glistp++, &D_800B74A0_usa);
                 break;
         }
 
-        for (var_t1 = BLOCK_LEN_ROWS - 1; var_t1 >= 0; var_t1--) {
-            for (var_a1 = 0; var_a1 < BLOCK_COLS_2D; var_a1++) {
-                block = &array[var_t1][var_a1];
+        for (row = BLOCK_LEN_ROWS - 1; row >= 0; row--) {
+            for (col = 0; col < BLOCK_COLS_2D; col++) {
+                block = &array[row][col];
                 if ((block->delay != -2) && (block->type != BLOCKTYPE_9) && (block->state != BLOCKSTATE_2) &&
                     (block->state != BLOCKSTATE_3) && (block->type != BLOCKTYPE_0) && (block->frame_n == var_t3)) {
-                    gSPObjRectangle(glistp++, &sprite[var_t1][var_a1]);
+                    gSPObjRectangle(glistp++, &sprite[row][col]);
                 }
             }
         }
@@ -128,19 +136,24 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
 
     if (cursor->sy != -1) {
         var_t3 = MAX(array[cursor->sy][cursor->sx + 1].frame_n, array[cursor->sy][cursor->sx + 0].frame_n);
+
         switch (var_t3) {
-            case 0x6:
+            case FRONTBACKTEXINDEX_6:
                 gSPObjLoadTxtr(glistp++, &tetrisBlock6);
                 break;
-            case 0x7:
+
+            case FRONTBACKTEXINDEX_7:
                 gSPObjLoadTxtr(glistp++, &tetrisBlock7);
                 break;
-            case 0x8:
+
+            case FRONTBACKTEXINDEX_8:
                 gSPObjLoadTxtr(glistp++, &tetrisBlock8);
                 break;
-            case 0x9:
+
+            case FRONTBACKTEXINDEX_9:
                 gSPObjLoadTxtr(glistp++, &tetrisBlock9);
                 break;
+
             default:
                 gSPObjLoadTxtr(glistp++, &tetrisBlock3);
                 break;
@@ -163,15 +176,19 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
                 case 0xD:
                     gSPObjLoadTxtr(glistp++, &tetrisBlock6);
                     break;
+
                 case 0xE:
                     gSPObjLoadTxtr(glistp++, &tetrisBlock7);
                     break;
+
                 case 0xF:
                     gSPObjLoadTxtr(glistp++, &tetrisBlock8);
                     break;
+
                 case 0x10:
                     gSPObjLoadTxtr(glistp++, &tetrisBlock9);
                     break;
+
                 default:
                     gSPObjLoadTxtr(glistp++, &tetrisBlockNew);
                     break;
@@ -182,15 +199,19 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
                 case 0x10:
                     gSPObjLoadTxtr(glistp++, &D_800B7458_usa);
                     break;
+
                 case 0x11:
                     gSPObjLoadTxtr(glistp++, &D_800B7470_usa);
                     break;
+
                 case 0x12:
                     gSPObjLoadTxtr(glistp++, &D_800B7488_usa);
                     break;
+
                 case 0x13:
                     gSPObjLoadTxtr(glistp++, &D_800B74A0_usa);
                     break;
+
                 default:
                     gSPObjLoadTxtr(glistp++, &tetrisBlockNew);
                     break;
@@ -200,8 +221,8 @@ void Draw2DTetrisWell(struct_gInfo_unk_00068 *dynamicp, tetWell *well, s32 num) 
         gSPObjLoadTxtr(glistp++, &tetrisBlockNew);
     }
 
-    for (var_a1 = 0; var_a1 < TETWELL_UNK_3EF0_LEN_6; var_a1++) {
-        gSPObjRectangle(glistp++, &dynamicp->new_block_rect[num][var_a1]);
+    for (col = 0; col < TETWELL_UNK_3EF0_LEN_6; col++) {
+        gSPObjRectangle(glistp++, &dynamicp->new_block_rect[num][col]);
     }
 }
 

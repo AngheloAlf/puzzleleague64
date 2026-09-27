@@ -166,41 +166,73 @@ uObjTxtr cursorSmall = {
     /* mask  */ 0x0,
 };
 
-u8 D_01001468_usa[] ALIGNED(8) = {
-#include "assets/misc/segment_0CA4A0/D_01001468_usa.i8.inc"
+/**
+ * Original name: block1
+ */
+u8 block1[] ALIGNED(8) = {
+#include "assets/misc/segment_0CA4A0/block1.ci8.inc"
 };
+static_assert(sizeof(block1) == BLOCK_TEX_WIDTH * BLOCK_TEX_HEIGHT * sizeof(u8), "");
 
-u8 D_01001C68_usa[] ALIGNED(8) = {
-#include "assets/misc/segment_0CA4A0/D_01001C68_usa.i8.inc"
+/**
+ * Original name: block2
+ */
+u8 block2[] ALIGNED(8) = {
+#include "assets/misc/segment_0CA4A0/block2.ci8.inc"
 };
+static_assert(sizeof(block2) == BLOCK_TEX_WIDTH * BLOCK_TEX_HEIGHT * sizeof(u8), "");
 
-u8 D_01002468_usa[] ALIGNED(8) = {
-#include "assets/misc/segment_0CA4A0/D_01002468_usa.i8.inc"
+/**
+ * Original name: block3
+ */
+u8 block3[] ALIGNED(8) = {
+#include "assets/misc/segment_0CA4A0/block3.ci8.inc"
 };
+static_assert(sizeof(block3) == BLOCK_TEX_WIDTH * BLOCK_TEX_HEIGHT * sizeof(u8), "");
 
-u8 D_01002C68_usa[] ALIGNED(8) = {
-#include "assets/misc/segment_0CA4A0/D_01002C68_usa.i8.inc"
+/**
+ * Original name: block4
+ */
+u8 block4[] ALIGNED(8) = {
+#include "assets/misc/segment_0CA4A0/block4.ci8.inc"
 };
+static_assert(sizeof(block4) == BLOCK_TEX_WIDTH * BLOCK_TEX_HEIGHT * sizeof(u8), "");
 
-u8 D_01003468_usa[] ALIGNED(8) = {
-#include "assets/misc/segment_0CA4A0/D_01003468_usa.i8.inc"
+/**
+ * Original name: block5
+ */
+u8 block5[] ALIGNED(8) = {
+#include "assets/misc/segment_0CA4A0/block5.ci8.inc"
 };
+static_assert(sizeof(block5) == BLOCK_TEX_WIDTH * BLOCK_TEX_HEIGHT * sizeof(u8), "");
 
+/**
+ * Original name: block6
+ */
 u8 block6[] ALIGNED(8) = {
 #include "assets/misc/segment_0CA4A0/block6.ci8.inc"
 };
 static_assert(sizeof(block6) == BLOCK_TEX_WIDTH * BLOCK_TEX_HEIGHT * sizeof(u8), "");
 
+/**
+ * Original name: block7
+ */
 u8 block7[] ALIGNED(8) = {
 #include "assets/misc/segment_0CA4A0/block7.ci8.inc"
 };
 static_assert(sizeof(block7) == BLOCK_TEX_WIDTH * BLOCK_TEX_HEIGHT * sizeof(u8), "");
 
+/**
+ * Original name: block8
+ */
 u8 block8[] ALIGNED(8) = {
 #include "assets/misc/segment_0CA4A0/block8.ci8.inc"
 };
 static_assert(sizeof(block8) == BLOCK_TEX_WIDTH * BLOCK_TEX_HEIGHT * sizeof(u8), "");
 
+/**
+ * Original name: block9
+ */
 u8 block9[] ALIGNED(8) = {
 #include "assets/misc/segment_0CA4A0/block9.ci8.inc"
 };
@@ -226,6 +258,9 @@ u8 D_01007468_usa[] ALIGNED(8) = {
 };
 static_assert(sizeof(D_01007468_usa) == BLOCK_TEX_WIDTH * BLOCK_TEX_HEIGHT * sizeof(u8), "");
 
+/**
+ * Original name: blockn
+ */
 u8 blockn[] ALIGNED(8) = {
 #include "assets/misc/segment_0CA4A0/blockn.ci8.inc"
 };

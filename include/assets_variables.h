@@ -30,11 +30,11 @@ extern uObjTxtr colorLUT;
 // extern UNK_TYPE D_01001000_usa;
 extern uObjTxtr cursorBig;
 extern uObjTxtr cursorSmall;
-extern u8 D_01001468_usa[];
-extern u8 D_01001C68_usa[];
-extern u8 D_01002468_usa[];
-extern u8 D_01002C68_usa[];
-extern u8 D_01003468_usa[];
+extern u8 block1[];
+extern u8 block2[];
+extern u8 block3[];
+extern u8 block4[];
+extern u8 block5[];
 
 #define BLOCK_TEX_WIDTH 64
 #define BLOCK_TEX_HEIGHT 32

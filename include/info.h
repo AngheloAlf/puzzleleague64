@@ -15,8 +15,24 @@
 #include "text.h"
 
 
-// TODO: Maybe make an enum for this?
-#define STRUCT_GINFO_UNK_00068_UNK_10208_LEN (14)
+typedef enum FrontBackTexIndex {
+    /*  0 */ FRONTBACKTEXINDEX_0,
+    /*  1 */ FRONTBACKTEXINDEX_1,
+    /*  2 */ FRONTBACKTEXINDEX_2,
+    /*  3 */ FRONTBACKTEXINDEX_3,
+    /*  4 */ FRONTBACKTEXINDEX_4,
+    /*  5 */ FRONTBACKTEXINDEX_5,
+    /*  6 */ FRONTBACKTEXINDEX_6,
+    /*  7 */ FRONTBACKTEXINDEX_7,
+    /*  8 */ FRONTBACKTEXINDEX_8,
+    /*  9 */ FRONTBACKTEXINDEX_9,
+    /* 10 */ FRONTBACKTEXINDEX_10,
+    /* 11 */ FRONTBACKTEXINDEX_11,
+    /* 12 */ FRONTBACKTEXINDEX_12,
+    /* 13 */ FRONTBACKTEXINDEX_13,
+
+    /* 14 */ FRONTBACKTEXINDEX_MAX,
+} FrontBackTexIndex;
 
 typedef struct struct_gInfo_unk_00068 {
     /* 0x00000 */ Gfx unk_00000[UNK_SIZE];
@@ -26,8 +42,8 @@ typedef struct struct_gInfo_unk_00068 {
     /* 0x10100 */ Mtx trans[GAME_BUFFER_LEN]; /* Original name: trans */
     /* 0x10180 */ Mtx rotate[GAME_BUFFER_LEN]; /* Original name: rotate */
     /* 0x10200 */ UNK_TYPE1 unk_10200[0x8];
-    /* 0x10208 */ char frontTexture[GAME_BUFFER_LEN][STRUCT_GINFO_UNK_00068_UNK_10208_LEN]; /* Original name: frontTexture */
-    /* 0x10224 */ char backTexture[GAME_BUFFER_LEN][0xE]; /* Original name: backTexture */
+    /* 0x10208 */ char frontTexture[GAME_BUFFER_LEN][FRONTBACKTEXINDEX_MAX]; /* Original name: frontTexture */
+    /* 0x10224 */ char backTexture[GAME_BUFFER_LEN][FRONTBACKTEXINDEX_MAX]; /* Original name: backTexture */
     /* 0x10240 */ s32 overflow; /* Original name: overflow */
     /* 0x10244 */ block_t block[GAME_BUFFER_LEN][BLOCK_LEN_ROWS][BLOCK_LEN_B];
     /* 0x14C84 */ UNK_TYPE1 unk_14C84[0x4];

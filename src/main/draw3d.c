@@ -8,6 +8,8 @@
 #include "macros_defines.h"
 #include "main_variables.h"
 
+#include "libc/assert.h"
+
 #include "attack3d.h"
 #include "bkground.h"
 #include "bonus.h"
@@ -111,28 +113,39 @@ void Set3DExplodeTile(void) {
  * Original name: Draw3DFrontTetrisWell
  */
 void Draw3DFrontTetrisWell(struct_gInfo_unk_00068 *dynamicp, s32 num) {
-    s32 sp34 = 9;
-    u8 sp10[] = { 0, 3, 1, 2, 4, 5, 6, 7, 8, 9, 0xA, 0xB, 0xC, 0xD, };
-    cursor_t *sp3C;
-    char (*sp44)[BLOCK_LEN_B];
-    block_t (*sp4C)[BLOCK_LEN_B];
-    block_t *var_a2;
-    block_t *var_a3;
-    s32 temp_a0;
-    s32 var_s0;
-    s32 var_s3;
-    s32 var_v1;
-    char *var_s2;
-    const Texture *var_s5;
-    block_t *var_s1;
-    block_t *var_s6;
+    s32 total = 9;
+    u8 order[] = {
+        FRONTBACKTEXINDEX_0,  // 0
+        FRONTBACKTEXINDEX_3,  // 1
+        FRONTBACKTEXINDEX_1,  // 2
+        FRONTBACKTEXINDEX_2,  // 3
+        FRONTBACKTEXINDEX_4,  // 4
+        FRONTBACKTEXINDEX_5,  // 5
+        FRONTBACKTEXINDEX_6,  // 6
+        FRONTBACKTEXINDEX_7,  // 7
+        FRONTBACKTEXINDEX_8,  // 8
+        FRONTBACKTEXINDEX_9,  // 9
+        FRONTBACKTEXINDEX_10, // 10
+        FRONTBACKTEXINDEX_11, // 11
+        FRONTBACKTEXINDEX_12, // 12
+        FRONTBACKTEXINDEX_13, // 13
+    };
+    cursor_t *cursor;
+    char (*ptr)[BLOCK_LEN_B];
+    block_t (*array)[BLOCK_LEN_B];
+    s32 row;
+    s32 col;
+    s32 temp;
+    const Texture *tex;
+    block_t *block;
     char *var_s7;
+    s32 i;
 
-    s32 iiiiii;
+    static_assert(ARRAY_COUNT(order) == FRONTBACKTEXINDEX_MAX, "");
 
-    sp4C = dynamicp->block[num];
-    sp44 = dynamicp->visible[num];
-    sp3C = &dynamicp->cursorBlock[num];
+    array = dynamicp->block[num];
+    ptr = dynamicp->visible[num];
+    cursor = &dynamicp->cursorBlock[num];
 
     gDPPipeSync(glistp++);
     gDPSetTextureLUT(glistp++, G_TT_RGBA16);
@@ -141,153 +154,142 @@ void Draw3DFrontTetrisWell(struct_gInfo_unk_00068 *dynamicp, s32 num) {
         gDPLoadTLUT_pal256(glistp++, colorTable);
 
         if (gMain >= GMAIN_38E) {
-            sp34 = 9;
+            total = 9;
         } else {
-            sp34 = 6;
+            total = 6;
         }
     } else {
         gDPLoadTLUT_pal256(glistp++, D_010001F0_usa);
 
         if (gMain >= GMAIN_38E) {
-            sp34 = 13;
+            total = 13;
         }
     }
 
     Set3DTile();
 
-    for (iiiiii = 1; iiiiii <= sp34; iiiiii++) {
-        if (iiiiii == 1) {
-            var_s5 = NULL;
+    for (i = 1; i <= total; i++) {
+        if (i == 1) {
+            tex = NULL;
         } else {
-            if (dynamicp->frontTexture[num][sp10[iiiiii]] == 0) {
+            if (dynamicp->frontTexture[num][order[i]] == 0) {
                 continue;
             }
         }
 
-        switch (sp10[iiiiii]) {
-            case 0x1:
-                var_s5 = tetrisBlock1.block.image;
+        switch (order[i]) {
+            case FRONTBACKTEXINDEX_1:
+                tex = tetrisBlock1.block.image;
                 break;
 
-            case 0x2:
-                var_s5 = tetrisBlock2.block.image;
+            case FRONTBACKTEXINDEX_2:
+                tex = tetrisBlock2.block.image;
                 break;
 
-            case 0x3:
-                var_s5 = tetrisBlock3.block.image;
+            case FRONTBACKTEXINDEX_3:
+                tex = tetrisBlock3.block.image;
                 break;
 
-            case 0x4:
-                var_s5 = tetrisBlock4.block.image;
+            case FRONTBACKTEXINDEX_4:
+                tex = tetrisBlock4.block.image;
                 break;
 
-            case 0x5:
-                var_s5 = tetrisBlock5.block.image;
+            case FRONTBACKTEXINDEX_5:
+                tex = tetrisBlock5.block.image;
                 break;
 
-            case 0x6:
-                var_s5 = tetrisBlock6.block.image;
+            case FRONTBACKTEXINDEX_6:
+                tex = tetrisBlock6.block.image;
                 break;
 
-            case 0x7:
-                var_s5 = tetrisBlock7.block.image;
+            case FRONTBACKTEXINDEX_7:
+                tex = tetrisBlock7.block.image;
                 break;
 
-            case 0x8:
-                var_s5 = tetrisBlock8.block.image;
+            case FRONTBACKTEXINDEX_8:
+                tex = tetrisBlock8.block.image;
                 break;
 
-            case 0x9:
-                var_s5 = tetrisBlock9.block.image;
+            case FRONTBACKTEXINDEX_9:
+                tex = tetrisBlock9.block.image;
                 break;
 
-            case 0xA:
-                var_s5 = D_01005C68_usa;
+            case FRONTBACKTEXINDEX_10:
+                tex = D_01005C68_usa;
                 break;
 
-            case 0xB:
-                var_s5 = D_01006468_usa;
+            case FRONTBACKTEXINDEX_11:
+                tex = D_01006468_usa;
                 break;
 
-            case 0xC:
-                var_s5 = D_01006C68_usa;
+            case FRONTBACKTEXINDEX_12:
+                tex = D_01006C68_usa;
                 break;
 
-            case 0xD:
-                var_s5 = D_01007468_usa;
+            case FRONTBACKTEXINDEX_13:
+                tex = D_01007468_usa;
                 break;
         }
 
-        if (var_s5 != NULL) {
-            gDPLoadTextureBlock(glistp++, var_s5, G_IM_FMT_CI, G_IM_SIZ_8b, BLOCK_TEX_WIDTH, BLOCK_TEX_HEIGHT, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+        if (tex != NULL) {
+            gDPLoadTextureBlock(glistp++, tex, G_IM_FMT_CI, G_IM_SIZ_8b, BLOCK_TEX_WIDTH, BLOCK_TEX_HEIGHT, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
         }
 
-        gDPPipeSync(glistp++);
-        gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0086, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
-        gDPSetTileSize(glistp++, G_TX_LOADTILE, 0, 0, 0x003C, 0x003C);
+        Set3DTile7();
 
-        for (var_s3 = 0; var_s3 < 0xC; var_s3++) {
-            var_s6 = sp4C[var_s3];
-            var_s7 = sp44[var_s3];
+        for (row = 0; row < BLOCK_LEN_ROWS; row++) {
+            block = array[row];
+            var_s7 = ptr[row];
 
-            for (var_s0 = 1; var_s0 < 5; var_s0++) {
-                var_s2 = &var_s7[var_s0];
-                var_s1 = &var_s6[var_s0];
+            for (col = 1; col < 5; col++) {
+                if (var_s7[col] == 0) {
+                    continue;
+                }
 
-                if (*var_s2 != 0) {
-                    if ((iiiiii == 1) && (*var_s2 >= 2)) {
-                        Draw3DTetrisBlockSide(var_s3, var_s0, var_s1->type, *var_s2);
-                        if ((var_s1->frame_n == sp10[1]) && (*var_s2 < 4)) {
-                            Draw3DTetrisBlock2(var_s0, var_s1->type);
-                        }
-                    } else {
-                        if ((var_s1->frame_n == sp10[iiiiii]) && (*var_s2 < 4)) {
-                            Draw3DTetrisBlock1(var_s3, var_s0, var_s1->type);
-                        }
+                if ((i == 1) && (var_s7[col] >= 2)) {
+                    Draw3DTetrisBlockSide(row, col, block[col].type, var_s7[col]);
+                    if ((block[col].frame_n == order[i]) && (var_s7[col] < 4)) {
+                        Draw3DTetrisBlock2(col, block[col].type);
+                    }
+                } else {
+                    if ((block[col].frame_n == order[i]) && (var_s7[col] < 4)) {
+                        Draw3DTetrisBlock1(row, col, block[col].type);
                     }
                 }
             }
 
-            for (var_s0 = 8; var_s0 >= 5; var_s0--) {
-                var_s2 = &var_s7[var_s0];
-                var_s1 = &var_s6[var_s0];
+            for (col = 8; col >= 5; col--) {
+                if (var_s7[col] == 0) {
+                    continue;
+                }
 
-                if (*var_s2 != 0) {
-                    if ((iiiiii == 1) && (*var_s2 >= 2)) {
-                        Draw3DTetrisBlockSide(var_s3, var_s0, var_s1->type, *var_s2);
-                        if ((var_s1->frame_n == sp10[1]) && (*var_s2 < 4)) {
-                            Draw3DTetrisBlock2(var_s0, var_s1->type);
-                        }
-                    } else {
-                        if ((var_s1->frame_n == sp10[iiiiii]) && (*var_s2 < 4)) {
-                            Draw3DTetrisBlock1(var_s3, var_s0, var_s1->type);
-                        }
+                if ((i == 1) && (var_s7[col] >= 2)) {
+                    Draw3DTetrisBlockSide(row, col, block[col].type, var_s7[col]);
+                    if ((block[col].frame_n == order[i]) && (var_s7[col] < 4)) {
+                        Draw3DTetrisBlock2(col, block[col].type);
+                    }
+                } else {
+                    if ((block[col].frame_n == order[i]) && (var_s7[col] < 4)) {
+                        Draw3DTetrisBlock1(row, col, block[col].type);
                     }
                 }
             }
         }
 
-        if (sp3C->sy == -1) {
+        if (cursor->sy == -1) {
             continue;
         }
 
-        if (gMain < 0x38E) {
-            if (sp10[iiiiii] == 3) {
-                var_a2 = &sp4C[sp3C->sy][5];
-                var_a3 = &sp4C[sp3C->sy][4];
-                Draw3DTetrisSwitch(dynamicp, num, var_a2, var_a3);
+        if (gMain < GMAIN_38E) {
+            if (order[i] == FRONTBACKTEXINDEX_3) {
+                Draw3DTetrisSwitch(dynamicp, num, &array[cursor->sy][5], &array[cursor->sy][4]);
             }
         } else {
-            var_v1 = sp4C[sp3C->sy][5].frame_n;
-            temp_a0 = sp4C[sp3C->sy][4].frame_n;
-            var_a2 = &sp4C[sp3C->sy][5];
-            var_a3 = &sp4C[sp3C->sy][4];
-            if (var_v1 < temp_a0) {
-                var_v1 = temp_a0;
-            }
+            temp = array[cursor->sy][5].frame_n;
+            temp = MAX(temp, array[cursor->sy][4].frame_n);
 
-            if (sp10[iiiiii] == var_v1) {
-                Draw3DTetrisSwitch(dynamicp, num, var_a2, var_a3);
+            if (order[i] == temp) {
+                Draw3DTetrisSwitch(dynamicp, num, &array[cursor->sy][5], &array[cursor->sy][4]);
             }
         }
     }
@@ -297,21 +299,37 @@ void Draw3DFrontTetrisWell(struct_gInfo_unk_00068 *dynamicp, s32 num) {
  * Original name: Draw3DBackTetrisWell
  */
 void Draw3DBackTetrisWell(struct_gInfo_unk_00068 *dynamicp, s32 num) {
-    s32 sp34 = 9;
-    u8 sp10[] = { 0, 3, 1, 2, 4, 5, 6, 7, 8, 9, 0xA, 0xB, 0xC, 0xD, };
-    char (*sp3C)[BLOCK_LEN_B];
-    block_t (*sp44)[BLOCK_LEN_B];
+    s32 total = 9;
+    u8 order[] = {
+        FRONTBACKTEXINDEX_0,  // 0
+        FRONTBACKTEXINDEX_3,  // 1
+        FRONTBACKTEXINDEX_1,  // 2
+        FRONTBACKTEXINDEX_2,  // 3
+        FRONTBACKTEXINDEX_4,  // 4
+        FRONTBACKTEXINDEX_5,  // 5
+        FRONTBACKTEXINDEX_6,  // 6
+        FRONTBACKTEXINDEX_7,  // 7
+        FRONTBACKTEXINDEX_8,  // 8
+        FRONTBACKTEXINDEX_9,  // 9
+        FRONTBACKTEXINDEX_10, // 10
+        FRONTBACKTEXINDEX_11, // 11
+        FRONTBACKTEXINDEX_12, // 12
+        FRONTBACKTEXINDEX_13, // 13
+    };
+    char (*ptr)[BLOCK_LEN_B];
+    block_t (*array)[BLOCK_LEN_B];
     s32 sp5C;
-    s32 var_s0;
-    s32 var_s3;
+    s32 col;
+    s32 row;
     char *var_s4;
-    const Texture *var_s5;
-    block_t *var_s7;
+    const Texture *tex;
+    block_t *block;
+    s32 i;
 
-    s32 iiiiii;
+    static_assert(ARRAY_COUNT(order) == FRONTBACKTEXINDEX_MAX, "");
 
-    sp44 = dynamicp->block[num];
-    sp3C = dynamicp->visible[num];
+    array = dynamicp->block[num];
+    ptr = dynamicp->visible[num];
 
     gDPPipeSync(glistp++);
     gDPSetTextureLUT(glistp++, G_TT_RGBA16);
@@ -320,139 +338,140 @@ void Draw3DBackTetrisWell(struct_gInfo_unk_00068 *dynamicp, s32 num) {
         gDPLoadTLUT_pal256(glistp++, colorTable);
 
         if (gMain >= GMAIN_38E) {
-            sp34 = 9;
+            total = 9;
         } else {
-            sp34 = 6;
+            total = 6;
         }
     } else {
         gDPLoadTLUT_pal256(glistp++, D_010001F0_usa);
 
         if (gMain >= GMAIN_38E) {
-            sp34 = 0xD;
+            total = 0xD;
         }
     }
 
     Set3DTile();
 
-    for (iiiiii = 1; iiiiii <= sp34; iiiiii++) {
-        if (iiiiii == 1) {
-            var_s5 = NULL;
+    for (i = 1; i <= total; i++) {
+        if (i == 1) {
+            tex = NULL;
         } else {
-            if (dynamicp->backTexture[num][sp10[iiiiii]] == 0) {
+            if (dynamicp->backTexture[num][order[i]] == 0) {
                 continue;
             }
         }
 
-        switch (sp10[iiiiii]) {
-            case 0x1:
-                var_s5 = tetrisBlock1.block.image;
+        switch (order[i]) {
+            case FRONTBACKTEXINDEX_1:
+                tex = tetrisBlock1.block.image;
                 break;
 
-            case 0x2:
-                var_s5 = tetrisBlock2.block.image;
+            case FRONTBACKTEXINDEX_2:
+                tex = tetrisBlock2.block.image;
                 break;
 
-            case 0x3:
-                var_s5 = tetrisBlock3.block.image;
+            case FRONTBACKTEXINDEX_3:
+                tex = tetrisBlock3.block.image;
                 break;
 
-            case 0x4:
-                var_s5 = tetrisBlock4.block.image;
+            case FRONTBACKTEXINDEX_4:
+                tex = tetrisBlock4.block.image;
                 break;
 
-            case 0x5:
-                var_s5 = tetrisBlock5.block.image;
+            case FRONTBACKTEXINDEX_5:
+                tex = tetrisBlock5.block.image;
                 break;
 
-            case 0x6:
-                var_s5 = tetrisBlock6.block.image;
+            case FRONTBACKTEXINDEX_6:
+                tex = tetrisBlock6.block.image;
                 break;
 
-            case 0x7:
-                var_s5 = tetrisBlock7.block.image;
+            case FRONTBACKTEXINDEX_7:
+                tex = tetrisBlock7.block.image;
                 break;
 
-            case 0x8:
-                var_s5 = tetrisBlock8.block.image;
+            case FRONTBACKTEXINDEX_8:
+                tex = tetrisBlock8.block.image;
                 break;
 
-            case 0x9:
-                var_s5 = tetrisBlock9.block.image;
+            case FRONTBACKTEXINDEX_9:
+                tex = tetrisBlock9.block.image;
                 break;
 
-            case 0xA:
-                var_s5 = D_01005C68_usa;
+            case FRONTBACKTEXINDEX_10:
+                tex = D_01005C68_usa;
                 break;
 
-            case 0xB:
-                var_s5 = D_01006468_usa;
+            case FRONTBACKTEXINDEX_11:
+                tex = D_01006468_usa;
                 break;
 
-            case 0xC:
-                var_s5 = D_01006C68_usa;
+            case FRONTBACKTEXINDEX_12:
+                tex = D_01006C68_usa;
                 break;
 
-            case 0xD:
-                var_s5 = D_01007468_usa;
+            case FRONTBACKTEXINDEX_13:
+                tex = D_01007468_usa;
                 break;
         }
 
-        if (var_s5 != NULL) {
-            gDPLoadTextureBlock(glistp++, var_s5, G_IM_FMT_CI, G_IM_SIZ_8b, 64, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+        if (tex != NULL) {
+            gDPLoadTextureBlock(glistp++, tex, G_IM_FMT_CI, G_IM_SIZ_8b, BLOCK_TEX_WIDTH, BLOCK_TEX_HEIGHT, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
         }
 
-        gDPPipeSync(glistp++);
-        gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0086, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
-        gDPSetTileSize(glistp++, G_TX_LOADTILE, 0, 0, 0x003C, 0x003C);
-        // Set3DTile7();
+        Set3DTile7();
 
         //! FAKE MATCH
-        var_s4 = sp3C[0];
-        for (var_s3 = 0, sp5C = 0; var_s3 < BLOCK_LEN_ROWS; var_s4 += BLOCK_LEN_B, sp5C++, var_s3++) {
-            var_s7 = sp44[sp5C];
-            for (var_s0 = 0xD; var_s0 >= 9; var_s0--) {
-                if (var_s4[var_s0] == 0) {
+        var_s4 = ptr[0];
+        for (row = 0, sp5C = 0; row < BLOCK_LEN_ROWS; var_s4 += BLOCK_LEN_B, sp5C++, row++) {
+            block = array[sp5C];
+            for (col = 0xD; col >= 9; col--) {
+                if (var_s4[col] == 0) {
                     continue;
                 }
 
-                if ((iiiiii == 1) && (var_s4[var_s0] >= 2)) {
-                    Draw3DTetrisBlockSide(var_s3, var_s0, sp44[var_s3][var_s0].type, var_s4[var_s0]);
-                    if ((sp44[var_s3][var_s0].frame_n == sp10[iiiiii]) && (var_s4[var_s0] < 4)) {
-                        Draw3DTetrisBlock2(var_s0, sp44[var_s3][var_s0].type);
+                if ((i == 1) && (var_s4[col] >= 2)) {
+                    Draw3DTetrisBlockSide(row, col, array[row][col].type, var_s4[col]);
+                    if ((array[row][col].frame_n == order[i]) && (var_s4[col] < 4)) {
+                        Draw3DTetrisBlock2(col, array[row][col].type);
                     }
                 } else {
-                    if ((sp44[var_s3][var_s0].frame_n == sp10[iiiiii]) && (var_s4[var_s0] < 4)) {
-                        Draw3DTetrisBlock1(var_s3, var_s0, sp44[var_s3][var_s0].type);
+                    if ((array[row][col].frame_n == order[i]) && (var_s4[col] < 4)) {
+                        Draw3DTetrisBlock1(row, col, array[row][col].type);
                     }
                 }
             }
 
-            for (var_s0 = 14; var_s0 < BLOCK_COLS_3D; var_s0++) {
-                if (var_s4[var_s0] != 0) {
-                    if ((iiiiii == 1) && (var_s4[var_s0] >= 2)) {
-                        Draw3DTetrisBlockSide(var_s3, var_s0, sp44[var_s3][var_s0].type, var_s4[var_s0]);
-                        if ((sp44[var_s3][var_s0].frame_n == sp10[iiiiii]) && (var_s4[var_s0] < 4)) {
-                            Draw3DTetrisBlock2(var_s0, sp44[var_s3][var_s0].type);
-                        }
-                    } else {
-                        if ((sp44[var_s3][var_s0].frame_n == sp10[iiiiii]) && (var_s4[var_s0] < 4)) {
-                            Draw3DTetrisBlock1(var_s3, var_s0, sp44[var_s3][var_s0].type);
-                        }
+            for (col = 14; col < BLOCK_COLS_3D; col++) {
+                if (var_s4[col] == 0) {
+                    continue;
+                }
+
+                if ((i == 1) && (var_s4[col] >= 2)) {
+                    Draw3DTetrisBlockSide(row, col, array[row][col].type, var_s4[col]);
+                    if ((array[row][col].frame_n == order[i]) && (var_s4[col] < 4)) {
+                        Draw3DTetrisBlock2(col, array[row][col].type);
+                    }
+                } else {
+                    if ((array[row][col].frame_n == order[i]) && (var_s4[col] < 4)) {
+                        Draw3DTetrisBlock1(row, col, array[row][col].type);
                     }
                 }
             }
 
-            var_s7 = sp44[sp5C];
-            if (var_s4[0] != 0) {
-                if ((iiiiii == 1) && (var_s4[0] >= 2)) {
-                    Draw3DTetrisBlockSide(var_s3, 0, var_s7->type, var_s4[0]);
-                    if ((var_s7->frame_n == sp10[iiiiii]) && (var_s4[0] < 4)) {
-                        Draw3DTetrisBlock2(0, var_s7->type);
-                    }
-                } else {
-                    if ((var_s7->frame_n == sp10[iiiiii]) && (var_s4[0] < 4)) {
-                        Draw3DTetrisBlock1(var_s3, 0, var_s7->type);
-                    }
+            block = array[sp5C];
+            if (var_s4[0] == 0) {
+                continue;
+            }
+
+            if ((i == 1) && (var_s4[0] >= 2)) {
+                Draw3DTetrisBlockSide(row, 0, block->type, var_s4[0]);
+                if ((block->frame_n == order[i]) && (var_s4[0] < 4)) {
+                    Draw3DTetrisBlock2(0, block->type);
+                }
+            } else {
+                if ((block->frame_n == order[i]) && (var_s4[0] < 4)) {
+                    Draw3DTetrisBlock1(row, 0, block->type);
                 }
             }
         }
@@ -836,17 +855,11 @@ void Draw3DIcon(struct_gInfo_unk_00068 *dynamicp, s32 num) {
         }
 
         if (var_s2 == 7) {
-            gDPPipeSync(glistp++);
-            gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0086, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                       G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
-            gDPSetTileSize(glistp++, G_TX_LOADTILE, 0, 0, 0x003C, 0x003C);
+            Set3DTile7();
         }
 
         if (var_s3 == 2) {
-            gDPPipeSync(glistp++);
-            gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0086, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                       G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
-            gDPSetTileSize(glistp++, G_TX_LOADTILE, 0, 0, 0x003C, 0x003C);
+            Set3DTile7();
         }
 
         for (var_a3 = 0; var_a3 < var_s3; var_a3++) {
@@ -1401,10 +1414,7 @@ s32 Draw3DAttack(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 front) {
                 gDPLoadTextureBlock(glistp++, var_t3, G_IM_FMT_CI, G_IM_SIZ_8b, 64, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                     G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-                gDPPipeSync(glistp++);
-                gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0086, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                           G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
-                gDPSetTileSize(glistp++, G_TX_LOADTILE, 0, 0, 0x003C, 0x003C);
+                Set3DTile7();
             }
 
             var_s7 = 0;
@@ -1533,11 +1543,8 @@ s32 Draw3DAttack(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 front) {
                         gDPLoadTextureBlock(glistp++, var_t3, G_IM_FMT_CI, G_IM_SIZ_8b, 64, 32, 0,
                                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
                                             G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-                        gDPPipeSync(glistp++);
-                        gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0086, G_TX_LOADTILE, 0,
-                                   G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP,
-                                   G_TX_NOMASK, G_TX_NOLOD);
-                        gDPSetTileSize(glistp++, G_TX_LOADTILE, 0, 0, 0x003C, 0x003C);
+
+                        Set3DTile7();
                     }
 
                     temp_fp = var_t5;
@@ -1660,11 +1667,8 @@ s32 Draw3DAttack(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 front) {
                         gDPLoadTextureBlock(glistp++, var_t3, G_IM_FMT_CI, G_IM_SIZ_8b, 64, 32, 0,
                                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
                                             G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-                        gDPPipeSync(glistp++);
-                        gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0086, G_TX_LOADTILE, 0,
-                                   G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP,
-                                   G_TX_NOMASK, G_TX_NOLOD);
-                        gDPSetTileSize(glistp++, G_TX_LOADTILE, 0, 0, 0x003C, 0x003C);
+
+                        Set3DTile7();
                     }
 
                     sp18 = var_t7;
@@ -1758,11 +1762,8 @@ s32 Draw3DAttack(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 front) {
                         gDPLoadTextureBlock(glistp++, var_t3, G_IM_FMT_CI, G_IM_SIZ_8b, 64, 32, 0,
                                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
                                             G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-                        gDPPipeSync(glistp++);
-                        gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0086, G_TX_LOADTILE, 0,
-                                   G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP,
-                                   G_TX_NOMASK, G_TX_NOLOD);
-                        gDPSetTileSize(glistp++, G_TX_LOADTILE, 0, 0, 0x003C, 0x003C);
+
+                        Set3DTile7();
                     }
 
                     for (var_s0_4 = 0; var_s0_4 < temp_s1->level; var_s0_4++) {

@@ -43,7 +43,7 @@ typedef struct block_t {
     /* 0x18 */ s32 sound; /* Original name: sound */
     /* 0x1C */ s32 currRow; /* Original name: currRow */
     /* 0x20 */ s32 chain_flag; /* Original name: chain_flag */ // bool?
-    /* 0x24 */ s32 frame_n; /* Original name: frame_n */
+    /* 0x24 */ s32 frame_n; /* Original name: frame_n */ // FrontBackTexIndex?
     /* 0x28 */ s32 frame_d; /* Original name: frame_d */
 } block_t; // size = 0x2C
 

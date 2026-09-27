@@ -19,12 +19,12 @@ segments:
       - { start: 0x00E38, type: i8, name: D_01000E38_usa.i8, width: 64, height: 24, palette: colorTable.rgba16 } # should be ci8, colorTable is the TLUT
       - [0x01438]
       - [0x01450]
-      - [0x01468, i8, D_01001468_usa.i8, 2048, 1] # unknown type and dimensions
-      - [0x01C68, i8, D_01001C68_usa.i8, 2048, 1] # unknown type and dimensions
-      - [0x02468, i8, D_01002468_usa.i8, 2048, 1] # unknown type and dimensions
-      - [0x02C68, i8, D_01002C68_usa.i8, 2048, 1] # unknown type and dimensions
-      - [0x03468, i8, D_01003468_usa.i8, 2048, 1] # unknown type and dimensions
 
+      - { start: 0x01468, type: ci8, name: block1.ci8, width: 64, height: 32, palettes: [D_010001F0_usa] }
+      - { start: 0x01C68, type: ci8, name: block2.ci8, width: 64, height: 32, palettes: [D_010001F0_usa] }
+      - { start: 0x02468, type: ci8, name: block3.ci8, width: 64, height: 32, palettes: [D_010001F0_usa] }
+      - { start: 0x02C68, type: ci8, name: block4.ci8, width: 64, height: 32, palettes: [D_010001F0_usa] }
+      - { start: 0x03468, type: ci8, name: block5.ci8, width: 64, height: 32, palettes: [D_010001F0_usa] }
       - { start: 0x03C68, type: ci8, name: block6.ci8, width: 64, height: 32, palettes: [D_010001F0_usa] }
       - { start: 0x04468, type: ci8, name: block7.ci8, width: 64, height: 32, palettes: [D_010001F0_usa] }
       - { start: 0x04C68, type: ci8, name: block8.ci8, width: 64, height: 32, palettes: [D_010001F0_usa] }
