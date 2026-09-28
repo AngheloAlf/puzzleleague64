@@ -1295,7 +1295,7 @@ extern s32 AIcolCheck[AI_CHECK_COUNT][5];
 extern s32 gMax;
 extern OSMesgQueue gfxFrameMsgQ;
 extern s32 B_801C7060_usa;
-extern TexturePtr B_801C7070_usa[GAME_BUFFER_LEN][BRICKTXTR_LEN];
+extern u16 *gbrickAB[GAME_BUFFER_LEN][BRICKTXTR_LEN]; /* Original name: PANEPON seems to use gbrickA and gbrickB for index [0] and [1] respectively. RGBA16, 64x32 */
 // extern UNK_TYPE B_801C7088_usa;
 extern u8 B_801C7089_usa;
 
@@ -1374,7 +1374,7 @@ extern OSMesg B_8021BA28_usa[1];
 // TODO: enum?
 extern s32 gWhatever;
 
-extern TexturePtr B_8021BA60_usa[2]; // explosionA? explosionB?
+extern u8 *explosionAB[GAME_BUFFER_LEN]; /* Original name: PANEPON seems to use explosionA and explosionB for index [0] and [1] respectively. CI8, 64x16 */
 // extern UNK_TYPE B_8021BA68_usa;
 // extern UNK_TYPE B_8021BA70_usa;
 // extern UNK_TYPE B_8021BA74_usa;

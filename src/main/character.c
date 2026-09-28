@@ -192,17 +192,17 @@ void InitCharacter(s32 left, s32 right) {
             B_801AB8A8_usa[1][5] = &character_block_textures->unk_0800[5];
 
             B_801F9E20_usa[1] = &character_block_textures->unk_3800;
-            B_8021BA60_usa[0] = &character_block_textures->unk_3C00;
+            explosionAB[0] = character_block_textures->unk_3C00;
             B_801C6C9C_usa[0] = &character_block_textures->unk_4000;
 
-            B_801C7070_usa[1][0] = &character_block_textures->unk_4200[0];
-            B_801C7070_usa[1][1] = &character_block_textures->unk_4200[1];
-            B_801C7070_usa[1][2] = &character_block_textures->unk_4200[2];
+            gbrickAB[1][0] = character_block_textures->unk_4200[0];
+            gbrickAB[1][1] = character_block_textures->unk_4200[1];
+            gbrickAB[1][2] = character_block_textures->unk_4200[2];
 
             B_801C6E70_usa[1].block.image = B_801C7360_usa[1];
 
             for (j = 0; j < BRICKTXTR_LEN; j++) {
-                brickTxtr[1][j].block.image = B_801C7070_usa[1][j];
+                brickTxtr[1][j].block.image = (u64 *)gbrickAB[1][j];
             }
 
             for (j = 0; j < B_801F9D00_USA_LEN; j++) {
@@ -210,7 +210,7 @@ void InitCharacter(s32 left, s32 right) {
             }
 
             B_801F9C48_usa[1].block.image = B_801F9E20_usa[1];
-            B_801F9CC8_usa[0].block.image = B_8021BA60_usa[0];
+            B_801F9CC8_usa[0].block.image = (u64 *)explosionAB[0];
             B_801C7368_usa[0].block.image = B_801C6C9C_usa[0];
         } else {
             B_801C7360_usa[0] = &character_block_textures->unk_0000;
@@ -223,26 +223,26 @@ void InitCharacter(s32 left, s32 right) {
             B_801AB8A8_usa[0][5] = &character_block_textures->unk_0800[5];
 
             B_801F9E20_usa[0] = &character_block_textures->unk_3800;
-            B_8021BA60_usa[1] = &character_block_textures->unk_3C00;
+            explosionAB[1] = character_block_textures->unk_3C00;
             B_801C6C9C_usa[1] = &character_block_textures->unk_4000;
 
-            B_801C7070_usa[0][0] = &character_block_textures->unk_4200[0];
-            B_801C7070_usa[0][1] = &character_block_textures->unk_4200[1];
-            B_801C7070_usa[0][2] = &character_block_textures->unk_4200[2];
+            gbrickAB[0][0] = character_block_textures->unk_4200[0];
+            gbrickAB[0][1] = character_block_textures->unk_4200[1];
+            gbrickAB[0][2] = character_block_textures->unk_4200[2];
 
             B_801C6E70_usa[0].block.image = B_801C7360_usa[0];
 
             for (j = 0; j < BRICKTXTR_LEN; j++) {
-                brickTxtr[0][j].block.image = B_801C7070_usa[0][j];
+                brickTxtr[0][j].block.image = (u64 *)gbrickAB[0][j];
             }
 
             for (j = 0; j < B_801F9D00_USA_LEN; j++) {
                 B_801F9D00_usa[0][j].block.image = B_801AB8A8_usa[0][j];
             }
 
-            B_801F9C48_usa[0].block.image = B_801F9E20_usa[0];
-            B_801F9CC8_usa[1].block.image = B_8021BA60_usa[1];
-            B_801C7368_usa[1].block.image = B_801C6C9C_usa[1];
+            B_801F9C48_usa[0].block.image = (u64 *)B_801F9E20_usa[0];
+            B_801F9CC8_usa[1].block.image = (u64 *)explosionAB[1];
+            B_801C7368_usa[1].block.image = (u64 *)B_801C6C9C_usa[1];
         }
     }
 }

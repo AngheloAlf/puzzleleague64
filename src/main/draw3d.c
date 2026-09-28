@@ -114,7 +114,7 @@ void Set3DExplodeTile(void) {
  */
 void Draw3DFrontTetrisWell(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     s32 total = 9;
-    u8 order[] = {
+    DATA_INLINE_CONST2 u8 order[] = {
         FRONTBACKTEXINDEX_0,  // 0
         FRONTBACKTEXINDEX_3,  // 1
         FRONTBACKTEXINDEX_1,  // 2
@@ -300,7 +300,7 @@ void Draw3DFrontTetrisWell(struct_gInfo_unk_00068 *dynamicp, s32 num) {
  */
 void Draw3DBackTetrisWell(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     s32 total = 9;
-    u8 order[] = {
+    DATA_INLINE_CONST2 u8 order[] = {
         FRONTBACKTEXINDEX_0,  // 0
         FRONTBACKTEXINDEX_3,  // 1
         FRONTBACKTEXINDEX_1,  // 2
@@ -883,303 +883,144 @@ void Draw3DIcon(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     }
 }
 
-#if VERSION_USA
-#if 0
 void Draw3DAttackBrick(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 check) {
-    Gfx *temp_a0;
-    Gfx *temp_a1;
-    Gfx *temp_a2;
-    Gfx *temp_v0_2;
-    Gfx *temp_v1;
-    Gfx *temp_v1_3;
-    Gfx *temp_v1_5;
-    Gfx *temp_v1_6;
-    Gfx *temp_v1_7;
-    Gfx *var_v1;
-    s16 temp_t0;
-    s16 temp_t1;
-    s32 temp_t7;
-    s32 temp_v1_2;
-    s32 temp_v1_4;
-    s32 var_a1;
-    s32 var_a1_2;
-    s32 var_t3;
-    s32 var_t3_2;
-    u16 temp_t0_2;
-    u16 temp_t1_2;
-    u16 var_a3;
-    u32 var_a0;
-    u32 var_v0_2;
-    u8 temp_v0;
-    void *temp_s3;
-    void *temp_t4;
-    void *var_a1_3;
-    void *var_a3_2;
-    void *var_t5;
-    void *var_t9;
-    void *var_v0;
+    attack_t *attk = dynamicp->attack[num];
+    s32 x;
+    s32 y;
+    s32 width;
+    s32 tmem;
+    s32 i;
+    attack_t *attack;
+    uObjSprite_t *s;
+    u16 *old_tex;
+    u16 *s_tex;
+    u8 *c_tex;
 
-    temp_v1 = glistp;
-    var_t9 = NULL;
-    var_t3 = check;
-    glistp = temp_v1 + 8;
-    temp_v1->words.w0 = 0xBA000E02;
-    temp_v1->words.w1 = 0;
-    temp_s3 = dynamicp + ((num * 0x5A0) + 0x14C88);
-    if (check >= 0) {
-        temp_t7 = num * 0xC;
-        var_t5 = (check * 0x48) + temp_s3;
-        do {
-            if (((u32) (var_t5->unk_0 - 2) < 2U) && (var_t5->unk_8 < 5)) {
-                temp_t0 = var_t5->unk_30;
-                temp_t4 = var_t5 + 0x30;
-                if ((u32) temp_t0 < 0x141U) {
-                    temp_v1_2 = var_t5->unk_4;
-                    temp_t1 = var_t5->unk_38;
-                    if (temp_v1_2 < 0xC) {
-                        var_v0 = *B_801C7070_usa[num];
-                    } else if (temp_v1_2 < 0x12) {
-                        var_v0 = *(&B_801C7070_usa[0][1] + temp_t7);
-                    } else {
-                        var_v0 = *(&B_801C7070_usa[0][2] + temp_t7);
-                    }
-                    if (var_t9 != var_v0) {
-                        temp_v1_3 = glistp;
-                        var_t9 = var_v0;
-                        glistp = temp_v1_3 + 8;
-                        temp_v1_3->words.w0 = 0xFD100000;
-                        glistp = temp_v1_3 + 0x10;
-                        temp_v1_3->unk_8 = 0xF5100000;
-                        glistp = temp_v1_3 + 0x18;
-                        temp_v1_3->unk_10 = 0xE6000000;
-                        glistp = temp_v1_3 + 0x20;
-                        temp_v1_3->unk_18 = 0xF3000000;
-                        glistp = temp_v1_3 + 0x28;
-                        glistp = temp_v1_3 + 0x30;
-                        temp_v1_3->words.w1 = (u32) var_t9;
-                        temp_v1_3->unk_C = 0x07000000;
-                        temp_v1_3->unk_14 = 0;
-                        temp_v1_3->unk_1C = 0x077FF080;
-                        temp_v1_3->unk_20 = 0xE7000000;
-                        temp_v1_3->unk_24 = 0;
-                        temp_v1_3->unk_28 = 0xF5102000;
-                        temp_v1_3->unk_2C = 0;
-                        glistp = temp_v1_3 + 0x38;
-                        temp_v1_3->unk_30 = 0xF2000000;
-                        temp_v1_3->unk_34 = 0xFC07C;
-                    }
-                    temp_v1_4 = var_t5->unk_4;
-                    if (temp_v1_4 < 4) {
-                        var_a3 = var_t5->unk_36;
-                        if (temp_v1_4 == 1) {
-                            var_a1 = 0;
-                        } else {
-                            var_a1 = 0xA;
-                            if (temp_v1_4 == 2) {
-                                var_a1 = 6;
-                            }
-                        }
-                        temp_v1_5 = glistp;
-                        glistp = temp_v1_5 + 8;
-                        glistp = temp_v1_5 + 0x10;
-                        temp_v1_5->unk_8 = (s32) (var_a1 | 0xF5102000);
-                        glistp = temp_v1_5 + 0x18;
-                        temp_v1_5->words.w0 = 0xE7000000;
-                        temp_v1_5->words.w1 = 0;
-                        temp_v1_5->unk_C = 0x07000000;
-                        temp_v1_5->unk_10 = 0xF2000000;
-                        temp_v1_5->unk_14 = (s32) (((((var_a3 - 1) * 4) & 0xFFF) << 0xC) | 0x0700003C);
-                    } else {
-                        temp_v1_6 = glistp;
-                        glistp = temp_v1_6 + 8;
-                        temp_v1_6->words.w0 = 0xE7000000;
-                        temp_v1_6->words.w1 = 0;
-                        temp_v0 = temp_t4->unk_16;
-                        var_a3 = 0x14;
-                        switch (temp_v0) {
-                            case 0x1:
-                                temp_v1_7 = glistp;
-                                glistp = temp_v1_7 + 8;
-                                temp_v1_7->words.w1 = 0x01000000;
-                                temp_v1_7->words.w0 = 0xF5102000;
-                                glistp = temp_v1_7 + 0x10;
-                                temp_v1_7->unk_8 = 0xF2000000;
-                                temp_v1_7->unk_C = 0x0104C03C;
-                                break;
-                            case 0x2:
-                                var_a0 = 0xF5102005;
-                                var_v1 = glistp;
-                                var_a1_2 = 0x0204C03C;
-                                glistp = var_v1 + 8;
-                                var_v0_2 = 0x02000000;
-block_26:
-                                var_v1->words.w1 = var_v0_2;
-                                var_v1->words.w0 = var_a0;
-                                glistp = var_v1 + 0x10;
-                                var_v1->unk_8 = 0xF2000000;
-                                var_v1->unk_C = var_a1_2;
-                                break;
-                            case 0x3:
-                                var_a0 = 0xF510200A;
-                                var_v1 = glistp;
-                                var_a1_2 = 0x0304C03C;
-                                glistp = var_v1 + 8;
-                                var_v0_2 = 0x03000000;
-                                goto block_26;
-                            case 0x4:
-                                var_a0 = 0xF5102100;
-                                var_v1 = glistp;
-                                var_a1_2 = 0x0404C03C;
-                                glistp = var_v1 + 8;
-                                var_v0_2 = 0x04000000;
-                                goto block_26;
-                            case 0x5:
-                                var_a0 = 0xF5102105;
-                                var_v1 = glistp;
-                                var_a1_2 = 0x0504C03C;
-                                glistp = var_v1 + 8;
-                                var_v0_2 = 0x05000000;
-                                goto block_26;
-                            case 0x6:
-                                var_a0 = 0xF510210A;
-                                var_v1 = glistp;
-                                var_a1_2 = 0x0604C03C;
-                                glistp = var_v1 + 8;
-                                var_v0_2 = 0x06000000;
-                                goto block_26;
-                        }
-                    }
-                    temp_a1 = glistp;
-                    glistp = temp_a1 + 8;
-                    temp_a1->words.w0 = ((((temp_t0 + var_a3) * 4) & 0xFFF) << 0xC) | ((((temp_t1 + 0x10) * 4) & 0xFFF) | 0xE4000000);
-                    glistp = temp_a1 + 0x10;
-                    temp_a1->unk_8 = 0xB4000000;
-                    glistp = temp_a1 + 0x18;
-                    temp_a1->unk_10 = 0xB3000000;
-                    glistp = temp_a1 + 0x20;
-                    temp_a1->unk_C = 0;
-                    temp_a1->unk_14 = 0x04000400;
-                    temp_a1->unk_18 = 0xE7000000;
-                    temp_a1->unk_1C = 0;
-                    temp_a1->words.w1 = ((temp_t4->unk_16 & 7) << 0x18) | (((temp_t0 * 4) & 0xFFF) << 0xC) | ((temp_t1 * 4) & 0xFFF);
-                }
+    gDPSetTextureLUT(glistp++, G_TT_NONE);
+
+    old_tex = NULL;
+
+    for (i = check; i >= 0; i--) {
+        attack = &attk[i];
+
+        if (attack->state != ATTACKSTATE_2 && attack->state != ATTACKSTATE_3) {
+            continue;
+        }
+
+        if (attack->disappear >= 5) {
+            continue;
+        }
+
+        s = &attack->rect.s;
+        x = s->objX;
+        if (x < 0 || x > SCREEN_WIDTH) {
+            continue;
+        }
+
+        y = s->objY;
+        if (attack->type < 0xC) {
+            s_tex = gbrickAB[num][0];
+        } else if (attack->type < 0x12) {
+            s_tex = gbrickAB[num][1];
+        } else {
+            s_tex = gbrickAB[num][2];
+        }
+
+        if (old_tex != s_tex) {
+            gDPLoadTextureBlock(glistp++, s_tex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+            old_tex = s_tex;
+        }
+
+        if (attack->type <= ATTACKTYPE_3) {
+            // TODO: wtf?? this should be an always-zero value
+            width = attack->rect.s.paddingX;
+
+            if (attack->type == ATTACKTYPE_1) {
+                tmem = 0;
+            } else if (attack->type == ATTACKTYPE_2) {
+                tmem = 6;
+            } else { // ATTACKTYPE_3 || ATTACKTYPE_0
+                tmem = 10;
             }
-            var_t3 -= 1;
-            var_t5 -= 0x48;
-        } while (var_t3 >= 0);
+
+            gDPPipeSync(glistp++);
+            gDPSetTile(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, tmem, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+            gDPSetTileSize(glistp++, G_TX_LOADTILE, 0, 0, (width - 1) << 2, 0x003C);
+        } else {
+            width = 0x14;
+
+            gDPPipeSync(glistp++);
+
+            switch (s->imagePal) {
+                case 0x1:
+                    gDPSetTile(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 0x0000, 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+                    gDPSetTileSize(glistp++, 1, 0, 0, 0x004C, 0x003C);
+                    break;
+
+                case 0x2:
+                    gDPSetTile(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 0x0005, 2, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+                    gDPSetTileSize(glistp++, 2, 0, 0, 0x004C, 0x003C);
+                    break;
+
+                case 0x3:
+                    gDPSetTile(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 0x000A, 3, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+                    gDPSetTileSize(glistp++, 3, 0, 0, 0x004C, 0x003C);
+                    break;
+
+                case 0x4:
+                    gDPSetTile(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 0x0100, 4, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+                    gDPSetTileSize(glistp++, 4, 0, 0, 0x004C, 0x003C);
+                    break;
+
+                case 0x5:
+                    gDPSetTile(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 0x0105, 5, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+                    gDPSetTileSize(glistp++, 5, 0, 0, 0x004C, 0x003C);
+                    break;
+
+                case 0x6:
+                    gDPSetTile(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 0x010A, 6, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+                    gDPSetTileSize(glistp++, 6, 0, 0, 0x004C, 0x003C);
+                    break;
+            }
+        }
+
+        gSPTextureRectangle(glistp++, x << 2, y << 2, (x + width) << 2, (y + 16) << 2, s->imagePal, 0, 0, 0x0400, 0x0400);
+        gDPPipeSync(glistp++);
     }
-    temp_a2 = glistp;
-    glistp = temp_a2 + 8;
-    glistp = temp_a2 + 0x10;
-    temp_a2->words.w0 = 0xE7000000;
-    temp_a2->words.w1 = 0;
-    temp_a2->unk_8 = 0xBA000E02;
-    temp_a2->unk_C = 0x8000;
+
+    gDPPipeSync(glistp++);
+    gDPSetTextureLUT(glistp++, G_TT_RGBA16);
+
     if (num == 0) {
-        temp_a2->unk_10 = 0xFD100000;
-        glistp = temp_a2 + 0x18;
-        glistp = temp_a2 + 0x20;
-        temp_a2->unk_18 = 0xE8000000;
-        glistp = temp_a2 + 0x28;
-        temp_a2->unk_24 = 0x07000000;
-        glistp = temp_a2 + 0x30;
-        temp_a2->unk_28 = 0xE6000000;
-        glistp = temp_a2 + 0x38;
-        temp_a2->unk_30 = 0xF0000000;
-        temp_a2->unk_1C = 0;
-        temp_a2->unk_20 = 0xF5000100;
-        temp_a2->unk_2C = 0;
-        temp_a2->unk_34 = 0x073FC000;
-        glistp = temp_a2 + 0x40;
-        temp_a2->unk_38 = 0xE7000000;
-        temp_a2->unk_3C = 0;
-        temp_a2->unk_14 = (void *) B_801C6C9C_usa[1];
-        var_a3_2 = B_8021BA60_usa[1];
+        gDPLoadTLUT_pal256(glistp++, B_801C6C9C_usa[1]);
+
+        c_tex = explosionAB[1];
     } else {
-        temp_a2->unk_10 = 0xFD100000;
-        glistp = temp_a2 + 0x18;
-        glistp = temp_a2 + 0x20;
-        temp_a2->unk_18 = 0xE8000000;
-        glistp = temp_a2 + 0x28;
-        temp_a2->unk_24 = 0x07000000;
-        glistp = temp_a2 + 0x30;
-        temp_a2->unk_28 = 0xE6000000;
-        glistp = temp_a2 + 0x38;
-        temp_a2->unk_30 = 0xF0000000;
-        temp_a2->unk_1C = 0;
-        temp_a2->unk_20 = 0xF5000100;
-        temp_a2->unk_2C = 0;
-        temp_a2->unk_34 = 0x073FC000;
-        glistp = temp_a2 + 0x40;
-        temp_a2->unk_38 = 0xE7000000;
-        temp_a2->unk_3C = 0;
-        temp_a2->unk_14 = (void *) B_801C6C9C_usa->unk_0;
-        var_a3_2 = B_8021BA60_usa->unk_0;
+        gDPLoadTLUT_pal256(glistp++, B_801C6C9C_usa[0]);
+
+        c_tex = explosionAB[0];
     }
-    temp_v0_2 = glistp;
-    var_t3_2 = 0;
-    glistp = temp_v0_2 + 8;
-    temp_v0_2->words.w0 = 0xFD500000;
-    glistp = temp_v0_2 + 0x10;
-    temp_v0_2->unk_8 = 0xF5500000;
-    temp_v0_2->unk_C = 0x07000000;
-    glistp = temp_v0_2 + 0x18;
-    temp_v0_2->unk_10 = 0xE6000000;
-    glistp = temp_v0_2 + 0x20;
-    temp_v0_2->unk_18 = 0xF3000000;
-    glistp = temp_v0_2 + 0x28;
-    temp_v0_2->unk_20 = 0xE7000000;
-    glistp = temp_v0_2 + 0x30;
-    glistp = temp_v0_2 + 0x38;
-    temp_v0_2->words.w1 = (u32) var_a3_2;
-    temp_v0_2->unk_14 = 0;
-    temp_v0_2->unk_1C = 0x071FF100;
-    temp_v0_2->unk_24 = 0;
-    temp_v0_2->unk_28 = 0xF5481000;
-    temp_v0_2->unk_2C = 0;
-    temp_v0_2->unk_30 = 0xF2000000;
-    temp_v0_2->unk_34 = 0xFC03C;
-    if (check >= 0) {
-        var_a1_3 = temp_s3;
-        do {
-            var_t3_2 += 1;
-            if ((var_a1_3->unk_0 == 1) && (var_a1_3->unk_C < 0)) {
-                temp_a0 = glistp;
-                temp_t0_2 = var_a1_3->unk_32;
-                temp_t1_2 = var_a1_3->unk_3A;
-                glistp = temp_a0 + 8;
-                temp_a0->words.w0 = ((((temp_t0_2 + 0x10) * 4) & 0xFFF) << 0xC) | ((((temp_t1_2 + 0x10) * 4) & 0xFFF) | 0xE4000000);
-                glistp = temp_a0 + 0x10;
-                glistp = temp_a0 + 0x18;
-                temp_a0->words.w1 = (((temp_t0_2 * 4) & 0xFFF) << 0xC) | ((temp_t1_2 * 4) & 0xFFF);
-                temp_a0->unk_8 = 0xB4000000;
-                temp_a0->unk_C = 0;
-                temp_a0->unk_10 = 0xB3000000;
-                temp_a0->unk_14 = 0x04000400;
-                glistp = temp_a0 + 0x20;
-                temp_a0->unk_18 = 0xE7000000;
-                temp_a0->unk_1C = 0;
-            }
-            var_a1_3 += 0x48;
-        } while (check >= var_t3_2);
+
+    gDPLoadTextureBlock(glistp++, c_tex, G_IM_FMT_CI, G_IM_SIZ_8b, 64, 16, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+
+    for (i = 0; i <= check; i++) {
+        attack = &attk[i];
+        s = &attack->rect.s;
+
+        if (attack->state != ATTACKSTATE_1) {
+            continue;
+        }
+        if (attack->delay >= 0) {
+            continue;
+        }
+
+        x = s->scaleW;
+        y = s->scaleH;
+
+        gSPTextureRectangle(glistp++, x << 2, y << 2, (x + 16) << 2, (y + 16) << 2, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
+        gDPPipeSync(glistp++);
     }
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/draw3d", Draw3DAttackBrick);
-#endif
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/draw3d", Draw3DAttackBrick);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/draw3d", Draw3DAttackBrick);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/draw3d", Draw3DAttackBrick);
-#endif
 
 void func_800615D8_usa(s32 row, s32 col, s32 arg2, s32 arg3) {
     gSPTexture(glistp++, 0x8000, 0x8000, 0, arg2, G_ON);
@@ -1846,7 +1687,7 @@ void Draw3DExplosion(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     gDPSetTextureLUT(glistp++, G_TT_RGBA16);
     gDPLoadTLUT_pal256(glistp++, B_801C6C9C_usa[num]);
 
-    tex = B_8021BA60_usa[num];
+    tex = explosionAB[num];
     gDPLoadTextureBlock(glistp++, tex, G_IM_FMT_CI, G_IM_SIZ_8b, 64, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 

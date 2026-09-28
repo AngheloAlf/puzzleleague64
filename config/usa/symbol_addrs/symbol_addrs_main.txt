@@ -2491,7 +2491,7 @@ AIcolCheck = 0x801C6FA8; // size:0x8C
 gMax = 0x801C7050; //
 gfxFrameMsgQ = 0x801C7058; //
 B_801C7060_usa = 0x801C7060; //
-B_801C7070_usa = 0x801C7070; // size:0x18
+gbrickAB = 0x801C7070; // size:0x18
 B_801C7088_usa = 0x801C7088; //
 B_801C7089_usa = 0x801C7089; //
 
@@ -2559,7 +2559,7 @@ B_8021B968_usa = 0x8021B968; //
 B_8021BA28_usa = 0x8021BA28; //
 
 gWhatever = 0x8021BA5C; //
-B_8021BA60_usa = 0x8021BA60; // size:0x8
+explosionAB = 0x8021BA60; // size:0x8
 B_8021BA68_usa = 0x8021BA68; //
 B_8021BA70_usa = 0x8021BA70; //
 B_8021BA74_usa = 0x8021BA74; //

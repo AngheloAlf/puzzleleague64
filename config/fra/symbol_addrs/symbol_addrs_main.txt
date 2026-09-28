@@ -2725,10 +2725,8 @@ B_801C4718_fra = 0x801C4718; //
 gMax = 0x801C47B0; //
 gfxFrameMsgQ = 0x801C47B8; //
 B_801C7060_usa = 0x801C47C0; //
-B_801C7070_usa = 0x801C47D0; //
-B_801C47D4_fra = 0x801C47D4; //
-B_801C47D8_fra = 0x801C47D8; //
-B_801C47DC_fra = 0x801C47DC; //
+gbrickAB = 0x801C47D0; // size:0x18
+B_801C47E8_fra = 0x801C47E8; //
 B_801C7089_usa = 0x801C47E9; // type:s8
 
 gTime = 0x801C4808; // size:0x8
@@ -2810,8 +2808,7 @@ B_8021BA50_usa = 0x801F9170; //
 B_8021BA54_usa = 0x801F9174; //
 
 gWhatever = 0x801F917C; //
-B_8021BA60_usa = 0x801F9180; //
-B_801F9184_fra = 0x801F9184; //
+explosionAB = 0x801F9180; // size:0x8
 B_801F9188_fra = 0x801F9188; //
 B_801F9190_fra = 0x801F9190; //
 B_801F9194_fra = 0x801F9194; //
