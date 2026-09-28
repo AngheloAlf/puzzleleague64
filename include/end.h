@@ -13,7 +13,7 @@ void GameOverSmoke(struct tetWell *well);
 void DeadBlocksShakeOne2D(struct tetWell *well);
 void AllDeadBlocks(struct tetWell *well);
 void AllDeadFaces(struct tetWell *well);
-// void func_80037900_usa();
+// void KillRow2D();
 void KillRow3D(struct tetWell *well, struct cursor_t *cursor);
 void GameOverSign(struct tetWell *well, struct cursor_t *cursor);
 s32 EndingExplosion(struct tetWell *well);

@@ -281,21 +281,58 @@ void AllDeadFaces(tetWell *well) {
     }
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", func_80037900_usa);
-#endif
+/**
+ * Original name: KillRow2D
+ */
+void KillRow2D(tetWell *well) {
+    s32 row;
+    s32 col;
+    s32 dist;
+    nbool done;
+    uObjSprite *rect;
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", func_80037900_usa);
-#endif
+    done = nfalse;
+    well->state.timer--;
+    if (well->state.timer > 0) {
+        return;
+    }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_80037900_usa);
-#endif
+    for (col = 0; col < TETWELL_UNK_3EF0_LEN_6; col++) {
+        rect = &well->new_block_rect[col];
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_80037900_usa);
-#endif
+        dist = rect->s.imageH >> 5;
+        dist--;
+        rect->s.imageH = dist << 5;
+    }
+
+    for (row = 0; row < BLOCK_LEN_ROWS; row++) {
+        for (col = 0; col < TETWELL_OBJSPRITE_LEN_B; col++) {
+            rect = &well->block_rect[row][col];
+
+            dist = rect->s.imageH >> 5;
+            dist--;
+            rect->s.imageH = dist << 5;
+
+            if (dist == 0) {
+                done = ntrue;
+            }
+        }
+    }
+
+    dist = well->left2D.s.imageH >> 5;
+    dist--;
+    well->left2D.s.imageH = dist << 5;
+
+    dist = well->right2D.s.imageH >> 5;
+    dist--;
+    well->right2D.s.imageH = dist << 5;
+
+    if (done) {
+        gMain = GMAIN_391;
+    } else {
+        well->state.timer = 1;
+    }
+}
 
 /**
  * Original name: KillRow3D
@@ -2305,7 +2342,7 @@ void DrawGameOver(struct_gInfo_unk_00068 *dynamicp) {
 ? DeadBlocksShakeOne2D(Game *);                     /* extern */
 ? AllDeadBlocks(Game *);                     /* extern */
 ? AllDeadFaces(Game *);                     /* extern */
-? func_80037900_usa(Game *);                     /* extern */
+? KillRow2D(Game *);                     /* extern */
 ? GameOverSign(Game *, cursor_t *); /* extern */
 s32 EndingExplosion(Game *);                   /* extern */
 ? func_80038018_usa(Game *, ?);                  /* extern */
@@ -2479,7 +2516,7 @@ block_39:
                     break;
                 case 0x390:                         /* switch 1 */
                     if (gTheGame.unk_8860[0].unk_0 == 8) {
-                        func_80037900_usa(&gTheGame);
+                        KillRow2D(&gTheGame);
                         var_v1_2 = gMain;
                         var_v0 = 0x391;
                         goto block_50;
