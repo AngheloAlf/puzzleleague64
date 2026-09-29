@@ -811,7 +811,7 @@ uObjTxtr deadsmoke = {
     /* type  */ G_OBJLT_TXTRBLOCK,
     /* image */ (u64 *)smokesmoke,
     /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
-    /* tsize */ GS_TB_TSIZE(SMOKESMOKE_TEX_WIDTH * SMOKESMOKE_TEX_HEIGHT, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(SMOKESMOKE_TEX_WIDTH *SMOKESMOKE_TEX_HEIGHT, G_IM_SIZ_8b),
     /* tline */ GS_TB_TLINE(SMOKESMOKE_TEX_WIDTH, G_IM_SIZ_8b),
     /* sid   */ 0,
     /* flag  */ (u32)-1,
@@ -1464,7 +1464,6 @@ u8 stars1[] ALIGNED(8) = {
 };
 static_assert(sizeof(stars1) == STARS1_TEX_WIDTH * STARS1_TEX_HEIGHT * sizeof(u8), "");
 
-
 u8 stars2[] ALIGNED(8) = {
 #include "assets/misc/segment_0CA4A0/stars2.ci8.inc"
 };
@@ -1495,7 +1494,7 @@ uObjTxtr stars2Texture = {
     /* type  */ G_OBJLT_TXTRBLOCK,
     /* image */ (u64 *)stars2,
     /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
-    /* tsize */ GS_TB_TSIZE(STARS2_TEX_WIDTH * STARS2_TEX_HEIGHT, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(STARS2_TEX_WIDTH *STARS2_TEX_HEIGHT, G_IM_SIZ_8b),
     /* tline */ GS_TB_TLINE(STARS2_TEX_WIDTH, G_IM_SIZ_8b),
     /* sid   */ 0,
     /* flag  */ (u32)-1,

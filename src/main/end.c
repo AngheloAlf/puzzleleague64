@@ -2087,7 +2087,7 @@ block_28:
 block_31:
             var_v1 = 0;
             if (gTheGame.totalPlayer == 2) {
-                #if 0
+#if 0
                 var_s0_2 = 0;
                 temp_v0 = glistp;
                 var_t4 = 0;
@@ -2112,7 +2112,7 @@ block_31:
                 temp_v0->unk_2C = 0;
                 temp_v0->unk_30 = 0xB9000002;
                 temp_v0->unk_34 = 1;
-                #endif
+#endif
                 do {
                     glistp->words.w0 = 0xE7000000;
                     glistp->words.w1 = 0;
@@ -2125,7 +2125,7 @@ block_31:
                         temp_a3 = (u16) *(&gTheGame.unk_9A90[0].b.frameW + var_t4) >> 2;
                         if (temp_t5 != 0) {
                             do {
-                                #if 0
+#if 0
                                 temp_a2 = glistp;
                                 var_a1 = temp_a3;
                                 temp_a2->words.w0 = 0xFD100000;
@@ -2181,7 +2181,7 @@ block_31:
                                 temp_a0_2->unk_2C = 0x04000400;
                                 temp_a0_2->unk_30 = 0xE7000000;
                                 temp_a0_2->unk_34 = 0;
-                                #endif
+#endif
                             } while (var_t0 < (s32) temp_t5);
                         }
                     }
@@ -2191,7 +2191,7 @@ block_31:
                 var_v1 = 2;
             }
         }
-        #if 0
+#if 0
         var_a1_2 = 0xBA001402;
         var_a2 = 0xFFFCF279;
         temp_v0_2 = glistp;
@@ -2212,7 +2212,7 @@ block_31:
         temp_v0_2->unk_20 = 0xB900031D;
         temp_v0_2->unk_24 = 0x504240;
         glistp = temp_v0_2 + 0x28;
-        #endif
+#endif
         if (var_s0_3 < 4) {
             var_t2 = var_s0_3 * 0x28;
             do {
@@ -2230,7 +2230,7 @@ block_31:
                         temp_t6 = (((var_a1_2 + var_a3) * 4) & 0xFFF) << 0xC;
                         temp_t4 = ((var_a1_2 * 4) & 0xFFF) << 0xC;
                         do {
-                            #if 0
+#if 0
                             temp_a1_4 = glistp;
                             var_a2_2 = 0x800;
                             temp_a1_4->words.w0 = 0xFD180000;
@@ -2283,7 +2283,7 @@ block_31:
                             temp_a0_3->unk_2C = 0x04000400;
                             temp_a0_3->unk_30 = 0xE7000000;
                             temp_a0_3->unk_34 = 0;
-                            #endif
+#endif
                         } while (var_t0_2 < (s32) temp_t5_2);
                     }
                 }

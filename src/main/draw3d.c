@@ -131,8 +131,8 @@ void Draw3DFrontTetrisWell(struct_gInfo_unk_00068 *dynamicp, s32 num) {
         FRONTBACKTEXINDEX_13, // 13
     };
     cursor_t *cursor;
-    char (*ptr)[BLOCK_LEN_B];
-    block_t (*array)[BLOCK_LEN_B];
+    char(*ptr)[BLOCK_LEN_B];
+    block_t(*array)[BLOCK_LEN_B];
     s32 row;
     s32 col;
     s32 temp;
@@ -232,7 +232,9 @@ void Draw3DFrontTetrisWell(struct_gInfo_unk_00068 *dynamicp, s32 num) {
         }
 
         if (tex != NULL) {
-            gDPLoadTextureBlock(glistp++, tex, G_IM_FMT_CI, G_IM_SIZ_8b, BLOCK_TEX_WIDTH, BLOCK_TEX_HEIGHT, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+            gDPLoadTextureBlock(glistp++, tex, G_IM_FMT_CI, G_IM_SIZ_8b, BLOCK_TEX_WIDTH, BLOCK_TEX_HEIGHT, 0,
+                                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
+                                G_TX_NOLOD, G_TX_NOLOD);
         }
 
         Set3DTile7();
@@ -316,8 +318,8 @@ void Draw3DBackTetrisWell(struct_gInfo_unk_00068 *dynamicp, s32 num) {
         FRONTBACKTEXINDEX_12, // 12
         FRONTBACKTEXINDEX_13, // 13
     };
-    char (*ptr)[BLOCK_LEN_B];
-    block_t (*array)[BLOCK_LEN_B];
+    char(*ptr)[BLOCK_LEN_B];
+    block_t(*array)[BLOCK_LEN_B];
     s32 sp5C;
     s32 col;
     s32 row;
@@ -416,7 +418,9 @@ void Draw3DBackTetrisWell(struct_gInfo_unk_00068 *dynamicp, s32 num) {
         }
 
         if (tex != NULL) {
-            gDPLoadTextureBlock(glistp++, tex, G_IM_FMT_CI, G_IM_SIZ_8b, BLOCK_TEX_WIDTH, BLOCK_TEX_HEIGHT, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+            gDPLoadTextureBlock(glistp++, tex, G_IM_FMT_CI, G_IM_SIZ_8b, BLOCK_TEX_WIDTH, BLOCK_TEX_HEIGHT, 0,
+                                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
+                                G_TX_NOLOD, G_TX_NOLOD);
         }
 
         Set3DTile7();
@@ -927,7 +931,8 @@ void Draw3DAttackBrick(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 check) {
         }
 
         if (old_tex != s_tex) {
-            gDPLoadTextureBlock(glistp++, s_tex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+            gDPLoadTextureBlock(glistp++, s_tex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
             old_tex = s_tex;
         }
 
@@ -944,7 +949,8 @@ void Draw3DAttackBrick(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 check) {
             }
 
             gDPPipeSync(glistp++);
-            gDPSetTile(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, tmem, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+            gDPSetTile(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, tmem, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                       G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
             gDPSetTileSize(glistp++, G_TX_LOADTILE, 0, 0, (width - 1) << 2, 0x003C);
         } else {
             width = 0x14;
@@ -953,38 +959,45 @@ void Draw3DAttackBrick(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 check) {
 
             switch (s->imagePal) {
                 case 0x1:
-                    gDPSetTile(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 0x0000, 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+                    gDPSetTile(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 0x0000, 1, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                               G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
                     gDPSetTileSize(glistp++, 1, 0, 0, 0x004C, 0x003C);
                     break;
 
                 case 0x2:
-                    gDPSetTile(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 0x0005, 2, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+                    gDPSetTile(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 0x0005, 2, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                               G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
                     gDPSetTileSize(glistp++, 2, 0, 0, 0x004C, 0x003C);
                     break;
 
                 case 0x3:
-                    gDPSetTile(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 0x000A, 3, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+                    gDPSetTile(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 0x000A, 3, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                               G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
                     gDPSetTileSize(glistp++, 3, 0, 0, 0x004C, 0x003C);
                     break;
 
                 case 0x4:
-                    gDPSetTile(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 0x0100, 4, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+                    gDPSetTile(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 0x0100, 4, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                               G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
                     gDPSetTileSize(glistp++, 4, 0, 0, 0x004C, 0x003C);
                     break;
 
                 case 0x5:
-                    gDPSetTile(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 0x0105, 5, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+                    gDPSetTile(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 0x0105, 5, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                               G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
                     gDPSetTileSize(glistp++, 5, 0, 0, 0x004C, 0x003C);
                     break;
 
                 case 0x6:
-                    gDPSetTile(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 0x010A, 6, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+                    gDPSetTile(glistp++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 0x010A, 6, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                               G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
                     gDPSetTileSize(glistp++, 6, 0, 0, 0x004C, 0x003C);
                     break;
             }
         }
 
-        gSPTextureRectangle(glistp++, x << 2, y << 2, (x + width) << 2, (y + 16) << 2, s->imagePal, 0, 0, 0x0400, 0x0400);
+        gSPTextureRectangle(glistp++, x << 2, y << 2, (x + width) << 2, (y + 16) << 2, s->imagePal, 0, 0, 0x0400,
+                            0x0400);
         gDPPipeSync(glistp++);
     }
 
@@ -1001,7 +1014,8 @@ void Draw3DAttackBrick(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 check) {
         c_tex = explosionAB[0];
     }
 
-    gDPLoadTextureBlock(glistp++, c_tex, G_IM_FMT_CI, G_IM_SIZ_8b, 64, 16, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadTextureBlock(glistp++, c_tex, G_IM_FMT_CI, G_IM_SIZ_8b, 64, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
     for (i = 0; i <= check; i++) {
         attack = &attk[i];
@@ -1017,7 +1031,8 @@ void Draw3DAttackBrick(struct_gInfo_unk_00068 *dynamicp, s32 num, s32 check) {
         x = s->scaleW;
         y = s->scaleH;
 
-        gSPTextureRectangle(glistp++, x << 2, y << 2, (x + 16) << 2, (y + 16) << 2, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
+        gSPTextureRectangle(glistp++, x << 2, y << 2, (x + 16) << 2, (y + 16) << 2, G_TX_RENDERTILE, 0, 0, 0x0400,
+                            0x0400);
         gDPPipeSync(glistp++);
     }
 }
@@ -2278,7 +2293,9 @@ void Draw3DSmoke(struct_gInfo_unk_00068 *dynamicp, s32 num) {
 
     gDPPipeSync(glistp++);
     gDPSetTextureLUT(glistp++, G_TT_NONE);
-    gDPLoadTextureBlock(glistp++, smokesmoke, G_IM_FMT_I, G_IM_SIZ_8b, SMOKESMOKE_TEX_WIDTH, SMOKESMOKE_TEX_HEIGHT, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadTextureBlock(glistp++, smokesmoke, G_IM_FMT_I, G_IM_SIZ_8b, SMOKESMOKE_TEX_WIDTH, SMOKESMOKE_TEX_HEIGHT, 0,
+                        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
+                        G_TX_NOLOD);
 
     Set3DTile();
 
@@ -2318,7 +2335,8 @@ void Draw3DSmoke(struct_gInfo_unk_00068 *dynamicp, s32 num) {
                 break;
         }
 
-        gSPTextureRectangle(glistp++, s->objX, s->objY, ((s->objX >> 2) + 24) << 2, ((s->objY >> 2) + 16) << 2, tile, 0, 0, 0x02AE, 0x0400);
+        gSPTextureRectangle(glistp++, s->objX, s->objY, ((s->objX >> 2) + 24) << 2, ((s->objY >> 2) + 16) << 2, tile, 0,
+                            0, 0x02AE, 0x0400);
 
         gDPPipeSync(glistp++);
     }
@@ -2551,14 +2569,17 @@ void Draw3DSmallStars(s32 layer) {
                 switch (gTheGame.tetrisWell[num].block[row][col].currRow) {
                     case 0:
                     case 1:
-                        gDPLoadTextureBlock(glistp++, stars1, G_IM_FMT_CI, G_IM_SIZ_8b, STARS1_TEX_WIDTH, STARS1_TEX_HEIGHT, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+                        gDPLoadTextureBlock(glistp++, stars1, G_IM_FMT_CI, G_IM_SIZ_8b, STARS1_TEX_WIDTH,
+                                            STARS1_TEX_HEIGHT, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
+                                            G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
                         break;
 
                     case 2:
                     case 3:
-                        gDPLoadTextureBlock(glistp++, stars2, G_IM_FMT_CI, G_IM_SIZ_8b, STARS2_TEX_WIDTH, STARS2_TEX_HEIGHT, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+                        gDPLoadTextureBlock(glistp++, stars2, G_IM_FMT_CI, G_IM_SIZ_8b, STARS2_TEX_WIDTH,
+                                            STARS2_TEX_HEIGHT, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
+                                            G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
                         break;
-
                 }
 
                 Set3DTile();
@@ -2599,7 +2620,6 @@ void Draw3DSmallStars(s32 layer) {
 
                 gSPTextureRectangle(glistp++, x << 2, y << 2, (x + 16) << 2, (y + 16) << 2, tile, 0, 0, 0x0400, 0x0400);
                 gDPPipeSync(glistp++);
-
             }
 
             total += 1;
