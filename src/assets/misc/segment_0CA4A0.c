@@ -1400,11 +1400,24 @@ uObjTxtr numberTexture6 = {
 };
 
 u8 D_01022620_usa[] ALIGNED(8) = {
-#include "assets/misc/segment_0CA4A0/D_01022620_usa.i8.inc"
+#include "assets/misc/segment_0CA4A0/D_01022620_usa.ci8.inc"
 };
+static_assert(ARRAY_COUNT(D_01022620_usa) == D_01022620_USA_WIDTH * D_01022620_USA_HEIGHT * sizeof(u8), "");
 
-u32 D_01022E20_usa[] = {
-    0x00001033, (u32)D_01022620_usa, 0x000000FF, 0x01000000, 0xFFFFFFFF, 0x00000000,
+/*
+height: 32
+width: 64
+palette: numberTable
+*/
+uObjTxtr D_01022E20_usa = {
+    /* type  */ G_OBJLT_TXTRBLOCK,
+    /* image */ (u64 *)D_01022620_usa,
+    /* tmem  */ GS_PIX2TMEM(0, G_IM_SIZ_8b),
+    /* tsize */ GS_TB_TSIZE(D_01022620_USA_WIDTH *D_01022620_USA_HEIGHT, G_IM_SIZ_8b),
+    /* tline */ GS_TB_TLINE(D_01022620_USA_WIDTH, G_IM_SIZ_8b),
+    /* sid   */ 0,
+    /* flag  */ (u32)-1,
+    /* mask  */ 0x0,
 };
 
 u8 clear[] ALIGNED(8) = {

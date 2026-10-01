@@ -25,6 +25,8 @@
 
 #define GAME_UNK_9A90_COUNT 4
 
+#define GAME_GSPRITE_COUNT 10
+
 
 /* Original name: help_t */
 typedef struct help_t {
@@ -54,7 +56,7 @@ typedef struct Game {
     /* 0x8E18 */ UNK_TYPE1 unk_8E18[0xC8];
     /* 0x8EE0 */ uObjTxtr unk_8EE0[UNK_SIZE]; // gTEXT?
     /* 0x8EF8 */ UNK_PAD unk_8EF8[0x8FD0-0x8EF8];
-    /* 0x8FD0 */ uObjSprite gSPRITE[10];
+    /* 0x8FD0 */ uObjSprite gSPRITE[GAME_GSPRITE_COUNT];
     /* 0x90C0 */ s32 currentText; /* Original name: currentText */
     /* 0x90C8 */ text_t drawText[DRAWTEXT_COUNT]; /* Original name: drawText */
     /* 0x9988 */ uObjBg frame[UNK_SIZE]; /* Original name: frame */

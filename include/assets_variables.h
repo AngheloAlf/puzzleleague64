@@ -176,8 +176,10 @@ extern uObjTxtr numberTexture4;
 extern uObjTxtr numberTexture5;
 extern uObjTxtr numberTexture6;
 
-// extern UNK_TYPE D_01022620_usa;
-// extern UNK_TYPE D_01022E20_usa;
+#define D_01022620_USA_WIDTH 64
+#define D_01022620_USA_HEIGHT 32
+extern u8 D_01022620_usa[];
+extern uObjTxtr D_01022E20_usa;
 
 #define CLEAR_TEX_WIDTH 64
 #define CLEAR_TEX_HEIGHT 32

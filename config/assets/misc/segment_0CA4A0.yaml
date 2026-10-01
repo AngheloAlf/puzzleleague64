@@ -144,7 +144,7 @@ segments:
       - [0x225D8]
       - [0x225F0]
       - [0x22608]
-      - [0x22620, i8, D_01022620_usa.i8, 2048, 1] # unknown type and dimensions
+      - { start: 0x22620, type: ci8, name: D_01022620_usa.ci8, width: 64, height: 32, palettes: [numberTable] }
       - [0x22E20]
       - { start: 0x22E38, type: ci8, name: clear.ci8, width: 64, height: 32, palettes: [numberTable] }
       - [0x23638]

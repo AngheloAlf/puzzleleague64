@@ -1818,465 +1818,188 @@ void Draw3DClearSign(struct_gInfo_unk_00068 *dynamicp, s32 num) {
     gDPSetRenderMode(glistp++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
 }
 
-#if VERSION_USA
-#if 0
-extern ? D_01022620_usa;
-
-void Draw3DGameOverStat(s32 arg0) {
-    s32 sp14;
-    s32 sp18;
-    s32 sp1C;
-    s32 sp20;
-    void **sp24;
-    s32 sp28;
-    s32 sp2C;
-    Gfx *temp_a1;
-    Gfx *temp_a1_2;
-    Gfx *temp_a1_3;
-    Gfx *temp_a2;
-    Gfx *temp_a3;
-    Gfx *temp_a3_2;
-    Gfx *temp_a3_3;
-    Gfx *temp_v0;
-    Gfx *temp_v0_2;
-    Gfx *temp_v1_5;
-    s32 temp_a1_4;
-    s32 temp_t0;
-    s32 temp_t0_2;
-    s32 temp_t0_3;
-    s32 temp_t1;
-    s32 temp_t1_2;
-    s32 temp_t1_3;
-    s32 temp_v0_3;
-    s32 temp_v1;
-    s32 temp_v1_2;
-    s32 temp_v1_3;
-    s32 temp_v1_4;
+/**
+ * Original name: Draw3DGameOverStat
+ */
+void Draw3DGameOverStat(struct_gInfo_unk_00068 *dynamicp) {
+    icon_t *var_s1;
+    icon_t *icon;
+    s32 x;
+    s32 y;
     s32 temp_v1_6;
-    s32 temp_v1_7;
-    s32 var_s2;
-    s32 var_s2_2;
-    s32 var_s2_3;
+    s32 i;
     s32 var_s3;
-    s32 var_t2;
-    s32 var_t3;
-    s32 var_t4;
-    s32 var_t6;
-    s32 var_t7;
-    u16 temp_t2;
-    u8 *var_s0;
-    void **var_t5;
-    void *var_s0_2;
-    void *var_s1;
+    s32 temp_t2;
+    u8 *tex;
 
-    var_s0 = saved_reg_s0;
-    var_s3 = saved_reg_s3;
-    sp14 = arg0;
-    temp_v0 = glistp;
-    var_s2 = 0;
-    var_s1 = sp14 + 0x157C8;
-    glistp = temp_v0 + 8;
-    glistp = temp_v0 + 0x10;
-    temp_v0->unk_C = 0x8000;
-    glistp = temp_v0 + 0x18;
-    temp_v0->unk_10 = 0xFD100000;
-    temp_v0->unk_14 = D_01000408_usa;
-    glistp = temp_v0 + 0x20;
-    temp_v0->unk_18 = 0xE8000000;
-    glistp = temp_v0 + 0x28;
-    temp_v0->unk_24 = 0x07000000;
-    glistp = temp_v0 + 0x30;
-    temp_v0->unk_28 = 0xE6000000;
-    glistp = temp_v0 + 0x38;
-    temp_v0->unk_30 = 0xF0000000;
-    temp_v0->words.w0 = 0xE7000000;
-    temp_v0->words.w1 = 0;
-    temp_v0->unk_8 = 0xBA000E02;
-    temp_v0->unk_1C = 0;
-    temp_v0->unk_20 = 0xF5000100;
-    temp_v0->unk_2C = 0;
-    temp_v0->unk_34 = 0x073FC000;
-    glistp = temp_v0 + 0x40;
-    temp_v0->unk_38 = 0xE7000000;
-    temp_v0->unk_3C = 0;
+    var_s1 = dynamicp->icon[0];
+
+    gDPPipeSync(glistp++);
+    gDPSetTextureLUT(glistp++, G_TT_RGBA16);
+    gDPLoadTLUT_pal256(glistp++, D_01000408_usa);
+
     Set3DTile();
-loop_1:
-    if (var_s1->unk_0 == -1) {
-        temp_v1 = var_s1->unk_4;
-        switch (temp_v1) {                          /* irregular */
-            case 0xC:
-                temp_v1_2 = var_s1->unk_8;
-                if (temp_v1_2 < 0xC) {
-                    var_s0 = combo01;
-                } else if (temp_v1_2 < 0x14) {
-                    var_s0 = combo02;
-                } else if (temp_v1_2 < 0x1C) {
-                    var_s0 = combo03;
-                } else if (temp_v1_2 < 0x24) {
-                    var_s0 = combo04;
-                } else if (temp_v1_2 < 0x2C) {
-                    var_s0 = combo05;
-                } else if (temp_v1_2 < 0x34) {
-                    var_s0 = combo06;
-                } else if (temp_v1_2 < 0x3C) {
-                    var_s0 = combo07;
+
+    for (i = 0; i < ICON_COUNT; i++) {
+        icon = &var_s1[i];
+
+        if (icon->flag != -1) {
+            break;
+        }
+
+        switch (icon->type) {
+            case ICONTYPE_12:
+                if (icon->total < 0xC) {
+                    tex = combo01;
+                } else if (icon->total < 0x14) {
+                    tex = combo02;
+                } else if (icon->total < 0x1C) {
+                    tex = combo03;
+                } else if (icon->total < 0x24) {
+                    tex = combo04;
+                } else if (icon->total < 0x2C) {
+                    tex = combo05;
+                } else if (icon->total < 0x34) {
+                    tex = combo06;
+                } else if (icon->total < 0x3C) {
+                    tex = combo07;
+                } else if (icon->total < 0x44) {
+                    tex = combo08;
                 } else {
-                    var_s0 = combo09;
-                    if (temp_v1_2 < 0x44) {
-                        var_s0 = combo08;
-                    }
+                    tex = combo09;
                 }
-                var_s3 = Return3DComboTile(var_s1->unk_8);
+
+                var_s3 = Return3DComboTile(icon->total);
                 break;
-            case 0xA:
-                temp_v1_3 = var_s1->unk_8;
-                if (temp_v1_3 < 9) {
-                    var_s0 = chain01;
-                } else if (temp_v1_3 < 0x11) {
-                    var_s0 = chain02;
-                } else if (temp_v1_3 < 0x19) {
-                    var_s0 = chain03;
-                } else if (temp_v1_3 < 0x21) {
-                    var_s0 = chain04;
-                } else if (temp_v1_3 < 0x29) {
-                    var_s0 = chain05;
-                } else if (temp_v1_3 < 0x31) {
-                    var_s0 = chain06;
-                } else if (temp_v1_3 < 0x39) {
-                    var_s0 = chain07;
-                } else if (temp_v1_3 < 0x41) {
-                    var_s0 = chain08;
-                } else if (temp_v1_3 < 0x49) {
-                    var_s0 = chain09;
-                } else if (temp_v1_3 < 0x51) {
-                    var_s0 = chain010;
+
+            case ICONTYPE_10:
+                if (icon->total < 9) {
+                    tex = chain01;
+                } else if (icon->total < 0x11) {
+                    tex = chain02;
+                } else if (icon->total < 0x19) {
+                    tex = chain03;
+                } else if (icon->total < 0x21) {
+                    tex = chain04;
+                } else if (icon->total < 0x29) {
+                    tex = chain05;
+                } else if (icon->total < 0x31) {
+                    tex = chain06;
+                } else if (icon->total < 0x39) {
+                    tex = chain07;
+                } else if (icon->total < 0x41) {
+                    tex = chain08;
+                } else if (icon->total < 0x49) {
+                    tex = chain09;
+                } else if (icon->total < 0x51) {
+                    tex = chain010;
+                } else if (icon->total < 0x59) {
+                    tex = chain011;
+                } else if (icon->total < 0x61) {
+                    tex = chain012;
                 } else {
-                    temp_v1_4 = var_s1->unk_8;
-                    if (temp_v1_4 < 0x59) {
-                        var_s0 = chain011;
-                    } else {
-                        var_s0 = chain013;
-                        if (temp_v1_4 < 0x61) {
-                            var_s0 = chain012;
-                        }
-                    }
+                    tex = chain013;
                 }
-                var_s3 = Return3DChainTile(var_s1->unk_8);
+
+                var_s3 = Return3DChainTile(icon->total);
                 break;
-            case 0xD:
-                var_s0 = combo09;
+
+            case ICONTYPE_13:
+                tex = combo09;
                 break;
         }
-        temp_a3 = glistp;
-        temp_t0 = (s32) (var_s1->unk_28 << 0x10) >> 0x12;
-        temp_t1 = (s32) (var_s1->unk_30 << 0x10) >> 0x12;
-        glistp = temp_a3 + 8;
-        temp_a3->words.w0 = 0xFD500000;
-        glistp = temp_a3 + 0x10;
-        temp_a3->unk_8 = 0xF5500000;
-        glistp = temp_a3 + 0x18;
-        temp_a3->unk_10 = 0xE6000000;
-        glistp = temp_a3 + 0x20;
-        temp_a3->unk_18 = 0xF3000000;
-        glistp = temp_a3 + 0x28;
-        glistp = temp_a3 + 0x30;
-        glistp = temp_a3 + 0x38;
-        temp_a3->words.w1 = (u32) var_s0;
-        temp_a3->unk_C = 0x07000000;
-        temp_a3->unk_14 = 0;
-        temp_a3->unk_1C = 0x073FF100;
-        temp_a3->unk_20 = 0xE7000000;
-        temp_a3->unk_24 = 0;
-        temp_a3->unk_28 = 0xF5481000;
-        temp_a3->unk_2C = 0;
-        temp_a3->unk_30 = 0xF2000000;
-        temp_a3->unk_34 = 0xFC07C;
+
+        x = icon->thing.rect.s.objX >> 2;
+        y = icon->thing.rect.s.objY >> 2;
+
+        gDPLoadTextureBlock(glistp++, tex, G_IM_FMT_CI, G_IM_SIZ_8b, COMBO_CHAIN_TEX_WIDTH, COMBO_CHAIN_TEX_HEIGHT, 0,
+                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
+                            G_TX_NOLOD);
+
         if (var_s3 == 7) {
-            glistp = temp_a3 + 0x40;
-            glistp = temp_a3 + 0x48;
-            temp_a3->unk_38 = 0xE7000000;
-            temp_a3->unk_3C = 0;
-            temp_a3->unk_40 = 0xF5481086;
-            temp_a3->unk_44 = 0x07000000;
-            glistp = temp_a3 + 0x50;
-            temp_a3->unk_48 = 0xF2000000;
-            temp_a3->unk_4C = 0x0703C03C;
+            Set3DTile7();
         }
-        if (var_s1->unk_4 == 0xD) {
-            temp_a1 = glistp;
-            glistp = temp_a1 + 8;
-            glistp = temp_a1 + 0x10;
-            glistp = temp_a1 + 0x18;
-            temp_a1->unk_8 = 0xF5481080;
-            glistp = temp_a1 + 0x20;
-            temp_a1->unk_14 = 0x0707C03C;
-            temp_a1->unk_18 = (s32) (((((temp_t0 + 0x20) * 4) & 0xFFF) << 0xC) | ((((temp_t1 + 0x10) * 4) & 0xFFF) | 0xE4000000));
-            glistp = temp_a1 + 0x28;
-            temp_a1->unk_20 = 0xB4000000;
-            glistp = temp_a1 + 0x30;
-            temp_a1->words.w0 = 0xE7000000;
-            temp_a1->words.w1 = 0;
-            temp_a1->unk_C = 0x07000000;
-            temp_a1->unk_10 = 0xF2000000;
-            temp_a1->unk_1C = (s32) ((((temp_t0 * 4) & 0xFFF) << 0xC) | (((temp_t1 * 4) & 0xFFF) | 0x07000000));
-            temp_a1->unk_24 = 0;
-            temp_a1->unk_28 = 0xB3000000;
-            temp_a1->unk_2C = 0x04000400;
+
+        if (icon->type == ICONTYPE_13) {
+            gDPPipeSync(glistp++);
+            gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0080, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                       G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+            gDPSetTileSize(glistp++, G_TX_LOADTILE, 0, 0, 0x007C, 0x003C);
+            gSPTextureRectangle(glistp++, x << 2, y << 2, (x + 32) << 2, (y + 16) << 2, G_TX_LOADTILE, 0, 0, 0x0400,
+                                0x0400);
         } else {
-            temp_a1_2 = glistp;
-            glistp = temp_a1_2 + 8;
-            temp_a1_2->words.w0 = ((((temp_t0 + 0x10) * 4) & 0xFFF) << 0xC) | ((((temp_t1 + 0x10) * 4) & 0xFFF) | 0xE4000000);
-            glistp = temp_a1_2 + 0x10;
-            temp_a1_2->unk_8 = 0xB4000000;
-            glistp = temp_a1_2 + 0x18;
-            temp_a1_2->words.w1 = ((var_s3 & 7) << 0x18) | (((temp_t0 * 4) & 0xFFF) << 0xC) | ((temp_t1 * 4) & 0xFFF);
-            temp_a1_2->unk_C = 0;
-            temp_a1_2->unk_10 = 0xB3000000;
-            temp_a1_2->unk_14 = 0x04000400;
+            gSPTextureRectangle(glistp++, x << 2, y << 2, (x + 16) << 2, (y + 16) << 2, var_s3, 0, 0, 0x0400, 0x0400);
         }
-        var_s2 += 1;
-        glistp->words.w0 = 0xE7000000;
-        glistp->words.w1 = 0;
-        glistp += 8;
-        var_s1 += 0x68;
-        if (var_s2 < 0xA) {
-            goto loop_1;
+
+        gDPPipeSync(glistp++);
+    }
+
+    for (i = 6; i < DRAWTEXT_COUNT; i++) {
+        gDPPipeSync(glistp++);
+        gDPSetTextureLUT(glistp++, G_TT_RGBA16);
+        gDPLoadTLUT_pal256(glistp++, gTheGame.unk_8BE4);
+
+        gDPPipeSync(glistp++);
+
+        guS2DEmuBgRect1Cyc(&glistp, &gTheGame.unk_8C88[3]);
+
+        gDPPipeSync(glistp++);
+        gDPSetTextureLUT(glistp++, G_TT_RGBA16);
+        gDPLoadTLUT_pal256(glistp++, numberTable);
+
+        temp_v1_6 = dynamicp->drawText[i].texture;
+
+        if ((temp_v1_6 == 0xA) || (temp_v1_6 == 0xC)) {
+            x = dynamicp->drawText[i].word.s.objX >> 2;
+            y = dynamicp->drawText[i].word.s.objY >> 2;
+
+            gDPLoadTextureBlock(glistp++, D_01022620_usa, G_IM_FMT_CI, G_IM_SIZ_8b, D_01022620_USA_WIDTH,
+                                D_01022620_USA_HEIGHT, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
+                                G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+            gDPPipeSync(glistp++);
+
+            if (dynamicp->drawText[i].texture == 0xA) {
+                gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0000, 3, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                           G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+                gDPSetTileSize(glistp++, 3, 0, 0, 0x00BC, 0x003C);
+            } else {
+                gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x0080, 3, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                           G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+                gDPSetTileSize(glistp++, 3, 0, 0, 0x00BC, 0x003C);
+            }
+
+            gSPTextureRectangle(glistp++, x << 2, y << 2, (x + 0x30) << 2, (y + 0x10) << 2, 3, 0, 0, 0x0400, 0x0400);
+            gDPPipeSync(glistp++);
         }
     }
-    var_s2_2 = 6;
-    var_t7 = 0x8000;
-    var_t6 = 0xFD100000;
-    var_t5 = &gTheGame.unk_8BE4;
-    var_t4 = 0xE8000000;
-    var_t2 = 0x07000000;
-    var_t3 = 0xF0000000;
-    var_s0_2 = sp14 + 0xC0;
-    do {
-        temp_v1_5 = glistp;
-        temp_v1_5->words.w0 = 0xE7000000;
-        temp_v1_5->words.w1 = 0;
-        temp_v1_5->unk_8 = 0xBA000E02;
-        temp_v1_5->unk_C = var_t7;
-        temp_v1_5->unk_10 = var_t6;
-        glistp = temp_v1_5 + 8;
-        glistp = temp_v1_5 + 0x10;
-        glistp = temp_v1_5 + 0x18;
-        glistp = temp_v1_5 + 0x20;
-        glistp = temp_v1_5 + 0x28;
-        glistp = temp_v1_5 + 0x30;
-        glistp = temp_v1_5 + 0x38;
-        glistp = temp_v1_5 + 0x40;
-        temp_v1_5->unk_18 = var_t4;
-        temp_v1_5->unk_1C = 0;
-        temp_v1_5->unk_20 = 0xF5000100;
-        temp_v1_5->unk_24 = var_t2;
-        temp_v1_5->unk_28 = 0xE6000000;
-        temp_v1_5->unk_2C = 0;
-        temp_v1_5->unk_30 = var_t3;
-        temp_v1_5->unk_34 = 0x073FC000;
-        temp_v1_5->unk_38 = 0xE7000000;
-        temp_v1_5->unk_3C = 0;
-        glistp = temp_v1_5 + 0x48;
-        temp_v1_5->unk_40 = 0xE7000000;
-        temp_v1_5->unk_44 = 0;
-        temp_v1_5->unk_14 = (void *) *var_t5;
-        sp18 = var_t2;
-        sp1C = var_t3;
-        sp20 = var_t4;
-        sp24 = var_t5;
-        sp28 = var_t6;
-        sp2C = var_t7;
-        guS2DEmuBgRect1Cyc(&glistp, (uObjBg *) (var_t5 + 0x11C));
-        temp_a3_2 = glistp;
-        temp_a3_2->words.w0 = 0xE7000000;
-        temp_a3_2->words.w1 = 0;
-        temp_a3_2->unk_8 = 0xBA000E02;
-        temp_a3_2->unk_C = var_t7;
-        temp_a3_2->unk_14 = numberTable;
-        temp_a3_2->unk_10 = var_t6;
-        temp_a3_2->unk_1C = 0;
-        temp_a3_2->unk_20 = 0xF5000100;
-        temp_a3_2->unk_18 = var_t4;
-        temp_a3_2->unk_28 = 0xE6000000;
-        temp_a3_2->unk_2C = 0;
-        temp_a3_2->unk_24 = var_t2;
-        temp_a3_2->unk_34 = 0x073FC000;
-        temp_a3_2->unk_38 = 0xE7000000;
-        temp_a3_2->unk_3C = 0;
-        temp_a3_2->unk_30 = var_t3;
-        temp_v1_6 = var_s0_2->unk_18710;
-        glistp = temp_a3_2 + 8;
-        glistp = temp_a3_2 + 0x10;
-        glistp = temp_a3_2 + 0x18;
-        glistp = temp_a3_2 + 0x20;
-        glistp = temp_a3_2 + 0x28;
-        glistp = temp_a3_2 + 0x30;
-        glistp = temp_a3_2 + 0x38;
-        glistp = temp_a3_2 + 0x40;
-        if (((temp_v1_6 == 0xA) | (temp_v1_6 == 0xC)) != 0) {
-            glistp = temp_a3_2 + 0x48;
-            temp_a3_2->unk_40 = 0xFD500000;
-            temp_a3_2->unk_44 = &D_01022620_usa;
-            glistp = temp_a3_2 + 0x50;
-            temp_a3_2->unk_48 = 0xF5500000;
-            glistp = temp_a3_2 + 0x58;
-            glistp = temp_a3_2 + 0x60;
-            temp_a3_2->unk_58 = 0xF3000000;
-            glistp = temp_a3_2 + 0x68;
-            glistp = temp_a3_2 + 0x70;
-            glistp = temp_a3_2 + 0x78;
-            glistp = temp_a3_2 + 0x80;
-            temp_a3_2->unk_4C = var_t2;
-            temp_a3_2->unk_50 = 0xE6000000;
-            temp_a3_2->unk_54 = 0;
-            temp_a3_2->unk_5C = 0x073FF100;
-            temp_a3_2->unk_60 = 0xE7000000;
-            temp_a3_2->unk_64 = 0;
-            temp_a3_2->unk_68 = 0xF5481000;
-            temp_a3_2->unk_6C = 0;
-            temp_a3_2->unk_70 = 0xF2000000;
-            temp_a3_2->unk_74 = 0xFC07C;
-            temp_a3_2->unk_78 = 0xE7000000;
-            temp_a3_2->unk_7C = 0;
-            temp_t0_2 = (s32) (var_s0_2->unk_186F8 << 0x10) >> 0x12;
-            temp_t1_2 = (s32) (var_s0_2->unk_18700 << 0x10) >> 0x12;
-            if (var_s0_2->unk_18710 == 0xA) {
-                glistp = temp_a3_2 + 0x88;
-                temp_a3_2->unk_84 = 0x03000000;
-                temp_a3_2->unk_80 = 0xF5481000;
-                glistp = temp_a3_2 + 0x90;
-                temp_a3_2->unk_88 = 0xF2000000;
-                temp_a3_2->unk_8C = 0x030BC03C;
-            } else {
-                glistp = temp_a3_2 + 0x88;
-                temp_a3_2->unk_84 = 0x03000000;
-                temp_a3_2->unk_80 = 0xF5481080;
-                glistp = temp_a3_2 + 0x90;
-                temp_a3_2->unk_88 = 0xF2000000;
-                temp_a3_2->unk_8C = 0x030BC03C;
-            }
-            temp_a1_3 = glistp;
-            glistp = temp_a1_3 + 8;
-            temp_a1_3->words.w0 = ((((temp_t0_2 + 0x30) * 4) & 0xFFF) << 0xC) | ((((temp_t1_2 + 0x10) * 4) & 0xFFF) | 0xE4000000);
-            glistp = temp_a1_3 + 0x10;
-            temp_a1_3->unk_8 = 0xB4000000;
-            glistp = temp_a1_3 + 0x18;
-            temp_a1_3->unk_10 = 0xB3000000;
-            temp_a1_3->words.w1 = (((temp_t0_2 * 4) & 0xFFF) << 0xC) | (((temp_t1_2 * 4) & 0xFFF) | 0x03000000);
-            temp_a1_3->unk_C = 0;
-            temp_a1_3->unk_14 = 0x04000400;
-            glistp = temp_a1_3 + 0x20;
-            temp_a1_3->unk_18 = 0xE7000000;
-            temp_a1_3->unk_1C = 0;
-        }
-        var_s2_2 += 1;
-        var_s0_2 += 0x20;
-    } while (var_s2_2 < 0x46);
-    var_s2_3 = 1;
-    temp_v0_2 = glistp;
-    glistp = temp_v0_2 + 8;
-    glistp = temp_v0_2 + 0x10;
-    temp_v0_2->unk_C = 0x8000;
-    glistp = temp_v0_2 + 0x18;
-    temp_v0_2->unk_10 = 0xFD100000;
-    temp_v0_2->unk_14 = numberTable;
-    glistp = temp_v0_2 + 0x20;
-    temp_v0_2->unk_18 = 0xE8000000;
-    glistp = temp_v0_2 + 0x28;
-    temp_v0_2->unk_24 = 0x07000000;
-    glistp = temp_v0_2 + 0x30;
-    temp_v0_2->unk_28 = 0xE6000000;
-    glistp = temp_v0_2 + 0x38;
-    temp_v0_2->unk_30 = 0xF0000000;
-    temp_v0_2->words.w0 = 0xE7000000;
-    temp_v0_2->words.w1 = 0;
-    temp_v0_2->unk_8 = 0xBA000E02;
-    temp_v0_2->unk_1C = 0;
-    temp_v0_2->unk_20 = 0xF5000100;
-    temp_v0_2->unk_2C = 0;
-    temp_v0_2->unk_34 = 0x073FC000;
-    glistp = temp_v0_2 + 0x40;
-    temp_v0_2->unk_38 = 0xE7000000;
-    temp_v0_2->unk_3C = 0;
-    do {
-        temp_v0_3 = 0xA - var_s2_3;
-        temp_v1_7 = temp_v0_3 * 0x18;
-        temp_a3_3 = glistp;
-        temp_t2 = *(&gTheGame.gSPRITE[0].s.imageAdrs + temp_v1_7);
-        temp_t0_3 = (s32) ((u16) gTheGame.gSPRITE[temp_v0_3].s.objX << 0x10) >> 0x12;
-        temp_t1_3 = (s32) (*(&gTheGame.gSPRITE[0].s.objY + temp_v1_7) << 0x10) >> 0x12;
-        glistp = temp_a3_3 + 8;
-        temp_a3_3->words.w0 = 0xFD500000;
-        temp_a3_3->words.w1 = (u32) arrow;
-        glistp = temp_a3_3 + 0x10;
-        temp_a3_3->unk_8 = 0xF5500000;
-        temp_a3_3->unk_C = 0x07000000;
-        glistp = temp_a3_3 + 0x18;
-        temp_a3_3->unk_10 = 0xE6000000;
-        glistp = temp_a3_3 + 0x20;
-        temp_a3_3->unk_18 = 0xF3000000;
-        glistp = temp_a3_3 + 0x28;
-        glistp = temp_a3_3 + 0x30;
-        glistp = temp_a3_3 + 0x38;
-        temp_a3_3->unk_14 = 0;
-        temp_a3_3->unk_1C = 0x070FF100;
-        temp_a3_3->unk_20 = 0xE7000000;
-        temp_a3_3->unk_24 = 0;
-        temp_a3_3->unk_28 = 0xF5481000;
-        temp_a3_3->unk_2C = 0;
-        temp_a3_3->unk_30 = 0xF2000000;
-        temp_a3_3->unk_34 = 0xFC01C;
-        if (var_s2_3 == 1) {
-            glistp = temp_a3_3 + 0x40;
-            glistp = temp_a3_3 + 0x48;
-            temp_a3_3->unk_40 = (s32) ((temp_t2 & 0x1FF) | 0xF5481000);
-            temp_a3_3->unk_44 = 0x01000000;
-            temp_a3_3->unk_38 = 0xE7000000;
-            temp_a3_3->unk_3C = 0;
-            glistp = temp_a3_3 + 0x50;
-            temp_a3_3->unk_48 = 0xF2000000;
-            temp_a3_3->unk_4C = 0x0101C01C;
+
+    gDPPipeSync(glistp++);
+    gDPSetTextureLUT(glistp++, G_TT_RGBA16);
+    gDPLoadTLUT_pal256(glistp++, numberTable);
+
+    for (i = 1; i < 3; i++) {
+        x = gTheGame.gSPRITE[GAME_GSPRITE_COUNT - i].s.objX >> 2;
+        y = gTheGame.gSPRITE[GAME_GSPRITE_COUNT - i].s.objY >> 2;
+        temp_t2 = gTheGame.gSPRITE[GAME_GSPRITE_COUNT - i].s.imageAdrs;
+
+        gDPLoadTextureBlock(glistp++, arrow, G_IM_FMT_CI, G_IM_SIZ_8b, 64, 8, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+
+        if (i == 1) {
+            gDPPipeSync(glistp++);
+            gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, temp_t2, 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                       G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+            gDPSetTileSize(glistp++, 1, 0, 0, 0x001C, 0x001C);
         } else {
-            glistp = temp_a3_3 + 0x40;
-            temp_a3_3->unk_38 = (s32) ((temp_t2 & 0x1FF) | 0xF5481000);
-            temp_a3_3->unk_3C = 0x02000000;
-            glistp = temp_a3_3 + 0x48;
-            temp_a3_3->unk_40 = 0xF2000000;
-            temp_a3_3->unk_44 = 0x0201C01C;
+            gDPSetTile(glistp++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, temp_t2, 2, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                       G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+            gDPSetTileSize(glistp++, 2, 0, 0, 0x001C, 0x001C);
         }
-        temp_a2 = glistp;
-        temp_a1_4 = var_s2_3 & 7;
-        var_s2_3 += 1;
-        glistp = temp_a2 + 8;
-        glistp = temp_a2 + 0x10;
-        temp_a2->unk_8 = 0xB4000000;
-        glistp = temp_a2 + 0x18;
-        temp_a2->unk_10 = 0xB3000000;
-        glistp = temp_a2 + 0x20;
-        temp_a2->words.w0 = ((((temp_t0_3 + 8) * 4) & 0xFFF) << 0xC) | ((((temp_t1_3 + 8) * 4) & 0xFFF) | 0xE4000000);
-        temp_a2->words.w1 = (temp_a1_4 << 0x18) | (((temp_t0_3 * 4) & 0xFFF) << 0xC) | ((temp_t1_3 * 4) & 0xFFF);
-        temp_a2->unk_C = 0;
-        temp_a2->unk_14 = 0x04000400;
-        temp_a2->unk_18 = 0xE7000000;
-        temp_a2->unk_1C = 0;
-    } while (var_s2_3 < 3);
+
+        gSPTextureRectangle(glistp++, x << 2, y << 2, (x + 8) << 2, (y + 8) << 2, i, 0, 0, 0x0400, 0x0400);
+        gDPPipeSync(glistp++);
+    }
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/draw3d", Draw3DGameOverStat);
-#endif
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/draw3d", Draw3DGameOverStat);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/draw3d", Draw3DGameOverStat);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/draw3d", Draw3DGameOverStat);
-#endif
 
 /**
  * Original name: Draw3DSmoke
