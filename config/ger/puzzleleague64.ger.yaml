@@ -419,7 +419,8 @@ segments:
       - [0x0ACF90, .data, main/screen]
       - [0x0ACFB0, data, main/peel]
       - [0x0ACFD0, .data, main/02E800]
-      - [0x0ACFF0, data, main/0ACFF0]
+      - [0x0ACFF0, .data, main/editor]
+      - [0x0AD040, data, main/0AD040]
       - [0x0AD310, .data, main/041780]
       - [0x0AD380, .data, main/043000]
       - [0x0AD3C0, .data, main/043D10]
@@ -608,7 +609,7 @@ segments:
       - { type: bss, vram: 0x801813B0, name: main/story }
       - { type: bss, vram: 0x801813C0, name: main/peel }
       - { type: .bss, vram: 0x80181780, name: main/02E800 }
-      - { type: bss, vram: 0x80181800, name: main/editor }
+      - { type: .bss, vram: 0x80181800, name: main/editor }
       - { type: bss, vram: 0x80181840, name: main/bonus }
       - { type: .bss, vram: 0x80181890, name: main/hvqm2util }
       - { type: bss, vram: 0x80185DC0, name: main/041780 }

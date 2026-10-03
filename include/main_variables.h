@@ -324,20 +324,22 @@ extern u8 tutorial_move2[];
 extern u8 tutorial_move3[];
 extern u8 tutorial_move4[];
 extern u8 tutorial_move5[];
-// extern UNK_TYPE D_800BB6F0_usa;
-// extern UNK_TYPE D_800BB88C_usa;
-// extern UNK_TYPE D_800BBB14_usa;
-// extern UNK_TYPE D_800BC030_usa;
-// extern UNK_TYPE D_800BC0FC_usa;
-// extern UNK_TYPE D_800BC404_usa;
-// extern UNK_TYPE D_800BC91C_usa;
-// extern UNK_TYPE D_800BCA1C_usa;
-// extern UNK_TYPE D_800BCC78_usa;
-// extern UNK_TYPE D_800BCF8C_usa;
-// extern UNK_TYPE D_800BD644_usa;
-// extern UNK_TYPE D_800BD7B8_usa;
-// extern UNK_TYPE D_800BDB68_usa;
-// extern UNK_TYPE D_800BE1E8_usa;
+
+extern u8 D_800BB6F0_usa[];
+extern u8 D_800BB88C_usa[];
+extern u8 D_800BBB14_usa[];
+extern u8 D_800BC030_usa[];
+extern u8 D_800BC0FC_usa[];
+extern u8 D_800BC404_usa[];
+extern u8 D_800BC91C_usa[];
+extern u8 D_800BCA1C_usa[];
+extern u8 D_800BCC78_usa[];
+extern u8 D_800BCF8C_usa[];
+extern u8 D_800BD644_usa[];
+extern u8 D_800BD7B8_usa[];
+extern u8 D_800BDB68_usa[];
+extern u8 D_800BE1E8_usa[];
+
 extern s32 gCounter;
 extern s32 gReset; /* Original name: gReset */
 extern enum_gMain gMain; /* Original name: gMain */
@@ -926,21 +928,6 @@ extern s16 ts_song_buffer;
 // extern UNK_TYPE gnWaveData;
 // extern UNK_TYPE B_8018E93C_usa;
 
-// extern UNK_TYPE B_8018E9C0_usa;
-// extern UNK_TYPE B_8018E9C4_usa;
-// extern UNK_TYPE gnTickCount;
-// extern UNK_TYPE gnFlushCount;
-// extern UNK_TYPE B_8018E9D0_usa;
-// extern UNK_TYPE B_8018E9D2_usa;
-// extern UNK_TYPE giScreenEdit;
-// extern UNK_TYPE gpHeapEdit;
-// extern UNK_TYPE B_8018E9DC_usa;
-// extern UNK_TYPE B_8018E9E0_usa;
-// extern UNK_TYPE B_8018E9E4_usa;
-// extern UNK_TYPE B_8018E9E8_usa;
-// extern UNK_TYPE B_8018E9EC_usa;
-// extern UNK_TYPE B_8018E9F0_usa;
-
 extern void *B_8018EA00_usa;
 extern void *B_8018EA04_usa;
 extern void *B_8018EA08_usa;
@@ -1230,7 +1217,7 @@ extern u8 TenSecond;
 // extern UNK_TYPE B_801AB7E2_usa;
 // extern UNK_TYPE B_801AB7E8_usa;
 extern OSMesgQueue B_801AB7F0_usa;
-// extern UNK_TYPE B_801AB808_usa;
+extern s32 B_801AB808_usa;
 
 extern s32 ganButton[0x10];
 
@@ -1257,7 +1244,7 @@ extern u16 st_Combo1[];
 // extern UNK_TYPE B_801ADC08_usa;
 // extern UNK_TYPE B_801ADC0C_usa;
 
-// extern UNK_TYPE B_801C6BD8_usa;
+extern s32 B_801C6BD8_usa;
 extern s32 B_801C6BDC_usa[2];
 extern s32 GarbageBlockBaseSfx_L;
 // extern UNK_TYPE B_801C6BE8_usa;

@@ -148,10 +148,7 @@ segments:
       - { path: "asm/{version}/data/main/peel.bss.o" }
 
       - { path: src/main/02E800.o }
-
       - { path: src/main/editor.o }
-      - { path: "asm/{version}/data/main/editor.data.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/data/main/editor.bss.o" }
 
       - { path: src/main/bonus.o }
       - { path: "asm/{version}/data/main/bonus.bss.o" }
@@ -161,9 +158,9 @@ segments:
       - { path: src/main/end.o }
 
       - { path: "asm/{version}/data/main/0B70C0.data.o", include_if_any: [[version, usa]] }
-      - { path: "asm/{version}/data/main/0B7590.data.o", include_if_any: [[version, eur]] }
+      - { path: "asm/{version}/data/main/0B75E0.data.o", include_if_any: [[version, eur]] }
       - { path: "asm/{version}/data/main/0B5E10.data.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/data/main/0ACFF0.data.o", include_if_any: [[version, ger]] }
+      - { path: "asm/{version}/data/main/0AD040.data.o", include_if_any: [[version, ger]] }
 
       - { path: src/main/hvqm2util.o }
       - { path: src/main/041780.o }
