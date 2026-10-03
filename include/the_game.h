@@ -43,14 +43,7 @@ typedef struct Game {
     /* 0x8B20 */ action_t action[ACTION_COUNT]; /* Original name: action */
     /* 0x8B98 */ uObjTxtr unk_8B98[2 * UNK_SIZE]; // gLUT?
     /* 0x8BC8 */ UNK_PAD unk_8BC8[0x18];
-    /* 0x8BE0 */ s32 unk_8BE0;
-    /* 0x8BE4 */ void *unk_8BE4;
-    /* 0x8BE8 */ s16 unk_8BE8;
-    /* 0x8BEA */ s16 unk_8BEA;
-    /* 0x8BEC */ s16 unk_8BEC;
-    /* 0x8BEE */ s16 unk_8BEE;
-    /* 0x8BF0 */ s32 unk_8BF0;
-    /* 0x8BF4 */ s32 unk_8BF4;
+    /* 0x8BE0 */ uObjTxtr unk_8BE0;
     /* 0x8BF8 */ UNK_PAD unk_8BF8[0x90];
     /* 0x8C88 */ uObjBg unk_8C88[10]; // gBG?
     /* 0x8E18 */ UNK_TYPE1 unk_8E18[0xC8];

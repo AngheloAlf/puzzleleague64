@@ -1937,7 +1937,7 @@ void Draw3DGameOverStat(struct_gInfo_unk_00068 *dynamicp) {
     for (i = 6; i < DRAWTEXT_COUNT; i++) {
         gDPPipeSync(glistp++);
         gDPSetTextureLUT(glistp++, G_TT_RGBA16);
-        gDPLoadTLUT_pal256(glistp++, gTheGame.unk_8BE4);
+        gDPLoadTLUT_pal256(glistp++, gTheGame.unk_8BE0.tlut.image);
 
         gDPPipeSync(glistp++);
 
