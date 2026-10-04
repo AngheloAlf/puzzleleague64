@@ -2498,12 +2498,15 @@ nbool screenHideArea(s32 iScreen, s32 nTagArea) {
     return nfalse;
 }
 
-nbool func_80027838_usa(s32 arg0, s32 arg1) {
-    struct_gaScreen_unk_18 *sp10;
+/**
+ * Original name: screenShowArea
+ */
+nbool screenShowArea(s32 iScreen, s32 nTagArea) {
+    struct_gaScreen_unk_18 *pArea;
 
-    if (inlined_func(arg0, arg1, &sp10)) {
-        sp10->nType &= ~0x800;
-        screenUpdateArea(sp10);
+    if (inlined_func(iScreen, nTagArea, &pArea)) {
+        pArea->nType &= ~0x800;
+        screenUpdateArea(pArea);
         return ntrue;
     }
     return nfalse;
@@ -3190,38 +3193,45 @@ void func_800296B0_usa(u16 *dst, char *src, s32 dstLen) {
     dst[i] = 0;
 }
 
-void func_800297C8_usa(s32 arg0, s32 arg1, u16 *arg2) {
-    if ((arg0 >= 0) && (arg0 < gnScreenCount)) {
-        struct_gaScreen *temp_t0 = &gaScreen[arg0];
-        s32 i;
+/**
+ * Original name: screenSetTextField
+ */
+void screenSetTextField(s32 iScreen, s32 nTagText, u16 *anText) {
+    struct_gaScreen *pScreen;
+    s32 i;
 
-        for (i = 0; i < temp_t0->unk_0C; i++) {
-            struct_gaScreen_unk_1C *temp_a0 = &temp_t0->unk_1C[i];
+    if ((iScreen < 0) || (iScreen >= gnScreenCount)) {
+        return;
+    }
 
-            if (temp_a0->unk_00 == arg1) {
-                if (temp_a0->unk_54 != -1) {
-                    s32 var_a1;
+    pScreen = &gaScreen[iScreen];
 
-                    i = temp_a0->unk_54;
+    for (i = 0; i < pScreen->unk_0C; i++) {
+        struct_gaScreen_unk_1C *temp_a0 = &pScreen->unk_1C[i];
 
-                    for (var_a1 = 0; var_a1 < temp_a0->unk_58; var_a1++) {
-                        temp_a0->unk_50[temp_a0->unk_54 + var_a1] = 3;
-                    }
+        if (temp_a0->unk_00 == nTagText) {
+            if (temp_a0->unk_54 != -1) {
+                s32 var_a1;
 
-                    while ((temp_a0->unk_50[i] != 0) && (i < temp_a0->unk_20) && (*arg2 != 0)) {
-                        temp_a0->unk_50[i++] = *arg2++;
-                    }
+                i = temp_a0->unk_54;
 
-                    if (temp_a0->unk_44 & 0x808000) {
-                        screenCenterText(temp_a0);
-                        if ((giScreen >= 0) && (giScreen < gnScreenCount)) {
-                            if (gaScreen[giScreen].unk_08 > 0) {
-                                screenUpdateArea(gaScreen[giScreen].unk_18);
-                            }
+                for (var_a1 = 0; var_a1 < temp_a0->unk_58; var_a1++) {
+                    temp_a0->unk_50[temp_a0->unk_54 + var_a1] = 3;
+                }
+
+                while ((temp_a0->unk_50[i] != 0) && (i < temp_a0->unk_20) && (*anText != 0)) {
+                    temp_a0->unk_50[i++] = *anText++;
+                }
+
+                if (temp_a0->unk_44 & 0x808000) {
+                    screenCenterText(temp_a0);
+                    if ((giScreen >= 0) && (giScreen < gnScreenCount)) {
+                        if (gaScreen[giScreen].unk_08 > 0) {
+                            screenUpdateArea(gaScreen[giScreen].unk_18);
                         }
                     }
-                    return;
                 }
+                return;
             }
         }
     }

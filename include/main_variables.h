@@ -1217,7 +1217,7 @@ extern u8 TenSecond;
 // extern UNK_TYPE B_801AB7E2_usa;
 // extern UNK_TYPE B_801AB7E8_usa;
 extern OSMesgQueue B_801AB7F0_usa;
-extern s32 B_801AB808_usa;
+extern s32 giSlot;
 
 extern s32 ganButton[0x10];
 

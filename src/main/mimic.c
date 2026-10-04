@@ -1546,7 +1546,7 @@ block_184:
                     var_a1_2 = 0x806D8069;
                 }
                 screenShowText(temp_s2, var_a1_2);
-                func_80027838_usa(temp_s2, 0x64);
+                screenShowArea(temp_s2, 0x64);
                 var_a1_3 = 0x64;
 block_222:
                 func_80027618_usa(temp_s2, var_a1_3, 0U);
@@ -1595,7 +1595,7 @@ block_222:
                 }
                 screenShowText(temp_s2, var_a1_4);
                 screenSetCursor(giScreenMimic, 0x65, sp28, 0);
-                func_80027838_usa(temp_s2, 0x65);
+                screenShowArea(temp_s2, 0x65);
                 var_a1_3 = 0x65;
                 goto block_222;
         }

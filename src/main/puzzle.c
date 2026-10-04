@@ -212,19 +212,22 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/puzzle", func_80089108_usa);
 INCLUDE_ASM("asm/ger/nonmatchings/main/puzzle", func_80089108_usa);
 #endif
 
-s32 func_8008913C_usa(s32 arg0) {
+/**
+ * Original name: LoadPuzzleEditor
+ */
+s32 LoadPuzzleEditor(s32 number) {
     tetWell *well = &gTheGame.tetrisWell[0];
-    s32 temp = arg0 - 1;
-    u8 *temp_s0 = gPlayer[0]->unk_121[temp];
+    s32 temp = number - 1;
+    u8 *ptr = gPlayer[0]->unk_121[temp];
 
     if (gTheGame.menu[0].speed == 0) {
-        gTheGame.menu[0].speed = gPlayer[0]->unk_793[arg0 - 1];
+        gTheGame.menu[0].speed = gPlayer[0]->unk_793[number - 1];
         well->menu.speed = gTheGame.menu[0].speed;
     }
 
     Init2DTetrisBlocks(well, 0);
 
-    if (Init2DPuzzle(well, &gTheGame.cursorBlock[0], temp_s0, 1) != 0) {
+    if (Init2DPuzzle(well, &gTheGame.cursorBlock[0], ptr, 1) != 0) {
         return -1;
     } else {
         Init2DTetrisBlocks(well, 0);
@@ -233,35 +236,35 @@ s32 func_8008913C_usa(s32 arg0) {
 }
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/puzzle", func_80089200_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/puzzle", SavePuzzleEditor);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/puzzle", func_80089200_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/puzzle", SavePuzzleEditor);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/puzzle", func_80089200_usa);
+INCLUDE_ASM("asm/fra/nonmatchings/main/puzzle", SavePuzzleEditor);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/puzzle", func_80089200_usa);
+INCLUDE_ASM("asm/ger/nonmatchings/main/puzzle", SavePuzzleEditor);
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/puzzle", func_8008928C_usa);
+INCLUDE_ASM("asm/usa/nonmatchings/main/puzzle", DeletePuzzleEditor);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/puzzle", func_8008928C_usa);
+INCLUDE_ASM("asm/eur/nonmatchings/main/puzzle", DeletePuzzleEditor);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/puzzle", func_8008928C_usa);
+INCLUDE_ASM("asm/fra/nonmatchings/main/puzzle", DeletePuzzleEditor);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/puzzle", func_8008928C_usa);
+INCLUDE_ASM("asm/ger/nonmatchings/main/puzzle", DeletePuzzleEditor);
 #endif
 
 /**
