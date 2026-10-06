@@ -2131,27 +2131,13 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003A0B8_usa);
 #endif
 
 #if VERSION_USA
-#ifdef NON_EQUIVALENT
 void Draw2DGameOver(struct_gInfo_unk_00068 *dynamicp) {
-    Gfx *temp_a0;
-    Gfx *temp_a0_2;
-    Gfx *temp_a1_2;
-    Gfx *temp_v0;
-    Gfx *temp_v0_2;
-    Gfx *temp_v0_3;
-    Gfx *temp_v0_4;
-    Gfx *temp_v1_2;
-    Gfx *temp_v1_4;
     s32 temp_a1;
     s32 temp_t3;
-    s32 var_a2;
     s32 var_a3_2;
     s32 var_s0;
-    s32 var_v0_2;
     s32 var_v1;
-    s32 var_v1_2;
     s32 temp_t0;
-    s32 temp_t1;
     s32 temp_t4;
 
     if (gMain == GMAIN_38F) {
@@ -2163,26 +2149,6 @@ void Draw2DGameOver(struct_gInfo_unk_00068 *dynamicp) {
     if (gTheGame.totalPlayer == 1) {
         if ((gMain == GMAIN_391) && (D_800B65B0_usa != 0) &&
             ((gSelection == SELECTION_8C) || (gSelection == SELECTION_BE))) {
-#if 0
-            temp_v0 = glistp;
-
-            temp_v0->words.w0 = 0xE7000000;
-            temp_v0->words.w1 = 0x00000000;
-            temp_v0->unk_8 = 0xBA000E02;
-            temp_v0->unk_C = 0x00008000;
-            temp_v0->unk_10 = 0xC1000017;
-            temp_v0->unk_14 = (s32 *) (&gTheGame.totalPlayer - 0x1028);
-            temp_v0->unk_18 = 0xE7000000;
-            temp_v0->unk_1C = 0x00000000;
-            temp_v0->unk_20 = 0x01000000;
-            temp_v0->unk_24 = (s32 *) (&gTheGame.totalPlayer - 0xF08);
-
-            glistp = temp_v0 + 8;
-            glistp = temp_v0 + 0x10;
-            glistp = temp_v0 + 0x18;
-            glistp = temp_v0 + 0x20;
-            glistp = temp_v0 + 0x28;
-#endif
             gDPPipeSync(glistp++);
             gDPSetTextureLUT(glistp++, G_TT_RGBA16);
             gSPObjLoadTxtr(glistp++, &gTheGame.unk_8BE0);
@@ -2191,63 +2157,16 @@ void Draw2DGameOver(struct_gInfo_unk_00068 *dynamicp) {
             gSPBgRect1Cyc(glistp++, &gTheGame.unk_8C88[3]);
 
             for (var_s0 = 6; var_s0 < 0x46; var_s0++) {
-#if 0
-                temp_a0 = glistp;
-
-                temp_a0->words.w0 = 0xE7000000;
-                temp_a0->words.w1 = 0x00000000;
-                temp_a0->unk_8 = 0xBA000E02;
-                temp_a0->unk_C = 0x00008000;
-                temp_a0->unk_10 = 0xC1000017;
-                temp_a0->unk_14 = &numberLUT;
-
-                glistp = temp_a0 + 8;
-                glistp = temp_a0 + 0x10;
-                glistp = temp_a0 + 0x18;
-#endif
                 gDPPipeSync(glistp++);
                 gDPSetTextureLUT(glistp++, G_TT_RGBA16);
                 gSPObjLoadTxtr(glistp++, &numberLUT);
 
                 if ((dynamicp->drawText[var_s0].texture == 0xA) || (dynamicp->drawText[var_s0].texture == 0xC)) {
-#if 0
-                    glistp = temp_a0 + 0x20;
-                    glistp = temp_a0 + 0x28;
-                    temp_a0->unk_18 = 0xC1000017;
-                    temp_a0->unk_1C = &D_01022E20_usa;
-                    temp_a0->unk_20 = 0x03000000;
-                    temp_a0->unk_24 = (void *) (dynamicp + var_t0);
-#endif
                     gSPObjLoadTxtr(glistp++, &D_01022E20_usa);
                     gSPObjRectangle(glistp++, &dynamicp->drawText[var_s0].word);
                 }
             }
 
-#if 0
-            temp_v0_2 = glistp;
-
-            temp_v0_2->words.w0 = 0xE7000000;
-            temp_v0_2->words.w1 = 0x00000000;
-            temp_v0_2->unk_8 = 0xBA000E02;
-            temp_v0_2->unk_C = 0x00008000;
-
-            temp_v0_2->unk_10 = 0xC1000017;
-            temp_v0_2->unk_14 = &numberLUT;
-            temp_v0_2->unk_18 = 0xC1000017;
-            temp_v0_2->unk_1C = &arrowTexture;
-
-            temp_v0_2->unk_20 = 0x03000000;
-            temp_v0_2->unk_24 = &gTheGame.gSPRITE[9];
-            temp_v0_2->unk_28 = 0x03000000;
-            temp_v0_2->unk_2C = (uObjSprite *) (&gTheGame.gSPRITE[9] - 0x18);
-
-            glistp = temp_v0_2 + 8;
-            glistp = temp_v0_2 + 0x10;
-            glistp = temp_v0_2 + 0x18;
-            glistp = temp_v0_2 + 0x20;
-            glistp = temp_v0_2 + 0x28;
-            glistp = temp_v0_2 + 0x30;
-#endif
             gDPPipeSync(glistp++);
             gDPSetTextureLUT(glistp++, G_TT_RGBA16);
             gSPObjLoadTxtr(glistp++, &numberLUT);
@@ -2272,29 +2191,6 @@ void Draw2DGameOver(struct_gInfo_unk_00068 *dynamicp) {
     }
 
     if (gTheGame.totalPlayer == 2) {
-#if 0
-        temp_v0_3 = glistp;
-
-        temp_v0_3->words.w0 = 0xE7000000;
-        temp_v0_3->words.w1 = 0x00000000;
-        temp_v0_3->unk_8 = 0xBA000E02;
-        temp_v0_3->unk_C = 0x00000000;
-        temp_v0_3->unk_10 = 0xFCFFFFFF;
-        temp_v0_3->unk_14 = 0xFFFCF279;
-        temp_v0_3->unk_18 = 0xB900031D;
-        temp_v0_3->unk_1C = 0x00000000;
-        temp_v0_3->unk_20 = 0xBA001402;
-        temp_v0_3->unk_24 = 0x00200000;
-        temp_v0_3->unk_28 = 0xE7000000;
-        temp_v0_3->unk_2C = 0x00000000;
-
-        glistp = temp_v0_3 + 8;
-        glistp = temp_v0_3 + 0x10;
-        glistp = temp_v0_3 + 0x18;
-        glistp = temp_v0_3 + 0x20;
-        glistp = temp_v0_3 + 0x28;
-        glistp = temp_v0_3 + 0x30;
-#endif
         gDPPipeSync(glistp++);
         gDPSetTextureLUT(glistp++, G_TT_NONE);
         gDPSetCombineMode(glistp++, G_CC_DECALRGBA, G_CC_DECALRGBA);
@@ -2304,12 +2200,6 @@ void Draw2DGameOver(struct_gInfo_unk_00068 *dynamicp) {
 
         for (var_s0 = 0; var_s0 < 2; var_s0++) {
             if (gTheGame.unk_9A90[var_s0].b.imagePtr != 0) {
-#if 0
-                temp_v1_2 = glistp;
-                glistp = temp_v1_2 + 8;
-                temp_v1_2->words.w0 = 0x02000000;
-                temp_v1_2->words.w1 = (u32) &gTheGame.unk_9A90[var_s0];
-#endif
                 gSPBgRectCopy(glistp++, &gTheGame.unk_9A90[var_s0]);
             }
         }
@@ -2319,26 +2209,6 @@ void Draw2DGameOver(struct_gInfo_unk_00068 *dynamicp) {
         var_v1 = 0;
     }
 
-#if 0
-    temp_v0_4 = glistp;
-
-    temp_v0_4->words.w0 = 0xE7000000;
-    temp_v0_4->words.w1 = 0x00000000;
-    temp_v0_4->unk_8 = 0xBA000E02;
-    temp_v0_4->unk_C = 0x00000000;
-    temp_v0_4->unk_10 = 0xBA001402;
-    temp_v0_4->unk_14 = 0x00000000;
-    temp_v0_4->unk_18 = 0xFCFFFFFF;
-    temp_v0_4->unk_1C = 0xFFFCF279;
-    temp_v0_4->unk_20 = 0xB900031D;
-    temp_v0_4->unk_24 = 0x00504240;
-
-    glistp = temp_v0_4 + 8;
-    glistp = temp_v0_4 + 0x10;
-    glistp = temp_v0_4 + 0x18;
-    glistp = temp_v0_4 + 0x20;
-    glistp = temp_v0_4 + 0x28;
-#endif
     gDPPipeSync(glistp++);
     gDPSetTextureLUT(glistp++, G_TT_NONE);
     gDPSetCycleType(glistp++, G_CYC_1CYCLE);
@@ -2358,95 +2228,12 @@ void Draw2DGameOver(struct_gInfo_unk_00068 *dynamicp) {
         temp_t4 = gTheGame.unk_9A90[var_s0].b.frameH >> 2;
 
         for (var_a3_2 = 0; var_a3_2 < temp_t4; var_a3_2 += 1) {
-            s32 a;
-            s32 b;
-            s32 c;
-            s32 d;
-
-#if 0
-            temp_t1 = temp_t0 >> 1;
-
-            temp_a1_2 = glistp;
-
-            temp_a1_2->words.w0 = 0xFD180000;
-            temp_a1_2->words.w1 = *(&gTheGame.unk_9A90[var_s0].b.imagePtr) + (temp_t0 * (var_a3_2 * 4));
-            temp_a1_2->unk_8 = 0xF5180000;
-            temp_a1_2->unk_C = 0x07000000;
-            temp_a1_2->unk_10 = 0xE6000000;
-            temp_a1_2->unk_14 = 0x00000000;
-            temp_a1_2->unk_18 = 0xF3000000;
-            if ((s32) temp_t1 > 0) {
-                var_a2 = temp_t1 + 0x7FF;
-            }
-            var_v1_2 = temp_t0 - 1;
-            if (var_v1_2 >= 0x800) {
-                var_v1_2 = 0x7FF;
-            }
-            if ((s32) temp_t1 > 0) {
-                var_v0_2 = (var_a2 / (s32) temp_t1) & 0xFFF;
-            } else {
-                var_v0_2 = var_a2 & 0xFFF;
-            }
-            temp_a1_2->unk_1C = (s32) (((var_v1_2 & 0xFFF) << 0xC) | 0x07000000 | var_v0_2);
-
-            glistp = temp_a1_2 + 8;
-            glistp = temp_a1_2 + 0x10;
-            glistp = temp_a1_2 + 0x18;
-            glistp = temp_a1_2 + 0x20;
-
-            if (temp_t1 > 0) {
-                var_a2 = temp_t1 + 0x7FF;
-            } else {
-                var_a2 = 0x800;
-            }
-
-            if (temp_t1 > 0) {
-                var_v0_2 = (var_a2 / temp_t1);
-            } else {
-                var_v0_2 = var_a2;
-            }
-            temp_a0_2 = glistp;
-
-            temp_a0_2->words.w0 = 0xE7000000;
-            temp_a0_2->words.w1 = 0x00000000;
-            temp_a0_2->unk_8 = (s32) (((((s32) ((temp_t0 * 2) + 7) >> 3) & 0x1FF) << 9) | 0xF5180000);
-            temp_a0_2->unk_C = 0x00000000;
-            temp_a0_2->unk_10 = 0xF2000000;
-            temp_a0_2->unk_14 = (s32) ((((temp_t0 - 1) * 4) & 0xFFF) << 0xC);
-
-            glistp = temp_a0_2 + 8;
-            glistp = temp_a0_2 + 0x10;
-            glistp = temp_a0_2 + 0x18;
-            glistp = temp_a0_2 + 0x20;
-            glistp = temp_a0_2 + 0x28;
-            glistp = temp_a0_2 + 0x30;
-            glistp = temp_a0_2 + 0x38;
-#endif
-            gDPLoadTextureBlock(glistp++, (u8 *)gTheGame.unk_9A90[var_s0].b.imagePtr + ((var_a3_2 * 4) * temp_t0),
+            gDPLoadTextureBlock(glistp++, (u8 *)gTheGame.unk_9A90[var_s0].b.imagePtr + sizeof(u32) * temp_t0 * var_a3_2,
                                 G_IM_FMT_RGBA, G_IM_SIZ_32b, temp_t0, 1, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-#if 0
-
-            temp_a0_2->unk_18 = (s32) (((((temp_a1 + temp_t0) * 4) & 0xFFF) << 0xC) | ((((temp_t3 + var_a3_2) * 4) & 0xFFF) | 0xE4000000));
-            temp_a0_2->unk_1C = (s32) ((((temp_a1 * 4) & 0xFFF) << 0xC) | (((temp_t3 + var_a3_2) * 4) & 0xFFF));
-            temp_a0_2->unk_20 = 0xB4000000;
-            temp_a0_2->unk_24 = 0x00000000;
-            temp_a0_2->unk_28 = 0xB3000000;
-            temp_a0_2->unk_2C = 0x04000400;
-            temp_a0_2->unk_30 = 0xE7000000;
-            temp_a0_2->unk_34 = 0x00000000;
-
-#endif
-            a = temp_a1;
-            b = (temp_t3 + var_a3_2);
-            c = (temp_a1 + temp_t0);
-
-            // d = ((temp_t3 + var_a3_2 + 1));
-            d = var_a3_2;
-            d = temp_t3 + d + 1;
-
-            gSPTextureRectangle(glistp++, a << 2, b << 2, c << 2, d << 2, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
+            gSPTextureRectangle(glistp++, temp_a1 << 2, (temp_t3 + var_a3_2) << 2, (temp_a1 + temp_t0) << 2,
+                                (temp_t3 + 1 + var_a3_2) << 2, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
             gDPPipeSync(glistp++);
         }
     }
@@ -2461,9 +2248,6 @@ void Draw2DGameOver(struct_gInfo_unk_00068 *dynamicp) {
     gDPPipeSync(glistp++);
     gDPSetCycleType(glistp++, G_CYC_1CYCLE);
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/end", Draw2DGameOver);
-#endif
 #endif
 
 #if VERSION_EUR

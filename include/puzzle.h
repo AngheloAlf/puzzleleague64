@@ -18,10 +18,10 @@ s32 Init3DPuzzle(struct tetWell *well, struct cursor_t *cursor, u8 ptr[], s32 nu
 // void func_80088F94_usa();
 // void func_80089108_usa();
 s32 LoadPuzzleEditor(s32 number);
-s32 SavePuzzleEditor(s32 arg0);
-s32 DeletePuzzleEditor(s32 arg0);
+s32 SavePuzzleEditor(s32 number);
+s32 DeletePuzzleEditor(s32 number);
 void InitPuzzleEditor(s32 arg0);
 void DoPuzzleEditor(void);
-void DrawPuzzleEditor(struct struct_gInfo_unk_00068 *arg0);
+void DrawPuzzleEditor(struct struct_gInfo_unk_00068 *dynamicp);
 
 #endif
