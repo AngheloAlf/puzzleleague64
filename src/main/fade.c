@@ -4,63 +4,82 @@
 
 #include "fade.h"
 
-#include "include_asm.h"
 #include "macros_defines.h"
 #include "main_variables.h"
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/fade", InitGameFade);
-#endif
+#include "the_game.h"
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/fade", func_800542C0_eur);
-#endif
+/**
+ * Original name: InitGameFade
+ */
+void InitGameFade(void) {
+    gBox_Level = 0;
+    gBlock_Level = 0;
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/fade", func_80052A30_fra);
-#endif
+    Flash_period[0] = 0;
+    Flash_count[0] = 0;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/fade", func_80052BB0_ger);
-#endif
+    Flash_period[1] = 0x19;
+    Flash_count[1] = 0;
+}
 
+/**
+ * Original name: SetGameFade
+ */
 void SetGameFade(void) {
     gBox_Level = 0x8C;
     gBlock_Level = 0xFF;
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/fade", func_8005407C_usa);
-#endif
+void func_8005407C_usa(void) {
+    if (gBlock_Level < 0xFF) {
+        gBlock_Level -= 0x14;
+    }
+}
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/fade", func_8005431C_eur);
-#endif
+/**
+ * Original name: DoGameFade
+ */
+void DoGameFade(s32 factor) {
+    if (gMain == GMAIN_388) {
+        if (gTheGame.totalPlayer == 1) {
+            if (gSelection == SELECTION_82) {
+                gBlock_Level = 0;
+            }
+            return;
+        }
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/fade", func_80052A8C_fra);
-#endif
+        if (gBox_Level > 0) {
+            gBox_Level -= 5;
+            if (gBox_Level < 0) {
+                gBox_Level = 0;
+            }
+        }
+        if (gBlock_Level > 0) {
+            gBlock_Level -= 9;
+            if (gBlock_Level < 0) {
+                gBlock_Level = 0;
+            }
+        }
+    } else if (gBlock_Level != 0xFF) {
+        if (gBox_Level < 0x8C) {
+            gBox_Level += factor * 4;
+            if (gBox_Level >= 0x8D) {
+                gBox_Level = 0x8C;
+            }
+        }
+        if (gBlock_Level < 0xFF) {
+            gBlock_Level += factor * 6;
+            if (gBlock_Level >= 0x100) {
+                gBlock_Level = 0xFF;
+            }
+        }
+    }
+}
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/fade", func_80052C0C_ger);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/fade", DoGameFade);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/fade", DoGameFade);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/fade", DoGameFade);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/fade", DoGameFade);
-#endif
-
+/**
+ * Original name: Draw2DGameFade
+ */
 void Draw2DGameFade(void) {
     if (gBlock_Level == 255) {
         gDPPipeSync(glistp++);
@@ -75,39 +94,35 @@ void Draw2DGameFade(void) {
     }
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/fade", func_80054320_usa);
-#endif
+/**
+ * Original name: Draw3DGameFade
+ */
+void Draw3DGameFade(void) {
+    if (gBlock_Level == 255) {
+        gDPPipeSync(glistp++);
+        gDPSetCombineMode(glistp++, G_CC_MODULATEIA, G_CC_MODULATEIA);
+        gDPSetRenderMode(glistp++, G_RM_RA_OPA_SURF, G_RM_RA_OPA_SURF2);
+        gDPSetPrimColor(glistp++, 0, 0, 255, 255, 255, 255);
+    } else {
+        gDPPipeSync(glistp++);
+        gDPSetCombineMode(glistp++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
+        gDPSetRenderMode(glistp++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
+        gDPSetPrimColor(glistp++, 0, 0, 255, 255, 255, gBlock_Level);
+    }
+}
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/fade", func_800545C0_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/fade", func_80052D30_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/fade", func_80052EB0_ger);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/fade", StartFlash);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/fade", StartFlash);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/fade", StartFlash);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/fade", StartFlash);
-#endif
+/**
+ * Original name: StartFlash
+ */
+void StartFlash(s32 frame) {
+    Flash_period[0] = frame;
+    Flash_count[0] = 0;
+}
 
 // TODO: enum for which?
+/**
+ * Original name: DoFlashDraw
+ */
 nbool DoFlashDraw(s32 which) {
     if (Flash_period[which] > 0) {
         Flash_period[which]--;
@@ -127,6 +142,9 @@ nbool DoFlashDraw(s32 which) {
     return ntrue;
 }
 
+/**
+ * Original name: DoFlashDrawAlways
+ */
 nbool DoFlashDrawAlways(void) {
     nbool ret = DoFlashDraw(1);
 
