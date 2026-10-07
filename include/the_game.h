@@ -23,7 +23,7 @@
 #include "text.h"
 
 
-#define GAME_UNK_9A90_COUNT 4
+#define GAME_ALPHA_COUNT 4
 
 #define GAME_GSPRITE_COUNT 10
 
@@ -59,7 +59,7 @@ typedef struct Game {
     /* 0x9A08 */ uObjSprite unk_9A08[3];
     /* 0x9A50 */ uObjBg unk_9A50; // bkground?
     /* 0x9A78 */ UNK_TYPE1 unk_9A78[0x9A90 - 0x9A78];
-    /* 0x9A90 */ uObjBg unk_9A90[GAME_UNK_9A90_COUNT]; // sign?
+    /* 0x9A90 */ uObjBg alpha[GAME_ALPHA_COUNT]; /* Original name: alpha */
     /* 0x9B30 */ uObjTxtr signLUT; /* Original name: signLUT */
     /* 0x9B48 */ s32 miscToggle; /* Original name: miscToggle */ // TODO: enum?
     /* 0x9B4C */ UNK_TYPE1 unk_9B4C[0x9B50 - 0x9B4C];

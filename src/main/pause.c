@@ -108,19 +108,19 @@ void Do2DPauseGame(gamepad_t *gamepad, s32 num, s32 flag) {
     }
 
     if (gTheGame.totalPlayer == 1) {
-        AnimatePauseKey(&gTheGame.unk_9A90[0]);
+        AnimatePauseKey(&gTheGame.alpha[0]);
 
         gTheGame.cursorBlock[0].frame_n++;
         gTheGame.cursorBlock[0].frame_d++;
 
-        gTheGame.unk_9A90[2].b.frameX = 117 << 2;
-        gTheGame.unk_9A90[2].b.frameY = 103 << 2;
+        gTheGame.alpha[2].b.frameX = 117 << 2;
+        gTheGame.alpha[2].b.frameY = 103 << 2;
 
         sp->s.objX = 122 << 2;
         sp->s.objY = (*pos * 0x11 + 0x70) << 2;
     } else {
-        AnimatePauseKey(&gTheGame.unk_9A90[0]);
-        AnimatePauseKey(&gTheGame.unk_9A90[1]);
+        AnimatePauseKey(&gTheGame.alpha[0]);
+        AnimatePauseKey(&gTheGame.alpha[1]);
 
         if (gTheGame.help.selection == num) {
             gTheGame.cursorBlock[0].frame_n++;
@@ -129,13 +129,13 @@ void Do2DPauseGame(gamepad_t *gamepad, s32 num, s32 flag) {
         gTheGame.cursorBlock[1].frame_d++;
 
         if (gTheGame.help.selection == 0) {
-            gTheGame.unk_9A90[2].b.frameX = 27 << 2;
-            gTheGame.unk_9A90[2].b.frameY = 103 << 2;
+            gTheGame.alpha[2].b.frameX = 27 << 2;
+            gTheGame.alpha[2].b.frameY = 103 << 2;
             sp->s.objX = 32 << 2;
             sp->s.objY = (*pos * 0x11 + 0x70) << 2;
         } else {
-            gTheGame.unk_9A90[2].b.frameX = 191 << 2;
-            gTheGame.unk_9A90[2].b.frameY = 103 << 2;
+            gTheGame.alpha[2].b.frameX = 191 << 2;
+            gTheGame.alpha[2].b.frameY = 103 << 2;
             sp->s.objX = 196 << 2;
             sp->s.objY = (*pos * 0x11 + 0x70) << 2;
         }
@@ -237,19 +237,19 @@ void Do3DPauseGame(gamepad_t *gamepad, s32 num, s32 flag) {
     }
 
     if (gTheGame.totalPlayer == 1) {
-        AnimatePauseKey(&gTheGame.unk_9A90[0]);
+        AnimatePauseKey(&gTheGame.alpha[0]);
 
         gTheGame.cursorBlock[0].frame_n++;
         gTheGame.cursorBlock[0].frame_d++;
 
-        gTheGame.unk_9A90[2].b.frameX = 117 << 2;
-        gTheGame.unk_9A90[2].b.frameY = 103 << 2;
+        gTheGame.alpha[2].b.frameX = 117 << 2;
+        gTheGame.alpha[2].b.frameY = 103 << 2;
 
         sp->s.objX = 122 << 2;
         sp->s.objY = (*pos * 0x11 + 0x70) << 2;
     } else {
-        AnimatePauseKey(&gTheGame.unk_9A90[0]);
-        AnimatePauseKey(&gTheGame.unk_9A90[1]);
+        AnimatePauseKey(&gTheGame.alpha[0]);
+        AnimatePauseKey(&gTheGame.alpha[1]);
 
         if (gTheGame.help.selection == num) {
             gTheGame.cursorBlock[0].frame_n++;
@@ -258,13 +258,13 @@ void Do3DPauseGame(gamepad_t *gamepad, s32 num, s32 flag) {
         gTheGame.cursorBlock[1].frame_d++;
 
         if (gTheGame.help.selection == 0) {
-            gTheGame.unk_9A90[2].b.frameX = 27 << 2;
-            gTheGame.unk_9A90[2].b.frameY = 103 << 2;
+            gTheGame.alpha[2].b.frameX = 27 << 2;
+            gTheGame.alpha[2].b.frameY = 103 << 2;
             sp->s.objX = 32 << 2;
             sp->s.objY = (*pos * 0x11 + 0x70) << 2;
         } else {
-            gTheGame.unk_9A90[2].b.frameX = 191 << 2;
-            gTheGame.unk_9A90[2].b.frameY = 103 << 2;
+            gTheGame.alpha[2].b.frameX = 191 << 2;
+            gTheGame.alpha[2].b.frameY = 103 << 2;
             sp->s.objX = 196 << 2;
             sp->s.objY = (*pos * 0x11 + 0x70) << 2;
         }
@@ -305,15 +305,15 @@ void Draw2DPause(struct_gInfo_unk_00068 *dynamicp UNUSED) {
     gDPSetRenderMode(glistp++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
 
     for (iPlayer = 0; iPlayer < gTheGame.totalPlayer; iPlayer++) {
-        s32 x = gTheGame.unk_9A90[iPlayer].b.frameX >> 2;
-        s32 y = gTheGame.unk_9A90[iPlayer].b.frameY >> 2;
-        s32 height = gTheGame.unk_9A90[0].b.imageH >> 2;
-        s32 width = gTheGame.unk_9A90[0].b.imageW >> 2;
+        s32 x = gTheGame.alpha[iPlayer].b.frameX >> 2;
+        s32 y = gTheGame.alpha[iPlayer].b.frameY >> 2;
+        s32 height = gTheGame.alpha[0].b.imageH >> 2;
+        s32 width = gTheGame.alpha[0].b.imageW >> 2;
         s32 line_height = 8;
         s32 i;
 
         for (i = 0; i < height; i += line_height) {
-            gDPLoadTextureBlock(glistp++, (u8 *)gTheGame.unk_9A90[iPlayer].b.imagePtr + sizeof(u32) * width * i,
+            gDPLoadTextureBlock(glistp++, (u8 *)gTheGame.alpha[iPlayer].b.imagePtr + sizeof(u32) * width * i,
                                 G_IM_FMT_RGBA, G_IM_SIZ_32b, width, line_height, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
@@ -332,7 +332,7 @@ void Draw2DPause(struct_gInfo_unk_00068 *dynamicp UNUSED) {
     gDPSetCycleType(glistp++, G_CYC_COPY);
 
     gDPPipeSync(glistp++);
-    gSPBgRectCopy(glistp++, &gTheGame.unk_9A90[2]);
+    gSPBgRectCopy(glistp++, &gTheGame.alpha[2]);
 
     gDPPipeSync(glistp++);
     gDPSetTextureLUT(glistp++, G_TT_RGBA16);
@@ -368,14 +368,14 @@ void Draw3DPause(struct_gInfo_unk_00068 *dynamicp UNUSED) {
     gDPSetRenderMode(glistp++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
 
     for (iPlayer = 0; iPlayer < gTheGame.totalPlayer; iPlayer++) {
-        x = gTheGame.unk_9A90[iPlayer].b.frameX >> 2;
-        y = gTheGame.unk_9A90[iPlayer].b.frameY >> 2;
-        height = gTheGame.unk_9A90[0].b.imageH >> 2;
-        width = gTheGame.unk_9A90[0].b.imageW >> 2;
+        x = gTheGame.alpha[iPlayer].b.frameX >> 2;
+        y = gTheGame.alpha[iPlayer].b.frameY >> 2;
+        height = gTheGame.alpha[0].b.imageH >> 2;
+        width = gTheGame.alpha[0].b.imageW >> 2;
         line_height = 8;
 
         for (i = 0; i < height; i += line_height) {
-            gDPLoadTextureBlock(glistp++, (u8 *)gTheGame.unk_9A90[iPlayer].b.imagePtr + sizeof(u32) * width * i,
+            gDPLoadTextureBlock(glistp++, (u8 *)gTheGame.alpha[iPlayer].b.imagePtr + sizeof(u32) * width * i,
                                 G_IM_FMT_RGBA, G_IM_SIZ_32b, width, line_height, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
@@ -395,7 +395,7 @@ void Draw3DPause(struct_gInfo_unk_00068 *dynamicp UNUSED) {
     gDPSetCycleType(glistp++, G_CYC_1CYCLE);
     gDPPipeSync(glistp++);
 
-    guS2DEmuBgRect1Cyc(&glistp, &gTheGame.unk_9A90[2]);
+    guS2DEmuBgRect1Cyc(&glistp, &gTheGame.alpha[2]);
 
     gDPPipeSync(glistp++);
     gDPSetTextureLUT(glistp++, G_TT_RGBA16);

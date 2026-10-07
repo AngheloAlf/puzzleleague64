@@ -28,12 +28,12 @@ void InitPause(void) {
     currSegment = Pon_Image_Heap;
     LOAD_DATA_SEGMENT_DW(currSegment, sign_pause, Pon_Image_Heap);
 
-    for (count = 0; count < GAME_UNK_9A90_COUNT; count++) {
-        gTheGame.unk_9A90[count].s.imagePtr = NULL;
+    for (count = 0; count < GAME_ALPHA_COUNT; count++) {
+        gTheGame.alpha[count].s.imagePtr = NULL;
     }
 
-    for (count = 0; count < GAME_UNK_9A90_COUNT - 1; count++) {
-        bg = &gTheGame.unk_9A90[count];
+    for (count = 0; count < GAME_ALPHA_COUNT - 1; count++) {
+        bg = &gTheGame.alpha[count];
 
         bg->s.imageX = 0;
         bg->s.frameX = -(160 << 2);
@@ -68,7 +68,7 @@ void InitPause(void) {
     }
 
     if (gTheGame.totalPlayer == 1) {
-        gTheGame.unk_9A90[gTheGame.totalPlayer].s.imagePtr = NULL;
+        gTheGame.alpha[gTheGame.totalPlayer].s.imagePtr = NULL;
     }
 
     gTheGame.signLUT.tlut.type = G_OBJLT_TLUT;
@@ -98,20 +98,20 @@ void InitPause(void) {
     gTheGame.gSPRITE[9].s.imageFlags = 0;
 
     if (gTheGame.totalPlayer == 1) {
-        gTheGame.unk_9A90[0].s.frameX = 137 << 2;
-        gTheGame.unk_9A90[0].s.frameY = 75 << 2;
+        gTheGame.alpha[0].s.frameX = 137 << 2;
+        gTheGame.alpha[0].s.frameY = 75 << 2;
     } else {
-        gTheGame.unk_9A90[0].s.frameX = 46 << 2;
-        gTheGame.unk_9A90[0].s.frameY = 75 << 2;
-        gTheGame.unk_9A90[1].s.frameX = 210 << 2;
-        gTheGame.unk_9A90[1].s.frameY = 75 << 2;
+        gTheGame.alpha[0].s.frameX = 46 << 2;
+        gTheGame.alpha[0].s.frameY = 75 << 2;
+        gTheGame.alpha[1].s.frameX = 210 << 2;
+        gTheGame.alpha[1].s.frameY = 75 << 2;
     }
 
     if (gTheGame.dimension == DIMENSION_3D) {
-        for (count = 0; count < GAME_UNK_9A90_COUNT; count++) {
-            gTheGame.unk_9A90[count].s.imageYorig = 0;
-            gTheGame.unk_9A90[count].s.scaleW = 1 << 10;
-            gTheGame.unk_9A90[count].s.scaleH = 1 << 10;
+        for (count = 0; count < GAME_ALPHA_COUNT; count++) {
+            gTheGame.alpha[count].s.imageYorig = 0;
+            gTheGame.alpha[count].s.scaleW = 1 << 10;
+            gTheGame.alpha[count].s.scaleH = 1 << 10;
         }
     }
 }

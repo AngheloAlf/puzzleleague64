@@ -397,7 +397,7 @@ void GameOverSign(tetWell *well, cursor_t *cursor) {
 
             case SELECTION_BE:
                 if (cursor->state == 7) {
-                    gTheGame.unk_9A90[0].b.frameY = 50 << 2;
+                    gTheGame.alpha[0].b.frameY = 50 << 2;
                     well->state.raise = 0;
                     gMain = GMAIN_393;
                     return;
@@ -434,8 +434,8 @@ void GameOverSign(tetWell *well, cursor_t *cursor) {
         return;
     }
 
-    temp = gTheGame.unk_9A90[0].b.frameY >> 2;
-    gTheGame.unk_9A90[0].b.frameY = (temp - var_s1) << 2;
+    temp = gTheGame.alpha[0].b.frameY >> 2;
+    gTheGame.alpha[0].b.frameY = (temp - var_s1) << 2;
 }
 
 /**
@@ -839,7 +839,7 @@ INLINE void func_800387AC_usa(tetWell *well, s32 arg1) {
     if (var_a0 == -0x10) {
         var_a0 = -0x1C;
     }
-    gTheGame.unk_9A90[arg1].b.frameY = ((gTheGame.unk_9A90[arg1].b.frameY >> 2) - var_a0) << 2;
+    gTheGame.alpha[arg1].b.frameY = ((gTheGame.alpha[arg1].b.frameY >> 2) - var_a0) << 2;
 }
 
 /**
@@ -1023,7 +1023,7 @@ s32 DoGameOverTryAgain(void) {
     }
 
     if (gTheGame.dimension == DIMENSION_2D) {
-        uObjBg *bg = &gTheGame.unk_9A90[2];
+        uObjBg *bg = &gTheGame.alpha[2];
 
         if (*pos == 0) {
             bg->s.imageH = SIGNEND_1P_YESNO_HEIGHT << 2;
@@ -1052,9 +1052,9 @@ s32 DoGameOverTryAgain(void) {
                 bg->s.imagePtr = (void *)endSegment->texs_1p.yesno_2;
             }
         }
-        osWritebackDCache(&gTheGame.unk_9A90[2], sizeof(uObjBg));
+        osWritebackDCache(&gTheGame.alpha[2], sizeof(uObjBg));
     } else {
-        uObjBg *bg = &gTheGame.unk_9A90[2];
+        uObjBg *bg = &gTheGame.alpha[2];
 
         if (*pos == 0) {
             bg->s.imageH = SIGNEND_1P_YESNO_HEIGHT << 2;
@@ -1083,7 +1083,7 @@ s32 DoGameOverTryAgain(void) {
                 bg->s.imagePtr = (void *)endSegment->texs_1p.yesno_2;
             }
         }
-        osWritebackDCache(&gTheGame.unk_9A90[2], sizeof(uObjBg));
+        osWritebackDCache(&gTheGame.alpha[2], sizeof(uObjBg));
     }
 
     return 0;
@@ -2130,19 +2130,21 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/end", func_8003A0B8_usa);
 INCLUDE_ASM("asm/ger/nonmatchings/main/end", func_8003A0B8_usa);
 #endif
 
-#if VERSION_USA
+/**
+ * Original name: Draw2DGameOver
+ */
 void Draw2DGameOver(struct_gInfo_unk_00068 *dynamicp) {
-    s32 temp_a1;
-    s32 temp_t3;
-    s32 var_a3_2;
-    s32 var_s0;
-    s32 var_v1;
-    s32 temp_t0;
-    s32 temp_t4;
+    s32 x;
+    s32 y;
+    s32 i;
+    s32 num;
+    s32 start;
+    s32 width;
+    s32 height;
 
     if (gMain == GMAIN_38F) {
-        for (var_s0 = 0; var_s0 < gTheGame.totalPlayer; var_s0++) {
-            Draw2DSmoke(dynamicp, var_s0);
+        for (num = 0; num < gTheGame.totalPlayer; num++) {
+            Draw2DSmoke(dynamicp, num);
         }
     }
 
@@ -2156,14 +2158,14 @@ void Draw2DGameOver(struct_gInfo_unk_00068 *dynamicp) {
             gDPPipeSync(glistp++);
             gSPBgRect1Cyc(glistp++, &gTheGame.unk_8C88[3]);
 
-            for (var_s0 = 6; var_s0 < 0x46; var_s0++) {
+            for (num = 6; num < DRAWTEXT_COUNT; num++) {
                 gDPPipeSync(glistp++);
                 gDPSetTextureLUT(glistp++, G_TT_RGBA16);
                 gSPObjLoadTxtr(glistp++, &numberLUT);
 
-                if ((dynamicp->drawText[var_s0].texture == 0xA) || (dynamicp->drawText[var_s0].texture == 0xC)) {
+                if ((dynamicp->drawText[num].texture == 0xA) || (dynamicp->drawText[num].texture == 0xC)) {
                     gSPObjLoadTxtr(glistp++, &D_01022E20_usa);
-                    gSPObjRectangle(glistp++, &dynamicp->drawText[var_s0].word);
+                    gSPObjRectangle(glistp++, &dynamicp->drawText[num].word);
                 }
             }
 
@@ -2198,15 +2200,14 @@ void Draw2DGameOver(struct_gInfo_unk_00068 *dynamicp) {
         gDPSetCycleType(glistp++, G_CYC_COPY);
         gDPPipeSync(glistp++);
 
-        for (var_s0 = 0; var_s0 < 2; var_s0++) {
-            if (gTheGame.unk_9A90[var_s0].b.imagePtr != 0) {
-                gSPBgRectCopy(glistp++, &gTheGame.unk_9A90[var_s0]);
+        for (num = 0; num < 2; num++) {
+            if (gTheGame.alpha[num].b.imagePtr != NULL) {
+                gSPBgRectCopy(glistp++, &gTheGame.alpha[num]);
             }
         }
-
-        var_v1 = 2;
+        start = 2;
     } else {
-        var_v1 = 0;
+        start = 0;
     }
 
     gDPPipeSync(glistp++);
@@ -2215,25 +2216,26 @@ void Draw2DGameOver(struct_gInfo_unk_00068 *dynamicp) {
     gDPSetCombineMode(glistp++, G_CC_DECALRGBA, G_CC_DECALRGBA);
     gDPSetRenderMode(glistp++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
 
-    for (var_s0 = var_v1; var_s0 < 4; var_s0++) {
+    for (num = start; num < GAME_ALPHA_COUNT; num++) {
         gDPPipeSync(glistp++);
 
-        if (gTheGame.unk_9A90[var_s0].b.imagePtr == NULL) {
+        if (gTheGame.alpha[num].b.imagePtr == NULL) {
             continue;
         }
 
-        temp_a1 = gTheGame.unk_9A90[var_s0].b.frameX >> 2;
-        temp_t3 = gTheGame.unk_9A90[var_s0].b.frameY >> 2;
-        temp_t0 = gTheGame.unk_9A90[var_s0].b.frameW >> 2;
-        temp_t4 = gTheGame.unk_9A90[var_s0].b.frameH >> 2;
+        x = gTheGame.alpha[num].b.frameX >> 2;
+        y = gTheGame.alpha[num].b.frameY >> 2;
+        width = gTheGame.alpha[num].b.frameW >> 2;
+        height = gTheGame.alpha[num].b.frameH >> 2;
 
-        for (var_a3_2 = 0; var_a3_2 < temp_t4; var_a3_2 += 1) {
-            gDPLoadTextureBlock(glistp++, (u8 *)gTheGame.unk_9A90[var_s0].b.imagePtr + sizeof(u32) * temp_t0 * var_a3_2,
-                                G_IM_FMT_RGBA, G_IM_SIZ_32b, temp_t0, 1, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+        // draw texture, one row at a time.
+        for (i = 0; i < height; i++) {
+            gDPLoadTextureBlock(glistp++, (u8 *)gTheGame.alpha[num].b.imagePtr + sizeof(u32) * width * i, G_IM_FMT_RGBA,
+                                G_IM_SIZ_32b, width, 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
+                                G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-            gSPTextureRectangle(glistp++, temp_a1 << 2, (temp_t3 + var_a3_2) << 2, (temp_a1 + temp_t0) << 2,
-                                (temp_t3 + 1 + var_a3_2) << 2, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
+            gSPTextureRectangle(glistp++, x << 2, (y + i) << 2, (x + width) << 2, (y + 1 + i) << 2, G_TX_RENDERTILE, 0,
+                                0, 0x0400, 0x0400);
             gDPPipeSync(glistp++);
         }
     }
@@ -2248,19 +2250,6 @@ void Draw2DGameOver(struct_gInfo_unk_00068 *dynamicp) {
     gDPPipeSync(glistp++);
     gDPSetCycleType(glistp++, G_CYC_1CYCLE);
 }
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/end", Draw2DGameOver);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/end", Draw2DGameOver);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/end", Draw2DGameOver);
-#endif
 
 #if VERSION_USA
 #if 0
@@ -2401,12 +2390,12 @@ block_31:
                     glistp->words.w0 = 0xE7000000;
                     glistp->words.w1 = 0;
                     glistp += 8;
-                    if (*(&gTheGame.unk_9A90[0].b.imagePtr + var_t4) != 0) {
+                    if (*(&gTheGame.alpha[0].b.imagePtr + var_t4) != 0) {
                         var_t0 = 0;
-                        temp_a1 = (s32) (*(&gTheGame.unk_9A90[0].b.frameX + var_t4) << 0x10) >> 0x12;
-                        temp_t3 = (s32) (*(&gTheGame.unk_9A90[0].b.frameY + var_t4) << 0x10) >> 0x12;
-                        temp_t5 = (u16) *(&gTheGame.unk_9A90[0].b.frameH + var_t4) >> 2;
-                        temp_a3 = (u16) *(&gTheGame.unk_9A90[0].b.frameW + var_t4) >> 2;
+                        temp_a1 = (s32) (*(&gTheGame.alpha[0].b.frameX + var_t4) << 0x10) >> 0x12;
+                        temp_t3 = (s32) (*(&gTheGame.alpha[0].b.frameY + var_t4) << 0x10) >> 0x12;
+                        temp_t5 = (u16) *(&gTheGame.alpha[0].b.frameH + var_t4) >> 2;
+                        temp_a3 = (u16) *(&gTheGame.alpha[0].b.frameW + var_t4) >> 2;
                         if (temp_t5 != 0) {
                             do {
 #if 0
@@ -2422,7 +2411,7 @@ block_31:
                                 temp_a2->unk_C = 0x07000000;
                                 temp_a2->unk_14 = 0;
                                 temp_a2->unk_18 = 0xF3000000;
-                                temp_a2->words.w1 = *(&gTheGame.unk_9A90[0].b.imagePtr + var_t4) + (temp_a3 * (var_t0 * 2));
+                                temp_a2->words.w1 = *(&gTheGame.alpha[0].b.imagePtr + var_t4) + (temp_a3 * (var_t0 * 2));
                                 if ((s32) temp_a3 < 0) {
                                     var_a1 = temp_a3 + 3;
                                 }
@@ -2503,12 +2492,12 @@ block_31:
                 glistp->words.w0 = 0xE7000000;
                 glistp->words.w1 = 0;
                 glistp += 8;
-                if (*(&gTheGame.unk_9A90[0].b.imagePtr + var_t2) != 0) {
+                if (*(&gTheGame.alpha[0].b.imagePtr + var_t2) != 0) {
                     var_t0_2 = 0;
-                    var_a1_2 = (s32) (*(&gTheGame.unk_9A90[0].b.frameX + var_t2) << 0x10) >> 0x12;
-                    temp_t3_2 = (s32) (*(&gTheGame.unk_9A90[0].b.frameY + var_t2) << 0x10) >> 0x12;
-                    temp_t5_2 = (u16) *(&gTheGame.unk_9A90[0].b.frameH + var_t2) >> 2;
-                    var_a3 = (u16) *(&gTheGame.unk_9A90[0].b.frameW + var_t2) >> 2;
+                    var_a1_2 = (s32) (*(&gTheGame.alpha[0].b.frameX + var_t2) << 0x10) >> 0x12;
+                    temp_t3_2 = (s32) (*(&gTheGame.alpha[0].b.frameY + var_t2) << 0x10) >> 0x12;
+                    temp_t5_2 = (u16) *(&gTheGame.alpha[0].b.frameH + var_t2) >> 2;
+                    var_a3 = (u16) *(&gTheGame.alpha[0].b.frameW + var_t2) >> 2;
                     if (temp_t5_2 != 0) {
                         temp_t1 = var_a3 >> 1;
                         temp_t6 = (((var_a1_2 + var_a3) * 4) & 0xFFF) << 0xC;
@@ -2527,7 +2516,7 @@ block_31:
                             temp_a1_4->unk_C = 0x07000000;
                             temp_a1_4->unk_14 = 0;
                             temp_a1_4->unk_18 = 0xF3000000;
-                            temp_a1_4->words.w1 = *(&gTheGame.unk_9A90[0].b.imagePtr + var_t2) + (var_a3 * (var_t0_2 * 4));
+                            temp_a1_4->words.w1 = *(&gTheGame.alpha[0].b.imagePtr + var_t2) + (var_a3 * (var_t0_2 * 4));
                             if ((s32) temp_t1 > 0) {
                                 var_a2_2 = temp_t1 + 0x7FF;
                             }
@@ -2656,7 +2645,6 @@ s32 func_8004FA2C_usa();                            /* extern */
 extern u8 B_801C6C90_usa;
 extern s32 gWhatever;
 extern ? SFX_INIT_TABLE;
-extern s32 D_800B65B0_usa;
 extern ? wallsdownShake;
 
 void DoGameOver2D(void) {
@@ -3555,8 +3543,8 @@ void DoGameOver3D(void) {
                 break;
 
             case GMAIN_393:
-                gTheGame.unk_9A90[1].b.frameY = 155 << 2;
-                gTheGame.unk_9A90[2].b.frameY = 180 << 2;
+                gTheGame.alpha[1].b.frameY = 155 << 2;
+                gTheGame.alpha[2].b.frameY = 180 << 2;
 
                 if (cursor1->state == 7) {
                     if ((gSelection < SELECTION_83) || (gSelection == SELECTION_AA)) {
@@ -3589,12 +3577,12 @@ void DoGameOver3D(void) {
                 break;
 
             case GMAIN_395:
-                AnimateGameOver3D(well1, &gTheGame.unk_9A90[0]);
+                AnimateGameOver3D(well1, &gTheGame.alpha[0]);
                 func_80039B78_usa();
                 func_8004ADD0_usa(0);
                 if ((gSelection == SELECTION_AA) || (gSelection == SELECTION_82)) {
                     if (cursor1->state == 7) {
-                        AnimatePushKey(&gTheGame.unk_9A90[1]);
+                        AnimatePushKey(&gTheGame.alpha[1]);
                     }
                 }
                 gWhatever++;
@@ -3835,8 +3823,8 @@ void DoGameOver3D(void) {
                 break;
 
             case GMAIN_394:
-                gTheGame.unk_9A90[2].b.frameY = 193 << 2;
-                gTheGame.unk_9A90[3].b.frameY = 193 << 2;
+                gTheGame.alpha[2].b.frameY = 193 << 2;
+                gTheGame.alpha[3].b.frameY = 193 << 2;
                 if (win1) {
                     Init3DSmallStars(0);
                 } else if (win2) {
@@ -3848,25 +3836,25 @@ void DoGameOver3D(void) {
 
             case GMAIN_395:
                 if (win1 == win2) {
-                    AnimateDraw3D(well1, &gTheGame.unk_9A90[0]);
-                    AnimateDraw3D(well2, &gTheGame.unk_9A90[1]);
+                    AnimateDraw3D(well1, &gTheGame.alpha[0]);
+                    AnimateDraw3D(well2, &gTheGame.alpha[1]);
                 } else {
                     if (win1) {
-                        AnimateLose3D(well1, &gTheGame.unk_9A90[0]);
+                        AnimateLose3D(well1, &gTheGame.alpha[0]);
                     } else {
-                        AnimateWin3D(well1, &gTheGame.unk_9A90[0]);
+                        AnimateWin3D(well1, &gTheGame.alpha[0]);
                     }
                     if (win2) {
-                        AnimateLose3D(well2, &gTheGame.unk_9A90[1]);
+                        AnimateLose3D(well2, &gTheGame.alpha[1]);
                     } else {
-                        AnimateWin3D(well2, &gTheGame.unk_9A90[1]);
+                        AnimateWin3D(well2, &gTheGame.alpha[1]);
                     }
 
                     SmallStars();
                 }
 
-                AnimatePushKey(&gTheGame.unk_9A90[2]);
-                AnimatePushKey(&gTheGame.unk_9A90[3]);
+                AnimatePushKey(&gTheGame.alpha[2]);
+                AnimatePushKey(&gTheGame.alpha[3]);
 
                 gWhatever++;
                 if (gWhatever == 0xDC) {
