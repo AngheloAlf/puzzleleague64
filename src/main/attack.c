@@ -14,7 +14,6 @@
 #include "sfxlimit.h"
 #include "the_game.h"
 
-#if VERSION_USA
 // Maybe?
 // int FromNumberToCombo(int number /* r1+0x0 */, int * type /* r1+0x4 */)
 INLINE s32 func_8005A8D0_usa(s32 arg0, s32 *arg1) {
@@ -73,9 +72,7 @@ INLINE s32 func_8005A8D0_usa(s32 arg0, s32 *arg1) {
     }
     return 8;
 }
-#endif
 
-#if VERSION_USA
 void func_8005A990_usa(attack_t *attack) {
     switch (attack->type) {
         case ATTACKTYPE_1:
@@ -108,7 +105,6 @@ void func_8005A990_usa(attack_t *attack) {
             attack->slot = -0x4C;
     }
 }
-#endif
 
 #if VERSION_USA
 #ifdef NON_MATCHING
@@ -161,8 +157,19 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/attack", func_8005A9EC_usa);
 #endif
 #endif
 
-#if VERSION_USA
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/attack", func_8005A9EC_usa);
+#endif
 
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/attack", func_8005A9EC_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/attack", func_8005A9EC_usa);
+#endif
+
+#if VERSION_USA
 #ifdef NON_MATCHING
 // regalloc
 void AttackFly(tetWell *well, attack_t *attack, s32 num) {
@@ -248,12 +255,48 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/attack", AttackFly);
 #endif
 #endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/attack", AttackFly);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/attack", AttackFly);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/attack", AttackFly);
+#endif
+
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/attack", AttackTop);
 #endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/attack", AttackTop);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/attack", AttackTop);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/attack", AttackTop);
+#endif
+
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/attack", AttackFall);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/attack", AttackFall);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/attack", AttackFall);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/attack", AttackFall);
 #endif
 
 #if VERSION_USA
@@ -317,12 +360,48 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/attack", AttackShake);
 #endif
 #endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/attack", AttackShake);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/attack", AttackShake);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/attack", AttackShake);
+#endif
+
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/attack", AttackToBlock);
 #endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/attack", AttackToBlock);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/attack", AttackToBlock);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/attack", AttackToBlock);
+#endif
+
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/attack", FinishGarbageBlock);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/attack", FinishGarbageBlock);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/attack", FinishGarbageBlock);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/attack", FinishGarbageBlock);
 #endif
 
 #if VERSION_USA
@@ -330,119 +409,11 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/attack", FindEmptySpaces);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/attack", func_8005AB90_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/attack", func_8005AC50_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/attack", func_8005ACAC_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/attack", AttackFly);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/attack", AttackTop);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/attack", AttackFall);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/attack", AttackShake);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/attack", AttackToBlock);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/attack", FinishGarbageBlock);
-#endif
-
-#if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/attack", FindEmptySpaces);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/attack", func_800592D0_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/attack", func_80059390_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/attack", func_800593EC_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/attack", AttackFly);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/attack", AttackTop);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/attack", AttackFall);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/attack", AttackShake);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/attack", AttackToBlock);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/attack", FinishGarbageBlock);
-#endif
-
-#if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/attack", FindEmptySpaces);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/attack", func_80059480_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/attack", func_80059540_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/attack", func_8005959C_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/attack", AttackFly);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/attack", AttackTop);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/attack", AttackFall);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/attack", AttackShake);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/attack", AttackToBlock);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/attack", FinishGarbageBlock);
 #endif
 
 #if VERSION_GER

@@ -14,16 +14,22 @@
 
 #include "assets_variables.h"
 
-#if VERSION_USA
+/**
+ * Original name: InitCursor
+ */
 void InitCursor(cursor_t *cursor) {
-    s32 var_v0;
+    s32 i;
 
     cursor->state = 0;
     cursor->delay = 0;
     cursor->waiting = 0;
     cursor->extra_wait = 0;
     cursor->frame_n = 0;
+#if VERSION_USA
     cursor->frame_d = 0xF;
+#else
+    cursor->frame_d = 0xD;
+#endif
 
     if ((gTheGame.dimension == DIMENSION_3D) || (gSelection < SELECTION_8C)) {
         cursor->x = 2;
@@ -43,27 +49,14 @@ void InitCursor(cursor_t *cursor) {
         return;
     }
 
-    for (var_v0 = 0; var_v0 < CURSOR_UNK_28_COUNT; var_v0++) {
-        cursor->target[var_v0] = 0;
+    for (i = 0; i < CURSOR_UNK_28_COUNT; i++) {
+        cursor->target[i] = 0;
     }
 
-    for (var_v0 = 0; var_v0 < CURSOR_UNK_84_COUNT; var_v0++) {
-        cursor->unk_84[var_v0] = 0;
+    for (i = 0; i < CURSOR_UNK_84_COUNT; i++) {
+        cursor->unk_84[i] = 0;
     }
 }
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/dlist", InitCursor);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/dlist", InitCursor);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/dlist", InitCursor);
-#endif
 
 void InitGamePad(s32 num) {
     // TODO: REGION_NTSC?
@@ -146,7 +139,6 @@ void InitDisplayList(struct_gInfo *info) {
     }
 }
 
-#if VERSION_USA
 // SetMenuVar?
 void func_800549A4_usa(void) {
     s32 num;
@@ -160,10 +152,21 @@ void func_800549A4_usa(void) {
         well->menu.misc = gTheGame.menu[num].misc;
     }
 }
-#endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/dlist", InitGameStateVar);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/dlist", InitGameStateVar);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/dlist", InitGameStateVar);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/dlist", InitGameStateVar);
 #endif
 
 #if VERSION_USA
@@ -171,35 +174,11 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/dlist", func_800552F4_usa);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/dlist", func_80054C44_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/dlist", InitGameStateVar);
-#endif
-
-#if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/dlist", func_80055594_eur);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/dlist", func_800533B4_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/dlist", InitGameStateVar);
-#endif
-
-#if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/dlist", func_80053D04_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/dlist", func_80053534_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/dlist", InitGameStateVar);
 #endif
 
 #if VERSION_GER

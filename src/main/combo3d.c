@@ -11,7 +11,9 @@
 #include "dlist.h"
 #include "tetwell.h"
 
-#if VERSION_USA
+/**
+ * Original name: Compact3DAttackNoWhere
+ */
 void Compact3DAttackNoWhere(tetWell *well) {
     s32 i;
 
@@ -21,19 +23,6 @@ void Compact3DAttackNoWhere(tetWell *well) {
         }
     }
 }
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/combo3d", Compact3DAttackNoWhere);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/combo3d", Compact3DAttackNoWhere);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/combo3d", Compact3DAttackNoWhere);
-#endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/combo3d", Compact3DAttack);

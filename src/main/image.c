@@ -303,7 +303,57 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_80020208_usa);
 INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_80020304_usa);
 #endif
 
-#if VERSION_USA
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_80020158_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_800201C8_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_8002031C_eur);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_80020418_eur);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_80020168_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_800201D8_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_8002032C_fra);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_80020428_fra);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_800201D8_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_80020248_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_8002039C_ger);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_80020498_ger);
+#endif
+
+/**
+ * Original name: imageSetScale
+ */
 nbool imageSetScale(struct_imageLoad_arg0 *pImage, f32 rScaleX, f32 rScaleY) {
     if ((pImage != NULL) && (rScaleX != DOUBLE_LITERAL(0.0))) {
         pImage->unk_88 = 1024 / rScaleX;
@@ -314,9 +364,9 @@ nbool imageSetScale(struct_imageLoad_arg0 *pImage, f32 rScaleX, f32 rScaleY) {
         }
         return ntrue;
     }
+
     return nfalse;
 }
-#endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_8002063C_usa);
@@ -336,26 +386,6 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_800207FC_usa);
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/image", func_800209BC_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_80020158_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_800201C8_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_8002031C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_80020418_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_800206C0_eur);
 #endif
 
 #if VERSION_EUR
@@ -379,26 +409,6 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/image", func_80020AD0_eur);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_80020168_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_800201D8_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_8002032C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_80020428_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_800206D0_fra);
-#endif
-
-#if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_80020760_fra);
 #endif
 
@@ -416,26 +426,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_80020920_fra);
 
 #if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/image", func_80020AE0_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_800201D8_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_80020248_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_8002039C_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_80020498_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/image", func_80020740_ger);
 #endif
 
 #if VERSION_GER

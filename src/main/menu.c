@@ -4354,15 +4354,50 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_800194DC_usa);
 INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_80019A24_usa);
 #endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_80019B58_eur);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_80019B8C_fra);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_80019BD8_ger);
+#endif
+
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_80019DAC_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_80019EE8_eur);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_80019F1C_fra);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_80019F68_ger);
 #endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_80019F44_usa);
 #endif
 
-#if VERSION_USA
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_8001A080_eur);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_8001A0B4_fra);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_8001A100_ger);
+#endif
+
 /**
  * Original name: menuInitUser
  */
@@ -4435,55 +4470,6 @@ nbool menuInitUser(s32 iUser) {
 
     return nfalse;
 }
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_80019B58_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_80019EE8_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/menu", func_8001A080_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/menu", menuInitUser);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_80019B8C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_80019F1C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/menu", func_8001A0B4_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/menu", menuInitUser);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_80019BD8_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_80019F68_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/menu", func_8001A100_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/menu", menuInitUser);
-#endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/menu", func_8001A330_usa);

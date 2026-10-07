@@ -7,19 +7,22 @@
 #include "macros_defines.h"
 #include "main_variables.h"
 
-#if VERSION_USA
 extern OSMesg B_801AB80C_usa[1];
 
+extern s32 B_801A5B30_usa;
+extern s32 B_801A5B40_usa;
+extern OSContStatus B_801F9CA8_usa[MAXCONTROLLERS];
+
+/**
+ * Original name: InitController
+ */
 void InitController(void) {
     osCreateMesgQueue(&gSerialMsgQ, B_801AB80C_usa, ARRAY_COUNT(B_801AB80C_usa));
     osSetEventMesg(OS_EVENT_SI, &gSerialMsgQ, (OSMesg)1);
     CheckController();
 }
 
-extern s32 B_801A5B30_usa;
-extern s32 B_801A5B40_usa;
-extern OSContStatus B_801F9CA8_usa[MAXCONTROLLERS];
-
+#if VERSION_USA
 #ifdef NON_EQUIVALENT
 void CheckController(void) {
     s32 var_a0;
@@ -51,6 +54,19 @@ void CheckController(void) {
 #else
 INCLUDE_ASM("asm/usa/nonmatchings/main/controller", CheckController);
 #endif
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/controller", CheckController);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/controller", CheckController);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/controller", CheckController);
+#endif
 
 void func_80046F8C_usa(void) {
     OSContStatus sp10[MAXCONTROLLERS];
@@ -69,6 +85,7 @@ void func_80046F8C_usa(void) {
     }
 }
 
+#if VERSION_USA
 #if 0
 extern OSContPad B_801C7228_usa;
 
@@ -166,7 +183,21 @@ void UpdateController(void) {
 #else
 INCLUDE_ASM("asm/usa/nonmatchings/main/controller", UpdateController);
 #endif
+#endif
 
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/controller", UpdateController);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/controller", UpdateController);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/controller", UpdateController);
+#endif
+
+#if VERSION_USA
 #if 0
 extern OSContPad B_801C7228_usa;
 
@@ -239,59 +270,11 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/controller", UpdateMenuController);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/controller", InitController);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/controller", func_80047124_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/controller", func_80046F8C_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/controller", UpdateController);
-#endif
-
-#if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/controller", UpdateMenuController);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/controller", InitController);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/controller", func_800458A4_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/controller", func_80046F8C_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/controller", UpdateController);
-#endif
-
-#if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/controller", UpdateMenuController);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/controller", InitController);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/controller", func_80045A14_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/controller", func_80046F8C_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/controller", UpdateController);
 #endif
 
 #if VERSION_GER
