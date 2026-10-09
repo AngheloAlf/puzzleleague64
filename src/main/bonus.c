@@ -8,6 +8,8 @@
 #include "macros_defines.h"
 #include "main_variables.h"
 
+#include "libc/assert.h"
+
 #include "animation.h"
 #include "bg_screen_load.h"
 #include "buffers.h"
@@ -63,6 +65,94 @@ typedef struct struct_8004EC4C_usa_arg3 {
     /* 0x0 */ UNK_TYPE4 unk_0;
     /* 0x0 */ UNK_TYPE1 unk_4[0x4];
 } struct_8004EC4C_usa_arg3; // size = 0x8
+
+s8 gameoverBounce[] = {
+    -1,
+    0,
+    0,
+    0,
+    -1,
+    0,
+    0,
+    0,
+    -1,
+    0,
+    0,
+    0,
+    -1,
+    0,
+    0,
+    0,
+    -1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+};
+
+// TODO: figure out what this values are
+char D_800B64E8_usa[][2] = {
+    { 0, 0x1C },
+    { 0, 0 },
+    { 8, 0x13 },
+    { 0, 0 },
+    { 8, 7 },
+    { 0, 0x11 },
+    { 0, 6 },
+    { 0, 0 },
+};
+char D_800B64F8_usa[][2] = {
+    { 0, 0 },
+    { 0x10, 0 },
+    { 5, 6 },
+    { 0x1C, 0 },
+    { 0x21, 0xA },
+    { 0, 0 },
+    { 0, 2 },
+    { 0xC, 2 },
+};
+RomOffset D_800B6508_usa[] = {
+    SEGMENT_ROM_START(segment_background_1CD7F0),
+    SEGMENT_ROM_START(segment_background_1F1BF0),
+    SEGMENT_ROM_START(segment_background_215FF0),
+    SEGMENT_ROM_START(segment_background_23A3F0),
+    SEGMENT_ROM_START(segment_background_25E7F0),
+    SEGMENT_ROM_START(segment_background_282BF0),
+    SEGMENT_ROM_START(segment_background_2A6FF0),
+    SEGMENT_ROM_START(segment_background_2CB3F0),
+};
+RomOffset D_800B6528_usa[] = {
+    SEGMENT_ROM_START(segment_flic_anime_bg_599F70),
+    SEGMENT_ROM_START(segment_flic_anime_bg_5A8C10),
+    SEGMENT_ROM_START(segment_flic_anime_bg_5B6730),
+    SEGMENT_ROM_START(segment_flic_anime_bg_5C62D0),
+    SEGMENT_ROM_START(segment_flic_anime_bg_5D4870),
+    SEGMENT_ROM_START(segment_flic_anime_bg_5E6490),
+    SEGMENT_ROM_START(segment_flic_anime_bg_5F3090),
+    SEGMENT_ROM_START(segment_flic_anime_bg_5FF430),
+};
+static_assert(ARRAY_COUNT(D_800B64E8_usa) == ARRAY_COUNT(D_800B64F8_usa), "");
+static_assert(ARRAY_COUNT(D_800B6508_usa) == ARRAY_COUNT(D_800B6528_usa), "");
+static_assert(ARRAY_COUNT(D_800B64E8_usa) == ARRAY_COUNT(D_800B6508_usa), "");
 
 #if VERSION_USA
 #ifdef NON_EQUIVALENT

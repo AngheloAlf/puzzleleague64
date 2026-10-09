@@ -120,11 +120,6 @@ extern s32 D_800B5A1C_usa;
 // extern UNK_TYPE D_800B6440_usa;
 // extern UNK_TYPE D_800B6444_usa;
 
-extern s8 gameoverBounce[];
-extern char D_800B64E8_usa[][2];
-extern char D_800B64F8_usa[][2];
-extern RomOffset D_800B6508_usa[];
-extern RomOffset D_800B6528_usa[];
 extern s8 losewordShake[];
 extern s8 winwordShake[];
 extern s8 pushkeyShake[];

@@ -1204,13 +1204,13 @@ D_800B6450_usa = 0x800AC3D0; // size:0x18
 D_800B6468_usa = 0x800AC3E8; //
 D_FLT_800B646C_usa = 0x800AC3EC; // type:f32
 gaEditData = 0x800AC3F0; //
+
 gameoverBounce = 0x800AC440; // type:s8
-D_800B64E8_usa = 0x800AC468; // type:s8
-D_800AC469_ger = 0x800AC469; // type:s8
-D_800B64F8_usa = 0x800AC478; // type:s8
-D_800AC479_ger = 0x800AC479; // type:s8
+D_800B64E8_usa = 0x800AC468; // type:s8 size:0x10
+D_800B64F8_usa = 0x800AC478; // type:s8 size:0x10
 D_800B6508_usa = 0x800AC488; //
 D_800B6528_usa = 0x800AC4A8; //
+
 losewordShake = 0x800AC4D0; // type:s8
 winwordShake = 0x800AC4F8; // type:s8
 pushkeyShake = 0x800AC4FC; // type:s8

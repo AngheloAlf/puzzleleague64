@@ -157,10 +157,10 @@ segments:
       - { path: src/main/pause.o }
       - { path: src/main/end.o }
 
-      - { path: "asm/{version}/data/main/0B70C0.data.o", include_if_any: [[version, usa]] }
-      - { path: "asm/{version}/data/main/0B75E0.data.o", include_if_any: [[version, eur]] }
-      - { path: "asm/{version}/data/main/0B5E10.data.o", include_if_any: [[version, fra]] }
-      - { path: "asm/{version}/data/main/0AD040.data.o", include_if_any: [[version, ger]] }
+      - { path: "asm/{version}/data/main/0B7150.data.o", include_if_any: [[version, usa]] }
+      - { path: "asm/{version}/data/main/0B7670.data.o", include_if_any: [[version, eur]] }
+      - { path: "asm/{version}/data/main/0B5EA0.data.o", include_if_any: [[version, fra]] }
+      - { path: "asm/{version}/data/main/0AD0D0.data.o", include_if_any: [[version, ger]] }
 
       - { path: src/main/hvqm2util.o }
       - { path: src/main/041780.o }
