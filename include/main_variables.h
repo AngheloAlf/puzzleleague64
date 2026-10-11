@@ -955,7 +955,7 @@ extern s16 Flash_count[];
 extern s32 gLastOverflow;
 extern s32 B_80192FF0_usa;
 extern s32 giScreenMimic;
-extern s32 B_80192FF8_usa;
+extern s32 B_80192FF8_usa[];
 extern s32 B_80192FFC_usa;
 extern s32 B_80193000_usa;
 extern s32 B_80193004_usa;

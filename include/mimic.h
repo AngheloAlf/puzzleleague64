@@ -3,6 +3,7 @@
 
 #include "ultra64.h"
 #include "unk.h"
+#include "other_types.h"
 
 struct ai_t;
 struct cursor_t;
@@ -39,8 +40,8 @@ void UpdateMT(struct tetWell *well, struct cursor_t *cursor, struct ai_t *brain)
 void UpdateMTController(struct tetWell *well, struct cursor_t *cursor, s32 num);
 void DoMT(void);
 void MimicCheckState(struct tetWell *well, struct cursor_t *cursor);
-s32 ViewMimic(void);
-s32 PlayMimic(s32 *result);
+nbool ViewMimic(void);
+nbool PlayMimic(s32 *result);
 void DrawMimic(struct struct_gInfo_unk_00068 *dynamicp);
 void Draw2DMT(struct struct_gInfo_unk_00068 *dynamicp);
 void Draw3DMT(struct struct_gInfo_unk_00068 *dynamicp);

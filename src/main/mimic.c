@@ -740,26 +740,26 @@ void MimicCheckState(tetWell *well, cursor_t *cursor) {
 /**
  * Original name: ViewMimic
  */
-INLINE s32 ViewMimic(void) {
-    if (gTheGame.controller[0].touch_button & 0x4000) {
+INLINE nbool ViewMimic(void) {
+    if (gTheGame.controller[0].touch_button & B_BUTTON) {
         PlaySE(SFX_INIT_TABLE, SFX_006);
-        return -1;
+        return ntrue;
     }
     DoMT();
     if (gMain == GMAIN_2BC) {
         gMain = GMAIN_MIMIC;
-        return -1;
+        return ntrue;
     }
-    return 0;
+    return nfalse;
 }
 
 /**
  * Original name: PlayMimic
  */
-INLINE s32 PlayMimic(s32 *result) {
-    if (gTheGame.controller[0].touch_button & 0x4000) {
+INLINE nbool PlayMimic(s32 *result) {
+    if (gTheGame.controller[0].touch_button & B_BUTTON) {
         PlaySE(SFX_INIT_TABLE, SFX_006);
-        return -1;
+        return ntrue;
     }
     DoMT();
     if (gMain == GMAIN_2BC) {
@@ -769,9 +769,9 @@ INLINE s32 PlayMimic(s32 *result) {
             *result = 0;
         }
         gMain = GMAIN_MIMIC;
-        return -1;
+        return ntrue;
     }
-    return 0;
+    return nfalse;
 }
 
 /**
@@ -1008,7 +1008,7 @@ void mimicTickText(s32 bSkip) {
     if (gnTagTextMimic != -1 && gnTagTextMimic > 0) {
         if (screenTextDone(giScreenMimic, gnTagTextMimic)) {
             if (geModeMimic == MM_GIRLTEXT) {
-                bFlag = (gTheGame.controller[0].touch_button >> 0xF) ? -1 : 0;
+                bFlag = (gTheGame.controller[0].touch_button & A_BUTTON) ? -1 : 0;
             } else {
                 B_80193014_usa++;
                 bFlag = (B_80193014_usa >= 0x3D) ? -1 : 0;
@@ -1030,6 +1030,57 @@ void mimicTickText(s32 bSkip) {
             B_80193014_usa = 0;
         }
     }
+}
+
+/**
+ * Original name: mimicNextLevel
+ */
+STATIC_INLINE void mimicNextLevel(void) {
+    s32 iCursorX;
+    s32 iCursorY;
+
+    screenGetCursor(giScreenMimic, 0x64, &iCursorX, &iCursorY);
+    if (gTheGame.menu[0].speed != 4) {
+        if (iCursorY < 3) {
+            iCursorY += 1;
+        } else {
+            iCursorY = 0;
+        }
+    }
+    screenSetCursor(giScreenMimic, 0x64, iCursorX, iCursorY);
+    gTheGame.menu[0].stage = iCursorY + 1;
+    screenSetCursor(giScreenMimic, 0x65, 0, 0);
+    gTheGame.menu[0].misc = 1;
+}
+
+/**
+ * Original name: mimicNextStage
+ */
+STATIC_INLINE s32 mimicNextStage(void) {
+    s32 iCursorLast;
+    s32 iCursorX;
+    s32 iCursorY;
+
+    screenGetCursor(giScreenMimic, 0x65, &iCursorX, &iCursorY);
+    iCursorLast = iCursorX;
+    if (gTheGame.menu[0].speed == 4) {
+        if (iCursorX < 5) {
+            iCursorX = iCursorLast + 1;
+        }
+    } else if (gTheGame.menu[0].stage < 3) {
+        if (iCursorX < 4) {
+            iCursorX = iCursorLast + 1;
+        }
+    } else {
+        if (iCursorX < 3) {
+            iCursorX = iCursorLast + 1;
+        }
+    }
+
+    screenSetCursor(giScreenMimic, 0x65, iCursorX, 0);
+    gTheGame.menu[0].misc = iCursorX + 1;
+
+    return iCursorLast == iCursorX;
 }
 
 void DrawMT(struct_gInfo_unk_00068 *dynamicp) {
@@ -1103,64 +1154,12 @@ STATIC_INLINE void DoMimic_inlined_func_2(void) {
 }
 
 STATIC_INLINE void DoMimic_inlined_func_3(s32 arg0, s32 arg1) {
-    s32 temp_s0;
-    temp_s0 = ((B_8019300C_usa & 0xFFFF) == 0x258) ? 0x259 : 0x258;
+    s32 temp_s0 = ((B_8019300C_usa & 0xFFFF) == 0x258) ? 0x259 : 0x258;
     if ((B_8019300C_usa == 0) || ((B_8019300C_usa >> 0x10) != arg0)) {
         B_8019300C_usa = temp_s0 | (arg0 << 0x10);
         func_80028DC0_usa(giScreenMimic, temp_s0, arg0);
         screenSetImagePosition(giScreenMimic, temp_s0, arg1, 0x48 + arg0);
     }
-}
-
-/**
- * Original name: mimicNextLevel
- */
-STATIC_INLINE void mimicNextLevel(void) {
-    s32 iCursorX;
-    s32 iCursorY;
-
-    screenGetCursor(giScreenMimic, 0x64, &iCursorX, &iCursorY);
-    if (gTheGame.menu[0].speed != 4) {
-        if (iCursorY < 3) {
-            iCursorY += 1;
-        } else {
-            iCursorY = 0;
-        }
-    }
-    screenSetCursor(giScreenMimic, 0x64, iCursorX, iCursorY);
-    gTheGame.menu[0].stage = iCursorY + 1;
-    screenSetCursor(giScreenMimic, 0x65, 0, 0);
-    gTheGame.menu[0].misc = 1;
-}
-
-/**
- * Original name: mimicNextStage
- */
-STATIC_INLINE s32 mimicNextStage(void) {
-    s32 iCursorLast;
-    s32 iCursorX;
-    s32 iCursorY;
-
-    screenGetCursor(giScreenMimic, 0x65, &iCursorX, &iCursorY);
-    iCursorLast = iCursorX;
-    if (gTheGame.menu[0].speed == 4) {
-        if (iCursorX < 5) {
-            iCursorX = iCursorLast + 1;
-        }
-    } else if (gTheGame.menu[0].stage < 3) {
-        if (iCursorX < 4) {
-            iCursorX = iCursorLast + 1;
-        }
-    } else {
-        if (iCursorX < 3) {
-            iCursorX = iCursorLast + 1;
-        }
-    }
-
-    screenSetCursor(giScreenMimic, 0x65, iCursorX, 0);
-    gTheGame.menu[0].misc = iCursorX + 1;
-
-    return iCursorLast == iCursorX;
 }
 
 /**
@@ -1174,7 +1173,7 @@ void DoMimic(void) {
     s32 temp_v0;
     s32 var_a2;
     s32 var_s2;
-    enum MimicMode eMode;
+    MimicMode eMode;
     s32 var_s4;
     s32 var_s5;
 
@@ -1238,28 +1237,28 @@ void DoMimic(void) {
     screenGetCursor(var_s2, 0x64, &iCursorX, &iCursorY);
     gTheGame.menu[0].stage = iCursorY + 1;
     if (sp20.unk_0 == 1 || sp20.unk_0 == 2) {
-        screenSetCursor(var_s2, 0x65, (&giScreenMimic)[gTheGame.menu[0].stage], 0);
+        screenSetCursor(var_s2, 0x65, B_80192FF8_usa[gTheGame.menu[0].stage - 1], 0);
     }
     screenGetCursor(var_s2, 0x65, &iCursorX, &iCursorY);
     gTheGame.menu[0].misc = iCursorX + 1;
-    // TODO: What is this: (&giScreenMimic)[gTheGame.menu[0].stage]?
-    (&giScreenMimic)[gTheGame.menu[0].stage] = iCursorX;
+    B_80192FF8_usa[gTheGame.menu[0].stage - 1] = iCursorX;
     eMode = MM_NONE;
     switch (geModeMimic) {
         case MM_NONE:
             eMode = MM_GIRLTEXT;
             break;
+
         case MM_GIRLTEXT:
             DoMimic_inlined_func_3(0, 0x9E);
             if (sp20.unk_0 == 0x21) {
                 var_s5 = -1;
             }
-
             temp_v0 = (gnTagTextMimic == -1 || gnTagTextMimic < 0) ? -1 : 0;
             if (temp_v0 || sp20.unk_0 == 0x22) {
                 eMode = MM_LEVEL;
             }
             break;
+
         case MM_LEVEL:
             DoMimic_inlined_func_3(0, 0x9E);
             if (sp20.unk_0 == 1 || sp20.unk_0 == 2) {
@@ -1272,6 +1271,7 @@ void DoMimic(void) {
                 eMode = MM_STAGE;
             }
             break;
+
         case MM_STAGE:
             DoMimic_inlined_func_3(0, 0x9E);
             if (sp20.unk_0 == 3 || sp20.unk_0 == 4) {
@@ -1288,6 +1288,7 @@ void DoMimic(void) {
                 eMode = MM_VIEWTEXT1;
             }
             break;
+
         case MM_VIEWTEXT1:
             DoMimic_inlined_func_3(1, 0x90);
             temp_v0 = (gnTagTextMimic == -1 || gnTagTextMimic < 0) ? -1 : 0;
@@ -1299,6 +1300,7 @@ void DoMimic(void) {
                 }
             }
             break;
+
         case MM_VIEW:
             DoMimic_inlined_func_3(1, 0x90);
             if (ViewMimic() != 0) {
@@ -1314,6 +1316,7 @@ void DoMimic(void) {
                 eMode = MM_STAGE;
             }
             break;
+
         case MM_VIEWTEXT2:
             DoMimic_inlined_func_3(1, 0x90);
             temp_v0 = (gnTagTextMimic == -1 || gnTagTextMimic < 0) ? -1 : 0;
@@ -1331,13 +1334,14 @@ void DoMimic(void) {
                 }
             }
             break;
+
         case MM_PLAYTEXT1:
             eMode = MM_PLAY;
             break;
+
         case MM_PLAY:
             DoMimic_inlined_func_3(0, 0x9E);
             sp40 = 0xABCD;
-
             if (PlayMimic(&sp40) != 0) {
                 if (sp40 == 0xABCD) {
                     var_s4 = 1;
@@ -1361,12 +1365,14 @@ void DoMimic(void) {
                 }
             }
             break;
+
         case MM_PLAYTEXT2:
             temp_v0 = (gnTagTextMimic == -1 || gnTagTextMimic < 0) ? -1 : 0;
             if (temp_v0) {
                 eMode = MM_STAGE;
             }
             break;
+
         case MM_PLAYTEXT3:
             temp_v0 = (gnTagTextMimic == -1 || gnTagTextMimic < 0) ? -1 : 0;
             if (temp_v0) {
@@ -1414,6 +1420,7 @@ void DoMimic(void) {
                 screenShowArea(var_s2, 0x64);
                 func_80027618_usa(var_s2, 0x64, 0U);
                 break;
+
             case MM_STAGE:
                 DoMimic_inlined_func(0xA);
 
@@ -1447,6 +1454,7 @@ void DoMimic(void) {
                 screenShowArea(var_s2, 0x65);
                 func_80027618_usa(var_s2, 0x65, 0U);
                 break;
+
             default:
                 break;
         }
@@ -1459,10 +1467,10 @@ void DoMimic(void) {
         gTheGame.menu[0].misc = iCursorX + 1;
         if (var_s4 == 1) {
             LoadMimic1(gTheGame.menu[0].speed, gTheGame.menu[0].stage, gTheGame.menu[0].misc,
-                       -(gTheGame.menu[0].game == 3));
+                       (gTheGame.menu[0].game == 3) ? -1 : 0);
         } else {
             LoadMimic2(gTheGame.menu[0].speed, gTheGame.menu[0].stage, gTheGame.menu[0].misc,
-                       -(gTheGame.menu[0].game == 3));
+                       (gTheGame.menu[0].game == 3) ? -1 : 0);
         }
     }
     if (var_s5 != 0) {
@@ -1471,7 +1479,7 @@ void DoMimic(void) {
         GAME_STATUS_SHIFT_RIGHT(gGameStatus);
         PlaySE(SFX_INIT_TABLE, SFX_006);
     }
-    mimicTickText((eMode == MM_NONE) ? -(sp20.unk_0 == 0x20) : 0);
+    mimicTickText((eMode == MM_NONE) && (sp20.unk_0 == 0x20) ? -1 : 0);
 
     DoMimic_inlined_func_2();
 }
@@ -1507,7 +1515,7 @@ void InitMimic(void) {
     B_80193004_usa = 0;
     B_80193000_usa = 0;
     B_80192FFC_usa = 0;
-    B_80192FF8_usa = 0;
+    B_80192FF8_usa[0] = 0;
 
     SetupMimic(&sp10);
 
