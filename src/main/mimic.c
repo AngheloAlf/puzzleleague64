@@ -737,7 +737,9 @@ void MimicCheckState(tetWell *well, cursor_t *cursor) {
     }
 }
 
-#if VERSION_USA
+/**
+ * Original name: ViewMimic
+ */
 INLINE s32 ViewMimic(void) {
     if (gTheGame.controller[0].touch_button & 0x4000) {
         PlaySE(SFX_INIT_TABLE, SFX_006);
@@ -750,9 +752,10 @@ INLINE s32 ViewMimic(void) {
     }
     return 0;
 }
-#endif
 
-#if VERSION_USA
+/**
+ * Original name: PlayMimic
+ */
 INLINE s32 PlayMimic(s32 *arg0) {
     if (gTheGame.controller[0].touch_button & 0x4000) {
         PlaySE(SFX_INIT_TABLE, SFX_006);
@@ -770,9 +773,10 @@ INLINE s32 PlayMimic(s32 *arg0) {
     }
     return 0;
 }
-#endif
 
-#if VERSION_USA
+/**
+ * Original name: DrawMimic
+ */
 INLINE void DrawMimic(struct_gInfo_unk_00068 *dynamicp) {
     if (gTheGame.dimension == DIMENSION_2D) {
         Draw2DMT(dynamicp);
@@ -783,7 +787,6 @@ INLINE void DrawMimic(struct_gInfo_unk_00068 *dynamicp) {
         pon_DrawLoadingMessage(&glistp);
     }
 }
-#endif
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/mimic", Draw2DMT);
@@ -969,18 +972,6 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/mimic", mimicTickText);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", func_80084FD0_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", func_8008503C_eur);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", func_800850DC_eur);
-#endif
-
-#if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", Draw2DMT);
 #endif
 
@@ -989,19 +980,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", Draw3DMT);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", func_80086080_eur);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/mimic", func_800836F0_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/mimic", func_8008375C_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/mimic", func_800837FC_fra);
+INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", mimicTickText);
 #endif
 
 #if VERSION_FRA
@@ -1013,19 +992,7 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/mimic", Draw3DMT);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/mimic", func_800847A0_fra);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", func_800838B0_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", func_8008391C_ger);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", func_800839BC_ger);
+INCLUDE_ASM("asm/fra/nonmatchings/main/mimic", mimicTickText);
 #endif
 
 #if VERSION_GER
@@ -1037,7 +1004,7 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", Draw3DMT);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", func_80084960_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", mimicTickText);
 #endif
 
 void DrawMT(struct_gInfo_unk_00068 *dynamicp) {
@@ -1049,21 +1016,12 @@ void DrawMT(struct_gInfo_unk_00068 *dynamicp) {
     }
 
     if ((gMain == GMAIN_MIMIC) && (geModeMimic >= MM_STAGE)) {
-        // TODO: Replace with DrawMimic() when mathcing non-USA
-        if (gTheGame.dimension == DIMENSION_2D) {
-            Draw2DMT(dynamicp);
-        } else {
-            Draw3DMT(dynamicp);
-        }
-        if (screenFlushing() == nfalse) {
-            pon_DrawLoadingMessage(&glistp);
-        }
+        DrawMimic(dynamicp);
     }
 
     pon_DrawLoadingMessage(&glistp);
 }
 
-#if VERSION_USA
 STATIC_INLINE void DoMimic_inlined_func(s32 temp) {
     u32 sp30;
     s32 temp_s0;
@@ -1129,51 +1087,60 @@ STATIC_INLINE void DoMimic_inlined_func_3(s32 arg0, s32 arg1) {
     }
 }
 
-STATIC_INLINE void DoMimic_inlined_func_4(void) {
-    s32 sp30;
-    s32 sp34;
+/**
+ * Original name: mimicNextLevel
+ */
+STATIC_INLINE void mimicNextLevel(void) {
+    s32 iCursorX;
+    s32 iCursorY;
 
-    screenGetCursor(giScreenMimic, 0x64, &sp30, &sp34);
+    screenGetCursor(giScreenMimic, 0x64, &iCursorX, &iCursorY);
     if (gTheGame.menu[0].speed != 4) {
-        if (sp34 < 3) {
-            sp34 += 1;
+        if (iCursorY < 3) {
+            iCursorY += 1;
         } else {
-            sp34 = 0;
+            iCursorY = 0;
         }
     }
-    screenSetCursor(giScreenMimic, 0x64, sp30, sp34);
-    gTheGame.menu[0].stage = sp34 + 1;
+    screenSetCursor(giScreenMimic, 0x64, iCursorX, iCursorY);
+    gTheGame.menu[0].stage = iCursorY + 1;
     screenSetCursor(giScreenMimic, 0x65, 0, 0);
     gTheGame.menu[0].misc = 1;
 }
 
-STATIC_INLINE s32 DoMimic_inlined_func_5(void) {
-    s32 sp30;
-    s32 sp34;
-    s32 var_s0;
+/**
+ * Original name: mimicNextStage
+ */
+STATIC_INLINE s32 mimicNextStage(void) {
+    s32 iCursorLast;
+    s32 iCursorX;
+    s32 iCursorY;
 
-    screenGetCursor(giScreenMimic, 0x65, &sp30, &sp34);
-    var_s0 = sp30;
+    screenGetCursor(giScreenMimic, 0x65, &iCursorX, &iCursorY);
+    iCursorLast = iCursorX;
     if (gTheGame.menu[0].speed == 4) {
-        if (sp30 < 5) {
-            sp30 = var_s0 + 1;
+        if (iCursorX < 5) {
+            iCursorX = iCursorLast + 1;
         }
     } else if (gTheGame.menu[0].stage < 3) {
-        if (sp30 < 4) {
-            sp30 = var_s0 + 1;
+        if (iCursorX < 4) {
+            iCursorX = iCursorLast + 1;
         }
     } else {
-        if (sp30 < 3) {
-            sp30 = var_s0 + 1;
+        if (iCursorX < 3) {
+            iCursorX = iCursorLast + 1;
         }
     }
 
-    screenSetCursor(giScreenMimic, 0x65, sp30, 0);
-    gTheGame.menu[0].misc = sp30 + 1;
+    screenSetCursor(giScreenMimic, 0x65, iCursorX, 0);
+    gTheGame.menu[0].misc = iCursorX + 1;
 
-    return var_s0 == sp30;
+    return iCursorLast == iCursorX;
 }
 
+/**
+ * Original name: DoMimic
+ */
 void DoMimic(void) {
     screenTick_arg0 sp20;
     s32 sp28;
@@ -1197,7 +1164,6 @@ void DoMimic(void) {
     int iCursorX; // r1+0x70
     int iCursorY; // r1+0x6C
     int anCommand[4]; // r1+0x5C
-
 #endif
 
     if (!screenFlushing()) {
@@ -1311,7 +1277,7 @@ void DoMimic(void) {
             DoMimic_inlined_func_3(1, 0x90);
             if (ViewMimic() != 0) {
                 if ((gTheGame.menu[0].game != 3) && (gTheGame.menu[0].misc < 3)) {
-                    DoMimic_inlined_func_5();
+                    mimicNextStage();
                     eMode = MM_STAGE;
                 } else {
                     DoMimic_inlined_func(0x1E);
@@ -1330,8 +1296,8 @@ void DoMimic(void) {
                     DoMimic_inlined_func(0x28);
                     eMode = MM_PLAYTEXT1;
                 } else {
-                    if (DoMimic_inlined_func_5()) {
-                        DoMimic_inlined_func_4();
+                    if (mimicNextStage()) {
+                        mimicNextLevel();
                         eMode = MM_LEVEL;
                     } else {
                         eMode = MM_STAGE;
@@ -1357,8 +1323,8 @@ void DoMimic(void) {
                 if (sp40 != 0) {
                     DoMimic_inlined_func(0x32);
 
-                    if (DoMimic_inlined_func_5()) {
-                        DoMimic_inlined_func_4();
+                    if (mimicNextStage()) {
+                        mimicNextLevel();
 
                         eMode = MM_PLAYTEXT3;
                     }
@@ -1479,19 +1445,6 @@ void DoMimic(void) {
 
     DoMimic_inlined_func_2();
 }
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", DoMimic);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/mimic", DoMimic);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", DoMimic);
-#endif
 
 const char RO_800C76E4_usa[] = "MIMIC?.SBF";
 
@@ -1499,7 +1452,6 @@ const char RO_800C76E4_usa[] = "MIMIC?.SBF";
 STATIC_INLINE void inlined_function() {
     u32 nType;
     s32 temp_s0;
-    s32 temp_s0_2;
 
     giScreenMimic = screenSet("MIMIC", 0x401);
     temp_s0 = gnTagTextMimic;
@@ -1512,14 +1464,7 @@ STATIC_INLINE void inlined_function() {
     } else {
         gnTagTextMimic = temp_s0;
     }
-
-    // TODO: Replace with DoMimic_inlined_func_3(0, 0x9E); when matching non-USA
-    temp_s0_2 = ((B_8019300C_usa & 0xFFFF) == 0x258) ? 0x259 : 0x258;
-    if ((B_8019300C_usa == 0) || ((B_8019300C_usa >> 0x10) != 0)) {
-        B_8019300C_usa = temp_s0_2;
-        func_80028DC0_usa(giScreenMimic, temp_s0_2, 0);
-        screenSetImagePosition(giScreenMimic, temp_s0_2, 0x9E, 0x48);
-    }
+    DoMimic_inlined_func_3(0, 0x9E);
 }
 
 void InitMimic(void) {
