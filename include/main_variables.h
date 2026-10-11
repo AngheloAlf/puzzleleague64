@@ -961,7 +961,7 @@ extern s32 B_80193000_usa;
 extern s32 B_80193004_usa;
 
 extern s32 B_8019300C_usa;
-// extern UNK_TYPE B_8019300E_usa;
+extern u16 B_8019300E_usa;
 extern s32 gnTagTextMimic;
 extern s32 B_80193014_usa;
 extern s32 B_80193020_usa;
