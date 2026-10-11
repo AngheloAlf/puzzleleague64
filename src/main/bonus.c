@@ -67,88 +67,50 @@ typedef struct struct_8004EC4C_usa_arg3 {
 } struct_8004EC4C_usa_arg3; // size = 0x8
 
 s8 gameoverBounce[] = {
-    -1,
-    0,
-    0,
-    0,
-    -1,
-    0,
-    0,
-    0,
-    -1,
-    0,
-    0,
-    0,
-    -1,
-    0,
-    0,
-    0,
-    -1,
-    0,
-    0,
-    0,
-    1,
-    0,
-    0,
-    0,
-    1,
-    0,
-    0,
-    0,
-    1,
-    0,
-    0,
-    0,
-    1,
-    0,
-    0,
-    0,
-    1,
-    0,
-    0,
-    0,
+    -1, 0, 0, 0, -1, 0, 0, 0, -1, 0, 0, 0, -1, 0, 0, 0, -1, 0, 0, 0,
+    1,  0, 0, 0, 1,  0, 0, 0, 1,  0, 0, 0, 1,  0, 0, 0, 1,  0, 0, 0,
 };
 
 // TODO: figure out what this values are
 char D_800B64E8_usa[][2] = {
-    { 0, 0x1C },
-    { 0, 0 },
-    { 8, 0x13 },
-    { 0, 0 },
-    { 8, 7 },
-    { 0, 0x11 },
-    { 0, 6 },
-    { 0, 0 },
+    { 0, 0x1C }, // 0
+    { 0, 0 },    // 1
+    { 8, 0x13 }, // 2
+    { 0, 0 },    // 3
+    { 8, 7 },    // 4
+    { 0, 0x11 }, // 5
+    { 0, 6 },    // 6
+    { 0, 0 },    // 7
 };
 char D_800B64F8_usa[][2] = {
-    { 0, 0 },
-    { 0x10, 0 },
-    { 5, 6 },
-    { 0x1C, 0 },
-    { 0x21, 0xA },
-    { 0, 0 },
-    { 0, 2 },
-    { 0xC, 2 },
+    { 0, 0 },      // 0
+    { 0x10, 0 },   // 1
+    { 5, 6 },      // 2
+    { 0x1C, 0 },   // 3
+    { 0x21, 0xA }, // 4
+    { 0, 0 },      // 5
+    { 0, 2 },      // 6
+    { 0xC, 2 },    // 7
 };
 RomOffset D_800B6508_usa[] = {
-    SEGMENT_ROM_START(segment_background_1CD7F0),
-    SEGMENT_ROM_START(segment_background_1F1BF0),
-    SEGMENT_ROM_START(segment_background_215FF0),
-    SEGMENT_ROM_START(segment_background_23A3F0),
-    SEGMENT_ROM_START(segment_background_25E7F0),
-    SEGMENT_ROM_START(segment_background_282BF0),
-    SEGMENT_ROM_START(segment_background_2A6FF0),
-    SEGMENT_ROM_START(segment_background_2CB3F0),
+    SEGMENT_ROM_START(segment_background_1CD7F0), // 0
+    SEGMENT_ROM_START(segment_background_1F1BF0), // 1
+    SEGMENT_ROM_START(segment_background_215FF0), // 2
+    SEGMENT_ROM_START(segment_background_23A3F0), // 3
+    SEGMENT_ROM_START(segment_background_25E7F0), // 4
+    SEGMENT_ROM_START(segment_background_282BF0), // 5
+    SEGMENT_ROM_START(segment_background_2A6FF0), // 6
+    SEGMENT_ROM_START(segment_background_2CB3F0), // 7
 };
 RomOffset D_800B6528_usa[] = {
-    SEGMENT_ROM_START(segment_flic_anime_bg_599F70),
-    SEGMENT_ROM_START(segment_flic_anime_bg_5A8C10),
-    SEGMENT_ROM_START(segment_flic_anime_bg_5B6730),
-    SEGMENT_ROM_START(segment_flic_anime_bg_5C62D0),
-    SEGMENT_ROM_START(segment_flic_anime_bg_5D4870),
-    SEGMENT_ROM_START(segment_flic_anime_bg_5E6490),
-    SEGMENT_ROM_START(segment_flic_anime_bg_5F3090),
-    SEGMENT_ROM_START(segment_flic_anime_bg_5FF430),
+    SEGMENT_ROM_START(segment_flic_anime_bg_599F70), // 0
+    SEGMENT_ROM_START(segment_flic_anime_bg_5A8C10), // 1
+    SEGMENT_ROM_START(segment_flic_anime_bg_5B6730), // 2
+    SEGMENT_ROM_START(segment_flic_anime_bg_5C62D0), // 3
+    SEGMENT_ROM_START(segment_flic_anime_bg_5D4870), // 4
+    SEGMENT_ROM_START(segment_flic_anime_bg_5E6490), // 5
+    SEGMENT_ROM_START(segment_flic_anime_bg_5F3090), // 6
+    SEGMENT_ROM_START(segment_flic_anime_bg_5FF430), // 7
 };
 static_assert(ARRAY_COUNT(D_800B64E8_usa) == ARRAY_COUNT(D_800B64F8_usa), "");
 static_assert(ARRAY_COUNT(D_800B6508_usa) == ARRAY_COUNT(D_800B6528_usa), "");
@@ -846,7 +808,7 @@ void InitStageClearIntro(void) {
     s16 sp38[12];
     s32 pad2[0xA] UNUSED;
     void *sp78;
-    s32 var_a3;
+    u32 var_a3;
     s32 var_s0;
     s32 temp;
     s32 a4;
@@ -905,29 +867,30 @@ void InitStageClearIntro(void) {
     DmaRomToRam(D_800B6528_usa[var_s0], sp38, sizeof(sp38));
 
     if (sp38[0] == 0x10) {
-        var_a3 = 0x54;
+        var_a3 = FUNC_8001DCC4_ARG3_PACK(0, 0, 5, 4);
     } else if (sp38[1] == 0) {
-        var_a3 = 0x33;
+        var_a3 = FUNC_8001DCC4_ARG3_PACK(0, 0, 3, 3);
     } else {
-        var_a3 = 0x13;
+        var_a3 = FUNC_8001DCC4_ARG3_PACK(0, 0, 1, 3);
     }
     a4 = sp38[2];
     a5 = sp38[3];
     temp = (a4 * a5 * 2);
-    func_8001FD0C_usa(&B_8018EA24_usa, D_800B6528_usa[var_s0] + sizeof(sp38), 0, var_a3, a4, a5, &sp78);
+    func_8001FD0C_usa(&B_8018EA24_usa, D_800B6528_usa[var_s0] + sizeof(sp38), ROM_NULL, var_a3, a4, a5, &sp78);
 
     if (sp38[6] == 0x10) {
-        var_a3 = 0x54;
+        var_a3 = FUNC_8001DCC4_ARG3_PACK(0, 0, 5, 4);
     } else if (sp38[7] == 0) {
-        var_a3 = 0x33;
+        var_a3 = FUNC_8001DCC4_ARG3_PACK(0, 0, 3, 3);
     } else {
-        var_a3 = 0x13;
+        var_a3 = FUNC_8001DCC4_ARG3_PACK(0, 0, 1, 3);
     }
     a4 = sp38[8];
     a5 = sp38[9];
     temp2 = temp + sizeof(sp38);
-    func_8001FD0C_usa(&B_8018EA28_usa, D_800B6528_usa[var_s0] + temp2, 0, var_a3, a4, a5, &sp78);
-    func_8001FD0C_usa(&B_8018EA20_usa, D_800B6508_usa[var_s0], 0, 0x800054, 0x140, 0xE8, &sp78);
+    func_8001FD0C_usa(&B_8018EA28_usa, D_800B6528_usa[var_s0] + temp2, ROM_NULL, var_a3, a4, a5, &sp78);
+    func_8001FD0C_usa(&B_8018EA20_usa, D_800B6508_usa[var_s0], ROM_NULL, FUNC_8001DCC4_ARG3_PACK(1, 0, 5, 4), 0x140,
+                      0xE8, &sp78);
 
     gWhatever = gTheGame.dimension = (gTheGame.menu[0].stage >= 4) ? DIMENSION_3D : DIMENSION_2D;
 
