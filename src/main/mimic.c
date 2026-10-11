@@ -1422,6 +1422,8 @@ void DoMimic(void) {
                 screenShowArea(var_s2, 0x65);
                 func_80027618_usa(var_s2, 0x65, 0U);
                 break;
+            default:
+                break;
         }
         geModeMimic = eMode;
     }
