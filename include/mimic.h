@@ -44,7 +44,7 @@ s32 PlayMimic(s32 *result);
 void DrawMimic(struct struct_gInfo_unk_00068 *dynamicp);
 void Draw2DMT(struct struct_gInfo_unk_00068 *dynamicp);
 void Draw3DMT(struct struct_gInfo_unk_00068 *dynamicp);
-// void mimicTickText();
+void mimicTickText(UNK_TYPE arg0);
 void DrawMT(struct struct_gInfo_unk_00068 *dynamicp);
 void DoMimic(void);
 void InitMimic(void);
