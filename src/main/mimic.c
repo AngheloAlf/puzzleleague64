@@ -20,9 +20,11 @@
 #include "character.h"
 #include "combo.h"
 #include "dlist.h"
+#include "image.h"
 #include "info.h"
 #include "init2d.h"
 #include "init3d.h"
+#include "menu.h"
 #include "other.h"
 #include "peel.h"
 #include "puzzle.h"
@@ -59,6 +61,9 @@ INLINE void QuitMimic(void) {
     GAME_STATUS_SHIFT_RIGHT(gGameStatus);
 }
 
+/**
+ * Original name: LoadMimic1
+ */
 void LoadMimic1(s32 kind, s32 level, s32 number, s32 play) {
     s32 temp_s0;
     s32 temp_v0;
@@ -188,15 +193,19 @@ void LoadMimic1(s32 kind, s32 level, s32 number, s32 play) {
     cursor[0].target[2] = temp_v0;
 }
 
-// Maybe inlined in DoMimic() or otherwise duplicated there?
-// ?? static void LoadMimic2(int kind /* r3 */, int level /* r4 */, int number /* r5 */, int play /* r6 */)
-void func_8008336C_usa(s32 kind, s32 level, s32 number, s32 play) {
+/**
+ * Original name: LoadMimic2
+ */
+INLINE void LoadMimic2(s32 kind, s32 level, s32 number, s32 play) {
     LoadMimic1(kind, level, number, play);
     PlaySE(SFX_INIT_TABLE, SFX_095);
     brainbrain[0].speed = -1;
     brainbrain[0].total_command = 0;
 }
 
+/**
+ * Original name: MTMove
+ */
 INLINE void MTMove(ai_t *brain, u8 *ptr) {
     s32 temp_v0;
     s32 var_a0;
@@ -228,6 +237,9 @@ INLINE void MTMove(ai_t *brain, u8 *ptr) {
     }
 }
 
+/**
+ * Original name: UpdateMT
+ */
 void UpdateMT(tetWell *well, cursor_t *cursor, ai_t *brain) {
     command_t *command;
     s32 var_v1;
@@ -726,15 +738,51 @@ void MimicCheckState(tetWell *well, cursor_t *cursor) {
 }
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/mimic", func_80084C18_usa);
+INLINE s32 ViewMimic(void) {
+    if (gTheGame.controller[0].touch_button & 0x4000) {
+        PlaySE(SFX_INIT_TABLE, SFX_006);
+        return -1;
+    }
+    DoMT();
+    if (gMain == GMAIN_2BC) {
+        gMain = GMAIN_MIMIC;
+        return -1;
+    }
+    return 0;
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/mimic", func_80084C84_usa);
+INLINE s32 PlayMimic(s32 *arg0) {
+    if (gTheGame.controller[0].touch_button & 0x4000) {
+        PlaySE(SFX_INIT_TABLE, SFX_006);
+        return -1;
+    }
+    DoMT();
+    if (gMain == GMAIN_2BC) {
+        if (gTheGame.cursorBlock[0].state == 7) {
+                *arg0 = -1;
+        } else if (gTheGame.cursorBlock[0].state == 8) {
+                *arg0 = 0;
+        }
+        gMain = GMAIN_MIMIC;
+        return -1;
+    }
+    return 0;
+}
 #endif
 
 #if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/mimic", func_80084D24_usa);
+INLINE void DrawMimic(struct_gInfo_unk_00068 *dynamicp) {
+    if (gTheGame.dimension == DIMENSION_2D) {
+        Draw2DMT(dynamicp);
+    } else {
+        Draw3DMT(dynamicp);
+    }
+    if (screenFlushing() == nfalse) {
+        pon_DrawLoadingMessage(&glistp);
+    }
+}
 #endif
 
 #if VERSION_USA
@@ -1001,13 +1049,13 @@ void DrawMT(struct_gInfo_unk_00068 *dynamicp) {
     }
 
     if ((gMain == GMAIN_MIMIC) && (geModeMimic >= MM_STAGE)) {
+        // TODO: Replace with DrawMimic() when mathcing non-USA
         if (gTheGame.dimension == DIMENSION_2D) {
             Draw2DMT(dynamicp);
         } else {
             Draw3DMT(dynamicp);
         }
-
-        if (!screenFlushing()) {
+        if (screenFlushing() == nfalse) {
             pon_DrawLoadingMessage(&glistp);
         }
     }
@@ -1016,649 +1064,421 @@ void DrawMT(struct_gInfo_unk_00068 *dynamicp) {
 }
 
 #if VERSION_USA
-#if 0
-? func_80083050_usa(s32, s32, s32, s32);            /* extern */
-? mimicTickText(s32);                           /* extern */
-? menuTickFairy(s32, s32, s32, ?);                  /* extern */
-extern u16 B_8019300E_usa;
+STATIC_INLINE void DoMimic_inlined_func(s32 temp) {
+    u32 sp30;
+    s32 temp_s0;
+    s32 var_v0;
 
-// unattempted
+    temp_s0 = gnTagTextMimic;
+    if (geModeMimic == MM_NONE) {
+        gnTagTextMimic = 0x1F4 + temp;
+    } else {
+        gnTagTextMimic = (gTheGame.menu[0].speed * 0x2710) + (gTheGame.menu[0].stage * 0x3E8);
+
+        if (temp) {
+            var_v0 = ((gTheGame.menu[0].misc * 0x64)) + temp;
+            gnTagTextMimic += var_v0;
+        }
+    }
+    B_80193014_usa = 0;
+    if (screenGetTextType(giScreenMimic, gnTagTextMimic, &sp30) != nfalse) {
+        screenHideText(giScreenMimic, -0x3FFFFE0C);
+        screenShowText(giScreenMimic, gnTagTextMimic);
+    } else {
+        gnTagTextMimic = temp_s0;
+    }
+}
+
+STATIC_INLINE void DoMimic_inlined_func_2(void) {
+    s32 var_a1_5 = B_8019300E_usa;
+    s32 var_s0;
+    struct struct_imageLoad_arg0 *sp30;
+
+    if (var_a1_5 == 0x258) {
+        var_s0 = 0x259;
+    } else if (var_a1_5 == 0x259) {
+        var_s0 = 0x258;
+    } else {
+        return;
+    }
+    if (func_8002864C_usa(giScreenMimic, var_a1_5, &sp30)) {
+        if (sp30->unk_14 < 0xFF) {
+            sp30->unk_14 += 8;
+            if (sp30->unk_14 >= 0x100) {
+                sp30->unk_14 = 0xFF;
+            }
+        }
+    }
+    if (func_8002864C_usa(giScreenMimic, var_s0, &sp30)) {
+        if (sp30->unk_14 > 0) {
+            sp30->unk_14 -= 8;
+            if (sp30->unk_14 < 0) {
+                sp30->unk_14 = 0;
+            }
+        }
+    }
+}
+
+STATIC_INLINE void DoMimic_inlined_func_3(s32 arg0, s32 arg1) {
+    s32 temp_s0;
+    temp_s0 = ((B_8019300C_usa & 0xFFFF) == 0x258) ? 0x259 : 0x258;
+    if ((B_8019300C_usa == 0) || ((B_8019300C_usa >> 0x10) != arg0)) {
+        B_8019300C_usa = temp_s0 | (arg0 << 0x10);
+        func_80028DC0_usa(giScreenMimic, temp_s0, arg0);
+        screenSetImagePosition(giScreenMimic, temp_s0, arg1, 0x48 + arg0);
+    }
+}
+
+STATIC_INLINE void DoMimic_inlined_func_4(void) {
+    s32 sp30;
+    s32 sp34;
+
+    screenGetCursor(giScreenMimic, 0x64, &sp30, &sp34);
+    if (gTheGame.menu[0].speed != 4) {
+        if (sp34 < 3) {
+            sp34 += 1;
+        } else {
+            sp34 = 0;
+        }
+    }
+    screenSetCursor(giScreenMimic, 0x64, sp30, sp34);
+    gTheGame.menu[0].stage = sp34 + 1;
+    screenSetCursor(giScreenMimic, 0x65, 0, 0);
+    gTheGame.menu[0].misc = 1;
+}
+
+STATIC_INLINE s32 DoMimic_inlined_func_5(void) {
+    s32 sp30;
+    s32 sp34;
+    s32 var_s0;
+
+    screenGetCursor(giScreenMimic, 0x65, &sp30, &sp34);
+    var_s0 = sp30;
+    if (gTheGame.menu[0].speed == 4) {
+        if (sp30 < 5) {
+            sp30 = var_s0 + 1;
+        }
+    } else if (gTheGame.menu[0].stage < 3) {
+        if (sp30 < 4) {
+            sp30 = var_s0 + 1;
+        }
+    } else {
+        if (sp30 < 3) {
+            sp30 = var_s0 + 1;
+        }
+    }
+
+    screenSetCursor(giScreenMimic, 0x65, sp30, 0);
+    gTheGame.menu[0].misc = sp30 + 1;
+
+    return var_s0 == sp30;
+}
+
 void DoMimic(void) {
-    s32 sp20;
-    s32 sp24;
+    screenTick_arg0 sp20;
     s32 sp28;
     s32 sp2C;
-    u32 sp30;
-    s32 sp34;
-    s32 sp38;
-    s32 sp3C;
     s32 sp40;
-    enum MimicMode var_s3;
-    s32 temp_a0;
-    s32 temp_a2;
-    s32 temp_s0;
-    s32 temp_s0_10;
-    s32 temp_s0_11;
-    s32 temp_s0_12;
-    s32 temp_s0_13;
-    s32 temp_s0_14;
-    s32 temp_s0_15;
-    s32 temp_s0_16;
-    s32 temp_s0_2;
-    s32 temp_s0_3;
-    s32 temp_s0_4;
-    s32 temp_s0_5;
-    s32 temp_s0_6;
-    s32 temp_s0_7;
-    s32 temp_s0_8;
-    s32 temp_s0_9;
-    s32 temp_s2;
     s32 temp_v0;
-    s32 temp_v0_2;
-    s32 temp_v0_3;
-    s32 temp_v1;
-    s32 temp_v1_2;
-    s32 temp_v1_3;
-    s32 temp_v1_4;
-    s32 temp_v1_5;
-    s32 temp_v1_6;
-    s32 temp_v1_7;
-    s32 temp_v1_8;
-    s32 var_a0;
-    s32 var_a1;
-    s32 var_a1_2;
-    s32 var_a1_3;
-    s32 var_a1_4;
     s32 var_a2;
-    s32 var_s0;
+    s32 var_s2;
+    enum MimicMode eMode;
     s32 var_s4;
     s32 var_s5;
-    s32 var_v0;
-    s32 var_v0_2;
-    s32 var_v0_3;
-    s32 var_v0_4;
-    s32 var_v0_5;
-    s32 var_v0_6;
 
-    if (screenFlushing() == nfalse) {
+#if 0
+    // Local variables
+    int nFlag; // r23
+    int iScreen; // r27
+    int nTagText; // r5
+    int nLoad; // r26
+    int bBack; // r31
+    @enum$635mimic_c eMode; // r30
+    int iCursorX; // r1+0x70
+    int iCursorY; // r1+0x6C
+    int anCommand[4]; // r1+0x5C
+
+#endif
+
+    if (!screenFlushing()) {
         peelTick();
     }
     var_s4 = 0;
-    temp_s2 = giScreenMimic;
+    var_s2 = giScreenMimic;
     B_80192FF0_usa += 1;
     screenSetBackLayers(1);
     var_a2 = gnTagTextMimic;
     var_s5 = 0;
-    if ((var_a2 != -1) && (var_a2 < 0)) {
-        var_a2 = -var_a2;
-    }
-    if (geModeMimic != MM_GIRLTEXT) {
-
-    }
-    menuTickFairy(temp_s2, B_80192FF0_usa, var_a2, 0x4FFFC);
-    sp24 = 0;
-    sp20 = 0;
-    if (gTheGame.controller[0].hold_button & 0x800) {
-        sp20 = 1;
-    }
-    if (gTheGame.controller[0].hold_button & 0x400) {
-        sp20 = 2;
-    }
-    if (gTheGame.controller[0].hold_button & 0x200) {
-        sp20 = 3;
-    }
-    if (gTheGame.controller[0].hold_button & 0x100) {
-        sp20 = 4;
-    }
-    screenTick((screenTick_arg0 *) &sp20);
-    if (sp20 == 0) {
-        if (gTheGame.controller[0].touch_button & 0x8000) {
-            sp20 = 0x20;
+    if (var_a2 != -1) {
+        if (var_a2 < 0) {
+            var_a2 = -var_a2;
         }
-        if (gTheGame.controller[0].touch_button & 0x4000) {
-            sp20 = 0x21;
+    }
+    menuTickFairy(var_s2, B_80192FF0_usa, var_a2, 0x4FFFC, 0xFFCAFFE0, 0x520002, 4, (geModeMimic != MM_GIRLTEXT) ? 0 : -1);
+    sp20.unk_4 = 0;
+    sp20.unk_0 = 0;
+    if (gTheGame.controller[0].hold_button & U_JPAD) {
+        sp20.unk_0 = 1;
+    }
+    if (gTheGame.controller[0].hold_button & D_JPAD) {
+        sp20.unk_0 = 2;
+    }
+    if (gTheGame.controller[0].hold_button & L_JPAD) {
+        sp20.unk_0 = 3;
+    }
+    if (gTheGame.controller[0].hold_button & R_JPAD) {
+        sp20.unk_0 = 4;
+    }
+    screenTick(&sp20);
+    if (sp20.unk_0 == 0) {
+        if (gTheGame.controller[0].touch_button & A_BUTTON) {
+            sp20.unk_0 = 0x20;
         }
-        if (gTheGame.controller[0].touch_button & 0x1000) {
-            sp20 = 0x22;
+        if (gTheGame.controller[0].touch_button & B_BUTTON) {
+            sp20.unk_0 = 0x21;
+        }
+        if (gTheGame.controller[0].touch_button & START_BUTTON) {
+            sp20.unk_0 = 0x22;
         }
     } else {
         PlaySE(SFX_INIT_TABLE, SFX_001);
     }
-    screenGetCursor(temp_s2, 0x64, &sp28, &sp2C);
+    screenGetCursor(var_s2, 0x64, &sp28, &sp2C);
     gTheGame.menu[0].stage = sp2C + 1;
-    if ((u32) (sp20 - 1) < 2U) {
-        screenSetCursor(temp_s2, 0x65, (&giScreenMimic)[gTheGame.menu[0].stage], 0);
+    if (sp20.unk_0 == 1 || sp20.unk_0 == 2) {
+        screenSetCursor(var_s2, 0x65, (&giScreenMimic)[gTheGame.menu[0].stage], 0);
     }
-    screenGetCursor(temp_s2, 0x65, &sp28, &sp2C);
+    screenGetCursor(var_s2, 0x65, &sp28, &sp2C);
     gTheGame.menu[0].misc = sp28 + 1;
+    // TODO: What is this: (&giScreenMimic)[gTheGame.menu[0].stage]?
     (&giScreenMimic)[gTheGame.menu[0].stage] = sp28;
-    var_s3 = MM_NONE;
-    switch (geModeMimic) {                          /* switch 1 */
-        case MM_NONE:                               /* switch 1 */
-            var_s3 = MM_GIRLTEXT;
+    eMode = MM_NONE;
+    switch (geModeMimic) {
+        case MM_NONE:
+            eMode = MM_GIRLTEXT;
             break;
-        case MM_GIRLTEXT:                           /* switch 1 */
-            temp_s0 = (-((B_8019300C_usa & 0xFFFF) == 0x258) & 0x259) | 0x258;
-            if ((B_8019300C_usa == 0) || (((s32) B_8019300C_usa >> 0x10) != 0)) {
-                B_8019300C_usa = temp_s0;
-                func_80028DC0_usa(giScreenMimic, temp_s0, 0);
-                screenSetImagePosition(giScreenMimic, temp_s0, 0x9E, 0x48);
-            }
-            if (sp20 == 0x21) {
+        case MM_GIRLTEXT:
+            DoMimic_inlined_func_3(0, 0x9E);
+            if (sp20.unk_0 == 0x21) {
                 var_s5 = -1;
             }
-            if (-((~gnTagTextMimic == 0) | ((u32) gnTagTextMimic >> 0x1F)) == 0) {
-                if (sp20 == 0x22) {
-                    var_s3 = MM_LEVEL;
-                }
-            } else {
-block_178:
-                var_s3 = MM_LEVEL;
+
+            temp_v0 = (gnTagTextMimic == -1 || gnTagTextMimic < 0) ? -1 : 0;
+            if (temp_v0 || sp20.unk_0 == 0x22) {
+                eMode = MM_LEVEL;
             }
             break;
-        case MM_LEVEL:                              /* switch 1 */
-            temp_s0_2 = (-((B_8019300C_usa & 0xFFFF) == 0x258) & 0x259) | 0x258;
-            if ((B_8019300C_usa == 0) || (((s32) B_8019300C_usa >> 0x10) != 0)) {
-                B_8019300C_usa = temp_s0_2;
-                func_80028DC0_usa(giScreenMimic, temp_s0_2, 0);
-                screenSetImagePosition(giScreenMimic, temp_s0_2, 0x9E, 0x48);
+        case MM_LEVEL:
+            DoMimic_inlined_func_3(0, 0x9E);
+            if (sp20.unk_0 == 1 || sp20.unk_0 == 2) {
+                DoMimic_inlined_func(0);
             }
-            if ((u32) (sp20 - 1) < 2U) {
-                temp_s0_3 = gnTagTextMimic;
-                if (geModeMimic == MM_NONE) {
-                    gnTagTextMimic = 0x1F4;
-                } else {
-                    gnTagTextMimic = (gTheGame.menu[0].speed * 0x2710) + (gTheGame.menu[0].stage * 0x3E8);
-                }
-                B_80193014_usa = 0;
-                if (screenGetTextType(giScreenMimic, gnTagTextMimic, &sp30) != nfalse) {
-                    screenHideText(giScreenMimic, -0x3FFFFE0C);
-                    screenShowText(giScreenMimic, gnTagTextMimic);
-                } else {
-                    gnTagTextMimic = temp_s0_3;
-                }
-            }
-            if (sp20 == 0x21) {
+            if (sp20.unk_0 == 0x21) {
                 var_s5 = -1;
             }
-            var_v0 = 0x20;
-block_101:
-            if (sp20 == var_v0) {
-                var_s3 = MM_STAGE;
+            if (sp20.unk_0 == 0x20) {
+                eMode = MM_STAGE;
             }
             break;
-        case MM_STAGE:                              /* switch 1 */
-            temp_s0_4 = (-((B_8019300C_usa & 0xFFFF) == 0x258) & 0x259) | 0x258;
-            if ((B_8019300C_usa == 0) || (((s32) B_8019300C_usa >> 0x10) != 0)) {
-                B_8019300C_usa = temp_s0_4;
-                func_80028DC0_usa(giScreenMimic, temp_s0_4, 0);
-                screenSetImagePosition(giScreenMimic, temp_s0_4, 0x9E, 0x48);
+        case MM_STAGE:
+            DoMimic_inlined_func_3(0, 0x9E);
+            if (sp20.unk_0 == 3 || sp20.unk_0 == 4) {
+                DoMimic_inlined_func(0xA);
             }
-            if ((u32) (sp20 - 3) < 2U) {
-                temp_s0_5 = gnTagTextMimic;
-                if (geModeMimic == MM_NONE) {
-                    gnTagTextMimic = 0x1FE;
-                } else {
-                    temp_v1 = (gTheGame.menu[0].speed * 0x2710) + (gTheGame.menu[0].stage * 0x3E8);
-                    gnTagTextMimic = temp_v1;
-                    gnTagTextMimic = temp_v1 + ((gTheGame.menu[0].misc * 0x64) + 0xA);
-                }
-                B_80193014_usa = 0;
-                if (screenGetTextType(giScreenMimic, gnTagTextMimic, &sp30) != nfalse) {
-                    screenHideText(giScreenMimic, -0x3FFFFE0C);
-                    screenShowText(giScreenMimic, gnTagTextMimic);
-                } else {
-                    gnTagTextMimic = temp_s0_5;
-                }
-            }
-            if (sp20 != 0) {
+            if (sp20.unk_0 != 0) {
                 var_s4 = 1;
             }
-            if (sp20 == 0x21) {
-                var_s3 = MM_LEVEL;
+            if (sp20.unk_0 == 0x21) {
+                eMode = MM_LEVEL;
             }
-            if (sp20 == 0x20) {
-                if (geModeMimic == MM_NONE) {
-                    gnTagTextMimic = 0x208;
-                } else {
-                    temp_v1_2 = (gTheGame.menu[0].speed * 0x2710) + (gTheGame.menu[0].stage * 0x3E8);
-                    gnTagTextMimic = temp_v1_2;
-                    gnTagTextMimic = temp_v1_2 + ((gTheGame.menu[0].misc * 0x64) + 0x14);
-                }
-                B_80193014_usa = 0;
-                if (screenGetTextType(giScreenMimic, gnTagTextMimic, &sp30) != nfalse) {
-block_145:
-                    screenHideText(giScreenMimic, -0x3FFFFE0C);
-                    var_s3 = MM_VIEWTEXT1;
-                    screenShowText(giScreenMimic, gnTagTextMimic);
-                } else {
-block_146:
-                    gnTagTextMimic = gnTagTextMimic;
-                    var_s3 = MM_VIEWTEXT1;
+            if (sp20.unk_0 == 0x20) {
+                DoMimic_inlined_func(0x14);
+                eMode = MM_VIEWTEXT1;
+            }
+            break;
+        case MM_VIEWTEXT1:
+            DoMimic_inlined_func_3(1, 0x90);
+            temp_v0 = (gnTagTextMimic == -1 || gnTagTextMimic < 0) ? -1 : 0;
+            if (temp_v0) {
+                eMode = MM_VIEW;
+            } else {
+                if (sp20.unk_0 == 0x21) {
+                    eMode = MM_STAGE;
                 }
             }
             break;
-        case MM_VIEWTEXT1:                          /* switch 1 */
-            temp_s0_6 = (-((B_8019300C_usa & 0xFFFF) == 0x258) & 0x259) | 0x258;
-            if ((B_8019300C_usa == 0) || (((s32) B_8019300C_usa >> 0x10) != 1)) {
-                B_8019300C_usa = temp_s0_6 | 0x10000;
-                func_80028DC0_usa(giScreenMimic, temp_s0_6, 1);
-                screenSetImagePosition(giScreenMimic, temp_s0_6, 0x90, 0x49);
-            }
-            if (-((~gnTagTextMimic == 0) | ((u32) gnTagTextMimic >> 0x1F)) != 0) {
-                var_s3 = MM_VIEW;
-            } else {
-block_100:
-                var_v0 = 0x21;
-                goto block_101;
-            }
-            break;
-        case MM_VIEW:                               /* switch 1 */
-            temp_s0_7 = (-((B_8019300C_usa & 0xFFFF) == 0x258) & 0x259) | 0x258;
-            if ((B_8019300C_usa == 0) || (((s32) B_8019300C_usa >> 0x10) != 1)) {
-                B_8019300C_usa = temp_s0_7 | 0x10000;
-                func_80028DC0_usa(giScreenMimic, temp_s0_7, 1);
-                screenSetImagePosition(giScreenMimic, temp_s0_7, 0x90, 0x49);
-            }
-            if (gTheGame.controller[0].touch_button & 0x4000) {
-                PlaySE(SFX_INIT_TABLE, SFX_006);
-                var_v0_2 = -1;
-            } else {
-                DoMT();
-                if (gMain != GMAIN_2BC) {
-                    var_v0_2 = 0;
-                } else {
-                    gMain = GMAIN_MIMIC;
-                    var_v0_2 = -1;
-                }
-            }
-            if (var_v0_2 != 0) {
+        case MM_VIEW:
+            DoMimic_inlined_func_3(1, 0x90);
+            if (ViewMimic() != 0) {
                 if ((gTheGame.menu[0].game != 3) && (gTheGame.menu[0].misc < 3)) {
-                    screenGetCursor(giScreenMimic, 0x65, &sp38, &sp3C);
-                    var_v0_3 = sp38 < 5;
-                    if (gTheGame.menu[0].speed != 4) {
-                        var_v0_3 = sp38 < 4;
-                        if (gTheGame.menu[0].stage >= 3) {
-                            var_v0_3 = sp38 < 3;
-                        }
-                    }
-                    if (var_v0_3 != 0) {
-                        sp38 += 1;
-                    }
-                    screenSetCursor(giScreenMimic, 0x65, sp38, 0);
-                    gTheGame.menu[0].misc = sp38 + 1;
-                    var_s3 = MM_STAGE;
+                    DoMimic_inlined_func_5();
+                    eMode = MM_STAGE;
                 } else {
-                    temp_s0_8 = gnTagTextMimic;
-                    if (geModeMimic == MM_NONE) {
-                        gnTagTextMimic = 0x212;
-                    } else {
-                        temp_v1_3 = (gTheGame.menu[0].speed * 0x2710) + (gTheGame.menu[0].stage * 0x3E8);
-                        gnTagTextMimic = temp_v1_3;
-                        gnTagTextMimic = temp_v1_3 + ((gTheGame.menu[0].misc * 0x64) + 0x1E);
-                    }
-                    B_80193014_usa = 0;
-                    if (screenGetTextType(giScreenMimic, gnTagTextMimic, &sp30) != nfalse) {
-                        screenHideText(giScreenMimic, -0x3FFFFE0C);
-                        var_s3 = MM_VIEWTEXT2;
-                        screenShowText(giScreenMimic, gnTagTextMimic);
-                    } else {
-                        gnTagTextMimic = temp_s0_8;
-                        var_s3 = MM_VIEWTEXT2;
-                    }
+                    DoMimic_inlined_func(0x1E);
+                    eMode = MM_VIEWTEXT2;
                 }
             }
-            goto block_100;
-        case MM_VIEWTEXT2:                          /* switch 1 */
-            temp_s0_9 = (-((B_8019300C_usa & 0xFFFF) == 0x258) & 0x259) | 0x258;
-            if ((B_8019300C_usa == 0) || (((s32) B_8019300C_usa >> 0x10) != 1)) {
-                B_8019300C_usa = temp_s0_9 | 0x10000;
-                func_80028DC0_usa(giScreenMimic, temp_s0_9, 1);
-                screenSetImagePosition(giScreenMimic, temp_s0_9, 0x90, 0x49);
+            if (sp20.unk_0 == 0x21) {
+                eMode = MM_STAGE;
             }
-            if (-((~gnTagTextMimic == 0) | ((u32) gnTagTextMimic >> 0x1F)) != 0) {
+            break;
+        case MM_VIEWTEXT2:
+            DoMimic_inlined_func_3(1, 0x90);
+            temp_v0 = (gnTagTextMimic == -1 || gnTagTextMimic < 0) ? -1 : 0;
+            if (temp_v0) {
                 if (gTheGame.menu[0].game == 3) {
-                    temp_s0_10 = gnTagTextMimic;
-                    if (geModeMimic == MM_NONE) {
-                        gnTagTextMimic = 0x21C;
-                    } else {
-                        temp_v1_4 = (gTheGame.menu[0].speed * 0x2710) + (gTheGame.menu[0].stage * 0x3E8);
-                        gnTagTextMimic = temp_v1_4;
-                        gnTagTextMimic = temp_v1_4 + ((gTheGame.menu[0].misc * 0x64) + 0x28);
-                    }
-                    B_80193014_usa = 0;
-                    if (screenGetTextType(giScreenMimic, gnTagTextMimic, &sp30) != nfalse) {
-                        screenHideText(giScreenMimic, -0x3FFFFE0C);
-                        var_s3 = MM_PLAYTEXT1;
-                        screenShowText(giScreenMimic, gnTagTextMimic);
-                    } else {
-                        gnTagTextMimic = temp_s0_10;
-                        var_s3 = MM_PLAYTEXT1;
-                    }
+                    DoMimic_inlined_func(0x28);
+                    eMode = MM_PLAYTEXT1;
                 } else {
-                    screenGetCursor(giScreenMimic, 0x65, (s32 *) &sp30, &sp34);
-                    var_v0_4 = (s32) sp30 < 5;
-                    if (gTheGame.menu[0].speed != 4) {
-                        var_v0_4 = (s32) sp30 < 4;
-                        if (gTheGame.menu[0].stage >= 3) {
-                            var_v0_4 = (s32) sp30 < 3;
-                        }
-                    }
-                    if (var_v0_4 != 0) {
-                        sp30 += 1;
-                    }
-                    screenSetCursor(giScreenMimic, 0x65, (s32) sp30, 0);
-                    gTheGame.menu[0].misc = sp30 + 1;
-                    var_s3 = MM_STAGE;
-                    if (sp30 == sp30) {
-                        screenGetCursor(giScreenMimic, 0x64, (s32 *) &sp30, &sp34);
-                        if (gTheGame.menu[0].speed != 4) {
-                            if (sp34 < 3) {
-                                sp34 += 1;
-                            } else {
-                                sp34 = 0;
-                            }
-                        }
-                        var_s3 = MM_LEVEL;
-block_165:
-                        screenSetCursor(giScreenMimic, 0x64, (s32) sp30, sp34);
-                        gTheGame.menu[0].stage = sp34 + 1;
-                        screenSetCursor(giScreenMimic, 0x65, 0, 0);
-                        gTheGame.menu[0].misc = 1;
+                    if (DoMimic_inlined_func_5()) {
+                        DoMimic_inlined_func_4();
+                        eMode = MM_LEVEL;
+                    } else {
+                        eMode = MM_STAGE;
                     }
                 }
             }
             break;
-        case MM_PLAYTEXT1:                          /* switch 1 */
-            var_s3 = MM_PLAY;
+        case MM_PLAYTEXT1:
+            eMode = MM_PLAY;
             break;
-        case MM_PLAY:                               /* switch 1 */
-            temp_s0_11 = (-((B_8019300C_usa & 0xFFFF) == 0x258) & 0x259) | 0x258;
-            if ((B_8019300C_usa == 0) || (((s32) B_8019300C_usa >> 0x10) != 0)) {
-                B_8019300C_usa = temp_s0_11;
-                func_80028DC0_usa(giScreenMimic, temp_s0_11, 0);
-                screenSetImagePosition(giScreenMimic, temp_s0_11, 0x9E, 0x48);
-            }
+        case MM_PLAY:
+            DoMimic_inlined_func_3(0, 0x9E);
             sp40 = 0xABCD;
-            if (gTheGame.controller[0].touch_button & 0x4000) {
-                PlaySE(SFX_INIT_TABLE, SFX_006);
-                var_v0_5 = -1;
-            } else {
-                DoMT();
-                var_v0_5 = 0;
-                if (gMain == GMAIN_2BC) {
-                    switch (gTheGame.cursorBlock[0].unk_00) { /* switch 2; irregular */
-                        case 0x7:                   /* switch 2 */
-                            sp40 = -1;
-                            break;
-                        case 0x8:                   /* switch 2 */
-                            sp40 = 0;
-                            break;
-                    }
-                    gMain = GMAIN_MIMIC;
-                    var_v0_5 = -1;
-                }
-            }
-            if (var_v0_5 != 0) {
+
+            if (PlayMimic(&sp40) != 0) {
                 if (sp40 == 0xABCD) {
                     var_s4 = 1;
-                    if (geModeMimic == MM_NONE) {
-                        gnTagTextMimic = 0x208;
-                    } else {
-                        temp_v1_5 = (gTheGame.menu[0].speed * 0x2710) + (gTheGame.menu[0].stage * 0x3E8);
-                        gnTagTextMimic = temp_v1_5;
-                        gnTagTextMimic = temp_v1_5 + ((gTheGame.menu[0].misc * 0x64) + 0x14);
-                    }
-                    B_80193014_usa = 0;
-                    if (screenGetTextType(giScreenMimic, gnTagTextMimic, &sp30) != nfalse) {
-                        goto block_145;
-                    }
-                    goto block_146;
+                    DoMimic_inlined_func(0x14);
+                    eMode = MM_VIEWTEXT1;
+                    break;
                 }
-                var_s3 = MM_PLAYTEXT2;
+                eMode = MM_PLAYTEXT2;
                 if (sp40 != 0) {
-                    temp_s0_12 = gnTagTextMimic;
-                    if (geModeMimic == MM_NONE) {
-                        gnTagTextMimic = 0x226;
-                    } else {
-                        temp_v1_6 = (gTheGame.menu[0].speed * 0x2710) + (gTheGame.menu[0].stage * 0x3E8);
-                        gnTagTextMimic = temp_v1_6;
-                        gnTagTextMimic = temp_v1_6 + ((gTheGame.menu[0].misc * 0x64) + 0x32);
-                    }
-                    B_80193014_usa = 0;
-                    if (screenGetTextType(giScreenMimic, gnTagTextMimic, &sp30) != nfalse) {
-                        screenHideText(giScreenMimic, -0x3FFFFE0C);
-                        screenShowText(giScreenMimic, gnTagTextMimic);
-                    } else {
-                        gnTagTextMimic = temp_s0_12;
-                    }
-                    screenGetCursor(giScreenMimic, 0x65, (s32 *) &sp30, &sp34);
-                    var_v0_6 = (s32) sp30 < 5;
-                    if (gTheGame.menu[0].speed != 4) {
-                        var_v0_6 = (s32) sp30 < 4;
-                        if (gTheGame.menu[0].stage >= 3) {
-                            var_v0_6 = (s32) sp30 < 3;
-                        }
-                    }
-                    if (var_v0_6 != 0) {
-                        sp30 += 1;
-                    }
-                    screenSetCursor(giScreenMimic, 0x65, (s32) sp30, 0);
-                    gTheGame.menu[0].misc = sp30 + 1;
-                    if (sp30 == sp30) {
-                        screenGetCursor(giScreenMimic, 0x64, (s32 *) &sp30, &sp34);
-                        if (gTheGame.menu[0].speed != 4) {
-                            if (sp34 < 3) {
-                                sp34 += 1;
-                            } else {
-                                sp34 = 0;
-                            }
-                        }
-                        var_s3 = MM_PLAYTEXT3;
-                        goto block_165;
+                    DoMimic_inlined_func(0x32);
+
+                    if (DoMimic_inlined_func_5()) {
+                        DoMimic_inlined_func_4();
+
+                        eMode = MM_PLAYTEXT3;
                     }
                 } else {
-                    temp_s0_13 = gnTagTextMimic;
-                    if (geModeMimic == MM_NONE) {
-                        gnTagTextMimic = 0x230;
-                    } else {
-                        temp_v1_7 = (gTheGame.menu[0].speed * 0x2710) + (gTheGame.menu[0].stage * 0x3E8);
-                        gnTagTextMimic = temp_v1_7;
-                        gnTagTextMimic = temp_v1_7 + ((gTheGame.menu[0].misc * 0x64) + 0x3C);
-                    }
-                    B_80193014_usa = 0;
-                    if (screenGetTextType(giScreenMimic, gnTagTextMimic, &sp30) != nfalse) {
-                        screenHideText(giScreenMimic, -0x3FFFFE0C);
-                        screenShowText(giScreenMimic, gnTagTextMimic);
-                    } else {
-                        gnTagTextMimic = temp_s0_13;
-                    }
-                    temp_s0_14 = (-((B_8019300C_usa & 0xFFFF) == 0x258) & 0x259) | 0x258;
-                    if ((B_8019300C_usa == 0) || (((s32) B_8019300C_usa >> 0x10) != 2)) {
-                        B_8019300C_usa = temp_s0_14 | 0x20000;
-                        func_80028DC0_usa(giScreenMimic, temp_s0_14, 2);
-                        screenSetImagePosition(giScreenMimic, temp_s0_14, 0xB1, 0x4A);
-                    }
+                    DoMimic_inlined_func(0x3C);
+
+                    DoMimic_inlined_func_3(2, 0xB1);
                 }
             }
             break;
-        case MM_PLAYTEXT2:                          /* switch 1 */
-            if (-((~gnTagTextMimic == 0) | ((u32) gnTagTextMimic >> 0x1F)) != 0) {
-                var_s3 = MM_STAGE;
+        case MM_PLAYTEXT2:
+            temp_v0 = (gnTagTextMimic == -1 || gnTagTextMimic < 0) ? -1 : 0;
+            if (temp_v0) {
+                eMode = MM_STAGE;
             }
             break;
-        case MM_PLAYTEXT3:                          /* switch 1 */
-            if (-((~gnTagTextMimic == 0) | ((u32) gnTagTextMimic >> 0x1F)) != 0) {
-                goto block_178;
+        case MM_PLAYTEXT3:
+            temp_v0 = (gnTagTextMimic == -1 || gnTagTextMimic < 0) ? -1 : 0;
+            if (temp_v0) {
+                eMode = MM_LEVEL;
             }
             break;
     }
-
-    if (var_s3 != MM_NONE) {
+    
+    if (eMode != MM_NONE) {
         if (geModeMimic == MM_VIEWTEXT1) {
-            var_a1 = 4;
-            goto block_184;
+            PlaySE(SFX_INIT_TABLE, SFX_004);
+        } else if (geModeMimic >= 2) {
+            PlaySE(SFX_INIT_TABLE, (sp20.unk_0 == 0x21) ? 6 : 2);
         }
-        if ((u32) geModeMimic >= 2U) {
-            var_a1 = (-(sp20 == 0x21) & 6) | 2;
-block_184:
-            PlaySE(SFX_INIT_TABLE, var_a1);
-        }
-        screenHideArea(temp_s2, 0x64);
-        screenHideArea(temp_s2, 0x65);
-        screenHideImage(temp_s2, 0x64);
-        screenHideImage(temp_s2, 0x65);
-        screenHideText(temp_s2, 0x80778064);
-        if ((gTheGame.menu[0].speed == 4) & (var_s3 == MM_LEVEL)) {
+        screenHideArea(var_s2, 0x64);
+        screenHideArea(var_s2, 0x65);
+        screenHideImage(var_s2, 0x64);
+        screenHideImage(var_s2, 0x65);
+        screenHideText(var_s2, 0x80778064);
+        if ((gTheGame.menu[0].speed == 4) & (eMode == MM_LEVEL)) {
             if (geModeMimic == MM_STAGE) {
                 var_s5 = -1;
             } else {
                 gTheGame.menu[0].stage = 1;
-                var_s3 = MM_STAGE;
+                eMode = MM_STAGE;
             }
         }
-        if (var_s3 == MM_STAGE) {
+        if (eMode == MM_STAGE) {
             var_s4 = 1;
         }
-        if (var_s3 == MM_PLAY) {
+        if (eMode == MM_PLAY) {
             var_s4 = 2;
         }
-        switch (var_s3) {                           /* switch 3; irregular */
-            case MM_LEVEL:                          /* switch 3 */
-                temp_s0_15 = gnTagTextMimic;
-                if (geModeMimic == MM_NONE) {
-                    gnTagTextMimic = 0x1F4;
-                } else {
-                    gnTagTextMimic = (gTheGame.menu[0].speed * 0x2710) + (gTheGame.menu[0].stage * 0x3E8);
-                }
-                B_80193014_usa = 0;
-                if (screenGetTextType(giScreenMimic, gnTagTextMimic, &sp30) != nfalse) {
-                    screenHideText(giScreenMimic, -0x3FFFFE0C);
-                    screenShowText(giScreenMimic, gnTagTextMimic);
-                } else {
-                    gnTagTextMimic = temp_s0_15;
-                }
-                screenShowImage(temp_s2, 0x64);
-                screenHideImage(temp_s2, 0x65);
+        switch (eMode) {
+            case MM_LEVEL:
+                DoMimic_inlined_func(0);
+
+                screenShowImage(var_s2, 0x64);
+                screenHideImage(var_s2, 0x65);
                 if (gTheGame.menu[0].speed != 2) {
-                    var_a1_2 = 0x80688064;
+                    screenShowText(var_s2, 0x80688064);
                 } else {
-                    var_a1_2 = 0x806D8069;
+                    screenShowText(var_s2, 0x806D8069);
                 }
-                screenShowText(temp_s2, var_a1_2);
-                screenShowArea(temp_s2, 0x64);
-                var_a1_3 = 0x64;
-block_222:
-                func_80027618_usa(temp_s2, var_a1_3, 0U);
+                screenShowArea(var_s2, 0x64);
+                func_80027618_usa(var_s2, 0x64, 0U);
                 break;
-            case MM_STAGE:                          /* switch 3 */
-                temp_s0_16 = gnTagTextMimic;
-                if (geModeMimic == MM_NONE) {
-                    gnTagTextMimic = 0x1FE;
-                } else {
-                    temp_v1_8 = (gTheGame.menu[0].speed * 0x2710) + (gTheGame.menu[0].stage * 0x3E8);
-                    gnTagTextMimic = temp_v1_8;
-                    gnTagTextMimic = temp_v1_8 + ((gTheGame.menu[0].misc * 0x64) + 0xA);
-                }
-                B_80193014_usa = 0;
-                if (screenGetTextType(giScreenMimic, gnTagTextMimic, &sp30) != nfalse) {
-                    screenHideText(giScreenMimic, -0x3FFFFE0C);
-                    screenShowText(giScreenMimic, gnTagTextMimic);
-                } else {
-                    gnTagTextMimic = temp_s0_16;
-                }
-                screenHideImage(temp_s2, 0x64);
-                screenShowImage(temp_s2, 0x65);
-                func_80028BAC_usa(temp_s2, 0x65, 0, 0);
-                func_80028BAC_usa(temp_s2, 0x65, 1, 0);
-                func_80028BAC_usa(temp_s2, 0x65, 2, 0);
-                func_80028BAC_usa(temp_s2, 0x65, 3, 0);
-                func_80028BAC_usa(temp_s2, 0x65, 4, 0);
-                func_80028BAC_usa(temp_s2, 0x65, 5, 0);
+            case MM_STAGE:
+                DoMimic_inlined_func(0xA);
+
+                screenHideImage(var_s2, 0x64);
+                screenShowImage(var_s2, 0x65);
+                func_80028BAC_usa(var_s2, 0x65, 0, 0);
+                func_80028BAC_usa(var_s2, 0x65, 1, 0);
+                func_80028BAC_usa(var_s2, 0x65, 2, 0);
+                func_80028BAC_usa(var_s2, 0x65, 3, 0);
+                func_80028BAC_usa(var_s2, 0x65, 4, 0);
+                func_80028BAC_usa(var_s2, 0x65, 5, 0);
                 screenGetCursor(giScreenMimic, 0x65, &sp28, &sp2C);
                 if (gTheGame.menu[0].speed != 4) {
-                    func_80028A98_usa(temp_s2, 0x65, 5, 0);
+                    func_80028A98_usa(var_s2, 0x65, 5, 0);
                     if (gTheGame.menu[0].stage >= 3) {
                         if (sp28 >= 4) {
                             sp28 = 3;
                         }
-                        func_80028A98_usa(temp_s2, 0x65, 4, 0);
-                        var_a1_4 = 0x6E;
+                        func_80028A98_usa(var_s2, 0x65, 4, 0);
+                        screenShowText(var_s2, 0x6E);
                     } else {
                         if (sp28 >= 5) {
                             sp28 = 4;
                         }
-                        var_a1_4 = 0x6F;
+                        screenShowText(var_s2, 0x6F);
                     }
                 } else {
-                    var_a1_4 = 0x70;
+                    screenShowText(var_s2, 0x70);
                 }
-                screenShowText(temp_s2, var_a1_4);
                 screenSetCursor(giScreenMimic, 0x65, sp28, 0);
-                screenShowArea(temp_s2, 0x65);
-                var_a1_3 = 0x65;
-                goto block_222;
+                screenShowArea(var_s2, 0x65);
+                func_80027618_usa(var_s2, 0x65, 0U);
+                break;
         }
-        geModeMimic = var_s3;
+        geModeMimic = eMode;
     }
     if (var_s4 != 0) {
-        screenGetCursor(temp_s2, 0x64, &sp28, &sp2C);
+        screenGetCursor(var_s2, 0x64, &sp28, &sp2C);
         gTheGame.menu[0].stage = sp2C + 1;
-        screenGetCursor(temp_s2, 0x65, &sp28, &sp2C);
-        temp_a2 = sp28 + 1;
-        gTheGame.menu[0].misc = temp_a2;
+        screenGetCursor(var_s2, 0x65, &sp28, &sp2C);
+        gTheGame.menu[0].misc = sp28 + 1;
         if (var_s4 == 1) {
-            func_80083050_usa(gTheGame.menu[0].speed, gTheGame.menu[0].stage, temp_a2, -(gTheGame.menu[0].game == 3));
+            LoadMimic1(gTheGame.menu[0].speed, gTheGame.menu[0].stage, gTheGame.menu[0].misc, -(gTheGame.menu[0].game == 3));
         } else {
-            func_80083050_usa(gTheGame.menu[0].speed, gTheGame.menu[0].stage, temp_a2, -(gTheGame.menu[0].game == 3));
-            PlaySE(SFX_INIT_TABLE, SFX_095);
-            brainbrain->speed = -1;
-            brainbrain->unk_104 = 0;
+            LoadMimic2(gTheGame.menu[0].speed, gTheGame.menu[0].stage, gTheGame.menu[0].misc, -(gTheGame.menu[0].game == 3));
         }
     }
     if (var_s5 != 0) {
         gMain = GMAIN_2BC;
         gReset = -1;
-        gGameStatus = (u32) gGameStatus;
+        GAME_STATUS_SHIFT_RIGHT(gGameStatus);
         PlaySE(SFX_INIT_TABLE, SFX_006);
     }
-    var_a0 = 0;
-    if (var_s3 == MM_NONE) {
-        var_a0 = -(sp20 == 0x20);
-    }
-    mimicTickText(var_a0);
-    if (B_8019300E_usa == 0x258) {
-        var_s0 = 0x259;
-        goto block_235;
-    }
-    var_s0 = 0x258;
-    if (B_8019300E_usa == 0x259) {
-block_235:
-        if (func_8002864C_usa(giScreenMimic, (s32) B_8019300E_usa, (struct struct_imageLoad_arg0 **) &sp30) != nfalse) {
-            temp_a0 = sp30->unk_14;
-            temp_v0 = temp_a0 + 8;
-            if (temp_a0 < 0xFF) {
-                sp30->unk_14 = temp_v0;
-                if (temp_v0 >= 0x100) {
-                    sp30->unk_14 = 0xFF;
-                }
-            }
-        }
-        if (func_8002864C_usa(giScreenMimic, var_s0, (struct struct_imageLoad_arg0 **) &sp30) != nfalse) {
-            temp_v0_2 = sp30->unk_14;
-            temp_v0_3 = temp_v0_2 - 8;
-            if (temp_v0_2 > 0) {
-                sp30->unk_14 = temp_v0_3;
-                if (temp_v0_3 < 0) {
-                    sp30->unk_14 = 0;
-                }
-            }
-        }
-    }
+    mimicTickText((eMode == MM_NONE) ? -(sp20.unk_0 == 0x20) : 0);
+
+    DoMimic_inlined_func_2();
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/mimic", DoMimic);
-#endif
 #endif
 
 #if VERSION_EUR
@@ -1693,6 +1513,7 @@ STATIC_INLINE void inlined_function() {
         gnTagTextMimic = temp_s0;
     }
 
+    // TODO: Replace with DoMimic_inlined_func_3(0, 0x9E); when matching non-USA
     temp_s0_2 = ((B_8019300C_usa & 0xFFFF) == 0x258) ? 0x259 : 0x258;
     if ((B_8019300C_usa == 0) || ((B_8019300C_usa >> 0x10) != 0)) {
         B_8019300C_usa = temp_s0_2;
