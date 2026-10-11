@@ -1075,7 +1075,7 @@ STATIC_INLINE void DoMimic_inlined_func(s32 temp) {
 STATIC_INLINE void DoMimic_inlined_func_2(void) {
     s32 var_a1_5 = B_8019300E_usa;
     s32 var_s0;
-    struct struct_imageLoad_arg0 *sp30;
+    struct_imageLoad_arg0 *sp30;
 
     if (var_a1_5 == 0x258) {
         var_s0 = 0x259;
