@@ -783,7 +783,7 @@ INLINE void DrawMimic(struct_gInfo_unk_00068 *dynamicp) {
     } else {
         Draw3DMT(dynamicp);
     }
-    if (screenFlushing() == nfalse) {
+    if (!screenFlushing()) {
         pon_DrawLoadingMessage(&glistp);
     }
 }
@@ -1039,7 +1039,7 @@ STATIC_INLINE void DoMimic_inlined_func(s32 temp) {
         }
     }
     B_80193014_usa = 0;
-    if (screenGetTextType(giScreenMimic, gnTagTextMimic, &sp30) != nfalse) {
+    if (screenGetTextType(giScreenMimic, gnTagTextMimic, &sp30)) {
         screenHideText(giScreenMimic, -0x3FFFFE0C);
         screenShowText(giScreenMimic, gnTagTextMimic);
     } else {
