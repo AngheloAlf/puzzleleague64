@@ -808,7 +808,7 @@ void InitStageClearIntro(void) {
     s16 sp38[12];
     s32 pad2[0xA] UNUSED;
     void *sp78;
-    u32 var_a3;
+    s32 var_a3;
     s32 var_s0;
     s32 temp;
     s32 a4;
@@ -867,30 +867,29 @@ void InitStageClearIntro(void) {
     DmaRomToRam(D_800B6528_usa[var_s0], sp38, sizeof(sp38));
 
     if (sp38[0] == 0x10) {
-        var_a3 = FUNC_8001DCC4_ARG3_PACK(0, 0, 5, 4);
+        var_a3 = 0x54;
     } else if (sp38[1] == 0) {
-        var_a3 = FUNC_8001DCC4_ARG3_PACK(0, 0, 3, 3);
+        var_a3 = 0x33;
     } else {
-        var_a3 = FUNC_8001DCC4_ARG3_PACK(0, 0, 1, 3);
+        var_a3 = 0x13;
     }
     a4 = sp38[2];
     a5 = sp38[3];
     temp = (a4 * a5 * 2);
-    func_8001FD0C_usa(&B_8018EA24_usa, D_800B6528_usa[var_s0] + sizeof(sp38), ROM_NULL, var_a3, a4, a5, &sp78);
+    func_8001FD0C_usa(&B_8018EA24_usa, D_800B6528_usa[var_s0] + sizeof(sp38), 0, var_a3, a4, a5, &sp78);
 
     if (sp38[6] == 0x10) {
-        var_a3 = FUNC_8001DCC4_ARG3_PACK(0, 0, 5, 4);
+        var_a3 = 0x54;
     } else if (sp38[7] == 0) {
-        var_a3 = FUNC_8001DCC4_ARG3_PACK(0, 0, 3, 3);
+        var_a3 = 0x33;
     } else {
-        var_a3 = FUNC_8001DCC4_ARG3_PACK(0, 0, 1, 3);
+        var_a3 = 0x13;
     }
     a4 = sp38[8];
     a5 = sp38[9];
     temp2 = temp + sizeof(sp38);
-    func_8001FD0C_usa(&B_8018EA28_usa, D_800B6528_usa[var_s0] + temp2, ROM_NULL, var_a3, a4, a5, &sp78);
-    func_8001FD0C_usa(&B_8018EA20_usa, D_800B6508_usa[var_s0], ROM_NULL, FUNC_8001DCC4_ARG3_PACK(1, 0, 5, 4), 0x140,
-                      0xE8, &sp78);
+    func_8001FD0C_usa(&B_8018EA28_usa, D_800B6528_usa[var_s0] + temp2, 0, var_a3, a4, a5, &sp78);
+    func_8001FD0C_usa(&B_8018EA20_usa, D_800B6508_usa[var_s0], 0, 0x800054, 0x140, 0xE8, &sp78);
 
     gWhatever = gTheGame.dimension = (gTheGame.menu[0].stage >= 4) ? DIMENSION_3D : DIMENSION_2D;
 
