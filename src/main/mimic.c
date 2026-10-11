@@ -967,20 +967,12 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/mimic", Draw3DMT);
 #endif
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/mimic", mimicTickText);
-#endif
-
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", Draw2DMT);
 #endif
 
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", Draw3DMT);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", mimicTickText);
 #endif
 
 #if VERSION_FRA
@@ -991,10 +983,6 @@ INCLUDE_ASM("asm/fra/nonmatchings/main/mimic", Draw2DMT);
 INCLUDE_ASM("asm/fra/nonmatchings/main/mimic", Draw3DMT);
 #endif
 
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/mimic", mimicTickText);
-#endif
-
 #if VERSION_GER
 INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", Draw2DMT);
 #endif
@@ -1003,9 +991,46 @@ INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", Draw2DMT);
 INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", Draw3DMT);
 #endif
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", mimicTickText);
+/**
+ * Original name: mimicTickText
+ */
+void mimicTickText(s32 bSkip) {
+    u32 nType;
+    s32 bFlag;
+
+#if 0
+    // B_80193014_usa is likely one of the following
+    // References
+    // -> static int gnTickTextMimic;
+    // -> static int gnTickMimic;
 #endif
+
+    if (gnTagTextMimic != -1 && gnTagTextMimic > 0) {
+        if (screenTextDone(giScreenMimic, gnTagTextMimic)) {
+            if (geModeMimic == MM_GIRLTEXT) {
+                bFlag = (gTheGame.controller[0].touch_button >> 0xF) ? -1 : 0;
+            } else {
+                B_80193014_usa++;
+                bFlag = (B_80193014_usa >= 0x3D) ? -1 : 0;
+            }
+            if (bFlag != 0) {
+                if (screenGetTextType(giScreenMimic, gnTagTextMimic + 1, &nType)) {
+                    screenHideText(giScreenMimic, gnTagTextMimic);
+                    B_80193014_usa = 0;
+                    gnTagTextMimic++;
+                    screenShowText(giScreenMimic, gnTagTextMimic);
+                } else {
+                    gnTagTextMimic = -gnTagTextMimic;
+                }
+            }
+        } else {
+            if (bSkip != 0) {
+                func_80028034_usa(giScreenMimic, gnTagTextMimic);
+            }
+            B_80193014_usa = 0;
+        }
+    }
+}
 
 void DrawMT(struct_gInfo_unk_00068 *dynamicp) {
     tut_dynamicp = dynamicp;
