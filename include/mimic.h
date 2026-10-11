@@ -33,18 +33,18 @@ typedef enum MimicKind {
 extern MimicMode geModeMimic;
 
 void LoadMimic1(s32 kind, s32 level, s32 number, s32 play);
-void func_8008336C_usa(s32 kind, s32 level, s32 number, s32 play);
+void LoadMimic2(s32 kind, s32 level, s32 number, s32 play);
 void MTMove(struct ai_t *brain, u8 *ptr);
 void UpdateMT(struct tetWell *well, struct cursor_t *cursor, struct ai_t *brain);
 void UpdateMTController(struct tetWell *well, struct cursor_t *cursor, s32 num);
 void DoMT(void);
 void MimicCheckState(struct tetWell *well, struct cursor_t *cursor);
-// void func_80084C18_usa();
-// void func_80084C84_usa();
-// void func_80084D24_usa();
+s32 ViewMimic(void);
+s32 PlayMimic(s32 *result);
+void DrawMimic(struct struct_gInfo_unk_00068 *dynamicp);
 void Draw2DMT(struct struct_gInfo_unk_00068 *dynamicp);
 void Draw3DMT(struct struct_gInfo_unk_00068 *dynamicp);
-// void mimicTickText();
+void mimicTickText(UNK_TYPE arg0);
 void DrawMT(struct struct_gInfo_unk_00068 *dynamicp);
 void DoMimic(void);
 void InitMimic(void);
