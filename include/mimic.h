@@ -40,7 +40,7 @@ void UpdateMTController(struct tetWell *well, struct cursor_t *cursor, s32 num);
 void DoMT(void);
 void MimicCheckState(struct tetWell *well, struct cursor_t *cursor);
 s32 ViewMimic(void);
-s32 PlayMimic(s32 *arg0);
+s32 PlayMimic(s32 *result);
 void DrawMimic(struct struct_gInfo_unk_00068 *dynamicp);
 void Draw2DMT(struct struct_gInfo_unk_00068 *dynamicp);
 void Draw3DMT(struct struct_gInfo_unk_00068 *dynamicp);

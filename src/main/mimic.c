@@ -756,7 +756,7 @@ INLINE s32 ViewMimic(void) {
 /**
  * Original name: PlayMimic
  */
-INLINE s32 PlayMimic(s32 *arg0) {
+INLINE s32 PlayMimic(s32 *result) {
     if (gTheGame.controller[0].touch_button & 0x4000) {
         PlaySE(SFX_INIT_TABLE, SFX_006);
         return -1;
@@ -764,9 +764,9 @@ INLINE s32 PlayMimic(s32 *arg0) {
     DoMT();
     if (gMain == GMAIN_2BC) {
         if (gTheGame.cursorBlock[0].state == 7) {
-            *arg0 = -1;
+            *result = -1;
         } else if (gTheGame.cursorBlock[0].state == 8) {
-            *arg0 = 0;
+            *result = 0;
         }
         gMain = GMAIN_MIMIC;
         return -1;
