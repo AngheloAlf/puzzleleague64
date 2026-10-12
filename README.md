@@ -109,7 +109,7 @@ You can access the DWARF dump in this repository:
 
 ## Contributing
 
-TODO: write some contributing guidelines.
+Check the [CONTRIBUTING.md](CONTRIBUTING.md) file.
 
 Small efforts are appreciated. Just open a PR and try to address any review comments left by other contributors c:
 
@@ -117,8 +117,57 @@ Small efforts are appreciated. Just open a PR and try to address any review comm
 
 This matching decomp effort is being done leak-free. If you have looked/worked with leaked materials (i.e. gigaleak) then it's a shame but you can't contribute to this project.
 
+## LLM policy
+
+This project does not welcome LLM-based contributions.
+
+The biggest reason for this is using an LLM to code sucks all the fun out from
+programming. This repo is one of my hobby projects, I work on it because I
+think it is fun what this project conveils, I don't aim for a finished project,
+I want to live the travel that leads to that finished project.
+
+Each function is a puzzle on its own that I want to solve by myself, like a
+sudoku. Is there any fun on just seeing the solution to a sudoku instead of
+solving it yourself?
+Human-based contributions do not suffer from this problem, since you can
+interact with the community, pass knowledge along and see them get the same
+feeling of accomplishment.
+
+If anybody wants to interact with this repository, I expect a human on the
+other side, not an LLM or a meat-proxy. I expect a person wanting to learn
+about the process, not a robocall.
+
+Other reasons for not welcoming LLM-based contributions:
+
+* Uncertainty of the legality of the training material for the LLM.
+  * Unless you have training the LLM you are using by yourself from scratch,
+    ther's no way to know what was used to train it, meaning it could have used
+    copyrighted materials on its training. This is a big no for a reverse
+    engineering project that aims to be as clean as possible and avoid any kind
+    of legal issues.
+* Enviromental concerns.
+  * All the recent infrastructure development has led to a negative
+    enviromental impact and has accelerated the climate change. I want to avoid
+    encouraging the detrimental acts towards the world.
+* Putting a price tag on a free hobby.
+  * Any half decent LLM agent will require a subscription for its use. I feel
+    this is against the spirit of OSS. Anybody should be able to work on
+    projects like this one, not only the people able to pay that subscription.
+
+Finally, I wish for this project to be opt-out from any usage on training LLMs.
+
 ## License
 
 The repo is licensed under the [MIT license](LICENSE), except for files that may have its own license stated either in the top of the file or are in a folder which has its own `LICENSE` file.
 
 One notable exception is the `src/` folder, which is licensed under the [CC0 license](src/LICENSE).
+
+### N.B.
+
+The intention of this project is to understand the inner workings of this game
+better, make it easier to modify its behaviour, and have fun while working on
+the project itself.
+
+As such, over and above the actual licensing of the repo, the decomp team
+requests that this codebase not be used to build binaries targeting non-MIPS
+machines ("porting").
