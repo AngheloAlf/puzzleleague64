@@ -262,114 +262,205 @@ s32 PlayGameSong(tetWell *well) {
     return 1;
 }
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/tetsound", func_80004848_usa);
-#endif
+// Maybe?
+// int GetLoadSongNumber(int songnum /* r3 */)
+s32 func_80004848_usa(s32 arg0) {
+    if ((arg0 < 0x48) || (arg0 == 0xFF)) {
+        return arg0;
+    }
+    return arg0 - 0x48;
+}
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/tetsound", func_8000486C_usa);
+/**
+ * Original name: PlayGameMusicTest
+ */
+s32 PlayGameMusicTest(s32 song_index) {
+    if (song_index < 0x49) {
+        song_index--;
+        func_80002D8C_usa(0x1E);
+        PlayMIDI(BGM_INIT_TABLE, song_index, 0, 1);
+        return 0;
+    }
+
+#if PRESERVE_UB
+    return 0;
 #endif
+}
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/tetsound", func_800048C0_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/tetsound", func_80004B9C_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/tetsound", func_80004E10_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/tetsound", func_80005018_usa);
-#endif
-
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/tetsound", func_800050C0_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tetsound", func_80004848_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tetsound", func_8000486C_usa);
 #endif
 
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/tetsound", func_800048C0_usa);
 #endif
 
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tetsound", func_80004B9C_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tetsound", func_80004E10_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tetsound", func_80005018_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/tetsound", func_800050C0_usa);
-#endif
-
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", func_80004900_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", func_80004924_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", func_80004978_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", func_80004C54_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", func_80004EC8_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", func_800050D0_fra);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", func_80005178_fra);
+INCLUDE_ASM("asm/fra/nonmatchings/main/tetsound", func_800048C0_usa);
 #endif
 
 #if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", func_80004900_ger);
+INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", func_800048C0_usa);
 #endif
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", func_80004924_ger);
-#endif
+nbool func_80004B9C_usa(s32 arg0) {
+    SfxInitStruct *sfx;
+    u16 held = gTheGame.controller[0].button;
+    u16 pressed = gTheGame.controller[0].touch_button;
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", func_80004978_ger);
-#endif
+    if (held & Z_TRIG) {
+        pressed |= held & (L_TRIG | R_TRIG);
+    }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", func_80004C54_ger);
-#endif
+    if (!(pressed & (L_TRIG | R_TRIG))) {
+        return nfalse;
+    }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", func_80004EC8_ger);
-#endif
+    if (arg0 <= 0) {
+        arg0 = 1;
+    } else if (arg0 > 0x1E4) {
+        arg0 = 0x1E4;
+    }
+    arg0--;
+    arg0 = D_800B3B38_usa[arg0];
+    if (arg0 < 0) {
+        arg0 = 0;
+    } else if (arg0 > 0x17B) {
+        arg0 = 0x17B;
+    }
+    sfx = &SFX_INIT_TABLE[arg0];
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", func_800050D0_ger);
-#endif
+    if (held & U_CBUTTONS) {
+        if ((pressed & L_TRIG) && (sfx->vol != 0)) {
+            sfx->vol--;
+        }
+        if ((pressed & R_TRIG) && (sfx->vol < 0xFF)) {
+            sfx->vol++;
+        }
+    }
+    if (held & L_CBUTTONS) {
+        if ((pressed & L_TRIG) && (sfx->pan != 0)) {
+            sfx->pan--;
+        }
+        if ((pressed & R_TRIG) && (sfx->pan < 0xFF)) {
+            sfx->pan++;
+        }
+    }
+    if (held & D_CBUTTONS) {
+        if ((pressed & L_TRIG) && (sfx->pitch > 0.0f)) {
+            sfx->pitch -= 0.5f;
+        }
+        if ((pressed & R_TRIG) && (sfx->pitch < 20.0f)) {
+            sfx->pitch += 0.5f;
+        }
+    }
+    if (held & R_CBUTTONS) {
+        if ((pressed & L_TRIG) && (D_FLT_800B3B10_usa > 0.0f)) {
+            D_FLT_800B3B10_usa -= 0.05f;
+        }
+        if ((pressed & R_TRIG) && (D_FLT_800B3B10_usa < 1.0f)) {
+            D_FLT_800B3B10_usa += 0.05f;
+        }
+        func_80002E70_usa(D_FLT_800B3B10_usa * 0x7FFF);
+    }
 
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/tetsound", func_80005178_ger);
-#endif
+    return ntrue;
+}
+
+nbool func_80004E10_usa(s32 arg0) {
+    SongInitStruct *song;
+    u16 held = gTheGame.controller[0].button;
+    u16 pressed = gTheGame.controller[0].touch_button;
+
+    if (held & Z_TRIG) {
+        pressed |= held & (L_TRIG | R_TRIG);
+    }
+
+    if (!(pressed & (L_TRIG | R_TRIG))) {
+        return nfalse;
+    }
+
+    if (arg0 <= 0) {
+        arg0 = 1;
+    } else if (arg0 > 0x48) {
+        arg0 = 0x48;
+    }
+    arg0--;
+    song = &BGM_INIT_TABLE[arg0];
+
+    if (held & U_CBUTTONS) {
+        if ((pressed & L_TRIG) && (song->vol != 0)) {
+            song->vol--;
+        }
+        if ((pressed & R_TRIG) && (song->vol < 0xFF)) {
+            song->vol++;
+        }
+    }
+    if (held & L_CBUTTONS) {
+        if ((pressed & L_TRIG) && (song->pan != 0)) {
+            song->pan--;
+        }
+        if ((pressed & R_TRIG) && (song->pan < 0xFF)) {
+            song->pan++;
+        }
+    }
+    if (held & D_CBUTTONS) {
+        if ((pressed & L_TRIG) && (song->tempo != 0)) {
+            song->tempo--;
+        }
+        if ((pressed & R_TRIG) && (song->tempo < 0xFF)) {
+            song->tempo++;
+        }
+    }
+    if (held & R_CBUTTONS) {
+        if ((pressed & L_TRIG) && (D_FLT_800B3B14_usa > 0.0f)) {
+            D_FLT_800B3B14_usa -= 0.01f;
+        }
+        if ((pressed & R_TRIG) && (D_FLT_800B3B14_usa < 1.0f)) {
+            D_FLT_800B3B14_usa += 0.01f;
+        }
+        func_80002E34_usa(D_FLT_800B3B14_usa * 0x7FFF);
+    }
+
+    return ntrue;
+}
+
+void func_80005018_usa(s32 arg0, s32 *arg1) {
+    SfxInitStruct *sfx;
+
+    if (arg0 <= 0) {
+        arg0 = 1;
+    } else if (arg0 > 0x1E4) {
+        arg0 = 0x1E4;
+    }
+    arg0--;
+    arg0 = D_800B3B38_usa[arg0];
+    if (arg0 < 0) {
+        arg0 = 0;
+    } else if (arg0 > 0x17B) {
+        arg0 = 0x17B;
+    }
+
+    sfx = &SFX_INIT_TABLE[arg0];
+    arg1[0] = sfx->vol;
+    arg1[1] = sfx->pan;
+    arg1[2] = sfx->pitch * 2.0f;
+    arg1[3] = D_FLT_800B3B10_usa * 100.0f;
+}
+
+void func_800050C0_usa(s32 arg0, s32 *arg1) {
+    SongInitStruct *song;
+
+    if (arg0 <= 0) {
+        arg0 = 1;
+    } else if (arg0 > 0x48) {
+        arg0 = 0x48;
+    }
+    arg0--;
+
+    song = &BGM_INIT_TABLE[arg0];
+    arg1[0] = song->vol;
+    arg1[1] = song->pan;
+    arg1[2] = song->tempo;
+    arg1[3] = D_FLT_800B3B14_usa * 100.0f;
+}

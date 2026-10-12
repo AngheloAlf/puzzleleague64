@@ -44,7 +44,7 @@ extern s16 ts_timer_counter;
 extern s16 ts_current_alert;
 extern s16 ts_old_alert;
 // extern UNK_TYPE D_800B3B34_usa;
-// extern UNK_TYPE D_800B3B38_usa;
+extern s16 D_800B3B38_usa[];
 // extern UNK_TYPE D_800B3F04_usa;
 // extern UNK_TYPE D_800B3F0C_usa;
 // extern UNK_TYPE D_800B3F0E_usa;
