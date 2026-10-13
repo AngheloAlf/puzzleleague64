@@ -814,7 +814,7 @@ void Draw2DMT(struct_gInfo_unk_00068 *dynamicp) {
             gSPObjRectangle(glistp++, &gTheGame.unk_9A08[1]);
         }
     }
-    
+
     gDPSetScissor(glistp++, G_SC_NON_INTERLACE, 0, 31, 320, 223);
     gDPPipeSync(glistp++);
     gDPSetAlphaCompare(glistp++, G_AC_THRESHOLD);
@@ -828,8 +828,10 @@ void Draw2DMT(struct_gInfo_unk_00068 *dynamicp) {
 
     if ((gSelection == SELECTION_64) && (gTheGame.menu[0].game == 3)) {
         bcopy(&gTheGame.tetrisWell[1].block, dynamicp->block[1][0], sizeof(block_t) * BLOCK_LEN_ROWS * BLOCK_LEN_B);
-        bcopy(&gTheGame.tetrisWell[1].block_rect, dynamicp->block_rect[1][0], sizeof(uObjSprite) * BLOCK_LEN_ROWS * TETWELL_OBJSPRITE_LEN_B);
-        bcopy(&gTheGame.tetrisWell[1].new_block_rect, dynamicp->new_block_rect[1], sizeof(uObjSprite) * TETWELL_UNK_3EF0_LEN_6);
+        bcopy(&gTheGame.tetrisWell[1].block_rect, dynamicp->block_rect[1][0],
+              sizeof(uObjSprite) * BLOCK_LEN_ROWS * TETWELL_OBJSPRITE_LEN_B);
+        bcopy(&gTheGame.tetrisWell[1].new_block_rect, dynamicp->new_block_rect[1],
+              sizeof(uObjSprite) * TETWELL_UNK_3EF0_LEN_6);
         bcopy(&gTheGame.tetrisWell[1].attack, dynamicp->attack[1], sizeof(attack_t) * ATTACK_COUNT);
         total = 2;
         if (gCounter < 0x1E) {
@@ -872,14 +874,14 @@ void Draw2DMT(struct_gInfo_unk_00068 *dynamicp) {
         Draw2DExplosion(dynamicp, num);
         Draw2DIcon(dynamicp, num);
     }
-    
+
     if (dynamicp->cursorBlock[0].state != 0x34C) {
         gDPPipeSync(glistp++);
         gDPSetTextureLUT(glistp++, G_TT_RGBA16);
         gSPObjLoadTxtr(glistp++, &colorLUT);
         Draw2DCursor(dynamicp);
     }
-    
+
     if (gSelection == SELECTION_64) {
         if (anim_bg == 0x34C) {
             if (DoFlashDrawAlways()) {
