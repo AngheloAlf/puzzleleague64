@@ -794,11 +794,9 @@ INLINE void DrawMimic(struct_gInfo_unk_00068 *dynamicp) {
 
 #if VERSION_USA
 void Draw2DMT(struct_gInfo_unk_00068 *dynamicp) {
-    s32 sp10[2];
-    s32 var_s0;
-    s32 var_s4;
-
-    var_s4 = 1;
+    s32 num;
+    s32 end_attack[2];
+    s32 total = 1;
 
     gDPPipeSync(glistp++);
     gDPSetTextureFilter(glistp++, G_TF_BILERP);
@@ -834,7 +832,7 @@ void Draw2DMT(struct_gInfo_unk_00068 *dynamicp) {
         bcopy(&gTheGame.tetrisWell[1].block_rect, dynamicp->block_rect[1][0], sizeof(uObjSprite) * BLOCK_LEN_ROWS * TETWELL_OBJSPRITE_LEN_B);
         bcopy(&gTheGame.tetrisWell[1].new_block_rect, dynamicp->new_block_rect[1], sizeof(uObjSprite) * TETWELL_UNK_3EF0_LEN_6);
         bcopy(&gTheGame.tetrisWell[1].attack, dynamicp->attack[1], sizeof(attack_t) * ATTACK_COUNT);
-        var_s4 = 2;
+        total = 2;
         if (gCounter < 0x1E) {
             bzero(dynamicp->frontTexture[1], 4);
             bcopy(&gTheGame.tetrisWell[1].icon, dynamicp->icon[1], sizeof(icon_t) * ICON_COUNT);
@@ -842,9 +840,9 @@ void Draw2DMT(struct_gInfo_unk_00068 *dynamicp) {
         }
     }
 
-    for (var_s0 = 0; var_s0 < var_s4; var_s0++) {
-        Draw2DTetrisWell(dynamicp, &gTheGame.tetrisWell[var_s0], var_s0);
-        sp10[var_s0] = Draw2DAttackBlock(dynamicp, var_s0);
+    for (num = 0; num < total; num++) {
+        Draw2DTetrisWell(dynamicp, &gTheGame.tetrisWell[num], num);
+        end_attack[num] = Draw2DAttackBlock(dynamicp, num);
     }
 
     if (gSelection == SELECTION_6E) {
@@ -860,7 +858,7 @@ void Draw2DMT(struct_gInfo_unk_00068 *dynamicp) {
     gDPSetRenderMode(glistp++, G_RM_NOOP, G_RM_NOOP2);
     gDPSetCycleType(glistp++, G_CYC_COPY);
     gSPBgRectCopy(glistp++, &gTheGame.unk_9B50[0]);
-    if (var_s4 == 2) {
+    if (total == 2) {
         gSPBgRectCopy(glistp++, &gTheGame.unk_9B50[1]);
     }
 
@@ -870,10 +868,10 @@ void Draw2DMT(struct_gInfo_unk_00068 *dynamicp) {
     gDPSetTextureLUT(glistp++, G_TT_RGBA16);
     gSPObjLoadTxtr(glistp++, &colorLUT);
 
-    for (var_s0 = 0; var_s0 < var_s4; var_s0++) {
-        Draw2DAttackBrick(dynamicp, var_s0, sp10[var_s0]);
-        Draw2DExplosion(dynamicp, var_s0);
-        Draw2DIcon(dynamicp, var_s0);
+    for (num = 0; num < total; num++) {
+        Draw2DAttackBrick(dynamicp, num, end_attack[num]);
+        Draw2DExplosion(dynamicp, num);
+        Draw2DIcon(dynamicp, num);
     }
     
     if (dynamicp->cursorBlock[0].state != 0x34C) {
