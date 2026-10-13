@@ -792,7 +792,6 @@ INLINE void DrawMimic(struct_gInfo_unk_00068 *dynamicp) {
     }
 }
 
-#if VERSION_USA
 void Draw2DMT(struct_gInfo_unk_00068 *dynamicp) {
     s32 num;
     s32 end_attack[2];
@@ -904,7 +903,6 @@ void Draw2DMT(struct_gInfo_unk_00068 *dynamicp) {
         }
     }
 }
-#endif
 
 #if VERSION_USA
 #if 0
@@ -1082,23 +1080,11 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/mimic", Draw3DMT);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", Draw2DMT);
-#endif
-
-#if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", Draw3DMT);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/mimic", Draw2DMT);
-#endif
-
-#if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/mimic", Draw3DMT);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", Draw2DMT);
 #endif
 
 #if VERSION_GER
