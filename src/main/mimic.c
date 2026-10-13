@@ -792,6 +792,9 @@ INLINE void DrawMimic(struct_gInfo_unk_00068 *dynamicp) {
     }
 }
 
+/**
+ * Original name: Draw2DMT
+ */
 void Draw2DMT(struct_gInfo_unk_00068 *dynamicp) {
     s32 num;
     s32 end_attack[2];
