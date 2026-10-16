@@ -204,7 +204,7 @@ extern u8 stars2[];
 
 extern uObjTxtr stars1Texture;
 extern uObjTxtr stars2Texture;
-// extern UNK_TYPE D_01024CB0_usa;
+extern u8 D_01024CB0_usa[];
 // extern UNK_TYPE D_0102AB30_usa;
 // extern UNK_TYPE D_0102CE30_usa;
 // extern UNK_TYPE D_0102EEB0_usa;
