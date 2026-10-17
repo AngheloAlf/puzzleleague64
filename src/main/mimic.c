@@ -910,7 +910,9 @@ void Draw2DMT(struct_gInfo_unk_00068 *dynamicp) {
     }
 }
 
-#if VERSION_USA
+/**
+ * Original name: Draw3DMT
+ */
 void Draw3DMT(struct_gInfo_unk_00068 *dynamicp) {
     u16 perspNorm;
     s32 var_t0;
@@ -952,17 +954,15 @@ void Draw3DMT(struct_gInfo_unk_00068 *dynamicp) {
             gDPSetTile(glistp++, G_IM_FMT_I, G_IM_SIZ_16b, 0, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
                        G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
             gDPLoadSync(glistp++);
-
             gDPLoadBlock(glistp++, G_TX_LOADTILE, 0, 0, ((var_t0 << 7) >> 1) - 1, 128);
             gDPPipeSync(glistp++);
             gDPSetTile(glistp++, G_IM_FMT_I, G_IM_SIZ_8b, 16, 0, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
                        G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
             gDPSetTileSize(glistp++, G_TX_RENDERTILE, 0, 0, 0x7F << 2, (var_t0 - 1) << 2);
-
             gSPTextureRectangle(glistp++, 0x005C, (var_t3 + 0x20) << 2, 0x025C, (var_t3 + var_t0 + 0x20) << 2,
                                 G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
-            // gSPTextureRectangle(glistp++, 0x17 << 2, (var_t3 + 0x20) << 2, (0x17 + 0x80) << 2, (var_t3 + var_t0 +
-            // 0x20) << 2, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
+            // gSPTextureRectangle(glistp++, 0x17 << 2, (var_t3 + 0x20) << 2, (0x17 + 0x80) << 2,
+            //                     (var_t3 + var_t0 + 0x20) << 2, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
 
             ptr += (var_t0 * 0x80);
         }
@@ -1025,20 +1025,6 @@ void Draw3DMT(struct_gInfo_unk_00068 *dynamicp) {
 
     gSPTexture(glistp++, 0, 0, 0, G_TX_RENDERTILE, G_OFF);
 }
-
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/mimic", Draw3DMT);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/mimic", Draw3DMT);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/mimic", Draw3DMT);
-#endif
 
 /**
  * Original name: mimicTickText
