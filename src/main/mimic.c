@@ -912,16 +912,26 @@ void Draw2DMT(struct_gInfo_unk_00068 *dynamicp) {
 
 #if VERSION_USA
 void Draw3DMT(struct_gInfo_unk_00068 *dynamicp) {
-    u16 sp28;
-    u8 *var_t4;
+    u16 perspNorm;
     s32 var_t0;
     s32 var_t3;
+    u8 *ptr;
+
+#if 0 
+    // Local variables
+    int row; // r26
+    int height; // r4
+
+    // References
+    // -> unsigned short colorTable[];
+    // -> unsigned char shade3d[]; maybe D_01024CB0_usa?
+#endif
 
     gDPPipeSync(glistp++);
     gDPSetTextureFilter(glistp++, G_TF_BILERP);
 
     if (gSelection == SELECTION_64) {
-        
+
         gDPPipeSync(glistp++);
         gDPSetTextureLUT(glistp++, G_TT_NONE);
         gDPSetTexturePersp(glistp++, G_TP_NONE);
@@ -930,33 +940,34 @@ void Draw3DMT(struct_gInfo_unk_00068 *dynamicp) {
         gDPSetCombineMode(glistp++, G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM);
         gDPSetPrimColor(glistp++, 0, 0, 50, 50, 50, 255);
 
-        var_t4 = &D_01024CB0_usa[0];
+        ptr = &D_01024CB0_usa[0];
 
         for (var_t3 = 0; var_t3 < 0xBD; var_t3 += 0x20) {
             var_t0 = 0xBD - var_t3;
             if (var_t0 >= 0x21) {
                 var_t0 = 0x20;
             }
-            
-            gDPSetTextureImage(glistp++, G_IM_FMT_I, G_IM_SIZ_16b, 1, var_t4);
-            gDPSetTile(glistp++, G_IM_FMT_I, G_IM_SIZ_16b, 0, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+
+            gDPSetTextureImage(glistp++, G_IM_FMT_I, G_IM_SIZ_16b, 1, ptr);
+            gDPSetTile(glistp++, G_IM_FMT_I, G_IM_SIZ_16b, 0, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                       G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
             gDPLoadSync(glistp++);
 
             gDPLoadBlock(glistp++, G_TX_LOADTILE, 0, 0, ((var_t0 << 7) >> 1) - 1, 128);
             gDPPipeSync(glistp++);
-            gDPSetTile(glistp++, G_IM_FMT_I, G_IM_SIZ_8b, 16, 0, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+            gDPSetTile(glistp++, G_IM_FMT_I, G_IM_SIZ_8b, 16, 0, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                       G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
             gDPSetTileSize(glistp++, G_TX_RENDERTILE, 0, 0, 0x7F << 2, (var_t0 - 1) << 2);
 
-            gSPTextureRectangle(glistp++, 0x005C, (var_t3 + 0x20) << 2, 0x025C, (var_t3 + var_t0 + 0x20) << 2, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
-            // gSPTextureRectangle(glistp++, 0x17 << 2, (var_t3 + 0x20) << 2, (0x17 + 0x80) << 2, (var_t3 + var_t0 + 0x20) << 2, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
-            
-            // gSPTextureRectangle(glistp++, x << 2, (y + i) << 2, (x + width) << 2, (y + 1 + i) << 2, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
+            gSPTextureRectangle(glistp++, 0x005C, (var_t3 + 0x20) << 2, 0x025C, (var_t3 + var_t0 + 0x20) << 2,
+                                G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
+            // gSPTextureRectangle(glistp++, 0x17 << 2, (var_t3 + 0x20) << 2, (0x17 + 0x80) << 2, (var_t3 + var_t0 +
+            // 0x20) << 2, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
 
-            var_t4 += (var_t0 << 7);
+            ptr += (var_t0 * 0x80);
         }
     }
-    
-    
+
     gDPPipeSync(glistp++);
     gDPSetCycleType(glistp++, G_CYC_1CYCLE);
     gDPSetAlphaCompare(glistp++, G_AC_THRESHOLD);
@@ -967,10 +978,10 @@ void Draw3DMT(struct_gInfo_unk_00068 *dynamicp) {
 
     gSPMatrix(glistp++, &dynamicp->trans[0], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
 
-    guPerspective(&dynamicp->unk_10000[0], &sp28, 33.0f, 0.88f, 10.0f, 3000.0f, 1.0f);
+    guPerspective(&dynamicp->unk_10000[0], &perspNorm, 33.0f, 0.88f, 10.0f, 3000.0f, 1.0f);
     guLookAt(&dynamicp->unk_10080[0], 0.0f, 0.0f, 900.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 
-    gSPPerspNormalize(glistp++, (u32) sp28);
+    gSPPerspNormalize(glistp++, perspNorm);
     gSPMatrix(glistp++, &dynamicp->unk_10000[0], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
     gSPMatrix(glistp++, &dynamicp->unk_10080[0], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
     gDPSetScissor(glistp++, G_SC_NON_INTERLACE, 0, 31, 320, 221);
@@ -998,7 +1009,7 @@ void Draw3DMT(struct_gInfo_unk_00068 *dynamicp) {
     gDPSetRenderMode(glistp++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
 
     Draw3DIcon(dynamicp, 0);
-    
+
     gDPSetScissor(glistp++, G_SC_NON_INTERLACE, 0, 7, 320, 239);
     gDPPipeSync(glistp++);
     gDPSetTexturePersp(glistp++, G_TP_NONE);
@@ -1007,14 +1018,13 @@ void Draw3DMT(struct_gInfo_unk_00068 *dynamicp) {
     gDPSetAlphaCompare(glistp++, G_AC_THRESHOLD);
 
     Draw3DExplosion(dynamicp, 0);
-    
+
     gDPSetTextureLUT(glistp++, G_TT_NONE);
 
     Draw3DCursor(dynamicp);
 
     gSPTexture(glistp++, 0, 0, 0, G_TX_RENDERTILE, G_OFF);
 }
-
 
 #endif
 
