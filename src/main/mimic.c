@@ -918,7 +918,7 @@ void Draw3DMT(struct_gInfo_unk_00068 *dynamicp) {
     s32 row;
     s32 height;
     u8 *ptr;
-    
+
     gDPPipeSync(glistp++);
     gDPSetTextureFilter(glistp++, G_TF_BILERP);
 
@@ -930,7 +930,7 @@ void Draw3DMT(struct_gInfo_unk_00068 *dynamicp) {
         gDPSetRenderMode(glistp++, G_RM_XLU_SURF, G_RM_NOOP2);
         gDPSetCombineMode(glistp++, G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM);
         gDPSetPrimColor(glistp++, 0, 0, 50, 50, 50, 255);
-        
+
         ptr = &shade3d[0];
 
         for (row = 0; row < 0xBD; row += 0x20) {
@@ -940,8 +940,8 @@ void Draw3DMT(struct_gInfo_unk_00068 *dynamicp) {
             }
             gDPLoadTextureBlock(glistp++, ptr, G_IM_FMT_I, G_IM_SIZ_8b, 0x80, height, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-            gSPTextureRectangle(glistp++, 0x17 << 2, (row + 0x20) << 2, (0x17 + 0x80) << 2,
-                                (row + height + 0x20) << 2, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
+            gSPTextureRectangle(glistp++, 0x17 << 2, (row + 0x20) << 2, (0x17 + 0x80) << 2, (row + height + 0x20) << 2,
+                                G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
             ptr += (height * 0x80);
         }
     }
