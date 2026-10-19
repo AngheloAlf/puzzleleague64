@@ -158,7 +158,7 @@ segments:
       - [0x24C80]
       - [0x24C98]
 
-      - [0x24CB0, i8, D_01024CB0_usa.i8, 24192, 1] # unknown type and dimensions
+      - [0x24CB0, i8, shade3d.i8, 128, 189]
       - [0x2AB30, i8, D_0102AB30_usa.i8, 8960, 1] # unknown type and dimensions
       - [0x2CE30, i8, D_0102CE30_usa.i8, 8320, 1] # unknown type and dimensions
       - [0x2EEB0, i8, D_0102EEB0_usa.i8, 512, 1] # unknown type and dimensions

@@ -1514,8 +1514,8 @@ uObjTxtr stars2Texture = {
     /* mask  */ 0x0,
 };
 
-u8 D_01024CB0_usa[] ALIGNED(8) = {
-#include "assets/misc/segment_0CA4A0/D_01024CB0_usa.i8.inc"
+u8 shade3d[] ALIGNED(8) = {
+#include "assets/misc/segment_0CA4A0/shade3d.i8.inc"
 };
 
 u8 D_0102AB30_usa[] ALIGNED(8) = {
