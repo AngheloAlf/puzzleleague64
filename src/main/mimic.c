@@ -933,16 +933,14 @@ void Draw3DMT(struct_gInfo_unk_00068 *dynamicp) {
 
         ptr = &shade3d[0];
 
-        for (row = 0; row < 0xBD; row += 0x20) {
-            height = 0xBD - row;
-            if (height >= 0x21) {
-                height = 0x20;
-            }
-            gDPLoadTextureBlock(glistp++, ptr, G_IM_FMT_I, G_IM_SIZ_8b, 0x80, height, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-            gSPTextureRectangle(glistp++, 0x17 << 2, (row + 0x20) << 2, (0x17 + 0x80) << 2, (row + height + 0x20) << 2,
-                                G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
-            ptr += (height * 0x80);
+        for (row = 0; row < SHADE3D_TEX_HEIGHT; row += 0x20) {
+            height = MIN(SHADE3D_TEX_HEIGHT - row, 0x20);
+            gDPLoadTextureBlock(glistp++, ptr, G_IM_FMT_I, G_IM_SIZ_8b, SHADE3D_TEX_WIDTH, height, 0,
+                                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
+                                G_TX_NOLOD, G_TX_NOLOD);
+            gSPTextureRectangle(glistp++, 0x17 << 2, (row + 0x20) << 2, (0x17 + SHADE3D_TEX_WIDTH) << 2,
+                                (row + height + 0x20) << 2, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
+            ptr += (height * SHADE3D_TEX_WIDTH);
         }
     }
 

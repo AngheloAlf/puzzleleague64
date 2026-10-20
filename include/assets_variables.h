@@ -204,6 +204,9 @@ extern u8 stars2[];
 
 extern uObjTxtr stars1Texture;
 extern uObjTxtr stars2Texture;
+
+#define SHADE3D_TEX_WIDTH 128
+#define SHADE3D_TEX_HEIGHT 189
 extern u8 shade3d[];
 // extern UNK_TYPE D_0102AB30_usa;
 // extern UNK_TYPE D_0102CE30_usa;
