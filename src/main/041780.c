@@ -578,7 +578,8 @@ void func_80041F1C_usa(void **heapP, s32 arg1) {
         if (gWorld >= ARRAY_COUNTU(D_800B67B4_usa)) {
             gWorld = 0;
         }
-        func_8001FD0C_usa(&D_800B6790_usa, D_800B67B4_usa[gWorld], 0, 0x800054, 0x140, 0xE8, heapP);
+        func_8001FD0C_usa(&D_800B6790_usa, D_800B67B4_usa[gWorld], ROM_NULL, FUNC_8001DCC4_ARG3_PACK(1, 0, 5, 4), 0x140,
+                          0xE8, heapP);
     }
 
     if (screenLoad("RESULT.SBF", heapP) != 0) {

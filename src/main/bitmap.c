@@ -8,8 +8,10 @@
 #include "macros_defines.h"
 #include "main_variables.h"
 
-#include "file.h"
 #include "reend.h"
+
+#include "file.h"
+#include "sound.h"
 
 extern s32 gpBitmapLast;
 
@@ -99,6 +101,18 @@ s32 bitmapLoadRLE(struct_bitmapLoad_arg0 *arg0, File *arg1, void *arg2) {
 #else
 INCLUDE_ASM("asm/usa/nonmatchings/main/bitmap", bitmapLoadRLE);
 #endif
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/bitmap", bitmapLoadRLE);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/bitmap", bitmapLoadRLE);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/bitmap", bitmapLoadRLE);
 #endif
 
 #if VERSION_USA
@@ -325,12 +339,145 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/bitmap", bitmapLoad);
 #endif
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/bitmap", func_8001DCC4_usa);
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/bitmap", bitmapLoad);
 #endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/bitmap", bitmapLoad);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/bitmap", bitmapLoad);
+#endif
+
+// bitmapLoadROM?
+nbool func_8001DCC4_usa(struct_bitmapLoad_arg0 **arg0, RomOffset arg1, RomOffset arg2, u32 arg3, s32 arg4, s32 arg5,
+                        void **heapP) {
+    u16 *var_v1_2;
+    u16 *var_v1_3;
+    s32 temp_s1;
+    s32 var_a0;
+    s32 var_a0_2;
+    s32 var_a1;
+    s32 var_s1;
+    s32 var_s4;
+    u16 temp_v0_4;
+    s32 temp;
+
+    arg3 &= FUNC_8001DCC4_ARG3_F | FUNC_8001DCC4_ARG3_F0 | FUNC_8001DCC4_ARG3_400 | FUNC_8001DCC4_ARG3_800000;
+
+    switch (FUNC_8001DCC4_ARG3_GET_F(arg3)) {
+        case ENUM_FUNC_8001DCC4_ARG3_F_2:
+            var_s4 = arg4 >> 1;
+            break;
+
+        case ENUM_FUNC_8001DCC4_ARG3_F_3:
+            var_s4 = arg4;
+            break;
+
+        case ENUM_FUNC_8001DCC4_ARG3_F_4:
+            var_s4 = arg4 << 1;
+            break;
+
+        case ENUM_FUNC_8001DCC4_ARG3_F_5:
+            var_s4 = arg4 << 2;
+            break;
+    }
+
+    if (FUNC_8001DCC4_ARG3_GET_F0(arg3) == ENUM_FUNC_8001DCC4_ARG3_F0_30) {
+        if (FUNC_8001DCC4_ARG3_GET_F(arg3) == ENUM_FUNC_8001DCC4_ARG3_F_3) {
+            var_s1 = 0x100;
+        } else {
+            var_s1 = 0x10;
+        }
+    } else {
+        var_s1 = 0;
+    }
+
+    if (!FUNC_8001DCC4_ARG3_GET_800000(arg3)) {
+        temp = var_s4 * arg5;
+    } else {
+        temp = var_s4 * 0xF0;
+    }
+    var_a0 = temp;
+
+    *arg0 = *heapP = ALIGN_TO(*heapP, struct_bitmapLoad_arg0);
+    *heapP = *heapP + sizeof(struct_bitmapLoad_arg0);
+
+    if (var_s1 > 0) {
+        // ensure 8byte alignment for textures
+        (*arg0)->unk_18 = *heapP = ALIGN_TO(*heapP, u64);
+        *heapP += var_s1 * sizeof(u16);
+    } else {
+        (*arg0)->unk_18 = 0;
+    }
+    (*arg0)->unk_1C = 0;
+    (*arg0)->unk_20 = NULL;
+
+    // ensure 8byte alignment for textures
+    (*arg0)->unk_08 = *heapP = ALIGN_TO(*heapP, u64);
+    *heapP += var_a0;
+
+    (*arg0)->unk_00 = arg3;
+    (*arg0)->unk_0C = arg4;
+    (*arg0)->unk_10 = !FUNC_8001DCC4_ARG3_GET_800000(arg3) ? arg5 : 0xF0;
+
+    (*arg0)->unk_04 = var_s4;
+    (*arg0)->unk_14 = arg4;
+
+    if (var_s1 > 0) {
+        DmaRomToRam(arg2, (*arg0)->unk_18, var_s1 * sizeof(u16));
+
+        // This whole block seems to be doing nothing at all and just wasting
+        // CPU cycles.
+        if (FUNC_8001DCC4_ARG3_GET_400(arg3)) {
+            for (var_a0_2 = 0; var_a0_2 < var_s1; var_a0_2++) {
+                temp_v0_4 = (*arg0)->unk_18[var_a0_2] & GPACK_RGBA5551(255, 255, 255, 0);
+                if (temp_v0_4 == GPACK_RGBA5551(0, 255, 0, 0)) {
+                    (*arg0)->unk_18[var_a0_2] = temp_v0_4;
+                }
+            }
+        }
+    }
+
+    if (FUNC_8001DCC4_ARG3_GET_800000(arg3)) {
+        temp_s1 = 0xEF - arg5;
+        DmaRomToRam(arg1, (*arg0)->unk_08 + (arg4 * temp_s1 * 2), var_s4 * arg5);
+
+        for (var_a1 = 0; var_a1 < temp_s1; var_a1++) {
+            // TODO: this cast is very fishy. Need to figure out what's going on here
+            var_v1_2 = &((u16 *)(*arg0)->unk_08)[arg4 * var_a1];
+            for (var_a0_2 = 0; var_a0_2 < arg4; var_a0_2++) {
+                *var_v1_2++ = 0;
+            }
+        }
+
+        var_v1_3 = &((u16 *)(*arg0)->unk_08)[arg4 * 0xEF];
+        for (var_a0_2 = 0; var_a0_2 < arg4; var_a0_2++) {
+            *var_v1_3++ = 0;
+        }
+    } else {
+        DmaRomToRam(arg1, (*arg0)->unk_08, var_s4 * arg5);
+    }
+
+    return ntrue;
+}
 
 #if VERSION_USA
 INCLUDE_ASM("asm/usa/nonmatchings/main/bitmap", func_8001E018_usa);
+#endif
+
+#if VERSION_EUR
+INCLUDE_ASM("asm/eur/nonmatchings/main/bitmap", func_8001E018_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/bitmap", func_8001E018_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/bitmap", func_8001E018_usa);
 #endif
 
 #if VERSION_USA
@@ -338,59 +485,11 @@ INCLUDE_ASM("asm/usa/nonmatchings/main/bitmap", func_8001E0F8_usa);
 #endif
 
 #if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/bitmap", bitmapLoadRLE);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/bitmap", bitmapLoad);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/bitmap", func_8001DCC4_usa);
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/bitmap", func_8001E018_usa);
-#endif
-
-#if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/bitmap", func_8001E0F8_usa);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/bitmap", bitmapLoadRLE);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/bitmap", bitmapLoad);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/bitmap", func_8001DCC4_usa);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/bitmap", func_8001E018_usa);
-#endif
-
-#if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/bitmap", func_8001E0F8_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/bitmap", bitmapLoadRLE);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/bitmap", bitmapLoad);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/bitmap", func_8001DCC4_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/bitmap", func_8001E018_usa);
 #endif
 
 #if VERSION_GER
@@ -415,12 +514,20 @@ s32 func_8001E110_usa(struct_bitmapLoad_arg0 *arg0, s32 arg1, s32 *arg2, s32 *ar
 INCLUDE_ASM("asm/usa/nonmatchings/main/bitmap", func_8001E184_usa);
 #endif
 
-#if VERSION_USA
-INCLUDE_ASM("asm/usa/nonmatchings/main/bitmap", func_8001E1E4_usa);
-#endif
-
 #if VERSION_EUR
 INCLUDE_ASM("asm/eur/nonmatchings/main/bitmap", func_8001E184_usa);
+#endif
+
+#if VERSION_FRA
+INCLUDE_ASM("asm/fra/nonmatchings/main/bitmap", func_8001E184_usa);
+#endif
+
+#if VERSION_GER
+INCLUDE_ASM("asm/ger/nonmatchings/main/bitmap", func_8001E184_usa);
+#endif
+
+#if VERSION_USA
+INCLUDE_ASM("asm/usa/nonmatchings/main/bitmap", func_8001E1E4_usa);
 #endif
 
 #if VERSION_EUR
@@ -428,15 +535,7 @@ INCLUDE_ASM("asm/eur/nonmatchings/main/bitmap", func_8001E1E4_usa);
 #endif
 
 #if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/bitmap", func_8001E184_usa);
-#endif
-
-#if VERSION_FRA
 INCLUDE_ASM("asm/fra/nonmatchings/main/bitmap", func_8001E1E4_usa);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/bitmap", func_8001E184_usa);
 #endif
 
 #if VERSION_GER

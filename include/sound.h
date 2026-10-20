@@ -12,6 +12,9 @@ struct song_t;
 typedef void (struct_8018A748_usa_callback)(musHandle, s32);
 typedef void(callback_800B3B00_usa)(UNK_TYPE arg0);
 
+// TODO: consider moving DmaRomToRam to a different header so files don't have
+// to include the kinda unrelated sound decls
+
 void func_80001B10_usa(void);
 void DmaRomToRam(RomOffset segmentRom, void *dstAddr, size_t segmentSize);
 s16 func_80001D60_usa(s32 arg0, s16 arg1);

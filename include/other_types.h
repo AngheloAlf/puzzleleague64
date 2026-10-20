@@ -6,6 +6,8 @@
 // Header for files that are well known, but don't have a proper header home yet
 
 typedef u32 RomOffset;
+#define ROM_NULL ((RomOffset)0)
+
 typedef void Texture;
 typedef Texture* TexturePtr;
 

@@ -2,7 +2,11 @@
 #define IMAGE_H
 
 #include "ultra64.h"
+#include "PR/gs2dex.h"
 #include "unk.h"
+
+#include "other_types.h"
+
 #include "bitmap.h"
 
 
@@ -17,7 +21,7 @@ typedef struct struct_imageLoad_arg0_unk_28 {
 // Image?
 typedef struct struct_imageLoad_arg0 {
     /* 0x00 */ UNK_TYPE unk_00;
-    /* 0x04 */ UNK_TYPE unk_04;
+    /* 0x04 */ s32 unk_04; // index of unk_38
     /* 0x08 */ UNK_TYPE2 unk_08; // count of unk_28
     /* 0x0A */ UNK_TYPE1 unk_0A[0x02]; // pad?
     /* 0x08 */ u32 unk_0C;
@@ -31,7 +35,7 @@ typedef struct struct_imageLoad_arg0 {
     /* 0x2C */ struct_bitmapLoad_arg0 **unk_2C;
     /* 0x30 */ UNK_TYPE *unk_30;
     /* 0x34 */ UNK_TYPE *unk_34;
-    /* 0x38 */ UNK_TYPE1 unk_38[0x50];
+    /* 0x38 */ uObjBg unk_38[2];
     /* 0x88 */ s32 unk_88;
     /* 0x8C */ s32 unk_8C;
     /* 0x90 */ UNK_TYPE2 unk_90;
@@ -139,7 +143,7 @@ void imageMake(struct_imageLoad_arg0 **ppImage, void **heapP, u32 nCount);
 // void func_8001EDE0_usa();
 s32 imageLoad(struct_imageLoad_arg0 **ppImage, void *pNameOrFile, void **heapP);
 // void func_8001FC08_usa();
-s32 func_8001FD0C_usa(struct_imageLoad_arg0 **arg0, RomOffset arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, void **heapP);
+nbool func_8001FD0C_usa(struct_imageLoad_arg0 **arg0, RomOffset arg1, RomOffset arg2, s32 arg3, s32 arg4, s32 arg5, void **heapP);
 nbool imageCopy(struct_imageLoad_arg0 **ppImage, struct_imageLoad_arg0 *pImage, void **heapP);
 nbool imageMakeScan(struct_imageLoad_arg0 *pImage, void **heapP);
 // void func_80020044_usa();

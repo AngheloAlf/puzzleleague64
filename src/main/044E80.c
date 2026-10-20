@@ -718,8 +718,8 @@ s32 func_80046470_usa(void) {
             }
 
             new_var = &D_800B6950_usa[B_80192FB0_usa->unk_0014 % 0x10];
-            func_8001FD0C_usa(&B_80192FB0_usa->unk_0008[B_80192FB0_usa->unk_0010], *new_var, 0, 0x54, 0x72, 0xC0,
-                              &sp20);
+            func_8001FD0C_usa(&B_80192FB0_usa->unk_0008[B_80192FB0_usa->unk_0010], *new_var, ROM_NULL,
+                              FUNC_8001DCC4_ARG3_PACK(0, 0, 5, 4), 0x72, 0xC0, &sp20);
 
             B_80192FB0_usa->unk_0008[B_80192FB0_usa->unk_0010]->unk_14 = 0;
             func_80044A1C_usa();
@@ -993,8 +993,8 @@ void func_80046C2C_usa(void **heapP, u32 arg1) {
         B_80192FB0_usa->unk_001C = 0;
         B_80192FB0_usa->unk_0018 = 0;
         B_80192FB0_usa->unk_0010 = 0;
-        func_8001FD0C_usa(B_80192FB0_usa->unk_0008, D_800B6950_usa[B_80192FB0_usa->unk_0014], 0, 0x54, 0x70, 0xC0,
-                          heapP);
+        func_8001FD0C_usa(B_80192FB0_usa->unk_0008, D_800B6950_usa[B_80192FB0_usa->unk_0014], ROM_NULL,
+                          FUNC_8001DCC4_ARG3_PACK(0, 0, 5, 4), 0x70, 0xC0, heapP);
 
         B_80192FB0_usa->unk_0008[B_80192FB0_usa->unk_0010]->unk_14 = 0;
         B_80192FB0_usa->unk_0008[1] = 0;
