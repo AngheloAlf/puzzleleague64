@@ -114,7 +114,7 @@ void AIBoundaryCheck(struct tetWell *well, struct ai_t *brain);
 // void AIPossibleRow();
 // void AIPossibleCol();
 // void AIComboCheck();
-// void AICombo3a();
+s32 AICombo3a(struct ai_t *brain);
 // void AICombo3b();
 // void AICombo45();
 // void AIComboX();
