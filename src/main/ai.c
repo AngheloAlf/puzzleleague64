@@ -1157,39 +1157,42 @@ void AIComboCheck(tetWell *well, ai_t *brain) {
     }
 }
 
-#if VERSION_USA
-#if 0
 s32 AICombo3a(ai_t *brain) {
-    s32 sp0[12];
-    s32 *var_v1;
+    s32 array[12];
     s32 temp_a0;
     s32 temp_t1;
     s32 var_a2;
-    s32 (*new_var)[5];
+    s32(*new_var)[5];
 
     s32 t6 = AIdistance[7];
     s32 v1;
     s32 *a0;
+
+#if 0
+    int row; // r1+0x8
+    int col; // r26
+    int from; // r1+0x8
+    int temp; // r1+0x8
+    int type; // r1+0x8
+#endif
 
     if (t6 == 0x12) {
         return 0;
     }
 
     v1 = AItotCheck[t6] - 3;
-    //a0 = AIrowCheck[t6];
     new_var = AIrowCheck;
     a0 = new_var[t6];
 
-    var_v1 = &a0[v1];
-    for (var_a2 = 0; var_a2 < 3; var_a2++) {
-        sp0[var_a2] = var_v1[var_a2];
+    for (var_a2 = 0; var_a2 < 3; var_a2++, v1++) {
+        array[var_a2] = a0[v1];
     }
 
-    AISortRows(brain->cursor_y, 3, sp0);
+    AISortRows(brain->cursor_y, 3, array);
 
-    temp_t1 = AIcolCheck[t6][sp0[3-1]];
+    temp_t1 = AIcolCheck[t6][array[3 - 1]];
     for (var_a2 = 0; var_a2 < 3; var_a2++) {
-        temp_a0 = sp0[var_a2];
+        temp_a0 = array[var_a2];
         if (temp_t1 != AIcolCheck[t6][temp_a0]) {
             AIAddCommand(brain, 1, AIrowCheck[t6][temp_a0], 0);
             AIAddCommand(brain, 3, AIcolCheck[t6][temp_a0], temp_t1);
@@ -1198,22 +1201,6 @@ s32 AICombo3a(ai_t *brain) {
 
     return -1;
 }
-#else
-INCLUDE_ASM("asm/usa/nonmatchings/main/ai", AICombo3a);
-#endif
-#endif
-
-#if VERSION_EUR
-INCLUDE_ASM("asm/eur/nonmatchings/main/ai", AICombo3a);
-#endif
-
-#if VERSION_FRA
-INCLUDE_ASM("asm/fra/nonmatchings/main/ai", AICombo3a);
-#endif
-
-#if VERSION_GER
-INCLUDE_ASM("asm/ger/nonmatchings/main/ai", AICombo3a);
-#endif
 
 s32 AICombo3b(ai_t *brain) {
     s32 array[12];
